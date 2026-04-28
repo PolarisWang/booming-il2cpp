@@ -21,7 +21,7 @@ public sealed partial class NativeAotLoweringPlanner
 {
 	private bool IsTrackedValueTypeSubjectId(string subjectId)
 	{
-		if (!string.IsNullOrWhiteSpace(subjectId))
+		if (!string.IsNullOrEmpty(subjectId))
 		{
 			return _valueTypeSubjectIds.Contains(subjectId);
 		}
@@ -48,16 +48,16 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return $"reinterpret_cast<{nativeBoxTypeSymbol}*>({instanceExpression})->value";
 		}
-		return $"reinterpret_cast<std::intptr_t>(&reinterpret_cast<{nativeBoxTypeSymbol}*>({instanceExpression})->value)";
+		return $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&reinterpret_cast<{nativeBoxTypeSymbol}*>({instanceExpression})->value)";
 	}
 
 	private string GetRequiredFunctionPointerTargetSymbol(AotCoreIrInstructionArtifact instruction)
 	{
-		if (!string.IsNullOrWhiteSpace(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
+		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
 		{
 			return TryGetInstantiationStubSymbol(value) ?? value.NativeSymbol;
 		}
-		if (!string.IsNullOrWhiteSpace(instruction.TargetSymbol))
+		if (!string.IsNullOrEmpty(instruction.TargetSymbol))
 		{
 			return instruction.TargetSymbol;
 		}
@@ -70,7 +70,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return text;
 		}
-		if (!string.IsNullOrWhiteSpace(instruction.TargetSymbol))
+		if (!string.IsNullOrEmpty(instruction.TargetSymbol))
 		{
 			return instruction.TargetSymbol;
 		}
@@ -126,31 +126,31 @@ public sealed partial class NativeAotLoweringPlanner
 		case AotCoreIrAbiCarrierKind.Int32:
 			returnLines =
 			[
-				"    return static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);"
+				"    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.Int8:
 			returnLines =
 			[
-				"    return static_cast<std::int8_t>(chaos_eval_stack[--chaos_stack_top]);"
+				"    return static_cast<CHAOS_IL2CPP_INT8>(chaos_eval_stack[--chaos_stack_top]);"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.UInt8:
 			returnLines =
 			[
-				"    return static_cast<std::uint8_t>(chaos_eval_stack[--chaos_stack_top]);"
+				"    return static_cast<CHAOS_IL2CPP_UINT8>(chaos_eval_stack[--chaos_stack_top]);"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.Int16:
 			returnLines =
 			[
-				"    return static_cast<std::int16_t>(chaos_eval_stack[--chaos_stack_top]);"
+				"    return static_cast<CHAOS_IL2CPP_INT16>(chaos_eval_stack[--chaos_stack_top]);"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.UInt16:
 			returnLines =
 			[
-				"    return static_cast<std::uint16_t>(chaos_eval_stack[--chaos_stack_top]);"
+				"    return static_cast<CHAOS_IL2CPP_UINT16>(chaos_eval_stack[--chaos_stack_top]);"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.Float32:
@@ -215,7 +215,7 @@ public sealed partial class NativeAotLoweringPlanner
 		case AotCoreIrAbiCarrierKind.UInt16:
 			pushLines =
 			[
-				$"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>({resultExpression});"
+				$"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>({resultExpression});"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.Float32:
@@ -247,7 +247,7 @@ public sealed partial class NativeAotLoweringPlanner
 			[
 				$"{indentation}auto* chaos_result_storage = new {GetRequiredAbiValueTypeSymbol(returnAbi)}{{}};",
 				$"{indentation}*chaos_result_storage = {resultExpression};",
-				$"{indentation}chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_result_storage);",
+				$"{indentation}chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_result_storage);",
 			];
 			break;
 		default:
@@ -388,7 +388,7 @@ public sealed partial class NativeAotLoweringPlanner
 				TypeShape = AotCoreIrTypeShapeKind.ValueType
 			};
 		default:
-			if (!string.IsNullOrWhiteSpace(returnType))
+			if (!string.IsNullOrEmpty(returnType))
 			{
 				return CreateLegacyAbiSlot(returnType);
 			}
@@ -459,7 +459,7 @@ public sealed partial class NativeAotLoweringPlanner
 				TypeShape = AotCoreIrTypeShapeKind.ValueType
 			};
 		default:
-			if (!string.IsNullOrWhiteSpace(typeName))
+			if (!string.IsNullOrEmpty(typeName))
 			{
 				return CreateNativeIntAbiSlot();
 			}
@@ -492,16 +492,16 @@ public sealed partial class NativeAotLoweringPlanner
 		return abiSlot.CarrierKindCode switch
 		{
 			AotCoreIrAbiCarrierKind.Void => "void", 
-			AotCoreIrAbiCarrierKind.Int32 => "std::int32_t", 
-			AotCoreIrAbiCarrierKind.Int8 => "std::int8_t", 
-			AotCoreIrAbiCarrierKind.UInt8 => "std::uint8_t", 
-			AotCoreIrAbiCarrierKind.Int16 => "std::int16_t", 
-			AotCoreIrAbiCarrierKind.UInt16 => "std::uint16_t", 
+			AotCoreIrAbiCarrierKind.Int32 => "CHAOS_IL2CPP_INT32", 
+			AotCoreIrAbiCarrierKind.Int8 => "CHAOS_IL2CPP_INT8", 
+			AotCoreIrAbiCarrierKind.UInt8 => "CHAOS_IL2CPP_UINT8", 
+			AotCoreIrAbiCarrierKind.Int16 => "CHAOS_IL2CPP_INT16", 
+			AotCoreIrAbiCarrierKind.UInt16 => "CHAOS_IL2CPP_UINT16", 
 			AotCoreIrAbiCarrierKind.Float32 => "float", 
 			AotCoreIrAbiCarrierKind.Float64 => "double", 
-			AotCoreIrAbiCarrierKind.Int64 => "std::int64_t", 
-			AotCoreIrAbiCarrierKind.UInt64 => "std::uint64_t", 
-			AotCoreIrAbiCarrierKind.NativeInt => "std::intptr_t", 
+			AotCoreIrAbiCarrierKind.Int64 => "CHAOS_IL2CPP_INT64", 
+			AotCoreIrAbiCarrierKind.UInt64 => "CHAOS_IL2CPP_UINT64", 
+			AotCoreIrAbiCarrierKind.NativeInt => "CHAOS_IL2CPP_INTPTR", 
 			AotCoreIrAbiCarrierKind.ValueTypeByValue => GetRequiredAbiValueTypeSymbol(abiSlot), 
 			_ => throw new NotSupportedException($"native-aot lowering does not support ABI return carrier '{abiSlot.CarrierKindCode}'."), 
 		};
@@ -531,7 +531,7 @@ public sealed partial class NativeAotLoweringPlanner
 			case AotCoreIrAbiCarrierKind.UInt8:
 			case AotCoreIrAbiCarrierKind.Int16:
 			case AotCoreIrAbiCarrierKind.UInt16:
-				lines.Add($"    chaos_args[{i}] = static_cast<std::intptr_t>(chaos_arg_{i});");
+				lines.Add($"    chaos_args[{i}] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_arg_{i});");
 				break;
 			case AotCoreIrAbiCarrierKind.Float32:
 				lines.Add($"    chaos_args[{i}] = chaos_store_float32(chaos_arg_{i});");
@@ -547,7 +547,7 @@ public sealed partial class NativeAotLoweringPlanner
 				break;
 			case AotCoreIrAbiCarrierKind.ValueTypeByValue:
 				lines.Add($"    auto chaos_abi_param_{i} = chaos_arg_{i};");
-				lines.Add($"    chaos_args[{i}] = reinterpret_cast<std::intptr_t>(&chaos_abi_param_{i});");
+				lines.Add($"    chaos_args[{i}] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_abi_param_{i});");
 				break;
 			default:
 				throw new NotSupportedException($"native-aot lowering does not support ABI parameter carrier '{aotCoreIrAbiSlotArtifact.CarrierKindCode}'.");
@@ -580,11 +580,11 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		return abiSlot.CarrierKindCode switch
 		{
-			AotCoreIrAbiCarrierKind.Int32 => "static_cast<std::int32_t>(" + sourceName + ")", 
-			AotCoreIrAbiCarrierKind.Int8 => "static_cast<std::int8_t>(" + sourceName + ")", 
-			AotCoreIrAbiCarrierKind.UInt8 => "static_cast<std::uint8_t>(" + sourceName + ")", 
-			AotCoreIrAbiCarrierKind.Int16 => "static_cast<std::int16_t>(" + sourceName + ")", 
-			AotCoreIrAbiCarrierKind.UInt16 => "static_cast<std::uint16_t>(" + sourceName + ")", 
+			AotCoreIrAbiCarrierKind.Int32 => "static_cast<CHAOS_IL2CPP_INT32>(" + sourceName + ")", 
+			AotCoreIrAbiCarrierKind.Int8 => "static_cast<CHAOS_IL2CPP_INT8>(" + sourceName + ")", 
+			AotCoreIrAbiCarrierKind.UInt8 => "static_cast<CHAOS_IL2CPP_UINT8>(" + sourceName + ")", 
+			AotCoreIrAbiCarrierKind.Int16 => "static_cast<CHAOS_IL2CPP_INT16>(" + sourceName + ")", 
+			AotCoreIrAbiCarrierKind.UInt16 => "static_cast<CHAOS_IL2CPP_UINT16>(" + sourceName + ")", 
 			AotCoreIrAbiCarrierKind.Float32 => "chaos_load_float32(" + sourceName + ")", 
 			AotCoreIrAbiCarrierKind.Float64 => "chaos_load_float64(" + sourceName + ")", 
 			AotCoreIrAbiCarrierKind.Int64 => "chaos_load_int64(" + sourceName + ")", 
@@ -608,16 +608,16 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		return abiSlot.CarrierKindCode switch
 		{
-			AotCoreIrAbiCarrierKind.Int32 => "std::int32_t", 
-			AotCoreIrAbiCarrierKind.Int8 => "std::int8_t", 
-			AotCoreIrAbiCarrierKind.UInt8 => "std::uint8_t", 
-			AotCoreIrAbiCarrierKind.Int16 => "std::int16_t", 
-			AotCoreIrAbiCarrierKind.UInt16 => "std::uint16_t", 
+			AotCoreIrAbiCarrierKind.Int32 => "CHAOS_IL2CPP_INT32", 
+			AotCoreIrAbiCarrierKind.Int8 => "CHAOS_IL2CPP_INT8", 
+			AotCoreIrAbiCarrierKind.UInt8 => "CHAOS_IL2CPP_UINT8", 
+			AotCoreIrAbiCarrierKind.Int16 => "CHAOS_IL2CPP_INT16", 
+			AotCoreIrAbiCarrierKind.UInt16 => "CHAOS_IL2CPP_UINT16", 
 			AotCoreIrAbiCarrierKind.Float32 => "float", 
 			AotCoreIrAbiCarrierKind.Float64 => "double", 
-			AotCoreIrAbiCarrierKind.Int64 => "std::int64_t", 
-			AotCoreIrAbiCarrierKind.UInt64 => "std::uint64_t", 
-			AotCoreIrAbiCarrierKind.NativeInt => "std::intptr_t", 
+			AotCoreIrAbiCarrierKind.Int64 => "CHAOS_IL2CPP_INT64", 
+			AotCoreIrAbiCarrierKind.UInt64 => "CHAOS_IL2CPP_UINT64", 
+			AotCoreIrAbiCarrierKind.NativeInt => "CHAOS_IL2CPP_INTPTR", 
 			AotCoreIrAbiCarrierKind.ValueTypeByValue => GetRequiredAbiValueTypeSymbol(abiSlot), 
 			_ => throw new NotSupportedException($"native-aot lowering does not support ABI parameter carrier '{abiSlot.CarrierKindCode}'."), 
 		};
@@ -625,7 +625,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string GetRequiredAbiValueTypeSymbol(AotCoreIrAbiSlotArtifact abiSlot)
 	{
-		if (abiSlot.CarrierKindCode != AotCoreIrAbiCarrierKind.ValueTypeByValue || string.IsNullOrWhiteSpace(abiSlot.TypeSubjectId))
+		if (abiSlot.CarrierKindCode != AotCoreIrAbiCarrierKind.ValueTypeByValue || string.IsNullOrEmpty(abiSlot.TypeSubjectId))
 		{
 			throw new NotSupportedException($"native-aot lowering requires a value-type ABI slot with subject metadata, got '{abiSlot.CarrierKindCode}'.");
 		}
@@ -638,7 +638,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return value.ToString(CultureInfo.InvariantCulture);
 		}
-		return "std::numeric_limits<std::int32_t>::min()";
+		return "CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT32)";
 	}
 
 	private static string FormatInt64Literal(long value)
@@ -647,7 +647,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return value.ToString(CultureInfo.InvariantCulture) + "LL";
 		}
-		return "std::numeric_limits<std::int64_t>::min()";
+		return "CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT64)";
 	}
 
 	private static string FormatFloat32Literal(float value)
@@ -662,7 +662,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static void RequireStringField(string? value, string fieldName)
 	{
-		if (string.IsNullOrWhiteSpace(value))
+		if (string.IsNullOrEmpty(value))
 		{
 			throw new InvalidOperationException("native-aot lowering plan requires non-empty field '" + fieldName + "'");
 		}

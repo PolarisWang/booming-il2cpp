@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/time/date-time-timespan",
+  "methods": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    }
+  ]
+}

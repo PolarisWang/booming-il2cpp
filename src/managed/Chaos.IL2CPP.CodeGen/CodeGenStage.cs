@@ -14,15 +14,11 @@ public sealed class CodeGenStage
         LinkedWorldModel linkedWorld,
         MetadataWriterOutput metadataWriterOutput)
     {
-        var methodShapes = linkedWorld.SemanticShapes.Methods
-            .ToDictionary(shape => shape.SubjectId, StringComparer.Ordinal);
-        var methodCapabilities = linkedWorld.CapabilityBundles.Methods
-            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
-        var internalAssemblyNames = linkedWorld.Assemblies
-            .Select(assembly => assembly.Name)
-            .ToHashSet(StringComparer.Ordinal);
-        var methodsBySubjectId = linkedWorld.Methods
-            .ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
+        var lookups = BuildStageLookups(linkedWorld);
+        var methodShapes = lookups.MethodShapes;
+        var methodCapabilities = lookups.MethodCapabilities;
+        var internalAssemblyNames = lookups.InternalAssemblyNames;
+        var methodsBySubjectId = lookups.MethodsBySubjectId;
         var typedIl = new TypedIlIrArtifact
         {
             Methods = linkedWorld.Methods
@@ -52,6 +48,7 @@ public sealed class CodeGenStage
                         .ToList(),
                 })
                 .ToList(),
+            TypeCapabilities = BuildCodeRegistrationTypeCapabilities(metadataWriterOutput.MetadataRegistration),
         };
         var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
         var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph
@@ -487,10 +484,12 @@ public sealed class CodeGenStage
         LinkedWorldModel linkedWorld,
         CodeRegistrationArtifact codeRegistration)
     {
+        var canonicalSubjectIds = BuildCanonicalSubjectIdLookup(linkedWorld.CanonicalSubjects.Subjects);
         var methodSubjectIds = linkedWorld.Methods
+            .OrderBy(method => ResolveCanonicalSubjectId(canonicalSubjectIds, method.SubjectId), StringComparer.Ordinal)
+            .ThenBy(method => method.SubjectId, StringComparer.Ordinal)
             .Select(method => method.SubjectId)
             .Distinct(StringComparer.Ordinal)
-            .OrderBy(subjectId => subjectId, StringComparer.Ordinal)
             .ToList();
         var firstMethodSymbol = codeRegistration.Modules
             .SelectMany(module => module.Registrations)
@@ -561,10 +560,12 @@ public sealed class CodeGenStage
         LinkedWorldModel linkedWorld,
         CodeRegistrationArtifact codeRegistration)
     {
+        var canonicalSubjectIds = BuildCanonicalSubjectIdLookup(linkedWorld.CanonicalSubjects.Subjects);
         var methodSubjectIds = linkedWorld.Methods
+            .OrderBy(method => ResolveCanonicalSubjectId(canonicalSubjectIds, method.SubjectId), StringComparer.Ordinal)
+            .ThenBy(method => method.SubjectId, StringComparer.Ordinal)
             .Select(method => method.SubjectId)
             .Distinct(StringComparer.Ordinal)
-            .OrderBy(subjectId => subjectId, StringComparer.Ordinal)
             .ToList();
         var firstMethodSymbol = codeRegistration.Modules
             .SelectMany(module => module.Registrations)
@@ -590,6 +591,26 @@ public sealed class CodeGenStage
             AuditStatus = "not-yet-emittable",
             AuditMessage = "assembly-bound full-closure native-aot emission is not implemented",
         };
+    }
+
+    private static IReadOnlyDictionary<string, string> BuildCanonicalSubjectIdLookup(
+        IReadOnlyList<CanonicalSubjectModel> canonicalSubjects)
+    {
+        return canonicalSubjects
+            .GroupBy(subject => subject.SubjectId, StringComparer.Ordinal)
+            .ToDictionary(
+                group => group.Key,
+                group => group.Last().CanonicalSubjectId,
+                StringComparer.Ordinal);
+    }
+
+    private static string ResolveCanonicalSubjectId(
+        IReadOnlyDictionary<string, string> canonicalSubjectIds,
+        string subjectId)
+    {
+        return canonicalSubjectIds.TryGetValue(subjectId, out var canonicalSubjectId)
+            ? canonicalSubjectId
+            : ManagedNaming.CanonicalizeSubjectId(subjectId);
     }
 
     private static IReadOnlyList<AuditTranslationUnitPageArtifact> BuildAuditTranslationUnitPages(
@@ -637,11 +658,7 @@ public sealed class CodeGenStage
                 string.Equals(registration.SubjectId, subjectId, StringComparison.Ordinal))
             ?.DefinitionSubjectId;
 
-        if (string.IsNullOrWhiteSpace(token))
-        {
-            return "0u";
-        }
-
+        _ = token; // metadataRegistration is read for validation only; token literal is always "0u" for now
         return "0u";
     }
 
@@ -730,5 +747,159 @@ public sealed class CodeGenStage
                 instruction,
                 methodsBySubjectId),
         };
+    }
+
+    private sealed record StageLookups(
+        IReadOnlyDictionary<string, MethodShapeModel> MethodShapes,
+        IReadOnlyDictionary<string, IReadOnlyList<string>> MethodCapabilities,
+        IReadOnlySet<string> InternalAssemblyNames,
+        IReadOnlyDictionary<string, ManagedMethodModel> MethodsBySubjectId);
+
+    private static StageLookups BuildStageLookups(LinkedWorldModel linkedWorld)
+    {
+        var methodShapes = new Dictionary<string, MethodShapeModel>(linkedWorld.SemanticShapes.Methods.Count, StringComparer.Ordinal);
+        var methodCapabilities = new Dictionary<string, IReadOnlyList<string>>(linkedWorld.CapabilityBundles.Methods.Count, StringComparer.Ordinal);
+        var internalAssemblyNames = new HashSet<string>(linkedWorld.Assemblies.Count, StringComparer.Ordinal);
+        var methodsBySubjectId = new Dictionary<string, ManagedMethodModel>(linkedWorld.Methods.Count, StringComparer.Ordinal);
+
+        foreach (var method in linkedWorld.Methods)
+        {
+            methodsBySubjectId[method.SubjectId] = method;
+        }
+
+        foreach (var shape in linkedWorld.SemanticShapes.Methods)
+        {
+            methodShapes[shape.SubjectId] = shape;
+        }
+
+        foreach (var bundle in linkedWorld.CapabilityBundles.Methods)
+        {
+            methodCapabilities[bundle.SubjectId] = bundle.Capabilities;
+        }
+
+        foreach (var assembly in linkedWorld.Assemblies)
+        {
+            internalAssemblyNames.Add(assembly.Name);
+        }
+
+        return new StageLookups(methodShapes, methodCapabilities, internalAssemblyNames, methodsBySubjectId);
+    }
+
+    private static IReadOnlyList<CodeRegistrationTypeCapabilityEntry> BuildCodeRegistrationTypeCapabilities(
+        MetadataRegistrationArtifact metadataRegistration)
+    {
+        static CodeRegistrationTypeCapabilityEntry? TryCreate(MetadataRegistrationEntry registration)
+        {
+            if (!string.Equals(registration.RegistrationKind, "type", StringComparison.Ordinal) ||
+                string.IsNullOrWhiteSpace(registration.SubjectId) ||
+                string.IsNullOrWhiteSpace(registration.DisplayName) ||
+                string.IsNullOrWhiteSpace(registration.DefinitionSubjectId))
+            {
+                return null;
+            }
+
+            var displayName = registration.DisplayName!;
+            uint valueSizeBytes;
+            uint vectorLaneKind;
+            uint scalarKind;
+            switch (displayName)
+            {
+                case "System.Byte":
+                    valueSizeBytes = 1u;
+                    vectorLaneKind = 1u;
+                    scalarKind = 2u;
+                    break;
+                case "System.SByte":
+                    valueSizeBytes = 1u;
+                    vectorLaneKind = 1u;
+                    scalarKind = 1u;
+                    break;
+                case "System.Int16":
+                    valueSizeBytes = 2u;
+                    vectorLaneKind = 1u;
+                    scalarKind = 1u;
+                    break;
+                case "System.UInt16":
+                    valueSizeBytes = 2u;
+                    vectorLaneKind = 1u;
+                    scalarKind = 2u;
+                    break;
+                case "System.Int32":
+                    valueSizeBytes = 4u;
+                    vectorLaneKind = 1u;
+                    scalarKind = 1u;
+                    break;
+                case "System.UInt32":
+                    valueSizeBytes = 4u;
+                    vectorLaneKind = 1u;
+                    scalarKind = 2u;
+                    break;
+                case "System.Int64":
+                    valueSizeBytes = 8u;
+                    vectorLaneKind = 1u;
+                    scalarKind = 1u;
+                    break;
+                case "System.UInt64":
+                    valueSizeBytes = 8u;
+                    vectorLaneKind = 1u;
+                    scalarKind = 2u;
+                    break;
+                case "System.IntPtr":
+                    valueSizeBytes = (uint)IntPtr.Size;
+                    vectorLaneKind = 1u;
+                    scalarKind = 3u;
+                    break;
+                case "System.UIntPtr":
+                    valueSizeBytes = (uint)IntPtr.Size;
+                    vectorLaneKind = 1u;
+                    scalarKind = 4u;
+                    break;
+                case "System.Single":
+                    valueSizeBytes = 4u;
+                    vectorLaneKind = 2u;
+                    scalarKind = 5u;
+                    break;
+                case "System.Double":
+                    valueSizeBytes = 8u;
+                    vectorLaneKind = 2u;
+                    scalarKind = 5u;
+                    break;
+                default:
+                    return null;
+            }
+
+            if (!uint.TryParse(registration.DefinitionSubjectId, out var typeToken))
+            {
+                var tokenText = registration.DefinitionSubjectId;
+                if (tokenText.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+                {
+                    typeToken = Convert.ToUInt32(tokenText, 16);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            return new CodeRegistrationTypeCapabilityEntry
+            {
+                SubjectId = registration.SubjectId,
+                TypeToken = typeToken,
+                CapabilityBits = 1u,
+                ValueSizeBytes = valueSizeBytes,
+                VectorWidthBytes = 16u,
+                VectorLaneCount = valueSizeBytes == 0u ? 0u : (16u / valueSizeBytes),
+                VectorLaneKind = vectorLaneKind,
+                ScalarKind = scalarKind,
+            };
+        }
+
+        return metadataRegistration.Registrations
+            .Select(TryCreate)
+            .Where(static item => item is not null)
+            .Cast<CodeRegistrationTypeCapabilityEntry>()
+            .GroupBy(static item => item.SubjectId, StringComparer.Ordinal)
+            .Select(static group => group.First())
+            .ToList();
     }
 }

@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+  "methods": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::RunClassConstructor:System.Void(System.RuntimeTypeHandle)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetSubArray:T[](T[],System.Range)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::BoxEnum:System.Object(T)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.Runtime.CompilerServices.FormattableString(System.String,System.Object[])",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    }
+  ]
+}

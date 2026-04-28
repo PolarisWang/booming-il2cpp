@@ -6,44 +6,44 @@
 
 namespace ChaosIl2cpp::Common {
 
-inline std::intptr_t checked_conv_ovf_i1(std::intptr_t value) noexcept
+inline CHAOS_IL2CPP_INTPTR checked_conv_ovf_i1(CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    if (value < static_cast<std::intptr_t>(std::numeric_limits<std::int8_t>::min()) ||
-        value > static_cast<std::intptr_t>(std::numeric_limits<std::int8_t>::max()))
+    if (value < static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT8)) ||
+        value > static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_INT8)))
     {
-        std::abort();
+        CHAOS_IL2CPP_ABORT();
     }
-    return static_cast<std::intptr_t>(static_cast<std::int8_t>(value));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(value));
 }
 
-inline std::intptr_t checked_conv_ovf_u1(std::intptr_t value) noexcept
+inline CHAOS_IL2CPP_INTPTR checked_conv_ovf_u1(CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    if (value < static_cast<std::intptr_t>(0) ||
-        value > static_cast<std::intptr_t>(std::numeric_limits<std::uint8_t>::max()))
+    if (value < static_cast<CHAOS_IL2CPP_INTPTR>(0) ||
+        value > static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_UINT8)))
     {
-        std::abort();
+        CHAOS_IL2CPP_ABORT();
     }
-    return static_cast<std::intptr_t>(static_cast<std::uint8_t>(value));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT8>(value));
 }
 
-inline std::intptr_t checked_conv_ovf_i2(std::intptr_t value) noexcept
+inline CHAOS_IL2CPP_INTPTR checked_conv_ovf_i2(CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    if (value < static_cast<std::intptr_t>(std::numeric_limits<std::int16_t>::min()) ||
-        value > static_cast<std::intptr_t>(std::numeric_limits<std::int16_t>::max()))
+    if (value < static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT16)) ||
+        value > static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_INT16)))
     {
-        std::abort();
+        CHAOS_IL2CPP_ABORT();
     }
-    return static_cast<std::intptr_t>(static_cast<std::int16_t>(value));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(value));
 }
 
-inline std::intptr_t checked_conv_ovf_u2(std::intptr_t value) noexcept
+inline CHAOS_IL2CPP_INTPTR checked_conv_ovf_u2(CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    if (value < static_cast<std::intptr_t>(0) ||
-        value > static_cast<std::intptr_t>(std::numeric_limits<std::uint16_t>::max()))
+    if (value < static_cast<CHAOS_IL2CPP_INTPTR>(0) ||
+        value > static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_UINT16)))
     {
-        std::abort();
+        CHAOS_IL2CPP_ABORT();
     }
-    return static_cast<std::intptr_t>(static_cast<std::uint16_t>(value));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(value));
 }
 
 } // namespace ChaosIl2cpp::Common

@@ -102,22 +102,53 @@ def _synthesize_candidate_families(
     *,
     existing_families: list[dict[str, Any]],
     surface_assemblies: dict[str, dict[str, Any]],
+    project_policies: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     assembly_payload = dict(surface_assemblies.get(assembly_name) or {})
     surface_types = dict(assembly_payload.get("publicTypes") or {})
     synthesized = family_synthesis_module.synthesize_families_for_assembly(assembly_name, surface_types)
     if not synthesized:
-        return [_demote_family(family) for family in existing_families]
+        # No new synthesis — reconcile existing family gates against assembly policy.
+        policies = dict(project_policies or {})
+        next_families: list[dict[str, Any]] = []
+        for family in existing_families:
+            demoted = _demote_family(family)
+            demoted["synthesisStatus"] = "orphan-confirmed"
+            gates = dict(demoted.get("verificationGates") or {})
+            for gate in ("hotupdate-proof", "benchmark"):
+                if gates.get(gate) == "not-required" and policies.get(gate) in ("required", "conditional"):
+                    gates[gate] = "pending"
+            demoted["verificationGates"] = gates
+            next_families.append(demoted)
+        return next_families
 
     matches = family_matching_module.match_family_candidates(synthesized, existing_families)
     existing_by_id = {str(family.get("familyId") or ""): family for family in existing_families}
     synthesized_by_id = {str(family.get("familyId") or ""): family for family in synthesized}
+
+    # Resolve effective gate policy for this assembly.
+    # Program manifest defines per-assembly projectPolicies that override hardcoded defaults.
+    # Treat any non-"not-required" policy as "pending" (the initial active state).
+    policies = dict(project_policies or {})
+    def _initial_gate_state(gate: str) -> str:
+        policy = policies.get(gate)
+        if policy in ("required", "conditional"):
+            return "pending"
+        return "not-required"
 
     next_families: list[dict[str, Any]] = []
     for family_id in matches["matchedFamilyIds"]:
         demoted = _demote_family(existing_by_id[family_id])
         demoted["matchedTypes"] = list(synthesized_by_id[family_id].get("matchedTypes") or [])
         demoted["synthesisStatus"] = "matched-existing"
+        # Reconcile existing gate states with assembly-level policy —
+        # if the policy says a gate is required/conditional but the family
+        # has it as "not-required", promote to "pending".
+        gates = dict(demoted.get("verificationGates") or {})
+        for gate in ("hotupdate-proof", "benchmark"):
+            if gates.get(gate) == "not-required" and policies.get(gate) in ("required", "conditional"):
+                gates[gate] = "pending"
+        demoted["verificationGates"] = gates
         next_families.append(demoted)
 
     for family_id in matches["newCandidateFamilyIds"]:
@@ -128,8 +159,8 @@ def _synthesize_candidate_families(
             "audit-input-and-ledger": "pending",
             "managed-proof": "pending",
             "native-proof": "pending",
-            "hotupdate-proof": "not-required",
-            "benchmark": "not-required",
+            "hotupdate-proof": _initial_gate_state("hotupdate-proof"),
+            "benchmark": _initial_gate_state("benchmark"),
             "codegen-review": "pending",
         }
         synthesized_family["methodCount"] = 0
@@ -141,6 +172,12 @@ def _synthesize_candidate_families(
     for family_id in matches["orphanConfirmedFamilyIds"]:
         demoted = _demote_family(existing_by_id[family_id])
         demoted["synthesisStatus"] = "orphan-confirmed"
+        # Reconcile existing gate states with assembly-level policy.
+        gates = dict(demoted.get("verificationGates") or {})
+        for gate in ("hotupdate-proof", "benchmark"):
+            if gates.get(gate) == "not-required" and policies.get(gate) in ("required", "conditional"):
+                gates[gate] = "pending"
+        demoted["verificationGates"] = gates
         next_families.append(demoted)
 
     return next_families
@@ -169,6 +206,9 @@ def _build_candidate_payload(
     payload["denominatorStatus"] = "candidate-derived"
     payload["authorityInputs"] = authority_inputs
 
+    program_manifest = _read_json(program_manifest_path)
+    assemblies_config = {str(a.get("assemblyName")): dict(a) for a in list(program_manifest.get("assemblies") or [])}
+
     derived_dlls: list[dict[str, Any]] = []
     for dll in list(payload.get("dlls") or []):
         assembly_name = str(dll.get("assemblyName") or "")
@@ -177,10 +217,13 @@ def _build_candidate_payload(
         next_dll = dict(dll)
         next_dll["denominatorStatus"] = "candidate-derived"
         next_dll["authorityInputs"] = _derive_dll_inputs(assembly_name, surface_assemblies, semantic_family_count)
+        assembly_config = assemblies_config.get(assembly_name, {})
+        project_policies = dict(assembly_config.get("projectPolicies") or {})
         next_dll["families"] = _synthesize_candidate_families(
             assembly_name,
             existing_families=list(dll.get("families") or []),
             surface_assemblies=surface_assemblies,
+            project_policies=project_policies,
         )
         derived_dlls.append(next_dll)
 

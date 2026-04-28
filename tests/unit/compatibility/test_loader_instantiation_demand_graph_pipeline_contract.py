@@ -127,6 +127,24 @@ class LoaderInstantiationDemandGraphPipelineContractTests(unittest.TestCase):
             linker_stage_source,
         )
 
+    def test_generic_instantiation_substitution_uses_token_aware_placeholder_rewrite(self) -> None:
+        substitution_source = LOADER_STAGE_GENERIC_COMPATIBILITY_SUBSTITUTION_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "return ReplaceInstantiationPlaceholders(value, substitutions);",
+            "private static string ReplaceInstantiationPlaceholders(",
+            "while (index < value.Length && value[index] == '!')",
+            "while (index < value.Length && char.IsDigit(value[index]))",
+            "substitutions.TryGetValue(value[placeholderStart..index], out var replacement)",
+            "builder.Append(replacement);",
+        ]:
+            self.assertIn(required_fragment, substitution_source)
+
+        self.assertNotIn(
+            "value = value.Replace(placeholder, replacement, StringComparison.Ordinal);",
+            substitution_source,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

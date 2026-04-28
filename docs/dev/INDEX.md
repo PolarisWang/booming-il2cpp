@@ -1,24 +1,14 @@
-# docs/dev ä»»åŠ¡ç´¢å¼•
+# docs/dev ÈÎÎñË÷Òı
 
-å½“å‰ active ä»»åŠ¡ï¼š
+µ±Ç° active ÈÎÎñ£º
 
-- [è¿›è¡Œä¸­ä»»åŠ¡ç´¢å¼•](in-progress/INDEX.md)
-- [æŒ‚èµ·ä»»åŠ¡ç´¢å¼•](hanging/INDEX.md)
-- [å·²å®Œæˆä»»åŠ¡ç´¢å¼•](completed/INDEX.md)
+- [½øĞĞÖĞÈÎÎñË÷Òı](in-progress/INDEX.md)
+- [¹ÒÆğÈÎÎñË÷Òı](hanging/INDEX.md)
+- [ÒÑÍê³ÉÈÎÎñË÷Òı](completed/INDEX.md)
 
 | task_id | lifecycle_status | phase | updated_at | summary | active |
 | --- | --- | --- | --- | --- | --- |
-| [20260425-01-runtime-skeleton-4c-handler-framework-roadmap](completed/20260425-01-runtime-skeleton-4c-handler-framework-roadmap/STATUS.md) | completed | completed | 2026-04-25 11:10:52 +08:00 | `runtime-skeleton 4C` roadmap å·²æ”¶å£ï¼Œfamily routerã€Convert/ConvertLike cutoverã€legacy dispatcher æ¸…ç†ä¸ formal verification evidence å·²å®Œæˆã€‚ | false |
-| [20260425-02-runtime-skeleton-4c-framework-foundation-cutover](completed/20260425-02-runtime-skeleton-4c-framework-foundation-cutover/STATUS.md) | completed | completed | 2026-04-25 11:10:52 +08:00 | 4C framework foundation cutover å·²å®Œæˆï¼Œ`UnsupportedReason` contractã€generic convert fallback ä¸ legacy family æ¸…ç†å·²é€šè¿‡ canonical gateã€‚ | false |
-| [20260424-01-c3-verification-topology-and-unified-entry](completed/20260424-01-c3-verification-topology-and-unified-entry/STATUS.md) | completed | completed | 2026-04-24 06:00:00 +08:00 | verification-v1 hard cut å·²å®Œæˆï¼Œ`verification/*` æˆä¸ºå”¯ä¸€ authority/public entryã€‚ | false |
-| [20260423-05-verification-v1-gap-reopen](completed/20260423-05-verification-v1-gap-reopen/STATUS.md) | completed | completed | 2026-04-23 17:59:31 +08:00 | verification-v1 reopen ç¼ºå£å·²å…³é—­ï¼Œformal `codegen-stubs` å·²è½åœ°ï¼Œæ—§å…¬å¼€éªŒè¯å…¥å£å·²é€€åœºã€‚ | false |
-| [20260423-01-verification-v1-roadmap](completed/20260423-01-verification-v1-roadmap/STATUS.md) | completed | completed | 2026-04-23 17:59:31 +08:00 | verification-v1 roadmap å·²å®Œæˆï¼Œformal source å›ºå®šåˆ° `verification/*` ä¸ `subjects/*/verification/codegen-stubs/*`ã€‚ | false |
-| [20260423-04-verification-v1-legacy-retirement](completed/20260423-04-verification-v1-legacy-retirement/STATUS.md) | completed | completed | 2026-04-23 14:12:40 +08:00 | æ—§ benchmark docs authority consumer å·²æ¸…ç†ï¼Œæ—§æµ‹è¯•æµç¨‹å…¥å£å·²é€€åŒ–ä¸º legacyã€‚ | false |
-| [20260423-03-verification-v1-wiki-cutover](completed/20260423-03-verification-v1-wiki-cutover/STATUS.md) | completed | completed | 2026-04-23 14:12:40 +08:00 | verification-v1 wiki canonical å…¥å£åˆ‡æ¢å·²å®Œæˆã€‚ | false |
-| [20260423-02-verification-v1-projection-cutover](completed/20260423-02-verification-v1-projection-cutover/STATUS.md) | completed | completed | 2026-04-23 14:12:40 +08:00 | inventoryã€benchmark ä¸é¦–é¡µå›ºå®šè§†å›¾å·²åˆ‡åˆ° formal source / projection generatorã€‚ | false |
-| [20260419-07-corelib-dll-boundary-native-codegen-implementation](completed/20260419-07-corelib-dll-boundary-native-codegen-implementation/STATUS.md) | completed | completed | 2026-04-24 08:40:00 +08:00 | çª„è¾¹ç•Œ CoreLib assembly-bound runtime-skeleton widening ä¸ subject review bundle ä¸»é“¾æ¥çº¿å·²å®Œæˆã€‚ | false |
-| [20260419-08-scriban-generator-formalization](hanging/20260419-08-scriban-generator-formalization/STATUS.md) | hanging | hanging | 2026-04-21 23:45:00 +08:00 | ç”¨æˆ·è¦æ±‚æš‚æŒ‚ `20260419` ä¸»çº¿ï¼Œæ¢å¤åæŒ‰ `plan-v1-01.md` å…ˆè¡¥ RED æµ‹è¯•å†æ‰§è¡Œå•æ¬¡åŸåœ° cutoverã€‚ | false |
-| [20260419-01-foundation-dll-translation-audit-roadmap](in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | in-progress | roadmap | 2026-04-25 21:58:00 +08:00 | DLL-first reporting sync å·²è¡¥é½ï¼Œ`System.Collections.Immutable` å·²æœ‰æ­£å¼ blocked STATUS å…¥å£ï¼ŒCoreLib canonical audit authority åŒæ­¥æ”¶æ•›åˆ° `20260419-37`ã€‚ | false |
-| [20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable](in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md) | in-progress | blocked-before-start | 2026-04-25 21:58:00 +08:00 | `System.Collections.Immutable` å·²æœ‰æ­£å¼ DLL-first å®¡è®¡å…¥å£ï¼Œä½†åœ¨ `20260419-03` çœŸæ­£å…³é—¸å‰ä»…ä¿æŒ blocked authorityã€‚ | false |
-| [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md) | in-progress | implementation | 2026-04-25 21:58:00 +08:00 | å½“å‰ widening child æŒç»­æ‰©å¤§ `System.Private.CoreLib` supplemental runtime-skeleton translated coverageï¼Œå¹¶ä½œä¸º canonical CoreLib audit authorityã€‚ | false |
-| [20260419-03-system-private-corelib-full-verification](completed/20260419-03-system-private-corelib-full-verification/STATUS.md) | completed | completed-blocked | 2026-04-24 21:20:00 +08:00 | å·²ä¸å†åªæœ‰çª„ proof packetï¼Œä½†çœŸå® CoreLib supplemental runtime-skeleton ä»å­˜åœ¨å¤§é‡ uncovered methodsï¼Œ`fullCoreLibTranslated = false`ã€‚ | false |
+| [20260427-04-dll-capability-verification-closure-roadmap](completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md) | completed | completed | 2026-04-28 03:12:00 +08:00 | DLL capability verification closure roadmap ÒÑÈ«²¿Íê³É£ºTruth / Evidence / Execution / Projection / Closeout ÒÑÊÕ¿Ú£¬formal `.sln`¡¢dashboard formal projection¡¢method ¼¶ case index Óë¾ÉÂß¼­ÇåÀíÈ«²¿Íê³É¡£ | false |
+| [20260419-01-foundation-dll-translation-audit-roadmap](in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | in-progress | roadmap | 2026-04-25 21:58:00 +08:00 | DLL-first reporting sync ÒÑ²¹Æë£¬`System.Collections.Immutable` ÒÑÓĞÕıÊ½ blocked STATUS Èë¿Ú£¬CoreLib canonical audit authority Í¬²½ÊÕÁ²µ½ `20260419-37`¡£ | false |
+| [20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable](in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md) | in-progress | blocked-before-start | 2026-04-25 21:58:00 +08:00 | `System.Collections.Immutable` ÒÑÓĞÕıÊ½ DLL-first Éó¼ÆÈë¿Ú£¬µ«ÔÚ `20260419-03` ÕæÕı¹ØÕ¢Ç°½ö±£³Ö blocked authority¡£ | false |
+| [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md) | in-progress | implementation | 2026-04-25 21:58:00 +08:00 | µ±Ç° widening child ³ÖĞøÀ©´ó `System.Private.CoreLib` supplemental runtime-skeleton translated coverage£¬²¢×÷Îª canonical CoreLib audit authority¡£ | false |

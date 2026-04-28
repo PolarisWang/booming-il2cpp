@@ -1,6 +1,8 @@
 // assembly-full-closure-runtime-skeleton
 // generated executable skeleton for assembly-bound native-reference runtime emission
+#include "bootstrap.h"
 #include "codegen_bridge.h"
+#include "memory_domain.h"
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
@@ -13,9 +15,9 @@ constexpr const char* kAssemblyName = {{ assembly_name_literal }};
 constexpr const char* kPlanKind = {{ plan_kind_literal }};
 constexpr const char* kRuntimeExecutionKind = {{ runtime_execution_kind_literal }};
 constexpr const char* kTranslationUnitMode = {{ translation_unit_mode_literal }};
-constexpr std::size_t translation_unit_method_count = {{ translation_unit_method_count }};
-constexpr std::size_t translation_unit_page_size = {{ translation_unit_page_size }};
-constexpr std::size_t translation_unit_page_count = {{ translation_unit_page_count }};
+constexpr CHAOS_IL2CPP_SIZE translation_unit_method_count = {{ translation_unit_method_count }};
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_size = {{ translation_unit_page_size }};
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_count = {{ translation_unit_page_count }};
 using NativeReferenceAssemblyPageDispatchFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
@@ -23,23 +25,35 @@ using NativeReferenceAssemblyPageDispatchFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
     const CodegenRegistrationOptionsV0* options,
     RuntimeState* runtime,
     ThreadState* thread,
-    std::uint32_t method_slot,
+    CHAOS_IL2CPP_UINT32 method_slot,
     void* managed_args);
 
 struct NativeReferenceAssemblyDispatchRequest
 {
     const char* subject_id;
     void* managed_args;
-    std::uint32_t method_id;
+    CHAOS_IL2CPP_UINT32 method_id;
 };
 
 struct RuntimeSkeletonMethodDispatchCatalogEntry
 {
-    std::uint32_t method_id;
+    CHAOS_IL2CPP_UINT32 method_id;
     const char* subject_id;
     NativeReferenceAssemblyPageDispatchFn dispatch;
-    std::uint32_t method_slot;
+    CHAOS_IL2CPP_UINT32 method_slot;
 };
+
+{{~ if has_type_capability_entries ~}}
+constexpr RuntimeTypeCapabilityEntryV0 kTypeCapabilityEntries[] =
+{
+{{~ for entry in type_capability_entries ~}}
+{{ entry }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kTypeCapabilityEntryCount = {{ type_capability_entry_count }};
+{{~ else ~}}
+constexpr CHAOS_IL2CPP_SIZE kTypeCapabilityEntryCount = 0;
+{{~ end ~}}
 
 {{~ for declaration in page_dispatch_declarations ~}}
 {{ declaration }}
@@ -52,9 +66,9 @@ constexpr RuntimeSkeletonMethodDispatchCatalogEntry kMethodDispatchCatalog[] =
 {{ entry }}
 {{ end ~}}
 };
-constexpr std::size_t kMethodDispatchCatalogCount = sizeof(kMethodDispatchCatalog) / sizeof(kMethodDispatchCatalog[0]);
+constexpr CHAOS_IL2CPP_SIZE kMethodDispatchCatalogCount = sizeof(kMethodDispatchCatalog) / sizeof(kMethodDispatchCatalog[0]);
 {{~ else ~}}
-constexpr std::size_t kMethodDispatchCatalogCount = 0;
+constexpr CHAOS_IL2CPP_SIZE kMethodDispatchCatalogCount = 0;
 {{~ end ~}}
 
 const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntry(const char* subject_id)
@@ -67,12 +81,12 @@ const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntry(
     return nullptr;
 {{~ else ~}}
 
-    std::size_t left = 0;
-    std::size_t right = kMethodDispatchCatalogCount;
+    CHAOS_IL2CPP_SIZE left = 0;
+    CHAOS_IL2CPP_SIZE right = kMethodDispatchCatalogCount;
     while (left < right) {
-        const std::size_t mid = left + ((right - left) / 2);
+        const CHAOS_IL2CPP_SIZE mid = left + ((right - left) / 2);
         const auto& entry = kMethodDispatchCatalog[mid];
-        const int compare = std::strcmp(entry.subject_id, subject_id);
+        const int compare = CHAOS_IL2CPP_STRCMP(entry.subject_id, subject_id);
         if (compare < 0) {
             left = mid + 1;
             continue;
@@ -90,7 +104,7 @@ const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntry(
 {{~ end ~}}
 }
 
-const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntryByMethodId(std::uint32_t method_id)
+const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntryByMethodId(CHAOS_IL2CPP_UINT32 method_id)
 {
     if (method_id == 0) {
         return nullptr;
@@ -99,10 +113,10 @@ const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntryB
 {{~ if !has_method_dispatch_entries ~}}
     return nullptr;
 {{~ else ~}}
-    std::size_t left = 0;
-    std::size_t right = kMethodDispatchCatalogCount;
+    CHAOS_IL2CPP_SIZE left = 0;
+    CHAOS_IL2CPP_SIZE right = kMethodDispatchCatalogCount;
     while (left < right) {
-        const std::size_t mid = left + ((right - left) / 2);
+        const CHAOS_IL2CPP_SIZE mid = left + ((right - left) / 2);
         const auto& entry = kMethodDispatchCatalog[mid];
         if (entry.method_id < method_id) {
             left = mid + 1;
@@ -158,7 +172,7 @@ int32_t DispatchAssemblyMethodId(
     const CodegenRegistrationOptionsV0* options,
     RuntimeState* runtime,
     ThreadState* thread,
-    std::uint32_t method_id,
+    CHAOS_IL2CPP_UINT32 method_id,
     void* managed_args)
 {
     const auto* method = FindMethodDispatchCatalogEntryByMethodId(method_id);
@@ -190,7 +204,24 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ native_entry_function_name }}(
     if (bridge == nullptr || code_registration == nullptr || metadata_registration == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
-    const BridgeStatus register_status = bridge->register_codegen(code_registration, metadata_registration, options);
+
+    // Push the memory domain for this assembly so marshal allocations
+    // during bootstrap and method dispatch are attributed correctly.
+    // Hot-update packages are registered under their assembly name by
+    // LoadHotUpdatePackage; AOT assemblies fall back to the AOT root domain.
+    namespace md = chaos::il2cpp::memory_domain;
+    auto* domain = md::FindDomainByName(runtime_skeleton::kAssemblyName);
+    if (domain == nullptr) {
+        domain = md::FindDomainById(chaos::il2cpp::bootstrap::GetAotDomainId());
+    }
+    md::DomainScope domain_scope(domain);
+
+    CodeRegistrationV0 local_code_registration = *code_registration;
+{{~ if has_type_capability_entries ~}}
+    local_code_registration.type_capabilities = kTypeCapabilityEntries;
+    local_code_registration.type_capability_count = static_cast<CHAOS_IL2CPP_UINT32>(kTypeCapabilityEntryCount);
+{{~ end ~}}
+    const BridgeStatus register_status = bridge->register_codegen(&local_code_registration, metadata_registration, options);
     if (register_status != CHAOS_BRIDGE_STATUS_OK) {
         return register_status;
     }
@@ -205,7 +236,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ native_entry_function_name }}(
     if (request->method_id != 0) {
         return runtime_skeleton::DispatchAssemblyMethodId(
             bridge,
-            code_registration,
+            &local_code_registration,
             metadata_registration,
             options,
             runtime,
@@ -215,7 +246,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ native_entry_function_name }}(
     }
     return runtime_skeleton::DispatchAssemblySubject(
         bridge,
-        code_registration,
+        &local_code_registration,
         metadata_registration,
         options,
         runtime,

@@ -7,6 +7,8 @@ namespace {
 void CompileOnlyCodegenBridgeSmoke(const CodegenBridgeV0* bridge) {
     CodeRegistrationV0 code_registration = {};
     code_registration.struct_size = sizeof(code_registration);
+    code_registration.type_capabilities = nullptr;
+    code_registration.type_capability_count = 0u;
 
     MetadataRegistrationV0 metadata_registration = {};
     metadata_registration.struct_size = sizeof(metadata_registration);
@@ -22,6 +24,7 @@ void CompileOnlyCodegenBridgeSmoke(const CodegenBridgeV0* bridge) {
     MethodInfoHandle method = nullptr;
     FieldInfoHandle field = nullptr;
     ExceptionHandle exception = nullptr;
+    RuntimeTypeCapabilityInfoV0 capability_info = {};
 
     int input_value = 3;
     int output_value = 0;
@@ -65,6 +68,8 @@ void CompileOnlyCodegenBridgeSmoke(const CodegenBridgeV0* bridge) {
         &exception);
 
     (void)bridge->resolve_icall("Chaos.Runtime.InternalCalls::Tick");
+    capability_info.struct_size = sizeof(capability_info);
+    (void)bridge->query_type_capability(type, &capability_info);
     (void)field;
 }
 

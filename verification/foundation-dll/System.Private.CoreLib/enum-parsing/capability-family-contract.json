@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/enum/parsing",
+  "displayName": "Enum Parsing And Formatting",
+  "methodSubjectIds": [
+    "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
+    "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)",
+    "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)",
+    "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
+    "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
+    "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
+    "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
+    "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
+    "System.Private.CoreLib/System.Enum::ToString:System.String()",
+    "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
+    "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
+    "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)"
+  ],
+  "methodSubjectCount": 12,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

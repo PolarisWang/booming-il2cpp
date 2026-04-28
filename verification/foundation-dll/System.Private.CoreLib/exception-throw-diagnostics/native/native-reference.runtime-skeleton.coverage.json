@@ -1,0 +1,29 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/exception/throw-diagnostics",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 14,
+  "emittedMethodCount": 14,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)",
+    "System.Private.CoreLib/System.Exception::get_Message:System.String()",
+    "System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
+    "System.Private.CoreLib/System.Exception::get_StackTrace:System.String()",
+    "System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
+    "System.Private.CoreLib/System.Exception::ToString:System.String()",
+    "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
+    "System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)",
+    "System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)"
+  ]
+}

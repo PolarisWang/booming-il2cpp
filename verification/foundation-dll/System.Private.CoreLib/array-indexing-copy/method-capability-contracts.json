@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/array/indexing-copy",
+  "methods": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Resize:System.Void(T[]&,System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array,System.Collections.IComparer)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Object)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Int32,System.Int32,System.Object)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(System.Array,System.Object)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(System.Array,System.Object)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(System.Array)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    }
+  ]
+}

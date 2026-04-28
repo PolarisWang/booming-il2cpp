@@ -33,13 +33,13 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
         ManagedClosureManifestArtifact closureManifest)
     {
-        var candidateTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        var candidateTypeSubjectIds = new HashSet<string>(reachableMethods.Count, StringComparer.Ordinal);
         var declaringTypeByStaticFieldSubjectId = new Dictionary<string, string>(StringComparer.Ordinal);
 
         foreach (var method in reachableMethods)
         {
             if (method.IsStatic &&
-                !string.IsNullOrWhiteSpace(method.Identity.DeclaringTypeSubjectId))
+                !string.IsNullOrEmpty(method.Identity.DeclaringTypeSubjectId))
             {
                 candidateTypeSubjectIds.Add(method.Identity.DeclaringTypeSubjectId);
             }
@@ -81,8 +81,8 @@ public sealed partial class NativeAotLoweringPlanner
         var reachableMethodSubjectIds = reachableMethods
             .Select(method => method.SubjectId)
             .ToHashSet(StringComparer.Ordinal);
-        var plansByTypeSubjectId = new Dictionary<string, StaticInitializationPlan>(StringComparer.Ordinal);
-        var requiredExternalRuntimeHelperSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        var plansByTypeSubjectId = new Dictionary<string, StaticInitializationPlan>(candidateTypeSubjectIds.Count, StringComparer.Ordinal);
+        var requiredExternalRuntimeHelperSubjectIds = new HashSet<string>(candidateTypeSubjectIds.Count, StringComparer.Ordinal);
 
         foreach (var typeSubjectId in candidateTypeSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
         {
@@ -152,7 +152,7 @@ public sealed partial class NativeAotLoweringPlanner
         var normalizedInputAssemblyPath = Path.GetFullPath(closureManifest.InputAssemblyPath);
         var resolvedAdditionalAssemblyPaths = closureManifest.ResolvedAssemblies
             .Select(assembly => assembly.Path)
-            .Where(path => !string.IsNullOrWhiteSpace(path))
+            .Where(path => !string.IsNullOrEmpty(path))
             .Select(path => Path.GetFullPath(path))
             .Where(path => !string.Equals(path, normalizedInputAssemblyPath, StringComparison.OrdinalIgnoreCase))
             .Distinct(StringComparer.OrdinalIgnoreCase)
@@ -205,7 +205,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             if (!string.Equals(instruction.Op, "newobj", StringComparison.Ordinal) ||
-                string.IsNullOrWhiteSpace(instruction.Callee))
+                string.IsNullOrEmpty(instruction.Callee))
             {
                 throw new NotSupportedException(
                     $"native-aot static initializer '{cctorMethod.SubjectId}' does not support opcode '{instruction.Op}' at IL offset {instruction.IlOffset ?? -1}.");
@@ -255,7 +255,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         if (instruction.Operand is string operand &&
-            !string.IsNullOrWhiteSpace(operand))
+            !string.IsNullOrEmpty(operand))
         {
             return operand;
         }

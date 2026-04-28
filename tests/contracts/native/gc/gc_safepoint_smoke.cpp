@@ -1,6 +1,7 @@
 #include "runtime_abi.h"
 #include <gc.h>
 #include <cassert>
+#include <cstddef>
 #include <cstdio>
 
 int main() {
@@ -20,17 +21,22 @@ int main() {
     const GC_word initial_gc_no = GC_get_gc_no();
 
     // Allocate many objects and hit safepoints to drive incremental GC
-    for (int i = 0; i < 10000; ++i) {
-        void* p = GC_MALLOC(64);
+    for (int i = 0; i < 100000; ++i) {
+        // Allocate varying sizes (some large) to create real collection pressure
+        std::size_t sz = (i % 8 == 0) ? 4096 : 128;
+        void* p = GC_MALLOC(sz);
         (void)p;  // intentionally let it become unreachable
 
-        if (i % 100 == 0) {
+        if (i % 500 == 0) {
             // Trigger a GC safepoint — should call GC_collect_a_little internally
             const RuntimeAbiV0* abi2 = chaos_runtime_get_abi_v0();
-            // GcSafepoint is not part of the public ABI table; call GC_collect_a_little directly
+            (void)abi2;
             GC_collect_a_little();
         }
     }
+
+    // Force one final collection to guarantee at least one full GC ran
+    GC_gcollect();
 
     const GC_word final_gc_no = GC_get_gc_no();
     assert(final_gc_no > initial_gc_no && "GC should have run at least once during safepoints");

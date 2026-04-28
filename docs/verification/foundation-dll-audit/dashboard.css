@@ -255,6 +255,68 @@ li + li { margin-top: 6px; }
   color: var(--muted);
   vertical-align: middle;
 }
+.native-proof-trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+}
+.native-proof-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: max-content;
+  min-width: 0;
+  max-width: min(80vw, 1100px);
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 248, 0.98);
+  box-shadow: 0 10px 24px rgba(28, 32, 38, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 30;
+  text-align: left;
+  white-space: nowrap;
+  user-select: text;
+  -webkit-user-select: text;
+}
+.native-proof-trigger:hover .native-proof-tooltip,
+.native-proof-trigger:focus-within .native-proof-tooltip,
+.native-proof-trigger.is-visible .native-proof-tooltip {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.native-proof-tooltip-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.native-proof-tooltip-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.native-proof-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.native-proof-methods {
+  margin: 0 0 10px;
+  padding-left: 18px;
+  max-height: 220px;
+  overflow: auto;
+  white-space: nowrap;
+}
+.native-proof-links a {
+  display: block;
+  color: var(--link);
+  text-decoration: underline;
+  white-space: nowrap;
+}
 /* source links */
 .source-links { margin-top: 14px; }
 .source-links h3 { font-size: 14px; margin-bottom: 8px; }

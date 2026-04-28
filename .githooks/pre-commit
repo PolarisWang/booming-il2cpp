@@ -1,9 +1,11 @@
 #!/bin/sh
-# Chaos IL2CPP — Pre-commit hook: architecture compliance check
+# Chaos IL2CPP — Pre-commit hook: architecture compliance + foundation DLL pipeline
 #
-# Runs build/check_arch.py on staged native C++ files.
+# Runs:
+#   1. build/check_arch.py on staged native C++ files
+#   2. build/check_foundation_dll_pipeline.py when test generator/ledger files change
+#
 # To install: git config core.hooksPath .githooks
-#
 # You can skip this check with: git commit --no-verify
 
 echo "=== [check_arch] Checking native architecture compliance ==="
@@ -12,24 +14,41 @@ STAGED_CPP=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^src/na
 
 if [ -z "$STAGED_CPP" ]; then
     echo "=== [check_arch] No native C++ files staged, skipping ==="
-    exit 0
-fi
-
-HAS_ERROR=0
-for FILE in $STAGED_CPP; do
-    OUTPUT=$(python3 build/check_arch.py --file "$FILE" 2>&1)
-    if echo "$OUTPUT" | grep -q "architecture issue"; then
-        echo "$OUTPUT"
-        HAS_ERROR=1
+else
+    HAS_ERROR=0
+    for FILE in $STAGED_CPP; do
+        OUTPUT=$(python3 build/check_arch.py --file "$FILE" 2>&1)
+        if echo "$OUTPUT" | grep -q "architecture issue"; then
+            echo "$OUTPUT"
+            HAS_ERROR=1
+        fi
+    done
+    if [ "$HAS_ERROR" -ne 0 ]; then
+        echo ""
+        echo "ERROR: Architecture check failed for staged native files."
+        echo "Fix the issues above or use 'git commit --no-verify' to bypass."
+        exit 1
     fi
-done
-
-if [ "$HAS_ERROR" -ne 0 ]; then
-    echo ""
-    echo "ERROR: Architecture check failed for staged native files."
-    echo "Fix the issues above or use 'git commit --no-verify' to bypass."
-    exit 1
+    echo "=== [check_arch] All staged native files pass architecture checks ==="
 fi
 
-echo "=== [check_arch] All staged native files pass architecture checks ==="
+echo "=== [foundation-dll] Checking foundation DLL pipeline ==="
+
+STAGED_FOUNDATION=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^build/toolchains/run/testing/foundation_dll/|^verification/projections/foundation-dll-audit/' || true)
+
+if [ -z "$STAGED_FOUNDATION" ]; then
+    echo "=== [foundation-dll] No foundation DLL files staged, skipping ==="
+else
+    echo "Staged foundation DLL files — running pipeline check..."
+    python3 build/check_foundation_dll_pipeline.py
+    PIPELINE_EXIT=$?
+    if [ "$PIPELINE_EXIT" -ne 0 ]; then
+        echo ""
+        echo "ERROR: Foundation DLL pipeline check failed."
+        echo "Fix the issues above or use 'git commit --no-verify' to bypass."
+        exit 1
+    fi
+    echo "=== [foundation-dll] Pipeline check passed ==="
+fi
+
 exit 0

@@ -125,6 +125,8 @@ public sealed record CodeRegistrationArtifact
     public string ArtifactKind { get; init; } = "codeRegistration";
 
     public required IReadOnlyList<CodeRegistrationModule> Modules { get; init; }
+
+    public IReadOnlyList<CodeRegistrationTypeCapabilityEntry> TypeCapabilities { get; init; } = [];
 }
 
 public sealed record CodeRegistrationModule
@@ -143,6 +145,25 @@ public sealed record CodeRegistrationEntry
     public required string Symbol { get; init; }
 
     public required string SubjectId { get; init; }
+}
+
+public sealed record CodeRegistrationTypeCapabilityEntry
+{
+    public required string SubjectId { get; init; }
+
+    public required uint TypeToken { get; init; }
+
+    public required uint CapabilityBits { get; init; }
+
+    public required uint ValueSizeBytes { get; init; }
+
+    public required uint VectorWidthBytes { get; init; }
+
+    public required uint VectorLaneCount { get; init; }
+
+    public required uint VectorLaneKind { get; init; }
+
+    public required uint ScalarKind { get; init; }
 }
 
 public sealed record MetadataWriterOutput

@@ -39,8 +39,12 @@ public sealed class NativeCodegenValidator
         RegexOptions.Compiled);
 
     private static readonly Regex UsingDirectiveRegex = new(
-        @"^using\s+(namespace\s+)?(std|chaos)",
+        @"^using\s+namespace\s+(std|chaos)",
         RegexOptions.Compiled | RegexOptions.Multiline);
+
+    private static readonly Regex RawStdTypeRegex = new(
+        @"\bstd::(intptr_t|int\d+_t|uint\d+_t|size_t|ptrdiff_t|string|vector|array|unique_ptr|make_unique|unordered_map|pair|abort\s*\(|memcpy|memcmp|strcmp|strlen|memset|mutex|lock_guard|recursive_timed_mutex|once_flag|call_once|thread|numeric_limits|atomic|to_string|printf|fwrite|fputc|fflush|chrono)\b",
+        RegexOptions.Compiled);
 
     public ValidationResult ValidateFile(string filePath)
     {
@@ -85,14 +89,14 @@ public sealed class NativeCodegenValidator
             result.Errors.Add($"'{fileName}': 'NULL' is forbidden — use 'nullptr' instead (found near line {EstimateLineNumber(content, nullMatch.Index)})");
         }
 
-        // Check 4: Must use <cstdint> types (std::int32_t etc.), not bare int/long
+        // Check 4: Must use <cstdint> types (CHAOS_IL2CPP_INT32 etc.), not bare int/long
         // Only flag in generated code, not in runtime library code
         if (!fileName.StartsWith("chaos/", StringComparison.Ordinal))
         {
             var bareIntMatch = BareIntRegex.Match(content);
             if (bareIntMatch.Success)
             {
-                result.Warnings.Add($"'{fileName}': prefer <cstdint> types (std::int32_t, etc.) over '{bareIntMatch.Value}' (found near line {EstimateLineNumber(content, bareIntMatch.Index)})");
+                result.Warnings.Add($"'{fileName}': prefer <cstdint> types (CHAOS_IL2CPP_INT32, etc.) over '{bareIntMatch.Value}' (found near line {EstimateLineNumber(content, bareIntMatch.Index)})");
             }
         }
 
@@ -123,6 +127,17 @@ public sealed class NativeCodegenValidator
             if (content.Contains("chaos_finally_scope_guard") || content.Contains("chaos_wrap_add"))
             {
                 result.Errors.Add($"'{fileName}': contains inline prelude definitions (chaos_finally_scope_guard, chaos_wrap_add) — must include <chaos/common.h> instead");
+            }
+        }
+
+        // Check 8: Generated code must not contain raw std:: types — use CHAOS_IL2CPP_* macros
+        if (!fileName.StartsWith("chaos/", StringComparison.Ordinal) &&
+            !fileName.StartsWith("native_types", StringComparison.Ordinal))
+        {
+            var rawStdMatch = RawStdTypeRegex.Match(content);
+            if (rawStdMatch.Success)
+            {
+                result.Errors.Add($"'{fileName}': raw std:: type '{rawStdMatch.Value}' found — use CHAOS_IL2CPP_* macros instead (found near line {EstimateLineNumber(content, rawStdMatch.Index)})");
             }
         }
 

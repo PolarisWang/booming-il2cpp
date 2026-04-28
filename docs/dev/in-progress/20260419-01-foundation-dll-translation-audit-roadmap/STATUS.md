@@ -25,7 +25,7 @@ active: false
 - brainstorm: `docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/brainstorm-v1-01.md`
 - design: `docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md`
 - roadmap: `docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md`
-- parallel_reporting_roadmap: `docs/dev/in-progress/20260425-03-foundation-dll-capability-closure-reporting-roadmap/roadmap-v1-01.md`
+- parallel_reporting_roadmap: `docs/dev/completed/20260425-03-foundation-dll-capability-closure-reporting-roadmap/roadmap-v1-01.md`
 - resumed_after: `docs/dev/completed/20260425-01-runtime-skeleton-4c-handler-framework-roadmap/STATUS.md`
 
 ## 当前判断

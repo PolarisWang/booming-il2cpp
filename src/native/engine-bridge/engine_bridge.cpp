@@ -1,6 +1,8 @@
 #include "engine_bridge.h"
 
 #include "runtime_core.h"
+#include "bootstrap.h"
+#include "memory_domain.h"
 
 #include <mutex>
 #include <new>
@@ -10,7 +12,7 @@
 namespace {
 
 struct EngineCallbackRegistration {
-    std::string name = {};
+    CHAOS_IL2CPP_STRING name = {};
     engine_callback_fn_t callback = nullptr;
     void* user_data = nullptr;
 };
@@ -18,7 +20,7 @@ struct EngineCallbackRegistration {
 struct EngineOwnershipRecord {
     uint32_t weak_count = 0u;
     uint32_t strong_count = 0u;
-    std::string owner = {};
+    CHAOS_IL2CPP_STRING owner = {};
 };
 
 }  // namespace
@@ -27,10 +29,10 @@ struct engine_runtime_context_t {
     const RuntimeAbiV0* abi = nullptr;
     RuntimeState* runtime = nullptr;
     ThreadState* thread = nullptr;
-    std::mutex mutex = {};
+    CHAOS_IL2CPP_MUTEX mutex = {};
     engine_callback_id_t next_callback_id = 1u;
-    std::unordered_map<engine_callback_id_t, EngineCallbackRegistration> callbacks = {};
-    std::unordered_map<engine_object_ref_t, EngineOwnershipRecord> ownership = {};
+    CHAOS_IL2CPP_UNORDERED_MAP(engine_callback_id_t, EngineCallbackRegistration) callbacks = {};
+    CHAOS_IL2CPP_UNORDERED_MAP(engine_object_ref_t, EngineOwnershipRecord) ownership = {};
 };
 
 namespace {
@@ -80,6 +82,10 @@ engine_status_t DispatchLifecyclePhase(
 
 }  // namespace
 
+/// Depth of the AOT domain push on the engine thread's TLS domain stack.
+/// Saved so engine_shutdown can correctly unwind to the pre-init depth.
+static int g_engine_domain_depth = -1;
+
 engine_status_t engine_init(
     engine_runtime_context_t** out_runtime,
     const engine_init_params_t* init_params) {
@@ -93,7 +99,7 @@ engine_status_t engine_init(
         return ENGINE_STATUS_INTERNAL_ERROR;
     }
 
-    auto* runtime = new (std::nothrow) engine_runtime_context_t();
+    auto* runtime = new (CHAOS_IL2CPP_NOTROW) engine_runtime_context_t();
     if (runtime == nullptr) {
         return ENGINE_STATUS_INTERNAL_ERROR;
     }
@@ -120,6 +126,16 @@ engine_status_t engine_init(
     }
 
     *out_runtime = runtime;
+
+    // Push the AOT root memory domain so marshal allocations during engine
+    // callbacks are attributed to the AOT domain.  Saved depth is used in
+    // engine_shutdown to unwind correctly.
+    namespace md = chaos::il2cpp::memory_domain;
+    auto* aot_domain = md::FindDomainById(chaos::il2cpp::bootstrap::GetAotDomainId());
+    if (aot_domain != nullptr) {
+        g_engine_domain_depth = md::PushDomain(aot_domain);
+    }
+
     return DispatchLifecyclePhase(runtime, "init");
 }
 
@@ -129,6 +145,14 @@ void engine_shutdown(engine_runtime_context_t* runtime) {
     }
 
     (void)DispatchLifecyclePhase(runtime, "shutdown");
+
+    // Pop the AOT domain push from engine_init, restoring the TLS domain
+    // stack to its pre-init state.
+    if (g_engine_domain_depth >= 0) {
+        chaos::il2cpp::memory_domain::PopDomain(g_engine_domain_depth);
+        g_engine_domain_depth = -1;
+    }
+
     if (runtime->runtime != nullptr && runtime->thread != nullptr) {
         runtime->abi->thread_detach(runtime->runtime, runtime->thread);
         runtime->thread = nullptr;
@@ -164,7 +188,7 @@ engine_status_t engine_retain_object(
         return ENGINE_STATUS_INVALID_ARGUMENT;
     }
 
-    std::lock_guard<std::mutex> lock(runtime->mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(runtime->mutex);
     EngineOwnershipRecord& record = runtime->ownership[object_ref];
     if (handle_kind == ENGINE_HANDLE_KIND_STRONG) {
         ++record.strong_count;
@@ -183,7 +207,7 @@ engine_status_t engine_release_object(
         return ENGINE_STATUS_INVALID_ARGUMENT;
     }
 
-    std::lock_guard<std::mutex> lock(runtime->mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(runtime->mutex);
     EngineOwnershipRecord* record = TryFindOwnershipRecord(runtime, object_ref);
     if (record == nullptr) {
         return ENGINE_STATUS_INVALID_ARGUMENT;
@@ -217,7 +241,7 @@ engine_status_t engine_transfer_ownership(
         return ENGINE_STATUS_INVALID_ARGUMENT;
     }
 
-    std::lock_guard<std::mutex> lock(runtime->mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(runtime->mutex);
     EngineOwnershipRecord* record = TryFindOwnershipRecord(runtime, object_ref);
     if (record == nullptr) {
         return ENGINE_STATUS_INVALID_ARGUMENT;
@@ -245,7 +269,7 @@ engine_status_t engine_register_callback(
         return ENGINE_STATUS_INVALID_ARGUMENT;
     }
 
-    std::lock_guard<std::mutex> lock(runtime->mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(runtime->mutex);
     const engine_callback_id_t callback_id = runtime->next_callback_id++;
     runtime->callbacks.emplace(
         callback_id,
@@ -270,7 +294,7 @@ engine_status_t engine_dispatch_callback(
 
     EngineCallbackRegistration registration = {};
     {
-        std::lock_guard<std::mutex> lock(runtime->mutex);
+        CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(runtime->mutex);
         const auto iterator = runtime->callbacks.find(callback_id);
         if (iterator == runtime->callbacks.end()) {
             return ENGINE_STATUS_INVALID_ARGUMENT;

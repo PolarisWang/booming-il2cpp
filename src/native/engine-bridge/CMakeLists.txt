@@ -13,7 +13,8 @@ target_include_directories(
         "${REPO_ROOT}/contracts/engine/v0"
         "${CMAKE_CURRENT_LIST_DIR}"
     PRIVATE
-        "${REPO_ROOT}/src/native/runtime-core")
+        "${REPO_ROOT}/src/native/runtime-core"
+        "${REPO_ROOT}/src/native/bootstrap")
 target_link_libraries(
     chaos_engine_bridge
     PUBLIC

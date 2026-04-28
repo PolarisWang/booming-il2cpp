@@ -2,6 +2,86 @@ from tests.unit.compatibility.il2cpp_codegen_structure_governance_test_support i
 
 
 class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovernanceTestSupport):
+    def test_managed_naming_exposes_generic_subject_canonicalizer(self) -> None:
+        managed_naming_source = MANAGED_NAMING_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "public static string CanonicalizeSubjectId(",
+            "private static string CanonicalizeGenericPlaceholderOrdinals(",
+            "private static IReadOnlyDictionary<string, string> BuildGenericPlaceholderMap(",
+            "placeholderPrefixLength",
+            "placeholderMap.TryGetValue(",
+        ]:
+            self.assertIn(required_fragment, managed_naming_source)
+
+    def test_semantic_world_uses_managed_naming_for_canonical_subject_ids(self) -> None:
+        semantic_world_stage_path = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.SemanticWorld"
+            / "SemanticWorldStage.cs"
+        )
+        semantic_world_source = semantic_world_stage_path.read_text(encoding="utf-8")
+
+        self.assertIn(
+            "CanonicalSubjectId = canonicalSubjectId ?? ManagedNaming.CanonicalizeSubjectId(subjectId)",
+            semantic_world_source,
+        )
+        self.assertNotIn(
+            "SubjectKind = \"method\",\n                    SubjectId = method.SubjectId,\n                    CanonicalSubjectId = method.SubjectId,",
+            semantic_world_source,
+        )
+
+    def test_full_closure_plans_order_methods_by_canonical_subject_id(self) -> None:
+        codegen_stage_path = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "CodeGenStage.cs"
+        )
+        codegen_stage_source = codegen_stage_path.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "BuildCanonicalSubjectIdLookup(linkedWorld.CanonicalSubjects.Subjects)",
+            "ResolveCanonicalSubjectId(canonicalSubjectIds, method.SubjectId)",
+            "ThenBy(method => method.SubjectId, StringComparer.Ordinal)",
+        ]:
+            self.assertIn(required_fragment, codegen_stage_source)
+
+    def test_runtime_skeleton_coverage_report_uses_canonical_subject_ids(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "BuildCanonicalSubjectIdLookup(loweringPlan.TranslationUnitMethodSubjectIds ?? [])",
+            "ResolveCanonicalSubjectId(canonicalSubjectIds, method.SubjectId)",
+            "[\"uncoveredMethodSubjectIds\"] = unsupportedMethods",
+            "[\"canonicalSubjectId\"] = ResolveCanonicalSubjectId(canonicalSubjectIds, method.SubjectId)",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+    def test_native_aot_string_id_symbol_helper_is_defined_once(self) -> None:
+        string_id_emission_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Emission"
+            / "NativeAotLoweringPlanner.StringIdEmission.cs"
+        ).read_text(encoding="utf-8")
+        object_model_utilities_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Emission"
+            / "NativeAotLoweringPlanner.ObjectModelUtilities.cs"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("private static string GetNativeStringIdSymbol(ulong id)", object_model_utilities_source)
+        self.assertNotIn("private static string GetNativeStringIdSymbol(ulong id)", string_id_emission_source)
+
     def test_native_reference_planner_and_emitter_share_catalog(self) -> None:
         planner_source = NATIVE_REFERENCE_PLANNER_PATH.read_text(encoding="utf-8")
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
@@ -21,6 +101,54 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
                 'private const string GeneratedTranslationUnitTemplateRelativePath = "Templates/NativeReferenceProof.cpp.scriban";',
                 source,
             )
+
+    def test_d3c_lowering_plan_registry_replaces_manual_trycreate_bus(self) -> None:
+        plan_builders_source = NATIVE_REFERENCE_PLAN_BUILDERS_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_PLAN_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
+        generator_source = CODEGEN_GENERATOR_SOURCE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("NativeReferenceLoweringPlanBuildContext", generated_exports_source)
+        self.assertIn("LoweringPlanPlugin(", generated_exports_source)
+        self.assertIn("NativeReferenceLoweringPlanPlugin[] NativeReferenceLoweringPlanPlugins", generator_source)
+        self.assertIn("foreach (var plugin in NativeReferenceLoweringPlanPlugins)", plan_builders_source)
+        self.assertNotIn("if (TryCreateReflectionInteropClosureLoweringPlan(", plan_builders_source[:12000])
+
+    def test_d3c_template_and_runtime_provider_registries_exist(self) -> None:
+        attributes_source = CODEGEN_PLUGIN_ATTRIBUTES_PATH.read_text(encoding="utf-8")
+        registries_source = CODEGEN_PLUGIN_REGISTRIES_PATH.read_text(encoding="utf-8")
+        template_plugins_source = CODEGEN_TEMPLATE_BUNDLE_PLUGINS_PATH.read_text(encoding="utf-8")
+        provider_plugins_source = CODEGEN_RUNTIME_PROVIDER_PLUGINS_PATH.read_text(encoding="utf-8")
+        provider_catalog_source = CODEGEN_RUNTIME_PROVIDER_CATALOG_PATH.read_text(encoding="utf-8")
+        native_reference_catalog_source = NATIVE_REFERENCE_CATALOG_PATH.read_text(encoding="utf-8")
+        native_aot_catalog_source = NATIVE_AOT_TEMPLATE_CATALOG_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "CodegenTemplateBundlePluginAttribute",
+            "RuntimeProviderPluginAttribute",
+            "CodeGenPluginProductLine",
+            "RuntimeSkeletonFamilyPluginKind",
+            "GeneratedTemplateBundlePluginMetadata",
+            "GeneratedRuntimeProviderPluginMetadata",
+            "ICodegenTemplateBundlePlugin",
+            "IRuntimeProviderPlugin",
+            "NativeReferenceProofCatalogTemplateBundlePlugin",
+            "NativeAotTemplateCatalogTemplateBundlePlugin",
+            "MarshalPlatformRuntimeProviderPlugin",
+            "TaskRuntimeKernelRuntimeProviderPlugin",
+            "InteropKernel32RuntimeProviderPlugin",
+            "GetNativeReferenceProviders()",
+            "GetNativeAotProviders()",
+            "GetRegisteredTemplateBundles()",
+        ]:
+            self.assertIn(required_fragment, "\n".join([
+                attributes_source,
+                registries_source,
+                template_plugins_source,
+                provider_plugins_source,
+                provider_catalog_source,
+                native_reference_catalog_source,
+                native_aot_catalog_source,
+            ]))
 
     def test_codegen_emitters_use_shared_scriban_renderer(self) -> None:
         planner_source = NATIVE_REFERENCE_PLANNER_PATH.read_text(encoding="utf-8")
@@ -236,19 +364,28 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
 
     def test_runtime_skeleton_emitter_has_4c_foundation_dispatcher_skeleton(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
+        generator_source = CODEGEN_GENERATOR_SOURCE_PATH.read_text(encoding="utf-8")
+        codegen_project_source = (REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Chaos.IL2CPP.CodeGen.csproj").read_text(encoding="utf-8")
 
         for required_fragment in [
             "private sealed record RuntimeSkeletonStubBuildContext(",
             "private enum RuntimeSkeletonFamilyHandlerMatchKind",
             "private sealed record RuntimeSkeletonFamilyHandlerResult(",
             "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonFamilyHandler(",
-            "private static readonly RuntimeSkeletonFamilyHandler[] RuntimeSkeletonFamilyHandlers =",
             "TryBuildRuntimeSkeletonConvertFamilyHandler",
             "TryBuildRuntimeSkeletonConvertLikeFamilyHandler",
             "TryBuildAssemblyFullClosureRuntimeSkeletonMethodStubVia4CDispatcher(",
             "var buildContext = new RuntimeSkeletonStubBuildContext(",
         ]:
             self.assertIn(required_fragment, emitter_source)
+
+        self.assertIn("RuntimeSkeletonFamilyPlugin(", generated_exports_source)
+        self.assertIn("RuntimeSkeletonFamilyPluginAttribute", generator_source)
+        self.assertIn("Chaos.IL2CPP.CodeGen.Generators.csproj", codegen_project_source)
+        self.assertIn('OutputItemType="Analyzer"', codegen_project_source)
+        self.assertIn('ReferenceOutputAssembly="false"', codegen_project_source)
+        self.assertNotIn("private static readonly RuntimeSkeletonFamilyHandler[] RuntimeSkeletonFamilyHandlers =", emitter_source)
 
         self.assertLess(
             emitter_source.index("TryBuildRuntimeSkeletonConvertFamilyHandler"),
@@ -529,11 +666,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_string_managed_invoke_family_precedes_string_micro_family(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_STRING_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringFamilyHandler"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringFamily"),
         )
         self.assertIn("CreateUnsupported(\"string-managed-invoke-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.String::\", StringComparison.Ordinal)", split_source)
@@ -541,11 +679,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_unsafe_managed_invoke_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_UNSAFE_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonUnsafeManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonUnsafeManagedInvokeFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_UnsafeManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"unsafe-managed-invoke-unsupported-shape\")", split_source)
         self.assertIn(
@@ -556,11 +695,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_memory_extensions_managed_invoke_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_MEMORY_EXTENSIONS_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonMemoryExtensionsManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonMemoryExtensionsManagedInvokeFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_MemoryExtensionsManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"memory-extensions-managed-invoke-unsupported-shape\")", split_source)
         self.assertIn(
@@ -571,11 +711,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_spanhelpers_kernel_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_SPANHELPERS_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonSpanHelpersKernelFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonSpanHelpersKernelFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_SpanHelpersKernelFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"spanhelpers-kernel-unsupported-shape\")", split_source)
         self.assertIn(
@@ -586,11 +727,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_array_and_memorymarshal_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_ARRAY_AND_MEMORYMARSHAL_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonArrayAndMemoryMarshalFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonArrayAndMemoryMarshalFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_ArrayAndMemoryMarshalFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"array-memorymarshal-family-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.Array::\", StringComparison.Ordinal)", split_source)
@@ -602,11 +744,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_half_managed_invoke_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_HALF_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonHalfManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonHalfManagedInvokeFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_HalfManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"half-managed-invoke-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.Half::\", StringComparison.Ordinal)", split_source)
@@ -614,11 +757,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_floating_scalar_managed_invoke_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_FLOATING_SCALAR_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonFloatingScalarManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonFloatingScalarManagedInvokeFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_FloatingScalarManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"floating-scalar-managed-invoke-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.Single::\", StringComparison.Ordinal)", split_source)
@@ -627,11 +771,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_number_managed_invoke_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_NUMBER_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonNumberManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonNumberManagedInvokeFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_NumberManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"number-managed-invoke-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.Number::\", StringComparison.Ordinal)", split_source)
@@ -639,11 +784,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_decimal_managed_invoke_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_DECIMAL_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonDecimalManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonDecimalManagedInvokeFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_DecimalManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"decimal-managed-invoke-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.Decimal\", StringComparison.Ordinal)", split_source)
@@ -651,11 +797,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_char_managed_invoke_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_CHAR_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonCharManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonCharManagedInvokeFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_CharManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"char-managed-invoke-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.Char::\", StringComparison.Ordinal)", split_source)
@@ -663,11 +810,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_companion_managed_invoke_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_COMPANION_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonCompanionManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonCompanionManagedInvokeFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_CompanionManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"companion-managed-invoke-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.DateTime+LeapSecondCache::\", StringComparison.Ordinal)", split_source)
@@ -676,11 +824,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_datetime_semantic_engine_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_DATETIME_SEMANTIC_ENGINE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonDateTimeSemanticEngineFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonDateTimeSemanticEngineFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_DateTimeSemanticEngineFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"datetime-semantic-engine-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.DateTimeFormat::\", StringComparison.Ordinal)", split_source)
@@ -689,11 +838,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_globalization_datetime_support_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_GLOBALIZATION_DATETIME_SUPPORT_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonGlobalizationDateTimeSupportFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonGlobalizationDateTimeSupportFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_GlobalizationDateTimeSupportFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"globalization-datetime-support-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.Globalization.CultureData::\", StringComparison.Ordinal)", split_source)
@@ -703,11 +853,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_VALUETYPE_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
         kernel_core_source = RUNTIME_SKELETON_KERNEL_CORE_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonValueTypeKernelFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonValueTypeKernelFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_ValueTypeKernelFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"valuetype-kernel-unsupported-shape\")", split_source)
         self.assertIn("RuntimeSkeletonKernelCore.", split_source)
@@ -719,11 +870,12 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
     def test_runtime_skeleton_enum_managed_invoke_family_precedes_string_families(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_ENUM_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("TryBuildRuntimeSkeletonEnumManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            emitter_source.index("TryBuildRuntimeSkeletonEnumManagedInvokeFamilyHandler"),
-            emitter_source.index("TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler"),
+            generated_exports_source.index("Plugin_EnumManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
         self.assertIn("CreateUnsupported(\"enum-managed-invoke-unsupported-shape\")", split_source)
         self.assertIn("SubjectId.Contains(\"/System.Enum::\", StringComparison.Ordinal)", split_source)
@@ -790,10 +942,8 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
 
     def test_runtime_skeleton_convert_like_family_owns_generic_convert_fallback_lanes(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
 
-        family_handlers_start = emitter_source.index(
-            "private static readonly RuntimeSkeletonFamilyHandler[] RuntimeSkeletonFamilyHandlers =",
-        )
         convert_family_start = emitter_source.index(
             "private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertFamilyHandler(",
         )
@@ -804,7 +954,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             "private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeIntForwarderHandler(",
         )
 
-        family_handlers_slice = emitter_source[family_handlers_start:convert_family_start]
+        family_handlers_slice = generated_exports_source
         convert_like_family_slice = emitter_source[convert_like_family_start:convert_int_handler_start]
 
         for required_fragment in [
@@ -814,7 +964,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         ]:
             self.assertIn(required_fragment, emitter_source)
 
-        self.assertIn("TryBuildRuntimeSkeletonConvertLikeFamilyHandler", family_handlers_slice)
+        self.assertIn("Plugin_ConvertLikeFamily", family_handlers_slice)
         self.assertIn("foreach (var convertLikeFamilyHandler in RuntimeSkeletonConvertLikeFamilyHandlers)", convert_like_family_slice)
 
     def test_runtime_skeleton_convert_families_share_handler_loop_helper(self) -> None:
@@ -1179,6 +1329,54 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         self.assertIn("TryBuildRuntimeSkeletonCompanionManagedInvokeCore(buildContext);", emitter_source)
         self.assertIn("TryBuildAssemblyBoundCompanionManagedInvokeCore(", emitter_source)
 
+    def test_native_reference_emitter_identity_struct_managed_invoke_family_no_longer_owns_vector_object_equals_and_tostring(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_path = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.IdentityStructManagedInvokeFamily.cs"
+        )
+        split_source = split_path.read_text(encoding="utf-8")
+        semantic_registry_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "RuntimeSkeletonSemanticRegistry.cs"
+        ).read_text(encoding="utf-8")
+
+        self.assertTrue(
+            split_path.is_file(),
+            msg=f"missing NativeReference emitter split file: {split_path}",
+        )
+
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", emitter_source)
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonIdentityStructManagedInvokeFamilyCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonIdentityStructManagedInvokeCore(", split_source)
+        self.assertIn("TryBuildAssemblyBoundIdentityStructManagedInvokeCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonIdentityStructManagedInvokeFamilyCore(buildContext);", emitter_source)
+        self.assertIn("TryBuildRuntimeSkeletonIdentityStructManagedInvokeCore(buildContext);", emitter_source)
+        self.assertIn("TryBuildAssemblyBoundIdentityStructManagedInvokeCore(", emitter_source)
+
+        for forbidden_fragment in [
+            '"/System.Numerics.Vector2::"',
+            '"/System.Numerics.Vector3::"',
+            '"/System.Numerics.Vector4::"',
+            'Equals:System.Boolean(System.Object)',
+            'ToString:System.String()',
+            'ToString:System.String(System.String)',
+            'ToString:System.String(System.String,System.IFormatProvider)',
+        ]:
+            self.assertNotIn(forbidden_fragment, split_source)
+
+        self.assertIn("IdentityStructFamilyId", semantic_registry_source)
+        self.assertIn("VectorManagedInvokeFamilyId", semantic_registry_source)
+
     def test_native_reference_emitter_datetime_semantic_engine_family_is_split_from_root_emitter(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_DATETIME_SEMANTIC_ENGINE_FAMILY_PATH.read_text(encoding="utf-8")
@@ -1233,6 +1431,70 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         self.assertIn("TryBuildRuntimeSkeletonValueTypeKernelCore(buildContext);", emitter_source)
         self.assertIn("TryBuildAssemblyBoundValueTypeKernelCore(", emitter_source)
 
+    def test_native_reference_emitter_marshal_platform_capability_family_is_split_from_root_emitter(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_MARSHAL_PLATFORM_CAPABILITY_FAMILY_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_REFERENCE_EMITTER_MARSHAL_PLATFORM_CAPABILITY_FAMILY_PATH.is_file(),
+            msg=f"missing NativeReference emitter split file: {NATIVE_REFERENCE_EMITTER_MARSHAL_PLATFORM_CAPABILITY_FAMILY_PATH}",
+        )
+
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", emitter_source)
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonMarshalPlatformCapabilityFamilyCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonMarshalPlatformCapabilityCore(", split_source)
+        self.assertIn("TryBuildAssemblyBoundMarshalPlatformCapabilityCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonMarshalPlatformCapabilityFamilyCore(buildContext);", emitter_source)
+
+    def test_native_reference_emitter_task_continuation_family_is_split_from_root_emitter(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_TASK_CONTINUATION_FAMILY_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_REFERENCE_EMITTER_TASK_CONTINUATION_FAMILY_PATH.is_file(),
+            msg=f"missing NativeReference emitter split file: {NATIVE_REFERENCE_EMITTER_TASK_CONTINUATION_FAMILY_PATH}",
+        )
+
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", emitter_source)
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonTaskContinuationFamilyCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonTaskContinuationCore(", split_source)
+        self.assertIn("TryBuildAssemblyBoundTaskContinuationCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonTaskContinuationFamilyCore(buildContext);", emitter_source)
+
+    def test_native_reference_emitter_interop_kernel32_platform_family_is_split_from_root_emitter(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_INTEROP_KERNEL32_PLATFORM_CAPABILITY_FAMILY_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_REFERENCE_EMITTER_INTEROP_KERNEL32_PLATFORM_CAPABILITY_FAMILY_PATH.is_file(),
+            msg=f"missing NativeReference emitter split file: {NATIVE_REFERENCE_EMITTER_INTEROP_KERNEL32_PLATFORM_CAPABILITY_FAMILY_PATH}",
+        )
+
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", emitter_source)
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonInteropKernel32PlatformCapabilityFamilyCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonInteropKernel32PlatformCapabilityCore(", split_source)
+        self.assertIn("TryBuildAssemblyBoundInteropKernel32PlatformCapabilityCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonInteropKernel32PlatformCapabilityFamilyCore(buildContext);", emitter_source)
+
+    def test_native_reference_emitter_native_runtime_eventsource_family_is_split_from_root_emitter(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_NATIVE_RUNTIME_EVENTSOURCE_PLATFORM_CAPABILITY_FAMILY_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_REFERENCE_EMITTER_NATIVE_RUNTIME_EVENTSOURCE_PLATFORM_CAPABILITY_FAMILY_PATH.is_file(),
+            msg=f"missing NativeReference emitter split file: {NATIVE_REFERENCE_EMITTER_NATIVE_RUNTIME_EVENTSOURCE_PLATFORM_CAPABILITY_FAMILY_PATH}",
+        )
+
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", emitter_source)
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonNativeRuntimeEventSourcePlatformCapabilityFamilyCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonNativeRuntimeEventSourcePlatformCapabilityCore(", split_source)
+        self.assertIn("TryBuildAssemblyBoundNativeRuntimeEventSourcePlatformCapabilityCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonNativeRuntimeEventSourcePlatformCapabilityFamilyHandler", emitter_source)
+
     def test_runtime_skeleton_kernel_registry_no_longer_uses_method_spec_table(self) -> None:
         kernel_core_source = RUNTIME_SKELETON_KERNEL_CORE_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_VALUETYPE_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
@@ -1243,6 +1505,86 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         self.assertIn("RuntimeSkeletonKernelEmissionPlan", kernel_core_source)
         self.assertIn("RuntimeSkeletonKernelCarrierSchema", kernel_core_source)
 
+    def test_native_reference_emitter_vector_kernel_family_is_split_from_root_emitter(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_VECTOR_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
+        vector_kernel_core_source = RUNTIME_SKELETON_VECTOR_KERNEL_CORE_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_REFERENCE_EMITTER_VECTOR_KERNEL_FAMILY_PATH.is_file(),
+            msg=f"missing NativeReference emitter split file: {NATIVE_REFERENCE_EMITTER_VECTOR_KERNEL_FAMILY_PATH}",
+        )
+        self.assertTrue(
+            RUNTIME_SKELETON_VECTOR_KERNEL_CORE_PATH.is_file(),
+            msg=f"missing vector kernel core file: {RUNTIME_SKELETON_VECTOR_KERNEL_CORE_PATH}",
+        )
+
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", emitter_source)
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonVectorKernelFamilyCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonVectorKernelCore(", split_source)
+        self.assertIn("TryBuildAssemblyBoundVectorKernelCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonVectorKernelFamilyCore(buildContext);", emitter_source)
+        self.assertIn("TryBuildRuntimeSkeletonVectorKernelCore(buildContext);", emitter_source)
+        self.assertIn("TryBuildAssemblyBoundVectorKernelCore(", emitter_source)
+        self.assertIn("Plugin_VectorKernelFamily", generated_exports_source)
+        self.assertIn("RuntimeSkeletonVectorKernelCore.", split_source)
+
+        for required_fragment in [
+            "record RuntimeSkeletonVectorKernelSemanticDescriptor(",
+            "record RuntimeSkeletonVectorKernelCarrierSchema(",
+            "record RuntimeSkeletonVectorKernelEmissionPlan(",
+            "/System.Numerics.Vector2::",
+            "/System.Numerics.Vector3::",
+            "/System.Numerics.Vector4::",
+            "/System.Runtime.Intrinsics.Vector64::",
+            "/System.Runtime.Intrinsics.Vector128::",
+            "/System.Runtime.Intrinsics.Vector256::",
+            "/System.Runtime.Intrinsics.Vector512::",
+            "vector-initializer",
+            "vector-arithmetic",
+            "vector-dot-product",
+            "vector-distance",
+            "vector-reinterpret",
+            "vector-fixed-arithmetic",
+            "vector-capability-query",
+        ]:
+            self.assertIn(required_fragment, vector_kernel_core_source)
+
+    def test_native_reference_emitter_vector_managed_invoke_family_is_split_from_root_emitter(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_VECTOR_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
+        abi_source = RUNTIME_SKELETON_VECTOR_MANAGED_INVOKE_ABI_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_REFERENCE_EMITTER_VECTOR_MANAGED_INVOKE_FAMILY_PATH.is_file(),
+            msg=f"missing NativeReference emitter split file: {NATIVE_REFERENCE_EMITTER_VECTOR_MANAGED_INVOKE_FAMILY_PATH}",
+        )
+        self.assertTrue(
+            RUNTIME_SKELETON_VECTOR_MANAGED_INVOKE_ABI_PATH.is_file(),
+            msg=f"missing vector managed invoke ABI file: {RUNTIME_SKELETON_VECTOR_MANAGED_INVOKE_ABI_PATH}",
+        )
+
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", emitter_source)
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonVectorManagedInvokeFamilyCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonVectorManagedInvokeCore(", split_source)
+        self.assertIn("TryBuildAssemblyBoundVectorManagedInvokeCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonVectorManagedInvokeFamilyCore(buildContext);", emitter_source)
+        self.assertIn("Plugin_VectorManagedInvokeFamily", generated_exports_source)
+
+        for required_fragment in [
+            "VectorManagedInvokeFamilyId",
+            "/System.Numerics.Vector2::",
+            "/System.Numerics.Vector3::",
+            "/System.Numerics.Vector4::",
+            "identity-struct-managed-invoke-v1",
+            "RuntimeSkeletonValueTypeManagedInvokeCore.TryCreate(",
+        ]:
+            self.assertIn(required_fragment, split_source + "\n" + abi_source + "\n" + RUNTIME_SKELETON_SEMANTIC_REGISTRY_PATH.read_text(encoding="utf-8"))
+
     def test_runtime_skeleton_half_kernel_operators_do_not_reuse_equals_semantics(self) -> None:
         kernel_core_source = RUNTIME_SKELETON_KERNEL_CORE_PATH.read_text(encoding="utf-8")
 
@@ -1252,6 +1594,70 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         self.assertIn("HalfOperatorGreaterThan(request->arg0, request->arg1)", kernel_core_source)
         self.assertIn("HalfOperatorGreaterThanOrEqual(request->arg0, request->arg1)", kernel_core_source)
         self.assertNotIn("HalfEquals(request->arg0, request->arg1)", kernel_core_source)
+
+    def test_runtime_skeleton_marshal_platform_core_exposes_fastpath_and_classification(self) -> None:
+        marshal_core_source = RUNTIME_SKELETON_MARSHAL_PLATFORM_CORE_PATH.read_text(encoding="utf-8")
+        marshal_abi_source = RUNTIME_SKELETON_MARSHAL_MANAGED_INVOKE_ABI_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "enum MarshalStructureMarshallingClass",
+            "FullyBlittableFastPath",
+            "LayoutFixedMarshallerPath",
+            "DescriptorDrivenMarshallerPath",
+            "record RuntimeSkeletonMarshalPlatformFastPathPlan(",
+            "TryCreateFastPath(",
+            "ClassifyStructureMarshalling(",
+            "marshal-platform-fast-v1",
+            "MarshalAllocHGlobal",
+            "MarshalStringToCoTaskMemUtf8",
+            "MarshalReadInt32",
+            "MarshalWriteIntPtr",
+            "marshal-managed-invoke-v1",
+        ]:
+            self.assertIn(required_fragment, marshal_core_source + "\n" + marshal_abi_source)
+
+    def test_runtime_skeleton_task_platform_core_exposes_kernel_and_fallback(self) -> None:
+        task_core_source = RUNTIME_SKELETON_TASK_PLATFORM_CORE_PATH.read_text(encoding="utf-8")
+        task_abi_source = RUNTIME_SKELETON_TASK_MANAGED_INVOKE_ABI_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "record RuntimeSkeletonTaskPlatformFastPathPlan(",
+            "TryCreateFastPath(",
+            "task-kernel-fast-v1",
+            "TaskKernelNewId",
+            "task-managed-invoke-v1",
+            "RuntimeSkeletonManagedInvokeAbiCore.CreatePointerBackedArgumentShapes(",
+            "supportsConstructors: true",
+        ]:
+            self.assertIn(required_fragment, task_core_source + "\n" + task_abi_source)
+
+    def test_runtime_skeleton_interop_kernel32_platform_core_exposes_fastpath_and_fallback(self) -> None:
+        interop_core_source = RUNTIME_SKELETON_INTEROP_KERNEL32_PLATFORM_CORE_PATH.read_text(encoding="utf-8")
+        interop_abi_source = RUNTIME_SKELETON_INTEROP_KERNEL32_MANAGED_INVOKE_ABI_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "record RuntimeSkeletonInteropKernel32FastPathPlan(",
+            "TryCreateFastPath(",
+            "interop-kernel32-fast-v1",
+            "InteropKernel32GetLastError",
+            "InteropKernel32GetCurrentProcessId",
+            "InteropKernel32CloseHandle",
+            "interop-kernel32-managed-invoke-v1",
+        ]:
+            self.assertIn(required_fragment, interop_core_source + "\n" + interop_abi_source)
+
+    def test_runtime_skeleton_native_runtime_eventsource_family_exposes_managed_invoke_core(self) -> None:
+        abi_source = RUNTIME_SKELETON_NATIVE_RUNTIME_EVENTSOURCE_MANAGED_INVOKE_ABI_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "native-runtime-event-source-managed-invoke-v1",
+            "RuntimeSkeletonManagedInvokeAbiCore.CreatePointerBackedArgumentShapes(",
+            "supportsStaticForwarder: true",
+            "supportsInstanceMethods: true",
+            "supportsConstructors: true",
+            "supportsInstanceFieldGetters: true",
+        ]:
+            self.assertIn(required_fragment, abi_source)
 
     def test_native_reference_emitter_floating_scalar_managed_invoke_family_is_split_from_root_emitter(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
@@ -1295,9 +1701,17 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         for required_path in [
             RUNTIME_SKELETON_MANAGED_INVOKE_CORE_PATH,
             RUNTIME_SKELETON_VALUE_TYPE_MANAGED_INVOKE_CORE_PATH,
+            RUNTIME_SKELETON_VECTOR_MANAGED_INVOKE_ABI_PATH,
             RUNTIME_SKELETON_SEMANTIC_REGISTRY_PATH,
             RUNTIME_SKELETON_BACKEND_SELECTOR_PATH,
             RUNTIME_SKELETON_KERNEL_CORE_PATH,
+            RUNTIME_SKELETON_MARSHAL_PLATFORM_CORE_PATH,
+            RUNTIME_SKELETON_MARSHAL_MANAGED_INVOKE_ABI_PATH,
+            RUNTIME_SKELETON_TASK_PLATFORM_CORE_PATH,
+            RUNTIME_SKELETON_TASK_MANAGED_INVOKE_ABI_PATH,
+            RUNTIME_SKELETON_INTEROP_KERNEL32_PLATFORM_CORE_PATH,
+            RUNTIME_SKELETON_INTEROP_KERNEL32_MANAGED_INVOKE_ABI_PATH,
+            RUNTIME_SKELETON_NATIVE_RUNTIME_EVENTSOURCE_MANAGED_INVOKE_ABI_PATH,
         ]:
             self.assertTrue(required_path.is_file(), msg=f"missing runtime skeleton C+ core file: {required_path}")
 
@@ -1346,6 +1760,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             / "ReferenceProof"
             / "RuntimeSkeletonEnumManagedInvokeAbi.cs"
         ).read_text(encoding="utf-8")
+        vector_source = RUNTIME_SKELETON_VECTOR_MANAGED_INVOKE_ABI_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
             "enum RuntimeSkeletonExecutionBackendKind",
@@ -1389,6 +1804,13 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             self.assertIn(required_fragment, decimal_source)
             self.assertIn(required_fragment, char_source)
             self.assertIn(required_fragment, enum_source)
+
+        for required_fragment in [
+            "RuntimeSkeletonSemanticRegistry.",
+            "RuntimeSkeletonValueTypeManagedInvokeCore.",
+            "identity-struct-managed-invoke-v1",
+        ]:
+            self.assertIn(required_fragment, vector_source)
 
     def test_native_reference_emitter_string_micro_family_is_split_from_root_emitter(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")

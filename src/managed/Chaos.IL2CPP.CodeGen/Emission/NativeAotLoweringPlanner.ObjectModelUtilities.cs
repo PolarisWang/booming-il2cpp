@@ -35,7 +35,7 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					throw new InvalidOperationException("reference type inheritance cycle detected for '" + typeSubjectId + "'.");
 				}
-				if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string value) && !string.IsNullOrWhiteSpace(value) && referenceTypeSubjectIds.Contains(value))
+				if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string value) && !string.IsNullOrEmpty(value) && referenceTypeSubjectIds.Contains(value))
 				{
 					Visit(value);
 				}
@@ -62,7 +62,7 @@ public sealed partial class NativeAotLoweringPlanner
 					}
 					AotCoreIrReferenceKind kind = targetReference.Kind;
 					bool flag = kind - 2 <= AotCoreIrReferenceKind.Type;
-					if (flag && targetReference.DeclaringTypeShape == AotCoreIrTypeShapeKind.ValueType && !string.IsNullOrWhiteSpace(targetReference.DeclaringTypeSubjectId))
+					if (flag && targetReference.DeclaringTypeShape == AotCoreIrTypeShapeKind.ValueType && !string.IsNullOrEmpty(targetReference.DeclaringTypeSubjectId))
 					{
 						hashSet.Add(targetReference.DeclaringTypeSubjectId);
 					}
@@ -86,7 +86,7 @@ public sealed partial class NativeAotLoweringPlanner
 					{
 						dictionary[targetReference.SubjectId] = targetReference.BaseTypeSubjectId;
 					}
-					if (!string.IsNullOrWhiteSpace(targetReference.ArrayElementSubjectId) && targetReference.ArrayElementTypeShape == AotCoreIrTypeShapeKind.ReferenceType)
+					if (!string.IsNullOrEmpty(targetReference.ArrayElementSubjectId) && targetReference.ArrayElementTypeShape == AotCoreIrTypeShapeKind.ReferenceType)
 					{
 						dictionary[targetReference.ArrayElementSubjectId] = targetReference.ArrayElementBaseTypeSubjectId;
 					}
@@ -110,7 +110,7 @@ public sealed partial class NativeAotLoweringPlanner
 					{
 						TrackImplementedInterfaces(dictionary, targetReference.SubjectId, targetReference.ImplementedInterfaceSubjectIds);
 					}
-					if (!string.IsNullOrWhiteSpace(targetReference.ArrayElementSubjectId) && targetReference.ArrayElementTypeShape == AotCoreIrTypeShapeKind.ReferenceType)
+					if (!string.IsNullOrEmpty(targetReference.ArrayElementSubjectId) && targetReference.ArrayElementTypeShape == AotCoreIrTypeShapeKind.ReferenceType)
 					{
 						TrackImplementedInterfaces(dictionary, targetReference.ArrayElementSubjectId, targetReference.ArrayElementImplementedInterfaceSubjectIds);
 					}
@@ -120,7 +120,7 @@ public sealed partial class NativeAotLoweringPlanner
 		return dictionary;
 		static void TrackImplementedInterfaces(IDictionary<string, HashSet<string>> implementedInterfaceSubjectIds, string? typeSubjectId, IReadOnlyList<string>? interfaceSubjectIds)
 		{
-			if (string.IsNullOrWhiteSpace(typeSubjectId) || interfaceSubjectIds == null || interfaceSubjectIds.Count == 0)
+			if (string.IsNullOrEmpty(typeSubjectId) || interfaceSubjectIds == null || interfaceSubjectIds.Count == 0)
 			{
 				return;
 			}
@@ -130,7 +130,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			foreach (string interfaceSubjectId in interfaceSubjectIds)
 			{
-				if (!string.IsNullOrWhiteSpace(interfaceSubjectId))
+				if (!string.IsNullOrEmpty(interfaceSubjectId))
 				{
 					value.Add(interfaceSubjectId);
 				}
@@ -182,7 +182,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private IReadOnlyList<AotCoreIrAbiSlotArtifact> ResolveDelegateInvokeParameterAbis(AotCoreIrInstructionArtifact instruction)
 	{
-		if (!string.IsNullOrWhiteSpace(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
+		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
 		{
 			return value.ParameterAbis;
 		}
@@ -191,7 +191,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private AotCoreIrAbiSlotArtifact ResolveDelegateInvokeReturnAbi(AotCoreIrInstructionArtifact instruction)
 	{
-		if (!string.IsNullOrWhiteSpace(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
+		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
 		{
 			return value.ReturnAbi;
 		}
@@ -200,7 +200,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string GetRequiredDeclaringTypeSubjectId(AotCoreIrReferenceArtifact targetReference)
 	{
-		if (!string.IsNullOrWhiteSpace(targetReference.DeclaringTypeSubjectId))
+		if (!string.IsNullOrEmpty(targetReference.DeclaringTypeSubjectId))
 		{
 			return targetReference.DeclaringTypeSubjectId;
 		}
@@ -209,7 +209,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private bool IsDelegateInvokeInstruction(AotCoreIrInstructionArtifact instruction)
 	{
-		if (!string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal) || string.IsNullOrWhiteSpace(instruction.Callee) || !string.Equals(GetMethodName(instruction.Callee), "Invoke", StringComparison.Ordinal))
+		if (!string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal) || string.IsNullOrEmpty(instruction.Callee) || !string.Equals(GetMethodName(instruction.Callee), "Invoke", StringComparison.Ordinal))
 		{
 			return false;
 		}
@@ -229,11 +229,6 @@ public sealed partial class NativeAotLoweringPlanner
 		throw new InvalidOperationException("opcode '" + instruction.Op + "' requires a string operand.");
 	}
 
-	private static string GetExternalRuntimeHelperSymbol(string subjectId)
-	{
-		return "chaos_external_runtime_" + SanitizeSubjectId(subjectId);
-	}
-
 	private static string GetFieldHandleLiteral(string subjectId)
 	{
 		return GetPseudoMetadataHandleLiteral(subjectId, 67108864u);
@@ -249,54 +244,71 @@ public sealed partial class NativeAotLoweringPlanner
 		return GetPseudoMetadataHandleLiteral(subjectId, 100663296u);
 	}
 
+	private static string GetNativeSymbol(string prefix, string subjectId)
+	{
+		return prefix + SanitizeSubjectId(subjectId);
+	}
+
 	private static string GetNativeTypeSymbol(string subjectId)
 	{
-		return "chaos_type_" + SanitizeSubjectId(subjectId);
+		return GetNativeSymbol("chaos_type_", subjectId);
 	}
 
 	private static string GetNativeValueTypeSymbol(string subjectId)
 	{
-		return "chaos_valuetype_" + SanitizeSubjectId(subjectId);
+		return GetNativeSymbol("chaos_valuetype_", subjectId);
 	}
 
 	private static string GetNativeFieldMemberName(string subjectId)
 	{
-		return "field_" + SanitizeSubjectId(subjectId);
+		return GetNativeSymbol("field_", subjectId);
 	}
 
 	private static string GetNativeStaticFieldSymbol(string subjectId)
 	{
-		return "chaos_static_" + SanitizeSubjectId(subjectId);
+		return GetNativeSymbol("chaos_static_", subjectId);
 	}
 
 	private static string GetNativeTypeInitializationFunctionSymbol(string typeSubjectId)
 	{
-		return "chaos_ensure_type_initialized_" + SanitizeSubjectId(typeSubjectId);
+		return GetNativeSymbol("chaos_ensure_type_initialized_", typeSubjectId);
 	}
 
 	private static string GetNativeTypeInitializationOnceFlagSymbol(string typeSubjectId)
 	{
-		return "chaos_type_init_once_" + SanitizeSubjectId(typeSubjectId);
+		return GetNativeSymbol("chaos_type_init_once_", typeSubjectId);
 	}
 
 	private static string GetNativeBoxTypeSymbol(string subjectId)
 	{
-		return "chaos_boxed_type_" + SanitizeSubjectId(subjectId);
+		return GetNativeSymbol("chaos_boxed_type_", subjectId);
 	}
 
 	private static string GetNativeTypeIdSymbol(string subjectId)
 	{
-		return "chaos_type_id_" + SanitizeSubjectId(subjectId);
+		return GetNativeSymbol("chaos_type_id_", subjectId);
 	}
 
 	private static string GetNativeBoxTypeIdSymbol(string subjectId)
 	{
-		return "chaos_boxed_type_id_" + SanitizeSubjectId(subjectId);
+		return GetNativeSymbol("chaos_boxed_type_id_", subjectId);
+	}
+
+	private static string GetNativeStringIdSymbol(ulong id)
+	{
+		if (!_nativeStringIdSymbolCache.TryGetValue(id, out var cached))
+			_nativeStringIdSymbolCache[id] = cached = "chaos_string_id_" + id.ToString("X16");
+		return cached;
+	}
+
+	private static string GetExternalRuntimeHelperSymbol(string subjectId)
+	{
+		return "chaos_external_runtime_" + SanitizeSubjectId(subjectId);
 	}
 
 	private static bool HasArrayElementReference(AotCoreIrReferenceArtifact targetReference)
 	{
-		return !string.IsNullOrWhiteSpace(targetReference.ArrayElementSubjectId);
+		return !string.IsNullOrEmpty(targetReference.ArrayElementSubjectId);
 	}
 
 	private static string GetMethodName(string subjectId)
@@ -371,7 +383,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsSpecialMethodName(string? name)
 	{
-		if (string.IsNullOrWhiteSpace(name))
+		if (string.IsNullOrEmpty(name))
 		{
 			return true;
 		}
@@ -476,7 +488,10 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string GetPseudoMetadataHandleLiteral(string subjectId, uint prefix)
 	{
-		return $"static_cast<std::intptr_t>({CreatePseudoMetadataHandle(subjectId, prefix)}u)";
+		var key = prefix + subjectId;
+		if (!_pseudoMetadataHandleCache.TryGetValue(key, out var cached))
+			_pseudoMetadataHandleCache[key] = cached = $"static_cast<CHAOS_IL2CPP_INTPTR>({CreatePseudoMetadataHandle(subjectId, prefix)}u)";
+		return cached;
 	}
 
 	private static uint CreatePseudoMetadataHandle(string subjectId, uint prefix)
@@ -497,9 +512,9 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string GetRuntimeTypeIdExpression(string? subjectId, AotCoreIrTypeShapeKind typeShape)
 	{
-		if (string.IsNullOrWhiteSpace(subjectId))
+		if (string.IsNullOrEmpty(subjectId))
 		{
-			return "static_cast<std::intptr_t>(0)";
+			return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
 		}
 		return GetNativeTypeIdSymbol(subjectId);
 	}
@@ -531,6 +546,9 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string SanitizeSubjectId(string subjectId)
 	{
+		if (_sanitizedSubjectIdCache.TryGetValue(subjectId, out var cached))
+			return cached;
+
 		StringBuilder stringBuilder = new StringBuilder(subjectId.Length);
 		foreach (char c in subjectId)
 		{
@@ -544,12 +562,15 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			stringBuilder.Insert(0, '_');
 		}
-		return stringBuilder.ToString();
+		return _sanitizedSubjectIdCache[subjectId] = stringBuilder.ToString();
 	}
 
 	private static string ToCppStringLiteral(string value)
 	{
-		StringBuilder stringBuilder = new StringBuilder();
+		if (_cppStringLiteralCache.TryGetValue(value, out var cached))
+			return cached;
+
+		StringBuilder stringBuilder = new StringBuilder(value.Length + 2);
 		stringBuilder.Append('"');
 		foreach (char c in value)
 		{
@@ -598,22 +619,22 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 		stringBuilder.Append('"');
-		return stringBuilder.ToString();
+		return _cppStringLiteralCache[value] = stringBuilder.ToString();
 	}
 
 	private static string FormatCustomAttributeLiteralExpression(CustomAttributeLiteralValue value)
 	{
 		return value.Kind switch
 		{
-			CustomAttributeLiteralKind.Null => "static_cast<std::intptr_t>(0)", 
-			CustomAttributeLiteralKind.Boolean => ((bool)value.Value) ? "static_cast<std::intptr_t>(1)" : "static_cast<std::intptr_t>(0)", 
-			CustomAttributeLiteralKind.Byte => $"static_cast<std::intptr_t>({(byte)value.Value})", 
-			CustomAttributeLiteralKind.Int16 => $"static_cast<std::intptr_t>({(short)value.Value})", 
-			CustomAttributeLiteralKind.Int32 => $"static_cast<std::intptr_t>({(int)value.Value})", 
-			CustomAttributeLiteralKind.Int64 => $"static_cast<std::intptr_t>({(long)value.Value}ll)", 
-			CustomAttributeLiteralKind.UInt16 => $"static_cast<std::intptr_t>({(ushort)value.Value}u)", 
-			CustomAttributeLiteralKind.UInt32 => $"static_cast<std::intptr_t>({(uint)value.Value}u)", 
-			CustomAttributeLiteralKind.UInt64 => $"static_cast<std::intptr_t>({(ulong)value.Value}ull)", 
+			CustomAttributeLiteralKind.Null => "static_cast<CHAOS_IL2CPP_INTPTR>(0)", 
+			CustomAttributeLiteralKind.Boolean => ((bool)value.Value) ? "static_cast<CHAOS_IL2CPP_INTPTR>(1)" : "static_cast<CHAOS_IL2CPP_INTPTR>(0)", 
+			CustomAttributeLiteralKind.Byte => $"static_cast<CHAOS_IL2CPP_INTPTR>({(byte)value.Value})", 
+			CustomAttributeLiteralKind.Int16 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(short)value.Value})", 
+			CustomAttributeLiteralKind.Int32 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(int)value.Value})", 
+			CustomAttributeLiteralKind.Int64 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(long)value.Value}ll)", 
+			CustomAttributeLiteralKind.UInt16 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(ushort)value.Value}u)", 
+			CustomAttributeLiteralKind.UInt32 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(uint)value.Value}u)", 
+			CustomAttributeLiteralKind.UInt64 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(ulong)value.Value}ull)", 
 			CustomAttributeLiteralKind.String => "chaos_reflection_create_string_literal(" + ToCppStringLiteral((string)value.Value) + ")", 
 			_ => throw new NotSupportedException($"unsupported custom attribute literal kind '{value.Kind}'."), 
 		};
@@ -625,7 +646,7 @@ public sealed partial class NativeAotLoweringPlanner
 		InstantiationStubId? instantiationStubId,
 		RuntimeGenericContextArtifact? runtimeGenericContext)
 	{
-		if (string.IsNullOrWhiteSpace(openDefinitionSubjectId) &&
+		if (string.IsNullOrEmpty(openDefinitionSubjectId) &&
 			sharedGenericBodyId is null &&
 			instantiationStubId is null &&
 			runtimeGenericContext is null)
@@ -633,7 +654,7 @@ public sealed partial class NativeAotLoweringPlanner
 			throw new ArgumentNullException(nameof(runtimeGenericContext));
 		}
 
-		string definitionSubjectId = !string.IsNullOrWhiteSpace(openDefinitionSubjectId)
+		string definitionSubjectId = !string.IsNullOrEmpty(openDefinitionSubjectId)
 			? openDefinitionSubjectId
 			: runtimeGenericContext!.InstantiationKey.DefinitionSubjectId;
 		string bodyId = sharedGenericBodyId?.Value

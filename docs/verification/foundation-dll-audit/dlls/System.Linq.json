@@ -1,11 +1,11 @@
 {
   "assemblyName": "System.Linq",
   "orderIndex": 7,
-  "phase": "phase-2",
-  "roadmapTaskId": "20260419-26-complex-bcl-ordered-dll-06-system-linq",
+  "phase": "roadmap-closed",
+  "roadmapTaskId": "20260427-04-dll-capability-verification-closure-roadmap",
   "dllState": "not-started",
   "currentProject": "audit-input-and-ledger",
-  "blockingReason": "验证 `System.Linq`",
+  "blockingReason": "",
   "riskTags": [],
   "projects": [
     {
@@ -13,14 +13,13 @@
       "displayName": "Audit Input And Ledger",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "刷新 audit input manifest，并校验 surface / semantic / nativeization plan。",
+      "verificationMethod": "Refresh audit input manifest and validate surface / semantic / nativeization plan.",
       "verificationTarget": "System.Linq",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -30,14 +29,13 @@
       "displayName": "Managed Proof",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "运行 managed proof，验证语义基线。",
+      "verificationMethod": "Run managed proof and validate managed semantics baseline.",
       "verificationTarget": "System.Linq",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -47,14 +45,13 @@
       "displayName": "Native Proof",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "运行 native / AOT proof，验证 generated native code 可执行。",
+      "verificationMethod": "Run native / AOT proof and validate generated native code execution.",
       "verificationTarget": "System.Linq",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -64,14 +61,13 @@
       "displayName": "HotUpdate Proof",
       "policyState": "conditional",
       "executionState": "pending",
-      "verificationMethod": "运行 patch / host proof，验证 hotupdate consumer 路径。",
+      "verificationMethod": "Run patch / host proof and validate hotupdate consumer path.",
       "verificationTarget": "System.Linq",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -81,14 +77,13 @@
       "displayName": "Benchmark",
       "policyState": "conditional",
       "executionState": "pending",
-      "verificationMethod": "运行 benchmark，归档性能结果。",
+      "verificationMethod": "Run benchmarks and archive performance results.",
       "verificationTarget": "System.Linq",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -98,14 +93,13 @@
       "displayName": "Codegen Review",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "审核 generated code、dispatch/helper/binding/coverage。",
+      "verificationMethod": "Review generated code, dispatch, helpers, bindings, and coverage artifacts.",
       "verificationTarget": "System.Linq",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -115,14 +109,13 @@
       "displayName": "Completion Certification",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "汇总前置 project 结果，给出 DLL completion 结论。",
+      "verificationMethod": "Aggregate project results and produce DLL completion conclusion.",
       "verificationTarget": "System.Linq",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -138,7 +131,7 @@
     "closurePercent": 0.0
   },
   "workflowProgress": {
-    "totalRequiredGates": 48,
+    "totalRequiredGates": 72,
     "passedGates": 0,
     "progressPercent": 0.0
   },
@@ -153,8 +146,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -178,7 +171,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/projection",
@@ -190,8 +262,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -215,7 +287,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/partitioning",
@@ -227,8 +378,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -252,7 +403,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/ordering",
@@ -264,8 +494,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -289,7 +519,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/grouping-lookup",
@@ -301,8 +610,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -326,7 +635,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/joins",
@@ -338,8 +726,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -363,7 +751,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/set-operations",
@@ -375,8 +842,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -400,7 +867,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/aggregation",
@@ -412,8 +958,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -437,7 +983,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/numeric-aggregation",
@@ -449,8 +1074,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -474,7 +1099,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/materialization",
@@ -486,8 +1190,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -511,7 +1215,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/generation-concat",
@@ -523,8 +1306,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -548,7 +1331,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Linq/shuffle-index",
@@ -560,8 +1422,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -585,9 +1447,2493 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     }
   ],
+  "familyVerificationClaims": {
+    "schemaVersion": 1,
+    "assemblyName": "System.Linq",
+    "ownerSubjectId": "SolutionCorePack",
+    "methodUniverseArtifactPaths": [],
+    "claims": [
+      {
+        "claimId": "family/System.Linq/filtering::native-proof",
+        "familyId": "family/System.Linq/filtering",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Filtering",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/filtering::managed-proof",
+        "familyId": "family/System.Linq/filtering",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Filtering",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/filtering::hotupdate-proof",
+        "familyId": "family/System.Linq/filtering",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Filtering",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/filtering::benchmark",
+        "familyId": "family/System.Linq/filtering",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Filtering",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/filtering::test-code",
+        "familyId": "family/System.Linq/filtering",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Filtering",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/projection::native-proof",
+        "familyId": "family/System.Linq/projection",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Projection",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/projection::managed-proof",
+        "familyId": "family/System.Linq/projection",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Projection",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/projection::hotupdate-proof",
+        "familyId": "family/System.Linq/projection",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Projection",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/projection::benchmark",
+        "familyId": "family/System.Linq/projection",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Projection",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/projection::test-code",
+        "familyId": "family/System.Linq/projection",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Projection",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/partitioning::native-proof",
+        "familyId": "family/System.Linq/partitioning",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Partitioning",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/partitioning::managed-proof",
+        "familyId": "family/System.Linq/partitioning",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Partitioning",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/partitioning::hotupdate-proof",
+        "familyId": "family/System.Linq/partitioning",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Partitioning",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/partitioning::benchmark",
+        "familyId": "family/System.Linq/partitioning",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Partitioning",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/partitioning::test-code",
+        "familyId": "family/System.Linq/partitioning",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Partitioning",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/ordering::native-proof",
+        "familyId": "family/System.Linq/ordering",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Ordering",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/ordering::managed-proof",
+        "familyId": "family/System.Linq/ordering",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Ordering",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/ordering::hotupdate-proof",
+        "familyId": "family/System.Linq/ordering",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Ordering",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/ordering::benchmark",
+        "familyId": "family/System.Linq/ordering",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Ordering",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/ordering::test-code",
+        "familyId": "family/System.Linq/ordering",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Ordering",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/grouping-lookup::native-proof",
+        "familyId": "family/System.Linq/grouping-lookup",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Grouping Lookup",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/grouping-lookup::managed-proof",
+        "familyId": "family/System.Linq/grouping-lookup",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Grouping Lookup",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/grouping-lookup::hotupdate-proof",
+        "familyId": "family/System.Linq/grouping-lookup",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Grouping Lookup",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/grouping-lookup::benchmark",
+        "familyId": "family/System.Linq/grouping-lookup",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Grouping Lookup",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/grouping-lookup::test-code",
+        "familyId": "family/System.Linq/grouping-lookup",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Grouping Lookup",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/joins::native-proof",
+        "familyId": "family/System.Linq/joins",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Joins",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/joins::managed-proof",
+        "familyId": "family/System.Linq/joins",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Joins",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/joins::hotupdate-proof",
+        "familyId": "family/System.Linq/joins",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Joins",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/joins::benchmark",
+        "familyId": "family/System.Linq/joins",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Joins",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/joins::test-code",
+        "familyId": "family/System.Linq/joins",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Joins",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/set-operations::native-proof",
+        "familyId": "family/System.Linq/set-operations",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Set Operations",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/set-operations::managed-proof",
+        "familyId": "family/System.Linq/set-operations",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Set Operations",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/set-operations::hotupdate-proof",
+        "familyId": "family/System.Linq/set-operations",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Set Operations",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/set-operations::benchmark",
+        "familyId": "family/System.Linq/set-operations",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Set Operations",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/set-operations::test-code",
+        "familyId": "family/System.Linq/set-operations",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Set Operations",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/aggregation::native-proof",
+        "familyId": "family/System.Linq/aggregation",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Aggregation",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/aggregation::managed-proof",
+        "familyId": "family/System.Linq/aggregation",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Aggregation",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/aggregation::hotupdate-proof",
+        "familyId": "family/System.Linq/aggregation",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Aggregation",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/aggregation::benchmark",
+        "familyId": "family/System.Linq/aggregation",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Aggregation",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/aggregation::test-code",
+        "familyId": "family/System.Linq/aggregation",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Aggregation",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/numeric-aggregation::native-proof",
+        "familyId": "family/System.Linq/numeric-aggregation",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Numeric Aggregation",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/numeric-aggregation::managed-proof",
+        "familyId": "family/System.Linq/numeric-aggregation",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Numeric Aggregation",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/numeric-aggregation::hotupdate-proof",
+        "familyId": "family/System.Linq/numeric-aggregation",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Numeric Aggregation",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/numeric-aggregation::benchmark",
+        "familyId": "family/System.Linq/numeric-aggregation",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Numeric Aggregation",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/numeric-aggregation::test-code",
+        "familyId": "family/System.Linq/numeric-aggregation",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Numeric Aggregation",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/materialization::native-proof",
+        "familyId": "family/System.Linq/materialization",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Materialization",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/materialization::managed-proof",
+        "familyId": "family/System.Linq/materialization",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Materialization",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/materialization::hotupdate-proof",
+        "familyId": "family/System.Linq/materialization",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Materialization",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/materialization::benchmark",
+        "familyId": "family/System.Linq/materialization",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Materialization",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/materialization::test-code",
+        "familyId": "family/System.Linq/materialization",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Materialization",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/generation-concat::native-proof",
+        "familyId": "family/System.Linq/generation-concat",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Generation And Concatenation",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/generation-concat::managed-proof",
+        "familyId": "family/System.Linq/generation-concat",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Generation And Concatenation",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/generation-concat::hotupdate-proof",
+        "familyId": "family/System.Linq/generation-concat",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Generation And Concatenation",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/generation-concat::benchmark",
+        "familyId": "family/System.Linq/generation-concat",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Generation And Concatenation",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/generation-concat::test-code",
+        "familyId": "family/System.Linq/generation-concat",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Generation And Concatenation",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/shuffle-index::native-proof",
+        "familyId": "family/System.Linq/shuffle-index",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Shuffle Index",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/shuffle-index::managed-proof",
+        "familyId": "family/System.Linq/shuffle-index",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Shuffle Index",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/shuffle-index::hotupdate-proof",
+        "familyId": "family/System.Linq/shuffle-index",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Shuffle Index",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/shuffle-index::benchmark",
+        "familyId": "family/System.Linq/shuffle-index",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Shuffle Index",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Linq/shuffle-index::test-code",
+        "familyId": "family/System.Linq/shuffle-index",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "LINQ Shuffle Index",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      }
+    ]
+  },
+  "familyVerificationSnapshot": {
+    "schemaVersion": 1,
+    "assemblyName": "System.Linq",
+    "ownerSubjectId": "SolutionCorePack",
+    "families": [
+      {
+        "familyId": "family/System.Linq/filtering",
+        "displayName": "LINQ Filtering",
+        "description": "Where, OfType, Cast, DistinctBy-adjacent filters, and predicate enumeration behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/projection",
+        "displayName": "LINQ Projection",
+        "description": "Select, SelectMany, index-aware selectors, and iterator shape behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/partitioning",
+        "displayName": "LINQ Partitioning",
+        "description": "Skip, Take, Range, Chunk, ElementAt, First, Last, Single, and default variants.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/ordering",
+        "displayName": "LINQ Ordering",
+        "description": "OrderBy, ThenBy, Reverse, comparer handling, and stable ordering behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/grouping-lookup",
+        "displayName": "LINQ Grouping Lookup",
+        "description": "GroupBy, ToLookup, IGrouping, ILookup, and grouped projection behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/joins",
+        "displayName": "LINQ Joins",
+        "description": "Join, GroupJoin, key comparison, and joined projection behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/set-operations",
+        "displayName": "LINQ Set Operations",
+        "description": "Distinct, Union, Intersect, Except, sequence equality, and comparer behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/aggregation",
+        "displayName": "LINQ Aggregation",
+        "description": "Aggregate, Count, LongCount, Any, All, Contains, and non-enumerated count behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/numeric-aggregation",
+        "displayName": "LINQ Numeric Aggregation",
+        "description": "Sum, Average, Min, Max, MinBy, MaxBy, nullable numeric, and selector overload behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/materialization",
+        "displayName": "LINQ Materialization",
+        "description": "ToArray, ToList, ToDictionary, ToHashSet, and collection conversion behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/generation-concat",
+        "displayName": "LINQ Generation And Concatenation",
+        "description": "Range, Repeat, Empty, Append, Prepend, Concat, and default-if-empty behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Linq/shuffle-index",
+        "displayName": "LINQ Shuffle Index",
+        "description": "Index, Shuffle, randomization helpers, and index-producing enumeration behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      }
+    ]
+  },
+  "truthContracts": {
+    "schemaVersion": 1,
+    "dllCapabilityManifest": {
+      "assemblyName": "System.Linq",
+      "ownerSubjectId": "SolutionCorePack",
+      "capabilityFamilies": [
+        "family/System.Linq/filtering",
+        "family/System.Linq/projection",
+        "family/System.Linq/partitioning",
+        "family/System.Linq/ordering",
+        "family/System.Linq/grouping-lookup",
+        "family/System.Linq/joins",
+        "family/System.Linq/set-operations",
+        "family/System.Linq/aggregation",
+        "family/System.Linq/numeric-aggregation",
+        "family/System.Linq/materialization",
+        "family/System.Linq/generation-concat",
+        "family/System.Linq/shuffle-index"
+      ],
+      "capabilityFamilyCount": 12,
+      "methodUniverseCount": 0
+    },
+    "capabilityFamilyVerificationContracts": [
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/filtering",
+        "displayName": "LINQ Filtering",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/projection",
+        "displayName": "LINQ Projection",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/partitioning",
+        "displayName": "LINQ Partitioning",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/ordering",
+        "displayName": "LINQ Ordering",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/grouping-lookup",
+        "displayName": "LINQ Grouping Lookup",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/joins",
+        "displayName": "LINQ Joins",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/set-operations",
+        "displayName": "LINQ Set Operations",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/aggregation",
+        "displayName": "LINQ Aggregation",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/numeric-aggregation",
+        "displayName": "LINQ Numeric Aggregation",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/materialization",
+        "displayName": "LINQ Materialization",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/generation-concat",
+        "displayName": "LINQ Generation And Concatenation",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Linq",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Linq/shuffle-index",
+        "displayName": "LINQ Shuffle Index",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      }
+    ],
+    "methodCapabilityContracts": []
+  },
   "sourceLinks": {
     "subjectSource": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
     "generatedCode": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/",

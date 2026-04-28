@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.Globalization;
 
 namespace Chaos.IL2CPP.Interpreter;
@@ -18,13 +19,55 @@ public sealed class ManagedInterpreterExecutor
     public Func<int, int> CreateInt32UnaryInvoker(IRMethod method)
     {
         ArgumentNullException.ThrowIfNull(method);
-        return value => ExecuteInt32(method, new int[] { value });
+        return value =>
+        {
+            var args = ArrayPool<int>.Shared.Rent(1);
+            args[0] = value;
+            try
+            {
+                return ExecuteInt32(method, args.AsSpan(0, 1));
+            }
+            finally
+            {
+                ArrayPool<int>.Shared.Return(args);
+            }
+        };
+    }
+
+    public int ExecuteInt32(IRMethod method, ReadOnlySpan<int> arguments)
+    {
+        var adapter = new Int32ListAsObjectAdapter(arguments);
+        var values = new Dictionary<string, object?>(
+            EstimateValueCapacity(method), StringComparer.Ordinal);
+        var result = ExecuteCore(method, adapter, values);
+        return result switch
+        {
+            int int32 => int32,
+            null => 0,
+            _ => Convert.ToInt32(result, CultureInfo.InvariantCulture),
+        };
     }
 
     public int ExecuteInt32(IRMethod method, IReadOnlyList<int> arguments)
     {
-        ArgumentNullException.ThrowIfNull(arguments);
-        return ExecuteInt32(method, arguments.Cast<object?>().ToArray());
+        if (arguments.Count == 0)
+        {
+            return ExecuteInt32(method, ReadOnlySpan<int>.Empty);
+        }
+
+        var args = ArrayPool<int>.Shared.Rent(arguments.Count);
+        try
+        {
+            for (var i = 0; i < arguments.Count; i++)
+            {
+                args[i] = arguments[i];
+            }
+            return ExecuteInt32(method, args.AsSpan(0, arguments.Count));
+        }
+        finally
+        {
+            ArrayPool<int>.Shared.Return(args);
+        }
     }
 
     public int ExecuteInt32(IRMethod method, IReadOnlyList<object?> arguments)
@@ -48,7 +91,26 @@ public sealed class ManagedInterpreterExecutor
             throw new InvalidOperationException("IR method does not contain any basic blocks.");
         }
 
-        var values = new Dictionary<string, object?>(StringComparer.Ordinal);
+        var values = new Dictionary<string, object?>(
+            EstimateValueCapacity(method), StringComparer.Ordinal);
+        return ExecuteCore(method, arguments, values);
+    }
+
+    private static int EstimateValueCapacity(IRMethod method)
+    {
+        var capacity = 0;
+        for (var i = 0; i < method.Blocks.Count; i++)
+        {
+            capacity += method.Blocks[i].Instructions.Count;
+        }
+        return Math.Max(capacity, 16);
+    }
+
+    private object? ExecuteCore(
+        IRMethod method,
+        IReadOnlyList<object?> arguments,
+        Dictionary<string, object?> values)
+    {
         var blockOrder = method.Blocks
             .OrderBy(block => block.BlockId)
             .ToList();
@@ -183,8 +245,6 @@ public sealed class ManagedInterpreterExecutor
                             jumped = true;
                             break;
                         case IROpCode.EndFilter:
-                            // EndFilter result is the filter outcome; handled by the catch-when flow
-                            // Nothing to do here: the filter evaluation was managed by the caller
                             break;
                         case IROpCode.Throw:
                             ThrowManagedException(instruction);
@@ -233,11 +293,20 @@ public sealed class ManagedInterpreterExecutor
         }
 
         var bridgeId = RequireSymbol(RequireOperand(instruction, 0));
-        var bridgeArguments = instruction.Operands
-            .Skip(1)
-            .Select(operand => ReadOperandValue(operand, arguments, values))
-            .ToList();
-        return _bridgeInvoker(bridgeId, bridgeArguments);
+        var argCount = instruction.Operands.Count - 1;
+        var bridgeArgs = ArrayPool<object?>.Shared.Rent(argCount);
+        try
+        {
+            for (var i = 0; i < argCount; i++)
+            {
+                bridgeArgs[i] = ReadOperandValue(instruction.Operands[i + 1], arguments, values);
+            }
+            return _bridgeInvoker(bridgeId, bridgeArgs.AsSpan(0, argCount).ToArray());
+        }
+        finally
+        {
+            ArrayPool<object?>.Shared.Return(bridgeArgs, clearArray: true);
+        }
     }
 
     private object? InvokeMethod(
@@ -256,12 +325,21 @@ public sealed class ManagedInterpreterExecutor
         }
 
         var calleeSubjectId = RequireSymbol(RequireOperand(instruction, 0));
-        var calleeArguments = instruction.Operands
-            .Skip(1)
-            .Select(operand => ReadOperandValue(operand, arguments, values))
-            .ToList();
-        var callee = _methodResolver(calleeSubjectId);
-        return Execute(callee, calleeArguments);
+        var argCount = instruction.Operands.Count - 1;
+        var calleeArgs = ArrayPool<object?>.Shared.Rent(argCount);
+        try
+        {
+            for (var i = 0; i < argCount; i++)
+            {
+                calleeArgs[i] = ReadOperandValue(instruction.Operands[i + 1], arguments, values);
+            }
+            var callee = _methodResolver(calleeSubjectId);
+            return Execute(callee, calleeArgs.AsSpan(0, argCount).ToArray());
+        }
+        finally
+        {
+            ArrayPool<object?>.Shared.Return(calleeArgs, clearArray: true);
+        }
     }
 
     private static int ResumePendingFinallyTarget(Stack<int> pendingFinallyTargets)
@@ -280,7 +358,6 @@ public sealed class ManagedInterpreterExecutor
         IReadOnlyDictionary<int, int> blockOffsets,
         out int handlerOffset)
     {
-        // 1. Try Catch region (unconditional catch).
         var catchRegion = method.ExceptionRegions.FirstOrDefault(candidate =>
             candidate.Kind == IRExceptionRegionKind.Catch &&
             candidate.TryBlockIds.Contains(blockId));
@@ -297,9 +374,6 @@ public sealed class ManagedInterpreterExecutor
             return true;
         }
 
-        // 2. Try Filter region: only enter handler if FilterBlockId resolves to nonzero.
-        // For now we accept any filter as matching (conservative: filters always pass in interpreter).
-        // Full filter evaluation would require executing the filter block in a nested context.
         var filterRegion = method.ExceptionRegions.FirstOrDefault(candidate =>
             candidate.Kind == IRExceptionRegionKind.Filter &&
             candidate.TryBlockIds.Contains(blockId));
@@ -316,7 +390,6 @@ public sealed class ManagedInterpreterExecutor
             return true;
         }
 
-        // 3. Try Fault region: enter unconditionally when leaving via exception.
         var faultRegion = method.ExceptionRegions.FirstOrDefault(candidate =>
             candidate.Kind == IRExceptionRegionKind.Fault &&
             candidate.TryBlockIds.Contains(blockId));
@@ -474,5 +547,37 @@ public sealed class ManagedInterpreterExecutor
         }
 
         return int.Parse(symbol[prefix.Length..], CultureInfo.InvariantCulture);
+    }
+}
+
+/// <summary>
+/// Adapts int[] + count to IReadOnlyList&lt;object?&gt; without boxing the source ints.
+/// </summary>
+internal sealed class Int32ListAsObjectAdapter : IReadOnlyList<object?>
+{
+    private readonly int[] _source;
+    private readonly int _count;
+
+    public Int32ListAsObjectAdapter(ReadOnlySpan<int> source)
+    {
+        _source = source.ToArray();
+        _count = source.Length;
+    }
+
+    public int Count => _count;
+
+    public object? this[int index] => _source[index];
+
+    public IEnumerator<object?> GetEnumerator()
+    {
+        for (var i = 0; i < _count; i++)
+        {
+            yield return _source[i];
+        }
+    }
+
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 }

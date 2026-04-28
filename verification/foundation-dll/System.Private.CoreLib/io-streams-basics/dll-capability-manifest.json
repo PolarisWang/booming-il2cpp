@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.Private.CoreLib/io/streams-basics"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 18
+}

@@ -1,11 +1,11 @@
 {
   "assemblyName": "System.Net.ServerSentEvents",
   "orderIndex": 8,
-  "phase": "phase-2",
-  "roadmapTaskId": "20260419-27-complex-bcl-ordered-dll-07-system-net-serversentevents",
+  "phase": "roadmap-closed",
+  "roadmapTaskId": "20260427-04-dll-capability-verification-closure-roadmap",
   "dllState": "not-started",
   "currentProject": "audit-input-and-ledger",
-  "blockingReason": "验证 `System.Net.ServerSentEvents`",
+  "blockingReason": "",
   "riskTags": [],
   "projects": [
     {
@@ -13,14 +13,13 @@
       "displayName": "Audit Input And Ledger",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "刷新 audit input manifest，并校验 surface / semantic / nativeization plan。",
+      "verificationMethod": "Refresh audit input manifest and validate surface / semantic / nativeization plan.",
       "verificationTarget": "System.Net.ServerSentEvents",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -30,14 +29,13 @@
       "displayName": "Managed Proof",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "运行 managed proof，验证语义基线。",
+      "verificationMethod": "Run managed proof and validate managed semantics baseline.",
       "verificationTarget": "System.Net.ServerSentEvents",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -47,14 +45,13 @@
       "displayName": "Native Proof",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "运行 native / AOT proof，验证 generated native code 可执行。",
+      "verificationMethod": "Run native / AOT proof and validate generated native code execution.",
       "verificationTarget": "System.Net.ServerSentEvents",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -64,14 +61,13 @@
       "displayName": "HotUpdate Proof",
       "policyState": "conditional",
       "executionState": "pending",
-      "verificationMethod": "运行 patch / host proof，验证 hotupdate consumer 路径。",
+      "verificationMethod": "Run patch / host proof and validate hotupdate consumer path.",
       "verificationTarget": "System.Net.ServerSentEvents",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -81,14 +77,13 @@
       "displayName": "Benchmark",
       "policyState": "conditional",
       "executionState": "pending",
-      "verificationMethod": "运行 benchmark，归档性能结果。",
+      "verificationMethod": "Run benchmarks and archive performance results.",
       "verificationTarget": "System.Net.ServerSentEvents",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -98,14 +93,13 @@
       "displayName": "Codegen Review",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "审核 generated code、dispatch/helper/binding/coverage。",
+      "verificationMethod": "Review generated code, dispatch, helpers, bindings, and coverage artifacts.",
       "verificationTarget": "System.Net.ServerSentEvents",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -115,14 +109,13 @@
       "displayName": "Completion Certification",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "汇总前置 project 结果，给出 DLL completion 结论。",
+      "verificationMethod": "Aggregate project results and produce DLL completion conclusion.",
       "verificationTarget": "System.Net.ServerSentEvents",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -138,7 +131,7 @@
     "closurePercent": 0.0
   },
   "workflowProgress": {
-    "totalRequiredGates": 16,
+    "totalRequiredGates": 24,
     "passedGates": 0,
     "progressPercent": 0.0
   },
@@ -153,8 +146,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -178,7 +171,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Net.ServerSentEvents/parser",
@@ -190,8 +262,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -215,7 +287,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Net.ServerSentEvents/item-parser",
@@ -227,8 +378,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -252,7 +403,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Net.ServerSentEvents/formatter",
@@ -264,8 +494,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -289,9 +519,909 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     }
   ],
+  "familyVerificationClaims": {
+    "schemaVersion": 1,
+    "assemblyName": "System.Net.ServerSentEvents",
+    "ownerSubjectId": "SolutionCorePack",
+    "methodUniverseArtifactPaths": [],
+    "claims": [
+      {
+        "claimId": "family/System.Net.ServerSentEvents/sse-item::native-proof",
+        "familyId": "family/System.Net.ServerSentEvents/sse-item",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Item Model",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/sse-item::managed-proof",
+        "familyId": "family/System.Net.ServerSentEvents/sse-item",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Item Model",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/sse-item::hotupdate-proof",
+        "familyId": "family/System.Net.ServerSentEvents/sse-item",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Item Model",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/sse-item::benchmark",
+        "familyId": "family/System.Net.ServerSentEvents/sse-item",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Item Model",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/sse-item::test-code",
+        "familyId": "family/System.Net.ServerSentEvents/sse-item",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Item Model",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/parser::native-proof",
+        "familyId": "family/System.Net.ServerSentEvents/parser",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Parser",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/parser::managed-proof",
+        "familyId": "family/System.Net.ServerSentEvents/parser",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Parser",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/parser::hotupdate-proof",
+        "familyId": "family/System.Net.ServerSentEvents/parser",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Parser",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/parser::benchmark",
+        "familyId": "family/System.Net.ServerSentEvents/parser",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Parser",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/parser::test-code",
+        "familyId": "family/System.Net.ServerSentEvents/parser",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Parser",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/item-parser::native-proof",
+        "familyId": "family/System.Net.ServerSentEvents/item-parser",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Item Parser",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/item-parser::managed-proof",
+        "familyId": "family/System.Net.ServerSentEvents/item-parser",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Item Parser",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/item-parser::hotupdate-proof",
+        "familyId": "family/System.Net.ServerSentEvents/item-parser",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Item Parser",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/item-parser::benchmark",
+        "familyId": "family/System.Net.ServerSentEvents/item-parser",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Item Parser",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/item-parser::test-code",
+        "familyId": "family/System.Net.ServerSentEvents/item-parser",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Item Parser",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/formatter::native-proof",
+        "familyId": "family/System.Net.ServerSentEvents/formatter",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Formatter",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/formatter::managed-proof",
+        "familyId": "family/System.Net.ServerSentEvents/formatter",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Formatter",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/formatter::hotupdate-proof",
+        "familyId": "family/System.Net.ServerSentEvents/formatter",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Formatter",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/formatter::benchmark",
+        "familyId": "family/System.Net.ServerSentEvents/formatter",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Formatter",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Net.ServerSentEvents/formatter::test-code",
+        "familyId": "family/System.Net.ServerSentEvents/formatter",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "SSE Formatter",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      }
+    ]
+  },
+  "familyVerificationSnapshot": {
+    "schemaVersion": 1,
+    "assemblyName": "System.Net.ServerSentEvents",
+    "ownerSubjectId": "SolutionCorePack",
+    "families": [
+      {
+        "familyId": "family/System.Net.ServerSentEvents/sse-item",
+        "displayName": "SSE Item Model",
+        "description": "SseItem value, event type, id, retry, comments, and generic payload model.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-27-complex-bcl-ordered-dll-07-system-net-serversentevents/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Net.ServerSentEvents/parser",
+        "displayName": "SSE Parser",
+        "description": "SseParser stream parsing, frame boundaries, cancellation, and malformed input behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-27-complex-bcl-ordered-dll-07-system-net-serversentevents/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Net.ServerSentEvents/item-parser",
+        "displayName": "SSE Item Parser",
+        "description": "SseItemParser parsing callbacks, typed payload conversion, and error handling.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-27-complex-bcl-ordered-dll-07-system-net-serversentevents/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Net.ServerSentEvents/formatter",
+        "displayName": "SSE Formatter",
+        "description": "SseFormatter output, field escaping, comments, retry, and typed payload formatting.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-27-complex-bcl-ordered-dll-07-system-net-serversentevents/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      }
+    ]
+  },
+  "truthContracts": {
+    "schemaVersion": 1,
+    "dllCapabilityManifest": {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "ownerSubjectId": "SolutionCorePack",
+      "capabilityFamilies": [
+        "family/System.Net.ServerSentEvents/sse-item",
+        "family/System.Net.ServerSentEvents/parser",
+        "family/System.Net.ServerSentEvents/item-parser",
+        "family/System.Net.ServerSentEvents/formatter"
+      ],
+      "capabilityFamilyCount": 4,
+      "methodUniverseCount": 0
+    },
+    "capabilityFamilyVerificationContracts": [
+      {
+        "assemblyName": "System.Net.ServerSentEvents",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Net.ServerSentEvents/sse-item",
+        "displayName": "SSE Item Model",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Net.ServerSentEvents",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Net.ServerSentEvents/parser",
+        "displayName": "SSE Parser",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Net.ServerSentEvents",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Net.ServerSentEvents/item-parser",
+        "displayName": "SSE Item Parser",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Net.ServerSentEvents",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Net.ServerSentEvents/formatter",
+        "displayName": "SSE Formatter",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      }
+    ],
+    "methodCapabilityContracts": []
+  },
   "sourceLinks": {
     "subjectSource": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
     "generatedCode": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/",

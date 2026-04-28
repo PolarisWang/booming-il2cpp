@@ -1,14 +1,14 @@
-extern "C" std::intptr_t {{ helper_symbol }}(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1)
+extern "C" CHAOS_IL2CPP_INTPTR {{ helper_symbol }}(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
-    if (chaos_arg_1 == static_cast<std::intptr_t>(0))
+    if (chaos_arg_1 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
-        std::abort();
+        CHAOS_IL2CPP_ABORT();
     }
 
-    const char* chaos_separator_utf8 = chaos_arg_0 == static_cast<std::intptr_t>(0)
+    const char* chaos_separator_utf8 = chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0)
         ? ""
         : chaos_reflection_get_string_utf8(chaos_arg_0);
-    std::string chaos_joined;
+    CHAOS_IL2CPP_STRING chaos_joined;
     bool chaos_first = true;
     auto chaos_append_separator = [&]()
     {
@@ -31,14 +31,14 @@ extern "C" std::intptr_t {{ helper_symbol }}(std::intptr_t chaos_arg_0, std::int
         if (chaos_array->element_type_shape != {{ reference_type_shape_value }} ||
             chaos_array->element_type_id != {{ string_type_id_symbol }})
         {
-            std::abort();
+            CHAOS_IL2CPP_ABORT();
         }
 
-        for (std::intptr_t chaos_index = 0; chaos_index < chaos_array->length; chaos_index++)
+        for (CHAOS_IL2CPP_INTPTR chaos_index = 0; chaos_index < chaos_array->length; chaos_index++)
         {
             chaos_append_separator();
-            const auto chaos_current = chaos_array->elements[static_cast<std::size_t>(chaos_index)];
-            if (chaos_current == static_cast<std::intptr_t>(0))
+            const auto chaos_current = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+            if (chaos_current == static_cast<CHAOS_IL2CPP_INTPTR>(0))
             {
                 continue;
             }
@@ -60,14 +60,14 @@ extern "C" std::intptr_t {{ helper_symbol }}(std::intptr_t chaos_arg_0, std::int
         while (true)
         {
             const auto chaos_has_next = {{ entry.move_next_symbol }}(chaos_enumerator);
-            if (chaos_has_next == static_cast<std::intptr_t>(0))
+            if (chaos_has_next == static_cast<CHAOS_IL2CPP_INTPTR>(0))
             {
                 break;
             }
 
             chaos_append_separator();
             const auto chaos_current = {{ entry.get_current_symbol }}(chaos_enumerator);
-            if (chaos_current == static_cast<std::intptr_t>(0))
+            if (chaos_current == static_cast<CHAOS_IL2CPP_INTPTR>(0))
             {
                 continue;
             }
@@ -83,5 +83,5 @@ extern "C" std::intptr_t {{ helper_symbol }}(std::intptr_t chaos_arg_0, std::int
     }
 
 {{~ end }}
-    std::abort();
+    CHAOS_IL2CPP_ABORT();
 }

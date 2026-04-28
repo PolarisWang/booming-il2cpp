@@ -1,6 +1,8 @@
 #ifndef CHAOS_IL2CPP_INTERPRETER_VM_H_
 #define CHAOS_IL2CPP_INTERPRETER_VM_H_
 
+#include <chaos/native_types.h>
+
 #include <cstddef>
 #include <cstdint>
 #include <vector>
@@ -108,13 +110,13 @@ struct IRInstruction {
 };
 
 struct IRMethod {
-    std::vector<IRInstruction> instructions = {};
+    CHAOS_IL2CPP_VECTOR(IRInstruction) instructions = {};
 };
 
 struct ExecutionFrame {
-    std::vector<InterpreterValue> arguments = {};
-    std::vector<InterpreterValue> locals = {};
-    std::vector<InterpreterValue> stack = {};
+    CHAOS_IL2CPP_VECTOR(InterpreterValue) arguments = {};
+    CHAOS_IL2CPP_VECTOR(InterpreterValue) locals = {};
+    CHAOS_IL2CPP_VECTOR(InterpreterValue) stack = {};
 };
 
 struct ExecutionResult {
@@ -129,8 +131,8 @@ public:
 
 private:
     static size_t GetBranchTarget(const IRMethod& method, size_t target);
-    static void EnsureLocal(std::vector<InterpreterValue>* locals, size_t index);
-    static InterpreterValue Pop(std::vector<InterpreterValue>* stack);
+    static void EnsureLocal(CHAOS_IL2CPP_VECTOR(InterpreterValue)* locals, size_t index);
+    static InterpreterValue Pop(CHAOS_IL2CPP_VECTOR(InterpreterValue)* stack);
 };
 
 }  // namespace chaos::il2cpp::interpreter

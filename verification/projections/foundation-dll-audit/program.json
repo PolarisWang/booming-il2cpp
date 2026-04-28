@@ -2,12 +2,16 @@
   "schemaVersion": 2,
   "programId": "foundation-dll-translation-audit",
   "title": "Foundation DLL Translation Audit",
+  "roadmapPath": "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+  "designPath": "",
+  "statusPath": "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md",
+  "subjectEntry": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
   "summary": {
     "dllCount": 14,
     "completedCount": 0,
-    "inProgressCount": 0,
-    "blockedCount": 2,
-    "notStartedCount": 12,
+    "inProgressCount": 1,
+    "blockedCount": 0,
+    "notStartedCount": 13,
     "progressPercent": 0.0,
     "activeAssembly": "System.Private.CoreLib",
     "capabilityClosure": {
@@ -20,15 +24,15 @@
       "closurePercent": 0.0
     },
     "workflowProgress": {
-      "totalRequiredGates": 464,
-      "passedGates": 6,
-      "progressPercent": 1.29
+      "totalRequiredGates": 696,
+      "passedGates": 144,
+      "progressPercent": 20.69
     },
     "dllCompletion": {
       "completedDllCount": 0,
-      "blockedDllCount": 2,
-      "inProgressDllCount": 0,
-      "notStartedDllCount": 12
+      "blockedDllCount": 0,
+      "inProgressDllCount": 1,
+      "notStartedDllCount": 13
     }
   },
   "scopeAssemblies": [

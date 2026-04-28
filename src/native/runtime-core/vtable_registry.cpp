@@ -1,5 +1,7 @@
 #include "vtable_registry.h"
 
+#include <chaos/native_types.h>
+
 #include <mutex>
 #include <unordered_map>
 #include <vector>
@@ -9,9 +11,9 @@ namespace chaos::il2cpp::vtable_registry {
 namespace {
 
 struct VTableRegistryState {
-    std::mutex                                            mutex;
+    CHAOS_IL2CPP_MUTEX                                            mutex;
     // Key: type_token → registered vtable
-    std::unordered_map<uint32_t, const TypeVTable*>       by_type_token;
+    CHAOS_IL2CPP_UNORDERED_MAP(uint32_t, const TypeVTable*)       by_type_token;
 };
 
 VTableRegistryState& GetState() {
@@ -27,7 +29,7 @@ bool RegisterTypeVTable(const TypeVTable* vtable) {
     }
 
     auto& state = GetState();
-    std::lock_guard<std::mutex> lock(state.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(state.mutex);
 
     // Idempotent — re-registration of the same token is silently ignored.
     if (state.by_type_token.count(vtable->type_token)) {
@@ -45,7 +47,7 @@ void* ResolveVirtualMethodPointer(uint32_t instance_type_token,
     }
 
     auto& state = GetState();
-    std::lock_guard<std::mutex> lock(state.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(state.mutex);
 
     // Walk the inheritance chain starting from instance_type_token.
     uint32_t current_token = instance_type_token;
@@ -71,7 +73,7 @@ void* ResolveVirtualMethodPointer(uint32_t instance_type_token,
 
 uint32_t GetRegisteredVTableCount() {
     auto& state = GetState();
-    std::lock_guard<std::mutex> lock(state.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(state.mutex);
     return static_cast<uint32_t>(state.by_type_token.size());
 }
 

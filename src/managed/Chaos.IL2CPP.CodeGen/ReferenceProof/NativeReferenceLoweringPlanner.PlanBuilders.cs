@@ -24,188 +24,21 @@ public sealed partial class NativeReferenceLoweringPlanner
         RequireMethodContract(entryPointMethod, "static-method", "has-canonical-body");
         var entryPointInstructions = GetSingleBlockInstructions(entryPointMethod);
 
-        if (TryCreateReflectionInteropClosureLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                entryPointRegistration,
-                out var reflectionInteropClosurePlan))
+        var buildContext = new NativeReferenceLoweringPlanBuildContext(
+            assemblyName,
+            entryPointSubjectId,
+            metadataRegistration,
+            methodPointers,
+            methods,
+            entryPointRegistration,
+            entryPointMethod,
+            entryPointInstructions);
+        foreach (var plugin in NativeReferenceLoweringPlanPlugins)
         {
-            return reflectionInteropClosurePlan;
-        }
-
-        if (TryCreateMarshalingUtf8ExportLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                entryPointRegistration,
-                out var marshalingUtf8ExportPlan))
-        {
-            return marshalingUtf8ExportPlan;
-        }
-
-        if (TryCreatePInvokeDllImportMinimalLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                entryPointRegistration,
-                entryPointMethod,
-                entryPointInstructions,
-                out var pinvokeDllImportMinimalPlan))
-        {
-            return pinvokeDllImportMinimalPlan;
-        }
-
-        if (TryCreateReflectionQueryMinimalLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                entryPointRegistration,
-                out var reflectionQueryMinimalPlan))
-        {
-            return reflectionQueryMinimalPlan;
-        }
-
-        if (TryCreateDelegateClosedTargetRelayLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                entryPointRegistration,
-                entryPointMethod,
-                entryPointInstructions,
-                out var delegateClosedTargetRelayPlan))
-        {
-            return delegateClosedTargetRelayPlan;
-        }
-
-        if (TryCreateNestedExceptionLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                entryPointRegistration,
-                out var nestedExceptionPlan))
-        {
-            return nestedExceptionPlan;
-        }
-
-        if (TryCreateExceptionThrowCatchFinallyLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                entryPointRegistration,
-                out var exceptionThrowCatchFinallyPlan))
-        {
-            return exceptionThrowCatchFinallyPlan;
-        }
-
-        if (TryCreateThreadingThreadStaticMonitorLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                out var threadingThreadStaticMonitorPlan))
-        {
-            return threadingThreadStaticMonitorPlan;
-        }
-
-        if (TryCreateAsyncAwaitIntLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                out var asyncAwaitIntPlan))
-        {
-            return asyncAwaitIntPlan;
-        }
-
-        if (TryCreateInterfaceDispatchMessageLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                entryPointRegistration,
-                entryPointMethod,
-                entryPointInstructions,
-                out var interfaceDispatchMessagePlan))
-        {
-            return interfaceDispatchMessagePlan;
-        }
-
-        if (TryCreateDispatchVirtualInstanceMessageLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                entryPointRegistration,
-                entryPointMethod,
-                entryPointInstructions,
-                out var dispatchVirtualInstanceMessagePlan))
-        {
-            return dispatchVirtualInstanceMessagePlan;
-        }
-
-        if (TryCreateArrayBoxingReferenceArrayLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                entryPointRegistration,
-                entryPointMethod,
-                entryPointInstructions,
-                out var arrayBoxingReferenceArrayPlan))
-        {
-            return arrayBoxingReferenceArrayPlan;
-        }
-
-        if (TryCreateArrayClearReferenceArrayLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                entryPointRegistration,
-                entryPointMethod,
-                entryPointInstructions,
-                out var arrayClearReferenceArrayPlan))
-        {
-            return arrayClearReferenceArrayPlan;
-        }
-
-        if (TryCreateArrayCopyReferenceArrayLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                entryPointRegistration,
-                entryPointMethod,
-                entryPointInstructions,
-                out var arrayCopyReferenceArrayPlan))
-        {
-            return arrayCopyReferenceArrayPlan;
-        }
-
-        if (TryCreateArrayReverseReferenceArrayLoweringPlan(
-                assemblyName,
-                entryPointSubjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                entryPointRegistration,
-                entryPointMethod,
-                entryPointInstructions,
-                out var arrayReverseReferenceArrayPlan))
-        {
-            return arrayReverseReferenceArrayPlan;
+            if (plugin(buildContext) is { } plan)
+            {
+                return plan;
+            }
         }
 
         if (IsStaticCallCtorGetterEntryPointShape(entryPointInstructions))

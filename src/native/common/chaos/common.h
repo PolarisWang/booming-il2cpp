@@ -11,6 +11,8 @@
 // Functions: snake_case
 // Constants: k_ + snake_case
 
+#include "native_types.h"
+#include "format.h"
 #include "checked_conv.h"
 #include "arithmetic.h"
 #include "load_store.h"

@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/span/memory-buffers",
+  "methods": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::get_Item:T&(System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32,System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::ToArray:T[](System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::CopyTo:System.Void(System.Span`1)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::get_Empty:System.Span`1()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.ReadOnlySpan`1::get_Item:T&(System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.ReadOnlySpan`1::Slice:System.ReadOnlySpan`1(System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.ReadOnlySpan`1::ToArray:T[]()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Memory`1::get_Span:System.Span`1()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Memory`1::ToArray:T[]()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.ReadOnlySpan`1)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.Span`1)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    }
+  ]
+}

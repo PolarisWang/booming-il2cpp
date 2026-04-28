@@ -44,6 +44,14 @@ NATIVE_REFERENCE_PLAN_BUILDERS_PATH = (
     / "ReferenceProof"
     / "NativeReferenceLoweringPlanner.PlanBuilders.cs"
 )
+NATIVE_REFERENCE_PLAN_GENERATED_PLUGIN_EXPORTS_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceLoweringPlanner.GeneratedPluginExports.cs"
+)
 NATIVE_REFERENCE_SHAPE_VALIDATION_PATH = (
     REPO_ROOT
     / "src"
@@ -92,6 +100,22 @@ NATIVE_REFERENCE_EMITTER_MEMORY_EXTENSIONS_MANAGED_INVOKE_FAMILY_PATH = (
     / "ReferenceProof"
     / "NativeReferenceProofEmitter.MemoryExtensionsManagedInvokeFamily.cs"
 )
+NATIVE_REFERENCE_EMITTER_TASK_CONTINUATION_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.TaskContinuationFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.GeneratedPluginExports.cs"
+)
 NATIVE_REFERENCE_EMITTER_SPANHELPERS_KERNEL_FAMILY_PATH = (
     REPO_ROOT
     / "src"
@@ -107,6 +131,30 @@ NATIVE_REFERENCE_EMITTER_ARRAY_AND_MEMORYMARSHAL_FAMILY_PATH = (
     / "Chaos.IL2CPP.CodeGen"
     / "ReferenceProof"
     / "NativeReferenceProofEmitter.ArrayAndMemoryMarshalFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_MARSHAL_PLATFORM_CAPABILITY_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.MarshalPlatformCapabilityFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_INTEROP_KERNEL32_PLATFORM_CAPABILITY_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.InteropKernel32PlatformCapabilityFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_NATIVE_RUNTIME_EVENTSOURCE_PLATFORM_CAPABILITY_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.NativeRuntimeEventSourcePlatformCapabilityFamily.cs"
 )
 NATIVE_REFERENCE_EMITTER_HALF_MANAGED_INVOKE_FAMILY_PATH = (
     REPO_ROOT
@@ -180,6 +228,22 @@ NATIVE_REFERENCE_EMITTER_VALUETYPE_KERNEL_FAMILY_PATH = (
     / "ReferenceProof"
     / "NativeReferenceProofEmitter.ValueTypeKernelFamily.cs"
 )
+NATIVE_REFERENCE_EMITTER_VECTOR_KERNEL_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.VectorKernelFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_VECTOR_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.VectorManagedInvokeFamily.cs"
+)
 NATIVE_REFERENCE_EMITTER_ENUM_MANAGED_INVOKE_FAMILY_PATH = (
     REPO_ROOT
     / "src"
@@ -204,6 +268,14 @@ RUNTIME_SKELETON_VALUE_TYPE_MANAGED_INVOKE_CORE_PATH = (
     / "ReferenceProof"
     / "RuntimeSkeletonValueTypeManagedInvokeCore.cs"
 )
+RUNTIME_SKELETON_VECTOR_MANAGED_INVOKE_ABI_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonVectorManagedInvokeAbi.cs"
+)
 RUNTIME_SKELETON_SEMANTIC_REGISTRY_PATH = (
     REPO_ROOT
     / "src"
@@ -227,6 +299,124 @@ RUNTIME_SKELETON_KERNEL_CORE_PATH = (
     / "Chaos.IL2CPP.CodeGen"
     / "ReferenceProof"
     / "RuntimeSkeletonKernelCore.cs"
+)
+RUNTIME_SKELETON_VECTOR_KERNEL_CORE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonVectorKernelCore.cs"
+)
+RUNTIME_SKELETON_MARSHAL_PLATFORM_CORE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonMarshalPlatformCore.cs"
+)
+RUNTIME_SKELETON_MARSHAL_MANAGED_INVOKE_ABI_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonMarshalManagedInvokeAbi.cs"
+)
+RUNTIME_SKELETON_TASK_PLATFORM_CORE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonTaskPlatformCore.cs"
+)
+RUNTIME_SKELETON_TASK_MANAGED_INVOKE_ABI_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonTaskManagedInvokeAbi.cs"
+)
+CODEGEN_PLUGIN_ATTRIBUTES_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Pluginization"
+    / "CodeGenPluginAttributes.cs"
+)
+CODEGEN_PLUGIN_REGISTRIES_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Pluginization"
+    / "CodeGenPluginRegistries.cs"
+)
+CODEGEN_TEMPLATE_BUNDLE_PLUGINS_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Pluginization"
+    / "CodeGenTemplateBundlePlugins.cs"
+)
+CODEGEN_RUNTIME_PROVIDER_PLUGINS_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Pluginization"
+    / "CodeGenRuntimeProviderPlugins.cs"
+)
+CODEGEN_RUNTIME_PROVIDER_CATALOG_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Pluginization"
+    / "CodeGenRuntimeProviderCatalog.cs"
+)
+CODEGEN_GENERATOR_PROJECT_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen.Generators"
+    / "Chaos.IL2CPP.CodeGen.Generators.csproj"
+)
+CODEGEN_GENERATOR_SOURCE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen.Generators"
+    / "CodeGenPluginRegistryGenerator.cs"
+)
+RUNTIME_SKELETON_INTEROP_KERNEL32_PLATFORM_CORE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonInteropKernel32PlatformCore.cs"
+)
+RUNTIME_SKELETON_INTEROP_KERNEL32_MANAGED_INVOKE_ABI_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonInteropKernel32ManagedInvokeAbi.cs"
+)
+RUNTIME_SKELETON_NATIVE_RUNTIME_EVENTSOURCE_MANAGED_INVOKE_ABI_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonNativeRuntimeEventSourceManagedInvokeAbi.cs"
 )
 NATIVE_REFERENCE_EMITTER_STRING_MICRO_FAMILY_PATH = (
     REPO_ROOT
@@ -362,6 +552,38 @@ NATIVE_REFERENCE_RUNTIME_SKELETON_ARRAY_BOXING_REFERENCE_ARRAY_STUB_TEMPLATE_PAT
     / "Chaos.IL2CPP.CodeGen"
     / "Templates"
     / "NativeReferenceProof.RuntimeSkeleton.ArrayBoxingReferenceArrayStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_MARSHAL_PLATFORM_FASTPATH_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.MarshalPlatformFastPathStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_TASK_KERNEL_FASTPATH_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.TaskKernelFastPathStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_TASK_MANAGED_INVOKE_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.TaskManagedInvokeStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_NATIVE_RUNTIME_EVENTSOURCE_MANAGED_INVOKE_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.NativeRuntimeEventSourceManagedInvokeStub.cpp.scriban"
 )
 NATIVE_AOT_RUNTIME_PRELUDE_PATH = (
     REPO_ROOT

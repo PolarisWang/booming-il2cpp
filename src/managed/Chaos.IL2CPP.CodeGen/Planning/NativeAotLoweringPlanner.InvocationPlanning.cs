@@ -84,7 +84,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         AddRange(ResolveDirectReachableMethods(instruction));
-        if (!string.IsNullOrWhiteSpace(instruction.Callee))
+        if (!string.IsNullOrEmpty(instruction.Callee))
         {
             AddRange(ResolveInterfaceDispatchTargets(instruction.Callee));
         }
@@ -95,7 +95,7 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlyList<AotCoreIrMethodArtifact> ResolveDirectReachableMethods(
         AotCoreIrInstructionArtifact instruction)
     {
-        if (string.IsNullOrWhiteSpace(instruction.Callee))
+        if (string.IsNullOrEmpty(instruction.Callee))
         {
             return [];
         }
@@ -123,12 +123,12 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
         StaticInitializationSupportModel staticInitializationSupport)
     {
-        var helpersBySubjectId = new Dictionary<string, ExternalRuntimeHelperDefinition>(StringComparer.Ordinal);
+        var helpersBySubjectId = new Dictionary<string, ExternalRuntimeHelperDefinition>(reachableMethods.Count, StringComparer.Ordinal);
         foreach (var method in reachableMethods)
         {
             foreach (var instruction in method.Instructions)
             {
-                if (string.IsNullOrWhiteSpace(instruction.Callee) ||
+                if (string.IsNullOrEmpty(instruction.Callee) ||
                     !TryCreateExternalRuntimeHelperDefinition(instruction.Callee, out var helperDefinition))
                 {
                     continue;
@@ -157,7 +157,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         continuationMethod = null;
         if (!TryGetAsyncStateMachineTypeName(callee, out var stateMachineTypeName) ||
-            string.IsNullOrWhiteSpace(stateMachineTypeName))
+            string.IsNullOrEmpty(stateMachineTypeName))
         {
             return false;
         }
@@ -354,7 +354,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         elementTypeDisplayName = GetTypeDisplayName(elementTypeName);
-        return !string.IsNullOrWhiteSpace(elementTypeDisplayName);
+        return !string.IsNullOrEmpty(elementTypeDisplayName);
     }
 
     private sealed record VirtualDispatchRoute(
@@ -366,7 +366,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         var routes = ResolveVirtualDispatchRoutes(instruction);
         var methods = new List<AotCoreIrMethodArtifact>();
-        var seenSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        var seenSubjectIds = new HashSet<string>(routes.Count, StringComparer.Ordinal);
 
         foreach (var route in routes)
         {
@@ -416,7 +416,10 @@ public sealed partial class NativeAotLoweringPlanner
 
     private IEnumerable<string> EnumerateVirtualDispatchCandidateTypeSubjectIds()
     {
-        var seenTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        var capacity = _referenceTypeBaseSubjectIds.Count
+            + _referenceTypeImplementedInterfaceSubjectIds.Count
+            + _methodsBySubjectId.Count;
+        var seenTypeSubjectIds = new HashSet<string>(capacity, StringComparer.Ordinal);
 
         foreach (var typeSubjectId in _referenceTypeBaseSubjectIds.Keys.OrderBy(subjectId => subjectId, StringComparer.Ordinal))
         {
@@ -436,7 +439,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         foreach (var typeSubjectId in _methodsBySubjectId.Values
                      .Select(method => method.Identity.DeclaringTypeSubjectId)
-                     .Where(subjectId => !string.IsNullOrWhiteSpace(subjectId))
+                     .Where(subjectId => !string.IsNullOrEmpty(subjectId))
                      .OrderBy(subjectId => subjectId, StringComparer.Ordinal))
         {
             if (seenTypeSubjectIds.Add(typeSubjectId))
@@ -463,7 +466,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         var currentTypeSubjectId = candidateTypeSubjectId;
         var currentTypeDefinitionSubjectId = candidateTypeSubjectId;
-        while (!string.IsNullOrWhiteSpace(currentTypeSubjectId))
+        while (!string.IsNullOrEmpty(currentTypeSubjectId))
         {
             if (TryResolveVirtualDispatchImplementationMethodOnType(
                     currentTypeSubjectId,
@@ -477,7 +480,7 @@ public sealed partial class NativeAotLoweringPlanner
                     currentTypeSubjectId,
                     currentTypeDefinitionSubjectId,
                     out var baseTypeSubjectId) ||
-                string.IsNullOrWhiteSpace(baseTypeSubjectId))
+                string.IsNullOrEmpty(baseTypeSubjectId))
             {
                 break;
             }
@@ -489,28 +492,37 @@ public sealed partial class NativeAotLoweringPlanner
         return null;
     }
 
+    private Dictionary<(string, string), AotCoreIrMethodArtifact>? _virtualDispatchMethodIndex;
+
     private bool TryResolveVirtualDispatchImplementationMethodOnType(
         string declaringTypeSubjectId,
         string slotSignatureSuffix,
         out AotCoreIrMethodArtifact? implementationMethod)
     {
-        implementationMethod = _methodsBySubjectId.Values
-            .Where(method =>
-                !method.IsStatic &&
-                CanEmitMethodBody(method) &&
-                string.Equals(method.Identity.DeclaringTypeSubjectId, declaringTypeSubjectId, StringComparison.Ordinal) &&
-                string.Equals(GetMethodSignatureSuffix(method.SubjectId), slotSignatureSuffix, StringComparison.Ordinal))
-            .OrderBy(method => method.SubjectId, StringComparer.Ordinal)
-            .FirstOrDefault();
+        // Lazy-build the virtual dispatch method index on first call.
+        var index = _virtualDispatchMethodIndex;
+        if (index is null)
+        {
+            index = new Dictionary<(string, string), AotCoreIrMethodArtifact>();
+            foreach (var method in _methodsBySubjectId.Values)
+            {
+                if (!method.IsStatic && CanEmitMethodBody(method))
+                    index.TryAdd((method.Identity.DeclaringTypeSubjectId, GetMethodSignatureSuffix(method.SubjectId)), method);
+            }
+            _virtualDispatchMethodIndex = index;
+        }
+
+        var key = (declaringTypeSubjectId, slotSignatureSuffix);
+        index.TryGetValue(key, out implementationMethod);
         return implementationMethod is not null;
     }
 
     private AotCoreIrMethodArtifact ResolveRequiredDispatchSlotMethod(AotCoreIrInstructionArtifact instruction)
     {
-        var subjectId = !string.IsNullOrWhiteSpace(instruction.Callee)
+        var subjectId = !string.IsNullOrEmpty(instruction.Callee)
             ? instruction.Callee
             : instruction.TargetReference?.SubjectId;
-        if (string.IsNullOrWhiteSpace(subjectId) ||
+        if (string.IsNullOrEmpty(subjectId) ||
             !_methodsBySubjectId.TryGetValue(subjectId, out var dispatchSlotMethod))
         {
             throw new NotSupportedException(
@@ -540,7 +552,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private InvocationTarget? TryResolveDirectInvocationTarget(string? callee)
     {
-        if (string.IsNullOrWhiteSpace(callee))
+        if (string.IsNullOrEmpty(callee))
         {
             return null;
         }
@@ -572,7 +584,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private AotCoreIrMethodArtifact? TryGetLowerableMethod(string? subjectId)
     {
-        if (string.IsNullOrWhiteSpace(subjectId) ||
+        if (string.IsNullOrEmpty(subjectId) ||
             !_methodsBySubjectId.TryGetValue(subjectId, out var method) ||
             !CanEmitMethodBody(method))
         {
@@ -590,7 +602,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         var currentTypeSubjectId = candidateTypeSubjectId;
         var currentTypeDefinitionSubjectId = candidateTypeDefinitionSubjectId;
-        while (!string.IsNullOrWhiteSpace(currentTypeSubjectId))
+        while (!string.IsNullOrEmpty(currentTypeSubjectId))
         {
             if (MatchesTypeSubjectId(
                     currentTypeSubjectId,
@@ -610,7 +622,7 @@ public sealed partial class NativeAotLoweringPlanner
                     currentTypeSubjectId,
                     currentTypeDefinitionSubjectId,
                     out var baseTypeSubjectId) ||
-                string.IsNullOrWhiteSpace(baseTypeSubjectId))
+                string.IsNullOrEmpty(baseTypeSubjectId))
             {
                 break;
             }
@@ -637,7 +649,7 @@ public sealed partial class NativeAotLoweringPlanner
         string slotDeclaringTypeSubjectId,
         string slotDeclaringTypeDefinitionSubjectId)
     {
-        if (string.IsNullOrWhiteSpace(candidateTypeSubjectId) ||
+        if (string.IsNullOrEmpty(candidateTypeSubjectId) ||
             !_referenceTypeImplementedInterfaceSubjectIds.TryGetValue(candidateTypeSubjectId, out var implementedInterfaceSubjectIds))
         {
             return false;
@@ -676,7 +688,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         baseTypeSubjectId = GetSyntheticReferenceTypeBaseSubjectId(subjectId);
-        return !string.IsNullOrWhiteSpace(baseTypeSubjectId);
+        return !string.IsNullOrEmpty(baseTypeSubjectId);
     }
 
     private static bool MatchesTypeSubjectId(
@@ -694,7 +706,7 @@ public sealed partial class NativeAotLoweringPlanner
         string slotDeclaringTypeSubjectId,
         string slotDeclaringTypeDefinitionSubjectId)
     {
-        return !string.IsNullOrWhiteSpace(candidateTypeSubjectId) &&
+        return !string.IsNullOrEmpty(candidateTypeSubjectId) &&
                (string.Equals(candidateTypeSubjectId, slotDeclaringTypeSubjectId, StringComparison.Ordinal) ||
                 string.Equals(candidateTypeSubjectId, slotDeclaringTypeDefinitionSubjectId, StringComparison.Ordinal));
     }

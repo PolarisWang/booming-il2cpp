@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata;
+﻿using System.Collections.Immutable;
+using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using Chaos.IL2CPP.Contracts;
@@ -7,13 +8,126 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed partial class NativeAotLoweringPlanner
 {
+    private sealed class MetadataMethodSignatureTypeNameProvider : ISignatureTypeProvider<string, object?>
+    {
+        private readonly MetadataReader _metadataReader;
+        private readonly string _assemblyName;
+
+        public MetadataMethodSignatureTypeNameProvider(
+            MetadataReader metadataReader,
+            string assemblyName)
+        {
+            _metadataReader = metadataReader;
+            _assemblyName = assemblyName;
+        }
+
+        public string GetArrayType(string elementType, ArrayShape shape)
+        {
+            if (shape.Rank == 1 && shape.LowerBounds.IsDefaultOrEmpty && shape.Sizes.IsDefaultOrEmpty)
+            {
+                return $"{elementType}[]";
+            }
+
+            return $"{elementType}[{new string(',', shape.Rank - 1)}]";
+        }
+
+        public string GetByReferenceType(string elementType) => $"{elementType}&";
+
+        public string GetFunctionPointerType(MethodSignature<string> signature)
+        {
+            return $"fnptr<{signature.ReturnType}({string.Join(",", signature.ParameterTypes)})>";
+        }
+
+        public string GetGenericInstantiation(string genericType, ImmutableArray<string> typeArguments)
+        {
+            return ManagedNaming.CreateInstantiatedTypeDisplayName(genericType, typeArguments);
+        }
+
+        public string GetGenericMethodParameter(object? genericContext, int index) => $"!!{index}";
+
+        public string GetGenericTypeParameter(object? genericContext, int index) => $"!{index}";
+
+        public string GetModifiedType(string modifierType, string unmodifiedType, bool isRequired) => unmodifiedType;
+
+        public string GetPinnedType(string elementType) => elementType;
+
+        public string GetPointerType(string elementType) => $"{elementType}*";
+
+        public string GetPrimitiveType(PrimitiveTypeCode typeCode)
+        {
+            return typeCode switch
+            {
+                PrimitiveTypeCode.Boolean => "System.Boolean",
+                PrimitiveTypeCode.Byte => "System.Byte",
+                PrimitiveTypeCode.Char => "System.Char",
+                PrimitiveTypeCode.Double => "System.Double",
+                PrimitiveTypeCode.Int16 => "System.Int16",
+                PrimitiveTypeCode.Int32 => "System.Int32",
+                PrimitiveTypeCode.Int64 => "System.Int64",
+                PrimitiveTypeCode.IntPtr => "System.IntPtr",
+                PrimitiveTypeCode.Object => "System.Object",
+                PrimitiveTypeCode.SByte => "System.SByte",
+                PrimitiveTypeCode.Single => "System.Single",
+                PrimitiveTypeCode.String => "System.String",
+                PrimitiveTypeCode.TypedReference => "System.TypedReference",
+                PrimitiveTypeCode.UInt16 => "System.UInt16",
+                PrimitiveTypeCode.UInt32 => "System.UInt32",
+                PrimitiveTypeCode.UInt64 => "System.UInt64",
+                PrimitiveTypeCode.UIntPtr => "System.UIntPtr",
+                PrimitiveTypeCode.Void => "System.Void",
+                _ => typeCode.ToString(),
+            };
+        }
+
+        public string GetSZArrayType(string elementType) => $"{elementType}[]";
+
+        public string GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
+        {
+            return TryResolveTypeDefinitionIdentity(reader, _assemblyName, handle, out var identity)
+                ? identity.DisplayName
+                : GetTypeNameFallback(
+                    reader,
+                    reader.GetTypeDefinition(handle).Namespace,
+                    reader.GetTypeDefinition(handle).Name);
+        }
+
+        public string GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
+        {
+            return TryResolveTypeReferenceIdentity(reader, _assemblyName, handle, out var identity)
+                ? identity.DisplayName
+                : GetTypeNameFallback(
+                    reader,
+                    reader.GetTypeReference(handle).Namespace,
+                    reader.GetTypeReference(handle).Name);
+        }
+
+        public string GetTypeFromSpecification(
+            MetadataReader reader,
+            object? genericContext,
+            TypeSpecificationHandle handle,
+            byte rawTypeKind)
+        {
+            return reader.GetTypeSpecification(handle).DecodeSignature(this, genericContext);
+        }
+
+        private static string GetTypeNameFallback(
+            MetadataReader reader,
+            StringHandle namespaceHandle,
+            StringHandle typeNameHandle)
+        {
+            var namespaceName = reader.GetString(namespaceHandle);
+            var typeName = reader.GetString(typeNameHandle);
+            return string.IsNullOrEmpty(namespaceName)
+                ? typeName
+                : $"{namespaceName}.{typeName}";
+        }
+    }
 
     private CustomAttributeSupportModel BuildCustomAttributeSupportModel(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
-        ManagedClosureManifestArtifact closureManifest,
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate)
     {
-        var queryDisplayNamesByCallee = new Dictionary<string, string>(StringComparer.Ordinal);
+        var queryDisplayNamesByCallee = new Dictionary<string, string>(reachableMethods.Count, StringComparer.Ordinal);
         foreach (var method in reachableMethods)
         {
             foreach (var instruction in method.Instructions)
@@ -51,7 +165,7 @@ public sealed partial class NativeAotLoweringPlanner
             .GroupBy(entry => entry.AssemblyName, StringComparer.Ordinal)
             .ToDictionary(group => group.Key, group => group.ToArray(), StringComparer.Ordinal);
 
-        foreach (var assemblyPath in EnumerateClosureAssemblyPaths(closureManifest))
+        foreach (var assemblyPath in _cachedClosureAssemblyPaths)
         {
             using var stream = File.OpenRead(assemblyPath);
             using var peReader = new PEReader(stream);
@@ -133,7 +247,7 @@ public sealed partial class NativeAotLoweringPlanner
                 materializationKeys);
         }
 
-        var queryAttributeTypeByCallee = new Dictionary<string, string>(StringComparer.Ordinal);
+        var queryAttributeTypeByCallee = new Dictionary<string, string>(queryDisplayNamesByCallee.Count, StringComparer.Ordinal);
         foreach (var (callee, attributeDisplayName) in queryDisplayNamesByCallee)
         {
             if (!displayNameToSubjectId.TryGetValue(attributeDisplayName, out var attributeTypeSubjectId))
@@ -145,8 +259,8 @@ public sealed partial class NativeAotLoweringPlanner
             queryAttributeTypeByCallee[callee] = attributeTypeSubjectId;
         }
 
-        var additionalReferenceTypes = new HashSet<string>(StringComparer.Ordinal);
-        var additionalInstanceFields = new HashSet<string>(StringComparer.Ordinal);
+        var additionalReferenceTypes = new HashSet<string>(materializations.Count, StringComparer.Ordinal);
+        var additionalInstanceFields = new HashSet<string>(materializations.Count, StringComparer.Ordinal);
         var syntheticGetterFieldByMethodSubjectId = new Dictionary<string, string>(StringComparer.Ordinal);
         var materializedAttributeTypes = materializations
             .Select(plan => plan.AttributeTypeSubjectId)
@@ -172,8 +286,8 @@ public sealed partial class NativeAotLoweringPlanner
             foreach (var instruction in method.Instructions)
             {
                 if (!TryParseAttributeGetterMethodSubjectId(instruction.Callee, out var attributeTypeSubjectId, out var memberName) ||
-                    string.IsNullOrWhiteSpace(attributeTypeSubjectId) ||
-                    string.IsNullOrWhiteSpace(memberName) ||
+                    string.IsNullOrEmpty(attributeTypeSubjectId) ||
+                    string.IsNullOrEmpty(memberName) ||
                     _methodsBySubjectId.ContainsKey(instruction.Callee!) ||
                     !materializedAttributeTypes.Contains(attributeTypeSubjectId!))
                 {
@@ -204,7 +318,6 @@ public sealed partial class NativeAotLoweringPlanner
 
     private AssemblyReflectionSupportModel BuildAssemblyReflectionSupportModel(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
-        ManagedClosureManifestArtifact closureManifest,
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate)
     {
         var usesAssemblyReflectionHelpers = reachableMethods.Any(method =>
@@ -226,9 +339,9 @@ public sealed partial class NativeAotLoweringPlanner
             .GroupBy(entry => entry.AssemblyName, StringComparer.Ordinal)
             .ToDictionary(group => group.Key, group => group.ToArray(), StringComparer.Ordinal);
         var reflectionTypeEntries = new List<AssemblyReflectionTypeEntry>();
-        var seenTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        var seenTypeSubjectIds = new HashSet<string>(supplementalMetadataTemplate.RegisteredTypes.Count, StringComparer.Ordinal);
 
-        foreach (var assemblyPath in EnumerateClosureAssemblyPaths(closureManifest))
+        foreach (var assemblyPath in _cachedClosureAssemblyPaths)
         {
             using var stream = File.OpenRead(assemblyPath);
             using var peReader = new PEReader(stream);
@@ -282,7 +395,6 @@ public sealed partial class NativeAotLoweringPlanner
 
     private ReflectionMemberSupportModel BuildReflectionMemberSupportModel(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
-        ManagedClosureManifestArtifact closureManifest,
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate)
     {
         var usesReflectionMemberHelpers = reachableMethods.Any(method =>
@@ -313,11 +425,11 @@ public sealed partial class NativeAotLoweringPlanner
         var typeEntries = new List<ReflectionMemberTypeEntry>();
         var fieldEntries = new List<ReflectionMemberFieldEntry>();
         var methodEntries = new List<ReflectionMemberMethodEntry>();
-        var seenTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
-        var seenFieldKeys = new HashSet<string>(StringComparer.Ordinal);
-        var seenMethodSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        var seenTypeSubjectIds = new HashSet<string>(supplementalMetadataTemplate.RegisteredTypes.Count, StringComparer.Ordinal);
+        var seenFieldKeys = new HashSet<string>(supplementalMetadataTemplate.RegisteredTypes.Count, StringComparer.Ordinal);
+        var seenMethodSubjectIds = new HashSet<string>(supplementalMetadataTemplate.RegisteredMethods.Count, StringComparer.Ordinal);
 
-        foreach (var assemblyPath in EnumerateClosureAssemblyPaths(closureManifest))
+        foreach (var assemblyPath in _cachedClosureAssemblyPaths)
         {
             using var stream = File.OpenRead(assemblyPath);
             using var peReader = new PEReader(stream);
@@ -436,7 +548,6 @@ public sealed partial class NativeAotLoweringPlanner
 
     private StaticFieldDataSupportModel BuildStaticFieldDataSupportModel(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
-        ManagedClosureManifestArtifact closureManifest,
         MetadataRegistrationArtifact metadataRegistration)
     {
         var requiredFieldSubjectIds = reachableMethods
@@ -455,16 +566,16 @@ public sealed partial class NativeAotLoweringPlanner
         var metadataFieldEntriesBySubjectId = metadataRegistration.Registrations
             .Where(entry =>
                 string.Equals(entry.RegistrationKind, "field", StringComparison.Ordinal) &&
-                !string.IsNullOrWhiteSpace(entry.MemberType))
+                !string.IsNullOrEmpty(entry.MemberType))
             .GroupBy(entry => entry.SubjectId, StringComparer.Ordinal)
             .ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal);
-        var closureAssemblyPathsByName = BuildClosureAssemblyPathByName(closureManifest);
-        var entriesBySubjectId = new Dictionary<string, StaticFieldDataEntry>(StringComparer.Ordinal);
+        var closureAssemblyPathsByName = _closureAssemblyPathByName;
+        var entriesBySubjectId = new Dictionary<string, StaticFieldDataEntry>(requiredFieldSubjectIds.Length, StringComparer.Ordinal);
 
         foreach (var fieldSubjectId in requiredFieldSubjectIds)
         {
             if (!metadataFieldEntriesBySubjectId.TryGetValue(fieldSubjectId, out var metadataFieldEntry) ||
-                string.IsNullOrWhiteSpace(metadataFieldEntry.MemberType) ||
+                string.IsNullOrEmpty(metadataFieldEntry.MemberType) ||
                 !TryParseStaticFieldDataSize(metadataFieldEntry.MemberType, out var staticFieldDataSize))
             {
                 continue;

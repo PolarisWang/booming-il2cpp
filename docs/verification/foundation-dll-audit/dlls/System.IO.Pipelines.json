@@ -1,11 +1,11 @@
 {
   "assemblyName": "System.IO.Pipelines",
   "orderIndex": 6,
-  "phase": "phase-2",
-  "roadmapTaskId": "20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines",
+  "phase": "roadmap-closed",
+  "roadmapTaskId": "20260427-04-dll-capability-verification-closure-roadmap",
   "dllState": "not-started",
   "currentProject": "audit-input-and-ledger",
-  "blockingReason": "验证 `System.IO.Pipelines`",
+  "blockingReason": "",
   "riskTags": [],
   "projects": [
     {
@@ -13,14 +13,13 @@
       "displayName": "Audit Input And Ledger",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "刷新 audit input manifest，并校验 surface / semantic / nativeization plan。",
+      "verificationMethod": "Refresh audit input manifest and validate surface / semantic / nativeization plan.",
       "verificationTarget": "System.IO.Pipelines",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -30,14 +29,13 @@
       "displayName": "Managed Proof",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "运行 managed proof，验证语义基线。",
+      "verificationMethod": "Run managed proof and validate managed semantics baseline.",
       "verificationTarget": "System.IO.Pipelines",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -47,14 +45,13 @@
       "displayName": "Native Proof",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "运行 native / AOT proof，验证 generated native code 可执行。",
+      "verificationMethod": "Run native / AOT proof and validate generated native code execution.",
       "verificationTarget": "System.IO.Pipelines",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -64,14 +61,13 @@
       "displayName": "HotUpdate Proof",
       "policyState": "conditional",
       "executionState": "pending",
-      "verificationMethod": "运行 patch / host proof，验证 hotupdate consumer 路径。",
+      "verificationMethod": "Run patch / host proof and validate hotupdate consumer path.",
       "verificationTarget": "System.IO.Pipelines",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -81,14 +77,13 @@
       "displayName": "Benchmark",
       "policyState": "conditional",
       "executionState": "pending",
-      "verificationMethod": "运行 benchmark，归档性能结果。",
+      "verificationMethod": "Run benchmarks and archive performance results.",
       "verificationTarget": "System.IO.Pipelines",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -98,14 +93,13 @@
       "displayName": "Codegen Review",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "审核 generated code、dispatch/helper/binding/coverage。",
+      "verificationMethod": "Review generated code, dispatch, helpers, bindings, and coverage artifacts.",
       "verificationTarget": "System.IO.Pipelines",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -115,14 +109,13 @@
       "displayName": "Completion Certification",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "汇总前置 project 结果，给出 DLL completion 结论。",
+      "verificationMethod": "Aggregate project results and produce DLL completion conclusion.",
       "verificationTarget": "System.IO.Pipelines",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
       ],
       "blockers": [],
       "updatedAt": ""
@@ -138,7 +131,7 @@
     "closurePercent": 0.0
   },
   "workflowProgress": {
-    "totalRequiredGates": 20,
+    "totalRequiredGates": 30,
     "passedGates": 0,
     "progressPercent": 0.0
   },
@@ -153,8 +146,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -178,7 +171,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.IO.Pipelines/reader-writer",
@@ -190,8 +262,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -215,7 +287,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.IO.Pipelines/read-flush-results",
@@ -227,8 +378,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -252,7 +403,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.IO.Pipelines/options-scheduler",
@@ -264,8 +494,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -289,7 +519,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.IO.Pipelines/stream-adapters",
@@ -301,8 +610,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -326,9 +635,1107 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     }
   ],
+  "familyVerificationClaims": {
+    "schemaVersion": 1,
+    "assemblyName": "System.IO.Pipelines",
+    "ownerSubjectId": "SolutionCorePack",
+    "methodUniverseArtifactPaths": [],
+    "claims": [
+      {
+        "claimId": "family/System.IO.Pipelines/pipe-core::native-proof",
+        "familyId": "family/System.IO.Pipelines/pipe-core",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Pipe Core",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/pipe-core::managed-proof",
+        "familyId": "family/System.IO.Pipelines/pipe-core",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Pipe Core",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/pipe-core::hotupdate-proof",
+        "familyId": "family/System.IO.Pipelines/pipe-core",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Pipe Core",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/pipe-core::benchmark",
+        "familyId": "family/System.IO.Pipelines/pipe-core",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Pipe Core",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/pipe-core::test-code",
+        "familyId": "family/System.IO.Pipelines/pipe-core",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Pipe Core",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/reader-writer::native-proof",
+        "familyId": "family/System.IO.Pipelines/reader-writer",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Pipe Reader Writer",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/reader-writer::managed-proof",
+        "familyId": "family/System.IO.Pipelines/reader-writer",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Pipe Reader Writer",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/reader-writer::hotupdate-proof",
+        "familyId": "family/System.IO.Pipelines/reader-writer",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Pipe Reader Writer",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/reader-writer::benchmark",
+        "familyId": "family/System.IO.Pipelines/reader-writer",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Pipe Reader Writer",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/reader-writer::test-code",
+        "familyId": "family/System.IO.Pipelines/reader-writer",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Pipe Reader Writer",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/read-flush-results::native-proof",
+        "familyId": "family/System.IO.Pipelines/read-flush-results",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Read And Flush Results",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/read-flush-results::managed-proof",
+        "familyId": "family/System.IO.Pipelines/read-flush-results",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Read And Flush Results",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/read-flush-results::hotupdate-proof",
+        "familyId": "family/System.IO.Pipelines/read-flush-results",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Read And Flush Results",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/read-flush-results::benchmark",
+        "familyId": "family/System.IO.Pipelines/read-flush-results",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Read And Flush Results",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/read-flush-results::test-code",
+        "familyId": "family/System.IO.Pipelines/read-flush-results",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Read And Flush Results",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/options-scheduler::native-proof",
+        "familyId": "family/System.IO.Pipelines/options-scheduler",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Options And Scheduler",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/options-scheduler::managed-proof",
+        "familyId": "family/System.IO.Pipelines/options-scheduler",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Options And Scheduler",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/options-scheduler::hotupdate-proof",
+        "familyId": "family/System.IO.Pipelines/options-scheduler",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Options And Scheduler",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/options-scheduler::benchmark",
+        "familyId": "family/System.IO.Pipelines/options-scheduler",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Options And Scheduler",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/options-scheduler::test-code",
+        "familyId": "family/System.IO.Pipelines/options-scheduler",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Options And Scheduler",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/stream-adapters::native-proof",
+        "familyId": "family/System.IO.Pipelines/stream-adapters",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Stream Adapters",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/stream-adapters::managed-proof",
+        "familyId": "family/System.IO.Pipelines/stream-adapters",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Stream Adapters",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/stream-adapters::hotupdate-proof",
+        "familyId": "family/System.IO.Pipelines/stream-adapters",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Stream Adapters",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/stream-adapters::benchmark",
+        "familyId": "family/System.IO.Pipelines/stream-adapters",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Stream Adapters",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Pipelines/stream-adapters::test-code",
+        "familyId": "family/System.IO.Pipelines/stream-adapters",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Stream Adapters",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      }
+    ]
+  },
+  "familyVerificationSnapshot": {
+    "schemaVersion": 1,
+    "assemblyName": "System.IO.Pipelines",
+    "ownerSubjectId": "SolutionCorePack",
+    "families": [
+      {
+        "familyId": "family/System.IO.Pipelines/pipe-core",
+        "displayName": "Pipe Core",
+        "description": "Pipe construction, reset, completion, pause/resume, and coordination behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.IO.Pipelines/reader-writer",
+        "displayName": "Pipe Reader Writer",
+        "description": "PipeReader and PipeWriter read, write, advance, cancel, and completion behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.IO.Pipelines/read-flush-results",
+        "displayName": "Read And Flush Results",
+        "description": "ReadResult and FlushResult state, cancellation, and completion behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.IO.Pipelines/options-scheduler",
+        "displayName": "Options And Scheduler",
+        "description": "PipeOptions, reader/writer stream options, PipeScheduler, and threshold behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.IO.Pipelines/stream-adapters",
+        "displayName": "Stream Adapters",
+        "description": "StreamPipeExtensions and stream-backed pipe reader/writer behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      }
+    ]
+  },
+  "truthContracts": {
+    "schemaVersion": 1,
+    "dllCapabilityManifest": {
+      "assemblyName": "System.IO.Pipelines",
+      "ownerSubjectId": "SolutionCorePack",
+      "capabilityFamilies": [
+        "family/System.IO.Pipelines/pipe-core",
+        "family/System.IO.Pipelines/reader-writer",
+        "family/System.IO.Pipelines/read-flush-results",
+        "family/System.IO.Pipelines/options-scheduler",
+        "family/System.IO.Pipelines/stream-adapters"
+      ],
+      "capabilityFamilyCount": 5,
+      "methodUniverseCount": 0
+    },
+    "capabilityFamilyVerificationContracts": [
+      {
+        "assemblyName": "System.IO.Pipelines",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Pipelines/pipe-core",
+        "displayName": "Pipe Core",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.IO.Pipelines",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Pipelines/reader-writer",
+        "displayName": "Pipe Reader Writer",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.IO.Pipelines",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Pipelines/read-flush-results",
+        "displayName": "Read And Flush Results",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.IO.Pipelines",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Pipelines/options-scheduler",
+        "displayName": "Options And Scheduler",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.IO.Pipelines",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Pipelines/stream-adapters",
+        "displayName": "Stream Adapters",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      }
+    ],
+    "methodCapabilityContracts": []
+  },
   "sourceLinks": {
     "subjectSource": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
     "generatedCode": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/",

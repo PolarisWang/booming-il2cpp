@@ -1,10 +1,22 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.Linker;
 
 public sealed partial class LinkerStage
 {
+    private sealed record ReachabilityContext(
+        SemanticWorldModel SemanticWorld,
+        IReadOnlyDictionary<string, ManagedMethodModel> MethodMap,
+        IReadOnlyDictionary<string, ManagedFieldModel> FieldMap,
+        IReadOnlyDictionary<string, ManagedPropertyModel> PropertyMap,
+        IReadOnlyDictionary<string, ManagedTypeModel> TypeMap,
+        IReadOnlyDictionary<string, IReadOnlyList<string>> MethodCapabilities,
+        HashSet<string> ReachableMethodIds,
+        HashSet<string> ReachableFieldIds,
+        HashSet<string> ReachablePropertyIds,
+        HashSet<string> ReachableTypeIds);
+
     private static ReachableClosure ComputeReachableClosure(SemanticWorldModel semanticWorld)
     {
         if (semanticWorld.FullAssemblyClosure &&
@@ -21,6 +33,8 @@ public sealed partial class LinkerStage
         var fieldMap = semanticWorld.Fields.ToDictionary(field => field.SubjectId, StringComparer.Ordinal);
         var propertyMap = semanticWorld.Properties.ToDictionary(property => property.SubjectId, StringComparer.Ordinal);
         var typeMap = semanticWorld.Types.ToDictionary(type => type.SubjectId, StringComparer.Ordinal);
+        var methodCapabilities = semanticWorld.CapabilityBundles.Methods
+            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
 
         ManagedMethodModel? entryPointMethod = null;
         if (!string.IsNullOrWhiteSpace(semanticWorld.EntryPointSubjectId) &&
@@ -30,250 +44,135 @@ public sealed partial class LinkerStage
                 $"linker entry point '{semanticWorld.EntryPointSubjectId}' is missing from semantic world");
         }
 
-        var reachableMethodIds = new HashSet<string>(StringComparer.Ordinal);
-        var reachableFieldIds = new HashSet<string>(StringComparer.Ordinal);
-        var reachablePropertyIds = new HashSet<string>(StringComparer.Ordinal);
-        var reachableTypeIds = new HashSet<string>(StringComparer.Ordinal);
+        var ctx = new ReachabilityContext(
+            semanticWorld, methodMap, fieldMap, propertyMap, typeMap, methodCapabilities,
+            [], [], [], []);
+
         var pendingMethods = new Queue<ManagedMethodModel>();
         if (entryPointMethod is not null)
         {
             pendingMethods.Enqueue(entryPointMethod);
         }
 
-        ExpandReachableMethods(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            pendingMethods,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
-        IncludeFullAssemblyClosure(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
-        IncludeThreadStaticFieldClosure(
-            semanticWorld,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachableTypeIds);
-        IncludeReflectionQuerySurface(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
-        IncludeAsyncStateMachineClosure(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
-        IncludeIteratorStateMachineClosure(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
-        IncludePreservedClosure(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
-        IncludePolymorphicDispatchImplementationClosure(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
-        IncludeGenericTypeDefinitions(reachableTypeIds, typeMap);
+        ExpandReachableMethods(ctx, pendingMethods);
+        IncludeFullAssemblyClosure(ctx);
+        IncludeThreadStaticFieldClosure(ctx);
+        IncludeReflectionQuerySurface(ctx);
+        IncludeAsyncStateMachineClosure(ctx);
+        IncludeIteratorStateMachineClosure(ctx);
+        IncludePreservedClosure(ctx);
+        IncludePolymorphicDispatchImplementationClosure(ctx);
+        IncludeGenericTypeDefinitions(ctx.ReachableTypeIds, typeMap);
 
         return new ReachableClosure(
-            semanticWorld.Types.Where(type => reachableTypeIds.Contains(type.SubjectId)).ToList(),
-            semanticWorld.Fields.Where(field => reachableFieldIds.Contains(field.SubjectId)).ToList(),
-            semanticWorld.Properties.Where(property => reachablePropertyIds.Contains(property.SubjectId)).ToList(),
-            semanticWorld.Methods.Where(method => reachableMethodIds.Contains(method.SubjectId)).ToList());
+            semanticWorld.Types.Where(type => ctx.ReachableTypeIds.Contains(type.SubjectId)).ToList(),
+            semanticWorld.Fields.Where(field => ctx.ReachableFieldIds.Contains(field.SubjectId)).ToList(),
+            semanticWorld.Properties.Where(property => ctx.ReachablePropertyIds.Contains(property.SubjectId)).ToList(),
+            semanticWorld.Methods.Where(method => ctx.ReachableMethodIds.Contains(method.SubjectId)).ToList());
     }
 
-    private static void IncludeFullAssemblyClosure(
-        SemanticWorldModel semanticWorld,
-        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
-        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
-        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
-        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
-        HashSet<string> reachableMethodIds,
-        HashSet<string> reachableFieldIds,
-        HashSet<string> reachablePropertyIds,
-        HashSet<string> reachableTypeIds)
+    private static void IncludeFullAssemblyClosure(ReachabilityContext ctx)
     {
-        if (!semanticWorld.FullAssemblyClosure)
+        if (!ctx.SemanticWorld.FullAssemblyClosure)
         {
             return;
         }
 
         var pendingMethods = new Queue<ManagedMethodModel>();
-        foreach (var type in semanticWorld.Types.Where(candidate =>
-                     string.Equals(candidate.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal)))
+        foreach (var type in ctx.SemanticWorld.Types.Where(candidate =>
+                     string.Equals(candidate.AssemblyName, ctx.SemanticWorld.Assembly.Name, StringComparison.Ordinal)))
         {
-            reachableTypeIds.Add(type.SubjectId);
+            ctx.ReachableTypeIds.Add(type.SubjectId);
         }
 
-        foreach (var field in semanticWorld.Fields.Where(candidate =>
-                     string.Equals(candidate.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal)))
+        foreach (var field in ctx.SemanticWorld.Fields.Where(candidate =>
+                     string.Equals(candidate.AssemblyName, ctx.SemanticWorld.Assembly.Name, StringComparison.Ordinal)))
         {
-            reachableFieldIds.Add(field.SubjectId);
-            reachableTypeIds.Add(field.DeclaringTypeSubjectId);
+            ctx.ReachableFieldIds.Add(field.SubjectId);
+            ctx.ReachableTypeIds.Add(field.DeclaringTypeSubjectId);
         }
 
-        foreach (var property in semanticWorld.Properties.Where(candidate =>
-                     string.Equals(candidate.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal)))
+        foreach (var property in ctx.SemanticWorld.Properties.Where(candidate =>
+                     string.Equals(candidate.AssemblyName, ctx.SemanticWorld.Assembly.Name, StringComparison.Ordinal)))
         {
-            reachablePropertyIds.Add(property.SubjectId);
-            reachableTypeIds.Add(property.DeclaringTypeSubjectId);
+            ctx.ReachablePropertyIds.Add(property.SubjectId);
+            ctx.ReachableTypeIds.Add(property.DeclaringTypeSubjectId);
         }
 
-        foreach (var method in semanticWorld.Methods.Where(candidate =>
-                     string.Equals(candidate.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal) &&
-                     !reachableMethodIds.Contains(candidate.SubjectId)))
+        foreach (var method in ctx.SemanticWorld.Methods.Where(candidate =>
+                     string.Equals(candidate.AssemblyName, ctx.SemanticWorld.Assembly.Name, StringComparison.Ordinal) &&
+                     !ctx.ReachableMethodIds.Contains(candidate.SubjectId)))
         {
             pendingMethods.Enqueue(method);
         }
 
-        ExpandReachableMethods(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            pendingMethods,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
+        ExpandReachableMethods(ctx, pendingMethods);
     }
 
-    private static void IncludePreservedClosure(
-        SemanticWorldModel semanticWorld,
-        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
-        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
-        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
-        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
-        HashSet<string> reachableMethodIds,
-        HashSet<string> reachableFieldIds,
-        HashSet<string> reachablePropertyIds,
-        HashSet<string> reachableTypeIds)
+    private static void IncludePreservedClosure(ReachabilityContext ctx)
     {
         var pendingMethods = new Queue<ManagedMethodModel>();
 
-        foreach (var type in semanticWorld.Types.Where(candidate => candidate.IsPreserved))
+        foreach (var type in ctx.SemanticWorld.Types.Where(candidate => candidate.IsPreserved))
         {
-            reachableTypeIds.Add(type.SubjectId);
+            ctx.ReachableTypeIds.Add(type.SubjectId);
 
-            foreach (var field in semanticWorld.Fields.Where(candidate =>
+            foreach (var field in ctx.SemanticWorld.Fields.Where(candidate =>
                          string.Equals(candidate.DeclaringTypeSubjectId, type.SubjectId, StringComparison.Ordinal)))
             {
-                reachableFieldIds.Add(field.SubjectId);
+                ctx.ReachableFieldIds.Add(field.SubjectId);
             }
 
-            foreach (var property in semanticWorld.Properties.Where(candidate =>
+            foreach (var property in ctx.SemanticWorld.Properties.Where(candidate =>
                          string.Equals(candidate.DeclaringTypeSubjectId, type.SubjectId, StringComparison.Ordinal)))
             {
-                reachablePropertyIds.Add(property.SubjectId);
+                ctx.ReachablePropertyIds.Add(property.SubjectId);
             }
 
-            foreach (var method in semanticWorld.Methods.Where(candidate =>
+            foreach (var method in ctx.SemanticWorld.Methods.Where(candidate =>
                          string.Equals(candidate.DeclaringTypeSubjectId, type.SubjectId, StringComparison.Ordinal) &&
-                         !reachableMethodIds.Contains(candidate.SubjectId)))
+                         !ctx.ReachableMethodIds.Contains(candidate.SubjectId)))
             {
                 pendingMethods.Enqueue(method);
             }
         }
 
-        foreach (var field in semanticWorld.Fields.Where(candidate => candidate.IsPreserved))
+        foreach (var field in ctx.SemanticWorld.Fields.Where(candidate => candidate.IsPreserved))
         {
-            reachableFieldIds.Add(field.SubjectId);
-            reachableTypeIds.Add(field.DeclaringTypeSubjectId);
+            ctx.ReachableFieldIds.Add(field.SubjectId);
+            ctx.ReachableTypeIds.Add(field.DeclaringTypeSubjectId);
         }
 
-        foreach (var property in semanticWorld.Properties.Where(candidate => candidate.IsPreserved))
+        foreach (var property in ctx.SemanticWorld.Properties.Where(candidate => candidate.IsPreserved))
         {
-            reachablePropertyIds.Add(property.SubjectId);
-            reachableTypeIds.Add(property.DeclaringTypeSubjectId);
+            ctx.ReachablePropertyIds.Add(property.SubjectId);
+            ctx.ReachableTypeIds.Add(property.DeclaringTypeSubjectId);
         }
 
-        foreach (var method in semanticWorld.Methods.Where(candidate => candidate.IsPreserved))
+        foreach (var method in ctx.SemanticWorld.Methods.Where(candidate => candidate.IsPreserved))
         {
-            reachableTypeIds.Add(method.DeclaringTypeSubjectId);
-            if (!reachableMethodIds.Contains(method.SubjectId))
+            ctx.ReachableTypeIds.Add(method.DeclaringTypeSubjectId);
+            if (!ctx.ReachableMethodIds.Contains(method.SubjectId))
             {
                 pendingMethods.Enqueue(method);
             }
         }
 
-        ExpandReachableMethods(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            pendingMethods,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
+        ExpandReachableMethods(ctx, pendingMethods);
     }
 
-    private static void IncludePolymorphicDispatchImplementationClosure(
-        SemanticWorldModel semanticWorld,
-        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
-        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
-        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
-        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
-        HashSet<string> reachableMethodIds,
-        HashSet<string> reachableFieldIds,
-        HashSet<string> reachablePropertyIds,
-        HashSet<string> reachableTypeIds)
+    private static void IncludePolymorphicDispatchImplementationClosure(ReachabilityContext ctx)
     {
-        var methodsByDeclaringType = semanticWorld.Methods
+        var methodsByDeclaringType = ctx.SemanticWorld.Methods
             .GroupBy(method => method.DeclaringTypeSubjectId, StringComparer.Ordinal)
             .ToDictionary(group => group.Key, group => group.ToArray(), StringComparer.Ordinal);
 
         while (true)
         {
             var pendingMethods = new Queue<ManagedMethodModel>();
-            var reachableTypeSnapshot = reachableTypeIds.ToArray();
-            var reachableMethodSnapshot = semanticWorld.Methods
-                .Where(method => reachableMethodIds.Contains(method.SubjectId))
+            var reachableTypeSnapshot = ctx.ReachableTypeIds.ToArray();
+            var reachableMethodSnapshot = ctx.SemanticWorld.Methods
+                .Where(method => ctx.ReachableMethodIds.Contains(method.SubjectId))
                 .ToArray();
 
             foreach (var method in reachableMethodSnapshot)
@@ -281,8 +180,8 @@ public sealed partial class LinkerStage
                 foreach (var instruction in method.Body.Blocks.SelectMany(block => block.Instructions))
                 {
                     if (!TryResolvePolymorphicDispatchSlot(
-                            methodMap,
-                            typeMap,
+                            ctx.MethodMap,
+                            ctx.TypeMap,
                             instruction,
                             out var slotMethod,
                             out var slotType,
@@ -295,27 +194,27 @@ public sealed partial class LinkerStage
 
                     foreach (var candidateTypeSubjectId in reachableTypeSnapshot)
                     {
-                        if (!typeMap.TryGetValue(candidateTypeSubjectId, out var candidateType) ||
+                        if (!ctx.TypeMap.TryGetValue(candidateTypeSubjectId, out var candidateType) ||
                             candidateType.IsInterface ||
                             !IsCompatiblePolymorphicDispatchTargetType(
                                 candidateType,
                                 slotType,
                                 slotTypeSubjectId!,
                                 interfaceDispatch,
-                                typeMap))
+                                ctx.TypeMap))
                         {
                             continue;
                         }
 
                         var implementationMethod = ResolvePolymorphicDispatchImplementationMethod(
                             methodsByDeclaringType,
-                            typeMap,
+                            ctx.TypeMap,
                             candidateType,
                             slotMethod,
                             slotSignatureSuffix!,
                             interfaceDispatch);
                         if (implementationMethod is null ||
-                            reachableMethodIds.Contains(implementationMethod.SubjectId))
+                            ctx.ReachableMethodIds.Contains(implementationMethod.SubjectId))
                         {
                             continue;
                         }
@@ -330,17 +229,7 @@ public sealed partial class LinkerStage
                 return;
             }
 
-            ExpandReachableMethods(
-                semanticWorld,
-                methodMap,
-                fieldMap,
-                propertyMap,
-                typeMap,
-                pendingMethods,
-                reachableMethodIds,
-                reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
+            ExpandReachableMethods(ctx, pendingMethods);
         }
     }
 
@@ -505,26 +394,18 @@ public sealed partial class LinkerStage
     }
 
     private static void ExpandReachableMethods(
-        SemanticWorldModel semanticWorld,
-        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
-        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
-        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
-        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
-        Queue<ManagedMethodModel> pendingMethods,
-        HashSet<string> reachableMethodIds,
-        HashSet<string> reachableFieldIds,
-        HashSet<string> reachablePropertyIds,
-        HashSet<string> reachableTypeIds)
+        ReachabilityContext ctx,
+        Queue<ManagedMethodModel> pendingMethods)
     {
         while (pendingMethods.Count > 0)
         {
             var method = pendingMethods.Dequeue();
-            if (!reachableMethodIds.Add(method.SubjectId))
+            if (!ctx.ReachableMethodIds.Add(method.SubjectId))
             {
                 continue;
             }
 
-            reachableTypeIds.Add(method.DeclaringTypeSubjectId);
+            ctx.ReachableTypeIds.Add(method.DeclaringTypeSubjectId);
 
             foreach (var block in method.Body.Blocks)
             {
@@ -532,51 +413,51 @@ public sealed partial class LinkerStage
                 {
                     var instruction = block.Instructions[instructionIndex];
                     if (!string.IsNullOrWhiteSpace(instruction.Callee) &&
-                        TryResolveMethod(methodMap, instruction.Callee, out var directCalleeMethod) &&
-                        IsInternalAssembly(semanticWorld, directCalleeMethod.AssemblyName))
+                        TryResolveMethod(ctx.MethodMap, instruction.Callee, out var directCalleeMethod) &&
+                        IsInternalAssembly(ctx.SemanticWorld, directCalleeMethod.AssemblyName))
                     {
                         pendingMethods.Enqueue(directCalleeMethod);
-                        reachableTypeIds.Add(directCalleeMethod.DeclaringTypeSubjectId);
+                        ctx.ReachableTypeIds.Add(directCalleeMethod.DeclaringTypeSubjectId);
                     }
 
                     if (string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal) &&
                         !string.IsNullOrWhiteSpace(instruction.Callee))
                     {
                         var resolvedTargetSubjectId = TryResolveDevirtualizedCallTarget(
-                            methodMap,
+                            ctx.MethodMap,
                             block.Instructions,
                             instructionIndex,
                             instruction.Callee!);
                         if (!string.IsNullOrWhiteSpace(resolvedTargetSubjectId) &&
-                            methodMap.TryGetValue(resolvedTargetSubjectId, out var resolvedMethod))
+                            ctx.MethodMap.TryGetValue(resolvedTargetSubjectId, out var resolvedMethod))
                         {
                             pendingMethods.Enqueue(resolvedMethod);
-                            reachableTypeIds.Add(resolvedMethod.DeclaringTypeSubjectId);
+                            ctx.ReachableTypeIds.Add(resolvedMethod.DeclaringTypeSubjectId);
                         }
                     }
 
                     var reference = instruction.Reference;
                     if (reference is null ||
-                        !IsInternalAssembly(semanticWorld, reference.AssemblyName))
+                        !IsInternalAssembly(ctx.SemanticWorld, reference.AssemblyName))
                     {
                         continue;
                     }
 
                     switch (reference.SubjectKind)
                     {
-                        case "method" when TryResolveMethod(methodMap, reference.SubjectId, out var referencedMethod):
+                        case "method" when TryResolveMethod(ctx.MethodMap, reference.SubjectId, out var referencedMethod):
                             pendingMethods.Enqueue(referencedMethod);
                             break;
-                        case "field" when fieldMap.TryGetValue(reference.SubjectId, out var referencedField):
-                            reachableFieldIds.Add(referencedField.SubjectId);
-                            reachableTypeIds.Add(referencedField.DeclaringTypeSubjectId);
+                        case "field" when ctx.FieldMap.TryGetValue(reference.SubjectId, out var referencedField):
+                            ctx.ReachableFieldIds.Add(referencedField.SubjectId);
+                            ctx.ReachableTypeIds.Add(referencedField.DeclaringTypeSubjectId);
                             break;
-                        case "property" when propertyMap.TryGetValue(reference.SubjectId, out var referencedProperty):
-                            reachablePropertyIds.Add(referencedProperty.SubjectId);
-                            reachableTypeIds.Add(referencedProperty.DeclaringTypeSubjectId);
+                        case "property" when ctx.PropertyMap.TryGetValue(reference.SubjectId, out var referencedProperty):
+                            ctx.ReachablePropertyIds.Add(referencedProperty.SubjectId);
+                            ctx.ReachableTypeIds.Add(referencedProperty.DeclaringTypeSubjectId);
                             break;
-                        case "type" when typeMap.ContainsKey(reference.SubjectId):
-                            reachableTypeIds.Add(reference.SubjectId);
+                        case "type" when ctx.TypeMap.ContainsKey(reference.SubjectId):
+                            ctx.ReachableTypeIds.Add(reference.SubjectId);
                             break;
                     }
                 }
@@ -607,44 +488,27 @@ public sealed partial class LinkerStage
         }
     }
 
-    private static void IncludeThreadStaticFieldClosure(
-        SemanticWorldModel semanticWorld,
-        IReadOnlySet<string> reachableMethodIds,
-        HashSet<string> reachableFieldIds,
-        HashSet<string> reachableTypeIds)
+    private static void IncludeThreadStaticFieldClosure(ReachabilityContext ctx)
     {
-        var methodCapabilities = semanticWorld.CapabilityBundles.Methods
-            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
-        var requiresThreadStaticClosure = reachableMethodIds.Any(subjectId =>
-            methodCapabilities.TryGetValue(subjectId, out var capabilities) &&
+        var requiresThreadStaticClosure = ctx.ReachableMethodIds.Any(subjectId =>
+            ctx.MethodCapabilities.TryGetValue(subjectId, out var capabilities) &&
             capabilities.Contains("requires-thread-static-storage", StringComparer.Ordinal));
         if (!requiresThreadStaticClosure)
         {
             return;
         }
 
-        foreach (var field in semanticWorld.Fields.Where(candidate => candidate.IsThreadStatic))
+        foreach (var field in ctx.SemanticWorld.Fields.Where(candidate => candidate.IsThreadStatic))
         {
-            reachableFieldIds.Add(field.SubjectId);
-            reachableTypeIds.Add(field.DeclaringTypeSubjectId);
+            ctx.ReachableFieldIds.Add(field.SubjectId);
+            ctx.ReachableTypeIds.Add(field.DeclaringTypeSubjectId);
         }
     }
 
-    private static void IncludeAsyncStateMachineClosure(
-        SemanticWorldModel semanticWorld,
-        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
-        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
-        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
-        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
-        HashSet<string> reachableMethodIds,
-        HashSet<string> reachableFieldIds,
-        HashSet<string> reachablePropertyIds,
-        HashSet<string> reachableTypeIds)
+    private static void IncludeAsyncStateMachineClosure(ReachabilityContext ctx)
     {
-        var methodCapabilities = semanticWorld.CapabilityBundles.Methods
-            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
-        var requiresAsyncClosure = reachableMethodIds.Any(subjectId =>
-            methodCapabilities.TryGetValue(subjectId, out var capabilities) &&
+        var requiresAsyncClosure = ctx.ReachableMethodIds.Any(subjectId =>
+            ctx.MethodCapabilities.TryGetValue(subjectId, out var capabilities) &&
             (capabilities.Contains("requires-async-state-machine", StringComparer.Ordinal) ||
              capabilities.Contains("requires-task-awaiter", StringComparer.Ordinal)));
         if (!requiresAsyncClosure)
@@ -652,7 +516,7 @@ public sealed partial class LinkerStage
             return;
         }
 
-        var asyncTypeIds = semanticWorld.Types
+        var asyncTypeIds = ctx.SemanticWorld.Types
             .Where(IsCompilerGeneratedAsyncStateMachine)
             .Select(type => type.SubjectId)
             .ToHashSet(StringComparer.Ordinal);
@@ -663,63 +527,42 @@ public sealed partial class LinkerStage
 
         foreach (var asyncTypeId in asyncTypeIds)
         {
-            reachableTypeIds.Add(asyncTypeId);
+            ctx.ReachableTypeIds.Add(asyncTypeId);
         }
 
-        foreach (var field in semanticWorld.Fields.Where(candidate => asyncTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        foreach (var field in ctx.SemanticWorld.Fields.Where(candidate => asyncTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
         {
-            reachableFieldIds.Add(field.SubjectId);
+            ctx.ReachableFieldIds.Add(field.SubjectId);
         }
 
-        foreach (var property in semanticWorld.Properties.Where(candidate => asyncTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        foreach (var property in ctx.SemanticWorld.Properties.Where(candidate => asyncTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
         {
-            reachablePropertyIds.Add(property.SubjectId);
+            ctx.ReachablePropertyIds.Add(property.SubjectId);
         }
 
         var pendingMethods = new Queue<ManagedMethodModel>();
-        foreach (var method in semanticWorld.Methods.Where(candidate => asyncTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        foreach (var method in ctx.SemanticWorld.Methods.Where(candidate => asyncTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
         {
-            if (!reachableMethodIds.Contains(method.SubjectId))
+            if (!ctx.ReachableMethodIds.Contains(method.SubjectId))
             {
                 pendingMethods.Enqueue(method);
             }
         }
 
-        ExpandReachableMethods(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            pendingMethods,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
+        ExpandReachableMethods(ctx, pendingMethods);
     }
 
-    private static void IncludeIteratorStateMachineClosure(
-        SemanticWorldModel semanticWorld,
-        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
-        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
-        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
-        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
-        HashSet<string> reachableMethodIds,
-        HashSet<string> reachableFieldIds,
-        HashSet<string> reachablePropertyIds,
-        HashSet<string> reachableTypeIds)
+    private static void IncludeIteratorStateMachineClosure(ReachabilityContext ctx)
     {
-        var methodCapabilities = semanticWorld.CapabilityBundles.Methods
-            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
-        var requiresIteratorClosure = reachableMethodIds.Any(subjectId =>
-            methodCapabilities.TryGetValue(subjectId, out var capabilities) &&
+        var requiresIteratorClosure = ctx.ReachableMethodIds.Any(subjectId =>
+            ctx.MethodCapabilities.TryGetValue(subjectId, out var capabilities) &&
             capabilities.Contains("requires-string-join-enumerable", StringComparer.Ordinal));
         if (!requiresIteratorClosure)
         {
             return;
         }
 
-        var iteratorTypeIds = semanticWorld.Types
+        var iteratorTypeIds = ctx.SemanticWorld.Types
             .Where(IsCompilerGeneratedIteratorStateMachine)
             .Select(type => type.SubjectId)
             .ToHashSet(StringComparer.Ordinal);
@@ -730,56 +573,35 @@ public sealed partial class LinkerStage
 
         foreach (var iteratorTypeId in iteratorTypeIds)
         {
-            reachableTypeIds.Add(iteratorTypeId);
+            ctx.ReachableTypeIds.Add(iteratorTypeId);
         }
 
-        foreach (var field in semanticWorld.Fields.Where(candidate => iteratorTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        foreach (var field in ctx.SemanticWorld.Fields.Where(candidate => iteratorTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
         {
-            reachableFieldIds.Add(field.SubjectId);
+            ctx.ReachableFieldIds.Add(field.SubjectId);
         }
 
-        foreach (var property in semanticWorld.Properties.Where(candidate => iteratorTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        foreach (var property in ctx.SemanticWorld.Properties.Where(candidate => iteratorTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
         {
-            reachablePropertyIds.Add(property.SubjectId);
+            ctx.ReachablePropertyIds.Add(property.SubjectId);
         }
 
         var pendingMethods = new Queue<ManagedMethodModel>();
-        foreach (var method in semanticWorld.Methods.Where(candidate => iteratorTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        foreach (var method in ctx.SemanticWorld.Methods.Where(candidate => iteratorTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
         {
-            if (!reachableMethodIds.Contains(method.SubjectId))
+            if (!ctx.ReachableMethodIds.Contains(method.SubjectId))
             {
                 pendingMethods.Enqueue(method);
             }
         }
 
-        ExpandReachableMethods(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            pendingMethods,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
+        ExpandReachableMethods(ctx, pendingMethods);
     }
 
-    private static void IncludeReflectionQuerySurface(
-        SemanticWorldModel semanticWorld,
-        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
-        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
-        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
-        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
-        HashSet<string> reachableMethodIds,
-        HashSet<string> reachableFieldIds,
-        HashSet<string> reachablePropertyIds,
-        HashSet<string> reachableTypeIds)
+    private static void IncludeReflectionQuerySurface(ReachabilityContext ctx)
     {
-        var methodCapabilities = semanticWorld.CapabilityBundles.Methods
-            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
-        var requiresReflectionQuerySurface = reachableMethodIds.Any(subjectId =>
-            methodCapabilities.TryGetValue(subjectId, out var capabilities) &&
+        var requiresReflectionQuerySurface = ctx.ReachableMethodIds.Any(subjectId =>
+            ctx.MethodCapabilities.TryGetValue(subjectId, out var capabilities) &&
             (capabilities.Contains("requires-closed-type-member-query", StringComparer.Ordinal) ||
              capabilities.Contains("requires-generic-type-definition-query", StringComparer.Ordinal)));
         if (!requiresReflectionQuerySurface)
@@ -787,7 +609,7 @@ public sealed partial class LinkerStage
             return;
         }
 
-        var targetTypeIds = CollectReflectionQueryTargetTypeIds(semanticWorld, reachableMethodIds, typeMap);
+        var targetTypeIds = CollectReflectionQueryTargetTypeIds(ctx);
         if (targetTypeIds.Count == 0)
         {
             return;
@@ -795,51 +617,38 @@ public sealed partial class LinkerStage
 
         foreach (var targetTypeId in targetTypeIds)
         {
-            reachableTypeIds.Add(targetTypeId);
+            ctx.ReachableTypeIds.Add(targetTypeId);
         }
 
-        foreach (var field in semanticWorld.Fields.Where(candidate => targetTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        foreach (var field in ctx.SemanticWorld.Fields.Where(candidate => targetTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
         {
-            reachableFieldIds.Add(field.SubjectId);
+            ctx.ReachableFieldIds.Add(field.SubjectId);
         }
 
-        foreach (var property in semanticWorld.Properties.Where(candidate => targetTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        foreach (var property in ctx.SemanticWorld.Properties.Where(candidate => targetTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
         {
-            reachablePropertyIds.Add(property.SubjectId);
+            ctx.ReachablePropertyIds.Add(property.SubjectId);
         }
 
         var pendingMethods = new Queue<ManagedMethodModel>();
-        foreach (var method in semanticWorld.Methods.Where(candidate => targetTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        foreach (var method in ctx.SemanticWorld.Methods.Where(candidate => targetTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
         {
-            if (!reachableMethodIds.Contains(method.SubjectId))
+            if (!ctx.ReachableMethodIds.Contains(method.SubjectId))
             {
                 pendingMethods.Enqueue(method);
             }
         }
 
-        ExpandReachableMethods(
-            semanticWorld,
-            methodMap,
-            fieldMap,
-            propertyMap,
-            typeMap,
-            pendingMethods,
-            reachableMethodIds,
-            reachableFieldIds,
-            reachablePropertyIds,
-            reachableTypeIds);
+        ExpandReachableMethods(ctx, pendingMethods);
     }
 
-    private static HashSet<string> CollectReflectionQueryTargetTypeIds(
-        SemanticWorldModel semanticWorld,
-        IReadOnlySet<string> reachableMethodIds,
-        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    private static HashSet<string> CollectReflectionQueryTargetTypeIds(ReachabilityContext ctx)
     {
         var targetTypeIds = new HashSet<string>(StringComparer.Ordinal);
 
-        foreach (var method in semanticWorld.Methods)
+        foreach (var method in ctx.SemanticWorld.Methods)
         {
-            if (!reachableMethodIds.Contains(method.SubjectId))
+            if (!ctx.ReachableMethodIds.Contains(method.SubjectId))
             {
                 continue;
             }
@@ -849,9 +658,9 @@ public sealed partial class LinkerStage
                 var reference = instruction.Reference;
                 if (!string.Equals(instruction.Op, "ldtoken", StringComparison.Ordinal) ||
                     reference is null ||
-                    !IsInternalAssembly(semanticWorld, reference.AssemblyName) ||
+                    !IsInternalAssembly(ctx.SemanticWorld, reference.AssemblyName) ||
                     !string.Equals(reference.SubjectKind, "type", StringComparison.Ordinal) ||
-                    !typeMap.ContainsKey(reference.SubjectId))
+                    !ctx.TypeMap.ContainsKey(reference.SubjectId))
                 {
                     continue;
                 }

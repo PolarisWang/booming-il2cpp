@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/globalization/culture",
+  "methods": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()",
+      "functionalRequired": true,
+      "benchmarkRequired": false,
+      "hotupdateFunctionalRequired": false,
+      "hotupdateBenchmarkRequired": false,
+      "routeCodes": [
+        "managed",
+        "native"
+      ],
+      "benchmarkProfiles": [],
+      "hotupdateProfiles": [],
+      "reviewRequired": true
+    }
+  ]
+}

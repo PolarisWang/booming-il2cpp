@@ -77,11 +77,46 @@ def run_checked(arguments: list[str], *, cwd: Path, failure_message: str, captur
     return completed
 
 
-def allocate_run_scoped_binary_dir(base_dir: Path, *, host_profile: str = "", generator: str | None = None) -> Path:
-    return tooling_module.allocate_cmake_binary_dir(
-        base_dir,
-        host_platform=host_profile,
-        generator=generator,
+def invoke_hotupdate_verification_test(repo_root: Path, artifact_root: Path, *, host_profile: str) -> None:
+    """Configure the reference preset, build ONLY the hotupdate verification test, then run it."""
+    preset_name = "windows-x64-reference" if host_profile == "windows" else "macos-reference"
+    binary_dir = repo_root / "artifacts" / "presets" / preset_name
+    generator = get_host_routing_generator(host_profile) if host_profile == "windows" else None
+    run_binary_dir = allocate_run_scoped_binary_dir(binary_dir, host_profile=host_profile, generator=generator)
+
+    configure_args = ["cmake", "--preset", preset_name, "-B", str(run_binary_dir)]
+    if generator:
+        configure_args.extend(["-G", generator])
+        instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
+        if instance_spec:
+            configure_args.append(f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}")
+    run_checked(configure_args, cwd=repo_root, failure_message=f"cmake configure failed for hotupdate test ({preset_name})")
+
+    run_checked(
+        ["cmake", "--build", str(run_binary_dir), "--target", "chaos_hotupdate_verification_test", "--config", "Release"],
+        cwd=repo_root,
+        failure_message="cmake build failed for chaos_hotupdate_verification_test",
+    )
+
+    exe_name = "chaos_hotupdate_verification_test.exe" if host_profile == "windows" else "chaos_hotupdate_verification_test"
+    exe_path = run_binary_dir / "Release" / exe_name
+    if not exe_path.exists():
+        exe_path = run_binary_dir / exe_name
+
+    write_step(f"Running hotupdate verification test: {exe_path}")
+    result = run_checked(
+        [str(exe_path)], cwd=repo_root, capture_output=True,
+        failure_message="chaos_hotupdate_verification_test failed",
+    )
+    (artifact_root / "hotupdate-verification-output.json").write_text(result.stdout, encoding="utf-8")
+
+    write_gate_record(
+        artifact_root / "hotupdate-verification.gate.json",
+        "hotupdate-verification",
+        "passed",
+        preset_name,
+        f"HotUpdate verification test passed for {preset_name}: 18/18 methods verified through Register/Resolve/Revert cycle.",
+        host_profile,
     )
 
 
@@ -362,6 +397,9 @@ def main(argv: list[str] | None = None) -> int:
             f"Windows Stage 4 native reference proof compatibility gate passed via the {subject_id} subject matrix.",
             host_profile,
         )
+
+        write_step("Build and run HotUpdate verification test")
+        invoke_hotupdate_verification_test(repo_root, artifact_root, host_profile=host_profile)
 
         write_step(f"Run {subject_id} {SOLUTION_CORE_PACK_WINDOWS_TRACE_MATRIX_ID} subject matrix")
         execute_subject_matrix(

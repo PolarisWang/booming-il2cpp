@@ -77,7 +77,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "    {",
                 "        chaos_equals = true;",
                 "    }",
-                "    else if (chaos_arg_0 != static_cast<std::intptr_t>(0) && chaos_arg_1 != static_cast<std::intptr_t>(0))",
+                "    else if (chaos_arg_0 != static_cast<CHAOS_IL2CPP_INTPTR>(0) && chaos_arg_1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))",
                 "    {",
                 $"        auto* chaos_left_string = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_0);",
                 $"        auto* chaos_right_string = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_1);",
@@ -89,7 +89,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "            }",
                 "            else",
                 "            {",
-                "                chaos_equals = std::strcmp(chaos_left_string->utf8_data, chaos_right_string->utf8_data) == 0;",
+                "                chaos_equals = CHAOS_IL2CPP_STRCMP(chaos_left_string->utf8_data, chaos_right_string->utf8_data) == 0;",
                 "            }",
                 "        }",
                 "    }",
@@ -119,7 +119,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         return
         [
-            $"{failureStateFieldSymbol} = static_cast<std::intptr_t>(1);",
+            $"{failureStateFieldSymbol} = static_cast<CHAOS_IL2CPP_INTPTR>(1);",
         ];
     }
 
@@ -148,7 +148,7 @@ public sealed partial class NativeAotLoweringPlanner
         out EqualityAssertionRuntimeHelperSpec assertionSpec)
     {
         assertionSpec = default;
-        if (string.IsNullOrWhiteSpace(subjectId))
+        if (string.IsNullOrEmpty(subjectId))
         {
             return false;
         }
@@ -188,7 +188,7 @@ public sealed partial class NativeAotLoweringPlanner
         out string failureStateFieldSubjectId)
     {
         failureStateFieldSubjectId = string.Empty;
-        if (string.IsNullOrWhiteSpace(assemblyName))
+        if (string.IsNullOrEmpty(assemblyName))
         {
             return false;
         }

@@ -28,9 +28,9 @@ bool MatchesExpectedOrder(const CallbackTrace& trace) {
         && trace.phases[0] != nullptr
         && trace.phases[1] != nullptr
         && trace.phases[2] != nullptr
-        && std::strcmp(trace.phases[0], "init") == 0
-        && std::strcmp(trace.phases[1], "tick") == 0
-        && std::strcmp(trace.phases[2], "shutdown") == 0
+        && CHAOS_IL2CPP_STRCMP(trace.phases[0], "init") == 0
+        && CHAOS_IL2CPP_STRCMP(trace.phases[1], "tick") == 0
+        && CHAOS_IL2CPP_STRCMP(trace.phases[2], "shutdown") == 0
         && trace.on_main_thread;
 }
 

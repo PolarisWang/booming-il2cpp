@@ -62,7 +62,7 @@ internal static class RuntimeSkeletonKernelCore
             RuntimeSkeletonKernelOperationKind.CharacterClassification,
             RuntimeSkeletonKernelBackendKind.Intrinsic,
             "System.Char",
-            "std::uint16_t",
+            "CHAOS_IL2CPP_UINT16",
             "Char"),
         new(
             "floating-classification",
@@ -70,7 +70,7 @@ internal static class RuntimeSkeletonKernelCore
             RuntimeSkeletonKernelOperationKind.FloatingClassification,
             RuntimeSkeletonKernelBackendKind.Intrinsic,
             "System.Half",
-            "std::uint16_t",
+            "CHAOS_IL2CPP_UINT16",
             "Half"),
         new(
             "floating-classification",
@@ -118,7 +118,7 @@ internal static class RuntimeSkeletonKernelCore
             RuntimeSkeletonKernelOperationKind.BitArithmetic,
             RuntimeSkeletonKernelBackendKind.Intrinsic,
             "System.IntPtr",
-            "std::intptr_t",
+            "CHAOS_IL2CPP_INTPTR",
             "IntPtr"),
         new(
             "bit-arithmetic",
@@ -126,7 +126,7 @@ internal static class RuntimeSkeletonKernelCore
             RuntimeSkeletonKernelOperationKind.BitArithmetic,
             RuntimeSkeletonKernelBackendKind.Intrinsic,
             "System.UIntPtr",
-            "std::uintptr_t",
+            "CHAOS_IL2CPP_UINTPTR",
             "UIntPtr"),
         new(
             "tick-arithmetic",
@@ -134,7 +134,7 @@ internal static class RuntimeSkeletonKernelCore
             RuntimeSkeletonKernelOperationKind.TickArithmetic,
             RuntimeSkeletonKernelBackendKind.Generic,
             "System.DateTime",
-            "std::uint64_t",
+            "CHAOS_IL2CPP_UINT64",
             "DateTime"),
         new(
             "tick-arithmetic",
@@ -142,7 +142,7 @@ internal static class RuntimeSkeletonKernelCore
             RuntimeSkeletonKernelOperationKind.TickArithmetic,
             RuntimeSkeletonKernelBackendKind.Generic,
             "System.TimeSpan",
-            "std::int64_t",
+            "CHAOS_IL2CPP_INT64",
             "TimeSpan"),
         new(
             "tick-arithmetic",
@@ -150,7 +150,7 @@ internal static class RuntimeSkeletonKernelCore
             RuntimeSkeletonKernelOperationKind.TickArithmetic,
             RuntimeSkeletonKernelBackendKind.Generic,
             "System.DateOnly",
-            "std::int32_t",
+            "CHAOS_IL2CPP_INT32",
             "DateOnly"),
         new(
             "tick-arithmetic",
@@ -158,7 +158,7 @@ internal static class RuntimeSkeletonKernelCore
             RuntimeSkeletonKernelOperationKind.TickArithmetic,
             RuntimeSkeletonKernelBackendKind.Generic,
             "System.TimeOnly",
-            "std::int64_t",
+            "CHAOS_IL2CPP_INT64",
             "TimeOnly"),
         new(
             "wide-decimal-arithmetic",
@@ -245,7 +245,7 @@ internal static class RuntimeSkeletonKernelCore
             "CompareTo:System.Int32(System.Char)" => TryCreateInstanceUnaryPlan(
                 descriptor,
                 backend,
-                "std::int32_t",
+                "CHAOS_IL2CPP_INT32",
                 $"{GetHelperNamespace()}::CharCompare(request->this_arg, request->arg0)",
                 out plan),
             "Equals:System.Boolean(System.Char)" => TryCreateInstanceUnaryPlan(
@@ -374,7 +374,7 @@ internal static class RuntimeSkeletonKernelCore
             return TryCreateInstanceUnaryPlan(
                 descriptor,
                 backend,
-                "std::int32_t",
+                "CHAOS_IL2CPP_INT32",
                 $"{GetHelperNamespace()}::{descriptor.HelperPrefix}Compare(request->this_arg, request->arg0)",
                 out plan);
         }
@@ -493,7 +493,7 @@ internal static class RuntimeSkeletonKernelCore
             return TryCreateWideBinaryInstancePlan(
                 descriptor,
                 backend,
-                "std::int32_t",
+                "CHAOS_IL2CPP_INT32",
                 $"{GetHelperNamespace()}::{descriptor.HelperPrefix}Compare(&request->this_arg, &request->arg0)",
                 out plan);
         }
@@ -570,7 +570,7 @@ internal static class RuntimeSkeletonKernelCore
             return TryCreateInstanceUnaryPlan(
                 descriptor,
                 backend,
-                "std::int32_t",
+                "CHAOS_IL2CPP_INT32",
                 $"{GetHelperNamespace()}::{descriptor.HelperPrefix}Compare(request->this_arg, request->arg0)",
                 out plan);
         }
@@ -658,13 +658,13 @@ internal static class RuntimeSkeletonKernelCore
             "Compare:System.Int32(System.DateTime,System.DateTime)" => TryCreatePointerBackedStaticBinaryPlan(
                 descriptor,
                 backend,
-                "std::int32_t",
+                "CHAOS_IL2CPP_INT32",
                 $"{GetHelperNamespace()}::DateTimeCompareTicks(&request->arg0, &request->arg1)",
                 out plan),
             "CompareTo:System.Int32(System.DateTime)" => TryCreatePointerBackedInstanceUnaryPlan(
                 descriptor,
                 backend,
-                "std::int32_t",
+                "CHAOS_IL2CPP_INT32",
                 $"{GetHelperNamespace()}::DateTimeCompareTicks(&request->this_arg, &request->arg0)",
                 out plan),
             "Equals:System.Boolean(System.DateTime)" => TryCreatePointerBackedInstanceUnaryPlan(
@@ -731,13 +731,13 @@ internal static class RuntimeSkeletonKernelCore
             "Compare:System.Int32(System.TimeSpan,System.TimeSpan)" => TryCreatePointerBackedStaticBinaryPlan(
                 descriptor,
                 backend,
-                "std::int32_t",
+                "CHAOS_IL2CPP_INT32",
                 $"{GetHelperNamespace()}::TimeSpanCompareTicks(&request->arg0, &request->arg1)",
                 out plan),
             "CompareTo:System.Int32(System.TimeSpan)" => TryCreatePointerBackedInstanceUnaryPlan(
                 descriptor,
                 backend,
-                "std::int32_t",
+                "CHAOS_IL2CPP_INT32",
                 $"{GetHelperNamespace()}::TimeSpanCompareTicks(&request->this_arg, &request->arg0)",
                 out plan),
             "Equals:System.Boolean(System.TimeSpan)" => TryCreatePointerBackedInstanceUnaryPlan(
@@ -804,7 +804,7 @@ internal static class RuntimeSkeletonKernelCore
             "CompareTo:System.Int32(System.DateOnly)" => TryCreateInstanceUnaryPlan(
                 descriptor,
                 backend,
-                "std::int32_t",
+                "CHAOS_IL2CPP_INT32",
                 $"{GetHelperNamespace()}::DateOnlyCompareDayNumber(request->this_arg, request->arg0)",
                 out plan),
             "Equals:System.Boolean(System.DateOnly)" => TryCreateInstanceUnaryPlan(
@@ -865,7 +865,7 @@ internal static class RuntimeSkeletonKernelCore
             "CompareTo:System.Int32(System.TimeOnly)" => TryCreateInstanceUnaryPlan(
                 descriptor,
                 backend,
-                "std::int32_t",
+                "CHAOS_IL2CPP_INT32",
                 $"{GetHelperNamespace()}::TimeOnlyCompareTicksValue(request->this_arg, request->arg0)",
                 out plan),
             "Equals:System.Boolean(System.TimeOnly)" => TryCreateInstanceUnaryPlan(

@@ -451,6 +451,17 @@
       "role": "codegen",
       "required": false,
       "exists": true
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "projectCode": "completion-certification",
+      "displayName": "completion-report.json",
+      "path": "artifacts/foundation-dll/System.Private.CoreLib/completion-report.json",
+      "artifactKind": "report-json",
+      "linkTargetType": "file",
+      "role": "completion",
+      "required": false,
+      "exists": true
     }
   ]
 }

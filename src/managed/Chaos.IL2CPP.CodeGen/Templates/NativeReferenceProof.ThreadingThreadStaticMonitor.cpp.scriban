@@ -13,7 +13,7 @@ namespace {
 
 constexpr const char* kThreadStaticSlotKey = "ThreadingProof.thread-slot";
 constexpr const char* kExpectedOutput = {{ expected_output_literal }};
-std::atomic<int32_t> g_finalized_count = 0;
+CHAOS_IL2CPP_ATOMIC(int32_t) g_finalized_count = 0;
 
 void RecordFinalizer(void* object_instance) {
     if (object_instance != nullptr) {
@@ -22,15 +22,15 @@ void RecordFinalizer(void* object_instance) {
 }
 
 bool WriteExpectedOutputLine() {
-    if (std::fwrite(kExpectedOutput, 1u, {{ expected_output_byte_count }}u, stdout) != {{ expected_output_byte_count }}u) {
+    if (CHAOS_IL2CPP_FWRITE(kExpectedOutput, 1u, {{ expected_output_byte_count }}u, stdout) != {{ expected_output_byte_count }}u) {
         return false;
     }
 
-    if (std::fputc('\n', stdout) == EOF) {
+    if (CHAOS_IL2CPP_FPUTC('\n', stdout) == EOF) {
         return false;
     }
 
-    return std::fflush(stdout) == 0;
+    return CHAOS_IL2CPP_FFLUSH(stdout) == 0;
 }
 
 }  // namespace
@@ -94,9 +94,9 @@ int32_t {{ native_reference_function_name }}(
     g_finalized_count.store(0);
 
     int32_t worker_slot = 0;
-    std::size_t worker_root_count = 0u;
+    CHAOS_IL2CPP_SIZE worker_root_count = 0u;
     bool worker_ok = false;
-    std::thread worker([&]() {
+    CHAOS_IL2CPP_THREAD worker([&]() {
         ThreadState* worker_thread = nullptr;
         if (abi->thread_attach(runtime, &worker_thread) != CHAOS_RUNTIME_STATUS_OK || worker_thread == nullptr) {
             return;

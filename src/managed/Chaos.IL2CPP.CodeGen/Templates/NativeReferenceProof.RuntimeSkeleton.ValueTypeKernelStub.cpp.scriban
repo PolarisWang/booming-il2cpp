@@ -33,6 +33,9 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     }
 
     auto* request = static_cast<{{ stub_name }}_KernelArgs*>(managed_args);
+{{~ if arg_validation_statements.size > 0 ~}}
+    {{ arg_validation_statements }}
+{{~ end ~}}
     if (request->return_value == nullptr) {
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }

@@ -19,6 +19,7 @@ class FoundationDllManifestTests(unittest.TestCase):
             (["foundation-dll", "derive", "--scope", "all"], "foundation-dll-derive"),
             (["foundation-dll", "analyze-gaps", "--scope", "System.Private.CoreLib"], "foundation-dll-analyze-gaps"),
             (["foundation-dll", "check-family", "--family", "family/System.Private.CoreLib/convert/char"], "foundation-dll-check-family"),
+            (["foundation-dll", "execute", "--assembly", "System.Private.CoreLib", "--family", "family/System.Private.CoreLib/convert/char", "--kind", "test"], "foundation-dll-execute"),
             (["foundation-dll", "onboard", "--scope", "System.Text.Json", "--promote-approved", "true"], "foundation-dll-onboard"),
             (["foundation-dll", "promote", "--scope", "System.Text.Json", "--promote-approved", "true"], "foundation-dll-promote"),
             (["foundation-dll", "refresh"], "foundation-dll-refresh"),

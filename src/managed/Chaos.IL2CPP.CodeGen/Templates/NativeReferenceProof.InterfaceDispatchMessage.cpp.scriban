@@ -248,15 +248,15 @@ double MeasureDirectDispatchTotalNanoseconds(
     ThreadState* thread,
     void* instance,
     uint32_t iterations) {
-    const auto started = std::chrono::steady_clock::now();
+    const auto started = CHAOS_IL2CPP_CHRONO_STEADY_CLOCK::now();
     for (uint32_t iteration = 0; iteration < iterations; ++iteration) {
         if ({{ instance_method_symbol }}(runtime, thread, instance) == nullptr) {
             return -1.0;
         }
     }
 
-    return std::chrono::duration<double, std::nano>(
-        std::chrono::steady_clock::now() - started).count();
+    return CHAOS_IL2CPP_CHRONO_DURATION(double, CHAOS_IL2CPP_NANO)(
+        CHAOS_IL2CPP_CHRONO_STEADY_CLOCK::now() - started).count();
 }
 
 double MeasureVirtualDispatchTotalNanoseconds(
@@ -265,7 +265,7 @@ double MeasureVirtualDispatchTotalNanoseconds(
     void* instance,
     MethodInfoHandle resolved_method,
     uint32_t iterations) {
-    const auto started = std::chrono::steady_clock::now();
+    const auto started = CHAOS_IL2CPP_CHRONO_STEADY_CLOCK::now();
     for (uint32_t iteration = 0; iteration < iterations; ++iteration) {
         void* return_value = nullptr;
         if (!InvokeResolvedInstanceMessage(runtime, thread, instance, resolved_method, &return_value)) {
@@ -273,8 +273,8 @@ double MeasureVirtualDispatchTotalNanoseconds(
         }
     }
 
-    return std::chrono::duration<double, std::nano>(
-        std::chrono::steady_clock::now() - started).count();
+    return CHAOS_IL2CPP_CHRONO_DURATION(double, CHAOS_IL2CPP_NANO)(
+        CHAOS_IL2CPP_CHRONO_STEADY_CLOCK::now() - started).count();
 }
 
 bool WarmProfileDispatch(
@@ -337,11 +337,11 @@ int32_t RunProfileDispatch(
     }
 
     const double elapsed_milliseconds = virtual_total_nanoseconds / 1000000.0;
-    std::printf(
+    CHAOS_IL2CPP_PRINTF(
         "{\"elapsedMilliseconds\": %.3f, \"metrics\": {\"dispatchNanoseconds\": %.3f}}\n",
         elapsed_milliseconds,
         dispatch_nanoseconds);
-    std::fflush(stdout);
+    CHAOS_IL2CPP_FFLUSH(stdout);
     return 0;
 }
 #endif

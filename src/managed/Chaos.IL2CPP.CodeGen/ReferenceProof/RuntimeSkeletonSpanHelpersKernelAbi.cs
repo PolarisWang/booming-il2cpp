@@ -90,7 +90,7 @@ internal static class RuntimeSkeletonSpanHelpersKernelAbiFactory
 
         shape = new RuntimeSkeletonSpanHelpersKernelReturnShape(
             managedType,
-            "void* return_value;\n    std::size_t return_value_size;",
+            "void* return_value;\n    CHAOS_IL2CPP_SIZE return_value_size;",
             "if (request->return_value == nullptr || request->return_value_size == 0u) {\n        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;\n    }",
             "void* return_value_ptr = request->return_value;",
             "&return_value_ptr",

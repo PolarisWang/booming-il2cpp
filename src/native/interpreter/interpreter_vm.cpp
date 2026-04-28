@@ -8,18 +8,18 @@ namespace chaos::il2cpp::interpreter {
 namespace {
 
 struct ObjectStorage {
-    std::vector<InterpreterValue> fields = {};
+    CHAOS_IL2CPP_VECTOR(InterpreterValue) fields = {};
 };
 
 struct ArrayStorage {
-    std::vector<InterpreterValue> elements = {};
+    CHAOS_IL2CPP_VECTOR(InterpreterValue) elements = {};
 };
 
 struct BoxedValue {
     InterpreterValue value = {};
 };
 
-std::vector<InterpreterValue> g_static_fields;
+CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 
 int32_t ReadInt32(const InterpreterValue& value) {
     switch (value.tag) {
@@ -34,7 +34,7 @@ int32_t ReadInt32(const InterpreterValue& value) {
         case ValueTag::Null:
             return 0;
         default:
-            throw std::runtime_error("value is not convertible to int32");
+            throw CHAOS_IL2CPP_RUNTIME_ERROR("value is not convertible to int32");
     }
 }
 
@@ -51,7 +51,7 @@ int64_t ReadInt64(const InterpreterValue& value) {
         case ValueTag::Null:
             return 0;
         default:
-            throw std::runtime_error("value is not convertible to int64");
+            throw CHAOS_IL2CPP_RUNTIME_ERROR("value is not convertible to int64");
     }
 }
 
@@ -68,7 +68,7 @@ float ReadFloat32(const InterpreterValue& value) {
         case ValueTag::Null:
             return 0.0f;
         default:
-            throw std::runtime_error("value is not convertible to float32");
+            throw CHAOS_IL2CPP_RUNTIME_ERROR("value is not convertible to float32");
     }
 }
 
@@ -85,13 +85,13 @@ double ReadFloat64(const InterpreterValue& value) {
         case ValueTag::Null:
             return 0.0;
         default:
-            throw std::runtime_error("value is not convertible to float64");
+            throw CHAOS_IL2CPP_RUNTIME_ERROR("value is not convertible to float64");
     }
 }
 
 ObjectStorage* RequireObject(const InterpreterValue& value) {
     if (value.tag != ValueTag::ObjectRef || value.obj == nullptr) {
-        throw std::runtime_error("object reference required");
+        throw CHAOS_IL2CPP_RUNTIME_ERROR("object reference required");
     }
 
     return static_cast<ObjectStorage*>(value.obj);
@@ -99,7 +99,7 @@ ObjectStorage* RequireObject(const InterpreterValue& value) {
 
 ArrayStorage* RequireArray(const InterpreterValue& value) {
     if (value.tag != ValueTag::ObjectRef || value.obj == nullptr) {
-        throw std::runtime_error("array reference required");
+        throw CHAOS_IL2CPP_RUNTIME_ERROR("array reference required");
     }
 
     return static_cast<ArrayStorage*>(value.obj);
@@ -148,15 +148,15 @@ InterpreterValue InterpreterValue::null_val() {
 
 size_t InterpreterVM::GetBranchTarget(const IRMethod& method, size_t target) {
     if (target >= method.instructions.size()) {
-        throw std::out_of_range("branch_target");
+        throw CHAOS_IL2CPP_OUT_OF_RANGE("branch_target");
     }
 
     return target;
 }
 
-void InterpreterVM::EnsureLocal(std::vector<InterpreterValue>* locals, size_t index) {
+void InterpreterVM::EnsureLocal(CHAOS_IL2CPP_VECTOR(InterpreterValue)* locals, size_t index) {
     if (locals == nullptr) {
-        throw std::invalid_argument("locals");
+        throw CHAOS_IL2CPP_INVALID_ARGUMENT("locals");
     }
 
     if (locals->size() <= index) {
@@ -164,9 +164,9 @@ void InterpreterVM::EnsureLocal(std::vector<InterpreterValue>* locals, size_t in
     }
 }
 
-InterpreterValue InterpreterVM::Pop(std::vector<InterpreterValue>* stack) {
+InterpreterValue InterpreterVM::Pop(CHAOS_IL2CPP_VECTOR(InterpreterValue)* stack) {
     if (stack == nullptr || stack->empty()) {
-        throw std::runtime_error("evaluation stack underflow");
+        throw CHAOS_IL2CPP_RUNTIME_ERROR("evaluation stack underflow");
     }
 
     const InterpreterValue value = stack->back();
@@ -176,7 +176,7 @@ InterpreterValue InterpreterVM::Pop(std::vector<InterpreterValue>* stack) {
 
 ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* frame) const {
     if (frame == nullptr) {
-        throw std::invalid_argument("frame");
+        throw CHAOS_IL2CPP_INVALID_ARGUMENT("frame");
     }
 
     ExecutionResult result = {};
@@ -206,7 +206,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             case IROpCode::LdArg:
                 if (instruction.operand_index < 0 ||
                     static_cast<size_t>(instruction.operand_index) >= frame->arguments.size()) {
-                    throw std::out_of_range("argument");
+                    throw CHAOS_IL2CPP_OUT_OF_RANGE("argument");
                 }
 
                 frame->stack.push_back(frame->arguments[static_cast<size_t>(instruction.operand_index)]);
@@ -222,7 +222,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::StArg: {
                 if (instruction.operand_index < 0) {
-                    throw std::out_of_range("argument");
+                    throw CHAOS_IL2CPP_OUT_OF_RANGE("argument");
                 }
 
                 const size_t argument_index = static_cast<size_t>(instruction.operand_index);
@@ -399,7 +399,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 const size_t index = static_cast<size_t>(ReadInt32(Pop(&frame->stack)));
                 auto* array = RequireArray(Pop(&frame->stack));
                 if (index >= array->elements.size()) {
-                    throw std::out_of_range("array_index");
+                    throw CHAOS_IL2CPP_OUT_OF_RANGE("array_index");
                 }
                 frame->stack.push_back(array->elements[index]);
                 break;
@@ -409,7 +409,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 const size_t index = static_cast<size_t>(ReadInt32(Pop(&frame->stack)));
                 auto* array = RequireArray(Pop(&frame->stack));
                 if (index >= array->elements.size()) {
-                    throw std::out_of_range("array_index");
+                    throw CHAOS_IL2CPP_OUT_OF_RANGE("array_index");
                 }
                 array->elements[index] = value;
                 break;
@@ -431,7 +431,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             case IROpCode::Unbox: {
                 const InterpreterValue boxed_value = Pop(&frame->stack);
                 if (boxed_value.tag != ValueTag::ObjectRef || boxed_value.obj == nullptr) {
-                    throw std::runtime_error("boxed value required");
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("boxed value required");
                 }
                 frame->stack.push_back(static_cast<BoxedValue*>(boxed_value.obj)->value);
                 break;
@@ -443,7 +443,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             case IROpCode::Call:
             case IROpCode::CallVirt:
             case IROpCode::CallBridge:
-                throw std::runtime_error("call dispatch requires external bridge");
+                throw CHAOS_IL2CPP_RUNTIME_ERROR("call dispatch requires external bridge");
             case IROpCode::Conv_I4:
                 frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(Pop(&frame->stack))));
                 break;
@@ -457,9 +457,9 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 frame->stack.push_back(InterpreterValue::from_f64(ReadFloat64(Pop(&frame->stack))));
                 break;
             case IROpCode::Throw:
-                throw std::runtime_error("interpreter throw");
+                throw CHAOS_IL2CPP_RUNTIME_ERROR("interpreter throw");
             case IROpCode::Rethrow:
-                throw std::runtime_error("interpreter rethrow");
+                throw CHAOS_IL2CPP_RUNTIME_ERROR("interpreter rethrow");
             case IROpCode::Leave:
                 instruction_index = GetBranchTarget(method, instruction.branch_target);
                 continue;
@@ -477,7 +477,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
 
                 return result;
             default:
-                throw std::runtime_error("unsupported opcode");
+                throw CHAOS_IL2CPP_RUNTIME_ERROR("unsupported opcode");
         }
 
         ++instruction_index;

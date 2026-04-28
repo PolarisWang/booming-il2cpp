@@ -1,0 +1,31 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/time/date-time-timespan",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 16,
+  "emittedMethodCount": 16,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+    "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
+    "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)",
+    "System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&)",
+    "System.Private.CoreLib/System.DateTime::ToString:System.String()",
+    "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)",
+    "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)",
+    "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)",
+    "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)",
+    "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)",
+    "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
+    "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+    "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
+    "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
+    "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
+    "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)"
+  ]
+}

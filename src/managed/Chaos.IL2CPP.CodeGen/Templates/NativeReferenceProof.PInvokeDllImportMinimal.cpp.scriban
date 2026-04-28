@@ -158,7 +158,7 @@ int32_t {{ native_reference_function_name }}(
         return 1;
     }
 
-    const std::string native_reference_output = std::string(kOutputPrefix) + std::to_string(import_result);
+    const CHAOS_IL2CPP_STRING native_reference_output = CHAOS_IL2CPP_STRING(kOutputPrefix) + CHAOS_IL2CPP_TO_STRING(import_result);
     void* managed_output = g_native_reference_context.abi->string_new_utf8(
         runtime,
         thread,

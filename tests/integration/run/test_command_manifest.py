@@ -113,6 +113,7 @@ class CommandManifestTests(unittest.TestCase):
                 "foundation-dll-derive",
                 "foundation-dll-analyze-gaps",
                 "foundation-dll-check-family",
+                "foundation-dll-execute",
                 "foundation-dll-promote",
                 "foundation-dll-onboard",
                 "foundation-dll-refresh",

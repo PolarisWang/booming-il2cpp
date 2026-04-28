@@ -32,7 +32,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     }
     const auto import_method = reinterpret_cast<NativeImportFn>(raw_import);
     const int32_t import_result = import_method({{ import_argument0 }}, {{ import_argument1 }}, {{ import_argument2 }});
-    const std::string output = std::string({{ output_prefix_literal }}) + std::to_string(import_result);
+    const CHAOS_IL2CPP_STRING output = CHAOS_IL2CPP_STRING({{ output_prefix_literal }}) + CHAOS_IL2CPP_TO_STRING(import_result);
     using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
     if (raw_write_line_string == nullptr) {

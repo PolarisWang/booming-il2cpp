@@ -23,14 +23,26 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return;
 		}
-		builder.AppendLine("bool chaos_object_equals(std::intptr_t chaos_left_value, std::intptr_t chaos_right_value) noexcept");
+		builder.AppendLine("bool chaos_object_equals(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value) noexcept");
 		builder.AppendLine("{");
+		builder.AppendLine("    // StringId fast path: tagged integers compare directly (O(1)).");
+		builder.AppendLine("    if (chaos_is_string_id(chaos_left_value) && chaos_is_string_id(chaos_right_value))");
+		builder.AppendLine("    {");
+		builder.AppendLine("        return chaos_left_value == chaos_right_value;");
+		builder.AppendLine("    }");
+		builder.AppendLine();
+		builder.AppendLine("    // Mixed StringId vs pointer: never equal (different representations).");
+		builder.AppendLine("    if (chaos_is_string_id(chaos_left_value) != chaos_is_string_id(chaos_right_value))");
+		builder.AppendLine("    {");
+		builder.AppendLine("        return false;");
+		builder.AppendLine("    }");
+		builder.AppendLine();
 		builder.AppendLine("    if (chaos_left_value == chaos_right_value)");
 		builder.AppendLine("    {");
 		builder.AppendLine("        return true;");
 		builder.AppendLine("    }");
 		builder.AppendLine();
-		builder.AppendLine("    if (chaos_left_value == static_cast<std::intptr_t>(0) || chaos_right_value == static_cast<std::intptr_t>(0))");
+		builder.AppendLine("    if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0) || chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("    {");
 		builder.AppendLine("        return false;");
 		builder.AppendLine("    }");
@@ -76,7 +88,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("            return chaos_left_string->utf8_data == chaos_right_string->utf8_data;");
 			builder.AppendLine("        }");
 			builder.AppendLine();
-			builder.AppendLine("        return std::strcmp(chaos_left_string->utf8_data, chaos_right_string->utf8_data) == 0;");
+			builder.AppendLine("        return CHAOS_IL2CPP_STRCMP(chaos_left_string->utf8_data, chaos_right_string->utf8_data) == 0;");
 			builder.AppendLine("    }");
 			builder.AppendLine();
 		}
@@ -96,7 +108,7 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder6 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(141, 3, stringBuilder);
-				handler.AppendLiteral("            return std::memcmp(&reinterpret_cast<");
+				handler.AppendLiteral("            return CHAOS_IL2CPP_MEMCMP(&reinterpret_cast<");
 				handler.AppendFormatted(GetNativeBoxTypeSymbol(item));
 				handler.AppendLiteral("*>(chaos_left_value)->value, &reinterpret_cast<");
 				handler.AppendFormatted(GetNativeBoxTypeSymbol(item));

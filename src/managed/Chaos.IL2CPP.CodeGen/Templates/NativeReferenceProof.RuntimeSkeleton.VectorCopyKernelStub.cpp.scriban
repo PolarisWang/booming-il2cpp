@@ -1,0 +1,53 @@
+struct {{ stub_name }}_KernelArgs
+{
+    {{ this_field_declaration }}
+{{~ if arg_field_declarations.size > 0 ~}}
+    {{ arg_field_declarations }}
+{{~ end ~}}
+{{~ if returns_bool ~}}
+    bool* return_value;
+{{~ end ~}}
+};
+
+// contract_id: {{ contract_id }}
+// kernel_semantic: {{ kernel_semantic_id }}
+// kernel_backend: {{ kernel_backend_kind }}
+// destination_arg_cpp_type: {{ destination_arg_cpp_type }}
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    if (managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    auto* request = static_cast<{{ stub_name }}_KernelArgs*>(managed_args);
+    const auto copy_result = chaos::il2cpp::runtime_core::{{ helper_name }}TryCopyTo(
+        request->this_arg,
+        {{ destination_data_expression }},
+        static_cast<CHAOS_IL2CPP_SIZE>({{ destination_length_expression }}),
+        {{ start_index_expression }});
+{{~ if returns_bool ~}}
+    if (request->return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    *request->return_value = copy_result;
+    return CHAOS_BRIDGE_STATUS_OK;
+{{~ else ~}}
+    return copy_result
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+{{~ end ~}}
+}

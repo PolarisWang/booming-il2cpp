@@ -9,8 +9,10 @@ internal static class Program
 {
     private const string FrameworkAssemblyName = "Chaos.TestFramework.Sdk";
     private const string FrameworkNamespace = "Chaos.TestFramework";
+    private const string CapabilityTestAttributeName = FrameworkNamespace + ".CapabilityTestAttribute";
     private const string UnitTestAttributeName = FrameworkNamespace + ".ChaosUnitTestAttribute";
-    private const string BenchmarkAttributeName = FrameworkNamespace + ".ChaosBenchmarkAttribute";
+    private const string BenchmarkAttributeName = FrameworkNamespace + ".BenchmarkAttribute";
+    private const string LegacyBenchmarkAttributeName = FrameworkNamespace + ".ChaosBenchmarkAttribute";
     private const string NamedArgumentAlias = "Alias";
     private const string NamedArgumentCapabilityFamily = "CapabilityFamily";
     private const string NamedArgumentCapability = "Capability";
@@ -28,12 +30,14 @@ internal static class Program
 
     private static readonly DeclarationAttributeSchema UnitTestSchema = new(UnitTestAttributeName, DeclaredAttributeKind.UnitTest);
     private static readonly DeclarationAttributeSchema BenchmarkSchema = new(BenchmarkAttributeName, DeclaredAttributeKind.Benchmark);
+    private static readonly DeclarationAttributeSchema LegacyBenchmarkSchema = new(LegacyBenchmarkAttributeName, DeclaredAttributeKind.Benchmark);
 
     private static readonly IReadOnlyDictionary<string, DeclarationAttributeSchema> DeclaredAttributeSchemas =
         new Dictionary<string, DeclarationAttributeSchema>(StringComparer.Ordinal)
         {
             [UnitTestSchema.AttributeTypeName] = UnitTestSchema,
             [BenchmarkSchema.AttributeTypeName] = BenchmarkSchema,
+            [LegacyBenchmarkSchema.AttributeTypeName] = LegacyBenchmarkSchema,
         };
 
     private static readonly IReadOnlyDictionary<string, NamedArgumentReader> UnitNamedArgumentReaders =
@@ -175,6 +179,20 @@ internal static class Program
             if (string.Equals(typeName, "<Module>", StringComparison.Ordinal))
             {
                 continue;
+            }
+
+            foreach (var attributeHandle in typeDefinition.GetCustomAttributes())
+            {
+                if (!TryGetAttributeTypeName(metadataReader, attributeHandle, out var attributeTypeName))
+                {
+                    continue;
+                }
+
+                if (string.Equals(attributeTypeName, CapabilityTestAttributeName, StringComparison.Ordinal))
+                {
+                    payload.FrameworkReferenced = true;
+                    break;
+                }
             }
 
             var declaringType = FullTypeName(metadataReader, typeHandle);

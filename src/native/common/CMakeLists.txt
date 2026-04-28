@@ -2,6 +2,7 @@ get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 
 add_library(chaos_common STATIC
     chaos/common.h
+    chaos/native_types.h
     chaos/checked_conv.h
     chaos/arithmetic.h
     chaos/load_store.h
@@ -21,6 +22,9 @@ add_library(chaos_common STATIC
     async.cpp)
 
 target_compile_features(chaos_common PUBLIC cxx_std_17)
+
+# chaos_common uses fmtlib for type-safe string formatting.
+target_link_libraries(chaos_common PUBLIC chaos_fmt)
 
 # chaos_common is a dependency-free foundation library.
 # It does NOT depend on chaos_runtime_core, BDWGC, or any other module.

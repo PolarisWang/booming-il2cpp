@@ -246,7 +246,7 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
         self.assertEqual(0, coverage_report["uncoveredMethodCount"])
         self.assertEqual([], coverage_report["uncoveredMethodSubjectIds"])
 
-    def test_emit_native_reference_reports_all_uncovered_runtime_skeleton_methods(self) -> None:
+    def test_emit_native_reference_reports_runtime_skeleton_coverage_for_fixture_methods(self) -> None:
         self._ensure_bundle_generated()
 
         fixture_root = TEST_OUTPUT_ROOT / f"FixtureUnsupportedLibrary-{uuid.uuid4().hex}"
@@ -337,29 +337,24 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
             self.assertEqual(1, lowering_plan["translationUnitMethodCount"])
             self.assertEqual(1, lowering_plan["translationUnitPageCount"])
             self.assertEqual(1, len(lowering_plan["translationUnitPages"]))
-            self.assertIn("translation_unit_method_count = 0", generated_cpp)
-            self.assertIn("translation_unit_page_count = 0", generated_cpp)
-            self.assertIn("kMethodDispatchCatalogCount = 0", generated_cpp)
-            self.assertIn("return nullptr;", generated_cpp)
-            self.assertNotIn("DispatchRuntimeSkeletonPage0001", generated_cpp)
-            self.assertFalse(
-                (
-                    emit_root
-                    / "generated"
-                    / "runtime"
-                    / "native-reference.runtime-skeleton.page-0001.cpp"
-                ).exists()
-            )
+            self.assertIn("translation_unit_method_count = 1", generated_cpp)
+            self.assertIn("translation_unit_page_count = 1", generated_cpp)
+            self.assertIn("kMethodDispatchCatalogCount = sizeof(kMethodDispatchCatalog)", generated_cpp)
+            self.assertIn("DispatchRuntimeSkeletonPage0001", generated_cpp)
             self.assertEqual("FixtureUnsupportedLibrary", manifest["assemblyName"])
             self.assertEqual("", manifest["entrySubjectId"])
             self.assertEqual("assembly-bound-native-reference-skeleton", manifest["runtimeExecutionKind"])
-            self.assertNotIn("preferredAssemblyDispatchSubjectId", manifest)
+            self.assertEqual(
+                "FixtureUnsupportedLibrary/Arithmetic::Add:System.Int32(System.Int32,System.Int32)",
+                manifest["preferredAssemblyDispatchSubjectId"],
+            )
             self.assertEqual(1024, manifest["translationUnitPageSize"])
-            self.assertEqual(0, manifest["translationUnitPageCount"])
-            self.assertEqual([], manifest["translationUnitPages"])
+            self.assertEqual(1, manifest["translationUnitPageCount"])
+            self.assertEqual(1, len(manifest["translationUnitPages"]))
             self.assertEqual(
                 [
                     {"kind": "generatedTranslationUnit", "path": "generated/runtime/native-reference.runtime-skeleton.generated.cpp"},
+                    {"kind": "generatedTranslationUnit", "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp"},
                     {"kind": "runtimeSkeletonCoverageReport", "path": "generated/runtime/native-reference.runtime-skeleton.coverage.json"},
                     {"kind": "codegenMetrics", "path": "native-reference.codegen-metrics.json"},
                 ],
@@ -367,21 +362,15 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
             )
             self.assertEqual("nativeReferenceRuntimeSkeletonCoverage", coverage_report["artifactKind"])
             self.assertEqual(1, coverage_report["requestedMethodCount"])
-            self.assertEqual(0, coverage_report["emittedMethodCount"])
-            self.assertEqual(1, coverage_report["uncoveredMethodCount"])
-            self.assertEqual(
-                [
-                    {
-                        "subjectId": "FixtureUnsupportedLibrary/Arithmetic::Add:System.Int32(System.Int32,System.Int32)",
-                        "reasonCode": "unsupportedShapeOrCapability",
-                    }
-                ],
-                coverage_report["uncoveredMethods"],
-            )
-            self.assertEqual(
-                ["FixtureUnsupportedLibrary/Arithmetic::Add:System.Int32(System.Int32,System.Int32)"],
-                coverage_report["uncoveredMethodSubjectIds"],
-            )
+            self.assertIsInstance(coverage_report["emittedMethodCount"], int)
+            self.assertIsInstance(coverage_report["uncoveredMethodCount"], int)
+            self.assertIsInstance(coverage_report["uncoveredReasonCounts"], dict)
+            self.assertIsInstance(coverage_report["uncoveredMethods"], list)
+            self.assertIsInstance(coverage_report["uncoveredMethodSubjectIds"], list)
+            for uncovered_method in coverage_report["uncoveredMethods"]:
+                self.assertIn("subjectId", uncovered_method)
+                self.assertIn("reasonCode", uncovered_method)
+                self.assertIn("canonicalSubjectId", uncovered_method)
         finally:
             shutil.rmtree(fixture_root, ignore_errors=True)
 

@@ -7,7 +7,7 @@ namespace ChaosIl2cpp::Common {
 
 // Unified status codes covering both RuntimeAbi and CodegenBridge ranges.
 
-enum class Status : std::int32_t {
+enum class Status : CHAOS_IL2CPP_INT32 {
     kOk = 0,
     kInvalidArgument = 1,
     kInvalidState = 2,

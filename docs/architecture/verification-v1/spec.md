@@ -1100,3 +1100,146 @@ foundation-dll-audit 投影的 refresh 顺序：
 5. 哪些 `verification/archive/{latest,master,reports}` 与 `verification/projections/**` 产物需要重生成
 
 如果这些问题回答不清，任务不能直接进入执行阶段。
+
+---
+
+## 17. Foundation DLL Capability Verification Closure
+
+### 17.1 Goal
+
+foundation-dll translation verification is a formal closure system rather than a single proof or dashboard view.
+
+Any DLL that enters translation-verification scope must have:
+
+- complete DLL / family / method capability authority
+- complete functional / performance / hotupdate obligations
+- archivable, reviewable, solution-executable generated result
+- stable formal aggregates consumable by projections
+
+### 17.2 Four-Layer Model
+
+#### Truth Layer
+
+Formal objects:
+
+- `DllCapabilityManifest`
+- `CapabilityFamilyVerificationContract`
+- `MethodCapabilityContract`
+
+Truth Layer defines authority only. It does not execute, aggregate, or infer truth from runtime results.
+
+#### Evidence Layer
+
+Formal objects:
+
+- `ManagedFactRecord`
+- `NativeFactRecord`
+- `ManagedBenchmarkRecord`
+- `NativeBenchmarkRecord`
+- `HotUpdateFactRecord`
+- `HotUpdateBenchmarkRecord`
+- `ReviewBundle`
+- `MethodValidationRecord`
+- `MethodCaseIndex`
+
+#### Execution Layer
+
+Formal objects:
+
+- `FoundationDllTranslationSolution.sln`
+- generated family `test/native/benchmark/host/patch` projects
+- execution contract
+
+#### Projection Layer
+
+Formal objects:
+
+- `DllAggregateRecord`
+- `FamilyAggregateRecord`
+- `MethodAggregateRecord`
+- dashboard / detail / method projections
+
+Projection Layer may only consume Truth + Evidence + Execution formal objects. It may not invent new truth.
+
+### 17.3 Onboarding Freeze
+
+Once a DLL enters translation-verification scope, all four layers must be generated together.
+
+Minimum inputs:
+
+- `assemblyName`
+- `ownerSubjectId`
+- `capabilityFamilies[]`
+- `methodUniverse[]`
+- `requiredRoutes`
+- `benchmark obligations`
+- `hotupdate obligations`
+- `review targets`
+- `solution entries`
+
+### 17.4 Directory Contract
+
+Per family, fixed directories are:
+
+- `verification/foundation-dll/<assembly>/<family>/test/`
+- `verification/foundation-dll/<assembly>/<family>/native/`
+- `verification/foundation-dll/<assembly>/<family>/benchmark/`
+- `verification/foundation-dll/<assembly>/<family>/host/`
+- `verification/foundation-dll/<assembly>/<family>/patch/`
+- `verification/foundation-dll/<assembly>/<family>/review/`
+
+Formal indexes:
+
+- `verification/foundation-dll/<assembly>/<family>/method-test-case-index.json`
+- `verification/foundation-dll/<assembly>/<family>/method-benchmark-case-index.json`
+- `verification/foundation-dll/<assembly>/<family>/method-hotupdate-case-index.json`
+
+### 17.5 A2 Source-Annotation-First
+
+foundation-dll case mapping truth uses generated source / metadata annotations.
+
+The annotation scanner authority boundary is fixed:
+
+- it may only read generated source / metadata
+- it may only produce formal case index
+- it may not infer truth from runtime results
+
+Annotations should prefer enum-backed attributes. String is reserved for:
+
+- `methodSubjectId`
+- a small number of non-enumerable path-like fields
+
+### 17.6 completed-before Gate
+
+foundation-dll translation verification uses `G2 reviewable-bundle` as the completed-before gate.
+
+Each in-scope family must satisfy:
+
+- generated source snapshot archived
+- case index generated
+- latest execution results archived
+- `ReviewBundle` generated
+- solution executable
+
+### 17.7 Execution Entry
+
+The formal main entry is fixed to:
+
+- `FoundationDllTranslationSolution.sln`
+
+The system must also support local accelerated execution:
+
+- by DLL
+- by family
+- by family `test/benchmark/host/patch`
+
+These local entries are development accelerators only. They are not new formal main entries and cannot replace the main `.sln` in formal aggregation.
+
+### 17.8 Display Contract
+
+Navigation is fixed as:
+
+- level-1 dashboard: DLL
+- level-2 detail: family
+- level-3 detail: method
+- tooltip: method test details

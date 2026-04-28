@@ -334,3 +334,75 @@ benchmark 的职责是补充成本证据，不替代 correctness 层。
 - [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md)
 - [`../../docs/architecture/subject-test-framework-v1/INDEX.md`](../../docs/architecture/subject-test-framework-v1/INDEX.md)
 - [`../../docs/architecture/verification-v1/spec.md`](../../docs/architecture/verification-v1/spec.md)
+
+## 8. Foundation DLL Capability Verification Supplement
+
+When capability onboarding hits the foundation-dll translation-verification mainline, the following extra rules apply.
+
+### 8.1 New DLL Onboarding
+
+When a new DLL enters translation-verification scope, all four layers must be generated together:
+
+- Truth Layer: DLL / family / method authority
+- Evidence Layer: functional / benchmark / hotupdate case mapping and review bundle skeleton
+- Execution Layer: generated `test/native/benchmark/host/patch` projects and solution wiring
+- Projection Layer: DLL / family / method aggregate skeleton
+
+It is not allowed to only add dashboard data or only add partial proof hosts.
+
+### 8.2 Method-Level Full Mapping
+
+foundation-dll `Subject Validation` does not allow weak authority.
+
+It must establish:
+
+- `methodSubjectId -> test case`
+- `methodSubjectId -> benchmark case`
+- `methodSubjectId -> hotupdate case`
+
+### 8.3 A2 Source-Annotation-First
+
+foundation-dll case mapping uses `A2 Source-Annotation-First`:
+
+- generated source / metadata annotations are the case-mapping truth
+- the annotation scanner may only read generated source / metadata and produce formal case indexes
+- the annotation scanner may not infer truth from runtime results
+
+Annotations should prefer enum-backed attributes. String should be kept only for `methodSubjectId` and similarly non-enumerable fields.
+
+### 8.4 Directory Contract
+
+Per family, fixed directories are:
+
+- `verification/foundation-dll/<assembly>/<family>/test/`
+- `verification/foundation-dll/<assembly>/<family>/native/`
+- `verification/foundation-dll/<assembly>/<family>/benchmark/`
+- `verification/foundation-dll/<assembly>/<family>/host/`
+- `verification/foundation-dll/<assembly>/<family>/patch/`
+- `verification/foundation-dll/<assembly>/<family>/review/`
+
+### 8.5 completed-before Gate
+
+foundation-dll family completed-before gate is fixed to `G2 reviewable-bundle`.
+
+Each in-scope family must satisfy:
+
+- generated source snapshot archived
+- case index generated
+- latest execution results archived
+- `ReviewBundle` generated
+- solution executable
+
+### 8.6 Formal Main Entry And Local Accelerators
+
+The formal main entry is fixed to:
+
+- `FoundationDllTranslationSolution.sln`
+
+The system must also support local accelerated execution:
+
+- by DLL
+- by family
+- by family `test/benchmark/host/patch`
+
+These local entries are development accelerators only and are not new formal main entries.

@@ -13,21 +13,21 @@ namespace ChaosIl2cpp::Common {
 template <typename TValue>
 struct ListRuntimeStorage
 {
-    std::vector<TValue> items;
+    CHAOS_IL2CPP_VECTOR(TValue) items;
 };
 
 template <typename TValue>
-ListRuntimeStorage<TValue>* require_list_runtime_storage(std::intptr_t handle)
+ListRuntimeStorage<TValue>* require_list_runtime_storage(CHAOS_IL2CPP_INTPTR handle)
 {
-    if (handle == static_cast<std::intptr_t>(0))
+    if (handle == static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
-        std::abort();
+        CHAOS_IL2CPP_ABORT();
     }
-    static std::unordered_map<std::intptr_t, std::unique_ptr<ListRuntimeStorage<TValue>>> storage_by_handle;
+    static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_UNIQUE_PTR(ListRuntimeStorage<TValue))) storage_by_handle;
     auto& storage = storage_by_handle[handle];
     if (storage == nullptr)
     {
-        storage = std::make_unique<ListRuntimeStorage<TValue>>();
+        storage = CHAOS_IL2CPP_MAKE_UNIQUE(ListRuntimeStorage<TValue))();
     }
     return storage.get();
 }
@@ -35,21 +35,21 @@ ListRuntimeStorage<TValue>* require_list_runtime_storage(std::intptr_t handle)
 template <typename TKey, typename TValue>
 struct DictionaryRuntimeStorage
 {
-    std::vector<std::pair<TKey, TValue>> entries;
+    CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_PAIR(TKey, TValue)) entries;
 };
 
 template <typename TKey, typename TValue>
-DictionaryRuntimeStorage<TKey, TValue>* require_dictionary_runtime_storage(std::intptr_t handle)
+DictionaryRuntimeStorage<TKey, TValue>* require_dictionary_runtime_storage(CHAOS_IL2CPP_INTPTR handle)
 {
-    if (handle == static_cast<std::intptr_t>(0))
+    if (handle == static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
-        std::abort();
+        CHAOS_IL2CPP_ABORT();
     }
-    static std::unordered_map<std::intptr_t, std::unique_ptr<DictionaryRuntimeStorage<TKey, TValue>>> storage_by_handle;
+    static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_UNIQUE_PTR(DictionaryRuntimeStorage<TKey, TValue))) storage_by_handle;
     auto& storage = storage_by_handle[handle];
     if (storage == nullptr)
     {
-        storage = std::make_unique<DictionaryRuntimeStorage<TKey, TValue>>();
+        storage = CHAOS_IL2CPP_MAKE_UNIQUE(DictionaryRuntimeStorage<TKey, TValue))();
     }
     return storage.get();
 }

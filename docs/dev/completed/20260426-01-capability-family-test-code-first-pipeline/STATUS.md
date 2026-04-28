@@ -5,14 +5,14 @@ task_type: roadmap
 lifecycle_status: completed
 phase: completed
 created_at: 2026-04-26 19:05:00 +08:00
-updated_at: 2026-04-26 19:05:00 +08:00
+updated_at: 2026-04-26 19:58:00 +08:00
 latest_stop_point: four roadmap phases closed with minimum working implementation; formal verification-v1 refresh passed after gap analysis wrote testCode authority into foundation-dll ledgers and projection payloads.
 current_dir: docs/dev/completed/20260426-01-capability-family-test-code-first-pipeline
 parent_task_id:
 source_task_id:
 source_relation:
-design_doc: docs/dev/in-progress/20260426-01-capability-family-test-code-first-pipeline/design-v1-01.md
-roadmap_or_plan: docs/dev/in-progress/20260426-01-capability-family-test-code-first-pipeline/roadmap-v1-01.md
+design_doc: docs/dev/completed/20260426-01-capability-family-test-code-first-pipeline/design-v1-01.md
+roadmap_or_plan: docs/dev/completed/20260426-01-capability-family-test-code-first-pipeline/roadmap-v1-01.md
 child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
@@ -38,7 +38,6 @@ auto_execution_decision: continue
 - 当前仓内真实状态：
   - `CapabilityTestAttribute` / 新 `BenchmarkAttribute` 已在 `Chaos.TestFramework.Sdk` 中存在
   - foundation-dll reporting / ledger / projection 主线已存在
-  - `gap_analyzer.py` 已补齐源码并接入命令面
   - `gap_analyzer.py` / `test_code_generator.py` / `test_discovery.py` 已补齐源码
   - foundation-dll projection / docs 已展示 family `testCode` 状态
   - formal `verification-v1` refresh 已通过
@@ -129,7 +128,7 @@ auto_execution_decision: continue
 
 ## 当前路线
 
-- roadmap: `docs/dev/in-progress/20260426-01-capability-family-test-code-first-pipeline/roadmap-v1-01.md`
+- roadmap: `docs/dev/completed/20260426-01-capability-family-test-code-first-pipeline/roadmap-v1-01.md`
 - phase_status:
   - `phase-0-command-surface-and-sdk-contract-stabilization`: completed
   - `phase-1-gap-analysis-and-candidate-test-code-authority`: completed

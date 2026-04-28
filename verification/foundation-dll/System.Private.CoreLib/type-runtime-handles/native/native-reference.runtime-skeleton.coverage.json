@@ -1,0 +1,28 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/type/runtime-handles",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 13,
+  "emittedMethodCount": 13,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.Private.CoreLib/System.Type::GetType:System.Type(System.String)",
+    "System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)",
+    "System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)",
+    "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+    "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+    "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+    "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+    "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+    "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+    "System.Private.CoreLib/System.Type::get_Name:System.String()",
+    "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+    "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+    "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()"
+  ]
+}
