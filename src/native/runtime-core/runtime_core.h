@@ -375,6 +375,69 @@ inline TCarrier VectorFixedShiftRightArithmetic(TCarrier value, CHAOS_IL2CPP_INT
 }
 
 template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedShiftLeftVariable(TCarrier value, TCarrier shift_amounts) {
+    return VectorFixedApplyBinary<TScalar, TCarrier>(
+        value,
+        shift_amounts,
+        [](TScalar lane, TScalar shift_lane) {
+            using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+            constexpr auto bit_width = static_cast<CHAOS_IL2CPP_INT32>(sizeof(TScalar) * 8u);
+            const auto shift_amount = static_cast<CHAOS_IL2CPP_INT32>(shift_lane);
+            if (shift_amount <= 0) {
+                return lane;
+            }
+
+            if (shift_amount >= bit_width) {
+                return static_cast<TScalar>(0);
+            }
+
+            return static_cast<TScalar>(static_cast<TUnsigned>(lane) << shift_amount);
+        });
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedShiftRightLogicalVariable(TCarrier value, TCarrier shift_amounts) {
+    return VectorFixedApplyBinary<TScalar, TCarrier>(
+        value,
+        shift_amounts,
+        [](TScalar lane, TScalar shift_lane) {
+            using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+            constexpr auto bit_width = static_cast<CHAOS_IL2CPP_INT32>(sizeof(TScalar) * 8u);
+            const auto shift_amount = static_cast<CHAOS_IL2CPP_INT32>(shift_lane);
+            if (shift_amount <= 0) {
+                return lane;
+            }
+
+            if (shift_amount >= bit_width) {
+                return static_cast<TScalar>(0);
+            }
+
+            return static_cast<TScalar>(static_cast<TUnsigned>(lane) >> shift_amount);
+        });
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedShiftRightArithmeticVariable(TCarrier value, TCarrier shift_amounts) {
+    static_assert(CHAOS_IL2CPP_IS_SIGNED<TScalar>, "arithmetic right shift requires signed scalar");
+    return VectorFixedApplyBinary<TScalar, TCarrier>(
+        value,
+        shift_amounts,
+        [](TScalar lane, TScalar shift_lane) {
+            constexpr auto bit_width = static_cast<CHAOS_IL2CPP_INT32>(sizeof(TScalar) * 8u);
+            const auto shift_amount = static_cast<CHAOS_IL2CPP_INT32>(shift_lane);
+            if (shift_amount <= 0) {
+                return lane;
+            }
+
+            if (shift_amount >= bit_width) {
+                return lane < 0 ? static_cast<TScalar>(-1) : static_cast<TScalar>(0);
+            }
+
+            return static_cast<TScalar>(lane >> shift_amount);
+        });
+}
+
+template <typename TScalar, typename TCarrier>
 inline TCarrier VectorFixedRotateLeft(TCarrier value, CHAOS_IL2CPP_UINT8 rotate_amount) {
     using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
     constexpr auto bit_width = static_cast<CHAOS_IL2CPP_UINT32>(sizeof(TScalar) * 8u);
@@ -538,6 +601,54 @@ inline TCarrier VectorFixedShuffle2x128(TCarrier left_value, TCarrier right_valu
     return result;
 }
 
+template <typename TValueScalar, typename TIndexScalar, typename TCarrier>
+inline TCarrier VectorFixedPermuteVar(TCarrier value, TCarrier indices) {
+    static_assert(sizeof(TCarrier) % sizeof(TValueScalar) == 0u, "carrier size must be divisible by value scalar size");
+    static_assert(sizeof(TCarrier) % sizeof(TIndexScalar) == 0u, "carrier size must be divisible by index scalar size");
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TValueScalar);
+
+    TValueScalar value_lanes[lane_count];
+    TIndexScalar index_lanes[lane_count];
+    TValueScalar result_lanes[lane_count];
+    CHAOS_IL2CPP_MEMCPY(value_lanes, &value, sizeof(TCarrier));
+    CHAOS_IL2CPP_MEMCPY(index_lanes, &indices, sizeof(TCarrier));
+    for (CHAOS_IL2CPP_SIZE lane_index = 0; lane_index < lane_count; ++lane_index) {
+        const auto selected_index = static_cast<CHAOS_IL2CPP_SIZE>(
+            static_cast<CHAOS_IL2CPP_UINT64>(index_lanes[lane_index]) % lane_count);
+        result_lanes[lane_index] = value_lanes[selected_index];
+    }
+
+    TCarrier result = {};
+    CHAOS_IL2CPP_MEMCPY(&result, result_lanes, sizeof(TCarrier));
+    return result;
+}
+
+template <typename TValueScalar, typename TIndexScalar, typename TCarrier>
+inline TCarrier VectorFixedPermuteVarX2(TCarrier left_value, TCarrier indices, TCarrier right_value) {
+    static_assert(sizeof(TCarrier) % sizeof(TValueScalar) == 0u, "carrier size must be divisible by value scalar size");
+    static_assert(sizeof(TCarrier) % sizeof(TIndexScalar) == 0u, "carrier size must be divisible by index scalar size");
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TValueScalar);
+
+    TValueScalar left_lanes[lane_count];
+    TValueScalar right_lanes[lane_count];
+    TIndexScalar index_lanes[lane_count];
+    TValueScalar result_lanes[lane_count];
+    CHAOS_IL2CPP_MEMCPY(left_lanes, &left_value, sizeof(TCarrier));
+    CHAOS_IL2CPP_MEMCPY(right_lanes, &right_value, sizeof(TCarrier));
+    CHAOS_IL2CPP_MEMCPY(index_lanes, &indices, sizeof(TCarrier));
+    for (CHAOS_IL2CPP_SIZE lane_index = 0; lane_index < lane_count; ++lane_index) {
+        const auto selected_index = static_cast<CHAOS_IL2CPP_SIZE>(
+            static_cast<CHAOS_IL2CPP_UINT64>(index_lanes[lane_index]) % (lane_count * 2u));
+        result_lanes[lane_index] = selected_index < lane_count
+            ? left_lanes[selected_index]
+            : right_lanes[selected_index - lane_count];
+    }
+
+    TCarrier result = {};
+    CHAOS_IL2CPP_MEMCPY(&result, result_lanes, sizeof(TCarrier));
+    return result;
+}
+
 template <typename TOutputScalar, typename TInputScalar>
 inline TOutputScalar VectorFixedConvertScalarUnchecked(TInputScalar value) {
     return static_cast<TOutputScalar>(value);
@@ -613,8 +724,7 @@ inline TOutputScalar VectorFixedConvertScalarSaturating(TInputScalar value) {
 }
 
 template <typename TOutputScalar, typename TInputScalar, typename TOutputCarrier, typename TInputCarrier>
-inline TOutputCarrier VectorFixedConvertToVector128(TInputCarrier value) {
-    static_assert(sizeof(TOutputCarrier) == sizeof(RuntimeIntrinsicVector128Carrier), "output carrier must be 128-bit");
+inline TOutputCarrier VectorFixedConvertToVector(TInputCarrier value) {
     static_assert(sizeof(TInputCarrier) % sizeof(TInputScalar) == 0u, "input carrier size must be divisible by input scalar size");
     static_assert(sizeof(TOutputCarrier) % sizeof(TOutputScalar) == 0u, "output carrier size must be divisible by output scalar size");
 
@@ -634,8 +744,7 @@ inline TOutputCarrier VectorFixedConvertToVector128(TInputCarrier value) {
 }
 
 template <typename TOutputScalar, typename TInputScalar, typename TOutputCarrier, typename TInputCarrier>
-inline TOutputCarrier VectorFixedConvertToVector128Saturating(TInputCarrier value) {
-    static_assert(sizeof(TOutputCarrier) == sizeof(RuntimeIntrinsicVector128Carrier), "output carrier must be 128-bit");
+inline TOutputCarrier VectorFixedConvertToVectorSaturating(TInputCarrier value) {
     static_assert(sizeof(TInputCarrier) % sizeof(TInputScalar) == 0u, "input carrier size must be divisible by input scalar size");
     static_assert(sizeof(TOutputCarrier) % sizeof(TOutputScalar) == 0u, "output carrier size must be divisible by output scalar size");
 
@@ -655,8 +764,7 @@ inline TOutputCarrier VectorFixedConvertToVector128Saturating(TInputCarrier valu
 }
 
 template <typename TOutputScalar, typename TInputScalar, typename TOutputCarrier, typename TInputCarrier>
-inline TOutputCarrier VectorFixedConvertToVector128Truncating(TInputCarrier value) {
-    static_assert(sizeof(TOutputCarrier) == sizeof(RuntimeIntrinsicVector128Carrier), "output carrier must be 128-bit");
+inline TOutputCarrier VectorFixedConvertToVectorTruncating(TInputCarrier value) {
     static_assert(sizeof(TInputCarrier) % sizeof(TInputScalar) == 0u, "input carrier size must be divisible by input scalar size");
     static_assert(sizeof(TOutputCarrier) % sizeof(TOutputScalar) == 0u, "output carrier size must be divisible by output scalar size");
 
@@ -673,6 +781,24 @@ inline TOutputCarrier VectorFixedConvertToVector128Truncating(TInputCarrier valu
     TOutputCarrier result = {};
     CHAOS_IL2CPP_MEMCPY(&result, output_lanes, sizeof(TOutputCarrier));
     return result;
+}
+
+template <typename TOutputScalar, typename TInputScalar, typename TOutputCarrier, typename TInputCarrier>
+inline TOutputCarrier VectorFixedConvertToVector128(TInputCarrier value) {
+    static_assert(sizeof(TOutputCarrier) == sizeof(RuntimeIntrinsicVector128Carrier), "output carrier must be 128-bit");
+    return VectorFixedConvertToVector<TOutputScalar, TInputScalar, TOutputCarrier, TInputCarrier>(value);
+}
+
+template <typename TOutputScalar, typename TInputScalar, typename TOutputCarrier, typename TInputCarrier>
+inline TOutputCarrier VectorFixedConvertToVector128Saturating(TInputCarrier value) {
+    static_assert(sizeof(TOutputCarrier) == sizeof(RuntimeIntrinsicVector128Carrier), "output carrier must be 128-bit");
+    return VectorFixedConvertToVectorSaturating<TOutputScalar, TInputScalar, TOutputCarrier, TInputCarrier>(value);
+}
+
+template <typename TOutputScalar, typename TInputScalar, typename TOutputCarrier, typename TInputCarrier>
+inline TOutputCarrier VectorFixedConvertToVector128Truncating(TInputCarrier value) {
+    static_assert(sizeof(TOutputCarrier) == sizeof(RuntimeIntrinsicVector128Carrier), "output carrier must be 128-bit");
+    return VectorFixedConvertToVectorTruncating<TOutputScalar, TInputScalar, TOutputCarrier, TInputCarrier>(value);
 }
 
 template <typename TScalar, typename TCarrier>
@@ -1113,8 +1239,8 @@ const TaskRuntimeKernelV1* GetTaskRuntimeKernelV1();
 /* GC allocation helpers for generated code. GcAllocate returns zeroed memory
    (scanned for pointers). GcAllocateAtomic returns zeroed memory that is NOT
    scanned for pointers — use for pointer-free data (e.g. string UTF-8 bytes). */
-void* GcAllocate(size_t size);
-void* GcAllocateAtomic(size_t size);
+void* GcAllocate(CHAOS_IL2CPP_SIZE size);
+void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size);
 RuntimeStatus TypeQueryCapability(TypeInfoHandle type, RuntimeTypeCapabilityInfoV0* out_capability_info);
 RuntimeMode GetRuntimeMode();
 void SetRuntimeMode(RuntimeMode mode);
@@ -1124,38 +1250,38 @@ void* BoxValueObject(
     ThreadState* thread_state,
     TypeInfoHandle value_type,
     const void* value,
-    size_t value_size);
+    CHAOS_IL2CPP_SIZE value_size);
 RuntimeStatus UnboxValueObject(
     RuntimeState* runtime_state,
     void* boxed_object,
     void* out_value,
-    size_t out_value_size);
+    CHAOS_IL2CPP_SIZE out_value_size);
 bool ArrayStoreReference(
     void* array_instance,
-    uintptr_t index,
+    CHAOS_IL2CPP_UINTPTR index,
     void* value);
 void* ArrayLoadReference(
     void* array_instance,
-    uintptr_t index);
+    CHAOS_IL2CPP_UINTPTR index);
 bool ArrayCopyReferenceRange(
     void* source_array_instance,
-    uintptr_t source_index,
+    CHAOS_IL2CPP_UINTPTR source_index,
     void* target_array_instance,
-    uintptr_t target_index,
-    uintptr_t length);
+    CHAOS_IL2CPP_UINTPTR target_index,
+    CHAOS_IL2CPP_UINTPTR length);
 bool ArrayClearReferenceRange(
     void* array_instance,
-    uintptr_t start_index,
-    uintptr_t length);
+    CHAOS_IL2CPP_UINTPTR start_index,
+    CHAOS_IL2CPP_UINTPTR length);
 bool ArrayReverseReferenceRange(
     void* array_instance,
-    uintptr_t start_index,
-    uintptr_t length);
-int32_t EngineLogWrite(
+    CHAOS_IL2CPP_UINTPTR start_index,
+    CHAOS_IL2CPP_UINTPTR length);
+CHAOS_IL2CPP_INT32 EngineLogWrite(
     const char* category_utf8,
     const char* message_utf8);
-uintptr_t CreateEngineObjectHandle(void* object_instance);
-void* ResolveEngineObjectHandle(uintptr_t handle);
+CHAOS_IL2CPP_UINTPTR CreateEngineObjectHandle(void* object_instance);
+void* ResolveEngineObjectHandle(CHAOS_IL2CPP_UINTPTR handle);
 bool RegisterEngineLifecycleCallback(
     const char* phase_utf8,
     EngineLifecycleCallback callback,
@@ -1166,23 +1292,23 @@ bool ThreadStaticInt32Add(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     const char* slot_key_utf8,
-    int32_t delta,
-    int32_t* out_value);
+    CHAOS_IL2CPP_INT32 delta,
+    CHAOS_IL2CPP_INT32* out_value);
 bool MonitorEnter(void* monitor_target);
 bool MonitorExit(void* monitor_target);
 bool GcSafepoint(
     RuntimeState* runtime_state,
     ThreadState* thread_state);
-size_t ReportThreadRoot(
+CHAOS_IL2CPP_SIZE ReportThreadRoot(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     const void* root_address,
-    size_t root_size);
+    CHAOS_IL2CPP_SIZE root_size);
 bool EnqueueFinalizer(
     RuntimeState* runtime_state,
     void* object_instance,
     FinalizerCallback finalizer);
-size_t DrainFinalizerQueue(RuntimeState* runtime_state);
+CHAOS_IL2CPP_SIZE DrainFinalizerQueue(RuntimeState* runtime_state);
 CHAOS_IL2CPP_INTPTR MarshalAllocHGlobal(RuntimeState* runtime_state, CHAOS_IL2CPP_INTPTR size);
 CHAOS_IL2CPP_INTPTR MarshalAllocCoTaskMem(RuntimeState* runtime_state, CHAOS_IL2CPP_INT32 size);
 CHAOS_IL2CPP_INTPTR MarshalReAllocHGlobal(RuntimeState* runtime_state, CHAOS_IL2CPP_INTPTR memory, CHAOS_IL2CPP_INTPTR size);
@@ -1240,7 +1366,7 @@ bool CharIsSeparatorLatin1(CHAOS_IL2CPP_UINT16 value);
 bool CharIsSurrogate(CHAOS_IL2CPP_UINT16 value);
 bool CharIsSurrogatePair(CHAOS_IL2CPP_UINT16 high_surrogate, CHAOS_IL2CPP_UINT16 low_surrogate);
 bool CharIsWhiteSpaceLatin1(CHAOS_IL2CPP_UINT16 value);
-int32_t CharCompare(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
+CHAOS_IL2CPP_INT32 CharCompare(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
 bool CharEquals(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
 bool HalfIsFinite(CHAOS_IL2CPP_UINT16 value);
 bool HalfIsEvenInteger(CHAOS_IL2CPP_UINT16 value);
@@ -1258,14 +1384,14 @@ bool HalfIsSubnormal(CHAOS_IL2CPP_UINT16 value);
 bool HalfIsZero(CHAOS_IL2CPP_UINT16 value);
 bool HalfIsInteger(CHAOS_IL2CPP_UINT16 value);
 bool HalfIsInfinity(CHAOS_IL2CPP_UINT16 value);
-int32_t HalfCompare(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
+CHAOS_IL2CPP_INT32 HalfCompare(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
 bool HalfEquals(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
 bool HalfOperatorEquals(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
 bool HalfOperatorLessThan(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
 bool HalfOperatorLessThanOrEqual(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
 bool HalfOperatorGreaterThan(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
 bool HalfOperatorGreaterThanOrEqual(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
-int32_t SingleCompare(float left_value, float right_value);
+CHAOS_IL2CPP_INT32 SingleCompare(float left_value, float right_value);
 bool SingleEquals(float left_value, float right_value);
 bool SingleIsEvenInteger(float value);
 bool SingleIsFinite(float value);
@@ -1283,7 +1409,7 @@ bool SingleIsSubnormal(float value);
 bool SingleIsZero(float value);
 bool SingleIsInteger(float value);
 bool SingleIsInfinity(float value);
-int32_t DoubleCompare(double left_value, double right_value);
+CHAOS_IL2CPP_INT32 DoubleCompare(double left_value, double right_value);
 bool DoubleEquals(double left_value, double right_value);
 bool DoubleIsEvenInteger(double value);
 bool DoubleIsFinite(double value);
@@ -1315,23 +1441,23 @@ bool NFloatIsRealNumber(double value);
 bool NFloatIsSubnormal(double value);
 bool NFloatIsInteger(double value);
 bool NFloatIsInfinity(double value);
-int32_t NFloatCompare(double left_value, double right_value);
+CHAOS_IL2CPP_INT32 NFloatCompare(double left_value, double right_value);
 bool NFloatEquals(double left_value, double right_value);
-int32_t Int128Compare(const void* left_value, const void* right_value);
+CHAOS_IL2CPP_INT32 Int128Compare(const void* left_value, const void* right_value);
 bool Int128Equals(const void* left_value, const void* right_value);
-int32_t UInt128Compare(const void* left_value, const void* right_value);
+CHAOS_IL2CPP_INT32 UInt128Compare(const void* left_value, const void* right_value);
 bool UInt128Equals(const void* left_value, const void* right_value);
-int32_t IntPtrCompare(CHAOS_IL2CPP_INTPTR left_value, CHAOS_IL2CPP_INTPTR right_value);
+CHAOS_IL2CPP_INT32 IntPtrCompare(CHAOS_IL2CPP_INTPTR left_value, CHAOS_IL2CPP_INTPTR right_value);
 bool IntPtrEquals(CHAOS_IL2CPP_INTPTR left_value, CHAOS_IL2CPP_INTPTR right_value);
-int32_t UIntPtrCompare(CHAOS_IL2CPP_UINTPTR left_value, CHAOS_IL2CPP_UINTPTR right_value);
+CHAOS_IL2CPP_INT32 UIntPtrCompare(CHAOS_IL2CPP_UINTPTR left_value, CHAOS_IL2CPP_UINTPTR right_value);
 bool UIntPtrEquals(CHAOS_IL2CPP_UINTPTR left_value, CHAOS_IL2CPP_UINTPTR right_value);
-int32_t DateTimeCompareTicks(const void* left_value, const void* right_value);
+CHAOS_IL2CPP_INT32 DateTimeCompareTicks(const void* left_value, const void* right_value);
 bool DateTimeEqualsTicks(const void* left_value, const void* right_value);
-int32_t TimeSpanCompareTicks(const void* left_value, const void* right_value);
+CHAOS_IL2CPP_INT32 TimeSpanCompareTicks(const void* left_value, const void* right_value);
 bool TimeSpanEqualsTicks(const void* left_value, const void* right_value);
-int32_t DateOnlyCompareDayNumber(CHAOS_IL2CPP_INT32 left_value, CHAOS_IL2CPP_INT32 right_value);
+CHAOS_IL2CPP_INT32 DateOnlyCompareDayNumber(CHAOS_IL2CPP_INT32 left_value, CHAOS_IL2CPP_INT32 right_value);
 bool DateOnlyEqualsDayNumber(CHAOS_IL2CPP_INT32 left_value, CHAOS_IL2CPP_INT32 right_value);
-int32_t TimeOnlyCompareTicksValue(CHAOS_IL2CPP_INT64 left_value, CHAOS_IL2CPP_INT64 right_value);
+CHAOS_IL2CPP_INT32 TimeOnlyCompareTicksValue(CHAOS_IL2CPP_INT64 left_value, CHAOS_IL2CPP_INT64 right_value);
 bool TimeOnlyEqualsTicksValue(CHAOS_IL2CPP_INT64 left_value, CHAOS_IL2CPP_INT64 right_value);
 RuntimeNumericsVector2Carrier Vector2Add(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value);
 RuntimeNumericsVector2Carrier Vector2Subtract(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value);
@@ -1352,7 +1478,7 @@ RuntimeNumericsVector2Carrier Vector2Normalize(RuntimeNumericsVector2Carrier val
 RuntimeNumericsVector2Carrier Vector2Lerp(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value, float amount);
 RuntimeNumericsVector2Carrier Vector2Reflect(RuntimeNumericsVector2Carrier vector, RuntimeNumericsVector2Carrier normal);
 bool Vector2Equals(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value);
-int32_t Vector2GetHashCode(RuntimeNumericsVector2Carrier value);
+CHAOS_IL2CPP_INT32 Vector2GetHashCode(RuntimeNumericsVector2Carrier value);
 float Vector2Length(RuntimeNumericsVector2Carrier value);
 float Vector2GetElement(RuntimeNumericsVector2Carrier value, CHAOS_IL2CPP_INT32 index);
 RuntimeNumericsVector2Carrier Vector2Negate(RuntimeNumericsVector2Carrier value);
@@ -1386,7 +1512,7 @@ RuntimeNumericsVector3Carrier Vector3Lerp(RuntimeNumericsVector3Carrier left_val
 RuntimeNumericsVector3Carrier Vector3Reflect(RuntimeNumericsVector3Carrier vector, RuntimeNumericsVector3Carrier normal);
 RuntimeNumericsVector3Carrier Vector3Cross(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVector3Carrier right_value);
 bool Vector3Equals(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVector3Carrier right_value);
-int32_t Vector3GetHashCode(RuntimeNumericsVector3Carrier value);
+CHAOS_IL2CPP_INT32 Vector3GetHashCode(RuntimeNumericsVector3Carrier value);
 float Vector3Length(RuntimeNumericsVector3Carrier value);
 float Vector3GetElement(RuntimeNumericsVector3Carrier value, CHAOS_IL2CPP_INT32 index);
 RuntimeNumericsVector3Carrier Vector3Negate(RuntimeNumericsVector3Carrier value);
@@ -1417,7 +1543,7 @@ RuntimeNumericsVector4Carrier Vector4SquareRoot(RuntimeNumericsVector4Carrier va
 RuntimeNumericsVector4Carrier Vector4Normalize(RuntimeNumericsVector4Carrier value);
 RuntimeNumericsVector4Carrier Vector4Lerp(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVector4Carrier right_value, float amount);
 bool Vector4Equals(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVector4Carrier right_value);
-int32_t Vector4GetHashCode(RuntimeNumericsVector4Carrier value);
+CHAOS_IL2CPP_INT32 Vector4GetHashCode(RuntimeNumericsVector4Carrier value);
 float Vector4Length(RuntimeNumericsVector4Carrier value);
 float Vector4GetElement(RuntimeNumericsVector4Carrier value, CHAOS_IL2CPP_INT32 index);
 RuntimeNumericsVector4Carrier Vector4Negate(RuntimeNumericsVector4Carrier value);

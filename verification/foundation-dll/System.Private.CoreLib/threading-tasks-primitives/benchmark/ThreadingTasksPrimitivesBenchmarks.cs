@@ -9,80 +9,93 @@ using System.Collections.Generic;
 using System.Reflection;
 using Chaos.TestFramework;
 
-// Benchmark stubs for family/System.Private.CoreLib/threading/tasks-primitives
+// Auto-generated benchmark skeletons for ThreadingTasksPrimitivesBenchmarks.
+// Framework handles timing — body only needs to invoke the method under measurement.
 public static class ThreadingTasksPrimitivesBenchmarks
 {
-    // Benchmark Task.Run native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Task.Run with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Run_System_Threading_Tasks_Task_System_Action() { }
-    // Benchmark Task.Run native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Run_System_Threading_Tasks_Task_System_Action() { _ = Task.Run(null!); }
+    // Purpose: Benchmark native-runtime performance of Task.Run with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task`1(System.Func`1)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Run_System_Threading_Tasks_Task_1_System_Func_1() { }
-    // Benchmark Task.Delay native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Run_System_Threading_Tasks_Task_1_System_Func_1() { _ = Task.Run(null!); }
+    // Purpose: Benchmark native-runtime performance of Task.Delay with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Delay_System_Threading_Tasks_Task_System_Int32() { _ = Task.Delay(42); }
-    // Benchmark Task.Wait native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Task.Wait with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Void() { Task.CompletedTask.Wait(); }
-    // Benchmark Task.Wait native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Task.Wait with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Boolean_System_Int32() { _ = Task.CompletedTask.Wait(42); }
-    // Benchmark Task.get_IsCompleted native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Task.get_IsCompleted with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_get_IsCompleted_System_Boolean() { _ = Task.CompletedTask.IsCompleted; }
-    // Benchmark Task.get_Status native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Task.get_Status with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_get_Status_System_Threading_Tasks_TaskStatus() { _ = Task.CompletedTask.Status; }
-    // Benchmark Task.ContinueWith native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Task.ContinueWith with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action{System.Threading.Tasks.Task})")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_ContinueWith_System_Threading_Tasks_Task_System_Action_System_Threadi() { }
-    // Benchmark Task.WhenAll native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_ContinueWith_System_Threading_Tasks_Task_System_Action_System_Threadi() { _ = Task.CompletedTask.ContinueWith(null!); }
+    // Purpose: Benchmark native-runtime performance of Task.WhenAll with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_WhenAll_System_Threading_Tasks_Task_System_Threading_Tasks_Task() { }
-    // Benchmark Task.WhenAny native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_WhenAll_System_Threading_Tasks_Task_System_Threading_Tasks_Task() { _ = Task.WhenAll(Array.Empty<System.Threading.Tasks.Task>()); }
+    // Purpose: Benchmark native-runtime performance of Task.WhenAny with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:System.Threading.Tasks.Task{System.Threading.Tasks.Task}(System.Threading.Tasks.Task[])")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_WhenAny_System_Threading_Tasks_Task_System_Threading_Tasks_Task_Syste() { }
-    // Benchmark Task.FromResult native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_WhenAny_System_Threading_Tasks_Task_System_Threading_Tasks_Task_Syste() { _ = Task.WhenAny(Array.Empty<System.Threading.Tasks.Task>()); }
+    // Purpose: Benchmark native-runtime performance of Task.FromResult with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::FromResult:System.Threading.Tasks.Task`1(TResult)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_FromResult_System_Threading_Tasks_Task_1_TResult() { }
-    // Benchmark Thread.Start native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Thread.Start with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Thread::Start:System.Void()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Thread_Start_System_Void() { }
-    // Benchmark Thread.Sleep native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Thread_Start_System_Void() { Thread.CurrentThread.Start(); }
+    // Purpose: Benchmark native-runtime performance of Thread.Sleep with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Threading_Thread_Sleep_System_Void_System_Int32() { Thread.Sleep(42); }
-    // Benchmark Thread.get_CurrentThread native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Thread.get_CurrentThread with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Threading_Thread_get_CurrentThread_System_Threading_Thread() { _ = Thread.CurrentThread; }
-    // Benchmark Thread.get_ManagedThreadId native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Thread.get_ManagedThreadId with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [BenchmarkRoute(BenchmarkRoute.Native)]

@@ -52,7 +52,9 @@ public static class BoxingUnboxingCastsBenchmarks
     // Purpose: Benchmark native-runtime performance of Object.MemberwiseClone with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_BoxingUnboxingCasts)]
-    public static void Benchmark_System_Private_CoreLib_System_Object_MemberwiseClone_System_Object() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Object_MemberwiseClone_System_Object() { _ = new object().MemberwiseClone(); }
     // Purpose: Benchmark native-runtime performance of RuntimeHelpers.GetObjectValue with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_BoxingUnboxingCasts)]

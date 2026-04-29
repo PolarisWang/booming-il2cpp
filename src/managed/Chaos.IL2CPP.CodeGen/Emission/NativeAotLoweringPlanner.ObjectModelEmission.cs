@@ -629,7 +629,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				builder.AppendLine("    CHAOS_IL2CPP_INTPTR length = 0;");
 				builder.AppendLine("    const char* utf8_data = nullptr;");
-				builder.AppendLine("    uint64_t string_id = 0u;  // stable StringId, 0 = not yet materialized");
+				builder.AppendLine("    CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized");
 			}
 			if (flag3)
 			{

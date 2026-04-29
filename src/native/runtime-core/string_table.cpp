@@ -13,18 +13,18 @@ namespace chaos::il2cpp::string_table {
 namespace {
 
 const StringEntry* g_aot_entries = nullptr;
-uint32_t g_aot_entry_count = 0u;
+CHAOS_IL2CPP_UINT32 g_aot_entry_count = 0u;
 
 CHAOS_IL2CPP_MUTEX g_dynamic_mutex;
 CHAOS_IL2CPP_UNORDERED_MAP(StringId, StringView) g_dynamic_entries;
 // Intermediate typedef avoids MSVC >> issue with nested macros
 using DomainVector = CHAOS_IL2CPP_VECTOR(StringId);
-using DomainRegistrations = CHAOS_IL2CPP_UNORDERED_MAP(uint32_t, DomainVector);
+using DomainRegistrations = CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, DomainVector);
 DomainRegistrations g_domain_registrations;
 
 }  // anonymous namespace
 
-void InitializeFromAot(const StringEntry* entries, uint32_t count)
+void InitializeFromAot(const StringEntry* entries, CHAOS_IL2CPP_UINT32 count)
 {
     g_aot_entries = entries;
     g_aot_entry_count = count;
@@ -65,7 +65,7 @@ StringView Resolve(StringId id)
     return StringView{};
 }
 
-StringId Register(const char* utf8_data, uint32_t byte_count, uint32_t domain_id)
+StringId Register(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count, CHAOS_IL2CPP_UINT32 domain_id)
 {
     if (utf8_data == nullptr || byte_count == 0u)
     {
@@ -73,7 +73,7 @@ StringId Register(const char* utf8_data, uint32_t byte_count, uint32_t domain_id
     }
 
     StringId id = 14695981039346656037ULL;
-    for (uint32_t i = 0u; i < byte_count; ++i)
+    for (CHAOS_IL2CPP_UINT32 i = 0u; i < byte_count; ++i)
     {
         id ^= static_cast<unsigned char>(utf8_data[i]);
         id *= 1099511628211ULL;
@@ -109,12 +109,12 @@ StringId Register(const char* utf8_data, uint32_t byte_count, uint32_t domain_id
     return id;
 }
 
-StringId Intern(const char* utf8_data, uint32_t byte_count)
+StringId Intern(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count)
 {
     return Register(utf8_data, byte_count, 0u);
 }
 
-void UnregisterDomain(uint32_t domain_id)
+void UnregisterDomain(CHAOS_IL2CPP_UINT32 domain_id)
 {
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_dynamic_mutex);
 
@@ -124,8 +124,10 @@ void UnregisterDomain(uint32_t domain_id)
         return;
     }
 
-    for (const auto id : domain_it->second)
+    const auto& domain_ids = domain_it->second;
+    for (CHAOS_IL2CPP_SIZE i = 0; i < domain_ids.size(); ++i)
     {
+        const auto id = domain_ids[i];
         const auto entry_it = g_dynamic_entries.find(id);
         if (entry_it != g_dynamic_entries.end())
         {

@@ -133,7 +133,7 @@ class DispatchVirtualNativeAotTests(unittest.TestCase):
         for required_fragment in [
             "switch (chaos_header->type_id)",
             "case chaos_type_id_CoreRuntimeFeatures_DispatchLeaf_System_Int32_:",
-            "extern \"C\" std::int32_t CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue(std::intptr_t chaos_arg_0)",
+            "extern \"C\" CHAOS_IL2CPP_INT32 CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue(CHAOS_IL2CPP_INTPTR chaos_arg_0)",
             "CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue(chaos_instance)",
             "CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue",
         ]:

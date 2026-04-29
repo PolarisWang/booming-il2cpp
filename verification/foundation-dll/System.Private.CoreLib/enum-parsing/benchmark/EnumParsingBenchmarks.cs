@@ -9,56 +9,75 @@ using System.Collections.Generic;
 using System.Reflection;
 using Chaos.TestFramework;
 
-// Benchmark stubs for family/System.Private.CoreLib/enum/parsing
+// Auto-generated benchmark skeletons for EnumParsingBenchmarks.
+// Framework handles timing — body only needs to invoke the method under measurement.
 public static class EnumParsingBenchmarks
 {
-    // Benchmark Enum.Format native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Enum.Format with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
-    public static void Benchmark_System_Private_CoreLib_System_Enum_Format_System_String_System_Type_System_Object_System_String() { }
-    // Benchmark Enum.GetName native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Enum_Format_System_String_System_Type_System_Object_System_String() { _ = Enum.Format(typeof(byte), 42, "hello"); }
+    // Purpose: Benchmark native-runtime performance of Enum.GetName with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
-    public static void Benchmark_System_Private_CoreLib_System_Enum_GetName_System_String_System_RuntimeType_System_UInt64() { }
-    // Benchmark Enum.GetName native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Enum_GetName_System_String_System_RuntimeType_System_UInt64() { _ = Enum.GetName(null!, 42uL); }
+    // Purpose: Benchmark native-runtime performance of Enum.GetName with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
-    public static void Benchmark_System_Private_CoreLib_System_Enum_GetName_System_String_System_Type_System_Object() { }
-    // Benchmark Enum.GetNames native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Enum_GetName_System_String_System_Type_System_Object() { _ = Enum.GetName(typeof(byte), 42); }
+    // Purpose: Benchmark native-runtime performance of Enum.GetNames with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
-    public static void Benchmark_System_Private_CoreLib_System_Enum_GetNames_System_String_System_Type() { }
-    // Benchmark Enum.GetValues native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Enum_GetNames_System_String_System_Type() { _ = Enum.GetNames(typeof(byte)); }
+    // Purpose: Benchmark native-runtime performance of Enum.GetValues with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
-    public static void Benchmark_System_Private_CoreLib_System_Enum_GetValues_System_Array_System_Type() { }
-    // Benchmark Enum.IsDefined native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Enum_GetValues_System_Array_System_Type() { _ = Enum.GetValues(typeof(byte)); }
+    // Purpose: Benchmark native-runtime performance of Enum.IsDefined with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
-    public static void Benchmark_System_Private_CoreLib_System_Enum_IsDefined_System_Boolean_System_Type_System_Object() { }
-    // Benchmark Enum.Parse native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Enum_IsDefined_System_Boolean_System_Type_System_Object() { _ = Enum.IsDefined(typeof(byte), 42); }
+    // Purpose: Benchmark native-runtime performance of Enum.Parse with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
-    public static void Benchmark_System_Private_CoreLib_System_Enum_Parse_System_Object_System_Type_System_String() { }
-    // Benchmark Enum.Parse native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Enum_Parse_System_Object_System_Type_System_String() { _ = Enum.Parse(typeof(byte), "hello"); }
+    // Purpose: Benchmark native-runtime performance of Enum.Parse with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
-    public static void Benchmark_System_Private_CoreLib_System_Enum_Parse_System_Object_System_Type_System_String_System_Boolean() { }
-    // Benchmark Enum.ToString native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Enum_Parse_System_Object_System_Type_System_String_System_Boolean() { _ = Enum.Parse(typeof(byte), "hello", true); }
+    // Purpose: Benchmark native-runtime performance of Enum.ToString with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::ToString:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Enum_ToString_System_String() { _ = DayOfWeek.Monday.ToString(); }
-    // Benchmark Enum.ToString native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Enum.ToString with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::ToString:System.String(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
-    public static void Benchmark_System_Private_CoreLib_System_Enum_ToString_System_String_System_String() { }
-    // Benchmark Enum.TryParse native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Enum_ToString_System_String_System_String() { _ = DayOfWeek.Monday.ToString("hello"); }
+    // Purpose: Benchmark native-runtime performance of Enum.TryParse with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
     public static void Benchmark_System_Private_CoreLib_System_Enum_TryParse_System_Boolean_System_Type_System_String_System_Boolean_System_Object() { }
-    // Benchmark Enum.TryParse native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Enum.TryParse with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
     public static void Benchmark_System_Private_CoreLib_System_Enum_TryParse_System_Boolean_System_Type_System_String_System_Object() { }}

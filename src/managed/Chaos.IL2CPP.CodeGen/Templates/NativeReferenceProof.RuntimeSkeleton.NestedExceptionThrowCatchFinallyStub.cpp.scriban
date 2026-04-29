@@ -1,4 +1,4 @@
-int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -27,7 +27,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     if (abi->class_init(runtime, reference_type) != CHAOS_RUNTIME_STATUS_OK) {
         return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
     }
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
     if (raw_write_line_string == nullptr) {
         return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
@@ -53,7 +53,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         if (inner_finally_message == nullptr) {
             return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
         }
-        const int32_t inner_finally_status = write_line_string(runtime, thread, inner_finally_message);
+        const CHAOS_IL2CPP_INT32 inner_finally_status = write_line_string(runtime, thread, inner_finally_message);
         if (inner_finally_status != CHAOS_BRIDGE_STATUS_OK) {
             return inner_finally_status;
         }
@@ -64,7 +64,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     if (outer_finally_message == nullptr || message == nullptr) {
         return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
     }
-    const int32_t outer_finally_status = write_line_string(runtime, thread, outer_finally_message);
+    const CHAOS_IL2CPP_INT32 outer_finally_status = write_line_string(runtime, thread, outer_finally_message);
     if (outer_finally_status != CHAOS_BRIDGE_STATUS_OK) {
         return outer_finally_status;
     }

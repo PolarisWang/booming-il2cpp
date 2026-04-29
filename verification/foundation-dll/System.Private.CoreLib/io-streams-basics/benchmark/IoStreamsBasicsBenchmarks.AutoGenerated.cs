@@ -16,11 +16,15 @@ public static class IoStreamsBasicsBenchmarks
     // Purpose: Benchmark native-runtime performance of Stream.Read with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
-    public static void Benchmark_System_Private_CoreLib_System_IO_Stream_Read_System_Int32_System_Byte_System_Int32_System_Int32() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_IO_Stream_Read_System_Int32_System_Byte_System_Int32_System_Int32() { _ = new MemoryStream().Read(new byte[] { 1, 2, 3 }, 42, 42); }
     // Purpose: Benchmark native-runtime performance of Stream.Write with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
-    public static void Benchmark_System_Private_CoreLib_System_IO_Stream_Write_System_Void_System_Byte_System_Int32_System_Int32() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_IO_Stream_Write_System_Void_System_Byte_System_Int32_System_Int32() { new MemoryStream().Write(new byte[] { 1, 2, 3 }, 42, 42); }
     // Purpose: Benchmark native-runtime performance of Stream.Flush with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.IO.Stream::Flush:System.Void()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
@@ -54,7 +58,9 @@ public static class IoStreamsBasicsBenchmarks
     // Purpose: Benchmark native-runtime performance of Stream.CopyTo with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
-    public static void Benchmark_System_Private_CoreLib_System_IO_Stream_CopyTo_System_Void_System_IO_Stream() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_IO_Stream_CopyTo_System_Void_System_IO_Stream() { new MemoryStream().CopyTo(null!); }
     // Purpose: Benchmark native-runtime performance of TextReader.ReadLine with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
@@ -88,20 +94,30 @@ public static class IoStreamsBasicsBenchmarks
     // Purpose: Benchmark native-runtime performance of BinaryReader.ReadInt32 with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
-    public static void Benchmark_System_Private_CoreLib_System_IO_BinaryReader_ReadInt32_System_Int32() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_IO_BinaryReader_ReadInt32_System_Int32() { _ = default(BinaryReader)!.ReadInt32(); }
     // Purpose: Benchmark native-runtime performance of BinaryReader.ReadString with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
-    public static void Benchmark_System_Private_CoreLib_System_IO_BinaryReader_ReadString_System_String() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_IO_BinaryReader_ReadString_System_String() { _ = default(BinaryReader)!.ReadString(); }
     // Purpose: Benchmark native-runtime performance of BinaryReader.ReadDouble with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
-    public static void Benchmark_System_Private_CoreLib_System_IO_BinaryReader_ReadDouble_System_Double() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_IO_BinaryReader_ReadDouble_System_Double() { _ = default(BinaryReader)!.ReadDouble(); }
     // Purpose: Benchmark native-runtime performance of BinaryWriter.Write with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
-    public static void Benchmark_System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_Int32() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_Int32() { default(BinaryWriter)!.Write(42); }
     // Purpose: Benchmark native-runtime performance of BinaryWriter.Write with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_IOStreamsBasics)]
-    public static void Benchmark_System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_String() { }}
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_String() { default(BinaryWriter)!.Write("hello"); }}

@@ -853,6 +853,25 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                                 proof["comparisonMethodResults"] = list(cmp_data.get("methodResults") or [])
                             except (json.JSONDecodeError, OSError):
                                 pass
+                    # Inject hotupdate verification report into hotupdateProof
+                    if proof_key == "hotupdateProof":
+                        report_path = repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id) / "hotupdate-verification-report.json"
+                        if report_path.is_file():
+                            try:
+                                report_data = json.loads(report_path.read_text(encoding="utf-8"))
+                                summary_data = dict(report_data.get("summary") or {})
+                                proof["passedMethodCount"] = summary_data.get("passedMethods", 0)
+                                proof["failedMethodCount"] = summary_data.get("failedMethods", 0)
+                                proof["unmatchedMethodCount"] = summary_data.get("unmatchedMethods", 0)
+                                proof["verificationMethodResults"] = list(report_data.get("methodResults") or [])
+                                # Update numerator/denominator based on actual results
+                                total = summary_data.get("totalMethods", 0)
+                                if total > 0:
+                                    proof["denominator"] = total
+                                    proof["numerator"] = summary_data.get("passedMethods", 0)
+                                    proof["progressPercent"] = (proof["numerator"] / total) * 100.0
+                            except (json.JSONDecodeError, OSError):
+                                pass
                     family_record[proof_key] = proof
                 # Synthetic proof objects for audit-input and codegen-review using methodCount
                 mc = int(family_record.get("methodCount") or 0)
@@ -1429,6 +1448,43 @@ li + li { margin-top: 6px; }
 .family-table th, .family-table td,
 .waiver-table th, .waiver-table td { white-space: nowrap; }
 .family-table tr.family-active td:first-child + td { font-weight: 700; }
+.benchmark-link {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 4px;
+  background: var(--ok-bg);
+  color: var(--ok-ink);
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.benchmark-link:hover { background: var(--ok-ink); color: #fff; text-decoration: none; }
+/* benchmark detail sections */
+.benchmark-detail { margin: 8px 0; }
+.benchmark-detail details {
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.benchmark-detail summary {
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 0;
+}
+.benchmark-detail summary:hover { color: var(--accent); }
+.benchmark-detail-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.benchmark-detail-table th,
+.benchmark-detail-table td {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  text-align: right;
+  font-size: 13px;
+}
+.benchmark-detail-table th { background: var(--bg-strong); text-align: right; font-weight: 700; }
+.benchmark-detail-table th:first-child,
+.benchmark-detail-table td:first-child { text-align: left; }
 /* dll detail dual axis */
 .dll-axis { margin-top: 0; }
 @media (max-width: 900px) {
@@ -1584,6 +1640,86 @@ def _gate_header_tooltip(gate_code: str) -> str:
     return tooltips.get(gate_code, "")
 
 
+def _render_benchmark_speedup_cell(
+    benchmark_proof: dict[str, Any],
+    *,
+    assembly_name: str,
+    family_id: str,
+    root_prefix: str,
+    is_detail_page: bool = False,
+) -> str:
+    """Render benchmark cell: show speedup summary with hyperlink to detail page section.
+
+    The cell displays the average speedup percentage as a clickable link
+    that jumps to the family's benchmark section in the DLL detail page.
+    """
+    avg_speedup = benchmark_proof.get("averageSpeedupPercent")
+    if avg_speedup is None:
+        return _render_generic_gate_progress_cell(
+            {}, gate_proof=benchmark_proof, root_prefix=root_prefix, label='Benchmark'
+        )
+    slug = _family_slug(family_id)
+    anchor = f"benchmark-{slug}"
+    detail_href = f"#{anchor}" if is_detail_page else f"./dlls/{assembly_name}.html#{anchor}"
+    avg_speedup_fmt = f"{avg_speedup:.1f}"
+    native_faster = int(benchmark_proof.get("nativeFasterCount") or 0)
+    managed_faster = int(benchmark_proof.get("managedFasterCount") or 0)
+    total = native_faster + managed_faster
+    if total > 0 and native_faster > managed_faster:
+        direction = "faster"
+    elif total > 0 and managed_faster >= native_faster:
+        direction = "slower"
+    else:
+        direction = ""
+    label = f"{avg_speedup_fmt}% {direction}" if direction else f"{avg_speedup_fmt}%"
+    return f'<a href="{escape(detail_href, quote=True)}" class="benchmark-link" title="View benchmark details: {native_faster} native faster, {managed_faster} managed faster">{escape(label)}</a>'
+
+
+def _render_benchmark_detail_section(family: dict[str, Any], *, assembly_name: str) -> str:
+    """Render a collapsible benchmark detail table for a family in the DLL detail page."""
+    family_id = _string(family.get("familyId") or "")
+    slug = _family_slug(family_id)
+    dname = _string(family.get("displayName"))
+    benchmark_proof = dict(family.get("benchmarkProof") or {})
+    avg_speedup = benchmark_proof.get("averageSpeedupPercent")
+    method_results = list(benchmark_proof.get("comparisonMethodResults") or [])
+    if not method_results:
+        return ""
+    avg_speedup_fmt = f"{avg_speedup:.1f}" if avg_speedup is not None else "n/a"
+    native_faster = int(benchmark_proof.get("nativeFasterCount") or 0)
+    managed_faster = int(benchmark_proof.get("managedFasterCount") or 0)
+    matched = sum(1 for r in method_results if r.get("status") == "matched")
+
+    rows = ""
+    for r in method_results:
+        sid = _short_method_subject_id(_string(r.get("methodSubjectId", "")))
+        status = _string(r.get("status", ""))
+        managed_ms = r.get("managedElapsedMs")
+        native_ms = r.get("nativeElapsedMs")
+        speedup = r.get("speedupPercent")
+        managed_str = f"{managed_ms:.4f}" if isinstance(managed_ms, (int, float)) else "n/a"
+        native_str = f"{native_ms:.4f}" if isinstance(native_ms, (int, float)) else "n/a"
+        speedup_str = f"{speedup:.2f}%" if isinstance(speedup, (int, float)) else "n/a"
+        status_badge = _status_badge(status)
+        rows += f"<tr><td>{escape(sid)}</td><td>{managed_str}</td><td>{native_str}</td><td>{speedup_str}</td><td>{status_badge}</td></tr>"
+
+    return f"""
+<div class="benchmark-detail" id="benchmark-{escape(slug, quote=True)}">
+  <details>
+    <summary><strong>{escape(dname)}</strong> — Average Speedup: {avg_speedup_fmt}% (Native faster: {native_faster}, Managed faster: {managed_faster}, Matched: {matched}/{len(method_results)})</summary>
+    <div class="table-wrap">
+      <table class="benchmark-detail-table">
+        <thead>
+          <tr><th>Method</th><th>Managed (ms)</th><th>Native (ms)</th><th>Speedup</th><th>Status</th></tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
+  </details>
+</div>"""
+
+
+# Keep original benchmark comparison for tooltip
 def _render_benchmark_comparison_section(gate_proof: dict[str, Any]) -> str:
     avg_speedup = gate_proof.get("averageSpeedupPercent")
     if avg_speedup is None:
@@ -1664,12 +1800,14 @@ def _render_generic_gate_progress_cell(
 """.strip()
 
 
-def _render_family_table(families: list[dict[str, Any]], *, root_prefix: str) -> str:
+def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str = "", root_prefix: str) -> str:
     if not families:
         return ""
     rows = ""
     for idx, family in enumerate(families, start=1):
         dname = _string(family.get("displayName"))
+        family_id = _string(family.get("familyId") or "")
+        slug = _family_slug(family_id)
         status = _string(family.get("closureStatus"))
         gates = dict(family.get("verificationGates") or {})
         test_code = dict(family.get("testCode") or {})
@@ -1692,12 +1830,23 @@ def _render_family_table(families: list[dict[str, Any]], *, root_prefix: str) ->
             f"<td>{native_proof_cell}</td>" if col == "native-proof"
             else f"<td>{_render_generic_gate_progress_cell(family, gate_proof=managed_proof, root_prefix=root_prefix, label='Managed Proof')}</td>" if col == "managed-proof"
             else f"<td>{_render_generic_gate_progress_cell(family, gate_proof=hotupdate_proof, root_prefix=root_prefix, label='HotUpdate Proof')}</td>" if col == "hotupdate-proof"
-            else f"<td>{_render_generic_gate_progress_cell(family, gate_proof=benchmark_proof, root_prefix=root_prefix, label='Benchmark')}</td>" if col == "benchmark"
+            else f"<td>{_render_benchmark_speedup_cell(benchmark_proof, assembly_name=assembly_name, family_id=family_id, root_prefix=root_prefix, is_detail_page=True)}</td>" if col == "benchmark"
             else f"<td>{_status_badge(gates.get(col, ''))}</td>"
             for col in GATE_COLUMNS
         )
+        # Source code links for benchmark
+        if assembly_name and slug:
+            # Derive benchmark class name from slug: "convert-char" -> "ConvertCharBenchmarks"
+            benchmark_class_name = "".join(part.capitalize() for part in slug.split("-")) + "Benchmarks"
+            managed_code_href = root_prefix + f"verification/foundation-dll/{assembly_name}/{slug}/benchmark/{benchmark_class_name}.cs"
+            native_code_href = root_prefix + f"verification/foundation-dll/{assembly_name}/{slug}/native/BenchmarkNativeEntry.cpp"
+            managed_code_cell = f'<td><a href="{escape(managed_code_href, quote=True)}" target="_blank" rel="noreferrer" title="{benchmark_class_name}.cs">.cs</a></td>'
+            native_code_cell = f'<td><a href="{escape(native_code_href, quote=True)}" target="_blank" rel="noreferrer" title="BenchmarkNativeEntry.cpp">.cpp</a></td>'
+        else:
+            managed_code_cell = '<td><span class="status-muted">n/a</span></td>'
+            native_code_cell = '<td><span class="status-muted">n/a</span></td>'
         bold_class = ' class="family-active"' if _family_has_active_gates(gates) else ""
-        rows += f"<tr{bold_class}><td>{idx}</td><td>{escape(dname)}</td><td>{_status_badge(status)}</td><td>{test_code_cell}</td>{gate_badges}</tr>"
+        rows += f"<tr{bold_class}><td>{idx}</td><td>{escape(dname)}</td><td>{test_code_cell}</td>{gate_badges}{managed_code_cell}{native_code_cell}<td>{_status_badge(status)}</td></tr>"
     gate_headers = "".join(
         f"<th title=\"{_gate_header_tooltip(col)}\">{GATE_LABELS[col]}</th>"
         for col in GATE_COLUMNS
@@ -1708,7 +1857,7 @@ def _render_family_table(families: list[dict[str, Any]], *, root_prefix: str) ->
   <p>Each capability family represents a logical group of methods. A family is considered closed when all its non-exempt verification gates pass.</p>
   <div class="table-wrap">
     <table class="family-table">
-      <thead><tr><th>#</th><th>Family</th><th title="Closure status: closed means all non-exempt verification gates pass">closureStatus</th><th title="Test code presence: present = handwritten tests exist, needs-tests = gap, coverage-widened = auto-generated, no-coverage = 0 methods">Test Code</th>{gate_headers}</tr></thead>
+      <thead><tr><th>#</th><th>Family</th><th title="Test code presence: present = handwritten tests exist, needs-tests = gap, coverage-widened = auto-generated, no-coverage = 0 methods">Test Code</th>{gate_headers}<th title="Managed benchmark source code">Managed Code</th><th title="Native benchmark source code">Native Code</th><th title="Closure status: closed means all non-exempt verification gates pass">closureStatus</th></tr></thead>
       <tbody>{rows}</tbody>
     </table>
   </div>
@@ -1893,7 +2042,12 @@ def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
     if family_source == "auto-derived":
         auto_derive_notice = '<div class="auto-derive-notice">&#9432; Capability families for this DLL have been auto-derived from project execution states. Replace with manually curated entries in capability-family-ledger.json.</div>'
 
-    family_section = _render_family_table(families, root_prefix=root_prefix)
+    family_section = _render_family_table(families, assembly_name=assembly_name, root_prefix=root_prefix)
+    # Benchmark detail tables per family
+    benchmark_detail_sections = "".join(
+        _render_benchmark_detail_section(family, assembly_name=assembly_name)
+        for family in families
+    )
     waiver_section = _render_waiver_table(families)
     source_links_html = _render_source_links_block(sl, root_prefix=root_prefix)
 
@@ -1925,6 +2079,7 @@ def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
       {auto_derive_notice}
       {source_links_html}
       {family_section}
+      {benchmark_detail_sections}
       {waiver_section}
     </div>
     <section>

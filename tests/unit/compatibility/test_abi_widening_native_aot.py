@@ -129,7 +129,7 @@ class AbiWideningNativeAotTests(unittest.TestCase):
         for required_fragment in [
             "struct chaos_valuetype_CoreRuntimeFeatures_AbiWideningPair",
             "extern \"C\" chaos_valuetype_CoreRuntimeFeatures_AbiWideningPair CoreRuntimeFeatures_AbiWideningHarness_Echo(chaos_valuetype_CoreRuntimeFeatures_AbiWideningPair chaos_arg_0)",
-            "extern \"C\" chaos_valuetype_CoreRuntimeFeatures_AbiWideningPair CoreRuntimeFeatures_AbiWideningHarness_Create(std::int32_t chaos_arg_0, std::int32_t chaos_arg_1)",
+            "extern \"C\" chaos_valuetype_CoreRuntimeFeatures_AbiWideningPair CoreRuntimeFeatures_AbiWideningHarness_Create(CHAOS_IL2CPP_INT32 chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1)",
             "auto chaos_abi_param_0 = chaos_arg_0;",
             "CoreRuntimeFeatures_AbiWideningHarness_Echo(*chaos_resolve_managed_value_pointer<chaos_valuetype_CoreRuntimeFeatures_AbiWideningPair>(chaos_arg_0))",
         ]:

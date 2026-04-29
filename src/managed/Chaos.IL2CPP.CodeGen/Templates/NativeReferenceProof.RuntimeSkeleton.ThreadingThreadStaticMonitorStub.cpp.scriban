@@ -1,6 +1,6 @@
 namespace {
 
-CHAOS_IL2CPP_ATOMIC(int32_t) {{ stub_name }}_g_finalized_count = 0;
+CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_INT32) {{ stub_name }}_g_finalized_count = 0;
 
 void {{ stub_name }}_RecordFinalizer(void* object_instance)
 {
@@ -11,7 +11,7 @@ void {{ stub_name }}_RecordFinalizer(void* object_instance)
 
 }  // namespace
 
-int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -34,7 +34,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         return CHAOS_BRIDGE_STATUS_NOT_READY;
     }
 
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
     if (raw_write_line_string == nullptr) {
         return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
@@ -44,8 +44,8 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     constexpr const char* kThreadStaticSlotKey = "ThreadingProof.thread-slot";
     int gate_object = 0;
     void* gate = &gate_object;
-    int32_t shared_total = 0;
-    int32_t main_slot = 0;
+    CHAOS_IL2CPP_INT32 shared_total = 0;
+    CHAOS_IL2CPP_INT32 main_slot = 0;
     if (!chaos::il2cpp::runtime_core::ThreadStaticInt32Add(runtime, thread, kThreadStaticSlotKey, 1, &main_slot) ||
         main_slot != 1) {
         return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
@@ -66,7 +66,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
     }
 
-    int32_t main_root = 7;
+    CHAOS_IL2CPP_INT32 main_root = 7;
     if (chaos::il2cpp::runtime_core::ReportThreadRoot(runtime, thread, &main_root, sizeof(main_root)) != 1u) {
         return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
     }
@@ -77,7 +77,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
 
     {{ stub_name }}_g_finalized_count.store(0);
 
-    int32_t worker_slot = 0;
+    CHAOS_IL2CPP_INT32 worker_slot = 0;
     CHAOS_IL2CPP_SIZE worker_root_count = 0u;
     bool worker_ok = false;
     CHAOS_IL2CPP_THREAD worker([&]() {
@@ -86,7 +86,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
             return;
         }
 
-        int32_t worker_root = 11;
+        CHAOS_IL2CPP_INT32 worker_root = 11;
         if (!chaos::il2cpp::runtime_core::ThreadStaticInt32Add(runtime, worker_thread, kThreadStaticSlotKey, 1, &worker_slot) ||
             worker_slot != 1) {
             abi->thread_detach(runtime, worker_thread);

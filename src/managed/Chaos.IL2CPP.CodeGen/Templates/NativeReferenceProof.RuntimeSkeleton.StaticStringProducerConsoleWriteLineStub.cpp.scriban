@@ -3,7 +3,7 @@ struct {{ stub_name }}_ProducerArgs
     void** return_value;
 };
 
-int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -22,7 +22,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     {
         &message
     };
-    const int32_t producer_status = {{ target_stub_name }}(
+    const CHAOS_IL2CPP_INT32 producer_status = {{ target_stub_name }}(
         bridge,
         code_registration,
         metadata_registration,
@@ -35,7 +35,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
             ? producer_status
             : CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
     }
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
     if (raw_write_line_string == nullptr) {
         return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;

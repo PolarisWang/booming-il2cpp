@@ -126,7 +126,7 @@ class Int64CarrierNativeAotTests(unittest.TestCase):
 
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn(
-            "extern \"C\" std::int64_t CoreRuntimeBenchmarks_IntegerCarrierBenchmarkMath_RoundTripInt64(std::int64_t chaos_arg_0)",
+            "extern \"C\" CHAOS_IL2CPP_INT64 CoreRuntimeBenchmarks_IntegerCarrierBenchmarkMath_RoundTripInt64(CHAOS_IL2CPP_INT64 chaos_arg_0)",
             generated_cpp,
         )
         self.assertIn("chaos_store_int64", generated_cpp)

@@ -2,9 +2,6 @@
 #define CHAOS_IL2CPP_INTERPRETER_VM_H_
 
 #include <chaos/native_types.h>
-
-#include <cstddef>
-#include <cstdint>
 #include <vector>
 
 namespace chaos::il2cpp::interpreter {
@@ -79,18 +76,18 @@ enum class ValueTag : uint8_t {
 struct InterpreterValue {
     ValueTag tag = ValueTag::Void;
     union {
-        int32_t i32;
-        int64_t i64;
+        CHAOS_IL2CPP_INT32 i32;
+        CHAOS_IL2CPP_INT64 i64;
         float f32;
         double f64;
         void* obj;
     };
 
     InterpreterValue() noexcept : tag(ValueTag::Void), i64(0) {}
-    InterpreterValue(int32_t value) noexcept : tag(ValueTag::Int32), i32(value) {}
+    InterpreterValue(CHAOS_IL2CPP_INT32 value) noexcept : tag(ValueTag::Int32), i32(value) {}
 
-    static InterpreterValue from_i32(int32_t value);
-    static InterpreterValue from_i64(int64_t value);
+    static InterpreterValue from_i32(CHAOS_IL2CPP_INT32 value);
+    static InterpreterValue from_i64(CHAOS_IL2CPP_INT64 value);
     static InterpreterValue from_f32(float value);
     static InterpreterValue from_f64(double value);
     static InterpreterValue from_obj(void* value);
@@ -99,14 +96,14 @@ struct InterpreterValue {
 
 struct IRInstruction {
     IROpCode op_code = IROpCode::Ret;
-    int32_t operand_index = 0;
-    int32_t immediate_i4 = 0;
-    size_t branch_target = 0;
-    int64_t immediate_i8 = 0;
+    CHAOS_IL2CPP_INT32 operand_index = 0;
+    CHAOS_IL2CPP_INT32 immediate_i4 = 0;
+    CHAOS_IL2CPP_SIZE branch_target = 0;
+    CHAOS_IL2CPP_INT64 immediate_i8 = 0;
     double immediate_r8 = 0.0;
     const char* string_operand = nullptr;
-    size_t field_offset = 0;
-    size_t secondary_index = 0;
+    CHAOS_IL2CPP_SIZE field_offset = 0;
+    CHAOS_IL2CPP_SIZE secondary_index = 0;
 };
 
 struct IRMethod {
@@ -121,7 +118,7 @@ struct ExecutionFrame {
 
 struct ExecutionResult {
     bool has_return_value = false;
-    int32_t int32_value = 0;
+    CHAOS_IL2CPP_INT32 int32_value = 0;
     InterpreterValue return_value = {};
 };
 
@@ -130,8 +127,8 @@ public:
     ExecutionResult Execute(const IRMethod& method, ExecutionFrame* frame) const;
 
 private:
-    static size_t GetBranchTarget(const IRMethod& method, size_t target);
-    static void EnsureLocal(CHAOS_IL2CPP_VECTOR(InterpreterValue)* locals, size_t index);
+    static CHAOS_IL2CPP_SIZE GetBranchTarget(const IRMethod& method, CHAOS_IL2CPP_SIZE target);
+    static void EnsureLocal(CHAOS_IL2CPP_VECTOR(InterpreterValue)* locals, CHAOS_IL2CPP_SIZE index);
     static InterpreterValue Pop(CHAOS_IL2CPP_VECTOR(InterpreterValue)* stack);
 };
 

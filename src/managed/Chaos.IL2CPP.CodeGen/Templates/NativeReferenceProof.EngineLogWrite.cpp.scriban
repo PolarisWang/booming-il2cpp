@@ -3,7 +3,7 @@
 
 namespace chaos::il2cpp::generated {
 
-int32_t {{ native_reference_function_name }}(
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,

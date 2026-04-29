@@ -1,5 +1,5 @@
-from __future__ import annotations
-
+from __future__ import annotations
+
 import shutil
 import subprocess
 import unittest
@@ -17,132 +17,132 @@ DLL_PATH = SOLUTION_CORE_PACK_PROOFS_ROOT / "bin" / "Release" / "net8.0" / "Core
 TEST_FRAMEWORK_PROJECT_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
 TEST_FRAMEWORK_DLL_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "bin" / "Release" / "net8.0" / "Chaos.TestFramework.Sdk.dll"
 SOURCE_PATH = SOLUTION_CORE_PACK_PROOFS_ROOT / "ObjectModelAndDispatch" / "CastTypeCheckProof.cs"
-ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/CastTypeCheckProofEntry::Run()"
+ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/CastTypeCheckProofEntry::Run()"
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "object-model-cast-type-check-native-aot"
-
-
-def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
-    completed = subprocess.run(
-        arguments,
-        cwd=cwd,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        check=False,
-    )
-    if completed.returncode != 0:
-        combined_output = "\n".join(part for part in [completed.stdout, completed.stderr] if part)
-        raise AssertionError(f"command failed ({completed.returncode}): {' '.join(arguments)}\n{combined_output}")
-    return completed
-
-
+
+
+def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
+    completed = subprocess.run(
+        arguments,
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        check=False,
+    )
+    if completed.returncode != 0:
+        combined_output = "\n".join(part for part in [completed.stdout, completed.stderr] if part)
+        raise AssertionError(f"command failed ({completed.returncode}): {' '.join(arguments)}\n{combined_output}")
+    return completed
+
+
 class ObjectModelCastTypeCheckNativeAotTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.output_root = TEST_OUTPUT_ROOT / f"bundle-{uuid.uuid4().hex}"
-        cls.native_aot_output_root = TEST_OUTPUT_ROOT / f"native-aot-{uuid.uuid4().hex}"
-        cls.bundle_generated = False
-        cls.native_aot_generated = False
-
-    def _ensure_native_aot_generated(self) -> None:
-        if self.__class__.native_aot_generated:
-            return
-
-        if self.output_root.exists():
-            shutil.rmtree(self.output_root)
-        if self.native_aot_output_root.exists():
-            shutil.rmtree(self.native_aot_output_root)
-
-        run_checked(["dotnet", "build", str(PROJECT_PATH), "-c", "Release"], cwd=REPO_ROOT)
-        self.assertTrue(DLL_PATH.is_file(), msg=f"missing proof assembly: {DLL_PATH}")
-        run_checked(["dotnet", "build", str(TEST_FRAMEWORK_PROJECT_PATH), "-c", "Release"], cwd=REPO_ROOT)
-        self.assertTrue(TEST_FRAMEWORK_DLL_PATH.is_file(), msg=f"missing test framework assembly: {TEST_FRAMEWORK_DLL_PATH}")
-
-        run_checked(["dotnet", "build", str(DRIVER_PROJECT_PATH), "-c", "Release", "-m:1"], cwd=REPO_ROOT)
-        self.assertTrue(DRIVER_DLL_PATH.is_file(), msg=f"missing driver dll: {DRIVER_DLL_PATH}")
-
-        run_checked(
-            [
-                "dotnet",
-                str(DRIVER_DLL_PATH),
-                str(DLL_PATH),
-                str(self.output_root),
-                "--entry-point-subject-id",
-                ENTRY_SUBJECT_ID,
-                "--additional-assembly",
-                str(TEST_FRAMEWORK_DLL_PATH),
-            ],
-            cwd=REPO_ROOT,
-        )
-
-        run_checked(
-            [
-                "dotnet",
-                str(DRIVER_DLL_PATH),
-                "emit-native-aot",
-                str(self.output_root),
-                str(self.native_aot_output_root),
-            ],
-            cwd=REPO_ROOT,
-        )
-
-        self.__class__.bundle_generated = True
-        self.__class__.native_aot_generated = True
-
-    def test_cast_type_check_proof_source_is_aot_friendly(self) -> None:
-        self.assertTrue(SOURCE_PATH.is_file(), msg=f"missing proof source: {SOURCE_PATH}")
-
-        source_text = SOURCE_PATH.read_text(encoding="utf-8")
-
-        for required_fragment in [
-            "internal interface ICastTypeCheckView",
-            "internal class CastTypeCheckBaseBox",
-            "internal class CastTypeCheckMiddleBox : CastTypeCheckBaseBox",
-            "internal sealed class CastTypeCheckDerivedBox : CastTypeCheckMiddleBox, ICastTypeCheckView",
-            "internal static class CastTypeCheckProofEntry",
-            'Alias = "cast-type-check-proof"',
-            "ChaosAssertState.Reset();",
-            "object value = new CastTypeCheckDerivedBox { BaseValue = 7, MiddleValue = 21, DerivedValue = 42 };",
-            "var interfaceMatched = value as ICastTypeCheckView;",
-            "var interfaceCasted = (ICastTypeCheckView)value;",
-            "var middle = value as CastTypeCheckMiddleBox;",
-            "var matched = value as CastTypeCheckBaseBox;",
-            "var casted = (CastTypeCheckBaseBox)value;",
-            "Assert.Equal(1, interfaceMatched is null ? 0 : 1);",
-            "Assert.Equal(1, interfaceCasted is null ? 0 : 1);",
-            "Assert.Equal(1, middle is null ? 0 : 1);",
-            "Assert.Equal(1, matched is null ? 0 : 1);",
-            "Assert.Equal(7, casted.BaseValue);",
-            "Assert.Equal(21, ((CastTypeCheckMiddleBox)casted).MiddleValue);",
-            "Assert.Equal(42, ((CastTypeCheckDerivedBox)casted).DerivedValue);",
-            "return ChaosAssertState.Complete();",
-        ]:
-            self.assertIn(required_fragment, source_text)
-
-    def test_driver_emits_native_aot_cpp_for_cast_type_check_proof(self) -> None:
-        self._ensure_native_aot_generated()
-
-        generated_cpp = (
-            self.native_aot_output_root
-            / "generated"
-            / "native-aot.generated.cpp"
-        ).read_text(encoding="utf-8")
-
-        for required_fragment in [
-            "struct chaos_object_header",
-            "header.type_id",
-            "chaos_type_id_CoreRuntimeFeatures_ICastTypeCheckView",
-            "chaos_type_CoreRuntimeFeatures_CastTypeCheckBaseBox",
-            "chaos_type_CoreRuntimeFeatures_CastTypeCheckMiddleBox : public chaos_type_CoreRuntimeFeatures_CastTypeCheckBaseBox",
-            "chaos_type_CoreRuntimeFeatures_CastTypeCheckDerivedBox : public chaos_type_CoreRuntimeFeatures_CastTypeCheckMiddleBox",
-            "chaos_is_type_compatible(",
-            "chaos_does_type_implement_interface(",
-            "chaos_eval_stack[chaos_stack_top++] = chaos_matches ? chaos_value : static_cast<std::intptr_t>(0);",
-        ]:
-            self.assertIn(required_fragment, generated_cpp)
-
-
-if __name__ == "__main__":
-    unittest.main()
-
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.output_root = TEST_OUTPUT_ROOT / f"bundle-{uuid.uuid4().hex}"
+        cls.native_aot_output_root = TEST_OUTPUT_ROOT / f"native-aot-{uuid.uuid4().hex}"
+        cls.bundle_generated = False
+        cls.native_aot_generated = False
+
+    def _ensure_native_aot_generated(self) -> None:
+        if self.__class__.native_aot_generated:
+            return
+
+        if self.output_root.exists():
+            shutil.rmtree(self.output_root)
+        if self.native_aot_output_root.exists():
+            shutil.rmtree(self.native_aot_output_root)
+
+        run_checked(["dotnet", "build", str(PROJECT_PATH), "-c", "Release"], cwd=REPO_ROOT)
+        self.assertTrue(DLL_PATH.is_file(), msg=f"missing proof assembly: {DLL_PATH}")
+        run_checked(["dotnet", "build", str(TEST_FRAMEWORK_PROJECT_PATH), "-c", "Release"], cwd=REPO_ROOT)
+        self.assertTrue(TEST_FRAMEWORK_DLL_PATH.is_file(), msg=f"missing test framework assembly: {TEST_FRAMEWORK_DLL_PATH}")
+
+        run_checked(["dotnet", "build", str(DRIVER_PROJECT_PATH), "-c", "Release", "-m:1"], cwd=REPO_ROOT)
+        self.assertTrue(DRIVER_DLL_PATH.is_file(), msg=f"missing driver dll: {DRIVER_DLL_PATH}")
+
+        run_checked(
+            [
+                "dotnet",
+                str(DRIVER_DLL_PATH),
+                str(DLL_PATH),
+                str(self.output_root),
+                "--entry-point-subject-id",
+                ENTRY_SUBJECT_ID,
+                "--additional-assembly",
+                str(TEST_FRAMEWORK_DLL_PATH),
+            ],
+            cwd=REPO_ROOT,
+        )
+
+        run_checked(
+            [
+                "dotnet",
+                str(DRIVER_DLL_PATH),
+                "emit-native-aot",
+                str(self.output_root),
+                str(self.native_aot_output_root),
+            ],
+            cwd=REPO_ROOT,
+        )
+
+        self.__class__.bundle_generated = True
+        self.__class__.native_aot_generated = True
+
+    def test_cast_type_check_proof_source_is_aot_friendly(self) -> None:
+        self.assertTrue(SOURCE_PATH.is_file(), msg=f"missing proof source: {SOURCE_PATH}")
+
+        source_text = SOURCE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "internal interface ICastTypeCheckView",
+            "internal class CastTypeCheckBaseBox",
+            "internal class CastTypeCheckMiddleBox : CastTypeCheckBaseBox",
+            "internal sealed class CastTypeCheckDerivedBox : CastTypeCheckMiddleBox, ICastTypeCheckView",
+            "internal static class CastTypeCheckProofEntry",
+            'Alias = "cast-type-check-proof"',
+            "ChaosAssertState.Reset();",
+            "object value = new CastTypeCheckDerivedBox { BaseValue = 7, MiddleValue = 21, DerivedValue = 42 };",
+            "var interfaceMatched = value as ICastTypeCheckView;",
+            "var interfaceCasted = (ICastTypeCheckView)value;",
+            "var middle = value as CastTypeCheckMiddleBox;",
+            "var matched = value as CastTypeCheckBaseBox;",
+            "var casted = (CastTypeCheckBaseBox)value;",
+            "Assert.Equal(1, interfaceMatched is null ? 0 : 1);",
+            "Assert.Equal(1, interfaceCasted is null ? 0 : 1);",
+            "Assert.Equal(1, middle is null ? 0 : 1);",
+            "Assert.Equal(1, matched is null ? 0 : 1);",
+            "Assert.Equal(7, casted.BaseValue);",
+            "Assert.Equal(21, ((CastTypeCheckMiddleBox)casted).MiddleValue);",
+            "Assert.Equal(42, ((CastTypeCheckDerivedBox)casted).DerivedValue);",
+            "return ChaosAssertState.Complete();",
+        ]:
+            self.assertIn(required_fragment, source_text)
+
+    def test_driver_emits_native_aot_cpp_for_cast_type_check_proof(self) -> None:
+        self._ensure_native_aot_generated()
+
+        generated_cpp = (
+            self.native_aot_output_root
+            / "generated"
+            / "native-aot.generated.cpp"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "struct chaos_object_header",
+            "header.type_id",
+            "chaos_type_id_CoreRuntimeFeatures_ICastTypeCheckView",
+            "chaos_type_CoreRuntimeFeatures_CastTypeCheckBaseBox",
+            "chaos_type_CoreRuntimeFeatures_CastTypeCheckMiddleBox : public chaos_type_CoreRuntimeFeatures_CastTypeCheckBaseBox",
+            "chaos_type_CoreRuntimeFeatures_CastTypeCheckDerivedBox : public chaos_type_CoreRuntimeFeatures_CastTypeCheckMiddleBox",
+            "chaos_is_type_compatible(",
+            "chaos_does_type_implement_interface(",
+            "chaos_eval_stack[chaos_stack_top++] = chaos_matches ? chaos_value : static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+        ]:
+            self.assertIn(required_fragment, generated_cpp)
+
+
+if __name__ == "__main__":
+    unittest.main()
+

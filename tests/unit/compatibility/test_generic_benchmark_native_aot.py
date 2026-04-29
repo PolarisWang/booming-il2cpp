@@ -95,7 +95,7 @@ class GenericBenchmarkNativeAotTests(unittest.TestCase):
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeBenchmarks/GenericBenchmarkEntry::RunWorkload()", generated_cpp)
         self.assertIn("chaos_object_equals(chaos_entry.first, chaos_arg_1)", generated_cpp)
-        self.assertIn("bool chaos_object_equals(std::intptr_t chaos_left_value, std::intptr_t chaos_right_value) noexcept", generated_cpp)
+        self.assertIn("bool chaos_object_equals(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value) noexcept", generated_cpp)
 
 
 if __name__ == "__main__":

@@ -3,9 +3,7 @@
 #include "bootstrap.h"
 #include "codegen_bridge.h"
 #include "memory_domain.h"
-#include <cstddef>
-#include <cstdint>
-#include <cstring>
+#include <chaos/native_types.h>
 
 namespace chaos::il2cpp::generated
 {
@@ -18,7 +16,7 @@ constexpr const char* kTranslationUnitMode = {{ translation_unit_mode_literal }}
 constexpr CHAOS_IL2CPP_SIZE translation_unit_method_count = {{ translation_unit_method_count }};
 constexpr CHAOS_IL2CPP_SIZE translation_unit_page_size = {{ translation_unit_page_size }};
 constexpr CHAOS_IL2CPP_SIZE translation_unit_page_count = {{ translation_unit_page_count }};
-using NativeReferenceAssemblyPageDispatchFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+using NativeReferenceAssemblyPageDispatchFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -135,7 +133,7 @@ const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntryB
 {{~ end ~}}
 }
 
-int32_t DispatchAssemblySubject(
+CHAOS_IL2CPP_INT32 DispatchAssemblySubject(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -165,7 +163,7 @@ int32_t DispatchAssemblySubject(
         managed_args);
 }
 
-int32_t DispatchAssemblyMethodId(
+CHAOS_IL2CPP_INT32 DispatchAssemblyMethodId(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -192,7 +190,7 @@ int32_t DispatchAssemblyMethodId(
 }
 }  // namespace runtime_skeleton
 
-int32_t CHAOS_RUNTIME_ABI_CALL {{ native_entry_function_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ native_entry_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -255,7 +253,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ native_entry_function_name }}(
         request->managed_args);
 }
 
-int32_t CHAOS_RUNTIME_ABI_CALL RunNativeReference(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL RunNativeReference(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,

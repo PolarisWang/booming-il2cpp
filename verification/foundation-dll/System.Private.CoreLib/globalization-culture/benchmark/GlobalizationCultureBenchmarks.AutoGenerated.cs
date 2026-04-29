@@ -28,7 +28,9 @@ public static class GlobalizationCultureBenchmarks
     // Purpose: Benchmark native-runtime performance of CultureInfo.GetCultureInfo with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GlobalizationCulture)]
-    public static void Benchmark_System_Private_CoreLib_System_Globalization_CultureInfo_GetCultureInfo_System_Globalization_CultureInfo_System_String() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Globalization_CultureInfo_GetCultureInfo_System_Globalization_CultureInfo_System_String() { _ = CultureInfo.GetCultureInfo("hello"); }
     // Purpose: Benchmark native-runtime performance of CultureInfo.get_Name with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GlobalizationCulture)]

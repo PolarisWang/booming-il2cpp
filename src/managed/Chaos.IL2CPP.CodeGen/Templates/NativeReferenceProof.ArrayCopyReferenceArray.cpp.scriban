@@ -10,16 +10,16 @@ using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
     ThreadState* thread,
     const void* left_string,
     const void* right_string);
-using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
     RuntimeState* runtime,
     ThreadState* thread,
     const void* string_object);
 
-constexpr uint32_t kReferenceTypeToken = {{ reference_type_token }};
-constexpr uint32_t kCapturedFieldToken = {{ captured_field_token }};
-constexpr uint32_t kEntryMethodToken = {{ entry_method_token }};
-constexpr uint32_t kConstructorMethodToken = {{ constructor_method_token }};
-constexpr uint32_t kInstanceMethodToken = {{ instance_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kReferenceTypeToken = {{ reference_type_token }};
+constexpr CHAOS_IL2CPP_UINT32 kCapturedFieldToken = {{ captured_field_token }};
+constexpr CHAOS_IL2CPP_UINT32 kEntryMethodToken = {{ entry_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kConstructorMethodToken = {{ constructor_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kInstanceMethodToken = {{ instance_method_token }};
 constexpr const char* kDefaultImageName = "{{ assembly_name }}";
 constexpr const char* kConsoleWriteLineStringIcall = "{{ console_write_line_string_icall }}";
 constexpr const char* kStringConcatPairIcall = "{{ string_concat_pair_icall }}";
@@ -174,7 +174,7 @@ extern "C" void* CHAOS_RUNTIME_ABI_CALL {{ instance_method_symbol }}(
     return g_native_reference_context.concat_string_pair(runtime, thread, combined_message, message_suffix);
 }
 
-extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     RuntimeState* runtime,
     ThreadState* thread,
     void* managed_args) {
@@ -250,7 +250,7 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     return g_native_reference_context.write_line_string(runtime, thread, message);
 }
 
-int32_t {{ native_reference_function_name }}(
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,

@@ -28,7 +28,9 @@ public static class TimeDateTimeTimespanBenchmarks
     // Purpose: Benchmark native-runtime performance of DateTime.Parse with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TimeDateTimeTimespan)]
-    public static void Benchmark_System_Private_CoreLib_System_DateTime_Parse_System_DateTime_System_String() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_DateTime_Parse_System_DateTime_System_String() { _ = DateTime.Parse("hello"); }
     // Purpose: Benchmark native-runtime performance of DateTime.TryParse with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TimeDateTimeTimespan)]
@@ -102,4 +104,6 @@ public static class TimeDateTimeTimespanBenchmarks
     // Purpose: Benchmark native-runtime performance of TimeSpan.Parse with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TimeDateTimeTimespan)]
-    public static void Benchmark_System_Private_CoreLib_System_TimeSpan_Parse_System_TimeSpan_System_String() { }}
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_TimeSpan_Parse_System_TimeSpan_System_String() { _ = TimeSpan.Parse("hello"); }}

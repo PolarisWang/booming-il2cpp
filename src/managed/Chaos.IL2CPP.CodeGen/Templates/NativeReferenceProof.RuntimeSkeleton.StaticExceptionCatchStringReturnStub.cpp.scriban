@@ -3,7 +3,7 @@ struct {{ stub_name }}_ManagedArgs
     void** return_value;
 };
 
-int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -26,7 +26,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
 
     void* message = nullptr;
     try {
-        const int32_t throw_status = {{ throw_stub_name }}(
+        const CHAOS_IL2CPP_INT32 throw_status = {{ throw_stub_name }}(
             bridge,
             code_registration,
             metadata_registration,

@@ -13,7 +13,7 @@ namespace {
 struct VTableRegistryState {
     CHAOS_IL2CPP_MUTEX                                            mutex;
     // Key: type_token → registered vtable
-    CHAOS_IL2CPP_UNORDERED_MAP(uint32_t, const TypeVTable*)       by_type_token;
+    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, const TypeVTable*)       by_type_token;
 };
 
 VTableRegistryState& GetState() {
@@ -40,8 +40,8 @@ bool RegisterTypeVTable(const TypeVTable* vtable) {
     return true;
 }
 
-void* ResolveVirtualMethodPointer(uint32_t instance_type_token,
-                                  uint32_t declared_method_token) {
+void* ResolveVirtualMethodPointer(CHAOS_IL2CPP_UINT32 instance_type_token,
+                                  CHAOS_IL2CPP_UINT32 declared_method_token) {
     if (instance_type_token == 0u || declared_method_token == 0u) {
         return nullptr;
     }
@@ -50,7 +50,7 @@ void* ResolveVirtualMethodPointer(uint32_t instance_type_token,
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(state.mutex);
 
     // Walk the inheritance chain starting from instance_type_token.
-    uint32_t current_token = instance_type_token;
+    CHAOS_IL2CPP_UINT32 current_token = instance_type_token;
     while (current_token != 0u) {
         auto it = state.by_type_token.find(current_token);
         if (it == state.by_type_token.end()) {
@@ -58,7 +58,7 @@ void* ResolveVirtualMethodPointer(uint32_t instance_type_token,
         }
 
         const TypeVTable* vtable = it->second;
-        for (uint32_t i = 0u; i < vtable->slot_count; ++i) {
+        for (CHAOS_IL2CPP_UINT32 i = 0u; i < vtable->slot_count; ++i) {
             if (vtable->slots[i].method_token == declared_method_token) {
                 return vtable->slots[i].method_pointer;
             }
@@ -71,10 +71,10 @@ void* ResolveVirtualMethodPointer(uint32_t instance_type_token,
     return nullptr;
 }
 
-uint32_t GetRegisteredVTableCount() {
+CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount() {
     auto& state = GetState();
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(state.mutex);
-    return static_cast<uint32_t>(state.by_type_token.size());
+    return static_cast<CHAOS_IL2CPP_UINT32>(state.by_type_token.size());
 }
 
 }  // namespace chaos::il2cpp::vtable_registry

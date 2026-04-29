@@ -12,7 +12,7 @@ namespace {
 // Mirrors the proof-only UTF-8 string layout currently produced by runtime-core.
 struct StringObjectHeader {
     TypeInfoHandle type;
-    uintptr_t byte_count;
+    CHAOS_IL2CPP_UINTPTR byte_count;
 };
 
 const StringObjectHeader* TryGetStringHeader(const void* string_object) {
@@ -25,7 +25,7 @@ const StringObjectHeader* TryGetStringHeader(const void* string_object) {
 
 }  // namespace
 
-const char* TryGetUtf8View(const void* string_object, uintptr_t* out_byte_count) {
+const char* TryGetUtf8View(const void* string_object, CHAOS_IL2CPP_UINTPTR* out_byte_count) {
     if (out_byte_count != nullptr) {
         *out_byte_count = 0u;
     }
@@ -52,8 +52,8 @@ void* CHAOS_RUNTIME_ABI_CALL ConcatStringPair(
         return nullptr;
     }
 
-    uintptr_t left_byte_count = 0u;
-    uintptr_t right_byte_count = 0u;
+    CHAOS_IL2CPP_UINTPTR left_byte_count = 0u;
+    CHAOS_IL2CPP_UINTPTR right_byte_count = 0u;
     const char* left_utf8 = TryGetUtf8View(left_string, &left_byte_count);
     const char* right_utf8 = TryGetUtf8View(right_string, &right_byte_count);
     if ((left_string != nullptr && left_utf8 == nullptr) || (right_string != nullptr && right_utf8 == nullptr)) {
@@ -61,13 +61,13 @@ void* CHAOS_RUNTIME_ABI_CALL ConcatStringPair(
     }
 
     CHAOS_IL2CPP_STRING combined;
-    combined.reserve(static_cast<size_t>(left_byte_count + right_byte_count));
+    combined.reserve(static_cast<CHAOS_IL2CPP_SIZE>(left_byte_count + right_byte_count));
     if (left_utf8 != nullptr) {
-        combined.append(left_utf8, static_cast<size_t>(left_byte_count));
+        combined.append(left_utf8, static_cast<CHAOS_IL2CPP_SIZE>(left_byte_count));
     }
 
     if (right_utf8 != nullptr) {
-        combined.append(right_utf8, static_cast<size_t>(right_byte_count));
+        combined.append(right_utf8, static_cast<CHAOS_IL2CPP_SIZE>(right_byte_count));
     }
 
     return abi->string_new_utf8(runtime_state, thread_state, combined.c_str(), combined.size());
@@ -84,9 +84,9 @@ void* CHAOS_RUNTIME_ABI_CALL ConcatStringTriple(
         return nullptr;
     }
 
-    uintptr_t first_byte_count = 0u;
-    uintptr_t second_byte_count = 0u;
-    uintptr_t third_byte_count = 0u;
+    CHAOS_IL2CPP_UINTPTR first_byte_count = 0u;
+    CHAOS_IL2CPP_UINTPTR second_byte_count = 0u;
+    CHAOS_IL2CPP_UINTPTR third_byte_count = 0u;
     const char* first_utf8 = TryGetUtf8View(first_string, &first_byte_count);
     const char* second_utf8 = TryGetUtf8View(second_string, &second_byte_count);
     const char* third_utf8 = TryGetUtf8View(third_string, &third_byte_count);
@@ -97,36 +97,36 @@ void* CHAOS_RUNTIME_ABI_CALL ConcatStringTriple(
     }
 
     CHAOS_IL2CPP_STRING combined;
-    combined.reserve(static_cast<size_t>(first_byte_count + second_byte_count + third_byte_count));
+    combined.reserve(static_cast<CHAOS_IL2CPP_SIZE>(first_byte_count + second_byte_count + third_byte_count));
     if (first_utf8 != nullptr) {
-        combined.append(first_utf8, static_cast<size_t>(first_byte_count));
+        combined.append(first_utf8, static_cast<CHAOS_IL2CPP_SIZE>(first_byte_count));
     }
 
     if (second_utf8 != nullptr) {
-        combined.append(second_utf8, static_cast<size_t>(second_byte_count));
+        combined.append(second_utf8, static_cast<CHAOS_IL2CPP_SIZE>(second_byte_count));
     }
 
     if (third_utf8 != nullptr) {
-        combined.append(third_utf8, static_cast<size_t>(third_byte_count));
+        combined.append(third_utf8, static_cast<CHAOS_IL2CPP_SIZE>(third_byte_count));
     }
 
     return abi->string_new_utf8(runtime_state, thread_state, combined.c_str(), combined.size());
 }
 
-int32_t CHAOS_RUNTIME_ABI_CALL WriteLineString(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL WriteLineString(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     const void* string_object) {
     (void)runtime_state;
     (void)thread_state;
 
-    uintptr_t byte_count = 0u;
+    CHAOS_IL2CPP_UINTPTR byte_count = 0u;
     const char* utf8_text = TryGetUtf8View(string_object, &byte_count);
     if (string_object != nullptr && utf8_text == nullptr) {
         return 1;
     }
 
-    if (utf8_text != nullptr && CHAOS_IL2CPP_FWRITE(utf8_text, 1u, static_cast<size_t>(byte_count), stdout) != byte_count) {
+    if (utf8_text != nullptr && CHAOS_IL2CPP_FWRITE(utf8_text, 1u, static_cast<CHAOS_IL2CPP_SIZE>(byte_count), stdout) != byte_count) {
         return 1;
     }
 

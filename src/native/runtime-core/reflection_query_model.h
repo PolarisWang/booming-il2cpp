@@ -11,22 +11,22 @@ namespace chaos::il2cpp::runtime_core {
 struct ReflectionQueryParameterDescriptor {
     const char* subject_id_utf8;
     const char* name_utf8;
-    uint32_t parameter_index;
+    CHAOS_IL2CPP_UINT32 parameter_index;
     const char* member_type_utf8;
 };
 
 struct ReflectionQueryMethodDescriptor {
-    uint32_t metadata_token;
+    CHAOS_IL2CPP_UINT32 metadata_token;
     const char* subject_id_utf8;
     const char* name_utf8;
     const char* member_type_utf8;
-    int32_t parameter_count;
+    CHAOS_IL2CPP_INT32 parameter_count;
     const ReflectionQueryParameterDescriptor* parameters;
-    uint32_t parameter_descriptor_count;
+    CHAOS_IL2CPP_UINT32 parameter_descriptor_count;
 };
 
 struct ReflectionQueryFieldDescriptor {
-    uint32_t metadata_token;
+    CHAOS_IL2CPP_UINT32 metadata_token;
     const char* subject_id_utf8;
     const char* name_utf8;
     const char* member_type_utf8;
@@ -39,7 +39,7 @@ struct ReflectionQueryPropertyDescriptor {
 };
 
 struct ReflectionQueryTypeDescriptor {
-    uint32_t metadata_token;
+    CHAOS_IL2CPP_UINT32 metadata_token;
     const char* subject_id_utf8;
     const char* definition_subject_id_utf8;
     const char* namespace_name_utf8;
@@ -47,32 +47,32 @@ struct ReflectionQueryTypeDescriptor {
     const char* display_name_utf8;
     const ReflectionQueryTypeDescriptor* generic_type_definition;
     const ReflectionQueryFieldDescriptor* fields;
-    uint32_t field_count;
+    CHAOS_IL2CPP_UINT32 field_count;
     const ReflectionQueryPropertyDescriptor* properties;
-    uint32_t property_count;
+    CHAOS_IL2CPP_UINT32 property_count;
     const ReflectionQueryMethodDescriptor* methods;
-    uint32_t method_count;
+    CHAOS_IL2CPP_UINT32 method_count;
 };
 
 struct ReflectionQueryImageDescriptor {
     const char* image_name_utf8;
     const ReflectionQueryTypeDescriptor* const* types;
-    uint32_t type_count;
+    CHAOS_IL2CPP_UINT32 type_count;
 };
 
-constexpr uintptr_t kReflectionQueryHandleTag =
-    static_cast<uintptr_t>(1) << ((sizeof(uintptr_t) * 8u) - 1u);
+constexpr CHAOS_IL2CPP_UINTPTR kReflectionQueryHandleTag =
+    static_cast<CHAOS_IL2CPP_UINTPTR>(1) << ((sizeof(CHAOS_IL2CPP_UINTPTR) * 8u) - 1u);
 
 template <typename THandle, typename TDescriptor>
 inline THandle EncodeReflectionQueryHandle(const TDescriptor* descriptor) {
     return descriptor == nullptr
         ? nullptr
-        : reinterpret_cast<THandle>(reinterpret_cast<uintptr_t>(descriptor) | kReflectionQueryHandleTag);
+        : reinterpret_cast<THandle>(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(descriptor) | kReflectionQueryHandleTag);
 }
 
 template <typename TDescriptor, typename THandle>
 inline const TDescriptor* TryDecodeReflectionQueryHandle(THandle handle) {
-    const uintptr_t raw_handle = reinterpret_cast<uintptr_t>(handle);
+    const CHAOS_IL2CPP_UINTPTR raw_handle = reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(handle);
     if ((raw_handle & kReflectionQueryHandleTag) == 0u) {
         return nullptr;
     }
@@ -124,12 +124,12 @@ inline bool NamesMatch(const char* left, const char* right) {
 
 inline const ReflectionQueryTypeDescriptor* FindReflectionQueryTypeByToken(
     const ReflectionQueryImageDescriptor* image,
-    uint32_t metadata_token) {
+    CHAOS_IL2CPP_UINT32 metadata_token) {
     if (image == nullptr || image->types == nullptr || metadata_token == 0u) {
         return nullptr;
     }
 
-    for (uint32_t index = 0u; index < image->type_count; index++) {
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < image->type_count; index++) {
         const ReflectionQueryTypeDescriptor* type = image->types[index];
         if (type != nullptr && type->metadata_token == metadata_token) {
             return type;
@@ -147,7 +147,7 @@ inline const ReflectionQueryTypeDescriptor* FindReflectionQueryTypeByName(
         return nullptr;
     }
 
-    for (uint32_t index = 0u; index < image->type_count; index++) {
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < image->type_count; index++) {
         const ReflectionQueryTypeDescriptor* type = image->types[index];
         if (type != nullptr &&
             NamesMatch(type->namespace_name_utf8, namespace_utf8) &&
@@ -161,18 +161,18 @@ inline const ReflectionQueryTypeDescriptor* FindReflectionQueryTypeByName(
 
 inline const ReflectionQueryFieldDescriptor* FindReflectionQueryFieldByToken(
     const ReflectionQueryImageDescriptor* image,
-    uint32_t metadata_token) {
+    CHAOS_IL2CPP_UINT32 metadata_token) {
     if (image == nullptr || image->types == nullptr || metadata_token == 0u) {
         return nullptr;
     }
 
-    for (uint32_t type_index = 0u; type_index < image->type_count; type_index++) {
+    for (CHAOS_IL2CPP_UINT32 type_index = 0u; type_index < image->type_count; type_index++) {
         const ReflectionQueryTypeDescriptor* type = image->types[type_index];
         if (type == nullptr || type->fields == nullptr) {
             continue;
         }
 
-        for (uint32_t field_index = 0u; field_index < type->field_count; field_index++) {
+        for (CHAOS_IL2CPP_UINT32 field_index = 0u; field_index < type->field_count; field_index++) {
             const ReflectionQueryFieldDescriptor* field = &type->fields[field_index];
             if (field->metadata_token == metadata_token) {
                 return field;
@@ -185,18 +185,18 @@ inline const ReflectionQueryFieldDescriptor* FindReflectionQueryFieldByToken(
 
 inline const ReflectionQueryMethodDescriptor* FindReflectionQueryMethodByToken(
     const ReflectionQueryImageDescriptor* image,
-    uint32_t metadata_token) {
+    CHAOS_IL2CPP_UINT32 metadata_token) {
     if (image == nullptr || image->types == nullptr || metadata_token == 0u) {
         return nullptr;
     }
 
-    for (uint32_t type_index = 0u; type_index < image->type_count; type_index++) {
+    for (CHAOS_IL2CPP_UINT32 type_index = 0u; type_index < image->type_count; type_index++) {
         const ReflectionQueryTypeDescriptor* type = image->types[type_index];
         if (type == nullptr || type->methods == nullptr) {
             continue;
         }
 
-        for (uint32_t method_index = 0u; method_index < type->method_count; method_index++) {
+        for (CHAOS_IL2CPP_UINT32 method_index = 0u; method_index < type->method_count; method_index++) {
             const ReflectionQueryMethodDescriptor* method = &type->methods[method_index];
             if (method->metadata_token == metadata_token) {
                 return method;
@@ -214,7 +214,7 @@ inline const ReflectionQueryFieldDescriptor* FindReflectionQueryField(
         return nullptr;
     }
 
-    for (uint32_t index = 0u; index < type->field_count; index++) {
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < type->field_count; index++) {
         const ReflectionQueryFieldDescriptor* field = &type->fields[index];
         if (NamesMatch(field->name_utf8, field_name_utf8)) {
             return field;
@@ -231,7 +231,7 @@ inline const ReflectionQueryPropertyDescriptor* FindReflectionQueryProperty(
         return nullptr;
     }
 
-    for (uint32_t index = 0u; index < type->property_count; index++) {
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < type->property_count; index++) {
         const ReflectionQueryPropertyDescriptor* property = &type->properties[index];
         if (NamesMatch(property->name_utf8, property_name_utf8)) {
             return property;
@@ -244,12 +244,12 @@ inline const ReflectionQueryPropertyDescriptor* FindReflectionQueryProperty(
 inline const ReflectionQueryMethodDescriptor* FindReflectionQueryMethod(
     const ReflectionQueryTypeDescriptor* type,
     const char* method_name_utf8,
-    int32_t parameter_count) {
+    CHAOS_IL2CPP_INT32 parameter_count) {
     if (type == nullptr || type->methods == nullptr || method_name_utf8 == nullptr || parameter_count < 0) {
         return nullptr;
     }
 
-    for (uint32_t index = 0u; index < type->method_count; index++) {
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < type->method_count; index++) {
         const ReflectionQueryMethodDescriptor* method = &type->methods[index];
         if (NamesMatch(method->name_utf8, method_name_utf8) && method->parameter_count == parameter_count) {
             return method;
@@ -261,12 +261,12 @@ inline const ReflectionQueryMethodDescriptor* FindReflectionQueryMethod(
 
 inline const ReflectionQueryParameterDescriptor* FindReflectionQueryParameter(
     const ReflectionQueryMethodDescriptor* method,
-    uint32_t parameter_index) {
+    CHAOS_IL2CPP_UINT32 parameter_index) {
     if (method == nullptr || method->parameters == nullptr) {
         return nullptr;
     }
 
-    for (uint32_t index = 0u; index < method->parameter_descriptor_count; index++) {
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < method->parameter_descriptor_count; index++) {
         const ReflectionQueryParameterDescriptor* parameter = &method->parameters[index];
         if (parameter->parameter_index == parameter_index) {
             return parameter;

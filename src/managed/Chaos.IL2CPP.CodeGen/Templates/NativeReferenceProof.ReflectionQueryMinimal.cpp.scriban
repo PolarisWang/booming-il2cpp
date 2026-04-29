@@ -5,22 +5,22 @@ namespace chaos::il2cpp::generated {
 namespace {
 
 using chaos::il2cpp::runtime_core::EncodeReflectionQueryImageHandle;
-using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
     RuntimeState* runtime,
     ThreadState* thread,
     const void* string_object);
 
 constexpr const char* kProofMarker = "reflectionQueryMinimal";
-constexpr uint32_t kClosedTypeToken = {{ closed_type_token }};
-constexpr uint32_t kGenericTypeDefinitionToken = {{ generic_type_definition_token }};
-constexpr uint32_t kFieldToken = {{ captured_field_token }};
-constexpr uint32_t kMethodToken = {{ instance_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kClosedTypeToken = {{ closed_type_token }};
+constexpr CHAOS_IL2CPP_UINT32 kGenericTypeDefinitionToken = {{ generic_type_definition_token }};
+constexpr CHAOS_IL2CPP_UINT32 kFieldToken = {{ captured_field_token }};
+constexpr CHAOS_IL2CPP_UINT32 kMethodToken = {{ instance_method_token }};
 constexpr const char* kConsoleWriteLineStringIcall = "{{ console_write_line_string_icall }}";
 constexpr const char* kFieldQueryName = {{ field_query_name_literal }};
 constexpr const char* kPropertyQueryName = {{ property_query_name_literal }};
 constexpr const char* kMethodQueryName = {{ method_query_name_literal }};
-constexpr int32_t kMethodParameterCount = {{ method_parameter_count }};
-constexpr uint32_t kParameterIndex = {{ parameter_index }}u;
+constexpr CHAOS_IL2CPP_INT32 kMethodParameterCount = {{ method_parameter_count }};
+constexpr CHAOS_IL2CPP_UINT32 kParameterIndex = {{ parameter_index }}u;
 constexpr const char* kExpectedOutput = {{ expected_output_literal }};
 
 const chaos::il2cpp::runtime_core::ReflectionQueryParameterDescriptor kMethodParameters[] = {
@@ -57,7 +57,7 @@ const chaos::il2cpp::runtime_core::ReflectionQueryMethodDescriptor kClosedTypeMe
         "",
         kMethodParameterCount,
         kMethodParameters,
-        static_cast<uint32_t>(sizeof(kMethodParameters) / sizeof(kMethodParameters[0])),
+        static_cast<CHAOS_IL2CPP_UINT32>(sizeof(kMethodParameters) / sizeof(kMethodParameters[0])),
     },
 };
 
@@ -86,11 +86,11 @@ const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kClosedType = {
     {{ closed_type_display_name_literal }},
     &kGenericTypeDefinition,
     kClosedTypeFields,
-    static_cast<uint32_t>(sizeof(kClosedTypeFields) / sizeof(kClosedTypeFields[0])),
+    static_cast<CHAOS_IL2CPP_UINT32>(sizeof(kClosedTypeFields) / sizeof(kClosedTypeFields[0])),
     kClosedTypeProperties,
-    static_cast<uint32_t>(sizeof(kClosedTypeProperties) / sizeof(kClosedTypeProperties[0])),
+    static_cast<CHAOS_IL2CPP_UINT32>(sizeof(kClosedTypeProperties) / sizeof(kClosedTypeProperties[0])),
     kClosedTypeMethods,
-    static_cast<uint32_t>(sizeof(kClosedTypeMethods) / sizeof(kClosedTypeMethods[0])),
+    static_cast<CHAOS_IL2CPP_UINT32>(sizeof(kClosedTypeMethods) / sizeof(kClosedTypeMethods[0])),
 };
 
 const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor* const kProofTypes[] = {
@@ -101,7 +101,7 @@ const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor* const kProofTy
 const chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kProofImage = {
     "{{ assembly_name }}",
     kProofTypes,
-    static_cast<uint32_t>(sizeof(kProofTypes) / sizeof(kProofTypes[0])),
+    static_cast<CHAOS_IL2CPP_UINT32>(sizeof(kProofTypes) / sizeof(kProofTypes[0])),
 };
 
 struct NativeReferenceContext {
@@ -175,7 +175,7 @@ bool EnsureNativeReferenceContextReady(
 
 }  // namespace
 
-extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     RuntimeState* runtime,
     ThreadState* thread,
     void* managed_args) {
@@ -231,7 +231,7 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     return g_native_reference_context.write_line_string(runtime, thread, native_reference_output);
 }
 
-int32_t {{ native_reference_function_name }}(
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,

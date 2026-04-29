@@ -2,13 +2,13 @@
 #define CHAOS_IL2CPP_VTABLE_REGISTRY_H_
 
 #include "runtime_abi.h"
-#include <stdint.h>
+#include <chaos/native_types.h>
 
 namespace chaos::il2cpp::vtable_registry {
 
 /// A single slot in a type's virtual method table.
 struct VTableSlot {
-    uint32_t method_token;    ///< Token of the declared (base) virtual method
+    CHAOS_IL2CPP_UINT32 method_token;    ///< Token of the declared (base) virtual method
     void*    method_pointer;  ///< Pointer to the concrete implementation
 };
 
@@ -16,10 +16,10 @@ struct VTableSlot {
 /// Registered at bootstrap time; looked up at runtime for virtual dispatch.
 struct TypeVTable {
     TypeInfoHandle type;         ///< The concrete type this vtable belongs to
-    uint32_t       type_token;   ///< Numeric token of `type` (for fast lookup without ABI decode)
+    CHAOS_IL2CPP_UINT32       type_token;   ///< Numeric token of `type` (for fast lookup without ABI decode)
     TypeInfoHandle base_type;    ///< Base type (nullptr = no base)
-    uint32_t       base_token;   ///< Numeric token of base_type (0 = no base)
-    uint32_t       slot_count;
+    CHAOS_IL2CPP_UINT32       base_token;   ///< Numeric token of base_type (0 = no base)
+    CHAOS_IL2CPP_UINT32       slot_count;
     const VTableSlot* slots;
 };
 
@@ -31,11 +31,11 @@ bool RegisterTypeVTable(const TypeVTable* vtable);
 /// Walks the inheritance chain from `instance_type_token` upward until the
 /// declared method is found.
 /// Returns nullptr if no entry is found.
-void* ResolveVirtualMethodPointer(uint32_t instance_type_token,
-                                  uint32_t declared_method_token);
+void* ResolveVirtualMethodPointer(CHAOS_IL2CPP_UINT32 instance_type_token,
+                                  CHAOS_IL2CPP_UINT32 declared_method_token);
 
 /// Returns the number of registered vtables (useful for diagnostics).
-uint32_t GetRegisteredVTableCount();
+CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount();
 
 }  // namespace chaos::il2cpp::vtable_registry
 

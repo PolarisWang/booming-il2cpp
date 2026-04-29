@@ -64,7 +64,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    }");
 			builder.AppendLine();
 			builder.AppendLine("    const auto chaos_id = chaos::il2cpp::string_table::Intern(");
-			builder.AppendLine("        chaos_utf8_data, static_cast<uint32_t>(chaos_length));");
+			builder.AppendLine("        chaos_utf8_data, static_cast<CHAOS_IL2CPP_UINT32>(chaos_length));");
 			builder.AppendLine("    return chaos_make_string_id_value(chaos_id);");
 			builder.AppendLine("}");
 			builder.AppendLine();

@@ -15,7 +15,7 @@ struct {{ stub_name }}_ManagedArgs
     void** return_value;
 };
 
-int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -48,7 +48,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     {
         &produced_value
     };
-    const int32_t producer_status = {{ producer_stub_name }}(
+    const CHAOS_IL2CPP_INT32 producer_status = {{ producer_stub_name }}(
         bridge,
         code_registration,
         metadata_registration,
@@ -67,7 +67,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         produced_value,
         &initial_forwarded_value
     };
-    const int32_t initial_forwarder_status = {{ initial_forwarder_stub_name }}(
+    const CHAOS_IL2CPP_INT32 initial_forwarder_status = {{ initial_forwarder_stub_name }}(
         bridge,
         code_registration,
         metadata_registration,
@@ -99,7 +99,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         constructed_instance,
         &instance_message
     };
-    const int32_t instance_call_status = {{ instance_call_stub_name }}(
+    const CHAOS_IL2CPP_INT32 instance_call_status = {{ instance_call_stub_name }}(
         bridge,
         code_registration,
         metadata_registration,
@@ -118,7 +118,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         instance_message,
         &first_forwarded_message
     };
-    const int32_t first_terminal_forwarder_status = {{ first_terminal_forwarder_stub_name }}(
+    const CHAOS_IL2CPP_INT32 first_terminal_forwarder_status = {{ first_terminal_forwarder_stub_name }}(
         bridge,
         code_registration,
         metadata_registration,
@@ -137,7 +137,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         first_forwarded_message,
         &second_forwarded_message
     };
-    const int32_t second_terminal_forwarder_status = {{ second_terminal_forwarder_stub_name }}(
+    const CHAOS_IL2CPP_INT32 second_terminal_forwarder_status = {{ second_terminal_forwarder_stub_name }}(
         bridge,
         code_registration,
         metadata_registration,
@@ -156,7 +156,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         second_forwarded_message,
         &forwarded_message
     };
-    const int32_t third_terminal_forwarder_status = {{ third_terminal_forwarder_stub_name }}(
+    const CHAOS_IL2CPP_INT32 third_terminal_forwarder_status = {{ third_terminal_forwarder_stub_name }}(
         bridge,
         code_registration,
         metadata_registration,
@@ -169,7 +169,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
             ? third_terminal_forwarder_status
             : CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
     }
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
     if (raw_write_line_string == nullptr) {
         return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;

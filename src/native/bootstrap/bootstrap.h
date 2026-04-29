@@ -19,9 +19,9 @@ struct BootstrapState {
 
 const BootstrapState* PeekBootstrapState();
 const CodegenBridgeV0* GetCodegenBridgeV0();
-const RuntimeTypeCapabilityEntryV0* FindRegisteredTypeCapabilityEntry(uint32_t type_token);
-void* FindInvokerPointer(uint32_t method_token);
-void* FindMethodPointerByToken(uint32_t method_token);
+const RuntimeTypeCapabilityEntryV0* FindRegisteredTypeCapabilityEntry(CHAOS_IL2CPP_UINT32 type_token);
+void* FindInvokerPointer(CHAOS_IL2CPP_UINT32 method_token);
+void* FindMethodPointerByToken(CHAOS_IL2CPP_UINT32 method_token);
 memory_domain::DomainId GetAotDomainId();
 
 }  // namespace chaos::il2cpp::bootstrap

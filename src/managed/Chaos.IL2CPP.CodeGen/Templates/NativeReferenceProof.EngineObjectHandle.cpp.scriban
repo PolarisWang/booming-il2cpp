@@ -9,7 +9,7 @@ int g_engine_object_handle_sentinel = 7;
 
 }  // namespace
 
-int32_t {{ native_reference_function_name }}(
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -26,7 +26,7 @@ int32_t {{ native_reference_function_name }}(
     (void)managed_args;
 
     void* object_instance = &g_engine_object_handle_sentinel;
-    const uintptr_t handle = chaos::il2cpp::runtime_core::CreateEngineObjectHandle(object_instance);
+    const CHAOS_IL2CPP_UINTPTR handle = chaos::il2cpp::runtime_core::CreateEngineObjectHandle(object_instance);
     if (handle == 0u) {
         return 1;
     }

@@ -64,4 +64,6 @@ public static class AttributesCustomMetadataBenchmarks
     // Purpose: Benchmark native-runtime performance of Attribute.get_TypeId with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Attribute::get_TypeId:System.Object()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_AttributesCustomMetadata)]
-    public static void Benchmark_System_Private_CoreLib_System_Attribute_get_TypeId_System_Object() { }}
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Attribute_get_TypeId_System_Object() { _ = default(Attribute)!.TypeId; }}

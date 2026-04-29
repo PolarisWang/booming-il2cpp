@@ -1,4 +1,4 @@
-extern "C" void {{ import_method_symbol }}(void* arg0, void* arg1, void* arg2, int32_t arg3);
+extern "C" void {{ import_method_symbol }}(void* arg0, void* arg1, void* arg2, CHAOS_IL2CPP_INT32 arg3);
 
 struct {{ stub_name }}_ManagedArgs
 {
@@ -8,7 +8,7 @@ struct {{ stub_name }}_ManagedArgs
     CHAOS_IL2CPP_INT32 arg3;
 };
 
-int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,

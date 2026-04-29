@@ -12,8 +12,8 @@ namespace chaos::il2cpp::generated {
 
 namespace {
 
-using NativeImportFn = int32_t (WINAPI*)(int32_t arg0, int32_t arg1, int32_t arg2);
-using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+using NativeImportFn = CHAOS_IL2CPP_INT32 (WINAPI*)(CHAOS_IL2CPP_INT32 arg0, CHAOS_IL2CPP_INT32 arg1, CHAOS_IL2CPP_INT32 arg2);
+using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
     RuntimeState* runtime,
     ThreadState* thread,
     const void* string_object);
@@ -86,12 +86,12 @@ bool EnsureNativeReferenceContextReady(
 
 }  // namespace
 
-extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ import_method_symbol }}(
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ import_method_symbol }}(
     RuntimeState* runtime,
     ThreadState* thread,
-    int32_t arg0,
-    int32_t arg1,
-    int32_t arg2) {
+    CHAOS_IL2CPP_INT32 arg0,
+    CHAOS_IL2CPP_INT32 arg1,
+    CHAOS_IL2CPP_INT32 arg2) {
     (void)runtime;
     (void)thread;
 
@@ -102,7 +102,7 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ import_method_symbol }}(
     return g_native_reference_context.import_method(arg0, arg1, arg2);
 }
 
-extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     RuntimeState* runtime,
     ThreadState* thread,
     void* managed_args) {
@@ -120,7 +120,7 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
         {{ import_argument2 }});
 }
 
-int32_t {{ native_reference_function_name }}(
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -153,7 +153,7 @@ int32_t {{ native_reference_function_name }}(
         return 1;
     }
 
-    const int32_t import_result = {{ entry_symbol }}(runtime, thread, managed_args);
+    const CHAOS_IL2CPP_INT32 import_result = {{ entry_symbol }}(runtime, thread, managed_args);
     if (!EnsureNativeReferenceContextReady(runtime, thread)) {
         return 1;
     }
@@ -163,7 +163,7 @@ int32_t {{ native_reference_function_name }}(
         runtime,
         thread,
         native_reference_output.c_str(),
-        static_cast<uint32_t>(native_reference_output.size()));
+        static_cast<CHAOS_IL2CPP_UINT32>(native_reference_output.size()));
     if (managed_output == nullptr) {
         return 1;
     }

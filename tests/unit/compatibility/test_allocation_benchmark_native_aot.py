@@ -95,7 +95,7 @@ class AllocationBenchmarkNativeAotTests(unittest.TestCase):
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeBenchmarks/AllocationBenchmarkEntry::RunWorkload()", generated_cpp)
         self.assertIn('extern "C" void CoreRuntimeBenchmarks_AllocationWorkItem__ctor(', generated_cpp)
-        self.assertNotIn("chaos_reflection_get_type_from_handle(std::intptr_t chaos_type_handle)", generated_cpp)
+        self.assertNotIn("chaos_reflection_get_type_from_handle(CHAOS_IL2CPP_INTPTR chaos_type_handle)", generated_cpp)
         self.assertNotIn("chaos_type_System_Private_CoreLib_System_Type", generated_cpp)
         self.assertNotIn("chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo", generated_cpp)
 

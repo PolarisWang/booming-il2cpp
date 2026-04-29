@@ -16,15 +16,21 @@ public static class TypeRuntimeHandlesBenchmarks
     // Purpose: Benchmark native-runtime performance of Type.GetType with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
-    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String() { _ = Type.GetType("hello"); }
     // Purpose: Benchmark native-runtime performance of Type.GetType with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
-    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean() { _ = Type.GetType("hello", true); }
     // Purpose: Benchmark native-runtime performance of Type.GetType with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
-    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean_System_Boolean() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean_System_Boolean() { _ = Type.GetType("hello", true, true); }
     // Purpose: Benchmark native-runtime performance of Type.GetTypeFromHandle with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]

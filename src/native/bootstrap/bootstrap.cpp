@@ -31,23 +31,23 @@ constexpr const char* kDelegateRemoveIcall =
     "System.Private.CoreLib/System.Delegate::Remove(System.Delegate,System.Delegate)";
 
 struct UnresolvedVirtualCallEntry {
-    uint32_t instance_type_token;
-    uint32_t declared_method_token;
+    CHAOS_IL2CPP_UINT32 instance_type_token;
+    CHAOS_IL2CPP_UINT32 declared_method_token;
     void* resolved_method;
 };
 
 struct MethodPointerEntry {
-    uint32_t method_token;
+    CHAOS_IL2CPP_UINT32 method_token;
     void* method_pointer;
 };
 
 struct InvokerEntry {
-    uint32_t method_token;
+    CHAOS_IL2CPP_UINT32 method_token;
     void* invoker_pointer;
 };
 
 struct DelegateInstance {
-    uint32_t method_token;
+    CHAOS_IL2CPP_UINT32 method_token;
     void* method_pointer;
     void* target_instance;
     DelegateInstance* next;          // multicast chain (nullptr = last in chain)
@@ -61,11 +61,11 @@ BootstrapState g_bootstrap_state = {};/// Invoker pointer table built at Registe
 /// Keyed by method_token, used by MethodInvoke to dispatch calls correctly
 /// regardless of whether the caller passes an opaque token, a reflection-query
 /// handle, or a raw function pointer.
-static CHAOS_IL2CPP_UNORDERED_MAP(uint32_t, void*) g_invoker_table;
+static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, void*) g_invoker_table;
 
 template <typename THandle>
-THandle MakeOpaqueHandle(uint32_t token) {
-    return reinterpret_cast<THandle>(static_cast<uintptr_t>(token));
+THandle MakeOpaqueHandle(CHAOS_IL2CPP_UINT32 token) {
+    return reinterpret_cast<THandle>(static_cast<CHAOS_IL2CPP_UINTPTR>(token));
 }
 
 bool IsStructSizeValid(
@@ -84,8 +84,8 @@ bool IsBootstrapped(ImageHandle image) {
     return g_bootstrap_state.is_bootstrapped && image != nullptr;
 }
 
-uint32_t DecodeOpaqueToken(const void* handle) {
-    return static_cast<uint32_t>(reinterpret_cast<uintptr_t>(handle));
+CHAOS_IL2CPP_UINT32 DecodeOpaqueToken(const void* handle) {
+    return static_cast<CHAOS_IL2CPP_UINT32>(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(handle));
 }
 
 const MethodPointerEntry* GetMethodPointerEntries() {
@@ -98,7 +98,7 @@ const MethodPointerEntry* GetMethodPointerEntries() {
     return static_cast<const MethodPointerEntry*>(g_bootstrap_state.code_registration->method_pointers);
 }
 
-void* FindInvokerPointerByToken(uint32_t method_token) {
+void* FindInvokerPointerByToken(CHAOS_IL2CPP_UINT32 method_token) {
     auto iter = g_invoker_table.find(method_token);
     return iter != g_invoker_table.end() ? iter->second : nullptr;
 }
@@ -114,14 +114,14 @@ const UnresolvedVirtualCallEntry* GetUnresolvedVirtualCallEntries() {
 }
 
 const UnresolvedVirtualCallEntry* FindUnresolvedVirtualCallEntry(
-    uint32_t instance_type_token,
-    uint32_t declared_method_token) {
+    CHAOS_IL2CPP_UINT32 instance_type_token,
+    CHAOS_IL2CPP_UINT32 declared_method_token) {
     const auto* entries = GetUnresolvedVirtualCallEntries();
     if (entries == nullptr) {
         return nullptr;
     }
 
-    for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->unresolved_virtual_call_count; index++) {
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < g_bootstrap_state.code_registration->unresolved_virtual_call_count; index++) {
         const auto& entry = entries[index];
         if (entry.instance_type_token == instance_type_token
             && entry.declared_method_token == declared_method_token
@@ -140,8 +140,8 @@ bool IsKnownResolvedVirtualHandle(MethodInfoHandle method) {
     // (vtable registry stores raw function pointers, not opaque tokens.)
     // We distinguish vtable pointers from token handles by checking the token range:
     // tokens are <= 0x0FFFFFFF; real function pointers are usually larger addresses.
-    const uintptr_t raw = reinterpret_cast<uintptr_t>(method);
-    if (raw > static_cast<uintptr_t>(0x0FFFFFFFu)) {
+    const CHAOS_IL2CPP_UINTPTR raw = reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(method);
+    if (raw > static_cast<CHAOS_IL2CPP_UINTPTR>(0x0FFFFFFFu)) {
         // Likely a real function pointer from vtable registry or unresolved-virtual table.
         return true;
     }
@@ -152,7 +152,7 @@ bool IsKnownResolvedVirtualHandle(MethodInfoHandle method) {
         return false;
     }
 
-    for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->unresolved_virtual_call_count; index++) {
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < g_bootstrap_state.code_registration->unresolved_virtual_call_count; index++) {
         if (entries[index].resolved_method == method) {
             return true;
         }
@@ -179,7 +179,7 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL RegisterCodegen(
     g_invoker_table.clear();
     if (code_registration->invoker_pointers != nullptr && code_registration->invoker_pointer_count > 0u) {
         const auto* entries = static_cast<const InvokerEntry*>(code_registration->invoker_pointers);
-        for (uint32_t index = 0u; index < code_registration->invoker_pointer_count; index++) {
+        for (CHAOS_IL2CPP_UINT32 index = 0u; index < code_registration->invoker_pointer_count; index++) {
             g_invoker_table[entries[index].method_token] = entries[index].invoker_pointer;
         }
     }
@@ -240,7 +240,7 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
 
 TypeInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveTypeByToken(
     ImageHandle image,
-    uint32_t type_token) {
+    CHAOS_IL2CPP_UINT32 type_token) {
     if (!IsBootstrapped(image) || type_token == 0u) {
         return nullptr;
     }
@@ -263,13 +263,13 @@ const RuntimeTypeCapabilityEntryV0* GetTypeCapabilityEntries() {
     return g_bootstrap_state.code_registration->type_capabilities;
 }
 
-const RuntimeTypeCapabilityEntryV0* FindTypeCapabilityEntryByToken(uint32_t type_token) {
+const RuntimeTypeCapabilityEntryV0* FindTypeCapabilityEntryByToken(CHAOS_IL2CPP_UINT32 type_token) {
     const auto* entries = GetTypeCapabilityEntries();
     if (entries == nullptr || type_token == 0u) {
         return nullptr;
     }
 
-    for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->type_capability_count; ++index) {
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < g_bootstrap_state.code_registration->type_capability_count; ++index) {
         if (entries[index].type_token == type_token) {
             return &entries[index];
         }
@@ -288,7 +288,7 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL QueryTypeCapability(
 
 MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveMethodByToken(
     ImageHandle image,
-    uint32_t method_token) {
+    CHAOS_IL2CPP_UINT32 method_token) {
     if (!IsBootstrapped(image) || method_token == 0u) {
         return nullptr;
     }
@@ -303,7 +303,7 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveMethodByToken(
 
 FieldInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveFieldByToken(
     ImageHandle image,
-    uint32_t field_token) {
+    CHAOS_IL2CPP_UINT32 field_token) {
     if (!IsBootstrapped(image) || field_token == 0u) {
         return nullptr;
     }
@@ -321,7 +321,7 @@ void* CHAOS_RUNTIME_ABI_CALL BoxValue(
     ThreadState* thread_state,
     TypeInfoHandle value_type,
     const void* value,
-    size_t value_size) {
+    CHAOS_IL2CPP_SIZE value_size) {
     return chaos::il2cpp::runtime_core::BoxValueObject(
         runtime_state,
         thread_state,
@@ -334,7 +334,7 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL UnboxValue(
     RuntimeState* runtime_state,
     void* boxed_object,
     void* out_value,
-    size_t out_value_size) {
+    CHAOS_IL2CPP_SIZE out_value_size) {
     return chaos::il2cpp::runtime_core::UnboxValueObject(
         runtime_state,
         boxed_object,
@@ -344,14 +344,14 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL UnboxValue(
         : CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
 }
 
-static uint32_t DecodeVirtualMethodToken(MethodInfoHandle method) {
+static CHAOS_IL2CPP_UINT32 DecodeVirtualMethodToken(MethodInfoHandle method) {
     if (const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryMethodHandle(method)) {
         return desc->metadata_token;
     }
     return DecodeOpaqueToken(method);
 }
 
-static uint32_t DecodeVirtualTypeToken(TypeInfoHandle type) {
+static CHAOS_IL2CPP_UINT32 DecodeVirtualTypeToken(TypeInfoHandle type) {
     if (const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(type)) {
         return desc->metadata_token;
     }
@@ -365,8 +365,8 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethod(
         return nullptr;
     }
 
-    const uint32_t instance_type_token  = DecodeVirtualTypeToken(instance_type);
-    const uint32_t declared_method_token = DecodeVirtualMethodToken(declared_method);
+    const CHAOS_IL2CPP_UINT32 instance_type_token  = DecodeVirtualTypeToken(instance_type);
+    const CHAOS_IL2CPP_UINT32 declared_method_token = DecodeVirtualMethodToken(declared_method);
 
     // 1. Try vtable registry (runtime-registered per-type vtables).
     if (void* vtable_ptr = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
@@ -384,8 +384,8 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethod(
 }
 
 static MethodInfoHandle ResolveVirtualMethodTokenImpl(
-    uint32_t instance_type_token,
-    uint32_t declared_method_token) {
+    CHAOS_IL2CPP_UINT32 instance_type_token,
+    CHAOS_IL2CPP_UINT32 declared_method_token) {
     // 1. Try vtable registry (runtime-registered per-type vtables).
     if (void* vtable_ptr = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
             instance_type_token, declared_method_token)) {
@@ -401,8 +401,8 @@ static MethodInfoHandle ResolveVirtualMethodTokenImpl(
 }
 
 MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethodByToken(
-    uint32_t instance_type_token,
-    uint32_t declared_method_token) {
+    CHAOS_IL2CPP_UINT32 instance_type_token,
+    CHAOS_IL2CPP_UINT32 declared_method_token) {
     if (instance_type_token == 0u || declared_method_token == 0u) {
         return nullptr;
     }
@@ -415,9 +415,9 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
     void* object_instance,
     MethodInfoHandle method,
     void* const* argv,
-    uint32_t argc,
+    CHAOS_IL2CPP_UINT32 argc,
     void* out_return_value,
-    size_t out_return_value_size,
+    CHAOS_IL2CPP_SIZE out_return_value_size,
     ExceptionHandle* out_exception) {
     if (runtime_state == nullptr
         || thread_state == nullptr
@@ -473,7 +473,7 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
 }
 
 static DelegateInstance* AllocateDelegateNode(
-    uint32_t method_token,
+    CHAOS_IL2CPP_UINT32 method_token,
     void* method_pointer,
     void* target_instance,
     DelegateInstance* next) {
@@ -518,7 +518,7 @@ void* CHAOS_RUNTIME_ABI_CALL CreateDelegate(
         return nullptr;
     }
 
-    const uint32_t method_token = DecodeOpaqueToken(method);
+    const CHAOS_IL2CPP_UINT32 method_token = DecodeOpaqueToken(method);
     void* const method_pointer = FindMethodPointerByToken(method_token);
     if (method_pointer == nullptr) {
         return nullptr;
@@ -617,7 +617,7 @@ template <bool has_target>
 static void DfnDispatch(
     void** return_slot,
     void* method_pointer,
-    uint32_t argc,
+    CHAOS_IL2CPP_UINT32 argc,
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     void* target_instance,
@@ -656,9 +656,9 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL DelegateInvoke(
     ThreadState* thread_state,
     void* delegate_instance,
     void* const* argv,
-    uint32_t argc,
+    CHAOS_IL2CPP_UINT32 argc,
     void* out_return_value,
-    size_t out_return_value_size,
+    CHAOS_IL2CPP_SIZE out_return_value_size,
     ExceptionHandle* out_exception) {
     if (runtime_state == nullptr
         || thread_state == nullptr
@@ -761,11 +761,11 @@ const CodegenBridgeV0* GetCodegenBridgeV0() {
     return &kCodegenBridgeV0;
 }
 
-const RuntimeTypeCapabilityEntryV0* FindRegisteredTypeCapabilityEntry(uint32_t type_token) {
+const RuntimeTypeCapabilityEntryV0* FindRegisteredTypeCapabilityEntry(CHAOS_IL2CPP_UINT32 type_token) {
     return FindTypeCapabilityEntryByToken(type_token);
 }
 
-void* FindMethodPointerByToken(uint32_t method_token) {
+void* FindMethodPointerByToken(CHAOS_IL2CPP_UINT32 method_token) {
     if (void* replacement = chaos::il2cpp::method_replacement::Resolve(method_token)) {
         return replacement;
     }
@@ -775,7 +775,7 @@ void* FindMethodPointerByToken(uint32_t method_token) {
         return nullptr;
     }
 
-    for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->method_pointer_count; index++) {
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < g_bootstrap_state.code_registration->method_pointer_count; index++) {
         if (entries[index].method_token == method_token) {
             return entries[index].method_pointer;
         }
@@ -784,7 +784,7 @@ void* FindMethodPointerByToken(uint32_t method_token) {
     return nullptr;
 }
 
-void* FindInvokerPointer(uint32_t method_token) {
+void* FindInvokerPointer(CHAOS_IL2CPP_UINT32 method_token) {
     return FindInvokerPointerByToken(method_token);
 }
 

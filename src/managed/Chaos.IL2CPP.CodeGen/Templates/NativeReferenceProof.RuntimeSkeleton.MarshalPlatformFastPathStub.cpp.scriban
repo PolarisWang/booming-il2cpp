@@ -11,7 +11,7 @@ struct {{ stub_name }}_ManagedArgs
 // contract_id: {{ contract_id }}
 // marshal_capability_area: {{ capability_area }}
 // managed_result_type: {{ return_managed_type }}
-int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,

@@ -18,8 +18,8 @@ struct EngineCallbackRegistration {
 };
 
 struct EngineOwnershipRecord {
-    uint32_t weak_count = 0u;
-    uint32_t strong_count = 0u;
+    CHAOS_IL2CPP_UINT32 weak_count = 0u;
+    CHAOS_IL2CPP_UINT32 strong_count = 0u;
     CHAOS_IL2CPP_STRING owner = {};
 };
 
@@ -213,7 +213,7 @@ engine_status_t engine_release_object(
         return ENGINE_STATUS_INVALID_ARGUMENT;
     }
 
-    uint32_t* counter = handle_kind == ENGINE_HANDLE_KIND_STRONG
+    CHAOS_IL2CPP_UINT32* counter = handle_kind == ENGINE_HANDLE_KIND_STRONG
         ? &record->strong_count
         : &record->weak_count;
     if (*counter == 0u) {
@@ -287,7 +287,7 @@ engine_status_t engine_dispatch_callback(
     engine_runtime_context_t* runtime,
     engine_callback_id_t callback_id,
     const void* payload,
-    size_t payload_size) {
+    CHAOS_IL2CPP_SIZE payload_size) {
     if (runtime == nullptr || callback_id == 0u) {
         return ENGINE_STATUS_INVALID_ARGUMENT;
     }

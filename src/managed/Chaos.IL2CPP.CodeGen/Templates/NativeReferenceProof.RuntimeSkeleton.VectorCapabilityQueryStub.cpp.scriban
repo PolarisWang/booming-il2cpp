@@ -12,7 +12,7 @@ struct {{ stub_name }}_VectorCapabilityArgs
 // contract_id: {{ contract_id }}
 // kernel_semantic: {{ kernel_semantic_id }}
 // kernel_backend: {{ kernel_backend_kind }}
-int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -54,14 +54,14 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
 {{~ if scalar_resolution_kind == "ClassGenericArgument" ~}}
             if (runtime_abi->generic_context_get_class_arg_count != nullptr &&
                 runtime_abi->generic_context_get_class_arg != nullptr &&
-                runtime_abi->generic_context_get_class_arg_count(generic_context) > static_cast<uint32_t>({{ scalar_generic_arg_index }})) {
-                scalar_type = runtime_abi->generic_context_get_class_arg(generic_context, static_cast<uint32_t>({{ scalar_generic_arg_index }}));
+                runtime_abi->generic_context_get_class_arg_count(generic_context) > static_cast<CHAOS_IL2CPP_UINT32>({{ scalar_generic_arg_index }})) {
+                scalar_type = runtime_abi->generic_context_get_class_arg(generic_context, static_cast<CHAOS_IL2CPP_UINT32>({{ scalar_generic_arg_index }}));
             }
 {{~ else ~}}
             if (runtime_abi->generic_context_get_method_arg_count != nullptr &&
                 runtime_abi->generic_context_get_method_arg != nullptr &&
-                runtime_abi->generic_context_get_method_arg_count(generic_context) > static_cast<uint32_t>({{ scalar_generic_arg_index }})) {
-                scalar_type = runtime_abi->generic_context_get_method_arg(generic_context, static_cast<uint32_t>({{ scalar_generic_arg_index }}));
+                runtime_abi->generic_context_get_method_arg_count(generic_context) > static_cast<CHAOS_IL2CPP_UINT32>({{ scalar_generic_arg_index }})) {
+                scalar_type = runtime_abi->generic_context_get_method_arg(generic_context, static_cast<CHAOS_IL2CPP_UINT32>({{ scalar_generic_arg_index }}));
             }
 {{~ end ~}}
         }
