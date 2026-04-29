@@ -1,4 +1,5 @@
 using Chaos.IL2CPP.Contracts;
+using System.Collections.Concurrent;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -26,6 +27,7 @@ internal enum RuntimeSkeletonVectorKernelOperationKind
     VectorUnaryPassthrough,
     VectorFixedArithmetic,
     VectorFixedEquality,
+    VectorFixedComparison,
     VectorCapabilityQuery,
     VectorGenericCreate,
     VectorFixedMemory,
@@ -116,41 +118,48 @@ internal static class RuntimeSkeletonVectorKernelCore
 {
     public const string ContractId = "vector-kernel-v1";
 
+    private enum VectorNumericsTypeFamily
+    {
+        Vector2,
+        Vector3,
+        Vector4,
+    }
+
+    private enum VectorIntrinsicsTypeFamily
+    {
+        Vector64,
+        Vector128,
+        Vector256,
+        Vector512,
+        Sse,
+        Sse2,
+        Sse41,
+        Sse42,
+        Ssse3,
+        Avx,
+        Avx2,
+        Avx512F,
+        Avx512BW,
+        Avx512DQ,
+        Avx512F_PlusVL,
+        Avx512BW_PlusVL,
+        AdvSimd,
+        AdvSimdArm64,
+        PackedSimd,
+    }
+
+    private sealed record IntrinsicsTypeInfo(
+        VectorIntrinsicsTypeFamily Family,
+        string ExpectedSubjectIdPrefix,
+        string CarrierCppType,
+        string HelperPrefix,
+        int FixedVectorWidthBytes);
+
     private static readonly RuntimeSkeletonVectorKernelSemanticDescriptor[] Descriptors =
     [
-        CreateDescriptor("vector-initializer", "/System.Numerics.Vector2::", RuntimeSkeletonVectorKernelOperationKind.VectorInitializer, "RuntimeNumericsVector2Carrier", 2, "Vector2"),
-        CreateDescriptor("vector-arithmetic", "/System.Numerics.Vector2::", RuntimeSkeletonVectorKernelOperationKind.VectorArithmetic, "RuntimeNumericsVector2Carrier", 2, "Vector2"),
-        CreateDescriptor("vector-dot-product", "/System.Numerics.Vector2::", RuntimeSkeletonVectorKernelOperationKind.VectorDotProduct, "RuntimeNumericsVector2Carrier", 2, "Vector2"),
-        CreateDescriptor("vector-distance", "/System.Numerics.Vector2::", RuntimeSkeletonVectorKernelOperationKind.VectorDistance, "RuntimeNumericsVector2Carrier", 2, "Vector2"),
-        CreateDescriptor("vector-indexer", "/System.Numerics.Vector2::", RuntimeSkeletonVectorKernelOperationKind.VectorIndexer, "RuntimeNumericsVector2Carrier", 2, "Vector2"),
-        CreateDescriptor("vector-hash", "/System.Numerics.Vector2::", RuntimeSkeletonVectorKernelOperationKind.VectorHash, "RuntimeNumericsVector2Carrier", 2, "Vector2"),
-        CreateDescriptor("vector-copy", "/System.Numerics.Vector2::", RuntimeSkeletonVectorKernelOperationKind.VectorCopy, "RuntimeNumericsVector2Carrier", 2, "Vector2"),
-        CreateDescriptor("vector-transform", "/System.Numerics.Vector2::", RuntimeSkeletonVectorKernelOperationKind.VectorTransform, "RuntimeNumericsVector2Carrier", 2, "Vector2"),
-
-        CreateDescriptor("vector-initializer", "/System.Numerics.Vector3::", RuntimeSkeletonVectorKernelOperationKind.VectorInitializer, "RuntimeNumericsVector3Carrier", 3, "Vector3"),
-        CreateDescriptor("vector-arithmetic", "/System.Numerics.Vector3::", RuntimeSkeletonVectorKernelOperationKind.VectorArithmetic, "RuntimeNumericsVector3Carrier", 3, "Vector3"),
-        CreateDescriptor("vector-dot-product", "/System.Numerics.Vector3::", RuntimeSkeletonVectorKernelOperationKind.VectorDotProduct, "RuntimeNumericsVector3Carrier", 3, "Vector3"),
-        CreateDescriptor("vector-distance", "/System.Numerics.Vector3::", RuntimeSkeletonVectorKernelOperationKind.VectorDistance, "RuntimeNumericsVector3Carrier", 3, "Vector3"),
-        CreateDescriptor("vector-indexer", "/System.Numerics.Vector3::", RuntimeSkeletonVectorKernelOperationKind.VectorIndexer, "RuntimeNumericsVector3Carrier", 3, "Vector3"),
-        CreateDescriptor("vector-hash", "/System.Numerics.Vector3::", RuntimeSkeletonVectorKernelOperationKind.VectorHash, "RuntimeNumericsVector3Carrier", 3, "Vector3"),
-        CreateDescriptor("vector-copy", "/System.Numerics.Vector3::", RuntimeSkeletonVectorKernelOperationKind.VectorCopy, "RuntimeNumericsVector3Carrier", 3, "Vector3"),
-        CreateDescriptor("vector-transform", "/System.Numerics.Vector3::", RuntimeSkeletonVectorKernelOperationKind.VectorTransform, "RuntimeNumericsVector3Carrier", 3, "Vector3"),
-
-        CreateDescriptor("vector-initializer", "/System.Numerics.Vector4::", RuntimeSkeletonVectorKernelOperationKind.VectorInitializer, "RuntimeNumericsVector4Carrier", 4, "Vector4"),
-        CreateDescriptor("vector-arithmetic", "/System.Numerics.Vector4::", RuntimeSkeletonVectorKernelOperationKind.VectorArithmetic, "RuntimeNumericsVector4Carrier", 4, "Vector4"),
-        CreateDescriptor("vector-dot-product", "/System.Numerics.Vector4::", RuntimeSkeletonVectorKernelOperationKind.VectorDotProduct, "RuntimeNumericsVector4Carrier", 4, "Vector4"),
-        CreateDescriptor("vector-distance", "/System.Numerics.Vector4::", RuntimeSkeletonVectorKernelOperationKind.VectorDistance, "RuntimeNumericsVector4Carrier", 4, "Vector4"),
-        CreateDescriptor("vector-indexer", "/System.Numerics.Vector4::", RuntimeSkeletonVectorKernelOperationKind.VectorIndexer, "RuntimeNumericsVector4Carrier", 4, "Vector4"),
-        CreateDescriptor("vector-hash", "/System.Numerics.Vector4::", RuntimeSkeletonVectorKernelOperationKind.VectorHash, "RuntimeNumericsVector4Carrier", 4, "Vector4"),
-        CreateDescriptor("vector-copy", "/System.Numerics.Vector4::", RuntimeSkeletonVectorKernelOperationKind.VectorCopy, "RuntimeNumericsVector4Carrier", 4, "Vector4"),
-        CreateDescriptor("vector-transform", "/System.Numerics.Vector4::", RuntimeSkeletonVectorKernelOperationKind.VectorTransform, "RuntimeNumericsVector4Carrier", 4, "Vector4"),
         CreateDescriptor("vector-fixed-shift", "/System.Numerics.Vector::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
         CreateDescriptor("vector-fixed-shift", "/System.Numerics.Vector<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
         CreateDescriptor("vector-fixed-shift", "/System.Numerics.Vector`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
-        CreateDescriptor("vector-generic-create", "/System.Runtime.Intrinsics.Vector64::", RuntimeSkeletonVectorKernelOperationKind.VectorGenericCreate, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
-        CreateDescriptor("vector-generic-create", "/System.Runtime.Intrinsics.Vector128::", RuntimeSkeletonVectorKernelOperationKind.VectorGenericCreate, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
-        CreateDescriptor("vector-generic-create", "/System.Runtime.Intrinsics.Vector256::", RuntimeSkeletonVectorKernelOperationKind.VectorGenericCreate, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
-        CreateDescriptor("vector-generic-create", "/System.Runtime.Intrinsics.Vector512::", RuntimeSkeletonVectorKernelOperationKind.VectorGenericCreate, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
         CreateDescriptor("vector-fixed-constant", "/System.Numerics.Vector<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
         CreateDescriptor("vector-fixed-constant", "/System.Numerics.Vector`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
         CreateDescriptor("vector-capability-query", "/System.Numerics.Vector<", RuntimeSkeletonVectorKernelOperationKind.VectorCapabilityQuery, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
@@ -163,65 +172,17 @@ internal static class RuntimeSkeletonVectorKernelCore
         CreateDescriptor("vector-fixed-arithmetic", "/System.Numerics.Vector`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
         CreateDescriptor("vector-fixed-equality", "/System.Numerics.Vector<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
         CreateDescriptor("vector-fixed-equality", "/System.Numerics.Vector`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
+        CreateDescriptor("vector-fixed-comparison", "/System.Numerics.Vector<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
+        CreateDescriptor("vector-fixed-comparison", "/System.Numerics.Vector`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison, "RuntimeIntrinsicVector256Carrier", 0, "VectorGeneric"),
 
-        CreateDescriptor("vector-fixed-create", "/System.Runtime.Intrinsics.Vector64::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedCreate, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector64::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
         CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector64<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
         CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector64`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
-        CreateDescriptor("vector-reinterpret", "/System.Runtime.Intrinsics.Vector64::", RuntimeSkeletonVectorKernelOperationKind.VectorReinterpret, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
-        CreateDescriptor("vector-fixed-create", "/System.Runtime.Intrinsics.Vector128::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedCreate, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector128::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
         CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector128<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
         CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector128`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
-        CreateDescriptor("vector-reinterpret", "/System.Runtime.Intrinsics.Vector128::", RuntimeSkeletonVectorKernelOperationKind.VectorReinterpret, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
-        CreateDescriptor("vector-fixed-create", "/System.Runtime.Intrinsics.Vector256::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedCreate, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector256::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
         CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector256<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
         CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector256`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
-        CreateDescriptor("vector-reinterpret", "/System.Runtime.Intrinsics.Vector256::", RuntimeSkeletonVectorKernelOperationKind.VectorReinterpret, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
-        CreateDescriptor("vector-fixed-create", "/System.Runtime.Intrinsics.Vector512::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedCreate, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector512::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
         CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector512<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
         CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Vector512`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Wasm.PackedSimd::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, string.Empty, 0, "PackedSimd"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.Arm.AdvSimd::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, string.Empty, 0, "AdvSimd"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Arm.AdvSimd::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector128Carrier", 0, "AdvSimd"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.Arm.AdvSimd::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector128Carrier", 0, "AdvSimd"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Arm.AdvSimd+Arm64::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector128Carrier", 0, "AdvSimdArm64"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.Arm.AdvSimd+Arm64::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector128Carrier", 0, "AdvSimdArm64"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Sse::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector128Carrier", 0, "Sse"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Sse::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector128Carrier", 0, "Sse"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.X86.Sse2::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, string.Empty, 0, "Sse2"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Sse2::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector128Carrier", 0, "Sse2"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Sse2::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector128Carrier", 0, "Sse2"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Sse41::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector128Carrier", 0, "Sse41"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Sse41::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector128Carrier", 0, "Sse41"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Sse42::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector128Carrier", 0, "Sse42"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Ssse3::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector128Carrier", 0, "Ssse3"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.X86.Avx2::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, string.Empty, 0, "Avx2"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector256Carrier", 0, "Avx"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector256Carrier", 0, "Avx"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx2::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector256Carrier", 0, "Avx2"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx2::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector256Carrier", 0, "Avx2"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.X86.Avx512BW::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, string.Empty, 0, "Avx512BW"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512BW::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector512Carrier", 0, "Avx512BW"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512BW::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector512Carrier", 0, "Avx512BW"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.X86.Avx512BW+VL::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, string.Empty, 0, "Avx512BWVL"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512BW+VL::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, string.Empty, 0, "Avx512BWVL"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512BW+VL::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, string.Empty, 0, "Avx512BWVL"),
-        CreateDescriptor("vector-capability-query", "/System.Runtime.Intrinsics.X86.Avx512BW+VL::", RuntimeSkeletonVectorKernelOperationKind.VectorCapabilityQuery, string.Empty, 0, "Avx512BWVL"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.X86.Avx512F::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, string.Empty, 0, "Avx512F"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512F::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector512Carrier", 0, "Avx512F"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512F::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector512Carrier", 0, "Avx512F"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512DQ::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector512Carrier", 0, "Avx512DQ"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512DQ::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector512Carrier", 0, "Avx512DQ"),
-        CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.X86.Avx512F+VL::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift, string.Empty, 0, "Avx512FVL"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512F+VL::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, string.Empty, 0, "Avx512FVL"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512F+VL::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, string.Empty, 0, "Avx512FVL"),
-        CreateDescriptor("vector-capability-query", "/System.Runtime.Intrinsics.X86.Avx512F+VL::", RuntimeSkeletonVectorKernelOperationKind.VectorCapabilityQuery, string.Empty, 0, "Avx512FVL"),
-        CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Wasm.PackedSimd::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector128Carrier", 0, "PackedSimd"),
-        CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.Wasm.PackedSimd::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise, "RuntimeIntrinsicVector128Carrier", 0, "PackedSimd"),
-        CreateDescriptor("vector-reinterpret", "/System.Runtime.Intrinsics.Vector512::", RuntimeSkeletonVectorKernelOperationKind.VectorReinterpret, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
         CreateDescriptor("vector-fixed-constant", "/System.Runtime.Intrinsics.Vector64<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
         CreateDescriptor("vector-fixed-constant", "/System.Runtime.Intrinsics.Vector64`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
         CreateDescriptor("vector-capability-query", "/System.Runtime.Intrinsics.Vector64<", RuntimeSkeletonVectorKernelOperationKind.VectorCapabilityQuery, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
@@ -234,8 +195,8 @@ internal static class RuntimeSkeletonVectorKernelCore
         CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector64`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
         CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector64<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
         CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector64`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
-        CreateDescriptor("vector-fixed-memory", "/System.Runtime.Intrinsics.X86.Avx512F::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedMemory, "RuntimeIntrinsicVector512Carrier", 0, "Avx512F"),
-        CreateDescriptor("vector-fixed-compose", "/System.Runtime.Intrinsics.X86.Avx512F::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedCompose, "RuntimeIntrinsicVector512Carrier", 0, "Avx512F"),
+        CreateDescriptor("vector-fixed-comparison", "/System.Runtime.Intrinsics.Vector64<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
+        CreateDescriptor("vector-fixed-comparison", "/System.Runtime.Intrinsics.Vector64`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
         CreateDescriptor("vector-fixed-constant", "/System.Runtime.Intrinsics.Vector128<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
         CreateDescriptor("vector-fixed-constant", "/System.Runtime.Intrinsics.Vector128`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
         CreateDescriptor("vector-capability-query", "/System.Runtime.Intrinsics.Vector128<", RuntimeSkeletonVectorKernelOperationKind.VectorCapabilityQuery, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
@@ -248,6 +209,8 @@ internal static class RuntimeSkeletonVectorKernelCore
         CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector128`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
         CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector128<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
         CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector128`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
+        CreateDescriptor("vector-fixed-comparison", "/System.Runtime.Intrinsics.Vector128<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
+        CreateDescriptor("vector-fixed-comparison", "/System.Runtime.Intrinsics.Vector128`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
         CreateDescriptor("vector-fixed-constant", "/System.Runtime.Intrinsics.Vector256<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
         CreateDescriptor("vector-fixed-constant", "/System.Runtime.Intrinsics.Vector256`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
         CreateDescriptor("vector-capability-query", "/System.Runtime.Intrinsics.Vector256<", RuntimeSkeletonVectorKernelOperationKind.VectorCapabilityQuery, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
@@ -260,6 +223,8 @@ internal static class RuntimeSkeletonVectorKernelCore
         CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector256`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
         CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector256<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
         CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector256`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
+        CreateDescriptor("vector-fixed-comparison", "/System.Runtime.Intrinsics.Vector256<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
+        CreateDescriptor("vector-fixed-comparison", "/System.Runtime.Intrinsics.Vector256`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
         CreateDescriptor("vector-fixed-constant", "/System.Runtime.Intrinsics.Vector512<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
         CreateDescriptor("vector-fixed-constant", "/System.Runtime.Intrinsics.Vector512`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
         CreateDescriptor("vector-capability-query", "/System.Runtime.Intrinsics.Vector512<", RuntimeSkeletonVectorKernelOperationKind.VectorCapabilityQuery, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
@@ -272,16 +237,441 @@ internal static class RuntimeSkeletonVectorKernelCore
         CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector512`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
         CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector512<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
         CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector512`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
+        CreateDescriptor("vector-fixed-comparison", "/System.Runtime.Intrinsics.Vector512<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
+        CreateDescriptor("vector-fixed-comparison", "/System.Runtime.Intrinsics.Vector512`1::", RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
         CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector64<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector64Carrier", 0, "Vector64"),
         CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector128<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector128Carrier", 0, "Vector128"),
         CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector256<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector256Carrier", 0, "Vector256"),
         CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector512<", RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic, "RuntimeIntrinsicVector512Carrier", 0, "Vector512"),
     ];
 
-    public static RuntimeSkeletonVectorKernelSemanticDescriptor? TryResolveBySubjectId(string subjectId)
+    private static readonly ConcurrentDictionary<string, RuntimeSkeletonVectorKernelSemanticDescriptor?> FallbackDescriptorCache = new(StringComparer.Ordinal);
+
+    public static RuntimeSkeletonVectorKernelSemanticDescriptor? TryResolveBySubjectId(
+        string subjectId,
+        TypedIlMethodArtifact? methodArtifact = null)
     {
-        return Descriptors.FirstOrDefault(
+        // Fast path: static descriptors array
+        var match = Descriptors.FirstOrDefault(
             descriptor => subjectId.Contains(descriptor.SubjectIdPrefix, StringComparison.Ordinal));
+
+        if (match is not null)
+        {
+            return match;
+        }
+
+        // Fallback path: metadata-driven resolution from TypedIlMethodArtifact (with cache)
+        if (methodArtifact is not null)
+        {
+            return FallbackDescriptorCache.GetOrAdd(
+                subjectId,
+                static (_, artifact) => TryResolveFromMethodArtifact(artifact),
+                methodArtifact);
+        }
+
+        return null;
+    }
+
+    public static RuntimeSkeletonVectorKernelSemanticDescriptor? TryResolveBySubjectId(string subjectId)
+        => TryResolveBySubjectId(subjectId, null);
+
+    private static RuntimeSkeletonVectorKernelSemanticDescriptor? TryResolveFromMethodArtifact(
+        TypedIlMethodArtifact method)
+    {
+        var declaringType = method.Identity.DeclaringTypeSubjectId;
+
+        // Phase 1: Try numerics types (Vector2/3/4)
+        var numericsFamily = ClassifyNumericsType(declaringType);
+        if (numericsFamily is not null)
+        {
+            return TryResolveNumericsFromArtifact(method, numericsFamily.Value);
+        }
+
+        // Phase 2: Try intrinsics types (Vector64/128/256/512, Sse, Avx, etc.)
+        var intrinsicsFamily = ClassifyIntrinsicsType(declaringType);
+        if (intrinsicsFamily is not null)
+        {
+            return TryResolveIntrinsicsFromArtifact(method, intrinsicsFamily.Value);
+        }
+
+        return null;
+    }
+
+    private static RuntimeSkeletonVectorKernelSemanticDescriptor? TryResolveNumericsFromArtifact(
+        TypedIlMethodArtifact method,
+        VectorNumericsTypeFamily typeFamily)
+    {
+        var methodName = ExtractMethodName(method.SubjectId);
+        if (methodName is null)
+        {
+            return null;
+        }
+
+        var operationKind = MapMethodNameToOperationKind(methodName);
+        if (operationKind is null)
+        {
+            return null;
+        }
+
+        var prefix = BuildSubjectIdPrefix(method.Identity.DeclaringTypeSubjectId);
+
+        var (carrierCppType, componentCount, helperPrefix) = typeFamily switch
+        {
+            VectorNumericsTypeFamily.Vector2 => ("RuntimeNumericsVector2Carrier", 2, "Vector2"),
+            VectorNumericsTypeFamily.Vector3 => ("RuntimeNumericsVector3Carrier", 3, "Vector3"),
+            VectorNumericsTypeFamily.Vector4 => ("RuntimeNumericsVector4Carrier", 4, "Vector4"),
+            _ => (null, 0, null),
+        };
+
+        if (carrierCppType is null)
+        {
+            return null;
+        }
+
+        var semanticId = MapOperationKindToSemanticId(operationKind.Value);
+        if (semanticId is null)
+        {
+            return null;
+        }
+
+        return new RuntimeSkeletonVectorKernelSemanticDescriptor(
+            semanticId,
+            prefix,
+            operationKind.Value,
+            RuntimeSkeletonVectorKernelBackendKind.Generic,
+            carrierCppType,
+            "float",
+            componentCount,
+            helperPrefix);
+    }
+
+    private static RuntimeSkeletonVectorKernelSemanticDescriptor? TryResolveIntrinsicsFromArtifact(
+        TypedIlMethodArtifact method,
+        VectorIntrinsicsTypeFamily family)
+    {
+        var methodName = ExtractMethodName(method.SubjectId);
+        if (methodName is null)
+        {
+            return null;
+        }
+
+        var operationKind = MapIntrinsicsMethodNameToOperationKind(methodName);
+        if (operationKind is null)
+        {
+            return null;
+        }
+
+        var info = GetIntrinsicsTypeInfo(family);
+        var prefix = BuildSubjectIdPrefix(method.Identity.DeclaringTypeSubjectId);
+        var semanticId = MapIntrinsicsOperationKindToSemanticId(operationKind.Value);
+        if (semanticId is null)
+        {
+            return null;
+        }
+
+        return new RuntimeSkeletonVectorKernelSemanticDescriptor(
+            semanticId,
+            prefix,
+            operationKind.Value,
+            RuntimeSkeletonVectorKernelBackendKind.Generic,
+            info.CarrierCppType,
+            "float",
+            0,
+            info.HelperPrefix);
+    }
+
+    private static VectorNumericsTypeFamily? ClassifyNumericsType(string declaringType)
+    {
+        var lastDot = declaringType.LastIndexOf('.');
+        var lastSlash = declaringType.LastIndexOf('/');
+        var startIndex = lastDot > lastSlash ? lastDot + 1 : (lastSlash >= 0 ? lastSlash + 1 : 0);
+        var typeName = declaringType[startIndex..];
+
+        return typeName switch
+        {
+            "Vector2" => VectorNumericsTypeFamily.Vector2,
+            "Vector3" => VectorNumericsTypeFamily.Vector3,
+            "Vector4" => VectorNumericsTypeFamily.Vector4,
+            _ => null,
+        };
+    }
+
+    private static VectorIntrinsicsTypeFamily? ClassifyIntrinsicsType(string declaringType)
+    {
+        var lastSlash = declaringType.LastIndexOf('/');
+        var typeName = lastSlash >= 0 ? declaringType[(lastSlash + 1)..] : declaringType;
+
+        // Order matters: check more specific patterns first
+        if (typeName.Contains("Avx512BW+VL", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Avx512BW_PlusVL;
+        if (typeName.Contains("Avx512F+VL", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Avx512F_PlusVL;
+        if (typeName.Contains("Avx512BW", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Avx512BW;
+        if (typeName.Contains("Avx512DQ", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Avx512DQ;
+        if (typeName.Contains("Avx512F", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Avx512F;
+        if (typeName.Contains("Avx2", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Avx2;
+        if (typeName.Contains("Avx", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Avx;
+        if (typeName.Contains("AdvSimd+Arm64", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.AdvSimdArm64;
+        if (typeName.Contains("AdvSimd", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.AdvSimd;
+        if (typeName.Contains("PackedSimd", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.PackedSimd;
+        if (typeName.Contains("Sse41", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Sse41;
+        if (typeName.Contains("Sse42", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Sse42;
+        if (typeName.Contains("Ssse3", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Ssse3;
+        if (typeName.Contains("Sse2", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Sse2;
+        if (typeName.Contains("Sse", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Sse;
+        if (typeName.StartsWith("System.Runtime.Intrinsics.Vector512", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Vector512;
+        if (typeName.StartsWith("System.Runtime.Intrinsics.Vector256", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Vector256;
+        if (typeName.StartsWith("System.Runtime.Intrinsics.Vector128", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Vector128;
+        if (typeName.StartsWith("System.Runtime.Intrinsics.Vector64", StringComparison.Ordinal))
+            return VectorIntrinsicsTypeFamily.Vector64;
+
+        return null;
+    }
+
+    private static IntrinsicsTypeInfo GetIntrinsicsTypeInfo(VectorIntrinsicsTypeFamily family)
+    {
+        return family switch
+        {
+            VectorIntrinsicsTypeFamily.Vector64 => new(family, "/System.Runtime.Intrinsics.Vector64::", "RuntimeIntrinsicVector64Carrier", "Vector64", 8),
+            VectorIntrinsicsTypeFamily.Vector128 => new(family, "/System.Runtime.Intrinsics.Vector128::", "RuntimeIntrinsicVector128Carrier", "Vector128", 16),
+            VectorIntrinsicsTypeFamily.Vector256 => new(family, "/System.Runtime.Intrinsics.Vector256::", "RuntimeIntrinsicVector256Carrier", "Vector256", 32),
+            VectorIntrinsicsTypeFamily.Vector512 => new(family, "/System.Runtime.Intrinsics.Vector512::", "RuntimeIntrinsicVector512Carrier", "Vector512", 64),
+            VectorIntrinsicsTypeFamily.Sse => new(family, "/System.Runtime.Intrinsics.X86.Sse::", "RuntimeIntrinsicVector128Carrier", "Sse", 16),
+            VectorIntrinsicsTypeFamily.Sse2 => new(family, "/System.Runtime.Intrinsics.X86.Sse2::", "RuntimeIntrinsicVector128Carrier", "Sse2", 16),
+            VectorIntrinsicsTypeFamily.Sse41 => new(family, "/System.Runtime.Intrinsics.X86.Sse41::", "RuntimeIntrinsicVector128Carrier", "Sse41", 16),
+            VectorIntrinsicsTypeFamily.Sse42 => new(family, "/System.Runtime.Intrinsics.X86.Sse42::", "RuntimeIntrinsicVector128Carrier", "Sse42", 16),
+            VectorIntrinsicsTypeFamily.Ssse3 => new(family, "/System.Runtime.Intrinsics.X86.Ssse3::", "RuntimeIntrinsicVector128Carrier", "Ssse3", 16),
+            VectorIntrinsicsTypeFamily.Avx => new(family, "/System.Runtime.Intrinsics.X86.Avx::", "RuntimeIntrinsicVector256Carrier", "Avx", 32),
+            VectorIntrinsicsTypeFamily.Avx2 => new(family, "/System.Runtime.Intrinsics.X86.Avx2::", "RuntimeIntrinsicVector256Carrier", "Avx2", 32),
+            VectorIntrinsicsTypeFamily.Avx512F => new(family, "/System.Runtime.Intrinsics.X86.Avx512F::", "RuntimeIntrinsicVector512Carrier", "Avx512F", 64),
+            VectorIntrinsicsTypeFamily.Avx512BW => new(family, "/System.Runtime.Intrinsics.X86.Avx512BW::", "RuntimeIntrinsicVector512Carrier", "Avx512BW", 64),
+            VectorIntrinsicsTypeFamily.Avx512DQ => new(family, "/System.Runtime.Intrinsics.X86.Avx512DQ::", "RuntimeIntrinsicVector512Carrier", "Avx512DQ", 64),
+            VectorIntrinsicsTypeFamily.Avx512F_PlusVL => new(family, "/System.Runtime.Intrinsics.X86.Avx512F+VL::", string.Empty, "Avx512FVL", 32),
+            VectorIntrinsicsTypeFamily.Avx512BW_PlusVL => new(family, "/System.Runtime.Intrinsics.X86.Avx512BW+VL::", string.Empty, "Avx512BWVL", 32),
+            VectorIntrinsicsTypeFamily.AdvSimd => new(family, "/System.Runtime.Intrinsics.Arm.AdvSimd::", "RuntimeIntrinsicVector128Carrier", "AdvSimd", 16),
+            VectorIntrinsicsTypeFamily.AdvSimdArm64 => new(family, "/System.Runtime.Intrinsics.Arm.AdvSimd+Arm64::", "RuntimeIntrinsicVector128Carrier", "AdvSimdArm64", 16),
+            VectorIntrinsicsTypeFamily.PackedSimd => new(family, "/System.Runtime.Intrinsics.Wasm.PackedSimd::", "RuntimeIntrinsicVector128Carrier", "PackedSimd", 16),
+            _ => throw new ArgumentOutOfRangeException(nameof(family)),
+        };
+    }
+
+    private static string? ExtractMethodName(string subjectId)
+    {
+        var sep = subjectId.IndexOf("::", StringComparison.Ordinal);
+        if (sep < 0)
+        {
+            return null;
+        }
+
+        var nameStart = sep + 2;
+        if (nameStart >= subjectId.Length)
+        {
+            return null;
+        }
+
+        var returnSep = subjectId.IndexOf(':', nameStart);
+        var paramSep = subjectId.IndexOf('(', nameStart);
+
+        var end = Math.Min(
+            returnSep > 0 ? returnSep : int.MaxValue,
+            paramSep > 0 ? paramSep : int.MaxValue);
+
+        return end > nameStart ? subjectId[nameStart..end] : null;
+    }
+
+    private static RuntimeSkeletonVectorKernelOperationKind? MapMethodNameToOperationKind(string methodName)
+    {
+        return methodName switch
+        {
+            "get_Zero" or "get_One" or "get_UnitX" or "get_UnitY" or "get_UnitZ" or "get_UnitW"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorInitializer,
+
+            "op_Addition" or "op_Subtraction" or "op_Multiply" or "op_Division" or "op_UnaryNegation"
+            or "Add" or "Subtract" or "Multiply" or "Divide" or "Negate"
+            or "Abs" or "Min" or "Max" or "Clamp"
+            or "SquareRoot" or "Normalize" or "Lerp" or "Reflect" or "Cross"
+            or "op_Equality" or "op_Inequality" or "Equals"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorArithmetic,
+
+            "Dot" => RuntimeSkeletonVectorKernelOperationKind.VectorDotProduct,
+
+            "Distance" or "DistanceSquared" or "Length" or "LengthSquared"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorDistance,
+
+            "get_Item" => RuntimeSkeletonVectorKernelOperationKind.VectorIndexer,
+
+            "GetHashCode" => RuntimeSkeletonVectorKernelOperationKind.VectorHash,
+
+            "CopyTo" => RuntimeSkeletonVectorKernelOperationKind.VectorCopy,
+
+            "Transform" or "TransformNormal" => RuntimeSkeletonVectorKernelOperationKind.VectorTransform,
+
+            _ => null,
+        };
+    }
+
+    private static string BuildSubjectIdPrefix(string declaringTypeSubjectId)
+    {
+        var assemblySep = declaringTypeSubjectId.IndexOf('/');
+        var typePart = assemblySep >= 0
+            ? declaringTypeSubjectId[assemblySep..]
+            : "/" + declaringTypeSubjectId;
+
+        // Closed generic: "...TypeName<ScalarType>" → "/...TypeName<"
+        var genericSep = typePart.IndexOf('<', StringComparison.Ordinal);
+        if (genericSep >= 0)
+        {
+            return typePart[..genericSep] + "<";
+        }
+
+        // Open generic: "...TypeName`1" → "/...TypeName`1::"
+        if (typePart.Contains('`'))
+        {
+            return typePart + "::";
+        }
+
+        // Non-generic: "...TypeName" → "/...TypeName::"
+        return typePart + "::";
+    }
+
+    private static string? MapOperationKindToSemanticId(RuntimeSkeletonVectorKernelOperationKind kind)
+    {
+        return kind switch
+        {
+            RuntimeSkeletonVectorKernelOperationKind.VectorInitializer => "vector-initializer",
+            RuntimeSkeletonVectorKernelOperationKind.VectorArithmetic => "vector-arithmetic",
+            RuntimeSkeletonVectorKernelOperationKind.VectorDotProduct => "vector-dot-product",
+            RuntimeSkeletonVectorKernelOperationKind.VectorDistance => "vector-distance",
+            RuntimeSkeletonVectorKernelOperationKind.VectorIndexer => "vector-indexer",
+            RuntimeSkeletonVectorKernelOperationKind.VectorHash => "vector-hash",
+            RuntimeSkeletonVectorKernelOperationKind.VectorCopy => "vector-copy",
+            RuntimeSkeletonVectorKernelOperationKind.VectorTransform => "vector-transform",
+            _ => null,
+        };
+    }
+
+    private static RuntimeSkeletonVectorKernelOperationKind? MapIntrinsicsMethodNameToOperationKind(string methodName)
+    {
+        return methodName switch
+        {
+            "get_Zero" or "get_AllBitsSet"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant,
+
+            "get_Count" or "get_IsSupported" or "get_One"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorCapabilityQuery,
+
+            "CreateScalar" or "CreateScalarUnsafe"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorFixedCreate,
+
+            "Create"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorGenericCreate,
+
+            "op_Addition" or "Add" or "op_Subtraction" or "Subtract"
+            or "op_Multiply" or "Multiply" or "op_Division" or "Divide"
+            or "Abs" or "Negate" or "op_UnaryNegation"
+            or "Min" or "Max" or "MinNative" or "MaxNative"
+            or "MinNumber" or "MaxNumber"
+            or "AddSaturate" or "SubtractSaturate"
+            or "Ceiling" or "Floor" or "Truncate" or "Round"
+            or "CompareEqual" or "CompareGreaterThan" or "CompareGreaterThanOrEqual"
+            or "CompareLessThan" or "CompareLessThanOrEqual"
+            or "CompareNotEqual"
+            or "Sqrt" or "SquareRoot"
+            or "DivideBy" or "ReciprocalSqrt" or "ReciprocalEstimate"
+            or "Scale" or "FusedMultiplyAdd"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic,
+
+            "op_Equality" or "op_Inequality"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality,
+
+            "Equals" or "EqualsFloatingPoint"
+            or "GreaterThanAny" or "GreaterThanAll"
+            or "LessThanAny" or "LessThanAll"
+            or "ExtractMostSignificantBits"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison,
+
+            "Not" or "OnesComplement" or "op_OnesComplement" or "op_BitwiseNot"
+            or "And" or "op_BitwiseAnd"
+            or "Or" or "op_BitwiseOr"
+            or "Xor" or "op_ExclusiveOr"
+            or "AndNot"
+            or "RotateLeftVariable" or "RotateRightVariable"
+            or "ClearHighBits" or "ShiftLeftLogical128BitLane" or "ShiftRightLogical128BitLane"
+            or "SumAbsoluteDifferences" or "SumAbsoluteDifferencesInBlock"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise,
+
+            "op_LeftShift" or "ShiftLeft" or "ShiftLeftLogical"
+            or "op_RightShift" or "ShiftRightArithmetic"
+            or "op_UnsignedRightShift" or "ShiftRightLogical"
+            or "RotateLeft" or "RotateRight"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift,
+
+            "op_UnaryPlus"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorUnaryPassthrough,
+
+            "AsByte" or "AsSByte"
+            or "AsInt16" or "AsUInt16"
+            or "AsInt32" or "AsUInt32"
+            or "AsInt64" or "AsUInt64"
+            or "AsSingle" or "AsDouble"
+            or "AsNInt" or "AsNUInt"
+            or "As" or "AsVector" or "AsVector128" or "AsVector256" or "AsVector512"
+            or "ToScalar" or "ToVector128" or "ToVector256" or "ToVector512"
+            or "Reinterpret" or "ChangeType"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorReinterpret,
+
+            "Load" or "LoadAligned" or "LoadUnsafe"
+            or "LoadVector128" or "LoadVector256" or "LoadVector512"
+            or "LoadAlignedVector128" or "LoadAlignedVector256" or "LoadAlignedVector512"
+            or "Store" or "StoreAligned" or "StoreUnsafe"
+            or "StoreAlignedVector128" or "StoreAlignedVector256" or "StoreAlignedVector512"
+            or "BroadcastVector128ToVector256" or "BroadcastVector128ToVector512"
+            or "BroadcastVector256ToVector512"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorFixedMemory,
+
+            "ExtractVector128" or "InsertVector128"
+            or "ExtractVector256" or "InsertVector256"
+                => RuntimeSkeletonVectorKernelOperationKind.VectorFixedCompose,
+
+            _ => null,
+        };
+    }
+
+    private static string? MapIntrinsicsOperationKindToSemanticId(RuntimeSkeletonVectorKernelOperationKind kind)
+    {
+        return kind switch
+        {
+            RuntimeSkeletonVectorKernelOperationKind.VectorFixedCreate => "vector-fixed-create",
+            RuntimeSkeletonVectorKernelOperationKind.VectorGenericCreate => "vector-generic-create",
+            RuntimeSkeletonVectorKernelOperationKind.VectorFixedShift => "vector-fixed-shift",
+            RuntimeSkeletonVectorKernelOperationKind.VectorFixedConstant => "vector-fixed-constant",
+            RuntimeSkeletonVectorKernelOperationKind.VectorFixedBitwise => "vector-fixed-bitwise",
+            RuntimeSkeletonVectorKernelOperationKind.VectorUnaryPassthrough => "vector-unary-passthrough",
+            RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic => "vector-fixed-arithmetic",
+            RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality => "vector-fixed-equality",
+            RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison => "vector-fixed-comparison",
+            RuntimeSkeletonVectorKernelOperationKind.VectorCapabilityQuery => "vector-capability-query",
+            RuntimeSkeletonVectorKernelOperationKind.VectorFixedMemory => "vector-fixed-memory",
+            RuntimeSkeletonVectorKernelOperationKind.VectorFixedCompose => "vector-fixed-compose",
+            RuntimeSkeletonVectorKernelOperationKind.VectorReinterpret => "vector-reinterpret",
+            _ => null,
+        };
     }
 
     public static RuntimeSkeletonVectorKernelBackendKind SelectBackend(
@@ -297,7 +687,7 @@ internal static class RuntimeSkeletonVectorKernelCore
         out RuntimeSkeletonVectorKernelEmissionPlan plan)
     {
         ArgumentNullException.ThrowIfNull(method);
-        return TryCreateCore(method.SubjectId, descriptor => SelectBackend(method, descriptor), out plan);
+        return TryCreateCore(method.SubjectId, descriptor => SelectBackend(method, descriptor), method, out plan);
     }
 
     public static bool TryCreate(
@@ -305,16 +695,18 @@ internal static class RuntimeSkeletonVectorKernelCore
         out RuntimeSkeletonVectorKernelEmissionPlan plan)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        return TryCreateCore(subjectId, static _ => RuntimeSkeletonVectorKernelBackendKind.Generic, out plan);
+        return TryCreateCore(subjectId, static _ => RuntimeSkeletonVectorKernelBackendKind.Generic, null, out plan);
     }
 
     private static bool TryCreateCore(
         string subjectId,
         Func<RuntimeSkeletonVectorKernelSemanticDescriptor, RuntimeSkeletonVectorKernelBackendKind> backendSelector,
+        TypedIlMethodArtifact? methodArtifact,
         out RuntimeSkeletonVectorKernelEmissionPlan plan)
     {
         plan = null!;
 
+        // Phase 1: Fast path — static descriptors array
         var matchingDescriptors = Descriptors
             .Where(descriptor => subjectId.Contains(descriptor.SubjectIdPrefix, StringComparison.Ordinal));
 
@@ -324,6 +716,20 @@ internal static class RuntimeSkeletonVectorKernelCore
             if (TryCreatePlan(descriptor, subjectId, backend, out plan))
             {
                 return true;
+            }
+        }
+
+        // Phase 2: Metadata-driven fallback — only when TypedIlMethodArtifact is available
+        if (methodArtifact is not null)
+        {
+            var fallbackDescriptor = TryResolveFromMethodArtifact(methodArtifact);
+            if (fallbackDescriptor is not null)
+            {
+                var backend = backendSelector(fallbackDescriptor);
+                if (TryCreatePlan(fallbackDescriptor, subjectId, backend, out plan))
+                {
+                    return true;
+                }
             }
         }
 
@@ -384,6 +790,7 @@ internal static class RuntimeSkeletonVectorKernelCore
             RuntimeSkeletonVectorKernelOperationKind.VectorCapabilityQuery => TryCreateCapabilityQueryPlan(descriptor, subjectId, backend, out plan),
             RuntimeSkeletonVectorKernelOperationKind.VectorFixedArithmetic => TryCreateFixedArithmeticPlan(descriptor, subjectId, backend, out plan),
             RuntimeSkeletonVectorKernelOperationKind.VectorFixedEquality => TryCreateFixedEqualityPlan(descriptor, subjectId, backend, out plan),
+            RuntimeSkeletonVectorKernelOperationKind.VectorFixedComparison => TryCreateFixedComparisonPlan(descriptor, subjectId, backend, out plan),
             RuntimeSkeletonVectorKernelOperationKind.VectorFixedMemory => TryCreateFixedMemoryPlan(descriptor, subjectId, backend, out plan),
             RuntimeSkeletonVectorKernelOperationKind.VectorFixedCompose => TryCreateFixedComposePlan(descriptor, subjectId, backend, out plan),
             _ => false,
@@ -2648,6 +3055,120 @@ internal static class RuntimeSkeletonVectorKernelCore
                         new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
                         $"{GetHelperNamespace()}::VectorFixedConvertToVector<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
                         out plan),
+                "ConvertToVector512Int64"
+                    when string.Equals(conversionReturnScalarManagedType, "System.Int64", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is
+                             "System.Byte" or
+                             "System.SByte" or
+                             "System.Int16" or
+                             "System.UInt16" or
+                             "System.Int32" or
+                             "System.UInt32" or
+                             "System.Single" or
+                             "System.Double" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVector<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512UInt64"
+                    when string.Equals(conversionReturnScalarManagedType, "System.UInt64", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is
+                             "System.Byte" or
+                             "System.SByte" or
+                             "System.Int16" or
+                             "System.UInt16" or
+                             "System.Int32" or
+                             "System.UInt32" or
+                             "System.Single" or
+                             "System.Double" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVector<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512Int32"
+                    when string.Equals(conversionReturnScalarManagedType, "System.Int32", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is
+                             "System.Byte" or
+                             "System.SByte" or
+                             "System.Int16" or
+                             "System.UInt16" or
+                             "System.Int64" or
+                             "System.UInt64" or
+                             "System.Single" or
+                             "System.Double" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVector<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512UInt32"
+                    when string.Equals(conversionReturnScalarManagedType, "System.UInt32", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is
+                             "System.Byte" or
+                             "System.SByte" or
+                             "System.Int16" or
+                             "System.UInt16" or
+                             "System.Int64" or
+                             "System.UInt64" or
+                             "System.Single" or
+                             "System.Double" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVector<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512Double"
+                    when string.Equals(conversionReturnScalarManagedType, "System.Double", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is
+                             "System.Int32" or
+                             "System.UInt32" or
+                             "System.Int64" or
+                             "System.UInt64" or
+                             "System.Single" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVector<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512Int16"
+                    when string.Equals(conversionReturnScalarManagedType, "System.Int16", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is "System.Byte" or "System.SByte" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVector<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512UInt16"
+                    when string.Equals(conversionReturnScalarManagedType, "System.UInt16", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is "System.Byte" or "System.SByte" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVector<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
                 "ConvertToVector128ByteWithSaturation"
                     when string.Equals(conversionReturnScalarManagedType, "System.Byte", StringComparison.Ordinal) &&
                          conversionInputScalarManagedType is "System.UInt16" or "System.UInt32" or "System.UInt64" =>
@@ -2727,6 +3248,72 @@ internal static class RuntimeSkeletonVectorKernelCore
                         backend,
                         new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
                         $"{GetHelperNamespace()}::VectorFixedConvertToVectorTruncating<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512Int64WithTruncation"
+                    when string.Equals(conversionReturnScalarManagedType, "System.Int64", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is "System.Single" or "System.Double" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVectorTruncating<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512UInt64WithTruncation"
+                    when string.Equals(conversionReturnScalarManagedType, "System.UInt64", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is "System.Single" or "System.Double" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVectorTruncating<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512Int32WithTruncation"
+                    when string.Equals(conversionReturnScalarManagedType, "System.Int32", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is "System.Single" or "System.Double" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVectorTruncating<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512UInt32WithTruncation"
+                    when string.Equals(conversionReturnScalarManagedType, "System.UInt32", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is "System.Single" or "System.Double" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVectorTruncating<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512DoubleWithTruncation"
+                    when string.Equals(conversionReturnScalarManagedType, "System.Double", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is "System.Single" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVectorTruncating<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
+                        out plan),
+                "ConvertToVector512Single"
+                    when string.Equals(conversionReturnScalarManagedType, "System.Single", StringComparison.Ordinal) &&
+                         string.Equals(conversionReturnCarrierCppType, "RuntimeIntrinsicVector512Carrier", StringComparison.Ordinal) &&
+                         conversionInputScalarManagedType is "System.Int32" or "System.UInt32" =>
+                    TryCreatePlanCore(
+                        descriptor,
+                        "vector-fixed-bitwise",
+                        backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [conversionInputCarrierCppType], conversionReturnCarrierCppType),
+                        $"{GetHelperNamespace()}::VectorFixedConvertToVector<{conversionReturnScalarCppType}, {conversionInputScalarCppType}, {conversionReturnCarrierCppType}, {conversionInputCarrierCppType}>(request->arg0)",
                         out plan),
                 "ConvertToVector128Single"
                     when string.Equals(conversionReturnScalarManagedType, "System.Single", StringComparison.Ordinal) &&
@@ -3142,6 +3729,64 @@ internal static class RuntimeSkeletonVectorKernelCore
                         $"{GetHelperNamespace()}::VectorFixedReciprocalSqrt14<{unaryInputScalarCppType}, {unaryReturnCarrierCppType}>(request->arg0)",
                         "vector-fixed-arithmetic",
                         out plan),
+                "Ceiling"
+                    when string.Equals(unaryInputScalarManagedType, unaryReturnScalarManagedType, StringComparison.Ordinal) &&
+                         (string.Equals(unaryInputScalarManagedType, "System.Single", StringComparison.Ordinal) ||
+                          string.Equals(unaryInputScalarManagedType, "System.Double", StringComparison.Ordinal)) =>
+                    TryCreateStaticUnaryCustomArgPlan(
+                        descriptor,
+                        backend,
+                        unaryParameterCppType,
+                        unaryReturnCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedCeiling<{unaryInputScalarCppType}, {unaryReturnCarrierCppType}>(request->arg0)",
+                        "vector-fixed-arithmetic",
+                        out plan),
+                "Floor"
+                    when string.Equals(unaryInputScalarManagedType, unaryReturnScalarManagedType, StringComparison.Ordinal) &&
+                         (string.Equals(unaryInputScalarManagedType, "System.Single", StringComparison.Ordinal) ||
+                          string.Equals(unaryInputScalarManagedType, "System.Double", StringComparison.Ordinal)) =>
+                    TryCreateStaticUnaryCustomArgPlan(
+                        descriptor,
+                        backend,
+                        unaryParameterCppType,
+                        unaryReturnCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedFloor<{unaryInputScalarCppType}, {unaryReturnCarrierCppType}>(request->arg0)",
+                        "vector-fixed-arithmetic",
+                        out plan),
+                "Truncate"
+                    when string.Equals(unaryInputScalarManagedType, unaryReturnScalarManagedType, StringComparison.Ordinal) &&
+                         (string.Equals(unaryInputScalarManagedType, "System.Single", StringComparison.Ordinal) ||
+                          string.Equals(unaryInputScalarManagedType, "System.Double", StringComparison.Ordinal)) =>
+                    TryCreateStaticUnaryCustomArgPlan(
+                        descriptor,
+                        backend,
+                        unaryParameterCppType,
+                        unaryReturnCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedTruncate<{unaryInputScalarCppType}, {unaryReturnCarrierCppType}>(request->arg0)",
+                        "vector-fixed-arithmetic",
+                        out plan),
+                "Round"
+                    when string.Equals(unaryInputScalarManagedType, unaryReturnScalarManagedType, StringComparison.Ordinal) &&
+                         (string.Equals(unaryInputScalarManagedType, "System.Single", StringComparison.Ordinal) ||
+                          string.Equals(unaryInputScalarManagedType, "System.Double", StringComparison.Ordinal)) =>
+                    TryCreateStaticUnaryCustomArgPlan(
+                        descriptor,
+                        backend,
+                        unaryParameterCppType,
+                        unaryReturnCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedRound<{unaryInputScalarCppType}, {unaryReturnCarrierCppType}>(request->arg0)",
+                        "vector-fixed-arithmetic",
+                        out plan),
+                "Sqrt" or "SquareRoot"
+                    when string.Equals(unaryInputScalarManagedType, unaryReturnScalarManagedType, StringComparison.Ordinal) =>
+                    TryCreateStaticUnaryCustomArgPlan(
+                        descriptor,
+                        backend,
+                        unaryParameterCppType,
+                        unaryReturnCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedSqrt<{unaryInputScalarCppType}, {unaryReturnCarrierCppType}>(request->arg0)",
+                        "vector-fixed-arithmetic",
+                        out plan),
                 _ => false,
             };
         }
@@ -3369,6 +4014,108 @@ internal static class RuntimeSkeletonVectorKernelCore
                         binaryCarrierCppType,
                         binaryCarrierCppType,
                         $"{GetHelperNamespace()}::VectorFixedScale<{binaryInputScalarCppType}, {binaryCarrierCppType}>(request->arg0, request->arg1)",
+                        "vector-fixed-arithmetic",
+                        RuntimeSkeletonVectorShiftTraitKind.None,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        "request->arg1",
+                        out plan),
+                "AddSaturate" when string.Equals(leftScalarManagedType, returnScalarManagedType, StringComparison.Ordinal) =>
+                    TryCreateStaticBinaryCustomArgsPlan(
+                        descriptor,
+                        backend,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedAddSaturate<{binaryInputScalarCppType}, {binaryCarrierCppType}>(request->arg0, request->arg1)",
+                        "vector-fixed-arithmetic",
+                        RuntimeSkeletonVectorShiftTraitKind.None,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        "request->arg1",
+                        out plan),
+                "SubtractSaturate" when string.Equals(leftScalarManagedType, returnScalarManagedType, StringComparison.Ordinal) =>
+                    TryCreateStaticBinaryCustomArgsPlan(
+                        descriptor,
+                        backend,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedSubtractSaturate<{binaryInputScalarCppType}, {binaryCarrierCppType}>(request->arg0, request->arg1)",
+                        "vector-fixed-arithmetic",
+                        RuntimeSkeletonVectorShiftTraitKind.None,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        "request->arg1",
+                        out plan),
+                "MinNative" when string.Equals(leftScalarManagedType, returnScalarManagedType, StringComparison.Ordinal) =>
+                    TryCreateStaticBinaryCustomArgsPlan(
+                        descriptor,
+                        backend,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedMinNative<{binaryInputScalarCppType}, {binaryCarrierCppType}>(request->arg0, request->arg1)",
+                        "vector-fixed-arithmetic",
+                        RuntimeSkeletonVectorShiftTraitKind.None,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        "request->arg1",
+                        out plan),
+                "MaxNative" when string.Equals(leftScalarManagedType, returnScalarManagedType, StringComparison.Ordinal) =>
+                    TryCreateStaticBinaryCustomArgsPlan(
+                        descriptor,
+                        backend,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedMaxNative<{binaryInputScalarCppType}, {binaryCarrierCppType}>(request->arg0, request->arg1)",
+                        "vector-fixed-arithmetic",
+                        RuntimeSkeletonVectorShiftTraitKind.None,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        "request->arg1",
+                        out plan),
+                "MinNumber" when string.Equals(leftScalarManagedType, returnScalarManagedType, StringComparison.Ordinal) =>
+                    TryCreateStaticBinaryCustomArgsPlan(
+                        descriptor,
+                        backend,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedMinNumber<{binaryInputScalarCppType}, {binaryCarrierCppType}>(request->arg0, request->arg1)",
+                        "vector-fixed-arithmetic",
+                        RuntimeSkeletonVectorShiftTraitKind.None,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        "request->arg1",
+                        out plan),
+                "MaxNumber" when string.Equals(leftScalarManagedType, returnScalarManagedType, StringComparison.Ordinal) =>
+                    TryCreateStaticBinaryCustomArgsPlan(
+                        descriptor,
+                        backend,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        binaryCarrierCppType,
+                        $"{GetHelperNamespace()}::VectorFixedMaxNumber<{binaryInputScalarCppType}, {binaryCarrierCppType}>(request->arg0, request->arg1)",
                         "vector-fixed-arithmetic",
                         RuntimeSkeletonVectorShiftTraitKind.None,
                         null,
@@ -3761,6 +4508,187 @@ internal static class RuntimeSkeletonVectorKernelCore
                         scalarResolutionKind,
                         scalarGenericArgumentIndex,
                         out plan),
+            _ => false,
+        };
+    }
+
+    private static bool TryCreateFixedComparisonPlan(
+        RuntimeSkeletonVectorKernelSemanticDescriptor descriptor,
+        string subjectId,
+        RuntimeSkeletonVectorKernelBackendKind backend,
+        out RuntimeSkeletonVectorKernelEmissionPlan plan)
+    {
+        plan = null!;
+        string scalarManagedType;
+        string methodSuffix;
+        if (descriptor.SubjectIdPrefix.EndsWith("`1::", StringComparison.Ordinal))
+        {
+            if (!TryExtractOpenIntrinsicMethodSuffix(descriptor.SubjectIdPrefix, subjectId, out methodSuffix))
+            {
+                return false;
+            }
+
+            scalarManagedType = "!0";
+        }
+        else if (!TryExtractClosedIntrinsicScalarManagedType(
+                     descriptor.SubjectIdPrefix,
+                     subjectId,
+                     out scalarManagedType,
+                     out methodSuffix))
+        {
+            return false;
+        }
+
+        var hasConcreteScalarCppType = TryMapManagedScalarCppType(scalarManagedType, out var scalarCppType);
+        var managedVectorTypeName = GetFixedVectorManagedTypeName(descriptor.SubjectIdPrefix);
+        string? scalarTypeSubjectId = null;
+        RuntimeSkeletonVectorKernelScalarResolutionKind? scalarResolutionKind = null;
+        int? scalarGenericArgumentIndex = null;
+        var fixedVectorWidthBytes = 0;
+
+        if (!hasConcreteScalarCppType)
+        {
+            if (!TryResolveShiftScalarSelector(
+                    descriptor.SubjectIdPrefix,
+                    subjectId,
+                    scalarManagedType,
+                    out scalarTypeSubjectId,
+                    out scalarResolutionKind,
+                    out scalarGenericArgumentIndex) ||
+                !TryGetFixedVectorWidthBytes(descriptor.SubjectIdPrefix, out fixedVectorWidthBytes))
+            {
+                return false;
+            }
+        }
+
+        var helperNs = GetHelperNamespace();
+        var carrierType = descriptor.CarrierCppType;
+        var twoArgs = new[] { carrierType, carrierType };
+
+        return methodSuffix switch
+        {
+            // Category B: mask-returning Equals
+            var current when current.StartsWith("Equals:", StringComparison.Ordinal) &&
+                              current.Contains($"({managedVectorTypeName}<{scalarManagedType}>,{managedVectorTypeName}<{scalarManagedType}>)", StringComparison.Ordinal) =>
+                TryCreateStaticBinaryMixedPlan(
+                    descriptor,
+                    backend,
+                    twoArgs,
+                    carrierType,
+                    $"{helperNs}::VectorFixedCompareEqual<{scalarCppType}, {scalarCppType}, {carrierType}>(request->arg0, request->arg1)",
+                    "vector-fixed-comparison",
+                    out plan),
+
+            // Category B: mask-returning EqualsFloatingPoint
+            var current when current.StartsWith("EqualsFloatingPoint:", StringComparison.Ordinal) &&
+                              current.Contains($"({managedVectorTypeName}<{scalarManagedType}>,{managedVectorTypeName}<{scalarManagedType}>)", StringComparison.Ordinal) =>
+                TryCreateStaticBinaryMixedPlan(
+                    descriptor,
+                    backend,
+                    twoArgs,
+                    carrierType,
+                    $"{helperNs}::VectorFixedCompareEqualFloatingPoint<{scalarCppType}, {scalarCppType}, {carrierType}>(request->arg0, request->arg1)",
+                    "vector-fixed-comparison",
+                    out plan),
+
+            // Category A: GreaterThanAny → CompareGreaterThan + AnyLaneNonZero
+            var current when current.StartsWith("GreaterThanAny:", StringComparison.Ordinal) &&
+                              current.Contains($"({managedVectorTypeName}<{scalarManagedType}>,{managedVectorTypeName}<{scalarManagedType}>)", StringComparison.Ordinal) =>
+                hasConcreteScalarCppType
+                    ? TryCreateStaticBinaryMixedPlan(
+                        descriptor,
+                        backend,
+                        twoArgs,
+                        "bool",
+                        $"{helperNs}::VectorFixedAnyLaneNonZero<{scalarCppType}, {carrierType}>" +
+                        $"({helperNs}::VectorFixedCompareGreaterThan<{scalarCppType}, {scalarCppType}, {carrierType}>(request->arg0, request->arg1))",
+                        "vector-fixed-comparison",
+                        out plan)
+                    : TryCreatePlanCore(
+                        descriptor, "vector-fixed-comparison", backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, twoArgs, "bool"),
+                        string.Empty, "greater-than-any",
+                        scalarTypeSubjectId, fixedVectorWidthBytes, scalarResolutionKind, scalarGenericArgumentIndex,
+                        out plan),
+
+            // Category A: GreaterThanAll → CompareGreaterThan + AllLanesNonZero
+            var current when current.StartsWith("GreaterThanAll:", StringComparison.Ordinal) &&
+                              current.Contains($"({managedVectorTypeName}<{scalarManagedType}>,{managedVectorTypeName}<{scalarManagedType}>)", StringComparison.Ordinal) =>
+                hasConcreteScalarCppType
+                    ? TryCreateStaticBinaryMixedPlan(
+                        descriptor,
+                        backend,
+                        twoArgs,
+                        "bool",
+                        $"{helperNs}::VectorFixedAllLanesNonZero<{scalarCppType}, {carrierType}>" +
+                        $"({helperNs}::VectorFixedCompareGreaterThan<{scalarCppType}, {scalarCppType}, {carrierType}>(request->arg0, request->arg1))",
+                        "vector-fixed-comparison",
+                        out plan)
+                    : TryCreatePlanCore(
+                        descriptor, "vector-fixed-comparison", backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, twoArgs, "bool"),
+                        string.Empty, "greater-than-all",
+                        scalarTypeSubjectId, fixedVectorWidthBytes, scalarResolutionKind, scalarGenericArgumentIndex,
+                        out plan),
+
+            // Category A: LessThanAny → CompareLessThan + AnyLaneNonZero
+            var current when current.StartsWith("LessThanAny:", StringComparison.Ordinal) &&
+                              current.Contains($"({managedVectorTypeName}<{scalarManagedType}>,{managedVectorTypeName}<{scalarManagedType}>)", StringComparison.Ordinal) =>
+                hasConcreteScalarCppType
+                    ? TryCreateStaticBinaryMixedPlan(
+                        descriptor,
+                        backend,
+                        twoArgs,
+                        "bool",
+                        $"{helperNs}::VectorFixedAnyLaneNonZero<{scalarCppType}, {carrierType}>" +
+                        $"({helperNs}::VectorFixedCompareLessThan<{scalarCppType}, {scalarCppType}, {carrierType}>(request->arg0, request->arg1))",
+                        "vector-fixed-comparison",
+                        out plan)
+                    : TryCreatePlanCore(
+                        descriptor, "vector-fixed-comparison", backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, twoArgs, "bool"),
+                        string.Empty, "less-than-any",
+                        scalarTypeSubjectId, fixedVectorWidthBytes, scalarResolutionKind, scalarGenericArgumentIndex,
+                        out plan),
+
+            // Category A: LessThanAll → CompareLessThan + AllLanesNonZero
+            var current when current.StartsWith("LessThanAll:", StringComparison.Ordinal) &&
+                              current.Contains($"({managedVectorTypeName}<{scalarManagedType}>,{managedVectorTypeName}<{scalarManagedType}>)", StringComparison.Ordinal) =>
+                hasConcreteScalarCppType
+                    ? TryCreateStaticBinaryMixedPlan(
+                        descriptor,
+                        backend,
+                        twoArgs,
+                        "bool",
+                        $"{helperNs}::VectorFixedAllLanesNonZero<{scalarCppType}, {carrierType}>" +
+                        $"({helperNs}::VectorFixedCompareLessThan<{scalarCppType}, {scalarCppType}, {carrierType}>(request->arg0, request->arg1))",
+                        "vector-fixed-comparison",
+                        out plan)
+                    : TryCreatePlanCore(
+                        descriptor, "vector-fixed-comparison", backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, twoArgs, "bool"),
+                        string.Empty, "less-than-all",
+                        scalarTypeSubjectId, fixedVectorWidthBytes, scalarResolutionKind, scalarGenericArgumentIndex,
+                        out plan),
+
+            // Category C: ExtractMostSignificantBits → unary, returns uint32
+            var current when current.StartsWith("ExtractMostSignificantBits:", StringComparison.Ordinal) &&
+                              current.Contains($"({managedVectorTypeName}<{scalarManagedType}>)", StringComparison.Ordinal) =>
+                hasConcreteScalarCppType
+                    ? TryCreateStaticUnaryPlan(
+                        descriptor,
+                        backend,
+                        "CHAOS_IL2CPP_UINT32",
+                        $"{helperNs}::VectorFixedExtractMostSignificantBits<{scalarCppType}, {carrierType}>(request->arg0)",
+                        "vector-fixed-comparison",
+                        out plan)
+                    : TryCreatePlanCore(
+                        descriptor, "vector-fixed-comparison", backend,
+                        new RuntimeSkeletonVectorKernelCarrierSchema(null, [carrierType], "CHAOS_IL2CPP_UINT32"),
+                        string.Empty, "extract-most-significant-bits",
+                        scalarTypeSubjectId, fixedVectorWidthBytes, scalarResolutionKind, scalarGenericArgumentIndex,
+                        out plan),
+
             _ => false,
         };
     }
@@ -5200,6 +6128,7 @@ internal static class RuntimeSkeletonVectorKernelCore
             "/System.Runtime.Intrinsics.X86.Sse2::" => 16,
             "/System.Runtime.Intrinsics.X86.Ssse3::" => 16,
             "/System.Runtime.Intrinsics.X86.Sse41::" => 16,
+            "/System.Runtime.Intrinsics.X86.Sse42::" => 16,
             "/System.Runtime.Intrinsics.X86.Avx::" => 32,
             "/System.Runtime.Intrinsics.X86.Avx2::" => 32,
             "/System.Runtime.Intrinsics.X86.Avx512BW::" => 64,

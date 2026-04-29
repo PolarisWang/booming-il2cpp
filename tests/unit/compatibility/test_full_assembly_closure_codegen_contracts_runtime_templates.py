@@ -980,6 +980,86 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
         ]:
             self.assertIn(required_fragment, template_source)
 
+    def test_runtime_skeleton_collections_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.CollectionsManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_COLLECTIONS_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonCollectionsManagedInvokeCore",
+            "TryBuildAssemblyBoundCollectionsManagedInvokeStub",
+            "TryBuildAssemblyBoundCollectionsManagedInvokeCore",
+            "RuntimeSkeletonCollectionsManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonCollectionsManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonCollectionsManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_collections_kernel_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.CollectionsKernelFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_COLLECTIONS_KERNEL_STUB_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonCollectionsKernelFamilyCore",
+            "TryBuildRuntimeSkeletonCollectionsKernelCore",
+            "TryBuildCollectionsKernelStub",
+            "RuntimeSkeletonCollectionsKernelAbiFactory.TryCreate(",
+            "GetRuntimeSkeletonCollectionsKernelStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonCollectionsKernelStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "helper_call_expression",
+            "version_assertion",
+            "arg_field_declarations",
+            "return_field_declaration",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
     def test_runtime_skeleton_unsafe_managed_invoke_helper_has_template(self) -> None:
         native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = (
@@ -1105,6 +1185,47 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             "return_value_size",
             "return_value_argument",
             "return_value_declaration",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_buffermemory_kernel_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.BufferMemoryKernelFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_BUFFER_MEMORY_KERNEL_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonBufferMemoryKernelFamilyHandler",
+            "TryBuildRuntimeSkeletonBufferMemoryKernelCore",
+            "TryBuildBufferMemoryKernelStub",
+            "RuntimeSkeletonBufferMemoryKernelAbiFactory.TryCreate(",
+            "GetRuntimeSkeletonBufferMemoryKernelStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonBufferMemoryKernelStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "chaos::il2cpp::runtime_core::",
+            "return CHAOS_BRIDGE_STATUS_OK;",
+            "helper_call_expression",
+            "has_return_value",
+            "needs_gc_write_barrier",
+            "arg_validations",
         ]:
             self.assertIn(required_fragment, template_source)
 
@@ -1714,19 +1835,6 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             '"/System.Numerics.Vector::"',
             '"/System.Numerics.Vector<"',
             '"/System.Numerics.Vector`1::"',
-            '"/System.Runtime.Intrinsics.Wasm.PackedSimd::"',
-            '"/System.Runtime.Intrinsics.Arm.AdvSimd::"',
-            '"/System.Runtime.Intrinsics.X86.Sse2::"',
-            '"/System.Runtime.Intrinsics.X86.Avx2::"',
-            'CreateDescriptor("vector-indexer", "/System.Numerics.Vector2::"',
-            'CreateDescriptor("vector-indexer", "/System.Numerics.Vector3::"',
-            'CreateDescriptor("vector-indexer", "/System.Numerics.Vector4::"',
-            'CreateDescriptor("vector-hash", "/System.Numerics.Vector2::"',
-            'CreateDescriptor("vector-hash", "/System.Numerics.Vector3::"',
-            'CreateDescriptor("vector-hash", "/System.Numerics.Vector4::"',
-            'CreateDescriptor("vector-copy", "/System.Numerics.Vector2::"',
-            'CreateDescriptor("vector-copy", "/System.Numerics.Vector3::"',
-            'CreateDescriptor("vector-copy", "/System.Numerics.Vector4::"',
             'CreateDescriptor("vector-fixed-equality", "/System.Numerics.Vector<"',
             'CreateDescriptor("vector-fixed-equality", "/System.Numerics.Vector`1::"',
             'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector64<"',
@@ -1737,21 +1845,6 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector256`1::"',
             'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector512<"',
             'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector512`1::"',
-            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Arm.AdvSimd::"',
-            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.Arm.AdvSimd::"',
-            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Sse2::"',
-            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Sse2::"',
-            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx2::"',
-            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx2::"',
-            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512F::"',
-            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512F::"',
-            'CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.X86.Avx512BW+VL::"',
-            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512BW+VL::"',
-            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512BW+VL::"',
-            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512F+VL::"',
-            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512F+VL::"',
-            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Wasm.PackedSimd::"',
-            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.Wasm.PackedSimd::"',
             '"System.Numerics.Vector<", 32',
             '"/System.Runtime.Intrinsics.Vector128::" => 16',
             '"/System.Runtime.Intrinsics.Vector256::" => 32',
@@ -1806,6 +1899,12 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             '"Shuffle2x128"',
             'when string.Equals(binaryImmediateCarrierCppType, "RuntimeIntrinsicVector256Carrier", StringComparison.Ordinal)',
             "TryExtractIntrinsicUnaryVectorConversionShape(",
+            '"ConvertToVector512Int64"',
+            '"ConvertToVector512UInt64"',
+            '"ConvertToVector512Int32"',
+            '"ConvertToVector512UInt32"',
+            '"ConvertToVector512Double"',
+            '"ConvertToVector512UInt32WithTruncation"',
             "TryExtractIntrinsicTernaryVectorMaskByteImmediateOperationShape(",
             "TryExtractIntrinsicBinaryVectorIndexOperationShape(",
             "TryExtractIntrinsicTernaryVectorIndexedBlendOperationShape(",
