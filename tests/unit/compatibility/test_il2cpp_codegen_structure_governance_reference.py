@@ -407,10 +407,13 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         datetime_engine_split_source = NATIVE_REFERENCE_EMITTER_DATETIME_SEMANTIC_ENGINE_FAMILY_PATH.read_text(encoding="utf-8")
         globalization_datetime_split_source = NATIVE_REFERENCE_EMITTER_GLOBALIZATION_DATETIME_SUPPORT_FAMILY_PATH.read_text(encoding="utf-8")
         valuetype_kernel_split_source = NATIVE_REFERENCE_EMITTER_VALUETYPE_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
+        buffermemory_kernel_split_source = NATIVE_REFERENCE_EMITTER_BUFFER_MEMORY_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
         enum_split_source = NATIVE_REFERENCE_EMITTER_ENUM_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
         string_split_source = NATIVE_REFERENCE_EMITTER_STRING_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        collections_managed_invoke_split_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        collections_kernel_split_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
         unsafe_split_source = NATIVE_REFERENCE_EMITTER_UNSAFE_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
-        combined_source = emitter_source + "\n" + convert_split_source + "\n" + memory_extensions_split_source + "\n" + spanhelpers_split_source + "\n" + array_memorymarshal_split_source + "\n" + half_split_source + "\n" + floating_split_source + "\n" + number_split_source + "\n" + decimal_split_source + "\n" + char_split_source + "\n" + companion_split_source + "\n" + datetime_engine_split_source + "\n" + globalization_datetime_split_source + "\n" + valuetype_kernel_split_source + "\n" + enum_split_source + "\n" + string_split_source + "\n" + unsafe_split_source
+        combined_source = emitter_source + "\n" + convert_split_source + "\n" + memory_extensions_split_source + "\n" + spanhelpers_split_source + "\n" + array_memorymarshal_split_source + "\n" + half_split_source + "\n" + floating_split_source + "\n" + number_split_source + "\n" + decimal_split_source + "\n" + char_split_source + "\n" + companion_split_source + "\n" + datetime_engine_split_source + "\n" + globalization_datetime_split_source + "\n" + valuetype_kernel_split_source + "\n" + buffermemory_kernel_split_source + "\n" + enum_split_source + "\n" + string_split_source + "\n" + collections_managed_invoke_split_source + "\n" + collections_kernel_split_source + "\n" + unsafe_split_source
 
         for required_fragment in [
             "private enum RuntimeSkeletonFamilyHandlerMatchKind",
@@ -435,8 +438,11 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             '"datetime-semantic-engine-unsupported-shape"',
             '"globalization-datetime-support-unsupported-shape"',
             '"valuetype-kernel-unsupported-shape"',
+            '"buffermemory-kernel-unsupported-shape"',
             '"enum-managed-invoke-unsupported-shape"',
             '"unsafe-managed-invoke-unsupported-shape"',
+            '"collections-managed-invoke-unsupported-shape"',
+            '"collections-kernel-unsupported-shape"',
             '"string-managed-invoke-unsupported-shape"',
             '"exception-family-owned-unsupported-shape"',
         ]:
@@ -721,6 +727,22 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         self.assertIn("CreateUnsupported(\"spanhelpers-kernel-unsupported-shape\")", split_source)
         self.assertIn(
             "SubjectId.Contains(\"/System.SpanHelpers::\", StringComparison.Ordinal)",
+            split_source,
+        )
+
+    def test_runtime_skeleton_buffermemory_kernel_family_precedes_string_families(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_BUFFER_MEMORY_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("TryBuildRuntimeSkeletonBufferMemoryKernelFamilyHandler", emitter_source)
+        self.assertLess(
+            generated_exports_source.index("Plugin_BufferMemoryKernelFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
+        )
+        self.assertIn("CreateUnsupported(\"buffermemory-kernel-unsupported-shape\")", split_source)
+        self.assertIn(
+            "SubjectId.Contains(\"/System.Buffer::\", StringComparison.Ordinal)",
             split_source,
         )
 
@@ -1221,6 +1243,22 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         self.assertIn("TryBuildRuntimeSkeletonSpanHelpersKernelCore(buildContext);", emitter_source)
         self.assertIn("TryBuildAssemblyBoundSpanHelpersKernelCore(", emitter_source)
 
+    def test_native_reference_emitter_buffermemory_kernel_family_is_split_from_root_emitter(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_BUFFER_MEMORY_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_REFERENCE_EMITTER_BUFFER_MEMORY_KERNEL_FAMILY_PATH.is_file(),
+            msg=f"missing NativeReference emitter split file: {NATIVE_REFERENCE_EMITTER_BUFFER_MEMORY_KERNEL_FAMILY_PATH}",
+        )
+
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", emitter_source)
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonBufferMemoryKernelFamilyCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonBufferMemoryKernelCore(", split_source)
+        self.assertIn("TryBuildBufferMemoryKernelStub(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonBufferMemoryKernelFamilyCore(buildContext);", emitter_source)
+
     def test_native_reference_emitter_array_and_memorymarshal_family_is_split_from_root_emitter(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = NATIVE_REFERENCE_EMITTER_ARRAY_AND_MEMORYMARSHAL_FAMILY_PATH.read_text(encoding="utf-8")
@@ -1535,9 +1573,6 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             "record RuntimeSkeletonVectorKernelSemanticDescriptor(",
             "record RuntimeSkeletonVectorKernelCarrierSchema(",
             "record RuntimeSkeletonVectorKernelEmissionPlan(",
-            "/System.Numerics.Vector2::",
-            "/System.Numerics.Vector3::",
-            "/System.Numerics.Vector4::",
             "/System.Runtime.Intrinsics.Vector64::",
             "/System.Runtime.Intrinsics.Vector128::",
             "/System.Runtime.Intrinsics.Vector256::",
@@ -1549,6 +1584,39 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             "vector-reinterpret",
             "vector-fixed-arithmetic",
             "vector-capability-query",
+        ]:
+            self.assertIn(required_fragment, vector_kernel_core_source)
+
+    def test_runtime_skeleton_vector_kernel_fallback_resolves_numerics_from_artifact(self) -> None:
+        vector_kernel_core_source = RUNTIME_SKELETON_VECTOR_KERNEL_CORE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryResolveFromMethodArtifact",
+            "MapMethodNameToOperationKind",
+            "ClassifyNumericsType",
+            "ExtractMethodName",
+            "BuildSubjectIdPrefix",
+            "MapOperationKindToSemanticId",
+            "MapIntrinsicsMethodNameToOperationKind",
+            "MapIntrinsicsOperationKindToSemanticId",
+            "ClassifyIntrinsicsType",
+            "GetIntrinsicsTypeInfo",
+        ]:
+            self.assertIn(required_fragment, vector_kernel_core_source)
+
+    def test_runtime_skeleton_vector_kernel_fallback_creates_plan_for_intrinsics(self) -> None:
+        vector_kernel_core_source = RUNTIME_SKELETON_VECTOR_KERNEL_CORE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryResolveFromMethodArtifact",
+            "MapIntrinsicsMethodNameToOperationKind",
+            "MapIntrinsicsOperationKindToSemanticId",
+            "ClassifyIntrinsicsType",
+            "GetIntrinsicsTypeInfo",
+            "BuildSubjectIdPrefix",
+            "FallbackDescriptorCache",
+            "ConcurrentDictionary",
+            "TypedIlMethodArtifact method,"
         ]:
             self.assertIn(required_fragment, vector_kernel_core_source)
 
@@ -1811,6 +1879,193 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             "identity-struct-managed-invoke-v1",
         ]:
             self.assertIn(required_fragment, vector_source)
+
+    def test_native_reference_emitter_collections_managed_invoke_family_is_split_from_root_emitter(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_REFERENCE_EMITTER_COLLECTIONS_MANAGED_INVOKE_FAMILY_PATH.is_file(),
+            msg=f"missing NativeReference emitter split file: {NATIVE_REFERENCE_EMITTER_COLLECTIONS_MANAGED_INVOKE_FAMILY_PATH}",
+        )
+
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", emitter_source)
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonCollectionsManagedInvokeCore(", split_source)
+        self.assertIn("TryBuildAssemblyBoundCollectionsManagedInvokeCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyCore(buildContext);", emitter_source)
+        self.assertIn("TryBuildAssemblyBoundCollectionsManagedInvokeCore(", emitter_source)
+
+    def test_runtime_skeleton_collections_managed_invoke_family_precedes_string_micro_family(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyHandler", emitter_source)
+        self.assertLess(
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_CollectionsManagedInvokeFamily"),
+        )
+        self.assertLess(
+            generated_exports_source.index("Plugin_CollectionsManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringFamily"),
+        )
+        self.assertIn("CreateUnsupported(\"collections-managed-invoke-unsupported-shape\")", split_source)
+        self.assertIn("SubjectId.Contains(\"/System.Collections.Generic.List`1\", StringComparison.Ordinal)", split_source)
+
+    def test_native_reference_emitter_collections_kernel_family_is_split_from_root_emitter(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_FAMILY_PATH.is_file(),
+            msg=f"missing NativeReference emitter split file: {NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_FAMILY_PATH}",
+        )
+
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", emitter_source)
+        self.assertIn("public sealed partial class NativeReferenceProofEmitter", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonCollectionsKernelFamilyCore(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonCollectionsKernelCore(", split_source)
+        self.assertIn("TryBuildCollectionsKernelStub(", split_source)
+        self.assertIn("TryBuildRuntimeSkeletonCollectionsKernelFamilyCore(buildContext);", emitter_source)
+        self.assertIn("TryBuildCollectionsKernelStub(", split_source)
+
+    def test_runtime_skeleton_collections_kernel_family_precedes_exception_family(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("TryBuildRuntimeSkeletonCollectionsKernelFamilyHandler", emitter_source)
+        self.assertLess(
+            generated_exports_source.index("Plugin_CollectionsKernelFamily"),
+            generated_exports_source.index("Plugin_ExceptionFamily"),
+        )
+        self.assertIn("CreateUnsupported(\"collections-kernel-unsupported-shape\")", split_source)
+
+    def test_runtime_skeleton_collections_kernel_abi_contract_id(self) -> None:
+        abi_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_ABI_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_ABI_PATH.is_file(),
+            msg=f"missing collections kernel ABI file: {NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_ABI_PATH}",
+        )
+
+        self.assertIn("HotUpdateStableContractId = \"collections-kernel-v1\"", abi_source)
+        self.assertIn("CollectionsKernelArgShape", abi_source)
+        self.assertIn("RuntimeSkeletonCollectionsKernelAbi", abi_source)
+        self.assertIn("RuntimeSkeletonCollectionsKernelAbiFactory", abi_source)
+
+    def test_runtime_skeleton_collections_kernel_template_exists(self) -> None:
+        self.assertTrue(
+            NATIVE_REFERENCE_RUNTIME_SKELETON_COLLECTIONS_KERNEL_STUB_TEMPLATE_PATH.is_file(),
+            msg=f"missing collections kernel stub template: {NATIVE_REFERENCE_RUNTIME_SKELETON_COLLECTIONS_KERNEL_STUB_TEMPLATE_PATH}",
+        )
+
+        template_source = NATIVE_REFERENCE_RUNTIME_SKELETON_COLLECTIONS_KERNEL_STUB_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "{{ stub_name }}_KernelArgs",
+            "helper_call_expression",
+            "CHAOS_RUNTIME_ABI_CALL",
+            "contract_id",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_collections_kernel_plugin_attribute(self) -> None:
+        generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
+
+        self.assertIn(
+            'RuntimeSkeletonFamilyPlugin("collections-kernel", CodeGenPluginProductLine.NativeReference, 165, RuntimeSkeletonFamilyPluginKind.Kernel)',
+            generated_exports_source,
+        )
+        self.assertLess(
+            generated_exports_source.index('RuntimeSkeletonFamilyPlugin("array"'),
+            generated_exports_source.index('RuntimeSkeletonFamilyPlugin("collections-kernel"'),
+        )
+        self.assertLess(
+            generated_exports_source.index('RuntimeSkeletonFamilyPlugin("collections-kernel"'),
+            generated_exports_source.index('RuntimeSkeletonFamilyPlugin("exception"'),
+        )
+
+    def test_runtime_skeleton_collections_kernel_abi_has_version_assertion(self) -> None:
+        abi_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_ABI_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("VersionAssertionExpression", abi_source)
+        self.assertIn("GetVersionAssertionExpression(", abi_source)
+
+    def test_runtime_skeleton_collections_kernel_template_has_version_assertion(self) -> None:
+        template_source = NATIVE_REFERENCE_RUNTIME_SKELETON_COLLECTIONS_KERNEL_STUB_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("version_assertion", template_source)
+
+    def test_runtime_skeleton_collections_kernel_widened_methods_count(self) -> None:
+        abi_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_ABI_PATH.read_text(encoding="utf-8")
+
+        # Count TryCreate* methods (excluding TryCreate itself which is the dispatcher)
+        method_count = abi_source.count("static bool TryCreate")
+        self.assertGreaterEqual(
+            method_count, 26,
+            msg=f"Expected >= 26 TryCreate* methods in ABI factory, found {method_count}. "
+                "New collection kernel methods should each have a TryCreate* factory.",
+        )
+
+    def test_runtime_skeleton_collections_kernel_abi_has_formal_version_assertion(self) -> None:
+        abi_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_ABI_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("NOT_SUPPORTED", abi_source)
+        self.assertIn("field_offset_count", abi_source)
+        self.assertIn("CollectionsKernelContractVersionHex", abi_source)
+
+    def test_runtime_skeleton_collections_kernel_template_has_contract_version_constant(self) -> None:
+        template_source = NATIVE_REFERENCE_RUNTIME_SKELETON_COLLECTIONS_KERNEL_STUB_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("kContractVersion", template_source)
+        self.assertIn("contract_version_hex", template_source)
+        self.assertNotIn("(void)metadata_registration", template_source)
+
+    def test_runtime_skeleton_collections_kernel_stack_factory_exists(self) -> None:
+        abi_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_ABI_PATH.read_text(encoding="utf-8")
+
+        self.assertIn('"Stack"', abi_source)
+        self.assertIn("TryCreateStackAbi(", abi_source)
+        self.assertIn("CollectionStackGetCount", abi_source)
+        self.assertIn("CollectionStackPush", abi_source)
+        self.assertIn("CollectionStackPop", abi_source)
+        self.assertIn("CollectionStackPeek", abi_source)
+        self.assertIn("CollectionStackTryPop", abi_source)
+        self.assertIn("CollectionStackTryPeek", abi_source)
+
+    def test_runtime_skeleton_collections_kernel_family_gate_covers_stack(self) -> None:
+        split_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_FAMILY_PATH.read_text(encoding="utf-8")
+
+        self.assertIn('Stack`1', split_source)
+
+    def test_runtime_skeleton_collections_managed_invoke_covers_extended_types(self) -> None:
+        abi_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_MANAGED_INVOKE_ABI_PATH.read_text(encoding="utf-8")
+        family_source = NATIVE_REFERENCE_EMITTER_COLLECTIONS_MANAGED_INVOKE_FAMILY_PATH.read_text(encoding="utf-8")
+
+        self.assertIn('Stack`1', abi_source)
+        self.assertIn('LinkedList`1', abi_source)
+        self.assertIn('SortedDictionary`2', abi_source)
+        self.assertIn('Stack`1', family_source)
+        self.assertIn('LinkedList`1', family_source)
+        self.assertIn('SortedDictionary`2', family_source)
+
+    def test_runtime_skeleton_buffermemory_kernel_abi_has_version_assertion(self) -> None:
+        abi_source = NATIVE_REFERENCE_EMITTER_BUFFER_MEMORY_KERNEL_ABI_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("VersionAssertionExpression", abi_source)
+        self.assertIn("NOT_SUPPORTED", abi_source)
+        self.assertIn("field_offset_count", abi_source)
+
+    def test_runtime_skeleton_buffermemory_kernel_template_has_version_assertion(self) -> None:
+        template_source = NATIVE_REFERENCE_RUNTIME_SKELETON_BUFFER_MEMORY_KERNEL_STUB_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("version_assertion", template_source)
+        self.assertIn("kContractVersion", template_source)
+        self.assertIn("contract_version_hex", template_source)
+        self.assertNotIn("(void)metadata_registration", template_source)
 
     def test_native_reference_emitter_string_micro_family_is_split_from_root_emitter(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
