@@ -1,6 +1,8 @@
 #include "host_main.h"
 #include "result_reporter.h"
 
+#include <chaos/native_types.h>
+
 #include <chrono>
 #include <cstdio>
 #include <cstdlib>

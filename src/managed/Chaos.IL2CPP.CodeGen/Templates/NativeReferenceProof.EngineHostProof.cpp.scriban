@@ -2,8 +2,7 @@
 #include "engine_bridge.h"
 #include "runtime_core.h"
 
-#include <cstdint>
-#include <cstring>
+#include <chaos/native_types.h>
 
 namespace chaos::il2cpp::generated {
 
@@ -35,7 +34,7 @@ void RecordLifecyclePhase(const char* phase_utf8, void* user_data) {
 engine_status_t RecordDispatchPayload(
     const char* callback_name_utf8,
     const void* payload,
-    size_t payload_size,
+    CHAOS_IL2CPP_SIZE payload_size,
     void* user_data) {
     auto* trace = static_cast<HostProofTrace*>(user_data);
     constexpr const char* kExpectedCallbackName = "host-proof-dispatch";
@@ -45,7 +44,7 @@ engine_status_t RecordDispatchPayload(
         return ENGINE_STATUS_INVALID_ARGUMENT;
     }
 
-    const size_t expected_payload_size = CHAOS_IL2CPP_STRLEN(kExpectedPayload);
+    const CHAOS_IL2CPP_SIZE expected_payload_size = CHAOS_IL2CPP_STRLEN(kExpectedPayload);
     trace->callback_count++;
     trace->callback_matched =
         CHAOS_IL2CPP_STRCMP(callback_name_utf8, kExpectedCallbackName) == 0 &&
@@ -65,7 +64,7 @@ bool MatchesExpectedLifecycle(const HostProofTrace& trace, int expected_iteratio
 
 }  // namespace
 
-int32_t {{ native_reference_function_name }}(
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,

@@ -1449,7 +1449,7 @@ public sealed partial class NativeReferenceProofEmitter
             {
                 var pageDispatchName = BuildAssemblyFullClosureRuntimeSkeletonPageDispatchFunctionName(page.PageNumber);
                 return $"""
-int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -1698,7 +1698,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
     private static string BuildAssemblyFullClosureRuntimeSkeletonMethodStubDeclaration(string stubName)
     {
-        return $@"int32_t CHAOS_RUNTIME_ABI_CALL {stubName}(
+        return $@"CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {stubName}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -1710,7 +1710,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
     private static string BuildAssemblyFullClosureRuntimeSkeletonFallbackStubDefinition(string stubName)
     {
-        return $@"int32_t CHAOS_RUNTIME_ABI_CALL {stubName}(
+        return $@"CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {stubName}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -9740,11 +9740,11 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             case "System.Int32":
             case "System.UInt32":
             case "System.Char":
-                typeShape = new AsyncManagedTypeShape(managedType, "int32_t", "0", "ldc.i4", "integer-like literals");
+                typeShape = new AsyncManagedTypeShape(managedType, "CHAOS_IL2CPP_INT32", "0", "ldc.i4", "integer-like literals");
                 return true;
             case "System.Int64":
             case "System.UInt64":
-                typeShape = new AsyncManagedTypeShape(managedType, "int64_t", "0", "ldc.i8", "int64 literals");
+                typeShape = new AsyncManagedTypeShape(managedType, "CHAOS_IL2CPP_INT64", "0", "ldc.i8", "int64 literals");
                 return true;
             case "System.Single":
                 typeShape = new AsyncManagedTypeShape(managedType, "float", "0.0f", "ldc.r4", "float literals");

@@ -197,7 +197,6 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Convert", "ToDouble", 1): "skip",
     ("Convert", "ToDecimal", 1): "skip",
     ("Convert", "ToBoolean", 1): "skip",
-    ("Convert", "ToChar", 1): "skip",      # "hello" is multi-char
     # Convert.ToXxx(string, IFormatProvider) - same issue
     ("Convert", "ToChar", 2): "skip",      # with IFormatProvider
     # Array index-out-of-range with empty arrays
@@ -894,7 +893,7 @@ def _benchmark_generated_source(
             call_expr = _build_call_expr(parsed)
             member_name = _member_name("Benchmark", method_subject_id)
             purpose_comment = f"// Purpose: Benchmark native-runtime performance of {parsed['type_name']}.{parsed['method_name']} with typical input"
-            if not _is_auto_callable(parsed) or _has_unsafe_param(parsed["param_types"]):
+            if _has_unsafe_param(parsed["param_types"]):
                 parts.append(
                     f"    {purpose_comment}\n"
                     f'    [BenchmarkSubjectId("{method_subject_id}")]\n'
@@ -1095,6 +1094,17 @@ def generate_family_skeleton(repo_root: Path, *, assembly_name: str, family: dic
     generated_path.write_text(generated_source, encoding="utf-8")
     benchmark_generated_path.parent.mkdir(parents=True, exist_ok=True)
     benchmark_generated_path.write_text(
+        _benchmark_generated_source(
+            class_name,
+            method_subject_ids=method_subject_ids,
+            capability_family_enum=capability_family_enum,
+        ),
+        encoding="utf-8",
+    )
+    # Overwrite handwritten benchmark file with real method bodies
+    benchmark_class_name = class_name.replace("Tests", "Benchmarks")
+    benchmark_path = family_root / "benchmark" / f"{benchmark_class_name}.cs"
+    benchmark_path.write_text(
         _benchmark_generated_source(
             class_name,
             method_subject_ids=method_subject_ids,

@@ -2,8 +2,7 @@
 #include "runtime_core.h"
 
 #include <atomic>
-#include <cstddef>
-#include <cstdint>
+#include <chaos/native_types.h>
 #include <cstdio>
 #include <thread>
 
@@ -13,7 +12,7 @@ namespace {
 
 constexpr const char* kThreadStaticSlotKey = "ThreadingProof.thread-slot";
 constexpr const char* kExpectedOutput = {{ expected_output_literal }};
-CHAOS_IL2CPP_ATOMIC(int32_t) g_finalized_count = 0;
+CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_INT32) g_finalized_count = 0;
 
 void RecordFinalizer(void* object_instance) {
     if (object_instance != nullptr) {
@@ -35,7 +34,7 @@ bool WriteExpectedOutputLine() {
 
 }  // namespace
 
-int32_t {{ native_reference_function_name }}(
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -60,8 +59,8 @@ int32_t {{ native_reference_function_name }}(
 
     int gate_object = 0;
     void* gate = &gate_object;
-    int32_t shared_total = 0;
-    int32_t main_slot = 0;
+    CHAOS_IL2CPP_INT32 shared_total = 0;
+    CHAOS_IL2CPP_INT32 main_slot = 0;
     if (!chaos::il2cpp::runtime_core::ThreadStaticInt32Add(runtime, thread, kThreadStaticSlotKey, 1, &main_slot) ||
         main_slot != 1) {
         return 1;
@@ -82,7 +81,7 @@ int32_t {{ native_reference_function_name }}(
         return 1;
     }
 
-    int32_t main_root = 7;
+    CHAOS_IL2CPP_INT32 main_root = 7;
     if (chaos::il2cpp::runtime_core::ReportThreadRoot(runtime, thread, &main_root, sizeof(main_root)) != 1u) {
         return 1;
     }
@@ -93,7 +92,7 @@ int32_t {{ native_reference_function_name }}(
 
     g_finalized_count.store(0);
 
-    int32_t worker_slot = 0;
+    CHAOS_IL2CPP_INT32 worker_slot = 0;
     CHAOS_IL2CPP_SIZE worker_root_count = 0u;
     bool worker_ok = false;
     CHAOS_IL2CPP_THREAD worker([&]() {
@@ -102,7 +101,7 @@ int32_t {{ native_reference_function_name }}(
             return;
         }
 
-        int32_t worker_root = 11;
+        CHAOS_IL2CPP_INT32 worker_root = 11;
         if (!chaos::il2cpp::runtime_core::ThreadStaticInt32Add(runtime, worker_thread, kThreadStaticSlotKey, 1, &worker_slot) ||
             worker_slot != 1) {
             abi->thread_detach(runtime, worker_thread);

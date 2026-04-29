@@ -25,11 +25,15 @@ def _load_json(path: Path) -> dict[str, Any]:
         return json.load(f)
 
 
-def _compute_speedup_pct(managed_ms: float, native_ms: float) -> float:
-    """Positive = native is faster; negative = managed is faster."""
-    if managed_ms <= 0.0:
-        return 0.0
-    return ((managed_ms - native_ms) / managed_ms) * 100.0
+def _compute_speedup_pct(managed_ms: float, native_ms: float) -> tuple[float, str]:
+    """Positive = native is faster; negative = managed is faster.
+
+    Returns (speedup_pct, status) where status is one of:
+    "matched", "invalid".
+    """
+    if managed_ms <= 0.0 or native_ms <= 0.0:
+        return 0.0, "invalid"
+    return ((managed_ms - native_ms) / managed_ms) * 100.0, "matched"
 
 
 def compare(
@@ -63,6 +67,7 @@ def compare(
     managed_faster_count = 0
     equal_count = 0
     unmatched_count = 0
+    invalid_count = 0
     total_speedup = 0.0
     matched_count = 0
 
@@ -82,24 +87,27 @@ def compare(
 
         managed_ms = managed_entry.get("elapsedMilliseconds", 0.0)
         native_ms = native_entry.get("elapsedMilliseconds", 0.0)
-        speedup_pct = _compute_speedup_pct(managed_ms, native_ms)
+        speedup_pct, status = _compute_speedup_pct(managed_ms, native_ms)
 
-        if speedup_pct > 1.0:
+        if status == "invalid":
+            invalid_count += 1
+        elif speedup_pct > 1.0:
             native_faster_count += 1
         elif speedup_pct < -1.0:
             managed_faster_count += 1
         else:
             equal_count += 1
 
-        matched_count += 1
-        total_speedup += speedup_pct
+        if status == "matched":
+            matched_count += 1
+            total_speedup += speedup_pct
 
         method_results.append({
             "methodSubjectId": sid,
-            "status": "matched",
+            "status": status,
             "managedElapsedMs": managed_ms,
             "nativeElapsedMs": native_ms,
-            "speedupPercent": round(speedup_pct, 2),
+            "speedupPercent": round(speedup_pct, 2) if status == "matched" else None,
         })
 
     average_speedup = round(total_speedup / matched_count, 2) if matched_count > 0 else 0.0
@@ -112,6 +120,7 @@ def compare(
             "totalMethods": len(all_subjects),
             "matchedCount": matched_count,
             "unmatchedCount": unmatched_count,
+            "invalidCount": invalid_count,
             "nativeFasterCount": native_faster_count,
             "managedFasterCount": managed_faster_count,
             "equalCount": equal_count,

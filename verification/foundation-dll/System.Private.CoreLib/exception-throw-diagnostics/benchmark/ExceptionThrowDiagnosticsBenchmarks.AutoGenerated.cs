@@ -40,7 +40,9 @@ public static class ExceptionThrowDiagnosticsBenchmarks
     // Purpose: Benchmark native-runtime performance of Exception.get_StackTrace with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Exception::get_StackTrace:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]
-    public static void Benchmark_System_Private_CoreLib_System_Exception_get_StackTrace_System_String() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Exception_get_StackTrace_System_String() { _ = new Exception().StackTrace; }
     // Purpose: Benchmark native-runtime performance of Exception.get_HResult with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Exception::get_HResult:System.Int32()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]

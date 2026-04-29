@@ -362,7 +362,7 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitStackTopConversion(builder, "CHAOS_IL2CPP_INT8", nextOffset, instruction.Op);
 			break;
 		case "conv.i2":
-			EmitStackTopConversion(builder, "std::int16_t", nextOffset, instruction.Op);
+			EmitStackTopConversion(builder, "CHAOS_IL2CPP_INT16", nextOffset, instruction.Op);
 			break;
 		case "conv.i8":
 			EmitStackTopConversion(builder, "CHAOS_IL2CPP_INT64", nextOffset, instruction.Op);
@@ -386,13 +386,13 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitStackTopConversion(builder, "CHAOS_IL2CPP_UINT8", nextOffset, instruction.Op);
 			break;
 		case "conv.u2":
-			EmitStackTopConversion(builder, "std::uint16_t", nextOffset, instruction.Op);
+			EmitStackTopConversion(builder, "CHAOS_IL2CPP_UINT16", nextOffset, instruction.Op);
 			break;
 		case "conv.ovf.i1":
-			EmitCheckedStackTopConversion(builder, "CHAOS_IL2CPP_INT8", "std::numeric_limits<CHAOS_IL2CPP_INT8>::min()", "std::numeric_limits<CHAOS_IL2CPP_INT8>::max()", nextOffset, instruction.Op);
+			EmitCheckedStackTopConversion(builder, "CHAOS_IL2CPP_INT8", "CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT8)", "CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_INT8)", nextOffset, instruction.Op);
 			break;
 		case "conv.ovf.u1":
-			EmitCheckedStackTopConversion(builder, "CHAOS_IL2CPP_UINT8", "0", "std::numeric_limits<CHAOS_IL2CPP_UINT8>::max()", nextOffset, instruction.Op);
+			EmitCheckedStackTopConversion(builder, "CHAOS_IL2CPP_UINT8", "0", "CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_UINT8)", nextOffset, instruction.Op);
 			break;
 		case "cgt.un":
 			builder.AppendLine("    {");
@@ -677,7 +677,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine("        if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 			builder.AppendLine("        {");
-			builder.AppendLine("            std::abort();");
+			builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 			builder.AppendLine("        }");
 		}
 		string value = targetSymbol + "(" + FormatAbiInvocationArgumentList(parameterAbis) + ")";
@@ -740,7 +740,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        const auto chaos_delegate_value = chaos_eval_stack[--chaos_stack_top];");
 		builder.AppendLine("        if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		stringBuilder = builder;
 		StringBuilder stringBuilder4 = stringBuilder;
@@ -755,7 +755,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("            if (chaos_invocation_list == nullptr ||");
 		builder.AppendLine("                static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)");
 		builder.AppendLine("            {");
-		builder.AppendLine("                std::abort();");
+		builder.AppendLine("                CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("            }");
 		builder.AppendLine();
 		if (!string.Equals(text, "void", StringComparison.Ordinal))
@@ -773,7 +773,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("                const auto chaos_invocation_delegate_value = (*chaos_invocation_list)[chaos_delegate_index];");
 		builder.AppendLine("                if (chaos_invocation_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("                {");
-		builder.AppendLine("                    std::abort();");
+		builder.AppendLine("                    CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("                }");
 		stringBuilder = builder;
 		StringBuilder stringBuilder6 = stringBuilder;
@@ -784,7 +784,7 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder6.AppendLine(ref handler);
 		builder.AppendLine("                if (chaos_invocation_delegate->chaos_delegate_method_ptr == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("                {");
-		builder.AppendLine("                    std::abort();");
+		builder.AppendLine("                    CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("                }");
 		builder.AppendLine("                if (chaos_invocation_delegate->chaos_delegate_target == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("                {");
@@ -858,7 +858,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        {");
 		builder.AppendLine("            if (chaos_delegate->chaos_delegate_method_ptr == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("            {");
-		builder.AppendLine("                std::abort();");
+		builder.AppendLine("                CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("            }");
 		builder.AppendLine("            if (chaos_delegate->chaos_delegate_target == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("            {");
@@ -964,7 +964,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        const auto chaos_instance = chaos_arg_0;");
 		builder.AppendLine("        if (chaos_instance == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_instance);");
 		if (!string.Equals(text, "void", StringComparison.Ordinal))
@@ -1083,7 +1083,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("            chaos_current_type_id = chaos_get_base_type_id(chaos_current_type_id);");
 		builder.AppendLine("        }");
 		builder.AppendLine();
-		builder.AppendLine("        std::abort();");
+		builder.AppendLine("        CHAOS_IL2CPP_ABORT();");
 		stringBuilder = builder;
 		StringBuilder stringBuilder13 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder);
@@ -1139,7 +1139,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        const auto chaos_target = chaos_eval_stack[--chaos_stack_top];");
 		builder.AppendLine("        if (chaos_target == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		StringBuilder stringBuilder;
 		StringBuilder.AppendInterpolatedStringHandler handler;
@@ -1325,8 +1325,8 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendFormatted(operation);
 		handler.AppendLiteral(" static_cast<CHAOS_IL2CPP_INT64>(chaos_right);");
 		builder.AppendLine(ref handler);
-		builder.AppendLine("        if (chaos_wide < static_cast<CHAOS_IL2CPP_INT64>(std::numeric_limits<CHAOS_IL2CPP_INT32>::min()) ||");
-		builder.AppendLine("            chaos_wide > static_cast<CHAOS_IL2CPP_INT64>(std::numeric_limits<CHAOS_IL2CPP_INT32>::max()))");
+		builder.AppendLine("        if (chaos_wide < static_cast<CHAOS_IL2CPP_INT64>(CHAOS_IL2CPP_NUMERIC_LIMITS_CHAOS_IL2CPP_INT32>::min()) ||");
+		builder.AppendLine("            chaos_wide > static_cast<CHAOS_IL2CPP_INT64>(CHAOS_IL2CPP_NUMERIC_LIMITS_CHAOS_IL2CPP_INT32>::max()))");
 		builder.AppendLine("        {");
 		EmitThrowOverflowException(builder, "            ");
 		builder.AppendLine("        }");
@@ -1625,7 +1625,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);");
 		builder.AppendLine("        if (chaos_length < 0)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        auto* chaos_array = new chaos_managed_array{};");
 		builder.AppendLine("        chaos_array->header.type_id = chaos_type_id_managed_array;");
@@ -1656,7 +1656,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_eval_stack[--chaos_stack_top]);");
 		builder.AppendLine("        if (chaos_array == nullptr)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = chaos_array->length;");
 		builder.AppendLine("    }");
@@ -1675,11 +1675,11 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_eval_stack[--chaos_stack_top]);");
 		builder.AppendLine("        if (chaos_array == nullptr)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]);");
 		builder.AppendLine("    }");
@@ -1702,7 +1702,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine("            if (chaos_header->type_id != chaos_type_id_managed_array)");
 			builder.AppendLine("            {");
-			builder.AppendLine("                std::abort();");
+			builder.AppendLine("                CHAOS_IL2CPP_ABORT();");
 			builder.AppendLine("            }");
 			builder.AppendLine("            auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_value);");
 			StringBuilder stringBuilder = builder;
@@ -1746,7 +1746,7 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder5.AppendLine(ref handler);
 		}
 		builder.AppendLine("            {");
-		builder.AppendLine("                std::abort();");
+		builder.AppendLine("                CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("            }");
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
@@ -2008,11 +2008,11 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_eval_stack[--chaos_stack_top]);");
 		builder.AppendLine("        if (chaos_array == nullptr)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];");
 		builder.AppendLine("    }");
@@ -2027,17 +2027,17 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_eval_stack[--chaos_stack_top]);");
 		builder.AppendLine("        if (chaos_array == nullptr)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		if (string.Equals(op, "stelem.ref", StringComparison.Ordinal))
 		{
 			builder.AppendLine("        if (!chaos_is_array_store_compatible(chaos_array, chaos_value))");
 			builder.AppendLine("        {");
-			builder.AppendLine("            std::abort();");
+			builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 			builder.AppendLine("        }");
 		}
 		builder.AppendLine("        chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
@@ -2051,7 +2051,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        const auto chaos_address = chaos_eval_stack[--chaos_stack_top];");
 		builder.AppendLine("        if (chaos_address == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        CHAOS_IL2CPP_INT32 chaos_value = 0;");
 		builder.AppendLine("        if ((chaos_address & chaos_raw_int32_pointer_tag) != 0)");
@@ -2076,7 +2076,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        const auto chaos_address = chaos_eval_stack[--chaos_stack_top];");
 		builder.AppendLine("        if (chaos_address == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        if ((chaos_address & chaos_raw_int32_pointer_tag) != 0)");
 		builder.AppendLine("        {");
@@ -2099,13 +2099,13 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        const auto chaos_size = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_eval_stack[--chaos_stack_top]);");
 		builder.AppendLine("        if (chaos_size < 0)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        const auto chaos_byte_count = static_cast<CHAOS_IL2CPP_SIZE>(chaos_size);");
-		builder.AppendLine("        void* chaos_block = std::malloc(chaos_byte_count == static_cast<CHAOS_IL2CPP_SIZE>(0) ? static_cast<CHAOS_IL2CPP_SIZE>(1) : chaos_byte_count);");
+		builder.AppendLine("        void* chaos_block = CHAOS_IL2CPP_MALLOC(chaos_byte_count == static_cast<CHAOS_IL2CPP_SIZE>(0) ? static_cast<CHAOS_IL2CPP_SIZE>(1) : chaos_byte_count);");
 		builder.AppendLine("        if (chaos_block == nullptr)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_block);");
 		builder.AppendLine("    }");
@@ -2135,9 +2135,9 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("            };");
 		builder.AppendLine("            if (chaos_source == static_cast<CHAOS_IL2CPP_INTPTR>(0) || chaos_destination == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("            {");
-		builder.AppendLine("                std::abort();");
+		builder.AppendLine("                CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("            }");
-		builder.AppendLine("            std::memcpy(chaos_resolve_cpblk_address(chaos_destination), chaos_resolve_cpblk_address(chaos_source), chaos_size);");
+		builder.AppendLine("            CHAOS_IL2CPP_MEMCPY(chaos_resolve_cpblk_address(chaos_destination), chaos_resolve_cpblk_address(chaos_source), chaos_size);");
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
 		AppendGotoNext(builder, nextOffset, op);
@@ -2201,7 +2201,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine(ref handler);
 		builder.AppendLine("        if (chaos_boxed == nullptr)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_boxed->value);");
 		builder.AppendLine("    }");
@@ -2225,7 +2225,7 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder2.AppendLine(ref handler);
 		builder.AppendLine("        if (chaos_boxed == nullptr)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            std::abort();");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("        }");
 		if (RequiresStructuredValueTypePayload(requiredTargetReference))
 		{
@@ -2309,7 +2309,7 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder3.AppendLine(ref handler);
 			builder.AppendLine("        if (chaos_source == nullptr)");
 			builder.AppendLine("        {");
-			builder.AppendLine("            std::abort();");
+			builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
 			builder.AppendLine("        }");
 			builder.AppendLine("        *chaos_destination = *chaos_source;");
 		}

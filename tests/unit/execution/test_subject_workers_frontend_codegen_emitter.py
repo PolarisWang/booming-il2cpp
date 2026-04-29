@@ -386,7 +386,7 @@ class TestSubjectWorkersFrontendCodegenEmitter(SubjectWorkersTestSupport):
                 )
                 (expected_output_root / "generated").mkdir(parents=True, exist_ok=True)
                 (expected_output_root / "generated" / "native-aot.generated.cpp").write_text(
-                    "extern \"C\" int chaos_method_fixture(std::int32_t chaos_arg_0);\n",
+                    "extern \"C\" int chaos_method_fixture(CHAOS_IL2CPP_INT32 chaos_arg_0);\n",
                     encoding="utf-8",
                 )
                 (expected_output_root / "native-aot.manifest.json").write_text(

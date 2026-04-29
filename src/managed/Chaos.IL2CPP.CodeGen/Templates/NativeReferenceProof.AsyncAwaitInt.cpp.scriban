@@ -4,7 +4,7 @@ namespace chaos::il2cpp::generated {
 
 namespace {
 
-using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
     RuntimeState* runtime,
     ThreadState* thread,
     const void* string_object);
@@ -66,7 +66,7 @@ bool EnsureNativeReferenceContextReady(RuntimeState* runtime, ThreadState* threa
 
 }  // namespace
 
-extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     RuntimeState* runtime,
     ThreadState* thread,
     void* managed_args) {
@@ -88,7 +88,7 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     return g_native_reference_context.write_line_string(runtime, thread, native_reference_output);
 }
 
-int32_t {{ native_reference_function_name }}(
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,

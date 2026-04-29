@@ -3,8 +3,8 @@
 #include "bootstrap.h"
 #include "codegen_bridge.h"
 #include "memory_domain.h"
-#include <cstddef>
-#include <cstdint>
+#include <chaos/native_types.h>
+#include <chaos/native_types.h>
 #include <cstring>
 
 namespace chaos::il2cpp::generated
@@ -14,33 +14,33 @@ namespace runtime_skeleton_io_streams_basics
 constexpr const char* kAssemblyName = "System.Private.CoreLib";
 constexpr const char* kPlanKind = "family-runtime-skeleton";
 constexpr const char* kRuntimeExecutionKind = "family-bound-native-reference-skeleton";
-constexpr std::size_t translation_unit_method_count = 18;
-constexpr std::size_t translation_unit_page_size = 18;
-constexpr std::size_t translation_unit_page_count = 1;
+constexpr CHAOS_IL2CPP_SIZE translation_unit_method_count = 18;
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_size = 18;
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_count = 1;
 
-using NativeReferenceAssemblyPageDispatchFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+using NativeReferenceAssemblyPageDispatchFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
     const CodegenRegistrationOptionsV0* options,
     RuntimeState* runtime,
     ThreadState* thread,
-    std::uint32_t method_slot,
+    CHAOS_IL2CPP_UINT32 method_slot,
     void* managed_args);
 
 struct NativeReferenceAssemblyDispatchRequest
 {
     const char* subject_id;
     void* managed_args;
-    std::uint32_t method_id;
+    CHAOS_IL2CPP_UINT32 method_id;
 };
 
 struct RuntimeSkeletonMethodDispatchCatalogEntry
 {
-    std::uint32_t method_id;
+    CHAOS_IL2CPP_UINT32 method_id;
     const char* subject_id;
     NativeReferenceAssemblyPageDispatchFn dispatch;
-    std::uint32_t method_slot;
+    CHAOS_IL2CPP_UINT32 method_slot;
 };
 
 // Page dispatch declarations
@@ -51,7 +51,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL DispatchRuntimeSkeletonPage0001(
     const CodegenRegistrationOptionsV0* options,
     RuntimeState* runtime,
     ThreadState* thread,
-    std::uint32_t method_slot,
+    CHAOS_IL2CPP_UINT32 method_slot,
     void* managed_args);
 
 constexpr RuntimeSkeletonMethodDispatchCatalogEntry kMethodDispatchCatalog[] =
@@ -75,18 +75,18 @@ constexpr RuntimeSkeletonMethodDispatchCatalogEntry kMethodDispatchCatalog[] =
     { 16, "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)", DispatchRuntimeSkeletonPage0001, 16 },
     { 17, "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.String)", DispatchRuntimeSkeletonPage0001, 17 },
 };
-constexpr std::size_t kMethodDispatchCatalogCount = sizeof(kMethodDispatchCatalog) / sizeof(kMethodDispatchCatalog[0]);
+constexpr CHAOS_IL2CPP_SIZE kMethodDispatchCatalogCount = sizeof(kMethodDispatchCatalog) / sizeof(kMethodDispatchCatalog[0]);
 
 const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntry(const char* subject_id)
 {
     if (subject_id == nullptr || subject_id[0] == '\0') { return nullptr; }
     if (kMethodDispatchCatalogCount == 0) { return nullptr; }
-    std::size_t left = 0;
-    std::size_t right = kMethodDispatchCatalogCount;
+    CHAOS_IL2CPP_SIZE left = 0;
+    CHAOS_IL2CPP_SIZE right = kMethodDispatchCatalogCount;
     while (left < right) {
-        const std::size_t mid = left + ((right - left) / 2);
+        const CHAOS_IL2CPP_SIZE mid = left + ((right - left) / 2);
         const auto& entry = kMethodDispatchCatalog[mid];
-        const int compare = std::strcmp(entry.subject_id, subject_id);
+        const int compare = CHAOS_IL2CPP_STRCMP(entry.subject_id, subject_id);
         if (compare < 0) { left = mid + 1; continue; }
         if (compare > 0) { right = mid; continue; }
         return &entry;
@@ -94,14 +94,14 @@ const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntry(
     return nullptr;
 }
 
-const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntryByMethodId(std::uint32_t method_id)
+constexpr RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntryByMethodId(CHAOS_IL2CPP_UINT32 method_id)
 {
     if (method_id == 0) { return nullptr; }
     if (kMethodDispatchCatalogCount == 0) { return nullptr; }
-    std::size_t left = 0;
-    std::size_t right = kMethodDispatchCatalogCount;
+    CHAOS_IL2CPP_SIZE left = 0;
+    CHAOS_IL2CPP_SIZE right = kMethodDispatchCatalogCount;
     while (left < right) {
-        const std::size_t mid = left + ((right - left) / 2);
+        const CHAOS_IL2CPP_SIZE mid = left + ((right - left) / 2);
         const auto& entry = kMethodDispatchCatalog[mid];
         if (entry.method_id < method_id) { left = mid + 1; continue; }
         if (entry.method_id > method_id) { right = mid; continue; }
@@ -133,7 +133,7 @@ int32_t DispatchAssemblyMethodId(
     const CodegenRegistrationOptionsV0* options,
     RuntimeState* runtime,
     ThreadState* thread,
-    std::uint32_t method_id,
+    CHAOS_IL2CPP_UINT32 method_id,
     void* managed_args)
 {
     const auto* method = FindMethodDispatchCatalogEntryByMethodId(method_id);

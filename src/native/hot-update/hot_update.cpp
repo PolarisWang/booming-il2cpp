@@ -81,22 +81,22 @@ CHAOS_IL2CPP_STRING ExtractJsonString(const CHAOS_IL2CPP_STRING& source, const c
     }
 
     const CHAOS_IL2CPP_STRING needle = CHAOS_IL2CPP_STRING("\"") + key + "\"";
-    const size_t key_offset = source.find(needle);
+    const CHAOS_IL2CPP_SIZE key_offset = source.find(needle);
     if (key_offset == CHAOS_IL2CPP_STRING::npos) {
         return {};
     }
 
-    const size_t colon_offset = source.find(':', key_offset + needle.size());
+    const CHAOS_IL2CPP_SIZE colon_offset = source.find(':', key_offset + needle.size());
     if (colon_offset == CHAOS_IL2CPP_STRING::npos) {
         return {};
     }
 
-    const size_t quote_begin = source.find('"', colon_offset + 1u);
+    const CHAOS_IL2CPP_SIZE quote_begin = source.find('"', colon_offset + 1u);
     if (quote_begin == CHAOS_IL2CPP_STRING::npos) {
         return {};
     }
 
-    const size_t quote_end = source.find('"', quote_begin + 1u);
+    const CHAOS_IL2CPP_SIZE quote_end = source.find('"', quote_begin + 1u);
     if (quote_end == CHAOS_IL2CPP_STRING::npos || quote_end <= quote_begin) {
         return {};
     }
@@ -106,7 +106,7 @@ CHAOS_IL2CPP_STRING ExtractJsonString(const CHAOS_IL2CPP_STRING& source, const c
 
 char* DuplicateCString(const CHAOS_IL2CPP_STRING& value) {
     auto* buffer = new char[value.size() + 1u];
-    for (size_t index = 0; index < value.size(); index++) {
+    for (CHAOS_IL2CPP_SIZE index = 0; index < value.size(); index++) {
         buffer[index] = value[index];
     }
 

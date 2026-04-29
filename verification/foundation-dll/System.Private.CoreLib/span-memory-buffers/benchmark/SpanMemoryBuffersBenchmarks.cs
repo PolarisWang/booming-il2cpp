@@ -9,74 +9,89 @@ using System.Collections.Generic;
 using System.Reflection;
 using Chaos.TestFramework;
 
-// Benchmark stubs for family/System.Private.CoreLib/span/memory-buffers
+// Auto-generated benchmark skeletons for SpanMemoryBuffersBenchmarks.
+// Framework handles timing — body only needs to invoke the method under measurement.
 public static class SpanMemoryBuffersBenchmarks
 {
-    // Benchmark Span.get_Item native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Span.get_Item with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Span`1::get_Item:T&(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
-    public static void Benchmark_System_Private_CoreLib_System_Span_1_get_Item_T_System_Int32() { }
-    // Benchmark Span.Slice native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Span_1_get_Item_T_System_Int32() { _ = default(Span<byte>)[42]; }
+    // Purpose: Benchmark native-runtime performance of Span.Slice with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
-    public static void Benchmark_System_Private_CoreLib_System_Span_1_Slice_System_Span_1_System_Int32() { }
-    // Benchmark Span.Slice native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Span_1_Slice_System_Span_1_System_Int32() { _ = default(Span<byte>).Slice(42); }
+    // Purpose: Benchmark native-runtime performance of Span.Slice with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32,System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
-    public static void Benchmark_System_Private_CoreLib_System_Span_1_Slice_System_Span_1_System_Int32_System_Int32() { }
-    // Benchmark Span.ToArray native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Span_1_Slice_System_Span_1_System_Int32_System_Int32() { _ = default(Span<byte>).Slice(42, 42); }
+    // Purpose: Benchmark native-runtime performance of Span.ToArray with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Span`1::ToArray:T[](System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
-    public static void Benchmark_System_Private_CoreLib_System_Span_1_ToArray_T_System_Int32() { }
-    // Benchmark Span.CopyTo native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Span_1_ToArray_T_System_Int32() { _ = default(Span<byte>).ToArray(42); }
+    // Purpose: Benchmark native-runtime performance of Span.CopyTo with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Span`1::CopyTo:System.Void(System.Span`1)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Span_1_CopyTo_System_Void_System_Span_1() { default(Span<byte>).CopyTo(default(Span<byte>)); }
-    // Benchmark Span.get_Empty native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Span.get_Empty with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Span`1::get_Empty:System.Span`1()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Span_1_get_Empty_System_Span_1() { _ = Span<byte>.Empty; }
-    // Benchmark ReadOnlySpan.get_Item native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of ReadOnlySpan.get_Item with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.ReadOnlySpan`1::get_Item:T&(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
-    public static void Benchmark_System_Private_CoreLib_System_ReadOnlySpan_1_get_Item_T_System_Int32() { }
-    // Benchmark ReadOnlySpan.Slice native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_ReadOnlySpan_1_get_Item_T_System_Int32() { _ = default(ReadOnlySpan<byte>)[42]; }
+    // Purpose: Benchmark native-runtime performance of ReadOnlySpan.Slice with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.ReadOnlySpan`1::Slice:System.ReadOnlySpan`1(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
-    public static void Benchmark_System_Private_CoreLib_System_ReadOnlySpan_1_Slice_System_ReadOnlySpan_1_System_Int32() { }
-    // Benchmark ReadOnlySpan.ToArray native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_ReadOnlySpan_1_Slice_System_ReadOnlySpan_1_System_Int32() { _ = default(ReadOnlySpan<byte>).Slice(42); }
+    // Purpose: Benchmark native-runtime performance of ReadOnlySpan.ToArray with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.ReadOnlySpan`1::ToArray:T[]()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_ReadOnlySpan_1_ToArray_T() { _ = default(ReadOnlySpan<byte>).ToArray(); }
-    // Benchmark Memory.Slice native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Memory.Slice with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
-    public static void Benchmark_System_Private_CoreLib_System_Memory_1_Slice_System_Memory_1_System_Int32() { }
-    // Benchmark Memory.get_Span native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Memory_1_Slice_System_Memory_1_System_Int32() { _ = default(Memory<byte>).Slice(42); }
+    // Purpose: Benchmark native-runtime performance of Memory.get_Span with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Memory`1::get_Span:System.Span`1()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Memory_1_get_Span_System_Span_1() { _ = default(Memory<byte>).Span; }
-    // Benchmark Memory.ToArray native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Memory.ToArray with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Memory`1::ToArray:T[]()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Memory_1_ToArray_T() { _ = default(Memory<byte>).ToArray(); }
-    // Benchmark MemoryMarshal.GetReference native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of MemoryMarshal.GetReference with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.ReadOnlySpan`1)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Runtime_InteropServices_MemoryMarshal_GetReference_T_System_ReadOnlySpan_1() { _ = MemoryMarshal.GetReference(default(ReadOnlySpan<byte>)); }
-    // Benchmark MemoryMarshal.GetReference native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of MemoryMarshal.GetReference with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.Span`1)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [BenchmarkRoute(BenchmarkRoute.Native)]

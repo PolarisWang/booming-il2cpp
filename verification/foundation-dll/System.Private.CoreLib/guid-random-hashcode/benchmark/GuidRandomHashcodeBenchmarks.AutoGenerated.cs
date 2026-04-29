@@ -16,11 +16,15 @@ public static class GuidRandomHashcodeBenchmarks
     // Purpose: Benchmark native-runtime performance of Guid..ctor with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]
-    public static void Benchmark_System_Private_CoreLib_System_Guid_ctor_System_Void_System_String() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Guid_ctor_System_Void_System_String() { new Guid("hello"); }
     // Purpose: Benchmark native-runtime performance of Guid..ctor with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]
-    public static void Benchmark_System_Private_CoreLib_System_Guid_ctor_System_Void_System_Byte() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Guid_ctor_System_Void_System_Byte() { new Guid(new byte[] { 1, 2, 3 }); }
     // Purpose: Benchmark native-runtime performance of Guid.NewGuid with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Guid::NewGuid:System.Guid()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]
@@ -30,7 +34,9 @@ public static class GuidRandomHashcodeBenchmarks
     // Purpose: Benchmark native-runtime performance of Guid.Parse with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]
-    public static void Benchmark_System_Private_CoreLib_System_Guid_Parse_System_Guid_System_String() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Guid_Parse_System_Guid_System_String() { _ = Guid.Parse("hello"); }
     // Purpose: Benchmark native-runtime performance of Guid.TryParse with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]

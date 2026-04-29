@@ -160,8 +160,8 @@ class GenericLayoutNativeAotTests(unittest.TestCase):
             "field_CoreRuntimeFeatures_GenericBox_System_Int32",
             "// Generic execution authority: definition=CoreRuntimeFeatures/GenericEcho::Echo`1:!!0(!!0); type=[]; method=[System.Int32]",
             "// Generic execution authority: definition=CoreRuntimeFeatures/GenericBox`1; type=[System.Int32]; method=[]",
-            f'extern "C" std::int32_t {generic_echo_stub_symbol}(std::int32_t chaos_arg_0);',
-            f'extern "C" std::int32_t {generic_echo_stub_symbol}(std::int32_t chaos_arg_0)\n{{',
+            f'extern "C" CHAOS_IL2CPP_INT32 {generic_echo_stub_symbol}(CHAOS_IL2CPP_INT32 chaos_arg_0);',
+            f'extern "C" CHAOS_IL2CPP_INT32 {generic_echo_stub_symbol}(CHAOS_IL2CPP_INT32 chaos_arg_0)\n{{',
         ]:
             self.assertIn(required_fragment, generated_cpp)
         self.assertGreaterEqual(generated_cpp.count(generic_echo_stub_symbol), 3)

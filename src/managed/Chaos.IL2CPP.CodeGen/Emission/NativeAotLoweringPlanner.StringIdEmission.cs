@@ -117,11 +117,11 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine();
         builder.AppendLine("// StringId constants for compile-time-known string literals.");
 
-        // Emit constexpr uint64_t constant for each string literal.
+        // Emit constexpr CHAOS_IL2CPP_UINT64 constant for each string literal.
         foreach (var literal in stringLiterals.OrderBy(l => l, StringComparer.Ordinal))
         {
             var id = mapping[literal];
-            builder.AppendLine($"constexpr uint64_t {GetNativeStringIdSymbol(id)} = {id}U;");
+            builder.AppendLine($"constexpr CHAOS_IL2CPP_UINT64 {GetNativeStringIdSymbol(id)} = {id}U;");
         }
 
         builder.AppendLine();
@@ -139,7 +139,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.Append('}');
         builder.AppendLine(";");
         builder.AppendLine();
-        builder.AppendLine("constexpr uint32_t chaos_aot_string_entry_count = sizeof(chaos_aot_string_entries) / sizeof(chaos_aot_string_entries[0]);");
+        builder.AppendLine("constexpr CHAOS_IL2CPP_UINT32 chaos_aot_string_entry_count = sizeof(chaos_aot_string_entries) / sizeof(chaos_aot_string_entries[0]);");
         builder.AppendLine();
     }
 

@@ -6,7 +6,7 @@
 
 namespace ChaosIl2cpp::Common {
 
-// Float32 store/load via bitcast through intptr_t.
+// Float32 store/load via bitcast through CHAOS_IL2CPP_INTPTR.
 
 inline CHAOS_IL2CPP_INTPTR store_float32(float value) noexcept
 {
@@ -23,7 +23,7 @@ inline float load_float32(CHAOS_IL2CPP_INTPTR value) noexcept
     return result;
 }
 
-// Float64 store/load via bitcast through intptr_t.
+// Float64 store/load via bitcast through CHAOS_IL2CPP_INTPTR.
 
 inline CHAOS_IL2CPP_INTPTR store_float64(double value) noexcept
 {

@@ -10,11 +10,11 @@ namespace chaos::il2cpp::method_replacement {
 namespace {
 
 CHAOS_IL2CPP_MUTEX g_method_replacement_mutex;
-CHAOS_IL2CPP_UNORDERED_MAP(uint32_t, MethodReplacementEntry) g_method_replacements;
+CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, MethodReplacementEntry) g_method_replacements;
 
 }  // namespace
 
-bool Register(uint32_t method_token, void* thunk) {
+bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk) {
     if (method_token == 0u || thunk == nullptr) {
         return false;
     }
@@ -27,7 +27,7 @@ bool Register(uint32_t method_token, void* thunk) {
     return true;
 }
 
-bool Revert(uint32_t method_token) {
+bool Revert(CHAOS_IL2CPP_UINT32 method_token) {
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_method_replacement_mutex);
     return g_method_replacements.erase(method_token) > 0u;
 }
@@ -37,7 +37,7 @@ void RevertAll() {
     g_method_replacements.clear();
 }
 
-void* Resolve(uint32_t method_token) {
+void* Resolve(CHAOS_IL2CPP_UINT32 method_token) {
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_method_replacement_mutex);
     const auto it = g_method_replacements.find(method_token);
     if (it == g_method_replacements.end() || !it->second.active) {
@@ -47,9 +47,9 @@ void* Resolve(uint32_t method_token) {
     return it->second.replacement_thunk;
 }
 
-uint32_t ActiveCount() {
+CHAOS_IL2CPP_UINT32 ActiveCount() {
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_method_replacement_mutex);
-    return static_cast<uint32_t>(g_method_replacements.size());
+    return static_cast<CHAOS_IL2CPP_UINT32>(g_method_replacements.size());
 }
 
 }  // namespace chaos::il2cpp::method_replacement

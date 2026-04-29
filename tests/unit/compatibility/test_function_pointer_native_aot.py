@@ -96,7 +96,7 @@ class FunctionPointerNativeAotTests(unittest.TestCase):
         self.assertIn("// Managed method: CoreRuntimeFeatures/FunctionPointerProofEntry::Run()", generated_cpp)
         self.assertIn("MultiplyAndOffset", generated_cpp)
         self.assertIn(
-            "reinterpret_cast<std::int32_t(*)(std::int32_t chaos_arg_0, std::int32_t chaos_arg_1)>(chaos_target)",
+            "reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INT32 chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1)>(chaos_target)",
             generated_cpp,
         )
 

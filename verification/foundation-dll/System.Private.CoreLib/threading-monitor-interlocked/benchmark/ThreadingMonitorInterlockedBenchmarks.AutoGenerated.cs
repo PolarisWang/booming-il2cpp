@@ -16,11 +16,15 @@ public static class ThreadingMonitorInterlockedBenchmarks
     // Purpose: Benchmark native-runtime performance of Monitor.Enter with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_Enter_System_Void_System_Object() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_Enter_System_Void_System_Object() { Monitor.Enter(42); }
     // Purpose: Benchmark native-runtime performance of Monitor.Exit with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_Exit_System_Void_System_Object() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_Exit_System_Void_System_Object() { Monitor.Exit(42); }
     // Purpose: Benchmark native-runtime performance of Monitor.TryEnter with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]
@@ -36,15 +40,21 @@ public static class ThreadingMonitorInterlockedBenchmarks
     // Purpose: Benchmark native-runtime performance of Monitor.Pulse with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_Pulse_System_Void_System_Object() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_Pulse_System_Void_System_Object() { Monitor.Pulse(42); }
     // Purpose: Benchmark native-runtime performance of Monitor.PulseAll with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Monitor::PulseAll:System.Void(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_PulseAll_System_Void_System_Object() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_PulseAll_System_Void_System_Object() { Monitor.PulseAll(42); }
     // Purpose: Benchmark native-runtime performance of Monitor.Wait with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Monitor::Wait:System.Boolean(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_Wait_System_Boolean_System_Object() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Monitor_Wait_System_Boolean_System_Object() { _ = Monitor.Wait(42); }
     // Purpose: Benchmark native-runtime performance of Interlocked.Increment with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Interlocked::Increment:System.Int32(System.Int32&)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingMonitorInterlocked)]

@@ -1,7 +1,6 @@
 // assembly-full-closure-audit
 // generated for translation inventory audit summary
-#include <cstddef>
-#include <cstdint>
+#include <chaos/native_types.h>
 
 namespace chaos::il2cpp::audit
 {

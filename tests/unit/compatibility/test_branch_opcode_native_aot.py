@@ -135,7 +135,7 @@ class BranchOpcodeNativeAotTests(unittest.TestCase):
         self.assertIn("if (chaos_left > chaos_right)", generated_cpp)
         self.assertIn("if (chaos_left <= chaos_right)", generated_cpp)
         self.assertIn("if (chaos_left >= chaos_right)", generated_cpp)
-        self.assertIn("const auto chaos_left = static_cast<std::uint32_t>", generated_cpp)
+        self.assertIn("const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>", generated_cpp)
 
 
 if __name__ == "__main__":

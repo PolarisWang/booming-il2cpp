@@ -9,76 +9,83 @@ using System.Collections.Generic;
 using System.Reflection;
 using Chaos.TestFramework;
 
-// Benchmark stubs for family/System.Private.CoreLib/type/runtime-handles
+// Auto-generated benchmark skeletons for TypeRuntimeHandlesBenchmarks.
+// Framework handles timing — body only needs to invoke the method under measurement.
 public static class TypeRuntimeHandlesBenchmarks
 {
-    // Benchmark Type.GetType native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Type.GetType with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
-    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String() { }
-    // Benchmark Type.GetType native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String() { _ = Type.GetType("hello"); }
+    // Purpose: Benchmark native-runtime performance of Type.GetType with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
-    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean() { }
-    // Benchmark Type.GetType native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean() { _ = Type.GetType("hello", true); }
+    // Purpose: Benchmark native-runtime performance of Type.GetType with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
-    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean_System_Boolean() { }
-    // Benchmark Type.GetTypeFromHandle native-runtime throughput
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Type_GetType_System_Type_System_String_System_Boolean_System_Boolean() { _ = Type.GetType("hello", true, true); }
+    // Purpose: Benchmark native-runtime performance of Type.GetTypeFromHandle with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Type_GetTypeFromHandle_System_Type_System_RuntimeTypeHandle() { _ = Type.GetTypeFromHandle(default(System.RuntimeTypeHandle)); }
-    // Benchmark Type.get_IsValueType native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Type.get_IsValueType with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Type_get_IsValueType_System_Boolean() { _ = typeof(byte).IsValueType; }
-    // Benchmark Type.get_IsEnum native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Type.get_IsEnum with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Type_get_IsEnum_System_Boolean() { _ = typeof(byte).IsEnum; }
-    // Benchmark Type.get_IsArray native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Type.get_IsArray with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Type_get_IsArray_System_Boolean() { _ = typeof(byte).IsArray; }
-    // Benchmark Type.get_TypeHandle native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Type.get_TypeHandle with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Type_get_TypeHandle_System_RuntimeTypeHandle() { _ = typeof(byte).TypeHandle; }
-    // Benchmark Type.get_FullName native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Type.get_FullName with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::get_FullName:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Type_get_FullName_System_String() { _ = typeof(byte).FullName; }
-    // Benchmark Type.get_Name native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Type.get_Name with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::get_Name:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Type_get_Name_System_String() { _ = typeof(byte).Name; }
-    // Benchmark Type.get_BaseType native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Type.get_BaseType with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::get_BaseType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Type_get_BaseType_System_Type() { _ = typeof(byte).BaseType; }
-    // Benchmark Type.GetMethods native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Type.GetMethods with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
     public static void Benchmark_System_Private_CoreLib_System_Type_GetMethods_System_Reflection_MethodInfo() { _ = typeof(byte).GetMethods(); }
-    // Benchmark Type.GetFields native-runtime throughput
+    // Purpose: Benchmark native-runtime performance of Type.GetFields with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_TypeRuntimeHandles)]
     [BenchmarkRoute(BenchmarkRoute.Native)]

@@ -555,18 +555,18 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
             self.assertIn("NativeReferenceStub_Page0001_Item0002", generated_page)
             self.assertIn("NativeReferenceStub_Page0001_Item0003", generated_page)
             self.assertIn("NativeReferenceStub_Page0001_Item0004", generated_page)
-            self.assertIn("std::uint8_t value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_UINT8 value;", generated_page)
             self.assertIn("bool value;", generated_page)
             self.assertIn("float value;", generated_page)
             self.assertIn("double value;", generated_page)
-            self.assertIn("std::int32_t value;", generated_page)
-            self.assertIn("std::uint32_t value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_INT32 value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_UINT32 value;", generated_page)
             self.assertIn(
-                "*request->return_value = static_cast<std::uint8_t>(request->value ? static_cast<std::uint8_t>(1) : static_cast<std::uint8_t>(0));",
+                "*request->return_value = static_cast<CHAOS_IL2CPP_UINT8>(request->value ? static_cast<CHAOS_IL2CPP_UINT8>(1) : static_cast<CHAOS_IL2CPP_UINT8>(0));",
                 generated_page,
             )
             self.assertIn(
-                "*request->return_value = static_cast<bool>(request->value != static_cast<std::uint8_t>(0));",
+                "*request->return_value = static_cast<bool>(request->value != static_cast<CHAOS_IL2CPP_UINT8>(0));",
                 generated_page,
             )
             self.assertIn(
@@ -574,11 +574,11 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
                 generated_page,
             )
             self.assertIn(
-                "*request->return_value = static_cast<std::int64_t>(request->value);",
+                "*request->return_value = static_cast<CHAOS_IL2CPP_INT64>(request->value);",
                 generated_page,
             )
             self.assertIn(
-                "*request->return_value = static_cast<std::uint64_t>(request->value);",
+                "*request->return_value = static_cast<CHAOS_IL2CPP_UINT64>(request->value);",
                 generated_page,
             )
             self.assertIn(
@@ -590,7 +590,7 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
                 generated_page,
             )
             self.assertIn(
-                "*request->return_value = static_cast<std::uint16_t>(request->value);",
+                "*request->return_value = static_cast<CHAOS_IL2CPP_UINT16>(request->value);",
                 generated_page,
             )
             self.assertIn('"Overflow_Byte"', generated_page)
@@ -759,32 +759,32 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
             self.assertEqual(coverage_report["requestedMethodCount"], coverage_report["emittedMethodCount"])
             self.assertEqual(0, coverage_report["uncoveredMethodCount"])
             self.assertEqual([], coverage_report["uncoveredMethodSubjectIds"])
-            self.assertIn("std::int8_t value;", generated_page)
-            self.assertIn("std::int16_t value;", generated_page)
-            self.assertIn("std::int32_t value;", generated_page)
-            self.assertIn("std::int64_t value;", generated_page)
-            self.assertIn("std::uint16_t value;", generated_page)
-            self.assertIn("std::uint32_t value;", generated_page)
-            self.assertIn("std::uint64_t value;", generated_page)
-            self.assertIn("std::uint16_t* return_value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_INT8 value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_INT16 value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_INT32 value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_INT64 value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_UINT16 value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_UINT32 value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_UINT64 value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_UINT16* return_value;", generated_page)
             self.assertIn(
-                "*request->return_value = static_cast<std::uint16_t>(request->value);",
+                "*request->return_value = static_cast<CHAOS_IL2CPP_UINT16>(request->value);",
                 generated_page,
             )
             self.assertIn(
-                "request->value < static_cast<std::int8_t>(0)",
+                "request->value < static_cast<CHAOS_IL2CPP_INT8>(0)",
                 generated_page,
             )
             self.assertIn(
-                "request->value < static_cast<std::int16_t>(0)",
+                "request->value < static_cast<CHAOS_IL2CPP_INT16>(0)",
                 generated_page,
             )
             self.assertIn(
-                "request->value > static_cast<std::uint32_t>(65535)",
+                "request->value > static_cast<CHAOS_IL2CPP_UINT32>(65535)",
                 generated_page,
             )
             self.assertIn(
-                "request->value > static_cast<std::uint64_t>(65535)",
+                "request->value > static_cast<CHAOS_IL2CPP_UINT64>(65535)",
                 generated_page,
             )
             self.assertIn('"Overflow_Char"', generated_page)
@@ -917,7 +917,7 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
             self.assertIn("bool value;", generated_page)
             self.assertIn("float value;", generated_page)
             self.assertIn("double value;", generated_page)
-            self.assertIn("std::uint16_t* return_value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_UINT16* return_value;", generated_page)
             self.assertIn('"Boolean"', generated_page)
             self.assertIn('"Single"', generated_page)
             self.assertIn('"Double"', generated_page)
@@ -1050,7 +1050,7 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
 
             self.assertIn("void* arg0;", generated_page)
             self.assertIn("void* arg1;", generated_page)
-            self.assertIn("std::uint16_t* return_value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_UINT16* return_value;", generated_page)
             self.assertIn("method_invoke", generated_page)
             self.assertIn("resolve_method_by_token(image, 0x", generated_page)
         finally:
@@ -1689,9 +1689,9 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
             self.assertIn('"Overflow_Byte"', generated_page)
             self.assertIn("produced_message", generated_page)
             self.assertIn("raise_managed_exception", generated_page)
-            self.assertIn("std::uint16_t value;", generated_page)
+            self.assertIn("CHAOS_IL2CPP_UINT16 value;", generated_page)
             self.assertIn(
-                "*request->return_value = static_cast<std::uint8_t>(request->value);",
+                "*request->return_value = static_cast<CHAOS_IL2CPP_UINT8>(request->value);",
                 generated_page,
             )
         finally:

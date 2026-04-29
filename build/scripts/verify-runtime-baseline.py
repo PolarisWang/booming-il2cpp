@@ -20,6 +20,7 @@ from testing import public_specs as public_specs_module
 from testing import subject_executor as subject_executor_module
 from testing import subject_planner as subject_planner_module
 from testing import subjects as subjects_module
+from testing.foundation_dll.hotupdate_verification_runner import generate_per_family_reports as generate_hotupdate_reports
 
 
 DEFAULT_WINDOWS_VISUAL_STUDIO_GENERATOR = "Visual Studio 17 2022"
@@ -400,6 +401,13 @@ def main(argv: list[str] | None = None) -> int:
 
         write_step("Build and run HotUpdate verification test")
         invoke_hotupdate_verification_test(repo_root, artifact_root, host_profile=host_profile)
+
+        write_step("Generate per-family hotupdate verification reports")
+        generate_hotupdate_reports(
+            input_path=artifact_root / "hotupdate-verification-output.json",
+            verification_root=repo_root / "verification",
+            assembly_name=subject_id,
+        )
 
         write_step(f"Run {subject_id} {SOLUTION_CORE_PACK_WINDOWS_TRACE_MATRIX_ID} subject matrix")
         execute_subject_matrix(

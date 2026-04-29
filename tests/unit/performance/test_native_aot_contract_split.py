@@ -223,7 +223,7 @@ class PhaseBAotContractSplitTests(unittest.TestCase):
         )
         self.assertNotIn("must not take parameters", method_emission_source)
         self.assertIn(
-            'extern "C" int {{ native_entry_function_name }}(std::int32_t chaos_entry_index)',
+            'extern "C" int {{ native_entry_function_name }}(CHAOS_IL2CPP_INT32 chaos_entry_index)',
             template_source,
         )
         self.assertEqual("int(int32)", lowering_plan_sample["workloadAbi"])

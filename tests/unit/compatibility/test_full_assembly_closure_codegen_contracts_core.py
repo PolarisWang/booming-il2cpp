@@ -222,7 +222,7 @@ class TestFullAssemblyClosureCodegenContractsCore(FullAssemblyClosureCodegenCont
         self.assertIn("BuildAssemblyBoundArrayCopyReferenceArrayStub(", native_reference_emitter_source)
         self.assertIn("ArrayCopyReferenceRange(", runtime_core_header_source)
         self.assertIn("ArrayCopyReferenceRange(", runtime_core_cpp_source)
-        self.assertIn("std::memmove(", runtime_core_cpp_source)
+        self.assertIn("CHAOS_IL2CPP_MEMMOVE(", runtime_core_cpp_source)
         self.assertIn("arrayCopyReferenceArrayDescriptors", native_reference_emitter_source)
         self.assertIn('subjectId.Contains("/System.Array::CopyTo:", StringComparison.Ordinal)', native_reference_emitter_source)
         self.assertIn('subjectId.Contains("/System.Array::ConstrainedCopy:", StringComparison.Ordinal)', native_reference_emitter_source)

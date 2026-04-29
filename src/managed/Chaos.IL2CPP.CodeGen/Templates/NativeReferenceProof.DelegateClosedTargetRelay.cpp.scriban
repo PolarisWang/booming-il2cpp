@@ -10,22 +10,22 @@ using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
     ThreadState* thread,
     const void* left_string,
     const void* right_string);
-using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
     RuntimeState* runtime,
     ThreadState* thread,
     const void* string_object);
 
 struct MethodPointerEntry {
-    uint32_t method_token;
+    CHAOS_IL2CPP_UINT32 method_token;
     void* method_pointer;
 };
 
-constexpr uint32_t kReferenceTypeToken = {{ reference_type_token }};
-constexpr uint32_t kCapturedFieldToken = {{ captured_field_token }};
-constexpr uint32_t kEntryMethodToken = {{ entry_method_token }};
-constexpr uint32_t kConstructorMethodToken = {{ constructor_method_token }};
-constexpr uint32_t kInstanceMethodToken = {{ instance_method_token }};
-constexpr uint32_t kStaticMethodToken = {{ static_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kReferenceTypeToken = {{ reference_type_token }};
+constexpr CHAOS_IL2CPP_UINT32 kCapturedFieldToken = {{ captured_field_token }};
+constexpr CHAOS_IL2CPP_UINT32 kEntryMethodToken = {{ entry_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kConstructorMethodToken = {{ constructor_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kInstanceMethodToken = {{ instance_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kStaticMethodToken = {{ static_method_token }};
 constexpr const char* kDefaultImageName = "{{ assembly_name }}";
 constexpr const char* kConsoleWriteLineStringIcall = "{{ console_write_line_string_icall }}";
 constexpr const char* kStringConcatPairIcall = "{{ string_concat_pair_icall }}";
@@ -108,7 +108,7 @@ void* CreateManagedString(
     RuntimeState* runtime,
     ThreadState* thread,
     const char* utf8_bytes,
-    uint32_t byte_count) {
+    CHAOS_IL2CPP_UINT32 byte_count) {
     return g_native_reference_context.abi->string_new_utf8(runtime, thread, utf8_bytes, byte_count);
 }
 
@@ -189,7 +189,7 @@ extern "C" void* CHAOS_RUNTIME_ABI_CALL {{ static_method_symbol }}(
     return g_native_reference_context.concat_string_pair(runtime, thread, arg0, suffix);
 }
 
-extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     RuntimeState* runtime,
     ThreadState* thread,
     void* managed_args) {
@@ -273,7 +273,7 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     return g_native_reference_context.write_line_string(runtime, thread, final_message);
 }
 
-int32_t {{ native_reference_function_name }}(
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -302,7 +302,7 @@ int32_t {{ native_reference_function_name }}(
     CodeRegistrationV0 registered_code_registration = *code_registration;
     registered_code_registration.method_pointers = method_pointers;
     registered_code_registration.method_pointer_count =
-        static_cast<uint32_t>(sizeof(method_pointers) / sizeof(method_pointers[0]));
+        static_cast<CHAOS_IL2CPP_UINT32>(sizeof(method_pointers) / sizeof(method_pointers[0]));
 
     if (bridge->register_codegen(&registered_code_registration, metadata_registration, options) != CHAOS_BRIDGE_STATUS_OK) {
         return 1;

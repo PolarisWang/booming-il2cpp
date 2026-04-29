@@ -9,22 +9,22 @@ using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
     ThreadState* thread,
     const void* left_string,
     const void* right_string);
-using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
     RuntimeState* runtime,
     ThreadState* thread,
     const void* string_object);
 
 struct UnresolvedVirtualCallEntry {
-    uint32_t instance_type_token;
-    uint32_t declared_method_token;
+    CHAOS_IL2CPP_UINT32 instance_type_token;
+    CHAOS_IL2CPP_UINT32 declared_method_token;
     void* resolved_method;
 };
 
-constexpr uint32_t kReferenceTypeToken = {{ reference_type_token }};
-constexpr uint32_t kCapturedFieldToken = {{ captured_field_token }};
-constexpr uint32_t kEntryMethodToken = {{ entry_method_token }};
-constexpr uint32_t kConstructorMethodToken = {{ constructor_method_token }};
-constexpr uint32_t kInstanceMethodToken = {{ instance_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kReferenceTypeToken = {{ reference_type_token }};
+constexpr CHAOS_IL2CPP_UINT32 kCapturedFieldToken = {{ captured_field_token }};
+constexpr CHAOS_IL2CPP_UINT32 kEntryMethodToken = {{ entry_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kConstructorMethodToken = {{ constructor_method_token }};
+constexpr CHAOS_IL2CPP_UINT32 kInstanceMethodToken = {{ instance_method_token }};
 constexpr const char* kDefaultImageName = "{{ assembly_name }}";
 constexpr const char* kConsoleWriteLineStringIcall = "{{ console_write_line_string_icall }}";
 constexpr const char* kStringConcatPairIcall = "{{ string_concat_pair_icall }}";
@@ -217,7 +217,7 @@ void* InvokeInstanceMessage(
 
 }  // namespace
 
-extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     RuntimeState* runtime,
     ThreadState* thread,
     void* managed_args) {
@@ -257,7 +257,7 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     return g_native_reference_context.write_line_string(runtime, thread, message);
 }
 
-int32_t {{ native_reference_function_name }}(
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -283,7 +283,7 @@ int32_t {{ native_reference_function_name }}(
     CodeRegistrationV0 registered_code_registration = *code_registration;
     registered_code_registration.unresolved_virtual_calls = unresolved_virtual_calls;
     registered_code_registration.unresolved_virtual_call_count =
-        static_cast<uint32_t>(sizeof(unresolved_virtual_calls) / sizeof(unresolved_virtual_calls[0]));
+        static_cast<CHAOS_IL2CPP_UINT32>(sizeof(unresolved_virtual_calls) / sizeof(unresolved_virtual_calls[0]));
 
     if (bridge->register_codegen(&registered_code_registration, metadata_registration, options) != CHAOS_BRIDGE_STATUS_OK) {
         return 1;

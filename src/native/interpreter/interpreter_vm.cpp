@@ -21,16 +21,16 @@ struct BoxedValue {
 
 CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 
-int32_t ReadInt32(const InterpreterValue& value) {
+CHAOS_IL2CPP_INT32 ReadInt32(const InterpreterValue& value) {
     switch (value.tag) {
         case ValueTag::Int32:
             return value.i32;
         case ValueTag::Int64:
-            return static_cast<int32_t>(value.i64);
+            return static_cast<CHAOS_IL2CPP_INT32>(value.i64);
         case ValueTag::Float32:
-            return static_cast<int32_t>(value.f32);
+            return static_cast<CHAOS_IL2CPP_INT32>(value.f32);
         case ValueTag::Float64:
-            return static_cast<int32_t>(value.f64);
+            return static_cast<CHAOS_IL2CPP_INT32>(value.f64);
         case ValueTag::Null:
             return 0;
         default:
@@ -38,16 +38,16 @@ int32_t ReadInt32(const InterpreterValue& value) {
     }
 }
 
-int64_t ReadInt64(const InterpreterValue& value) {
+CHAOS_IL2CPP_INT64 ReadInt64(const InterpreterValue& value) {
     switch (value.tag) {
         case ValueTag::Int32:
-            return static_cast<int64_t>(value.i32);
+            return static_cast<CHAOS_IL2CPP_INT64>(value.i32);
         case ValueTag::Int64:
             return value.i64;
         case ValueTag::Float32:
-            return static_cast<int64_t>(value.f32);
+            return static_cast<CHAOS_IL2CPP_INT64>(value.f32);
         case ValueTag::Float64:
-            return static_cast<int64_t>(value.f64);
+            return static_cast<CHAOS_IL2CPP_INT64>(value.f64);
         case ValueTag::Null:
             return 0;
         default:
@@ -107,11 +107,11 @@ ArrayStorage* RequireArray(const InterpreterValue& value) {
 
 }  // namespace
 
-InterpreterValue InterpreterValue::from_i32(int32_t value) {
+InterpreterValue InterpreterValue::from_i32(CHAOS_IL2CPP_INT32 value) {
     return InterpreterValue(value);
 }
 
-InterpreterValue InterpreterValue::from_i64(int64_t value) {
+InterpreterValue InterpreterValue::from_i64(CHAOS_IL2CPP_INT64 value) {
     InterpreterValue result = {};
     result.tag = ValueTag::Int64;
     result.i64 = value;
@@ -146,7 +146,7 @@ InterpreterValue InterpreterValue::null_val() {
     return result;
 }
 
-size_t InterpreterVM::GetBranchTarget(const IRMethod& method, size_t target) {
+CHAOS_IL2CPP_SIZE InterpreterVM::GetBranchTarget(const IRMethod& method, CHAOS_IL2CPP_SIZE target) {
     if (target >= method.instructions.size()) {
         throw CHAOS_IL2CPP_OUT_OF_RANGE("branch_target");
     }
@@ -154,7 +154,7 @@ size_t InterpreterVM::GetBranchTarget(const IRMethod& method, size_t target) {
     return target;
 }
 
-void InterpreterVM::EnsureLocal(CHAOS_IL2CPP_VECTOR(InterpreterValue)* locals, size_t index) {
+void InterpreterVM::EnsureLocal(CHAOS_IL2CPP_VECTOR(InterpreterValue)* locals, CHAOS_IL2CPP_SIZE index) {
     if (locals == nullptr) {
         throw CHAOS_IL2CPP_INVALID_ARGUMENT("locals");
     }
@@ -180,7 +180,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
     }
 
     ExecutionResult result = {};
-    size_t instruction_index = 0;
+    CHAOS_IL2CPP_SIZE instruction_index = 0;
 
     while (instruction_index < method.instructions.size()) {
         const IRInstruction& instruction = method.instructions[instruction_index];
@@ -205,19 +205,19 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             case IROpCode::LdArg:
                 if (instruction.operand_index < 0 ||
-                    static_cast<size_t>(instruction.operand_index) >= frame->arguments.size()) {
+                    static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index) >= frame->arguments.size()) {
                     throw CHAOS_IL2CPP_OUT_OF_RANGE("argument");
                 }
 
-                frame->stack.push_back(frame->arguments[static_cast<size_t>(instruction.operand_index)]);
+                frame->stack.push_back(frame->arguments[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)]);
                 break;
             case IROpCode::LdLoc:
-                EnsureLocal(&frame->locals, static_cast<size_t>(instruction.operand_index));
-                frame->stack.push_back(frame->locals[static_cast<size_t>(instruction.operand_index)]);
+                EnsureLocal(&frame->locals, static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index));
+                frame->stack.push_back(frame->locals[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)]);
                 break;
             case IROpCode::StLoc: {
-                EnsureLocal(&frame->locals, static_cast<size_t>(instruction.operand_index));
-                frame->locals[static_cast<size_t>(instruction.operand_index)] = Pop(&frame->stack);
+                EnsureLocal(&frame->locals, static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index));
+                frame->locals[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)] = Pop(&frame->stack);
                 break;
             }
             case IROpCode::StArg: {
@@ -225,7 +225,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     throw CHAOS_IL2CPP_OUT_OF_RANGE("argument");
                 }
 
-                const size_t argument_index = static_cast<size_t>(instruction.operand_index);
+                const CHAOS_IL2CPP_SIZE argument_index = static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index);
                 if (frame->arguments.size() <= argument_index) {
                     frame->arguments.resize(argument_index + 1u);
                 }
@@ -259,8 +259,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::Blt: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 if (left < right) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
@@ -268,8 +268,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::Bgt: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 if (left > right) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
@@ -277,8 +277,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::Ble: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 if (left <= right) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
@@ -286,8 +286,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::Bge: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 if (left >= right) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
@@ -295,37 +295,37 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::Add: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left + right));
                 break;
             }
             case IROpCode::Sub: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left - right));
                 break;
             }
             case IROpCode::Mul: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left * right));
                 break;
             }
             case IROpCode::Div: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left / right));
                 break;
             }
             case IROpCode::Rem: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left % right));
                 break;
             }
             case IROpCode::Neg: {
-                const int32_t value = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 value = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(-value));
                 break;
             }
@@ -339,14 +339,14 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::Clt: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left < right ? 1 : 0));
                 break;
             }
             case IROpCode::Cgt: {
-                const int32_t right = ReadInt32(Pop(&frame->stack));
-                const int32_t left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left > right ? 1 : 0));
                 break;
             }
@@ -372,7 +372,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::NewArr: {
-                const size_t length = static_cast<size_t>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_SIZE length = static_cast<CHAOS_IL2CPP_SIZE>(ReadInt32(Pop(&frame->stack)));
                 auto* storage = new ArrayStorage();
                 storage->elements.resize(length);
                 frame->stack.push_back(InterpreterValue::from_obj(storage));
@@ -396,7 +396,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::LdElem: {
-                const size_t index = static_cast<size_t>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_SIZE index = static_cast<CHAOS_IL2CPP_SIZE>(ReadInt32(Pop(&frame->stack)));
                 auto* array = RequireArray(Pop(&frame->stack));
                 if (index >= array->elements.size()) {
                     throw CHAOS_IL2CPP_OUT_OF_RANGE("array_index");
@@ -406,7 +406,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::StElem: {
                 const InterpreterValue value = Pop(&frame->stack);
-                const size_t index = static_cast<size_t>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_SIZE index = static_cast<CHAOS_IL2CPP_SIZE>(ReadInt32(Pop(&frame->stack)));
                 auto* array = RequireArray(Pop(&frame->stack));
                 if (index >= array->elements.size()) {
                     throw CHAOS_IL2CPP_OUT_OF_RANGE("array_index");
@@ -416,7 +416,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::LdLen: {
                 auto* array = RequireArray(Pop(&frame->stack));
-                frame->stack.push_back(InterpreterValue::from_i32(static_cast<int32_t>(array->elements.size())));
+                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(array->elements.size())));
                 break;
             }
             case IROpCode::Pop:

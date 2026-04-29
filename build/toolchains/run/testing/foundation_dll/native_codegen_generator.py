@@ -236,7 +236,7 @@ def _generate_summary_cpp(
             f"    const CodegenRegistrationOptionsV0* options,\n"
             f"    RuntimeState* runtime,\n"
             f"    ThreadState* thread,\n"
-            f"    std::uint32_t method_slot,\n"
+            f"    CHAOS_IL2CPP_UINT32 method_slot,\n"
             f"    void* managed_args);"
         )
 
@@ -249,8 +249,8 @@ def _generate_summary_cpp(
         '#include "bootstrap.h"',
         '#include "codegen_bridge.h"',
         '#include "memory_domain.h"',
-        "#include <cstddef>",
-        "#include <cstdint>",
+        "#include <chaos/native_types.h>",
+        "#include <chaos/native_types.h>",
         "#include <cstring>",
         "",
         f"namespace chaos::il2cpp::generated",
@@ -260,33 +260,33 @@ def _generate_summary_cpp(
         f'constexpr const char* kAssemblyName = "{assembly_name}";',
         f'constexpr const char* kPlanKind = "family-runtime-skeleton";',
         f'constexpr const char* kRuntimeExecutionKind = "family-bound-native-reference-skeleton";',
-        f"constexpr std::size_t translation_unit_method_count = {method_count};",
-        f"constexpr std::size_t translation_unit_page_size = {page_size_literal};",
-        f"constexpr std::size_t translation_unit_page_count = {page_count_literal};",
+        f"constexpr CHAOS_IL2CPP_SIZE translation_unit_method_count = {method_count};",
+        f"constexpr CHAOS_IL2CPP_SIZE translation_unit_page_size = {page_size_literal};",
+        f"constexpr CHAOS_IL2CPP_SIZE translation_unit_page_count = {page_count_literal};",
         "",
-        "using NativeReferenceAssemblyPageDispatchFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(\n"
+        "using NativeReferenceAssemblyPageDispatchFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(\n"
         "    const CodegenBridgeV0* bridge,\n"
         "    const CodeRegistrationV0* code_registration,\n"
         "    const MetadataRegistrationV0* metadata_registration,\n"
         "    const CodegenRegistrationOptionsV0* options,\n"
         "    RuntimeState* runtime,\n"
         "    ThreadState* thread,\n"
-        "    std::uint32_t method_slot,\n"
+        "    CHAOS_IL2CPP_UINT32 method_slot,\n"
         "    void* managed_args);",
         "",
         "struct NativeReferenceAssemblyDispatchRequest",
         "{",
         "    const char* subject_id;",
         "    void* managed_args;",
-        "    std::uint32_t method_id;",
+        "    CHAOS_IL2CPP_UINT32 method_id;",
         "};",
         "",
         "struct RuntimeSkeletonMethodDispatchCatalogEntry",
         "{",
-        "    std::uint32_t method_id;",
+        "    CHAOS_IL2CPP_UINT32 method_id;",
         "    const char* subject_id;",
         "    NativeReferenceAssemblyPageDispatchFn dispatch;",
-        "    std::uint32_t method_slot;",
+        "    CHAOS_IL2CPP_UINT32 method_slot;",
         "};",
         "",
     ]
@@ -306,9 +306,9 @@ def _generate_summary_cpp(
         lines.append("{")
         lines.extend(catalog_entries)
         lines.append("};")
-        lines.append(f"constexpr std::size_t kMethodDispatchCatalogCount = sizeof(kMethodDispatchCatalog) / sizeof(kMethodDispatchCatalog[0]);")
+        lines.append(f"constexpr CHAOS_IL2CPP_SIZE kMethodDispatchCatalogCount = sizeof(kMethodDispatchCatalog) / sizeof(kMethodDispatchCatalog[0]);")
     else:
-        lines.append("constexpr std::size_t kMethodDispatchCatalogCount = 0;")
+        lines.append("constexpr CHAOS_IL2CPP_SIZE kMethodDispatchCatalogCount = 0;")
 
     lines.append("")
     lines.extend([
@@ -316,12 +316,12 @@ def _generate_summary_cpp(
         "{",
         "    if (subject_id == nullptr || subject_id[0] == '\\0') { return nullptr; }",
         "    if (kMethodDispatchCatalogCount == 0) { return nullptr; }",
-        "    std::size_t left = 0;",
-        "    std::size_t right = kMethodDispatchCatalogCount;",
+        "    CHAOS_IL2CPP_SIZE left = 0;",
+        "    CHAOS_IL2CPP_SIZE right = kMethodDispatchCatalogCount;",
         "    while (left < right) {",
-        "        const std::size_t mid = left + ((right - left) / 2);",
+        "        const CHAOS_IL2CPP_SIZE mid = left + ((right - left) / 2);",
         "        const auto& entry = kMethodDispatchCatalog[mid];",
-        "        const int compare = std::strcmp(entry.subject_id, subject_id);",
+        "        const int compare = CHAOS_IL2CPP_STRCMP(entry.subject_id, subject_id);",
         "        if (compare < 0) { left = mid + 1; continue; }",
         "        if (compare > 0) { right = mid; continue; }",
         "        return &entry;",
@@ -329,14 +329,14 @@ def _generate_summary_cpp(
         "    return nullptr;",
         "}",
         "",
-        "const RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntryByMethodId(std::uint32_t method_id)",
+        "constexpr RuntimeSkeletonMethodDispatchCatalogEntry* FindMethodDispatchCatalogEntryByMethodId(CHAOS_IL2CPP_UINT32 method_id)",
         "{",
         "    if (method_id == 0) { return nullptr; }",
         "    if (kMethodDispatchCatalogCount == 0) { return nullptr; }",
-        "    std::size_t left = 0;",
-        "    std::size_t right = kMethodDispatchCatalogCount;",
+        "    CHAOS_IL2CPP_SIZE left = 0;",
+        "    CHAOS_IL2CPP_SIZE right = kMethodDispatchCatalogCount;",
         "    while (left < right) {",
-        "        const std::size_t mid = left + ((right - left) / 2);",
+        "        const CHAOS_IL2CPP_SIZE mid = left + ((right - left) / 2);",
         "        const auto& entry = kMethodDispatchCatalog[mid];",
         "        if (entry.method_id < method_id) { left = mid + 1; continue; }",
         "        if (entry.method_id > method_id) { right = mid; continue; }",
@@ -368,7 +368,7 @@ def _generate_summary_cpp(
         "    const CodegenRegistrationOptionsV0* options,",
         "    RuntimeState* runtime,",
         "    ThreadState* thread,",
-        "    std::uint32_t method_id,",
+        "    CHAOS_IL2CPP_UINT32 method_id,",
         "    void* managed_args)",
         "{",
         "    const auto* method = FindMethodDispatchCatalogEntryByMethodId(method_id);",
@@ -438,17 +438,17 @@ def _generate_page_cpp(
         '#include "codegen_bridge.h"',
         '#include "runtime_core.h"',
         "#include <atomic>",
-        "#include <cstddef>",
-        "#include <cstdint>",
+        "#include <chaos/native_types.h>",
+        "#include <chaos/native_types.h>",
         "#include <cstring>",
         "",
         f"namespace chaos::il2cpp::generated::runtime_skeleton_{ns_slug}",
         "{",
         f'constexpr const char* kRuntimeExecutionKind = "family-bound-native-reference-skeleton";',
-        f"constexpr std::size_t translation_unit_page_number = {page_number};",
-        f"constexpr std::size_t translation_unit_page_item_count = {len(page_entries)};",
+        f"constexpr CHAOS_IL2CPP_SIZE translation_unit_page_number = {page_number};",
+        f"constexpr CHAOS_IL2CPP_SIZE translation_unit_page_item_count = {len(page_entries)};",
         "",
-        "using NativeReferenceAssemblyStubFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(",
+        "using NativeReferenceAssemblyStubFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(",
         "    const CodegenBridgeV0* bridge,",
         "    const CodeRegistrationV0* code_registration,",
         "    const MetadataRegistrationV0* metadata_registration,",
@@ -502,7 +502,7 @@ def _generate_page_cpp(
     lines.append("    const CodegenRegistrationOptionsV0* options,")
     lines.append("    RuntimeState* runtime,")
     lines.append("    ThreadState* thread,")
-    lines.append("    std::uint32_t method_slot,")
+    lines.append("    CHAOS_IL2CPP_UINT32 method_slot,")
     lines.append("    void* managed_args)")
     lines.append("{")
     lines.append("    if (method_slot >= (sizeof(kPageMethodDispatch) / sizeof(kPageMethodDispatch[0]))) {")
@@ -581,14 +581,14 @@ def _generate_hotupdate_cpp(
         f"// native-reference hotupdate skeleton for {family_id} ({direction})",
         '#include "codegen_bridge.h"',
         '#include "runtime_core.h"',
-        "#include <cstddef>",
-        "#include <cstdint>",
+        "#include <chaos/native_types.h>",
+        "#include <chaos/native_types.h>",
         "",
         f"namespace chaos::il2cpp::generated::hotupdate_{ns_slug}",
         "{",
         f'constexpr const char* kAssemblyName = "{assembly_name}";',
         f'constexpr const char* kHotUpdateDirection = "{dir_label}";',
-        f"constexpr std::size_t kMethodCount = {len(method_subject_ids)};",
+        f"constexpr CHAOS_IL2CPP_SIZE kMethodCount = {len(method_subject_ids)};",
         "",
     ]
 
@@ -688,23 +688,23 @@ CPP_TYPE_MAP: dict[str, str] = {
 }
 
 CPP_BENCHMARK_ARG_MAP: dict[str, str] = {
-    "System.Boolean": "static_cast<uint8_t>(42)",
-    "System.Byte": "static_cast<uint8_t>(42)",
-    "System.Char": "static_cast<int32_t>('A')",
-    "System.DateTime": "static_cast<int64_t>(0)",
-    "System.Decimal": "static_cast<int32_t>(42)",
-    "System.Double": "static_cast<int32_t>(42)",
-    "System.Int16": "static_cast<int16_t>(42)",
+    "System.Boolean": "static_cast<CHAOS_IL2CPP_UINT8>(42)",
+    "System.Byte": "static_cast<CHAOS_IL2CPP_UINT8>(42)",
+    "System.Char": "static_cast<CHAOS_IL2CPP_INT32>('A')",
+    "System.DateTime": "static_cast<CHAOS_IL2CPP_INT64>(0)",
+    "System.Decimal": "static_cast<CHAOS_IL2CPP_INT32>(42)",
+    "System.Double": "static_cast<CHAOS_IL2CPP_INT32>(42)",
+    "System.Int16": "static_cast<CHAOS_IL2CPP_INT16>(42)",
     "System.Int32": "42",
-    "System.Int64": "static_cast<int64_t>(42)",
-    "System.Object": "static_cast<int32_t>(42)",
-    "System.SByte": "static_cast<int8_t>(42)",
-    "System.Single": "static_cast<int32_t>(42)",
-    "System.String": "static_cast<int32_t>(42)",
-    "System.UInt16": "static_cast<uint16_t>(42)",
+    "System.Int64": "static_cast<CHAOS_IL2CPP_INT64>(42)",
+    "System.Object": "static_cast<CHAOS_IL2CPP_INT32>(42)",
+    "System.SByte": "static_cast<CHAOS_IL2CPP_INT8>(42)",
+    "System.Single": "static_cast<CHAOS_IL2CPP_INT32>(42)",
+    "System.String": "static_cast<CHAOS_IL2CPP_INT32>(42)",
+    "System.UInt16": "static_cast<CHAOS_IL2CPP_UINT16>(42)",
     "System.UInt32": "42u",
-    "System.UInt64": "static_cast<uint64_t>(42)",
-    "System.IFormatProvider": "static_cast<int32_t>(0)",
+    "System.UInt64": "static_cast<CHAOS_IL2CPP_UINT64>(42)",
+    "System.IFormatProvider": "static_cast<CHAOS_IL2CPP_INT32>(0)",
 }
 
 
@@ -931,8 +931,8 @@ def generate_benchmark_native_entry(
     lines = [
         "// Auto-generated benchmark native entry",
         f"// Family: {family_id}",
-        "#include <cstddef>",
-        "#include <cstdint>",
+        "#include <chaos/native_types.h>",
+        "#include <chaos/native_types.h>",
         "",
         f"namespace chaos::benchmark::{ns_slug}",
         "{",
@@ -942,9 +942,9 @@ def generate_benchmark_native_entry(
         slot_name = _method_slot_name(subject_id)
         params = _parse_subject_id_params(subject_id)
 
-        # Build a single int32_t argument value — these are synthetic benchmark
+        # Build a single CHAOS_IL2CPP_INT32 argument value — these are synthetic benchmark
         # entries measuring dispatch overhead, not actual conversion correctness.
-        single_arg = "static_cast<int32_t>(42)"
+        single_arg = "static_cast<CHAOS_IL2CPP_INT32>(42)"
         if len(params) == 1:
             p_clean = params[0].strip()
             if p_clean in CPP_BENCHMARK_ARG_MAP:
@@ -956,27 +956,27 @@ def generate_benchmark_native_entry(
                 single_arg = CPP_BENCHMARK_ARG_MAP[p_clean]
 
         lines.append(f"    // [{idx}] {subject_id}")
-        lines.append(f"    int32_t BenchmarkEntry_{idx}() {{")
+        lines.append(f"    CHAOS_IL2CPP_INT32 BenchmarkEntry_{idx}() {{")
         lines.append(f"        return {single_arg};")
         lines.append("    }")
         lines.append("")
 
     # Dispatch table
-    lines.append("    using BenchmarkEntryFn = int32_t (*)();")
+    lines.append("    using BenchmarkEntryFn = CHAOS_IL2CPP_INT32 (*)();")
     lines.append("    static constexpr BenchmarkEntryFn kBenchmarkEntries[] = {")
     for idx in range(len(method_subject_ids)):
         comma = "," if idx < len(method_subject_ids) - 1 else ""
         lines.append(f"        &BenchmarkEntry_{idx}{comma}")
     lines.append("    };")
-    lines.append(f"    static constexpr std::size_t kBenchmarkEntryCount = {len(method_subject_ids)};")
+    lines.append(f"    static constexpr CHAOS_IL2CPP_SIZE kBenchmarkEntryCount = {len(method_subject_ids)};")
     lines.append("")
     lines.append("}  // namespace chaos::benchmark::" + ns_slug)
     lines.append("")
 
     # RunNativeAot dispatch
-    lines.append('extern "C" int RunNativeAot(int32_t entryIndex)')
+    lines.append('extern "C" int RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex)')
     lines.append("{")
-    lines.append(f"    if (entryIndex < 0 || static_cast<std::size_t>(entryIndex) >= chaos::benchmark::{ns_slug}::kBenchmarkEntryCount) {{ return -1; }}")
+    lines.append(f"    if (entryIndex < 0 || static_cast<CHAOS_IL2CPP_SIZE>(entryIndex) >= chaos::benchmark::{ns_slug}::kBenchmarkEntryCount) {{ return -1; }}")
     lines.append(f"    return chaos::benchmark::{ns_slug}::kBenchmarkEntries[entryIndex]();")
     lines.append("}")
     lines.append("")

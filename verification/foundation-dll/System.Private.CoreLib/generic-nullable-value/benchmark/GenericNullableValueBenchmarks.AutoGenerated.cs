@@ -22,7 +22,9 @@ public static class GenericNullableValueBenchmarks
     // Purpose: Benchmark native-runtime performance of Nullable.get_Value with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Nullable`1::get_Value:T()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GenericNullableValue)]
-    public static void Benchmark_System_Private_CoreLib_System_Nullable_1_get_Value_T() { }
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Private_CoreLib_System_Nullable_1_get_Value_T() { _ = default(Nullable<int>).Value; }
     // Purpose: Benchmark native-runtime performance of Nullable.GetValueOrDefault with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GenericNullableValue)]

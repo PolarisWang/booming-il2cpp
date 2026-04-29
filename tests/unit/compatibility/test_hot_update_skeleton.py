@@ -135,13 +135,27 @@ class HotUpdateSkeletonTests(unittest.TestCase):
 
         for required_fragment in [
             "struct HotUpdateAssemblyImage",
+            "#include <chaos/native_types.h>",
+            "CHAOS_IL2CPP_SIZE size = 0u;",
+            "CHAOS_IL2CPP_UINT32 domain_id = 0u;",
             "LoadAssemblyImageFromPath",
             "ReleaseAssemblyImage",
         ]:
             self.assertIn(required_fragment, native_header_source)
 
+        method_replacement_header_source = (
+            NATIVE_HOT_UPDATE_ROOT / "method_replacement.h"
+        ).read_text(encoding="utf-8")
         for required_fragment in [
-            "std::ifstream",
+            "#include <chaos/native_types.h>",
+            "CHAOS_IL2CPP_UINT32 method_token = 0u;",
+            "bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk);",
+            "CHAOS_IL2CPP_UINT32 ActiveCount();",
+        ]:
+            self.assertIn(required_fragment, method_replacement_header_source)
+
+        for required_fragment in [
+            "CHAOS_IL2CPP_IFSTREAM",
             "LoadAssemblyImageFromPath",
             "ReleaseAssemblyImage",
         ]:

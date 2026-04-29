@@ -141,6 +141,26 @@ Validation rules:
 5. Include guard format: `CHAOS_IL2CPP_*_H_`
 6. No `chaos_` prefix inside `ChaosIl2cpp::Common` namespace
 7. No inline prelude definitions (must use `#include <chaos/common.h>`)
+8. **No raw `std::` types in generated code** — all standard library types must use `CHAOS_IL2CPP_*` macros defined in `<chaos/native_types.h>`. Examples:
+
+   | Raw `std::` | Macro |
+   |-------------|-------|
+   | `std::int32_t` | `CHAOS_IL2CPP_INT32` |
+   | `std::string` | `CHAOS_IL2CPP_STRING` |
+   | `std::vector<T>` | `CHAOS_IL2CPP_VECTOR(T)` |
+   | `std::unordered_map<K,V>` | `CHAOS_IL2CPP_UNORDERED_MAP(K,V)` |
+   | `std::unique_ptr<T>` | `CHAOS_IL2CPP_UNIQUE_PTR(T)` |
+   | `std::abort()` | `CHAOS_IL2CPP_ABORT()` |
+   | `std::malloc(s)` | `CHAOS_IL2CPP_MALLOC(s)` |
+   | `std::memcpy(d,s,n)` | `CHAOS_IL2CPP_MEMCPY(d,s,n)` |
+   | `std::mutex` | `CHAOS_IL2CPP_MUTEX` |
+   | `std::lock_guard<M>` | `CHAOS_IL2CPP_LOCK_GUARD(M)` |
+   | `std::numeric_limits<T>::min()` | `CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(T)` |
+
+   **Macro syntax rules**:
+   - Macros use **parentheses `()` syntax**: `CHAOS_IL2CPP_VECTOR(type)` NOT `CHAOS_IL2CPP_VECTOR<type>`
+   - Nested macros require intermediate `using` typedefs for MSVC `>>` compatibility
+   - See `<chaos/native_types.h>` for the complete macro list
 
 ---
 

@@ -43,7 +43,11 @@ public sealed class NativeCodegenValidator
         RegexOptions.Compiled | RegexOptions.Multiline);
 
     private static readonly Regex RawStdTypeRegex = new(
-        @"\bstd::(intptr_t|int\d+_t|uint\d+_t|size_t|ptrdiff_t|string|vector|array|unique_ptr|make_unique|unordered_map|pair|abort\s*\(|memcpy|memcmp|strcmp|strlen|memset|mutex|lock_guard|recursive_timed_mutex|once_flag|call_once|thread|numeric_limits|atomic|to_string|printf|fwrite|fputc|fflush|chrono)\b",
+        @"\bstd::(intptr_t|int\d+_t|uint\d+_t|size_t|ptrdiff_t|string|string_view|vector|array|unique_ptr|make_unique|shared_ptr|make_shared|unordered_map|pair|abort\s*\(|malloc\s*\(|free\s*\(|realloc\s*\(|memcpy|memcmp|memmove|strcmp|strlen|memset|mutex|lock_guard|recursive_timed_mutex|recursive_mutex|once_flag|call_once|thread|numeric_limits|atomic|to_string|printf|fwrite|fputc|fflush|chrono|move|nothrow)\b",
+        RegexOptions.Compiled);
+
+    private static readonly Regex BareCStdintTypeRegex = new(
+        @"(?<!\w)(intptr_t|int\d+_t|uint\d+_t|size_t|ptrdiff_t)(?!\w)",
         RegexOptions.Compiled);
 
     public ValidationResult ValidateFile(string filePath)
@@ -138,6 +142,17 @@ public sealed class NativeCodegenValidator
             if (rawStdMatch.Success)
             {
                 result.Errors.Add($"'{fileName}': raw std:: type '{rawStdMatch.Value}' found — use CHAOS_IL2CPP_* macros instead (found near line {EstimateLineNumber(content, rawStdMatch.Index)})");
+            }
+        }
+
+        // Check 9: Generated code must not contain bare <cstdint> types (int32_t, uint32_t, etc.) — use CHAOS_IL2CPP_* macros
+        if (!fileName.StartsWith("chaos/", StringComparison.Ordinal) &&
+            !fileName.StartsWith("native_types", StringComparison.Ordinal))
+        {
+            var bareTypeMatch = BareCStdintTypeRegex.Match(content);
+            if (bareTypeMatch.Success)
+            {
+                result.Errors.Add($"'{fileName}': bare type '{bareTypeMatch.Value}' found — use CHAOS_IL2CPP_* macro instead (found near line {EstimateLineNumber(content, bareTypeMatch.Index)})");
             }
         }
 

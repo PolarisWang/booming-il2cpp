@@ -28,7 +28,7 @@ target_link_libraries(chaos_common PUBLIC chaos_fmt)
 
 # chaos_common is a dependency-free foundation library.
 # It does NOT depend on chaos_runtime_core, BDWGC, or any other module.
-# All types are self-contained; opaque handles use std::intptr_t.
+# All types are self-contained; opaque handles use CHAOS_IL2CPP_INTPTR.
 
 target_include_directories(
     chaos_common

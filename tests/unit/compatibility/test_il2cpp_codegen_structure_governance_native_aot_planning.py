@@ -85,7 +85,7 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotPlanning(Il2CppCodeGenStructu
             self.assertIn(required_fragment, static_initialization_source)
 
         for legacy_fragment in [
-            'builder.AppendLine($"std::once_flag',
+            'builder.AppendLine($"CHAOS_IL2CPP_ONCE_FLAG',
             'builder.AppendLine($"{indentation}if (',
             'builder.AppendLine($"{indentation}    auto* chaos_object = new',
         ]:
@@ -152,8 +152,8 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotPlanning(Il2CppCodeGenStructu
 
         for legacy_fragment in [
             'builder.AppendLine("    return;',
-            'builder.AppendLine("    return static_cast<std::int32_t>(',
-            'handler.AppendLiteral("chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>(',
+            'builder.AppendLine("    return static_cast<CHAOS_IL2CPP_INT32>(',
+            'handler.AppendLiteral("chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(',
             'handler.AppendLiteral("    chaos_args[',
         ]:
             self.assertNotIn(legacy_fragment, invocation_abi_source)
@@ -210,25 +210,25 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotPlanning(Il2CppCodeGenStructu
             self.assertIn(required_fragment, string_runtime_source)
 
         for legacy_fragment in [
-            '"extern \\"C\\" std::intptr_t " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1)\\n{\\n    return chaos_reflection_concat_string_pair_values(chaos_arg_0, chaos_arg_1);\\n}"',
-            '$"extern \\"C\\" std::intptr_t {GetExternalRuntimeHelperSymbol(callee)}(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1, std::int32_t chaos_arg_2)\\n{{\\n    if (chaos_arg_2 != {4})',
-            '"extern \\"C\\" std::intptr_t " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0)\\n{\\n    auto* chaos_value_slot = chaos_resolve_native_int_slot(chaos_arg_0);\\n    char chaos_buffer[64]{};\\n    std::snprintf(chaos_buffer, sizeof(chaos_buffer), \\"%d\\", static_cast<std::int32_t>(*chaos_value_slot));\\n    return chaos_reflection_create_string_literal(chaos_buffer);\\n}"',
+            '"extern \\"C\\" CHAOS_IL2CPP_INTPTR " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)\\n{\\n    return chaos_reflection_concat_string_pair_values(chaos_arg_0, chaos_arg_1);\\n}"',
+            '$"extern \\"C\\" CHAOS_IL2CPP_INTPTR {GetExternalRuntimeHelperSymbol(callee)}(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2)\\n{{\\n    if (chaos_arg_2 != {4})',
+            '"extern \\"C\\" CHAOS_IL2CPP_INTPTR " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0)\\n{\\n    auto* chaos_value_slot = chaos_resolve_native_int_slot(chaos_arg_0);\\n    char chaos_buffer[64]{};\\n    std::snprintf(chaos_buffer, sizeof(chaos_buffer), \\"%d\\", static_cast<CHAOS_IL2CPP_INT32>(*chaos_value_slot));\\n    return chaos_reflection_create_string_literal(chaos_buffer);\\n}"',
             'std::snprintf(chaos_buffer, sizeof(chaos_buffer), "%.1f", static_cast<double>(chaos_load_float32(chaos_arg_0)));',
             'std::snprintf(chaos_buffer, sizeof(chaos_buffer), "%.1f", chaos_load_float64(chaos_arg_0));',
-            '"extern \\"C\\" void " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1)\\n{\\n    chaos_reflection_set_exception_metadata(',
-            '"extern \\"C\\" std::intptr_t " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0)\\n{\\n    return chaos_reflection_get_exception_message(chaos_arg_0);\\n}"',
-            '"extern \\"C\\" void " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0, std::int32_t chaos_arg_1, std::int32_t chaos_arg_2)\\n{\\n    (void)chaos_arg_1;\\n    (void)chaos_arg_2;\\n    chaos_default_interpolated_string_handler_reset(chaos_arg_0);\\n}"',
-            '"extern \\"C\\" void " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1)\\n{\\n    chaos_default_interpolated_string_handler_append_string(chaos_arg_0, chaos_arg_1);\\n}"',
-            '$"extern \\"C\\" std::intptr_t {GetExternalRuntimeHelperSymbol(callee)}()\\n{{\\n{text}\\n}}"',
-            '"extern \\"C\\" std::intptr_t " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1)\\n{\\n    return chaos_delegate_combine(chaos_arg_0, chaos_arg_1);\\n}"',
-            '$"extern \\"C\\" std::int32_t {GetExternalRuntimeHelperSymbol(callee)}()\\n{{\\n    return static_cast<std::int32_t>(sizeof({GetRequiredAbiValueTypeSymbol(valueTypeAbi)}));\\n}}"',
-            '$"extern \\"C\\" std::intptr_t {GetExternalRuntimeHelperSymbol(callee)}(std::int32_t chaos_arg_0)\\n{{\\n    if (chaos_arg_0 < 0)',
-            '"extern \\"C\\" void " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0)\\n{\\n    if (chaos_arg_0 != static_cast<std::intptr_t>(0))\\n    {\\n        std::free(reinterpret_cast<void*>(chaos_arg_0));\\n    }\\n}"',
-            '$"extern \\"C\\" void {GetExternalRuntimeHelperSymbol(callee)}({valueTypeSymbol} chaos_arg_0, std::intptr_t chaos_arg_1, std::intptr_t chaos_arg_2)\\n{{\\n    if (chaos_arg_1 == static_cast<std::intptr_t>(0) || chaos_arg_2 != static_cast<std::intptr_t>(0))',
-            '$"extern \\"C\\" {valueTypeSymbol2} {GetExternalRuntimeHelperSymbol(callee)}(std::intptr_t chaos_arg_0)\\n{{\\n    if (chaos_arg_0 == static_cast<std::intptr_t>(0))',
-            '$"extern \\"C\\" std::intptr_t {GetExternalRuntimeHelperSymbol(callee)}(std::intptr_t chaos_arg_0)\\n{{\\n    if (chaos_arg_0 == static_cast<std::intptr_t>(0))',
-            '"extern \\"C\\" std::intptr_t " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0)\\n{\\n    return chaos_arg_0 == static_cast<std::intptr_t>(0)\\n        ? static_cast<std::intptr_t>(0)\\n        : chaos_reflection_create_string_literal(reinterpret_cast<const char*>(chaos_arg_0));\\n}"',
-            '"extern \\"C\\" std::intptr_t " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1, std::intptr_t chaos_arg_2)\\n{\\n    auto* chaos_slot = chaos_resolve_native_int_slot(chaos_arg_0);',
+            '"extern \\"C\\" void " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)\\n{\\n    chaos_reflection_set_exception_metadata(',
+            '"extern \\"C\\" CHAOS_IL2CPP_INTPTR " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0)\\n{\\n    return chaos_reflection_get_exception_message(chaos_arg_0);\\n}"',
+            '"extern \\"C\\" void " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2)\\n{\\n    (void)chaos_arg_1;\\n    (void)chaos_arg_2;\\n    chaos_default_interpolated_string_handler_reset(chaos_arg_0);\\n}"',
+            '"extern \\"C\\" void " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)\\n{\\n    chaos_default_interpolated_string_handler_append_string(chaos_arg_0, chaos_arg_1);\\n}"',
+            '$"extern \\"C\\" CHAOS_IL2CPP_INTPTR {GetExternalRuntimeHelperSymbol(callee)}()\\n{{\\n{text}\\n}}"',
+            '"extern \\"C\\" CHAOS_IL2CPP_INTPTR " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)\\n{\\n    return chaos_delegate_combine(chaos_arg_0, chaos_arg_1);\\n}"',
+            '$"extern \\"C\\" CHAOS_IL2CPP_INT32 {GetExternalRuntimeHelperSymbol(callee)}()\\n{{\\n    return static_cast<CHAOS_IL2CPP_INT32>(sizeof({GetRequiredAbiValueTypeSymbol(valueTypeAbi)}));\\n}}"',
+            '$"extern \\"C\\" CHAOS_IL2CPP_INTPTR {GetExternalRuntimeHelperSymbol(callee)}(CHAOS_IL2CPP_INT32 chaos_arg_0)\\n{{\\n    if (chaos_arg_0 < 0)',
+            '"extern \\"C\\" void " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0)\\n{\\n    if (chaos_arg_0 != static_cast<CHAOS_IL2CPP_INTPTR>(0))\\n    {\\n        CHAOS_IL2CPP_FREE(reinterpret_cast<void*>(chaos_arg_0));\\n    }\\n}"',
+            '$"extern \\"C\\" void {GetExternalRuntimeHelperSymbol(callee)}({valueTypeSymbol} chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)\\n{{\\n    if (chaos_arg_1 == static_cast<CHAOS_IL2CPP_INTPTR>(0) || chaos_arg_2 != static_cast<CHAOS_IL2CPP_INTPTR>(0))',
+            '$"extern \\"C\\" {valueTypeSymbol2} {GetExternalRuntimeHelperSymbol(callee)}(CHAOS_IL2CPP_INTPTR chaos_arg_0)\\n{{\\n    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))',
+            '$"extern \\"C\\" CHAOS_IL2CPP_INTPTR {GetExternalRuntimeHelperSymbol(callee)}(CHAOS_IL2CPP_INTPTR chaos_arg_0)\\n{{\\n    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))',
+            '"extern \\"C\\" CHAOS_IL2CPP_INTPTR " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0)\\n{\\n    return chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0)\\n        ? static_cast<CHAOS_IL2CPP_INTPTR>(0)\\n        : chaos_reflection_create_string_literal(reinterpret_cast<const char*>(chaos_arg_0));\\n}"',
+            '"extern \\"C\\" CHAOS_IL2CPP_INTPTR " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)\\n{\\n    auto* chaos_slot = chaos_resolve_native_int_slot(chaos_arg_0);',
             'stringBuilder.AppendLine("    auto* chaos_enumerable_header = reinterpret_cast<chaos_object_header*>(chaos_arg_1);");',
             'stringBuilder.AppendLine("        while (true)");',
             'stringBuilder.AppendLine("            chaos_append_separator();");',

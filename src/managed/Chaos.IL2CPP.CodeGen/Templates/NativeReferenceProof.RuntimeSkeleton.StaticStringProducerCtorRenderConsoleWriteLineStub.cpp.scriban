@@ -3,7 +3,7 @@ struct {{ stub_name }}_ProducerArgs
     void** return_value;
 };
 
-int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -34,7 +34,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     }
     using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
     using ConcatStringTripleFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* first_string, const void* second_string, const void* third_string);
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_concat_string = bridge->resolve_icall({{ concat_icall_literal }});
     void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
     if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
@@ -45,7 +45,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     {
         &produced_value
     };
-    const int32_t producer_status = {{ producer_stub_name }}(
+    const CHAOS_IL2CPP_INT32 producer_status = {{ producer_stub_name }}(
         bridge,
         code_registration,
         metadata_registration,

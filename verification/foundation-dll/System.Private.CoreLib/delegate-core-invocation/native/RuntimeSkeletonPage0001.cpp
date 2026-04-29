@@ -3,17 +3,17 @@
 #include "codegen_bridge.h"
 #include "runtime_core.h"
 #include <atomic>
-#include <cstddef>
-#include <cstdint>
+#include <chaos/native_types.h>
+#include <chaos/native_types.h>
 #include <cstring>
 
 namespace chaos::il2cpp::generated::runtime_skeleton_delegate_core_invocation
 {
 constexpr const char* kRuntimeExecutionKind = "family-bound-native-reference-skeleton";
-constexpr std::size_t translation_unit_page_number = 1;
-constexpr std::size_t translation_unit_page_item_count = 10;
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_number = 1;
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_item_count = 10;
 
-using NativeReferenceAssemblyStubFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+using NativeReferenceAssemblyStubFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -253,7 +253,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL DispatchRuntimeSkeletonPage0001(
     const CodegenRegistrationOptionsV0* options,
     RuntimeState* runtime,
     ThreadState* thread,
-    std::uint32_t method_slot,
+    CHAOS_IL2CPP_UINT32 method_slot,
     void* managed_args)
 {
     if (method_slot >= (sizeof(kPageMethodDispatch) / sizeof(kPageMethodDispatch[0]))) {

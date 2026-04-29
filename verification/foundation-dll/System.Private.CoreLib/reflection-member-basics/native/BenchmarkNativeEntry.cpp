@@ -1,81 +1,81 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/reflection/member-basics
-#include <cstddef>
-#include <cstdint>
+#include <chaos/native_types.h>
+#include <chaos/native_types.h>
 
 namespace chaos::benchmark::reflection_member_basics
 {
     // [0] System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()
-    int32_t BenchmarkEntry_0() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_0() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [1] System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()
-    int32_t BenchmarkEntry_1() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_1() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [2] System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()
-    int32_t BenchmarkEntry_2() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_2() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [3] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
-    int32_t BenchmarkEntry_3() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_3() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [4] System.Private.CoreLib/System.Reflection.MethodInfo::GetParameters:System.Reflection.ParameterInfo[]()
-    int32_t BenchmarkEntry_4() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_4() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [5] System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()
-    int32_t BenchmarkEntry_5() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_5() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [6] System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])
-    int32_t BenchmarkEntry_6() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_6() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [7] System.Private.CoreLib/System.Reflection.FieldInfo::GetValue:System.Object(System.Object)
-    int32_t BenchmarkEntry_7() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_7() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [8] System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object)
-    int32_t BenchmarkEntry_8() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_8() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [9] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
-    int32_t BenchmarkEntry_9() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_9() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [10] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object)
-    int32_t BenchmarkEntry_10() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_10() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [11] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Object[])
-    int32_t BenchmarkEntry_11() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_11() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [12] System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object)
-    int32_t BenchmarkEntry_12() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_12() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [13] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
-    int32_t BenchmarkEntry_13() {
-        return static_cast<int32_t>(42);
+    CHAOS_IL2CPP_INT32 BenchmarkEntry_13() {
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
-    using BenchmarkEntryFn = int32_t (*)();
+    using BenchmarkEntryFn = CHAOS_IL2CPP_INT32 (*)();
     static constexpr BenchmarkEntryFn kBenchmarkEntries[] = {
         &BenchmarkEntry_0,
         &BenchmarkEntry_1,
@@ -92,12 +92,12 @@ namespace chaos::benchmark::reflection_member_basics
         &BenchmarkEntry_12,
         &BenchmarkEntry_13
     };
-    static constexpr std::size_t kBenchmarkEntryCount = 14;
+    static constexpr CHAOS_IL2CPP_SIZE kBenchmarkEntryCount = 14;
 
 }  // namespace chaos::benchmark::reflection_member_basics
 
-extern "C" int RunNativeAot(int32_t entryIndex)
+extern "C" int RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex)
 {
-    if (entryIndex < 0 || static_cast<std::size_t>(entryIndex) >= chaos::benchmark::reflection_member_basics::kBenchmarkEntryCount) { return -1; }
+    if (entryIndex < 0 || static_cast<CHAOS_IL2CPP_SIZE>(entryIndex) >= chaos::benchmark::reflection_member_basics::kBenchmarkEntryCount) { return -1; }
     return chaos::benchmark::reflection_member_basics::kBenchmarkEntries[entryIndex]();
 }

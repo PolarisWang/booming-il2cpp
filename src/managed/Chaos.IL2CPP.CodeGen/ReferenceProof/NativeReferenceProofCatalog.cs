@@ -171,6 +171,10 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.VectorCopyKernelStub.cpp.scriban";
     public const string RuntimeSkeletonVectorCapabilityQueryStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.VectorCapabilityQueryStub.cpp.scriban";
+    public const string RuntimeSkeletonVectorMemoryKernelStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.VectorMemoryKernelStub.cpp.scriban";
+    public const string RuntimeSkeletonVectorComposeKernelStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.VectorComposeKernelStub.cpp.scriban";
     public const string RuntimeSkeletonNumberManagedInvokeStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.NumberManagedInvokeStub.cpp.scriban";
     public const string RuntimeSkeletonDecimalManagedInvokeStubTemplateRelativePath =
@@ -513,6 +517,16 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonVectorCapabilityQueryStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonVectorCapabilityQueryStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonVectorMemoryKernelStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonVectorMemoryKernelStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonVectorComposeKernelStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonVectorComposeKernelStubTemplateRelativePath);
     }
 
     public static Template GetRuntimeSkeletonNumberManagedInvokeStubTemplate()

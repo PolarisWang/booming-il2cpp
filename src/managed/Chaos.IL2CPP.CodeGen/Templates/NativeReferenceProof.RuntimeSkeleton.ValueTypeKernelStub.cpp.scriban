@@ -13,7 +13,7 @@ struct {{ stub_name }}_KernelArgs
 // kernel_semantic: {{ kernel_semantic_id }}
 // kernel_backend: {{ kernel_backend_kind }}
 // helper_namespace: chaos::il2cpp::runtime_core::
-int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,

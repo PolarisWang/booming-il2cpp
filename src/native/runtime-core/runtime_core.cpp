@@ -28,7 +28,7 @@
 
 struct ThreadRootRecord {
     const void* address;
-    size_t size;
+    CHAOS_IL2CPP_SIZE size;
 };
 
 struct FinalizerWorkItem {
@@ -42,7 +42,7 @@ struct RuntimeInternalState {
 };
 
 struct ThreadInternalState {
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_STRING, int32_t) thread_static_int32_slots;
+    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_STRING, CHAOS_IL2CPP_INT32) thread_static_int32_slots;
     CHAOS_IL2CPP_VECTOR(ThreadRootRecord) reported_roots;
     bool at_gc_safepoint = false;
 };
@@ -61,7 +61,7 @@ namespace chaos::il2cpp::runtime_core {
 
 namespace {
 
-constexpr size_t kInlineFieldStorageSize = sizeof(void*) * 4u;
+constexpr CHAOS_IL2CPP_SIZE kInlineFieldStorageSize = sizeof(void*) * 4u;
 constexpr CHAOS_IL2CPP_UINT64 kDateTimeTicksMask = 0x3FFFFFFFFFFFFFFFull;
 // struct ManagedExceptionCarrier is declared in runtime_core.h and used as the cold EH payload.
 
@@ -72,17 +72,17 @@ struct ObjectHeader {
 
 struct StringObjectHeader {
     TypeInfoHandle type;
-    uintptr_t byte_count;
+    CHAOS_IL2CPP_UINTPTR byte_count;
 };
 
 struct ArrayHeader {
     TypeInfoHandle element_type;
-    uintptr_t length;
+    CHAOS_IL2CPP_UINTPTR length;
 };
 
 struct BoxedValueHeader {
     TypeInfoHandle type;
-    uintptr_t byte_count;
+    CHAOS_IL2CPP_UINTPTR byte_count;
 };
 
 struct UInt128Layout {
@@ -220,8 +220,8 @@ struct EngineLifecycleRegistration {
 constexpr const char* kEngineObservePrefix = "CHAOS_ENGINE_OBSERVE ";
 
 CHAOS_IL2CPP_MUTEX g_engine_binding_mutex;
-uintptr_t g_next_engine_handle = 1u;
-CHAOS_IL2CPP_UNORDERED_MAP(uintptr_t, void*) g_engine_handles = {};
+CHAOS_IL2CPP_UINTPTR g_next_engine_handle = 1u;
+CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINTPTR, void*) g_engine_handles = {};
 CHAOS_IL2CPP_VECTOR(EngineLifecycleRegistration) g_engine_lifecycle_registrations = {};
 CHAOS_IL2CPP_MUTEX g_monitor_registry_mutex;
 CHAOS_IL2CPP_UNORDERED_MAP(void*, CHAOS_IL2CPP_SHARED_PTR(CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX)) g_monitor_registry = {};
@@ -236,10 +236,10 @@ struct GcHandleEntry {
     bool pinned;
 };
 static CHAOS_IL2CPP_MUTEX s_gc_handle_mutex;
-static CHAOS_IL2CPP_ATOMIC(uint64_t) s_next_gc_handle{1};
-static CHAOS_IL2CPP_UNORDERED_MAP(uint64_t, GcHandleEntry) s_gc_handle_table;
+static CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_UINT64) s_next_gc_handle{1};
+static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT64, GcHandleEntry) s_gc_handle_table;
 
-void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(size_t size, void* user_data) {
+void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(CHAOS_IL2CPP_SIZE size, void* user_data) {
     (void)user_data;
     return GC_MALLOC(size);
 }
@@ -253,15 +253,15 @@ void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
 // Allocate memory that contains no pointers (e.g., string bytes, boxed value data).
 // GC_MALLOC_ATOMIC allows the GC to skip scanning this region for pointers,
 // improving collection performance.
-static void* AllocateBytesAtomic(size_t size) {
+static void* AllocateBytesAtomic(CHAOS_IL2CPP_SIZE size) {
     return GC_MALLOC_ATOMIC(size);
 }
 
-void* GcAllocate(size_t size) {
+void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
     return GC_MALLOC(size);
 }
 
-void* GcAllocateAtomic(size_t size) {
+void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) {
     return GC_MALLOC_ATOMIC(size);
 }
 
@@ -294,7 +294,7 @@ bool TryNormalizeConfig(const RuntimeConfig* config, RuntimeConfig* out_config) 
     return true;
 }
 
-void* AllocateBytes(const RuntimeConfig& config, size_t size) {
+void* AllocateBytes(const RuntimeConfig& config, CHAOS_IL2CPP_SIZE size) {
     if (config.allocator == nullptr) {
         return nullptr;
     }
@@ -491,16 +491,16 @@ CHAOS_IL2CPP_SHARED_PTR(CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX) GetOrCreateMonitor(vo
 }
 
 bool IsLikelyMetadataTokenHandle(MethodInfoHandle method) {
-    const uintptr_t raw_method = reinterpret_cast<uintptr_t>(method);
+    const CHAOS_IL2CPP_UINTPTR raw_method = reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(method);
     if (raw_method == 0u) return false;
     // On 64-bit platforms, real pointers always have nonzero high 32 bits,
     // while metadata tokens are zero-extended 32-bit values (table code in
     // the low 8 bits, row index in bits 8-23).  Checking the high bits
     // eliminates all valid pointer aliases.
-    if (sizeof(uintptr_t) > sizeof(uint32_t) && (raw_method >> 32) != 0u) return false;
+    if (sizeof(CHAOS_IL2CPP_UINTPTR) > sizeof(CHAOS_IL2CPP_UINT32) && (raw_method >> 32) != 0u) return false;
     // Tighten to the maximum valid IL metadata token range.
     // Token format: 0xTT###### where TT ∈ [0x00, 0x2B].
-    return raw_method <= static_cast<uintptr_t>(0x2BFFFFFFu);
+    return raw_method <= static_cast<CHAOS_IL2CPP_UINTPTR>(0x2BFFFFFFu);
 }
 
 static const ReflectionQueryTypeDescriptor* TryResolveRuntimeCoreTypeDescriptor(TypeInfoHandle type) {
@@ -591,12 +591,12 @@ static bool TryPopulateRegisteredTypeCapability(
         return false;
     }
 
-    const uintptr_t raw_handle = reinterpret_cast<uintptr_t>(type);
+    const CHAOS_IL2CPP_UINTPTR raw_handle = reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(type);
     if ((raw_handle & kReflectionQueryHandleTag) != 0u) {
         return false;
     }
 
-    const uint32_t type_token = static_cast<uint32_t>(raw_handle);
+    const CHAOS_IL2CPP_UINT32 type_token = static_cast<CHAOS_IL2CPP_UINT32>(raw_handle);
     if (const auto* entry = chaos::il2cpp::bootstrap::FindRegisteredTypeCapabilityEntry(type_token)) {
         *out_capability_info = entry->capability_info;
         return true;
@@ -743,13 +743,13 @@ void* CHAOS_RUNTIME_ABI_CALL ArrayNew(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     TypeInfoHandle element_type,
-    uintptr_t length) {
+    CHAOS_IL2CPP_UINTPTR length) {
     if (!IsAttached(runtime_state, thread_state) || element_type == nullptr) {
         return nullptr;
     }
 
-    const size_t allocation_size =
-        sizeof(ArrayHeader) + (static_cast<size_t>(length) * sizeof(void*));
+    const CHAOS_IL2CPP_SIZE allocation_size =
+        sizeof(ArrayHeader) + (static_cast<CHAOS_IL2CPP_SIZE>(length) * sizeof(void*));
     unsigned char* storage = static_cast<unsigned char*>(AllocateBytes(runtime_state->config, allocation_size));
     if (storage == nullptr) {
         return nullptr;
@@ -761,7 +761,7 @@ void* CHAOS_RUNTIME_ABI_CALL ArrayNew(
 
     void** elements = reinterpret_cast<void**>(storage + sizeof(ArrayHeader));
     if (length != 0u) {
-        CHAOS_IL2CPP_MEMSET(elements, 0, static_cast<size_t>(length) * sizeof(void*));
+        CHAOS_IL2CPP_MEMSET(elements, 0, static_cast<CHAOS_IL2CPP_SIZE>(length) * sizeof(void*));
     }
 
     return header;
@@ -771,7 +771,7 @@ void* CHAOS_RUNTIME_ABI_CALL StringNewUtf8(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     const char* utf8_bytes,
-    uintptr_t byte_count) {
+    CHAOS_IL2CPP_UINTPTR byte_count) {
     if (!IsAttached(runtime_state, thread_state)) {
         return nullptr;
     }
@@ -780,7 +780,7 @@ void* CHAOS_RUNTIME_ABI_CALL StringNewUtf8(
         return nullptr;
     }
 
-    const size_t allocation_size = sizeof(StringObjectHeader) + static_cast<size_t>(byte_count) + 1u;
+    const CHAOS_IL2CPP_SIZE allocation_size = sizeof(StringObjectHeader) + static_cast<CHAOS_IL2CPP_SIZE>(byte_count) + 1u;
     // Use atomic allocation: string bytes contain no pointers, so GC need not scan them.
     unsigned char* storage = static_cast<unsigned char*>(AllocateBytesAtomic(allocation_size));
     if (storage == nullptr) {
@@ -793,7 +793,7 @@ void* CHAOS_RUNTIME_ABI_CALL StringNewUtf8(
 
     char* text = reinterpret_cast<char*>(storage + sizeof(StringObjectHeader));
     if (byte_count != 0u) {
-        CHAOS_IL2CPP_MEMCPY(text, utf8_bytes, static_cast<size_t>(byte_count));
+        CHAOS_IL2CPP_MEMCPY(text, utf8_bytes, static_cast<CHAOS_IL2CPP_SIZE>(byte_count));
     }
 
     text[byte_count] = '\0';
@@ -866,7 +866,7 @@ GCHandle CHAOS_RUNTIME_ABI_CALL GcHandleNew(
     }
 
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(s_gc_handle_mutex);
-    uint64_t handle = s_next_gc_handle++;
+    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle++;
     s_gc_handle_table[handle] = GcHandleEntry{ object_instance, pinned };
 
     if (pinned) {
@@ -886,7 +886,7 @@ void CHAOS_RUNTIME_ABI_CALL GcHandleFree(
     }
 
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(s_gc_handle_mutex);
-    auto it = s_gc_handle_table.find(static_cast<uint64_t>(gc_handle));
+    auto it = s_gc_handle_table.find(static_cast<CHAOS_IL2CPP_UINT64>(gc_handle));
     if (it != s_gc_handle_table.end()) {
         // Note: for pinned handles we intentionally do not call GC_remove_roots here.
         // GC_add_roots registers a memory range (not the object itself) as a scan root.
@@ -917,7 +917,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldGetValue(
     FieldInfoHandle field,
     void* object_instance,
     void* out_value,
-    size_t out_value_size) {
+    CHAOS_IL2CPP_SIZE out_value_size) {
     if (!IsAttached(runtime_state, thread_state)
         || object_instance == nullptr
         || out_value == nullptr
@@ -941,7 +941,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldSetValue(
     FieldInfoHandle field,
     void* object_instance,
     const void* value,
-    size_t value_size) {
+    CHAOS_IL2CPP_SIZE value_size) {
     if (!IsAttached(runtime_state, thread_state)
         || object_instance == nullptr
         || value == nullptr
@@ -965,16 +965,16 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL MethodInvoke(
     MethodInfoHandle method,
     void* object_instance,
     void* const* argv,
-    uint32_t argc,
+    CHAOS_IL2CPP_UINT32 argc,
     void* out_return_value,
-    size_t out_return_value_size,
+    CHAOS_IL2CPP_SIZE out_return_value_size,
     ExceptionHandle* out_exception) {
     using RawMethodInvokerFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
         RuntimeState* runtime,
         ThreadState* thread,
         void* __this,
         void* const* argv,
-        uint32_t argc);
+        CHAOS_IL2CPP_UINT32 argc);
 
     if (!IsAttached(runtime_state, thread_state) || method == nullptr) {
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
@@ -989,11 +989,11 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL MethodInvoke(
     // This handles all three handle types (opaque token, reflection-query,
     // function pointer) through a single uniform path.
     void* invoker_ptr = nullptr;
-    uint32_t method_token = 0;
+    CHAOS_IL2CPP_UINT32 method_token = 0;
     bool is_token_based = false;
 
     if (IsLikelyMetadataTokenHandle(method)) {
-        method_token = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(method));
+        method_token = static_cast<CHAOS_IL2CPP_UINT32>(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(method));
         is_token_based = true;
     } else if (const auto* desc = TryDecodeReflectionQueryMethodHandle(method)) {
         method_token = desc->metadata_token;
@@ -1067,7 +1067,7 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL ImageFindType(
 MethodInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindMethod(
     TypeInfoHandle type,
     const char* method_name_utf8,
-    int32_t parameter_count) {
+    CHAOS_IL2CPP_INT32 parameter_count) {
     if (type == nullptr || method_name_utf8 == nullptr || parameter_count < 0) {
         return nullptr;
     }
@@ -1132,7 +1132,7 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL TypeGetGenericTypeDefinition(TypeInfoHandl
 
 ParameterInfoHandle CHAOS_RUNTIME_ABI_CALL MethodGetParameter(
     MethodInfoHandle method,
-    uint32_t parameter_index) {
+    CHAOS_IL2CPP_UINT32 parameter_index) {
     if (method == nullptr) {
         return nullptr;
     }
@@ -1149,27 +1149,27 @@ GenericContextHandle CHAOS_RUNTIME_ABI_CALL MethodGetGenericContext(MethodInfoHa
     if (method == nullptr) {
         return nullptr;
     }
-    const uint32_t method_token = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(method));
+    const CHAOS_IL2CPP_UINT32 method_token = static_cast<CHAOS_IL2CPP_UINT32>(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(method));
     return chaos::il2cpp::generic_context::GetGenericContextForMethod(method_token);
 }
 
-uint32_t CHAOS_RUNTIME_ABI_CALL GenericContextGetClassArgCount(GenericContextHandle generic_context) {
+CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL GenericContextGetClassArgCount(GenericContextHandle generic_context) {
     return chaos::il2cpp::generic_context::GetClassTypeArgCount(generic_context);
 }
 
 TypeInfoHandle CHAOS_RUNTIME_ABI_CALL GenericContextGetClassArg(
     GenericContextHandle generic_context,
-    uint32_t index) {
+    CHAOS_IL2CPP_UINT32 index) {
     return chaos::il2cpp::generic_context::GetClassTypeArg(generic_context, index);
 }
 
-uint32_t CHAOS_RUNTIME_ABI_CALL GenericContextGetMethodArgCount(GenericContextHandle generic_context) {
+CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL GenericContextGetMethodArgCount(GenericContextHandle generic_context) {
     return chaos::il2cpp::generic_context::GetMethodTypeArgCount(generic_context);
 }
 
 TypeInfoHandle CHAOS_RUNTIME_ABI_CALL GenericContextGetMethodArg(
     GenericContextHandle generic_context,
-    uint32_t index) {
+    CHAOS_IL2CPP_UINT32 index) {
     return chaos::il2cpp::generic_context::GetMethodTypeArg(generic_context, index);
 }
 
@@ -1243,7 +1243,7 @@ void* BoxValueObject(
     ThreadState* thread_state,
     TypeInfoHandle value_type,
     const void* value,
-    size_t value_size) {
+    CHAOS_IL2CPP_SIZE value_size) {
     if (!IsAttached(runtime_state, thread_state)
         || value_type == nullptr
         || value == nullptr
@@ -1251,7 +1251,7 @@ void* BoxValueObject(
         return nullptr;
     }
 
-    const size_t allocation_size = sizeof(BoxedValueHeader) + value_size;
+    const CHAOS_IL2CPP_SIZE allocation_size = sizeof(BoxedValueHeader) + value_size;
     // Value data contains no pointers; use atomic allocation so GC skips scanning it.
     unsigned char* storage = static_cast<unsigned char*>(AllocateBytesAtomic(allocation_size));
     if (storage == nullptr) {
@@ -1269,7 +1269,7 @@ RuntimeStatus UnboxValueObject(
     RuntimeState* runtime_state,
     void* boxed_object,
     void* out_value,
-    size_t out_value_size) {
+    CHAOS_IL2CPP_SIZE out_value_size) {
     if (runtime_state == nullptr || boxed_object == nullptr || out_value == nullptr || out_value_size == 0u) {
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
@@ -1285,7 +1285,7 @@ RuntimeStatus UnboxValueObject(
 
 bool ArrayStoreReference(
     void* array_instance,
-    uintptr_t index,
+    CHAOS_IL2CPP_UINTPTR index,
     void* value) {
     if (array_instance == nullptr) {
         return false;
@@ -1303,7 +1303,7 @@ bool ArrayStoreReference(
 
 void* ArrayLoadReference(
     void* array_instance,
-    uintptr_t index) {
+    CHAOS_IL2CPP_UINTPTR index) {
     if (array_instance == nullptr) {
         return nullptr;
     }
@@ -1319,10 +1319,10 @@ void* ArrayLoadReference(
 
 bool ArrayCopyReferenceRange(
     void* source_array_instance,
-    uintptr_t source_index,
+    CHAOS_IL2CPP_UINTPTR source_index,
     void* target_array_instance,
-    uintptr_t target_index,
-    uintptr_t length) {
+    CHAOS_IL2CPP_UINTPTR target_index,
+    CHAOS_IL2CPP_UINTPTR length) {
     if (source_array_instance == nullptr || target_array_instance == nullptr) {
         return false;
     }
@@ -1351,14 +1351,14 @@ bool ArrayCopyReferenceRange(
     CHAOS_IL2CPP_MEMMOVE(
         target_elements + target_index,
         source_elements + source_index,
-        static_cast<size_t>(length) * sizeof(void*));
+        static_cast<CHAOS_IL2CPP_SIZE>(length) * sizeof(void*));
     return true;
 }
 
 bool ArrayClearReferenceRange(
     void* array_instance,
-    uintptr_t start_index,
-    uintptr_t length) {
+    CHAOS_IL2CPP_UINTPTR start_index,
+    CHAOS_IL2CPP_UINTPTR length) {
     if (array_instance == nullptr) {
         return false;
     }
@@ -1373,7 +1373,7 @@ bool ArrayClearReferenceRange(
     }
 
     auto* elements = reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(array_instance) + sizeof(ArrayHeader));
-    for (uintptr_t index = 0; index < length; ++index) {
+    for (CHAOS_IL2CPP_UINTPTR index = 0; index < length; ++index) {
         elements[start_index + index] = nullptr;
     }
 
@@ -1382,8 +1382,8 @@ bool ArrayClearReferenceRange(
 
 bool ArrayReverseReferenceRange(
     void* array_instance,
-    uintptr_t start_index,
-    uintptr_t length) {
+    CHAOS_IL2CPP_UINTPTR start_index,
+    CHAOS_IL2CPP_UINTPTR length) {
     if (array_instance == nullptr) {
         return false;
     }
@@ -1402,8 +1402,8 @@ bool ArrayReverseReferenceRange(
     }
 
     auto* elements = reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(array_instance) + sizeof(ArrayHeader));
-    uintptr_t left = start_index;
-    uintptr_t right = start_index + length - 1u;
+    CHAOS_IL2CPP_UINTPTR left = start_index;
+    CHAOS_IL2CPP_UINTPTR right = start_index + length - 1u;
     while (left < right) {
         void* temporary = elements[left];
         elements[left] = elements[right];
@@ -1415,7 +1415,7 @@ bool ArrayReverseReferenceRange(
     return true;
 }
 
-int32_t EngineLogWrite(
+CHAOS_IL2CPP_INT32 EngineLogWrite(
     const char* category_utf8,
     const char* message_utf8) {
     (void)category_utf8;
@@ -1424,12 +1424,12 @@ int32_t EngineLogWrite(
         return 1;
     }
 
-    const size_t prefix_length = CHAOS_IL2CPP_STRLEN(kEngineObservePrefix);
+    const CHAOS_IL2CPP_SIZE prefix_length = CHAOS_IL2CPP_STRLEN(kEngineObservePrefix);
     if (CHAOS_IL2CPP_FWRITE(kEngineObservePrefix, 1u, prefix_length, stdout) != prefix_length) {
         return 1;
     }
 
-    const size_t message_length = CHAOS_IL2CPP_STRLEN(message_utf8);
+    const CHAOS_IL2CPP_SIZE message_length = CHAOS_IL2CPP_STRLEN(message_utf8);
     if (CHAOS_IL2CPP_FWRITE(message_utf8, 1u, message_length, stdout) != message_length) {
         return 1;
     }
@@ -1441,18 +1441,18 @@ int32_t EngineLogWrite(
     return CHAOS_IL2CPP_FFLUSH(stdout) == 0 ? 0 : 1;
 }
 
-uintptr_t CreateEngineObjectHandle(void* object_instance) {
+CHAOS_IL2CPP_UINTPTR CreateEngineObjectHandle(void* object_instance) {
     if (object_instance == nullptr) {
         return 0u;
     }
 
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_engine_binding_mutex);
-    const uintptr_t handle = g_next_engine_handle++;
+    const CHAOS_IL2CPP_UINTPTR handle = g_next_engine_handle++;
     g_engine_handles[handle] = object_instance;
     return handle;
 }
 
-void* ResolveEngineObjectHandle(uintptr_t handle) {
+void* ResolveEngineObjectHandle(CHAOS_IL2CPP_UINTPTR handle) {
     if (handle == 0u) {
         return nullptr;
     }
@@ -1511,8 +1511,8 @@ bool ThreadStaticInt32Add(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     const char* slot_key_utf8,
-    int32_t delta,
-    int32_t* out_value) {
+    CHAOS_IL2CPP_INT32 delta,
+    CHAOS_IL2CPP_INT32* out_value) {
     if (!IsAttached(runtime_state, thread_state) || slot_key_utf8 == nullptr || out_value == nullptr) {
         return false;
     }
@@ -1522,7 +1522,7 @@ bool ThreadStaticInt32Add(
         return false;
     }
 
-    int32_t& value = thread_internal_state->thread_static_int32_slots[slot_key_utf8];
+    CHAOS_IL2CPP_INT32& value = thread_internal_state->thread_static_int32_slots[slot_key_utf8];
     value += delta;
     *out_value = value;
     return true;
@@ -1582,11 +1582,11 @@ bool GcSafepoint(
     return true;
 }
 
-size_t ReportThreadRoot(
+CHAOS_IL2CPP_SIZE ReportThreadRoot(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     const void* root_address,
-    size_t root_size) {
+    CHAOS_IL2CPP_SIZE root_size) {
     if (!IsAttached(runtime_state, thread_state) || root_address == nullptr || root_size == 0u) {
         return 0u;
     }
@@ -1638,7 +1638,7 @@ bool EnqueueFinalizer(
     return true;
 }
 
-size_t DrainFinalizerQueue(RuntimeState* runtime_state) {
+CHAOS_IL2CPP_SIZE DrainFinalizerQueue(RuntimeState* runtime_state) {
     auto* runtime_internal_state = GetRuntimeInternalState(runtime_state);
     if (runtime_internal_state == nullptr) {
         return 0u;
@@ -1710,7 +1710,7 @@ void* MarshalPtrToStringUtf8(
         byte_count = CHAOS_IL2CPP_STRLEN(utf8_bytes);
     }
 
-    return StringNewUtf8(runtime_state, thread_state, utf8_bytes, static_cast<uintptr_t>(byte_count));
+    return StringNewUtf8(runtime_state, thread_state, utf8_bytes, static_cast<CHAOS_IL2CPP_UINTPTR>(byte_count));
 }
 
 CHAOS_IL2CPP_INTPTR MarshalStringToCoTaskMemUtf8(
@@ -1951,7 +1951,7 @@ bool CharIsWhiteSpaceLatin1(CHAOS_IL2CPP_UINT16 value) {
            value == 0xA0u;
 }
 
-int32_t CharCompare(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value) {
+CHAOS_IL2CPP_INT32 CharCompare(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value) {
     if (left_value < right_value) {
         return -1;
     }
@@ -2027,24 +2027,24 @@ static CHAOS_IL2CPP_UINT32 SingleGetHashCodeValue(float value) {
     return bits;
 }
 
-static int32_t HashCodeCombine2(CHAOS_IL2CPP_UINT32 hc1, CHAOS_IL2CPP_UINT32 hc2) {
+static CHAOS_IL2CPP_INT32 HashCodeCombine2(CHAOS_IL2CPP_UINT32 hc1, CHAOS_IL2CPP_UINT32 hc2) {
     CHAOS_IL2CPP_UINT32 hash = HashCodeMixEmptyState();
     hash += 8u;
     hash = HashCodeQueueRound(hash, hc1);
     hash = HashCodeQueueRound(hash, hc2);
-    return static_cast<int32_t>(HashCodeMixFinal(hash));
+    return static_cast<CHAOS_IL2CPP_INT32>(HashCodeMixFinal(hash));
 }
 
-static int32_t HashCodeCombine3(CHAOS_IL2CPP_UINT32 hc1, CHAOS_IL2CPP_UINT32 hc2, CHAOS_IL2CPP_UINT32 hc3) {
+static CHAOS_IL2CPP_INT32 HashCodeCombine3(CHAOS_IL2CPP_UINT32 hc1, CHAOS_IL2CPP_UINT32 hc2, CHAOS_IL2CPP_UINT32 hc3) {
     CHAOS_IL2CPP_UINT32 hash = HashCodeMixEmptyState();
     hash += 12u;
     hash = HashCodeQueueRound(hash, hc1);
     hash = HashCodeQueueRound(hash, hc2);
     hash = HashCodeQueueRound(hash, hc3);
-    return static_cast<int32_t>(HashCodeMixFinal(hash));
+    return static_cast<CHAOS_IL2CPP_INT32>(HashCodeMixFinal(hash));
 }
 
-static int32_t HashCodeCombine4(CHAOS_IL2CPP_UINT32 hc1, CHAOS_IL2CPP_UINT32 hc2, CHAOS_IL2CPP_UINT32 hc3, CHAOS_IL2CPP_UINT32 hc4) {
+static CHAOS_IL2CPP_INT32 HashCodeCombine4(CHAOS_IL2CPP_UINT32 hc1, CHAOS_IL2CPP_UINT32 hc2, CHAOS_IL2CPP_UINT32 hc3, CHAOS_IL2CPP_UINT32 hc4) {
     CHAOS_IL2CPP_UINT32 v1 = kHashCodeSeed + kHashCodePrime1 + kHashCodePrime2;
     CHAOS_IL2CPP_UINT32 v2 = kHashCodeSeed + kHashCodePrime2;
     CHAOS_IL2CPP_UINT32 v3 = kHashCodeSeed;
@@ -2057,7 +2057,7 @@ static int32_t HashCodeCombine4(CHAOS_IL2CPP_UINT32 hc1, CHAOS_IL2CPP_UINT32 hc2
 
     CHAOS_IL2CPP_UINT32 hash = HashCodeMixState(v1, v2, v3, v4);
     hash += 16u;
-    return static_cast<int32_t>(HashCodeMixFinal(hash));
+    return static_cast<CHAOS_IL2CPP_INT32>(HashCodeMixFinal(hash));
 }
 
 static float VectorMinElement(float left_value, float right_value) {
@@ -2189,7 +2189,7 @@ static float HalfToFloatValue(CHAOS_IL2CPP_UINT16 value) {
     return negative ? -result : result;
 }
 
-int32_t HalfCompare(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value) {
+CHAOS_IL2CPP_INT32 HalfCompare(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value) {
     const bool left_is_nan = HalfIsNaN(left_value);
     const bool right_is_nan = HalfIsNaN(right_value);
     if (left_is_nan && right_is_nan) {
@@ -2268,7 +2268,7 @@ bool HalfOperatorGreaterThanOrEqual(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP
 }
 
 template <typename T>
-static int32_t FloatingCompareGeneric(T left_value, T right_value) {
+static CHAOS_IL2CPP_INT32 FloatingCompareGeneric(T left_value, T right_value) {
     const bool left_is_nan = CHAOS_IL2CPP_ISNAN(left_value);
     const bool right_is_nan = CHAOS_IL2CPP_ISNAN(right_value);
     if (left_is_nan && right_is_nan) {
@@ -2369,7 +2369,7 @@ bool SingleIsInfinity(float value) {
         : SingleIsInfinityGeneric(value);
 }
 
-int32_t SingleCompare(float left_value, float right_value) {
+CHAOS_IL2CPP_INT32 SingleCompare(float left_value, float right_value) {
     return FloatingCompareGeneric(left_value, right_value);
 }
 
@@ -2476,7 +2476,7 @@ bool DoubleIsInfinity(double value) {
         : DoubleIsInfinityGeneric(value);
 }
 
-int32_t DoubleCompare(double left_value, double right_value) {
+CHAOS_IL2CPP_INT32 DoubleCompare(double left_value, double right_value) {
     return FloatingCompareGeneric(left_value, right_value);
 }
 
@@ -2546,7 +2546,7 @@ bool DoubleIsInteger(double value) {
 #define DEFINE_NFLOAT_BOOL_DELEGATE(name) \
     bool NFloat##name(double value) { return Double##name(value); }
 #define DEFINE_NFLOAT_CMP_DELEGATE(name) \
-    int32_t NFloat##name(double left, double right) { return Double##name(left, right); }
+    CHAOS_IL2CPP_INT32 NFloat##name(double left, double right) { return Double##name(left, right); }
 
 DEFINE_NFLOAT_BOOL_DELEGATE(IsFinite);
 DEFINE_NFLOAT_BOOL_DELEGATE(IsNaN);
@@ -2565,7 +2565,7 @@ DEFINE_NFLOAT_BOOL_DELEGATE(IsInteger);
 
 DEFINE_NFLOAT_CMP_DELEGATE(Compare);
 
-// Equals takes two doubles and returns bool (not int32_t), so it needs a
+// Equals takes two doubles and returns bool (not CHAOS_IL2CPP_INT32), so it needs a
 // dedicated definition rather than the CMP or BOOL macro.
 bool NFloatEquals(double left, double right) {
     return DoubleEquals(left, right);
@@ -2574,7 +2574,7 @@ bool NFloatEquals(double left, double right) {
 #undef DEFINE_NFLOAT_BOOL_DELEGATE
 #undef DEFINE_NFLOAT_CMP_DELEGATE
 
-static int32_t Int128CompareGeneric(const void* left_value, const void* right_value) {
+static CHAOS_IL2CPP_INT32 Int128CompareGeneric(const void* left_value, const void* right_value) {
     if (left_value == nullptr || right_value == nullptr) {
         return 0;
     }
@@ -2602,11 +2602,11 @@ static int32_t Int128CompareGeneric(const void* left_value, const void* right_va
     return 0;
 }
 
-static int32_t Int128CompareIntrinsicImpl(const void* left_value, const void* right_value) {
+static CHAOS_IL2CPP_INT32 Int128CompareIntrinsicImpl(const void* left_value, const void* right_value) {
     return Int128CompareGeneric(left_value, right_value);
 }
 
-int32_t Int128Compare(const void* left_value, const void* right_value) {
+CHAOS_IL2CPP_INT32 Int128Compare(const void* left_value, const void* right_value) {
     return kBitArithmeticKernelBackend == ValueTypeKernelBackendKind::Intrinsic
         ? Int128CompareIntrinsicImpl(left_value, right_value)
         : Int128CompareGeneric(left_value, right_value);
@@ -2616,7 +2616,7 @@ bool Int128Equals(const void* left_value, const void* right_value) {
     return Int128Compare(left_value, right_value) == 0;
 }
 
-static int32_t UInt128CompareGeneric(const void* left_value, const void* right_value) {
+static CHAOS_IL2CPP_INT32 UInt128CompareGeneric(const void* left_value, const void* right_value) {
     if (left_value == nullptr || right_value == nullptr) {
         return 0;
     }
@@ -2644,11 +2644,11 @@ static int32_t UInt128CompareGeneric(const void* left_value, const void* right_v
     return 0;
 }
 
-static int32_t UInt128CompareIntrinsicImpl(const void* left_value, const void* right_value) {
+static CHAOS_IL2CPP_INT32 UInt128CompareIntrinsicImpl(const void* left_value, const void* right_value) {
     return UInt128CompareGeneric(left_value, right_value);
 }
 
-int32_t UInt128Compare(const void* left_value, const void* right_value) {
+CHAOS_IL2CPP_INT32 UInt128Compare(const void* left_value, const void* right_value) {
     return kBitArithmeticKernelBackend == ValueTypeKernelBackendKind::Intrinsic
         ? UInt128CompareIntrinsicImpl(left_value, right_value)
         : UInt128CompareGeneric(left_value, right_value);
@@ -2658,7 +2658,7 @@ bool UInt128Equals(const void* left_value, const void* right_value) {
     return UInt128Compare(left_value, right_value) == 0;
 }
 
-int32_t IntPtrCompare(CHAOS_IL2CPP_INTPTR left_value, CHAOS_IL2CPP_INTPTR right_value) {
+CHAOS_IL2CPP_INT32 IntPtrCompare(CHAOS_IL2CPP_INTPTR left_value, CHAOS_IL2CPP_INTPTR right_value) {
     if (left_value < right_value) {
         return -1;
     }
@@ -2674,7 +2674,7 @@ bool IntPtrEquals(CHAOS_IL2CPP_INTPTR left_value, CHAOS_IL2CPP_INTPTR right_valu
     return left_value == right_value;
 }
 
-int32_t UIntPtrCompare(CHAOS_IL2CPP_UINTPTR left_value, CHAOS_IL2CPP_UINTPTR right_value) {
+CHAOS_IL2CPP_INT32 UIntPtrCompare(CHAOS_IL2CPP_UINTPTR left_value, CHAOS_IL2CPP_UINTPTR right_value) {
     if (left_value < right_value) {
         return -1;
     }
@@ -2690,7 +2690,7 @@ bool UIntPtrEquals(CHAOS_IL2CPP_UINTPTR left_value, CHAOS_IL2CPP_UINTPTR right_v
     return left_value == right_value;
 }
 
-int32_t DateTimeCompareTicks(const void* left_value, const void* right_value) {
+CHAOS_IL2CPP_INT32 DateTimeCompareTicks(const void* left_value, const void* right_value) {
     if (left_value == nullptr || right_value == nullptr) {
         return 0;
     }
@@ -2716,7 +2716,7 @@ bool DateTimeEqualsTicks(const void* left_value, const void* right_value) {
     return DateTimeCompareTicks(left_value, right_value) == 0;
 }
 
-int32_t TimeSpanCompareTicks(const void* left_value, const void* right_value) {
+CHAOS_IL2CPP_INT32 TimeSpanCompareTicks(const void* left_value, const void* right_value) {
     if (left_value == nullptr || right_value == nullptr) {
         return 0;
     }
@@ -2740,7 +2740,7 @@ bool TimeSpanEqualsTicks(const void* left_value, const void* right_value) {
     return TimeSpanCompareTicks(left_value, right_value) == 0;
 }
 
-int32_t DateOnlyCompareDayNumber(CHAOS_IL2CPP_INT32 left_value, CHAOS_IL2CPP_INT32 right_value) {
+CHAOS_IL2CPP_INT32 DateOnlyCompareDayNumber(CHAOS_IL2CPP_INT32 left_value, CHAOS_IL2CPP_INT32 right_value) {
     if (left_value < right_value) {
         return -1;
     }
@@ -2756,7 +2756,7 @@ bool DateOnlyEqualsDayNumber(CHAOS_IL2CPP_INT32 left_value, CHAOS_IL2CPP_INT32 r
     return left_value == right_value;
 }
 
-int32_t TimeOnlyCompareTicksValue(CHAOS_IL2CPP_INT64 left_value, CHAOS_IL2CPP_INT64 right_value) {
+CHAOS_IL2CPP_INT32 TimeOnlyCompareTicksValue(CHAOS_IL2CPP_INT64 left_value, CHAOS_IL2CPP_INT64 right_value) {
     if (left_value < right_value) {
         return -1;
     }
@@ -2958,7 +2958,7 @@ bool Vector2Equals(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVect
            left_value.y == right_value.y;
 }
 
-int32_t Vector2GetHashCode(RuntimeNumericsVector2Carrier value) {
+CHAOS_IL2CPP_INT32 Vector2GetHashCode(RuntimeNumericsVector2Carrier value) {
     return HashCodeCombine2(
         SingleGetHashCodeValue(value.x),
         SingleGetHashCodeValue(value.y));
@@ -3142,7 +3142,7 @@ bool Vector3Equals(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVect
            left_value.z == right_value.z;
 }
 
-int32_t Vector3GetHashCode(RuntimeNumericsVector3Carrier value) {
+CHAOS_IL2CPP_INT32 Vector3GetHashCode(RuntimeNumericsVector3Carrier value) {
     return HashCodeCombine3(
         SingleGetHashCodeValue(value.x),
         SingleGetHashCodeValue(value.y),
@@ -3323,7 +3323,7 @@ bool Vector4Equals(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVect
            left_value.w == right_value.w;
 }
 
-int32_t Vector4GetHashCode(RuntimeNumericsVector4Carrier value) {
+CHAOS_IL2CPP_INT32 Vector4GetHashCode(RuntimeNumericsVector4Carrier value) {
     return HashCodeCombine4(
         SingleGetHashCodeValue(value.x),
         SingleGetHashCodeValue(value.y),

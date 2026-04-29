@@ -3,9 +3,7 @@
 #include "codegen_bridge.h"
 #include "runtime_core.h"
 #include <atomic>
-#include <cstddef>
-#include <cstdint>
-#include <cstring>
+#include <chaos/native_types.h>
 
 namespace chaos::il2cpp::generated::runtime_skeleton
 {
@@ -13,7 +11,7 @@ constexpr const char* kRuntimeExecutionKind = {{ runtime_execution_kind_literal 
 constexpr CHAOS_IL2CPP_SIZE translation_unit_page_number = {{ page_number }};
 constexpr CHAOS_IL2CPP_SIZE translation_unit_page_item_count = {{ page_item_count }};
 
-using NativeReferenceAssemblyStubFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+using NativeReferenceAssemblyStubFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -88,7 +86,7 @@ struct RuntimeSkeletonFieldBindingState
     CHAOS_IL2CPP_ATOMIC(const char*) image_name;
     CHAOS_IL2CPP_ATOMIC(void*) reference_type;
     CHAOS_IL2CPP_ATOMIC(void*) captured_field;
-    CHAOS_IL2CPP_ATOMIC(int32_t) class_init_status;
+    CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_INT32) class_init_status;
 };
 
 struct RuntimeSkeletonConstructorFieldSetterDescriptor
@@ -171,7 +169,7 @@ struct RuntimeSkeletonArrayBoxingReferenceArrayDescriptor
     const char* concat_icall;
     const char* string_concat_triple_icall;
     const char* console_write_line_string_icall;
-    int32_t boxed_int32_value;
+    CHAOS_IL2CPP_INT32 boxed_int32_value;
     const char* constructor_literal;
     CHAOS_IL2CPP_UINT32 constructor_literal_byte_count;
     const char* message_prefix_literal;
@@ -350,7 +348,7 @@ constexpr RuntimeSkeletonArrayClearReferenceArrayDescriptor kPageArrayClearRefer
 };
 constexpr CHAOS_IL2CPP_SIZE kPageArrayClearReferenceArrayDescriptorCount = {{ array_clear_reference_array_descriptor_count }};
 
-const RuntimeAbiV0* TryGetRuntimeSkeletonAbi(int32_t* status)
+const RuntimeAbiV0* TryGetRuntimeSkeletonAbi(CHAOS_IL2CPP_INT32* status)
 {
     const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
     if (abi == nullptr) {
@@ -371,7 +369,7 @@ const char* ResolveRuntimeSkeletonImageName(
         : fallback_assembly_name;
 }
 
-int32_t ResolveRuntimeSkeletonType(
+CHAOS_IL2CPP_INT32 ResolveRuntimeSkeletonType(
     const CodegenBridgeV0* bridge,
     const CodegenRegistrationOptionsV0* options,
     RuntimeSkeletonTypeCacheEntry* cache,
@@ -402,7 +400,7 @@ int32_t ResolveRuntimeSkeletonType(
     return CHAOS_BRIDGE_STATUS_OK;
 }
 
-int32_t ResolveRuntimeSkeletonType(
+CHAOS_IL2CPP_INT32 ResolveRuntimeSkeletonType(
     const CodegenBridgeV0* bridge,
     const CodegenRegistrationOptionsV0* options,
     CHAOS_IL2CPP_UINT32 descriptor_index,
@@ -440,7 +438,7 @@ int32_t ResolveRuntimeSkeletonType(
     return CHAOS_BRIDGE_STATUS_OK;
 }
 
-int32_t ResolveRuntimeSkeletonFieldBinding(
+CHAOS_IL2CPP_INT32 ResolveRuntimeSkeletonFieldBinding(
     const CodegenBridgeV0* bridge,
     const CodegenRegistrationOptionsV0* options,
     RuntimeSkeletonFieldBindingCacheEntry* cache,
@@ -477,7 +475,7 @@ int32_t ResolveRuntimeSkeletonFieldBinding(
     return CHAOS_BRIDGE_STATUS_OK;
 }
 
-int32_t ResolveRuntimeSkeletonFieldBinding(
+CHAOS_IL2CPP_INT32 ResolveRuntimeSkeletonFieldBinding(
     const CodegenBridgeV0* bridge,
     const CodegenRegistrationOptionsV0* options,
     CHAOS_IL2CPP_UINT32 descriptor_index,
@@ -523,7 +521,7 @@ int32_t ResolveRuntimeSkeletonFieldBinding(
     return CHAOS_BRIDGE_STATUS_OK;
 }
 
-int32_t EnsureRuntimeSkeletonClassInitialized(
+CHAOS_IL2CPP_INT32 EnsureRuntimeSkeletonClassInitialized(
     const RuntimeAbiV0* abi,
     RuntimeState* runtime,
     TypeInfoHandle reference_type)
@@ -537,7 +535,7 @@ int32_t EnsureRuntimeSkeletonClassInitialized(
         : CHAOS_BRIDGE_STATUS_CLASS_INIT_FAILED;
 }
 
-int32_t EnsureRuntimeSkeletonFieldBindingClassInitialized(
+CHAOS_IL2CPP_INT32 EnsureRuntimeSkeletonFieldBindingClassInitialized(
     const RuntimeAbiV0* abi,
     RuntimeState* runtime,
     CHAOS_IL2CPP_UINT32 descriptor_index,
@@ -552,15 +550,15 @@ int32_t EnsureRuntimeSkeletonFieldBindingClassInitialized(
     }
 
     auto& state = gPageFieldBindingStates[descriptor_index];
-    const int32_t cached_status = state.class_init_status.load(CHAOS_IL2CPP_MEMORY_ORDER_ACQUIRE);
+    const CHAOS_IL2CPP_INT32 cached_status = state.class_init_status.load(CHAOS_IL2CPP_MEMORY_ORDER_ACQUIRE);
     if (cached_status != 0) {
         return cached_status;
     }
 
-    const int32_t class_init_status = abi->class_init(runtime, reference_type) == CHAOS_RUNTIME_STATUS_OK
+    const CHAOS_IL2CPP_INT32 class_init_status = abi->class_init(runtime, reference_type) == CHAOS_RUNTIME_STATUS_OK
         ? CHAOS_BRIDGE_STATUS_OK
         : CHAOS_BRIDGE_STATUS_CLASS_INIT_FAILED;
-    int32_t expected = 0;
+    CHAOS_IL2CPP_INT32 expected = 0;
     state.class_init_status.compare_exchange_strong(
         expected,
         class_init_status,
@@ -571,7 +569,7 @@ int32_t EnsureRuntimeSkeletonFieldBindingClassInitialized(
         : expected;
 }
 
-int32_t ExecuteRuntimeSkeletonConstructorFieldSetter(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonConstructorFieldSetter(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -589,7 +587,7 @@ int32_t ExecuteRuntimeSkeletonConstructorFieldSetter(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -597,7 +595,7 @@ int32_t ExecuteRuntimeSkeletonConstructorFieldSetter(
 
     TypeInfoHandle reference_type = nullptr;
     FieldInfoHandle captured_field = nullptr;
-    const int32_t binding_status = ResolveRuntimeSkeletonFieldBinding(
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
         bridge,
         options,
         descriptor_index,
@@ -607,7 +605,7 @@ int32_t ExecuteRuntimeSkeletonConstructorFieldSetter(
         return binding_status;
     }
 
-    const int32_t class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
         abi,
         runtime,
         descriptor_index,
@@ -621,7 +619,7 @@ int32_t ExecuteRuntimeSkeletonConstructorFieldSetter(
         : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
 }
 
-int32_t ExecuteRuntimeSkeletonFieldGetterStringReturn(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonFieldGetterStringReturn(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -638,7 +636,7 @@ int32_t ExecuteRuntimeSkeletonFieldGetterStringReturn(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -646,7 +644,7 @@ int32_t ExecuteRuntimeSkeletonFieldGetterStringReturn(
 
     TypeInfoHandle reference_type = nullptr;
     FieldInfoHandle captured_field = nullptr;
-    const int32_t binding_status = ResolveRuntimeSkeletonFieldBinding(
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
         bridge,
         options,
         descriptor_index,
@@ -656,7 +654,7 @@ int32_t ExecuteRuntimeSkeletonFieldGetterStringReturn(
         return binding_status;
     }
 
-    const int32_t class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
         abi,
         runtime,
         descriptor_index,
@@ -680,7 +678,7 @@ int32_t ExecuteRuntimeSkeletonFieldGetterStringReturn(
     return CHAOS_BRIDGE_STATUS_OK;
 }
 
-int32_t ExecuteRuntimeSkeletonFieldBackedStringReturn(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonFieldBackedStringReturn(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -701,7 +699,7 @@ int32_t ExecuteRuntimeSkeletonFieldBackedStringReturn(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -710,7 +708,7 @@ int32_t ExecuteRuntimeSkeletonFieldBackedStringReturn(
     const auto& descriptor = kPageFieldBackedStringReturnDescriptors[descriptor_index];
     TypeInfoHandle reference_type = nullptr;
     FieldInfoHandle captured_field = nullptr;
-    const int32_t binding_status = ResolveRuntimeSkeletonFieldBinding(
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
         bridge,
         options,
         descriptor.field_binding_index,
@@ -720,7 +718,7 @@ int32_t ExecuteRuntimeSkeletonFieldBackedStringReturn(
         return binding_status;
     }
 
-    const int32_t class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
         abi,
         runtime,
         descriptor.field_binding_index,
@@ -779,7 +777,7 @@ int32_t ExecuteRuntimeSkeletonFieldBackedStringReturn(
     return CHAOS_BRIDGE_STATUS_OK;
 }
 
-int32_t ExecuteRuntimeSkeletonFieldArgumentStringReturn(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonFieldArgumentStringReturn(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -801,7 +799,7 @@ int32_t ExecuteRuntimeSkeletonFieldArgumentStringReturn(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -810,7 +808,7 @@ int32_t ExecuteRuntimeSkeletonFieldArgumentStringReturn(
     const auto& descriptor = kPageFieldArgumentStringReturnDescriptors[descriptor_index];
     TypeInfoHandle reference_type = nullptr;
     FieldInfoHandle captured_field = nullptr;
-    const int32_t binding_status = ResolveRuntimeSkeletonFieldBinding(
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
         bridge,
         options,
         descriptor.field_binding_index,
@@ -820,7 +818,7 @@ int32_t ExecuteRuntimeSkeletonFieldArgumentStringReturn(
         return binding_status;
     }
 
-    const int32_t class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
         abi,
         runtime,
         descriptor.field_binding_index,
@@ -866,7 +864,7 @@ int32_t ExecuteRuntimeSkeletonFieldArgumentStringReturn(
     return CHAOS_BRIDGE_STATUS_OK;
 }
 
-int32_t ExecuteRuntimeSkeletonStaticCallCtorGetter(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonStaticCallCtorGetter(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -883,7 +881,7 @@ int32_t ExecuteRuntimeSkeletonStaticCallCtorGetter(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -892,7 +890,7 @@ int32_t ExecuteRuntimeSkeletonStaticCallCtorGetter(
     const auto& descriptor = kPageStaticCallCtorGetterDescriptors[descriptor_index];
     TypeInfoHandle reference_type = nullptr;
     FieldInfoHandle captured_field = nullptr;
-    const int32_t binding_status = ResolveRuntimeSkeletonFieldBinding(
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
         bridge,
         options,
         descriptor.field_binding_index,
@@ -902,7 +900,7 @@ int32_t ExecuteRuntimeSkeletonStaticCallCtorGetter(
         return binding_status;
     }
 
-    const int32_t class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
         abi,
         runtime,
         descriptor.field_binding_index,
@@ -911,7 +909,7 @@ int32_t ExecuteRuntimeSkeletonStaticCallCtorGetter(
         return class_init_status;
     }
 
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
     if (raw_write_line_string == nullptr) {
         return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
@@ -928,7 +926,7 @@ int32_t ExecuteRuntimeSkeletonStaticCallCtorGetter(
         return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
     }
 
-    const int32_t setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
         bridge,
         code_registration,
         metadata_registration,
@@ -944,7 +942,7 @@ int32_t ExecuteRuntimeSkeletonStaticCallCtorGetter(
     }
 
     void* message = nullptr;
-    const int32_t getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
         bridge,
         code_registration,
         metadata_registration,
@@ -963,7 +961,7 @@ int32_t ExecuteRuntimeSkeletonStaticCallCtorGetter(
         : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
 }
 
-int32_t ExecuteRuntimeSkeletonConstructorThenInstanceCall(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonConstructorThenInstanceCall(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -980,7 +978,7 @@ int32_t ExecuteRuntimeSkeletonConstructorThenInstanceCall(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -989,7 +987,7 @@ int32_t ExecuteRuntimeSkeletonConstructorThenInstanceCall(
     const auto& descriptor = kPageArrayCopyReferenceArrayDescriptors[descriptor_index];
     TypeInfoHandle reference_type = nullptr;
     FieldInfoHandle captured_field = nullptr;
-    const int32_t binding_status = ResolveRuntimeSkeletonFieldBinding(
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
         bridge,
         options,
         descriptor.field_binding_index,
@@ -999,7 +997,7 @@ int32_t ExecuteRuntimeSkeletonConstructorThenInstanceCall(
         return binding_status;
     }
 
-    const int32_t class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
         abi,
         runtime,
         descriptor.field_binding_index,
@@ -1008,7 +1006,7 @@ int32_t ExecuteRuntimeSkeletonConstructorThenInstanceCall(
         return class_init_status;
     }
 
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
     if (raw_write_line_string == nullptr) {
         return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
@@ -1025,7 +1023,7 @@ int32_t ExecuteRuntimeSkeletonConstructorThenInstanceCall(
         return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
     }
 
-    const int32_t setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
         bridge,
         code_registration,
         metadata_registration,
@@ -1041,7 +1039,7 @@ int32_t ExecuteRuntimeSkeletonConstructorThenInstanceCall(
     }
 
     void* captured_value = nullptr;
-    const int32_t getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
         bridge,
         code_registration,
         metadata_registration,
@@ -1095,7 +1093,7 @@ int32_t ExecuteRuntimeSkeletonConstructorThenInstanceCall(
         : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
 }
 
-int32_t ExecuteRuntimeSkeletonStaticStringLiteralAppend(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonStaticStringLiteralAppend(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -1116,7 +1114,7 @@ int32_t ExecuteRuntimeSkeletonStaticStringLiteralAppend(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -1144,7 +1142,7 @@ int32_t ExecuteRuntimeSkeletonStaticStringLiteralAppend(
     return CHAOS_BRIDGE_STATUS_OK;
 }
 
-int32_t ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -1161,7 +1159,7 @@ int32_t ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -1170,7 +1168,7 @@ int32_t ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
     const auto& descriptor = kPageDelegateClosedTargetRelayDescriptors[descriptor_index];
     TypeInfoHandle reference_type = nullptr;
     FieldInfoHandle captured_field = nullptr;
-    const int32_t binding_status = ResolveRuntimeSkeletonFieldBinding(
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
         bridge,
         options,
         descriptor.field_binding_index,
@@ -1180,7 +1178,7 @@ int32_t ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
         return binding_status;
     }
 
-    const int32_t class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
         abi,
         runtime,
         descriptor.field_binding_index,
@@ -1190,7 +1188,7 @@ int32_t ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
     }
 
     using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
     void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
     if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
@@ -1219,7 +1217,7 @@ int32_t ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
         return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
     }
 
-    const int32_t setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
         bridge,
         code_registration,
         metadata_registration,
@@ -1235,7 +1233,7 @@ int32_t ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
     }
 
     void* captured_value = nullptr;
-    const int32_t getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
         bridge,
         code_registration,
         metadata_registration,
@@ -1274,7 +1272,7 @@ int32_t ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
         : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
 }
 
-int32_t ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -1291,7 +1289,7 @@ int32_t ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -1300,7 +1298,7 @@ int32_t ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
     const auto& descriptor = kPageArrayBoxingReferenceArrayDescriptors[descriptor_index];
     TypeInfoHandle reference_type = nullptr;
     FieldInfoHandle captured_field = nullptr;
-    const int32_t binding_status = ResolveRuntimeSkeletonFieldBinding(
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
         bridge,
         options,
         descriptor.field_binding_index,
@@ -1311,7 +1309,7 @@ int32_t ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
     }
 
     TypeInfoHandle boxed_value_type = nullptr;
-    const int32_t boxed_type_status = ResolveRuntimeSkeletonType(
+    const CHAOS_IL2CPP_INT32 boxed_type_status = ResolveRuntimeSkeletonType(
         bridge,
         options,
         descriptor.boxed_value_type_index,
@@ -1320,7 +1318,7 @@ int32_t ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
         return boxed_type_status;
     }
 
-    const int32_t class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
         abi,
         runtime,
         descriptor.field_binding_index,
@@ -1331,7 +1329,7 @@ int32_t ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
 
     using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
     using ConcatStringTripleFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* first_string, const void* second_string, const void* third_string);
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
     void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
     if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
@@ -1339,7 +1337,7 @@ int32_t ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
     }
 
     const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
-    const int32_t boxed_input = descriptor.boxed_int32_value;
+    const CHAOS_IL2CPP_INT32 boxed_input = descriptor.boxed_int32_value;
     void* boxed_value = bridge->box_value(runtime, thread, boxed_value_type, &boxed_input, sizeof(boxed_input));
     if (boxed_value == nullptr) {
         return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
@@ -1360,7 +1358,7 @@ int32_t ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
         return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
     }
 
-    const int32_t setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
         bridge,
         code_registration,
         metadata_registration,
@@ -1385,7 +1383,7 @@ int32_t ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
     }
 
     void* captured_value = nullptr;
-    const int32_t getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
         bridge,
         code_registration,
         metadata_registration,
@@ -1433,7 +1431,7 @@ int32_t ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
         : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
 }
 
-int32_t ExecuteRuntimeSkeletonArrayReverseReferenceArray(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonArrayReverseReferenceArray(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -1450,7 +1448,7 @@ int32_t ExecuteRuntimeSkeletonArrayReverseReferenceArray(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -1459,7 +1457,7 @@ int32_t ExecuteRuntimeSkeletonArrayReverseReferenceArray(
     const auto& descriptor = kPageArrayReverseReferenceArrayDescriptors[descriptor_index];
     TypeInfoHandle reference_type = nullptr;
     FieldInfoHandle captured_field = nullptr;
-    const int32_t binding_status = ResolveRuntimeSkeletonFieldBinding(
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
         bridge,
         options,
         descriptor.field_binding_index,
@@ -1469,7 +1467,7 @@ int32_t ExecuteRuntimeSkeletonArrayReverseReferenceArray(
         return binding_status;
     }
 
-    const int32_t class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
         abi,
         runtime,
         descriptor.field_binding_index,
@@ -1480,7 +1478,7 @@ int32_t ExecuteRuntimeSkeletonArrayReverseReferenceArray(
 
     using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
     using ConcatStringTripleFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* first_string, const void* second_string, const void* third_string);
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
     void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
     if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
@@ -1503,7 +1501,7 @@ int32_t ExecuteRuntimeSkeletonArrayReverseReferenceArray(
         return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
     }
 
-    const int32_t setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
         bridge,
         code_registration,
         metadata_registration,
@@ -1535,7 +1533,7 @@ int32_t ExecuteRuntimeSkeletonArrayReverseReferenceArray(
     }
 
     void* captured_value = nullptr;
-    const int32_t getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
         bridge,
         code_registration,
         metadata_registration,
@@ -1582,7 +1580,7 @@ int32_t ExecuteRuntimeSkeletonArrayReverseReferenceArray(
         : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
 }
 
-int32_t ExecuteRuntimeSkeletonArrayCopyReferenceArray(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonArrayCopyReferenceArray(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -1599,7 +1597,7 @@ int32_t ExecuteRuntimeSkeletonArrayCopyReferenceArray(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -1608,7 +1606,7 @@ int32_t ExecuteRuntimeSkeletonArrayCopyReferenceArray(
     const auto& descriptor = kPageArrayCopyReferenceArrayDescriptors[descriptor_index];
     TypeInfoHandle reference_type = nullptr;
     FieldInfoHandle captured_field = nullptr;
-    const int32_t binding_status = ResolveRuntimeSkeletonFieldBinding(
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
         bridge,
         options,
         descriptor.field_binding_index,
@@ -1618,7 +1616,7 @@ int32_t ExecuteRuntimeSkeletonArrayCopyReferenceArray(
         return binding_status;
     }
 
-    const int32_t class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
         abi,
         runtime,
         descriptor.field_binding_index,
@@ -1629,7 +1627,7 @@ int32_t ExecuteRuntimeSkeletonArrayCopyReferenceArray(
 
     using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
     using ConcatStringTripleFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* first_string, const void* second_string, const void* third_string);
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
     void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
     if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
@@ -1657,7 +1655,7 @@ int32_t ExecuteRuntimeSkeletonArrayCopyReferenceArray(
         return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
     }
 
-    const int32_t setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
         bridge,
         code_registration,
         metadata_registration,
@@ -1691,7 +1689,7 @@ int32_t ExecuteRuntimeSkeletonArrayCopyReferenceArray(
     }
 
     void* captured_value = nullptr;
-    const int32_t getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
         bridge,
         code_registration,
         metadata_registration,
@@ -1738,7 +1736,7 @@ int32_t ExecuteRuntimeSkeletonArrayCopyReferenceArray(
         : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
 }
 
-int32_t ExecuteRuntimeSkeletonArrayClearReferenceArray(
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonArrayClearReferenceArray(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -1758,7 +1756,7 @@ int32_t ExecuteRuntimeSkeletonArrayClearReferenceArray(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    int32_t abi_status = CHAOS_BRIDGE_STATUS_OK;
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
     const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
     if (abi == nullptr) {
         return abi_status;
@@ -1766,7 +1764,7 @@ int32_t ExecuteRuntimeSkeletonArrayClearReferenceArray(
 
     const auto& descriptor = kPageArrayClearReferenceArrayDescriptors[descriptor_index];
     TypeInfoHandle string_type = nullptr;
-    const int32_t type_status = ResolveRuntimeSkeletonType(
+    const CHAOS_IL2CPP_INT32 type_status = ResolveRuntimeSkeletonType(
         bridge,
         options,
         descriptor.string_type_index,
@@ -1780,7 +1778,7 @@ int32_t ExecuteRuntimeSkeletonArrayClearReferenceArray(
     }
 
     using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
     void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
     void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
     if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
@@ -1853,7 +1851,7 @@ constexpr NativeReferenceAssemblyStubFn kPageMethodDispatch[] =
 {{ end ~}}
 };
 
-int32_t CHAOS_RUNTIME_ABI_CALL {{ page_dispatch_function_name }}(
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ page_dispatch_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
