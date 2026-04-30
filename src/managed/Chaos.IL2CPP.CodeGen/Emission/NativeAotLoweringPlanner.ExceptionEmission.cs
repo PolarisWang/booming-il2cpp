@@ -34,7 +34,7 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendLiteral(";");
 		stringBuilder2.AppendLine(ref handler);
 		builder.AppendLine();
-		EmitInstructionRange(builder, method, catchOnlyShape.TryInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, catchOnlyShape.TryInstructions, nextOffsetsByIlOffset, offsets);
 		builder.AppendLine("    }");
 		builder.AppendLine("    catch (const chaos_managed_exception& chaos_exception)");
 		builder.AppendLine("    {");
@@ -62,10 +62,10 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendLiteral(";");
 		stringBuilder4.AppendLine(ref handler);
 		builder.AppendLine();
-		EmitInstructionRange(builder, method, catchOnlyShape.HandlerInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, catchOnlyShape.HandlerInstructions, nextOffsetsByIlOffset, offsets);
 		builder.AppendLine("    }");
 		builder.AppendLine();
-		EmitInstructionRange(builder, method, catchOnlyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, catchOnlyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
 	}
 
 	private void EmitFilterOnlyExceptionMethodBody(StringBuilder builder, AotCoreIrMethodArtifact method, FilterOnlyExceptionMethodShape filterOnlyShape, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
@@ -77,7 +77,7 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		EmitFilterTryCatchCore(builder, method, filterOnlyShape.TryInstructions, filterOnlyShape.FilterInstructions, filterOnlyShape.HandlerInstructions, nextOffsetsByIlOffset, offsets, "    ");
 		builder.AppendLine();
-		EmitInstructionRange(builder, method, filterOnlyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, filterOnlyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
 	}
 
 	private void EmitCatchAndFinallyExceptionMethodBody(StringBuilder builder, AotCoreIrMethodArtifact method, CatchAndFinallyExceptionMethodShape catchAndFinallyShape, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
@@ -89,12 +89,12 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		EmitCatchAndFinallyOuterFinallyScopes(builder, method, catchAndFinallyShape, 0, nextOffsetsByIlOffset, offsets);
 		builder.AppendLine();
-		EmitInstructionRange(builder, method, catchAndFinallyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, catchAndFinallyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
 	}
 
 	private void EmitFinallyOnlyExceptionMethodBody(StringBuilder builder, AotCoreIrMethodArtifact method, FinallyOnlyExceptionMethodShape finallyOnlyShape, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
 	{
-		EmitInstructionRange(builder, method, finallyOnlyShape.PrefixInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, finallyOnlyShape.PrefixInstructions, nextOffsetsByIlOffset, offsets);
 		if (finallyOnlyShape.PrefixInstructions.Count > 0)
 		{
 			builder.AppendLine();
@@ -106,7 +106,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine(ref handler);
 		EmitFinallyOnlyScopes(builder, method, finallyOnlyShape, 0, nextOffsetsByIlOffset, offsets);
 		builder.AppendLine();
-		EmitInstructionRange(builder, method, finallyOnlyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, finallyOnlyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
 	}
 
 	private void EmitFinallyOnlyScopes(StringBuilder builder, AotCoreIrMethodArtifact method, FinallyOnlyExceptionMethodShape finallyOnlyShape, int finallyIndex, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
@@ -119,7 +119,7 @@ public sealed partial class NativeAotLoweringPlanner
 			if (finallyOnlyShape.TryInstructions.Count > 1)
 			{
 				builder.AppendLine();
-				EmitInstructionRange(builder, method, finallyOnlyShape.TryInstructions.Skip(1).ToArray(), nextOffsetsByIlOffset, offsets);
+				EmitStructuredInstructionRange(builder, method, finallyOnlyShape.TryInstructions.Skip(1).ToArray(), nextOffsetsByIlOffset, offsets);
 			}
 		}
 		else
@@ -179,7 +179,7 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendLiteral(";");
 			stringBuilder2.AppendLine(ref handler);
 			builder.AppendLine();
-			EmitInstructionRange(builder, method, catchAndFinallyShape.InnerTryInstructions, nextOffsetsByIlOffset, offsets);
+			EmitStructuredInstructionRange(builder, method, catchAndFinallyShape.InnerTryInstructions, nextOffsetsByIlOffset, offsets);
 		}
 		else
 		{
@@ -196,12 +196,12 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendLiteral(";");
 			stringBuilder3.AppendLine(ref handler);
 			builder.AppendLine();
-			EmitInstructionRange(builder, method, catchAndFinallyShape.InnerTryInstructions, nextOffsetsByIlOffset, offsets);
+			EmitStructuredInstructionRange(builder, method, catchAndFinallyShape.InnerTryInstructions, nextOffsetsByIlOffset, offsets);
 			builder.AppendLine("            }");
 			if (catchAndFinallyShape.PostInnerTryInstructions.Count > 0)
 			{
 				builder.AppendLine();
-				EmitInstructionRange(builder, method, catchAndFinallyShape.PostInnerTryInstructions, nextOffsetsByIlOffset, offsets);
+				EmitStructuredInstructionRange(builder, method, catchAndFinallyShape.PostInnerTryInstructions, nextOffsetsByIlOffset, offsets);
 			}
 		}
 		builder.AppendLine("        }");
@@ -231,7 +231,7 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendLiteral(";");
 		stringBuilder5.AppendLine(ref handler);
 		builder.AppendLine();
-		EmitInstructionRange(builder, method, catchAndFinallyShape.HandlerInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, catchAndFinallyShape.HandlerInstructions, nextOffsetsByIlOffset, offsets);
 		builder.AppendLine("        }");
 	}
 
@@ -244,7 +244,7 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		EmitNestedFinallyScopes(builder, method, filterAndFinallyShape, 0, nextOffsetsByIlOffset, offsets);
 		builder.AppendLine();
-		EmitInstructionRange(builder, method, filterAndFinallyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, filterAndFinallyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
 	}
 
 	private void EmitNestedFinallyScopes(StringBuilder builder, AotCoreIrMethodArtifact method, FilterAndFinallyExceptionMethodShape filterAndFinallyShape, int finallyIndex, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
@@ -295,7 +295,7 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendLiteral(";");
 		stringBuilder4.AppendLine(ref handler);
 		builder.AppendLine();
-		EmitInstructionRange(builder, method, tryInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, tryInstructions, nextOffsetsByIlOffset, offsets);
 		stringBuilder = builder;
 		StringBuilder stringBuilder5 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder);
@@ -372,7 +372,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			builder.AppendLine();
 		}
-		EmitInstructionRange(builder, method, handlerInstructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, handlerInstructions, nextOffsetsByIlOffset, offsets);
 	}
 
 	private void EmitLinearInstructionSequence(StringBuilder builder, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, string indentation)
@@ -509,6 +509,16 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendLiteral("chaos_locals[");
 			handler.AppendFormatted(GetRequiredIntOperand(instruction));
 			handler.AppendLiteral("] = chaos_eval_stack[--chaos_stack_top];");
+			stringBuilder8.AppendLine(ref handler);
+			break;
+		}
+		case "pop":
+		{
+			StringBuilder stringBuilder = builder;
+			StringBuilder stringBuilder8 = stringBuilder;
+			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(31, 1, stringBuilder);
+			handler.AppendFormatted(indentation);
+			handler.AppendLiteral("chaos_stack_top--;");
 			stringBuilder8.AppendLine(ref handler);
 			break;
 		}
