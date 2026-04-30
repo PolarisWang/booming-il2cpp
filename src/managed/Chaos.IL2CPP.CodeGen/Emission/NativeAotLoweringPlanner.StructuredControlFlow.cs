@@ -28,6 +28,7 @@ public sealed partial class NativeAotLoweringPlanner
     private sealed record ControlFlowGraph(
         IReadOnlyList<BasicBlock> Blocks,
         IReadOnlyDictionary<int, int> OffsetToBlockIndex,
+        IReadOnlyDictionary<int, NaturalLoopInfo> LoopHeaders,
         bool IsReducible);
 
     // Structured node tree
@@ -44,6 +45,21 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyDictionary<int, StructuredNode> CaseBodies,
         StructuredNode? DefaultBody,
         int? MergeOffset) : StructuredNode;
+
+    private sealed record LoopNode(
+        BasicBlock HeaderBlock,
+        StructuredNode Body,
+        int? ExitOffset,
+        bool IsWhile,
+        BasicBlock? LatchBlock) : StructuredNode;
+
+    private sealed record NaturalLoopInfo(
+        int HeaderIndex,
+        HashSet<int> BodyIndices,
+        HashSet<int> LatchIndices);
+
+    // Break/continue context stack
+    private static readonly Stack<(int headerOffset, int exitOffset)> LoopContextStack = new();
 
     // ──────────────────────────────────────────────
     // CFG Construction
@@ -223,119 +239,287 @@ public sealed partial class NativeAotLoweringPlanner
         for (int i = 0; i < blocks.Count; i++)
             offsetToBlockIndex[blocks[i].StartOffset] = i;
 
-        // Check reducibility: the CFG is reducible if every block (apart from entry)
-        // has a unique path structure that doesn't create irreducible loops.
-        // We use a simpler check: no forward-crossing conditional branches
-        // that can't be represented as if-else or switch.
-        bool isReducible = IsCfgReducible(blocks, offsetToBlockIndex);
+        var dominators = ComputeDominators(blocks);
+        var loopHeaders = FindLoopHeaders(blocks, offsetToBlockIndex, dominators);
+        bool isReducible = IsCfgReducible(blocks, offsetToBlockIndex, loopHeaders);
 
-        return new ControlFlowGraph(blocks, offsetToBlockIndex, isReducible);
+        return new ControlFlowGraph(blocks, offsetToBlockIndex, loopHeaders, isReducible);
     }
 
     /// <summary>
-    /// Check if the CFG is reducible using simple heuristics:
-    /// 1. No backward edges (we're not doing loop detection)
-    /// 2. All conditional targets are forward
-    /// 3. Switch targets don't cross between blocks
+    /// Compute predecessors for each block in the CFG.
+    /// </summary>
+    private static IReadOnlyList<IReadOnlyList<int>> ComputePredecessors(IReadOnlyList<BasicBlock> blocks)
+    {
+        var preds = new List<List<int>>();
+        for (int i = 0; i < blocks.Count; i++)
+            preds.Add(new List<int>());
+
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            var block = blocks[i];
+            if (block.BranchTarget.HasValue)
+            {
+                if (TryGetBlockIndex(block.BranchTarget.Value, blocks, out var targetIdx))
+                    preds[targetIdx].Add(i);
+            }
+            if (block.ConditionalTarget.HasValue)
+            {
+                if (TryGetBlockIndex(block.ConditionalTarget.Value, blocks, out var targetIdx))
+                    preds[targetIdx].Add(i);
+                if (i + 1 < blocks.Count)
+                    preds[i + 1].Add(i);
+            }
+            if (block.SwitchTargets.Count > 0)
+            {
+                foreach (var t in block.SwitchTargets)
+                {
+                    if (TryGetBlockIndex(t, blocks, out var targetIdx))
+                        preds[targetIdx].Add(i);
+                }
+            }
+            if (block.Terminator == null || (!IsBlockTerminatorOpcode(block.Terminator.Op) && !block.IsTerminal))
+            {
+                if (i + 1 < blocks.Count)
+                    preds[i + 1].Add(i);
+            }
+        }
+
+        return preds;
+    }
+
+    private static bool TryGetBlockIndex(int offset, IReadOnlyList<BasicBlock> blocks, out int index)
+    {
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            if (blocks[i].StartOffset == offset)
+            {
+                index = i;
+                return true;
+            }
+        }
+        index = -1;
+        return false;
+    }
+
+    /// <summary>
+    /// Compute dominators using iterative data-flow algorithm.
+    /// dom(0) = {0}, dom(i) = {i} U (intersection of dom(p) for all p in preds(i)).
+    /// </summary>
+    private static bool[][] ComputeDominators(IReadOnlyList<BasicBlock> blocks)
+    {
+        int n = blocks.Count;
+        if (n == 0) return Array.Empty<bool[]>();
+
+        var dominators = new bool[n][];
+        for (int i = 0; i < n; i++)
+            dominators[i] = new bool[n];
+
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                dominators[i][j] = true;
+
+        var preds = ComputePredecessors(blocks);
+
+        bool changed = true;
+        while (changed)
+        {
+            changed = false;
+            for (int i = 0; i < n; i++)
+            {
+                if (i == 0)
+                {
+                    var newDom = new bool[n];
+                    newDom[0] = true;
+                    if (!BitSetsEqual(dominators[i], newDom))
+                    {
+                        dominators[i] = newDom;
+                        changed = true;
+                    }
+                    continue;
+                }
+
+                bool[] intersection;
+                var predList = preds[i];
+                if (predList.Count == 0)
+                {
+                    intersection = new bool[n];
+                    intersection[i] = true;
+                }
+                else
+                {
+                    intersection = new bool[n];
+                    for (int j = 0; j < n; j++)
+                        intersection[j] = true;
+
+                    foreach (var p in predList)
+                        for (int j = 0; j < n; j++)
+                            intersection[j] = intersection[j] && dominators[p][j];
+
+                    intersection[i] = true;
+                }
+
+                if (!BitSetsEqual(dominators[i], intersection))
+                {
+                    dominators[i] = intersection;
+                    changed = true;
+                }
+            }
+        }
+
+        return dominators;
+    }
+
+    private static bool BitSetsEqual(bool[] a, bool[] b)
+    {
+        if (a.Length != b.Length) return false;
+        for (int i = 0; i < a.Length; i++)
+            if (a[i] != b[i]) return false;
+        return true;
+    }
+
+    /// <summary>
+    /// Find all natural loops in the CFG.
+    /// </summary>
+    private static Dictionary<int, NaturalLoopInfo> FindLoopHeaders(
+        IReadOnlyList<BasicBlock> blocks,
+        IReadOnlyDictionary<int, int> offsetToBlockIndex,
+        bool[][] dominators)
+    {
+        var loopHeaders = new Dictionary<int, NaturalLoopInfo>();
+
+        void CheckBackEdge(int sourceIdx, int? targetOffset)
+        {
+            if (!targetOffset.HasValue) return;
+            if (!offsetToBlockIndex.TryGetValue(targetOffset.Value, out var h)) return;
+            if (h >= sourceIdx) return;
+            if (!dominators[sourceIdx][h]) return;
+
+            if (!loopHeaders.ContainsKey(h))
+            {
+                var body = FindNaturalLoopBody(blocks, offsetToBlockIndex, h, sourceIdx);
+                loopHeaders[h] = new NaturalLoopInfo(h, body, new HashSet<int> { sourceIdx });
+            }
+            else
+            {
+                loopHeaders[h].LatchIndices.Add(sourceIdx);
+                var additionalBody = FindNaturalLoopBody(blocks, offsetToBlockIndex, h, sourceIdx);
+                loopHeaders[h].BodyIndices.UnionWith(additionalBody);
+            }
+        }
+
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            var block = blocks[i];
+            CheckBackEdge(i, block.ConditionalTarget);
+            CheckBackEdge(i, block.BranchTarget);
+        }
+
+        return loopHeaders;
+    }
+
+    /// <summary>
+    /// Find the body of a natural loop given header h and latch l.
+    /// </summary>
+    private static HashSet<int> FindNaturalLoopBody(
+        IReadOnlyList<BasicBlock> blocks,
+        IReadOnlyDictionary<int, int> offsetToBlockIndex,
+        int headerIndex,
+        int latchIndex)
+    {
+        var body = new HashSet<int> { headerIndex, latchIndex };
+        var stack = new Stack<int>();
+        stack.Push(latchIndex);
+
+        while (stack.Count > 0)
+        {
+            var idx = stack.Pop();
+            for (int j = 0; j < blocks.Count; j++)
+            {
+                if (j == idx) continue;
+                if (body.Contains(j)) continue;
+                if (j == headerIndex) continue;
+
+                var b = blocks[j];
+                bool isPred = false;
+                if (b.BranchTarget.HasValue && offsetToBlockIndex.TryGetValue(b.BranchTarget.Value, out var bt) && bt == idx)
+                    isPred = true;
+                if (!isPred && b.ConditionalTarget.HasValue && offsetToBlockIndex.TryGetValue(b.ConditionalTarget.Value, out var ct) && ct == idx)
+                    isPred = true;
+                if (!isPred && b.SwitchTargets.Count > 0 && b.SwitchTargets.Any(t => offsetToBlockIndex.TryGetValue(t, out var st) && st == idx))
+                    isPred = true;
+                if (!isPred && (b.Terminator == null || !IsBlockTerminatorOpcode(b.Terminator.Op)))
+                {
+                    if (j + 1 < blocks.Count && j + 1 == idx)
+                        isPred = true;
+                }
+
+                if (isPred && body.Add(j))
+                    stack.Push(j);
+            }
+        }
+
+        return body;
+    }
+
+    /// <summary>
+    /// Check if the CFG is reducible:
+    /// 1. All backward branches are natural loops (header dominates latch)
+    /// 2. No irreducible loop structures (cross-nesting)
     /// </summary>
     private static bool IsCfgReducible(
         IReadOnlyList<BasicBlock> blocks,
-        IReadOnlyDictionary<int, int> offsetToBlockIndex)
+        IReadOnlyDictionary<int, int> offsetToBlockIndex,
+        IReadOnlyDictionary<int, NaturalLoopInfo> loopHeaders)
     {
         for (int i = 0; i < blocks.Count; i++)
         {
             var block = blocks[i];
             if (block.ConditionalTarget.HasValue)
             {
-                // Conditional targets must be forward
                 if (!offsetToBlockIndex.TryGetValue(block.ConditionalTarget.Value, out var targetIdx))
                     return false;
-                if (targetIdx <= i)
-                    return false; // backward branch = loop, not handled
+                if (targetIdx < i)
+                {
+                    if (!loopHeaders.ContainsKey(targetIdx))
+                        return false;
+                    if (!loopHeaders[targetIdx].LatchIndices.Contains(i))
+                        return false;
+                }
             }
             if (block.BranchTarget.HasValue)
             {
-                // Branch target must be forward (backward = loop)
-                if (offsetToBlockIndex.TryGetValue(block.BranchTarget.Value, out var targetIdx) && targetIdx <= i)
-                    return false;
+                if (offsetToBlockIndex.TryGetValue(block.BranchTarget.Value, out var targetIdx) && targetIdx < i)
+                {
+                    if (!loopHeaders.ContainsKey(targetIdx))
+                        return false;
+                    if (!loopHeaders[targetIdx].LatchIndices.Contains(i))
+                        return false;
+                }
             }
             if (block.SwitchTargets.Count > 0)
             {
-                // All switch targets must be forward
                 foreach (var t in block.SwitchTargets)
                 {
-                    if (offsetToBlockIndex.TryGetValue(t, out var targetIdx) && targetIdx <= i)
-                        return false;
+                    if (offsetToBlockIndex.TryGetValue(t, out var targetIdx) && targetIdx < i)
+                    {
+                        if (!loopHeaders.ContainsKey(targetIdx))
+                            return false;
+                    }
                 }
             }
         }
 
-        // Check for "jump into the middle" patterns: a block reached from both
-        // a conditional branch fall-through AND an unconditional branch target.
-        // This indicates a pattern that can't be represented as structured if-else.
-        for (int i = 0; i < blocks.Count; i++)
+        foreach (var kvp in loopHeaders)
         {
-            int predecessorCount = 0;
-            bool hasStructuralPred = false; // reached by fall-through from i-1
-            bool hasBranchPred = false; // reached as branch target
-
-            if (i > 0 && blocks[i - 1].Terminator != null)
+            int h1 = kvp.Key;
+            var body1 = kvp.Value.BodyIndices;
+            foreach (var kvp2 in loopHeaders)
             {
-                var prevTerm = blocks[i - 1].Terminator;
-                if (prevTerm.Op is "br" or "leave")
-                {
-                    hasBranchPred = blocks[i - 1].BranchTarget == blocks[i].StartOffset;
-                }
-                else if (IsConditionalBranchOpcode(prevTerm.Op))
-                {
-                    // The fall-through from a conditional branch goes to the next block
-                    hasStructuralPred = true;
-                    hasBranchPred = blocks[i - 1].ConditionalTarget == blocks[i].StartOffset;
-                }
-                else if (IsSwitchOpcode(prevTerm.Op))
-                {
-                    hasBranchPred = blocks[i - 1].SwitchTargets.Contains(blocks[i].StartOffset);
-                }
-                else
-                {
-                    // No terminator = fall-through
-                    hasStructuralPred = true;
-                }
-            }
-            else if (i > 0)
-            {
-                hasStructuralPred = true; // fall-through
-            }
-
-            if (hasStructuralPred && hasBranchPred)
-            {
-                // This block has both a fall-through predecessor and a branch-encoded
-                // predecessor. Check farther back for more complex patterns.
-                // For our purposes, a block that is BOTH a branch target AND
-                // a fall-through target is suspicious but may be a simple merge point.
-                // Only flag it if there are additional branch targets from elsewhere.
-                predecessorCount = (hasStructuralPred ? 1 : 0) + (hasBranchPred ? 1 : 0);
-            }
-
-            // Count all blocks that branch to this one
-            for (int j = 0; j < blocks.Count; j++)
-            {
-                if (j == i) continue;
-                var b = blocks[j];
-                if (b.BranchTarget == blocks[i].StartOffset ||
-                    b.ConditionalTarget == blocks[i].StartOffset ||
-                    (b.Terminator != null && IsSwitchOpcode(b.Terminator.Op) && b.SwitchTargets.Contains(blocks[i].StartOffset)))
-                {
-                    predecessorCount++;
-                }
-            }
-
-            // If a block has > 2 predecessors from different contexts, it may be irreducible
-            if (predecessorCount > 2)
-            {
-                // This is still often reducible (e.g., merge after if-else).
-                // Only flag if the block is a branch target from multiple
-                // non-sequential locations AND also a fall-through target.
+                int h2 = kvp2.Key;
+                if (h1 >= h2) continue;
+                if (body1.Contains(h2) && kvp2.Value.BodyIndices.Contains(h1))
+                    return false;
             }
         }
 
@@ -365,7 +549,6 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (IsConditionalBranchOpcode(block.Terminator.Op))
             {
-                // Single condition block with no merge → degenerate if without else
                 return BuildIfThenElse(cfg, startIndex);
             }
             if (IsSwitchOpcode(block.Terminator.Op))
@@ -375,6 +558,12 @@ public sealed partial class NativeAotLoweringPlanner
             return new BasicBlockNode(block);
         }
 
+        // Check if startIndex is a loop header
+        if (cfg.LoopHeaders.TryGetValue(startIndex, out var loopInfo))
+        {
+            return BuildLoop(cfg, startIndex, endIndex, loopInfo);
+        }
+
         // Try to find a conditional branch at the start of the interval
         var firstBlock = cfg.Blocks[startIndex];
         if (firstBlock.ConditionalTarget.HasValue && IsConditionalBranchOpcode(firstBlock.Terminator?.Op ?? ""))
@@ -382,7 +571,6 @@ public sealed partial class NativeAotLoweringPlanner
             var ite = BuildIfThenElse(cfg, startIndex);
             if (ite is IfThenElseNode iteNode)
             {
-                // Find where the merge block is and continue after it
                 int afterMergeIdx;
                 if (iteNode.MergeOffset.HasValue &&
                     cfg.OffsetToBlockIndex.TryGetValue(iteNode.MergeOffset.Value, out var mergeIdx))
@@ -391,8 +579,6 @@ public sealed partial class NativeAotLoweringPlanner
                 }
                 else
                 {
-                    // Check if the then/else branches both terminate
-                    // In that case the "merge" is the end of the interval
                     afterMergeIdx = endIndex + 1;
                 }
 
@@ -437,11 +623,20 @@ public sealed partial class NativeAotLoweringPlanner
         while (idx <= endIndex)
         {
             var block = cfg.Blocks[idx];
-            if (block.ConditionalTarget.HasValue && IsConditionalBranchOpcode(block.Terminator?.Op ?? ""))
+
+            if (cfg.LoopHeaders.TryGetValue(idx, out var currentLoop))
+            {
+                var loop = BuildLoop(cfg, idx, endIndex, currentLoop);
+                seqNodes.Add(loop);
+                int nextIdx = idx + 1;
+                while (nextIdx <= endIndex && currentLoop.BodyIndices.Contains(nextIdx))
+                    nextIdx++;
+                idx = nextIdx;
+            }
+            else if (block.ConditionalTarget.HasValue && IsConditionalBranchOpcode(block.Terminator?.Op ?? ""))
             {
                 var ite = BuildIfThenElse(cfg, idx);
                 seqNodes.Add(ite);
-                // Advance past the if-then-else structure
                 if (ite is IfThenElseNode iteResult && iteResult.MergeOffset.HasValue &&
                     cfg.OffsetToBlockIndex.TryGetValue(iteResult.MergeOffset.Value, out var mergeIdx))
                 {
@@ -449,7 +644,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }
                 else
                 {
-                    idx = endIndex + 1; // terminated branches
+                    idx = endIndex + 1;
                 }
             }
             else if (IsSwitchOpcode(block.Terminator?.Op ?? ""))
@@ -477,6 +672,60 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     /// <summary>
+    /// Build a loop node from a natural loop.
+    /// </summary>
+    private static StructuredNode BuildLoop(
+        ControlFlowGraph cfg,
+        int headerIndex, int endIndex,
+        NaturalLoopInfo loopInfo)
+    {
+        var header = cfg.Blocks[headerIndex];
+        int bodyStart = headerIndex + 1;
+
+        int maxLatchIdx = loopInfo.LatchIndices.Max();
+        int bodyEnd = maxLatchIdx;
+        if (bodyEnd > endIndex) bodyEnd = endIndex;
+
+        int exitIdx = bodyEnd + 1;
+        while (exitIdx <= endIndex && loopInfo.BodyIndices.Contains(exitIdx))
+            exitIdx++;
+
+        int? exitOffset = exitIdx <= endIndex ? cfg.Blocks[exitIdx].StartOffset : null;
+
+        bool isWhile;
+        BasicBlock? latchBlock = null;
+
+        if (header.ConditionalTarget.HasValue && IsConditionalBranchOpcode(header.Terminator?.Op ?? ""))
+        {
+            isWhile = true;
+            var latchesInBody = loopInfo.LatchIndices.Where(l => l <= bodyEnd && l >= bodyStart).ToList();
+            if (latchesInBody.Count > 0)
+            {
+                int latchIdx = latchesInBody.Max();
+                latchBlock = cfg.Blocks[latchIdx];
+            }
+        }
+        else
+        {
+            isWhile = false;
+            var latchesInBody = loopInfo.LatchIndices.Where(l => l <= bodyEnd && l >= bodyStart).ToList();
+            if (latchesInBody.Count > 0)
+            {
+                int latchIdx = latchesInBody.Max();
+                latchBlock = cfg.Blocks[latchIdx];
+            }
+        }
+
+        StructuredNode body;
+        if (bodyStart <= bodyEnd)
+            body = RecoverStructure(cfg, bodyStart, bodyEnd);
+        else
+            body = new SequenceNode(Array.Empty<StructuredNode>());
+
+        return new LoopNode(header, body, exitOffset, isWhile, latchBlock);
+    }
+
+    /// <summary>
     /// Build an if-then-else node starting from a conditional branch block.
     /// </summary>
     private static StructuredNode BuildIfThenElse(ControlFlowGraph cfg, int conditionBlockIndex)
@@ -492,10 +741,8 @@ public sealed partial class NativeAotLoweringPlanner
         int falseBlockIdx = conditionBlockIndex + 1;
         int endIdx = cfg.Blocks.Count - 1;
 
-        // Find the merge point: the first block that post-dominates both paths
         int? mergeOffset = FindMergePoint(cfg, conditionBlockIndex, trueBlockIdx, falseBlockIdx);
 
-        // Recurse on then and else branches
         StructuredNode thenBranch;
         if (mergeOffset.HasValue && cfg.OffsetToBlockIndex.TryGetValue(mergeOffset.Value, out var mergeIdx))
         {
@@ -512,7 +759,6 @@ public sealed partial class NativeAotLoweringPlanner
         }
         else
         {
-            // No merge found - branches are terminated
             thenBranch = RecoverStructure(cfg, trueBlockIdx, endIdx);
             if (falseBlockIdx <= endIdx)
             {
@@ -525,7 +771,6 @@ public sealed partial class NativeAotLoweringPlanner
 
     /// <summary>
     /// Find the merge point for an if-then-else structure.
-    /// The merge point is the first block reachable from both the true and false paths.
     /// </summary>
     private static int? FindMergePoint(
         ControlFlowGraph cfg,
@@ -536,11 +781,9 @@ public sealed partial class NativeAotLoweringPlanner
         var visitedTrue = new HashSet<int>();
         var visitedFalse = new HashSet<int>();
 
-        // Walk forward from both paths
         WalkForward(cfg, trueBlockIndex, visitedTrue);
         WalkForward(cfg, falseBlockIndex, visitedFalse);
 
-        // Intersection gives merge candidates, pick lowest index
         var intersection = visitedTrue.Intersect(visitedFalse).ToList();
         if (intersection.Count == 0)
             return null;
@@ -554,7 +797,6 @@ public sealed partial class NativeAotLoweringPlanner
 
     /// <summary>
     /// Walk forward through the CFG collecting all reachable block indices.
-    /// Stops at terminal blocks.
     /// </summary>
     private static void WalkForward(ControlFlowGraph cfg, int startIndex, HashSet<int> visited)
     {
@@ -582,7 +824,6 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (block.Terminator == null || !IsBlockTerminatorOpcode(block.Terminator.Op))
             {
-                // Fall-through to next block
                 if (idx + 1 < cfg.Blocks.Count)
                     stack.Push(idx + 1);
             }
@@ -598,8 +839,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (swBlock.SwitchTargets.Count == 0)
             return new BasicBlockNode(swBlock);
 
-        // Group targets by their block index
-        var caseMap = new Dictionary<int, List<int>>(); // target block index → case values
+        var caseMap = new Dictionary<int, List<int>>();
         for (int i = 0; i < swBlock.SwitchTargets.Count; i++)
         {
             var target = swBlock.SwitchTargets[i];
@@ -611,12 +851,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
-        // The merge point is the block after all case bodies
         int maxTargetIdx = caseMap.Keys.Max();
         int mergeIdx = maxTargetIdx + 1;
         int endIdx = cfg.Blocks.Count - 1;
 
-        // Build case bodies
         var caseBodies = new Dictionary<int, StructuredNode>();
         foreach (var kvp in caseMap)
         {
@@ -632,7 +870,6 @@ public sealed partial class NativeAotLoweringPlanner
                 caseBodies[caseValue] = body;
         }
 
-        // Default body: blocks before merge that aren't covered by any case
         StructuredNode? defaultBody = null;
         var coveredBlocks = new HashSet<int>(caseMap.Keys);
         var defaultBlocks = Enumerable.Range(switchBlockIndex + 1, mergeIdx - switchBlockIndex - 1)

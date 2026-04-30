@@ -179,6 +179,8 @@ tr:nth-child(even) td { background: #fff7ea; }
 .status-in-progress { background: #b8d8f0; color: #1a5a8a; font-weight: 700; }
 .status-failed { background: var(--blocked-bg); color: var(--blocked-ink); font-weight: 800; }
 .status-warning { background: var(--warn-bg); color: var(--warn-ink); font-weight: 700; }
+.code-note { padding: 8px 12px; margin-bottom: 4px; background: var(--warn-bg); color: var(--warn-ink); font-size: 12px; border-radius: 4px; line-height: 1.4; }
+.failure-reason { padding: 4px 8px; background: var(--blocked-bg); color: var(--blocked-ink); font-size: 12px; border-radius: 3px; display: inline-block; }
 .list-label {
   margin: 12px 0 6px;
   color: var(--muted);

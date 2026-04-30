@@ -9,7 +9,10 @@ public sealed partial class NativeReferenceProofEmitter
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyCore(
         RuntimeSkeletonStubBuildContext buildContext)
     {
-        if (!buildContext.SubjectId.Contains("/System.Collections.", StringComparison.Ordinal))
+        if (!buildContext.SubjectId.Contains("/System.Collections.", StringComparison.Ordinal) &&
+            !buildContext.SubjectId.Contains("Stack`1", StringComparison.Ordinal) &&
+            !buildContext.SubjectId.Contains("LinkedList`1", StringComparison.Ordinal) &&
+            !buildContext.SubjectId.Contains("SortedDictionary`2", StringComparison.Ordinal))
         {
             return RuntimeSkeletonFamilyHandlerResult.NoMatch;
         }
@@ -36,21 +39,6 @@ public sealed partial class NativeReferenceProofEmitter
 
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
-
-    private static bool TryBuildAssemblyBoundCollectionsManagedInvokeStub(
-        string assemblyName,
-        string subjectId,
-        MetadataRegistrationArtifact metadataRegistration,
-        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
-        string stubName,
-        out string stub) =>
-        TryBuildAssemblyBoundCollectionsManagedInvokeCore(
-            assemblyName,
-            subjectId,
-            metadataRegistration,
-            methodsBySubjectId,
-            stubName,
-            out stub);
 
     private static bool TryBuildAssemblyBoundCollectionsManagedInvokeCore(
         string assemblyName,

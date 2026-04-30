@@ -134,7 +134,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 if (TryParseCustomAttributeQueryCallee(instruction.Callee, out var attributeDisplayName))
                 {
-                    queryDisplayNamesByCallee[instruction.Callee!] = attributeDisplayName!;
+                    queryDisplayNamesByCallee[ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee!)] = attributeDisplayName!;
                 }
             }
         }
@@ -295,7 +295,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }
 
                 var fieldSubjectId = ResolveAttributeStorageField(attributeTypeSubjectId!, memberName!);
-                syntheticGetterFieldByMethodSubjectId[instruction.Callee!] = fieldSubjectId;
+                syntheticGetterFieldByMethodSubjectId[ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee!)] = fieldSubjectId;
                 additionalReferenceTypes.Add(attributeTypeSubjectId!);
                 additionalInstanceFields.Add(fieldSubjectId);
             }

@@ -32,6 +32,9 @@ public sealed partial class NativeReferenceProofEmitter
     [RuntimeSkeletonFamilyPlugin("array", CodeGenPluginProductLine.NativeReference, 160, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult Plugin_ArrayFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonArrayFamilyHandler(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("collections-kernel", CodeGenPluginProductLine.NativeReference, 165, RuntimeSkeletonFamilyPluginKind.Kernel)]
+    private static RuntimeSkeletonFamilyHandlerResult Plugin_CollectionsKernelFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonCollectionsKernelFamilyHandler(buildContext);
+
     [RuntimeSkeletonFamilyPlugin("exception", CodeGenPluginProductLine.NativeReference, 170, RuntimeSkeletonFamilyPluginKind.Hybrid)]
     private static RuntimeSkeletonFamilyHandlerResult Plugin_ExceptionFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonExceptionFamilyHandler(buildContext);
 
@@ -46,6 +49,9 @@ public sealed partial class NativeReferenceProofEmitter
 
     [RuntimeSkeletonFamilyPlugin("spanhelpers-kernel", CodeGenPluginProductLine.NativeReference, 200, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult Plugin_SpanHelpersKernelFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonSpanHelpersKernelFamilyHandler(buildContext);
+
+    [RuntimeSkeletonFamilyPlugin("buffermemory-kernel", CodeGenPluginProductLine.NativeReference, 205, RuntimeSkeletonFamilyPluginKind.Kernel)]
+    private static RuntimeSkeletonFamilyHandlerResult Plugin_BufferMemoryKernelFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonBufferMemoryKernelFamilyHandler(buildContext);
 
     [RuntimeSkeletonFamilyPlugin("collections-managed-invoke", CodeGenPluginProductLine.NativeReference, 216, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult Plugin_CollectionsManagedInvokeFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyHandler(buildContext);

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Reader - HotUpdate Detail - System.Text.Json - Foundation DLL Audit</title>
+  <link rel="stylesheet" href="../../../../../dashboard.css">
+</head>
+<body>
+  <main>
+    <div class="page-header">
+      <a class="back-link" href="../System.Text.Json.html">Back to System.Text.Json</a>
+      <div class="eyebrow">HotUpdate Detail — Patch Verification</div>
+      <h1>JSON Reader</h1>
+      <div class="summary-grid">
+        <div class="summary-card"><strong>Closure Status</strong><span class="status status-in-progress">in-progress</span></div>
+        <div class="summary-card"><strong>Methods</strong>0</div>
+        <div class="summary-card"><strong>Passed</strong>0</div>
+        <div class="summary-card"><strong>Failed</strong>0</div>
+      </div>
+    </div>
+
+    <section class="detail-section">
+      <h2>HotUpdate Verification Results</h2>
+      <p>Per-method patch verification: managed host code, managed patch code, and native test code. Expand code blocks to inspect the implementations.</p>
+      <div class="table-wrap">
+        <table class="family-detail-table">
+          <thead><tr><th>Method</th><th>Status</th><th>Detail / Failure Reason</th><th>Managed Host Code</th><th>Managed Patch Code</th><th>Native Test Code</th></tr></thead>
+          <tbody><tr><td colspan="6">No hotupdate verification data available</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Evidence</h2>
+      <div class="source-links">
+        <span class="status-muted">n/a</span>
+      </div>
+    </section>
+  </main>
+  <script>
+// Tab switching
+function switchTab(tabName) {
+  var contents = document.querySelectorAll('.tab-content');
+  for (var i = 0; i < contents.length; i++) { contents[i].classList.remove('active'); }
+  var buttons = document.querySelectorAll('.tab-button');
+  for (var i = 0; i < buttons.length; i++) { buttons[i].classList.remove('active'); }
+  var target = document.getElementById('tab-' + tabName);
+  if (target) { target.classList.add('active'); }
+  var btn = document.querySelector('.tab-button[data-tab="' + tabName + '"]');
+  if (btn) { btn.classList.add('active'); }
+  window.location.hash = tabName;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash) {
+    var btn = document.querySelector('.tab-button[data-tab="' + hash + '"]');
+    if (btn) switchTab(hash);
+  }
+});
+// Expandable rows
+function toggleRow(btn) {
+  var row = btn.closest('tr');
+  var detail = row.nextElementSibling;
+  if (detail && detail.classList.contains('matrix-row-detail')) {
+    row.classList.toggle('expanded');
+    detail.classList.toggle('expanded');
+  }
+}
+// Native proof tooltips
+(function() {
+  var triggers = document.querySelectorAll('.native-proof-trigger');
+  for (var i = 0; i < triggers.length; i++) {
+    var trigger = triggers[i];
+    var delayMs = Number(trigger.dataset.tooltipDelayMs || '500');
+    var hideTimer = null;
+    var clearHide = function() {
+      if (hideTimer !== null) { window.clearTimeout(hideTimer); hideTimer = null; }
+    };
+    var show = function() { clearHide(); trigger.classList.add('is-visible'); };
+    var hide = function() {
+      clearHide();
+      hideTimer = window.setTimeout(function() {
+        trigger.classList.remove('is-visible');
+        hideTimer = null;
+      }, delayMs);
+    };
+    trigger.addEventListener('pointerenter', show);
+    trigger.addEventListener('pointerleave', hide);
+    trigger.addEventListener('focusin', show);
+    trigger.addEventListener('focusout', function(event) {
+      if (trigger.contains(event.relatedTarget)) { return; }
+      hide();
+    });
+  }
+})();
+</script>
+</body>
+</html>
