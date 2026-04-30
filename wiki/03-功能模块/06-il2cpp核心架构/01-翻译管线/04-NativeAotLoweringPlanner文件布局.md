@@ -24,6 +24,9 @@
 | 文件 | 职责 |
 |------|------|
 | `NativeAotLoweringPlanner.EmissionOrder.cs` | Emission 驱动管线 |
+| `NativeAotLoweringPlanner.MethodEmission.cs` | 方法体发射入口、指令派发、结构化控制流发射 |
+| `NativeAotLoweringPlanner.ExceptionEmission.cs` | 异常处理 EH C++ 生成（5种 shape） |
+| `NativeAotLoweringPlanner.StructuredControlFlow.cs` | CFG 构建、基本块分析、结构化恢复算法 |
 | `NativeAotLoweringPlanner.Emit_Computation.cs` | 计算操作 C++ 生成 |
 | `NativeAotLoweringPlanner.Emit_MethodCall.cs` | 方法调用 C++ 生成 |
 | `NativeAotLoweringPlanner.Emit_ArrayOperations.cs` | 数组操作 C++ 生成 |
