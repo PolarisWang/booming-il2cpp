@@ -413,19 +413,27 @@ public sealed class AotCoreIrLowering
         IReadOnlyDictionary<string, ManagedMethodModel> managedMethods,
         IReadOnlyDictionary<string, string> targetSymbols)
     {
-        if (!string.Equals(instruction.Op, "call", StringComparison.Ordinal) ||
-            string.IsNullOrWhiteSpace(instruction.Callee))
+        if (!string.Equals(instruction.Op, "call", StringComparison.Ordinal) &&
+            !string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal))
         {
             return (null, null, null);
         }
 
-        if (!managedMethods.TryGetValue(instruction.Callee, out var calleeMethod) ||
-            !calleeMethod.IsStatic)
+        if (string.IsNullOrWhiteSpace(instruction.Callee))
         {
             return (null, null, null);
         }
 
-        targetSymbols.TryGetValue(instruction.Callee, out var targetSymbol);
+        if (!managedMethods.TryGetValue(instruction.Callee, out var calleeMethod))
+        {
+            return (null, null, null);
+        }
+
+        if (!targetSymbols.TryGetValue(instruction.Callee, out var targetSymbol))
+        {
+            targetSymbol = ManagedNaming.CreateMethodSymbol(calleeMethod);
+        }
+
         return (targetSymbol, calleeMethod.Parameters.Count, calleeMethod.ReturnType);
     }
 
