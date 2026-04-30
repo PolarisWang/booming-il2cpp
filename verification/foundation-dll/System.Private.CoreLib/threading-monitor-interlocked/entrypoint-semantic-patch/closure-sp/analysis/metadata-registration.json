@@ -1,0 +1,193 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "name": "ThreadingMonitorInterlockedSemanticPatchEntry",
+      "displayName": "ThreadingMonitorInterlockedSemanticPatchEntry",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method13:System.Int32()",
+      "name": "Method13",
+      "definitionSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 17,
+      "subjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ThreadingMonitorInterlockedSemanticPatchEntry/ThreadingMonitorInterlockedSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

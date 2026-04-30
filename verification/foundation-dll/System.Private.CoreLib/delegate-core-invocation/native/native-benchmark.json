@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/delegate/core-invocation",
+  "warmupIterations": 100,
+  "measureIterations": 10000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+      "elapsedMilliseconds": 0.0093,
+      "opsPerSecond": 1075268817.204301,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
+      "elapsedMilliseconds": 0.0094,
+      "opsPerSecond": 1063829787.234043,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+      "elapsedMilliseconds": 0.0092,
+      "opsPerSecond": 1086956521.73913,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+      "elapsedMilliseconds": 0.0094,
+      "opsPerSecond": 1063829787.234043,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+      "elapsedMilliseconds": 0.0093,
+      "opsPerSecond": 1075268817.204301,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)",
+      "elapsedMilliseconds": 0.0092,
+      "opsPerSecond": 1086956521.73913,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)",
+      "elapsedMilliseconds": 0.0092,
+      "opsPerSecond": 1086956521.73913,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()",
+      "elapsedMilliseconds": 0.0093,
+      "opsPerSecond": 1075268817.204301,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)",
+      "elapsedMilliseconds": 0.0093,
+      "opsPerSecond": 1075268817.204301,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)",
+      "elapsedMilliseconds": 0.0094,
+      "opsPerSecond": 1063829787.234043,
+      "iterations": 10000
+    }
+  ]
+}

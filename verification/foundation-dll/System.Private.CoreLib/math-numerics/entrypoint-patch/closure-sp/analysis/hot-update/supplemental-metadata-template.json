@@ -1,0 +1,171 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method7:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method8:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method9:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method10:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method11:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method12:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method13:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method14:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method15:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method16:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method16:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method17:System.Int32()",
+      "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method17:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

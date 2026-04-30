@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-28T14:39:17.081756Z",
+  "generatedAtUtc": "2026-04-30T05:06:55.400112Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "mergeKey": "closureId",
@@ -109,7 +109,7 @@
         "codegen",
         "loader"
       ],
-      "verificationState": "blocked",
+      "verificationState": "failed",
       "supportState": "partial",
       "blockers": [
         {
@@ -135,9 +135,9 @@
       ],
       "obligationCount": 68,
       "passedCount": 0,
-      "failedCount": 0,
+      "failedCount": 1,
       "blockedCount": 4,
-      "missingCount": 60,
+      "missingCount": 54,
       "notRequiredCount": 0
     }
   ]

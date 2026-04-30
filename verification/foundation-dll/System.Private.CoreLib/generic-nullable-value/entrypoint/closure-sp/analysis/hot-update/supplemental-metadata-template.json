@@ -1,0 +1,107 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

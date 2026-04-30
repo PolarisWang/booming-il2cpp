@@ -184,7 +184,7 @@ def _analyze_payload(
             if test_code["testCodeStatus"] == "present" and int(family.get("methodCount") or 0) > 0:
                 gates = dict(family.get("verificationGates") or {})
                 promoted = False
-                for gate in ("audit-input-and-ledger", "managed-proof", "native-proof", "hotupdate-proof", "benchmark", "codegen-review"):
+                for gate in ("audit-input-and-ledger", "codegen-review"):
                     if gates.get(gate) in ("pending", ""):
                         gates[gate] = "passed"
                         promoted = True

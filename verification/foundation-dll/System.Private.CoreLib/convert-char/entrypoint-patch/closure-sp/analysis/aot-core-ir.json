@@ -1,0 +1,1731 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.run",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ConvertCharPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.run",
+        "signature": "System.Int32 ConvertCharPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            88,
+            99,
+            110,
+            118,
+            126,
+            134,
+            142,
+            150,
+            158,
+            166,
+            174,
+            182,
+            190,
+            198,
+            206,
+            214,
+            222,
+            230
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 238,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 88,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 93,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 99,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 104,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 105,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 110,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 116,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 118,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 124,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 126,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 132,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 134,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 139,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 140,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 142,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 147,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 148,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 150,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 155,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 156,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 158,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 163,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 164,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 166,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 171,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 172,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 174,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 179,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 180,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 182,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 187,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 188,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 190,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 195,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 196,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 198,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 203,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 204,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 206,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method14:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 211,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 212,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 214,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method15:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method15:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method15:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 219,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 220,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 222,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method16:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method16:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method16:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 227,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 228,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 230,
+          "resultType": "System.Int32",
+          "callee": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method17:System.Int32()",
+          "reference": {
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method17:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ConvertCharPatchEntry",
+            "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method17:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method17",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 235,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 236,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 238,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 239,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 240,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 242
+        },
+        {
+          "op": "ret",
+          "ilOffset": 243
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method0",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method0:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method0:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method0",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method0()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177280,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method1",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method1:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method1:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method1",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method1()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177279,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method2",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method2:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method2:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method2",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method2()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177278,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method3",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method3:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method3:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method3",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method3()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method4",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method4:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method4:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method4",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method4()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177276,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method5",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method5:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method5:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method5",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method5()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177275,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method6",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method6:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method6:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method6",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method6()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177274,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method7",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method7:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method7:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method7",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method7()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177273,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method8",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method8:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method8:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method8",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method8()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177272,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method9",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method9:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method9:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method9",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method9()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177271,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method10",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method10:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method10:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method10",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method10()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177270,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method11",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method11:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method11()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method11:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method11:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method11",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method11()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177269,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method12",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method12:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method12()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method12:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method12:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method12",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method12()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177268,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method13",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method13:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method13()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method13:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method13:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method13",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method13()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177267,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method14",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method14:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method14()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method14:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method14:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method14",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method14()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177266,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method15",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method15:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method15()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method15:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method15:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method15",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method15()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method15",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177265,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method16",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method16:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method16()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method16:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method16:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method16",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method16()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method16",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177264,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "convert-char-patch-entry.convert-char-patch-entry.method17",
+      "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method17:System.Int32()",
+      "signature": "System.Int32 ConvertCharPatchEntry::Method17()",
+      "identity": {
+        "assemblyName": "ConvertCharPatchEntry",
+        "declaringTypeSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry",
+        "definitionSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method17:System.Int32()",
+        "subjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Method17:System.Int32()",
+        "methodId": "convert-char-patch-entry.convert-char-patch-entry.method17",
+        "signature": "System.Int32 ConvertCharPatchEntry::Method17()"
+      },
+      "nativeSymbol": "ConvertCharPatchEntry_ConvertCharPatchEntry_Method17",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177263,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 19,
+    "trimmedMethodCount": 19,
+    "entryPrefix": "ConvertCharPatchEntry"
+  }
+}

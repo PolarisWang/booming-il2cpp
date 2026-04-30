@@ -1,0 +1,84 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "BoxingUnboxingCastsSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Run",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method0",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method1",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method2",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method3",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method4",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method5",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method6",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method7",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method8",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method9",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "BoxingUnboxingCastsSemanticPatchEntry_BoxingUnboxingCastsSemanticPatchEntry_Method10",
+          "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method10:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "SpanMemoryBuffersNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Run",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method0",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method1",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method2",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method3",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method4",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method5",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method6",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method7",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method8",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method9",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method10",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method11",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method12",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "SpanMemoryBuffersNativeEntry_SpanMemoryBuffersNativeEntry_Method13",
+          "subjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Method13:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

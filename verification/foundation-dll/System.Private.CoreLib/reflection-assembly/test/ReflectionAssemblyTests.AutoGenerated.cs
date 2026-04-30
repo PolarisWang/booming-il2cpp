@@ -1,0 +1,228 @@
+using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Reflection;
+using Chaos.TestFramework;
+using Xunit;
+
+// Auto-generated skeleton for Assembly Reflection (family/System.Private.CoreLib/reflection/assembly).
+public partial class ReflectionAssemblyTests
+{
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetExecutingAssembly:System.Reflection.Assembly()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetExecutingAssembly_System_Reflection_Assembly()
+    {
+    var result = typeof(byte).Assembly.GetExecutingAssembly();
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetCallingAssembly:System.Reflection.Assembly()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetCallingAssembly_System_Reflection_Assembly()
+    {
+    var result = typeof(byte).Assembly.GetCallingAssembly();
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetEntryAssembly:System.Reflection.Assembly()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetEntryAssembly_System_Reflection_Assembly()
+    {
+    var result = typeof(byte).Assembly.GetEntryAssembly();
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetName_System_Reflection_AssemblyName()
+    {
+    _ = typeof(byte).Assembly.GetName();
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::get_FullName:System.String()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_get_FullName_System_String()
+    {
+    var result = typeof(byte).Assembly.FullName;
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::get_Location:System.String()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_get_Location_System_String()
+    {
+    var result = typeof(byte).Assembly.Location;
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::get_ImageRuntimeVersion:System.String()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_get_ImageRuntimeVersion_System_String()
+    {
+    var result = typeof(byte).Assembly.ImageRuntimeVersion;
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetTypes_System_Type()
+    {
+    var result = typeof(byte).Assembly.GetTypes();
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetExportedTypes:System.Type[]()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetExportedTypes_System_Type()
+    {
+    var result = typeof(byte).Assembly.GetExportedTypes();
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetForwardedTypes:System.Type[]()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetForwardedTypes_System_Type()
+    {
+    var result = typeof(byte).Assembly.GetForwardedTypes();
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetType_System_Type_System_String()
+    {
+    var result = typeof(byte).Assembly.GetType("hello");
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetType_System_Type_System_String_System_Boolean()
+    {
+    var result = typeof(byte).Assembly.GetType("hello", true);
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetModule_System_Reflection_Module_System_String()
+    {
+    _ = typeof(byte).Assembly.GetModule("hello");
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetModules_System_Reflection_Module()
+    {
+    _ = typeof(byte).Assembly.GetModules();
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceStream:System.IO.Stream(System.String)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetManifestResourceStream_System_IO_Stream_System_String()
+    {
+    _ = typeof(byte).Assembly.GetManifestResourceStream("hello");
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceNames:System.String[]()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_GetManifestResourceNames_System_String()
+    {
+    var result = typeof(byte).Assembly.GetManifestResourceNames();
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.Assembly::get_EntryPoint:System.Reflection.MethodInfo()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_Assembly_get_EntryPoint_System_Reflection_MethodInfo()
+    {
+    _ = typeof(byte).Assembly.EntryPoint;
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.AssemblyName::get_Name:System.String()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_AssemblyName_get_Name_System_String()
+    {
+    var result = typeof(byte).Assembly.GetName().Name;
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.AssemblyName::get_Version:System.Version()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_AssemblyName_get_Version_System_Version()
+    {
+    var result = typeof(byte).Assembly.GetName().Version;
+    Xunit.Assert.NotNull((object)result);
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Reflection.AssemblyName::get_CultureInfo:System.Globalization.CultureInfo()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Reflection_AssemblyName_get_CultureInfo_System_Globalization_CultureInfo()
+    {
+    _ = typeof(byte).Assembly.GetName().CultureInfo;
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Type_get_Assembly_System_Reflection_Assembly()
+    {
+    _ = typeof(byte).Assembly;
+    }
+
+    [MethodSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
+    [VerificationRoute(VerificationRoute.Native)]
+    [Fact]
+    public void Method_System_Private_CoreLib_System_Type_GetType_System_Type_System_String()
+    {
+    {
+    var result = System.Type.GetType("System.String");
+    Xunit.Assert.NotNull((object)result);
+    }

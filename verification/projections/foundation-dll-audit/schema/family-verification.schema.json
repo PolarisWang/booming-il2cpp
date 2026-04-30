@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "family-verification.schema.json",
+  "title": "Foundation DLL Audit Family Verification",
+  "description": "Per-family gate evaluation results for the dashboard detail view.",
+  "type": "object",
+  "required": ["schemaVersion", "assemblies"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "enum": [1] },
+    "assemblies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["schemaVersion", "assemblyName", "ownerSubjectId", "families"],
+        "properties": {
+          "schemaVersion": { "type": "integer", "enum": [1] },
+          "assemblyName": { "type": "string" },
+          "ownerSubjectId": { "type": "string" },
+          "families": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "familyId", "displayName", "closureStatus", "verificationGates",
+                "methodCount", "testCode",
+                "nativeProof", "managedProof", "hotupdateProof",
+                "benchmarkProof", "testCodeProof"
+              ],
+              "properties": {
+                "familyId": { "type": "string", "pattern": "^family/" },
+                "displayName": { "type": "string" },
+                "description": { "type": "string" },
+                "denominatorStatus": {
+                  "type": "string",
+                  "enum": ["candidate-derived", "audit-confirmed", "auto-derived"]
+                },
+                "closureStatus": {
+                  "type": "string",
+                  "enum": ["closed", "waived", "excluded", "platform-blocked", "in-progress"]
+                },
+                "verificationGates": {
+                  "type": "object",
+                  "description": "Per-gate verification state for this family.",
+                  "patternProperties": {
+                    "^[a-z-]+$": {
+                      "type": "string",
+                      "enum": ["passed", "pending", "blocked", "not-required", "in-progress", "missing-evidence"]
+                    }
+                  }
+                },
+                "methodCount": { "type": "integer" },
+                "implementationFamilies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["familyId", "displayName"],
+                    "properties": {
+                      "familyId": { "type": "string" },
+                      "displayName": { "type": "string" },
+                      "handlerName": { "type": "string" }
+                    }
+                  }
+                },
+                "sourceGroups": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "groupId": { "type": "string" },
+                      "typeNames": { "type": "array", "items": { "type": "string" } },
+                      "methodCount": { "type": "integer" }
+                    }
+                  }
+                },
+                "authorityRefs": { "type": "array", "items": { "type": "string" } },
+                "derivationBasis": { "type": "array", "items": { "type": "string" } },
+                "confirmationNote": { "type": "string" },
+                "testCode": {
+                  "type": "object",
+                  "required": ["testCodeStatus", "requestedMethodCount"],
+                  "properties": {
+                    "testCodeStatus": {
+                      "type": "string",
+                      "enum": ["present", "needs-tests", "coverage-widened", "no-coverage"]
+                    },
+                    "requestedMethodCount": { "type": "integer" },
+                    "emittedMethodCount": { "type": "integer" },
+                    "allMethodsCovered": { "type": "boolean" },
+                    "action": { "type": "string" },
+                    "testProjectPath": { "type": "string" }
+                  }
+                },
+                "capabilityFamilyEnum": { "type": "string" },
+                "synthesisStatus": { "type": "string" },
+                "nativeProof": { "$ref": "#/definitions/ProofEvaluation" },
+                "managedProof": { "$ref": "#/definitions/ProofEvaluation" },
+                "hotupdateProof": { "$ref": "#/definitions/ProofEvaluation" },
+                "benchmarkProof": { "$ref": "#/definitions/ProofEvaluation" },
+                "testCodeProof": { "$ref": "#/definitions/ProofEvaluation" },
+                "auditInputProof": { "$ref": "#/definitions/SyntheticProof" },
+                "codegenReviewProof": { "$ref": "#/definitions/SyntheticProof" },
+                "reviewBundle": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProofEvaluation": {
+      "type": "object",
+      "description": "Gate evaluation result with coverage evidence.",
+      "required": ["status", "numerator", "denominator", "progressPercent"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["passed", "pending", "blocked", "not-required", "in-progress", "missing-evidence", "no-coverage", "present"]
+        },
+        "numerator": { "type": "integer", "description": "Number of passed/covered items." },
+        "denominator": { "type": "integer", "description": "Total number of items required." },
+        "progressPercent": { "type": "number", "description": "numerator/denominator * 100." },
+        "reason": { "type": "string", "description": "Reason code or message for the evaluation result." },
+        "evidence": {
+          "type": "array",
+          "description": "Evidence artifacts supporting this evaluation.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "path": { "type": "string" },
+              "artifactKind": { "type": "string" },
+              "linkTargetType": { "type": "string" }
+            }
+          }
+        },
+        "runs": {
+          "type": "array",
+          "description": "Run-level evidence grouping.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "runId": { "type": "string" },
+              "status": { "type": "string" },
+              "evidence": { "type": "array", "items": { "type": "object" } }
+            }
+          }
+        },
+        "methodDetails": {
+          "type": "array",
+          "description": "Per-method coverage details.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "subjectId": { "type": "string" },
+              "covered": { "type": "boolean" }
+            }
+          }
+        },
+        "testCases": { "type": "array", "items": { "type": "object" } },
+        "benchmarkCases": { "type": "array", "items": { "type": "object" } },
+        "hotupdateCases": { "type": "array", "items": { "type": "object" } },
+        "caseItems": { "type": "array", "items": { "type": "object" } },
+        "caseSectionLabel": { "type": "string" },
+        "passedMethodCount": { "type": "integer" },
+        "failedMethodCount": { "type": "integer" },
+        "unmatchedMethodCount": { "type": "integer" },
+        "verificationMethodResults": { "type": "array", "items": { "type": "object" } },
+        "averageSpeedupPercent": { "type": "number" },
+        "nativeFasterCount": { "type": "integer" },
+        "managedFasterCount": { "type": "integer" },
+        "comparisonMethodResults": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "SyntheticProof": {
+      "type": "object",
+      "description": "Synthetic gate evaluation (audit-input, codegen-review) derived from methodCount.",
+      "required": ["status", "denominator", "numerator", "progressPercent"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["passed", "pending", "blocked", "not-required", "in-progress", "missing-evidence", "no-coverage", "present"]
+        },
+        "denominator": { "type": "integer" },
+        "numerator": { "type": "integer" },
+        "progressPercent": { "type": "number" },
+        "evidence": { "type": "array", "items": { "type": "object" } },
+        "caseItems": { "type": "array", "items": { "type": "object" } },
+        "caseSectionLabel": { "type": "string" }
+      }
+    }
+  }
+}

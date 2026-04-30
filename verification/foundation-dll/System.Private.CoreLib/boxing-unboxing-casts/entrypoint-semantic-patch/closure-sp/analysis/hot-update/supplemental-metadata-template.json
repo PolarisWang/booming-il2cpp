@@ -1,0 +1,115 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method7:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method8:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method9:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BoxingUnboxingCastsSemanticPatchEntry",
+      "subjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method10:System.Int32()",
+      "definitionSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSemanticPatchEntry/BoxingUnboxingCastsSemanticPatchEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

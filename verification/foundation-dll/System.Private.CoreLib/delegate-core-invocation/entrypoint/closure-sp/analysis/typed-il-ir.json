@@ -1,0 +1,1885 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.run",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.run",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                53,
+                61,
+                69,
+                77,
+                85,
+                93,
+                101,
+                109,
+                117,
+                125
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 133,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method0",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method0",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-delegate-construction",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+              "resultType": "System.Action",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_0"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 32,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9",
+              "resultType": "DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9"
+              }
+            },
+            {
+              "op": "ldftn",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+              "resultType": "System.IntPtr",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()"
+              }
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.Action",
+              "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "stsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+              "resultType": "System.Void",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_0"
+              }
+            },
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+              "resultType": "System.Action",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_1"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 63,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9",
+              "resultType": "DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9"
+              }
+            },
+            {
+              "op": "ldftn",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+              "resultType": "System.IntPtr",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()"
+              }
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.Action",
+              "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "stsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+              "resultType": "System.Void",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_1"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Delegate",
+              "callee": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 76,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method1",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method1",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-delegate-construction",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+              "resultType": "System.Action",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_0"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 32,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9",
+              "resultType": "DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9"
+              }
+            },
+            {
+              "op": "ldftn",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+              "resultType": "System.IntPtr",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()"
+              }
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.Action",
+              "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "stsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+              "resultType": "System.Void",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_0"
+              }
+            },
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
+              "resultType": "System.Action",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_1"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 63,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9",
+              "resultType": "DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9"
+              }
+            },
+            {
+              "op": "ldftn",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+              "resultType": "System.IntPtr",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()"
+              }
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.Action",
+              "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "stsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
+              "resultType": "System.Void",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_1"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Delegate",
+              "callee": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 76,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method2",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method2",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-delegate-construction",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+              "resultType": "System.Action",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__3_0"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 32,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9",
+              "resultType": "DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9"
+              }
+            },
+            {
+              "op": "ldftn",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+              "resultType": "System.IntPtr",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()"
+              }
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.Action",
+              "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "stsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+              "resultType": "System.Void",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__3_0"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Object[]",
+              "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Object",
+              "callee": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 49,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 54,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 57,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method3",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method3",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-delegate-construction",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+              "resultType": "System.Action",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__4_0"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 32,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9",
+              "resultType": "DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9"
+              }
+            },
+            {
+              "op": "ldftn",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+              "resultType": "System.IntPtr",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()"
+              }
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.Action",
+              "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "stsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+              "resultType": "System.Void",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__4_0"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.MethodInfo",
+              "callee": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 45,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method4",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method4",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-delegate-construction",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+              "resultType": "System.Action",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__5_0"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 32,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9",
+              "resultType": "DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9"
+              }
+            },
+            {
+              "op": "ldftn",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+              "resultType": "System.IntPtr",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()"
+              }
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.Action",
+              "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "stsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+              "resultType": "System.Void",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__5_0"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Object",
+              "callee": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 44,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 49,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 52,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method5",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method5",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Action",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Action"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.Object",
+              "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldstr",
+              "operand": "ToString",
+              "resultType": "System.String"
+            },
+            {
+              "op": "ldsfld",
+              "operand": "System.Private.CoreLib/System.Type::EmptyTypes",
+              "resultType": "System.Type[]",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "field",
+                "subjectId": "System.Private.CoreLib/System.Type::EmptyTypes"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Reflection.MethodInfo",
+              "callee": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Delegate",
+              "callee": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.Reflection.MethodInfo)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.Reflection.MethodInfo)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 54,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method6",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method6",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Action",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Action"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldstr",
+              "operand": "ToString",
+              "resultType": "System.String"
+            },
+            {
+              "op": "ldsfld",
+              "operand": "System.Private.CoreLib/System.Type::EmptyTypes",
+              "resultType": "System.Type[]",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "field",
+                "subjectId": "System.Private.CoreLib/System.Type::EmptyTypes"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Reflection.MethodInfo",
+              "callee": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Delegate",
+              "callee": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 49,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method7",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method7",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-delegate-construction",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+              "resultType": "System.Action",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__8_0"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 32,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9",
+              "resultType": "DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9"
+              }
+            },
+            {
+              "op": "ldftn",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+              "resultType": "System.IntPtr",
+              "callee": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()"
+              }
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.Action",
+              "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+              }
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "stsfld",
+              "operand": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+              "resultType": "System.Void",
+              "reference": {
+                "assemblyName": "DelegateCoreInvocationNativeEntry",
+                "subjectKind": "field",
+                "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__8_0"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Delegate[]",
+              "callee": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 45,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method8",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method8",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method9",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry.method9",
+        "signature": "System.Int32 DelegateCoreInvocationNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method0-b-1-0",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method0-b-1-0",
+        "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0()"
+      },
+      "methodRole": "instance-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method0-b-1-1",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method0-b-1-1",
+        "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1()"
+      },
+      "methodRole": "instance-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method1-b-2-0",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method1-b-2-0",
+        "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0()"
+      },
+      "methodRole": "instance-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method1-b-2-1",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method1-b-2-1",
+        "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1()"
+      },
+      "methodRole": "instance-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method2-b-3-0",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method2-b-3-0",
+        "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0()"
+      },
+      "methodRole": "instance-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method3-b-4-0",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method3-b-4-0",
+        "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0()"
+      },
+      "methodRole": "instance-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method4-b-5-0",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method4-b-5-0",
+        "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0()"
+      },
+      "methodRole": "instance-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method7-b-8-0",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationNativeEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+        "methodId": "delegate-core-invocation-native-entry.delegate-core-invocation-native-entry-c.method7-b-8-0",
+        "signature": "System.Void DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0()"
+      },
+      "methodRole": "instance-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

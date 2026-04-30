@@ -1,0 +1,105 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReflectionModulePatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "name": "ReflectionModulePatchEntry",
+      "displayName": "ReflectionModulePatchEntry",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 9,
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

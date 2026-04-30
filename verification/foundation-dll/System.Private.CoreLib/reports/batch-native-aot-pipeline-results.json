@@ -1,0 +1,411 @@
+{
+  "total": 31,
+  "passed": 31,
+  "failed": 0,
+  "results": [
+    {
+      "family": "array-indexing-copy",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\entrypoint\\build-output\\ArrayIndexingCopyNativeEntry.dll"
+    },
+    {
+      "family": "buffer-memory",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 10,
+      "entryPointSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\entrypoint\\build-output\\BufferMemoryNativeEntry.dll"
+    },
+    {
+      "family": "collections-generic-core",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 16,
+      "entryPointSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\collections-generic-core\\entrypoint\\build-output\\CollectionsGenericCoreNativeEntry.dll"
+    },
+    {
+      "family": "convert-char",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 18,
+      "entryPointSubjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\entrypoint\\build-output\\ConvertCharNativeEntry.dll"
+    },
+    {
+      "family": "enum-parsing",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 12,
+      "entryPointSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\entrypoint\\build-output\\EnumParsingNativeEntry.dll"
+    },
+    {
+      "family": "generic-nullable-value",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 10,
+      "entryPointSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\entrypoint\\build-output\\GenericNullableValueNativeEntry.dll"
+    },
+    {
+      "family": "guid-random-hashcode",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 14,
+      "entryPointSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\entrypoint\\build-output\\GuidRandomHashcodeNativeEntry.dll"
+    },
+    {
+      "family": "math-numerics",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 18,
+      "entryPointSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\math-numerics\\entrypoint\\build-output\\MathNumericsNativeEntry.dll"
+    },
+    {
+      "family": "object-equality-identity",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 7,
+      "entryPointSubjectId": "ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\object-equality-identity\\entrypoint\\build-output\\ObjectEqualityIdentityNativeEntry.dll"
+    },
+    {
+      "family": "primitive-numeric-conversions",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 15,
+      "entryPointSubjectId": "PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions\\entrypoint\\build-output\\PrimitiveNumericConversionsNativeEntry.dll"
+    },
+    {
+      "family": "string-char-text-core",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 20,
+      "entryPointSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\string-char-text-core\\entrypoint\\build-output\\StringCharTextCoreNativeEntry.dll"
+    },
+    {
+      "family": "time-date-time-timespan",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 16,
+      "entryPointSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\time-date-time-timespan\\entrypoint\\build-output\\TimeDateTimeTimespanNativeEntry.dll"
+    },
+    {
+      "family": "threading-monitor-interlocked",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 14,
+      "entryPointSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\entrypoint\\build-output\\ThreadingMonitorInterlockedNativeEntry.dll"
+    },
+    {
+      "family": "attributes-custom-metadata",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 9,
+      "entryPointSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\attributes-custom-metadata\\entrypoint\\build-output\\AttributesCustomMetadataNativeEntry.dll"
+    },
+    {
+      "family": "boxing-unboxing-casts",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 11,
+      "entryPointSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\boxing-unboxing-casts\\entrypoint\\build-output\\BoxingUnboxingCastsNativeEntry.dll"
+    },
+    {
+      "family": "delegate-core-invocation",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 10,
+      "entryPointSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\delegate-core-invocation\\entrypoint\\build-output\\DelegateCoreInvocationNativeEntry.dll"
+    },
+    {
+      "family": "exception-throw-diagnostics",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 14,
+      "entryPointSubjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\entrypoint\\build-output\\ExceptionThrowDiagnosticsNativeEntry.dll"
+    },
+    {
+      "family": "globalization-culture",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\globalization-culture\\entrypoint\\build-output\\GlobalizationCultureNativeEntry.dll"
+    },
+    {
+      "family": "io-streams-basics",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 18,
+      "entryPointSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\io-streams-basics\\entrypoint\\build-output\\IoStreamsBasicsNativeEntry.dll"
+    },
+    {
+      "family": "reflection-member-basics",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 14,
+      "entryPointSubjectId": "ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-basics\\entrypoint\\build-output\\ReflectionMemberBasicsNativeEntry.dll"
+    },
+    {
+      "family": "runtime-compiler-services",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 10,
+      "entryPointSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\runtime-compiler-services\\entrypoint\\build-output\\RuntimeCompilerServicesNativeEntry.dll"
+    },
+    {
+      "family": "span-memory-buffers",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 14,
+      "entryPointSubjectId": "SpanMemoryBuffersNativeEntry/SpanMemoryBuffersNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\entrypoint\\build-output\\SpanMemoryBuffersNativeEntry.dll"
+    },
+    {
+      "family": "type-runtime-handles",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\type-runtime-handles\\entrypoint\\build-output\\TypeRuntimeHandlesNativeEntry.dll"
+    },
+    {
+      "family": "reflection-type",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 43,
+      "entryPointSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-type\\entrypoint\\build-output\\ReflectionTypeNativeEntry.dll"
+    },
+    {
+      "family": "reflection-assembly",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 22,
+      "entryPointSubjectId": "ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-assembly\\entrypoint\\build-output\\ReflectionAssemblyNativeEntry.dll"
+    },
+    {
+      "family": "reflection-member-complete",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 22,
+      "entryPointSubjectId": "ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-complete\\entrypoint\\build-output\\ReflectionMemberCompleteNativeEntry.dll"
+    },
+    {
+      "family": "reflection-generics",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 12,
+      "entryPointSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-generics\\entrypoint\\build-output\\ReflectionGenericsNativeEntry.dll"
+    },
+    {
+      "family": "reflection-parameters",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 10,
+      "entryPointSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-parameters\\entrypoint\\build-output\\ReflectionParametersNativeEntry.dll"
+    },
+    {
+      "family": "reflection-module",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 6,
+      "entryPointSubjectId": "ReflectionModuleNativeEntry/ReflectionModuleNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\entrypoint\\build-output\\ReflectionModuleNativeEntry.dll"
+    },
+    {
+      "family": "reflection-binding",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 12,
+      "entryPointSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-binding\\entrypoint\\build-output\\ReflectionBindingNativeEntry.dll"
+    },
+    {
+      "family": "reflection-activation",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 8,
+      "entryPointSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-activation\\entrypoint\\build-output\\ReflectionActivationNativeEntry.dll"
+    }
+  ],
+  "timestamp": "2026-04-29T23:14:56"
+}

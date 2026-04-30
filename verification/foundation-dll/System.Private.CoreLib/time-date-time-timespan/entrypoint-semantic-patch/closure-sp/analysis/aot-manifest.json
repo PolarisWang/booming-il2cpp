@@ -1,0 +1,222 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
+      "reason": "external-call"
+    }
+  ]
+}

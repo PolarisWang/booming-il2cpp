@@ -1,0 +1,2176 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.run",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 MathNumericsNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.run",
+        "signature": "System.Int32 MathNumericsNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            88,
+            99,
+            110,
+            118,
+            126,
+            134,
+            142,
+            150,
+            158,
+            166,
+            174,
+            182,
+            190,
+            198,
+            206,
+            214,
+            222,
+            230
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 238,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 88,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 93,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 99,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 104,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 105,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 110,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 116,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 118,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 124,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 126,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 132,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 134,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 139,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 140,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 142,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 147,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 148,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 150,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 155,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 156,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 158,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 163,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 164,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 166,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 171,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 172,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 174,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 179,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 180,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 182,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 187,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 188,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 190,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 195,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 196,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 198,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 203,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 204,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 206,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method14:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 211,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 212,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 214,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method15:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method15:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method15:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 219,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 220,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 222,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method16:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method16:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method16:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 227,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 228,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 230,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method17:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method17:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsNativeEntry",
+            "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method17:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method17",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 235,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 236,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 238,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 239,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 240,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 242
+        },
+        {
+          "op": "ret",
+          "ilOffset": 243
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method0",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method0:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method0:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method0",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method0()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 11,
+          "ilOffset": 9,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 11
+        },
+        {
+          "op": "ret",
+          "ilOffset": 12
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method1",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method1:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method1:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method1",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method1()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method2",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method2:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method2:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method2",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method2()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method3",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method3:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method3:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method3",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method3()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method4",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method4:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method4:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method4",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method4()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method5",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method5:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method5:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method5",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method5()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method6",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method6:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method6:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method6",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method6()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 5,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 13,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 13
+        },
+        {
+          "op": "ret",
+          "ilOffset": 14
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method7",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method7:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method7:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method7",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method7()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 10,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 19,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 24,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 28
+        },
+        {
+          "op": "ret",
+          "ilOffset": 29
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method8",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method8:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method8:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method8",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method8()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 5,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 13,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 13
+        },
+        {
+          "op": "ret",
+          "ilOffset": 14
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method9",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method9:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method9:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method9",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method9()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method10",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method10:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method10:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method10",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method10()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 10,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 19,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 24,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 28
+        },
+        {
+          "op": "ret",
+          "ilOffset": 29
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method11",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method11:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method11:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method11",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method11()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method12",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method12:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method12:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method12",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method12()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method13",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method13:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method13:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method13",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method13()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 5,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 10,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 14,
+          "ilOffset": 12,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 14
+        },
+        {
+          "op": "ret",
+          "ilOffset": 15
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method14",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method14:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method14:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method14",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method14()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 3,
+          "resultType": "System.Byte[]",
+          "callee": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method15",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method15:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method15:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method15",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method15()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method15",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Byte[]",
+          "callee": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 23
+        },
+        {
+          "op": "ret",
+          "ilOffset": 24
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method16",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method16:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method16:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method16",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method16()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method16",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-native-entry.math-numerics-native-entry.method17",
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 MathNumericsNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "MathNumericsNativeEntry",
+        "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+        "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method17:System.Int32()",
+        "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method17:System.Int32()",
+        "methodId": "math-numerics-native-entry.math-numerics-native-entry.method17",
+        "signature": "System.Int32 MathNumericsNativeEntry::Method17()"
+      },
+      "nativeSymbol": "MathNumericsNativeEntry_MathNumericsNativeEntry_Method17",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 19,
+    "trimmedMethodCount": 19,
+    "entryPrefix": "MathNumericsNativeEntry"
+  }
+}

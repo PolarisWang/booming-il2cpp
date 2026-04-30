@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ExceptionThrowDiagnosticsSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Run",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method0",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method1",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method2",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method3",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method4",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method5",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method6",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method7",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method8",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method9",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method10",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method11",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method12",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ExceptionThrowDiagnosticsSemanticPatchEntry_ExceptionThrowDiagnosticsSemanticPatchEntry_Method13",
+          "subjectId": "ExceptionThrowDiagnosticsSemanticPatchEntry/ExceptionThrowDiagnosticsSemanticPatchEntry::Method13:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

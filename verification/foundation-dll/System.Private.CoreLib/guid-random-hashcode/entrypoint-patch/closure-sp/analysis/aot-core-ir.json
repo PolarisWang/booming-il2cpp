@@ -1,0 +1,1371 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.run",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.run",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            69,
+            77,
+            85,
+            93,
+            101,
+            109,
+            117,
+            125,
+            133,
+            141,
+            149,
+            157,
+            165,
+            173
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 181,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 69,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 74,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 77,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 82,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 85,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 90,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 93,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 98,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 99,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 101,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 106,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 107,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 109,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 114,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 117,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 122,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 125,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 130,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 133,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 138,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 139,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 141,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 146,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 147,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 149,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 154,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 155,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 157,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 162,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 163,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 165,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 170,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 171,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 173,
+          "resultType": "System.Int32",
+          "callee": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectKind": "method",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GuidRandomHashcodePatchEntry",
+            "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 178,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 179,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 181,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 182,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 183,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 185
+        },
+        {
+          "op": "ret",
+          "ilOffset": 186
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method0",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method0:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method0:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method0",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method0()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177280,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method1",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method1:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method1:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method1",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method1()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177279,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method2",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method2:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method2:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method2",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method2()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177278,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method3",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method3:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method3:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method3",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method3()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method4",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method4:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method4:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method4",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method4()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177276,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method5",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method5:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method5:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method5",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method5()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177275,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method6",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method6:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method6:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method6",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method6()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177274,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method7",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method7:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method7:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method7",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method7()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177273,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method8",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method8:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method8:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method8",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method8()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177272,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method9",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method9:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method9:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method9",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method9()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177271,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method10",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method10:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method10:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method10",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method10()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177270,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method11",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method11:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method11()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method11:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method11:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method11",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method11()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177269,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method12",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method12:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method12()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method12:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method12:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method12",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method12()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177268,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method13",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method13:System.Int32()",
+      "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method13()",
+      "identity": {
+        "assemblyName": "GuidRandomHashcodePatchEntry",
+        "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+        "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method13:System.Int32()",
+        "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method13:System.Int32()",
+        "methodId": "guid-random-hashcode-patch-entry.guid-random-hashcode-patch-entry.method13",
+        "signature": "System.Int32 GuidRandomHashcodePatchEntry::Method13()"
+      },
+      "nativeSymbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177267,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 15,
+    "trimmedMethodCount": 15,
+    "entryPrefix": "GuidRandomHashcodePatchEntry"
+  }
+}

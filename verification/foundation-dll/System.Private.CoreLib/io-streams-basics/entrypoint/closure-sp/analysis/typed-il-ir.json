@@ -1,0 +1,1658 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.run",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.run",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                88,
+                99,
+                110,
+                118,
+                126,
+                134,
+                142,
+                150,
+                158,
+                166,
+                174,
+                182,
+                190,
+                198,
+                206,
+                214,
+                222,
+                230
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 238,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method16:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method16:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method17:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method17:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method0",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method0:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method0:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method0",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method1",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method1:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method1:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method1",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method2",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method2:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method2:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method2",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+              "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Void",
+              "callee": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 16,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method3",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method3:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method3:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method3",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+              "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 42,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "conv.i8",
+              "resultType": "System.Int64"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int64",
+              "callee": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method4",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method4:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method4:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method4",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+              "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 42,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "conv.i8",
+              "resultType": "System.Int64"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Void",
+              "callee": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method5",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method5:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method5:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method5",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+              "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int64",
+              "callee": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 15,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method6",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method6:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method6:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method6",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+              "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int64",
+              "callee": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 15,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method7",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method7:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method7:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method7",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method8",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method8:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method8:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method8",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldstr",
+              "operand": "hello",
+              "resultType": "System.String"
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.IO.StringReader",
+              "callee": "System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.String",
+              "callee": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 23,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 28,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 31,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method9",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method9:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method9:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method9",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldstr",
+              "operand": "hello",
+              "resultType": "System.String"
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.IO.StringReader",
+              "callee": "System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.String",
+              "callee": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 23,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 28,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 31,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method10",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method10:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method10:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method10",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.IO.StringWriter",
+              "callee": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "ldstr",
+              "operand": "hello",
+              "resultType": "System.String"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Void",
+              "callee": "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method11",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method11:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method11:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method11",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.IO.StringWriter",
+              "callee": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "ldstr",
+              "operand": "hello",
+              "resultType": "System.String"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Void",
+              "callee": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method12",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method12:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method12:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method12",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.IO.StringWriter",
+              "callee": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Void",
+              "callee": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 16,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method13",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method13:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method13:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method13",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method14",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method14:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method14:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method14",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method15",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method15:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method15:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method15",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method16",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method16:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method16:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method16",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method16()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method17",
+      "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsNativeEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry",
+        "definitionSubjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method17:System.Int32()",
+        "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method17:System.Int32()",
+        "methodId": "io-streams-basics-native-entry.io-streams-basics-native-entry.method17",
+        "signature": "System.Int32 IoStreamsBasicsNativeEntry::Method17()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

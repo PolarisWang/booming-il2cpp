@@ -1,0 +1,156 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionsGenericCoreSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionsGenericCoreSemanticPatchEntry/CollectionsGenericCoreSemanticPatchEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Clear:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Sort:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::ToArray:System.Int32[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    }
+  ]
+}

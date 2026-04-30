@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/globalization/culture",
+  "verificationKind": "hotupdate-proof",
+  "totalMethods": 13,
+  "results": [
+    {
+      "methodToken": 100663297,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000000",
+      "expectedPatchedValue": "0xb0000000",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663298,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000001",
+      "expectedPatchedValue": "0xb0000001",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663299,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000002",
+      "expectedPatchedValue": "0xb0000002",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663300,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000003",
+      "expectedPatchedValue": "0xb0000003",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663301,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000004",
+      "expectedPatchedValue": "0xb0000004",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663302,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000005",
+      "expectedPatchedValue": "0xb0000005",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663303,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000006",
+      "expectedPatchedValue": "0xb0000006",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663304,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000007",
+      "expectedPatchedValue": "0xb0000007",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663305,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000008",
+      "expectedPatchedValue": "0xb0000008",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663306,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000009",
+      "expectedPatchedValue": "0xb0000009",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663307,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb000000a",
+      "expectedPatchedValue": "0xb000000a",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663308,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb000000b",
+      "expectedPatchedValue": "0xb000000b",
+      "revertVerified": true
+    },
+    {
+      "methodToken": 100663309,
+      "status": "passed",
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb000000c",
+      "expectedPatchedValue": "0xb000000c",
+      "revertVerified": true
+    }
+  ],
+  "passedMethods": 13,
+  "failedMethods": 0
+}

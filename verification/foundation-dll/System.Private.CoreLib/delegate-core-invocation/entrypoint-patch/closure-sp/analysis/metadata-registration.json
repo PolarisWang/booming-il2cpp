@@ -1,0 +1,149 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "DelegateCoreInvocationPatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "name": "DelegateCoreInvocationPatchEntry",
+      "displayName": "DelegateCoreInvocationPatchEntry",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 13,
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

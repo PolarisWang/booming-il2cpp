@@ -1,0 +1,107 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "BufferMemoryNativeEntry",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

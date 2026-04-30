@@ -1,0 +1,78 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionParametersNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Run",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Method0",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Method1",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Method2",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Method3",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Method4",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Method5",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Method6",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Method7",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Method8",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReflectionParametersNativeEntry_ReflectionParametersNativeEntry_Method9",
+          "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method9:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

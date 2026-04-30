@@ -271,6 +271,14 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.NestedExceptionThrowCatchFinallyStub.cpp.scriban";
     public const string RuntimeSkeletonThreadingThreadStaticMonitorStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.ThreadingThreadStaticMonitorStub.cpp.scriban";
+    public const string RuntimeSkeletonBufferMemoryKernelStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.BufferMemoryKernelStub.cpp.scriban";
+    public const string RuntimeSkeletonCollectionsKernelStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.CollectionsKernelStub.cpp.scriban";
+    public const string RuntimeSkeletonCollectionsManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.CollectionsManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonMathKernelStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.MathKernelStub.cpp.scriban";
 
     private static readonly IReadOnlyDictionary<string, string> TemplateRelativePathByPlanKind =
         new Dictionary<string, string>(StringComparer.Ordinal)
@@ -767,6 +775,26 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonThreadingThreadStaticMonitorStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonThreadingThreadStaticMonitorStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonBufferMemoryKernelStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonBufferMemoryKernelStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonCollectionsKernelStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonCollectionsKernelStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonCollectionsManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonCollectionsManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonMathKernelStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonMathKernelStubTemplateRelativePath);
     }
 
     public static string GetRequiredTemplateRelativePath(string planKind)

@@ -1,0 +1,85 @@
+// AUTO-GENERATED from RuntimeHelperShapeRegistry -- DO NOT EDIT
+// This file is the single source of truth for runtime helper dispatch.
+// All changes must originate in RuntimeHelperShapeRegistry.BuildDefault().
+
+#ifndef CHAOS_IL2CPP_RUNTIME_HELPER_SHAPES_H_
+#define CHAOS_IL2CPP_RUNTIME_HELPER_SHAPES_H_
+
+#include <cstdint>
+#include <cstddef>
+
+namespace chaos { namespace il2cpp { namespace shape_dispatch {
+#pragma pack(push, 1)
+
+// ---- Shape ID enum (FNV-1a hashes of canonical shape keys) ----
+enum ShapeId : uint32_t {
+{{~ for entry in shape_entries ~}}
+    {{ entry.enum_name }} = 0x{{ entry.shape_id }}u,
+{{~ end ~}}
+
+    SHAPE_COUNT = {{ shape_entry_count }}u,
+};
+
+// ---- Compile-time dispatch: NativeInt-returning shapes ----
+template <ShapeId S, typename... Args>
+CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
+{{~ for entry in native_int_entries ~}}
+    {{ entry.constexpr_prefix }} (S == {{ entry.enum_name }}) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            {{ entry.native_fn_symbol }}(args...));
+    }
+{{~ end ~}}
+    else {
+        static_assert(S != S, "Unhandled shape ID in DispatchNativeInt");
+        return 0;
+    }
+}
+
+// ---- Compile-time dispatch: Void-returning shapes ----
+template <ShapeId S, typename... Args>
+void DispatchVoid(Args... args) {
+{{~ for entry in void_entries ~}}
+    {{ entry.constexpr_prefix }} (S == {{ entry.enum_name }}) {
+        {{ entry.native_fn_symbol }}(args...);
+    }
+{{~ end ~}}
+    else {
+        static_assert(S != S, "Unhandled shape ID in DispatchVoid");
+    }
+}
+
+// ---- Compile-time dispatch: Int32-returning shapes ----
+template <ShapeId S, typename... Args>
+CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
+{{~ for entry in int32_entries ~}}
+    {{ entry.constexpr_prefix }} (S == {{ entry.enum_name }}) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            {{ entry.native_fn_symbol }}(args...));
+    }
+{{~ end ~}}
+    else {
+        static_assert(S != S, "Unhandled shape ID in DispatchInt32");
+        return 0;
+    }
+}
+
+// ---- Runtime dispatch table (HotUpdate registration) ----
+using ShapeRuntimeDispatchFn = void* (*)(void** args, uint32_t argc);
+
+struct ShapeRuntimeEntry {
+    ShapeId id;
+    ShapeRuntimeDispatchFn fn;
+};
+
+constexpr uint32_t kMaxRuntimeShapeEntries = 32;
+extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
+extern uint32_t g_runtime_shape_count;
+
+// ---- Compile-time completeness verification ----
+static_assert(SHAPE_COUNT == {{ shape_entry_count }}u,
+    "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
+
+#pragma pack(pop)
+}}}  // namespace chaos::il2cpp::shape_dispatch
+
+#endif // CHAOS_IL2CPP_RUNTIME_HELPER_SHAPES_H_

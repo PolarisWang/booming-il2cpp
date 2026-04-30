@@ -1,0 +1,91 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReflectionActivationNativeEntry",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReflectionActivationNativeEntry",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ReflectionActivationNativeEntry",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionActivationNativeEntry",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionActivationNativeEntry",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionActivationNativeEntry",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionActivationNativeEntry",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionActivationNativeEntry",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionActivationNativeEntry",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionActivationNativeEntry",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

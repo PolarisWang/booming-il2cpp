@@ -1,0 +1,108 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "PrimitiveNumericConversionsSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Run",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method0",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method1",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method2",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method3",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method4",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method5",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method6",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method7",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method8",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method9",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method10",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method11",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method12",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method13",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "PrimitiveNumericConversionsSemanticPatchEntry_PrimitiveNumericConversionsSemanticPatchEntry_Method14",
+          "subjectId": "PrimitiveNumericConversionsSemanticPatchEntry/PrimitiveNumericConversionsSemanticPatchEntry::Method14:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

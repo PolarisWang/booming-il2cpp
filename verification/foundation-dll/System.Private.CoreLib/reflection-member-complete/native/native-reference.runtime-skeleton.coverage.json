@@ -1,0 +1,20 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/member-complete",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 3,
+  "emittedMethodCount": 0,
+  "uncoveredMethodCount": 3,
+  "uncoveredReasonCounts": {
+    "python-codegen-skeleton-stub": 3
+  },
+  "uncoveredMethodSubjectIds": [
+    "System.Private.CoreLib/System.Reflection.MemberInfo:get_Name():System.String",
+    "System.Private.CoreLib/System.Reflection.MemberInfo:get_MemberType():System.Reflection.MemberTypes",
+    "System.Private.CoreLib/System.Reflection.MemberInfo:get_DeclaringType():System.Type"
+  ],
+  "coveredMethodSubjectIds": []
+}

@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ReflectionModulePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ReflectionModulePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionModulePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionModulePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionModulePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionModulePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionModulePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

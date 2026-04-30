@@ -1,0 +1,177 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "metadataToken": 33554435
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationNativeEntry",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

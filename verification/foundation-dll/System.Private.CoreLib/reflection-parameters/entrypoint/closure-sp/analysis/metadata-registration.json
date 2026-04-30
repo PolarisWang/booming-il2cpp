@@ -1,0 +1,149 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReflectionParametersNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "name": "ReflectionParametersNativeEntry",
+      "displayName": "ReflectionParametersNativeEntry",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 13,
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

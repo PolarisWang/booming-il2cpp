@@ -1,0 +1,78 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "GenericNullableValuePatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Run",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Method0",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Method1",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Method2",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Method3",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Method4",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Method5",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Method6",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Method7",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Method8",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "GenericNullableValuePatchEntry_GenericNullableValuePatchEntry_Method9",
+          "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method9:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -257,6 +257,30 @@ RUNTIME_SKELETON_ENUM_MANAGED_INVOKE_TEMPLATE_PATH = (
     / "Templates"
     / "NativeReferenceProof.RuntimeSkeleton.EnumManagedInvokeStub.cpp.scriban"
 )
+RUNTIME_SKELETON_COLLECTIONS_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.CollectionsManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_COLLECTIONS_KERNEL_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.CollectionsKernelStub.cpp.scriban"
+)
+RUNTIME_SKELETON_BUFFERMEMORY_KERNEL_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.BufferMemoryKernelStub.cpp.scriban"
+)
 
 class FullAssemblyClosureCodegenContractTestSupport(unittest.TestCase):
     pass

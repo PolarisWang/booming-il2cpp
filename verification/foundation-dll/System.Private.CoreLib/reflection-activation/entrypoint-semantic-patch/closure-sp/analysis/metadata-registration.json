@@ -1,0 +1,127 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReflectionActivationSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry",
+      "name": "ReflectionActivationSemanticPatchEntry",
+      "displayName": "ReflectionActivationSemanticPatchEntry",
+      "definitionSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 11,
+      "subjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ReflectionActivationSemanticPatchEntry/ReflectionActivationSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

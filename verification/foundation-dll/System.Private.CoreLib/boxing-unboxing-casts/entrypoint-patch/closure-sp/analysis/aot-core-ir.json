@@ -1,0 +1,1101 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.run",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.run",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            57,
+            65,
+            73,
+            81,
+            89,
+            97,
+            105,
+            113,
+            121,
+            129,
+            137
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 145,
+          "ilOffset": 55,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 57,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 62,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 63,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 65,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 70,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 71,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 73,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 78,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 79,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 81,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 86,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 87,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 89,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 95,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 97,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 102,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 103,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 110,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 111,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 118,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 119,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 121,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 126,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 127,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 129,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 134,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 135,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 137,
+          "resultType": "System.Int32",
+          "callee": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BoxingUnboxingCastsPatchEntry",
+            "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 142,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 143,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 145,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 146,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 149,
+          "ilOffset": 147,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 149
+        },
+        {
+          "op": "ret",
+          "ilOffset": 150
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method0",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method0:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method0:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method0",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method0()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177280,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method1",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method1:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method1:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method1",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method1()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177279,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method2",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method2:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method2:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method2",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method2()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177278,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method3",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method3:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method3:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method3",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method3()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method4",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method4:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method4:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method4",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method4()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177276,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method5",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method5:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method5:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method5",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method5()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177275,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method6",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method6:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method6:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method6",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method6()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177274,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method7",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method7:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method7:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method7",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method7()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177273,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method8",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method8:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method8:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method8",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method8()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177272,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method9",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method9:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method9:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method9",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method9()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177271,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method10",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "BoxingUnboxingCastsPatchEntry",
+        "declaringTypeSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+        "definitionSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method10:System.Int32()",
+        "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method10:System.Int32()",
+        "methodId": "boxing-unboxing-casts-patch-entry.boxing-unboxing-casts-patch-entry.method10",
+        "signature": "System.Int32 BoxingUnboxingCastsPatchEntry::Method10()"
+      },
+      "nativeSymbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177270,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 12,
+    "trimmedMethodCount": 12,
+    "entryPrefix": "BoxingUnboxingCastsPatchEntry"
+  }
+}

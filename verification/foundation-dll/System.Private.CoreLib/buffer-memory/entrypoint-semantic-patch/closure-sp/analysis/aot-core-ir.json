@@ -1,0 +1,1074 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.run",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.run",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            53,
+            61,
+            69,
+            77,
+            85,
+            93,
+            101,
+            109,
+            117,
+            125
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 133,
+          "ilOffset": 51,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 53,
+          "resultType": "System.Int32",
+          "callee": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 58,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 59,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 61,
+          "resultType": "System.Int32",
+          "callee": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 66,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 69,
+          "resultType": "System.Int32",
+          "callee": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 74,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 77,
+          "resultType": "System.Int32",
+          "callee": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 82,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 85,
+          "resultType": "System.Int32",
+          "callee": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 90,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 93,
+          "resultType": "System.Int32",
+          "callee": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 98,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 99,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 101,
+          "resultType": "System.Int32",
+          "callee": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 106,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 107,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 109,
+          "resultType": "System.Int32",
+          "callee": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 114,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 117,
+          "resultType": "System.Int32",
+          "callee": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 122,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 125,
+          "resultType": "System.Int32",
+          "callee": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "BufferMemorySemanticPatchEntry",
+            "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 130,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 133,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 134,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 135,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 137
+        },
+        {
+          "op": "ret",
+          "ilOffset": 138
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method0",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method0:System.Int32()",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method0:System.Int32()",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method0",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method0()"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method1",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method1:System.Int32()",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method1:System.Int32()",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method1",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method1()"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method2",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method2:System.Int32()",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method2:System.Int32()",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method2",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method2()"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "dup",
+          "ilOffset": 7
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 9,
+          "ilOffset": 9,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stelem",
+          "operand": "System.SByte",
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13
+        },
+        {
+          "op": "call",
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 20,
+          "ilOffset": 18,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 20
+        },
+        {
+          "op": "ret",
+          "ilOffset": 21
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method3",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method3:System.Int32()",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method3:System.Int32()",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method3",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method3()"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method4",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method4:System.Int32()",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method4:System.Int32()",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method4",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method4()"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method5",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method5:System.Int32()",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method5:System.Int32()",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method5",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method5()"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method6",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method6:System.Int32()",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method6:System.Int32()",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method6",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method6()"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method7",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method7:System.Int32()",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method7:System.Int32()",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method7",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method7()"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method8",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method8:System.Int32()",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method8:System.Int32()",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method8",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method8()"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method9",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "BufferMemorySemanticPatchEntry",
+        "declaringTypeSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry",
+        "definitionSubjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method9:System.Int32()",
+        "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method9:System.Int32()",
+        "methodId": "buffer-memory-semantic-patch-entry.buffer-memory-semantic-patch-entry.method9",
+        "signature": "System.Int32 BufferMemorySemanticPatchEntry::Method9()"
+      },
+      "nativeSymbol": "BufferMemorySemanticPatchEntry_BufferMemorySemanticPatchEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 11,
+    "trimmedMethodCount": 11,
+    "entryPrefix": "BufferMemorySemanticPatchEntry"
+  }
+}

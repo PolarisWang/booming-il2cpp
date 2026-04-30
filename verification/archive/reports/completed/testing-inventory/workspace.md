@@ -4,7 +4,7 @@
 - stageKind: workspace
 - closureId: closure/completed/testing-inventory
 - scopeCode: testing-inventory
-- verificationState: missing
+- verificationState: passed
 - supportState: supported
 
 ## Covered Obligations
@@ -22,6 +22,7 @@
 - obligation/14/61
 - obligation/14/64
 - obligation/9/39
+- obligation/6/22
 - obligation/12/53
 - obligation/1/1
 - obligation/1/7
@@ -55,7 +56,6 @@
 - obligation/6/26
 - obligation/9/42
 - obligation/7/32
-- obligation/6/22
 - obligation/6/23
 - obligation/8/37
 - obligation/7/31
@@ -81,7 +81,14 @@
 - evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()/workspace
 - evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()/workspace
 - evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/workspace
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()/workspace
@@ -138,6 +145,7 @@
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()/workspace
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/workspace
@@ -150,17 +158,7 @@
 - n/a
 
 ## Missing Claims
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/workspace
+- n/a
 
 ## Blockers
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- n/a

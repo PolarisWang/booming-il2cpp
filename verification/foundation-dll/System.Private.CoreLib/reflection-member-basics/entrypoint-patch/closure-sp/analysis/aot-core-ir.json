@@ -1,0 +1,1371 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.run",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.run",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            69,
+            77,
+            85,
+            93,
+            101,
+            109,
+            117,
+            125,
+            133,
+            141,
+            149,
+            157,
+            165,
+            173
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 181,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 69,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 74,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 77,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 82,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 85,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 90,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 93,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 98,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 99,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 101,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 106,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 107,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 109,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 114,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 117,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 122,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 125,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 130,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 133,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 138,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 139,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 141,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 146,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 147,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 149,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 154,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 155,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 157,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 162,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 163,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 165,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 170,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 171,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 173,
+          "resultType": "System.Int32",
+          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 178,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 179,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 181,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 182,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 183,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 185
+        },
+        {
+          "op": "ret",
+          "ilOffset": 186
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method0",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method0:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method0:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method0",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method0()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177280,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method1",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method1:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method1:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method1",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method1()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177279,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method2",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method2:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method2:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method2",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method2()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177278,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method3",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method3:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method3:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method3",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method3()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method4",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method4:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method4:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method4",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method4()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177276,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method5",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method5:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method5:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method5",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method5()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177275,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method6",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method6:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method6:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method6",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method6()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177274,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method7",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method7:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method7:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method7",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method7()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177273,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method8",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method8:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method8:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method8",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method8()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177272,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method9",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method9:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method9:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method9",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method9()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177271,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method10",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method10:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method10:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method10",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method10()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177270,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method11",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method11:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method11()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method11:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method11:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method11",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method11()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177269,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method12",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method12:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method12()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method12:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method12:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method12",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method12()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177268,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method13",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method13:System.Int32()",
+      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method13()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsPatchEntry",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method13:System.Int32()",
+        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method13:System.Int32()",
+        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.method13",
+        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Method13()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177267,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 15,
+    "trimmedMethodCount": 15,
+    "entryPrefix": "ReflectionMemberBasicsPatchEntry"
+  }
+}

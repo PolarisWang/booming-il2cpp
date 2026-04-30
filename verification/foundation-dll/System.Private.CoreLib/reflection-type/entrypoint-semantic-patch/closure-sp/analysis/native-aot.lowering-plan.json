@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "ReflectionTypeSemanticPatchEntry",
+  "entrySubjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Run:System.Int32(System.Int32)",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Run",
+  "entryMethodToken": "0u",
+  "workloadAbi": "int(int32)"
+}

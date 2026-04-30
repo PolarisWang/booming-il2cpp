@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>SystemPrivateCoreLib_ReflectionGenericsNativeEntry</AssemblyName>
+    <RootNamespace>SystemPrivateCoreLib_ReflectionGenericsNativeEntry</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="SystemPrivateCoreLib_ReflectionGenericsNativeEntry.cs" />
+  </ItemGroup>
+</Project>

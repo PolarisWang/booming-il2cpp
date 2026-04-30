@@ -1,0 +1,1977 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.run",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.run",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            69,
+            77,
+            85,
+            93,
+            101,
+            109,
+            117,
+            125,
+            133,
+            141,
+            149,
+            157,
+            165,
+            173
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 181,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 69,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 74,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 77,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 82,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 85,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 90,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 93,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 98,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 99,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 101,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 106,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 107,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 109,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 114,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 117,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 122,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 125,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 130,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 133,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 138,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 139,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 141,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 146,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 147,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 149,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 154,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 155,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 157,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 162,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 163,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 165,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 170,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 171,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 173,
+          "resultType": "System.Int32",
+          "callee": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+            "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 178,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 179,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 181,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 182,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 185,
+          "ilOffset": 183,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 185
+        },
+        {
+          "op": "ret",
+          "ilOffset": 186
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method0",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method0:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method0:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method0",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method0()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.Object",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "callee": "System.Threading/Monitor::Enter:System.Void(System.Object)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Monitor::Enter:System.Void(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Monitor::Enter:System.Void(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method1",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method1:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method1:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method1",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method1()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.Object",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "callee": "System.Threading/Monitor::Exit:System.Void(System.Object)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Monitor::Exit:System.Void(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Monitor::Exit:System.Void(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method2",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method2:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method2:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method2",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method2()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Boolean",
+          "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 18,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 18,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 22,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 22
+        },
+        {
+          "op": "ret",
+          "ilOffset": 23
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method3",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method3:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method3:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method3",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method3()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Boolean",
+          "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 20,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 21,
+          "ilOffset": 18,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 20,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 24,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 24
+        },
+        {
+          "op": "ret",
+          "ilOffset": 25
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method4",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method4:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method4:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method4",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method4()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "callee": "System.Threading/Monitor::Pulse:System.Void(System.Object)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Monitor::Pulse:System.Void(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Monitor::Pulse:System.Void(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 18,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 18
+        },
+        {
+          "op": "ret",
+          "ilOffset": 19
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method5",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method5:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method5:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method5",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method5()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "callee": "System.Threading/Monitor::PulseAll:System.Void(System.Object)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Monitor::PulseAll:System.Void(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Monitor::PulseAll:System.Void(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 18,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 18
+        },
+        {
+          "op": "ret",
+          "ilOffset": 19
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method6",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method6:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method6:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method6",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method6()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Boolean",
+          "callee": "System.Threading/Monitor::Wait:System.Boolean(System.Object)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Monitor::Wait:System.Boolean(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Monitor::Wait:System.Boolean(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 18,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 18,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 22,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 22
+        },
+        {
+          "op": "ret",
+          "ilOffset": 23
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method7",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method7:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method7:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method7",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method7()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Threading/Interlocked::Increment:System.Int32(System.Int32&)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Interlocked::Increment:System.Int32(System.Int32&)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Interlocked::Increment:System.Int32(System.Int32&)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 14,
+          "ilOffset": 12,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 14
+        },
+        {
+          "op": "ret",
+          "ilOffset": 15
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method8",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method8:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method8:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method8",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method8()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Threading/Interlocked::Decrement:System.Int32(System.Int32&)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Interlocked::Decrement:System.Int32(System.Int32&)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Interlocked::Decrement:System.Int32(System.Int32&)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 14,
+          "ilOffset": 12,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 14
+        },
+        {
+          "op": "ret",
+          "ilOffset": 15
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method9",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method9:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method9:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method9",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method9()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Threading/Interlocked::Exchange:System.Int32(System.Int32&,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Interlocked::Exchange:System.Int32(System.Int32&,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Interlocked::Exchange:System.Int32(System.Int32&,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method10",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method10:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method10:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method10",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method10()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "callee": "System.Threading/Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 18,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 18
+        },
+        {
+          "op": "ret",
+          "ilOffset": 19
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method11",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method11:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method11:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method11",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method11()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Threading/Interlocked::Add:System.Int32(System.Int32&,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Interlocked::Add:System.Int32(System.Int32&,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Interlocked::Add:System.Int32(System.Int32&,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method12",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method12:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method12:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method12",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method12()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Threading/Interlocked::MemoryBarrier:System.Void()",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Interlocked::MemoryBarrier:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Interlocked::MemoryBarrier:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 11,
+          "ilOffset": 9,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 11
+        },
+        {
+          "op": "ret",
+          "ilOffset": 12
+        }
+      ]
+    },
+    {
+      "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method13",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedNativeEntry",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+        "definitionSubjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method13:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method13:System.Int32()",
+        "methodId": "threading-monitor-interlocked-native-entry.threading-monitor-interlocked-native-entry.method13",
+        "signature": "System.Int32 ThreadingMonitorInterlockedNativeEntry::Method13()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedNativeEntry_ThreadingMonitorInterlockedNativeEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Threading/Volatile::Read:System.Int32(System.Int32&)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Volatile::Read:System.Int32(System.Int32&)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Volatile::Read:System.Int32(System.Int32&)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 14,
+          "ilOffset": 12,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 14
+        },
+        {
+          "op": "ret",
+          "ilOffset": 15
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 15,
+    "trimmedMethodCount": 15,
+    "entryPrefix": "ThreadingMonitorInterlockedNativeEntry"
+  }
+}

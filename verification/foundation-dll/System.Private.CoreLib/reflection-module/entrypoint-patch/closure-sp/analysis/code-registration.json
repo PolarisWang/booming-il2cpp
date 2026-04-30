@@ -1,0 +1,54 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionModulePatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Run",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Method0",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Method1",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Method2",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Method3",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Method4",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Method5",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Method5:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

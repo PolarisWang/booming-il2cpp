@@ -1,0 +1,155 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method7:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method8:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method9:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method10:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method11:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method12:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method13:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method14:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanSemanticPatchEntry",
+      "subjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method15:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ConvertCharSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "name": "ConvertCharSemanticPatchEntry",
+      "displayName": "ConvertCharSemanticPatchEntry",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method13:System.Int32()",
+      "name": "Method13",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method14:System.Int32()",
+      "name": "Method14",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method15:System.Int32()",
+      "name": "Method15",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method16:System.Int32()",
+      "name": "Method16",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method16:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method17:System.Int32()",
+      "name": "Method17",
+      "definitionSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method17:System.Int32()",
+      "declaringTypeSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 21,
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

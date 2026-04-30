@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\entrypoint-patch\\build-output\\ExceptionThrowDiagnosticsPatchEntry.dll"
+    ],
+    "entry": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Int32(System.Int32)"
+  }
+}

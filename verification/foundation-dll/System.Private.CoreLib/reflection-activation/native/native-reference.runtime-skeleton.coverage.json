@@ -1,0 +1,23 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/activation",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 8,
+  "emittedMethodCount": 8,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)",
+    "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])",
+    "System.Private.CoreLib/System.Activator::CreateInstance:T()",
+    "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
+    "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
+    "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)",
+    "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32[])",
+    "System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])"
+  ]
+}

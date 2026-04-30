@@ -1,0 +1,126 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/\u003CPrivateImplementationDetails\u003E",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method13:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method10:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method11:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/\u003CPrivateImplementationDetails\u003E::06DF4F7E1394F1C57CC6583FBA4D8060A5A66F4F4771C14AEFF6B9AF8A28C9B3",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    }
+  ],
+  "exceptionFacts": []
+}

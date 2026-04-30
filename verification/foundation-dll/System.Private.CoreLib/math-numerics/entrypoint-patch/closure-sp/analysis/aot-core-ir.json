@@ -1,0 +1,1731 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.run",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 MathNumericsPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.run",
+        "signature": "System.Int32 MathNumericsPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            88,
+            99,
+            110,
+            118,
+            126,
+            134,
+            142,
+            150,
+            158,
+            166,
+            174,
+            182,
+            190,
+            198,
+            206,
+            214,
+            222,
+            230
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 238,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 88,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 93,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 99,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 104,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 105,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 110,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 116,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 118,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 124,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 126,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 132,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 134,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 139,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 140,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 142,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 147,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 148,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 150,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 155,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 156,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 158,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 163,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 164,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 166,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 171,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 172,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 174,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 179,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 180,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 182,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 187,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 188,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 190,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 195,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 196,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 198,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 203,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 204,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 206,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method14:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 211,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 212,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 214,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method15:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method15:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method15:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 219,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 220,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 222,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method16:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method16:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method16:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 227,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 228,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 230,
+          "resultType": "System.Int32",
+          "callee": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method17:System.Int32()",
+          "reference": {
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method17:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "MathNumericsPatchEntry",
+            "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method17:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method17",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 235,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 236,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 238,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 239,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 240,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 242
+        },
+        {
+          "op": "ret",
+          "ilOffset": 243
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method0",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method0:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method0:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method0",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method0()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177280,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method1",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method1:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method1:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method1",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method1()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177279,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method2",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method2:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method2:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method2",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method2()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177278,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method3",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method3:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method3:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method3",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method3()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method4",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method4:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method4:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method4",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method4()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177276,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method5",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method5:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method5:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method5",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method5()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177275,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method6",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method6:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method6:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method6",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method6()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177274,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method7",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method7:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method7:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method7",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method7()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177273,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method8",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method8:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method8:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method8",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method8()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177272,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method9",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method9:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method9:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method9",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method9()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177271,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method10",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method10:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method10:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method10",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method10()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177270,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method11",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method11:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method11()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method11:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method11:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method11",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method11()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177269,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method12",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method12:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method12()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method12:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method12:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method12",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method12()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177268,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method13",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method13:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method13()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method13:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method13:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method13",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method13()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177267,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method14",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method14:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method14()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method14:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method14:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method14",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method14()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177266,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method15",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method15:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method15()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method15:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method15:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method15",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method15()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method15",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177265,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method16",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method16:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method16()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method16:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method16:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method16",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method16()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method16",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177264,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method17",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method17:System.Int32()",
+      "signature": "System.Int32 MathNumericsPatchEntry::Method17()",
+      "identity": {
+        "assemblyName": "MathNumericsPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+        "definitionSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method17:System.Int32()",
+        "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method17:System.Int32()",
+        "methodId": "math-numerics-patch-entry.math-numerics-patch-entry.method17",
+        "signature": "System.Int32 MathNumericsPatchEntry::Method17()"
+      },
+      "nativeSymbol": "MathNumericsPatchEntry_MathNumericsPatchEntry_Method17",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177263,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 19,
+    "trimmedMethodCount": 19,
+    "entryPrefix": "MathNumericsPatchEntry"
+  }
+}

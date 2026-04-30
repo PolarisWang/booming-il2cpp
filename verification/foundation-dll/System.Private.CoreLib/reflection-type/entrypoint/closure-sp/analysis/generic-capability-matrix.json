@@ -1,0 +1,1091 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "genericCapabilityMatrix",
+  "ownerSubjectId": "ReflectionTypeNativeEntry",
+  "entrySubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Run:System.Int32(System.Int32)",
+  "hotUpdateModes": [
+    "HotUpdateNone",
+    "HotUpdateMetadataAugmented",
+    "HotUpdateGenericSharing"
+  ],
+  "gates": {
+    "status": "ok",
+    "unsupportedLeakCount": 0,
+    "missingAuthorityCount": 0,
+    "nonCanonicalHotUpdateNameCount": 0,
+    "leaks": []
+  },
+  "familyBudgets": [
+    {
+      "familyId": "ClosedGenericType",
+      "displayName": "Closed Generic Type",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedMethodOnGenericType",
+      "displayName": "Closed Method On Generic Type",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedGenericMethod",
+      "displayName": "Closed Generic Method",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedGenericMethodOnGenericType",
+      "displayName": "Closed Generic Method On Generic Type",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "CrossAssemblyBoundary",
+      "displayName": "Cross Assembly Boundary",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "DispatchBoundary",
+      "displayName": "Dispatch Boundary",
+      "budgetLimit": 128,
+      "observedCount": 44
+    },
+    {
+      "familyId": "ReflectionBoundary",
+      "displayName": "Reflection Boundary",
+      "budgetLimit": 64,
+      "observedCount": 79
+    },
+    {
+      "familyId": "HotUpdateBoundary",
+      "displayName": "HotUpdate Boundary",
+      "budgetLimit": 64,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncTaskFamily",
+      "displayName": "Async Task Family",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncValueTaskFamily",
+      "displayName": "Async ValueTask Family",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncBuilderFamily",
+      "displayName": "Async Builder Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncAwaiterFamily",
+      "displayName": "Async Awaiter Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "PointerByRefFamily",
+      "displayName": "Pointer And ByRef Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "RefStructFamily",
+      "displayName": "Ref Struct Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    }
+  ],
+  "boundaryCases": [
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method10:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method10:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method10:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method11:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method11:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsAbstract:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method12:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method12:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsSealed:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method13:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method13:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsInterface:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method14:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method14:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method15:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method15:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsByRef:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method16:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method16:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsPointer:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method17:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method17:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method17:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method18:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method18:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method18:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method19:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method19:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsNested:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method20:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method20:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsPublic:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method21:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method21:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsNotPublic:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method22:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method22:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsNestedPublic:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method23:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method23:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsNestedPrivate:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method24:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method24:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method24:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method24:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method25:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method25:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method25:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method25:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method26:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method26:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_ReflectedType:System.Type()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method26:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_ReflectedType:System.Type()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method26:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method27:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method27:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_UnderlyingSystemType:System.Type()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method27:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_UnderlyingSystemType:System.Type()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method27:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method28:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method28:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method28:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method29:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method29:System.Int32()",
+      "ilOffset": 12,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method29:System.Int32()",
+      "ilOffset": 12,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method29:System.Int32()",
+      "ilOffset": 17,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method30:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method30:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method30:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method31:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method31:System.Int32()",
+      "ilOffset": 12,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method31:System.Int32()",
+      "ilOffset": 12,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method31:System.Int32()",
+      "ilOffset": 17,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method32:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method32:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method32:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method33:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method33:System.Int32()",
+      "ilOffset": 12,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method33:System.Int32()",
+      "ilOffset": 12,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method33:System.Int32()",
+      "ilOffset": 17,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method34:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method34:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method34:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method34:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method35:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method35:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method35:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method36:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method36:System.Int32()",
+      "ilOffset": 12,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method36:System.Int32()",
+      "ilOffset": 12,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method36:System.Int32()",
+      "ilOffset": 17,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method37:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method37:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method37:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method38:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method38:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method38:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method38:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method39:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method39:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetElementType:System.Type()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method39:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetElementType:System.Type()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method39:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method3:System.Int32()",
+      "ilOffset": 10,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method3:System.Int32()",
+      "ilOffset": 15,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method40:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method40:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method40:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method41:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method41:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method41:System.Int32()",
+      "ilOffset": 21,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method42:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method42:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method42:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method42:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method4:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method4:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method4:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method4:System.Int32()",
+      "ilOffset": 23,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method5:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method5:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method5:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method5:System.Int32()",
+      "ilOffset": 23,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method6:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method6:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Namespace:System.String()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method6:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Namespace:System.String()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method6:System.Int32()",
+      "ilOffset": 23,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method7:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method7:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_AssemblyQualifiedName:System.String()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method7:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_AssemblyQualifiedName:System.String()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method7:System.Int32()",
+      "ilOffset": 23,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method8:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method8:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method8:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+      "evidenceKind": "callvirt-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method9:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "ReflectionBoundary",
+      "sourceMethodSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method9:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+      "evidenceKind": "call-reflection-target",
+      "status": "observed"
+    }
+  ],
+  "entries": []
+}

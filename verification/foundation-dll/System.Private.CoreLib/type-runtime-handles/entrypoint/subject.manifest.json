@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\type-runtime-handles\\entrypoint\\build-output\\TypeRuntimeHandlesNativeEntry.dll"
+    ],
+    "entry": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "EnumParsingNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Run",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method0",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method1",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method2",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method3",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method4",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method5",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method6",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method7",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method8",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method9",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method10",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "EnumParsingNativeEntry_EnumParsingNativeEntry_Method11",
+          "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method11:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

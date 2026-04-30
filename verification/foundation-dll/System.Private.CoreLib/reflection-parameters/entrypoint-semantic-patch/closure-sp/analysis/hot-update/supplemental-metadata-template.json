@@ -1,0 +1,107 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method7:System.Int32()",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method8:System.Int32()",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionParametersSemanticPatchEntry",
+      "subjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method9:System.Int32()",
+      "definitionSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionParametersSemanticPatchEntry/ReflectionParametersSemanticPatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

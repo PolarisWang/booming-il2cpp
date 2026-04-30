@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-28T14:39:17.081756Z",
+  "generatedAtUtc": "2026-04-30T05:06:55.400112Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "closureId": "closure/completed/testing-inventory",
@@ -1369,7 +1369,7 @@
         ],
         "proofRequired": true,
         "benchmarkRequired": true,
-        "declaredUnitCount": 1,
+        "declaredUnitCount": 3,
         "declaredBenchmarkCount": 1,
         "contractStatus": "ok",
         "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
@@ -2755,7 +2755,7 @@
         "semantic",
         "perf"
       ],
-      "verificationState": "missing",
+      "verificationState": "failed",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",
@@ -3115,7 +3115,7 @@
         "semantic",
         "perf"
       ],
-      "verificationState": "missing",
+      "verificationState": "planned",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",
@@ -3223,7 +3223,7 @@
         "semantic",
         "perf"
       ],
-      "verificationState": "missing",
+      "verificationState": "planned",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",
@@ -3275,7 +3275,7 @@
         "contract",
         "semantic"
       ],
-      "verificationState": "missing",
+      "verificationState": "planned",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",
@@ -3327,7 +3327,7 @@
         "contract",
         "semantic"
       ],
-      "verificationState": "missing",
+      "verificationState": "planned",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",
@@ -3379,7 +3379,7 @@
         "contract",
         "semantic"
       ],
-      "verificationState": "missing",
+      "verificationState": "planned",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",

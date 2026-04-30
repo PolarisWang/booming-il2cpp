@@ -1,0 +1,1482 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.run",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.run",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            53,
+            61,
+            69,
+            77,
+            85,
+            93,
+            101,
+            109,
+            117,
+            125
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 133,
+          "ilOffset": 51,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 53,
+          "resultType": "System.Int32",
+          "callee": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 58,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 59,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 61,
+          "resultType": "System.Int32",
+          "callee": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 66,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 69,
+          "resultType": "System.Int32",
+          "callee": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 74,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 77,
+          "resultType": "System.Int32",
+          "callee": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 82,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 85,
+          "resultType": "System.Int32",
+          "callee": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 90,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 93,
+          "resultType": "System.Int32",
+          "callee": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 98,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 99,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 101,
+          "resultType": "System.Int32",
+          "callee": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 106,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 107,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 109,
+          "resultType": "System.Int32",
+          "callee": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 114,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 117,
+          "resultType": "System.Int32",
+          "callee": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 122,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 125,
+          "resultType": "System.Int32",
+          "callee": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "RuntimeCompilerServicesNativeEntry",
+            "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 130,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 133,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 134,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 135,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 137
+        },
+        {
+          "op": "ret",
+          "ilOffset": 138
+        }
+      ]
+    },
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method0",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method0:System.Int32()",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method0:System.Int32()",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method0",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method0()"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method1",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method1:System.Int32()",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method1:System.Int32()",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method1",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method1()"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 10,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "call",
+          "ilOffset": 15,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 25,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 26,
+          "ilOffset": 23,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 29,
+          "ilOffset": 27,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "ret",
+          "ilOffset": 30
+        }
+      ]
+    },
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method2",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method2:System.Int32()",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method2:System.Int32()",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method2",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method2()"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 13
+        },
+        {
+          "op": "brtrue",
+          "operand": 20,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 16
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 25,
+          "ilOffset": 18,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 28
+        },
+        {
+          "op": "ret",
+          "ilOffset": 29
+        }
+      ]
+    },
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method3",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method3:System.Int32()",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method3:System.Int32()",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method3",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method3()"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method4",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method4:System.Int32()",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method4:System.Int32()",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method4",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method4()"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method5",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method5:System.Int32()",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method5:System.Int32()",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method5",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method5()"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method6",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method6:System.Int32()",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method6:System.Int32()",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method6",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method6()"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method7",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method7:System.Int32()",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method7:System.Int32()",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method7",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method7()"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "hello",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Object[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.FormattableString",
+          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.FormattableString(System.String,System.Object[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.FormattableString(System.String,System.Object[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.FormattableString(System.String,System.Object[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 24,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 24
+        },
+        {
+          "op": "ret",
+          "ilOffset": 25
+        }
+      ]
+    },
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method8",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method8:System.Int32()",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method8:System.Int32()",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method8",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method8()"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "newobj",
+          "ilOffset": 8,
+          "resultType": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException",
+          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "pop",
+          "ilOffset": 13
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 18,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 18
+        },
+        {
+          "op": "ret",
+          "ilOffset": 19
+        }
+      ]
+    },
+    {
+      "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method9",
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "RuntimeCompilerServicesNativeEntry",
+        "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+        "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method9:System.Int32()",
+        "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method9:System.Int32()",
+        "methodId": "runtime-compiler-services-native-entry.runtime-compiler-services-native-entry.method9",
+        "signature": "System.Int32 RuntimeCompilerServicesNativeEntry::Method9()"
+      },
+      "nativeSymbol": "RuntimeCompilerServicesNativeEntry_RuntimeCompilerServicesNativeEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "newobj",
+          "ilOffset": 8,
+          "resultType": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException",
+          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "call",
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 18
+        },
+        {
+          "op": "brtrue",
+          "operand": 25,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 21
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 30,
+          "ilOffset": 23,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 30,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 33,
+          "ilOffset": 31,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 33
+        },
+        {
+          "op": "ret",
+          "ilOffset": 34
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 11,
+    "trimmedMethodCount": 11,
+    "entryPrefix": "RuntimeCompilerServicesNativeEntry"
+  }
+}

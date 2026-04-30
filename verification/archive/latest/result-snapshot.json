@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-28T14:39:17.081756Z",
+  "generatedAtUtc": "2026-04-30T05:06:55.400112Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "closureId": "closure/completed/testing-inventory",
@@ -1804,12 +1804,24 @@
       "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/collector",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/registry",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/workspace",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/managed-proof",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/native-proof",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/hotupdate-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/collector",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/registry",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/hotupdate-proof",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/collector",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/registry",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/workspace",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/managed-proof",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/native-proof",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/hotupdate-proof",
         "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
@@ -1829,7 +1841,7 @@
         ],
         "proofRequired": true,
         "benchmarkRequired": true,
-        "declaredUnitCount": 1,
+        "declaredUnitCount": 3,
         "declaredBenchmarkCount": 1,
         "contractStatus": "ok",
         "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
@@ -3637,7 +3649,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "missing",
+      "verificationState": "failed",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/collector",
@@ -4112,7 +4124,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "missing",
+      "verificationState": "planned",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/collector",
@@ -4252,7 +4264,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "missing",
+      "verificationState": "planned",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/collector",
@@ -4322,7 +4334,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "missing",
+      "verificationState": "planned",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/collector",
@@ -4389,7 +4401,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "missing",
+      "verificationState": "planned",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/collector",
@@ -4456,7 +4468,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "missing",
+      "verificationState": "planned",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/collector",

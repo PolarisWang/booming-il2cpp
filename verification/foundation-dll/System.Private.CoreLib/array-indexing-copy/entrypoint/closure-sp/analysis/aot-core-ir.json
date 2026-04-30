@@ -1,0 +1,2329 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.run",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.run",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            65,
+            73,
+            81,
+            89,
+            97,
+            105,
+            113,
+            121,
+            129,
+            137,
+            145,
+            153,
+            161
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 169,
+          "ilOffset": 63,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 65,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 70,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 71,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 73,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 78,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 79,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 81,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 86,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 87,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 89,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 95,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 97,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 102,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 103,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 110,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 111,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 118,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 119,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 121,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 126,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 127,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 129,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 134,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 135,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 137,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 142,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 143,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 145,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 150,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 151,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 153,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 158,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 159,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 161,
+          "resultType": "System.Int32",
+          "callee": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ArrayIndexingCopyNativeEntry",
+            "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 166,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 167,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 169,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 170,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 171,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 173
+        },
+        {
+          "op": "ret",
+          "ilOffset": 174
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method0",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method0:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method0:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method0",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method0()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 8,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 20,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 24,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 24
+        },
+        {
+          "op": "ret",
+          "ilOffset": 25
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method1",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method1:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method1:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method1",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method1()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 9,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 26,
+          "ilOffset": 24,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 26
+        },
+        {
+          "op": "ret",
+          "ilOffset": 27
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method2",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method2:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method2:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method2",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method2()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 9,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method3",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method3:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method3:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method3",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method3()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method4",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method4:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method4:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method4",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method4()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Byte[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty<System.Byte>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Array::Sort<System.Byte>:System.Void(System.Byte[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Sort<System.Byte>:System.Void(System.Byte[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Sort<System.Byte>:System.Void(System.Byte[])",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(!!0[])",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Sort:System.Void(!!0[]);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Sort:System.Void(!!0[]);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(!!0[])",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Sort:System.Void(!!0[]);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Sort:System.Void(!!0[]);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Sort<System.Byte>:System.Void(System.Byte[])",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(!!0[])",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Sort<System.Byte>(System.Byte[])",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(!!0[])",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method5",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method5:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method5:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method5",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method5()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldnull",
+          "ilOffset": 7,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Array::Sort<System.Byte>:System.Void(System.Byte[],System.Collections.Generic.IComparer<System.Byte>)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Sort<System.Byte>:System.Void(System.Byte[],System.Collections.Generic.IComparer<System.Byte>)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Sort<System.Byte>:System.Void(System.Byte[],System.Collections.Generic.IComparer<System.Byte>)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(!!0[],System.Collections.Generic.IComparer<!!0>)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Sort:System.Void(!!0[],System.Collections.Generic.IComparer<!!0>);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Sort:System.Void(!!0[],System.Collections.Generic.IComparer<!!0>);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(!!0[],System.Collections.Generic.IComparer<!!0>)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Sort:System.Void(!!0[],System.Collections.Generic.IComparer<!!0>);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Sort:System.Void(!!0[],System.Collections.Generic.IComparer<!!0>);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Sort<System.Byte>:System.Void(System.Byte[],System.Collections.Generic.IComparer<System.Byte>)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(!!0[],System.Collections.Generic.IComparer<!!0>)",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Sort<System.Byte>(System.Byte[],System.Collections.Generic.IComparer<System.Byte>)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(!!0[],System.Collections.Generic.IComparer<!!0>)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 18,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 18
+        },
+        {
+          "op": "ret",
+          "ilOffset": 19
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method6",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method6:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method6:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method6",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method6()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Byte)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Byte)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Byte)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],!!0)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Byte)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],!!0)",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::BinarySearch<System.Byte>(System.Byte[],System.Byte)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 17,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 17
+        },
+        {
+          "op": "ret",
+          "ilOffset": 18
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method7",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method7:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method7:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method7",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method7()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 9,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Int32,System.Int32,System.Byte)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Int32,System.Int32,System.Byte)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Int32,System.Int32,System.Byte)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],System.Int32,System.Int32,!!0)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],System.Int32,System.Int32,!!0);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],System.Int32,System.Int32,!!0);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],System.Int32,System.Int32,!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],System.Int32,System.Int32,!!0);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],System.Int32,System.Int32,!!0);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Int32,System.Int32,System.Byte)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],System.Int32,System.Int32,!!0)",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::BinarySearch<System.Byte>(System.Byte[],System.Int32,System.Int32,System.Byte)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],System.Int32,System.Int32,!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method8",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method8:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method8:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method8",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method8()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Array::IndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::IndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::IndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(!!0[],!!0)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::IndexOf:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::IndexOf:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(!!0[],!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::IndexOf:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::IndexOf:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::IndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(!!0[],!!0)",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::IndexOf<System.Byte>(System.Byte[],System.Byte)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(!!0[],!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 17,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 17
+        },
+        {
+          "op": "ret",
+          "ilOffset": 18
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method9",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method9:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method9:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method9",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method9()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 2,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Array::LastIndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::LastIndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::LastIndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(!!0[],!!0)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(!!0[],!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(!!0[],!!0);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::LastIndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(!!0[],!!0)",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::LastIndexOf<System.Byte>(System.Byte[],System.Byte)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(!!0[],!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 17,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 17
+        },
+        {
+          "op": "ret",
+          "ilOffset": 18
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method10",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method10:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method10:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method10",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method10()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Byte[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty<System.Byte>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Array::Reverse<System.Byte>:System.Void(System.Byte[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Reverse<System.Byte>:System.Void(System.Byte[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Reverse<System.Byte>:System.Void(System.Byte[])",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(!!0[])",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Reverse:System.Void(!!0[]);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Reverse:System.Void(!!0[]);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(!!0[])",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Reverse:System.Void(!!0[]);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Reverse:System.Void(!!0[]);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Reverse<System.Byte>:System.Void(System.Byte[])",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(!!0[])",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Reverse<System.Byte>(System.Byte[])",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(!!0[])",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method11",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method11:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method11:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method11",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method11()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newobj",
+          "ilOffset": 3,
+          "resultType": "System.Private.CoreLib/System.Int32[,]",
+          "callee": "System.Private.CoreLib/System.Int32[,]::.ctor:System.Void(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int32[,]::.ctor:System.Void(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32[,]",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 17,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 17
+        },
+        {
+          "op": "ret",
+          "ilOffset": 18
+        }
+      ]
+    },
+    {
+      "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method12",
+      "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "ArrayIndexingCopyNativeEntry",
+        "declaringTypeSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry",
+        "definitionSubjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method12:System.Int32()",
+        "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method12:System.Int32()",
+        "methodId": "array-indexing-copy-native-entry.array-indexing-copy-native-entry.method12",
+        "signature": "System.Int32 ArrayIndexingCopyNativeEntry::Method12()"
+      },
+      "nativeSymbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 2,
+          "resultType": "System.Int32[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 13
+        },
+        {
+          "op": "brtrue",
+          "operand": 20,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 16
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 25,
+          "ilOffset": 18,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 28
+        },
+        {
+          "op": "ret",
+          "ilOffset": 29
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 14,
+    "trimmedMethodCount": 14,
+    "entryPrefix": "ArrayIndexingCopyNativeEntry"
+  }
+}

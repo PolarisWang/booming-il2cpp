@@ -1,0 +1,3059 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.run",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.run",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                188,
+                199,
+                210,
+                221,
+                232,
+                243,
+                254,
+                265,
+                276,
+                287,
+                298,
+                309,
+                320,
+                331,
+                342,
+                353,
+                364,
+                375,
+                386,
+                397,
+                408,
+                419,
+                430,
+                441,
+                452,
+                463,
+                474,
+                485,
+                493,
+                501,
+                509,
+                517,
+                525,
+                533,
+                541,
+                549,
+                557,
+                565,
+                573,
+                581,
+                589,
+                597,
+                605
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 613,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method16:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method16:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method17:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method17:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method18:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method18:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method19:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method19:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method20:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method20:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method21:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method21:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method22:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method22:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method23:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method23:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method24:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method24:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method25:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method25:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method26:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method26:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method27:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method27:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method28:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method28:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method29:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method29:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method30:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method30:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method31:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method31:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method32:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method32:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method33:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method33:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method34:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method34:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method35:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method35:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method36:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method36:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method37:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method37:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method38:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method38:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method39:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method39:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method40:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method40:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method41:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method41:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method42:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method42:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method0",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method0:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method0:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method0",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177280,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method1",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method1:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method1:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method1",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177279,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method2",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method2:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method2:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method2",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177278,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method3",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method3:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method3:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method3",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177277,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method4",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method4:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method4:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method4",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177276,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method5",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method5:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method5:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method5",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177275,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method6",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method6:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method6:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method6",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177274,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method7",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method7:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method7:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method7",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177273,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method8",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method8:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method8:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method8",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177272,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method9",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method9:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method9:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method9",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177271,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method10",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method10:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method10:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method10",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177270,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method11",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method11:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method11()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method11:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method11:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method11",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177269,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method12",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method12:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method12()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method12:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method12:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method12",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177268,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method13",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method13:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method13()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method13:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method13:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method13",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177267,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method14",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method14:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method14()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method14:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method14:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method14",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177266,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method15",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method15:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method15()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method15:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method15:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method15",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177265,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method16",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method16:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method16()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method16:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method16:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method16",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method16()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177264,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method17",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method17:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method17()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method17:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method17:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method17",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method17()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177263,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method18",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method18:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method18()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method18:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method18:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method18",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method18()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177262,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method19",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method19:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method19()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method19:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method19:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method19",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method19()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177261,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method20",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method20:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method20()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method20:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method20:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method20",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method20()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177260,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method21",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method21:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method21()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method21:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method21:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method21",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method21()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177259,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method22",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method22:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method22()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method22:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method22:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method22",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method22()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177258,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method23",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method23:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method23()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method23:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method23:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method23",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method23()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177257,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method24",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method24:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method24()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method24:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method24:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method24",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method24()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177256,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method25",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method25:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method25()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method25:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method25:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method25",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method25()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177255,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method26",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method26:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method26()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method26:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method26:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method26",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method26()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177254,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method27",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method27:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method27()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method27:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method27:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method27",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method27()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177253,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method28",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method28:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method28()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method28:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method28:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method28",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method28()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177252,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method29",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method29:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method29()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method29:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method29:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method29",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method29()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177251,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method30",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method30:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method30()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method30:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method30:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method30",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method30()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177250,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method31",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method31:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method31()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method31:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method31:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method31",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method31()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177249,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method32",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method32:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method32()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method32:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method32:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method32",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method32()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177248,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method33",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method33:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method33()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method33:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method33:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method33",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method33()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177247,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method34",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method34:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method34()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method34:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method34:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method34",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method34()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177246,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method35",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method35:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method35()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method35:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method35:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method35",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method35()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177245,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method36",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method36:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method36()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method36:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method36:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method36",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method36()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177244,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method37",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method37:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method37()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method37:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method37:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method37",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method37()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177243,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method38",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method38:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method38()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method38:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method38:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method38",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method38()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177242,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method39",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method39:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method39()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method39:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method39:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method39",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method39()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177241,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method40",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method40:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method40()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method40:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method40:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method40",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method40()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177240,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method41",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method41:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method41()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method41:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method41:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method41",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method41()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177239,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method42",
+      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method42:System.Int32()",
+      "signature": "System.Int32 ReflectionTypePatchEntry::Method42()",
+      "identity": {
+        "assemblyName": "ReflectionTypePatchEntry",
+        "declaringTypeSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+        "definitionSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method42:System.Int32()",
+        "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Method42:System.Int32()",
+        "methodId": "reflection-type-patch-entry.reflection-type-patch-entry.method42",
+        "signature": "System.Int32 ReflectionTypePatchEntry::Method42()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177238,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

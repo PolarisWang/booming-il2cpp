@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\collections-generic-core\\entrypoint-patch\\build-output\\CollectionsGenericCorePatchEntry.dll"
+    ],
+    "entry": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Run:System.Int32(System.Int32)"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method10:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method11:System.Int32()",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

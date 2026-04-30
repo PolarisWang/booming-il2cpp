@@ -1,0 +1,1605 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.run",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.run",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                88,
+                99,
+                110,
+                118,
+                126,
+                134,
+                142,
+                150,
+                158,
+                166,
+                174,
+                182,
+                190,
+                198,
+                206,
+                214,
+                222,
+                230
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 238,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method16:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method16:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method17:System.Int32()",
+              "reference": {
+                "assemblyName": "MathNumericsSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method17:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method0",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method0:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method0:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method0",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 99,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 11,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method1",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method1:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method1:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method1",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Double",
+              "callee": "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method2",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method2:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method2:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method2",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Double",
+              "callee": "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method3",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method3:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method3:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method3",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Double",
+              "callee": "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method4",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method4:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method4:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method4",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Double",
+              "callee": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method5",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method5:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method5:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method5",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 42,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Double",
+              "callee": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method6",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method6:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method6:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method6",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 99,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 99,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 13,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method7",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method7:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method7:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method7",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Double",
+              "callee": "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 28,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method8",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method8:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method8:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method8",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 99,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 99,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 13,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method9",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method9:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method9:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method9",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Double",
+              "callee": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method10",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method10:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method10:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method10",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Double",
+              "callee": "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 28,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method11",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method11:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method11()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method11:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method11:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method11",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Double",
+              "callee": "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method12",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method12:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method12()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method12:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method12:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method12",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Double",
+              "callee": "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method13",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method13:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method13()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method13:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method13:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method13",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 99,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 99,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int64",
+              "callee": "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 14,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method14",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method14:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method14()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method14:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method14:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method14",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 99,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Byte[]",
+              "callee": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 16,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method15",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method15:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method15()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method15:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method15:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method15",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 99,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Byte[]",
+              "callee": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 23,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method16",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method16:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method16()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method16:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method16:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method16",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method16()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method17",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method17:System.Int32()",
+      "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method17()",
+      "identity": {
+        "assemblyName": "MathNumericsSemanticPatchEntry",
+        "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+        "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method17:System.Int32()",
+        "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method17:System.Int32()",
+        "methodId": "math-numerics-semantic-patch-entry.math-numerics-semantic-patch-entry.method17",
+        "signature": "System.Int32 MathNumericsSemanticPatchEntry::Method17()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

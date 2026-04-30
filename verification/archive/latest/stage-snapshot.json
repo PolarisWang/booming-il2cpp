@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-28T14:39:17.081756Z",
+  "generatedAtUtc": "2026-04-30T05:06:55.400112Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "closureId": "closure/completed/testing-inventory",
@@ -27,6 +27,7 @@
         "obligation/14/61",
         "obligation/14/64",
         "obligation/9/39",
+        "obligation/6/22",
         "obligation/12/53",
         "obligation/1/1",
         "obligation/1/7",
@@ -60,7 +61,6 @@
         "obligation/6/26",
         "obligation/9/42",
         "obligation/7/32",
-        "obligation/6/22",
         "obligation/6/23",
         "obligation/8/37",
         "obligation/7/31",
@@ -93,6 +93,7 @@
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/collector",
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/collector",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/collector",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/collector",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/collector",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/collector",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()/collector",
@@ -149,6 +150,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/collector",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()/collector",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()/collector",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/collector",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/collector",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/collector",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/collector",
@@ -165,7 +167,7 @@
       "closureId": "closure/completed/testing-inventory",
       "scopeCode": "testing-inventory",
       "stageKind": "hotupdate-proof",
-      "verificationState": "planned",
+      "verificationState": "failed",
       "supportState": "supported",
       "coveredObligationClaimIds": [
         "obligation/13/54",
@@ -182,6 +184,7 @@
         "obligation/14/61",
         "obligation/14/64",
         "obligation/9/39",
+        "obligation/6/22",
         "obligation/12/53",
         "obligation/1/1",
         "obligation/1/7",
@@ -215,7 +218,6 @@
         "obligation/6/26",
         "obligation/9/42",
         "obligation/7/32",
-        "obligation/6/22",
         "obligation/6/23",
         "obligation/8/37",
         "obligation/7/31",
@@ -233,10 +235,10 @@
         "obligation/8/35",
         "obligation/10/45"
       ],
-      "successEvidenceIds": [
+      "successEvidenceIds": [],
+      "failedEvidenceIds": [
         "evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/hotupdate-proof"
       ],
-      "failedEvidenceIds": [],
       "blockedEvidenceIds": [],
       "missingEvidenceClaimIds": [],
       "blockers": [],
@@ -264,6 +266,7 @@
         "obligation/14/61",
         "obligation/14/64",
         "obligation/9/39",
+        "obligation/6/22",
         "obligation/12/53",
         "obligation/1/1",
         "obligation/1/7",
@@ -297,7 +300,6 @@
         "obligation/6/26",
         "obligation/9/42",
         "obligation/7/32",
-        "obligation/6/22",
         "obligation/6/23",
         "obligation/8/37",
         "obligation/7/31",
@@ -334,6 +336,7 @@
       "missingEvidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/managed-proof",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()/managed-proof",
@@ -390,12 +393,23 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()/managed-proof",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/managed-proof"
       ],
       "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。"
+        },
         {
           "code": "missing-evidence",
           "lane": "contracts",
@@ -731,6 +745,7 @@
         "obligation/14/61",
         "obligation/14/64",
         "obligation/9/39",
+        "obligation/6/22",
         "obligation/12/53",
         "obligation/1/1",
         "obligation/1/7",
@@ -764,7 +779,6 @@
         "obligation/6/26",
         "obligation/9/42",
         "obligation/7/32",
-        "obligation/6/22",
         "obligation/6/23",
         "obligation/8/37",
         "obligation/7/31",
@@ -782,36 +796,7 @@
         "obligation/8/35",
         "obligation/10/45"
       ],
-      "successEvidenceIds": [
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ConversionOpsProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CustomAttributeLookupProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DirectCallVirtProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DispatchProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ExceptionProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FunctionPointerProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericInstantiationProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericSharingBoundaryProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MarshalingProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NestedExceptionProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RuntimeHelpersProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()/native-proof",
-        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()/native-proof"
-      ],
+      "successEvidenceIds": [],
       "failedEvidenceIds": [],
       "blockedEvidenceIds": [],
       "missingEvidenceClaimIds": [],
@@ -1124,6 +1109,7 @@
         "obligation/14/61",
         "obligation/14/64",
         "obligation/9/39",
+        "obligation/6/22",
         "obligation/12/53",
         "obligation/1/1",
         "obligation/1/7",
@@ -1157,7 +1143,6 @@
         "obligation/6/26",
         "obligation/9/42",
         "obligation/7/32",
-        "obligation/6/22",
         "obligation/6/23",
         "obligation/8/37",
         "obligation/7/31",
@@ -1190,6 +1175,7 @@
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/registry",
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/registry",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/registry",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/registry",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/registry",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/registry",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()/registry",
@@ -1246,6 +1232,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/registry",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()/registry",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()/registry",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/registry",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/registry",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/registry",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/registry",
@@ -1262,7 +1249,7 @@
       "closureId": "closure/completed/testing-inventory",
       "scopeCode": "testing-inventory",
       "stageKind": "workspace",
-      "verificationState": "missing",
+      "verificationState": "passed",
       "supportState": "supported",
       "coveredObligationClaimIds": [
         "obligation/13/54",
@@ -1279,6 +1266,7 @@
         "obligation/14/61",
         "obligation/14/64",
         "obligation/9/39",
+        "obligation/6/22",
         "obligation/12/53",
         "obligation/1/1",
         "obligation/1/7",
@@ -1312,7 +1300,6 @@
         "obligation/6/26",
         "obligation/9/42",
         "obligation/7/32",
-        "obligation/6/22",
         "obligation/6/23",
         "obligation/8/37",
         "obligation/7/31",
@@ -1338,7 +1325,14 @@
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()/workspace",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()/workspace",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/workspace",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()/workspace",
@@ -1395,6 +1389,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()/workspace",
+        "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/workspace",
@@ -1402,46 +1397,8 @@
       ],
       "failedEvidenceIds": [],
       "blockedEvidenceIds": [],
-      "missingEvidenceClaimIds": [
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/workspace"
-      ],
-      "blockers": [
-        {
-          "code": "missing-evidence",
-          "lane": "contracts",
-          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
-        },
-        {
-          "code": "missing-evidence",
-          "lane": "contracts",
-          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
-        },
-        {
-          "code": "missing-evidence",
-          "lane": "contracts",
-          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
-        },
-        {
-          "code": "missing-evidence",
-          "lane": "contracts",
-          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
-        },
-        {
-          "code": "missing-evidence",
-          "lane": "contracts",
-          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
-        },
-        {
-          "code": "missing-evidence",
-          "lane": "contracts",
-          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
-        }
-      ],
+      "missingEvidenceClaimIds": [],
+      "blockers": [],
       "reportRefs": []
     }
   ]

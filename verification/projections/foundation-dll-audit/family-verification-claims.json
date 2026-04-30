@@ -5,9 +5,7 @@
       "schemaVersion": 1,
       "assemblyName": "System.Private.CoreLib",
       "ownerSubjectId": "SolutionCorePack",
-      "methodUniverseArtifactPaths": [
-        "artifacts/subjects/SolutionCorePack/runs/20260426-143601-windows-4240/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/native-reference.plan.json"
-      ],
+      "methodUniverseArtifactPaths": [],
       "claims": [
         {
           "claimId": "family/System.Private.CoreLib/convert/char::native-proof",

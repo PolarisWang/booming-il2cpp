@@ -1419,6 +1419,60 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    return chaos_type->runtime_type_handle;");
 			builder.AppendLine("}");
 			builder.AppendLine();
+			var getObjectTypeModel = new Scriban.Runtime.ScriptObject
+			{
+				["type_entries"] = _reflectionMemberSupport.TypeEntries
+					.OrderBy((ReflectionMemberTypeEntry entry) => entry.TypeSubjectId, StringComparer.Ordinal)
+					.Select(entry => new Scriban.Runtime.ScriptObject
+					{
+						["type_id_symbol"] = GetNativeTypeIdSymbol(entry.TypeSubjectId),
+						["type_handle_literal"] = GetTypeHandleLiteral(entry.TypeSubjectId),
+					})
+					.ToArray(),
+			};
+			builder.AppendLine(
+				ScribanTemplateRenderer.RenderTemplate(
+					NativeAotTemplateCatalog.GetReflectionGetObjectTypeTemplate(),
+					getObjectTypeModel).TrimEnd());
+			builder.AppendLine();
+			var createInstanceModel = new Scriban.Runtime.ScriptObject
+			{
+				["type_native_symbol"] = GetNativeTypeSymbol("System.Private.CoreLib/System.Type"),
+				["ctor_entries"] = _reflectionMemberSupport.MethodEntries
+					.Where((ReflectionMemberMethodEntry entry) => entry.IsConstructor && entry.ParameterNames.Count == 0)
+					.OrderBy((ReflectionMemberMethodEntry entry) => entry.DeclaringTypeSubjectId, StringComparer.Ordinal)
+					.ThenBy((ReflectionMemberMethodEntry entry) => entry.MethodSubjectId, StringComparer.Ordinal)
+					.Select(entry =>
+					{
+						InvocationTarget? ctorTarget = TryResolveDirectInvocationTarget(entry.MethodSubjectId);
+						if (!ctorTarget.HasValue)
+						{
+							return null;
+						}
+
+						InvocationTarget resolvedCtorTarget = ctorTarget.Value;
+						if (resolvedCtorTarget.ParameterAbis.Count != 1 ||
+							resolvedCtorTarget.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+						{
+							return null;
+						}
+
+						return new Scriban.Runtime.ScriptObject
+						{
+							["type_handle_literal"] = GetTypeHandleLiteral(entry.DeclaringTypeSubjectId),
+							["native_type_symbol"] = GetNativeTypeSymbol(entry.DeclaringTypeSubjectId),
+							["type_id_symbol"] = GetNativeTypeIdSymbol(entry.DeclaringTypeSubjectId),
+							["ctor_symbol"] = resolvedCtorTarget.TargetSymbol,
+						};
+					})
+					.Where(model => model is not null)
+					.ToArray()!,
+			};
+			builder.AppendLine(
+				ScribanTemplateRenderer.RenderTemplate(
+					NativeAotTemplateCatalog.GetReflectionCreateInstanceTemplate(),
+					createInstanceModel).TrimEnd());
+			builder.AppendLine();
 			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR chaos_type_handle, const char* chaos_method_name) noexcept");
 			builder.AppendLine("{");
 			builder.AppendLine("    if (chaos_method_name == nullptr)");

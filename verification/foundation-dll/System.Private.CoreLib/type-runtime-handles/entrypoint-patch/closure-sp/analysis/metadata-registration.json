@@ -1,0 +1,182 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "TypeRuntimeHandlesPatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "name": "TypeRuntimeHandlesPatchEntry",
+      "displayName": "TypeRuntimeHandlesPatchEntry",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 16,
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

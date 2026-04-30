@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\entrypoint-semantic-patch\\build-output\\GuidRandomHashcodeSemanticPatchEntry.dll"
+    ],
+    "entry": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Run:System.Int32(System.Int32)"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\entrypoint-semantic-patch\\build-output\\GenericNullableValueSemanticPatchEntry.dll"
+    ],
+    "entry": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Run:System.Int32(System.Int32)"
+  }
+}

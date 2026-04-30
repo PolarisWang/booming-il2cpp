@@ -1,0 +1,123 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method7:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method8:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method9:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method10:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionBindingPatchEntry",
+      "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method11:System.Int32()",
+      "definitionSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

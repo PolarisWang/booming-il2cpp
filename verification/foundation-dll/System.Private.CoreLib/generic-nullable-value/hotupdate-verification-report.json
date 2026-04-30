@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/generic/nullable-value",
+  "summary": {
+    "totalMethods": 10,
+    "passedMethods": 9,
+    "failedMethods": 1,
+    "unmatchedMethods": 0
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::get_HasValue:System.Boolean()",
+      "status": "passed",
+      "methodToken": 100663297,
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000000",
+      "expectedPatchedValue": "0xb0000000",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::get_Value:T()",
+      "status": "passed",
+      "methodToken": 100663298,
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000001",
+      "expectedPatchedValue": "0xb0000001",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()",
+      "status": "passed",
+      "methodToken": 100663299,
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000002",
+      "expectedPatchedValue": "0xb0000002",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)",
+      "status": "passed",
+      "methodToken": 100663300,
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000003",
+      "expectedPatchedValue": "0xb0000003",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)",
+      "status": "passed",
+      "methodToken": 100663301,
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000004",
+      "expectedPatchedValue": "0xb0000004",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::GetHashCode:System.Int32()",
+      "status": "passed",
+      "methodToken": 100663302,
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000005",
+      "expectedPatchedValue": "0xb0000005",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::ToString:System.String()",
+      "status": "passed",
+      "methodToken": 100663303,
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000006",
+      "expectedPatchedValue": "0xb0000006",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)",
+      "status": "failed",
+      "methodToken": 100663304,
+      "originalReturnValue": "0x00000001",
+      "patchedReturnValue": "0xb0000007",
+      "expectedPatchedValue": "0xb0000007",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.ValueType::GetHashCode:System.Int32()",
+      "status": "passed",
+      "methodToken": 100663305,
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000008",
+      "expectedPatchedValue": "0xb0000008",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.ValueType::ToString:System.String()",
+      "status": "passed",
+      "methodToken": 100663306,
+      "originalReturnValue": "0x00000000",
+      "patchedReturnValue": "0xb0000009",
+      "expectedPatchedValue": "0xb0000009",
+      "revertVerified": true,
+      "semanticVerified": false
+    }
+  ]
+}

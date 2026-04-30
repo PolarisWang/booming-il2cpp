@@ -1,0 +1,78 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "RuntimeCompilerServicesPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Run",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Method0",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Method1",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Method2",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Method3",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Method4",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Method5",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Method6",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Method7",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Method8",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "RuntimeCompilerServicesPatchEntry_RuntimeCompilerServicesPatchEntry_Method9",
+          "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method9:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

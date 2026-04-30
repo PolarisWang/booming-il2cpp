@@ -1,0 +1,3163 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.run",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.run",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            96,
+            107,
+            118,
+            129,
+            140,
+            148,
+            156,
+            164,
+            172,
+            180,
+            188,
+            196,
+            204,
+            212,
+            220,
+            228,
+            236,
+            244,
+            252,
+            260
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 268,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 96,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 101,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 102,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 107,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 112,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 113,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 118,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 124,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 129,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 134,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 135,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 140,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 145,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 146,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 148,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 153,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 154,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 156,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 161,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 162,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 164,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 169,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 170,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 172,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 177,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 178,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 180,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 185,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 186,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 188,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 193,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 194,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 196,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 201,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 202,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 204,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 209,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 210,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 212,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 217,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 218,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 220,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method14:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 225,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 226,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 228,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method15:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method15:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method15:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 233,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 234,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 236,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method16:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method16:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method16:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 241,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 242,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 244,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method17:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method17:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method17:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method17",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 249,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 250,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 252,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method18:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method18:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method18:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method18",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 257,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 258,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 260,
+          "resultType": "System.Int32",
+          "callee": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method19:System.Int32()",
+          "reference": {
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method19:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+            "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method19:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method19",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 265,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 266,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 268,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 269,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 272,
+          "ilOffset": 270,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 272
+        },
+        {
+          "op": "ret",
+          "ilOffset": 273
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method0",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method0:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method0:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method0",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method0()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "world",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 6,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method1",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method1:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method1:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method1",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method1()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "world",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 90,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method2",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method2:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method2:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method2",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method2()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "hello",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 7,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 12
+        },
+        {
+          "op": "brtrue",
+          "operand": 19,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 15
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 24,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 24,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 27,
+          "ilOffset": 25,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 27
+        },
+        {
+          "op": "ret",
+          "ilOffset": 28
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method3",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method3:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method3:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method3",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method3()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "hello",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 2,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 8,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 13
+        },
+        {
+          "op": "brtrue",
+          "operand": 20,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 16
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 25,
+          "ilOffset": 18,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 28
+        },
+        {
+          "op": "ret",
+          "ilOffset": 29
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method4",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method4:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method4:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method4",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method4()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 6,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 19
+        },
+        {
+          "op": "ret",
+          "ilOffset": 20
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method5",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method5:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method5:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method5",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method5()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "hello",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldstr",
+          "operand": "world",
+          "ilOffset": 7,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 3,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 22,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 22
+        },
+        {
+          "op": "ret",
+          "ilOffset": 23
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method6",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method6:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method6:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method6",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method6()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 6,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 16
+        },
+        {
+          "op": "brtrue",
+          "operand": 23,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 19
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 20,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 21,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 31,
+          "ilOffset": 29,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 31
+        },
+        {
+          "op": "ret",
+          "ilOffset": 32
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method7",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method7:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method7:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method7",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method7()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 6,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 7,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 11,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 12,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 21
+        },
+        {
+          "op": "brtrue",
+          "operand": 28,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 24
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 33,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 33,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 36,
+          "ilOffset": 34,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 36
+        },
+        {
+          "op": "ret",
+          "ilOffset": 37
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method8",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method8:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method8:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method8",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method8()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Object[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 16
+        },
+        {
+          "op": "brtrue",
+          "operand": 23,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 19
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 20,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 21,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 31,
+          "ilOffset": 29,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 31
+        },
+        {
+          "op": "ret",
+          "ilOffset": 32
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method9",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method9:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method9:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method9",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method9()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "world",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 6,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 21,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 22,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 25,
+          "ilOffset": 23,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 25
+        },
+        {
+          "op": "ret",
+          "ilOffset": 26
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method10",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method10:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method10:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method10",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method10()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "world",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 6,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 21,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 22,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 25,
+          "ilOffset": 23,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 25
+        },
+        {
+          "op": "ret",
+          "ilOffset": 26
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method11",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method11:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method11()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method11:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method11:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method11",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method11()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "world",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 6,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 11,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 16,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 21
+        },
+        {
+          "op": "brtrue",
+          "operand": 28,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 24
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 33,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 33,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 36,
+          "ilOffset": 34,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 36
+        },
+        {
+          "op": "ret",
+          "ilOffset": 37
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method12",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method12:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method12()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method12:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method12:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method12",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method12()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "world",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 90,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 9,
+          "resultType": "System.String[]",
+          "callee": "System.Private.CoreLib/System.String::Split:System.String[](System.Char,System.StringSplitOptions)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Split:System.String[](System.Char,System.StringSplitOptions)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Split:System.String[](System.Char,System.StringSplitOptions)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 22,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 22
+        },
+        {
+          "op": "ret",
+          "ilOffset": 23
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method13",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method13:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method13()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method13:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method13:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method13",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method13()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "world",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::ToUpper:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::ToUpper:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::ToUpper:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 11
+        },
+        {
+          "op": "brtrue",
+          "operand": 18,
+          "ilOffset": 12,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 14
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 26,
+          "ilOffset": 24,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 26
+        },
+        {
+          "op": "ret",
+          "ilOffset": 27
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method14",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method14:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method14()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method14:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method14:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method14",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method14()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "world",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::ToLower:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::ToLower:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::ToLower:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 11
+        },
+        {
+          "op": "brtrue",
+          "operand": 18,
+          "ilOffset": 12,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 14
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 26,
+          "ilOffset": 24,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 26
+        },
+        {
+          "op": "ret",
+          "ilOffset": 27
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method15",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method15:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method15()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method15:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method15:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method15",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method15()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method15",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "world",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Trim:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Trim:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Trim:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 11
+        },
+        {
+          "op": "brtrue",
+          "operand": 18,
+          "ilOffset": 12,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 14
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 26,
+          "ilOffset": 24,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 26
+        },
+        {
+          "op": "ret",
+          "ilOffset": 27
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method16",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method16:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method16()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method16:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method16:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method16",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method16()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method16",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "99",
+          "ilOffset": 1,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.String[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty<System.String>:System.String[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.String>:System.String[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.String>:System.String[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.String]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.String]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.String]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.String]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty<System.String>:System.String[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty<System.String>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 16
+        },
+        {
+          "op": "brtrue",
+          "operand": 23,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 19
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 20,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 21,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 31,
+          "ilOffset": 29,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 31
+        },
+        {
+          "op": "ret",
+          "ilOffset": 32
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method17",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method17:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method17()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method17:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method17:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method17",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method17()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method17",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 90,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 3,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 13,
+          "ilOffset": 8,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 14,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 17,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 17
+        },
+        {
+          "op": "ret",
+          "ilOffset": 18
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method18",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method18:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method18()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method18:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method18:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method18",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method18()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method18",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 90,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 3,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 13,
+          "ilOffset": 8,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 14,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 17,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 17
+        },
+        {
+          "op": "ret",
+          "ilOffset": 18
+        }
+      ]
+    },
+    {
+      "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method19",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method19:System.Int32()",
+      "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method19()",
+      "identity": {
+        "assemblyName": "StringCharTextCoreSemanticPatchEntry",
+        "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+        "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method19:System.Int32()",
+        "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method19:System.Int32()",
+        "methodId": "string-char-text-core-semantic-patch-entry.string-char-text-core-semantic-patch-entry.method19",
+        "signature": "System.Int32 StringCharTextCoreSemanticPatchEntry::Method19()"
+      },
+      "nativeSymbol": "StringCharTextCoreSemanticPatchEntry_StringCharTextCoreSemanticPatchEntry_Method19",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 90,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 3,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 13,
+          "ilOffset": 8,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 14,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 17,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 17
+        },
+        {
+          "op": "ret",
+          "ilOffset": 18
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 21,
+    "trimmedMethodCount": 21,
+    "entryPrefix": "StringCharTextCoreSemanticPatchEntry"
+  }
+}

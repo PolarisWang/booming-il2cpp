@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

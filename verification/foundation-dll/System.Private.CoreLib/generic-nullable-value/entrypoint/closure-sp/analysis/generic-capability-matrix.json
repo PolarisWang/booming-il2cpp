@@ -1,0 +1,260 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "genericCapabilityMatrix",
+  "ownerSubjectId": "GenericNullableValueNativeEntry",
+  "entrySubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Run:System.Int32(System.Int32)",
+  "hotUpdateModes": [
+    "HotUpdateNone",
+    "HotUpdateMetadataAugmented",
+    "HotUpdateGenericSharing"
+  ],
+  "gates": {
+    "status": "ok",
+    "unsupportedLeakCount": 0,
+    "missingAuthorityCount": 0,
+    "nonCanonicalHotUpdateNameCount": 0,
+    "leaks": []
+  },
+  "familyBudgets": [
+    {
+      "familyId": "ClosedGenericType",
+      "displayName": "Closed Generic Type",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedMethodOnGenericType",
+      "displayName": "Closed Method On Generic Type",
+      "budgetLimit": 512,
+      "observedCount": 4
+    },
+    {
+      "familyId": "ClosedGenericMethod",
+      "displayName": "Closed Generic Method",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedGenericMethodOnGenericType",
+      "displayName": "Closed Generic Method On Generic Type",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "CrossAssemblyBoundary",
+      "displayName": "Cross Assembly Boundary",
+      "budgetLimit": 512,
+      "observedCount": 4
+    },
+    {
+      "familyId": "DispatchBoundary",
+      "displayName": "Dispatch Boundary",
+      "budgetLimit": 128,
+      "observedCount": 8
+    },
+    {
+      "familyId": "ReflectionBoundary",
+      "displayName": "Reflection Boundary",
+      "budgetLimit": 64,
+      "observedCount": 0
+    },
+    {
+      "familyId": "HotUpdateBoundary",
+      "displayName": "HotUpdate Boundary",
+      "budgetLimit": 64,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncTaskFamily",
+      "displayName": "Async Task Family",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncValueTaskFamily",
+      "displayName": "Async ValueTask Family",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncBuilderFamily",
+      "displayName": "Async Builder Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncAwaiterFamily",
+      "displayName": "Async Awaiter Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "PointerByRefFamily",
+      "displayName": "Pointer And ByRef Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "RefStructFamily",
+      "displayName": "Ref Struct Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    }
+  ],
+  "boundaryCases": [
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method4:System.Int32()",
+      "ilOffset": 24,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method5:System.Int32()",
+      "ilOffset": 17,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method6:System.Int32()",
+      "ilOffset": 17,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method6:System.Int32()",
+      "ilOffset": 29,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method7:System.Int32()",
+      "ilOffset": 15,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method8:System.Int32()",
+      "ilOffset": 8,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method9:System.Int32()",
+      "ilOffset": 8,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method9:System.Int32()",
+      "ilOffset": 20,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    }
+  ],
+  "entries": [
+    {
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+      "demandSourceKind": "memberReference",
+      "requestingAssemblyName": "GenericNullableValueNativeEntry",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "familyKindCode": 2,
+      "contextKindCode": 1,
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "isCrossAssembly": true,
+      "statusReasonCode": "loader-demand:memberReference",
+      "authoritySource": "demand-derived",
+      "openDefinitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+      "sharedGenericBodyId": "body:definition=System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]",
+      "instantiationStubId": "stub:definition=System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]",
+      "hasOpenDefinitionAuthority": true,
+      "hasSharedBodyAuthority": true,
+      "hasInstantiationStubAuthority": true,
+      "hasRuntimeGenericContextAuthority": true
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::GetValueOrDefault:System.Int32()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::GetValueOrDefault:!0()",
+      "demandSourceKind": "memberReference",
+      "requestingAssemblyName": "GenericNullableValueNativeEntry",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "familyKindCode": 2,
+      "contextKindCode": 1,
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "isCrossAssembly": true,
+      "statusReasonCode": "loader-demand:memberReference",
+      "authoritySource": "aot-core-ir",
+      "openDefinitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::GetValueOrDefault:!0()",
+      "sharedGenericBodyId": "body:definition=System.Private.CoreLib/System.Nullable\u00601::GetValueOrDefault:!0();type=[System.Int32];method=[]",
+      "instantiationStubId": "stub:definition=System.Private.CoreLib/System.Nullable\u00601::GetValueOrDefault:!0();type=[System.Int32];method=[]",
+      "hasOpenDefinitionAuthority": true,
+      "hasSharedBodyAuthority": true,
+      "hasInstantiationStubAuthority": true,
+      "hasRuntimeGenericContextAuthority": true
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::get_HasValue:System.Boolean()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean()",
+      "demandSourceKind": "memberReference",
+      "requestingAssemblyName": "GenericNullableValueNativeEntry",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "familyKindCode": 2,
+      "contextKindCode": 1,
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "isCrossAssembly": true,
+      "statusReasonCode": "loader-demand:memberReference",
+      "authoritySource": "aot-core-ir",
+      "openDefinitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean()",
+      "sharedGenericBodyId": "body:definition=System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean();type=[System.Int32];method=[]",
+      "instantiationStubId": "stub:definition=System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean();type=[System.Int32];method=[]",
+      "hasOpenDefinitionAuthority": true,
+      "hasSharedBodyAuthority": true,
+      "hasInstantiationStubAuthority": true,
+      "hasRuntimeGenericContextAuthority": true
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::get_Value:System.Int32()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_Value:!0()",
+      "demandSourceKind": "memberReference",
+      "requestingAssemblyName": "GenericNullableValueNativeEntry",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "familyKindCode": 2,
+      "contextKindCode": 1,
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "isCrossAssembly": true,
+      "statusReasonCode": "loader-demand:memberReference",
+      "authoritySource": "aot-core-ir",
+      "openDefinitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_Value:!0()",
+      "sharedGenericBodyId": "body:definition=System.Private.CoreLib/System.Nullable\u00601::get_Value:!0();type=[System.Int32];method=[]",
+      "instantiationStubId": "stub:definition=System.Private.CoreLib/System.Nullable\u00601::get_Value:!0();type=[System.Int32];method=[]",
+      "hasOpenDefinitionAuthority": true,
+      "hasSharedBodyAuthority": true,
+      "hasInstantiationStubAuthority": true,
+      "hasRuntimeGenericContextAuthority": true
+    }
+  ]
+}

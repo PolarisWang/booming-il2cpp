@@ -1,0 +1,186 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method13:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method14:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method15:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method16:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method17:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method18:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method19:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method2:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method6:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method11:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method12:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method13:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method14:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method15:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method16:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

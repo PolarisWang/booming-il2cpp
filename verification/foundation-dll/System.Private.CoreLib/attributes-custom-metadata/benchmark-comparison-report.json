@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+  "summary": {
+    "totalMethods": 9,
+    "matchedCount": 9,
+    "unmatchedCount": 0,
+    "invalidCount": 0,
+    "nativeFasterCount": 9,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 52.33
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)",
+      "status": "matched",
+      "managedElapsedMs": 0.0152,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 39.47
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttribute:System.Attribute(System.Reflection.MemberInfo,System.Type)",
+      "status": "matched",
+      "managedElapsedMs": 4.9813,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 99.82
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.Assembly)",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0091,
+      "speedupPercent": 50.54
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.Assembly,System.Type)",
+      "status": "matched",
+      "managedElapsedMs": 0.0183,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 48.63
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.MemberInfo)",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 48.91
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.MemberInfo,System.Type)",
+      "status": "matched",
+      "managedElapsedMs": 0.0147,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 36.05
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0095,
+      "speedupPercent": 48.37
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::IsDefined:System.Boolean(System.Reflection.MemberInfo,System.Type)",
+      "status": "matched",
+      "managedElapsedMs": 0.0183,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 49.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::get_TypeId:System.Object()",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 49.46
+    }
+  ]
+}

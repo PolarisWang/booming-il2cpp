@@ -1,0 +1,1334 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.run",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.run",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                88,
+                99,
+                110,
+                118,
+                126,
+                134,
+                142,
+                150,
+                158,
+                166,
+                174,
+                182,
+                190,
+                198,
+                206,
+                214,
+                222,
+                230
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 238,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method16:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method16:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method17:System.Int32()",
+              "reference": {
+                "assemblyName": "IoStreamsBasicsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method17:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 242,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method0",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method0:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method0:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method0",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177280,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method1",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method1:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method1:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method1",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177279,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method2",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method2:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method2:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method2",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177278,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method3",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method3:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method3:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method3",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177277,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method4",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method4:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method4:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method4",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177276,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method5",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method5:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method5:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method5",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177275,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method6",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method6:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method6:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method6",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177274,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method7",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method7:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method7:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method7",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177273,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method8",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method8:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method8:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method8",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177272,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method9",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method9:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method9:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method9",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177271,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method10",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method10:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method10:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method10",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177270,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method11",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method11:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method11()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method11:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method11:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method11",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177269,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method12",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method12:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method12()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method12:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method12:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method12",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177268,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method13",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method13:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method13()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method13:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method13:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method13",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177267,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method14",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method14:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method14()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method14:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method14:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method14",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177266,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method15",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method15:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method15()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method15:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method15:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method15",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177265,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method16",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method16:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method16()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method16:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method16:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method16",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method16()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177264,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method17",
+      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method17:System.Int32()",
+      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method17()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsPatchEntry",
+        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method17:System.Int32()",
+        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Method17:System.Int32()",
+        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.method17",
+        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Method17()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177263,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

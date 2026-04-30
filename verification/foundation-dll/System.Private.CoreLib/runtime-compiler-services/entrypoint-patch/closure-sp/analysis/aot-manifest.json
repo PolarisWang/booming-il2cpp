@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

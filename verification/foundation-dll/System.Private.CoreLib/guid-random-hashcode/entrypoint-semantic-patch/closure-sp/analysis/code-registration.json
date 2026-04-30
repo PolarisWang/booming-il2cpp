@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "GuidRandomHashcodeSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Run",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method0",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method1",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method2",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method3",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method4",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method5",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method6",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method7",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method8",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method9",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method10",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method11",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method12",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "GuidRandomHashcodeSemanticPatchEntry_GuidRandomHashcodeSemanticPatchEntry_Method13",
+          "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method13:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

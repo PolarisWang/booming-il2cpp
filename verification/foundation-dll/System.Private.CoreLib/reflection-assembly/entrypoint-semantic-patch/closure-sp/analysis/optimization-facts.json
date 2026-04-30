@@ -1,0 +1,484 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method13:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method14:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method15:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method16:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method17:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method18:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method19:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method20:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method21:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method0:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method1:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method2:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method4:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method4:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_FullName:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method4:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_Location:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method6:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method6:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_ImageRuntimeVersion:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method6:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetExportedTypes:System.Type[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method9:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method9:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetForwardedTypes:System.Type[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method9:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method10:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method10:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method10:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method11:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method11:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method11:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method12:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method12:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method12:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method13:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method13:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method13:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method14:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method14:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceStream:System.IO.Stream(System.String)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method14:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method15:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method15:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceNames:System.String[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method15:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method16:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method16:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_EntryPoint:System.Reflection.MethodInfo()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method16:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method17:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method17:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method17:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_Name:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method17:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method18:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method18:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method18:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_Version:System.Version()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method18:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method19:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method19:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method19:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_CultureInfo:System.Globalization.CultureInfo()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method19:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method20:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method20:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

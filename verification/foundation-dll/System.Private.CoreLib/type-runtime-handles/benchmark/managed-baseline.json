@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/type/runtime-handles",
+  "warmupIterations": 100,
+  "measureIterations": 10000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String)",
+      "elapsedMilliseconds": 5.071300,
+      "opsPerSecond": 1971880.977264,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)",
+      "elapsedMilliseconds": 0.014700,
+      "opsPerSecond": 680272108.843537,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_Name:System.String()",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    }
+  ]
+}

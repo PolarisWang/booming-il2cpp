@@ -1,0 +1,1788 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.run",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ReflectionActivationNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ReflectionActivationNativeEntry",
+        "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+        "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.run",
+        "signature": "System.Int32 ReflectionActivationNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            45,
+            53,
+            61,
+            69,
+            77,
+            85,
+            93,
+            101
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 109,
+          "ilOffset": 43,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 45,
+          "resultType": "System.Int32",
+          "callee": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 50,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 113,
+          "ilOffset": 51,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 53,
+          "resultType": "System.Int32",
+          "callee": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 58,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 113,
+          "ilOffset": 59,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 61,
+          "resultType": "System.Int32",
+          "callee": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 66,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 113,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 69,
+          "resultType": "System.Int32",
+          "callee": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 74,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 113,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 77,
+          "resultType": "System.Int32",
+          "callee": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 82,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 113,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 85,
+          "resultType": "System.Int32",
+          "callee": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 90,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 113,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 93,
+          "resultType": "System.Int32",
+          "callee": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 98,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 113,
+          "ilOffset": 99,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 101,
+          "resultType": "System.Int32",
+          "callee": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ReflectionActivationNativeEntry",
+            "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 106,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 113,
+          "ilOffset": 107,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 109,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 110,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 113,
+          "ilOffset": 111,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 113
+        },
+        {
+          "op": "ret",
+          "ilOffset": 114
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method0",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ReflectionActivationNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "ReflectionActivationNativeEntry",
+        "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+        "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method0:System.Int32()",
+        "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method0:System.Int32()",
+        "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method0",
+        "signature": "System.Int32 ReflectionActivationNativeEntry::Method0()"
+      },
+      "nativeSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 16
+        },
+        {
+          "op": "brtrue",
+          "operand": 23,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 19
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 20,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 21,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 31,
+          "ilOffset": 29,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 31
+        },
+        {
+          "op": "ret",
+          "ilOffset": 32
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method1",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ReflectionActivationNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "ReflectionActivationNativeEntry",
+        "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+        "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method1:System.Int32()",
+        "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method1:System.Int32()",
+        "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method1",
+        "signature": "System.Int32 ReflectionActivationNativeEntry::Method1()"
+      },
+      "nativeSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.Object[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 16,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 21
+        },
+        {
+          "op": "brtrue",
+          "operand": 28,
+          "ilOffset": 22,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 24
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 33,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 33,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 36,
+          "ilOffset": 34,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 36
+        },
+        {
+          "op": "ret",
+          "ilOffset": 37
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method2",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ReflectionActivationNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "ReflectionActivationNativeEntry",
+        "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+        "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method2:System.Int32()",
+        "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method2:System.Int32()",
+        "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method2",
+        "signature": "System.Int32 ReflectionActivationNativeEntry::Method2()"
+      },
+      "nativeSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Byte",
+          "callee": "System.Private.CoreLib/System.Activator::CreateInstance<System.Byte>:System.Byte()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Activator::CreateInstance<System.Byte>:System.Byte()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Activator::CreateInstance<System.Byte>:System.Byte()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Activator::CreateInstance:!!0()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Activator::CreateInstance:!!0();type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Activator::CreateInstance:!!0();type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Activator::CreateInstance:!!0()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Activator::CreateInstance:!!0();type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Activator::CreateInstance:!!0();type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Activator::CreateInstance<System.Byte>:System.Byte()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Activator::CreateInstance:!!0()",
+              "displaySubjectId": "System.Private.CoreLib/System.Activator::CreateInstance<System.Byte>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Activator::CreateInstance:!!0()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "call",
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 17,
+          "ilOffset": 15,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 17
+        },
+        {
+          "op": "ret",
+          "ilOffset": 18
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method3",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ReflectionActivationNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "ReflectionActivationNativeEntry",
+        "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+        "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method3:System.Int32()",
+        "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method3:System.Int32()",
+        "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method3",
+        "signature": "System.Int32 ReflectionActivationNativeEntry::Method3()"
+      },
+      "nativeSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldnull",
+          "ilOffset": 12,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "call",
+          "ilOffset": 13,
+          "resultType": "System.Object[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty<System.Object>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldnull",
+          "ilOffset": 18,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "call",
+          "ilOffset": 19,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 24
+        },
+        {
+          "op": "brtrue",
+          "operand": 31,
+          "ilOffset": 25,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 27
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 36,
+          "ilOffset": 29,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 31,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 36,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 39,
+          "ilOffset": 37,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 39
+        },
+        {
+          "op": "ret",
+          "ilOffset": 40
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method4",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ReflectionActivationNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "ReflectionActivationNativeEntry",
+        "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+        "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method4:System.Int32()",
+        "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method4:System.Int32()",
+        "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method4",
+        "signature": "System.Int32 ReflectionActivationNativeEntry::Method4()"
+      },
+      "nativeSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 13,
+          "resultType": "System.Array",
+          "callee": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 26,
+          "ilOffset": 24,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 26
+        },
+        {
+          "op": "ret",
+          "ilOffset": 27
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method5",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 ReflectionActivationNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "ReflectionActivationNativeEntry",
+        "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+        "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method5:System.Int32()",
+        "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method5:System.Int32()",
+        "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method5",
+        "signature": "System.Int32 ReflectionActivationNativeEntry::Method5()"
+      },
+      "nativeSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 11,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 15,
+          "resultType": "System.Array",
+          "callee": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 28
+        },
+        {
+          "op": "ret",
+          "ilOffset": 29
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method6",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 ReflectionActivationNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "ReflectionActivationNativeEntry",
+        "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+        "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method6:System.Int32()",
+        "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method6:System.Int32()",
+        "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method6",
+        "signature": "System.Int32 ReflectionActivationNativeEntry::Method6()"
+      },
+      "nativeSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 11,
+          "resultType": "System.Int32[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty<System.Int32>:System.Int32[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Int32>:System.Int32[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Int32>:System.Int32[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Int32]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Int32]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Int32]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Int32]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty<System.Int32>:System.Int32[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty<System.Int32>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 16,
+          "resultType": "System.Array",
+          "callee": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 29,
+          "ilOffset": 27,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 29
+        },
+        {
+          "op": "ret",
+          "ilOffset": 30
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method7",
+      "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 ReflectionActivationNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "ReflectionActivationNativeEntry",
+        "declaringTypeSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry",
+        "definitionSubjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method7:System.Int32()",
+        "subjectId": "ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method7:System.Int32()",
+        "methodId": "reflection-activation-native-entry.reflection-activation-native-entry.method7",
+        "signature": "System.Int32 ReflectionActivationNativeEntry::Method7()"
+      },
+      "nativeSymbol": "ReflectionActivationNativeEntry_ReflectionActivationNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Object",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Object"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldsfld",
+          "operand": "System.Private.CoreLib/System.Type::EmptyTypes",
+          "ilOffset": 11,
+          "resultType": "System.Type[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "field",
+            "subjectId": "System.Private.CoreLib/System.Type::EmptyTypes"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::EmptyTypes",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeSubjectId": "System.Private.CoreLib/System.Type",
+            "declaringTypeShape": 1
+          },
+          "runtimeServiceKind": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 16,
+          "resultType": "System.Reflection.ConstructorInfo",
+          "callee": "System.Private.CoreLib/System.Type::GetConstructor:System.Reflection.ConstructorInfo(System.Type[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetConstructor:System.Reflection.ConstructorInfo(System.Type[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetConstructor:System.Reflection.ConstructorInfo(System.Type[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldnull",
+          "ilOffset": 21,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 22,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "dup",
+          "ilOffset": 27
+        },
+        {
+          "op": "brtrue",
+          "operand": 34,
+          "ilOffset": 28,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 30
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 31,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 39,
+          "ilOffset": 32,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 34,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 39,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 42,
+          "ilOffset": 40,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 42
+        },
+        {
+          "op": "ret",
+          "ilOffset": 43
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 9,
+    "trimmedMethodCount": 9,
+    "entryPrefix": "ReflectionActivationNativeEntry"
+  }
+}

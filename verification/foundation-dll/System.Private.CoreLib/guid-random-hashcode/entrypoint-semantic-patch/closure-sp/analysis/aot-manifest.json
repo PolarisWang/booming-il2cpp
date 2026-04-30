@@ -1,0 +1,210 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/GuidRandomHashcodeSemanticPatchEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "GuidRandomHashcodeSemanticPatchEntry/\u003CPrivateImplementationDetails\u003E::06DF4F7E1394F1C57CC6583FBA4D8060A5A66F4F4771C14AEFF6B9AF8A28C9B3",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.HashCode",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Int32\u003E:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.HashCode::Combine\u003CSystem.Int32,System.Int32\u003E:System.Int32(System.Int32,System.Int32)",
+      "reason": "external-call"
+    }
+  ]
+}

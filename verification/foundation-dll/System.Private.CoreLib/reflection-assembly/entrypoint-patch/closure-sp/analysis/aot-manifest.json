@@ -1,0 +1,144 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method18:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method19:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method20:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionAssemblyPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method21:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

@@ -26,6 +26,14 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL WriteLineString(
     ThreadState* thread_state,
     const void* string_object);
 
+/// Compute TimeSpan ticks from milliseconds with rounding and overflow check.
+/// Returns ticks via out parameter. The TimeSpan value type is opaque at this level.
+void CHAOS_RUNTIME_ABI_CALL TimeSpanFromMilliseconds(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    CHAOS_IL2CPP_FLOAT64 milliseconds,
+    CHAOS_IL2CPP_INT64* out_ticks);
+
 }  // namespace chaos::il2cpp::support
 
 #endif  // CHAOS_IL2CPP_SUPPORT_H_

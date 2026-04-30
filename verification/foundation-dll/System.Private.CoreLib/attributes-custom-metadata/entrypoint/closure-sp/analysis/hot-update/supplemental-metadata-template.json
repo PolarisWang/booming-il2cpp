@@ -1,0 +1,99 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesCustomMetadataNativeEntry",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

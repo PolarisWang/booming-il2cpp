@@ -26,7 +26,7 @@ SolutionCorePack,5,Exceptions And Control Flow,28,Nested Exception,1,NativeGener
 SolutionCorePack,5,Exceptions And Control Flow,29,Finally And Filter,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
 SolutionCorePack,5,Exceptions And Control Flow,30,Cross Boundary Exception,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
 SolutionCorePack,6,Reflection And Metadata,21,Custom Attribute Lookup,4; 1,MetadataOnly; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
-SolutionCorePack,6,Reflection And Metadata,22,Member Metadata Lookup,4; 1,MetadataOnly; NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,6,Reflection And Metadata,22,Member Metadata Lookup,4; 1,MetadataOnly; NativeGenerated,true,true,3,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
 SolutionCorePack,6,Reflection And Metadata,23,Metadata Supplement,4,MetadataOnly,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
 SolutionCorePack,6,Reflection And Metadata,24,Metadata Closure,4; 1,MetadataOnly; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
 SolutionCorePack,6,Reflection And Metadata,25,Linker Preserve Contract,4; 1,MetadataOnly; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。

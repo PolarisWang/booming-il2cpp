@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/globalization/culture",
+  "summary": {
+    "totalMethods": 13,
+    "matchedCount": 13,
+    "unmatchedCount": 0,
+    "invalidCount": 0,
+    "nativeFasterCount": 13,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 53.54
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 49.46
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)",
+      "status": "matched",
+      "managedElapsedMs": 0.0183,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 49.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 48.91
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0147,
+      "nativeElapsedMs": 0.0095,
+      "speedupPercent": 35.37
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()",
+      "status": "matched",
+      "managedElapsedMs": 4.9402,
+      "nativeElapsedMs": 0.0127,
+      "speedupPercent": 99.74
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 50.0
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 49.46
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+      "status": "matched",
+      "managedElapsedMs": 0.0263,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 65.02
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 50.0
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()",
+      "status": "matched",
+      "managedElapsedMs": 0.0183,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 48.63
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 50.0
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0183,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 49.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 50.0
+    }
+  ]
+}
