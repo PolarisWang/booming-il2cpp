@@ -101,6 +101,8 @@
 #define CHAOS_IL2CPP_RECURSIVE_MUTEX          std::recursive_timed_mutex
 #define CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX     std::recursive_mutex
 #define CHAOS_IL2CPP_LOCK_GUARD(M)            std::lock_guard<M>
+#define CHAOS_IL2CPP_UNIQUE_LOCK(M)           std::unique_lock<M>
+#define CHAOS_IL2CPP_CONDITION_VARIABLE       std::condition_variable
 #define CHAOS_IL2CPP_THREAD                   std::thread
 #define CHAOS_IL2CPP_THIS_THREAD_SLEEP_FOR(t) std::this_thread::sleep_for(t)
 #define CHAOS_IL2CPP_THIS_THREAD_GET_ID()     std::this_thread::get_id()
@@ -172,5 +174,29 @@
 #define CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(T) std::numeric_limits<T>::max()
 #define CHAOS_IL2CPP_NUMERIC_LIMITS_INFINITY(T) std::numeric_limits<T>::infinity()
 #define CHAOS_IL2CPP_NUMERIC_LIMITS_QUIET_NAN(T) std::numeric_limits<T>::quiet_NaN()
+
+// ── Indirect load/store templates ────────────────────────────
+#define CHAOS_IL2CPP_RAW_POINTER_TAG  CHAOS_IL2CPP_UINTPTR(1) << 63
+
+template<typename T>
+inline T chaos_load_indirect(CHAOS_IL2CPP_INTPTR address) {
+    if (address == 0) { CHAOS_IL2CPP_ABORT(); }
+    auto addr = static_cast<CHAOS_IL2CPP_UINTPTR>(address);
+    if ((addr & CHAOS_IL2CPP_RAW_POINTER_TAG) != 0) {
+        return *reinterpret_cast<const T*>(addr & ~CHAOS_IL2CPP_RAW_POINTER_TAG);
+    }
+    return static_cast<T>(*chaos_resolve_native_int_slot(address));
+}
+
+template<typename T>
+inline void chaos_store_indirect(CHAOS_IL2CPP_INTPTR address, T value) {
+    if (address == 0) { CHAOS_IL2CPP_ABORT(); }
+    auto addr = static_cast<CHAOS_IL2CPP_UINTPTR>(address);
+    if ((addr & CHAOS_IL2CPP_RAW_POINTER_TAG) != 0) {
+        *reinterpret_cast<T*>(addr & ~CHAOS_IL2CPP_RAW_POINTER_TAG) = value;
+        return;
+    }
+    *chaos_resolve_native_int_slot(address) = static_cast<CHAOS_IL2CPP_INTPTR>(value);
+}
 
 #endif  // CHAOS_IL2CPP_COMMON_NATIVE_TYPES_H_
