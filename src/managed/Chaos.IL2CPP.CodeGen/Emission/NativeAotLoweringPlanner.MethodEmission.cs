@@ -534,10 +534,55 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitArrayStore(builder, nextOffset, instruction.Op);
 			break;
 		case "ldind.i4":
-			EmitLoadIndirectInt32(builder, nextOffset, instruction.Op);
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_INT32", "static_cast<CHAOS_IL2CPP_INTPTR>", nextOffset, instruction.Op);
+			break;
+		case "ldind.u1":
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_UINT8", "static_cast<CHAOS_IL2CPP_INTPTR>", nextOffset, instruction.Op);
+			break;
+		case "ldind.i1":
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_INT8", "static_cast<CHAOS_IL2CPP_INTPTR>", nextOffset, instruction.Op);
+			break;
+		case "ldind.u2":
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_UINT16", "static_cast<CHAOS_IL2CPP_INTPTR>", nextOffset, instruction.Op);
+			break;
+		case "ldind.i2":
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_INT16", "static_cast<CHAOS_IL2CPP_INTPTR>", nextOffset, instruction.Op);
+			break;
+		case "ldind.u4":
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_UINT32", "static_cast<CHAOS_IL2CPP_INTPTR>", nextOffset, instruction.Op);
+			break;
+		case "ldind.i8":
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_INT64", "static_cast<CHAOS_IL2CPP_INT64>", nextOffset, instruction.Op);
+			break;
+		case "ldind.r4":
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_FLOAT32", "chaos_store_float32", nextOffset, instruction.Op);
+			break;
+		case "ldind.r8":
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_FLOAT64", "chaos_store_float64", nextOffset, instruction.Op);
+			break;
+		case "ldind.ref":
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_INTPTR", "static_cast<CHAOS_IL2CPP_INTPTR>", nextOffset, instruction.Op);
 			break;
 		case "stind.i4":
-			EmitStoreIndirectInt32(builder, nextOffset, instruction.Op);
+			EmitStoreIndirect(builder, "CHAOS_IL2CPP_INT32", "static_cast<CHAOS_IL2CPP_INT32>", nextOffset, instruction.Op);
+			break;
+		case "stind.i1":
+			EmitStoreIndirect(builder, "CHAOS_IL2CPP_INT8", "static_cast<CHAOS_IL2CPP_INT8>", nextOffset, instruction.Op);
+			break;
+		case "stind.i2":
+			EmitStoreIndirect(builder, "CHAOS_IL2CPP_INT16", "static_cast<CHAOS_IL2CPP_INT16>", nextOffset, instruction.Op);
+			break;
+		case "stind.i8":
+			EmitStoreIndirect(builder, "CHAOS_IL2CPP_INT64", "static_cast<CHAOS_IL2CPP_INT64>", nextOffset, instruction.Op);
+			break;
+		case "stind.r4":
+			EmitStoreIndirect(builder, "CHAOS_IL2CPP_FLOAT32", "static_cast<CHAOS_IL2CPP_FLOAT32>", nextOffset, instruction.Op);
+			break;
+		case "stind.r8":
+			EmitStoreIndirect(builder, "CHAOS_IL2CPP_FLOAT64", "static_cast<CHAOS_IL2CPP_FLOAT64>", nextOffset, instruction.Op);
+			break;
+		case "stind.ref":
+			EmitStoreIndirect(builder, "CHAOS_IL2CPP_INTPTR", "static_cast<CHAOS_IL2CPP_INTPTR>", nextOffset, instruction.Op);
 			break;
 		case "cpblk":
 			EmitCopyBlock(builder, nextOffset, instruction.Op);
@@ -2038,52 +2083,27 @@ public sealed partial class NativeAotLoweringPlanner
 		AppendGotoNext(builder, nextOffset, op);
 	}
 
-	private static void EmitLoadIndirectInt32(StringBuilder builder, int? nextOffset, string op)
+	
+	private static void EmitLoadIndirect(StringBuilder builder, string nativeType, string stackOp, int? nextOffset, string op)
 	{
 		builder.AppendLine("    {");
 		builder.AppendLine("        const auto chaos_address = chaos_eval_stack[--chaos_stack_top];");
-		builder.AppendLine("        if (chaos_address == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-		builder.AppendLine("        {");
-		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
-		builder.AppendLine("        }");
-		builder.AppendLine("        CHAOS_IL2CPP_INT32 chaos_value = 0;");
-		builder.AppendLine("        if ((chaos_address & chaos_raw_int32_pointer_tag) != 0)");
-		builder.AppendLine("        {");
-		builder.AppendLine("            const auto* chaos_value_ptr = reinterpret_cast<const CHAOS_IL2CPP_INT32*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_raw_int32_pointer_tag));");
-		builder.AppendLine("            chaos_value = *chaos_value_ptr;");
-		builder.AppendLine("        }");
-		builder.AppendLine("        else");
-		builder.AppendLine("        {");
-		builder.AppendLine("            const auto* chaos_value_ptr = chaos_resolve_native_int_slot(chaos_address);");
-		builder.AppendLine("            chaos_value = static_cast<CHAOS_IL2CPP_INT32>(*chaos_value_ptr);");
-		builder.AppendLine("        }");
-		builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_value);");
+		builder.AppendLine("        const auto chaos_value = chaos_load_indirect<" + nativeType + ">(chaos_address);");
+		builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = " + stackOp + "(chaos_value);");
 		builder.AppendLine("    }");
 		AppendGotoNext(builder, nextOffset, op);
 	}
 
-	private static void EmitStoreIndirectInt32(StringBuilder builder, int? nextOffset, string op)
+	private static void EmitStoreIndirect(StringBuilder builder, string nativeType, string valueCast, int? nextOffset, string op)
 	{
 		builder.AppendLine("    {");
-		builder.AppendLine("        const auto chaos_value = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);");
+		builder.AppendLine("        const auto chaos_value = " + valueCast + "(chaos_eval_stack[--chaos_stack_top]);");
 		builder.AppendLine("        const auto chaos_address = chaos_eval_stack[--chaos_stack_top];");
-		builder.AppendLine("        if (chaos_address == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-		builder.AppendLine("        {");
-		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
-		builder.AppendLine("        }");
-		builder.AppendLine("        if ((chaos_address & chaos_raw_int32_pointer_tag) != 0)");
-		builder.AppendLine("        {");
-		builder.AppendLine("            auto* chaos_value_ptr = reinterpret_cast<CHAOS_IL2CPP_INT32*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_raw_int32_pointer_tag));");
-		builder.AppendLine("            *chaos_value_ptr = chaos_value;");
-		builder.AppendLine("        }");
-		builder.AppendLine("        else");
-		builder.AppendLine("        {");
-		builder.AppendLine("            auto* chaos_value_ptr = chaos_resolve_native_int_slot(chaos_address);");
-		builder.AppendLine("            *chaos_value_ptr = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_value);");
-		builder.AppendLine("        }");
+		builder.AppendLine("        chaos_store_indirect<" + nativeType + ">(chaos_address, chaos_value);");
 		builder.AppendLine("    }");
 		AppendGotoNext(builder, nextOffset, op);
 	}
+
 
 	private static void EmitLocalAlloc(StringBuilder builder, int? nextOffset, string op)
 	{
@@ -2116,9 +2136,9 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        {");
 		builder.AppendLine("            const auto chaos_resolve_cpblk_address = [](CHAOS_IL2CPP_INTPTR chaos_address) -> void*");
 		builder.AppendLine("            {");
-		builder.AppendLine("                if ((chaos_address & chaos_raw_int32_pointer_tag) != 0)");
+		builder.AppendLine("                if ((chaos_address & CHAOS_IL2CPP_RAW_POINTER_TAG) != 0)");
 		builder.AppendLine("                {");
-		builder.AppendLine("                    return reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_raw_int32_pointer_tag));");
+		builder.AppendLine("                    return reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~CHAOS_IL2CPP_RAW_POINTER_TAG));");
 		builder.AppendLine("                }");
 		builder.AppendLine("                if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)");
 		builder.AppendLine("                {");
