@@ -17,6 +17,8 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed partial class NativeAotLoweringPlanner
 {
+	private static bool _suppressGotoNext;
+
 	private static string FormatMethodDeclaration(AotCoreIrMethodArtifact method)
 	{
 		return FormatMethodDeclaration(method.NativeSymbol, method.ReturnAbi, GetMethodAbiParameterSlots(method));
@@ -187,16 +189,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("}");
 			return;
 		}
-		int requiredIlOffset = GetRequiredIlOffset(instructions[0]);
-		stringBuilder = builder;
-		StringBuilder stringBuilder7 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder);
-		handler.AppendLiteral("    goto chaos_ip_");
-		handler.AppendFormatted(requiredIlOffset);
-		handler.AppendLiteral(";");
-		stringBuilder7.AppendLine(ref handler);
-		builder.AppendLine();
-		EmitInstructionRange(builder, method, instructions, nextOffsetsByIlOffset, offsets);
+		EmitStructuredInstructionRange(builder, method, instructions, nextOffsetsByIlOffset, offsets);
 		builder.AppendLine("}");
 	}
 
@@ -2569,6 +2562,8 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			throw new InvalidOperationException("opcode '" + op + "' cannot be the final instruction in the method");
 		}
+		if (_suppressGotoNext)
+			return;
 		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
 		handler.AppendLiteral("    goto chaos_ip_");
 		handler.AppendFormatted(nextOffset.Value);
@@ -2588,6 +2583,256 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine(ref handler);
 			EmitInstruction(builder, method, instruction, nextOffsetsByIlOffset[requiredIlOffset], offsets);
 			builder.AppendLine();
+		}
+	}
+
+	private void EmitStructuredInstructionRange(StringBuilder builder, AotCoreIrMethodArtifact method, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
+	{
+		if (instructions.Count == 0)
+			return;
+
+		var cfg = BuildControlFlowGraph(instructions, offsets);
+		if (!cfg.IsReducible)
+		{
+			EmitInstructionRange(builder, method, instructions, nextOffsetsByIlOffset, offsets);
+			return;
+		}
+
+		_suppressGotoNext = true;
+		try
+		{
+			var tree = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
+			EmitStructuredNode(builder, tree, method, nextOffsetsByIlOffset, offsets);
+		}
+		finally
+		{
+			_suppressGotoNext = false;
+		}
+	}
+
+	private void EmitStructuredNode(StringBuilder builder, StructuredNode node, AotCoreIrMethodArtifact method, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
+	{
+		if (node is BasicBlockNode bbNode)
+		{
+			EmitBasicBlockContent(builder, bbNode.Block, method, nextOffsetsByIlOffset, offsets);
+		}
+		else if (node is SequenceNode seqNode)
+		{
+			foreach (var child in seqNode.Nodes)
+				EmitStructuredNode(builder, child, method, nextOffsetsByIlOffset, offsets);
+		}
+		else if (node is IfThenElseNode iteNode)
+		{
+			EmitStructuredIfThenElse(builder, iteNode, method, nextOffsetsByIlOffset, offsets);
+		}
+		else if (node is SwitchNode swNode)
+		{
+			EmitStructuredSwitch(builder, swNode, method, nextOffsetsByIlOffset, offsets);
+		}
+	}
+
+	private void EmitBasicBlockContent(StringBuilder builder, BasicBlock block, AotCoreIrMethodArtifact method, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
+	{
+		foreach (var instr in block.BodyInstructions)
+		{
+			int ilOffset = GetRequiredIlOffset(instr);
+			EmitInstruction(builder, method, instr, nextOffsetsByIlOffset[ilOffset], offsets);
+			builder.AppendLine();
+		}
+
+		if (block.Terminator != null)
+		{
+			if (block.Terminator.Op == "br" || block.Terminator.Op == "leave")
+			{
+				int target = GetRequiredIntOperand(block.Terminator);
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
+				handler.AppendLiteral("    goto chaos_ip_");
+				handler.AppendFormatted(target);
+				handler.AppendLiteral(";");
+				builder.AppendLine(ref handler);
+			}
+			else if (block.IsTerminal)
+			{
+				int ilOffset = GetRequiredIlOffset(block.Terminator);
+				int? nextOffset = nextOffsetsByIlOffset.TryGetValue(ilOffset, out var no) ? no : null;
+				EmitInstruction(builder, method, block.Terminator, nextOffset, offsets);
+				builder.AppendLine();
+			}
+		}
+	}
+
+	private void EmitStructuredIfThenElse(StringBuilder builder, IfThenElseNode ite, AotCoreIrMethodArtifact method, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
+	{
+		var condBlock = ite.ConditionBlock;
+		var terminator = condBlock.Terminator;
+
+		foreach (var instr in condBlock.BodyInstructions)
+		{
+			int ilOffset = GetRequiredIlOffset(instr);
+			EmitInstruction(builder, method, instr, nextOffsetsByIlOffset[ilOffset], offsets);
+			builder.AppendLine();
+		}
+
+		if (terminator == null) return;
+
+		int targetOffset = GetRequiredBranchTarget(terminator, offsets);
+
+		if (terminator.Op == "brtrue" || terminator.Op == "brfalse")
+		{
+			bool branchOnNonZero = terminator.Op == "brtrue";
+			builder.AppendLine("    {");
+			builder.AppendLine("        const auto chaos_condition = chaos_eval_stack[--chaos_stack_top];");
+			string condition = branchOnNonZero
+				? "chaos_condition != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
+				: "chaos_condition == static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+			builder.AppendLine("        if (" + condition + ")");
+			builder.AppendLine("        {");
+			EmitStructuredBranchContent(builder, ite.ThenBranch, method, nextOffsetsByIlOffset, offsets, "            ");
+			if (ite.MergeOffset.HasValue && ite.MergeOffset.Value != targetOffset)
+				builder.AppendLine("            goto chaos_ip_" + ite.MergeOffset.Value + ";");
+			builder.AppendLine("        }");
+			if (ite.ElseBranch != null)
+			{
+				builder.AppendLine("        else");
+				builder.AppendLine("        {");
+				EmitStructuredBranchContent(builder, ite.ElseBranch, method, nextOffsetsByIlOffset, offsets, "            ");
+				if (ite.MergeOffset.HasValue)
+					builder.AppendLine("            goto chaos_ip_" + ite.MergeOffset.Value + ";");
+				builder.AppendLine("        }");
+			}
+			builder.AppendLine("    }");
+		}
+		else
+		{
+			string cmpOp = terminator.Op switch
+			{
+				"beq" => "==",
+				"bne.un" => "!=",
+				"bge" => ">=",
+				"bge.un" => ">=",
+				"bgt" => ">",
+				"ble" => "<=",
+				"blt" => "<",
+				_ => throw new NotSupportedException("unknown comparison opcode '" + terminator.Op + "'")
+			};
+			bool isUnsigned = terminator.Op == "bge.un";
+			string valueType = isUnsigned ? "CHAOS_IL2CPP_UINT32" : (cmpOp == "==" || cmpOp == "!=" ? "CHAOS_IL2CPP_INTPTR" : "CHAOS_IL2CPP_INT32");
+
+			builder.AppendLine("    {");
+			if (isUnsigned)
+			{
+				builder.AppendLine("        const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]));");
+				builder.AppendLine("        const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]));");
+			}
+			else
+			{
+				builder.AppendLine("        const auto chaos_right = static_cast<" + valueType + ">(chaos_eval_stack[--chaos_stack_top]);");
+				builder.AppendLine("        const auto chaos_left = static_cast<" + valueType + ">(chaos_eval_stack[--chaos_stack_top]);");
+			}
+			builder.AppendLine("        if (chaos_left " + cmpOp + " chaos_right)");
+			builder.AppendLine("        {");
+			EmitStructuredBranchContent(builder, ite.ThenBranch, method, nextOffsetsByIlOffset, offsets, "            ");
+			if (ite.MergeOffset.HasValue && ite.MergeOffset.Value != targetOffset)
+				builder.AppendLine("            goto chaos_ip_" + ite.MergeOffset.Value + ";");
+			builder.AppendLine("        }");
+			if (ite.ElseBranch != null)
+			{
+				builder.AppendLine("        else");
+				builder.AppendLine("        {");
+				EmitStructuredBranchContent(builder, ite.ElseBranch, method, nextOffsetsByIlOffset, offsets, "            ");
+				if (ite.MergeOffset.HasValue)
+					builder.AppendLine("            goto chaos_ip_" + ite.MergeOffset.Value + ";");
+				builder.AppendLine("        }");
+			}
+			builder.AppendLine("    }");
+		}
+
+		if (ite.MergeOffset.HasValue)
+		{
+			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
+			handler.AppendLiteral("    goto chaos_ip_");
+			handler.AppendFormatted(ite.MergeOffset.Value);
+			handler.AppendLiteral(";");
+			builder.AppendLine(ref handler);
+		}
+	}
+
+	private void EmitStructuredBranchContent(StringBuilder builder, StructuredNode branch, AotCoreIrMethodArtifact method, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets, string indentation)
+	{
+		if (branch is BasicBlockNode bb)
+		{
+			foreach (var instr in bb.Block.BodyInstructions)
+			{
+				EmitLinearInstruction(builder, instr, indentation);
+			}
+		}
+		else if (branch is SequenceNode seq)
+		{
+			foreach (var child in seq.Nodes)
+				EmitStructuredBranchContent(builder, child, method, nextOffsetsByIlOffset, offsets, indentation);
+		}
+		else if (branch is IfThenElseNode nestedIte)
+		{
+			builder.AppendLine(indentation + "{");
+			EmitStructuredIfThenElse(builder, nestedIte, method, nextOffsetsByIlOffset, offsets);
+			builder.AppendLine(indentation + "}");
+		}
+	}
+
+	private void EmitStructuredSwitch(StringBuilder builder, SwitchNode sw, AotCoreIrMethodArtifact method, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
+	{
+		var swBlock = sw.SwitchBlock;
+		var terminator = swBlock.Terminator;
+		if (terminator == null || terminator.Op != "switch")
+		{
+			EmitBasicBlockContent(builder, swBlock, method, nextOffsetsByIlOffset, offsets);
+			return;
+		}
+
+		foreach (var instr in swBlock.BodyInstructions)
+		{
+			int ilOffset = GetRequiredIlOffset(instr);
+			EmitInstruction(builder, method, instr, nextOffsetsByIlOffset[ilOffset], offsets);
+			builder.AppendLine();
+		}
+
+		builder.AppendLine("    {");
+		builder.AppendLine("        const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);");
+		builder.AppendLine("        switch (chaos_switch_value)");
+		builder.AppendLine("        {");
+
+		var sortedCaseValues = sw.CaseBodies.Keys.OrderBy(k => k).ToList();
+		foreach (var caseValue in sortedCaseValues)
+		{
+			var body = sw.CaseBodies[caseValue];
+			builder.AppendLine("            case " + caseValue + ":");
+			builder.AppendLine("            {");
+			EmitStructuredBranchContent(builder, body, method, nextOffsetsByIlOffset, offsets, "                ");
+			if (sw.MergeOffset.HasValue)
+				builder.AppendLine("                goto chaos_ip_" + sw.MergeOffset.Value + ";");
+			builder.AppendLine("            }");
+		}
+
+		if (sw.DefaultBody != null)
+		{
+			builder.AppendLine("            default:");
+			builder.AppendLine("            {");
+			EmitStructuredBranchContent(builder, sw.DefaultBody, method, nextOffsetsByIlOffset, offsets, "                ");
+			if (sw.MergeOffset.HasValue)
+				builder.AppendLine("                goto chaos_ip_" + sw.MergeOffset.Value + ";");
+			builder.AppendLine("            }");
+		}
+
+		builder.AppendLine("        }");
+		builder.AppendLine("    }");
+
+		if (sw.MergeOffset.HasValue)
+		{
+			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
+			handler.AppendLiteral("    goto chaos_ip_");
+			handler.AppendFormatted(sw.MergeOffset.Value);
+			handler.AppendLiteral(";");
+			builder.AppendLine(ref handler);
 		}
 	}
 

@@ -548,62 +548,6 @@ public sealed partial class NativeAotLoweringPlanner
 			CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
 			TypeShape = (AotCoreIrTypeShapeKind)0
 		};
-		if (MatchesMethodSubject(callee, "System.Threading.Thread/System.Threading.Thread", ".ctor", "System.Threading.ThreadStart"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"void",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-				[
-					"    auto& chaos_thread_entry = chaos_require_thread_runtime_entry(chaos_arg_0);",
-					"    CHAOS_IL2CPP_LOCK_GUARD<CHAOS_IL2CPP_MUTEX> chaos_guard(chaos_thread_entry.mutex);",
-					"    chaos_thread_entry.thread_start_delegate = chaos_arg_1;",
-					"    if (chaos_thread_entry.managed_thread_id == 0)",
-					"    {",
-					"        chaos_thread_entry.managed_thread_id = chaos_allocate_managed_thread_id();",
-					"    }",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-			{
-				CreateNativeIntAbiSlot("System.Threading.Thread/System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot("System.Threading.Thread/System.Threading.ThreadStart", AotCoreIrTypeShapeKind.ReferenceType)
-			}), returnVoidAbi, new HashSet<int> { 0, 1 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Threading.Thread/System.Threading.Thread", "Start"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" void {GetExternalRuntimeHelperSymbol(callee)}(CHAOS_IL2CPP_INTPTR chaos_arg_0)\n{{\n    auto& chaos_thread_entry = chaos_require_thread_runtime_entry(chaos_arg_0);\n    CHAOS_IL2CPP_LOCK_GUARD<CHAOS_IL2CPP_MUTEX> chaos_guard(chaos_thread_entry.mutex);\n    if (chaos_thread_entry.worker != nullptr ||\n        chaos_thread_entry.thread_start_delegate == static_cast<CHAOS_IL2CPP_INTPTR>(0))\n    {{\n        CHAOS_IL2CPP_ABORT();\n    }}\n\n    if (chaos_thread_entry.managed_thread_id == 0)\n    {{\n        chaos_thread_entry.managed_thread_id = chaos_allocate_managed_thread_id();\n    }}\n\n    const auto chaos_delegate_value = chaos_thread_entry.thread_start_delegate;\n    const auto chaos_managed_thread_id = chaos_thread_entry.managed_thread_id;\n    chaos_thread_entry.worker = CHAOS_IL2CPP_MAKE_UNIQUE(CHAOS_IL2CPP_THREAD>(\n        [chaos_delegate_value, chaos_managed_thread_id, chaos_arg_0]()\n        {{\n            chaos_current_thread_object = chaos_arg_0;\n            chaos_current_managed_thread_id = chaos_managed_thread_id;\n\n            const auto chaos_invoke_single_delegate = [](const {GetNativeTypeSymbol("System.Private.CoreLib/System.Delegate")}* chaos_invocation_delegate)\n            {{\n                if (chaos_invocation_delegate->chaos_delegate_method_ptr == static_cast<CHAOS_IL2CPP_INTPTR>(0))\n                {{\n                    CHAOS_IL2CPP_ABORT();\n                }}\n\n                if (chaos_invocation_delegate->chaos_delegate_target == static_cast<CHAOS_IL2CPP_INTPTR>(0))\n                {{\n                    const auto chaos_open_function =\n                        reinterpret_cast<void(*)()>(chaos_invocation_delegate->chaos_delegate_method_ptr);\n                    chaos_open_function();\n                    return;\n                }}\n\n                const auto chaos_closed_function =\n                    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(chaos_invocation_delegate->chaos_delegate_method_ptr);\n                chaos_closed_function(chaos_invocation_delegate->chaos_delegate_target);\n            }};\n\n            const auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);\n            if (const auto* chaos_invocation_list = chaos_try_get_delegate_invocation_list(chaos_delegate);\n                chaos_invocation_list != nullptr)\n            {{\n                for (const auto chaos_entry_value : *chaos_invocation_list)\n                {{\n                    chaos_invoke_single_delegate(chaos_require_delegate(chaos_entry_value));\n                }}\n\n                return;\n            }}\n\n            chaos_invoke_single_delegate(chaos_delegate);\n        }});\n}}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Threading.Thread/System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType)), new AotCoreIrAbiSlotArtifact
-			{
-				CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
-				TypeShape = (AotCoreIrTypeShapeKind)0
-			}, new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Threading.Thread/System.Threading.Thread", "Join"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"void",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    auto& chaos_thread_entry = chaos_require_thread_runtime_entry(chaos_arg_0);",
-					"    CHAOS_IL2CPP_THREAD* chaos_worker = nullptr;",
-					"    {",
-					"        CHAOS_IL2CPP_LOCK_GUARD<CHAOS_IL2CPP_MUTEX> chaos_guard(chaos_thread_entry.mutex);",
-					"        chaos_worker = chaos_thread_entry.worker.get();",
-					"    }",
-					string.Empty,
-					"    if (chaos_worker != nullptr && chaos_worker->joinable())",
-					"    {",
-					"        chaos_worker->join();",
-					"    }",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Threading.Thread/System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType)), returnVoidAbi, new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Threading.Thread/System.Threading.Thread", "get_CurrentThread"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" CHAOS_IL2CPP_INTPTR {GetExternalRuntimeHelperSymbol(callee)}()\n{{\n    if (chaos_current_thread_object == static_cast<CHAOS_IL2CPP_INTPTR>(0))\n    {{\n        auto* chaos_thread_object = new {GetNativeTypeSymbol("System.Threading.Thread/System.Threading.Thread")}{{}};\n        chaos_thread_object->header.type_id = {GetNativeTypeIdSymbol("System.Threading.Thread/System.Threading.Thread")};\n        chaos_current_thread_object = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_thread_object);\n        auto& chaos_thread_entry = chaos_require_thread_runtime_entry(chaos_current_thread_object);\n        if (chaos_thread_entry.managed_thread_id == 0)\n        {{\n            chaos_thread_entry.managed_thread_id = chaos_current_managed_thread_id;\n        }}\n    }}\n\n    return chaos_current_thread_object;\n}}", Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateNativeIntAbiSlot("System.Threading.Thread/System.Threading.Thread", AotCoreIrTypeShapeKind.ReferenceType), EmptyRawArgumentIndices);
-			return true;
-		}
 		if (MatchesMethodSubject(callee, "System.Threading.Thread/System.Threading.Thread", "get_Name"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
@@ -656,28 +600,6 @@ public sealed partial class NativeAotLoweringPlanner
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), returnVoidAbi, new HashSet<int> { 0 });
 			return true;
 		}
-		if (MatchesMethodSubject(callee, "System.Threading/Monitor", "Enter", "System.Object", "System.Boolean&"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), "extern \"C\" void " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)\n{\n    auto& chaos_monitor_entry = chaos_require_monitor_runtime_entry(chaos_arg_0);\n    auto* chaos_lock_taken_slot = chaos_resolve_native_int_slot(chaos_arg_1);\n    *chaos_lock_taken_slot = static_cast<CHAOS_IL2CPP_INTPTR>(0);\n    chaos_monitor_entry.mutex.lock();\n    *chaos_lock_taken_slot = static_cast<CHAOS_IL2CPP_INTPTR>(1);\n}", new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-			{
-				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot()
-			}), new AotCoreIrAbiSlotArtifact
-			{
-				CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
-				TypeShape = (AotCoreIrTypeShapeKind)0
-			}, new HashSet<int> { 0, 1 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Threading/Monitor", "Exit", "System.Object"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), "extern \"C\" void " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0)\n{\n    auto& chaos_monitor_entry = chaos_require_monitor_runtime_entry(chaos_arg_0);\n    chaos_monitor_entry.mutex.unlock();\n}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), new AotCoreIrAbiSlotArtifact
-			{
-				CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
-				TypeShape = (AotCoreIrTypeShapeKind)0
-			}, new HashSet<int> { 0 });
-			return true;
-		}
 		if (MatchesMethodSubject(callee, "System.Threading/Monitor", "TryEnter", "System.Object", "System.TimeSpan", "System.Boolean&"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" void {GetExternalRuntimeHelperSymbol(callee)}(CHAOS_IL2CPP_INTPTR chaos_arg_0, {GetNativeValueTypeSymbol("System.Private.CoreLib/System.TimeSpan")} chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2)\n{{\n    auto& chaos_monitor_entry = chaos_require_monitor_runtime_entry(chaos_arg_0);\n    auto* chaos_lock_taken_slot = chaos_resolve_native_int_slot(chaos_arg_2);\n    *chaos_lock_taken_slot = static_cast<CHAOS_IL2CPP_INTPTR>(0);\n\n    CHAOS_IL2CPP_INT64 chaos_ticks = 0;\n    CHAOS_IL2CPP_MEMCPY(&chaos_ticks, &chaos_arg_1, sizeof(chaos_ticks));\n    if (chaos_ticks < 0)\n    {{\n        chaos_ticks = 0;\n    }}\n\n    const auto chaos_timeout = CHAOS_IL2CPP_CHRONO_DURATION_CAST(CHAOS_IL2CPP_CHRONO_STEADY_CLOCK::duration>(\n        CHAOS_IL2CPP_CHRONO_NANOSECONDS(chaos_ticks * 100));\n    if (chaos_monitor_entry.mutex.try_lock_for(chaos_timeout))\n    {{\n        *chaos_lock_taken_slot = static_cast<CHAOS_IL2CPP_INTPTR>(1);\n    }}\n}}", new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
@@ -707,16 +629,7 @@ public sealed partial class NativeAotLoweringPlanner
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), BuildVoidInterfaceDispatchHelperSource(GetExternalRuntimeHelperSymbol(callee), readOnlyList), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.IDisposable", AotCoreIrTypeShapeKind.ReferenceType)), returnVoidAbi, new HashSet<int> { 0 });
 			return true;
 		}
-		if (!MatchesMethodSubject(callee, "System.Object", "Equals", "System.Object"))
-		{
-			return false;
-		}
-		helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), "extern \"C\" CHAOS_IL2CPP_INTPTR " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)\n{\n    return chaos_object_equals(chaos_arg_0, chaos_arg_1)\n        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)\n        : static_cast<CHAOS_IL2CPP_INTPTR>(0);\n}", new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-		{
-			CreateNativeIntAbiSlot(),
-			CreateNativeIntAbiSlot()
-		}), CreateNativeIntAbiSlot(), new HashSet<int> { 0, 1 });
-		return true;
+		return false;
 	}
 
 	private IReadOnlyList<AotCoreIrMethodArtifact> ResolveInterfaceDispatchTargets(string interfaceMethodSubjectId)
