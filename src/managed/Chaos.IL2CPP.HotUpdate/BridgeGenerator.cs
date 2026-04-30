@@ -13,7 +13,7 @@ public sealed class BridgeGenerator
             AotToHotUpdate = request.AotToHotUpdate
                 .Select(spec => new AotToHotUpdateBridgeEntry
                 {
-                    BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
+                    BridgeId = ManagedNaming.NormalizeSubjectIdAssembly(RequireValue(spec.BridgeId, nameof(spec.BridgeId))),
                     HotUpdateAuthorityKey = ResolveAuthorityKey(
                         spec.HotUpdateIdentity,
                         spec.HotUpdateAuthorityKey,
@@ -24,7 +24,7 @@ public sealed class BridgeGenerator
             HotUpdateToAot = request.HotUpdateToAot
                 .Select(spec => new HotUpdateToAotBridgeEntry
                 {
-                    BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
+                    BridgeId = ManagedNaming.NormalizeSubjectIdAssembly(RequireValue(spec.BridgeId, nameof(spec.BridgeId))),
                     AotAuthorityKey = ResolveAuthorityKey(
                         spec.AotIdentity,
                         spec.AotAuthorityKey,
@@ -35,7 +35,7 @@ public sealed class BridgeGenerator
             HotUpdateToEngine = request.HotUpdateToEngine
                 .Select(spec => new HotUpdateToEngineBridgeEntry
                 {
-                    BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
+                    BridgeId = ManagedNaming.NormalizeSubjectIdAssembly(RequireValue(spec.BridgeId, nameof(spec.BridgeId))),
                     EngineAuthorityKey = ResolveAuthorityKey(
                         spec.EngineIdentity,
                         spec.EngineAuthorityKey,
@@ -46,7 +46,7 @@ public sealed class BridgeGenerator
             DelegateWrappers = request.DelegateWrappers
                 .Select(spec => new DelegateWrapperEntry
                 {
-                    WrapperId = RequireValue(spec.WrapperId, nameof(spec.WrapperId)),
+                    WrapperId = ManagedNaming.NormalizeSubjectIdAssembly(RequireValue(spec.WrapperId, nameof(spec.WrapperId))),
                     HotUpdateAuthorityKey = ResolveAuthorityKey(
                         spec.HotUpdateIdentity,
                         spec.HotUpdateAuthorityKey,

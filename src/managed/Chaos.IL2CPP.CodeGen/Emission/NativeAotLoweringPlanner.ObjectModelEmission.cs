@@ -133,19 +133,19 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					TrackReferenceType("System.Private.CoreLib/System.Type", "System.Private.CoreLib/System.Object");
 				}
-				if (IsReflectionMemberHelperSubjectId(instruction.Callee ?? string.Empty) || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.Reflection.MethodInfo", "MakeGenericMethod", "System.Type[]"))
+				if (IsReflectionMemberHelperSubjectId(instruction.Callee ?? string.Empty) || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Reflection.MethodInfo", "MakeGenericMethod", "System.Type[]"))
 				{
 					TrackReferenceType("System.Private.CoreLib/System.Reflection.MethodInfo", "System.Private.CoreLib/System.Object");
 				}
-				if (string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::GetConstructors(System.Reflection.BindingFlags)", StringComparison.Ordinal))
+				if (string.Equals(ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee ?? string.Empty), "System.Private.CoreLib/System.Type::GetConstructors(System.Reflection.BindingFlags)", StringComparison.Ordinal))
 				{
 					TrackReferenceType("System.Private.CoreLib/System.Reflection.ConstructorInfo", "System.Private.CoreLib/System.Object");
 				}
-				if (string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::GetField(System.String)", StringComparison.Ordinal))
+				if (string.Equals(ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee ?? string.Empty), "System.Private.CoreLib/System.Type::GetField(System.String)", StringComparison.Ordinal))
 				{
 					TrackReferenceType("System.Private.CoreLib/System.Reflection.FieldInfo", "System.Private.CoreLib/System.Object");
 				}
-				if (string.Equals(instruction.Callee, "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters()", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name()", StringComparison.Ordinal))
+				if (string.Equals(ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee ?? string.Empty), "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters()", StringComparison.Ordinal) || string.Equals(ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee ?? string.Empty), "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name()", StringComparison.Ordinal))
 				{
 					TrackReferenceType("System.Private.CoreLib/System.Reflection.ParameterInfo", "System.Private.CoreLib/System.Object");
 				}
@@ -590,15 +590,16 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine();
 		foreach (string typeSubjectId in GetReferenceTypeEmissionOrder(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 		{
-			bool num2 = string.Equals(typeSubjectId, "System.Private.CoreLib/System.String", StringComparison.Ordinal);
-			bool flag3 = string.Equals(typeSubjectId, "System.Private.CoreLib/System.Delegate", StringComparison.Ordinal);
-			bool flag4 = string.Equals(typeSubjectId, "System.Private.CoreLib/System.Type", StringComparison.Ordinal);
-			bool flag5 = string.Equals(typeSubjectId, "System.Private.CoreLib/System.Reflection.MethodInfo", StringComparison.Ordinal);
-			bool flag6 = string.Equals(typeSubjectId, "System.Private.CoreLib/System.Reflection.ConstructorInfo", StringComparison.Ordinal);
-			bool flag7 = string.Equals(typeSubjectId, "System.Private.CoreLib/System.Reflection.FieldInfo", StringComparison.Ordinal);
-			bool flag8 = string.Equals(typeSubjectId, "System.Private.CoreLib/System.Reflection.ParameterInfo", StringComparison.Ordinal);
-			bool flag9 = string.Equals(typeSubjectId, "System.Private.CoreLib/System.Reflection.Assembly", StringComparison.Ordinal);
-			bool flag10 = string.Equals(typeSubjectId, "System.Private.CoreLib/System.Reflection.AssemblyName", StringComparison.Ordinal);
+			var ns = ManagedNaming.NormalizeSubjectIdAssembly(typeSubjectId);
+			bool num2 = string.Equals(ns, "System.Private.CoreLib/System.String", StringComparison.Ordinal);
+			bool flag3 = string.Equals(ns, "System.Private.CoreLib/System.Delegate", StringComparison.Ordinal);
+			bool flag4 = string.Equals(ns, "System.Private.CoreLib/System.Type", StringComparison.Ordinal);
+			bool flag5 = string.Equals(ns, "System.Private.CoreLib/System.Reflection.MethodInfo", StringComparison.Ordinal);
+			bool flag6 = string.Equals(ns, "System.Private.CoreLib/System.Reflection.ConstructorInfo", StringComparison.Ordinal);
+			bool flag7 = string.Equals(ns, "System.Private.CoreLib/System.Reflection.FieldInfo", StringComparison.Ordinal);
+			bool flag8 = string.Equals(ns, "System.Private.CoreLib/System.Reflection.ParameterInfo", StringComparison.Ordinal);
+			bool flag9 = string.Equals(ns, "System.Private.CoreLib/System.Reflection.Assembly", StringComparison.Ordinal);
+			bool flag10 = string.Equals(ns, "System.Private.CoreLib/System.Reflection.AssemblyName", StringComparison.Ordinal);
 			if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string value6) && !string.IsNullOrWhiteSpace(value6) && referenceTypeSubjectIds.Contains(value6))
 			{
 				StringBuilder stringBuilder = builder;

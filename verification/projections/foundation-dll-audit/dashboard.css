@@ -575,3 +575,17 @@ li + li { margin-top: 6px; }
   .project-overview,
   .project-card { padding: 14px; }
 }
+
+/* primary column emphasis */
+.primary-header { background: #c8b89a !important; font-weight: 800; }
+.family-table td.primary-cell { background: #f5efe0; font-weight: 600; }
+.primary-cell-link { display: block; color: var(--ink); text-decoration: none; }
+.primary-cell-link:hover { color: var(--accent); text-decoration: underline; }
+/* family detail page */
+.family-detail-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.family-detail-table th,
+.family-detail-table td { padding: 6px 10px; border: 1px solid var(--line); font-size: 13px; }
+.family-detail-table th { background: var(--bg-strong); font-weight: 700; }
+.family-detail-table th:first-child,
+.family-detail-table td:first-child { text-align: left; }
+.detail-section { margin-top: 24px; }

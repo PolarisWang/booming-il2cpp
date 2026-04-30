@@ -19,16 +19,16 @@ namespace chaos::il2cpp::bootstrap {
 
 namespace {
 
-constexpr const char* kConsoleWriteLineStringIcall =
-    "System.Console/System.Console::WriteLine(System.String)";
-constexpr const char* kStringConcatPairIcall =
-    "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
-constexpr const char* kStringConcatTripleIcall =
-    "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)";
-constexpr const char* kDelegateCombineIcall =
-    "System.Private.CoreLib/System.Delegate::Combine(System.Delegate,System.Delegate)";
-constexpr const char* kDelegateRemoveIcall =
-    "System.Private.CoreLib/System.Delegate::Remove(System.Delegate,System.Delegate)";
+constexpr const char* kConsoleWriteLineStringIcallSignature =
+    "System.Console::WriteLine(System.String)";
+constexpr const char* kStringConcatPairIcallSignature =
+    "System.String::Concat(System.String,System.String)";
+constexpr const char* kStringConcatTripleIcallSignature =
+    "System.String::Concat(System.String,System.String,System.String)";
+constexpr const char* kDelegateCombineIcallSignature =
+    "System.Delegate::Combine(System.Delegate,System.Delegate)";
+constexpr const char* kDelegateRemoveIcallSignature =
+    "System.Delegate::Remove(System.Delegate,System.Delegate)";
 
 struct UnresolvedVirtualCallEntry {
     CHAOS_IL2CPP_UINT32 instance_type_token;
@@ -709,23 +709,23 @@ void* CHAOS_RUNTIME_ABI_CALL ResolveIcall(const char* icall_name_utf8) {
         return nullptr;
     }
 
-    if (CHAOS_IL2CPP_STRCMP(icall_name_utf8, kConsoleWriteLineStringIcall) == 0) {
+    if (std::strstr(icall_name_utf8, kConsoleWriteLineStringIcallSignature) != nullptr) {
         return reinterpret_cast<void*>(&chaos::il2cpp::support::WriteLineString);
     }
 
-    if (CHAOS_IL2CPP_STRCMP(icall_name_utf8, kStringConcatPairIcall) == 0) {
+    if (std::strstr(icall_name_utf8, kStringConcatPairIcallSignature) != nullptr) {
         return reinterpret_cast<void*>(&chaos::il2cpp::support::ConcatStringPair);
     }
 
-    if (CHAOS_IL2CPP_STRCMP(icall_name_utf8, kStringConcatTripleIcall) == 0) {
+    if (std::strstr(icall_name_utf8, kStringConcatTripleIcallSignature) != nullptr) {
         return reinterpret_cast<void*>(&chaos::il2cpp::support::ConcatStringTriple);
     }
 
-    if (CHAOS_IL2CPP_STRCMP(icall_name_utf8, kDelegateCombineIcall) == 0) {
+    if (std::strstr(icall_name_utf8, kDelegateCombineIcallSignature) != nullptr) {
         return reinterpret_cast<void*>(&CombineDelegate);
     }
 
-    if (CHAOS_IL2CPP_STRCMP(icall_name_utf8, kDelegateRemoveIcall) == 0) {
+    if (std::strstr(icall_name_utf8, kDelegateRemoveIcallSignature) != nullptr) {
         return reinterpret_cast<void*>(&RemoveDelegate);
     }
 

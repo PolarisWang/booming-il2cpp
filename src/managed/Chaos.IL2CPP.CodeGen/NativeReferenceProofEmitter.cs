@@ -1923,6 +1923,22 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return TryBuildRuntimeSkeletonConvertLikeHandlers(buildContext, RuntimeSkeletonFamilyHandlerResult.NoMatch);
     }
 
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonThreadingAtomicKernelFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonThreadingAtomicKernelFamilyCore(buildContext);
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonThreadingTaskManagedInvokeFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonThreadingTaskManagedInvokeFamilyCore(buildContext);
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonThreadingSyncManagedInvokeFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonThreadingSyncManagedInvokeFamilyCore(buildContext);
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonThreadingThreadManagedInvokeFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonThreadingThreadManagedInvokeFamilyCore(buildContext);
+
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeHandlers(
         RuntimeSkeletonStubBuildContext buildContext,
         RuntimeSkeletonFamilyHandlerResult missResult)
@@ -8412,7 +8428,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 entryPointInstructions,
                 out var pinvokeDllImportMinimalPlan))
         {
-            return pinvokeDllImportMinimalPlan;
+            return pinvokeDllImportMinimalPlan!;
         }
 
         if (TryBuildLegacyReflectionClosedTypeQueryLoweringPlan(
@@ -8422,7 +8438,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 entryPointRegistration,
                 out var reflectionQueryMinimalPlan))
         {
-            return reflectionQueryMinimalPlan;
+            return reflectionQueryMinimalPlan!;
         }
 
         if (MatchesLegacyStaticForwarderCtorGetterEntryPointShape(entryPointInstructions))
@@ -10276,9 +10292,6 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         {
             return false;
         }
-
-        int branchOpIndex = 2;
-        int callOpIndex = 3;
 
         // Signed input types that need a dual (lower bound) check for signed output types
         // Use a sign check pattern via bge/bge.un with 0

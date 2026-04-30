@@ -159,31 +159,31 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine();
 		if (TryCreateCatchOnlyExceptionMethodShape(method, out CatchOnlyExceptionMethodShape catchOnlyShape))
 		{
-			EmitCatchOnlyExceptionMethodBody(builder, method, catchOnlyShape, nextOffsetsByIlOffset, offsets);
+			EmitCatchOnlyExceptionMethodBody(builder, method, catchOnlyShape!, nextOffsetsByIlOffset, offsets);
 			builder.AppendLine("}");
 			return;
 		}
 		if (TryCreateFilterOnlyExceptionMethodShape(method, out FilterOnlyExceptionMethodShape filterOnlyShape))
 		{
-			EmitFilterOnlyExceptionMethodBody(builder, method, filterOnlyShape, nextOffsetsByIlOffset, offsets);
+			EmitFilterOnlyExceptionMethodBody(builder, method, filterOnlyShape!, nextOffsetsByIlOffset, offsets);
 			builder.AppendLine("}");
 			return;
 		}
 		if (TryCreateFinallyOnlyExceptionMethodShape(method, out FinallyOnlyExceptionMethodShape finallyOnlyShape))
 		{
-			EmitFinallyOnlyExceptionMethodBody(builder, method, finallyOnlyShape, nextOffsetsByIlOffset, offsets);
+			EmitFinallyOnlyExceptionMethodBody(builder, method, finallyOnlyShape!, nextOffsetsByIlOffset, offsets);
 			builder.AppendLine("}");
 			return;
 		}
 		if (TryCreateCatchAndFinallyExceptionMethodShape(method, out CatchAndFinallyExceptionMethodShape catchAndFinallyShape))
 		{
-			EmitCatchAndFinallyExceptionMethodBody(builder, method, catchAndFinallyShape, nextOffsetsByIlOffset, offsets);
+			EmitCatchAndFinallyExceptionMethodBody(builder, method, catchAndFinallyShape!, nextOffsetsByIlOffset, offsets);
 			builder.AppendLine("}");
 			return;
 		}
 		if (TryCreateFilterAndFinallyExceptionMethodShape(method, out FilterAndFinallyExceptionMethodShape filterAndFinallyShape))
 		{
-			EmitFilterAndFinallyExceptionMethodBody(builder, method, filterAndFinallyShape, nextOffsetsByIlOffset, offsets);
+			EmitFilterAndFinallyExceptionMethodBody(builder, method, filterAndFinallyShape!, nextOffsetsByIlOffset, offsets);
 			builder.AppendLine("}");
 			return;
 		}

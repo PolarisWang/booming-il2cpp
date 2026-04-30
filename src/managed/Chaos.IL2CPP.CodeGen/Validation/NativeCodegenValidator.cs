@@ -70,7 +70,6 @@ public sealed class NativeCodegenValidator
     public ValidationResult ValidateContent(string content, string fileName, ValidationResult? result = null)
     {
         result ??= new ValidationResult();
-        var lineNumber = 0;
 
         // Check 1: No `using namespace std;` or `using namespace chaos;`
         var usingMatch = UsingNamespaceRegex.Match(content);

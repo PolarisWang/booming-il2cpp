@@ -172,6 +172,80 @@ public static class ManagedNaming
         return CanonicalizeGenericPlaceholderOrdinals(subjectId);
     }
 
+    /// <summary>Extract the type display name from a SubjectId by stripping the assembly prefix.
+    /// For "System.Private.CoreLib/System.String::Concat..." returns "System.String".
+    /// For type SubjectIds like "System.Private.CoreLib/System.Int32" returns "System.Int32".</summary>
+    public static string GetTypeDisplayNameFromSubjectId(string subjectId)
+    {
+        // For method SubjectIds, the declaring type is before "::"
+        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        var typePart = separatorIndex >= 0 ? subjectId[..separatorIndex] : subjectId;
+        // Strip assembly prefix (everything before the first '/')
+        var slashIndex = typePart.IndexOf('/');
+        return slashIndex >= 0 ? typePart[(slashIndex + 1)..] : typePart;
+    }
+
+    /// <summary>Match a method SubjectId against type display name + method name + parameter types,
+    /// ignoring the assembly prefix. This is the assembly-agnostic equivalent of comparing
+    /// declaring type SubjectIds directly. Example: "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+    /// matches MatchesMethod(subjectId, "System.String", "Concat", ["System.String", "System.String"]).</summary>
+    public static bool MatchesMethod(string subjectId, string typeDisplayName, string methodName, params string[] parameterTypes)
+    {
+        if (string.IsNullOrEmpty(subjectId))
+            return false;
+
+        var actualTypeDisplayName = GetTypeDisplayNameFromSubjectId(subjectId);
+        if (!string.Equals(actualTypeDisplayName, typeDisplayName, StringComparison.Ordinal))
+            return false;
+
+        if (!TryParseMethodSubjectIdComponents(subjectId, out _, out var actualMethodName, out _, out var parameterSignature))
+            return false;
+
+        if (!string.Equals(actualMethodName, methodName, StringComparison.Ordinal))
+            return false;
+
+        return string.Join(",", parameterTypes) == parameterSignature;
+    }
+
+    /// <summary>Normalize the assembly prefix in a SubjectId.
+    /// Maps known assembly aliases (e.g. "System.Runtime" -> "System.Private.CoreLib")
+    /// to a canonical form. Returns the original SubjectId unchanged if no mapping applies.</summary>
+    public static string NormalizeSubjectIdAssembly(string subjectId)
+    {
+        if (string.IsNullOrEmpty(subjectId))
+            return subjectId;
+
+        var slashIndex = subjectId.IndexOf('/');
+        if (slashIndex <= 0)
+            return subjectId;
+
+        var originalPrefix = subjectId[..slashIndex];
+        var canonicalPrefix = CanonicalizeAssemblyName(originalPrefix);
+
+        return string.Equals(originalPrefix, canonicalPrefix, StringComparison.Ordinal)
+            ? subjectId
+            : $"{canonicalPrefix}{subjectId[slashIndex..]}";
+    }
+
+    /// <summary>Canonicalize an assembly name to its canonical form.
+    /// Known aliases: System.Runtime, mscorlib, netstandard -> System.Private.CoreLib.</summary>
+    public static string CanonicalizeAssemblyName(string assemblyName)
+    {
+        if (string.IsNullOrEmpty(assemblyName))
+            return assemblyName;
+
+        return assemblyName switch
+        {
+            "System.Runtime" => "System.Private.CoreLib",
+            "mscorlib" => "System.Private.CoreLib",
+            "netstandard" => "System.Private.CoreLib",
+            "System.Runtime.InteropServices" => "System.Private.CoreLib",
+            "System.Threading" => "System.Private.CoreLib",
+            "System.Collections" => "System.Private.CoreLib",
+            _ => assemblyName,
+        };
+    }
+
     public static string StripGenericArity(string value)
     {
         var builder = new System.Text.StringBuilder();

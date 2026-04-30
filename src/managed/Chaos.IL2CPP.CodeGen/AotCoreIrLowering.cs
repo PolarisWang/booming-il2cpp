@@ -585,8 +585,9 @@ public sealed class AotCoreIrLowering
 
     private static bool RequiresValueTypeByValueCarrier(ManagedTypeModel managedType)
     {
-        return !string.Equals(managedType.SubjectId, "System.Private.CoreLib/System.Int32", StringComparison.Ordinal) &&
-               !managedType.SubjectId.StartsWith("System.Private.CoreLib/System.", StringComparison.Ordinal);
+        var subjectId = ManagedNaming.NormalizeSubjectIdAssembly(managedType.SubjectId);
+        return !string.Equals(subjectId, "System.Private.CoreLib/System.Int32", StringComparison.Ordinal) &&
+               !subjectId.StartsWith("System.Private.CoreLib/System.", StringComparison.Ordinal);
     }
 
     private static string GetRequiredNativeSymbol(
@@ -1002,25 +1003,6 @@ public sealed class AotCoreIrLowering
             "System.UInt32" => true,
             "System.UInt64" => true,
             "System.UIntPtr" => true,
-            "System.Private.CoreLib/System.Boolean" => true,
-            "System.Private.CoreLib/System.Byte" => true,
-            "System.Private.CoreLib/System.Char" => true,
-            "System.Private.CoreLib/System.Double" => true,
-            "System.Private.CoreLib/System.Int16" => true,
-            "System.Private.CoreLib/System.Int32" => true,
-            "System.Private.CoreLib/System.Int64" => true,
-            "System.Private.CoreLib/System.IntPtr" => true,
-            "System.Private.CoreLib/System.RuntimeArgumentHandle" => true,
-            "System.Private.CoreLib/System.RuntimeFieldHandle" => true,
-            "System.Private.CoreLib/System.RuntimeMethodHandle" => true,
-            "System.Private.CoreLib/System.RuntimeTypeHandle" => true,
-            "System.Private.CoreLib/System.SByte" => true,
-            "System.Private.CoreLib/System.Single" => true,
-            "System.Private.CoreLib/System.TypedReference" => true,
-            "System.Private.CoreLib/System.UInt16" => true,
-            "System.Private.CoreLib/System.UInt32" => true,
-            "System.Private.CoreLib/System.UInt64" => true,
-            "System.Private.CoreLib/System.UIntPtr" => true,
             _ => false,
         };
     }

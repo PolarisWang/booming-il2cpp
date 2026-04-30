@@ -26,21 +26,6 @@ public sealed partial class NativeAotLoweringPlanner
 			CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
 			TypeShape = (AotCoreIrTypeShapeKind)0
 		};
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers", "InitializeArray", "System.Array", "System.RuntimeFieldHandle"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"void",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-				[
-					"    chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-			{
-				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot()
-			}), returnAbi, new HashSet<int> { 1 });
-			return true;
-		}
 		if (TryReadSingleGenericTypeArgument(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan<", out string typeSubjectId) && IsInt32ElementType(typeSubjectId))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
@@ -563,17 +548,6 @@ public sealed partial class NativeAotLoweringPlanner
 			CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
 			TypeShape = (AotCoreIrTypeShapeKind)0
 		};
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Environment", "get_CurrentManagedThreadId"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INT32",
-				GetExternalRuntimeHelperSymbol(callee),
-				string.Empty,
-				[
-					"    return chaos_current_managed_thread_id;",
-				]), Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateInt32AbiSlot(), EmptyRawArgumentIndices);
-			return true;
-		}
 		if (MatchesMethodSubject(callee, "System.Threading.Thread/System.Threading.Thread", ".ctor", "System.Threading.ThreadStart"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
@@ -660,7 +634,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}), returnVoidAbi, new HashSet<int> { 0, 1 });
 			return true;
 		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.GC", "Collect") || MatchesMethodSubject(callee, "System.Private.CoreLib/System.GC", "WaitForPendingFinalizers"))
+		if (MatchesMethodSubject(callee, "System.GC", "Collect") || MatchesMethodSubject(callee, "System.GC", "WaitForPendingFinalizers"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
@@ -671,7 +645,7 @@ public sealed partial class NativeAotLoweringPlanner
 				]), Array.Empty<AotCoreIrAbiSlotArtifact>(), returnVoidAbi, EmptyRawArgumentIndices);
 			return true;
 		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.GC", "KeepAlive", "System.Object"))
+		if (MatchesMethodSubject(callee, "System.GC", "KeepAlive", "System.Object"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
@@ -680,20 +654,6 @@ public sealed partial class NativeAotLoweringPlanner
 				[
 					"    (void)chaos_arg_0;",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), returnVoidAbi, new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.TimeSpan", "FromMilliseconds", "System.Double"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" {GetNativeValueTypeSymbol("System.Private.CoreLib/System.TimeSpan")} {GetExternalRuntimeHelperSymbol(callee)}(double chaos_arg_0)\n{{\n    const auto chaos_ticks_value = chaos_arg_0 * 10000.0;\n    if (chaos_ticks_value < static_cast<double>(CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT64)) ||\n        chaos_ticks_value > static_cast<double>(CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_INT64)))\n    {{\n        CHAOS_IL2CPP_ABORT();\n    }}\n\n    const auto chaos_ticks = static_cast<CHAOS_IL2CPP_INT64>(\n        chaos_ticks_value + (chaos_ticks_value >= 0.0 ? 0.5 : -0.5));\n    {GetNativeValueTypeSymbol("System.Private.CoreLib/System.TimeSpan")} chaos_result{{}};\n    CHAOS_IL2CPP_MEMCPY(&chaos_result, &chaos_ticks, sizeof(chaos_ticks));\n    return chaos_result;\n}}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact
-			{
-				CarrierKindCode = AotCoreIrAbiCarrierKind.Float64,
-				TypeShape = AotCoreIrTypeShapeKind.ValueType
-			}), new AotCoreIrAbiSlotArtifact
-			{
-				CarrierKindCode = AotCoreIrAbiCarrierKind.ValueTypeByValue,
-				TypeSubjectId = "System.Private.CoreLib/System.TimeSpan",
-				TypeShape = AotCoreIrTypeShapeKind.ValueType
-			}, new HashSet<int> { 0 });
 			return true;
 		}
 		if (MatchesMethodSubject(callee, "System.Threading/Monitor", "Enter", "System.Object", "System.Boolean&"))
@@ -737,16 +697,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}, new HashSet<int> { 0, 2 });
 			return true;
 		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Object", ".ctor"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), "extern \"C\" void " + GetExternalRuntimeHelperSymbol(callee) + "(CHAOS_IL2CPP_INTPTR chaos_arg_0)\n{\n    (void)chaos_arg_0;\n}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType)), new AotCoreIrAbiSlotArtifact
-			{
-				CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
-				TypeShape = (AotCoreIrTypeShapeKind)0
-			}, new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.IDisposable", "Dispose"))
+		if (MatchesMethodSubject(callee, "System.IDisposable", "Dispose"))
 		{
 			IReadOnlyList<AotCoreIrMethodArtifact> readOnlyList = ResolveInterfaceDispatchTargets(callee);
 			if (readOnlyList.Count == 0)
@@ -756,7 +707,7 @@ public sealed partial class NativeAotLoweringPlanner
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), BuildVoidInterfaceDispatchHelperSource(GetExternalRuntimeHelperSymbol(callee), readOnlyList), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.IDisposable", AotCoreIrTypeShapeKind.ReferenceType)), returnVoidAbi, new HashSet<int> { 0 });
 			return true;
 		}
-		if (!MatchesMethodSubject(callee, "System.Private.CoreLib/System.Object", "Equals", "System.Object"))
+		if (!MatchesMethodSubject(callee, "System.Object", "Equals", "System.Object"))
 		{
 			return false;
 		}
@@ -848,43 +799,6 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return true;
 		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Threading.Tasks.Task", "Yield"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", GetExternalRuntimeHelperSymbol(callee), string.Empty, [
-				"    return chaos_async_yield_create();"
-			]), Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateNativeIntAbiSlot(), EmptyRawArgumentIndices);
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.YieldAwaitable", "GetAwaiter"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", GetExternalRuntimeHelperSymbol(callee), "CHAOS_IL2CPP_INTPTR chaos_arg_0", [
-				"    return chaos_async_yield_get_awaiter(chaos_arg_0);"
-			]), new AotCoreIrAbiSlotArtifact[]
-			{
-				CreateNativeIntAbiSlot()
-			}, CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.YieldAwaitable+YieldAwaiter", "get_IsCompleted"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", GetExternalRuntimeHelperSymbol(callee), "CHAOS_IL2CPP_INTPTR chaos_arg_0", [
-				"    return chaos_async_yield_get_is_completed(chaos_arg_0);"
-			]), new AotCoreIrAbiSlotArtifact[]
-			{
-				CreateNativeIntAbiSlot()
-			}, CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.YieldAwaitable+YieldAwaiter", "GetResult"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper("void", GetExternalRuntimeHelperSymbol(callee), "CHAOS_IL2CPP_INTPTR chaos_arg_0", [
-				"    chaos_async_yield_get_result(chaos_arg_0);"
-			]), new AotCoreIrAbiSlotArtifact[]
-			{
-				CreateNativeIntAbiSlot()
-			}, CreateVoidAbiSlot(), new HashSet<int> { 0 });
-			return true;
-		}
 		if (TryCreateAsyncTaskGetAwaiterHelperDefinition(callee, "System.Private.CoreLib/System.Threading.Tasks.Task", isValueTask: false, out helperDefinition) || TryCreateAsyncTaskGetAwaiterHelperDefinition(callee, "System.Private.CoreLib/System.Threading.Tasks.ValueTask", isValueTask: true, out helperDefinition) || TryCreateAsyncAwaiterIsCompletedHelperDefinition(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter", out helperDefinition) || TryCreateAsyncAwaiterIsCompletedHelperDefinition(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter", out helperDefinition) || TryCreateAsyncAwaiterGetResultHelperDefinition(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter", out helperDefinition) || TryCreateAsyncAwaiterGetResultHelperDefinition(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter", out helperDefinition) || TryCreateAsyncBuilderStartHelperDefinition(callee, isValueTaskBuilder: false, out helperDefinition) || TryCreateAsyncBuilderStartHelperDefinition(callee, isValueTaskBuilder: true, out helperDefinition) || TryCreateAsyncBuilderAwaitUnsafeOnCompletedHelperDefinition(callee, isValueTaskBuilder: false, out helperDefinition) || TryCreateAsyncBuilderAwaitUnsafeOnCompletedHelperDefinition(callee, isValueTaskBuilder: true, out helperDefinition))
 		{
 			return true;
@@ -945,7 +859,13 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool MatchesMethodSubject(string subjectId, string declaringTypeSubjectId, string methodName, params string[] parameterTypes)
 	{
-		return !string.IsNullOrEmpty(subjectId) && string.Equals(GetMethodDeclaringTypeSubjectId(subjectId), declaringTypeSubjectId, StringComparison.Ordinal) && MatchesMethodSignature(subjectId, methodName, parameterTypes);
+		// Strip assembly prefix (e.g. "System.Private.CoreLib/System.String" -> "System.String")
+		// to make matching assembly-agnostic. The typeDisplayName is everything after the first '/'.
+		var slashIndex = declaringTypeSubjectId.IndexOf('/');
+		var typeDisplayName = slashIndex >= 0
+			? declaringTypeSubjectId[(slashIndex + 1)..]
+			: declaringTypeSubjectId;
+		return ManagedNaming.MatchesMethod(subjectId, typeDisplayName, methodName, parameterTypes);
 	}
 
 	private static bool MatchesMethodSignature(string subjectId, string methodName, params string[] parameterTypes)
@@ -1152,360 +1072,6 @@ public sealed partial class NativeAotLoweringPlanner
 		return true;
 	}
 
-	private bool TryCreateReflectionRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
-	{
-		helperDefinition = null;
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Type", "GetTypeFromHandle", "System.RuntimeTypeHandle"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_type_from_handle(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Type", "get_TypeHandle"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_type_handle(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
-			return true;
-		}
-		if (string.Equals(callee, GetFieldMethodSubjectId, StringComparison.Ordinal))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-				[
-					"    return chaos_reflection_get_field(chaos_arg_0, chaos_arg_1);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-			{
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)
-			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
-			return true;
-		}
-		if (string.Equals(callee, GetMethodByNameMethodSubjectId, StringComparison.Ordinal))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-				[
-					"    return chaos_reflection_get_method(chaos_arg_0, chaos_arg_1, 0);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-			{
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)
-			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Type", "get_Assembly"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_assembly(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Type", "GetGenericTypeDefinition"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_generic_type_definition(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Type", "GetGenericArguments"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_generic_arguments(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (string.Equals(callee, GetPropertyMethodSubjectId, StringComparison.Ordinal))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-				[
-					"    return chaos_reflection_get_property(chaos_arg_0, chaos_arg_1);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-			{
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)
-			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
-			return true;
-		}
-		if (string.Equals(callee, GetPropertiesMethodSubjectId, StringComparison.Ordinal))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_properties(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (string.Equals(callee, GetInterfaceMethodSubjectId, StringComparison.Ordinal))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
-				[
-					"    return chaos_reflection_get_interface(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
-			{
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot()
-			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1, 2 });
-			return true;
-		}
-		if (string.Equals(callee, GetInterfaceMapMethodSubjectId, StringComparison.Ordinal))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				$"{GetNativeValueTypeSymbol("System.Private.CoreLib/System.Reflection.InterfaceMapping")}",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-				[
-					"    return chaos_reflection_get_interface_map(chaos_arg_0, chaos_arg_1);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-			{
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)
-			}), new AotCoreIrAbiSlotArtifact
-			{
-				CarrierKindCode = AotCoreIrAbiCarrierKind.ValueTypeByValue,
-				TypeSubjectId = "System.Private.CoreLib/System.Reflection.InterfaceMapping",
-				TypeShape = AotCoreIrTypeShapeKind.ValueType
-			}, new HashSet<int> { 0, 1 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.Assembly", "GetType", "System.String"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-				[
-					"    return chaos_reflection_get_type_from_assembly(chaos_arg_0, chaos_arg_1);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-			{
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)
-			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Type", "GetType", "System.String"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_type_by_name(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.Assembly", "GetName"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_assembly_name(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.AssemblyName", "get_Name"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_assembly_name_value(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Type", "GetConstructors", "System.Reflection.BindingFlags"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
-				[
-					"    return chaos_reflection_get_constructors(chaos_arg_0, chaos_arg_1);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-			{
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateInt32AbiSlot()
-			}), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Type", "GetMethod", "System.String", "System.Reflection.BindingFlags"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
-				[
-					"    return chaos_reflection_get_method(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
-			{
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-				new AotCoreIrAbiSlotArtifact
-				{
-					CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
-					TypeShape = AotCoreIrTypeShapeKind.ValueType
-				}
-			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.MethodBase", "get_MethodHandle"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_method_handle(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.MethodBase", "GetParameters"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_parameters(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.MethodBase", "Invoke", "System.Object", "System.Object[]"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
-				[
-					"    return chaos_reflection_invoke_method(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
-			{
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)
-			}), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1, 2 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.MethodInfo", "MakeGenericMethod", "System.Type[]"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-				[
-					"    return chaos_reflection_make_generic_method(chaos_arg_0, chaos_arg_1);",
-				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-			{
-				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType),
-				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)
-			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.MemberInfo", "get_Name"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_member_name(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.MemberInfo", "get_DeclaringType"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_declaring_type(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.MemberInfo", "get_MetadataToken"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INT32",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_metadata_token(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateInt32AbiSlot(), new HashSet<int> { 0 });
-			return true;
-		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.ParameterInfo", "get_Name"))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_parameter_name(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.ParameterInfo", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (string.Equals(callee, ActivatorCreateInstanceTypeMethodSubjectId, StringComparison.Ordinal))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_create_instance(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		if (string.Equals(callee, ObjectGetTypeMethodSubjectId, StringComparison.Ordinal))
-		{
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"CHAOS_IL2CPP_INTPTR",
-				GetExternalRuntimeHelperSymbol(callee),
-				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
-				[
-					"    return chaos_reflection_get_object_type(chaos_arg_0);",
-				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
-			return true;
-		}
-		return false;
-	}
 
 }
 

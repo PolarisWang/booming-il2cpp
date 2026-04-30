@@ -112,4 +112,16 @@ public sealed partial class NativeReferenceProofEmitter
 
     [RuntimeSkeletonFamilyPlugin("convert-like", CodeGenPluginProductLine.NativeReference, 380, RuntimeSkeletonFamilyPluginKind.Hybrid)]
     private static RuntimeSkeletonFamilyHandlerResult Plugin_ConvertLikeFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonConvertLikeFamilyHandler(buildContext);
+
+    [RuntimeSkeletonFamilyPlugin("threading-atomic-kernel", CodeGenPluginProductLine.NativeReference, 410, RuntimeSkeletonFamilyPluginKind.Kernel)]
+    private static RuntimeSkeletonFamilyHandlerResult Plugin_ThreadingAtomicKernelFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonThreadingAtomicKernelFamilyHandler(buildContext);
+
+    [RuntimeSkeletonFamilyPlugin("threading-task-managed-invoke", CodeGenPluginProductLine.NativeReference, 420, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
+    private static RuntimeSkeletonFamilyHandlerResult Plugin_ThreadingTaskManagedInvokeFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonThreadingTaskManagedInvokeFamilyHandler(buildContext);
+
+    [RuntimeSkeletonFamilyPlugin("threading-sync-managed-invoke", CodeGenPluginProductLine.NativeReference, 430, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
+    private static RuntimeSkeletonFamilyHandlerResult Plugin_ThreadingSyncManagedInvokeFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonThreadingSyncManagedInvokeFamilyHandler(buildContext);
+
+    [RuntimeSkeletonFamilyPlugin("threading-thread-managed-invoke", CodeGenPluginProductLine.NativeReference, 440, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
+    private static RuntimeSkeletonFamilyHandlerResult Plugin_ThreadingThreadManagedInvokeFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonThreadingThreadManagedInvokeFamilyHandler(buildContext);
 }

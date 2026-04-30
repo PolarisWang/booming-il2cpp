@@ -57,6 +57,8 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlyList<AotCoreIrMethodArtifact> _genericStaticMethodCandidates =
         Array.Empty<AotCoreIrMethodArtifact>();
 
+    private readonly RuntimeHelperShapeRegistry _shapeRegistry = RuntimeHelperShapeRegistry.BuildDefault();
+
     public NativeAotTemplateModel Create(
         NativeAotLoweringPlanArtifact loweringPlan,
         AotCoreIrArtifact aotCoreIr,
@@ -165,6 +167,7 @@ public sealed partial class NativeAotLoweringPlanner
             EntryNativeSymbol = entryMethod.NativeSymbol,
             NativeEntryFunctionName = loweringPlan.NativeEntryFunctionName,
             EntryBridgeArguments = entryBridgeArguments,
+            ShapeDispatchHeaderContent = _shapeRegistry.GenerateCppShapeHeader(),
         };
     }
 
@@ -1643,6 +1646,8 @@ public sealed record NativeAotTemplateModel
     public required string NativeEntryFunctionName { get; init; }
 
     public required string EntryBridgeArguments { get; init; }
+
+    public required string ShapeDispatchHeaderContent { get; init; }
 }
 
 public sealed record NativeAotMethodTemplateModel

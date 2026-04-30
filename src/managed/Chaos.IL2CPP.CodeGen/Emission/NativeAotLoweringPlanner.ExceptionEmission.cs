@@ -385,7 +385,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private void EmitStructuredFinallyHandlerSequence(StringBuilder builder, FinallyHandlerShape handlerShape, string indentation)
 	{
-		if (!TryCreateFinallyHandlerEmissionPlan(handlerShape, out FinallyHandlerEmissionPlan emissionPlan) || (object)emissionPlan == null)
+		if (!TryCreateFinallyHandlerEmissionPlan(handlerShape, out FinallyHandlerEmissionPlan emissionPlan) || emissionPlan is null)
 		{
 			throw new NotSupportedException($"native-aot finally handler at IL offset {handlerShape.ExceptionRegion.HandlerOffset} does not support current structured emission shape");
 		}
@@ -1458,7 +1458,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return false;
 		}
-		if ((object)finallyHandlerShape == null)
+		if (finallyHandlerShape is null)
 		{
 			int[] array15 = array11.Where((AotCoreIrInstructionArtifact instruction) => string.Equals(instruction.Op, "leave", StringComparison.Ordinal)).Select(GetRequiredIntOperand).ToArray();
 			if (array15.Length == 0 || array15.Any((int target) => !tailOffsets.Contains(target)))

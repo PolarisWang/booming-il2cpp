@@ -74,7 +74,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static IReadOnlyDictionary<string, string?> CollectReferenceTypeBaseSubjectIds(AotCoreIrArtifact aotCoreIr)
 	{
-		Dictionary<string, string> dictionary = new Dictionary<string, string>(StringComparer.Ordinal);
+		Dictionary<string, string?> dictionary = new Dictionary<string, string?>(StringComparer.Ordinal);
 		foreach (AotCoreIrMethodArtifact method in aotCoreIr.Methods)
 		{
 			foreach (AotCoreIrInstructionArtifact instruction in method.Instructions)
@@ -396,6 +396,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsAsyncRuntimeHelperSubjectId(string subjectId)
 	{
+		subjectId = ManagedNaming.NormalizeSubjectIdAssembly(subjectId);
 		if (subjectId.Contains("YieldAwaitable", StringComparison.Ordinal) || (subjectId.StartsWith("System.Private.CoreLib/System.Threading.Tasks.Task::", StringComparison.Ordinal) && string.Equals(GetMethodName(subjectId), "Yield", StringComparison.Ordinal)))
 		{
 			return true;
@@ -413,6 +414,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsCollectionRuntimeHelperSubjectId(string subjectId)
 	{
+		subjectId = ManagedNaming.NormalizeSubjectIdAssembly(subjectId);
 		if (!subjectId.StartsWith("System.Collections/System.Collections.Generic.List<", StringComparison.Ordinal) && !subjectId.StartsWith("System.Collections/System.Collections.Generic.Dictionary<", StringComparison.Ordinal) && !subjectId.StartsWith("System.Private.CoreLib/System.Collections.Generic.IReadOnlyCollection<", StringComparison.Ordinal))
 		{
 			return subjectId.StartsWith("System.Private.CoreLib/System.Collections.Generic.IReadOnlyList<", StringComparison.Ordinal);
@@ -422,6 +424,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsSpanRuntimeHelperSubjectId(string subjectId)
 	{
+		subjectId = ManagedNaming.NormalizeSubjectIdAssembly(subjectId);
 		if (MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers", "InitializeArray", "System.Array", "System.RuntimeFieldHandle") || subjectId.StartsWith("System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan<", StringComparison.Ordinal) || subjectId.StartsWith("System.Memory/System.MemoryExtensions::AsSpan<", StringComparison.Ordinal) || subjectId.StartsWith("System.Memory/System.MemoryExtensions::AsMemory<", StringComparison.Ordinal))
 		{
 			return true;
@@ -445,6 +448,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsThreadRuntimeHelperSubjectId(string subjectId)
 	{
+		subjectId = ManagedNaming.NormalizeSubjectIdAssembly(subjectId);
 		if (!MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Environment", "get_CurrentManagedThreadId") && !MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", ".ctor", "System.Threading.ThreadStart") && !MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", "Start") && !MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", "Join") && !MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", "get_CurrentThread") && !MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", "get_Name"))
 		{
 			return MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", "set_Name", "System.String");
@@ -454,6 +458,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsDefaultInterpolatedStringHandlerHelperSubjectId(string subjectId)
 	{
+		subjectId = ManagedNaming.NormalizeSubjectIdAssembly(subjectId);
 		if (!MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", ".ctor", "System.Int32", "System.Int32") && !MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", "AppendFormatted", "System.String") && !MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", "AppendLiteral", "System.String") && !IsSupportedDefaultInterpolatedStringHandlerAppendFormattedSubjectId(subjectId))
 		{
 			return MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", "ToStringAndClear");
@@ -463,16 +468,19 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsTypeReflectionHelperSubjectId(string subjectId)
 	{
+		subjectId = ManagedNaming.NormalizeSubjectIdAssembly(subjectId);
 		return MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetTypeFromHandle", "System.RuntimeTypeHandle") || string.Equals(subjectId, GetTypeHandleMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetFieldMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetPropertyMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetPropertiesMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetMethodByNameMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetInterfaceMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetInterfaceMapMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetGenericArgumentsMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, MemberInfoGetDeclaringTypeMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetMethodMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetAssemblyMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetGenericTypeDefinitionMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetConstructorsMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, ActivatorCreateInstanceTypeMethodSubjectId, StringComparison.Ordinal);
 	}
 
 	private static bool IsAssemblyReflectionHelperSubjectId(string subjectId)
 	{
+		subjectId = ManagedNaming.NormalizeSubjectIdAssembly(subjectId);
 		return MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "get_Assembly") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.Assembly", "GetType", "System.String") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetType", "System.String") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.Assembly", "GetName") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.AssemblyName", "get_Name");
 	}
 
 	private static bool IsReflectionMemberHelperSubjectId(string subjectId)
 	{
+		subjectId = ManagedNaming.NormalizeSubjectIdAssembly(subjectId);
 		return string.Equals(subjectId, GetMethodByNameMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetMethodMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetPropertyMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetPropertiesMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetInterfaceMapMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetParametersMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, MemberInfoGetNameMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, ParameterInfoGetNameMethodSubjectId, StringComparison.Ordinal) || string.Equals(subjectId, GetMethodHandleMethodSubjectId, StringComparison.Ordinal) || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.MethodBase", "Invoke", "System.Object", "System.Object[]");
 	}
 
@@ -627,7 +635,7 @@ public sealed partial class NativeAotLoweringPlanner
 		return value.Kind switch
 		{
 			CustomAttributeLiteralKind.Null => "static_cast<CHAOS_IL2CPP_INTPTR>(0)", 
-			CustomAttributeLiteralKind.Boolean => ((bool)value.Value) ? "static_cast<CHAOS_IL2CPP_INTPTR>(1)" : "static_cast<CHAOS_IL2CPP_INTPTR>(0)", 
+			CustomAttributeLiteralKind.Boolean => ((bool)value.Value!) ? "static_cast<CHAOS_IL2CPP_INTPTR>(1)" : "static_cast<CHAOS_IL2CPP_INTPTR>(0)", 
 			CustomAttributeLiteralKind.Byte => $"static_cast<CHAOS_IL2CPP_INTPTR>({(byte)value.Value})", 
 			CustomAttributeLiteralKind.Int16 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(short)value.Value})", 
 			CustomAttributeLiteralKind.Int32 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(int)value.Value})", 
@@ -635,7 +643,7 @@ public sealed partial class NativeAotLoweringPlanner
 			CustomAttributeLiteralKind.UInt16 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(ushort)value.Value}u)", 
 			CustomAttributeLiteralKind.UInt32 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(uint)value.Value}u)", 
 			CustomAttributeLiteralKind.UInt64 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(ulong)value.Value}ull)", 
-			CustomAttributeLiteralKind.String => "chaos_reflection_create_string_literal(" + ToCppStringLiteral((string)value.Value) + ")", 
+			CustomAttributeLiteralKind.String => "chaos_reflection_create_string_literal(" + ToCppStringLiteral((string)value.Value!) + ")", 
 			_ => throw new NotSupportedException($"unsupported custom attribute literal kind '{value.Kind}'."), 
 		};
 	}
