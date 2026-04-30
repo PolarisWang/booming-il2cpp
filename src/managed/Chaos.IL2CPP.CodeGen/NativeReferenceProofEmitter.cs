@@ -1995,6 +1995,14 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyCore(buildContext);
 
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonCollectionsKernelFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonCollectionsKernelFamilyCore(buildContext);
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonBufferMemoryKernelFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonBufferMemoryKernelFamilyCore(buildContext);
+
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonSpanHelpersKernelFamilyHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonSpanHelpersKernelFamilyCore(buildContext);
@@ -5060,6 +5068,21 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         string stubName,
         out string stub) =>
         TryBuildAssemblyBoundMemoryExtensionsManagedInvokeCore(
+            assemblyName,
+            subjectId,
+            metadataRegistration,
+            methodsBySubjectId,
+            stubName,
+            out stub);
+
+    private static bool TryBuildAssemblyBoundCollectionsManagedInvokeStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub) =>
+        TryBuildAssemblyBoundCollectionsManagedInvokeCore(
             assemblyName,
             subjectId,
             metadataRegistration,

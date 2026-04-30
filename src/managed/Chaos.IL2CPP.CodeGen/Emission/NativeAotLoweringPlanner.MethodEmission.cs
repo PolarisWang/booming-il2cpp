@@ -2629,6 +2629,10 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			EmitStructuredSwitch(builder, swNode, method, nextOffsetsByIlOffset, offsets);
 		}
+		else if (node is LoopNode loopNode)
+		{
+			EmitStructuredLoop(builder, loopNode, method, nextOffsetsByIlOffset, offsets);
+		}
 	}
 
 	private void EmitBasicBlockContent(StringBuilder builder, BasicBlock block, AotCoreIrMethodArtifact method, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
@@ -2645,6 +2649,23 @@ public sealed partial class NativeAotLoweringPlanner
 			if (block.Terminator.Op == "br" || block.Terminator.Op == "leave")
 			{
 				int target = GetRequiredIntOperand(block.Terminator);
+
+				// Check break/continue context for structured loops
+				if (LoopContextStack.Count > 0)
+				{
+					var (headerOffset, exitOffset) = LoopContextStack.Peek();
+					if (target == exitOffset)
+					{
+						builder.AppendLine("    break;");
+						return;
+					}
+					if (target == headerOffset)
+					{
+						builder.AppendLine("    continue;");
+						return;
+					}
+				}
+
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
 				handler.AppendLiteral("    goto chaos_ip_");
 				handler.AppendFormatted(target);
@@ -2777,6 +2798,14 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitStructuredIfThenElse(builder, nestedIte, method, nextOffsetsByIlOffset, offsets);
 			builder.AppendLine(indentation + "}");
 		}
+		else if (branch is LoopNode nestedLoop)
+		{
+			EmitStructuredLoop(builder, nestedLoop, method, nextOffsetsByIlOffset, offsets);
+		}
+		else if (branch is SwitchNode nestedSwitch)
+		{
+			EmitStructuredSwitch(builder, nestedSwitch, method, nextOffsetsByIlOffset, offsets);
+		}
 	}
 
 	private void EmitStructuredSwitch(StringBuilder builder, SwitchNode sw, AotCoreIrMethodArtifact method, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
@@ -2835,5 +2864,151 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine(ref handler);
 		}
 	}
+
+
+		private void EmitStructuredLoop(StringBuilder builder, LoopNode loopNode, AotCoreIrMethodArtifact method, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
+		{
+			var headerBlock = loopNode.HeaderBlock;
+			var terminator = headerBlock.Terminator;
+			int exitOffset = loopNode.ExitOffset ?? -1;
+			int headerOffset = headerBlock.StartOffset;
+
+			// Push loop context for break/continue detection
+			LoopContextStack.Push((headerOffset, exitOffset));
+
+			try
+			{
+				if (loopNode.IsWhile)
+				{
+					// while loop: condition in header block
+					bool hasCondition = terminator != null && (terminator.Op == "brtrue" || terminator.Op == "brfalse"
+						|| terminator.Op == "beq" || terminator.Op == "bne.un"
+						|| terminator.Op == "bge" || terminator.Op == "bge.un"
+						|| terminator.Op == "bgt" || terminator.Op == "ble" || terminator.Op == "blt");
+
+					if (hasCondition)
+					{
+						// Emit condition on eval stack
+						foreach (var instr in headerBlock.BodyInstructions)
+						{
+							int ilOffset = GetRequiredIlOffset(instr);
+							EmitInstruction(builder, method, instr, nextOffsetsByIlOffset[ilOffset], offsets);
+							builder.AppendLine();
+						}
+
+						if (terminator.Op == "brtrue" || terminator.Op == "brfalse")
+						{
+							bool branchOnNonZero = terminator.Op == "brtrue";
+							string condition = branchOnNonZero
+								? "chaos_condition != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
+								: "chaos_condition == static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+							builder.AppendLine("    {");
+							builder.AppendLine("        const auto chaos_condition = chaos_eval_stack[--chaos_stack_top];");
+							builder.AppendLine("        while (" + condition + ")");
+							builder.AppendLine("        {");
+							EmitStructuredBranchContent(builder, loopNode.Body, method, nextOffsetsByIlOffset, offsets, "            ");
+							builder.AppendLine("        }");
+							builder.AppendLine("    }");
+						}
+						else
+						{
+							string cmpOp = terminator.Op switch
+							{
+								"beq" => "==",
+								"bne.un" => "!=",
+								"bge" => ">=",
+								"bge.un" => ">=",
+								"bgt" => ">",
+								"ble" => "<=",
+								"blt" => "<",
+								_ => throw new NotSupportedException("unknown comparison opcode '" + terminator.Op + "'")
+							};
+							bool isUnsigned = terminator.Op == "bge.un";
+							string valueType = isUnsigned ? "CHAOS_IL2CPP_UINT32" : (cmpOp == "==" || cmpOp == "!=" ? "CHAOS_IL2CPP_INTPTR" : "CHAOS_IL2CPP_INT32");
+
+							builder.AppendLine("    {");
+							if (isUnsigned)
+							{
+								builder.AppendLine("        const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]));");
+								builder.AppendLine("        const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]));");
+							}
+							else
+							{
+								builder.AppendLine("        const auto chaos_right = static_cast<" + valueType + ">(chaos_eval_stack[--chaos_stack_top]);");
+								builder.AppendLine("        const auto chaos_left = static_cast<" + valueType + ">(chaos_eval_stack[--chaos_stack_top]);");
+							}
+							builder.AppendLine("        while (chaos_left " + cmpOp + " chaos_right)");
+							builder.AppendLine("        {");
+							EmitStructuredBranchContent(builder, loopNode.Body, method, nextOffsetsByIlOffset, offsets, "            ");
+							builder.AppendLine("        }");
+							builder.AppendLine("    }");
+						}
+					}
+					else
+					{
+						// Conditional branch not recognized — fallback to goto-style
+						if (exitOffset >= 0)
+						{
+							StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
+							handler.AppendLiteral("    goto chaos_ip_");
+							handler.AppendFormatted(exitOffset);
+							handler.AppendLiteral(";");
+							builder.AppendLine(ref handler);
+						}
+					}
+				}
+				else
+				{
+					// do-while loop: condition in latch block
+					builder.AppendLine("    do");
+					builder.AppendLine("    {");
+					EmitStructuredBranchContent(builder, loopNode.Body, method, nextOffsetsByIlOffset, offsets, "        ");
+
+					// Emit condition from latch block
+					var latchBlock = loopNode.LatchBlock;
+					if (latchBlock?.Terminator != null)
+					{
+						var latchTerm = latchBlock.Terminator;
+						if (latchTerm.Op == "brtrue" || latchTerm.Op == "brfalse")
+						{
+							bool branchOnNonZero = latchTerm.Op == "brtrue";
+							string condition = branchOnNonZero
+								? "chaos_condition != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
+								: "chaos_condition == static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+
+							foreach (var instr in latchBlock.BodyInstructions)
+							{
+								int ilOffset = GetRequiredIlOffset(instr);
+								EmitInstruction(builder, method, instr, nextOffsetsByIlOffset[ilOffset], offsets);
+								builder.AppendLine();
+							}
+							builder.AppendLine("        const auto chaos_condition = chaos_eval_stack[--chaos_stack_top];");
+							builder.AppendLine("        if (!(" + condition + ")) break;");
+						}
+						else if (latchTerm.Op == "br")
+						{
+							// unconditional branch back to header — no condition at latch
+							// This is an infinite loop: do { } while(true);
+							// Nothing extra needed; the closing brace makes it loop back
+						}
+					}
+
+					builder.AppendLine("    } while (true);");
+				}
+
+				if (exitOffset >= 0)
+				{
+					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
+					handler.AppendLiteral("    goto chaos_ip_");
+					handler.AppendFormatted(exitOffset);
+					handler.AppendLiteral(";");
+					builder.AppendLine(ref handler);
+				}
+			}
+			finally
+			{
+				LoopContextStack.Pop();
+			}
+		}
 
 }

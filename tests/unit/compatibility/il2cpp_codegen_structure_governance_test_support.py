@@ -921,5 +921,70 @@ MANAGED_CLOSURE_ARTIFACT_MODELS_PATH = (
     REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureArtifactModels.cs"
 )
 
+NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.CollectionsKernelFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_COLLECTIONS_KERNEL_ABI_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonCollectionsKernelAbi.cs"
+)
+NATIVE_REFERENCE_EMITTER_BUFFER_MEMORY_KERNEL_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.BufferMemoryKernelFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_BUFFER_MEMORY_KERNEL_ABI_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonBufferMemoryKernelAbi.cs"
+)
+NATIVE_REFERENCE_EMITTER_COLLECTIONS_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.CollectionsManagedInvokeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_COLLECTIONS_MANAGED_INVOKE_ABI_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonCollectionsManagedInvokeAbi.cs"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_COLLECTIONS_KERNEL_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.CollectionsKernelStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_BUFFER_MEMORY_KERNEL_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.BufferMemoryKernelStub.cpp.scriban"
+)
+
 class Il2CppCodeGenStructureGovernanceTestSupport(unittest.TestCase):
     pass

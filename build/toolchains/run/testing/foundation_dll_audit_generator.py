@@ -1096,119 +1096,164 @@ def _build_source_paths(assembly_name: str, slug: str) -> dict[str, str]:
 def _extract_method_code_snippet(repo_root: Path, file_path: str, subject_id: str) -> str:
     """Extract method code from a source file by matching SubjectId attribute.
 
-    Tries multiple attribute patterns: MethodSubjectId, BenchmarkSubjectId,
-    HotUpdateSubjectId, and comment-based patterns for native files.
-    Returns a formatted code snippet with line numbers, or empty string if not found.
+    Tries multiple patterns: MethodSubjectId/BenchmarkSubjectId/HotUpdateSubjectId
+    attributes, comment-based patterns, and partial short-name matches.
+    If the specified file doesn't match, falls back to scanning sibling .cpp files
+    under the broader native/ directory tree (handles skeleton files at
+    native/RuntimeSkeletonPage*.cpp, not just native/genuine/generated/*.cpp).
     """
     full_path = repo_root / file_path
-    if not full_path.is_file():
-        return ""
-    try:
-        lines = full_path.read_text(encoding="utf-8").splitlines()
-    except Exception:
-        return ""
-    # Find the line with any SubjectId attribute matching subject_id
-    target_line = -1
-    escaped_sid = re.escape(subject_id)
-    # Try multiple attribute patterns
-    attr_patterns = [
-        rf'MethodSubjectId\("{escaped_sid}"\)',
-        rf'BenchmarkSubjectId\("{escaped_sid}"\)',
-        rf'HotUpdateSubjectId\("{escaped_sid}"\)',
-    ]
-    for i, line in enumerate(lines):
-        for pat in attr_patterns:
-            if re.search(pat, line):
-                target_line = i
+    candidates: list[Path] = []
+    if full_path.is_file():
+        candidates.append(full_path)
+
+    # Build sibling candidate list for fallback
+    parent = full_path.parent
+    if parent.is_dir():
+        # Walk up to find the "native" root directory for C++ files
+        native_root: Path | None = None
+        for ancestor in [parent] + list(parent.parents):
+            if ancestor.name == "native" and ancestor.is_dir():
+                native_root = ancestor
                 break
-        if target_line >= 0:
-            break
-    if target_line < 0:
-        # Try comment-based pattern for native files: // [N] full SubjectId
-        escaped_full = re.escape(subject_id)
+        search_root = native_root if native_root is not None else parent
+        for sibling in sorted(search_root.rglob("*.cpp")):
+            if sibling != full_path:
+                candidates.append(sibling)
+        # Also scan sibling .cs files in the parent directory for managed code
+        for sibling in sorted(parent.rglob("*.cs")):
+            if sibling != full_path:
+                candidates.append(sibling)
+
+    for candidate in candidates:
+        try:
+            lines = candidate.read_text(encoding="utf-8").splitlines()
+        except Exception:
+            continue
+        target_line = -1
+        escaped_sid = re.escape(subject_id)
+        attr_patterns = [
+            rf'MethodSubjectId\("{escaped_sid}"\)',
+            rf'BenchmarkSubjectId\("{escaped_sid}"\)',
+            rf'HotUpdateSubjectId\("{escaped_sid}"\)',
+        ]
         for i, line in enumerate(lines):
-            if re.search(escaped_full, line):
-                target_line = i
-                break
-    if target_line < 0:
-        # Try partial match (last segment after :: or /)
-        short_sid = subject_id.split("::")[-1].split("/")[-1]
-        if short_sid and short_sid != subject_id:
-            short_escaped = re.escape(short_sid)
-            for i, line in enumerate(lines):
-                for pat in attr_patterns:
-                    if re.search(pat.replace(escaped_sid, short_escaped), line):
-                        target_line = i
-                        break
-                if target_line >= 0:
+            for pat in attr_patterns:
+                if re.search(pat, line):
+                    target_line = i
                     break
-    if target_line < 0:
-        return ""
-    # Find opening brace within next 30 lines
-    brace_start = -1
-    for j in range(target_line + 1, min(target_line + 30, len(lines))):
-        stripped = lines[j].strip()
-        if '{' in stripped or stripped.endswith('{') or stripped.startswith('{'):
-            brace_start = j
-            break
-        # Also match lines that end with opening brace
-        if stripped.rstrip().endswith('{'):
-            brace_start = j
-            break
-    if brace_start < 0:
-        return ""
-    # Track brace depth from the line with opening brace
-    depth = 0
-    brace_end = -1
-    in_string = False
-    string_char = None
-    for j in range(brace_start, len(lines)):
-        line_str = lines[j]
-        for c in line_str:
-            if in_string:
-                if c == '\\':
-                    pass  # skip next char
-                elif c == string_char:
-                    in_string = False
-            else:
-                if c in ('"', "'"):
-                    in_string = True
-                    string_char = c
-                elif c == '{':
-                    depth += 1
-                elif c == '}':
-                    depth -= 1
-                    if depth == 0:
-                        brace_end = j
+            if target_line >= 0:
+                break
+        if target_line < 0:
+            # Try comment-based pattern: // full SubjectId
+            for i, line in enumerate(lines):
+                if re.search(escaped_sid, line):
+                    target_line = i
+                    break
+        if target_line < 0:
+            # Try partial match (last segment after :: or /)
+            short_sid = subject_id.split("::")[-1].split("/")[-1]
+            if short_sid and short_sid != subject_id:
+                short_escaped = re.escape(short_sid)
+                for i, line in enumerate(lines):
+                    for pat in attr_patterns:
+                        if re.search(pat.replace(escaped_sid, short_escaped), line):
+                            target_line = i
+                            break
+                    if target_line >= 0:
                         break
-        if brace_end >= 0:
-            break
-    if brace_end < 0:
-        return ""
-    # Extract lines with context
-    start_show = max(0, target_line - 1)
-    end_show = min(len(lines), brace_end + 1)
-    snippet_lines = lines[start_show:end_show]
-    truncated = False
-    if len(snippet_lines) > 60:
-        snippet_lines = snippet_lines[:58]
-        truncated = True
-    # Format with line numbers
-    result = []
-    for idx, l in enumerate(snippet_lines, start=start_show + 1):
-        result.append(f"{idx:4d}  {l}")
-    if truncated:
-        result.append("// ... truncated")
-    return "\n".join(result)
+                if target_line < 0:
+                    for i, line in enumerate(lines):
+                        if re.search(short_escaped, line):
+                            target_line = i
+                            break
+        if target_line < 0:
+            continue
+
+        # --- Priority: skip synthetic benchmark stubs when looking for real code ---
+        # BenchmarkNativeEntry.cpp intentionally returns 42 (dispatch overhead).
+        # When this file matches as a *fallback sibling* (not the primary file),
+        # the real code is in the skeleton file — skip the synthetic stub.
+        if candidate != full_path and ("BenchmarkEntry_" in candidate.name or "Benchmark" in candidate.name):
+            all_return_42 = all(
+                not ln.strip().startswith("return ") or "42" in ln
+                for ln in lines
+            )
+            if all_return_42:
+                continue
+
+        # Find opening brace within next 30 lines
+        brace_start = -1
+        for j in range(target_line + 1, min(target_line + 30, len(lines))):
+            stripped = lines[j].strip()
+            if '{' in stripped:
+                brace_start = j
+                break
+        if brace_start < 0:
+            continue
+        # Track brace depth from the line with opening brace
+        depth = 0
+        brace_end = -1
+        in_string = False
+        string_char = None
+        for j in range(brace_start, len(lines)):
+            line_str = lines[j]
+            for c in line_str:
+                if in_string:
+                    if c == '\\':
+                        pass
+                    elif c == string_char:
+                        in_string = False
+                else:
+                    if c in ('"', "'"):
+                        in_string = True
+                        string_char = c
+                    elif c == '{':
+                        depth += 1
+                    elif c == '}':
+                        depth -= 1
+                        if depth == 0:
+                            brace_end = j
+                            break
+            if brace_end >= 0:
+                break
+        if brace_end < 0:
+            continue
+        # Extract lines with context
+        start_show = max(0, target_line - 1)
+        end_show = min(len(lines), brace_end + 1)
+        snippet_lines = lines[start_show:end_show]
+        truncated = False
+        if len(snippet_lines) > 60:
+            snippet_lines = snippet_lines[:58]
+            truncated = True
+        result = []
+        for idx, l in enumerate(snippet_lines, start=start_show + 1):
+            result.append(f"{idx:4d}  {l}")
+        if truncated:
+            result.append("// ... truncated")
+        return "\n".join(result)
+    return ""
 
 
-def _render_code_block(code_text: str, filename: str, language: str) -> str:
+def _is_synthetic_benchmark_stub(code_text: str) -> bool:
+    """Detect if native benchmark code is a synthetic stub (return 42 variants only)."""
+    if not code_text:
+        return False
+    return all(
+        not line.strip().startswith("return ") or "42" in line
+        for line in code_text.splitlines()
+    )
+
+
+def _render_code_block(code_text: str, filename: str, language: str, *, note: str = "") -> str:
     """Render a collapsible code block with filename header."""
     if not code_text:
         return '<span class="status-muted">Code not found</span>'
     escaped = escape(code_text)
     safe_name = escape(filename)
-    return f'<details class="code-detail-card"><summary class="code-summary">{safe_name} ({language})</summary><pre class="code-block"><code>{escaped}</code></pre></details>'
+    note_html = f'<div class="code-note">{escape(note)}</div>' if note else ""
+    return f'<details class="code-detail-card"><summary class="code-summary">{safe_name} ({language})</summary>{note_html}<pre class="code-block"><code>{escaped}</code></pre></details>'
 
 
 def _dashboard_styles() -> str:
@@ -1394,6 +1439,8 @@ tr:nth-child(even) td { background: #fff7ea; }
 .status-in-progress { background: #b8d8f0; color: #1a5a8a; font-weight: 700; }
 .status-failed { background: var(--blocked-bg); color: var(--blocked-ink); font-weight: 800; }
 .status-warning { background: var(--warn-bg); color: var(--warn-ink); font-weight: 700; }
+.code-note { padding: 8px 12px; margin-bottom: 4px; background: var(--warn-bg); color: var(--warn-ink); font-size: 12px; border-radius: 4px; line-height: 1.4; }
+.failure-reason { padding: 4px 8px; background: var(--blocked-bg); color: var(--blocked-ink); font-size: 12px; border-radius: 3px; display: inline-block; }
 .list-label {
   margin: 12px 0 6px;
   color: var(--muted);
@@ -2624,7 +2671,12 @@ def _render_benchmark_detail_page(family: dict[str, Any], *, assembly_name: str,
             bm_managed_code = _extract_method_code_snippet(repo_root, source_paths["managed_benchmark"], sid)
             bm_native_code = _extract_method_code_snippet(repo_root, source_paths["native_benchmark"], sid)
             bm_managed_block = _render_code_block(bm_managed_code, source_paths["managed_benchmark"].split("/")[-1], "C#")
-            bm_native_block = _render_code_block(bm_native_code, source_paths["native_benchmark"].split("/")[-1], "C++")
+            bm_native_note = ""
+            if _is_synthetic_benchmark_stub(bm_native_code):
+                bm_native_note = "This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page."
+            elif not bm_native_code:
+                bm_native_note = "Native benchmark code not found — benchmark may not have been generated."
+            bm_native_block = _render_code_block(bm_native_code, source_paths["native_benchmark"].split("/")[-1], "C++", note=bm_native_note)
             bm_rows += f"<tr><td>{escape(short_sid)}</td><td>{managed_str}</td><td>{native_str}</td><td>{speedup_str}</td><td>{status_b}</td><td>{bm_managed_block}</td><td>{bm_native_block}</td></tr>"
     else:
         bm_rows = "<tr><td colspan=\"7\">No benchmark data available</td></tr>"

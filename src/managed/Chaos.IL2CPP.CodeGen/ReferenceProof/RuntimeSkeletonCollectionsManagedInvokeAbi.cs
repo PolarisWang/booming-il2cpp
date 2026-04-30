@@ -71,7 +71,10 @@ internal static class RuntimeSkeletonCollectionsManagedInvokeAbiFactory
 
     private static bool MatchesCollectionsPrefix(string subjectId)
     {
-        return subjectId.Contains("/System.Collections.", StringComparison.Ordinal);
+        return subjectId.Contains("/System.Collections.", StringComparison.Ordinal) ||
+               subjectId.Contains("Stack`1", StringComparison.Ordinal) ||
+               subjectId.Contains("LinkedList`1", StringComparison.Ordinal) ||
+               subjectId.Contains("SortedDictionary`2", StringComparison.Ordinal);
     }
 
     private static bool IsSupportedMethodRole(string methodRole)

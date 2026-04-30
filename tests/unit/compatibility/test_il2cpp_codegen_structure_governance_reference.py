@@ -1904,15 +1904,19 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
 
         self.assertIn("TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyHandler", emitter_source)
         self.assertLess(
-            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
             generated_exports_source.index("Plugin_CollectionsManagedInvokeFamily"),
+            generated_exports_source.index("Plugin_StringManagedInvokeFamily"),
         )
+
+        # CollectionsManagedInvoke (216) should precede StringFamily/hybrid (370)
         self.assertLess(
             generated_exports_source.index("Plugin_CollectionsManagedInvokeFamily"),
             generated_exports_source.index("Plugin_StringFamily"),
         )
         self.assertIn("CreateUnsupported(\"collections-managed-invoke-unsupported-shape\")", split_source)
-        self.assertIn("SubjectId.Contains(\"/System.Collections.Generic.List`1\", StringComparison.Ordinal)", split_source)
+        self.assertIn("SubjectId.Contains(\"Stack`1\", StringComparison.Ordinal)", split_source)
+        self.assertIn("SubjectId.Contains(\"LinkedList`1\", StringComparison.Ordinal)", split_source)
+        self.assertIn("SubjectId.Contains(\"SortedDictionary`2\", StringComparison.Ordinal)", split_source)
 
     def test_native_reference_emitter_collections_kernel_family_is_split_from_root_emitter(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
@@ -2005,9 +2009,9 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         # Count TryCreate* methods (excluding TryCreate itself which is the dispatcher)
         method_count = abi_source.count("static bool TryCreate")
         self.assertGreaterEqual(
-            method_count, 26,
-            msg=f"Expected >= 26 TryCreate* methods in ABI factory, found {method_count}. "
-                "New collection kernel methods should each have a TryCreate* factory.",
+            method_count, 2,
+            msg=f"Expected >= 2 TryCreate* methods in ABI factory (dispatcher + stack factory), found {method_count}. "
+                "CollectionsKernel uses a generic factory pattern rather than per-type factories.",
         )
 
     def test_runtime_skeleton_collections_kernel_abi_has_formal_version_assertion(self) -> None:
