@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\entrypoint-patch\\build-output\\EnumParsingPatchEntry.dll"
+    ],
+    "entry": "EnumParsingPatchEntry/EnumParsingPatchEntry::Run:System.Int32(System.Int32)"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionMemberCompletePatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Run",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method0",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method1",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method2",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method3",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method4",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method5",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method6",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method7",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method8",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method9",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method10",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method11",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method12",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method13",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method14",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method15",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method16",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method17",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method18",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method19",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method19:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method20",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method20:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "ReflectionMemberCompletePatchEntry_ReflectionMemberCompletePatchEntry_Method21",
+          "subjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Method21:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

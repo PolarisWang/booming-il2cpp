@@ -1,0 +1,129 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method0:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method1:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method2:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method4:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method9:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method10:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

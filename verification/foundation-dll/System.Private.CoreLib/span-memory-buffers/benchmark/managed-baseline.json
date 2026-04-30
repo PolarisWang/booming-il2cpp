@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/span/memory-buffers",
+  "warmupIterations": 100,
+  "measureIterations": 10000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::get_Item:T&(System.Int32)",
+      "elapsedMilliseconds": 5.114900,
+      "opsPerSecond": 1955072.435434,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32)",
+      "elapsedMilliseconds": 0.014600,
+      "opsPerSecond": 684931506.849315,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32,System.Int32)",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::ToArray:T[](System.Int32)",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::CopyTo:System.Void(System.Span`1)",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Span`1::get_Empty:System.Span`1()",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.ReadOnlySpan`1::get_Item:T&(System.Int32)",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.ReadOnlySpan`1::Slice:System.ReadOnlySpan`1(System.Int32)",
+      "elapsedMilliseconds": 0.025700,
+      "opsPerSecond": 389105058.365759,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.ReadOnlySpan`1::ToArray:T[]()",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32)",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Memory`1::get_Span:System.Span`1()",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Memory`1::ToArray:T[]()",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.ReadOnlySpan`1)",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.Span`1)",
+      "elapsedMilliseconds": 0.021900,
+      "opsPerSecond": 456621004.566210,
+      "iterations": 10000
+    }
+  ]
+}

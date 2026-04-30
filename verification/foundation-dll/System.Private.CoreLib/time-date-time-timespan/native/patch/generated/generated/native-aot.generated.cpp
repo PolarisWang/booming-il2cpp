@@ -1,0 +1,1021 @@
+#include <chaos/common.h>
+#include "runtime_core.h"
+
+namespace
+{
+#include <chaos/common.h>
+
+struct chaos_object_header
+{
+    CHAOS_IL2CPP_INTPTR type_id = 0;
+};
+
+constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;
+
+struct chaos_managed_array
+{
+    chaos_object_header header{};
+    CHAOS_IL2CPP_UINT8 element_type_shape = 0;
+    CHAOS_IL2CPP_INTPTR element_type_id = 0;
+    CHAOS_IL2CPP_INTPTR length = 0;
+    CHAOS_IL2CPP_INTPTR* elements = nullptr;
+};
+
+constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_reference = 1;
+constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_value = 2;
+constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_interface = 3;
+
+CHAOS_IL2CPP_INTPTR chaos_normalize_native_int_argument(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
+{
+    if ((chaos_value & chaos_managed_pointer_local_slot_tag) == 0)
+    {
+        return chaos_value;
+    }
+
+    auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_value & ~chaos_managed_pointer_local_slot_tag));
+    return *chaos_slot;
+}
+
+template <typename TValue>
+TValue* chaos_resolve_managed_value_pointer(CHAOS_IL2CPP_INTPTR chaos_managed_pointer)
+{
+    if ((chaos_managed_pointer & chaos_managed_pointer_local_slot_tag) != 0)
+    {
+        auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_managed_pointer & ~chaos_managed_pointer_local_slot_tag));
+        if (*chaos_slot == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+        {
+            *chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new TValue{});
+        }
+        return reinterpret_cast<TValue*>(*chaos_slot);
+    }
+
+    return reinterpret_cast<TValue*>(chaos_managed_pointer);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_get_base_type_id(CHAOS_IL2CPP_INTPTR chaos_type_id) noexcept
+{
+    switch (chaos_type_id)
+    {
+        default:
+            return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    }
+}
+
+bool chaos_is_type_compatible(CHAOS_IL2CPP_INTPTR chaos_actual_type_id, CHAOS_IL2CPP_INTPTR chaos_target_type_id) noexcept
+{
+    auto chaos_current_type_id = chaos_actual_type_id;
+    while (chaos_current_type_id != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        if (chaos_current_type_id == chaos_target_type_id)
+        {
+            return true;
+        }
+
+        chaos_current_type_id = chaos_get_base_type_id(chaos_current_type_id);
+    }
+
+    return false;
+}
+
+bool chaos_type_implements_interface(CHAOS_IL2CPP_INTPTR chaos_actual_type_id, CHAOS_IL2CPP_INTPTR chaos_target_interface_type_id) noexcept
+{
+    switch (chaos_actual_type_id)
+    {
+        default:
+            return false;
+    }
+}
+
+bool chaos_does_type_implement_interface(CHAOS_IL2CPP_INTPTR chaos_actual_type_id, CHAOS_IL2CPP_INTPTR chaos_target_interface_type_id) noexcept
+{
+    auto chaos_current_type_id = chaos_actual_type_id;
+    while (chaos_current_type_id != static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        if (chaos_type_implements_interface(chaos_current_type_id, chaos_target_interface_type_id))
+        {
+            return true;
+        }
+
+        chaos_current_type_id = chaos_get_base_type_id(chaos_current_type_id);
+    }
+
+    return false;
+}
+
+bool chaos_is_array_type_compatible(
+    CHAOS_IL2CPP_UINT8 chaos_actual_element_shape,
+    CHAOS_IL2CPP_INTPTR chaos_actual_element_type_id,
+    CHAOS_IL2CPP_UINT8 chaos_target_element_shape,
+    CHAOS_IL2CPP_INTPTR chaos_target_element_type_id) noexcept
+{
+    if (chaos_actual_element_shape == chaos_type_shape_reference)
+    {
+        if (chaos_target_element_shape == chaos_type_shape_reference)
+        {
+            return chaos_is_type_compatible(chaos_actual_element_type_id, chaos_target_element_type_id);
+        }
+
+        if (chaos_target_element_shape == chaos_type_shape_interface)
+        {
+            return chaos_does_type_implement_interface(chaos_actual_element_type_id, chaos_target_element_type_id);
+        }
+
+        return false;
+    }
+
+    return chaos_actual_element_shape == chaos_target_element_shape
+        && chaos_actual_element_type_id == chaos_target_element_type_id;
+}
+
+bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
+{
+    if (chaos_array == nullptr)
+    {
+        return false;
+    }
+
+    if (chaos_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        return true;
+    }
+
+    // StringId fast path: materialized value carries a heap pointer;
+    // this line is reached only if caller skipped materialization.
+    if (chaos_is_string_id(chaos_value))
+    {
+        return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(chaos_type_id_System_Private_CoreLib_System_String, chaos_array->element_type_id);
+    }
+
+    auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_value);
+    if (chaos_array->element_type_shape == chaos_type_shape_interface)
+    {
+        return chaos_does_type_implement_interface(chaos_header->type_id, chaos_array->element_type_id);
+    }
+
+    if (chaos_array->element_type_shape == chaos_type_shape_reference)
+    {
+        return chaos_is_type_compatible(chaos_header->type_id, chaos_array->element_type_id);
+    }
+
+    return false;
+}
+
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method0(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method1(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method2(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method3(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method4(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method5(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method6(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method7(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method8(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method9(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method10(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method11(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method12(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method13(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method14(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method15(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Run(CHAOS_IL2CPP_INT32 chaos_arg_0);
+}
+
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method0(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method1(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method2(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method3(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method4(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method5(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method6(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method7(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method8(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method9(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method10(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method11(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method12(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method13(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method14(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method15(void);
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Run(CHAOS_IL2CPP_INT32 chaos_arg_0);
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method0()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method0(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177280);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method1()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method1(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177279);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method2()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method2(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177278);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method3()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method3(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177277);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method4()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method4(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177276);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method5()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method5(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177275);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method6()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method6(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177274);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method7()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method7(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177273);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method8()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method8(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177272);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method9()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method9(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177271);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method10()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method10(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177270);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method11()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method11(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177269);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method12()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method12(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177268);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method13()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method13(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177267);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method14()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method14(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177266);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method15()
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method15(void)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177265);
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_7;
+
+chaos_ip_7:
+    goto chaos_ip_9;
+
+chaos_ip_9:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_10;
+
+chaos_ip_10:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Managed method: TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Run(System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Run(CHAOS_IL2CPP_INT32 chaos_arg_0)
+{
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 60) chaos_eval_stack{};
+    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
+    chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_arg_0);
+
+    goto chaos_ip_1;
+
+chaos_ip_1:
+    chaos_eval_stack[chaos_stack_top++] = chaos_args[0];
+    goto chaos_ip_2;
+
+chaos_ip_2:
+    chaos_locals[1] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_3;
+
+chaos_ip_3:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[1];
+    goto chaos_ip_4;
+
+chaos_ip_4:
+    chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_5;
+
+chaos_ip_5:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+    goto chaos_ip_6;
+
+chaos_ip_6:
+    {
+        const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+        switch (chaos_switch_value)
+        {
+            case 0:
+                goto chaos_ip_80;
+            case 1:
+                goto chaos_ip_88;
+            case 2:
+                goto chaos_ip_96;
+            case 3:
+                goto chaos_ip_104;
+            case 4:
+                goto chaos_ip_112;
+            case 5:
+                goto chaos_ip_120;
+            case 6:
+                goto chaos_ip_128;
+            case 7:
+                goto chaos_ip_136;
+            case 8:
+                goto chaos_ip_144;
+            case 9:
+                goto chaos_ip_152;
+            case 10:
+                goto chaos_ip_160;
+            case 11:
+                goto chaos_ip_168;
+            case 12:
+                goto chaos_ip_176;
+            case 13:
+                goto chaos_ip_184;
+            case 14:
+                goto chaos_ip_192;
+            case 15:
+                goto chaos_ip_200;
+            default:
+                goto chaos_ip_75;
+        }
+    }
+
+chaos_ip_75:
+    goto chaos_ip_208;
+
+chaos_ip_80:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method0();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_85;
+
+chaos_ip_85:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_86;
+
+chaos_ip_86:
+    goto chaos_ip_212;
+
+chaos_ip_88:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method1();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_93;
+
+chaos_ip_93:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_94;
+
+chaos_ip_94:
+    goto chaos_ip_212;
+
+chaos_ip_96:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method2();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_101;
+
+chaos_ip_101:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_102;
+
+chaos_ip_102:
+    goto chaos_ip_212;
+
+chaos_ip_104:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method3();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_109;
+
+chaos_ip_109:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_110;
+
+chaos_ip_110:
+    goto chaos_ip_212;
+
+chaos_ip_112:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method4();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_117;
+
+chaos_ip_117:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_118;
+
+chaos_ip_118:
+    goto chaos_ip_212;
+
+chaos_ip_120:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method5();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_125;
+
+chaos_ip_125:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_126;
+
+chaos_ip_126:
+    goto chaos_ip_212;
+
+chaos_ip_128:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method6();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_133;
+
+chaos_ip_133:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_134;
+
+chaos_ip_134:
+    goto chaos_ip_212;
+
+chaos_ip_136:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method7();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_141;
+
+chaos_ip_141:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_142;
+
+chaos_ip_142:
+    goto chaos_ip_212;
+
+chaos_ip_144:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method8();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_149;
+
+chaos_ip_149:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_150;
+
+chaos_ip_150:
+    goto chaos_ip_212;
+
+chaos_ip_152:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method9();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_157;
+
+chaos_ip_157:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_158;
+
+chaos_ip_158:
+    goto chaos_ip_212;
+
+chaos_ip_160:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method10();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_165;
+
+chaos_ip_165:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_166;
+
+chaos_ip_166:
+    goto chaos_ip_212;
+
+chaos_ip_168:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method11();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_173;
+
+chaos_ip_173:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_174;
+
+chaos_ip_174:
+    goto chaos_ip_212;
+
+chaos_ip_176:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method12();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_181;
+
+chaos_ip_181:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_182;
+
+chaos_ip_182:
+    goto chaos_ip_212;
+
+chaos_ip_184:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method13();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_189;
+
+chaos_ip_189:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_190;
+
+chaos_ip_190:
+    goto chaos_ip_212;
+
+chaos_ip_192:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method14();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_197;
+
+chaos_ip_197:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_198;
+
+chaos_ip_198:
+    goto chaos_ip_212;
+
+chaos_ip_200:
+    {
+        const auto chaos_result = TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Method15();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
+    goto chaos_ip_205;
+
+chaos_ip_205:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_206;
+
+chaos_ip_206:
+    goto chaos_ip_212;
+
+chaos_ip_208:
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
+    goto chaos_ip_209;
+
+chaos_ip_209:
+    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+    goto chaos_ip_210;
+
+chaos_ip_210:
+    goto chaos_ip_212;
+
+chaos_ip_212:
+    chaos_eval_stack[chaos_stack_top++] = chaos_locals[2];
+    goto chaos_ip_213;
+
+chaos_ip_213:
+    return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+
+}
+
+// Native AOT entry for TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Run:System.Int32(System.Int32)
+// Managed symbol: TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Run
+extern "C" int RunNativeAot(CHAOS_IL2CPP_INT32 chaos_entry_index)
+{
+    return TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Run(chaos_entry_index);
+}

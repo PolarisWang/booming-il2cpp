@@ -1,0 +1,276 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003C\u003E9",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Action",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "field",
+      "subjectId": "System.Private.CoreLib/System.Type::EmptyTypes",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.Reflection.MethodInfo)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
+      "reason": "external-call"
+    }
+  ]
+}

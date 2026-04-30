@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemoryPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

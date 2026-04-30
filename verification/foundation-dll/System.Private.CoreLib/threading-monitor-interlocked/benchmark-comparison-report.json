@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/threading/monitor-interlocked",
+  "summary": {
+    "totalMethods": 14,
+    "matchedCount": 14,
+    "unmatchedCount": 0,
+    "invalidCount": 0,
+    "nativeFasterCount": 14,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 57.66
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Add:System.Int32(System.Int32&,System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 0.0221,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.37
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 57.99
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Decrement:System.Int32(System.Int32&)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 57.99
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Exchange:System.Int32(System.Int32&,System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Increment:System.Int32(System.Int32&)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::MemoryBarrier:System.Void()",
+      "status": "matched",
+      "managedElapsedMs": 0.0147,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 36.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object)",
+      "status": "matched",
+      "managedElapsedMs": 6.0175,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 99.84
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object)",
+      "status": "matched",
+      "managedElapsedMs": 0.0146,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 36.99
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.08
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::PulseAll:System.Void(System.Object)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.27
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.27
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Wait:System.Boolean(System.Object)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.08
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Volatile::Read:System.Int32(System.Int32&)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 57.99
+    }
+  ]
+}

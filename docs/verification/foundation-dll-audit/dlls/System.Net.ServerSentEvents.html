@@ -24,20 +24,20 @@
       </div>
       <div class="progress-axis dll-axis"><div class="progress-bar-container"><div class="progress-label"><span>Capability Closure</span><span>0/4 (0.0%)</span></div><div class="progress-bar"><div class="progress-bar-fill capability-closure" style="width: 0.0%"></div></div></div><div class="progress-bar-container"><div class="progress-label"><span>Workflow Progress</span><span>0/24 (0.0%)</span></div><div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width: 0.0%"></div></div></div></div>
       
-      <div class="source-links"><h3>Source Links</h3><div class="source-links-grid"><a href="../../../../subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln" target="_blank" rel="noreferrer" class="source-link" title="subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln"><span class="source-link-icon">📁</span><span class="source-link-label">Subject Source</span><span class="source-link-path">.../EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln</span></a><a href="../../../../artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/" target="_blank" rel="noreferrer" class="source-link" title="artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/"><span class="source-link-icon">⚙️</span><span class="source-link-label">Generated Code</span><span class="source-link-path">.../20260424-200729-windows-23a1/analysis/generated</span></a><a href="../../../../artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/" target="_blank" rel="noreferrer" class="source-link" title="artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/"><span class="source-link-icon">📊</span><span class="source-link-label">Evidence</span><span class="source-link-path">.../SolutionCorePack/runs/20260424-200729-windows-23a1</span></a><a href="../../../../verification/catalog/programs/foundation-dll-translation-audit.program.json" target="_blank" rel="noreferrer" class="source-link" title="verification/catalog/programs/foundation-dll-translation-audit.program.json"><span class="source-link-icon">📋</span><span class="source-link-label">Verification Source</span><span class="source-link-path">.../catalog/programs/foundation-dll-translation-audit.program.json</span></a></div></div>
+      <div class="source-links"><h3>Source Links</h3><div class="source-links-grid"><a href="../../../../subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/" target="_blank" rel="noreferrer" class="source-link" title="subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln"><span class="source-link-icon">📁</span><span class="source-link-label">Subject Source</span><span class="source-link-path">.../EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln</span></a><a href="../../../../artifacts/subjects/SolutionCorePack/runs/subject-exec-windows_threading_threadstatic_monitor_native_proof/analysis/generated/" target="_blank" rel="noreferrer" class="source-link" title="artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/"><span class="source-link-icon">⚙️</span><span class="source-link-label">Generated Code</span><span class="source-link-path">.../20260424-200729-windows-23a1/analysis/generated</span></a><a href="../../../../artifacts/subjects/SolutionCorePack/runs/subject-exec-windows_threading_threadstatic_monitor_native_proof/" target="_blank" rel="noreferrer" class="source-link" title="artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/"><span class="source-link-icon">📊</span><span class="source-link-label">Evidence</span><span class="source-link-path">.../SolutionCorePack/runs/20260424-200729-windows-23a1</span></a><a href="../../../../verification/catalog/programs/foundation-dll-translation-audit.program.json" target="_blank" rel="noreferrer" class="source-link" title="verification/catalog/programs/foundation-dll-translation-audit.program.json"><span class="source-link-icon">📋</span><span class="source-link-label">Verification Source</span><span class="source-link-path">.../catalog/programs/foundation-dll-translation-audit.program.json</span></a></div></div>
       <section>
   <h2>Capability Families</h2>
   <p>Each capability family represents a logical group of methods. A family is considered closed when all its non-exempt verification gates pass.</p>
   <div class="table-wrap">
     <table class="family-table">
-      <thead><tr><th>#</th><th>Family</th><th title="Test code presence: present = handwritten tests exist, needs-tests = gap, coverage-widened = auto-generated, no-coverage = 0 methods">Test Code</th><th title="Managed Proof: 表示该家族的托管侧测试覆盖情况。计算方式: 分母 = 该家族的测试用例数 (testCases)，分子 = 当状态为 passed 时等于分母，否则为 0。进度 = 分子 / 分母 * 100%。悬停查看详细测试用例列表">Managed Proof</th><th title="Native Proof: 表示该家族的原生侧代码生成覆盖情况。计算方式: 分母 = 该家族中需要进行原生证明的方法总数 (methodSubjectIds)，分子 = 已通过覆盖率检查的方法数。进度 = 分子 / 分母 * 100%。悬停查看每个方法的覆盖状态">Native Proof</th><th title="HotUpdate: 表示该家族的热更新验证覆盖情况。验证流程: ① Host C# → il2cpp AOT 编译为 C++ 原生代码; ② Patch C# → 编译为 patch.dll (热更包); ③ C++ 运行时通过 LoadHotUpdatePackage + method_replacement::Register 加载并注册热更替换; ④ C++ 验证入口调用原始方法 → 断言热更已生效且结果符合预期。整个过程在 C++ 侧完成，不依赖 managed 运行时。计算方式: 分母 = 该家族的热更新测试用例数 (hotupdateCases)，分子 = 当状态为 passed 时等于分母，否则为 0。进度 = 分子 / 分母 * 100%。悬停查看详细热更新用例列表">HotUpdate</th><th title="Benchmark: 表示该家族的原生代码性能基准测试覆盖情况。验证流程: ① 通过 dotnet build/run 执行 managed benchmark 生成 baseline 结果; ② 编译 native C++ benchmark 代码通过 benchmark-host 执行计时; ③ 对比脚本按 methodSubjectId 匹配 managed/native 结果; ④ 计算 per-method 提升百分比 (managed_time - native_time) / managed_time * 100%; ⑤ 汇总输出平均提升百分比作为总体指标。计算方式: 分母 = 该家族的基准测试用例数 (benchmarkCases)，分子 = 当状态为 passed 时等于分母，否则为 0。进度 = 分子 / 分母 * 100%。悬停查看详细基准测试用例列表及 per-method 提升百分比">Benchmark</th><th title="Managed benchmark source code">Managed Code</th><th title="Native benchmark source code">Native Code</th><th title="Closure status: closed means all non-exempt verification gates pass">closureStatus</th></tr></thead>
-      <tbody><tr><td>1</td><td>SSE Item Model</td><td><span class="status status-no-coverage">no-coverage</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-sse-item/benchmark/FamilySystem.net.serversenteventsSseItemBenchmarks.cs" target="_blank" rel="noreferrer" title="FamilySystem.net.serversenteventsSseItemBenchmarks.cs">.cs</a></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-sse-item/native/BenchmarkNativeEntry.cpp" target="_blank" rel="noreferrer" title="BenchmarkNativeEntry.cpp">.cpp</a></td><td><span class="status status-in-progress">in-progress</span></td></tr><tr><td>2</td><td>SSE Parser</td><td><span class="status status-no-coverage">no-coverage</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-parser/benchmark/FamilySystem.net.serversenteventsParserBenchmarks.cs" target="_blank" rel="noreferrer" title="FamilySystem.net.serversenteventsParserBenchmarks.cs">.cs</a></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-parser/native/BenchmarkNativeEntry.cpp" target="_blank" rel="noreferrer" title="BenchmarkNativeEntry.cpp">.cpp</a></td><td><span class="status status-in-progress">in-progress</span></td></tr><tr><td>3</td><td>SSE Item Parser</td><td><span class="status status-no-coverage">no-coverage</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-item-parser/benchmark/FamilySystem.net.serversenteventsItemParserBenchmarks.cs" target="_blank" rel="noreferrer" title="FamilySystem.net.serversenteventsItemParserBenchmarks.cs">.cs</a></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-item-parser/native/BenchmarkNativeEntry.cpp" target="_blank" rel="noreferrer" title="BenchmarkNativeEntry.cpp">.cpp</a></td><td><span class="status status-in-progress">in-progress</span></td></tr><tr><td>4</td><td>SSE Formatter</td><td><span class="status status-no-coverage">no-coverage</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-formatter/benchmark/FamilySystem.net.serversenteventsFormatterBenchmarks.cs" target="_blank" rel="noreferrer" title="FamilySystem.net.serversenteventsFormatterBenchmarks.cs">.cs</a></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-formatter/native/BenchmarkNativeEntry.cpp" target="_blank" rel="noreferrer" title="BenchmarkNativeEntry.cpp">.cpp</a></td><td><span class="status status-in-progress">in-progress</span></td></tr></tbody>
+      <thead><tr><th>#</th><th>Family</th><th title="Managed Proof: 表示该家族的托管侧测试覆盖情况。计算方式: 分母 = 该家族的测试用例数 (testCases)，分子 = 当状态为 passed 时等于分母，否则为 0。进度 = 分子 / 分母 * 100%。悬停查看详细测试用例列表"><a href="#gate-managed-proof" class="gate-anchor-link">Managed Proof</a></th><th title="Native Proof: 表示该家族的原生侧代码生成覆盖情况。计算方式: 分母 = 该家族中需要进行原生证明的方法总数 (methodSubjectIds)，分子 = 已通过覆盖率检查的方法数。进度 = 分子 / 分母 * 100%。悬停查看每个方法的覆盖状态"><a href="#gate-native-proof" class="gate-anchor-link">Native Proof</a></th><th title="HotUpdate: 表示该家族的热更新验证覆盖情况。验证流程: ① Host C# → il2cpp AOT 编译为 C++ 原生代码; ② Patch C# → 编译为 patch.dll (热更包); ③ C++ 运行时通过 LoadHotUpdatePackage + method_replacement::Register 加载并注册热更替换; ④ C++ 验证入口调用原始方法 → 断言热更已生效且结果符合预期。整个过程在 C++ 侧完成，不依赖 managed 运行时。计算方式: 分母 = 该家族的热更新测试用例数 (hotupdateCases)，分子 = 当状态为 passed 时等于分母，否则为 0。进度 = 分子 / 分母 * 100%。悬停查看详细热更新用例列表"><a href="#gate-hotupdate-proof" class="gate-anchor-link">HotUpdate</a></th><th title="Benchmark: 表示该家族的原生代码性能基准测试覆盖情况。验证流程: ① 通过 dotnet build/run 执行 managed benchmark 生成 baseline 结果; ② 编译 native C++ benchmark 代码通过 benchmark-host 执行计时; ③ 对比脚本按 methodSubjectId 匹配 managed/native 结果; ④ 计算 per-method 提升百分比 (managed_time - native_time) / managed_time * 100%; ⑤ 汇总输出平均提升百分比作为总体指标。计算方式: 分母 = 该家族的基准测试用例数 (benchmarkCases)，分子 = 当状态为 passed 时等于分母，否则为 0。进度 = 分子 / 分母 * 100%。悬停查看详细基准测试用例列表及 per-method 提升百分比"><a href="#gate-benchmark" class="gate-anchor-link">Benchmark</a></th><th title="Test Code: 表示该家族的测试代码存在情况。状态值: present = 手写测试存在, needs-tests = 缺口, coverage-widened = 自动生成, no-coverage = 0 方法。点击跳转查看详情"><a href="#gate-test-code" class="gate-anchor-link">Test Code</a></th><th title="Audit Input & Ledger: 表示该家族的审计输入和分类账状态。评估方式: 检查 audit-input-and-ledger 项目的执行状态。点击跳转查看详情"><a href="#gate-audit-input-and-ledger" class="gate-anchor-link">Audit Input</a></th><th title="CodeGen Review: 表示该家族的代码生成审查状态。评估方式: 检查 codegen-review 项目的执行状态。点击跳转查看详情"><a href="#gate-codegen-review" class="gate-anchor-link">CodeGen Review</a></th><th title="Managed benchmark source code">Managed Code</th><th title="Native benchmark source code">Native Code</th><th title="Closure status: closed means all non-exempt verification gates pass">closureStatus</th></tr></thead>
+      <tbody><tr><td>1</td><td>SSE Item Model</td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-no-coverage">no-coverage</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-sse-item/benchmark/FamilySystem.net.serversenteventsSseItemBenchmarks.cs" target="_blank" rel="noreferrer" title="FamilySystem.net.serversenteventsSseItemBenchmarks.cs">.cs</a></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-sse-item/native/BenchmarkNativeEntry.cpp" target="_blank" rel="noreferrer" title="BenchmarkNativeEntry.cpp">.cpp</a></td><td><span class="status status-in-progress">in-progress</span></td></tr><tr><td>2</td><td>SSE Parser</td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-no-coverage">no-coverage</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-parser/benchmark/FamilySystem.net.serversenteventsParserBenchmarks.cs" target="_blank" rel="noreferrer" title="FamilySystem.net.serversenteventsParserBenchmarks.cs">.cs</a></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-parser/native/BenchmarkNativeEntry.cpp" target="_blank" rel="noreferrer" title="BenchmarkNativeEntry.cpp">.cpp</a></td><td><span class="status status-in-progress">in-progress</span></td></tr><tr><td>3</td><td>SSE Item Parser</td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-no-coverage">no-coverage</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-item-parser/benchmark/FamilySystem.net.serversenteventsItemParserBenchmarks.cs" target="_blank" rel="noreferrer" title="FamilySystem.net.serversenteventsItemParserBenchmarks.cs">.cs</a></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-item-parser/native/BenchmarkNativeEntry.cpp" target="_blank" rel="noreferrer" title="BenchmarkNativeEntry.cpp">.cpp</a></td><td><span class="status status-in-progress">in-progress</span></td></tr><tr><td>4</td><td>SSE Formatter</td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-no-coverage">no-coverage</span></td><td><span class="status status-pending">pending</span></td><td><span class="status status-pending">pending</span></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-formatter/benchmark/FamilySystem.net.serversenteventsFormatterBenchmarks.cs" target="_blank" rel="noreferrer" title="FamilySystem.net.serversenteventsFormatterBenchmarks.cs">.cs</a></td><td><a href="../../../../verification/foundation-dll/System.Net.ServerSentEvents/family-System.Net.ServerSentEvents-formatter/native/BenchmarkNativeEntry.cpp" target="_blank" rel="noreferrer" title="BenchmarkNativeEntry.cpp">.cpp</a></td><td><span class="status status-in-progress">in-progress</span></td></tr></tbody>
     </table>
   </div>
 </section>
-      
-      
     </div>
+    
+    
     <section>
       <h2>Blocking Context</h2>
       <p>n/a</p>
@@ -187,41 +187,596 @@
   <ul><li><a href="../../../../docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md" target="_blank" rel="noreferrer">docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md</a></li><li><a href="../../../../docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md" target="_blank" rel="noreferrer">docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md</a></li></ul>
 </div></div>
     </section>
+    <section>
+      <h2>Gate Details</h2>
+      <p>Detailed verification gate status per family. Each gate section shows numerator/denominator progress, method-level details (where available), evidence links, and complete data provenance information.</p>
+      <div class="gate-section-header" style="margin-top:24px"><h3 style="color:var(--muted)">SSE Item Model</h3></div><section class="gate-section" id="gate-native-proof">
+  <div class="gate-section-header">
+    <h3>Native Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_native_proof()</code> @ <code>verification_kernel.py:106</code></div>
+    <div>Evidence: <code>native-reference.runtime-skeleton.coverage.json</code></div>
+    <div>Claims: <code>truth-contract:method-capability-contracts</code></div>
+  </div>
+</section><section class="gate-section" id="gate-managed-proof">
+  <div class="gate-section-header">
+    <h3>Managed Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>managed-proof artifacts</code></div>
+    <div>Claims: <code>gate-presence:managed-proof</code></div>
+  </div>
+</section><section class="gate-section" id="gate-hotupdate-proof">
+  <div class="gate-section-header">
+    <h3>HotUpdate Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>0/1 (0.0%)</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>hotupdate-verification-report.json</code></div>
+    <div>Claims: <code>gate-presence:hotupdate-proof</code></div>
+  </div>
+</section><section class="gate-section" id="gate-benchmark">
+  <div class="gate-section-header">
+    <h3>Benchmark</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>0/1 (0.0%)</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>benchmark-comparison-report.json</code></div>
+    <div>Claims: <code>gate-presence:benchmark</code></div>
+  </div>
+</section><section class="gate-section" id="gate-test-code">
+  <div class="gate-section-header">
+    <h3>Test Code</h3>
+    <span class="status status-no-coverage">no-coverage</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_test_code()</code> @ <code>verification_kernel.py:250</code></div>
+    <div>Evidence: <code>testCode ledger entry</code></div>
+    <div>Claims: <code>ledger:testCode</code></div>
+  </div>
+</section><section class="gate-section" id="gate-audit-input-and-ledger">
+  <div class="gate-section-header">
+    <h3>Audit Input &amp; Ledger</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>N/A</code> @ <code>N/A</code></div>
+    <div>Evidence: <code>N/A</code></div>
+    <div>Claims: <code>N/A</code></div>
+  </div>
+</section><section class="gate-section" id="gate-codegen-review">
+  <div class="gate-section-header">
+    <h3>CodeGen Review</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>N/A</code> @ <code>N/A</code></div>
+    <div>Evidence: <code>N/A</code></div>
+    <div>Claims: <code>N/A</code></div>
+  </div>
+</section><div class="gate-section-header" style="margin-top:24px"><h3 style="color:var(--muted)">SSE Parser</h3></div><section class="gate-section" id="gate-native-proof">
+  <div class="gate-section-header">
+    <h3>Native Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_native_proof()</code> @ <code>verification_kernel.py:106</code></div>
+    <div>Evidence: <code>native-reference.runtime-skeleton.coverage.json</code></div>
+    <div>Claims: <code>truth-contract:method-capability-contracts</code></div>
+  </div>
+</section><section class="gate-section" id="gate-managed-proof">
+  <div class="gate-section-header">
+    <h3>Managed Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>managed-proof artifacts</code></div>
+    <div>Claims: <code>gate-presence:managed-proof</code></div>
+  </div>
+</section><section class="gate-section" id="gate-hotupdate-proof">
+  <div class="gate-section-header">
+    <h3>HotUpdate Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>0/1 (0.0%)</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>hotupdate-verification-report.json</code></div>
+    <div>Claims: <code>gate-presence:hotupdate-proof</code></div>
+  </div>
+</section><section class="gate-section" id="gate-benchmark">
+  <div class="gate-section-header">
+    <h3>Benchmark</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>0/1 (0.0%)</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>benchmark-comparison-report.json</code></div>
+    <div>Claims: <code>gate-presence:benchmark</code></div>
+  </div>
+</section><section class="gate-section" id="gate-test-code">
+  <div class="gate-section-header">
+    <h3>Test Code</h3>
+    <span class="status status-no-coverage">no-coverage</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_test_code()</code> @ <code>verification_kernel.py:250</code></div>
+    <div>Evidence: <code>testCode ledger entry</code></div>
+    <div>Claims: <code>ledger:testCode</code></div>
+  </div>
+</section><section class="gate-section" id="gate-audit-input-and-ledger">
+  <div class="gate-section-header">
+    <h3>Audit Input &amp; Ledger</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>N/A</code> @ <code>N/A</code></div>
+    <div>Evidence: <code>N/A</code></div>
+    <div>Claims: <code>N/A</code></div>
+  </div>
+</section><section class="gate-section" id="gate-codegen-review">
+  <div class="gate-section-header">
+    <h3>CodeGen Review</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>N/A</code> @ <code>N/A</code></div>
+    <div>Evidence: <code>N/A</code></div>
+    <div>Claims: <code>N/A</code></div>
+  </div>
+</section><div class="gate-section-header" style="margin-top:24px"><h3 style="color:var(--muted)">SSE Item Parser</h3></div><section class="gate-section" id="gate-native-proof">
+  <div class="gate-section-header">
+    <h3>Native Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_native_proof()</code> @ <code>verification_kernel.py:106</code></div>
+    <div>Evidence: <code>native-reference.runtime-skeleton.coverage.json</code></div>
+    <div>Claims: <code>truth-contract:method-capability-contracts</code></div>
+  </div>
+</section><section class="gate-section" id="gate-managed-proof">
+  <div class="gate-section-header">
+    <h3>Managed Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>managed-proof artifacts</code></div>
+    <div>Claims: <code>gate-presence:managed-proof</code></div>
+  </div>
+</section><section class="gate-section" id="gate-hotupdate-proof">
+  <div class="gate-section-header">
+    <h3>HotUpdate Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>0/1 (0.0%)</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>hotupdate-verification-report.json</code></div>
+    <div>Claims: <code>gate-presence:hotupdate-proof</code></div>
+  </div>
+</section><section class="gate-section" id="gate-benchmark">
+  <div class="gate-section-header">
+    <h3>Benchmark</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>0/1 (0.0%)</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>benchmark-comparison-report.json</code></div>
+    <div>Claims: <code>gate-presence:benchmark</code></div>
+  </div>
+</section><section class="gate-section" id="gate-test-code">
+  <div class="gate-section-header">
+    <h3>Test Code</h3>
+    <span class="status status-no-coverage">no-coverage</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_test_code()</code> @ <code>verification_kernel.py:250</code></div>
+    <div>Evidence: <code>testCode ledger entry</code></div>
+    <div>Claims: <code>ledger:testCode</code></div>
+  </div>
+</section><section class="gate-section" id="gate-audit-input-and-ledger">
+  <div class="gate-section-header">
+    <h3>Audit Input &amp; Ledger</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>N/A</code> @ <code>N/A</code></div>
+    <div>Evidence: <code>N/A</code></div>
+    <div>Claims: <code>N/A</code></div>
+  </div>
+</section><section class="gate-section" id="gate-codegen-review">
+  <div class="gate-section-header">
+    <h3>CodeGen Review</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>N/A</code> @ <code>N/A</code></div>
+    <div>Evidence: <code>N/A</code></div>
+    <div>Claims: <code>N/A</code></div>
+  </div>
+</section><div class="gate-section-header" style="margin-top:24px"><h3 style="color:var(--muted)">SSE Formatter</h3></div><section class="gate-section" id="gate-native-proof">
+  <div class="gate-section-header">
+    <h3>Native Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_native_proof()</code> @ <code>verification_kernel.py:106</code></div>
+    <div>Evidence: <code>native-reference.runtime-skeleton.coverage.json</code></div>
+    <div>Claims: <code>truth-contract:method-capability-contracts</code></div>
+  </div>
+</section><section class="gate-section" id="gate-managed-proof">
+  <div class="gate-section-header">
+    <h3>Managed Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>managed-proof artifacts</code></div>
+    <div>Claims: <code>gate-presence:managed-proof</code></div>
+  </div>
+</section><section class="gate-section" id="gate-hotupdate-proof">
+  <div class="gate-section-header">
+    <h3>HotUpdate Proof</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>0/1 (0.0%)</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>hotupdate-verification-report.json</code></div>
+    <div>Claims: <code>gate-presence:hotupdate-proof</code></div>
+  </div>
+</section><section class="gate-section" id="gate-benchmark">
+  <div class="gate-section-header">
+    <h3>Benchmark</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>0/1 (0.0%)</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+    <div>Evidence: <code>benchmark-comparison-report.json</code></div>
+    <div>Claims: <code>gate-presence:benchmark</code></div>
+  </div>
+</section><section class="gate-section" id="gate-test-code">
+  <div class="gate-section-header">
+    <h3>Test Code</h3>
+    <span class="status status-no-coverage">no-coverage</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>evaluate_test_code()</code> @ <code>verification_kernel.py:250</code></div>
+    <div>Evidence: <code>testCode ledger entry</code></div>
+    <div>Claims: <code>ledger:testCode</code></div>
+  </div>
+</section><section class="gate-section" id="gate-audit-input-and-ledger">
+  <div class="gate-section-header">
+    <h3>Audit Input &amp; Ledger</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>N/A</code> @ <code>N/A</code></div>
+    <div>Evidence: <code>N/A</code></div>
+    <div>Claims: <code>N/A</code></div>
+  </div>
+</section><section class="gate-section" id="gate-codegen-review">
+  <div class="gate-section-header">
+    <h3>CodeGen Review</h3>
+    <span class="status status-pending">pending</span>
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>n/a</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:0.0%"></div></div>
+  </div>
+  
+  
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links"><span class="status-muted">n/a</span></div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>N/A</code> @ <code>N/A</code></div>
+    <div>Evidence: <code>N/A</code></div>
+    <div>Claims: <code>N/A</code></div>
+  </div>
+</section>
+    </section>
   </main>
   <script>
-(() => {
-  const triggers = document.querySelectorAll('.native-proof-trigger');
-  for (const trigger of triggers) {
-    const delayMs = Number(trigger.dataset.tooltipDelayMs || '500');
-    let hideTimer = null;
-
-    const clearHide = () => {
-      if (hideTimer !== null) {
-        window.clearTimeout(hideTimer);
-        hideTimer = null;
-      }
+// Tab switching
+function switchTab(tabName) {
+  var contents = document.querySelectorAll('.tab-content');
+  for (var i = 0; i < contents.length; i++) { contents[i].classList.remove('active'); }
+  var buttons = document.querySelectorAll('.tab-button');
+  for (var i = 0; i < buttons.length; i++) { buttons[i].classList.remove('active'); }
+  var target = document.getElementById('tab-' + tabName);
+  if (target) { target.classList.add('active'); }
+  var btn = document.querySelector('.tab-button[data-tab="' + tabName + '"]');
+  if (btn) { btn.classList.add('active'); }
+  window.location.hash = tabName;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash) {
+    var btn = document.querySelector('.tab-button[data-tab="' + hash + '"]');
+    if (btn) switchTab(hash);
+  }
+});
+// Expandable rows
+function toggleRow(btn) {
+  var row = btn.closest('tr');
+  var detail = row.nextElementSibling;
+  if (detail && detail.classList.contains('matrix-row-detail')) {
+    row.classList.toggle('expanded');
+    detail.classList.toggle('expanded');
+  }
+}
+// Native proof tooltips
+(function() {
+  var triggers = document.querySelectorAll('.native-proof-trigger');
+  for (var i = 0; i < triggers.length; i++) {
+    var trigger = triggers[i];
+    var delayMs = Number(trigger.dataset.tooltipDelayMs || '500');
+    var hideTimer = null;
+    var clearHide = function() {
+      if (hideTimer !== null) { window.clearTimeout(hideTimer); hideTimer = null; }
     };
-
-    const show = () => {
+    var show = function() { clearHide(); trigger.classList.add('is-visible'); };
+    var hide = function() {
       clearHide();
-      trigger.classList.add('is-visible');
-    };
-
-    const hide = () => {
-      clearHide();
-      hideTimer = window.setTimeout(() => {
+      hideTimer = window.setTimeout(function() {
         trigger.classList.remove('is-visible');
         hideTimer = null;
       }, delayMs);
     };
-
     trigger.addEventListener('pointerenter', show);
     trigger.addEventListener('pointerleave', hide);
     trigger.addEventListener('focusin', show);
-    trigger.addEventListener('focusout', (event) => {
-      if (trigger.contains(event.relatedTarget)) {
-        return;
-      }
+    trigger.addEventListener('focusout', function(event) {
+      if (trigger.contains(event.relatedTarget)) { return; }
       hide();
     });
   }

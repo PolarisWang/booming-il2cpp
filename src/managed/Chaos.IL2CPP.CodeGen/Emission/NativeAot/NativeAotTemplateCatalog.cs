@@ -25,6 +25,9 @@ internal static class NativeAotTemplateCatalog
     public const string StringJoinInt32EnumerableTemplateRelativePath = "Templates/NativeAot.StringJoinInt32Enumerable.cpp.scriban";
     public const string StringJoinStringEnumerableTemplateRelativePath = "Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban";
     public const string SimpleExternalRuntimeHelperTemplateRelativePath = "Templates/NativeAot.SimpleExternalRuntimeHelper.cpp.scriban";
+    public const string ReflectionGetObjectTypeTemplateRelativePath = "Templates/NativeAot.ReflectionGetObjectType.cpp.scriban";
+    public const string ReflectionCreateInstanceTemplateRelativePath = "Templates/NativeAot.ReflectionCreateInstance.cpp.scriban";
+    public const string RuntimeHelperShapeDispatchHeaderTemplateRelativePath = "Templates/NativeAot.RuntimeHelperShapeDispatch.h.scriban";
 
     public static Template GetTranslationUnitTemplate()
     {
@@ -114,6 +117,21 @@ internal static class NativeAotTemplateCatalog
     public static Template GetSimpleExternalRuntimeHelperTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(SimpleExternalRuntimeHelperTemplateRelativePath);
+    }
+
+    public static Template GetReflectionGetObjectTypeTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(ReflectionGetObjectTypeTemplateRelativePath);
+    }
+
+    public static Template GetReflectionCreateInstanceTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(ReflectionCreateInstanceTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeHelperShapeDispatchHeaderTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeHelperShapeDispatchHeaderTemplateRelativePath);
     }
 
 }

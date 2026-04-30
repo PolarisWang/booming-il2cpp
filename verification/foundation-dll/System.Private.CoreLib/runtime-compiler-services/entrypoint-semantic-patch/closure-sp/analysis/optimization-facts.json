@@ -1,0 +1,88 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method2:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method9:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

@@ -22,6 +22,7 @@
 - obligation/14/61
 - obligation/14/64
 - obligation/9/39
+- obligation/6/22
 - obligation/12/53
 - obligation/1/1
 - obligation/1/7
@@ -55,7 +56,6 @@
 - obligation/6/26
 - obligation/9/42
 - obligation/7/32
-- obligation/6/22
 - obligation/6/23
 - obligation/8/37
 - obligation/7/31
@@ -96,6 +96,7 @@
 ## Missing Claims
 - evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/managed-proof
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/managed-proof
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/managed-proof
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/managed-proof
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()/managed-proof
@@ -152,12 +153,15 @@
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/managed-proof
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()/managed-proof
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TypePropertyAndInterfaceProofEntry::Run()/managed-proof
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/managed-proof
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/managed-proof
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/managed-proof
 - evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/managed-proof
 
 ## Blockers
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
 - missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
 - missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
 - missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。

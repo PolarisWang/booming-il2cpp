@@ -1,0 +1,138 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "StringCharTextCorePatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Run",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method0",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method1",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method2",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method3",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method4",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method5",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method6",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method7",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method8",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method9",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method10",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method11",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method12",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method13",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method14",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method15",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method16",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method17",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method18",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "StringCharTextCorePatchEntry_StringCharTextCorePatchEntry_Method19",
+          "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method19:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

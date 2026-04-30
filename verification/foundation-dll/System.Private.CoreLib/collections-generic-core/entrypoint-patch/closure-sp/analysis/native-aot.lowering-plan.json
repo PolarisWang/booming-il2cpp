@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "CollectionsGenericCorePatchEntry",
+  "entrySubjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Run:System.Int32(System.Int32)",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "CollectionsGenericCorePatchEntry_CollectionsGenericCorePatchEntry_Run",
+  "entryMethodToken": "0u",
+  "workloadAbi": "int(int32)"
+}

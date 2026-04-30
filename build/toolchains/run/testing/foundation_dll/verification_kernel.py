@@ -173,16 +173,19 @@ def evaluate_native_proof(
             ]
             numerator = sum(1 for subject_id in claim_payload.methodSubjectIds if subject_id not in uncovered_ids)
         elif claim_payload.methodSubjectIds and status == "passed":
+            # Gate says "passed" but no coverage evidence — don't fabricate coverage
             method_details = [
                 {
                     "subjectId": subject_id,
-                    "covered": True,
+                    "covered": False,
                 }
                 for subject_id in claim_payload.methodSubjectIds
             ]
-            numerator = denominator
+            numerator = 0
+            reason = "no-coverage-evidence"
         elif status == "passed":
-            numerator = denominator
+            numerator = 0
+            reason = "no-coverage-evidence"
         else:
             reason = "coverage-source-missing"
     progress_percent = round((numerator / denominator) * 100, 2) if denominator > 0 else 0.0
@@ -230,7 +233,7 @@ def evaluate_generic_gate(
         denominator = len(claim_method_ids)
     else:
         denominator = int((claim or {}).get("denominator") or (1 if status != "not-required" else 0))
-    numerator = denominator if status == "passed" and denominator else 0
+    numerator = denominator if status == "passed" and claim_method_ids and denominator else 0
     progress_percent = 100.0 if numerator and denominator else 0.0
     return VerificationEvaluation(
         status=status,

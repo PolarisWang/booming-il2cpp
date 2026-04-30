@@ -1,0 +1,182 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "name": "TypeRuntimeHandlesSemanticPatchEntry",
+      "displayName": "TypeRuntimeHandlesSemanticPatchEntry",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 16,
+      "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

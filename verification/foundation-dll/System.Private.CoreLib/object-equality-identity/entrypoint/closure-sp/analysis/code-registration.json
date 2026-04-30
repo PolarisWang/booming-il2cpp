@@ -1,0 +1,60 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ObjectEqualityIdentityNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ObjectEqualityIdentityNativeEntry_ObjectEqualityIdentityNativeEntry_Run",
+          "subjectId": "ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ObjectEqualityIdentityNativeEntry_ObjectEqualityIdentityNativeEntry_Method0",
+          "subjectId": "ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ObjectEqualityIdentityNativeEntry_ObjectEqualityIdentityNativeEntry_Method1",
+          "subjectId": "ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ObjectEqualityIdentityNativeEntry_ObjectEqualityIdentityNativeEntry_Method2",
+          "subjectId": "ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ObjectEqualityIdentityNativeEntry_ObjectEqualityIdentityNativeEntry_Method3",
+          "subjectId": "ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ObjectEqualityIdentityNativeEntry_ObjectEqualityIdentityNativeEntry_Method4",
+          "subjectId": "ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ObjectEqualityIdentityNativeEntry_ObjectEqualityIdentityNativeEntry_Method5",
+          "subjectId": "ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ObjectEqualityIdentityNativeEntry_ObjectEqualityIdentityNativeEntry_Method6",
+          "subjectId": "ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method6:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

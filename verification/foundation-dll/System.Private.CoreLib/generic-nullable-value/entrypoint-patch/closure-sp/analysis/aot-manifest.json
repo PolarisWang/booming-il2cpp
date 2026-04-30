@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValuePatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

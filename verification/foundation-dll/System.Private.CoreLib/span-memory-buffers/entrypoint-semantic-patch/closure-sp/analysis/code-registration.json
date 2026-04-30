@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "SpanMemoryBuffersSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Run",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method0",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method1",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method2",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method3",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method4",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method5",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method6",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method7",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method8",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method9",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method10",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method11",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method12",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "SpanMemoryBuffersSemanticPatchEntry_SpanMemoryBuffersSemanticPatchEntry_Method13",
+          "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method13:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

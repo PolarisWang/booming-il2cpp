@@ -1,0 +1,126 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "IoStreamsBasicsNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Run",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method0",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method1",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method2",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method3",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method4",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method5",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method6",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method7",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method8",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method9",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method10",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method11",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method12",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method13",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method14",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method15",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method16",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "IoStreamsBasicsNativeEntry_IoStreamsBasicsNativeEntry_Method17",
+          "subjectId": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Method17:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -852,7 +852,116 @@ extern "C" CHAOS_IL2CPP_INTPTR {{helperSymbol}}(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 			}, new HashSet<int> { 0 });
 			return true;
 		}
+		if (TryCreateMarshalCopyRuntimeHelperDefinition(callee, out helperDefinition))
+		{
+			return true;
+		}
 		return false;
+	}
+
+	private static readonly IReadOnlyDictionary<string, string> MarshalCopyElementTypeMap = new Dictionary<string, string>
+	{
+		["System.Byte"] = "CHAOS_IL2CPP_UINT8",
+		["System.Int16"] = "CHAOS_IL2CPP_INT16",
+		["System.Int32"] = "CHAOS_IL2CPP_INT32",
+		["System.Int64"] = "CHAOS_IL2CPP_INT64",
+		["System.IntPtr"] = "CHAOS_IL2CPP_INTPTR",
+	};
+
+	private bool TryCreateMarshalCopyRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
+	{
+		helperDefinition = null;
+		if (!string.Equals(GetMethodDeclaringTypeSubjectId(callee), "System.Runtime.InteropServices/Marshal", StringComparison.Ordinal) ||
+		    !string.Equals(GetMethodName(callee), "Copy", StringComparison.Ordinal))
+		{
+			return false;
+		}
+		var parameterTypes = GetMethodParameterTypes(callee);
+		if (parameterTypes.Count != 4)
+		{
+			return false;
+		}
+
+		bool isArrayToPtr;
+		string elementTypeName;
+		if (parameterTypes[0].EndsWith("[]", StringComparison.Ordinal))
+		{
+			isArrayToPtr = true;
+			elementTypeName = parameterTypes[0].Substring(0, parameterTypes[0].Length - 2);
+		}
+		else if (string.Equals(parameterTypes[0], "System.IntPtr", StringComparison.Ordinal) &&
+		         parameterTypes[1].EndsWith("[]", StringComparison.Ordinal))
+		{
+			isArrayToPtr = false;
+			elementTypeName = parameterTypes[1].Substring(0, parameterTypes[1].Length - 2);
+		}
+		else
+		{
+			return false;
+		}
+
+		if (!MarshalCopyElementTypeMap.TryGetValue(elementTypeName, out var cppElementType))
+		{
+			return false;
+		}
+
+		AotCoreIrAbiSlotArtifact voidReturnAbi = new()
+		{
+			CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
+			TypeShape = (AotCoreIrTypeShapeKind)0,
+		};
+
+		AotCoreIrAbiSlotArtifact[] paramAbis;
+		string paramSignature;
+		string[] bodyLines;
+
+		if (isArrayToPtr)
+		{
+			paramSignature = "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2, CHAOS_IL2CPP_INT32 chaos_arg_3";
+			bodyLines =
+			[
+				"    auto* chaos_array = reinterpret_cast<void*>(chaos_arg_0);",
+				"    auto chaos_start_index = chaos_arg_1;",
+				"    auto chaos_dest = chaos_arg_2;",
+				"    auto chaos_length = chaos_arg_3;",
+				$"    chaos::il2cpp::runtime_core::MarshalCopyArrayToPtr<{cppElementType}>(chaos_array, chaos_start_index, chaos_dest, chaos_length);",
+			];
+			paramAbis =
+			[
+				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+				CreateInt32AbiSlot(),
+				CreateNativeIntAbiSlot(),
+				CreateInt32AbiSlot(),
+			];
+		}
+		else
+		{
+			paramSignature = "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2, CHAOS_IL2CPP_INT32 chaos_arg_3";
+			bodyLines =
+			[
+				"    auto chaos_source = chaos_arg_0;",
+				"    auto* chaos_array = reinterpret_cast<void*>(chaos_arg_1);",
+				"    auto chaos_start_index = chaos_arg_2;",
+				"    auto chaos_length = chaos_arg_3;",
+				$"    chaos::il2cpp::runtime_core::MarshalCopyPtrToArray<{cppElementType}>(chaos_source, chaos_array, chaos_start_index, chaos_length);",
+			];
+			paramAbis =
+			[
+				CreateNativeIntAbiSlot(),
+				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+				CreateInt32AbiSlot(),
+				CreateInt32AbiSlot(),
+			];
+		}
+
+		helperDefinition = new ExternalRuntimeHelperDefinition(
+			callee,
+			GetExternalRuntimeHelperSymbol(callee),
+			RenderSimpleExternalRuntimeHelper("void", GetExternalRuntimeHelperSymbol(callee), paramSignature, bodyLines),
+			new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(paramAbis),
+			voidReturnAbi,
+			new HashSet<int> { 0, 1, 2, 3 });
+		return true;
 	}
 
 	private bool TryCreateInterlockedRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)

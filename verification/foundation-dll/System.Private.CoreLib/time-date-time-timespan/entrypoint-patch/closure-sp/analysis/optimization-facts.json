@@ -1,0 +1,99 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method13:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method14:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Method15:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

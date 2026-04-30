@@ -4,7 +4,7 @@
 - stageKind: hotupdate-proof
 - closureId: closure/completed/testing-inventory
 - scopeCode: testing-inventory
-- verificationState: planned
+- verificationState: failed
 - supportState: supported
 
 ## Covered Obligations
@@ -22,6 +22,7 @@
 - obligation/14/61
 - obligation/14/64
 - obligation/9/39
+- obligation/6/22
 - obligation/12/53
 - obligation/1/1
 - obligation/1/7
@@ -55,7 +56,6 @@
 - obligation/6/26
 - obligation/9/42
 - obligation/7/32
-- obligation/6/22
 - obligation/6/23
 - obligation/8/37
 - obligation/7/31
@@ -74,10 +74,10 @@
 - obligation/10/45
 
 ## Success Evidence
-- evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/hotupdate-proof
+- n/a
 
 ## Failed Evidence
-- n/a
+- evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/hotupdate-proof
 
 ## Blocked Evidence
 - n/a

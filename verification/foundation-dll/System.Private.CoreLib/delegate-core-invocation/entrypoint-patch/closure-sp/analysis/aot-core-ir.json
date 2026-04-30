@@ -1,0 +1,1011 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.run",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.run",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            53,
+            61,
+            69,
+            77,
+            85,
+            93,
+            101,
+            109,
+            117,
+            125
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 133,
+          "ilOffset": 51,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 53,
+          "resultType": "System.Int32",
+          "callee": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 58,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 59,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 61,
+          "resultType": "System.Int32",
+          "callee": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 66,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 67,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 69,
+          "resultType": "System.Int32",
+          "callee": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 74,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 77,
+          "resultType": "System.Int32",
+          "callee": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 82,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 85,
+          "resultType": "System.Int32",
+          "callee": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 90,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 91,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 93,
+          "resultType": "System.Int32",
+          "callee": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 98,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 99,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 101,
+          "resultType": "System.Int32",
+          "callee": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 106,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 107,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 109,
+          "resultType": "System.Int32",
+          "callee": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 114,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 117,
+          "resultType": "System.Int32",
+          "callee": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 122,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 125,
+          "resultType": "System.Int32",
+          "callee": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationPatchEntry",
+            "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 130,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 133,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 134,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 137,
+          "ilOffset": 135,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 137
+        },
+        {
+          "op": "ret",
+          "ilOffset": 138
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method0",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method0:System.Int32()",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method0:System.Int32()",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method0",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method0()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177280,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method1",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method1:System.Int32()",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method1:System.Int32()",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method1",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method1()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177279,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method2",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method2:System.Int32()",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method2:System.Int32()",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method2",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method2()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177278,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method3",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method3:System.Int32()",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method3:System.Int32()",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method3",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method3()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method4",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method4:System.Int32()",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method4:System.Int32()",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method4",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method4()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177276,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method5",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method5:System.Int32()",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method5:System.Int32()",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method5",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method5()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177275,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method6",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method6:System.Int32()",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method6:System.Int32()",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method6",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method6()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177274,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method7",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method7:System.Int32()",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method7:System.Int32()",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method7",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method7()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177273,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method8",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method8:System.Int32()",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method8:System.Int32()",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method8",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method8()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177272,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method9",
+      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationPatchEntry",
+        "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+        "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method9:System.Int32()",
+        "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Method9:System.Int32()",
+        "methodId": "delegate-core-invocation-patch-entry.delegate-core-invocation-patch-entry.method9",
+        "signature": "System.Int32 DelegateCoreInvocationPatchEntry::Method9()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationPatchEntry_DelegateCoreInvocationPatchEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177271,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 11,
+    "trimmedMethodCount": 11,
+    "entryPrefix": "DelegateCoreInvocationPatchEntry"
+  }
+}

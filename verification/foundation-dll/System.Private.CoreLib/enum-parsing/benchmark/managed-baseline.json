@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/enum/parsing",
+  "warmupIterations": 100,
+  "measureIterations": 10000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
+      "elapsedMilliseconds": 5.221800,
+      "opsPerSecond": 1915048.450726,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)",
+      "elapsedMilliseconds": 0.014700,
+      "opsPerSecond": 680272108.843537,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)",
+      "elapsedMilliseconds": 0.022100,
+      "opsPerSecond": 452488687.782805,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
+      "elapsedMilliseconds": 0.022100,
+      "opsPerSecond": 452488687.782805,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
+      "elapsedMilliseconds": 0.022100,
+      "opsPerSecond": 452488687.782805,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
+      "elapsedMilliseconds": 0.022100,
+      "opsPerSecond": 452488687.782805,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
+      "elapsedMilliseconds": 0.022100,
+      "opsPerSecond": 452488687.782805,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::ToString:System.String()",
+      "elapsedMilliseconds": 0.022100,
+      "opsPerSecond": 452488687.782805,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
+      "elapsedMilliseconds": 0.022100,
+      "opsPerSecond": 452488687.782805,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
+      "elapsedMilliseconds": 0.032000,
+      "opsPerSecond": 312500000.000000,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
+      "elapsedMilliseconds": 0.014700,
+      "opsPerSecond": 680272108.843537,
+      "iterations": 10000
+    }
+  ]
+}

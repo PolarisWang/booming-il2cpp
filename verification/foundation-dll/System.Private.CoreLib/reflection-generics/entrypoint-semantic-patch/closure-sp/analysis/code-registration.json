@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionGenericsSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Run",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method0",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method1",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method2",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method3",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method4",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method5",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method6",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method7",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method8",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method9",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method10",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReflectionGenericsSemanticPatchEntry_ReflectionGenericsSemanticPatchEntry_Method11",
+          "subjectId": "ReflectionGenericsSemanticPatchEntry/ReflectionGenericsSemanticPatchEntry::Method11:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

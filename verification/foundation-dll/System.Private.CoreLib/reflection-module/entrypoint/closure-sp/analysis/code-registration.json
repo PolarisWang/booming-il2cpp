@@ -1,0 +1,54 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionModuleNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionModuleNativeEntry_ReflectionModuleNativeEntry_Run",
+          "subjectId": "ReflectionModuleNativeEntry/ReflectionModuleNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionModuleNativeEntry_ReflectionModuleNativeEntry_Method0",
+          "subjectId": "ReflectionModuleNativeEntry/ReflectionModuleNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionModuleNativeEntry_ReflectionModuleNativeEntry_Method1",
+          "subjectId": "ReflectionModuleNativeEntry/ReflectionModuleNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionModuleNativeEntry_ReflectionModuleNativeEntry_Method2",
+          "subjectId": "ReflectionModuleNativeEntry/ReflectionModuleNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionModuleNativeEntry_ReflectionModuleNativeEntry_Method3",
+          "subjectId": "ReflectionModuleNativeEntry/ReflectionModuleNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionModuleNativeEntry_ReflectionModuleNativeEntry_Method4",
+          "subjectId": "ReflectionModuleNativeEntry/ReflectionModuleNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionModuleNativeEntry_ReflectionModuleNativeEntry_Method5",
+          "subjectId": "ReflectionModuleNativeEntry/ReflectionModuleNativeEntry::Method5:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

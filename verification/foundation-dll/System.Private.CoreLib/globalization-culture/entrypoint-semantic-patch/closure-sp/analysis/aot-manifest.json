@@ -1,0 +1,186 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GlobalizationCultureSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()",
+      "reason": "external-call"
+    }
+  ]
+}

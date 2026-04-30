@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ArrayIndexingCopySemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Run",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method0",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method1",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method2",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method3",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method4",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method5",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method6",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method7",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method8",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method9",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method10",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method11",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ArrayIndexingCopySemanticPatchEntry_ArrayIndexingCopySemanticPatchEntry_Method12",
+          "subjectId": "ArrayIndexingCopySemanticPatchEntry/ArrayIndexingCopySemanticPatchEntry::Method12:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

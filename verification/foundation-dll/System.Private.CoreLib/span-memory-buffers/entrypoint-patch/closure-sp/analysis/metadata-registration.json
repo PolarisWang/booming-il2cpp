@@ -1,0 +1,193 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SpanMemoryBuffersPatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "name": "SpanMemoryBuffersPatchEntry",
+      "displayName": "SpanMemoryBuffersPatchEntry",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method13:System.Int32()",
+      "name": "Method13",
+      "definitionSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 17,
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

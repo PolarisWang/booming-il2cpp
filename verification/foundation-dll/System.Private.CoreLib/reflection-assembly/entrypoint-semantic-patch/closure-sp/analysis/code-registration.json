@@ -1,0 +1,150 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionAssemblySemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Run",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method0",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method1",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method2",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method3",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method4",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method5",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method6",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method7",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method8",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method9",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method10",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method11",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method12",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method13",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method14",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method15",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method16",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method17",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method18",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method19",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method19:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method20",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method20:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "ReflectionAssemblySemanticPatchEntry_ReflectionAssemblySemanticPatchEntry_Method21",
+          "subjectId": "ReflectionAssemblySemanticPatchEntry/ReflectionAssemblySemanticPatchEntry::Method21:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

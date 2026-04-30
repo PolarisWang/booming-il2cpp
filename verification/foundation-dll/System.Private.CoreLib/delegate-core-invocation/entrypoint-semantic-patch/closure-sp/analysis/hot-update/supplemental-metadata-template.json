@@ -1,0 +1,177 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec",
+      "metadataToken": 33554435
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method7:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method8:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method9:System.Int32()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DelegateCoreInvocationSemanticPatchEntry",
+      "subjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSemanticPatchEntry/DelegateCoreInvocationSemanticPatchEntry\u002B\u003C\u003Ec",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

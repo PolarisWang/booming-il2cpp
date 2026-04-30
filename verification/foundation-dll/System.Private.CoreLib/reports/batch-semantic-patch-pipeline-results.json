@@ -1,0 +1,88 @@
+{
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "family": "reflection-type",
+      "steps": {
+        "build": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit": "OK"
+      },
+      "success": true
+    },
+    {
+      "family": "reflection-assembly",
+      "steps": {
+        "build": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit": "OK"
+      },
+      "success": true
+    },
+    {
+      "family": "reflection-member-complete",
+      "steps": {
+        "build": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit": "OK"
+      },
+      "success": true
+    },
+    {
+      "family": "reflection-generics",
+      "steps": {
+        "build": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit": "OK"
+      },
+      "success": true
+    },
+    {
+      "family": "reflection-parameters",
+      "steps": {
+        "build": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit": "OK"
+      },
+      "success": true
+    },
+    {
+      "family": "reflection-module",
+      "steps": {
+        "build": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit": "OK"
+      },
+      "success": true
+    },
+    {
+      "family": "reflection-binding",
+      "steps": {
+        "build": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit": "OK"
+      },
+      "success": true
+    },
+    {
+      "family": "reflection-activation",
+      "steps": {
+        "build": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit": "OK"
+      },
+      "success": true
+    }
+  ],
+  "timestamp": "2026-04-29T23:40:04"
+}

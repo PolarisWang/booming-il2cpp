@@ -1,0 +1,171 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReflectionBindingNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "name": "ReflectionBindingNativeEntry",
+      "displayName": "ReflectionBindingNativeEntry",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 15,
+      "subjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ReflectionBindingNativeEntry/ReflectionBindingNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

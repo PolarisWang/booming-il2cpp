@@ -1,0 +1,264 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method18:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StringCharTextCoreNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method19:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Split:System.String[](System.Char,System.StringSplitOptions)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::ToUpper:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::ToLower:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Trim:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.String\u003E:System.String[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)",
+      "reason": "external-call"
+    }
+  ]
+}

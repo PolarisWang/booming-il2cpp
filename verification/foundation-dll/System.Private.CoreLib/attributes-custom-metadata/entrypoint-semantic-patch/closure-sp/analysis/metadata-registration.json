@@ -1,0 +1,138 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "name": "AttributesCustomMetadataSemanticPatchEntry",
+      "displayName": "AttributesCustomMetadataSemanticPatchEntry",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 12,
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

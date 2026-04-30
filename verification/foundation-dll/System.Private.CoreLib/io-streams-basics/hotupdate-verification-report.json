@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/io/streams-basics",
+  "summary": {
+    "totalMethods": 18,
+    "passedMethods": 18,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
+      "status": "passed",
+      "methodToken": 100663297,
+      "originalReturnValue": "0xa0000000",
+      "patchedReturnValue": "0xb0000000",
+      "expectedPatchedValue": "0xb0000000",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
+      "status": "passed",
+      "methodToken": 100663298,
+      "originalReturnValue": "0xa0000001",
+      "patchedReturnValue": "0xb0000001",
+      "expectedPatchedValue": "0xb0000001",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
+      "status": "passed",
+      "methodToken": 100663299,
+      "originalReturnValue": "0xa0000002",
+      "patchedReturnValue": "0xb0000002",
+      "expectedPatchedValue": "0xb0000002",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+      "status": "passed",
+      "methodToken": 100663300,
+      "originalReturnValue": "0xa0000003",
+      "patchedReturnValue": "0xb0000003",
+      "expectedPatchedValue": "0xb0000003",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
+      "status": "passed",
+      "methodToken": 100663301,
+      "originalReturnValue": "0xa0000004",
+      "patchedReturnValue": "0xb0000004",
+      "expectedPatchedValue": "0xb0000004",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
+      "status": "passed",
+      "methodToken": 100663302,
+      "originalReturnValue": "0xa0000005",
+      "patchedReturnValue": "0xb0000005",
+      "expectedPatchedValue": "0xb0000005",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
+      "status": "passed",
+      "methodToken": 100663303,
+      "originalReturnValue": "0xa0000006",
+      "patchedReturnValue": "0xb0000006",
+      "expectedPatchedValue": "0xb0000006",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)",
+      "status": "passed",
+      "methodToken": 100663304,
+      "originalReturnValue": "0xa0000007",
+      "patchedReturnValue": "0xb0000007",
+      "expectedPatchedValue": "0xb0000007",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
+      "status": "passed",
+      "methodToken": 100663305,
+      "originalReturnValue": "0xa0000008",
+      "patchedReturnValue": "0xb0000008",
+      "expectedPatchedValue": "0xb0000008",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()",
+      "status": "passed",
+      "methodToken": 100663306,
+      "originalReturnValue": "0xa0000009",
+      "patchedReturnValue": "0xb0000009",
+      "expectedPatchedValue": "0xb0000009",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)",
+      "status": "passed",
+      "methodToken": 100663307,
+      "originalReturnValue": "0xa000000a",
+      "patchedReturnValue": "0xb000000a",
+      "expectedPatchedValue": "0xb000000a",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
+      "status": "passed",
+      "methodToken": 100663308,
+      "originalReturnValue": "0xa000000b",
+      "patchedReturnValue": "0xb000000b",
+      "expectedPatchedValue": "0xb000000b",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
+      "status": "passed",
+      "methodToken": 100663309,
+      "originalReturnValue": "0xa000000c",
+      "patchedReturnValue": "0xb000000c",
+      "expectedPatchedValue": "0xb000000c",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()",
+      "status": "passed",
+      "methodToken": 100663310,
+      "originalReturnValue": "0xa000000d",
+      "patchedReturnValue": "0xb000000d",
+      "expectedPatchedValue": "0xb000000d",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()",
+      "status": "passed",
+      "methodToken": 100663311,
+      "originalReturnValue": "0xa000000e",
+      "patchedReturnValue": "0xb000000e",
+      "expectedPatchedValue": "0xb000000e",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()",
+      "status": "passed",
+      "methodToken": 100663312,
+      "originalReturnValue": "0xa000000f",
+      "patchedReturnValue": "0xb000000f",
+      "expectedPatchedValue": "0xb000000f",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)",
+      "status": "passed",
+      "methodToken": 100663313,
+      "originalReturnValue": "0xa0000010",
+      "patchedReturnValue": "0xb0000010",
+      "expectedPatchedValue": "0xb0000010",
+      "revertVerified": true,
+      "semanticVerified": false
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.String)",
+      "status": "passed",
+      "methodToken": 100663314,
+      "originalReturnValue": "0xa0000011",
+      "patchedReturnValue": "0xb0000011",
+      "expectedPatchedValue": "0xb0000011",
+      "revertVerified": true,
+      "semanticVerified": false
+    }
+  ]
+}

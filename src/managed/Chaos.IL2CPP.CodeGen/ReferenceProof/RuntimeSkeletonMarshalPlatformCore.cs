@@ -33,7 +33,8 @@ internal static class RuntimeSkeletonMarshalPlatformCore
 
         return TryCreateMemoryBlockFastPath(method, out plan) ||
                TryCreateStringFastPath(method, out plan) ||
-               TryCreateRawReadWriteFastPath(method, out plan);
+               TryCreateRawReadWriteFastPath(method, out plan) ||
+               TryCreateCopyFastPath(method, out plan);
     }
 
     public static MarshalStructureMarshallingClass ClassifyStructureMarshalling(string managedType)
@@ -203,6 +204,75 @@ internal static class RuntimeSkeletonMarshalPlatformCore
                 TryCreateWriteFastPath(method, "MarshalWriteIntPtr", LoadScalar("System.IntPtr", "request->arg2"), LoadScalar("System.Int32", "request->arg1"), out plan),
             _ => false,
         };
+    }
+
+    private static bool TryCreateCopyFastPath(
+        TypedIlMethodArtifact method,
+        out RuntimeSkeletonMarshalPlatformFastPathPlan plan)
+    {
+        plan = null!;
+        return method.SubjectId switch
+        {
+            // Array→Ptr (5 overloads): T[], int, IntPtr, int
+            "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Byte[],System.Int32,System.IntPtr,System.Int32)" =>
+                TryCreateCopyFastPathCore(method, "CHAOS_IL2CPP_UINT8", isArrayToPtr: true, out plan),
+            "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int16[],System.Int32,System.IntPtr,System.Int32)" =>
+                TryCreateCopyFastPathCore(method, "CHAOS_IL2CPP_INT16", isArrayToPtr: true, out plan),
+            "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int32[],System.Int32,System.IntPtr,System.Int32)" =>
+                TryCreateCopyFastPathCore(method, "CHAOS_IL2CPP_INT32", isArrayToPtr: true, out plan),
+            "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int64[],System.Int32,System.IntPtr,System.Int32)" =>
+                TryCreateCopyFastPathCore(method, "CHAOS_IL2CPP_INT64", isArrayToPtr: true, out plan),
+            "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr[],System.Int32,System.IntPtr,System.Int32)" =>
+                TryCreateCopyFastPathCore(method, "CHAOS_IL2CPP_INTPTR", isArrayToPtr: true, out plan),
+
+            // Ptr→Array (5 overloads): IntPtr, T[], int, int
+            "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Byte[],System.Int32,System.Int32)" =>
+                TryCreateCopyFastPathCore(method, "CHAOS_IL2CPP_UINT8", isArrayToPtr: false, out plan),
+            "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int16[],System.Int32,System.Int32)" =>
+                TryCreateCopyFastPathCore(method, "CHAOS_IL2CPP_INT16", isArrayToPtr: false, out plan),
+            "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int32[],System.Int32,System.Int32)" =>
+                TryCreateCopyFastPathCore(method, "CHAOS_IL2CPP_INT32", isArrayToPtr: false, out plan),
+            "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int64[],System.Int32,System.Int32)" =>
+                TryCreateCopyFastPathCore(method, "CHAOS_IL2CPP_INT64", isArrayToPtr: false, out plan),
+            "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.IntPtr[],System.Int32,System.Int32)" =>
+                TryCreateCopyFastPathCore(method, "CHAOS_IL2CPP_INTPTR", isArrayToPtr: false, out plan),
+
+            _ => false,
+        };
+    }
+
+    private static bool TryCreateCopyFastPathCore(
+        TypedIlMethodArtifact method,
+        string cppElementType,
+        bool isArrayToPtr,
+        out RuntimeSkeletonMarshalPlatformFastPathPlan plan)
+    {
+        string helperStatements;
+        if (isArrayToPtr)
+        {
+            helperStatements =
+                $"auto* chaos_array = {LoadReference("request->arg0")};\n    " +
+                $"const auto chaos_start_index = {LoadScalar("System.Int32", "request->arg1")};\n    " +
+                $"const auto chaos_dest = {LoadScalar("System.IntPtr", "request->arg2")};\n    " +
+                $"const auto chaos_length = {LoadScalar("System.Int32", "request->arg3")};\n    " +
+                $"chaos::il2cpp::runtime_core::MarshalCopyArrayToPtr<{cppElementType}>(chaos_array, chaos_start_index, chaos_dest, chaos_length);";
+        }
+        else
+        {
+            helperStatements =
+                $"const auto chaos_source = {LoadScalar("System.IntPtr", "request->arg0")};\n    " +
+                $"auto* chaos_array = {LoadReference("request->arg1")};\n    " +
+                $"const auto chaos_start_index = {LoadScalar("System.Int32", "request->arg2")};\n    " +
+                $"const auto chaos_length = {LoadScalar("System.Int32", "request->arg3")};\n    " +
+                $"chaos::il2cpp::runtime_core::MarshalCopyPtrToArray<{cppElementType}>(chaos_source, chaos_array, chaos_start_index, chaos_length);";
+        }
+
+        return TryCreateStaticFastPath(
+            method,
+            "memory-block",
+            "System.Void",
+            helperStatements,
+            out plan);
     }
 
     private static bool TryCreateReadFastPath(

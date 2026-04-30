@@ -1,0 +1,60 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ObjectEqualityIdentitySemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ObjectEqualityIdentitySemanticPatchEntry_ObjectEqualityIdentitySemanticPatchEntry_Run",
+          "subjectId": "ObjectEqualityIdentitySemanticPatchEntry/ObjectEqualityIdentitySemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ObjectEqualityIdentitySemanticPatchEntry_ObjectEqualityIdentitySemanticPatchEntry_Method0",
+          "subjectId": "ObjectEqualityIdentitySemanticPatchEntry/ObjectEqualityIdentitySemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ObjectEqualityIdentitySemanticPatchEntry_ObjectEqualityIdentitySemanticPatchEntry_Method1",
+          "subjectId": "ObjectEqualityIdentitySemanticPatchEntry/ObjectEqualityIdentitySemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ObjectEqualityIdentitySemanticPatchEntry_ObjectEqualityIdentitySemanticPatchEntry_Method2",
+          "subjectId": "ObjectEqualityIdentitySemanticPatchEntry/ObjectEqualityIdentitySemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ObjectEqualityIdentitySemanticPatchEntry_ObjectEqualityIdentitySemanticPatchEntry_Method3",
+          "subjectId": "ObjectEqualityIdentitySemanticPatchEntry/ObjectEqualityIdentitySemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ObjectEqualityIdentitySemanticPatchEntry_ObjectEqualityIdentitySemanticPatchEntry_Method4",
+          "subjectId": "ObjectEqualityIdentitySemanticPatchEntry/ObjectEqualityIdentitySemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ObjectEqualityIdentitySemanticPatchEntry_ObjectEqualityIdentitySemanticPatchEntry_Method5",
+          "subjectId": "ObjectEqualityIdentitySemanticPatchEntry/ObjectEqualityIdentitySemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ObjectEqualityIdentitySemanticPatchEntry_ObjectEqualityIdentitySemanticPatchEntry_Method6",
+          "subjectId": "ObjectEqualityIdentitySemanticPatchEntry/ObjectEqualityIdentitySemanticPatchEntry::Method6:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -173,6 +173,7 @@ const MarshalPlatformAbiRootV1 kMarshalPlatformAbiRootV1 = {
     MarshalPlatformCapabilityMemoryBlock |
     MarshalPlatformCapabilityStringMarshaling |
     MarshalPlatformCapabilityStructureLayout |
+    MarshalPlatformCapabilityDelegateBridge |
     MarshalPlatformCapabilityComCore |
     MarshalPlatformCapabilityComActivation |
     MarshalPlatformCapabilityVariantScalar |
@@ -181,7 +182,7 @@ const MarshalPlatformAbiRootV1 kMarshalPlatformAbiRootV1 = {
     &kMarshalMemoryBlockAbiV1,
     &kMarshalStringMarshalingAbiV1,
     &kMarshalStructureLayoutAbiV1,
-    nullptr,
+    &kMarshalDelegateBridgeAbiV1,
     &kComInteropAbiV1,
     &kVariantInteropAbiV1,
 };

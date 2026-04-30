@@ -1,0 +1,35 @@
+# 01-翻译管线 INDEX
+
+> 描述 Chaos IL2CPP 从 IL 到 C++ 的完整翻译流程。阅读顺序：按编号从 `01` 到 `21`。
+
+## 文档
+
+### 核心翻译管线（01-12）
+| 文档 | 说明 |
+|------|------|
+| [`01-总体流程与五层职责.md`](./01-%E6%80%BB%E4%BD%93%E6%B5%81%E7%A8%8B%E4%B8%8E%E4%BA%94%E5%B1%82%E8%81%8C%E8%B4%A3.md) | Loader → SemanticWorld → Linker → CodeGen → Emitter |
+| [`02-输入合约模型.md`](./02-%E8%BE%93%E5%85%A5%E5%90%88%E7%BA%A6%E6%A8%A1%E5%9E%8B.md) | AotCoreIrArtifact 结构树、引用与类型信息 |
+| [`03-求值栈与ABI调用模型.md`](./03-%E6%B1%82%E5%80%BC%E6%A0%88%E4%B8%8EABI%E8%B0%83%E7%94%A8%E6%A8%A1%E5%9E%8B.md) | 求值栈值表示、12种 ABI carrier 映射 |
+| [`04-NativeAotLoweringPlanner文件布局.md`](./04-NativeAotLoweringPlanner%E6%96%87%E4%BB%B6%E5%B8%83%E5%B1%80.md) | 20+ partial 文件分布（Planning / Emission / RuntimeSupport） |
+| [`05-异常处理架构.md`](./05-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84.md) | 5种 EH shape 的 C++ 模式 |
+| [`06-字符串ID系统.md`](./06-%E5%AD%97%E7%AC%A6%E4%B8%B2ID%E7%B3%BB%E7%BB%9F.md) | FNV-1a 64-bit hash、碰撞处理、AOT baked table |
+| [`07-对象模型与相等性.md`](./07-%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%9B%B8%E7%AD%89%E6%80%A7.md) | C++ struct 定义、类型身份辅助函数、相等性 7 级优先级 |
+| [`08-泛型执行模型.md`](./08-%E6%B3%9B%E5%9E%8B%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B.md) | GenericContextShapeKind、实例化存根、封闭泛型 method handle |
+| [`09-运行时Helper生态.md`](./09-%E8%BF%90%E8%A1%8C%E6%97%B6Helper%E7%94%9F%E6%80%81.md) | 16 类 helper 及其文件分布 |
+| [`10-静态初始化模型.md`](./10-%E9%9D%99%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E6%A8%A1%E5%9E%8B.md) | std::call_once 模式 |
+| [`11-CPP运行时模块分层.md`](./11-CPP%E8%BF%90%E8%A1%8C%E6%97%B6%E6%A8%A1%E5%9D%97%E5%88%86%E5%B1%82.md) | 8 模块 DAG、禁止包含列表、命名约定、验证层级 |
+| [`12-关键合约.md`](./12-%E5%85%B3%E9%94%AE%E5%90%88%E7%BA%A6.md) | codegen_bridge.h / runtime_abi.h / engine contracts / 共享 ABI 合约 / 版本兼容性 / 功能支持状态 |
+
+### C++ 运行时子系统（13-21）
+| 文档 | 说明 |
+|------|------|
+| [`13-MemoryDomain系统.md`](./13-MemoryDomain%E7%B3%BB%E7%BB%9F.md) | 内存域分配隔离、3 种堆策略、TLS 域栈 |
+| [`14-VTable注册表.md`](./14-VTable%E6%B3%A8%E5%86%8C%E8%A1%A8.md) | 虚方法分派注册中心、继承链遍历解析 |
+| [`15-泛型上下文运行时.md`](./15-%E6%B3%9B%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E8%BF%90%E8%A1%8C%E6%97%B6.md) | 封闭泛型实例化注册、类型参数查询 |
+| [`16-字符串表运行时.md`](./16-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A8%E8%BF%90%E8%A1%8C%E6%97%B6.md) | 运行时字符串解析、AOT 二分查找、动态注册 |
+| [`17-反射查询模型.md`](./17-%E5%8F%8D%E5%B0%84%E6%9F%A5%E8%AF%A2%E6%A8%A1%E5%9E%8B.md) | 不可变反射描述符、指针标记句柄、AOT const 数据 |
+| [`18-热更新架构.md`](./18-%E7%83%AD%E6%9B%B4%E6%96%B0%E6%9E%B6%E6%9E%84.md) | 包加载/卸载、方法替换表、MemoryDomain 关联 |
+| [`19-解释器VM架构.md`](./19-%E8%A7%A3%E9%87%8A%E5%99%A8VM%E6%9E%B6%E6%9E%84.md) | IR opcode、栈机执行模型、EH 支持 |
+| [`20-Chaos公共库.md`](./20-Chaos%E5%85%AC%E5%85%B1%E5%BA%93.md) | 15 个头文件、native_types 宏、指针标记、async/await 基元 |
+| [`21-引导程序与引擎桥接.md`](./21-%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F%E4%B8%8E%E5%BC%95%E6%93%8E%E6%A1%A5%E6%8E%A5.md) | BootstrapState、codegen 注册、engine C++ 实现 |
+| [`22-Planner设计模式.md`](./22-Planner%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md) | CustomAttribute物化、反射元数据、RVA字段、委托组合、签名解码、符号命名 |

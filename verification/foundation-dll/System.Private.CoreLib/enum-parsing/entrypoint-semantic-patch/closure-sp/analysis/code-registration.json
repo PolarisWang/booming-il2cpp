@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "EnumParsingSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Run",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method0",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method1",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method2",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method3",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method4",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method5",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method6",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method7",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method8",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method9",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method10",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "EnumParsingSemanticPatchEntry_EnumParsingSemanticPatchEntry_Method11",
+          "subjectId": "EnumParsingSemanticPatchEntry/EnumParsingSemanticPatchEntry::Method11:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

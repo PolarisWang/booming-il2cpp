@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/delegate/core-invocation",
+  "summary": {
+    "totalMethods": 10,
+    "matchedCount": 10,
+    "unmatchedCount": 0,
+    "invalidCount": 0,
+    "nativeFasterCount": 10,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 61.06
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+      "status": "matched",
+      "managedElapsedMs": 4.911,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 99.81
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.18
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.18
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.18
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 48.91
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.27
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.27
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    }
+  ]
+}

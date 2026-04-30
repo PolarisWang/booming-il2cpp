@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-complete\\entrypoint-semantic-patch\\build-output\\ReflectionMemberCompleteSemanticPatchEntry.dll"
+    ],
+    "entry": "ReflectionMemberCompleteSemanticPatchEntry/ReflectionMemberCompleteSemanticPatchEntry::Run:System.Int32(System.Int32)"
+  }
+}

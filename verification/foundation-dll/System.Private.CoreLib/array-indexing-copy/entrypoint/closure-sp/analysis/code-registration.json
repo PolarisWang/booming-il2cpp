@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ArrayIndexingCopyNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Run",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method0",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method1",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method2",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method3",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method4",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method5",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method6",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method7",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method8",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method9",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method10",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method11",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ArrayIndexingCopyNativeEntry_ArrayIndexingCopyNativeEntry_Method12",
+          "subjectId": "ArrayIndexingCopyNativeEntry/ArrayIndexingCopyNativeEntry::Method12:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -39,6 +39,21 @@
 #define CHAOS_IL2CPP_UINTPTR  std::uintptr_t
 #define CHAOS_IL2CPP_SIZE     std::size_t
 
+// ── Math functions (abstracted for platform portability) ────────
+#define CHAOS_IL2CPP_SIN           std::sin
+#define CHAOS_IL2CPP_COS           std::cos
+#define CHAOS_IL2CPP_COPYSIGN      std::copysign
+#define CHAOS_IL2CPP_REMAINDER     std::remainder
+#define CHAOS_IL2CPP_ILOGB         std::ilogb
+#define CHAOS_IL2CPP_SCALBN        std::scalbn
+#define CHAOS_IL2CPP_LOG           std::log
+#define CHAOS_IL2CPP_ROUND         std::round
+#define CHAOS_IL2CPP_NEARBYINT     std::nearbyint
+#define CHAOS_IL2CPP_NEXTAFTER     std::nextafter
+#define CHAOS_IL2CPP_SINCOS(x,s,c) do { (s) = std::sin(x); (c) = std::cos(x); } while(false)
+#define CHAOS_IL2CPP_MAXMAGNITUDE  std::fmaxmag
+#define CHAOS_IL2CPP_MINMAGNITUDE  std::fminmag
+
 // ── Containers ──────────────────────────────────────────────
 #define CHAOS_IL2CPP_VECTOR(T)          std::vector<T>
 #define CHAOS_IL2CPP_ARRAY(T, N)        std::array<T, N>
@@ -116,6 +131,11 @@
 
 // ── Math ────────────────────────────────────────────────────
 #define CHAOS_IL2CPP_SQRT(x)       std::sqrt(x)
+#define CHAOS_IL2CPP_CEIL(x)       std::ceil(x)
+#define CHAOS_IL2CPP_FLOOR(x)      std::floor(x)
+#define CHAOS_IL2CPP_POW(x, y)     std::pow(x, y)
+#define CHAOS_IL2CPP_TAN(x)        std::tan(x)
+#define CHAOS_IL2CPP_EXP(x)        std::exp(x)
 #define CHAOS_IL2CPP_FABS(x)       std::fabs(x)
 #define CHAOS_IL2CPP_ISNAN(x)      std::isnan(x)
 #define CHAOS_IL2CPP_ISFINITE(x)   std::isfinite(x)

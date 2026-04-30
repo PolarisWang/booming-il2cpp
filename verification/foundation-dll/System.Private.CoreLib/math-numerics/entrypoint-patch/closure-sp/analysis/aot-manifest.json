@@ -1,0 +1,120 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MathNumericsPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

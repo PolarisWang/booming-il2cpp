@@ -1,0 +1,782 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.run",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.run",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                53,
+                61,
+                69,
+                77,
+                85,
+                93,
+                101,
+                109,
+                117,
+                125
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 133,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method0",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method0:System.Int32()",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method0:System.Int32()",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method0",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177280,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method1",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method1:System.Int32()",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method1:System.Int32()",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method1",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177279,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method2",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method2:System.Int32()",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method2:System.Int32()",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method2",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177278,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method3",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method3:System.Int32()",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method3:System.Int32()",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method3",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177277,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method4",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method4:System.Int32()",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method4:System.Int32()",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method4",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177276,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method5",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method5:System.Int32()",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method5:System.Int32()",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method5",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177275,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method6",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method6:System.Int32()",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method6:System.Int32()",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method6",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177274,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method7",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method7:System.Int32()",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method7:System.Int32()",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method7",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177273,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method8",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method8:System.Int32()",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method8:System.Int32()",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method8",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177272,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method9",
+      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 BufferMemoryPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "BufferMemoryPatchEntry",
+        "declaringTypeSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+        "definitionSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method9:System.Int32()",
+        "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Method9:System.Int32()",
+        "methodId": "buffer-memory-patch-entry.buffer-memory-patch-entry.method9",
+        "signature": "System.Int32 BufferMemoryPatchEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177271,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

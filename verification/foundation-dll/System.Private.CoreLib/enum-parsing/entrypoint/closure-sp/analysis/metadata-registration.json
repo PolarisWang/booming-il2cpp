@@ -1,0 +1,171 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "EnumParsingNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "name": "EnumParsingNativeEntry",
+      "displayName": "EnumParsingNativeEntry",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 15,
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

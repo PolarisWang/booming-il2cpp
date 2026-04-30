@@ -1,0 +1,240 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConvertCharSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Decimal::.ctor:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
+      "reason": "external-call"
+    }
+  ]
+}

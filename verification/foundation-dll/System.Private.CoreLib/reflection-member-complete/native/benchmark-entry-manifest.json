@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/member-complete",
+  "entries": [
+    {
+      "entryIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo:get_Name():System.String",
+      "returnType": "void",
+      "isImplemented": false,
+      "reason": "python-codegen-path: benchmark uses synthetic stub, not il2cpp translation"
+    },
+    {
+      "entryIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo:get_MemberType():System.Reflection.MemberTypes",
+      "returnType": "void",
+      "isImplemented": false,
+      "reason": "python-codegen-path: benchmark uses synthetic stub, not il2cpp translation"
+    },
+    {
+      "entryIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo:get_DeclaringType():System.Type",
+      "returnType": "void",
+      "isImplemented": false,
+      "reason": "python-codegen-path: benchmark uses synthetic stub, not il2cpp translation"
+    }
+  ],
+  "implementedCount": 0,
+  "totalCount": 3
+}

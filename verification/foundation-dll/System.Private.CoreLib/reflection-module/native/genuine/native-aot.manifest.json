@@ -1,0 +1,18 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotManifest",
+  "assemblyName": "ReflectionModuleNativeEntry",
+  "entrySubjectId": "ReflectionModuleNativeEntry/ReflectionModuleNativeEntry::Run:System.Int32(System.Int32)",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/reflection-module/entrypoint/closure-sp/analysis",
+  "planArtifactPath": "native-aot.plan.json",
+  "generatedArtifacts": [
+    {
+      "kind": "generatedTranslationUnit",
+      "path": "generated/native-aot.generated.cpp"
+    },
+    {
+      "kind": "codegenMetrics",
+      "path": "native-aot.codegen-metrics.json"
+    }
+  ]
+}

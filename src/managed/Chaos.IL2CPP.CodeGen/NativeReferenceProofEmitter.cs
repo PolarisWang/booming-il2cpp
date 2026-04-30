@@ -1975,9 +1975,17 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonMemoryExtensionsManagedInvokeFamilyCore(buildContext);
 
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyCore(buildContext);
+
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonSpanHelpersKernelFamilyHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonSpanHelpersKernelFamilyCore(buildContext);
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonMathKernelFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonMathKernelFamilyCore(buildContext);
 
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonValueTypeKernelFamilyHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>

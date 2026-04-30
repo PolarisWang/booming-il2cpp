@@ -1,0 +1,150 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionAssemblyPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Run",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method0",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method1",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method2",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method3",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method4",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method5",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method6",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method7",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method8",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method9",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method10",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method11",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method12",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method13",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method14",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method15",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method16",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method17",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method18",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method19",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method19:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method20",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method20:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "ReflectionAssemblyPatchEntry_ReflectionAssemblyPatchEntry_Method21",
+          "subjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Method21:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

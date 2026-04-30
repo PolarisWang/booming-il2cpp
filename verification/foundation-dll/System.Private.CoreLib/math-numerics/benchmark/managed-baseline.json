@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/math/numerics",
+  "warmupIterations": 100,
+  "measureIterations": 10000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)",
+      "elapsedMilliseconds": 5.187900,
+      "opsPerSecond": 1927562.212070,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)",
+      "elapsedMilliseconds": 0.016500,
+      "opsPerSecond": 606060606.060606,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)",
+      "elapsedMilliseconds": 0.020100,
+      "opsPerSecond": 497512437.810945,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)",
+      "elapsedMilliseconds": 0.020100,
+      "opsPerSecond": 497512437.810945,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)",
+      "elapsedMilliseconds": 0.020200,
+      "opsPerSecond": 495049504.950495,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Round:System.Double(System.Double,System.Int32)",
+      "elapsedMilliseconds": 0.020100,
+      "opsPerSecond": 497512437.810945,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)",
+      "elapsedMilliseconds": 0.020100,
+      "opsPerSecond": 497512437.810945,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)",
+      "elapsedMilliseconds": 0.020200,
+      "opsPerSecond": 495049504.950495,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)",
+      "elapsedMilliseconds": 0.020200,
+      "opsPerSecond": 495049504.950495,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)",
+      "elapsedMilliseconds": 0.020100,
+      "opsPerSecond": 497512437.810945,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)",
+      "elapsedMilliseconds": 0.020100,
+      "opsPerSecond": 497512437.810945,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)",
+      "elapsedMilliseconds": 0.020100,
+      "opsPerSecond": 497512437.810945,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)",
+      "elapsedMilliseconds": 0.020100,
+      "opsPerSecond": 497512437.810945,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)",
+      "elapsedMilliseconds": 0.020200,
+      "opsPerSecond": 495049504.950495,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)",
+      "elapsedMilliseconds": 0.020200,
+      "opsPerSecond": 495049504.950495,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)",
+      "elapsedMilliseconds": 0.020200,
+      "opsPerSecond": 495049504.950495,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)",
+      "elapsedMilliseconds": 0.020100,
+      "opsPerSecond": 497512437.810945,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32)",
+      "elapsedMilliseconds": 0.020100,
+      "opsPerSecond": 497512437.810945,
+      "iterations": 10000
+    }
+  ]
+}

@@ -1,0 +1,1829 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.run",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.run",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                80,
+                88,
+                96,
+                104,
+                112,
+                120,
+                128,
+                136,
+                144,
+                152,
+                160,
+                168,
+                176,
+                184,
+                192,
+                200
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 208,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "TimeDateTimeTimespanNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method0",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method0:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method0:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method0",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 2024,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)"
+              }
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 18,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method1",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method1:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method1:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method1",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 2024,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)"
+              }
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method2",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method2:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method2:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method2",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldstr",
+              "operand": "2024-06-15",
+              "resultType": "System.String"
+            },
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method3",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method3:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method3:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method3",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldstr",
+              "operand": "2024-06-15",
+              "resultType": "System.String"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime\u0026)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime\u0026)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 18,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method4",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method4:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method4:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method4",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "call",
+              "resultType": "System.String",
+              "callee": "System.Private.CoreLib/System.DateTime::ToString:System.String()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 26,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 29,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method5",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method5:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method5:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method5",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "ldstr",
+              "operand": "hello",
+              "resultType": "System.String"
+            },
+            {
+              "op": "call",
+              "resultType": "System.String",
+              "callee": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 26,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 31,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 34,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method6",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method6:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method6:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method6",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "ldc.r8",
+              "operand": 42,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 34,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method7",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method7:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method7:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method7",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "ldc.r8",
+              "operand": 42,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 34,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method8",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method8:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method8:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method8",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "ldc.r8",
+              "operand": 42,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 34,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method9",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method9:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method9:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method9",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.DateTime",
+              "callee": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::get_UtcNow:System.DateTime()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 19,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method10",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method10:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method10:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method10",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 2024,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 2,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 15,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method11",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method11:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method11:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method11",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 42,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 42,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 42,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.TimeSpan",
+              "callee": "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)"
+              }
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 17,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method12",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method12:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method12:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method12",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 42,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.TimeSpan",
+              "callee": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 32,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method13",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method13:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method13:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method13",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 42,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.TimeSpan",
+              "callee": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 32,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method14",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method14:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method14:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method14",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.r8",
+              "operand": 42,
+              "resultType": "System.Double"
+            },
+            {
+              "op": "call",
+              "resultType": "System.TimeSpan",
+              "callee": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 32,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method15",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "TimeDateTimeTimespanNativeEntry",
+        "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+        "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method15:System.Int32()",
+        "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method15:System.Int32()",
+        "methodId": "time-date-time-timespan-native-entry.time-date-time-timespan-native-entry.method15",
+        "signature": "System.Int32 TimeDateTimeTimespanNativeEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldstr",
+              "operand": "01:30:00",
+              "resultType": "System.String"
+            },
+            {
+              "op": "call",
+              "resultType": "System.TimeSpan",
+              "callee": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 28,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -11,10 +11,10 @@
       ],
       "audit-input-and-ledger": "in-progress",
       "managed-proof": "pending",
-      "native-proof": "passed",
-      "hotupdate-proof": "passed",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
       "benchmark": "pending",
-      "codegen-review": "passed",
+      "codegen-review": "pending",
       "completion-certification": "in-progress",
       "denominatorStatus": "audit-confirmed",
       "capabilityClosure": {

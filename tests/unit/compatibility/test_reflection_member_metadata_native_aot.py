@@ -126,6 +126,21 @@ class ReflectionMemberMetadataNativeAotTests(unittest.TestCase):
         self.assertIn("chaos_reflection_get_generic_type_definition", generated_cpp)
         self.assertIn("chaos_reflection_get_member_name", generated_cpp)
 
+    def test_emit_native_aot_succeeds_for_type_property_and_interface_proof(self) -> None:
+        generated_cpp = self._emit("CoreRuntimeFeatures/TypePropertyAndInterfaceProofEntry::Run()")
+
+        self.assertIn("// Managed method: CoreRuntimeFeatures/TypePropertyAndInterfaceProofEntry::Run()", generated_cpp)
+        self.assertIn("chaos_reflection_get_property", generated_cpp)
+        self.assertIn("chaos_reflection_get_properties", generated_cpp)
+        self.assertIn("chaos_reflection_get_interface", generated_cpp)
+        self.assertIn("chaos_reflection_get_interface_map", generated_cpp)
+
+    def test_emit_native_aot_succeeds_for_activator_create_instance_proof(self) -> None:
+        generated_cpp = self._emit("CoreRuntimeFeatures/ActivatorCreateInstanceProofEntry::Run()")
+
+        self.assertIn("// Managed method: CoreRuntimeFeatures/ActivatorCreateInstanceProofEntry::Run()", generated_cpp)
+        self.assertIn("chaos_reflection_create_instance", generated_cpp)
+
 
 if __name__ == "__main__":
     unittest.main()

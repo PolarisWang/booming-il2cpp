@@ -1,0 +1,84 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "BoxingUnboxingCastsNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Run",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method0",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method1",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method2",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method3",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method4",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method5",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method6",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method7",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method8",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method9",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "BoxingUnboxingCastsNativeEntry_BoxingUnboxingCastsNativeEntry_Method10",
+          "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method10:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -137,4 +137,23 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL WriteLineString(
     return CHAOS_IL2CPP_FFLUSH(stdout) == 0 ? 0 : 1;
 }
 
+void CHAOS_RUNTIME_ABI_CALL TimeSpanFromMilliseconds(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    CHAOS_IL2CPP_FLOAT64 milliseconds,
+    CHAOS_IL2CPP_INT64* out_ticks) {
+    (void)runtime_state;
+    (void)thread_state;
+
+    const auto chaos_ticks_value = milliseconds * 10000.0;
+    if (chaos_ticks_value < static_cast<double>(CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT64)) ||
+        chaos_ticks_value > static_cast<double>(CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_INT64))) {
+        CHAOS_IL2CPP_ABORT();
+    }
+
+    const auto chaos_ticks = static_cast<CHAOS_IL2CPP_INT64>(
+        chaos_ticks_value + (chaos_ticks_value >= 0.0 ? 0.5 : -0.5));
+    CHAOS_IL2CPP_MEMCPY(out_ticks, &chaos_ticks, sizeof(chaos_ticks));
+}
+
 }  // namespace chaos::il2cpp::support

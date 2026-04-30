@@ -1,0 +1,69 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

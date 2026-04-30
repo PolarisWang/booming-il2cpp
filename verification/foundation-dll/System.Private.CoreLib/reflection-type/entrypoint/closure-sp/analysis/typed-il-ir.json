@@ -1,0 +1,4939 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.run",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.run",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                188,
+                199,
+                210,
+                221,
+                232,
+                243,
+                254,
+                265,
+                276,
+                287,
+                298,
+                309,
+                320,
+                331,
+                342,
+                353,
+                364,
+                375,
+                386,
+                397,
+                408,
+                419,
+                430,
+                441,
+                452,
+                463,
+                474,
+                485,
+                493,
+                501,
+                509,
+                517,
+                525,
+                533,
+                541,
+                549,
+                557,
+                565,
+                573,
+                581,
+                589,
+                597,
+                605
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 613,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method16:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method16:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method17:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method17:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method18:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method18:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method19:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method19:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method20:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method20:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method21:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method21:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method22:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method22:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method23:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method23:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method24:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method24:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method25:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method25:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method26:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method26:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method27:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method27:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method28:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method28:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method29:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method29:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method30:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method30:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method31:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method31:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method32:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method32:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method33:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method33:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method34:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method34:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method35:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method35:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method36:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method36:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method37:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method37:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method38:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method38:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method39:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method39:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method40:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method40:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method41:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method41:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method42:System.Int32()",
+              "reference": {
+                "assemblyName": "ReflectionTypeNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method42:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 617,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method0",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method0:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method0:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method0",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method1",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method1:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method1:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method1",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method2",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method2:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method2:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method2",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method3",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method3:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method3:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method3",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "initobj",
+              "operand": "System.Private.CoreLib/System.RuntimeTypeHandle",
+              "resultType": "System.Void",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle"
+              }
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 23,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method4",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method4:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method4:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method4",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.String",
+              "callee": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 23,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 28,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 31,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method5",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method5:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method5:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method5",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.String",
+              "callee": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 23,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 28,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 31,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method6",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method6:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method6:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method6",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.String",
+              "callee": "System.Private.CoreLib/System.Type::get_Namespace:System.String()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_Namespace:System.String()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 23,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 28,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 31,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method7",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method7:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method7:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method7",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.String",
+              "callee": "System.Private.CoreLib/System.Type::get_AssemblyQualifiedName:System.String()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_AssemblyQualifiedName:System.String()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 23,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 28,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 31,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method8",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method8:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method8:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method8",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.RuntimeTypeHandle",
+              "callee": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloca",
+              "operand": 0,
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.RuntimeTypeHandle::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 27,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method9",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method9:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method9:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method9",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method10",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method10:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method10:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method10",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method11",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method11:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method11:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method11",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsAbstract:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsAbstract:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method12",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method12:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method12:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method12",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsSealed:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsSealed:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method13",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method13:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method13:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method13",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsInterface:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsInterface:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method14",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method14:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method14:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method14",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method15",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method15:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method15:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method15",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsByRef:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsByRef:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method16",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method16:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method16:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method16",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method16()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsPointer:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsPointer:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method17",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method17:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method17:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method17",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method17()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method18",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method18:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method18()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method18:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method18:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method18",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method18()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method19",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method19:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method19()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method19:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method19:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method19",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method19()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsNested:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsNested:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method20",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method20:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method20()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method20:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method20:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method20",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method20()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsPublic:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsPublic:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method21",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method21:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method21()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method21:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method21:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method21",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method21()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsNotPublic:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsNotPublic:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method22",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method22:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method22()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method22:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method22:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method22",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method22()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsNestedPublic:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsNestedPublic:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method23",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method23:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method23()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method23:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method23:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method23",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method23()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Type::get_IsNestedPrivate:System.Boolean()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_IsNestedPrivate:System.Boolean()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 21,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 22,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method24",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method24:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method24()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method24:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method24:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method24",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method24()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method25",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method25:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method25()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method25:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method25:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method25",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method25()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method26",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method26:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method26()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method26:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method26:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method26",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method26()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Reflection.MemberInfo::get_ReflectedType:System.Type()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_ReflectedType:System.Type()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method27",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method27:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method27()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method27:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method27:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method27",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method27()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::get_UnderlyingSystemType:System.Type()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_UnderlyingSystemType:System.Type()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method28",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method28:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method28()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method28:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method28:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method28",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method28()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Reflection.MethodInfo[]",
+              "callee": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method29",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method29:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method29()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method29:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method29:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method29",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method29()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.MethodInfo[]",
+              "callee": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method30",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method30:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method30()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method30:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method30:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method30",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method30()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Reflection.FieldInfo[]",
+              "callee": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method31",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method31:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method31()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method31:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method31:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method31",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method31()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.FieldInfo[]",
+              "callee": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method32",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method32:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method32()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method32:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method32:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method32",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method32()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Reflection.PropertyInfo[]",
+              "callee": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method33",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method33:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method33()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method33:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method33:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method33",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method33()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.PropertyInfo[]",
+              "callee": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method34",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method34:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method34()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method34:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method34:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method34",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method34()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.EventInfo[]",
+              "callee": "System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method35",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method35:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method35()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method35:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method35:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method35",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method35()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Reflection.ConstructorInfo[]",
+              "callee": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method36",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method36:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method36()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method36:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method36:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method36",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method36()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.ConstructorInfo[]",
+              "callee": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 25,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method37",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method37:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method37()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method37:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method37:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method37",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method37()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Reflection.MemberInfo[]",
+              "callee": "System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method38",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method38:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method38()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method38:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method38:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method38",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method38()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Type[]",
+              "callee": "System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method39",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method39:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method39()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method39:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method39:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method39",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method39()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetElementType:System.Type()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetElementType:System.Type()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method40",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method40:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method40()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method40:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method40:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method40",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method40()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type[]",
+              "callee": "System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method41",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method41:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method41()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method41:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method41:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method41",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method41()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldstr",
+              "operand": "hello",
+              "resultType": "System.String"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 29,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "reflection-type-native-entry.reflection-type-native-entry.method42",
+      "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method42:System.Int32()",
+      "signature": "System.Int32 ReflectionTypeNativeEntry::Method42()",
+      "identity": {
+        "assemblyName": "ReflectionTypeNativeEntry",
+        "declaringTypeSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry",
+        "definitionSubjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method42:System.Int32()",
+        "subjectId": "ReflectionTypeNativeEntry/ReflectionTypeNativeEntry::Method42:System.Int32()",
+        "methodId": "reflection-type-native-entry.reflection-type-native-entry.method42",
+        "signature": "System.Int32 ReflectionTypeNativeEntry::Method42()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.Assembly",
+              "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 24,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

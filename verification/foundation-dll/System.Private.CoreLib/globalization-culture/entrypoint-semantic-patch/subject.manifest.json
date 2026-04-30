@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\globalization-culture\\entrypoint-semantic-patch\\build-output\\GlobalizationCultureSemanticPatchEntry.dll"
+    ],
+    "entry": "GlobalizationCultureSemanticPatchEntry/GlobalizationCultureSemanticPatchEntry::Run:System.Int32(System.Int32)"
+  }
+}

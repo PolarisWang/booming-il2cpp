@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionBindingPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Run",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method0",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method1",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method2",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method3",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method4",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method5",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method6",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method7",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method8",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method9",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method10",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReflectionBindingPatchEntry_ReflectionBindingPatchEntry_Method11",
+          "subjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Method11:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

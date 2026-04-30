@@ -1,0 +1,276 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionTypeSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Run",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method0",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method1",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method2",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method3",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method4",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method5",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method6",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method7",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method8",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method9",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method10",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method11",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method12",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method13",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method14",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method15",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method16",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method17",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method18",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method19",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method19:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method20",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method20:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method21",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method21:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method22",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method22:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method23",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method23:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method24",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method24:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method25",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method25:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method26",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method26:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method27",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method27:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method28",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method28:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method29",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method29:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method30",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method30:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method31",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method31:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method32",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method32:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method33",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method33:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method34",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method34:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method35",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method35:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method36",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method36:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method37",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method37:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method38",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method38:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method39",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method39:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method40",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method40:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method41",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method41:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "ReflectionTypeSemanticPatchEntry_ReflectionTypeSemanticPatchEntry_Method42",
+          "subjectId": "ReflectionTypeSemanticPatchEntry/ReflectionTypeSemanticPatchEntry::Method42:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

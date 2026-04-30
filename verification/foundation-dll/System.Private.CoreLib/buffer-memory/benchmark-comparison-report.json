@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/buffer/memory",
+  "summary": {
+    "totalMethods": 10,
+    "matchedCount": 10,
+    "unmatchedCount": 0,
+    "invalidCount": 0,
+    "nativeFasterCount": 10,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 57.54
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 5.1529,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 99.82
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Buffer::BulkMoveWithWriteBarrier:System.Void(System.Byte&,System.Byte&,System.UIntPtr)",
+      "status": "matched",
+      "managedElapsedMs": 0.0147,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 36.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.18
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Byte*,System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.014,
+      "speedupPercent": 36.07
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Int32,System.Byte[],System.Int32,System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.27
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Buffer::Memmove:System.Void(System.Byte&,System.Byte&,System.UIntPtr)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.08
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.Int64,System.Int64)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.18
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.UInt64,System.UInt64)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.08
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.27
+    }
+  ]
+}

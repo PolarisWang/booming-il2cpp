@@ -1,0 +1,83 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ObjectEqualityIdentityPatchEntry",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+      "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ObjectEqualityIdentityPatchEntry",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentityPatchEntry",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentityPatchEntry",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentityPatchEntry",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentityPatchEntry",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentityPatchEntry",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentityPatchEntry",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentityPatchEntry",
+      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

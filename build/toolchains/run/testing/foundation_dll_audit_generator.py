@@ -836,8 +836,9 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                 ):
                     proof = dict(family_record.get(proof_key) or {})
                     proof["denominator"] = case_count
-                    proof["numerator"] = case_count if _string(proof.get("status")) == "passed" else 0
-                    proof["progressPercent"] = 100.0 if proof["numerator"] and proof["denominator"] else 0.0
+                    current_num = int(proof.get("numerator") or 0)
+                    proof["numerator"] = min(current_num, case_count) if current_num > 0 else 0
+                    proof["progressPercent"] = round((proof["numerator"] / proof["denominator"]) * 100, 2) if proof["denominator"] > 0 else 0.0
                     proof["caseItems"] = items
                     proof["caseSectionLabel"] = section_label
                     # Inject benchmark comparison report into benchmarkProof
@@ -1075,23 +1076,23 @@ def _dll_json_relative_path(assembly_name: str) -> str:
 def _dashboard_styles() -> str:
     return """
 :root {
-  --bg: #f3efe6;
-  --bg-strong: #e2d6c0;
-  --panel: #fffaf2;
-  --panel-strong: #fff4df;
-  --line: #d6cab4;
-  --ink: #202523;
-  --muted: #5e675f;
-  --accent: #98553a;
-  --accent-soft: #f2dfd4;
-  --ok-bg: #dff4e4;
-  --ok-ink: #205b35;
-  --warn-bg: #ffe7c7;
-  --warn-ink: #8a4f14;
-  --pending-bg: #ece6de;
-  --pending-ink: #5f5347;
-  --blocked-bg: #f5d9d4;
-  --blocked-ink: #8b3124;
+  --bg: #f0ebe0;
+  --bg-strong: #e0d2b8;
+  --panel: #fffcf5;
+  --panel-strong: #fff6e0;
+  --line: #cdbfa6;
+  --ink: #1a1d1b;
+  --muted: #4d5a4e;
+  --accent: #b5472b;
+  --accent-soft: #fce8e0;
+  --ok-bg: #c8f0d4;
+  --ok-ink: #1a7a3a;
+  --warn-bg: #ffdbb5;
+  --warn-ink: #b86500;
+  --pending-bg: #e0d8cc;
+  --pending-ink: #5a4a3a;
+  --blocked-bg: #f8c8c0;
+  --blocked-ink: #b83020;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -1246,15 +1247,15 @@ tr:nth-child(even) td { background: #fff7ea; }
   text-transform: uppercase;
 }
 .status-passed,
-.status-completed { background: var(--ok-bg); color: var(--ok-ink); }
-.status-blocked { background: var(--blocked-bg); color: var(--blocked-ink); }
+.status-completed { background: #b8ebc8; color: #0d6b2a; font-weight: 800; }
+.status-blocked { background: var(--blocked-bg); color: var(--blocked-ink); font-weight: 800; }
 .status-pending,
 .status-conditional,
 .status-not-started,
 .status-required { background: var(--pending-bg); color: var(--pending-ink); }
-.status-in-progress { background: #deedf9; color: #24527a; }
-.status-failed { background: var(--blocked-bg); color: var(--blocked-ink); }
-.status-warning { background: var(--warn-bg); color: var(--warn-ink); }
+.status-in-progress { background: #b8d8f0; color: #1a5a8a; font-weight: 700; }
+.status-failed { background: var(--blocked-bg); color: var(--blocked-ink); font-weight: 800; }
+.status-warning { background: var(--warn-bg); color: var(--warn-ink); font-weight: 700; }
 .list-label {
   margin: 12px 0 6px;
   color: var(--muted);
@@ -1474,6 +1475,17 @@ li + li { margin-top: 6px; }
   padding: 4px 0;
 }
 .benchmark-detail summary:hover { color: var(--accent); }
+.provenance-info {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.provenance-info code {
+  font-size: 11px;
+  background: var(--bg-strong);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
 .benchmark-detail-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
 .benchmark-detail-table th,
 .benchmark-detail-table td {
@@ -1487,6 +1499,148 @@ li + li { margin-top: 6px; }
 .benchmark-detail-table td:first-child { text-align: left; }
 /* dll detail dual axis */
 .dll-axis { margin-top: 0; }
+/* tab bar */
+.tab-bar {
+  display: flex;
+  gap: 2px;
+  margin-top: 18px;
+  border-bottom: 3px solid var(--accent);
+}
+.tab-button {
+  padding: 12px 24px;
+  border: none;
+  background: #e8e0d4;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: -3px;
+  border-radius: 8px 8px 0 0;
+  letter-spacing: 0.03em;
+}
+.tab-button:hover { background: #ddd4c4; color: var(--ink); }
+.tab-button.active {
+  background: var(--accent);
+  color: #fff;
+  border-bottom: 3px solid var(--accent);
+  box-shadow: 0 -2px 8px rgba(181, 71, 43, 0.15);
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+/* heatmap cell colors - more vibrant */
+.heatmap-cell-passed { background: #b8ebc8 !important; color: #0d6b2a !important; font-weight: 700 !important; }
+.heatmap-cell-in-progress { background: #b8d8f0 !important; color: #1a5a8a !important; font-weight: 700 !important; }
+.heatmap-cell-blocked { background: #f8c8c0 !important; color: #b83020 !important; font-weight: 700 !important; }
+.heatmap-cell-pending { background: #e0d8cc !important; color: #5a4a3a !important; }
+.heatmap-cell-not-required { background: #ece8e0 !important; color: #8a8078 !important; font-style: italic !important; }
+.heatmap-cell-missing-evidence { background: #ffdbb5 !important; color: #b86500 !important; font-weight: 700 !important; }
+/* expandable rows */
+.matrix-row-expandable { cursor: pointer; }
+.matrix-row-expandable td:first-child { position: relative; padding-left: 28px; }
+.matrix-row-expandable td:first-child::before {
+  content: "▶";
+  position: absolute;
+  left: 8px;
+  font-size: 10px;
+  color: var(--muted);
+  transition: transform 0.2s;
+}
+.matrix-row-expandable.expanded td:first-child::before { transform: rotate(90deg); }
+.matrix-row-detail { display: none; }
+.matrix-row-detail.expanded { display: table-row; }
+.matrix-row-detail td {
+  padding: 14px 20px;
+  background: #fffdf7;
+}
+/* gate detail sections (Layer 3) */
+.gate-section {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  background: var(--panel);
+}
+.gate-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.gate-section-header h3 { margin: 0; font-size: 18px; }
+.gate-section-header .status { flex-shrink: 0; }
+.gate-section[id] { scroll-margin-top: 20px; }
+/* provenance tiering */
+.provenance-abbreviated {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.provenance-abbreviated code {
+  font-size: 10px;
+  background: var(--bg-strong);
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+.provenance-full {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  background: #fffdf6;
+}
+.provenance-full code {
+  font-size: 11px;
+  background: var(--bg-strong);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+/* gate anchor link */
+.gate-anchor-link {
+  color: inherit;
+  text-decoration: none;
+}
+.gate-anchor-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+/* families summary cards */
+.family-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.family-summary-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.family-summary-card strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+/* gate global progress section */
+.gate-progress-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.gate-progress-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.gate-progress-card h4 { margin: 0 0 8px; font-size: 14px; }
 @media (max-width: 900px) {
   main { width: min(100vw - 18px, 100%); margin: 10px auto 28px; }
   .page-header,
@@ -1556,7 +1710,53 @@ def _render_project_card(project: dict[str, Any], *, root_prefix: str) -> str:
 """.strip()
 
 
-def _render_source_links_block(sl: dict[str, Any], *, root_prefix: str) -> str:
+def _resolve_source_link(repo_root: Path, root_prefix: str, path_text: str) -> str:
+    """Resolve a source link path. If the exact path doesn't exist, try to find the closest existing alternative."""
+    normalized = _normalized(path_text)
+    if not normalized:
+        return ""
+    full_path = repo_root / normalized
+    if full_path.exists():
+        return root_prefix + normalized
+
+    # Try directory variant (remove filename)
+    if not normalized.endswith("/"):
+        parent_path = repo_root / Path(normalized).parent
+        if parent_path.exists():
+            return root_prefix + _normalized(str(Path(normalized).parent)) + "/"
+
+    # If this is an artifacts run path, try to find the latest run
+    runs_match = re.match(r"(artifacts/subjects/[^/]+/runs/)[^/]+(/.*)?", normalized)
+    if runs_match:
+        runs_dir = repo_root / runs_match.group(1)
+        suffix = runs_match.group(2) or ""
+        if runs_dir.is_dir():
+            try:
+                latest_runs = sorted(
+                    [d for d in runs_dir.iterdir() if d.is_dir() and d.name != "last.json"],
+                    key=lambda d: d.name,
+                    reverse=True,
+                )
+            except (OSError, NotADirectoryError):
+                latest_runs = []
+            if latest_runs:
+                latest_run = latest_runs[0]
+                suffix_stripped = suffix.lstrip("/")
+                alt_path = f"{runs_match.group(1)}{latest_run.name}/{suffix_stripped}" if suffix_stripped else f"{runs_match.group(1)}{latest_run.name}/"
+                alt_full = repo_root / alt_path
+                if alt_full.exists() or alt_full.is_dir():
+                    return root_prefix + alt_path
+                for subdir in ("analysis/generated/", "analysis/", ""):
+                    attempt = f"{runs_match.group(1)}{latest_run.name}/{subdir}"
+                    if (repo_root / attempt).exists():
+                        return root_prefix + attempt
+                return root_prefix + f"{runs_match.group(1)}{latest_run.name}/"
+
+    # Last resort: return the original path anyway
+    return root_prefix + normalized
+
+
+def _render_source_links_block(sl: dict[str, Any], *, repo_root: Path, root_prefix: str) -> str:
     priority = [
         ("subjectSource", "Subject Source", "\U0001F4C1"),
         ("generatedCode", "Generated Code", "\u2699\uFE0F"),
@@ -1569,7 +1769,7 @@ def _render_source_links_block(sl: dict[str, Any], *, root_prefix: str) -> str:
         path = _string(sl.get(key))
         if not path:
             continue
-        resolved = root_prefix + _normalized(path)
+        resolved = _resolve_source_link(repo_root, root_prefix, path)
         parts = path.rstrip("/").split("/")
         short_path = "/".join(parts[-3:]) if len(parts) >= 3 else path
         if len(path) > 60:
@@ -1592,6 +1792,9 @@ GATE_LABELS: dict[str, str] = {
     "native-proof": "Native Proof",
     "hotupdate-proof": "HotUpdate",
     "benchmark": "Benchmark",
+    "test-code": "Test Code",
+    "audit-input-and-ledger": "Audit Input",
+    "codegen-review": "CodeGen Review",
 }
 GATE_COLUMNS = tuple(GATE_LABELS.keys())
 
@@ -1635,6 +1838,22 @@ def _gate_header_tooltip(gate_code: str) -> str:
             "分子 = 当状态为 passed 时等于分母，否则为 0。"
             "进度 = 分子 / 分母 * 100%。"
             "悬停查看详细基准测试用例列表及 per-method 提升百分比"
+        ),
+        "test-code": (
+            "Test Code: 表示该家族的测试代码存在情况。"
+            "状态值: present = 手写测试存在, needs-tests = 缺口, "
+            "coverage-widened = 自动生成, no-coverage = 0 方法。"
+            "点击跳转查看详情"
+        ),
+        "audit-input-and-ledger": (
+            "Audit Input & Ledger: 表示该家族的审计输入和分类账状态。"
+            "评估方式: 检查 audit-input-and-ledger 项目的执行状态。"
+            "点击跳转查看详情"
+        ),
+        "codegen-review": (
+            "CodeGen Review: 表示该家族的代码生成审查状态。"
+            "评估方式: 检查 codegen-review 项目的执行状态。"
+            "点击跳转查看详情"
         ),
     }
     return tooltips.get(gate_code, "")
@@ -1795,12 +2014,17 @@ def _render_generic_gate_progress_cell(
     {case_section}
     <div class="list-label">Evidence</div>
     <div class="native-proof-links">{evidence_links}</div>
+    <div class="list-label">Data Provenance</div>
+    <div class="provenance-info">
+      <div>Source: <code>evaluate_generic_gate()</code> @ <code>verification_kernel.py:204</code></div>
+      <div>Gate: <code>{escape(label)}</code></div>
+    </div>
   </div>
 </div>
 """.strip()
 
 
-def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str = "", root_prefix: str) -> str:
+def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str = "", root_prefix: str, is_detail_page: bool = False) -> str:
     if not families:
         return ""
     rows = ""
@@ -1810,9 +2034,6 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
         slug = _family_slug(family_id)
         status = _string(family.get("closureStatus"))
         gates = dict(family.get("verificationGates") or {})
-        test_code = dict(family.get("testCode") or {})
-        test_code_status = _string(test_code.get("testCodeStatus"))
-        test_code_cell = _status_badge(test_code_status) if test_code_status else '<span class="status-badge status-muted">n/a</span>'
         native_proof = dict(family.get("nativeProof") or {})
         native_proof_cell = (
             _render_native_proof_progress_cell(
@@ -1826,11 +2047,17 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
         managed_proof = dict(family.get("managedProof") or {})
         hotupdate_proof = dict(family.get("hotupdateProof") or {})
         benchmark_proof = dict(family.get("benchmarkProof") or {})
+        test_code_proof = dict(family.get("testCodeProof") or {})
+        audit_input_proof = dict(family.get("auditInputProof") or {})
+        codegen_review_proof = dict(family.get("codegenReviewProof") or {})
         gate_badges = "".join(
             f"<td>{native_proof_cell}</td>" if col == "native-proof"
             else f"<td>{_render_generic_gate_progress_cell(family, gate_proof=managed_proof, root_prefix=root_prefix, label='Managed Proof')}</td>" if col == "managed-proof"
             else f"<td>{_render_generic_gate_progress_cell(family, gate_proof=hotupdate_proof, root_prefix=root_prefix, label='HotUpdate Proof')}</td>" if col == "hotupdate-proof"
             else f"<td>{_render_benchmark_speedup_cell(benchmark_proof, assembly_name=assembly_name, family_id=family_id, root_prefix=root_prefix, is_detail_page=True)}</td>" if col == "benchmark"
+            else f"<td>{_render_generic_gate_progress_cell(family, gate_proof=test_code_proof, root_prefix=root_prefix, label='Test Code')}</td>" if col == "test-code"
+            else f"<td>{_render_generic_gate_progress_cell(family, gate_proof=audit_input_proof, root_prefix=root_prefix, label='Audit Input')}</td>" if col == "audit-input-and-ledger"
+            else f"<td>{_render_generic_gate_progress_cell(family, gate_proof=codegen_review_proof, root_prefix=root_prefix, label='CodeGen Review')}</td>" if col == "codegen-review"
             else f"<td>{_status_badge(gates.get(col, ''))}</td>"
             for col in GATE_COLUMNS
         )
@@ -1846,9 +2073,11 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
             managed_code_cell = '<td><span class="status-muted">n/a</span></td>'
             native_code_cell = '<td><span class="status-muted">n/a</span></td>'
         bold_class = ' class="family-active"' if _family_has_active_gates(gates) else ""
-        rows += f"<tr{bold_class}><td>{idx}</td><td>{escape(dname)}</td><td>{test_code_cell}</td>{gate_badges}{managed_code_cell}{native_code_cell}<td>{_status_badge(status)}</td></tr>"
+        rows += f"<tr{bold_class}><td>{idx}</td><td>{escape(dname)}</td>{gate_badges}{managed_code_cell}{native_code_cell}<td>{_status_badge(status)}</td></tr>"
     gate_headers = "".join(
-        f"<th title=\"{_gate_header_tooltip(col)}\">{GATE_LABELS[col]}</th>"
+        f"<th title=\"{_gate_header_tooltip(col)}\">"
+        + (f'<a href="#gate-{col}" class="gate-anchor-link">{GATE_LABELS[col]}</a>' if is_detail_page else GATE_LABELS[col])
+        + "</th>"
         for col in GATE_COLUMNS
     )
     return f"""
@@ -1857,7 +2086,7 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
   <p>Each capability family represents a logical group of methods. A family is considered closed when all its non-exempt verification gates pass.</p>
   <div class="table-wrap">
     <table class="family-table">
-      <thead><tr><th>#</th><th>Family</th><th title="Test code presence: present = handwritten tests exist, needs-tests = gap, coverage-widened = auto-generated, no-coverage = 0 methods">Test Code</th>{gate_headers}<th title="Managed benchmark source code">Managed Code</th><th title="Native benchmark source code">Native Code</th><th title="Closure status: closed means all non-exempt verification gates pass">closureStatus</th></tr></thead>
+      <thead><tr><th>#</th><th>Family</th>{gate_headers}<th title="Managed benchmark source code">Managed Code</th><th title="Native benchmark source code">Native Code</th><th title="Closure status: closed means all non-exempt verification gates pass">closureStatus</th></tr></thead>
       <tbody>{rows}</tbody>
     </table>
   </div>
@@ -1944,6 +2173,12 @@ def _render_native_proof_progress_cell(
     <ul class="native-proof-methods">{hotupdate_case_items}</ul>
     <div class="list-label">Evidence</div>
     <div class="native-proof-links">{evidence_links}</div>
+    <div class="list-label">Data Provenance</div>
+    <div class="provenance-info">
+      <div>Source: <code>evaluate_native_proof()</code> @ <code>verification_kernel.py:106</code></div>
+      <div>Evidence: <code>native-reference.runtime-skeleton.coverage.json</code></div>
+      <div>Claims: <code>truth-contract:method-capability-contracts</code></div>
+    </div>
   </div>
 </div>
 """.strip()
@@ -1963,42 +2198,60 @@ def _short_method_subject_id(subject_id: str) -> str:
     return normalized[:colon] + normalized[paren:]
 
 
-def _native_proof_tooltip_script() -> str:
+def _dashboard_scripts() -> str:
     return """
 <script>
-(() => {
-  const triggers = document.querySelectorAll('.native-proof-trigger');
-  for (const trigger of triggers) {
-    const delayMs = Number(trigger.dataset.tooltipDelayMs || '500');
-    let hideTimer = null;
-
-    const clearHide = () => {
-      if (hideTimer !== null) {
-        window.clearTimeout(hideTimer);
-        hideTimer = null;
-      }
+// Tab switching
+function switchTab(tabName) {
+  var contents = document.querySelectorAll('.tab-content');
+  for (var i = 0; i < contents.length; i++) { contents[i].classList.remove('active'); }
+  var buttons = document.querySelectorAll('.tab-button');
+  for (var i = 0; i < buttons.length; i++) { buttons[i].classList.remove('active'); }
+  var target = document.getElementById('tab-' + tabName);
+  if (target) { target.classList.add('active'); }
+  var btn = document.querySelector('.tab-button[data-tab="' + tabName + '"]');
+  if (btn) { btn.classList.add('active'); }
+  window.location.hash = tabName;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash) {
+    var btn = document.querySelector('.tab-button[data-tab="' + hash + '"]');
+    if (btn) switchTab(hash);
+  }
+});
+// Expandable rows
+function toggleRow(btn) {
+  var row = btn.closest('tr');
+  var detail = row.nextElementSibling;
+  if (detail && detail.classList.contains('matrix-row-detail')) {
+    row.classList.toggle('expanded');
+    detail.classList.toggle('expanded');
+  }
+}
+// Native proof tooltips
+(function() {
+  var triggers = document.querySelectorAll('.native-proof-trigger');
+  for (var i = 0; i < triggers.length; i++) {
+    var trigger = triggers[i];
+    var delayMs = Number(trigger.dataset.tooltipDelayMs || '500');
+    var hideTimer = null;
+    var clearHide = function() {
+      if (hideTimer !== null) { window.clearTimeout(hideTimer); hideTimer = null; }
     };
-
-    const show = () => {
+    var show = function() { clearHide(); trigger.classList.add('is-visible'); };
+    var hide = function() {
       clearHide();
-      trigger.classList.add('is-visible');
-    };
-
-    const hide = () => {
-      clearHide();
-      hideTimer = window.setTimeout(() => {
+      hideTimer = window.setTimeout(function() {
         trigger.classList.remove('is-visible');
         hideTimer = null;
       }, delayMs);
     };
-
     trigger.addEventListener('pointerenter', show);
     trigger.addEventListener('pointerleave', hide);
     trigger.addEventListener('focusin', show);
-    trigger.addEventListener('focusout', (event) => {
-      if (trigger.contains(event.relatedTarget)) {
-        return;
-      }
+    trigger.addEventListener('focusout', function(event) {
+      if (trigger.contains(event.relatedTarget)) { return; }
       hide();
     });
   }
@@ -2007,7 +2260,7 @@ def _native_proof_tooltip_script() -> str:
 """.strip()
 
 
-def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
+def _render_dll_detail_page(dll: dict[str, Any], *, repo_root: Path, root_prefix: str) -> str:
     projects = list(dll.get("projects") or [])
     project_rows = "".join(
         "<tr>"
@@ -2042,14 +2295,14 @@ def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
     if family_source == "auto-derived":
         auto_derive_notice = '<div class="auto-derive-notice">&#9432; Capability families for this DLL have been auto-derived from project execution states. Replace with manually curated entries in capability-family-ledger.json.</div>'
 
-    family_section = _render_family_table(families, assembly_name=assembly_name, root_prefix=root_prefix)
+    family_section = _render_family_table(families, assembly_name=assembly_name, root_prefix=root_prefix, is_detail_page=True)
     # Benchmark detail tables per family
     benchmark_detail_sections = "".join(
         _render_benchmark_detail_section(family, assembly_name=assembly_name)
         for family in families
     )
     waiver_section = _render_waiver_table(families)
-    source_links_html = _render_source_links_block(sl, root_prefix=root_prefix)
+    source_links_html = _render_source_links_block(sl, repo_root=repo_root, root_prefix=root_prefix)
 
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -2079,9 +2332,9 @@ def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
       {auto_derive_notice}
       {source_links_html}
       {family_section}
-      {benchmark_detail_sections}
-      {waiver_section}
     </div>
+    {benchmark_detail_sections if benchmark_detail_sections.strip() else ''}
+    {waiver_section if waiver_section.strip() else ''}
     <section>
       <h2>Blocking Context</h2>
       <p>{escape(str(dll.get("blockingReason") or "n/a"))}</p>
@@ -2098,11 +2351,139 @@ def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
       </div>
       <div class="project-grid">{project_cards}</div>
     </section>
+    <section>
+      <h2>Gate Details</h2>
+      <p>Detailed verification gate status per family. Each gate section shows numerator/denominator progress, method-level details (where available), evidence links, and complete data provenance information.</p>
+      {_render_layer3_gate_sections(families, assembly_name=assembly_name, root_prefix=root_prefix)}
+    </section>
   </main>
-  {_native_proof_tooltip_script()}
+  {_dashboard_scripts()}
 </body>
 </html>
 """
+
+
+def _render_gate_detail_section(
+    gate_code: str,
+    gate_label: str,
+    gate_proof: dict[str, Any],
+    *,
+    assembly_name: str,
+    family_id: str,
+    root_prefix: str,
+) -> str:
+    """Render a Layer 3 gate detail section with full provenance info."""
+    status = _string(gate_proof.get("status"))
+    numerator = int(gate_proof.get("numerator") or 0)
+    denominator = int(gate_proof.get("denominator") or 0)
+    progress_pct = float(gate_proof.get("progressPercent") or 0.0)
+    evidence = list(gate_proof.get("evidence") or [])
+    method_details = list(gate_proof.get("methodDetails") or [])
+    case_items = list(gate_proof.get("caseItems") or [])
+
+    evidence_links = "".join(
+        f'<a href="{escape(root_prefix + _normalized(_string(item.get("path"))), quote=True)}" target="_blank" rel="noreferrer">{escape(_string(item.get("label")) or _string(item.get("path")))}</a>'
+        for item in evidence[:8]
+    ) or '<span class="status-muted">n/a</span>'
+
+    method_items = "".join(
+        f"<li>{escape(_short_method_subject_id(_string(item.get('subjectId'))))} - {'&#9989;' if item.get('covered') else '&#10060;'}</li>"
+        for item in method_details
+    ) or ""
+
+    case_items_html = ""
+    if case_items:
+        case_list = "".join(
+            f"<li>{escape(_string(item.get('memberName')))} ({escape(_string(item.get('detail') or 'n/a'))})</li>"
+            for item in case_items[:20]
+        )
+        case_items_html = f'<div class="list-label">Cases</div><ul class="native-proof-methods">{case_list}</ul>'
+
+    denom_display = f"{numerator}/{denominator} ({progress_pct:.1f}%)" if denominator > 0 else "n/a"
+
+    # Provenance info - gate-specific
+    provenance_source_map = {
+        "native-proof": ("evaluate_native_proof()", "verification_kernel.py:106", "native-reference.runtime-skeleton.coverage.json", "truth-contract:method-capability-contracts"),
+        "managed-proof": ("evaluate_generic_gate()", "verification_kernel.py:204", "managed-proof artifacts", "gate-presence:managed-proof"),
+        "hotupdate-proof": ("evaluate_generic_gate()", "verification_kernel.py:204", "hotupdate-verification-report.json", "gate-presence:hotupdate-proof"),
+        "benchmark": ("evaluate_generic_gate()", "verification_kernel.py:204", "benchmark-comparison-report.json", "gate-presence:benchmark"),
+        "test-code": ("evaluate_test_code()", "verification_kernel.py:250", "testCode ledger entry", "ledger:testCode"),
+    }
+    src_func, src_file, src_evidence, src_claims = provenance_source_map.get(gate_code, ("N/A", "N/A", "N/A", "N/A"))
+
+    return f"""
+<section class="gate-section" id="gate-{escape(gate_code, quote=True)}">
+  <div class="gate-section-header">
+    <h3>{escape(gate_label)}</h3>
+    {_status_badge(status)}
+  </div>
+  <div class="progress-bar-container" style="margin-bottom:12px">
+    <div class="progress-label"><span>Progress</span><span>{denom_display}</span></div>
+    <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:{min(progress_pct, 100.0):.1f}%"></div></div>
+  </div>
+  {method_items if method_items else ''}
+  {case_items_html}
+  <div class="list-label">Evidence</div>
+  <div class="native-proof-links">{evidence_links}</div>
+  <div class="provenance-full">
+    <strong>Data Provenance</strong>
+    <div>Source function: <code>{escape(src_func)}</code> @ <code>{escape(src_file)}</code></div>
+    <div>Evidence: <code>{escape(src_evidence)}</code></div>
+    <div>Claims: <code>{escape(src_claims)}</code></div>
+  </div>
+</section>
+""".strip()
+
+
+def _render_layer3_gate_sections(families: list[dict[str, Any]], *, assembly_name: str, root_prefix: str) -> str:
+    """Render all Layer 3 gate detail sections for a DLL detail page."""
+    sections = ""
+    for family in families:
+        family_id = _string(family.get("familyId") or "")
+        dname = _string(family.get("displayName"))
+        native_proof = dict(family.get("nativeProof") or {})
+        managed_proof = dict(family.get("managedProof") or {})
+        hotupdate_proof = dict(family.get("hotupdateProof") or {})
+        benchmark_proof = dict(family.get("benchmarkProof") or {})
+        test_code_proof = dict(family.get("testCodeProof") or {})
+        audit_input_proof = dict(family.get("auditInputProof") or {})
+        codegen_review_proof = dict(family.get("codegenReviewProof") or {})
+
+        # Section header for family grouping
+        sections += f'<div class="gate-section-header" style="margin-top:24px"><h3 style="color:var(--muted)">{escape(dname)}</h3></div>'
+
+        for gate_code, gate_label, gate_proof in (
+            ("native-proof", "Native Proof", native_proof),
+            ("managed-proof", "Managed Proof", managed_proof),
+            ("hotupdate-proof", "HotUpdate Proof", hotupdate_proof),
+            ("benchmark", "Benchmark", benchmark_proof),
+            ("test-code", "Test Code", test_code_proof),
+            ("audit-input-and-ledger", "Audit Input & Ledger", audit_input_proof),
+            ("codegen-review", "CodeGen Review", codegen_review_proof),
+        ):
+            sections += _render_gate_detail_section(
+                gate_code, gate_label, gate_proof,
+                assembly_name=assembly_name,
+                family_id=family_id,
+                root_prefix=root_prefix,
+            )
+    return sections
+
+
+def _heatmap_class(gate_state: str) -> str:
+    """Return the heatmap CSS class for a gate execution state."""
+    state_map = {
+        "passed": "heatmap-cell-passed",
+        "completed": "heatmap-cell-passed",
+        "passing": "heatmap-cell-passed",
+        "in-progress": "heatmap-cell-in-progress",
+        "blocked": "heatmap-cell-blocked",
+        "pending": "heatmap-cell-pending",
+        "not-required": "heatmap-cell-not-required",
+        "missing-evidence": "heatmap-cell-missing-evidence",
+        "not-started": "heatmap-cell-pending",
+    }
+    return state_map.get(gate_state, "")
 
 
 def _render_dashboard(payload: dict[str, Any], *, root_prefix: str, has_ledger: bool = False) -> str:
@@ -2113,23 +2494,20 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str, has_ledger: 
     extra_keys: list[str] = []
     if has_ledger and any(row.get("capabilityClosure") is not None for row in matrix_rows):
         extra_keys = ["denominatorStatus", "capabilityClosure", "workflowProgress"]
-    matrix_headers = [
-        "assemblyName",
-        "dllState",
-        "currentProject",
-        *extra_keys,
-        *[
-            key
-            for key in list(matrix_rows[0].keys() if matrix_rows else [])
-            if key not in {"assemblyName", "orderIndex", "dllState", "currentProject", "riskTags", "denominatorStatus", "capabilityClosure", "workflowProgress"}
-        ],
+    gate_keys = [
+        key
+        for key in list(matrix_rows[0].keys() if matrix_rows else [])
+        if key not in {"assemblyName", "orderIndex", "dllState", "currentProject", "riskTags", "denominatorStatus", "capabilityClosure", "workflowProgress"}
     ]
+    matrix_headers = ["assemblyName", "dllState", "currentProject", *extra_keys, *gate_keys]
 
-    matrix_body = "".join(
-        "<tr>"
-        + "".join(
+    # --- Matrix body with heatmap + expandable rows ---
+    matrix_body = ""
+    for row in matrix_rows:
+        asm = str(row.get("assemblyName") or "")
+        cells = "".join(
             (
-                f"<td>{_local_link('./' + _dll_detail_relative_path(str(row.get(header) or '')), str(row.get(header) or ''))}</td>"
+                f'<td><a href="./{escape(_dll_detail_relative_path(asm), quote=True)}">{escape(asm)}</a></td>'
                 if header == "assemblyName"
                 else (
                     f"<td>{_render_mini_bar(row.get('capabilityClosure', {}).get('closurePercent', 0.0), row.get('capabilityClosure', {}).get('closedFamilies', 0), row.get('capabilityClosure', {}).get('totalFamilies', 0))}</td>"
@@ -2137,16 +2515,26 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str, has_ledger: 
                     else (
                         f"<td>{_render_mini_bar(row.get('workflowProgress', {}).get('progressPercent', 0.0), row.get('workflowProgress', {}).get('passedGates', 0), row.get('workflowProgress', {}).get('totalRequiredGates', 0))}</td>"
                         if header == "workflowProgress"
-                        else f"<td>{escape(str(row.get(header, '')))}</td>"
+                        else f'<td class="{_heatmap_class(str(row.get(header, "")))}">{escape(str(row.get(header, "")))}</td>'
                     )
                 )
             )
             for header in matrix_headers
         )
-        + "</tr>"
-        for row in matrix_rows
-    )
+        # Expandable detail row: show current project and blocking reason
+        detail_html = f"<td colspan=\"{len(matrix_headers)}\"><strong>Blocking:</strong> {escape(str(row.get('blockingReason') or 'n/a'))}</td>"
+        matrix_body += (
+            f'<tr class="matrix-row-expandable" onclick="toggleRow(this)">{cells}</tr>\n'
+            f'<tr class="matrix-row-detail"><td colspan="{len(matrix_headers)}">'
+            f'<div style="display:flex;gap:20px;flex-wrap:wrap">'
+            f'<div><strong>Current Project:</strong> {escape(str(row.get("currentProject") or "n/a"))}</div>'
+            f'<div><strong>Risk Tags:</strong> {escape(", ".join(row.get("riskTags") or []) or "none")}</div>'
+            f'<div><strong>Denominator:</strong> {escape(str(row.get("denominatorStatus") or "n/a"))}</div>'
+            f'</div>'
+            f'</td></tr>\n'
+        )
 
+    # --- Detail cards (unchanged, reused in Overview tab) ---
     detail_cards = []
     for dll in list(payload.get("dlls") or []):
         if has_ledger and dll.get("capabilityClosure") is not None:
@@ -2186,7 +2574,7 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str, has_ledger: 
 </div>'''.strip()
             )
         else:
-            project_cards = "".join(_render_project_card(project, root_prefix=root_prefix) for project in list(dll.get("projects") or []))
+            project_cards_html = "".join(_render_project_card(project, root_prefix=root_prefix) for project in list(dll.get("projects") or []))
             detail_cards.append(
                 f'''
 <div class="dll-card" id="{escape(_status_class(dll.get("assemblyName")), quote=True)}">
@@ -2209,10 +2597,11 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str, has_ledger: 
     <div class="meta-card"><strong>Support Refs</strong>{_dll_support_count(dll)}</div>
     <div class="meta-card"><strong>Verification Projects</strong>{len(list(dll.get("projects") or []))}</div>
   </div>
-  <div class="project-grid">{project_cards}</div>
+  <div class="project-grid">{project_cards_html}</div>
 </div>'''.strip()
             )
 
+    # --- Overview tab: progress bars + summary cards + detail cards ---
     triple_axis_html = ""
     if has_ledger:
         dll_comp = dict(summary.get("dllCompletion") or {})
@@ -2227,6 +2616,146 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str, has_ledger: 
             + '</div>'
         )
 
+    overview_html = f"""
+<div id="tab-overview" class="tab-content active">
+  <div class="summary-grid">
+    <div class="summary-card"><strong>DLL Count</strong>{escape(str(summary.get("dllCount") or 0))}</div>
+    <div class="summary-card"><strong>Completed</strong>{escape(str(summary.get("completedCount") or 0))}</div>
+    <div class="summary-card"><strong>In Progress</strong>{escape(str(summary.get("inProgressCount") or 0))}</div>
+    <div class="summary-card"><strong>Blocked</strong>{escape(str(summary.get("blockedCount") or 0))}</div>
+    <div class="summary-card"><strong>Not Started</strong>{escape(str(summary.get("notStartedCount") or 0))}</div>
+    <div class="summary-card"><strong>Active Assembly</strong>{escape(str(summary.get("activeAssembly") or ""))}</div>
+  </div>
+  {triple_axis_html}
+  <section>
+    <h2>Program Overview</h2>
+    <p>{escape(str(program.get("title") or ""))}</p>
+    <div class="meta-grid">
+      <div class="meta-card"><strong>Roadmap</strong>{_dashboard_link(str(program.get("roadmapPath") or ""), root_prefix=root_prefix)}</div>
+      <div class="meta-card"><strong>Design</strong>{_dashboard_link(str(program.get("designPath") or ""), root_prefix=root_prefix)}</div>
+      <div class="meta-card"><strong>Status</strong>{_dashboard_link(str(program.get("statusPath") or ""), root_prefix=root_prefix)}</div>
+      <div class="meta-card"><strong>Subject Entry</strong>{_dashboard_link(str(program.get("subjectEntry") or ""), root_prefix=root_prefix)}</div>
+    </div>
+  </section>
+  <section>
+    <h2>DLL Detail</h2>
+    {"".join(detail_cards)}
+  </section>
+</div>
+"""
+
+    # --- Matrix tab: full matrix with heatmap + expandable rows ---
+    matrix_html = f"""
+<div id="tab-matrix" class="tab-content">
+  <section>
+    <h2>DLL Matrix</h2>
+    <p>Full verification matrix for all DLLs. Click a row to expand details. Cell colors indicate gate state: green=passed, blue=in-progress, red=blocked, gray=pending, light gray=not-required, orange=missing-evidence.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>{"".join(f"<th>{escape(header)}</th>" for header in matrix_headers)}</tr></thead>
+        <tbody>{matrix_body}</tbody>
+      </table>
+    </div>
+  </section>
+</div>
+"""
+
+    # --- Families tab: per-DLL family closure summary ---
+    family_summary_cards = ""
+    for dll in list(payload.get("dlls") or []):
+        asm = _string(dll.get("assemblyName"))
+        families = list(dll.get("capabilityFamilies") or [])
+        cc = dict(dll.get("capabilityClosure") or {})
+        if not families:
+            continue
+        total = cc.get("totalFamilies", len(families))
+        closed = cc.get("closedFamilies", sum(1 for f in families if f.get("closureStatus") == "closed"))
+        in_prog = cc.get("inProgressFamilies", sum(1 for f in families if f.get("closureStatus") == "in-progress"))
+        waived = cc.get("waivedFamilies", sum(1 for f in families if f.get("closureStatus") == "waived"))
+        excluded = cc.get("excludedFamilies", sum(1 for f in families if f.get("closureStatus") == "excluded"))
+        blocked = cc.get("platformBlockedFamilies", sum(1 for f in families if f.get("closureStatus") == "platform-blocked"))
+        closed_pct = round((closed / total) * 100, 1) if total > 0 else 0
+        family_summary_cards += f"""
+<div class="family-summary-card">
+  <strong>{escape(asm)}</strong>
+  <div>Total Families: {total}</div>
+  <div>Closed: {closed} ({closed_pct}%)</div>
+  <div>In Progress: {in_prog} | Blocked: {blocked}</div>
+  <div>Waived: {waived} | Excluded: {excluded}</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:{min(closed_pct,100.0)}%;height:100%"></div></div>
+</div>"""
+    # Overall summary
+    total_families_all = sum(dll.get("capabilityClosure", {}).get("totalFamilies", 0) for dll in payload.get("dlls", []) if dll.get("capabilityFamilies"))
+    closed_all = sum(dll.get("capabilityClosure", {}).get("closedFamilies", 0) for dll in payload.get("dlls", []) if dll.get("capabilityFamilies"))
+    in_prog_all = sum(dll.get("capabilityClosure", {}).get("inProgressFamilies", 0) for dll in payload.get("dlls", []) if dll.get("capabilityFamilies"))
+    waived_all = sum(dll.get("capabilityClosure", {}).get("waivedFamilies", 0) for dll in payload.get("dlls", []) if dll.get("capabilityFamilies"))
+    closed_all_pct = round((closed_all / total_families_all) * 100, 1) if total_families_all > 0 else 0
+    overall_family_header = f"""
+<div class="family-summary-card" style="border-left:4px solid var(--accent);background:var(--accent-soft)">
+  <strong>All DLLs Combined</strong>
+  <div>Total Families: {total_families_all}</div>
+  <div>Closed: {closed_all} ({closed_all_pct}%) | In Progress: {in_prog_all} | Waived: {waived_all}</div>
+  <div class="progress-bar" style="margin-top:8px;height:12px"><div class="progress-bar-fill capability-closure" style="width:{min(closed_all_pct,100.0)}%;height:100%"></div></div>
+</div>""" if total_families_all > 0 else ""
+
+    families_html = f"""
+<div id="tab-families" class="tab-content">
+  <section>
+    <h2>Families Overview</h2>
+    <p>Per-DLL capability family closure status. Each card shows the closure distribution for one assembly's families.</p>
+    <div class="family-summary-grid">
+      {overall_family_header}
+      {family_summary_cards}
+    </div>
+  </section>
+</div>
+"""
+
+    # --- Gates tab: per-gate global progress ---
+    gate_progress_data: dict[str, dict[str, int]] = {}
+    for gate_code in GATE_COLUMNS:
+        gate_label = GATE_LABELS.get(gate_code, gate_code)
+        gate_progress_data[gate_label] = {"passed": 0, "total": 0, "blocked": 0, "pending": 0}
+    for dll in list(payload.get("dlls") or []):
+        for family in list(dll.get("capabilityFamilies") or []):
+            gates = dict(family.get("verificationGates") or {})
+            for gate_code in GATE_COLUMNS:
+                gl = GATE_LABELS.get(gate_code, gate_code)
+                state = _string(gates.get(gate_code))
+                if state and state != "not-required":
+                    gate_progress_data[gl]["total"] += 1
+                    if state == "passed":
+                        gate_progress_data[gl]["passed"] += 1
+                    elif state in ("blocked", "failed"):
+                        gate_progress_data[gl]["blocked"] += 1
+                    else:
+                        gate_progress_data[gl]["pending"] += 1
+
+    gate_progress_cards = ""
+    for gl in sorted(gate_progress_data.keys()):
+        gd = gate_progress_data[gl]
+        passed_pct = round((gd["passed"] / gd["total"]) * 100, 1) if gd["total"] > 0 else 0
+        gate_progress_cards += f"""
+<div class="gate-progress-card">
+  <h4>{escape(gl)}</h4>
+  <div>Passed: {gd['passed']}/{gd['total']} ({passed_pct}%)</div>
+  <div>Blocked: {gd['blocked']} | Pending: {gd['pending']}</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill workflow-progress" style="width:{min(passed_pct,100.0)}%;height:100%"></div></div>
+</div>"""
+
+    gates_html = f"""
+<div id="tab-gates" class="tab-content">
+  <section>
+    <h2>Gates Progress</h2>
+    <p>Per-gate global progress across all DLLs and families. Shows how many gate evaluations have passed versus total required.</p>
+    <div class="gate-progress-grid">
+      {gate_progress_cards}
+    </div>
+  </section>
+</div>
+"""
+
+    # --- Assemble template ---
     template = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -2242,45 +2771,21 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str, has_ledger: 
       <h1>Foundation DLL Audit</h1>
       <p>Unified view for `System.Private.CoreLib + 13 DLLs`, including DLL status, family detail, verification projects, and evidence entry points.</p>
       <div class="top-nav">
-        <a href="#program">Program Overview</a>
-        <a href="#matrix">DLL Matrix</a>
-        <a href="#details">DLL Detail</a>
         <a href="./artifact-index.html">Artifact Index</a>
       </div>
-      <div class="summary-grid">
-        <div class="summary-card"><strong>DLL Count</strong>{escape(str(summary.get("dllCount") or 0))}</div>
-        <div class="summary-card"><strong>Completed</strong>{escape(str(summary.get("completedCount") or 0))}</div>
-        <div class="summary-card"><strong>In Progress</strong>{escape(str(summary.get("inProgressCount") or 0))}</div>
-        <div class="summary-card"><strong>Blocked</strong>{escape(str(summary.get("blockedCount") or 0))}</div>
-        <div class="summary-card"><strong>Not Started</strong>{escape(str(summary.get("notStartedCount") or 0))}</div>
-        <div class="summary-card"><strong>Active Assembly</strong>{escape(str(summary.get("activeAssembly") or ""))}</div>
+      <div class="tab-bar">
+        <button class="tab-button active" data-tab="overview" onclick="switchTab('overview')">Overview</button>
+        <button class="tab-button" data-tab="matrix" onclick="switchTab('matrix')">Matrix</button>
+        <button class="tab-button" data-tab="families" onclick="switchTab('families')">Families</button>
+        <button class="tab-button" data-tab="gates" onclick="switchTab('gates')">Gates</button>
       </div>
-      {triple_axis_html}
     </div>
-    <section id="program">
-      <h2>Program Overview</h2>
-      <p>{escape(str(program.get("title") or ""))}</p>
-      <div class="meta-grid">
-        <div class="meta-card"><strong>Roadmap</strong>{_dashboard_link(str(program.get("roadmapPath") or ""), root_prefix=root_prefix)}</div>
-        <div class="meta-card"><strong>Design</strong>{_dashboard_link(str(program.get("designPath") or ""), root_prefix=root_prefix)}</div>
-        <div class="meta-card"><strong>Status</strong>{_dashboard_link(str(program.get("statusPath") or ""), root_prefix=root_prefix)}</div>
-        <div class="meta-card"><strong>Subject Entry</strong>{_dashboard_link(str(program.get("subjectEntry") or ""), root_prefix=root_prefix)}</div>
-      </div>
-    </section>
-    <section id="matrix">
-      <h2>DLL Matrix</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr>{"".join(f"<th>{escape(header)}</th>" for header in matrix_headers)}</tr></thead>
-          <tbody>{matrix_body}</tbody>
-        </table>
-      </div>
-    </section>
-    <section id="details">
-      <h2>DLL Detail</h2>
-      {"".join(detail_cards)}
-    </section>
+    {overview_html}
+    {matrix_html}
+    {families_html}
+    {gates_html}
   </main>
+  {_dashboard_scripts()}
 </body>
 </html>
 """
@@ -2395,7 +2900,7 @@ def _write_projection_bundle(repo_root: Path, payload: dict[str, Any], *, output
         detail_html_path = dll_root / f"{_string(dll.get('assemblyName'))}.html"
         write_json(detail_json_path, dll)
         detail_html_path.write_text(
-            _render_dll_detail_page(dll, root_prefix=_root_relative_prefix(repo_root, detail_html_path)),
+            _render_dll_detail_page(dll, repo_root=repo_root, root_prefix=_root_relative_prefix(repo_root, detail_html_path)),
             encoding="utf-8",
         )
         artifacts.append(_relative(repo_root, detail_json_path))

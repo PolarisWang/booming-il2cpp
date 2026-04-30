@@ -1,0 +1,307 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "genericCapabilityMatrix",
+  "ownerSubjectId": "GlobalizationCultureNativeEntry",
+  "entrySubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Run:System.Int32(System.Int32)",
+  "hotUpdateModes": [
+    "HotUpdateNone",
+    "HotUpdateMetadataAugmented",
+    "HotUpdateGenericSharing"
+  ],
+  "gates": {
+    "status": "ok",
+    "unsupportedLeakCount": 0,
+    "missingAuthorityCount": 0,
+    "nonCanonicalHotUpdateNameCount": 0,
+    "leaks": []
+  },
+  "familyBudgets": [
+    {
+      "familyId": "ClosedGenericType",
+      "displayName": "Closed Generic Type",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedMethodOnGenericType",
+      "displayName": "Closed Method On Generic Type",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedGenericMethod",
+      "displayName": "Closed Generic Method",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedGenericMethodOnGenericType",
+      "displayName": "Closed Generic Method On Generic Type",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "CrossAssemblyBoundary",
+      "displayName": "Cross Assembly Boundary",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "DispatchBoundary",
+      "displayName": "Dispatch Boundary",
+      "budgetLimit": 128,
+      "observedCount": 25
+    },
+    {
+      "familyId": "ReflectionBoundary",
+      "displayName": "Reflection Boundary",
+      "budgetLimit": 64,
+      "observedCount": 0
+    },
+    {
+      "familyId": "HotUpdateBoundary",
+      "displayName": "HotUpdate Boundary",
+      "budgetLimit": 64,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncTaskFamily",
+      "displayName": "Async Task Family",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncValueTaskFamily",
+      "displayName": "Async ValueTask Family",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncBuilderFamily",
+      "displayName": "Async Builder Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncAwaiterFamily",
+      "displayName": "Async Awaiter Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "PointerByRefFamily",
+      "displayName": "Pointer And ByRef Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "RefStructFamily",
+      "displayName": "Ref Struct Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    }
+  ],
+  "boundaryCases": [
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method0:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method10:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method10:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method10:System.Int32()",
+      "ilOffset": 28,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method11:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method11:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method11:System.Int32()",
+      "ilOffset": 28,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method12:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method12:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method12:System.Int32()",
+      "ilOffset": 23,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method1:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method3:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method3:System.Int32()",
+      "ilOffset": 18,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method4:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method4:System.Int32()",
+      "ilOffset": 18,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method5:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method5:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method6:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method6:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method7:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method7:System.Int32()",
+      "ilOffset": 21,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method8:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method8:System.Int32()",
+      "ilOffset": 22,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method9:System.Int32()",
+      "ilOffset": 6,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method9:System.Int32()",
+      "ilOffset": 21,
+      "targetSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    }
+  ],
+  "entries": []
+}

@@ -1,0 +1,232 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method0:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method0:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method0:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method1:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method1:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_ParameterType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method1:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method2:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method2:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_DefaultValue:System.Object()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method2:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_RawDefaultValue:System.Object()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method4:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method4:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_HasDefaultValue:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Attributes:System.Reflection.ParameterAttributes()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method6:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method6:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Position:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method9:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersNativeEntry/ReflectionParametersNativeEntry::Method9:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

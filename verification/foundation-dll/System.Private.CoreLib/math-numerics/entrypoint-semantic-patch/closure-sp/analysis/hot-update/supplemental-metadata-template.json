@@ -1,0 +1,171 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method7:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method8:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method9:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method10:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method11:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method12:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method13:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method14:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method15:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method16:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method16:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "MathNumericsSemanticPatchEntry",
+      "subjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method17:System.Int32()",
+      "definitionSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry::Method17:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsSemanticPatchEntry/MathNumericsSemanticPatchEntry",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

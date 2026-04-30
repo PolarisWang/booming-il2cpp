@@ -1177,7 +1177,7 @@ public sealed partial class NativeAotLoweringPlanner
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
 			return true;
 		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Type", "GetField", "System.String"))
+		if (string.Equals(callee, GetFieldMethodSubjectId, StringComparison.Ordinal))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"CHAOS_IL2CPP_INTPTR",
@@ -1192,7 +1192,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
 			return true;
 		}
-		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Type", "GetMethod", "System.String"))
+		if (string.Equals(callee, GetMethodByNameMethodSubjectId, StringComparison.Ordinal))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"CHAOS_IL2CPP_INTPTR",
@@ -1238,6 +1238,68 @@ public sealed partial class NativeAotLoweringPlanner
 				[
 					"    return chaos_reflection_get_generic_arguments(chaos_arg_0);",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
+			return true;
+		}
+		if (string.Equals(callee, GetPropertyMethodSubjectId, StringComparison.Ordinal))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
+				"CHAOS_IL2CPP_INTPTR",
+				GetExternalRuntimeHelperSymbol(callee),
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+				[
+					"    return chaos_reflection_get_property(chaos_arg_0, chaos_arg_1);",
+				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+			{
+				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)
+			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
+			return true;
+		}
+		if (string.Equals(callee, GetPropertiesMethodSubjectId, StringComparison.Ordinal))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
+				"CHAOS_IL2CPP_INTPTR",
+				GetExternalRuntimeHelperSymbol(callee),
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
+				[
+					"    return chaos_reflection_get_properties(chaos_arg_0);",
+				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
+			return true;
+		}
+		if (string.Equals(callee, GetInterfaceMethodSubjectId, StringComparison.Ordinal))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
+				"CHAOS_IL2CPP_INTPTR",
+				GetExternalRuntimeHelperSymbol(callee),
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
+				[
+					"    return chaos_reflection_get_interface(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+			{
+				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+				CreateNativeIntAbiSlot()
+			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1, 2 });
+			return true;
+		}
+		if (string.Equals(callee, GetInterfaceMapMethodSubjectId, StringComparison.Ordinal))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
+				$"{GetNativeValueTypeSymbol("System.Private.CoreLib/System.Reflection.InterfaceMapping")}",
+				GetExternalRuntimeHelperSymbol(callee),
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+				[
+					"    return chaos_reflection_get_interface_map(chaos_arg_0, chaos_arg_1);",
+				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+			{
+				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+				CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)
+			}), new AotCoreIrAbiSlotArtifact
+			{
+				CarrierKindCode = AotCoreIrAbiCarrierKind.ValueTypeByValue,
+				TypeSubjectId = "System.Private.CoreLib/System.Reflection.InterfaceMapping",
+				TypeShape = AotCoreIrTypeShapeKind.ValueType
+			}, new HashSet<int> { 0, 1 });
 			return true;
 		}
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.Assembly", "GetType", "System.String"))
@@ -1418,6 +1480,28 @@ public sealed partial class NativeAotLoweringPlanner
 				[
 					"    return chaos_reflection_get_parameter_name(chaos_arg_0);",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.ParameterInfo", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
+			return true;
+		}
+		if (string.Equals(callee, ActivatorCreateInstanceTypeMethodSubjectId, StringComparison.Ordinal))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
+				"CHAOS_IL2CPP_INTPTR",
+				GetExternalRuntimeHelperSymbol(callee),
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
+				[
+					"    return chaos_reflection_create_instance(chaos_arg_0);",
+				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
+			return true;
+		}
+		if (string.Equals(callee, ObjectGetTypeMethodSubjectId, StringComparison.Ordinal))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
+				"CHAOS_IL2CPP_INTPTR",
+				GetExternalRuntimeHelperSymbol(callee),
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
+				[
+					"    return chaos_reflection_get_object_type(chaos_arg_0);",
+				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
 			return true;
 		}
 		return false;

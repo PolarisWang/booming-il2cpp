@@ -1,0 +1,74 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

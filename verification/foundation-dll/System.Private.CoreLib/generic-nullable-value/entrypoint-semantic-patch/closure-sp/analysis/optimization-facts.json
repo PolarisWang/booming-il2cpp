@@ -1,0 +1,118 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method4:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method6:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method6:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method9:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method9:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

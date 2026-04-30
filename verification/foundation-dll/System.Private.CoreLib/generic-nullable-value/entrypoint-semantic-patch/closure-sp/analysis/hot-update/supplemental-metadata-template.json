@@ -1,0 +1,107 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method7:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method8:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSemanticPatchEntry",
+      "subjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method9:System.Int32()",
+      "definitionSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "GenericNullableValueSemanticPatchEntry/GenericNullableValueSemanticPatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

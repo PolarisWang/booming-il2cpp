@@ -140,3 +140,27 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
 ## 底线
 
 运行命令。阅读输出。然后再声明结果。
+
+## Dashboard 数据约束检查（新增）
+
+如果本轮改动触及以下任一文件，完成前必须运行 dashboard 数据约束检查：
+
+- `build/toolchains/run/testing/foundation_dll_audit_generator.py`
+- `build/toolchains/run/testing/foundation_dll/verification_kernel.py`
+- `build/toolchains/run/testing/foundation_dll/family_verification_claims.py`
+- `build/toolchains/run/testing/foundation_dll/gap_analyzer.py`
+- `build/toolchains/run/testing/foundation_dll/derive.py`
+- `build/toolchains/run/testing/foundation_dll/truth_contracts.py`
+
+命中时执行以下检查：
+
+```
+## Dashboard 验证清单
+[ ] 运行 foundation_dll_audit_generator.py — 重新生成输出工件
+[ ] 运行 validate-output-schemas.py — 所有输出符合 JSON Schema
+[ ] 运行 verify-dashboard-field-coverage.py — 字段覆盖率 >= 95%
+[ ] 注册表 diff 检查 — provenance-registry.md 与 committed baseline 差异审查
+[ ] 新增字段已在数据字典中登记（wiki 文档）
+[ ] 新增 enum 值已在枚举值字典中登记
+[ ] tooltip Data Provenance 信息准确（如涉及 UI 变更）
+```

@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "GuidRandomHashcodePatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Run",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method0",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method1",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method2",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method3",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method4",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method5",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method6",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method7",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method8",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method9",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method10",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method11",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method12",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "GuidRandomHashcodePatchEntry_GuidRandomHashcodePatchEntry_Method13",
+          "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method13:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

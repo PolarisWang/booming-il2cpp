@@ -1,0 +1,126 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ConvertCharNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Run",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method0",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method1",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method2",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method3",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method4",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method5",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method6",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method7",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method8",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method9",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method10",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method11",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method12",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method13",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method14",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method15",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method16",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method17",
+          "subjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Method17:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

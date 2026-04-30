@@ -1,0 +1,78 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "RuntimeCompilerServicesSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Run",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Method0",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Method1",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Method2",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Method3",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Method4",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Method5",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Method6",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Method7",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Method8",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "RuntimeCompilerServicesSemanticPatchEntry_RuntimeCompilerServicesSemanticPatchEntry_Method9",
+          "subjectId": "RuntimeCompilerServicesSemanticPatchEntry/RuntimeCompilerServicesSemanticPatchEntry::Method9:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

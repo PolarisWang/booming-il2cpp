@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/threading/monitor-interlocked",
+  "warmupIterations": 100,
+  "measureIterations": 10000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object)",
+      "elapsedMilliseconds": 0.0094,
+      "opsPerSecond": 1063829787.234043,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object)",
+      "elapsedMilliseconds": 0.0092,
+      "opsPerSecond": 1086956521.73913,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)",
+      "elapsedMilliseconds": 0.0093,
+      "opsPerSecond": 1075268817.204301,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
+      "elapsedMilliseconds": 0.0094,
+      "opsPerSecond": 1063829787.234043,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object)",
+      "elapsedMilliseconds": 0.0094,
+      "opsPerSecond": 1063829787.234043,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::PulseAll:System.Void(System.Object)",
+      "elapsedMilliseconds": 0.0094,
+      "opsPerSecond": 1063829787.234043,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Wait:System.Boolean(System.Object)",
+      "elapsedMilliseconds": 0.0094,
+      "opsPerSecond": 1063829787.234043,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Increment:System.Int32(System.Int32&)",
+      "elapsedMilliseconds": 0.0093,
+      "opsPerSecond": 1075268817.204301,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Decrement:System.Int32(System.Int32&)",
+      "elapsedMilliseconds": 0.0092,
+      "opsPerSecond": 1086956521.73913,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Exchange:System.Int32(System.Int32&,System.Int32)",
+      "elapsedMilliseconds": 0.0093,
+      "opsPerSecond": 1075268817.204301,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32)",
+      "elapsedMilliseconds": 0.0092,
+      "opsPerSecond": 1086956521.73913,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Add:System.Int32(System.Int32&,System.Int32)",
+      "elapsedMilliseconds": 0.0092,
+      "opsPerSecond": 1086956521.73913,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::MemoryBarrier:System.Void()",
+      "elapsedMilliseconds": 0.0093,
+      "opsPerSecond": 1075268817.204301,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Volatile::Read:System.Int32(System.Int32&)",
+      "elapsedMilliseconds": 0.0092,
+      "opsPerSecond": 1086956521.73913,
+      "iterations": 10000
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/SpanMemoryBuffersSemanticPatchEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SpanMemoryBuffersSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "SpanMemoryBuffersSemanticPatchEntry/\u003CPrivateImplementationDetails\u003E::06DF4F7E1394F1C57CC6583FBA4D8060A5A66F4F4771C14AEFF6B9AF8A28C9B3",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::CopyTo:System.Void(System.Span\u003CSystem.Byte\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::get_Empty:System.Span\u003CSystem.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::.ctor:System.Void(System.Void*,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::get_Span:System.Span\u003CSystem.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+      "reason": "external-call"
+    }
+  ]
+}

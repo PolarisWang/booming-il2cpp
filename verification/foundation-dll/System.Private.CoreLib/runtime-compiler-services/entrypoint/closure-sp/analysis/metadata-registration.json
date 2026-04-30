@@ -1,0 +1,149 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "RuntimeCompilerServicesNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "name": "RuntimeCompilerServicesNativeEntry",
+      "displayName": "RuntimeCompilerServicesNativeEntry",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 13,
+      "subjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

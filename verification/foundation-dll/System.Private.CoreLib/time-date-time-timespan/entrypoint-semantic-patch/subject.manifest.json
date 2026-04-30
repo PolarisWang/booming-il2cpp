@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\time-date-time-timespan\\entrypoint-semantic-patch\\build-output\\TimeDateTimeTimespanSemanticPatchEntry.dll"
+    ],
+    "entry": "TimeDateTimeTimespanSemanticPatchEntry/TimeDateTimeTimespanSemanticPatchEntry::Run:System.Int32(System.Int32)"
+  }
+}

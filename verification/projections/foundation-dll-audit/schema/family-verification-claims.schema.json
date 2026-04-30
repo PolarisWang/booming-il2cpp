@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "family-verification-claims.schema.json",
+  "title": "Foundation DLL Audit Verification Claims",
+  "description": "Verification claims with method subject IDs, denominators, and derivation rules per gate.",
+  "type": "object",
+  "required": ["schemaVersion", "assemblies"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "enum": [1] },
+    "assemblies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["assemblyName", "ownerSubjectId", "claims"],
+        "properties": {
+          "schemaVersion": { "type": "integer", "enum": [1] },
+          "assemblyName": { "type": "string" },
+          "ownerSubjectId": { "type": "string" },
+          "methodUniverseArtifactPaths": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "claims": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "claimId", "familyId", "gateCode", "required",
+                "denominator", "methodSubjectIds",
+                "ownerSubjectId", "scope", "derivationRule"
+              ],
+              "properties": {
+                "claimId": { "type": "string", "pattern": "::" },
+                "familyId": { "type": "string", "pattern": "^family/" },
+                "gateCode": {
+                  "type": "string",
+                  "enum": [
+                    "native-proof", "managed-proof", "hotupdate-proof",
+                    "benchmark", "test-code",
+                    "audit-input-and-ledger", "codegen-review",
+                    "completion-certification"
+                  ]
+                },
+                "required": { "type": "boolean" },
+                "denominator": { "type": "integer" },
+                "methodSubjectIds": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "ownerSubjectId": { "type": "string" },
+                "scope": { "type": "string" },
+                "derivationRule": {
+                  "type": "string",
+                  "description": "Rule describing how this claim was derived. Empty when not yet derived.",
+                  "enum": [
+                    "",
+                    "truth-contract:method-capability-contracts",
+                    "gate-presence:managed-proof",
+                    "gate-presence:hotupdate-proof",
+                    "gate-presence:benchmark",
+                    "ledger:testCode"
+                  ]
+                },
+                "authorityRefs": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

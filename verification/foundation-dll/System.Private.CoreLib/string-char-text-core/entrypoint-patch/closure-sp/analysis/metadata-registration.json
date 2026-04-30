@@ -1,0 +1,259 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "StringCharTextCorePatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "name": "StringCharTextCorePatchEntry",
+      "displayName": "StringCharTextCorePatchEntry",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method13:System.Int32()",
+      "name": "Method13",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method14:System.Int32()",
+      "name": "Method14",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method15:System.Int32()",
+      "name": "Method15",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method16:System.Int32()",
+      "name": "Method16",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method16:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method17:System.Int32()",
+      "name": "Method17",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method17:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 21,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method18:System.Int32()",
+      "name": "Method18",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method18:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 22,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method19:System.Int32()",
+      "name": "Method19",
+      "definitionSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Method19:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 23,
+      "subjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

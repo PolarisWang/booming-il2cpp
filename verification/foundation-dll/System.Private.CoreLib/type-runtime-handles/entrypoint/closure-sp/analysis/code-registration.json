@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "TypeRuntimeHandlesNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Run",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method0",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method1",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method2",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method3",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method4",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method5",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method6",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method7",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method8",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method9",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method10",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method11",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "TypeRuntimeHandlesNativeEntry_TypeRuntimeHandlesNativeEntry_Method12",
+          "subjectId": "TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method12:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

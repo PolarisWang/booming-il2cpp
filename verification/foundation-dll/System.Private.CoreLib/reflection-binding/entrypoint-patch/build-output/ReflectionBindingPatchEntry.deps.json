@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "ReflectionBindingPatchEntry/1.0.0": {
+        "runtime": {
+          "ReflectionBindingPatchEntry.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ReflectionBindingPatchEntry/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

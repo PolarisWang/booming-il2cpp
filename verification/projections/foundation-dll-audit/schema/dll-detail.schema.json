@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "dll-detail.schema.json",
+  "title": "Foundation DLL Audit DLL Detail",
+  "description": "Per-DLL detailed view with projects, evidence artifacts, and all gate proofs.",
+  "type": "object",
+  "required": [
+    "assemblyName", "orderIndex", "phase", "dllState",
+    "currentProject", "projects"
+  ],
+  "properties": {
+    "assemblyName": { "type": "string" },
+    "orderIndex": { "type": "integer" },
+    "phase": { "type": "string" },
+    "roadmapTaskId": { "type": "string" },
+    "dllState": {
+      "type": "string",
+      "enum": ["completed", "in-progress", "blocked", "not-started"]
+    },
+    "currentProject": { "type": "string" },
+    "blockingReason": { "type": "string" },
+    "riskTags": { "type": "array", "items": { "type": "string" } },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "projectCode", "displayName", "policyState",
+          "executionState", "verificationMethod", "verificationTarget"
+        ],
+        "properties": {
+          "projectCode": { "type": "string" },
+          "displayName": { "type": "string" },
+          "policyState": { "type": "string" },
+          "executionState": { "type": "string" },
+          "verificationMethod": { "type": "string" },
+          "verificationTarget": { "type": "string" },
+          "completionRule": { "type": "string" },
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "assemblyName": { "type": "string" },
+                "projectCode": { "type": "string" },
+                "displayName": { "type": "string" },
+                "path": { "type": "string" },
+                "artifactKind": { "type": "string" },
+                "linkTargetType": { "type": "string" },
+                "role": { "type": "string" },
+                "required": { "type": "boolean" },
+                "exists": { "type": "boolean" }
+              }
+            }
+          },
+          "supportRefs": { "type": "array", "items": { "type": "string" } },
+          "blockers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": { "type": "string" },
+                "message": { "type": "string" }
+              }
+            }
+          },
+          "updatedAt": { "type": "string" }
+        }
+      }
+    }
+  }
+}

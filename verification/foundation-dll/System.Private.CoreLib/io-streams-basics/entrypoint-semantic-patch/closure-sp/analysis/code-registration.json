@@ -1,0 +1,126 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "IoStreamsBasicsSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Run",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method0",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method1",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method2",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method3",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method4",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method5",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method6",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method7",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method8",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method9",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method10",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method11",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method12",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method13",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method14",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method15",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method16",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "IoStreamsBasicsSemanticPatchEntry_IoStreamsBasicsSemanticPatchEntry_Method17",
+          "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method17:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

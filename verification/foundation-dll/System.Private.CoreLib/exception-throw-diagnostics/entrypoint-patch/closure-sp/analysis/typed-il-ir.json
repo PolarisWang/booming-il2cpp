@@ -1,0 +1,1058 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.run",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.run",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                69,
+                77,
+                85,
+                93,
+                101,
+                109,
+                117,
+                125,
+                133,
+                141,
+                149,
+                157,
+                165,
+                173
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 181,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 185,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method0",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method0:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method0:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method0",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177280,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method1",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method1:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method1:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method1",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177279,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method2",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method2:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method2:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method2",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177278,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method3",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method3:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method3:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method3",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177277,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method4",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method4:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method4:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method4",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177276,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method5",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method5:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method5:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method5",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177275,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method6",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method6:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method6:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method6",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177274,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method7",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method7:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method7:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method7",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177273,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method8",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method8:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method8:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method8",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177272,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method9",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method9:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method9:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method9",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177271,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method10",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method10:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method10:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method10",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177270,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method11",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method11:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method11()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method11:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method11:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method11",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177269,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method12",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method12:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method12()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method12:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method12:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method12",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177268,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method13",
+      "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method13:System.Int32()",
+      "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method13()",
+      "identity": {
+        "assemblyName": "ExceptionThrowDiagnosticsPatchEntry",
+        "declaringTypeSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry",
+        "definitionSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method13:System.Int32()",
+        "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method13:System.Int32()",
+        "methodId": "exception-throw-diagnostics-patch-entry.exception-throw-diagnostics-patch-entry.method13",
+        "signature": "System.Int32 ExceptionThrowDiagnosticsPatchEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177267,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

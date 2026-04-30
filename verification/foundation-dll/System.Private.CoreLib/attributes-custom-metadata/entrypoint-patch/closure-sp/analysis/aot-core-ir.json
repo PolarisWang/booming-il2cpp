@@ -1,0 +1,921 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.run",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.run",
+        "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            49,
+            57,
+            65,
+            73,
+            81,
+            89,
+            97,
+            105,
+            113
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 121,
+          "ilOffset": 47,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 49,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 54,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 55,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 57,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 62,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 63,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 65,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 70,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 71,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 73,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 78,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 79,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 81,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 86,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 87,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 89,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 95,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 97,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 102,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 103,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 110,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 111,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataPatchEntry",
+            "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 118,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 119,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 121,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 122,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 125
+        },
+        {
+          "op": "ret",
+          "ilOffset": 126
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method0",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method0:System.Int32()",
+        "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method0:System.Int32()",
+        "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method0",
+        "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method0()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177280,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method1",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method1:System.Int32()",
+        "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method1:System.Int32()",
+        "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method1",
+        "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method1()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177279,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method2",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method2:System.Int32()",
+        "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method2:System.Int32()",
+        "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method2",
+        "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method2()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177278,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method3",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method3:System.Int32()",
+        "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method3:System.Int32()",
+        "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method3",
+        "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method3()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177277,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method4",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method4:System.Int32()",
+        "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method4:System.Int32()",
+        "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method4",
+        "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method4()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177276,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method5",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method5:System.Int32()",
+        "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method5:System.Int32()",
+        "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method5",
+        "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method5()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177275,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method6",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method6:System.Int32()",
+        "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method6:System.Int32()",
+        "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method6",
+        "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method6()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177274,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method7",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method7:System.Int32()",
+        "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method7:System.Int32()",
+        "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method7",
+        "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method7()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177273,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method8",
+      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method8:System.Int32()",
+        "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Method8:System.Int32()",
+        "methodId": "attributes-custom-metadata-patch-entry.attributes-custom-metadata-patch-entry.method8",
+        "signature": "System.Int32 AttributesCustomMetadataPatchEntry::Method8()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataPatchEntry_AttributesCustomMetadataPatchEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": -1342177272,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 9
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 10,
+    "trimmedMethodCount": 10,
+    "entryPrefix": "AttributesCustomMetadataPatchEntry"
+  }
+}

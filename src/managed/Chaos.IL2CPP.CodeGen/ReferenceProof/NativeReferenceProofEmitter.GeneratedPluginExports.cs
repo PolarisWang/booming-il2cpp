@@ -41,8 +41,14 @@ public sealed partial class NativeReferenceProofEmitter
     [RuntimeSkeletonFamilyPlugin("memory-extensions-managed-invoke", CodeGenPluginProductLine.NativeReference, 190, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult Plugin_MemoryExtensionsManagedInvokeFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonMemoryExtensionsManagedInvokeFamilyHandler(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("math-kernel", CodeGenPluginProductLine.NativeReference, 185, RuntimeSkeletonFamilyPluginKind.Kernel)]
+    private static RuntimeSkeletonFamilyHandlerResult Plugin_MathKernelFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonMathKernelFamilyHandler(buildContext);
+
     [RuntimeSkeletonFamilyPlugin("spanhelpers-kernel", CodeGenPluginProductLine.NativeReference, 200, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult Plugin_SpanHelpersKernelFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonSpanHelpersKernelFamilyHandler(buildContext);
+
+    [RuntimeSkeletonFamilyPlugin("collections-managed-invoke", CodeGenPluginProductLine.NativeReference, 216, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
+    private static RuntimeSkeletonFamilyHandlerResult Plugin_CollectionsManagedInvokeFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonCollectionsManagedInvokeFamilyHandler(buildContext);
 
     [RuntimeSkeletonFamilyPlugin("valuetype-kernel", CodeGenPluginProductLine.NativeReference, 210, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult Plugin_ValueTypeKernelFamily(RuntimeSkeletonStubBuildContext buildContext) => TryBuildRuntimeSkeletonValueTypeKernelFamilyHandler(buildContext);

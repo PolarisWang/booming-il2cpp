@@ -1,0 +1,259 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "name": "StringCharTextCoreSemanticPatchEntry",
+      "displayName": "StringCharTextCoreSemanticPatchEntry",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method13:System.Int32()",
+      "name": "Method13",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method14:System.Int32()",
+      "name": "Method14",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method15:System.Int32()",
+      "name": "Method15",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method16:System.Int32()",
+      "name": "Method16",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method16:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method17:System.Int32()",
+      "name": "Method17",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method17:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 21,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method18:System.Int32()",
+      "name": "Method18",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method18:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 22,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method19:System.Int32()",
+      "name": "Method19",
+      "definitionSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Method19:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 23,
+      "subjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

@@ -1,0 +1,1323 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.run",
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.run",
+        "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                49,
+                57,
+                65,
+                73,
+                81,
+                89,
+                97,
+                105,
+                113
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 121,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 125,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 125,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 125,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 125,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 125,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 125,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 125,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 125,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+                "subjectKind": "method",
+                "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 125,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 125,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method0",
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method0:System.Int32()",
+        "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method0:System.Int32()",
+        "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method0",
+        "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.Assembly",
+              "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Attribute",
+              "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 39,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method1",
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method1:System.Int32()",
+        "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method1:System.Int32()",
+        "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method1",
+        "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.Assembly",
+              "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Attribute",
+              "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 39,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method2",
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method2:System.Int32()",
+        "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method2:System.Int32()",
+        "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method2",
+        "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.Assembly",
+              "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E",
+              "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttributes:System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E(System.Reflection.Assembly,System.Type)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttributes:System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E(System.Reflection.Assembly,System.Type)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 39,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method3",
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method3:System.Int32()",
+        "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method3:System.Int32()",
+        "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method3",
+        "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.Assembly",
+              "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E",
+              "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttributes:System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E(System.Reflection.Assembly,System.Type)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttributes:System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E(System.Reflection.Assembly,System.Type)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 39,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method4",
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method4:System.Int32()",
+        "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method4:System.Int32()",
+        "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method4",
+        "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.Assembly",
+              "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E",
+              "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttributes:System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E(System.Reflection.Assembly)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttributes:System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E(System.Reflection.Assembly)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 29,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method5",
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method5:System.Int32()",
+        "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method5:System.Int32()",
+        "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method5",
+        "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.Assembly",
+              "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E",
+              "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttributes:System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E(System.Reflection.Assembly)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttributes:System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E(System.Reflection.Assembly)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 29,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method6",
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method6:System.Int32()",
+        "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method6:System.Int32()",
+        "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method6",
+        "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.Assembly",
+              "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 36,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 37,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 40,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method7",
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method7:System.Int32()",
+        "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method7:System.Int32()",
+        "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method7",
+        "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-closed-type-member-query",
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Byte",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Byte"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Reflection.Assembly",
+              "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldtoken",
+              "operand": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+              "resultType": "System.RuntimeTypeHandle",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "type",
+                "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Type",
+              "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Boolean",
+              "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "brtrue",
+              "operand": 36,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 37,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 40,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method8",
+      "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataSemanticPatchEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry",
+        "definitionSubjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method8:System.Int32()",
+        "subjectId": "AttributesCustomMetadataSemanticPatchEntry/AttributesCustomMetadataSemanticPatchEntry::Method8:System.Int32()",
+        "methodId": "attributes-custom-metadata-semantic-patch-entry.attributes-custom-metadata-semantic-patch-entry.method8",
+        "signature": "System.Int32 AttributesCustomMetadataSemanticPatchEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Private.CoreLib/System.ObsoleteAttribute",
+              "callee": "System.Private.CoreLib/System.ObsoleteAttribute::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.ObsoleteAttribute::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Object",
+              "callee": "System.Private.CoreLib/System.Attribute::get_TypeId:System.Object()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Attribute::get_TypeId:System.Object()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "dup"
+            },
+            {
+              "op": "brtrue",
+              "operand": 18,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "br",
+              "operand": 23,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 26,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

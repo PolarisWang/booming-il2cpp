@@ -1,0 +1,237 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "MathNumericsNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "name": "MathNumericsNativeEntry",
+      "displayName": "MathNumericsNativeEntry",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method13:System.Int32()",
+      "name": "Method13",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method14:System.Int32()",
+      "name": "Method14",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method15:System.Int32()",
+      "name": "Method15",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method16:System.Int32()",
+      "name": "Method16",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method16:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method17:System.Int32()",
+      "name": "Method17",
+      "definitionSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Method17:System.Int32()",
+      "declaringTypeSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 21,
+      "subjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

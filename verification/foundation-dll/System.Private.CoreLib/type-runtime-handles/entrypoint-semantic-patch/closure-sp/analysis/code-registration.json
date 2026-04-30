@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "TypeRuntimeHandlesSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Run",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method0",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method1",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method2",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method3",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method4",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method5",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method6",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method7",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method8",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method9",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method10",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method11",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "TypeRuntimeHandlesSemanticPatchEntry_TypeRuntimeHandlesSemanticPatchEntry_Method12",
+          "subjectId": "TypeRuntimeHandlesSemanticPatchEntry/TypeRuntimeHandlesSemanticPatchEntry::Method12:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

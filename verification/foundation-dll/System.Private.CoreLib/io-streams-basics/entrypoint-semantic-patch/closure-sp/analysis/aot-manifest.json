@@ -1,0 +1,222 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/IoStreamsBasicsSemanticPatchEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IoStreamsBasicsSemanticPatchEntry",
+      "subjectKind": "field",
+      "subjectId": "IoStreamsBasicsSemanticPatchEntry/\u003CPrivateImplementationDetails\u003E::06DF4F7E1394F1C57CC6583FBA4D8060A5A66F4F4771C14AEFF6B9AF8A28C9B3",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

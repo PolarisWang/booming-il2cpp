@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ExceptionThrowDiagnosticsPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Run",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method0",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method1",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method2",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method3",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method4",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method5",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method6",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method7",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method8",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method9",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method10",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method11",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method12",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPatchEntry_Method13",
+          "subjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Method13:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionMemberBasicsPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Run",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method0",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method1",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method2",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method3",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method4",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method5",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method6",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method7",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method8",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method9",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method10",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method11",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method12",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Method13",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method13:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

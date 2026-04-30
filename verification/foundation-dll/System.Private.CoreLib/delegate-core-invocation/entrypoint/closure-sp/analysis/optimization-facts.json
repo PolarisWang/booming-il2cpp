@@ -1,0 +1,290 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_0:System.Void()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod0\u003Eb__1_1:System.Void()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_0:System.Void()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod1\u003Eb__2_1:System.Void()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod2\u003Eb__3_0:System.Void()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod3\u003Eb__4_0:System.Void()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod4\u003Eb__5_0:System.Void()",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003CMethod7\u003Eb__8_0:System.Void()",
+      "devirtualized": true
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    }
+  ],
+  "exceptionFacts": []
+}

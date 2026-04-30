@@ -1,0 +1,139 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method7:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method8:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method9:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method10:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method11:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method12:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method13:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

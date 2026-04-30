@@ -1,0 +1,84 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "BufferMemorySemanticPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySemanticPatchEntry/BufferMemorySemanticPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+      "reason": "external-call"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReflectionGenericsNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "name": "ReflectionGenericsNativeEntry",
+      "displayName": "ReflectionGenericsNativeEntry",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 15,
+      "subjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

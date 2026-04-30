@@ -1,0 +1,139 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method0:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method1:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method2:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method3:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method4:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method5:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method6:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method7:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method8:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method9:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method10:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method11:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method12:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionMemberBasicsPatchEntry",
+      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method13:System.Int32()",
+      "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

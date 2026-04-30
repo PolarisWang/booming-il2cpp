@@ -1,0 +1,126 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ConvertCharSemanticPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Run",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method0",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method1",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method2",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method3",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method4",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method5",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method6",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method7",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method8",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method9",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method10",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method11",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method12",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method13",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method14",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method15",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method16",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ConvertCharSemanticPatchEntry_ConvertCharSemanticPatchEntry_Method17",
+          "subjectId": "ConvertCharSemanticPatchEntry/ConvertCharSemanticPatchEntry::Method17:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

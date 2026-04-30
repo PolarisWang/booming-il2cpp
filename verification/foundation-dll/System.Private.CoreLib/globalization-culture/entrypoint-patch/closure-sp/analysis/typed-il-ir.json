@@ -1,0 +1,989 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.run",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Run:System.Int32(System.Int32)",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.run",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                65,
+                73,
+                81,
+                89,
+                97,
+                105,
+                113,
+                121,
+                129,
+                137,
+                145,
+                153,
+                161
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 169,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "GlobalizationCulturePatchEntry",
+                "subjectKind": "method",
+                "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method0",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method0:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method0()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method0:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method0:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method0",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177280,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method1",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method1:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method1()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method1:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method1:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method1",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177279,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method2",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method2:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method2()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method2:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method2:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method2",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177278,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method3",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method3:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method3()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method3:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method3:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method3",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177277,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method4",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method4:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method4()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method4:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method4:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method4",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177276,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method5",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method5:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method5()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method5:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method5:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method5",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177275,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method6",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method6:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method6()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method6:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method6:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method6",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177274,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method7",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method7:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method7()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method7:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method7:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method7",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177273,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method8",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method8:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method8()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method8:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method8:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method8",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177272,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method9",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method9:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method9()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method9:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method9:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method9",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177271,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method10",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method10:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method10()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method10:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method10:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method10",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177270,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method11",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method11:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method11()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method11:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method11:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method11",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177269,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method12",
+      "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method12:System.Int32()",
+      "signature": "System.Int32 GlobalizationCulturePatchEntry::Method12()",
+      "identity": {
+        "assemblyName": "GlobalizationCulturePatchEntry",
+        "declaringTypeSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry",
+        "definitionSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method12:System.Int32()",
+        "subjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Method12:System.Int32()",
+        "methodId": "globalization-culture-patch-entry.globalization-culture-patch-entry.method12",
+        "signature": "System.Int32 GlobalizationCulturePatchEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": -1342177268,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 9,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
