@@ -66,7 +66,7 @@ public sealed partial class NativeReferenceLoweringPlanner
             .ToList();
         if (TryCreateEngineLoweringPlan(linkedWorld.Assembly.Name, linkedWorld.EntryPointSubjectId, out var enginePlan))
         {
-            return enginePlan;
+            return enginePlan!;
         }
 
         var methodShapes = linkedWorld.SemanticShapes.Methods

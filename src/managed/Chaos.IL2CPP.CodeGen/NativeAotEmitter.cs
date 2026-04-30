@@ -72,11 +72,16 @@ public sealed class NativeAotEmitter
                     RelativePath = NativeAotArtifactNames.GeneratedTranslationUnit,
                     Contents = BuildGeneratedTranslationUnit(templateModel),
                 },
+                new NativeAotGeneratedSource
+                {
+                    RelativePath = NativeAotArtifactNames.ShapeDispatchHeader,
+                    Contents = templateModel.ShapeDispatchHeaderContent,
+                },
             ];
             generatedArtifacts = generatedSources
                 .Select(generatedSource => new NativeAotGeneratedArtifactRef
                 {
-                    Kind = "generatedTranslationUnit",
+                    Kind = generatedSource.RelativePath.EndsWith(".h", StringComparison.Ordinal) ? "shapeDispatchHeader" : "generatedTranslationUnit",
                     Path = generatedSource.RelativePath,
                 })
                 .ToList();

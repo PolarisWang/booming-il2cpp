@@ -39,10 +39,15 @@
 #define CHAOS_IL2CPP_UINTPTR  std::uintptr_t
 #define CHAOS_IL2CPP_SIZE     std::size_t
 
+// ── Floating-point types ──────────────────────────────────────
+#define CHAOS_IL2CPP_FLOAT32  float
+#define CHAOS_IL2CPP_FLOAT64  double
+
 // ── Math functions (abstracted for platform portability) ────────
 #define CHAOS_IL2CPP_SIN           std::sin
 #define CHAOS_IL2CPP_COS           std::cos
 #define CHAOS_IL2CPP_COPYSIGN      std::copysign
+#define CHAOS_IL2CPP_ABS           std::abs
 #define CHAOS_IL2CPP_REMAINDER     std::remainder
 #define CHAOS_IL2CPP_ILOGB         std::ilogb
 #define CHAOS_IL2CPP_SCALBN        std::scalbn

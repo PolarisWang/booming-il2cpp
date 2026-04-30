@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -335,7 +335,7 @@ public sealed partial class NativeAotLoweringPlanner
 				};
 				return true;
 			}
-			abiSlot = null;
+			abiSlot = default!;
 			return false;
 		}
 		}
@@ -358,7 +358,7 @@ public sealed partial class NativeAotLoweringPlanner
 			abiSlot = CreateNativeIntAbiSlot();
 			return true;
 		default:
-			abiSlot = null;
+			abiSlot = default!;
 			return false;
 		}
 	}
@@ -413,7 +413,8 @@ public sealed partial class NativeAotLoweringPlanner
 		string value = subjectId;
 		while (!string.IsNullOrEmpty(value))
 		{
-			if (string.Equals(value, "System.Private.CoreLib/System.Delegate", StringComparison.Ordinal) || string.Equals(value, "System.Private.CoreLib/System.MulticastDelegate", StringComparison.Ordinal))
+			string valueDisplayName = ManagedNaming.GetTypeDisplayNameFromSubjectId(value);
+			if (string.Equals(valueDisplayName, "System.Delegate", StringComparison.Ordinal) || string.Equals(valueDisplayName, "System.MulticastDelegate", StringComparison.Ordinal))
 			{
 				return true;
 			}
@@ -422,7 +423,8 @@ public sealed partial class NativeAotLoweringPlanner
 				break;
 			}
 		}
-		if (subjectId.StartsWith("System.Private.CoreLib/System.Action", StringComparison.Ordinal) || subjectId.StartsWith("System.Private.CoreLib/System.Func", StringComparison.Ordinal))
+		string subjectIdDisplayName = ManagedNaming.GetTypeDisplayNameFromSubjectId(subjectId);
+		if (subjectIdDisplayName.StartsWith("System.Action", StringComparison.Ordinal) || subjectIdDisplayName.StartsWith("System.Func", StringComparison.Ordinal))
 		{
 			return true;
 		}
@@ -444,15 +446,16 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string? GetSyntheticReferenceTypeBaseSubjectId(string subjectId)
 	{
-		if (string.Equals(subjectId, "System.Private.CoreLib/System.Delegate", StringComparison.Ordinal))
+		string subjectIdDisplayName = ManagedNaming.GetTypeDisplayNameFromSubjectId(subjectId);
+		if (string.Equals(subjectIdDisplayName, "System.Delegate", StringComparison.Ordinal))
 		{
 			return "System.Private.CoreLib/System.Object";
 		}
-		if (string.Equals(subjectId, "System.Private.CoreLib/System.MulticastDelegate", StringComparison.Ordinal))
+		if (string.Equals(subjectIdDisplayName, "System.MulticastDelegate", StringComparison.Ordinal))
 		{
 			return "System.Private.CoreLib/System.Delegate";
 		}
-		if (subjectId.StartsWith("System.Private.CoreLib/System.Action", StringComparison.Ordinal) || subjectId.StartsWith("System.Private.CoreLib/System.Func", StringComparison.Ordinal))
+		if (subjectIdDisplayName.StartsWith("System.Action", StringComparison.Ordinal) || subjectIdDisplayName.StartsWith("System.Func", StringComparison.Ordinal))
 		{
 			return "System.Private.CoreLib/System.MulticastDelegate";
 		}

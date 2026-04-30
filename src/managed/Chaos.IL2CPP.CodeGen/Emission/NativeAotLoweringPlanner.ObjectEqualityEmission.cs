@@ -54,7 +54,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        return false;");
 		builder.AppendLine("    }");
 		builder.AppendLine();
-		if (referenceTypeSubjectIds.Contains("System.Private.CoreLib/System.String"))
+		if (referenceTypeSubjectIds.Contains(ManagedNaming.NormalizeSubjectIdAssembly("System.Private.CoreLib/System.String")))
 		{
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder2 = stringBuilder;

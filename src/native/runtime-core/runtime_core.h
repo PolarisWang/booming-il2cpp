@@ -1703,11 +1703,14 @@ inline float  MathReciprocalEstimate(float  value) { return 1.0f / value; }
 inline double MathReciprocalSqrtEstimate(double value) { return 1.0 / CHAOS_IL2CPP_SQRT(value); }
 inline float  MathReciprocalSqrtEstimate(float  value) { return 1.0f / CHAOS_IL2CPP_SQRT(value); }
 
-inline double MathMaxMagnitude(double x, double y) { return CHAOS_IL2CPP_MAXMAGNITUDE(x, y); }
-inline float  MathMaxMagnitude(float  x, float  y) { return CHAOS_IL2CPP_MAXMAGNITUDE(x, y); }
+// NOTE: Use std::abs + ternary instead of std::fmaxmag/fminmag.
+// std::fmaxmag/fminmag are not reliably available across all MSVC versions
+// (they require C++17 mode on some toolchains and may be missing entirely on others).
+inline double MathMaxMagnitude(double x, double y) { return (CHAOS_IL2CPP_ABS(x) >= CHAOS_IL2CPP_ABS(y)) ? x : y; }
+inline float  MathMaxMagnitude(float  x, float  y) { return (CHAOS_IL2CPP_ABS(x) >= CHAOS_IL2CPP_ABS(y)) ? x : y; }
 
-inline double MathMinMagnitude(double x, double y) { return CHAOS_IL2CPP_MINMAGNITUDE(x, y); }
-inline float  MathMinMagnitude(float  x, float  y) { return CHAOS_IL2CPP_MINMAGNITUDE(x, y); }
+inline double MathMinMagnitude(double x, double y) { return (CHAOS_IL2CPP_ABS(x) <= CHAOS_IL2CPP_ABS(y)) ? x : y; }
+inline float  MathMinMagnitude(float  x, float  y) { return (CHAOS_IL2CPP_ABS(x) <= CHAOS_IL2CPP_ABS(y)) ? x : y; }
 
 inline CHAOS_IL2CPP_INT64 MathBigMul(CHAOS_IL2CPP_INT32 a, CHAOS_IL2CPP_INT32 b) {
     return static_cast<CHAOS_IL2CPP_INT64>(a) * static_cast<CHAOS_IL2CPP_INT64>(b);
@@ -1767,10 +1770,10 @@ struct MathDivRemUInt64Result  { CHAOS_IL2CPP_UINT64 Quotient; CHAOS_IL2CPP_UINT
 struct MathDivRemIntPtrResult  { CHAOS_IL2CPP_INTPTR  Quotient; CHAOS_IL2CPP_INTPTR  Remainder; };
 struct MathDivRemUIntPtrResult { CHAOS_IL2CPP_UINTPTR Quotient; CHAOS_IL2CPP_UINTPTR Remainder; };
 
-inline MathDivRemByteResult    MathDivRemByte(CHAOS_IL2CPP_UINT8 a, CHAOS_IL2CPP_UINT8 b)    { return {a / b, a % b}; }
+inline MathDivRemByteResult    MathDivRemByte(CHAOS_IL2CPP_UINT8 a, CHAOS_IL2CPP_UINT8 b)    { return {static_cast<CHAOS_IL2CPP_UINT8>(a / b), static_cast<CHAOS_IL2CPP_UINT8>(a % b)}; }
 inline MathDivRemSByteResult   MathDivRemSByte(CHAOS_IL2CPP_INT8 a, CHAOS_IL2CPP_INT8 b)     { return {static_cast<CHAOS_IL2CPP_INT8>(a / b), static_cast<CHAOS_IL2CPP_INT8>(a % b)}; }
 inline MathDivRemInt16Result   MathDivRemInt16(CHAOS_IL2CPP_INT16 a, CHAOS_IL2CPP_INT16 b)   { return {static_cast<CHAOS_IL2CPP_INT16>(a / b), static_cast<CHAOS_IL2CPP_INT16>(a % b)}; }
-inline MathDivRemUInt16Result  MathDivRemUInt16(CHAOS_IL2CPP_UINT16 a, CHAOS_IL2CPP_UINT16 b) { return {a / b, a % b}; }
+inline MathDivRemUInt16Result  MathDivRemUInt16(CHAOS_IL2CPP_UINT16 a, CHAOS_IL2CPP_UINT16 b) { return {static_cast<CHAOS_IL2CPP_UINT16>(a / b), static_cast<CHAOS_IL2CPP_UINT16>(a % b)}; }
 inline MathDivRemInt32Result   MathDivRemInt32(CHAOS_IL2CPP_INT32 a, CHAOS_IL2CPP_INT32 b)   { return {a / b, a % b}; }
 inline MathDivRemUInt32Result  MathDivRemUInt32(CHAOS_IL2CPP_UINT32 a, CHAOS_IL2CPP_UINT32 b) { return {a / b, a % b}; }
 inline MathDivRemInt64Result   MathDivRemInt64(CHAOS_IL2CPP_INT64 a, CHAOS_IL2CPP_INT64 b)   { return {a / b, a % b}; }

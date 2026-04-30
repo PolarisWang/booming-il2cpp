@@ -58,6 +58,16 @@ public sealed partial class NativeAotLoweringPlanner
 {
 	private bool TryCreateExternalRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
+		// Canonicalize assembly prefix so matching is assembly-agnostic
+		callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
+
+		if (_shapeRegistry.TryMatchShape(callee, out var shapeEntry) &&
+			shapeEntry.Kind == RuntimeHelperShapeRegistry.ShapeKind.SimpleForward)
+		{
+			helperDefinition = CreateDefinitionFromShapeEntry(callee, shapeEntry);
+			return true;
+		}
+
 		if (TryCreateCustomAttributeRuntimeHelperDefinition(callee, out helperDefinition))
 		{
 			return true;
@@ -114,7 +124,26 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return true;
 		}
-		return TryCreateReflectionRuntimeHelperDefinition(callee, out helperDefinition);
+		return false;
+	}
+
+	private ExternalRuntimeHelperDefinition CreateDefinitionFromShapeEntry(
+		string callee,
+		RuntimeHelperShapeRegistry.ShapeEntry entry)
+	{
+		var symbol = GetExternalRuntimeHelperSymbol(callee);
+		var returnType = MapAbiSlotReturnType(entry.ReturnAbi);
+		var parameterSignature = FormatAbiSlotParameterSignature(entry.ParameterAbis);
+		var argCount = entry.ParameterAbis.Count;
+		var args = argCount == 0 ? string.Empty :
+			string.Join(", ", Enumerable.Range(0, argCount).Select(i => $"chaos_arg_{i}"));
+		var bodyLines = entry.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void
+			? new[] { $"    {entry.NativeFnSymbol}({args});" }
+			: new[] { $"    return {entry.NativeFnSymbol}({args});" };
+		return new ExternalRuntimeHelperDefinition(callee, symbol,
+			RenderSimpleExternalRuntimeHelper(returnType, symbol, parameterSignature, bodyLines),
+			entry.ParameterAbis, entry.ReturnAbi, entry.RawArgumentIndices ?? EmptyRawArgumentIndices,
+			entry.ReferencedStaticFieldSubjectIds);
 	}
 
 }

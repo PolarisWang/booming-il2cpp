@@ -314,7 +314,7 @@ public sealed partial class NativeReferenceLoweringPlanner
             return false;
         }
 
-        loweringPlan = dispatchPlan with
+        loweringPlan = dispatchPlan! with
         {
             PlanKind = "interfaceDispatchMessage",
             DispatchStrategy = "interface-runtime-helper",
