@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.ObjectModel",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.ObjectModel/observable-collections"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 25
+}

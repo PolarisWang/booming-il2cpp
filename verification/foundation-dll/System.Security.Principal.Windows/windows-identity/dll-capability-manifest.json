@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Security.Principal.Windows",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.Security.Principal.Windows/windows-identity"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 13
+}

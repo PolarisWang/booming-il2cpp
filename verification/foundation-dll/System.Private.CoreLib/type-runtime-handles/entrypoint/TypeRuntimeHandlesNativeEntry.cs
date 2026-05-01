@@ -53,61 +53,61 @@ public static class TypeRuntimeHandlesNativeEntry
     // [3] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)
     static int Method3()
     {
-        return Type.GetTypeFromHandle(default(System.RuntimeTypeHandle)).GetHashCode();
+        return (int)(Type.GetTypeFromHandle(default(System.RuntimeTypeHandle)));
     }
 
     // [4] System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()
     static int Method4()
     {
-        return (typeof(byte).IsValueType ? 1 : 0);
+        return (int)(typeof(byte).IsValueType);
     }
 
     // [5] System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()
     static int Method5()
     {
-        return (typeof(byte).IsEnum ? 1 : 0);
+        return (int)(typeof(byte).IsEnum);
     }
 
     // [6] System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()
     static int Method6()
     {
-        return (typeof(byte).IsArray ? 1 : 0);
+        return (int)(typeof(byte).IsArray);
     }
 
     // [7] System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()
     static int Method7()
     {
-        return typeof(byte).TypeHandle.GetHashCode();
+        return (int)(typeof(byte).TypeHandle);
     }
 
     // [8] System.Private.CoreLib/System.Type::get_FullName:System.String()
     static int Method8()
     {
-        return (typeof(byte).FullName?.GetHashCode() ?? 0);
+        return (int)(typeof(byte).FullName);
     }
 
     // [9] System.Private.CoreLib/System.Type::get_Name:System.String()
     static int Method9()
     {
-        return (typeof(byte).Name?.GetHashCode() ?? 0);
+        return (int)(typeof(byte).Name);
     }
 
     // [10] System.Private.CoreLib/System.Type::get_BaseType:System.Type()
     static int Method10()
     {
-        return typeof(byte).BaseType.GetHashCode();
+        return (int)(typeof(byte).BaseType);
     }
 
     // [11] System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()
     static int Method11()
     {
-        return typeof(byte).GetMethods().GetHashCode();
+        return (int)(typeof(byte).GetMethods());
     }
 
     // [12] System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()
     static int Method12()
     {
-        return typeof(byte).GetFields().GetHashCode();
+        return (int)(typeof(byte).GetFields());
     }
 
 }

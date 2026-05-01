@@ -32,39 +32,41 @@ public static class GuidRandomHashcodeNativeEntry
     // [0] System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)
     static int Method0()
     {
-        new Guid("11111111-1111-1111-1111-111111111111");
-        return (int)0;
+        // TODO: System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String) could not be auto-generated
+        return 0;
     }
 
     // [1] System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])
     static int Method1()
     {
-        new Guid("11111111-1111-1111-1111-111111111111");
-        return (int)0;
+        // TODO: System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[]) could not be auto-generated
+        return 0;
     }
 
     // [2] System.Private.CoreLib/System.Guid::NewGuid:System.Guid()
     static int Method2()
     {
-        return Guid.NewGuid().GetHashCode();
+        return (int)(Guid.NewGuid());
     }
 
     // [3] System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)
     static int Method3()
     {
-        return Guid.Parse("11111111-1111-1111-1111-111111111111").GetHashCode();
+        // TODO: System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String) could not be auto-generated
+        return 0;
     }
 
     // [4] System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)
     static int Method4()
     {
-        return (Guid.TryParse("11111111-1111-1111-1111-111111111111", out Guid __g0) ? 1 : 0);
+    var refLocal_1 = Guid.Empty;
+        return (int)(Guid.TryParse("hello", ref refLocal_1));
     }
 
     // [5] System.Private.CoreLib/System.Guid::ToString:System.String()
     static int Method5()
     {
-        return (Guid.NewGuid().ToString()?.GetHashCode() ?? 0);
+        return (int)(Guid.NewGuid().ToString());
     }
 
     // [6] System.Private.CoreLib/System.Random::.ctor:System.Void()
@@ -89,7 +91,7 @@ public static class GuidRandomHashcodeNativeEntry
     // [9] System.Private.CoreLib/System.Random::NextDouble:System.Double()
     static int Method9()
     {
-        return unchecked((int)new Random().NextDouble());
+        return (int)(new Random().NextDouble());
     }
 
     // [10] System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])

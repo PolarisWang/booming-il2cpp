@@ -41,133 +41,139 @@ public static class ReflectionMemberCompleteNativeEntry
     // [0] System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()
     static int Method0()
     {
-        return (typeof(string).GetMembers()[0].Name?.GetHashCode() ?? 0);
+        // TODO: System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String() could not be auto-generated
+        return 0;
     }
 
     // [1] System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()
     static int Method1()
     {
-        return typeof(string).GetMembers()[0].MemberType.GetHashCode();
+        // TODO: System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes() could not be auto-generated
+        return 0;
     }
 
     // [2] System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()
     static int Method2()
     {
-        return typeof(string).GetMembers()[0].DeclaringType.GetHashCode();
+        // TODO: System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type() could not be auto-generated
+        return 0;
     }
 
     // [3] System.Private.CoreLib/System.Reflection.MemberInfo::get_ReflectedType:System.Type()
     static int Method3()
     {
-        return typeof(string).GetMembers()[0].ReflectedType.GetHashCode();
+        return (int)(default(MemberInfo)!.ReflectedType);
     }
 
     // [4] System.Private.CoreLib/System.Reflection.MemberInfo::get_MetadataToken:System.Int32()
     static int Method4()
     {
-        return typeof(string).GetMembers()[0].MetadataToken;
+        return default(MemberInfo)!.MetadataToken;
     }
 
     // [5] System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()
     static int Method5()
     {
-        return typeof(string).GetMethod("ToString", System.Type.EmptyTypes)!.ReturnType.GetHashCode();
+        // TODO: System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type() could not be auto-generated
+        return 0;
     }
 
     // [6] System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()
     static int Method6()
     {
-        return typeof(string).GetMethod("ToString", System.Type.EmptyTypes)!.GetBaseDefinition().GetHashCode();
+        return (int)(default(MethodInfo)!.GetBaseDefinition());
     }
 
     // [7] System.Private.CoreLib/System.Reflection.MethodBase::get_MethodHandle:System.RuntimeMethodHandle()
     static int Method7()
     {
-        return typeof(string).GetMethod("ToString", System.Type.EmptyTypes)!.MethodHandle.GetHashCode();
+        return (int)(default(MethodInfo)!.MethodHandle);
     }
 
     // [8] System.Private.CoreLib/System.Reflection.MethodBase::get_CallingConvention:System.Reflection.CallingConventions()
     static int Method8()
     {
-        return typeof(string).GetMethod("ToString", System.Type.EmptyTypes)!.CallingConvention.GetHashCode();
+        return (int)(default(MethodInfo)!.CallingConvention);
     }
 
     // [9] System.Private.CoreLib/System.Reflection.MethodBase::get_IsPublic:System.Boolean()
     static int Method9()
     {
-        return (typeof(string).GetMethod("ToString", System.Type.EmptyTypes)!.IsPublic ? 1 : 0);
+        return (int)(default(MethodInfo)!.IsPublic);
     }
 
     // [10] System.Private.CoreLib/System.Reflection.MethodBase::get_IsStatic:System.Boolean()
     static int Method10()
     {
-        return (typeof(string).GetMethod("ToString", System.Type.EmptyTypes)!.IsStatic ? 1 : 0);
+        return (int)(default(MethodInfo)!.IsStatic);
     }
 
     // [11] System.Private.CoreLib/System.Reflection.MethodBase::get_IsVirtual:System.Boolean()
     static int Method11()
     {
-        return (typeof(string).GetMethod("ToString", System.Type.EmptyTypes)!.IsVirtual ? 1 : 0);
+        return (int)(default(MethodInfo)!.IsVirtual);
     }
 
     // [12] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
     static int Method12()
     {
-        return typeof(string).GetField("Empty")!.FieldType.GetHashCode();
+        // TODO: System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type() could not be auto-generated
+        return 0;
     }
 
     // [13] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsStatic:System.Boolean()
     static int Method13()
     {
-        return (typeof(string).GetField("Empty")!.IsStatic ? 1 : 0);
+        return (int)(default(FieldInfo)!.IsStatic);
     }
 
     // [14] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsInitOnly:System.Boolean()
     static int Method14()
     {
-        return (typeof(string).GetField("Empty")!.IsInitOnly ? 1 : 0);
+        return (int)(default(FieldInfo)!.IsInitOnly);
     }
 
     // [15] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsLiteral:System.Boolean()
     static int Method15()
     {
-        return (typeof(string).GetField("Empty")!.IsLiteral ? 1 : 0);
+        return (int)(default(FieldInfo)!.IsLiteral);
     }
 
     // [16] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
     static int Method16()
     {
-        return typeof(string).GetProperty("Length")!.PropertyType.GetHashCode();
+        // TODO: System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type() could not be auto-generated
+        return 0;
     }
 
     // [17] System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanRead:System.Boolean()
     static int Method17()
     {
-        return (typeof(string).GetProperty("Length")!.CanRead ? 1 : 0);
+        return (int)(default(PropertyInfo)!.CanRead);
     }
 
     // [18] System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanWrite:System.Boolean()
     static int Method18()
     {
-        return (typeof(string).GetProperty("Length")!.CanWrite ? 1 : 0);
+        return (int)(default(PropertyInfo)!.CanWrite);
     }
 
     // [19] System.Private.CoreLib/System.Reflection.PropertyInfo::GetIndexParameters:System.Reflection.ParameterInfo[]()
     static int Method19()
     {
-        return typeof(string).GetProperty("Length")!.GetIndexParameters().GetHashCode();
+        return (int)(default(PropertyInfo)!.GetIndexParameters());
     }
 
     // [20] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldHandle:System.RuntimeFieldHandle()
     static int Method20()
     {
-        return typeof(string).GetField("Empty")!.FieldHandle.GetHashCode();
+        return (int)(default(FieldInfo)!.FieldHandle);
     }
 
     // [21] System.Private.CoreLib/System.Reflection.ConstructorInfo::get_CallingConvention:System.Reflection.CallingConventions()
     static int Method21()
     {
-        return typeof(object).GetConstructor(System.Type.EmptyTypes)!.CallingConvention.GetHashCode();
+        return (int)(default(ConstructorInfo)!.CallingConvention);
     }
 
 }

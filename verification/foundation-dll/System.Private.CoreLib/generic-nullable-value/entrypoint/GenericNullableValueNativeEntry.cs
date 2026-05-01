@@ -28,19 +28,20 @@ public static class GenericNullableValueNativeEntry
     // [0] System.Private.CoreLib/System.Nullable`1::get_HasValue:System.Boolean()
     static int Method0()
     {
-        return (new Nullable<int>(42).HasValue ? 1 : 0);
+        return (int)(default(Nullable<int>).HasValue);
     }
 
     // [1] System.Private.CoreLib/System.Nullable`1::get_Value:T()
     static int Method1()
     {
-        return new Nullable<int>(42).Value.GetHashCode();
+        // TODO: System.Private.CoreLib/System.Nullable`1::get_Value:T() could not be auto-generated
+        return 0;
     }
 
     // [2] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()
     static int Method2()
     {
-        return new Nullable<int>(42).GetValueOrDefault().GetHashCode();
+        return (int)(default(Nullable<int>).GetValueOrDefault());
     }
 
     // [3] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)
@@ -53,25 +54,25 @@ public static class GenericNullableValueNativeEntry
     // [4] System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)
     static int Method4()
     {
-        return (new Nullable<int>(42).Equals(42) ? 1 : 0);
+        return (int)(default(Nullable<int>).Equals(42));
     }
 
     // [5] System.Private.CoreLib/System.Nullable`1::GetHashCode:System.Int32()
     static int Method5()
     {
-        return new Nullable<int>(42).GetHashCode();
+        return default(Nullable<int>).GetHashCode();
     }
 
     // [6] System.Private.CoreLib/System.Nullable`1::ToString:System.String()
     static int Method6()
     {
-        return (new Nullable<int>(42).ToString()?.GetHashCode() ?? 0);
+        return (int)(default(Nullable<int>).ToString());
     }
 
     // [7] System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
     static int Method7()
     {
-        return (((ValueType)42).Equals(42) ? 1 : 0);
+        return (int)(((ValueType)42).Equals(42));
     }
 
     // [8] System.Private.CoreLib/System.ValueType::GetHashCode:System.Int32()
@@ -83,7 +84,7 @@ public static class GenericNullableValueNativeEntry
     // [9] System.Private.CoreLib/System.ValueType::ToString:System.String()
     static int Method9()
     {
-        return (((ValueType)42).ToString()?.GetHashCode() ?? 0);
+        return (int)(((ValueType)42).ToString());
     }
 
 }

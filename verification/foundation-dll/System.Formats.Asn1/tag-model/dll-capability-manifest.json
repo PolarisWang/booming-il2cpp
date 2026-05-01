@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Formats.Asn1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.Formats.Asn1/tag-model"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 39
+}

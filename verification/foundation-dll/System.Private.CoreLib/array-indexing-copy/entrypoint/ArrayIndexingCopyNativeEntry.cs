@@ -53,8 +53,9 @@ public static class ArrayIndexingCopyNativeEntry
     // [3] System.Private.CoreLib/System.Array::Resize:System.Void(T[]&,System.Int32)
     static int Method3()
     {
-        // TODO: System.Private.CoreLib/System.Array::Resize:System.Void(T[]&,System.Int32) could not be auto-generated
-        return 0;
+    var refLocal_0 = Array.Empty<T>();
+        Array.Resize(ref refLocal_0, 42);
+        return (int)refLocal_0;
     }
 
     // [4] System.Private.CoreLib/System.Array::Sort:System.Void(System.Array)
@@ -111,7 +112,7 @@ public static class ArrayIndexingCopyNativeEntry
     // [12] System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)
     static int Method12()
     {
-        return (new int[1].GetValue(0)?.GetHashCode() ?? 0);
+        return (int)(new int[1].GetValue(0));
     }
 
 }

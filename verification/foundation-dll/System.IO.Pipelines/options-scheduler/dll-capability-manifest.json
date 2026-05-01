@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.IO.Pipelines/options-scheduler"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 52
+}

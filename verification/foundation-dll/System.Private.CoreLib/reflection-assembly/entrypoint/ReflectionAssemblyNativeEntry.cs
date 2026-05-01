@@ -43,127 +43,127 @@ public static class ReflectionAssemblyNativeEntry
     // [0] System.Private.CoreLib/System.Reflection.Assembly::GetExecutingAssembly:System.Reflection.Assembly()
     static int Method0()
     {
-        return Assembly.GetExecutingAssembly().GetHashCode();
+        return (int)(typeof(byte).Assembly.GetExecutingAssembly());
     }
 
     // [1] System.Private.CoreLib/System.Reflection.Assembly::GetCallingAssembly:System.Reflection.Assembly()
     static int Method1()
     {
-        return Assembly.GetCallingAssembly().GetHashCode();
+        return (int)(typeof(byte).Assembly.GetCallingAssembly());
     }
 
     // [2] System.Private.CoreLib/System.Reflection.Assembly::GetEntryAssembly:System.Reflection.Assembly()
     static int Method2()
     {
-        return Assembly.GetEntryAssembly().GetHashCode();
+        return (int)(typeof(byte).Assembly.GetEntryAssembly());
     }
 
     // [3] System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()
     static int Method3()
     {
-        return typeof(byte).Assembly.GetName().GetHashCode();
+        return (int)(typeof(byte).Assembly.GetName());
     }
 
     // [4] System.Private.CoreLib/System.Reflection.Assembly::get_FullName:System.String()
     static int Method4()
     {
-        return (typeof(byte).Assembly.FullName?.GetHashCode() ?? 0);
+        return (int)(typeof(byte).Assembly.FullName);
     }
 
     // [5] System.Private.CoreLib/System.Reflection.Assembly::get_Location:System.String()
     static int Method5()
     {
-        return (typeof(byte).Assembly.Location?.GetHashCode() ?? 0);
+        return (int)(typeof(byte).Assembly.Location);
     }
 
     // [6] System.Private.CoreLib/System.Reflection.Assembly::get_ImageRuntimeVersion:System.String()
     static int Method6()
     {
-        return (typeof(byte).Assembly.ImageRuntimeVersion?.GetHashCode() ?? 0);
+        return (int)(typeof(byte).Assembly.ImageRuntimeVersion);
     }
 
     // [7] System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()
     static int Method7()
     {
-        return typeof(byte).Assembly.GetTypes().GetHashCode();
+        return (int)(typeof(byte).Assembly.GetTypes());
     }
 
     // [8] System.Private.CoreLib/System.Reflection.Assembly::GetExportedTypes:System.Type[]()
     static int Method8()
     {
-        return typeof(byte).Assembly.GetExportedTypes().GetHashCode();
+        return (int)(typeof(byte).Assembly.GetExportedTypes());
     }
 
     // [9] System.Private.CoreLib/System.Reflection.Assembly::GetForwardedTypes:System.Type[]()
     static int Method9()
     {
-        return typeof(byte).Assembly.GetForwardedTypes().GetHashCode();
+        return (int)(typeof(byte).Assembly.GetForwardedTypes());
     }
 
     // [10] System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)
     static int Method10()
     {
-        return typeof(byte).Assembly.GetType("hello").GetHashCode();
+        return (int)(typeof(byte).Assembly.GetType("hello"));
     }
 
     // [11] System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean)
     static int Method11()
     {
-        return typeof(byte).Assembly.GetType("hello", true).GetHashCode();
+        return (int)(typeof(byte).Assembly.GetType("hello", true));
     }
 
     // [12] System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)
     static int Method12()
     {
-        return typeof(byte).Assembly.GetModule("hello").GetHashCode();
+        return (int)(typeof(byte).Assembly.GetModule("hello"));
     }
 
     // [13] System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()
     static int Method13()
     {
-        return typeof(byte).Assembly.GetModules().GetHashCode();
+        return (int)(typeof(byte).Assembly.GetModules());
     }
 
     // [14] System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceStream:System.IO.Stream(System.String)
     static int Method14()
     {
-        return typeof(byte).Assembly.GetManifestResourceStream("hello").GetHashCode();
+        return (int)(typeof(byte).Assembly.GetManifestResourceStream("hello"));
     }
 
     // [15] System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceNames:System.String[]()
     static int Method15()
     {
-        return typeof(byte).Assembly.GetManifestResourceNames().GetHashCode();
+        return (int)(typeof(byte).Assembly.GetManifestResourceNames());
     }
 
     // [16] System.Private.CoreLib/System.Reflection.Assembly::get_EntryPoint:System.Reflection.MethodInfo()
     static int Method16()
     {
-        return typeof(byte).Assembly.EntryPoint.GetHashCode();
+        return (int)(typeof(byte).Assembly.EntryPoint);
     }
 
     // [17] System.Private.CoreLib/System.Reflection.AssemblyName::get_Name:System.String()
     static int Method17()
     {
-        return (typeof(byte).Assembly.GetName().Name?.GetHashCode() ?? 0);
+        return (int)(AssemblyName.Name);
     }
 
     // [18] System.Private.CoreLib/System.Reflection.AssemblyName::get_Version:System.Version()
     static int Method18()
     {
-        return typeof(byte).Assembly.GetName().Version.GetHashCode();
+        return (int)(AssemblyName.Version);
     }
 
     // [19] System.Private.CoreLib/System.Reflection.AssemblyName::get_CultureInfo:System.Globalization.CultureInfo()
     static int Method19()
     {
-        return typeof(byte).Assembly.GetName().CultureInfo.GetHashCode();
+        return (int)(AssemblyName.CultureInfo);
     }
 
     // [20] System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()
     static int Method20()
     {
-        return typeof(byte).Assembly.GetHashCode();
+        return (int)(typeof(byte).Assembly);
     }
 
     // [21] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)

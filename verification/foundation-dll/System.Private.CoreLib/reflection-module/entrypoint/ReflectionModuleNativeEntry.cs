@@ -25,37 +25,37 @@ public static class ReflectionModuleNativeEntry
     // [0] System.Private.CoreLib/System.Reflection.Module::get_FullyQualifiedName:System.String()
     static int Method0()
     {
-        return (typeof(byte).Assembly.GetModules()[0].FullyQualifiedName?.GetHashCode() ?? 0);
+        return (int)(Module.FullyQualifiedName);
     }
 
     // [1] System.Private.CoreLib/System.Reflection.Module::get_Name:System.String()
     static int Method1()
     {
-        return (typeof(byte).Assembly.GetModules()[0].Name?.GetHashCode() ?? 0);
+        return (int)(Module.Name);
     }
 
     // [2] System.Private.CoreLib/System.Reflection.Module::get_Assembly:System.Reflection.Assembly()
     static int Method2()
     {
-        return typeof(byte).Assembly.GetModules()[0].Assembly.GetHashCode();
+        return (int)(Module.Assembly);
     }
 
     // [3] System.Private.CoreLib/System.Reflection.Module::GetType:System.Type(System.String)
     static int Method3()
     {
-        return typeof(byte).Assembly.GetModules()[0].GetType("hello").GetHashCode();
+        return (int)(Module.GetType("hello"));
     }
 
     // [4] System.Private.CoreLib/System.Reflection.Module::GetTypes:System.Type[]()
     static int Method4()
     {
-        return typeof(byte).Assembly.GetModules()[0].GetTypes().GetHashCode();
+        return (int)(Module.GetTypes());
     }
 
     // [5] System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)
     static int Method5()
     {
-        return typeof(byte).Assembly.GetModules()[0].GetCustomAttributes(typeof(byte)).GetHashCode();
+        return (int)(Module.GetCustomAttributes(typeof(byte)));
     }
 
 }

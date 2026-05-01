@@ -42,31 +42,31 @@ public static class MathNumericsNativeEntry
     // [1] System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)
     static int Method1()
     {
-        return unchecked((int)Math.Abs(42.0));
+        return (int)(Math.Abs(42.0));
     }
 
     // [2] System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)
     static int Method2()
     {
-        return unchecked((int)Math.Ceiling(42.0));
+        return (int)(Math.Ceiling(42.0));
     }
 
     // [3] System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)
     static int Method3()
     {
-        return unchecked((int)Math.Floor(42.0));
+        return (int)(Math.Floor(42.0));
     }
 
     // [4] System.Private.CoreLib/System.Math::Round:System.Double(System.Double)
     static int Method4()
     {
-        return unchecked((int)Math.Round(42.0));
+        return (int)(Math.Round(42.0));
     }
 
     // [5] System.Private.CoreLib/System.Math::Round:System.Double(System.Double,System.Int32)
     static int Method5()
     {
-        return unchecked((int)Math.Round(42.0));
+        return (int)(Math.Round(42.0));
     }
 
     // [6] System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)
@@ -78,7 +78,7 @@ public static class MathNumericsNativeEntry
     // [7] System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)
     static int Method7()
     {
-        return unchecked((int)Math.Max(42.0, 42.0));
+        return (int)(Math.Max(42.0, 42.0));
     }
 
     // [8] System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)
@@ -90,43 +90,43 @@ public static class MathNumericsNativeEntry
     // [9] System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)
     static int Method9()
     {
-        return unchecked((int)Math.Sqrt(42.0));
+        return (int)(Math.Sqrt(42.0));
     }
 
     // [10] System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)
     static int Method10()
     {
-        return unchecked((int)Math.Pow(42.0, 42.0));
+        return (int)(Math.Pow(42.0, 42.0));
     }
 
     // [11] System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)
     static int Method11()
     {
-        return unchecked((int)Math.Sin(42.0));
+        return (int)(Math.Sin(42.0));
     }
 
     // [12] System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)
     static int Method12()
     {
-        return unchecked((int)Math.Cos(42.0));
+        return (int)(Math.Cos(42.0));
     }
 
     // [13] System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)
     static int Method13()
     {
-        return unchecked((int)Math.BigMul(42, 42));
+        return (int)(Math.BigMul(42, 42));
     }
 
     // [14] System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)
     static int Method14()
     {
-        return BitConverter.GetBytes(42).GetHashCode();
+        return (int)(BitConverter.GetBytes(42));
     }
 
     // [15] System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)
     static int Method15()
     {
-        return BitConverter.GetBytes(42.0).GetHashCode();
+        return (int)(BitConverter.GetBytes(42.0));
     }
 
     // [16] System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)

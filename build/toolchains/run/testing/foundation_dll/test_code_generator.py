@@ -88,6 +88,52 @@ INSTANCE_EXPR_MAP: dict[str, str] = {
     "Thread": "Thread.CurrentThread",
 }
 
+INSTANCE_ALTERNATIVE_EXPR_MAP: dict[str, str] = {
+    "string": '"world"',
+    "String": '"world"',
+    "DateTime": "new DateTime(2024, 6, 15)",
+    "TimeSpan": "TimeSpan.FromDays(1)",
+    "Type": "typeof(int)",
+    "ValueType": "((ValueType)99)",
+    "Array": "new int[3]",
+    "Nullable": "default(Nullable<int>)",
+    "Span": "default(Span<byte>)",
+    "ReadOnlySpan": "default(ReadOnlySpan<byte>)",
+    "Memory": "default(Memory<byte>)",
+    "List": "new List<int>()",
+    "Dictionary": "new Dictionary<string, int>()",
+    "Stream": "new MemoryStream()",
+    "TextReader": 'new StringReader("world")',
+    "TextWriter": "new StringWriter()",
+    "BinaryReader": "default(BinaryReader)!",
+    "BinaryWriter": "default(BinaryWriter)!",
+    "Task": "Task.CompletedTask",
+    "Thread": "Thread.CurrentThread",
+    "CultureInfo": "CultureInfo.InvariantCulture",
+    "CompareInfo": "CultureInfo.InvariantCulture.CompareInfo",
+    "TextInfo": "CultureInfo.InvariantCulture.TextInfo",
+    "RuntimeHelpers": "null!",
+    "Object": "new object()",
+    "Guid": "Guid.NewGuid()",
+    "Exception": "new Exception()",
+    "Enum": "DayOfWeek.Sunday",
+    "Delegate": "default(Delegate)!",
+    "MulticastDelegate": "default(MulticastDelegate)!",
+    "Attribute": "default(Attribute)!",
+    "Random": "new Random()",
+    "HashCode": "default(HashCode)",
+    "RuntimeWrappedException": "new RuntimeWrappedException(99)",
+    "PropertyInfo": "default(PropertyInfo)!",
+    "MemberInfo": "default(MemberInfo)!",
+    "MethodBase": "default(MethodInfo)!",
+    "FieldInfo": "default(FieldInfo)!",
+    "MethodInfo": "default(MethodInfo)!",
+    "ConstructorInfo": "default(ConstructorInfo)!",
+    "EventInfo": "default(EventInfo)!",
+    "ParameterInfo": "default(ParameterInfo)!",
+    "Assembly": "typeof(byte).Assembly",
+}
+
 # Types whose methods are all static (no instance required).
 STATIC_TYPES = frozenset({
     "Convert", "Math", "MemoryMarshal", "RuntimeHelpers",
@@ -409,6 +455,40 @@ TYPE_DEFAULT_MAP: dict[str, str] = {
     "System.RuntimeFieldHandle": "default(System.RuntimeFieldHandle)",
 }
 
+TYPE_ALTERNATIVE_MAP: dict[str, str] = {
+    "System.Boolean": "false",
+    "System.Byte": "(byte)7",
+    "System.SByte": "(sbyte)7",
+    "System.Int16": "(short)7",
+    "System.UInt16": "(ushort)7",
+    "System.Int32": "7",
+    "System.UInt32": "7u",
+    "System.Int64": "7L",
+    "System.UInt64": "7uL",
+    "System.Single": "7.0f",
+    "System.Double": "7.0",
+    "System.Decimal": "7m",
+    "System.Char": "'Z'",
+    "System.String": '"world"',
+    "System.Byte[]": "new byte[] { 9, 8, 7 }",
+    "System.Array": "Array.Empty<byte>()",
+    "System.IntPtr": "IntPtr.Zero",
+    "System.UIntPtr": "UIntPtr.Zero",
+    "System.Type": "typeof(int)",
+    "System.Guid": "Guid.Empty",
+    "System.TimeSpan": "TimeSpan.FromDays(1)",
+    "System.DateTime": "new DateTime(2024, 6, 15)",
+    "System.DateOnly": "new DateOnly(2024, 12, 25)",
+    "System.TimeOnly": "new TimeOnly(12, 30)",
+    "System.Uri": 'new Uri("http://example.com")',
+    "System.Version": "new Version(2, 0)",
+    "System.Object": "99",
+    "System.Enum": "DayOfWeek.Sunday",
+    "System.ValueType": "99",
+}
+
+
+
 
 def _parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
     """Parse a methodSubjectId into its components.
@@ -541,6 +621,147 @@ def _default_expr(csharp_type: str) -> str:
     if bare.endswith("[]"):
         return f"Array.Empty<{bare[:-2]}>()"
     return "null!"
+
+
+def _has_blocked_param(param_types: list[str]) -> bool:
+    """Check if any parameter type is blocked from auto-generation in entrypoint context."""
+    for pt in param_types:
+        pt = pt.strip()
+        bare = pt.rstrip("&*?").strip()
+        # Pointer parameters need unsafe context
+        if pt.endswith("*"):
+            return True
+        # Delegate-like types
+        if bare in ("System.Delegate", "System.MulticastDelegate",
+                     "System.EventHandler", "System.EventHandler`1"):
+            return True
+        # Generic type parameter (not concrete type)
+        if "." not in bare and "`" not in bare:
+            if bare and ((len(bare) == 1 and bare.isupper()) or
+                         (bare.startswith("T") and len(bare) > 1 and bare[1].isupper())):
+                return True
+    return False
+
+
+def _has_ref_param(param_types: list[str]) -> bool:
+    """Check if any parameter is a ref parameter."""
+    return any(pt.strip().endswith("&") for pt in param_types)
+
+
+def _default_expr_for_type(csharp_type: str, type_map: dict[str, str] | None = None) -> str:
+    """Generate default expression using an alternative type map."""
+    tm = type_map or TYPE_DEFAULT_MAP
+    bare = csharp_type.rstrip("&*?").strip()
+    if bare in tm:
+        return tm[bare]
+    if bare.endswith("[]"):
+        return f"Array.Empty<{bare[:-2]}>()"
+    return "null!"
+
+
+def _build_call_expr_with_args(parsed: dict[str, Any], args: str, instance_map: dict[str, str] | None = None) -> str:
+    """Build call expression from pre-computed args (shared by ref and non-ref paths)."""
+    type_name = parsed["type_name"]
+    method_name = parsed["method_name"]
+    param_count = len(parsed["param_types"])
+    im = instance_map or INSTANCE_EXPR_MAP
+
+    override = _METHOD_OVERRIDES.get((type_name, method_name, param_count))
+    if override is not None and override != "skip":
+        return override
+
+    if method_name in (".ctor", ".cctor"):
+        return _build_ctor_expr(type_name, args)
+
+    expr = _try_property_access(type_name, method_name, args)
+    if expr is not None:
+        return expr
+
+    if (type_name, method_name, param_count) in _STATIC_BY_SIGNATURE:
+        return f"{type_name}.{method_name}({args})"
+
+    static_methods = STATIC_METHODS_BY_TYPE.get(type_name, frozenset())
+    if method_name in static_methods:
+        return f"{type_name}.{method_name}({args})"
+
+    if type_name in STATIC_TYPES:
+        return f"{type_name}.{method_name}({args})"
+
+    inst = im.get(type_name)
+    if inst is not None:
+        return f"{inst}.{method_name}({args})"
+
+    return f"{type_name}.{method_name}({args})"
+
+
+def _build_call_expr_with_refs(
+    parsed: dict[str, Any],
+    type_map: dict[str, str] | None = None,
+    instance_map: dict[str, str] | None = None,
+) -> tuple[str, str]:
+    """Build a C# call expression for methods with ref parameters.
+
+    Returns (prelude, call_expr) where prelude contains local variable
+    declarations for ref params (empty string if none).
+    """
+    type_name = parsed["type_name"]
+    method_name = parsed["method_name"]
+    param_types = parsed["param_types"]
+    tm = type_map or TYPE_DEFAULT_MAP
+    im = instance_map or INSTANCE_EXPR_MAP
+
+    param_count = len(param_types)
+    override = _METHOD_OVERRIDES.get((type_name, method_name, param_count))
+    if override is not None and override != "skip":
+        return ("", override)
+
+    prelude_lines: list[str] = []
+    call_args: list[str] = []
+
+    for i, pt in enumerate(param_types):
+        pt = pt.strip()
+        if pt.endswith("&"):
+            bare = pt.rstrip("&").strip()
+            default_val = _default_expr_for_type(bare, tm)
+            local_name = f"refLocal_{i}"
+            prelude_lines.append(f"    var {local_name} = {default_val};")
+            call_args.append(f"ref {local_name}")
+        else:
+            call_args.append(_default_expr_for_type(pt, tm))
+
+    prelude = "\n".join(prelude_lines)
+    call_expr = _build_call_expr_with_args(parsed, ", ".join(call_args), im)
+    return (prelude, call_expr)
+
+
+def _ref_return_expr(parsed: dict[str, Any]) -> str:
+    """Build a checksum expression from ref parameter values for void return methods."""
+    param_types = parsed["param_types"]
+    ref_locals = [
+        f"refLocal_{i}"
+        for i, pt in enumerate(param_types)
+        if pt.strip().endswith("&")
+    ]
+    if not ref_locals:
+        return "0"
+    return " ^ ".join(ref_locals)
+
+
+def _cast_return_to_int(ret: str, call_expr: str) -> str:
+    """Cast a method's return value to int for checksum return."""
+    ret = ret.strip()
+    if ret == "System.Int32":
+        return call_expr
+    if ret in ("System.Int64", "System.UInt64", "System.UInt32"):
+        return f"(int)({call_expr})"
+    if ret in ("System.Byte", "System.SByte", "System.Int16",
+               "System.UInt16", "System.Char", "System.Boolean"):
+        return f"(int)({call_expr})"
+    if ret in ("System.Single", "System.Double", "System.Decimal"):
+        return f"(int)({call_expr})"
+    if ret in ("System.IntPtr", "System.UIntPtr"):
+        return f"(int)({call_expr})"
+    return f"(int)({call_expr})"
 
 
 def _is_auto_callable(parsed: dict[str, Any]) -> bool:

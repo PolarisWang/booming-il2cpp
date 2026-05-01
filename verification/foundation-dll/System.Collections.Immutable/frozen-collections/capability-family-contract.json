@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Collections.Immutable/frozen-collections",
+  "displayName": "Frozen Collections",
+  "methodSubjectIds": [
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::FrozenDictionary::Void(System.Object)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::get_Property:System.Void()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Method1:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Method2:System.Void(P0, P1)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Validate:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::FrozenSet::Void(System.Object)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::get_Property:System.Void()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Method1:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Method2:System.Void(P0, P1)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Validate:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::get_Value:System.Void()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::set_Value:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::get_Count:System.Void()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::set_Count:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::get_IsEmpty:System.Void()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::set_IsEmpty:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::get_Key:System.Void()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::set_Key:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::get_Value:System.Void()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::set_Value:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::get_Count:System.Void()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::set_Count:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::get_IsEmpty:System.Void()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::set_IsEmpty:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::get_Key:System.Void()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::set_Key:System.Void(P0)"
+  ],
+  "methodSubjectCount": 26,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

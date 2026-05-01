@@ -36,109 +36,111 @@ public static class ConvertCharNativeEntry
     // [0] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)
     static int Method0()
     {
-        return (int)Convert.ToChar(true);
+        return (int)(Convert.ToChar(true));
     }
 
     // [1] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)
     static int Method1()
     {
-        return (int)Convert.ToChar((byte)42);
+        return (int)(Convert.ToChar((byte)42));
     }
 
     // [2] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)
     static int Method2()
     {
-        return (int)Convert.ToChar('A');
+        return (int)(Convert.ToChar('A'));
     }
 
     // [3] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)
     static int Method3()
     {
-        return (int)Convert.ToChar(DateTime.UtcNow);
+        return (int)(Convert.ToChar(DateTime.UtcNow));
     }
 
     // [4] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)
     static int Method4()
     {
-        return (int)Convert.ToChar(42m);
+        return (int)(Convert.ToChar(42m));
     }
 
     // [5] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)
     static int Method5()
     {
-        return (int)Convert.ToChar(42.0);
+        return (int)(Convert.ToChar(42.0));
     }
 
     // [6] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)
     static int Method6()
     {
-        return (int)Convert.ToChar((short)42);
+        return (int)(Convert.ToChar((short)42));
     }
 
     // [7] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)
     static int Method7()
     {
-        return (int)Convert.ToChar(42);
+        return (int)(Convert.ToChar(42));
     }
 
     // [8] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)
     static int Method8()
     {
-        return (int)Convert.ToChar(42L);
+        return (int)(Convert.ToChar(42L));
     }
 
     // [9] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)
     static int Method9()
     {
-        return (int)Convert.ToChar(42);
+        return (int)(Convert.ToChar(42));
     }
 
     // [10] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)
     static int Method10()
     {
-        return (int)Convert.ToChar("A", System.Globalization.CultureInfo.InvariantCulture);
+        // TODO: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider) could not be auto-generated
+        return 0;
     }
 
     // [11] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)
     static int Method11()
     {
-        return (int)Convert.ToChar((sbyte)42);
+        return (int)(Convert.ToChar((sbyte)42));
     }
 
     // [12] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)
     static int Method12()
     {
-        return (int)Convert.ToChar(42.0f);
+        return (int)(Convert.ToChar(42.0f));
     }
 
     // [13] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)
     static int Method13()
     {
-        return (int)Convert.ToChar("hello");
+        return (int)(Convert.ToChar("hello"));
     }
 
     // [14] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)
     static int Method14()
     {
-        return (int)Convert.ToChar("A", System.Globalization.CultureInfo.InvariantCulture);
+        // TODO: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider) could not be auto-generated
+        return 0;
     }
 
     // [15] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)
     static int Method15()
     {
-        return (int)Convert.ToChar((ushort)42);
+        return (int)(Convert.ToChar((ushort)42));
     }
 
     // [16] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)
     static int Method16()
     {
-        return (int)Convert.ToChar(42u);
+        return (int)(Convert.ToChar(42u));
     }
 
     // [17] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)
     static int Method17()
     {
-        return (int)Convert.ToChar(42uL);
+        return (int)(Convert.ToChar(42uL));
     }
 
 }

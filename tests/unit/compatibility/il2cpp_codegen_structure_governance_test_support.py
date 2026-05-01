@@ -793,6 +793,14 @@ NATIVE_AOT_EXTERNAL_RUNTIME_HELPERS_PATH = (
     / "RuntimeSupport"
     / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs"
 )
+NATIVE_AOT_RUNTIME_HELPER_SHAPE_REGISTRY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "RuntimeHelperShapeRegistry.cs"
+)
 NATIVE_AOT_OBJECT_MODEL_EMISSION_PATH = (
     REPO_ROOT
     / "src"

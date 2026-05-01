@@ -28,49 +28,50 @@ public static class ReflectionActivationNativeEntry
     // [0] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)
     static int Method0()
     {
-        return (Activator.CreateInstance(typeof(byte))?.GetHashCode() ?? 0);
+        return (int)(Activator.CreateInstance(typeof(byte)));
     }
 
     // [1] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])
     static int Method1()
     {
-        return (Activator.CreateInstance(typeof(byte), Array.Empty<System.Object>())?.GetHashCode() ?? 0);
+        return (int)(Activator.CreateInstance(typeof(byte), Array.Empty<System.Object>()));
     }
 
     // [2] System.Private.CoreLib/System.Activator::CreateInstance:T()
     static int Method2()
     {
-        return Activator.CreateInstance<byte>().GetHashCode();
+        return (int)(Activator.CreateInstance());
     }
 
     // [3] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     static int Method3()
     {
-        return (Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!)?.GetHashCode() ?? 0);
+        return (int)(Activator.CreateInstance(typeof(byte), null!, null!, Array.Empty<System.Object>(), null!));
     }
 
     // [4] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
     static int Method4()
     {
-        return Array.CreateInstance(typeof(byte), 42).GetHashCode();
+        return (int)(Array.CreateInstance(typeof(byte), 42));
     }
 
     // [5] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)
     static int Method5()
     {
-        return Array.CreateInstance(typeof(byte), 42, 42).GetHashCode();
+        return (int)(Array.CreateInstance(typeof(byte), 42, 42));
     }
 
     // [6] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32[])
     static int Method6()
     {
-        return Array.CreateInstance(typeof(byte), Array.Empty<System.Int32>()).GetHashCode();
+        return (int)(Array.CreateInstance(typeof(byte), Array.Empty<System.Int32>()));
     }
 
     // [7] System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])
     static int Method7()
     {
-        return (typeof(object).GetConstructor(System.Type.EmptyTypes)!.Invoke(null)?.GetHashCode() ?? 0);
+        // TODO: System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[]) could not be auto-generated
+        return 0;
     }
 
 }

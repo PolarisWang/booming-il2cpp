@@ -25,19 +25,19 @@ public static class ObjectEqualityIdentityNativeEntry
     // [0] System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)
     static int Method0()
     {
-        return (new object().Equals(42) ? 1 : 0);
+        return (int)(new object().Equals(42));
     }
 
     // [1] System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)
     static int Method1()
     {
-        return (Object.Equals(42, 42) ? 1 : 0);
+        return (int)(Object.Equals(42, 42));
     }
 
     // [2] System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)
     static int Method2()
     {
-        return (Object.ReferenceEquals(42, 42) ? 1 : 0);
+        return (int)(Object.ReferenceEquals(42, 42));
     }
 
     // [3] System.Private.CoreLib/System.Object::GetHashCode:System.Int32()
@@ -49,13 +49,13 @@ public static class ObjectEqualityIdentityNativeEntry
     // [4] System.Private.CoreLib/System.Object::ToString:System.String()
     static int Method4()
     {
-        return (new object().ToString()?.GetHashCode() ?? 0);
+        return (int)(new object().ToString());
     }
 
     // [5] System.Private.CoreLib/System.Object::GetType:System.Type()
     static int Method5()
     {
-        return new object().GetType().GetHashCode();
+        return (int)(new object().GetType());
     }
 
     // [6] System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()

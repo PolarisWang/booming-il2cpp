@@ -1555,71 +1555,31 @@
       "exceptionRegions": [],
       "instructions": [
         {
-          "op": "ldstr",
-          "operand": "A",
+          "op": "ldc.i4",
+          "operand": 0,
           "ilOffset": 1,
-          "resultType": "System.String"
-        },
-        {
-          "op": "call",
-          "ilOffset": 6,
-          "resultType": "System.Globalization.CultureInfo",
-          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "call",
-          "ilOffset": 11,
-          "resultType": "System.Char",
-          "callee": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
+          "resultType": "System.Int32"
         },
         {
           "op": "stloc",
           "operand": 0,
-          "ilOffset": 16,
+          "ilOffset": 2,
           "resultType": "System.Void"
         },
         {
           "op": "br",
-          "operand": 19,
-          "ilOffset": 17,
+          "operand": 5,
+          "ilOffset": 3,
           "resultType": "System.Void"
         },
         {
           "op": "ldloc",
           "operand": 0,
-          "ilOffset": 19
+          "ilOffset": 5
         },
         {
           "op": "ret",
-          "ilOffset": 20
+          "ilOffset": 6
         }
       ]
     },
@@ -1871,71 +1831,31 @@
       "exceptionRegions": [],
       "instructions": [
         {
-          "op": "ldstr",
-          "operand": "A",
+          "op": "ldc.i4",
+          "operand": 0,
           "ilOffset": 1,
-          "resultType": "System.String"
-        },
-        {
-          "op": "call",
-          "ilOffset": 6,
-          "resultType": "System.Globalization.CultureInfo",
-          "callee": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
-        },
-        {
-          "op": "call",
-          "ilOffset": 11,
-          "resultType": "System.Char",
-          "callee": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4
+          "resultType": "System.Int32"
         },
         {
           "op": "stloc",
           "operand": 0,
-          "ilOffset": 16,
+          "ilOffset": 2,
           "resultType": "System.Void"
         },
         {
           "op": "br",
-          "operand": 19,
-          "ilOffset": 17,
+          "operand": 5,
+          "ilOffset": 3,
           "resultType": "System.Void"
         },
         {
           "op": "ldloc",
           "operand": 0,
-          "ilOffset": 19
+          "ilOffset": 5
         },
         {
           "op": "ret",
-          "ilOffset": 20
+          "ilOffset": 6
         }
       ]
     },

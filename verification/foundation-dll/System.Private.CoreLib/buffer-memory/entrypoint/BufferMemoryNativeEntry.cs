@@ -35,8 +35,10 @@ public static class BufferMemoryNativeEntry
     // [1] System.Private.CoreLib/System.Buffer::BulkMoveWithWriteBarrier:System.Void(System.Byte&,System.Byte&,System.UIntPtr)
     static int Method1()
     {
-        // TODO: System.Private.CoreLib/System.Buffer::BulkMoveWithWriteBarrier:System.Void(System.Byte&,System.Byte&,System.UIntPtr) could not be auto-generated
-        return 0;
+    var refLocal_0 = (byte)42;
+    var refLocal_1 = (byte)42;
+        Buffer.BulkMoveWithWriteBarrier(ref refLocal_0, ref refLocal_1, UIntPtr.Zero);
+        return (int)refLocal_0 ^ refLocal_1;
     }
 
     // [2] System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)
@@ -69,8 +71,10 @@ public static class BufferMemoryNativeEntry
     // [6] System.Private.CoreLib/System.Buffer::Memmove:System.Void(System.Byte&,System.Byte&,System.UIntPtr)
     static int Method6()
     {
-        // TODO: System.Private.CoreLib/System.Buffer::Memmove:System.Void(System.Byte&,System.Byte&,System.UIntPtr) could not be auto-generated
-        return 0;
+    var refLocal_0 = (byte)42;
+    var refLocal_1 = (byte)42;
+        Buffer.Memmove(ref refLocal_0, ref refLocal_1, UIntPtr.Zero);
+        return (int)refLocal_0 ^ refLocal_1;
     }
 
     // [7] System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.Int64,System.Int64)

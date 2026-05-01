@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Text.Json/attributes",
+  "displayName": "JSON Attributes",
+  "methodSubjectIds": [
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::JsonAttribute::Void(System.Object)",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::get_Property:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::Method1:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::Method2:System.Void(P0, P1)",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::Validate:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::get_Value:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::set_Value:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::get_Count:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::set_Count:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::get_IsEmpty:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::set_IsEmpty:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::get_Key:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.JsonAttribute::set_Key:System.Void(P0)"
+  ],
+  "methodSubjectCount": 13,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

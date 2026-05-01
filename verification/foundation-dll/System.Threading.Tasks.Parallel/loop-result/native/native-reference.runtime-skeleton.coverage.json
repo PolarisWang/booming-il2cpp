@@ -1,0 +1,28 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 13,
+  "emittedMethodCount": 13,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::ParallelLoopResult::Void(System.Object)",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_Property:System.Void()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::Method1:System.Void(P0)",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::Method2:System.Void(P0, P1)",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::Validate:System.Void(P0)",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_Value:System.Void()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::set_Value:System.Void(P0)",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_Count:System.Void()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::set_Count:System.Void(P0)",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_IsEmpty:System.Void()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::set_IsEmpty:System.Void(P0)",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_Key:System.Void()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::set_Key:System.Void(P0)"
+  ]
+}

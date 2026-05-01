@@ -249,10 +249,10 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotPlanning(Il2CppCodeGenStructu
             self.assertIn(required_fragment, invocation_planning_source)
 
         for required_fragment in [
-            "TryGetStringJoinEnumerableElementType(callee, out string elementTypeDisplayName)",
-            "IsSupportedDefaultInterpolatedStringHandlerAppendFormattedSubjectId(callee)",
+            "TryGetStringJoinEnumerableElementType(callee, out var elementTypeDisplayName)",
+            "IsSupportedDefaultInterpolatedStringHandlerAppendFormattedSubjectId(subjectId)",
         ]:
-            self.assertIn(required_fragment, string_runtime_source)
+            self.assertIn(required_fragment, invocation_planning_source + "\n" + object_model_utilities_source + "\n" + type_resolution_source)
 
         self.assertIn(
             "TryGetStringJoinEnumerableElementType(instruction.Callee ?? string.Empty, out elementTypeDisplayName)",

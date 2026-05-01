@@ -1,0 +1,1883 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.run",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.run",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            73,
+            81,
+            89,
+            97,
+            105,
+            113,
+            121,
+            129,
+            137,
+            145,
+            153,
+            161,
+            169,
+            177,
+            185
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 193,
+          "ilOffset": 71,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 73,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 78,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 79,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 81,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 86,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 87,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 89,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 95,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 97,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 102,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 103,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 110,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 111,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 118,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 119,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 121,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 126,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 127,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 129,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 134,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 135,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 137,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 142,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 143,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 145,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 150,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 151,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 153,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 158,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 159,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 161,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 166,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 167,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 169,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 174,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 175,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 177,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 182,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 183,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 185,
+          "resultType": "System.Int32",
+          "callee": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method14:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+            "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 190,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 191,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 193,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 194,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 197,
+          "ilOffset": 195,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 197
+        },
+        {
+          "op": "ret",
+          "ilOffset": 198
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method0",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method0:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method0:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method0",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method0()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method1",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method1:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method1:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method1",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method1()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method2",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method2:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method2:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method2",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method2()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 3,
+          "resultType": "System.Threading.Tasks.Task",
+          "callee": "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method3",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method3:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method3:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method3",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method3()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Threading.Tasks.Task",
+          "callee": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 16,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 16
+        },
+        {
+          "op": "ret",
+          "ilOffset": 17
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method4",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method4:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method4:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method4",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method4()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Threading.Tasks.Task",
+          "callee": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 8,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 18,
+          "ilOffset": 13,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 19,
+          "ilOffset": 16,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 18,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 22,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 22
+        },
+        {
+          "op": "ret",
+          "ilOffset": 23
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method5",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method5:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method5:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method5",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method5()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Threading.Tasks.Task",
+          "callee": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 6,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 16,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 17,
+          "ilOffset": 14,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 16,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 20,
+          "ilOffset": 18,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 20
+        },
+        {
+          "op": "ret",
+          "ilOffset": 21
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method6",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method6:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method6:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method6",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method6()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Threading.Tasks.Task",
+          "callee": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 6,
+          "resultType": "System.Threading.Tasks.TaskStatus",
+          "callee": "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 25,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 28,
+          "ilOffset": 26,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 28
+        },
+        {
+          "op": "ret",
+          "ilOffset": 29
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method7",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method7:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method7:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method7",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method7()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method8",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method8:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method8:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method8",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method8()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Private.CoreLib/System.Threading.Tasks.Task",
+          "ilOffset": 2,
+          "resultType": "System.Threading.Tasks.Task[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "call",
+          "ilOffset": 7,
+          "resultType": "System.Threading.Tasks.Task",
+          "callee": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 20,
+          "ilOffset": 18,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 20
+        },
+        {
+          "op": "ret",
+          "ilOffset": 21
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method9",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method9:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method9:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method9",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method9()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method10",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method10:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method10:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method10",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method10()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method11",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method11:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method11:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method11",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method11()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method12",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method12:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method12:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method12",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method12()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "callee": "System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Threading.Thread",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Thread",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 13,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 13
+        },
+        {
+          "op": "ret",
+          "ilOffset": 14
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method13",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method13:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method13:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method13",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method13()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Threading.Thread",
+          "callee": "System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
+          "reference": {
+            "assemblyName": "System.Threading.Thread",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Thread",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 14,
+          "ilOffset": 12,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 14
+        },
+        {
+          "op": "ret",
+          "ilOffset": 15
+        }
+      ]
+    },
+    {
+      "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method14",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry",
+        "definitionSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method14:System.Int32()",
+        "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method14:System.Int32()",
+        "methodId": "threading-tasks-primitives-native-entry.threading-tasks-primitives-native-entry.method14",
+        "signature": "System.Int32 ThreadingTasksPrimitivesNativeEntry::Method14()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesNativeEntry_ThreadingTasksPrimitivesNativeEntry_Method14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Threading.Thread",
+          "callee": "System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
+          "reference": {
+            "assemblyName": "System.Threading.Thread",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Thread",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Thread/System.Threading.Thread::get_ManagedThreadId:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Threading.Thread",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::get_ManagedThreadId:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Thread",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::get_ManagedThreadId:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 14,
+          "ilOffset": 12,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 14
+        },
+        {
+          "op": "ret",
+          "ilOffset": 15
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 16,
+    "trimmedMethodCount": 16,
+    "entryPrefix": "ThreadingTasksPrimitivesNativeEntry"
+  }
+}

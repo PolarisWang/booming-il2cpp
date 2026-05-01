@@ -46,13 +46,13 @@ public static class ExceptionThrowDiagnosticsNativeEntry
     // [2] System.Private.CoreLib/System.Exception::get_Message:System.String()
     static int Method2()
     {
-        return (new Exception().Message?.GetHashCode() ?? 0);
+        return (int)(new Exception().Message);
     }
 
     // [3] System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()
     static int Method3()
     {
-        return new Exception().InnerException.GetHashCode();
+        return (int)(new Exception().InnerException);
     }
 
     // [4] System.Private.CoreLib/System.Exception::get_StackTrace:System.String()
@@ -71,13 +71,13 @@ public static class ExceptionThrowDiagnosticsNativeEntry
     // [6] System.Private.CoreLib/System.Exception::ToString:System.String()
     static int Method6()
     {
-        return (new Exception().ToString()?.GetHashCode() ?? 0);
+        return (int)(new Exception().ToString());
     }
 
     // [7] System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()
     static int Method7()
     {
-        return new Exception().GetBaseException().GetHashCode();
+        return (int)(new Exception().GetBaseException());
     }
 
     // [8] System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)

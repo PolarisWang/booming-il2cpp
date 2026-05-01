@@ -30,55 +30,63 @@ public static class EnumParsingNativeEntry
     // [0] System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)
     static int Method0()
     {
-        return (Enum.Format(typeof(DayOfWeek), DayOfWeek.Monday, "G")?.GetHashCode() ?? 0);
+        // TODO: System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String) could not be auto-generated
+        return 0;
     }
 
     // [1] System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)
     static int Method1()
     {
-        return (Enum.GetName(typeof(DayOfWeek), DayOfWeek.Monday)?.GetHashCode() ?? 0);
+        // TODO: System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64) could not be auto-generated
+        return 0;
     }
 
     // [2] System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)
     static int Method2()
     {
-        return (Enum.GetName(typeof(DayOfWeek), DayOfWeek.Monday)?.GetHashCode() ?? 0);
+        // TODO: System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object) could not be auto-generated
+        return 0;
     }
 
     // [3] System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)
     static int Method3()
     {
-        return Enum.GetNames(typeof(DayOfWeek)).GetHashCode();
+        // TODO: System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type) could not be auto-generated
+        return 0;
     }
 
     // [4] System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)
     static int Method4()
     {
-        return Enum.GetValues(typeof(DayOfWeek)).GetHashCode();
+        // TODO: System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type) could not be auto-generated
+        return 0;
     }
 
     // [5] System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)
     static int Method5()
     {
-        return (Enum.IsDefined(typeof(DayOfWeek), "Monday") ? 1 : 0);
+        // TODO: System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object) could not be auto-generated
+        return 0;
     }
 
     // [6] System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)
     static int Method6()
     {
-        return (Enum.Parse(typeof(DayOfWeek), "Monday")?.GetHashCode() ?? 0);
+        // TODO: System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String) could not be auto-generated
+        return 0;
     }
 
     // [7] System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)
     static int Method7()
     {
-        return (Enum.Parse(typeof(DayOfWeek), "Monday", true)?.GetHashCode() ?? 0);
+        // TODO: System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean) could not be auto-generated
+        return 0;
     }
 
     // [8] System.Private.CoreLib/System.Enum::ToString:System.String()
     static int Method8()
     {
-        return (DayOfWeek.Monday.ToString()?.GetHashCode() ?? 0);
+        return (int)(DayOfWeek.Monday.ToString());
     }
 
     // [9] System.Private.CoreLib/System.Enum::ToString:System.String(System.String)
@@ -91,13 +99,15 @@ public static class EnumParsingNativeEntry
     // [10] System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)
     static int Method10()
     {
-        return (Enum.TryParse(typeof(DayOfWeek), "Monday", true, out object __ep0) ? 1 : 0);
+    var refLocal_3 = 42;
+        return (int)(Enum.TryParse(typeof(byte), "hello", true, ref refLocal_3));
     }
 
     // [11] System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)
     static int Method11()
     {
-        return (Enum.TryParse(typeof(DayOfWeek), "Monday", out object __ep0) ? 1 : 0);
+    var refLocal_2 = 42;
+        return (int)(Enum.TryParse(typeof(byte), "hello", ref refLocal_2));
     }
 
 }

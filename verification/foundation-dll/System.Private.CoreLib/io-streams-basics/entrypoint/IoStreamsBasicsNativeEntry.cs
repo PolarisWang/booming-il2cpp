@@ -58,7 +58,7 @@ public static class IoStreamsBasicsNativeEntry
     // [3] System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)
     static int Method3()
     {
-        return unchecked((int)new MemoryStream().Seek(42L, System.IO.SeekOrigin.Begin));
+        return (int)(new MemoryStream().Seek(42L, System.IO.SeekOrigin.Begin));
     }
 
     // [4] System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)
@@ -71,13 +71,13 @@ public static class IoStreamsBasicsNativeEntry
     // [5] System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()
     static int Method5()
     {
-        return unchecked((int)new MemoryStream().Length);
+        return (int)(new MemoryStream().Length);
     }
 
     // [6] System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()
     static int Method6()
     {
-        return unchecked((int)new MemoryStream().Position);
+        return (int)(new MemoryStream().Position);
     }
 
     // [7] System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)
@@ -90,13 +90,13 @@ public static class IoStreamsBasicsNativeEntry
     // [8] System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()
     static int Method8()
     {
-        return (new StringReader("hello").ReadLine()?.GetHashCode() ?? 0);
+        return (int)(new StringReader("hello").ReadLine());
     }
 
     // [9] System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()
     static int Method9()
     {
-        return (new StringReader("hello").ReadToEnd()?.GetHashCode() ?? 0);
+        return (int)(new StringReader("hello").ReadToEnd());
     }
 
     // [10] System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)

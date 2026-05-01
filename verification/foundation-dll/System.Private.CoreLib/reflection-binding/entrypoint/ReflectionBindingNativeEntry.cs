@@ -32,73 +32,74 @@ public static class ReflectionBindingNativeEntry
     // [0] System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String)
     static int Method0()
     {
-        return typeof(byte).GetMethod("hello").GetHashCode();
+        return (int)(typeof(byte).GetMethod("hello"));
     }
 
     // [1] System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Reflection.BindingFlags)
     static int Method1()
     {
-        return typeof(byte).GetMethod("hello", System.Reflection.BindingFlags.Default).GetHashCode();
+        return (int)(typeof(byte).GetMethod("hello", null!));
     }
 
     // [2] System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])
     static int Method2()
     {
-        return typeof(byte).GetMethod("hello", Array.Empty<System.Type>()).GetHashCode();
+        return (int)(typeof(byte).GetMethod("hello", Array.Empty<System.Type>()));
     }
 
     // [3] System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String)
     static int Method3()
     {
-        return typeof(byte).GetField("hello").GetHashCode();
+        return (int)(typeof(byte).GetField("hello"));
     }
 
     // [4] System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String,System.Reflection.BindingFlags)
     static int Method4()
     {
-        return typeof(byte).GetField("hello", System.Reflection.BindingFlags.Default).GetHashCode();
+        return (int)(typeof(byte).GetField("hello", null!));
     }
 
     // [5] System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String)
     static int Method5()
     {
-        return typeof(byte).GetProperty("hello").GetHashCode();
+        return (int)(typeof(byte).GetProperty("hello"));
     }
 
     // [6] System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Reflection.BindingFlags)
     static int Method6()
     {
-        return typeof(byte).GetProperty("hello", System.Reflection.BindingFlags.Default).GetHashCode();
+        return (int)(typeof(byte).GetProperty("hello", null!));
     }
 
     // [7] System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Type[])
     static int Method7()
     {
-        return typeof(byte).GetProperty("hello", Array.Empty<System.Type>()).GetHashCode();
+        return (int)(typeof(byte).GetProperty("hello", Array.Empty<System.Type>()));
     }
 
     // [8] System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String)
     static int Method8()
     {
-        return typeof(byte).GetEvent("hello").GetHashCode();
+        return (int)(typeof(byte).GetEvent("hello"));
     }
 
     // [9] System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String,System.Reflection.BindingFlags)
     static int Method9()
     {
-        return typeof(byte).GetEvent("hello", System.Reflection.BindingFlags.Default).GetHashCode();
+        return (int)(typeof(byte).GetEvent("hello", null!));
     }
 
     // [10] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
     static int Method10()
     {
-        return (typeof(string).GetMethod("ToString", System.Type.EmptyTypes)!.Invoke("hello", null)?.GetHashCode() ?? 0);
+        // TODO: System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[]) could not be auto-generated
+        return 0;
     }
 
     // [11] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     static int Method11()
     {
-        return (typeof(string).GetMethod("ToString", System.Type.EmptyTypes)!.Invoke(42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!)?.GetHashCode() ?? 0);
+        return (int)(default(MethodInfo)!.Invoke(42, null!, null!, Array.Empty<System.Object>(), null!));
     }
 
 }

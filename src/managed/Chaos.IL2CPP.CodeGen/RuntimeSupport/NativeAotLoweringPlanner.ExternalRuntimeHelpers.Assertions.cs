@@ -10,60 +10,7 @@ public sealed partial class NativeAotLoweringPlanner
     private const string KnownEqualityAssertionMethodName = "Equal";
     private const string KnownEqualityAssertionFailureStateExitCodeFieldName = "ExitCode";
 
-    private bool TryCreateAssertionRuntimeHelperDefinition(
-        string callee,
-        out ExternalRuntimeHelperDefinition? helperDefinition)
-    {
-        helperDefinition = null;
-        if (!TryParseKnownEqualityAssertionContract(callee, out var assertionSpec))
-        {
-            return false;
-        }
-
-        if (!TryCreateResolvedTypeAbiSlot(assertionSpec.ComparedTypeNameOrSubjectId, out var comparedAbi) ||
-            !IsSupportedEqualityAssertionAbi(comparedAbi))
-        {
-            return false;
-        }
-
-        helperDefinition = CreateEqualityAssertionRuntimeHelperDefinition(callee, comparedAbi, assertionSpec);
-        return true;
-    }
-
-    private ExternalRuntimeHelperDefinition CreateEqualityAssertionRuntimeHelperDefinition(
-        string callee,
-        AotCoreIrAbiSlotArtifact comparedAbi,
-        EqualityAssertionRuntimeHelperSpec assertionSpec)
-    {
-        var symbol = GetExternalRuntimeHelperSymbol(callee);
-        var parameterAbis = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
-            [
-                comparedAbi,
-                comparedAbi,
-                CreateNativeIntAbiSlot(StringTypeSubjectId, AotCoreIrTypeShapeKind.ReferenceType),
-            ]);
-        var rendered = RenderSimpleExternalRuntimeHelper(
-            "void",
-            symbol,
-            FormatAbiSlotParameterSignature(parameterAbis),
-            CreateEqualityAssertionRuntimeHelperBodyLines(
-                comparedAbi,
-                CreateFailureStateWriteBodyLines(GetNativeStaticFieldSymbol(assertionSpec.FailureStateFieldSubjectId))));
-
-        return new ExternalRuntimeHelperDefinition(
-            callee,
-            symbol,
-            rendered,
-            parameterAbis,
-            CreateVoidAbiSlot(),
-            EmptyRawArgumentIndices,
-            new HashSet<string>(StringComparer.Ordinal)
-            {
-                assertionSpec.FailureStateFieldSubjectId,
-            });
-    }
-
-    private IReadOnlyList<string> CreateEqualityAssertionRuntimeHelperBodyLines(
+    internal static IReadOnlyList<string> CreateEqualityAssertionRuntimeHelperBodyLines(
         AotCoreIrAbiSlotArtifact comparedAbi,
         IReadOnlyList<string> failureBodyLines)
     {
@@ -79,8 +26,8 @@ public sealed partial class NativeAotLoweringPlanner
                 "    }",
                 "    else if (chaos_arg_0 != static_cast<CHAOS_IL2CPP_INTPTR>(0) && chaos_arg_1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))",
                 "    {",
-                $"        auto* chaos_left_string = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_0);",
-                $"        auto* chaos_right_string = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_1);",
+                "        auto* chaos_left_string = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_arg_0);",
+                "        auto* chaos_right_string = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_arg_1);",
                 "        if (chaos_left_string->length == chaos_right_string->length)",
                 "        {",
                 "            if (chaos_left_string->utf8_data == nullptr || chaos_right_string->utf8_data == nullptr)",
@@ -115,7 +62,7 @@ public sealed partial class NativeAotLoweringPlanner
         ];
     }
 
-    private static IReadOnlyList<string> CreateFailureStateWriteBodyLines(string failureStateFieldSymbol)
+    internal static IReadOnlyList<string> CreateFailureStateWriteBodyLines(string failureStateFieldSymbol)
     {
         return
         [
@@ -123,7 +70,7 @@ public sealed partial class NativeAotLoweringPlanner
         ];
     }
 
-    private static bool IsSupportedEqualityAssertionAbi(AotCoreIrAbiSlotArtifact comparedAbi)
+    internal static bool IsSupportedEqualityAssertionAbi(AotCoreIrAbiSlotArtifact comparedAbi)
     {
         if (string.Equals(comparedAbi.TypeSubjectId, StringTypeSubjectId, StringComparison.Ordinal))
         {
@@ -143,7 +90,7 @@ public sealed partial class NativeAotLoweringPlanner
             AotCoreIrAbiCarrierKind.UInt64;
     }
 
-    private static bool TryParseKnownEqualityAssertionContract(
+    internal static bool TryParseKnownEqualityAssertionContract(
         string? subjectId,
         out EqualityAssertionRuntimeHelperSpec assertionSpec)
     {
@@ -247,7 +194,7 @@ public sealed partial class NativeAotLoweringPlanner
                string.Equals(parameterTypes[2], "System.String", StringComparison.Ordinal);
     }
 
-    private readonly record struct EqualityAssertionRuntimeHelperSpec(
+    internal readonly record struct EqualityAssertionRuntimeHelperSpec(
         string ComparedTypeNameOrSubjectId,
         string FailureStateFieldSubjectId);
 }

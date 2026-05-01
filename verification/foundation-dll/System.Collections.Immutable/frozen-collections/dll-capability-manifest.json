@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.Collections.Immutable/frozen-collections"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 26
+}

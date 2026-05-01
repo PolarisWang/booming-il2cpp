@@ -30,37 +30,37 @@ public static class BoxingUnboxingCastsNativeEntry
     // [0] System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)
     static int Method0()
     {
-        return (Convert.ChangeType(42, typeof(byte))?.GetHashCode() ?? 0);
+        return (int)(Convert.ChangeType(42, typeof(byte)));
     }
 
     // [1] System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)
     static int Method1()
     {
-        return (Convert.ChangeType(42, typeof(byte), null!)?.GetHashCode() ?? 0);
+        return (int)(Convert.ChangeType(42, typeof(byte), null!));
     }
 
     // [2] System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)
     static int Method2()
     {
-        return (typeof(byte).IsAssignableFrom(typeof(byte)) ? 1 : 0);
+        return (int)(typeof(byte).IsAssignableFrom(typeof(byte)));
     }
 
     // [3] System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)
     static int Method3()
     {
-        return (typeof(byte).IsInstanceOfType(42) ? 1 : 0);
+        return (int)(typeof(byte).IsInstanceOfType(42));
     }
 
     // [4] System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)
     static int Method4()
     {
-        return (typeof(byte).IsSubclassOf(typeof(byte)) ? 1 : 0);
+        return (int)(typeof(byte).IsSubclassOf(typeof(byte)));
     }
 
     // [5] System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)
     static int Method5()
     {
-        return (typeof(byte).IsAssignableTo(typeof(byte)) ? 1 : 0);
+        return (int)(typeof(byte).IsAssignableTo(typeof(byte)));
     }
 
     // [6] System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()
@@ -73,25 +73,25 @@ public static class BoxingUnboxingCastsNativeEntry
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
     static int Method7()
     {
-        return (RuntimeHelpers.GetObjectValue(42)?.GetHashCode() ?? 0);
+        return (int)(RuntimeHelpers.GetObjectValue(42));
     }
 
     // [8] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
     static int Method8()
     {
-        return Array.CreateInstance(typeof(byte), 42).GetHashCode();
+        return (int)(Array.CreateInstance(typeof(byte), 42));
     }
 
     // [9] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)
     static int Method9()
     {
-        return Array.CreateInstance(typeof(byte), 42, 42).GetHashCode();
+        return (int)(Array.CreateInstance(typeof(byte), 42, 42));
     }
 
     // [10] System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
     static int Method10()
     {
-        return (((ValueType)42).Equals(42) ? 1 : 0);
+        return (int)(((ValueType)42).Equals(42));
     }
 
 }

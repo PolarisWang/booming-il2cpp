@@ -29,61 +29,61 @@ public static class ReflectionParametersNativeEntry
     // [0] System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name:System.String()
     static int Method0()
     {
-        return (typeof(string).GetMethod("IndexOf", new[] { typeof(char) })!.GetParameters()[0].Name?.GetHashCode() ?? 0);
+        return (int)(default(ParameterInfo)!.Name);
     }
 
     // [1] System.Private.CoreLib/System.Reflection.ParameterInfo::get_ParameterType:System.Type()
     static int Method1()
     {
-        return typeof(string).GetMethod("IndexOf", new[] { typeof(char) })!.GetParameters()[0].ParameterType.GetHashCode();
+        return (int)(default(ParameterInfo)!.ParameterType);
     }
 
     // [2] System.Private.CoreLib/System.Reflection.ParameterInfo::get_DefaultValue:System.Object()
     static int Method2()
     {
-        return (typeof(string).GetMethod("IndexOf", new[] { typeof(char) })!.GetParameters()[0].DefaultValue?.GetHashCode() ?? 0);
+        return (int)(default(ParameterInfo)!.DefaultValue);
     }
 
     // [3] System.Private.CoreLib/System.Reflection.ParameterInfo::get_RawDefaultValue:System.Object()
     static int Method3()
     {
-        return (typeof(string).GetMethod("IndexOf", new[] { typeof(char) })!.GetParameters()[0].RawDefaultValue?.GetHashCode() ?? 0);
+        return (int)(default(ParameterInfo)!.RawDefaultValue);
     }
 
     // [4] System.Private.CoreLib/System.Reflection.ParameterInfo::get_HasDefaultValue:System.Boolean()
     static int Method4()
     {
-        return (typeof(string).GetMethod("IndexOf", new[] { typeof(char) })!.GetParameters()[0].HasDefaultValue ? 1 : 0);
+        return (int)(default(ParameterInfo)!.HasDefaultValue);
     }
 
     // [5] System.Private.CoreLib/System.Reflection.ParameterInfo::get_Attributes:System.Reflection.ParameterAttributes()
     static int Method5()
     {
-        return typeof(string).GetMethod("IndexOf", new[] { typeof(char) })!.GetParameters()[0].Attributes.GetHashCode();
+        return (int)(default(ParameterInfo)!.Attributes);
     }
 
     // [6] System.Private.CoreLib/System.Reflection.ParameterInfo::get_Position:System.Int32()
     static int Method6()
     {
-        return typeof(string).GetMethod("IndexOf", new[] { typeof(char) })!.GetParameters()[0].Position;
+        return default(ParameterInfo)!.Position;
     }
 
     // [7] System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()
     static int Method7()
     {
-        return typeof(string).GetMethod("IndexOf", new[] { typeof(char) })!.GetParameters()[0].GetRequiredCustomModifiers().GetHashCode();
+        return (int)(default(ParameterInfo)!.GetRequiredCustomModifiers());
     }
 
     // [8] System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()
     static int Method8()
     {
-        return typeof(string).GetMethod("IndexOf", new[] { typeof(char) })!.GetParameters()[0].GetOptionalCustomModifiers().GetHashCode();
+        return (int)(default(ParameterInfo)!.GetOptionalCustomModifiers());
     }
 
     // [9] System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()
     static int Method9()
     {
-        return typeof(string).GetMethod("ToString", System.Type.EmptyTypes)!.GetParameters().GetHashCode();
+        return (int)(default(MethodInfo)!.GetParameters());
     }
 
 }
