@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Compression.Brotli",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.IO.Compression.Brotli/encoder"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 13
+}

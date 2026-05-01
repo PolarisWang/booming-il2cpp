@@ -1,0 +1,174 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_CompletedTask:System.Threading.Tasks.Task()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Thread",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Thread",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Thread",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Thread/System.Threading.Thread::get_ManagedThreadId:System.Int32()",
+      "reason": "external-call"
+    }
+  ]
+}

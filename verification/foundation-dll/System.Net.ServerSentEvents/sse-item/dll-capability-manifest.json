@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Net.ServerSentEvents",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.Net.ServerSentEvents/sse-item"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 13
+}

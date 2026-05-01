@@ -1,0 +1,31 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.ObjectModel",
+  "familyId": "family/System.ObjectModel/command-type-metadata",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 16,
+  "emittedMethodCount": 16,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::TypeConverterAttribute::Void()",
+    "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::TypeConverterAttribute::Void(System.Object)",
+    "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::Equals:System.Void(P0)",
+    "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::GetHashCode:System.Void()",
+    "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.Void()",
+    "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::set_ConverterTypeName:System.Void(P0)",
+    "System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Void()",
+    "System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Void(P0)",
+    "System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(P0)",
+    "System.ObjectModel/System.Windows.Input.ICommand::add_CanExecuteChanged:System.Void(P0)",
+    "System.ObjectModel/System.Windows.Input.ICommand::remove_CanExecuteChanged:System.Void(P0)",
+    "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::ValueSerializerAttribute::Void(System.Object)",
+    "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Void()",
+    "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.Void()",
+    "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::set_ValueSerializerType:System.Void(P0)",
+    "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::set_ValueSerializerTypeName:System.Void(P0)"
+  ]
+}

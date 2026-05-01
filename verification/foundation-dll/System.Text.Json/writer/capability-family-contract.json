@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Text.Json/writer",
+  "displayName": "JSON Writer",
+  "methodSubjectIds": [
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::Utf8JsonWriter::Void(System.Object)",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::get_Property:System.Void()",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::Method1:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::Method2:System.Void(P0, P1)",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::Validate:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::get_Value:System.Void()",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::set_Value:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::get_Count:System.Void()",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::set_Count:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::get_IsEmpty:System.Void()",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::set_IsEmpty:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::get_Key:System.Void()",
+    "System.Text.Json/System.Text.Json.Utf8JsonWriter::set_Key:System.Void(P0)"
+  ],
+  "methodSubjectCount": 13,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

@@ -84,7 +84,7 @@ public static class CollectionsGenericCoreNativeEntry
     // [7] System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()
     static int Method7()
     {
-        return new List<int>().ToArray().GetHashCode();
+        return (int)(new List<int>().ToArray());
     }
 
     // [8] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Add:System.Void(TKey,TValue)

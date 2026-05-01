@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.Runtime.InteropServices/objective-c-interop"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 9
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Text.Json/polymorphism-reference",
+  "displayName": "JSON Polymorphism And Reference",
+  "methodSubjectIds": [
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::ReferenceHandler::Void(System.Object)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::get_Property:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::Method1:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::Method2:System.Void(P0, P1)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::Validate:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::ReferenceResolver::Void(System.Object)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::get_Property:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::Method1:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::Method2:System.Void(P0, P1)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::Validate:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::get_Value:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::set_Value:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::get_Count:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::set_Count:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::get_IsEmpty:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::set_IsEmpty:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::get_Key:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::set_Key:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::get_Value:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::set_Value:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::get_Count:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::set_Count:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::get_IsEmpty:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::set_IsEmpty:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::get_Key:System.Void()",
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::set_Key:System.Void(P0)"
+  ],
+  "methodSubjectCount": 26,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

@@ -79,6 +79,9 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
         planner_source = NATIVE_AOT_PLANNER_PATH.read_text(encoding="utf-8")
         object_model_source = NATIVE_AOT_OBJECT_MODEL_EMISSION_PATH.read_text(encoding="utf-8")
         assertion_runtime_source = NATIVE_AOT_EXTERNAL_RUNTIME_ASSERTIONS_PATH.read_text(encoding="utf-8")
+        external_helpers_source = NATIVE_AOT_EXTERNAL_RUNTIME_HELPERS_PATH.read_text(encoding="utf-8")
+        registry_source = NATIVE_AOT_RUNTIME_HELPER_SHAPE_REGISTRY_PATH.read_text(encoding="utf-8")
+        combined_search = planner_source + "\n" + assertion_runtime_source + "\n" + registry_source
         self.assertTrue(
             NATIVE_AOT_EXTERNAL_RUNTIME_ASSERTIONS_PATH.is_file(),
             msg=f"missing assertion helper source: {NATIVE_AOT_EXTERNAL_RUNTIME_ASSERTIONS_PATH}",
@@ -93,17 +96,14 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
         )
 
         for required_fragment in [
-            "TryCreateAssertionRuntimeHelperDefinition(",
             "TryParseKnownEqualityAssertionContract(",
-            "CreateEqualityAssertionRuntimeHelperDefinition(",
             "CreateEqualityAssertionRuntimeHelperBodyLines(",
             "IsSupportedEqualityAssertionAbi(",
             "RenderSimpleExternalRuntimeHelper(",
             "new HashSet<string>(StringComparer.Ordinal)",
             "ManagedNaming.CreateFieldSubjectId(",
-            "ReferencedStaticFieldSubjectIds",
         ]:
-            self.assertIn(required_fragment, planner_source + "\n" + assertion_runtime_source)
+            self.assertIn(required_fragment, combined_search)
 
         for forbidden_fragment in [
             'TestFrameworkEqualTemplateRelativePath = "Templates/NativeAot.TestFrameworkEqual.cpp.scriban"',
@@ -151,9 +151,14 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
             self.assertIn(required_fragment, object_model_utilities_source)
 
         for required_fragment in [
+            "ResolveInterfaceDispatchTargets(",
+            "MatchesMethodSubject(",
+            "CreateVoidAbiSlot()",
+        ]:
+            self.assertIn(required_fragment, collection_runtime_source)
+
+        for forbidden_fragment in [
             "TryCreateSupportedAsyncRuntimeResultShape(",
-            "chaos_async_task_builder_set_result_raw",
-            "chaos_async_task_awaiter_get_result_raw",
             "AotCoreIrAbiCarrierKind.Int8 =>",
             "AotCoreIrAbiCarrierKind.UInt8 =>",
             "AotCoreIrAbiCarrierKind.Int16 =>",
@@ -179,7 +184,7 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
             'TryReadSingleGenericTypeArgument(callee, openGenericBuilderTypePrefix + "<", out string resultTypeName)',
             'TryReadSingleGenericTypeArgument(callee, openGenericAwaiterTypePrefix + "<", out string resultTypeName)',
         ]:
-            self.assertIn(required_fragment, collection_runtime_source)
+            self.assertNotIn(forbidden_fragment, collection_runtime_source)
 
         self.assertNotIn(
             "if (resultAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Int32 && resultAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.NativeInt)",
@@ -333,21 +338,34 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
 
         string_and_platform_source = NATIVE_AOT_EXTERNAL_RUNTIME_STRING_AND_PLATFORM_PATH.read_text(encoding="utf-8")
         for required_fragment in [
-            "private bool TryCreateStringRuntimeHelperDefinition(",
             "private ExternalRuntimeHelperDefinition CreateStringJoinInt32EnumerableRuntimeHelperDefinition(",
-            "private bool TryCreateExceptionRuntimeHelperDefinition(",
-            "private bool TryCreatePlatformRuntimeHelperDefinition(",
+            "private static string RenderSimpleExternalRuntimeHelper(",
+            "MarshalCopyElementTypeMap",
         ]:
             self.assertIn(required_fragment, string_and_platform_source)
 
+        for forbidden_fragment in [
+            "private bool TryCreateStringRuntimeHelperDefinition(",
+            "private bool TryCreateExceptionRuntimeHelperDefinition(",
+            "private bool TryCreatePlatformRuntimeHelperDefinition(",
+        ]:
+            self.assertNotIn(forbidden_fragment, string_and_platform_source)
+
         collection_and_reflection_source = NATIVE_AOT_EXTERNAL_RUNTIME_COLLECTION_AND_REFLECTION_PATH.read_text(encoding="utf-8")
         for required_fragment in [
+            "private bool TryCreateCustomAttributeRuntimeHelperDefinition(",
+            "private IReadOnlyList<AotCoreIrMethodArtifact> ResolveInterfaceDispatchTargets(",
+            "private static bool MatchesMethodSubject(",
+            "CreateVoidAbiSlot()",
+        ]:
+            self.assertIn(required_fragment, collection_and_reflection_source)
+
+        for forbidden_fragment in [
             "private bool TryCreateSpanRuntimeHelperDefinition(",
             "private bool TryCreateCollectionRuntimeHelperDefinition(",
             "private bool TryCreateAsyncRuntimeHelperDefinition(",
-            "private bool TryCreateReflectionRuntimeHelperDefinition(",
         ]:
-            self.assertIn(required_fragment, collection_and_reflection_source)
+            self.assertNotIn(forbidden_fragment, collection_and_reflection_source)
 
         type_resolution_source = NATIVE_AOT_EXTERNAL_RUNTIME_TYPE_RESOLUTION_PATH.read_text(encoding="utf-8")
         for required_fragment in [

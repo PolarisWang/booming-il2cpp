@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.Linq/filtering"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 65
+}

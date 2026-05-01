@@ -35,13 +35,13 @@ public static class RuntimeCompilerServicesNativeEntry
     // [1] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)
     static int Method1()
     {
-        return (RuntimeHelpers.Equals(42, 42) ? 1 : 0);
+        return (int)(RuntimeHelpers.Equals(42, 42));
     }
 
     // [2] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
     static int Method2()
     {
-        return (RuntimeHelpers.GetObjectValue(42)?.GetHashCode() ?? 0);
+        return (int)(RuntimeHelpers.GetObjectValue(42));
     }
 
     // [3] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::RunClassConstructor:System.Void(System.RuntimeTypeHandle)
@@ -61,8 +61,7 @@ public static class RuntimeCompilerServicesNativeEntry
     // [5] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetSubArray:T[](T[],System.Range)
     static int Method5()
     {
-        // TODO: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetSubArray:T[](T[],System.Range) could not be auto-generated
-        return 0;
+        return (int)(RuntimeHelpers.GetSubArray(Array.Empty<T>(), null!));
     }
 
     // [6] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::BoxEnum:System.Object(T)
@@ -75,7 +74,7 @@ public static class RuntimeCompilerServicesNativeEntry
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.Runtime.CompilerServices.FormattableString(System.String,System.Object[])
     static int Method7()
     {
-        return FormattableStringFactory.Create("hello", Array.Empty<System.Object>()).GetHashCode();
+        return (int)(FormattableStringFactory.Create("hello", Array.Empty<System.Object>()));
     }
 
     // [8] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)
@@ -88,7 +87,7 @@ public static class RuntimeCompilerServicesNativeEntry
     // [9] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()
     static int Method9()
     {
-        return (new RuntimeWrappedException(42).WrappedException?.GetHashCode() ?? 0);
+        return (int)(new RuntimeWrappedException(42).WrappedException);
     }
 
 }

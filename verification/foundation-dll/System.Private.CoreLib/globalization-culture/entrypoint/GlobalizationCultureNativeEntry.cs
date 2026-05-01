@@ -32,13 +32,13 @@ public static class GlobalizationCultureNativeEntry
     // [0] System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()
     static int Method0()
     {
-        return CultureInfo.CurrentCulture.GetHashCode();
+        return (int)(CultureInfo.CurrentCulture);
     }
 
     // [1] System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()
     static int Method1()
     {
-        return CultureInfo.InvariantCulture.GetHashCode();
+        return (int)(CultureInfo.InvariantCulture);
     }
 
     // [2] System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)
@@ -51,25 +51,25 @@ public static class GlobalizationCultureNativeEntry
     // [3] System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()
     static int Method3()
     {
-        return (CultureInfo.InvariantCulture.Name?.GetHashCode() ?? 0);
+        return (int)(CultureInfo.InvariantCulture.Name);
     }
 
     // [4] System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()
     static int Method4()
     {
-        return (CultureInfo.InvariantCulture.DisplayName?.GetHashCode() ?? 0);
+        return (int)(CultureInfo.InvariantCulture.DisplayName);
     }
 
     // [5] System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()
     static int Method5()
     {
-        return CultureInfo.InvariantCulture.DateTimeFormat.GetHashCode();
+        return (int)(CultureInfo.InvariantCulture.DateTimeFormat);
     }
 
     // [6] System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()
     static int Method6()
     {
-        return CultureInfo.InvariantCulture.NumberFormat.GetHashCode();
+        return (int)(CultureInfo.InvariantCulture.NumberFormat);
     }
 
     // [7] System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)
@@ -93,19 +93,19 @@ public static class GlobalizationCultureNativeEntry
     // [10] System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)
     static int Method10()
     {
-        return (CultureInfo.InvariantCulture.TextInfo.ToUpper("hello")?.GetHashCode() ?? 0);
+        return (int)(CultureInfo.InvariantCulture.TextInfo.ToUpper("hello"));
     }
 
     // [11] System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)
     static int Method11()
     {
-        return (CultureInfo.InvariantCulture.TextInfo.ToLower("hello")?.GetHashCode() ?? 0);
+        return (int)(CultureInfo.InvariantCulture.TextInfo.ToLower("hello"));
     }
 
     // [12] System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()
     static int Method12()
     {
-        return (CultureInfo.InvariantCulture.TextInfo.CultureName?.GetHashCode() ?? 0);
+        return (int)(CultureInfo.InvariantCulture.TextInfo.CultureName);
     }
 
 }

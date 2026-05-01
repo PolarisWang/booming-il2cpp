@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.IO.Pipelines/reader-writer",
+  "displayName": "Pipe Reader Writer",
+  "methodSubjectIds": [
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::PipeReader::Void(System.Object)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::get_Property:System.Void()",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Method1:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Method2:System.Void(P0, P1)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Validate:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::PipeWriter::Void(System.Object)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_Property:System.Void()",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Method1:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Method2:System.Void(P0, P1)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Validate:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::get_Value:System.Void()",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::set_Value:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::get_Count:System.Void()",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::set_Count:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::get_IsEmpty:System.Void()",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::set_IsEmpty:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::get_Key:System.Void()",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeReader::set_Key:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_Value:System.Void()",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::set_Value:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_Count:System.Void()",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::set_Count:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_IsEmpty:System.Void()",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::set_IsEmpty:System.Void(P0)",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_Key:System.Void()",
+    "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::set_Key:System.Void(P0)"
+  ],
+  "methodSubjectCount": 26,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

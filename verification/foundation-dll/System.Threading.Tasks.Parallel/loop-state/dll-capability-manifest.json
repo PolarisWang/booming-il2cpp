@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.Threading.Tasks.Parallel/loop-state"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 13
+}

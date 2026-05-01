@@ -83,241 +83,241 @@ public static class ReflectionTypeNativeEntry
     // [3] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)
     static int Method3()
     {
-        return Type.GetTypeFromHandle(default(System.RuntimeTypeHandle)).GetHashCode();
+        return (int)(Type.GetTypeFromHandle(default(System.RuntimeTypeHandle)));
     }
 
     // [4] System.Private.CoreLib/System.Type::get_Name:System.String()
     static int Method4()
     {
-        return (typeof(byte).Name?.GetHashCode() ?? 0);
+        return (int)(typeof(byte).Name);
     }
 
     // [5] System.Private.CoreLib/System.Type::get_FullName:System.String()
     static int Method5()
     {
-        return (typeof(byte).FullName?.GetHashCode() ?? 0);
+        return (int)(typeof(byte).FullName);
     }
 
     // [6] System.Private.CoreLib/System.Type::get_Namespace:System.String()
     static int Method6()
     {
-        return (typeof(byte).Namespace?.GetHashCode() ?? 0);
+        return (int)(typeof(byte).Namespace);
     }
 
     // [7] System.Private.CoreLib/System.Type::get_AssemblyQualifiedName:System.String()
     static int Method7()
     {
-        return (typeof(byte).AssemblyQualifiedName?.GetHashCode() ?? 0);
+        return (int)(typeof(byte).AssemblyQualifiedName);
     }
 
     // [8] System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()
     static int Method8()
     {
-        return typeof(byte).TypeHandle.GetHashCode();
+        return (int)(typeof(byte).TypeHandle);
     }
 
     // [9] System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()
     static int Method9()
     {
-        return (typeof(byte).IsValueType ? 1 : 0);
+        return (int)(typeof(byte).IsValueType);
     }
 
     // [10] System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()
     static int Method10()
     {
-        return (typeof(byte).IsEnum ? 1 : 0);
+        return (int)(typeof(byte).IsEnum);
     }
 
     // [11] System.Private.CoreLib/System.Type::get_IsAbstract:System.Boolean()
     static int Method11()
     {
-        return (typeof(byte).IsAbstract ? 1 : 0);
+        return (int)(typeof(byte).IsAbstract);
     }
 
     // [12] System.Private.CoreLib/System.Type::get_IsSealed:System.Boolean()
     static int Method12()
     {
-        return (typeof(byte).IsSealed ? 1 : 0);
+        return (int)(typeof(byte).IsSealed);
     }
 
     // [13] System.Private.CoreLib/System.Type::get_IsInterface:System.Boolean()
     static int Method13()
     {
-        return (typeof(byte).IsInterface ? 1 : 0);
+        return (int)(typeof(byte).IsInterface);
     }
 
     // [14] System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()
     static int Method14()
     {
-        return (typeof(byte).IsArray ? 1 : 0);
+        return (int)(typeof(byte).IsArray);
     }
 
     // [15] System.Private.CoreLib/System.Type::get_IsByRef:System.Boolean()
     static int Method15()
     {
-        return (typeof(byte).IsByRef ? 1 : 0);
+        return (int)(typeof(byte).IsByRef);
     }
 
     // [16] System.Private.CoreLib/System.Type::get_IsPointer:System.Boolean()
     static int Method16()
     {
-        return (typeof(byte).IsPointer ? 1 : 0);
+        return (int)(typeof(byte).IsPointer);
     }
 
     // [17] System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()
     static int Method17()
     {
-        return (typeof(byte).IsGenericType ? 1 : 0);
+        return (int)(typeof(byte).IsGenericType);
     }
 
     // [18] System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()
     static int Method18()
     {
-        return (typeof(byte).IsConstructedGenericType ? 1 : 0);
+        return (int)(typeof(byte).IsConstructedGenericType);
     }
 
     // [19] System.Private.CoreLib/System.Type::get_IsNested:System.Boolean()
     static int Method19()
     {
-        return (typeof(byte).IsNested ? 1 : 0);
+        return (int)(typeof(byte).IsNested);
     }
 
     // [20] System.Private.CoreLib/System.Type::get_IsPublic:System.Boolean()
     static int Method20()
     {
-        return (typeof(byte).IsPublic ? 1 : 0);
+        return (int)(typeof(byte).IsPublic);
     }
 
     // [21] System.Private.CoreLib/System.Type::get_IsNotPublic:System.Boolean()
     static int Method21()
     {
-        return (typeof(byte).IsNotPublic ? 1 : 0);
+        return (int)(typeof(byte).IsNotPublic);
     }
 
     // [22] System.Private.CoreLib/System.Type::get_IsNestedPublic:System.Boolean()
     static int Method22()
     {
-        return (typeof(byte).IsNestedPublic ? 1 : 0);
+        return (int)(typeof(byte).IsNestedPublic);
     }
 
     // [23] System.Private.CoreLib/System.Type::get_IsNestedPrivate:System.Boolean()
     static int Method23()
     {
-        return (typeof(byte).IsNestedPrivate ? 1 : 0);
+        return (int)(typeof(byte).IsNestedPrivate);
     }
 
     // [24] System.Private.CoreLib/System.Type::get_BaseType:System.Type()
     static int Method24()
     {
-        return typeof(byte).BaseType.GetHashCode();
+        return (int)(typeof(byte).BaseType);
     }
 
     // [25] System.Private.CoreLib/System.Type::get_DeclaringType:System.Type()
     static int Method25()
     {
-        return typeof(byte).DeclaringType.GetHashCode();
+        return (int)(typeof(byte).DeclaringType);
     }
 
     // [26] System.Private.CoreLib/System.Type::get_ReflectedType:System.Type()
     static int Method26()
     {
-        return typeof(byte).ReflectedType.GetHashCode();
+        return (int)(typeof(byte).ReflectedType);
     }
 
     // [27] System.Private.CoreLib/System.Type::get_UnderlyingSystemType:System.Type()
     static int Method27()
     {
-        return typeof(byte).UnderlyingSystemType.GetHashCode();
+        return (int)(typeof(byte).UnderlyingSystemType);
     }
 
     // [28] System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()
     static int Method28()
     {
-        return typeof(byte).GetMethods().GetHashCode();
+        return (int)(typeof(byte).GetMethods());
     }
 
     // [29] System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)
     static int Method29()
     {
-        return typeof(byte).GetMethods(System.Reflection.BindingFlags.Default).GetHashCode();
+        return (int)(typeof(byte).GetMethods(null!));
     }
 
     // [30] System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()
     static int Method30()
     {
-        return typeof(byte).GetFields().GetHashCode();
+        return (int)(typeof(byte).GetFields());
     }
 
     // [31] System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)
     static int Method31()
     {
-        return typeof(byte).GetFields(System.Reflection.BindingFlags.Default).GetHashCode();
+        return (int)(typeof(byte).GetFields(null!));
     }
 
     // [32] System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()
     static int Method32()
     {
-        return typeof(byte).GetProperties().GetHashCode();
+        return (int)(typeof(byte).GetProperties());
     }
 
     // [33] System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)
     static int Method33()
     {
-        return typeof(byte).GetProperties(System.Reflection.BindingFlags.Default).GetHashCode();
+        return (int)(typeof(byte).GetProperties(null!));
     }
 
     // [34] System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()
     static int Method34()
     {
-        return typeof(byte).GetEvents().GetHashCode();
+        return (int)(typeof(byte).GetEvents());
     }
 
     // [35] System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()
     static int Method35()
     {
-        return typeof(byte).GetConstructors().GetHashCode();
+        return (int)(typeof(byte).GetConstructors());
     }
 
     // [36] System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)
     static int Method36()
     {
-        return typeof(byte).GetConstructors(System.Reflection.BindingFlags.Default).GetHashCode();
+        return (int)(typeof(byte).GetConstructors(null!));
     }
 
     // [37] System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()
     static int Method37()
     {
-        return typeof(byte).GetMembers().GetHashCode();
+        return (int)(typeof(byte).GetMembers());
     }
 
     // [38] System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()
     static int Method38()
     {
-        return typeof(byte).GetInterfaces().GetHashCode();
+        return (int)(typeof(byte).GetInterfaces());
     }
 
     // [39] System.Private.CoreLib/System.Type::GetElementType:System.Type()
     static int Method39()
     {
-        return typeof(byte).GetElementType().GetHashCode();
+        return (int)(typeof(byte).GetElementType());
     }
 
     // [40] System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()
     static int Method40()
     {
-        return typeof(byte).GetNestedTypes().GetHashCode();
+        return (int)(typeof(byte).GetNestedTypes());
     }
 
     // [41] System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)
     static int Method41()
     {
-        return typeof(byte).GetNestedType("hello").GetHashCode();
+        return (int)(typeof(byte).GetNestedType("hello"));
     }
 
     // [42] System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()
     static int Method42()
     {
-        return typeof(byte).Assembly.GetHashCode();
+        return (int)(typeof(byte).Assembly);
     }
 
 }

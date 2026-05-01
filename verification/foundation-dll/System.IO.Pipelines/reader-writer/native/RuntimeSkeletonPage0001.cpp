@@ -1,0 +1,618 @@
+// family-runtime-skeleton
+// runtime skeleton page 1
+#include "codegen_bridge.h"
+#include "runtime_core.h"
+#include <atomic>
+#include <chaos/native_types.h>
+#include <chaos/native_types.h>
+#include <cstring>
+
+namespace chaos::il2cpp::generated::runtime_skeleton_reader_writer
+{
+constexpr const char* kRuntimeExecutionKind = "family-bound-native-reference-skeleton";
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_number = 1;
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_item_count = 26;
+
+using NativeReferenceAssemblyStubFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args);
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::PipeReader::Void(System.Object)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_PipeReader_Void_System_Object(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::get_Property:System.Void()
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_get_Property_System_Void(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::Method1:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_Method1_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::Method2:System.Void(P0, P1)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_Method2_System_Void_P0_P1(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::Validate:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_Validate_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::PipeWriter::Void(System.Object)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_PipeWriter_Void_System_Object(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_Property:System.Void()
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_get_Property_System_Void(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Method1:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_Method1_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Method2:System.Void(P0, P1)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_Method2_System_Void_P0_P1(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Validate:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_Validate_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::get_Value:System.Void()
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_get_Value_System_Void(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::set_Value:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_set_Value_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::get_Count:System.Void()
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_get_Count_System_Void(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::set_Count:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_set_Count_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::get_IsEmpty:System.Void()
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_get_IsEmpty_System_Void(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::set_IsEmpty:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_set_IsEmpty_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::get_Key:System.Void()
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_get_Key_System_Void(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeReader::set_Key:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_set_Key_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_Value:System.Void()
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_get_Value_System_Void(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::set_Value:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_set_Value_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_Count:System.Void()
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_get_Count_System_Void(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::set_Count:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_set_Count_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_IsEmpty:System.Void()
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_get_IsEmpty_System_Void(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::set_IsEmpty:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_set_IsEmpty_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_Key:System.Void()
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_get_Key_System_Void(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+// Stub for System.IO.Pipelines/System.IO.Pipelines.PipeWriter::set_Key:System.Void(P0)
+int32_t CHAOS_RUNTIME_ABI_CALL NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_set_Key_System_Void_P0(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    // Skeleton stub - method dispatch placeholder
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+static const NativeReferenceAssemblyStubFn kPageMethodDispatch[] =
+{
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_PipeReader_Void_System_Object,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_get_Property_System_Void,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_Method1_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_Method2_System_Void_P0_P1,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_Validate_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_PipeWriter_Void_System_Object,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_get_Property_System_Void,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_Method1_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_Method2_System_Void_P0_P1,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_Validate_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_get_Value_System_Void,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_set_Value_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_get_Count_System_Void,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_set_Count_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_get_IsEmpty_System_Void,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_set_IsEmpty_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_get_Key_System_Void,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeReader_set_Key_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_get_Value_System_Void,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_set_Value_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_get_Count_System_Void,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_set_Count_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_get_IsEmpty_System_Void,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_set_IsEmpty_System_Void_P0,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_get_Key_System_Void,
+    &NativeReferenceStub_System_IO_Pipelines_System_IO_Pipelines_PipeWriter_set_Key_System_Void_P0,
+};
+
+int32_t CHAOS_RUNTIME_ABI_CALL DispatchRuntimeSkeletonPage0001(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 method_slot,
+    void* managed_args)
+{
+    if (method_slot >= (sizeof(kPageMethodDispatch) / sizeof(kPageMethodDispatch[0]))) {
+        return CHAOS_BRIDGE_STATUS_NOT_FOUND;
+    }
+    // Domain is already pushed by the summary entry point.
+    return kPageMethodDispatch[method_slot](
+        bridge, code_registration, metadata_registration, options, runtime, thread, managed_args);
+}
+}  // namespace chaos::il2cpp::generated::runtime_skeleton_reader_writer

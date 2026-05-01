@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Collections.Immutable/immutable-array",
+  "displayName": "Immutable Array",
+  "methodSubjectIds": [
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::ImmutableArray::Void(System.Object)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::get_Property:System.Void()",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Method1:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Method2:System.Void(P0, P1)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Validate:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::get_Value:System.Void()",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::set_Value:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::get_Count:System.Void()",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::set_Count:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::get_IsEmpty:System.Void()",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::set_IsEmpty:System.Void(P0)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::get_Key:System.Void()",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::set_Key:System.Void(P0)"
+  ],
+  "methodSubjectCount": 13,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

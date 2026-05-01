@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Text.Json/reader",
+  "displayName": "JSON Reader",
+  "methodSubjectIds": [
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::Utf8JsonReader::Void(System.Object)",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::get_Property:System.Void()",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::Method1:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::Method2:System.Void(P0, P1)",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::Validate:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::get_Value:System.Void()",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::set_Value:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::get_Count:System.Void()",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::set_Count:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::get_IsEmpty:System.Void()",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::set_IsEmpty:System.Void(P0)",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::get_Key:System.Void()",
+    "System.Text.Json/System.Text.Json.Utf8JsonReader::set_Key:System.Void(P0)"
+  ],
+  "methodSubjectCount": 13,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

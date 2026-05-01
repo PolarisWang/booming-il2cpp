@@ -281,6 +281,8 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.MathKernelStub.cpp.scriban";
     public const string RuntimeSkeletonThreadingAtomicStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.ThreadingAtomicStub.cpp.scriban";
+    public const string RuntimeSkeletonThreadingSyncKernelStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ThreadingSyncKernelStub.cpp.scriban";
 
     private static readonly IReadOnlyDictionary<string, string> TemplateRelativePathByPlanKind =
         new Dictionary<string, string>(StringComparer.Ordinal)
@@ -802,6 +804,11 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonThreadingAtomicStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonThreadingAtomicStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonThreadingSyncKernelStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonThreadingSyncKernelStubTemplateRelativePath);
     }
 
     public static string GetRequiredTemplateRelativePath(string planKind)

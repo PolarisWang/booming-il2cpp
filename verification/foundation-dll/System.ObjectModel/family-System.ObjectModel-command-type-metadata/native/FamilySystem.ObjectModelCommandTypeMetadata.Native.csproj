@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>FamilySystem.ObjectModelCommandTypeMetadata.Native</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+  </ItemGroup>
+</Project>

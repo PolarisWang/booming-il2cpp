@@ -33,82 +33,83 @@ public static class ThreadingMonitorInterlockedNativeEntry
     // [0] System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object)
     static int Method0()
     {
-        Monitor.Enter(new object());
-        return (int)0;
+        // TODO: System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object) could not be auto-generated
+        return 0;
     }
 
     // [1] System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object)
     static int Method1()
     {
-        Monitor.Exit(new object());
-        return (int)0;
+        // TODO: System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object) could not be auto-generated
+        return 0;
     }
 
     // [2] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)
     static int Method2()
     {
-        return (Monitor.TryEnter(42) ? 1 : 0);
+        return (int)(Monitor.TryEnter(42));
     }
 
     // [3] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)
     static int Method3()
     {
-        return (Monitor.TryEnter(42, 42) ? 1 : 0);
+        return (int)(Monitor.TryEnter(42, 42));
     }
 
     // [4] System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object)
     static int Method4()
     {
-        Monitor.Pulse(42);
-        return (int)0;
+        // TODO: System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object) could not be auto-generated
+        return 0;
     }
 
     // [5] System.Private.CoreLib/System.Threading.Monitor::PulseAll:System.Void(System.Object)
     static int Method5()
     {
-        Monitor.PulseAll(42);
-        return (int)0;
+        // TODO: System.Private.CoreLib/System.Threading.Monitor::PulseAll:System.Void(System.Object) could not be auto-generated
+        return 0;
     }
 
     // [6] System.Private.CoreLib/System.Threading.Monitor::Wait:System.Boolean(System.Object)
     static int Method6()
     {
-        return (Monitor.Wait(42) ? 1 : 0);
+        // TODO: System.Private.CoreLib/System.Threading.Monitor::Wait:System.Boolean(System.Object) could not be auto-generated
+        return 0;
     }
 
     // [7] System.Private.CoreLib/System.Threading.Interlocked::Increment:System.Int32(System.Int32&)
     static int Method7()
     {
-        System.Int32 __ref_0 = 42;
-        return Interlocked.Increment(ref __ref_0);
+        // TODO: System.Private.CoreLib/System.Threading.Interlocked::Increment:System.Int32(System.Int32&) could not be auto-generated
+        return 0;
     }
 
     // [8] System.Private.CoreLib/System.Threading.Interlocked::Decrement:System.Int32(System.Int32&)
     static int Method8()
     {
-        System.Int32 __ref_0 = 42;
-        return Interlocked.Decrement(ref __ref_0);
+        // TODO: System.Private.CoreLib/System.Threading.Interlocked::Decrement:System.Int32(System.Int32&) could not be auto-generated
+        return 0;
     }
 
     // [9] System.Private.CoreLib/System.Threading.Interlocked::Exchange:System.Int32(System.Int32&,System.Int32)
     static int Method9()
     {
-        System.Int32 __ref_0 = 42;
-        return Interlocked.Exchange(ref __ref_0, 42);
+        // TODO: System.Private.CoreLib/System.Threading.Interlocked::Exchange:System.Int32(System.Int32&,System.Int32) could not be auto-generated
+        return 0;
     }
 
     // [10] System.Private.CoreLib/System.Threading.Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32)
     static int Method10()
     {
-        System.Int32 __ref_0 = 42;
-        return Interlocked.CompareExchange(ref __ref_0, 42, 42);
+        // TODO: System.Private.CoreLib/System.Threading.Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32) could not be auto-generated
+        return 0;
     }
 
     // [11] System.Private.CoreLib/System.Threading.Interlocked::Add:System.Int32(System.Int32&,System.Int32)
     static int Method11()
     {
-        System.Int32 __ref_0 = 42;
-        return Interlocked.Add(ref __ref_0, 42);
+        // TODO: System.Private.CoreLib/System.Threading.Interlocked::Add:System.Int32(System.Int32&,System.Int32) could not be auto-generated
+        return 0;
     }
 
     // [12] System.Private.CoreLib/System.Threading.Interlocked::MemoryBarrier:System.Void()
@@ -121,8 +122,8 @@ public static class ThreadingMonitorInterlockedNativeEntry
     // [13] System.Private.CoreLib/System.Threading.Volatile::Read:System.Int32(System.Int32&)
     static int Method13()
     {
-        System.Int32 __ref_0 = 42;
-        return Volatile.Read(ref __ref_0);
+    var refLocal_0 = 42;
+        return Volatile.Read(ref refLocal_0);
     }
 
 }

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Security.Principal.Windows",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Security.Principal.Windows/token-access",
+  "displayName": "Token Access",
+  "methodSubjectIds": [
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::SafeAccessTokenHandle::Void(System.Object)",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_Property:System.Void()",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::Method1:System.Void(P0)",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::Method2:System.Void(P0, P1)",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::Validate:System.Void(P0)",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::TokenAccessLevels::Void(System.Object)",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::get_Property:System.Void()",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::Method1:System.Void(P0)",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::Method2:System.Void(P0, P1)",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::Validate:System.Void(P0)",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_Value:System.Void()",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::set_Value:System.Void(P0)",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_Count:System.Void()",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::set_Count:System.Void(P0)",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_IsEmpty:System.Void()",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::set_IsEmpty:System.Void(P0)",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_Key:System.Void()",
+    "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::set_Key:System.Void(P0)",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::get_Value:System.Void()",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::set_Value:System.Void(P0)",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::get_Count:System.Void()",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::set_Count:System.Void(P0)",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::get_IsEmpty:System.Void()",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::set_IsEmpty:System.Void(P0)",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::get_Key:System.Void()",
+    "System.Security.Principal.Windows/System.Security.Principal.TokenAccessLevels::set_Key:System.Void(P0)"
+  ],
+  "methodSubjectCount": 26,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

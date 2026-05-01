@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Runtime.InteropServices/com-wrappers",
+  "displayName": "COM Wrappers",
+  "methodSubjectIds": [
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::ComWrappers::Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::ComputeVtables:System.Void(P0, P1, P2)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::CreateObject:System.Void(P0, P1)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::CreateObject:System.Void(P0, P1, P2, P3)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetIUnknownImpl:System.Void(P0, P1, P2)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateComInterfaceForObject:System.Void(P0, P1)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateObjectForComInstance:System.Void(P0, P1)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateObjectForComInstance:System.Void(P0, P1, P2)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrRegisterObjectForComInstance:System.Void(P0, P1, P2)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrRegisterObjectForComInstance:System.Void(P0, P1, P2, P3)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::RegisterForMarshalling:System.Void(P0)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::RegisterForTrackerSupport:System.Void(P0)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::ReleaseObjects:System.Void(P0)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::TryGetComInstance:System.Void(P0, P1)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::TryGetObject:System.Void(P0, P1)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers+ComInterfaceDispatch::GetInstance`1:System.Void(P0)"
+  ],
+  "methodSubjectCount": 16,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

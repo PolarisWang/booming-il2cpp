@@ -50,13 +50,13 @@ public static class StringCharTextCoreNativeEntry
     // [2] System.Private.CoreLib/System.String::Substring:System.String(System.Int32)
     static int Method2()
     {
-        return ("hello".Substring(1)?.GetHashCode() ?? 0);
+        return (int)("hello".Substring(1));
     }
 
     // [3] System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)
     static int Method3()
     {
-        return ("hello".Substring(1, 2)?.GetHashCode() ?? 0);
+        return (int)("hello".Substring(1, 2));
     }
 
     // [4] System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)
@@ -74,85 +74,85 @@ public static class StringCharTextCoreNativeEntry
     // [6] System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)
     static int Method6()
     {
-        return (String.Concat("hello", "hello")?.GetHashCode() ?? 0);
+        return (int)(String.Concat("hello", "hello"));
     }
 
     // [7] System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)
     static int Method7()
     {
-        return (String.Concat("hello", "hello", "hello")?.GetHashCode() ?? 0);
+        return (int)(String.Concat("hello", "hello", "hello"));
     }
 
     // [8] System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])
     static int Method8()
     {
-        return (String.Format("hello", Array.Empty<System.Object>())?.GetHashCode() ?? 0);
+        return (int)(String.Format("hello", Array.Empty<System.Object>()));
     }
 
     // [9] System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)
     static int Method9()
     {
-        return ("hello".StartsWith("hello") ? 1 : 0);
+        return (int)("hello".StartsWith("hello"));
     }
 
     // [10] System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)
     static int Method10()
     {
-        return ("hello".Contains("hello") ? 1 : 0);
+        return (int)("hello".Contains("hello"));
     }
 
     // [11] System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)
     static int Method11()
     {
-        return ("hello".Replace("hello", "hello")?.GetHashCode() ?? 0);
+        return (int)("hello".Replace("hello", "hello"));
     }
 
     // [12] System.Private.CoreLib/System.String::Split:System.String[](System.Char)
     static int Method12()
     {
-        return "hello".Split('A').GetHashCode();
+        return (int)("hello".Split('A'));
     }
 
     // [13] System.Private.CoreLib/System.String::ToUpper:System.String()
     static int Method13()
     {
-        return ("hello".ToUpper()?.GetHashCode() ?? 0);
+        return (int)("hello".ToUpper());
     }
 
     // [14] System.Private.CoreLib/System.String::ToLower:System.String()
     static int Method14()
     {
-        return ("hello".ToLower()?.GetHashCode() ?? 0);
+        return (int)("hello".ToLower());
     }
 
     // [15] System.Private.CoreLib/System.String::Trim:System.String()
     static int Method15()
     {
-        return ("hello".Trim()?.GetHashCode() ?? 0);
+        return (int)("hello".Trim());
     }
 
     // [16] System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])
     static int Method16()
     {
-        return (String.Join("hello", Array.Empty<System.String>())?.GetHashCode() ?? 0);
+        return (int)(String.Join("hello", Array.Empty<System.String>()));
     }
 
     // [17] System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)
     static int Method17()
     {
-        return (Char.IsDigit('A') ? 1 : 0);
+        return (int)(Char.IsDigit('A'));
     }
 
     // [18] System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)
     static int Method18()
     {
-        return (Char.IsLetter('A') ? 1 : 0);
+        return (int)(Char.IsLetter('A'));
     }
 
     // [19] System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)
     static int Method19()
     {
-        return (Char.IsWhiteSpace('A') ? 1 : 0);
+        return (int)(Char.IsWhiteSpace('A'));
     }
 
 }

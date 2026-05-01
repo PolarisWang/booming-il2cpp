@@ -1,0 +1,28 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Formats.Asn1",
+  "familyId": "family/System.Formats.Asn1/reader",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 13,
+  "emittedMethodCount": 13,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::AsnReader::Void(System.Object)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::get_Property:System.Void()",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::Method1:System.Void(P0)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::Method2:System.Void(P0, P1)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::Validate:System.Void(P0)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::get_Value:System.Void()",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::set_Value:System.Void(P0)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::get_Count:System.Void()",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::set_Count:System.Void(P0)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::get_IsEmpty:System.Void()",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::set_IsEmpty:System.Void(P0)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::get_Key:System.Void()",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnReader::set_Key:System.Void(P0)"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "group": "inspect",
+  "commands": [
+    {
+      "id": "trace",
+      "title": "View, filter, and display cross-language trace JSONL",
+      "group": "Inspect",
+      "handler": "trace.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "trace"
+      ],
+      "syntax": "trace [--file <path>] [--stats] [--errors] [--group-by <field>] [--follow <subject>] [--context N] [--timeline] [--compact]",
+      "show_in_menu": true,
+      "examples": [
+        "run trace",
+        "run trace --errors",
+        "run trace --follow String::.ctor --context 3",
+        "run trace --timeline --file <path>"
+      ]
+    }
+  ]
+}

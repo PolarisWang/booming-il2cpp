@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityFamilies": [
+    "family/System.Text.Json/nodes"
+  ],
+  "capabilityFamilyCount": 1,
+  "methodUniverseCount": 52
+}

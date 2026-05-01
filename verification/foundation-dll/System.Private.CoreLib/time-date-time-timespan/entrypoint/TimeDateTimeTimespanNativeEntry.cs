@@ -48,43 +48,45 @@ public static class TimeDateTimeTimespanNativeEntry
     // [2] System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)
     static int Method2()
     {
-        return DateTime.Parse("2024-06-15").GetHashCode();
+        // TODO: System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String) could not be auto-generated
+        return 0;
     }
 
     // [3] System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&)
     static int Method3()
     {
-        return (DateTime.TryParse("2024-06-15", out DateTime __dt0) ? 1 : 0);
+    var refLocal_1 = DateTime.UtcNow;
+        return (int)(DateTime.TryParse("hello", ref refLocal_1));
     }
 
     // [4] System.Private.CoreLib/System.DateTime::ToString:System.String()
     static int Method4()
     {
-        return (DateTime.UtcNow.ToString()?.GetHashCode() ?? 0);
+        return (int)(DateTime.UtcNow.ToString());
     }
 
     // [5] System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)
     static int Method5()
     {
-        return (DateTime.UtcNow.ToString("hello")?.GetHashCode() ?? 0);
+        return (int)(DateTime.UtcNow.ToString("hello"));
     }
 
     // [6] System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)
     static int Method6()
     {
-        return DateTime.UtcNow.AddDays(42.0).GetHashCode();
+        return (int)(DateTime.UtcNow.AddDays(42.0));
     }
 
     // [7] System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)
     static int Method7()
     {
-        return DateTime.UtcNow.AddHours(42.0).GetHashCode();
+        return (int)(DateTime.UtcNow.AddHours(42.0));
     }
 
     // [8] System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)
     static int Method8()
     {
-        return DateTime.UtcNow.AddMinutes(42.0).GetHashCode();
+        return (int)(DateTime.UtcNow.AddMinutes(42.0));
     }
 
     // [9] System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)
@@ -109,25 +111,26 @@ public static class TimeDateTimeTimespanNativeEntry
     // [12] System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)
     static int Method12()
     {
-        return TimeSpan.FromDays(42.0).GetHashCode();
+        return (int)(TimeSpan.FromDays(42.0));
     }
 
     // [13] System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)
     static int Method13()
     {
-        return TimeSpan.FromHours(42.0).GetHashCode();
+        return (int)(TimeSpan.FromHours(42.0));
     }
 
     // [14] System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)
     static int Method14()
     {
-        return TimeSpan.FromMinutes(42.0).GetHashCode();
+        return (int)(TimeSpan.FromMinutes(42.0));
     }
 
     // [15] System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)
     static int Method15()
     {
-        return TimeSpan.Parse("01:30:00").GetHashCode();
+        // TODO: System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String) could not be auto-generated
+        return 0;
     }
 
 }

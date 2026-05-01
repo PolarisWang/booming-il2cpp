@@ -33,91 +33,104 @@ public static class PrimitiveNumericConversionsNativeEntry
     // [0] System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)
     static int Method0()
     {
-        return (Convert.ToBoolean("true") ? 1 : 0);
+        // TODO: System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String) could not be auto-generated
+        return 0;
     }
 
     // [1] System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)
     static int Method1()
     {
-        return (int)Convert.ToByte("99");
+        // TODO: System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String) could not be auto-generated
+        return 0;
     }
 
     // [2] System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)
     static int Method2()
     {
-        return (int)Convert.ToInt16("99");
+        // TODO: System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String) could not be auto-generated
+        return 0;
     }
 
     // [3] System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)
     static int Method3()
     {
-        return Convert.ToInt32("99");
+        // TODO: System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String) could not be auto-generated
+        return 0;
     }
 
     // [4] System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)
     static int Method4()
     {
-        return unchecked((int)Convert.ToInt64("99"));
+        // TODO: System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String) could not be auto-generated
+        return 0;
     }
 
     // [5] System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)
     static int Method5()
     {
-        return unchecked((int)Convert.ToSingle("99.5"));
+        // TODO: System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String) could not be auto-generated
+        return 0;
     }
 
     // [6] System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)
     static int Method6()
     {
-        return unchecked((int)Convert.ToDouble("99.5"));
+        // TODO: System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String) could not be auto-generated
+        return 0;
     }
 
     // [7] System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)
     static int Method7()
     {
-        return unchecked((int)Convert.ToDecimal("99.5"));
+        // TODO: System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String) could not be auto-generated
+        return 0;
     }
 
     // [8] System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)
     static int Method8()
     {
-        return (Convert.ToString(42)?.GetHashCode() ?? 0);
+        return (int)(Convert.ToString(42));
     }
 
     // [9] System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)
     static int Method9()
     {
-        return (Convert.ToString(42.0)?.GetHashCode() ?? 0);
+        return (int)(Convert.ToString(42.0));
     }
 
     // [10] System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)
     static int Method10()
     {
-        return unchecked((int)Convert.ToDecimal("99.5"));
+        // TODO: System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double) could not be auto-generated
+        return 0;
     }
 
     // [11] System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)
     static int Method11()
     {
-        return Convert.ToInt32("99");
+        // TODO: System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double) could not be auto-generated
+        return 0;
     }
 
     // [12] System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)
     static int Method12()
     {
-        return int.Parse("99");
+        // TODO: System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String) could not be auto-generated
+        return 0;
     }
 
     // [13] System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)
     static int Method13()
     {
-        return unchecked((int)long.Parse("99"));
+        // TODO: System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String) could not be auto-generated
+        return 0;
     }
 
     // [14] System.Private.CoreLib/System.Double::Parse:System.Double(System.String)
     static int Method14()
     {
-        return unchecked((int)double.Parse("99.5"));
+        // TODO: System.Private.CoreLib/System.Double::Parse:System.Double(System.String) could not be auto-generated
+        return 0;
     }
 
 }

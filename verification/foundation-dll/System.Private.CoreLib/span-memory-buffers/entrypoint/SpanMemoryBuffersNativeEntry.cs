@@ -68,7 +68,7 @@ public static class SpanMemoryBuffersNativeEntry
     // [5] System.Private.CoreLib/System.Span`1::get_Empty:System.Span`1()
     static int Method5()
     {
-        return Span<byte>.Empty.GetHashCode();
+        return (int)(Span<byte>.Empty);
     }
 
     // [6] System.Private.CoreLib/System.ReadOnlySpan`1::get_Item:T&(System.Int32)
@@ -88,7 +88,7 @@ public static class SpanMemoryBuffersNativeEntry
     // [8] System.Private.CoreLib/System.ReadOnlySpan`1::ToArray:T[]()
     static int Method8()
     {
-        return default(ReadOnlySpan<byte>).ToArray().GetHashCode();
+        return (int)(default(ReadOnlySpan<byte>).ToArray());
     }
 
     // [9] System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32)
@@ -101,25 +101,25 @@ public static class SpanMemoryBuffersNativeEntry
     // [10] System.Private.CoreLib/System.Memory`1::get_Span:System.Span`1()
     static int Method10()
     {
-        return default(Memory<byte>).Span.GetHashCode();
+        return (int)(default(Memory<byte>).Span);
     }
 
     // [11] System.Private.CoreLib/System.Memory`1::ToArray:T[]()
     static int Method11()
     {
-        return default(Memory<byte>).ToArray().GetHashCode();
+        return (int)(default(Memory<byte>).ToArray());
     }
 
     // [12] System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.ReadOnlySpan`1)
     static int Method12()
     {
-        return MemoryMarshal.GetReference(default(ReadOnlySpan<byte>)).GetHashCode();
+        return (int)(MemoryMarshal.GetReference(default(ReadOnlySpan<byte>)));
     }
 
     // [13] System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.Span`1)
     static int Method13()
     {
-        return MemoryMarshal.GetReference(default(Span<byte>)).GetHashCode();
+        return (int)(MemoryMarshal.GetReference(default(Span<byte>)));
     }
 
 }

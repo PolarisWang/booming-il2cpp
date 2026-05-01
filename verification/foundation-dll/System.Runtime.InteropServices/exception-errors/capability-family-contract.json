@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Runtime.InteropServices/exception-errors",
+  "displayName": "Interop Exceptions And Errors",
+  "methodSubjectIds": [
+    "System.Runtime.InteropServices/System.DllNotFoundException::DllNotFoundException::Void()",
+    "System.Runtime.InteropServices/System.DllNotFoundException::DllNotFoundException::Void(System.Object)",
+    "System.Runtime.InteropServices/System.DllNotFoundException::DllNotFoundException::Void(System.Object, System.Object)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::COMException::Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::COMException::Void(System.Object)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::COMException::Void(System.Object, System.Object)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::ToString:System.Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::SEHException::Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::SEHException::Void(System.Object)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::SEHException::Void(System.Object, System.Object)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::CanResume:System.Void()"
+  ],
+  "methodSubjectCount": 11,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

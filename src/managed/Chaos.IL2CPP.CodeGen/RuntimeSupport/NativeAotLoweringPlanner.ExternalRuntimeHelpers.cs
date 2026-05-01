@@ -61,6 +61,26 @@ public sealed partial class NativeAotLoweringPlanner
 		// Canonicalize assembly prefix so matching is assembly-agnostic
 		callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
 
+		// === Generic shape dispatch via Registry (runs first -- GenericShapeDescriptor resolves
+		//     complex shapes with custom body logic that cannot be expressed as a simple forward) ===
+		if (_shapeRegistry.TryMatchGenericShape(callee, out var genericDescriptor, out var typeArgs))
+		{
+			var resolution = genericDescriptor.Resolver(this, callee, typeArgs);
+			if (resolution != null)
+			{
+				helperDefinition = new ExternalRuntimeHelperDefinition(
+					callee,
+					resolution.Symbol,
+					resolution.CppSource,
+					resolution.ParameterAbis,
+					resolution.ReturnAbi,
+					resolution.RawArgumentIndices,
+					resolution.ReferencedStaticFieldSubjectIds);
+				return true;
+			}
+		}
+
+		// === Simple forward shape dispatch (native function call wrapper) ===
 		if (_shapeRegistry.TryMatchShape(callee, out var shapeEntry) &&
 			shapeEntry.Kind == RuntimeHelperShapeRegistry.ShapeKind.SimpleForward)
 		{
@@ -69,58 +89,6 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 
 		if (TryCreateCustomAttributeRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateAssertionRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateAsyncRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateStringRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateExceptionRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateNumericFormattingRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateInterpolatedStringRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreatePlatformRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateDelegateInteropRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateMarshalingRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateInterlockedRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateSpanRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateCollectionRuntimeHelperDefinition(callee, out helperDefinition))
-		{
-			return true;
-		}
-		if (TryCreateObjectRuntimeHelperDefinition(callee, out helperDefinition))
 		{
 			return true;
 		}
