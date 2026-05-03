@@ -1,0 +1,158 @@
+{
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "results": [
+    {
+      "family": "observable-collections",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 25,
+      "entryPointSubjectId": "ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\observable-collections\\entrypoint\\build-output\\ObservableCollectionsNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\observable-collections\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "data-errors",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 8,
+      "entryPointSubjectId": "DataErrorsNativeEntry/DataErrorsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\data-errors\\entrypoint\\build-output\\DataErrorsNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\data-errors\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "command-type-metadata",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 16,
+      "entryPointSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\command-type-metadata\\entrypoint\\build-output\\CommandTypeMetadataNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\command-type-metadata\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "property-change-notifications",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 18,
+      "entryPointSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\property-change-notifications\\entrypoint\\build-output\\PropertyChangeNotificationsNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\property-change-notifications\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "object-model-collections",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 19,
+      "entryPointSubjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\object-model-collections\\entrypoint\\build-output\\ObjectModelCollectionsNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\object-model-collections\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "collection-change-notifications",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 20,
+      "entryPointSubjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\entrypoint\\build-output\\CollectionChangeNotificationsNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T21:47:15"
+}

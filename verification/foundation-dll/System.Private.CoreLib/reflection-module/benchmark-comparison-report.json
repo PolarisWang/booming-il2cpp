@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/module",
+  "summary": {
+    "totalMethods": 6,
+    "matchedCount": 6,
+    "unmatchedCount": 0,
+    "invalidCount": 0,
+    "nativeFasterCount": 6,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 61.5
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.18
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetType:System.Type(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.18
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetTypes:System.Type[]()",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.18
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_Assembly:System.Reflection.Assembly()",
+      "status": "matched",
+      "managedElapsedMs": 0.0221,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.92
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_FullyQualifiedName:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 4.9255,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 99.81
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_Name:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.0147,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 36.73
+    }
+  ]
+}

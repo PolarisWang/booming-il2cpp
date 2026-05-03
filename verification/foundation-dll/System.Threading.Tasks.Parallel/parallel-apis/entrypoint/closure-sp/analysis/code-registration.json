@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ParallelApisNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Run",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method0",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method1",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method2",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method3",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method4",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method5",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method6",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method7",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method8",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method9",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method10",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method11",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Method12",
+          "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method12:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

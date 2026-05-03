@@ -1,0 +1,129 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "genericCapabilityMatrix",
+  "ownerSubjectId": "ObservableCollectionsNativeEntry",
+  "entrySubjectId": "ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Run:System.Int32(System.Int32)",
+  "hotUpdateModes": [
+    "HotUpdateNone",
+    "HotUpdateMetadataAugmented",
+    "HotUpdateGenericSharing"
+  ],
+  "gates": {
+    "status": "ok",
+    "unsupportedLeakCount": 0,
+    "missingAuthorityCount": 0,
+    "nonCanonicalHotUpdateNameCount": 0,
+    "leaks": []
+  },
+  "familyBudgets": [
+    {
+      "familyId": "ClosedGenericType",
+      "displayName": "Closed Generic Type",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedMethodOnGenericType",
+      "displayName": "Closed Method On Generic Type",
+      "budgetLimit": 512,
+      "observedCount": 1
+    },
+    {
+      "familyId": "ClosedGenericMethod",
+      "displayName": "Closed Generic Method",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedGenericMethodOnGenericType",
+      "displayName": "Closed Generic Method On Generic Type",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "CrossAssemblyBoundary",
+      "displayName": "Cross Assembly Boundary",
+      "budgetLimit": 512,
+      "observedCount": 1
+    },
+    {
+      "familyId": "DispatchBoundary",
+      "displayName": "Dispatch Boundary",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ReflectionBoundary",
+      "displayName": "Reflection Boundary",
+      "budgetLimit": 64,
+      "observedCount": 0
+    },
+    {
+      "familyId": "HotUpdateBoundary",
+      "displayName": "HotUpdate Boundary",
+      "budgetLimit": 64,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncTaskFamily",
+      "displayName": "Async Task Family",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncValueTaskFamily",
+      "displayName": "Async ValueTask Family",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncBuilderFamily",
+      "displayName": "Async Builder Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncAwaiterFamily",
+      "displayName": "Async Awaiter Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "PointerByRefFamily",
+      "displayName": "Pointer And ByRef Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "RefStructFamily",
+      "displayName": "Ref Struct Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    }
+  ],
+  "boundaryCases": [],
+  "entries": [
+    {
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Byte\u003E::.ctor:System.Void()",
+      "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::.ctor:System.Void()",
+      "demandSourceKind": "memberReference",
+      "requestingAssemblyName": "ObservableCollectionsNativeEntry",
+      "owningAssemblyName": "System.ObjectModel",
+      "familyKindCode": 2,
+      "contextKindCode": 1,
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "isCrossAssembly": true,
+      "statusReasonCode": "loader-demand:memberReference",
+      "authoritySource": "demand-derived",
+      "openDefinitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::.ctor:System.Void()",
+      "sharedGenericBodyId": "body:definition=System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::.ctor:System.Void();type=[System.Byte];method=[]",
+      "instantiationStubId": "stub:definition=System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::.ctor:System.Void();type=[System.Byte];method=[]",
+      "hasOpenDefinitionAuthority": true,
+      "hasSharedBodyAuthority": true,
+      "hasInstantiationStubAuthority": true,
+      "hasRuntimeGenericContextAuthority": true
+    }
+  ]
+}

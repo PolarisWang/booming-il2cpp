@@ -1,0 +1,402 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method18:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method19:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method20:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method21:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method22:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method23:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method24:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method25:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method26:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method27:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method28:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method29:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method30:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method31:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method32:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method33:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method34:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method35:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method36:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method37:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method38:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method39:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method40:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method41:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method42:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method43:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method44:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method45:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method46:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method47:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method48:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method49:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method50:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method51:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method52:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method53:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method54:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method55:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method56:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method57:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method58:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method59:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method60:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method61:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method62:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method63:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ProjectionNativeEntry/ProjectionNativeEntry::Method64:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

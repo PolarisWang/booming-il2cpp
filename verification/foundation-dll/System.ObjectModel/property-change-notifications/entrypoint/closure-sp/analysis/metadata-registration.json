@@ -1,0 +1,237 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "PropertyChangeNotificationsNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "name": "PropertyChangeNotificationsNativeEntry",
+      "displayName": "PropertyChangeNotificationsNativeEntry",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method13:System.Int32()",
+      "name": "Method13",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method14:System.Int32()",
+      "name": "Method14",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method15:System.Int32()",
+      "name": "Method15",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method16:System.Int32()",
+      "name": "Method16",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method16:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method17:System.Int32()",
+      "name": "Method17",
+      "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method17:System.Int32()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 21,
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

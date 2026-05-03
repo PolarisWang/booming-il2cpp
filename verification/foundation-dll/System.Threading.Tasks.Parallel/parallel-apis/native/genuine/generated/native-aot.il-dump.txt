@@ -1,0 +1,41 @@
+.method public static System.Int32 ParallelApisNativeEntry::Run(System.Int32)
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ParallelApisNativeEntry::Method0()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method1()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method2()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method3()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method4()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method5()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method6()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method7()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method8()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method9()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method10()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method11()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 ParallelApisNativeEntry::Method12()
+// SubjectId: ParallelApisNativeEntry/ParallelApisNativeEntry::Method12:System.Int32()

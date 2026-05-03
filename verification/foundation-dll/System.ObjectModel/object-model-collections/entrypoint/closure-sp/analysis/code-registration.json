@@ -1,0 +1,132 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ObjectModelCollectionsNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Run",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method0",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method1",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method2",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method3",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method4",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method5",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method6",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method7",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method8",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method9",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method10",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method11",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method12",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method13",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method14",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method15",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method16",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method17",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "ObjectModelCollectionsNativeEntry_ObjectModelCollectionsNativeEntry_Method18",
+          "subjectId": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Method18:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

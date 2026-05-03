@@ -1,0 +1,168 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method18:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method19:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method20:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method21:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method22:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method23:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method24:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PolymorphismReferenceNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method25:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

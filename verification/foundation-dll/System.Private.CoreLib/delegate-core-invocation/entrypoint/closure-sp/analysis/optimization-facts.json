@@ -1,0 +1,69 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

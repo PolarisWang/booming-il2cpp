@@ -1,0 +1,4577 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.run",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 MaterializationNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "materialization-native-entry.materialization-native-entry.run",
+        "signature": "System.Int32 MaterializationNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                276,
+                287,
+                298,
+                309,
+                320,
+                331,
+                342,
+                353,
+                364,
+                375,
+                386,
+                397,
+                408,
+                419,
+                430,
+                441,
+                452,
+                463,
+                474,
+                485,
+                496,
+                507,
+                518,
+                529,
+                540,
+                551,
+                562,
+                573,
+                584,
+                595,
+                606,
+                617,
+                628,
+                639,
+                650,
+                661,
+                672,
+                683,
+                694,
+                705,
+                716,
+                727,
+                738,
+                749,
+                760,
+                771,
+                782,
+                793,
+                804,
+                815,
+                823,
+                831,
+                839,
+                847,
+                855,
+                863,
+                871,
+                879,
+                887,
+                895,
+                903,
+                911,
+                919,
+                927,
+                935
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 943,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method16:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method16:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method17:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method17:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method18:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method18:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method19:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method19:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method20:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method20:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method21:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method21:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method22:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method22:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method23:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method23:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method24:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method24:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method25:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method25:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method26:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method26:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method27:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method27:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method28:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method28:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method29:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method29:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method30:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method30:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method31:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method31:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method32:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method32:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method33:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method33:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method34:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method34:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method35:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method35:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method36:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method36:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method37:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method37:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method38:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method38:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method39:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method39:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method40:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method40:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method41:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method41:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method42:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method42:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method43:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method43:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method44:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method44:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method45:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method45:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method46:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method46:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method47:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method47:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method48:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method48:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method49:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method49:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method50:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method50:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method51:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method51:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method52:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method52:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method53:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method53:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method54:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method54:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method55:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method55:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method56:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method56:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method57:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method57:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method58:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method58:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method59:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method59:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method60:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method60:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method61:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method61:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method62:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method62:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method63:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method63:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "MaterializationNativeEntry/MaterializationNativeEntry::Method64:System.Int32()",
+              "reference": {
+                "assemblyName": "MaterializationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method64:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method0",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method0:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method0:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method0",
+        "signature": "System.Int32 MaterializationNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method1",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method1:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method1:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method1",
+        "signature": "System.Int32 MaterializationNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method2",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method2:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method2:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method2",
+        "signature": "System.Int32 MaterializationNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method3",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method3:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method3:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method3",
+        "signature": "System.Int32 MaterializationNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method4",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method4:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method4:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method4",
+        "signature": "System.Int32 MaterializationNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method5",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method5:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method5:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method5",
+        "signature": "System.Int32 MaterializationNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method6",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method6:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method6:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method6",
+        "signature": "System.Int32 MaterializationNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method7",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method7:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method7:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method7",
+        "signature": "System.Int32 MaterializationNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method8",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method8:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method8:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method8",
+        "signature": "System.Int32 MaterializationNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method9",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method9:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method9:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method9",
+        "signature": "System.Int32 MaterializationNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method10",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method10:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method10:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method10",
+        "signature": "System.Int32 MaterializationNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method11",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method11:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method11:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method11",
+        "signature": "System.Int32 MaterializationNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method12",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method12:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method12:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method12",
+        "signature": "System.Int32 MaterializationNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method13",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method13:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method13:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method13",
+        "signature": "System.Int32 MaterializationNativeEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method14",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method14:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method14:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method14",
+        "signature": "System.Int32 MaterializationNativeEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method15",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method15:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method15:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method15",
+        "signature": "System.Int32 MaterializationNativeEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method16",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method16:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method16:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method16",
+        "signature": "System.Int32 MaterializationNativeEntry::Method16()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method17",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method17:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method17:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method17",
+        "signature": "System.Int32 MaterializationNativeEntry::Method17()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method18",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method18:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method18()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method18:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method18:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method18",
+        "signature": "System.Int32 MaterializationNativeEntry::Method18()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method19",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method19:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method19()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method19:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method19:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method19",
+        "signature": "System.Int32 MaterializationNativeEntry::Method19()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method20",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method20:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method20()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method20:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method20:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method20",
+        "signature": "System.Int32 MaterializationNativeEntry::Method20()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method21",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method21:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method21()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method21:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method21:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method21",
+        "signature": "System.Int32 MaterializationNativeEntry::Method21()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method22",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method22:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method22()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method22:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method22:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method22",
+        "signature": "System.Int32 MaterializationNativeEntry::Method22()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method23",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method23:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method23()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method23:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method23:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method23",
+        "signature": "System.Int32 MaterializationNativeEntry::Method23()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method24",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method24:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method24()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method24:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method24:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method24",
+        "signature": "System.Int32 MaterializationNativeEntry::Method24()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method25",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method25:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method25()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method25:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method25:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method25",
+        "signature": "System.Int32 MaterializationNativeEntry::Method25()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method26",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method26:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method26()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method26:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method26:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method26",
+        "signature": "System.Int32 MaterializationNativeEntry::Method26()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method27",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method27:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method27()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method27:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method27:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method27",
+        "signature": "System.Int32 MaterializationNativeEntry::Method27()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method28",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method28:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method28()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method28:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method28:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method28",
+        "signature": "System.Int32 MaterializationNativeEntry::Method28()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method29",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method29:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method29()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method29:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method29:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method29",
+        "signature": "System.Int32 MaterializationNativeEntry::Method29()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method30",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method30:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method30()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method30:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method30:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method30",
+        "signature": "System.Int32 MaterializationNativeEntry::Method30()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method31",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method31:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method31()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method31:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method31:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method31",
+        "signature": "System.Int32 MaterializationNativeEntry::Method31()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method32",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method32:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method32()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method32:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method32:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method32",
+        "signature": "System.Int32 MaterializationNativeEntry::Method32()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method33",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method33:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method33()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method33:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method33:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method33",
+        "signature": "System.Int32 MaterializationNativeEntry::Method33()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method34",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method34:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method34()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method34:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method34:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method34",
+        "signature": "System.Int32 MaterializationNativeEntry::Method34()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method35",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method35:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method35()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method35:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method35:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method35",
+        "signature": "System.Int32 MaterializationNativeEntry::Method35()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method36",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method36:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method36()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method36:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method36:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method36",
+        "signature": "System.Int32 MaterializationNativeEntry::Method36()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method37",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method37:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method37()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method37:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method37:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method37",
+        "signature": "System.Int32 MaterializationNativeEntry::Method37()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method38",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method38:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method38()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method38:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method38:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method38",
+        "signature": "System.Int32 MaterializationNativeEntry::Method38()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method39",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method39:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method39()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method39:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method39:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method39",
+        "signature": "System.Int32 MaterializationNativeEntry::Method39()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method40",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method40:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method40()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method40:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method40:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method40",
+        "signature": "System.Int32 MaterializationNativeEntry::Method40()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method41",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method41:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method41()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method41:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method41:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method41",
+        "signature": "System.Int32 MaterializationNativeEntry::Method41()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method42",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method42:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method42()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method42:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method42:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method42",
+        "signature": "System.Int32 MaterializationNativeEntry::Method42()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method43",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method43:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method43()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method43:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method43:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method43",
+        "signature": "System.Int32 MaterializationNativeEntry::Method43()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method44",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method44:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method44()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method44:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method44:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method44",
+        "signature": "System.Int32 MaterializationNativeEntry::Method44()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method45",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method45:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method45()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method45:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method45:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method45",
+        "signature": "System.Int32 MaterializationNativeEntry::Method45()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method46",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method46:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method46()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method46:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method46:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method46",
+        "signature": "System.Int32 MaterializationNativeEntry::Method46()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method47",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method47:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method47()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method47:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method47:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method47",
+        "signature": "System.Int32 MaterializationNativeEntry::Method47()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method48",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method48:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method48()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method48:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method48:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method48",
+        "signature": "System.Int32 MaterializationNativeEntry::Method48()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method49",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method49:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method49()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method49:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method49:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method49",
+        "signature": "System.Int32 MaterializationNativeEntry::Method49()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method50",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method50:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method50()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method50:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method50:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method50",
+        "signature": "System.Int32 MaterializationNativeEntry::Method50()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method51",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method51:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method51()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method51:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method51:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method51",
+        "signature": "System.Int32 MaterializationNativeEntry::Method51()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method52",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method52:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method52()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method52:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method52:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method52",
+        "signature": "System.Int32 MaterializationNativeEntry::Method52()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method53",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method53:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method53()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method53:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method53:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method53",
+        "signature": "System.Int32 MaterializationNativeEntry::Method53()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method54",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method54:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method54()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method54:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method54:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method54",
+        "signature": "System.Int32 MaterializationNativeEntry::Method54()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method55",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method55:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method55()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method55:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method55:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method55",
+        "signature": "System.Int32 MaterializationNativeEntry::Method55()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method56",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method56:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method56()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method56:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method56:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method56",
+        "signature": "System.Int32 MaterializationNativeEntry::Method56()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method57",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method57:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method57()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method57:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method57:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method57",
+        "signature": "System.Int32 MaterializationNativeEntry::Method57()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method58",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method58:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method58()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method58:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method58:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method58",
+        "signature": "System.Int32 MaterializationNativeEntry::Method58()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method59",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method59:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method59()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method59:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method59:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method59",
+        "signature": "System.Int32 MaterializationNativeEntry::Method59()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method60",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method60:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method60()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method60:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method60:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method60",
+        "signature": "System.Int32 MaterializationNativeEntry::Method60()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method61",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method61:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method61()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method61:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method61:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method61",
+        "signature": "System.Int32 MaterializationNativeEntry::Method61()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method62",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method62:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method62()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method62:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method62:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method62",
+        "signature": "System.Int32 MaterializationNativeEntry::Method62()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method63",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method63:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method63()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method63:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method63:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method63",
+        "signature": "System.Int32 MaterializationNativeEntry::Method63()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "materialization-native-entry.materialization-native-entry.method64",
+      "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method64:System.Int32()",
+      "signature": "System.Int32 MaterializationNativeEntry::Method64()",
+      "identity": {
+        "assemblyName": "MaterializationNativeEntry",
+        "declaringTypeSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry",
+        "definitionSubjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method64:System.Int32()",
+        "subjectId": "MaterializationNativeEntry/MaterializationNativeEntry::Method64:System.Int32()",
+        "methodId": "materialization-native-entry.materialization-native-entry.method64",
+        "signature": "System.Int32 MaterializationNativeEntry::Method64()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

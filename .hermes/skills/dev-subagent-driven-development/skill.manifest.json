@@ -1,0 +1,12 @@
+{
+  "kind": "project",
+  "domain": "workflow",
+  "name": "dev-subagent-driven-development",
+  "summary": "按计划协调子 agent 执行实现任务，并在阶段间做双重审查。",
+  "trigger_signals": ["已有计划且适合委派时", "存在可独立实现的任务块时", "需要控制器协调多个实现 agent 时"],
+  "owner": "00-skills-maintainers",
+  "status": "active",
+  "version": "1.0.0",
+  "startup_visible": false,
+  "token_budget": "medium"
+}

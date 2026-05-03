@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableSortedDictionaryNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableSortedDictionaryNativeEntry_ImmutableSortedDictionaryNativeEntry_Run",
+          "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableSortedDictionaryNativeEntry_ImmutableSortedDictionaryNativeEntry_Method0",
+          "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableSortedDictionaryNativeEntry_ImmutableSortedDictionaryNativeEntry_Method1",
+          "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method1:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

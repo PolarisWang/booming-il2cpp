@@ -1,0 +1,124 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "ImmutableArrayNativeEntry",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableArray::Create\u003CSystem.Byte\u003E:ImmutableArray\u003CSystem.Byte\u003E()",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E()",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E()",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableArrayNativeEntry",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableArray::Create\u003CSystem.Byte\u003E:ImmutableArray\u003CSystem.Byte\u003E(System.Byte)",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableArrayNativeEntry",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableArray::Create\u003CSystem.Byte\u003E:ImmutableArray\u003CSystem.Byte\u003E(System.Byte,System.Byte)",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0,!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0,!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableArrayNativeEntry",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableArray::Create\u003CSystem.Int32\u003E:ImmutableArray\u003CSystem.Int32\u003E()",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E()",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E()",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableArrayNativeEntry",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableArray::Create\u003CSystem.Int32\u003E:ImmutableArray\u003CSystem.Int32\u003E(System.Int32)",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableArrayNativeEntry",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableArray::Create\u003CSystem.String\u003E:ImmutableArray\u003CSystem.String\u003E(System.String)",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    }
+  ]
+}

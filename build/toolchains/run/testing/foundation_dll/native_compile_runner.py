@@ -18,6 +18,7 @@ Phase 3 gate: patch variant compiles + returns correct sentinel
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -32,7 +33,7 @@ _REPO_ROOT = _HERE.parents[4]
 _VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib"
 
 # Expected MSVC path
-_MSVC_CL = Path("C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC") if os.name == "nt" else None
+_MSVC_CL = Path("C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC") if os.name == "nt" else None
 
 
 def _find_latest_msvc_cl() -> Path | None:
@@ -71,7 +72,7 @@ def _find_msvc_env() -> dict[str, str]:
     # Run vcvarsall.bat x64 and capture environment
     try:
         result = subprocess.run(
-            f'"{vcvars}" x64 > nul 2>&1 && set',
+            f'"{vcvars}" x64 && set',
             shell=True, capture_output=True, text=True, timeout=30,
         )
         env = {}
@@ -91,6 +92,9 @@ def _find_chaos_include_dirs() -> list[Path]:
     candidates = [
         _REPO_ROOT / "src" / "native" / "common",
         _REPO_ROOT / "src" / "native" / "common" / "chaos",
+        _REPO_ROOT / "src" / "native" / "runtime-core",
+        _REPO_ROOT / "contracts" / "native" / "v0",
+        _REPO_ROOT / "third_party" / "fmt" / "include",
         _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib",
     ]
     for c in candidates:
@@ -135,7 +139,7 @@ def compile_cpp(
 
     # Build compile command
     cmd = (
-        f'"{cl_exe}" /nologo /std:c++20 /c /EHsc /W3 '
+        f'"{cl_exe}" /nologo /std:c++20 /c /EHsc /W3 /utf-8 '
         f'{include_flags} {defines} '
         f'-Fo"{obj_path}" '
         f'"{cpp_path}"'

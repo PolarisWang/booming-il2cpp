@@ -1,0 +1,77 @@
+.method public static System.Int32 ObservableCollectionsNativeEntry::Run(System.Int32)
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method0()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method1()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method2()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method3()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method4()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method5()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method6()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method7()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method8()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method9()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method10()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method11()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method12()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method13()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method14()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method15()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method15:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method16()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method16:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method17()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method17:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method18()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method18:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method19()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method19:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method20()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method20:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method21()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method21:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method22()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method22:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method23()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method23:System.Int32()
+
+.method public static System.Int32 ObservableCollectionsNativeEntry::Method24()
+// SubjectId: ObservableCollectionsNativeEntry/ObservableCollectionsNativeEntry::Method24:System.Int32()

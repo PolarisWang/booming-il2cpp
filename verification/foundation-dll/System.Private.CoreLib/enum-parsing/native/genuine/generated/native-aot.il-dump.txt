@@ -1,0 +1,38 @@
+.method public static System.Int32 EnumParsingNativeEntry::Run(System.Int32)
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 EnumParsingNativeEntry::Method0()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method1()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method2()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method3()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method4()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method5()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method6()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method7()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method8()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method9()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method10()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 EnumParsingNativeEntry::Method11()
+// SubjectId: EnumParsingNativeEntry/EnumParsingNativeEntry::Method11:System.Int32()

@@ -1,0 +1,4577 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.run",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.run",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                276,
+                287,
+                298,
+                309,
+                320,
+                331,
+                342,
+                353,
+                364,
+                375,
+                386,
+                397,
+                408,
+                419,
+                430,
+                441,
+                452,
+                463,
+                474,
+                485,
+                496,
+                507,
+                518,
+                529,
+                540,
+                551,
+                562,
+                573,
+                584,
+                595,
+                606,
+                617,
+                628,
+                639,
+                650,
+                661,
+                672,
+                683,
+                694,
+                705,
+                716,
+                727,
+                738,
+                749,
+                760,
+                771,
+                782,
+                793,
+                804,
+                815,
+                823,
+                831,
+                839,
+                847,
+                855,
+                863,
+                871,
+                879,
+                887,
+                895,
+                903,
+                911,
+                919,
+                927,
+                935
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 943,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method16:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method16:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method17:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method17:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method18:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method18:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method19:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method19:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method20:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method20:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method21:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method21:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method22:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method22:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method23:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method23:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method24:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method24:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method25:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method25:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method26:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method26:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method27:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method27:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method28:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method28:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method29:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method29:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method30:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method30:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method31:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method31:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method32:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method32:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method33:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method33:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method34:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method34:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method35:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method35:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method36:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method36:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method37:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method37:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method38:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method38:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method39:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method39:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method40:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method40:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method41:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method41:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method42:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method42:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method43:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method43:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method44:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method44:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method45:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method45:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method46:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method46:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method47:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method47:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method48:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method48:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method49:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method49:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method50:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method50:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method51:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method51:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method52:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method52:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method53:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method53:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method54:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method54:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method55:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method55:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method56:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method56:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method57:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method57:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method58:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method58:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method59:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method59:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method60:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method60:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method61:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method61:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method62:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method62:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method63:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method63:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method64:System.Int32()",
+              "reference": {
+                "assemblyName": "NumericAggregationNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method64:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method0",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method0:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method0:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method0",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method1",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method1:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method1:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method1",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method2",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method2:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method2:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method2",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method3",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method3:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method3:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method3",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method4",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method4:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method4:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method4",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method5",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method5:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method5:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method5",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method6",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method6:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method6:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method6",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method7",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method7:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method7:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method7",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method8",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method8:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method8:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method8",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method9",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method9:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method9:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method9",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method10",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method10:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method10:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method10",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method11",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method11:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method11:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method11",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method12",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method12:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method12:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method12",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method13",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method13:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method13:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method13",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method14",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method14:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method14:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method14",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method15",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method15:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method15:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method15",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method16",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method16:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method16:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method16",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method16()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method17",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method17:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method17:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method17",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method17()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method18",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method18:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method18()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method18:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method18:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method18",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method18()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method19",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method19:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method19()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method19:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method19:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method19",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method19()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method20",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method20:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method20()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method20:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method20:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method20",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method20()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method21",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method21:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method21()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method21:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method21:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method21",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method21()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method22",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method22:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method22()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method22:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method22:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method22",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method22()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method23",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method23:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method23()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method23:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method23:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method23",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method23()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method24",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method24:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method24()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method24:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method24:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method24",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method24()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method25",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method25:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method25()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method25:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method25:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method25",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method25()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method26",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method26:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method26()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method26:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method26:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method26",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method26()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method27",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method27:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method27()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method27:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method27:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method27",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method27()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method28",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method28:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method28()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method28:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method28:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method28",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method28()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method29",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method29:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method29()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method29:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method29:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method29",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method29()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method30",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method30:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method30()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method30:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method30:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method30",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method30()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method31",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method31:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method31()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method31:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method31:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method31",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method31()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method32",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method32:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method32()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method32:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method32:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method32",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method32()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method33",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method33:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method33()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method33:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method33:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method33",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method33()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method34",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method34:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method34()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method34:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method34:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method34",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method34()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method35",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method35:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method35()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method35:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method35:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method35",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method35()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method36",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method36:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method36()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method36:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method36:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method36",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method36()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method37",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method37:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method37()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method37:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method37:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method37",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method37()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method38",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method38:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method38()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method38:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method38:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method38",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method38()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method39",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method39:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method39()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method39:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method39:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method39",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method39()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method40",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method40:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method40()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method40:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method40:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method40",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method40()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method41",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method41:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method41()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method41:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method41:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method41",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method41()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method42",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method42:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method42()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method42:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method42:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method42",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method42()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method43",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method43:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method43()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method43:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method43:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method43",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method43()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method44",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method44:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method44()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method44:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method44:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method44",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method44()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method45",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method45:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method45()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method45:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method45:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method45",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method45()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method46",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method46:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method46()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method46:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method46:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method46",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method46()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method47",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method47:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method47()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method47:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method47:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method47",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method47()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method48",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method48:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method48()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method48:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method48:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method48",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method48()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method49",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method49:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method49()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method49:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method49:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method49",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method49()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method50",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method50:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method50()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method50:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method50:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method50",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method50()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method51",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method51:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method51()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method51:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method51:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method51",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method51()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method52",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method52:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method52()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method52:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method52:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method52",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method52()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method53",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method53:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method53()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method53:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method53:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method53",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method53()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method54",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method54:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method54()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method54:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method54:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method54",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method54()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method55",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method55:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method55()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method55:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method55:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method55",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method55()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method56",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method56:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method56()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method56:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method56:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method56",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method56()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method57",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method57:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method57()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method57:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method57:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method57",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method57()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method58",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method58:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method58()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method58:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method58:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method58",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method58()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method59",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method59:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method59()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method59:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method59:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method59",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method59()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method60",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method60:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method60()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method60:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method60:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method60",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method60()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method61",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method61:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method61()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method61:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method61:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method61",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method61()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method62",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method62:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method62()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method62:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method62:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method62",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method62()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method63",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method63:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method63()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method63:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method63:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method63",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method63()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method64",
+      "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method64:System.Int32()",
+      "signature": "System.Int32 NumericAggregationNativeEntry::Method64()",
+      "identity": {
+        "assemblyName": "NumericAggregationNativeEntry",
+        "declaringTypeSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry",
+        "definitionSubjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method64:System.Int32()",
+        "subjectId": "NumericAggregationNativeEntry/NumericAggregationNativeEntry::Method64:System.Int32()",
+        "methodId": "numeric-aggregation-native-entry.numeric-aggregation-native-entry.method64",
+        "signature": "System.Int32 NumericAggregationNativeEntry::Method64()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

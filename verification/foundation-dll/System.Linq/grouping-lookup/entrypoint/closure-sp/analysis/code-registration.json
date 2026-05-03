@@ -1,0 +1,408 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "GroupingLookupNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Run",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method0",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method1",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method2",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method3",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method4",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method5",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method6",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method7",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method8",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method9",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method10",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method11",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method12",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method13",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method14",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method15",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method16",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method17",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method18",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method19",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method19:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method20",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method20:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method21",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method21:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method22",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method22:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method23",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method23:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method24",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method24:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method25",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method25:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method26",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method26:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method27",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method27:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method28",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method28:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method29",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method29:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method30",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method30:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method31",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method31:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method32",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method32:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method33",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method33:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method34",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method34:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method35",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method35:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method36",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method36:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method37",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method37:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method38",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method38:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method39",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method39:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method40",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method40:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method41",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method41:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method42",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method42:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method43",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method43:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method44",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method44:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method45",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method45:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method46",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method46:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method47",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method47:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method48",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method48:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method49",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method49:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method50",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method50:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method51",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method51:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method52",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method52:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method53",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method53:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method54",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method54:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method55",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method55:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method56",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method56:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method57",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method57:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method58",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method58:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method59",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method59:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method60",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method60:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method61",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method61:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method62",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method62:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method63",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method63:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "GroupingLookupNativeEntry_GroupingLookupNativeEntry_Method64",
+          "subjectId": "GroupingLookupNativeEntry/GroupingLookupNativeEntry::Method64:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

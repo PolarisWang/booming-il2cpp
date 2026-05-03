@@ -1,0 +1,182 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReaderNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "name": "ReaderNativeEntry",
+      "displayName": "ReaderNativeEntry",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 16,
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

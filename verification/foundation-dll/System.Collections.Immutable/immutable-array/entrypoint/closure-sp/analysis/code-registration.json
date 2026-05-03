@@ -1,0 +1,54 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableArrayNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableArrayNativeEntry_ImmutableArrayNativeEntry_Run",
+          "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableArrayNativeEntry_ImmutableArrayNativeEntry_Method0",
+          "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableArrayNativeEntry_ImmutableArrayNativeEntry_Method1",
+          "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ImmutableArrayNativeEntry_ImmutableArrayNativeEntry_Method2",
+          "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ImmutableArrayNativeEntry_ImmutableArrayNativeEntry_Method3",
+          "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ImmutableArrayNativeEntry_ImmutableArrayNativeEntry_Method4",
+          "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ImmutableArrayNativeEntry_ImmutableArrayNativeEntry_Method5",
+          "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method5:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

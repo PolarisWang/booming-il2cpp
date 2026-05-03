@@ -1,0 +1,42 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ExtensionsMarshalNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ExtensionsMarshalNativeEntry_ExtensionsMarshalNativeEntry_Run",
+          "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ExtensionsMarshalNativeEntry_ExtensionsMarshalNativeEntry_Method0",
+          "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ExtensionsMarshalNativeEntry_ExtensionsMarshalNativeEntry_Method1",
+          "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ExtensionsMarshalNativeEntry_ExtensionsMarshalNativeEntry_Method2",
+          "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ExtensionsMarshalNativeEntry_ExtensionsMarshalNativeEntry_Method3",
+          "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method3:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

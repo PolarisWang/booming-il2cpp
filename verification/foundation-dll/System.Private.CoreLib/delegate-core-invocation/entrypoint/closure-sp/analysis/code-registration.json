@@ -1,0 +1,78 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "DelegateCoreInvocationNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Run",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Method0",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Method1",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Method2",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Method3",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Method4",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Method5",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Method6",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Method7",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Method8",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "DelegateCoreInvocationNativeEntry_DelegateCoreInvocationNativeEntry_Method9",
+          "subjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

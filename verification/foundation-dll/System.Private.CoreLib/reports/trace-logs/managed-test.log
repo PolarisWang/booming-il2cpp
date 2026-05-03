@@ -1,0 +1,140 @@
+=== managed-proof ===
+[RUN] array-indexing-copy
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    24, Skipped:     2, Total:    26, Duration: 17 ms - ArrayIndexingCopy.Tests.dll (net8.0)
+
+[SKIP] assembly (no test project)
+[RUN] attributes-custom-metadata
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    16, Skipped:     2, Total:    18, Duration: 16 ms - AttributesCustomMetadata.Tests.dll (net8.0)
+
+[RUN] boxing-unboxing-casts
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    20, Skipped:     2, Total:    22, Duration: 17 ms - BoxingUnboxingCasts.Tests.dll (net8.0)
+
+[RUN] buffer-memory
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     2, Skipped:    18, Total:    20, Duration: 21 ms - BufferMemory.Tests.dll (net8.0)
+
+[RUN] collections-generic-core
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     8, Skipped:    24, Total:    32, Duration: 20 ms - CollectionsGenericCore.Tests.dll (net8.0)
+
+[RUN] convert-char
+[xUnit.net 00:00:00.09]     ConvertCharTests.Method_System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Double [FAIL]
+
+Failed!  - Failed:     6, Passed:    10, Skipped:    20, Total:    36, Duration: 19 ms - ConvertChar.Tests.dll (net8.0)
+
+[SKIP] custom-metadata (no test project)
+[RUN] delegate-core-invocation
+A total of 1 test files matched the specified pattern.
+
+Skipped! - Failed:     0, Passed:     0, Skipped:    20, Total:    20, Duration: 16 ms - DelegateCoreInvocation.Tests.dll (net8.0)
+
+[RUN] enum-parsing
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     2, Skipped:    22, Total:    24, Duration: 20 ms - EnumParsing.Tests.dll (net8.0)
+
+[RUN] exception-throw-diagnostics
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    26, Skipped:     2, Total:    28, Duration: 16 ms - ExceptionThrowDiagnostics.Tests.dll (net8.0)
+
+[SKIP] field-property (no test project)
+[RUN] generic-nullable-value
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    16, Skipped:     4, Total:    20, Duration: 18 ms - GenericNullableValue.Tests.dll (net8.0)
+
+[SKIP] generics (no test project)
+[RUN] globalization-culture
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    24, Skipped:     2, Total:    26, Duration: 17 ms - GlobalizationCulture.Tests.dll (net8.0)
+
+[RUN] guid-random-hashcode
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    20, Skipped:     8, Total:    28, Duration: 16 ms - GuidRandomHashcode.Tests.dll (net8.0)
+
+[RUN] io-streams-basics
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    20, Skipped:    16, Total:    36, Duration: 19 ms - IoStreamsBasics.Tests.dll (net8.0)
+
+[RUN] math-numerics
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    32, Skipped:     4, Total:    36, Duration: 20 ms - MathNumerics.Tests.dll (net8.0)
+
+[SKIP] member-complete (no test project)
+[SKIP] module (no test project)
+[RUN] object-equality-identity
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    12, Skipped:     2, Total:    14, Duration: 18 ms - ObjectEqualityIdentity.Tests.dll (net8.0)
+
+[SKIP] parameters (no test project)
+[RUN] primitive-numeric-conversions
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     4, Skipped:    26, Total:    30, Duration: 21 ms - PrimitiveNumericConversions.Tests.dll (net8.0)
+
+[SKIP] reflection-activation (no test project)
+[SKIP] reflection-assembly (no test project)
+[SKIP] reflection-binding (no test project)
+[SKIP] reflection-field-property (no test project)
+[SKIP] reflection-generics (no test project)
+[RUN] reflection-member-basics
+A total of 1 test files matched the specified pattern.
+
+Skipped! - Failed:     0, Passed:     0, Skipped:    28, Total:    28, Duration: 19 ms - ReflectionMemberBasics.Tests.dll (net8.0)
+
+[SKIP] reflection-member-complete (no test project)
+[SKIP] reflection-module (no test project)
+[SKIP] reflection-parameters (no test project)
+[SKIP] reflection-type (no test project)
+[SKIP] reports (no test project)
+[RUN] runtime-compiler-services
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    12, Skipped:     8, Total:    20, Duration: 18 ms - RuntimeCompilerServices.Tests.dll (net8.0)
+
+[RUN] span-memory-buffers
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    14, Skipped:    14, Total:    28, Duration: 18 ms - SpanMemoryBuffers.Tests.dll (net8.0)
+
+[RUN] string-char-text-core
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    40, Skipped:     0, Total:    40, Duration: 21 ms - StringCharTextCore.Tests.dll (net8.0)
+
+[RUN] threading-monitor-interlocked
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     6, Skipped:    22, Total:    28, Duration: 20 ms - ThreadingMonitorInterlocked.Tests.dll (net8.0)
+
+[RUN] threading-tasks-primitives
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    16, Skipped:    14, Total:    30, Duration: 92 ms - ThreadingTasksPrimitives.Tests.dll (net8.0)
+
+[RUN] time-date-time-timespan
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    26, Skipped:     6, Total:    32, Duration: 17 ms - TimeDateTimeTimespan.Tests.dll (net8.0)
+
+[RUN] type-runtime-handles
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    20, Skipped:     6, Total:    26, Duration: 18 ms - TypeRuntimeHandles.Tests.dll (net8.0)
+
+[SKIP] type (no test project)
+=== DONE ===

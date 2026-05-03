@@ -1,0 +1,32 @@
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Run(System.Int32)
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Method0()
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Method1()
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Method2()
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Method3()
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Method4()
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Method5()
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Method6()
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Method7()
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Method8()
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 RuntimeCompilerServicesNativeEntry::Method9()
+// SubjectId: RuntimeCompilerServicesNativeEntry/RuntimeCompilerServicesNativeEntry::Method9:System.Int32()

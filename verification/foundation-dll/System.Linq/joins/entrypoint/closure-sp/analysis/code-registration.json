@@ -1,0 +1,408 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "JoinsNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Run",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method0",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method1",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method2",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method3",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method4",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method5",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method6",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method7",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method8",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method9",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method10",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method11",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method12",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method13",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method14",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method15",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method16",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method17",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method18",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method19",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method19:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method20",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method20:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method21",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method21:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method22",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method22:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method23",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method23:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method24",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method24:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method25",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method25:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method26",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method26:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method27",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method27:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method28",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method28:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method29",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method29:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method30",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method30:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method31",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method31:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method32",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method32:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method33",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method33:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method34",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method34:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method35",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method35:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method36",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method36:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method37",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method37:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method38",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method38:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method39",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method39:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method40",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method40:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method41",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method41:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method42",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method42:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method43",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method43:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method44",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method44:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method45",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method45:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method46",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method46:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method47",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method47:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method48",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method48:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method49",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method49:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method50",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method50:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method51",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method51:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method52",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method52:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method53",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method53:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method54",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method54:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method55",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method55:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method56",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method56:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method57",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method57:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method58",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method58:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method59",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method59:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method60",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method60:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method61",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method61:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method62",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method62:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method63",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method63:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "JoinsNativeEntry_JoinsNativeEntry_Method64",
+          "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method64:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

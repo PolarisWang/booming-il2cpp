@@ -1,0 +1,50 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ImmutableInterlockedNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry",
+      "name": "ImmutableInterlockedNativeEntry",
+      "displayName": "ImmutableInterlockedNativeEntry",
+      "definitionSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 4,
+      "subjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

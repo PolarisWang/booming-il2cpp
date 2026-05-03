@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\data-errors\\entrypoint\\build-output\\DataErrorsNativeEntry.dll"
+    ],
+    "entry": "DataErrorsNativeEntry/DataErrorsNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

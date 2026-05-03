@@ -8,4 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ManagedBenchmarkHarness.cs" />
+    <Compile Remove="BenchmarkManagedBody.cs" />
+  </ItemGroup>
 </Project>

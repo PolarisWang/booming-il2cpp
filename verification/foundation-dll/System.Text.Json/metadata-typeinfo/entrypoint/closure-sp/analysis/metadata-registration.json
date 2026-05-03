@@ -1,0 +1,182 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "MetadataTypeinfoNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "name": "MetadataTypeinfoNativeEntry",
+      "displayName": "MetadataTypeinfoNativeEntry",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 16,
+      "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

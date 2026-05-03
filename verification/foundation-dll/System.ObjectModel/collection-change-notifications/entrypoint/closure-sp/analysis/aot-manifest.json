@@ -1,0 +1,132 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method18:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Method19:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

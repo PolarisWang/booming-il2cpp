@@ -1,0 +1,1281 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.run",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.run",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            65,
+            73,
+            81,
+            89,
+            97,
+            105,
+            113,
+            121,
+            129,
+            137,
+            145,
+            153,
+            161
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 169,
+          "ilOffset": 63,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 65,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 70,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 71,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 73,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 78,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 79,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 81,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 86,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 87,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 89,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 95,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 97,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 102,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 103,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 110,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 111,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 118,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 119,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 121,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 126,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 127,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 129,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 134,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 135,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 137,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 142,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 143,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 145,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 150,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 151,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 153,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 158,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 159,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 161,
+          "resultType": "System.Int32",
+          "callee": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelOptionsNativeEntry",
+            "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 166,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 167,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 169,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 170,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 173,
+          "ilOffset": 171,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 173
+        },
+        {
+          "op": "ret",
+          "ilOffset": 174
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method0",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method0:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method0:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method0",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method0()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method1",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method1:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method1:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method1",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method1()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method2",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method2:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method2:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method2",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method2()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method3",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method3:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method3:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method3",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method3()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method4",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method4:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method4:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method4",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method4()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method5",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method5:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method5:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method5",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method5()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method6",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method6:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method6:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method6",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method6()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method7",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method7:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method7:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method7",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method7()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method8",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method8:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method8:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method8",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method8()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method9",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method9:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method9:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method9",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method9()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method10",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method10:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method10:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method10",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method10()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method11",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method11:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method11:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method11",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method11()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "parallel-options-native-entry.parallel-options-native-entry.method12",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 ParallelOptionsNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "ParallelOptionsNativeEntry",
+        "declaringTypeSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry",
+        "definitionSubjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method12:System.Int32()",
+        "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method12:System.Int32()",
+        "methodId": "parallel-options-native-entry.parallel-options-native-entry.method12",
+        "signature": "System.Int32 ParallelOptionsNativeEntry::Method12()"
+      },
+      "nativeSymbol": "ParallelOptionsNativeEntry_ParallelOptionsNativeEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 14,
+    "trimmedMethodCount": 14,
+    "entryPrefix": "ParallelOptionsNativeEntry"
+  }
+}

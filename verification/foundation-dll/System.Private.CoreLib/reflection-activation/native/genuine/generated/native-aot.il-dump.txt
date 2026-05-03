@@ -1,0 +1,26 @@
+.method public static System.Int32 ReflectionActivationNativeEntry::Run(System.Int32)
+// SubjectId: ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ReflectionActivationNativeEntry::Method0()
+// SubjectId: ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ReflectionActivationNativeEntry::Method1()
+// SubjectId: ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ReflectionActivationNativeEntry::Method2()
+// SubjectId: ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ReflectionActivationNativeEntry::Method3()
+// SubjectId: ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ReflectionActivationNativeEntry::Method4()
+// SubjectId: ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ReflectionActivationNativeEntry::Method5()
+// SubjectId: ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ReflectionActivationNativeEntry::Method6()
+// SubjectId: ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 ReflectionActivationNativeEntry::Method7()
+// SubjectId: ReflectionActivationNativeEntry/ReflectionActivationNativeEntry::Method7:System.Int32()

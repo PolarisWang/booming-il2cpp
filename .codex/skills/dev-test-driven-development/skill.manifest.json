@@ -1,0 +1,12 @@
+{
+  "kind": "project",
+  "domain": "workflow",
+  "name": "dev-test-driven-development",
+  "summary": "按红绿重构流程先写测试再写实现。",
+  "trigger_signals": ["开发功能或修复 bug 时", "适合先写测试时", "需要严格避免先写实现时"],
+  "owner": "00-skills-maintainers",
+  "status": "active",
+  "version": "1.0.0",
+  "startup_visible": false,
+  "token_budget": "small"
+}

@@ -178,6 +178,12 @@
 // ── Indirect load/store templates ────────────────────────────
 #define CHAOS_IL2CPP_RAW_POINTER_TAG  CHAOS_IL2CPP_UINTPTR(1) << 63
 
+// Resolve a native int slot pointer — used by chaos_load_indirect / chaos_store_indirect.
+inline CHAOS_IL2CPP_INTPTR* chaos_resolve_native_int_slot(CHAOS_IL2CPP_INTPTR chaos_value)
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_value));
+}
+
 template<typename T>
 inline T chaos_load_indirect(CHAOS_IL2CPP_INTPTR address) {
     if (address == 0) { CHAOS_IL2CPP_ABORT(); }

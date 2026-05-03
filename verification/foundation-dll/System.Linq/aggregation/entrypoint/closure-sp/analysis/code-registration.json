@@ -1,0 +1,408 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "AggregationNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Run",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method0",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method1",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method2",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method3",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method4",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method5",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method6",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method7",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method8",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method9",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method10",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method11",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method12",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method13",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method14",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method15",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method16",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method17",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method18",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method19",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method19:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method20",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method20:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method21",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method21:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method22",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method22:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method23",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method23:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method24",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method24:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method25",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method25:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method26",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method26:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method27",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method27:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method28",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method28:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method29",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method29:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method30",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method30:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method31",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method31:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method32",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method32:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method33",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method33:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method34",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method34:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method35",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method35:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method36",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method36:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method37",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method37:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method38",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method38:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method39",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method39:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method40",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method40:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method41",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method41:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method42",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method42:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method43",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method43:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method44",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method44:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method45",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method45:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method46",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method46:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method47",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method47:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method48",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method48:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method49",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method49:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method50",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method50:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method51",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method51:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method52",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method52:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method53",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method53:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method54",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method54:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method55",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method55:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method56",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method56:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method57",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method57:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method58",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method58:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method59",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method59:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method60",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method60:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method61",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method61:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method62",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method62:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method63",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method63:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "AggregationNativeEntry_AggregationNativeEntry_Method64",
+          "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method64:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

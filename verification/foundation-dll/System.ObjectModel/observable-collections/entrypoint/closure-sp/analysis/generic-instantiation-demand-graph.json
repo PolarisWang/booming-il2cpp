@@ -1,0 +1,24 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "ObservableCollectionsNativeEntry",
+      "owningAssemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Byte\u003E::.ctor:System.Void()",
+      "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::.ctor:System.Void()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::.ctor:System.Void()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

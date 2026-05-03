@@ -1,0 +1,32 @@
+.method public static System.Int32 BufferMemoryNativeEntry::Run(System.Int32)
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 BufferMemoryNativeEntry::Method0()
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 BufferMemoryNativeEntry::Method1()
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 BufferMemoryNativeEntry::Method2()
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 BufferMemoryNativeEntry::Method3()
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 BufferMemoryNativeEntry::Method4()
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 BufferMemoryNativeEntry::Method5()
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 BufferMemoryNativeEntry::Method6()
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 BufferMemoryNativeEntry::Method7()
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 BufferMemoryNativeEntry::Method8()
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 BufferMemoryNativeEntry::Method9()
+// SubjectId: BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method9:System.Int32()

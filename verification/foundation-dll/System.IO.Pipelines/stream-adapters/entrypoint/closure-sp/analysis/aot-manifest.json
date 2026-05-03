@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

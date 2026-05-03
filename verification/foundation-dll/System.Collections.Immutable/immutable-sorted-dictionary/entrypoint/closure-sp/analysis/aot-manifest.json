@@ -1,0 +1,36 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ImmutableSortedDictionaryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ImmutableSortedDictionaryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableSortedDictionaryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedDictionary::Create\u003CSystem.String,System.Int32\u003E:ImmutableSortedDictionary\u003CSystem.String,System.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedDictionary::Create\u003CSystem.Byte,System.Byte\u003E:ImmutableSortedDictionary\u003CSystem.Byte,System.Byte\u003E()",
+      "reason": "external-call"
+    }
+  ]
+}

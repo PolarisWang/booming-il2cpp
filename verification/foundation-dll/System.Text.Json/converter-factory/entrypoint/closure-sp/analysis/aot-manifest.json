@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactoryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

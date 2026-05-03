@@ -1,0 +1,109 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method13:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method14:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method15:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method16:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method17:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

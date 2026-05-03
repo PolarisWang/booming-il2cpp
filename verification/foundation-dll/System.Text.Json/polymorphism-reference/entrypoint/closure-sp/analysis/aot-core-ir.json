@@ -1,0 +1,2451 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.run",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.run",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            120,
+            131,
+            142,
+            153,
+            164,
+            175,
+            186,
+            197,
+            208,
+            219,
+            230,
+            238,
+            246,
+            254,
+            262,
+            270,
+            278,
+            286,
+            294,
+            302,
+            310,
+            318,
+            326,
+            334,
+            342,
+            350
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 358,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 120,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 125,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 126,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 131,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 136,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 137,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 142,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 147,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 148,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 153,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 158,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 159,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 164,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 169,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 170,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 175,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 180,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 181,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 186,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 191,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 192,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 197,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 202,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 203,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 208,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 213,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 214,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 219,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 224,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 225,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 230,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 235,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 236,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 238,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 243,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 244,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 246,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 251,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 252,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 254,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 259,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 260,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 262,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method14:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 267,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 268,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 270,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method15:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method15:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method15:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 275,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 276,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 278,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method16:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method16:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method16:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 283,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 284,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 286,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method17:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method17:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method17:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method17",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 291,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 292,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 294,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method18:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method18:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method18:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method18",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 299,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 300,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 302,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method19:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method19:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method19:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method19",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 307,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 308,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 310,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method20:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method20:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method20:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method20",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 315,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 316,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 318,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method21:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method21:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method21:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method21",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 323,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 324,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 326,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method22:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method22:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method22:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method22",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 331,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 332,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 334,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method23:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method23:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method23:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method23",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 339,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 340,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 342,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method24:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method24:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method24:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method24",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 347,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 348,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 350,
+          "resultType": "System.Int32",
+          "callee": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method25:System.Int32()",
+          "reference": {
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method25:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PolymorphismReferenceNativeEntry",
+            "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method25:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method25",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 355,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 356,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 358,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 359,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 362,
+          "ilOffset": 360,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 362
+        },
+        {
+          "op": "ret",
+          "ilOffset": 363
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method0",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method0:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method0:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method0",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method0()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method1",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method1:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method1:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method1",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method1()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method2",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method2:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method2:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method2",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method2()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method3",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method3:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method3:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method3",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method3()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method4",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method4:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method4:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method4",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method4()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method5",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method5:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method5:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method5",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method5()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method6",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method6:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method6:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method6",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method6()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method7",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method7:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method7:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method7",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method7()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method8",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method8:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method8:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method8",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method8()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method9",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method9:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method9:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method9",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method9()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method10",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method10:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method10:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method10",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method10()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method11",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method11:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method11:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method11",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method11()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method12",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method12:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method12:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method12",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method12()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method13",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method13:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method13:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method13",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method13()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method14",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method14:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method14:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method14",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method14()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method15",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method15:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method15:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method15",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method15()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method15",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method16",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method16:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method16:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method16",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method16()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method16",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method17",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method17:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method17:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method17",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method17()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method17",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method18",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method18:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method18()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method18:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method18:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method18",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method18()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method18",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method19",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method19:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method19()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method19:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method19:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method19",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method19()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method19",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method20",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method20:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method20()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method20:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method20:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method20",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method20()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method20",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method21",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method21:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method21()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method21:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method21:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method21",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method21()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method21",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method22",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method22:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method22()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method22:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method22:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method22",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method22()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method22",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method23",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method23:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method23()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method23:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method23:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method23",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method23()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method23",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method24",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method24:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method24()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method24:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method24:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method24",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method24()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method24",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method25",
+      "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method25:System.Int32()",
+      "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method25()",
+      "identity": {
+        "assemblyName": "PolymorphismReferenceNativeEntry",
+        "declaringTypeSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry",
+        "definitionSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method25:System.Int32()",
+        "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method25:System.Int32()",
+        "methodId": "polymorphism-reference-native-entry.polymorphism-reference-native-entry.method25",
+        "signature": "System.Int32 PolymorphismReferenceNativeEntry::Method25()"
+      },
+      "nativeSymbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method25",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 27,
+    "trimmedMethodCount": 27,
+    "entryPrefix": "PolymorphismReferenceNativeEntry"
+  }
+}

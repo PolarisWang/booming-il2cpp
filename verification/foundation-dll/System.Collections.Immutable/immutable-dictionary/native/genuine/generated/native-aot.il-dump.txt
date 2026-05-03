@@ -1,0 +1,11 @@
+.method public static System.Int32 ImmutableDictionaryNativeEntry::Run(System.Int32)
+// SubjectId: ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ImmutableDictionaryNativeEntry::Method0()
+// SubjectId: ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ImmutableDictionaryNativeEntry::Method1()
+// SubjectId: ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ImmutableDictionaryNativeEntry::Method2()
+// SubjectId: ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method2:System.Int32()

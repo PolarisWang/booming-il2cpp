@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Linq\\shuffle-index\\entrypoint\\build-output\\ShuffleIndexNativeEntry.dll"
+    ],
+    "entry": "ShuffleIndexNativeEntry/ShuffleIndexNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

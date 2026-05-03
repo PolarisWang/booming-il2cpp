@@ -1,0 +1,97 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "metadataToken": 33554435
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "FrozenCollectionsNativeEntry",
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

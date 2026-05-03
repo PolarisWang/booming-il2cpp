@@ -1,0 +1,20 @@
+.method public static System.Int32 ImmutableListNativeEntry::Run(System.Int32)
+// SubjectId: ImmutableListNativeEntry/ImmutableListNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ImmutableListNativeEntry::Method0()
+// SubjectId: ImmutableListNativeEntry/ImmutableListNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ImmutableListNativeEntry::Method1()
+// SubjectId: ImmutableListNativeEntry/ImmutableListNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ImmutableListNativeEntry::Method2()
+// SubjectId: ImmutableListNativeEntry/ImmutableListNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ImmutableListNativeEntry::Method3()
+// SubjectId: ImmutableListNativeEntry/ImmutableListNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ImmutableListNativeEntry::Method4()
+// SubjectId: ImmutableListNativeEntry/ImmutableListNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ImmutableListNativeEntry::Method5()
+// SubjectId: ImmutableListNativeEntry/ImmutableListNativeEntry::Method5:System.Int32()

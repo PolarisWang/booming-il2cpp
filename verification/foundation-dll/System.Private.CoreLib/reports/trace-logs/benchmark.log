@@ -1,0 +1,38 @@
+[benchmark-poc] Starting benchmark POC for family/System.Private.CoreLib/convert/char
+[benchmark-poc] Found 18 methods
+[benchmark-poc] Step 1: Generating managed benchmark bodies
+[benchmark-poc] Step 2: Running managed benchmark baseline
+[benchmark-poc] Running: dotnet run --project D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\convert-char\benchmark\ManagedBenchmarkHarness.csproj --configuration Release
+[benchmark-poc] Managed baseline written to D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\convert-char\benchmark\managed-baseline.json
+[benchmark-poc] Step 3: Generating native benchmark entry
+[benchmark-poc] Step 4: Building native benchmark executable
+[benchmark-poc] Running: cmake --build D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference --target chaos_benchmark_convert_char --config Release
+[benchmark-poc] Step 5: Running native benchmark for each method
+[benchmark-poc] Using native executable: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 0 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 1 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 2 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 3 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 4 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 5 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 6 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 7 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 8 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 9 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 10 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 11 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 12 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 13 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 14 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 15 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 16 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)
+[benchmark-poc] Running: D:\agent\booming-il2cpp\artifacts\presets\windows-x64-reference\verification\foundation-dll\System.Private.CoreLib\convert-char\native\Release\chaos_benchmark_convert_char.exe --entry-index 17 --iterations 10000 --subject-id System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)
+[benchmark-poc] Native benchmark results written to D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\convert-char\native\native-benchmark.json
+[benchmark-poc] Step 6: Comparing managed vs native benchmarks
+Benchmark comparison report written to D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\convert-char\benchmark-comparison-report.json
+  Total: 18, Matched: 18, Unmatched: 0
+  Native faster: 18, Managed faster: 0, Equal: 0
+  Average speedup: 57.72%
+[benchmark-poc] Benchmark POC complete!
+[benchmark-poc]   Average speedup: 57.72%
+[benchmark-poc]   Native faster: 18/18

@@ -1,0 +1,333 @@
+{
+  "total": 13,
+  "passed": 13,
+  "failed": 0,
+  "results": [
+    {
+      "family": "document-element",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 26,
+      "entryPointSubjectId": "DocumentElementNativeEntry/DocumentElementNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\document-element\\entrypoint\\build-output\\DocumentElementNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\document-element\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "writer",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "WriterNativeEntry/WriterNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\writer\\entrypoint\\build-output\\WriterNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\writer\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "reader",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\reader\\entrypoint\\build-output\\ReaderNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\reader\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "attributes",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\attributes\\entrypoint\\build-output\\AttributesNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\attributes\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "polymorphism-reference",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 26,
+      "entryPointSubjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\polymorphism-reference\\entrypoint\\build-output\\PolymorphismReferenceNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\polymorphism-reference\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "serializer",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\serializer\\entrypoint\\build-output\\SerializerNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\serializer\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "converter-factory",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\converter-factory\\entrypoint\\build-output\\ConverterFactoryNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\converter-factory\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "metadata-typeinfo",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\metadata-typeinfo\\entrypoint\\build-output\\MetadataTypeinfoNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\metadata-typeinfo\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "nodes",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 52,
+      "entryPointSubjectId": "NodesNativeEntry/NodesNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\nodes\\entrypoint\\build-output\\NodesNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\nodes\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "schema",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\schema\\entrypoint\\build-output\\SchemaNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\schema\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "converters",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "ConvertersNativeEntry/ConvertersNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\converters\\entrypoint\\build-output\\ConvertersNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\converters\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "source-generation-context",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\source-generation-context\\entrypoint\\build-output\\SourceGenerationContextNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\source-generation-context\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "serializer-options",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 26,
+      "entryPointSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\serializer-options\\entrypoint\\build-output\\SerializerOptionsNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\serializer-options\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T21:48:22"
+}

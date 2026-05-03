@@ -1,0 +1,279 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method13:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method14:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method15:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method16:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method17:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method18:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method19:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method20:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method21:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method22:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method23:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method24:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method25:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method26:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method27:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method28:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method29:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method30:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method31:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method32:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method33:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method34:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method35:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method36:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method37:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method38:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method39:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method40:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method41:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method42:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method43:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method44:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method45:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method46:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method47:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method48:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method49:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method50:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method51:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

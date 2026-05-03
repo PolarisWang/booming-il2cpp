@@ -1,0 +1,106 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

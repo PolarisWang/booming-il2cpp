@@ -1,0 +1,408 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "GenerationConcatNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Run",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method0",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method1",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method2",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method3",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method4",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method5",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method6",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method7",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method8",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method9",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method10",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method11",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method12",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method13",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method14",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method15",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method16",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method17",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method18",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method19",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method19:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method20",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method20:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method21",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method21:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method22",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method22:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method23",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method23:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method24",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method24:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method25",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method25:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method26",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method26:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method27",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method27:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method28",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method28:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method29",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method29:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method30",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method30:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method31",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method31:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method32",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method32:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method33",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method33:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method34",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method34:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method35",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method35:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method36",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method36:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method37",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method37:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method38",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method38:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method39",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method39:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method40",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method40:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method41",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method41:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method42",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method42:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method43",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method43:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method44",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method44:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method45",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method45:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method46",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method46:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method47",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method47:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method48",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method48:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method49",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method49:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method50",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method50:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method51",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method51:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method52",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method52:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method53",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method53:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method54",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method54:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method55",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method55:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method56",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method56:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method57",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method57:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method58",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method58:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method59",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method59:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method60",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method60:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method61",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method61:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method62",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method62:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method63",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method63:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Method64",
+          "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method64:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

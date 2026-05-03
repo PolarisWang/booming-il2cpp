@@ -1,0 +1,68 @@
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Run(System.Int32)
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method0()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method1()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method2()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method3()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method4()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method5()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method6()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method7()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method8()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method9()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method10()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method11()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method12()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method13()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method14()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method15()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method15:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method16()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method16:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method17()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method17:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method18()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method18:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method19()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method19:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method20()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method20:System.Int32()
+
+.method public static System.Int32 ReflectionMemberCompleteNativeEntry::Method21()
+// SubjectId: ReflectionMemberCompleteNativeEntry/ReflectionMemberCompleteNativeEntry::Method21:System.Int32()

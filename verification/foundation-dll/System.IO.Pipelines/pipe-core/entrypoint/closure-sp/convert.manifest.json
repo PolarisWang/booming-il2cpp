@@ -1,0 +1,8 @@
+{
+  "subjectDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\pipe-core\\entrypoint",
+  "outputDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\pipe-core\\entrypoint\\closure-sp",
+  "sourceType": "managed-dlls",
+  "analysisDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\pipe-core\\entrypoint\\closure-sp\\analysis",
+  "generatedDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\pipe-core\\entrypoint\\closure-sp\\generated",
+  "status": "ok"
+}

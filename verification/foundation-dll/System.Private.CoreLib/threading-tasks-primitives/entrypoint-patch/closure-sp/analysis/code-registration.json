@@ -1,0 +1,108 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ThreadingTasksPrimitivesPatchEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Run",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method0",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method1",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method2",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method3",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method4",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method5",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method6",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method7",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method8",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method9",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method10",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method11",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method12",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method13",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ThreadingTasksPrimitivesPatchEntry_ThreadingTasksPrimitivesPatchEntry_Method14",
+          "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method14:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

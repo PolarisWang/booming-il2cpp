@@ -1,0 +1,38 @@
+.method public static System.Int32 ReflectionGenericsNativeEntry::Run(System.Int32)
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method0()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method1()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method2()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method3()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method4()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method5()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method6()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method7()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method8()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method9()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method10()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 ReflectionGenericsNativeEntry::Method11()
+// SubjectId: ReflectionGenericsNativeEntry/ReflectionGenericsNativeEntry::Method11:System.Int32()

@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "StreamAdaptersNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Run",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method0",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method1",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method2",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method3",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method4",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method5",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method6",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method7",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method8",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method9",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method10",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method11",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "StreamAdaptersNativeEntry_StreamAdaptersNativeEntry_Method12",
+          "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method12:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

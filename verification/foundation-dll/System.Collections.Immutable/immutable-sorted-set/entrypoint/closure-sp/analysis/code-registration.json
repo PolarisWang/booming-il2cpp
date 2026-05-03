@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableSortedSetNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Run",
+          "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method0",
+          "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method1",
+          "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method2",
+          "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method3",
+          "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method4",
+          "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method4:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

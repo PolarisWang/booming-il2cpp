@@ -1,0 +1,50 @@
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Run(System.Int32)
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method0()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method1()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method2()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method3()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method4()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method5()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method6()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method7()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method8()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method9()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method10()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method11()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method12()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method13()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method14()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 CommandTypeMetadataNativeEntry::Method15()
+// SubjectId: CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()

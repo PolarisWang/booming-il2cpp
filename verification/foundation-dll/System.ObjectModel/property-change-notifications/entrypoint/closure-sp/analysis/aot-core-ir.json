@@ -1,0 +1,1731 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.run",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.run",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            88,
+            99,
+            110,
+            118,
+            126,
+            134,
+            142,
+            150,
+            158,
+            166,
+            174,
+            182,
+            190,
+            198,
+            206,
+            214,
+            222,
+            230
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 238,
+          "ilOffset": 83,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 88,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 93,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 99,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 104,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 105,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 110,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 115,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 116,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 118,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 124,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 126,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 131,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 132,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 134,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 139,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 140,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 142,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 147,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 148,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 150,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 155,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 156,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 158,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 163,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 164,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 166,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 171,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 172,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 174,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 179,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 180,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 182,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 187,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 188,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 190,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 195,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 196,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 198,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 203,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 204,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 206,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method14:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 211,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 212,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 214,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method15:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method15:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method15:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 219,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 220,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 222,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method16:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method16:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method16:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 227,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 228,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 230,
+          "resultType": "System.Int32",
+          "callee": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method17:System.Int32()",
+          "reference": {
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method17:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "PropertyChangeNotificationsNativeEntry",
+            "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method17:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method17",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 235,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 236,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 238,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 239,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 242,
+          "ilOffset": 240,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 242
+        },
+        {
+          "op": "ret",
+          "ilOffset": 243
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method0",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method0:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method0:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method0",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method0()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method1",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method1:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method1:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method1",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method1()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method2",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method2:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method2:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method2",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method2()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method3",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method3:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method3:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method3",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method3()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method4",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method4:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method4:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method4",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method4()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method5",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method5:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method5:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method5",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method5()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method6",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method6:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method6:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method6",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method6()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method7",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method7:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method7:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method7",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method7()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method8",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method8:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method8:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method8",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method8()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method9",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method9:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method9:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method9",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method9()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method10",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method10:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method10:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method10",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method10()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method11",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method11:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method11:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method11",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method11()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method12",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method12:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method12:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method12",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method12()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method13",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method13:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method13:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method13",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method13()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method14",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method14:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method14:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method14",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method14()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method15",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method15:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method15:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method15",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method15()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method15",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method16",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method16:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method16:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method16",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method16()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method16",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method17",
+      "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "PropertyChangeNotificationsNativeEntry",
+        "declaringTypeSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry",
+        "definitionSubjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method17:System.Int32()",
+        "subjectId": "PropertyChangeNotificationsNativeEntry/PropertyChangeNotificationsNativeEntry::Method17:System.Int32()",
+        "methodId": "property-change-notifications-native-entry.property-change-notifications-native-entry.method17",
+        "signature": "System.Int32 PropertyChangeNotificationsNativeEntry::Method17()"
+      },
+      "nativeSymbol": "PropertyChangeNotificationsNativeEntry_PropertyChangeNotificationsNativeEntry_Method17",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 19,
+    "trimmedMethodCount": 19,
+    "entryPrefix": "PropertyChangeNotificationsNativeEntry"
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/assembly",
+  "summary": {
+    "totalMethods": 22,
+    "matchedCount": 22,
+    "unmatchedCount": 0,
+    "invalidCount": 0,
+    "nativeFasterCount": 22,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 58.0
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetCallingAssembly:System.Reflection.Assembly()",
+      "status": "matched",
+      "managedElapsedMs": 0.0184,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 49.46
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetEntryAssembly:System.Reflection.Assembly()",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.18
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetExecutingAssembly:System.Reflection.Assembly()",
+      "status": "matched",
+      "managedElapsedMs": 4.7128,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 99.8
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetExportedTypes:System.Type[]()",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetForwardedTypes:System.Type[]()",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceNames:System.String[]()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceStream:System.IO.Stream(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0095,
+      "speedupPercent": 56.82
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.27
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.27
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 57.99
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean)",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.08
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_EntryPoint:System.Reflection.MethodInfo()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.08
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_FullName:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0095,
+      "speedupPercent": 56.62
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_ImageRuntimeVersion:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 58.18
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::get_Location:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0091,
+      "speedupPercent": 58.45
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_CultureInfo:System.Globalization.CultureInfo()",
+      "status": "matched",
+      "managedElapsedMs": 0.0183,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 49.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_Name:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.27
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.AssemblyName::get_Version:System.Version()",
+      "status": "matched",
+      "managedElapsedMs": 0.0214,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 57.01
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0183,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 49.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "status": "matched",
+      "managedElapsedMs": 0.0183,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 49.73
+    }
+  ]
+}

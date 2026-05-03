@@ -1,0 +1,197 @@
+.method public static System.Int32 ProjectionNativeEntry::Run(System.Int32)
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ProjectionNativeEntry::Method0()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method1()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method2()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method3()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method4()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method5()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method6()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method7()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method8()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method9()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method10()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method11()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method12()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method13()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method14()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method15()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method15:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method16()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method16:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method17()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method17:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method18()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method18:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method19()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method19:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method20()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method20:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method21()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method21:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method22()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method22:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method23()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method23:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method24()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method24:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method25()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method25:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method26()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method26:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method27()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method27:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method28()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method28:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method29()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method29:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method30()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method30:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method31()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method31:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method32()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method32:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method33()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method33:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method34()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method34:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method35()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method35:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method36()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method36:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method37()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method37:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method38()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method38:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method39()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method39:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method40()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method40:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method41()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method41:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method42()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method42:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method43()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method43:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method44()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method44:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method45()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method45:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method46()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method46:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method47()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method47:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method48()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method48:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method49()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method49:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method50()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method50:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method51()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method51:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method52()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method52:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method53()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method53:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method54()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method54:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method55()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method55:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method56()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method56:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method57()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method57:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method58()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method58:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method59()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method59:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method60()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method60:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method61()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method61:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method62()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method62:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method63()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method63:System.Int32()
+
+.method public static System.Int32 ProjectionNativeEntry::Method64()
+// SubjectId: ProjectionNativeEntry/ProjectionNativeEntry::Method64:System.Int32()

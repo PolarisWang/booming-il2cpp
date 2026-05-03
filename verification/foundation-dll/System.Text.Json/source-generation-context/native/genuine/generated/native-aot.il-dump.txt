@@ -1,0 +1,41 @@
+.method public static System.Int32 SourceGenerationContextNativeEntry::Run(System.Int32)
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method0()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method1()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method2()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method3()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method4()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method5()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method6()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method7()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method8()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method9()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method10()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method11()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 SourceGenerationContextNativeEntry::Method12()
+// SubjectId: SourceGenerationContextNativeEntry/SourceGenerationContextNativeEntry::Method12:System.Int32()

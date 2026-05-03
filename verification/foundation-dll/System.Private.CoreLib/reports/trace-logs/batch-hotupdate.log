@@ -1,0 +1,816 @@
+Exception in thread Thread-8 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-16 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-24 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-32 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-40 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-48 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-56 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-64 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-72 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-80 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-88 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-96 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Batch hotupdate patch variant CodeGen pipeline - 31 families
+Repo: D:\agent\booming-il2cpp
+Verification: D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib
+
+
+============================================================
+HotUpdate patch variant: array-indexing-copy
+============================================================
+  Methods: 13
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ArrayIndexingCopyPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\array-indexing-copy\entrypoint-patch\build-output\ArrayIndexingCopyPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 14 methods in IR
+  [3/4] Trimming...
+    trim OK: 14 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 28025 bytes
+  >>> PASSED (1/1)
+
+============================================================
+HotUpdate patch variant: buffer-memory
+============================================================
+  Methods: 10
+  [1/4] Building patch entrypoint...
+[entrypoint] Building BufferMemoryPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\buffer-memory\entrypoint-patch\build-output\BufferMemoryPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 11 methods in IR
+  [3/4] Trimming...
+    trim OK: 11 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 22540 bytes
+  >>> PASSED (2/2)
+
+============================================================
+HotUpdate patch variant: collections-generic-core
+============================================================
+  Methods: 16
+  [1/4] Building patch entrypoint...
+[entrypoint] Building CollectionsGenericCorePatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\collections-generic-core\entrypoint-patch\build-output\CollectionsGenericCorePatchEntry.dll
+  [2/4] Convert...
+    convert OK: 17 methods in IR
+  [3/4] Trimming...
+    trim OK: 17 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 33870 bytes
+  >>> PASSED (3/3)
+
+============================================================
+HotUpdate patch variant: convert-char
+============================================================
+  Methods: 18
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ConvertCharPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\convert-char\entrypoint-patch\build-output\ConvertCharPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 19 methods in IR
+  [3/4] Trimming...
+    trim OK: 19 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 34670 bytes
+  >>> PASSED (4/4)
+
+============================================================
+HotUpdate patch variant: enum-parsing
+============================================================
+  Methods: 12
+  [1/4] Building patch entrypoint...
+[entrypoint] Building EnumParsingPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\enum-parsing\entrypoint-patch\build-output\EnumParsingPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 13 methods in IR
+  [3/4] Trimming...
+    trim OK: 13 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 25472 bytes
+  >>> PASSED (5/5)
+
+============================================================
+HotUpdate patch variant: generic-nullable-value
+============================================================
+  Methods: 10
+  [1/4] Building patch entrypoint...
+[entrypoint] Building GenericNullableValuePatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\generic-nullable-value\entrypoint-patch\build-output\GenericNullableValuePatchEntry.dll
+  [2/4] Convert...
+    convert OK: 11 methods in IR
+  [3/4] Trimming...
+    trim OK: 11 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 23612 bytes
+  >>> PASSED (6/6)
+
+============================================================
+HotUpdate patch variant: guid-random-hashcode
+============================================================
+  Methods: 14
+  [1/4] Building patch entrypoint...
+[entrypoint] Building GuidRandomHashcodePatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\guid-random-hashcode\entrypoint-patch\build-output\GuidRandomHashcodePatchEntry.dll
+  [2/4] Convert...
+    convert OK: 15 methods in IR
+  [3/4] Trimming...
+    trim OK: 15 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 29812 bytes
+  >>> PASSED (7/7)
+
+============================================================
+HotUpdate patch variant: math-numerics
+============================================================
+  Methods: 18
+  [1/4] Building patch entrypoint...
+[entrypoint] Building MathNumericsPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\math-numerics\entrypoint-patch\build-output\MathNumericsPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 19 methods in IR
+  [3/4] Trimming...
+    trim OK: 19 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 34900 bytes
+  >>> PASSED (8/8)
+
+============================================================
+HotUpdate patch variant: object-equality-identity
+============================================================
+  Methods: 7
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ObjectEqualityIdentityPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\object-equality-identity\entrypoint-patch\build-output\ObjectEqualityIdentityPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 8 methods in IR
+  [3/4] Trimming...
+    trim OK: 8 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 18897 bytes
+  >>> PASSED (9/9)
+
+============================================================
+HotUpdate patch variant: primitive-numeric-conversions
+============================================================
+  Methods: 15
+  [1/4] Building patch entrypoint...
+[entrypoint] Building PrimitiveNumericConversionsPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions\entrypoint-patch\build-output\PrimitiveNumericConversionsPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 16 methods in IR
+  [3/4] Trimming...
+    trim OK: 16 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 33175 bytes
+  >>> PASSED (10/10)
+
+============================================================
+HotUpdate patch variant: string-char-text-core
+============================================================
+  Methods: 20
+  [1/4] Building patch entrypoint...
+[entrypoint] Building StringCharTextCorePatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\string-char-text-core\entrypoint-patch\build-output\StringCharTextCorePatchEntry.dll
+  [2/4] Convert...
+    convert OK: 21 methods in IR
+  [3/4] Trimming...
+    trim OK: 21 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 39514 bytes
+  >>> PASSED (11/11)
+
+============================================================
+HotUpdate patch variant: time-date-time-timespan
+============================================================
+  Methods: 16
+  [1/4] Building patch entrypoint...
+[entrypoint] Building TimeDateTimeTimespanPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\time-date-time-timespan\entrypoint-patch\build-output\TimeDateTimeTimespanPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 17 methods in IR
+  [3/4] Trimming...
+    trim OK: 17 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 33458 bytes
+  >>> PASSED (12/12)
+
+============================================================
+HotUpdate patch variant: threading-monitor-interlocked
+============================================================Exception in thread Thread-104 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-112 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-120 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-128 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-136 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-144 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-152 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-160 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-168 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-176 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-184 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-192 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+
+  Methods: 14
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ThreadingMonitorInterlockedPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\threading-monitor-interlocked\entrypoint-patch\build-output\ThreadingMonitorInterlockedPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 15 methods in IR
+  [3/4] Trimming...
+    trim OK: 15 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 31450 bytes
+  >>> PASSED (13/13)
+
+============================================================
+HotUpdate patch variant: attributes-custom-metadata
+============================================================
+  Methods: 9
+  [1/4] Building patch entrypoint...
+[entrypoint] Building AttributesCustomMetadataPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\attributes-custom-metadata\entrypoint-patch\build-output\AttributesCustomMetadataPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 10 methods in IR
+  [3/4] Trimming...
+    trim OK: 10 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 22466 bytes
+  >>> PASSED (14/14)
+
+============================================================
+HotUpdate patch variant: boxing-unboxing-casts
+============================================================
+  Methods: 11
+  [1/4] Building patch entrypoint...
+[entrypoint] Building BoxingUnboxingCastsPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\boxing-unboxing-casts\entrypoint-patch\build-output\BoxingUnboxingCastsPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 12 methods in IR
+  [3/4] Trimming...
+    trim OK: 12 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 25107 bytes
+  >>> PASSED (15/15)
+
+============================================================
+HotUpdate patch variant: delegate-core-invocation
+============================================================
+  Methods: 10
+  [1/4] Building patch entrypoint...
+[entrypoint] Building DelegateCoreInvocationPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\delegate-core-invocation\entrypoint-patch\build-output\DelegateCoreInvocationPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 11 methods in IR
+  [3/4] Trimming...
+    trim OK: 11 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 23880 bytes
+  >>> PASSED (16/16)
+
+============================================================
+HotUpdate patch variant: exception-throw-diagnostics
+============================================================
+  Methods: 14
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ExceptionThrowDiagnosticsPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\exception-throw-diagnostics\entrypoint-patch\build-output\ExceptionThrowDiagnosticsPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 15 methods in IR
+  [3/4] Trimming...
+    trim OK: 15 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 31086 bytes
+  >>> PASSED (17/17)
+
+============================================================
+HotUpdate patch variant: globalization-culture
+============================================================
+  Methods: 13
+  [1/4] Building patch entrypoint...
+[entrypoint] Building GlobalizationCulturePatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\globalization-culture\entrypoint-patch\build-output\GlobalizationCulturePatchEntry.dll
+  [2/4] Convert...
+    convert OK: 14 methods in IR
+  [3/4] Trimming...
+    trim OK: 14 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 28535 bytes
+  >>> PASSED (18/18)
+
+============================================================
+HotUpdate patch variant: io-streams-basics
+============================================================
+  Methods: 18
+  [1/4] Building patch entrypoint...
+[entrypoint] Building IoStreamsBasicsPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\io-streams-basics\entrypoint-patch\build-output\IoStreamsBasicsPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 19 methods in IR
+  [3/4] Trimming...
+    trim OK: 19 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 35590 bytes
+  >>> PASSED (19/19)
+
+============================================================
+HotUpdate patch variant: reflection-member-basics
+============================================================
+  Methods: 14
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ReflectionMemberBasicsPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-member-basics\entrypoint-patch\build-output\ReflectionMemberBasicsPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 15 methods in IR
+  [3/4] Trimming...
+    trim OK: 15 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 30540 bytes
+  >>> PASSED (20/20)
+
+============================================================
+HotUpdate patch variant: runtime-compiler-services
+============================================================
+  Methods: 10
+  [1/4] Building patch entrypoint...
+[entrypoint] Building RuntimeCompilerServicesPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\runtime-compiler-services\entrypoint-patch\build-output\RuntimeCompilerServicesPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 11 methods in IR
+  [3/4] Trimming...
+    trim OK: 11 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 24014 bytes
+  >>> PASSED (21/21)
+
+============================================================
+HotUpdate patch variant: span-memory-buffers
+============================================================
+  Methods: 14
+  [1/4] Building patch entrypoint...
+[entrypoint] Building SpanMemoryBuffersPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\span-memory-buffers\entrypoint-patch\build-output\SpanMemoryBuffersPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 15 methods in IR
+  [3/4] Trimming...
+    trim OK: 15 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 29630 bytes
+  >>> PASSED (22/22)
+
+============================================================
+HotUpdate patch variant: type-runtime-handles
+============================================================
+  Methods: 13
+  [1/4] Building patch entrypoint...
+[entrypoint] Building TypeRuntimeHandlesPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\type-runtime-handles\entrypoint-patch\build-output\TypeRuntimeHandlesPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 14 methods in IR
+  [3/4] Trimming...
+    trim OK: 14 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 28195 bytes
+  >>> PASSED (23/23)
+
+============================================================
+HotUpdate patch variant: reflection-type
+============================================================
+  Methods: 43
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ReflectionTypePatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-type\entrypoint-patch\build-output\ReflectionTypePatchEntry.dll
+  [2/4] Convert...
+    convert OK: 44 methods in IR
+  [3/4] Trimming...
+    trim OK: 44 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 74586 bytes
+  >>> PASSED (24/24)
+
+============================================================
+HotUpdate patch variant: reflection-assembly
+============================================================
+  Methods: 22
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ReflectionAssemblyPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-assembly\entrypoint-patch\build-output\ReflectionAssemblyPatchEntry.dllException in thread Thread-200 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-208 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-216 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-224 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-232 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-240 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+Exception in thread Thread-248 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 133: illegal multibyte sequence
+
+  [2/4] Convert...
+    convert OK: 23 methods in IR
+  [3/4] Trimming...
+    trim OK: 23 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 42748 bytes
+  >>> PASSED (25/25)
+
+============================================================
+HotUpdate patch variant: reflection-member-complete
+============================================================
+  Methods: 22
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ReflectionMemberCompletePatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-member-complete\entrypoint-patch\build-output\ReflectionMemberCompletePatchEntry.dll
+  [2/4] Convert...
+    convert OK: 23 methods in IR
+  [3/4] Trimming...
+    trim OK: 23 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 44416 bytes
+  >>> PASSED (26/26)
+
+============================================================
+HotUpdate patch variant: reflection-generics
+============================================================
+  Methods: 12
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ReflectionGenericsPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-generics\entrypoint-patch\build-output\ReflectionGenericsPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 13 methods in IR
+  [3/4] Trimming...
+    trim OK: 13 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 26578 bytes
+  >>> PASSED (27/27)
+
+============================================================
+HotUpdate patch variant: reflection-parameters
+============================================================
+  Methods: 10
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ReflectionParametersPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-parameters\entrypoint-patch\build-output\ReflectionParametersPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 11 methods in IR
+  [3/4] Trimming...
+    trim OK: 11 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 23612 bytes
+  >>> PASSED (28/28)
+
+============================================================
+HotUpdate patch variant: reflection-module
+============================================================
+  Methods: 6
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ReflectionModulePatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-module\entrypoint-patch\build-output\ReflectionModulePatchEntry.dll
+  [2/4] Convert...
+    convert OK: 7 methods in IR
+  [3/4] Trimming...
+    trim OK: 7 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 16724 bytes
+  >>> PASSED (29/29)
+
+============================================================
+HotUpdate patch variant: reflection-binding
+============================================================
+  Methods: 12
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ReflectionBindingPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-binding\entrypoint-patch\build-output\ReflectionBindingPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 13 methods in IR
+  [3/4] Trimming...
+    trim OK: 13 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 26420 bytes
+  >>> PASSED (30/30)
+
+============================================================
+HotUpdate patch variant: reflection-activation
+============================================================
+  Methods: 8
+  [1/4] Building patch entrypoint...
+[entrypoint] Building ReflectionActivationPatchEntry...
+[entrypoint] Built D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reflection-activation\entrypoint-patch\build-output\ReflectionActivationPatchEntry.dll
+  [2/4] Convert...
+    convert OK: 9 methods in IR
+  [3/4] Trimming...
+    trim OK: 9 methods retained
+  [4/4] Emitting native AOT...
+    emit-native-aot OK: 20344 bytes
+  >>> PASSED (31/31)
+
+============================================================
+SUMMARY: 31 passed, 0 failed, 31 total
+============================================================
+  PASS  array-indexing-copy                  build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  buffer-memory                        build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  collections-generic-core             build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  convert-char                         build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  enum-parsing                         build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  generic-nullable-value               build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  guid-random-hashcode                 build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  math-numerics                        build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  object-equality-identity             build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  primitive-numeric-conversions        build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  string-char-text-core                build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  time-date-time-timespan              build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  threading-monitor-interlocked        build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  attributes-custom-metadata           build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  boxing-unboxing-casts                build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  delegate-core-invocation             build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  exception-throw-diagnostics          build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  globalization-culture                build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  io-streams-basics                    build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  reflection-member-basics             build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  runtime-compiler-services            build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  span-memory-buffers                  build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  type-runtime-handles                 build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  reflection-type                      build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  reflection-assembly                  build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  reflection-member-complete           build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  reflection-generics                  build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  reflection-parameters                build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  reflection-module                    build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  reflection-binding                   build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+  PASS  reflection-activation                build_patch_entrypoint=OK -> convert=OK -> trim=OK -> emit_native_aot=OK
+
+Results written to D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\reports\batch-hotupdate-pipeline-results.json

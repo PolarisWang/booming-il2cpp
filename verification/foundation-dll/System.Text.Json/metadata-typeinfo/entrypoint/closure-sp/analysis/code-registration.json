@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "MetadataTypeinfoNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Run",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method0",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method1",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method2",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method3",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method4",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method5",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method6",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method7",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method8",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method9",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method10",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method11",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "MetadataTypeinfoNativeEntry_MetadataTypeinfoNativeEntry_Method12",
+          "subjectId": "MetadataTypeinfoNativeEntry/MetadataTypeinfoNativeEntry::Method12:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

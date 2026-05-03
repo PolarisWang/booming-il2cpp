@@ -1,0 +1,122 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ImmutableListNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry",
+      "name": "ImmutableListNativeEntry",
+      "displayName": "ImmutableListNativeEntry",
+      "definitionSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 2,
+      "subjectId": "ImmutableListNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "name": "\u003CPrivateImplementationDetails\u003E",
+      "displayName": "\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "ImmutableListNativeEntry/\u003CPrivateImplementationDetails\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 3,
+      "subjectId": "ImmutableListNativeEntry/\u003CPrivateImplementationDetails\u003E::983987033F0E117011E531DC33AD9BB15290BBA41A414D830FB5CBDBCDA2FF17",
+      "name": "983987033F0E117011E531DC33AD9BB15290BBA41A414D830FB5CBDBCDA2FF17",
+      "definitionSubjectId": "ImmutableListNativeEntry/\u003CPrivateImplementationDetails\u003E::983987033F0E117011E531DC33AD9BB15290BBA41A414D830FB5CBDBCDA2FF17",
+      "declaringTypeSubjectId": "ImmutableListNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "System.Int16"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 11,
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

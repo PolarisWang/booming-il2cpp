@@ -1,0 +1,44 @@
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Run(System.Int32)
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method0()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method1()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method2()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method3()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method4()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method5()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method6()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method7()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method8()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method9()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method10()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method11()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method12()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 ReflectionMemberBasicsNativeEntry::Method13()
+// SubjectId: ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Method13:System.Int32()

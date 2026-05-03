@@ -1,0 +1,1235 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.run",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.run",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                80,
+                88,
+                96,
+                104,
+                112,
+                120,
+                128,
+                136,
+                144,
+                152,
+                160,
+                168,
+                176,
+                184,
+                192,
+                200
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 208,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "CommandTypeMetadataNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method0",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method0",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute",
+              "callee": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.ObjectModel",
+                "subjectKind": "method",
+                "subjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 11,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method1",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method1",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method2",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method2",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method3",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method3",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "uses-virtual-call-site"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute",
+              "callee": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.ObjectModel",
+                "subjectKind": "method",
+                "subjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "callvirt",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "pop"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 16,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method4",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method4",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method5",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method5",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method6",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method6",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method7",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method7",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method8",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method8",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method9",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method9",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method10",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method10",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method11",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method11",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method12",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method12",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method13",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method13",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method14",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method14",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method15",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "CommandTypeMetadataNativeEntry",
+        "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+        "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()",
+        "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()",
+        "methodId": "command-type-metadata-native-entry.command-type-metadata-native-entry.method15",
+        "signature": "System.Int32 CommandTypeMetadataNativeEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

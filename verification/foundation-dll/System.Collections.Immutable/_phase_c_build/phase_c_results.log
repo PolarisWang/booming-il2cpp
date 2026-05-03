@@ -1,0 +1,100 @@
+
+============================================================
+Family: immutable-array OK
+============================================================
+$ C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe /nologo /std:c++17 /utf-8 /FID:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\_compat.h /c /FoD:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated.obj D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated_fixed.cpp
+native-aot.generated_fixed.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(48): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_UNIQUE_PTR'
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(52): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_MAKE_UNIQUE'
+
+
+
+============================================================
+Family: immutable-list OK
+============================================================
+$ C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe /nologo /std:c++17 /utf-8 /FID:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\_compat.h /c /FoD:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated.obj D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated_fixed.cpp
+native-aot.generated_fixed.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(48): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_UNIQUE_PTR'
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(52): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_MAKE_UNIQUE'
+
+
+
+============================================================
+Family: immutable-dictionary OK
+============================================================
+$ C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe /nologo /std:c++17 /utf-8 /FID:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\_compat.h /c /FoD:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated.obj D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated_fixed.cpp
+native-aot.generated_fixed.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(48): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_UNIQUE_PTR'
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(52): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_MAKE_UNIQUE'
+
+
+
+============================================================
+Family: immutable-sorted-dictionary OK
+============================================================
+$ C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe /nologo /std:c++17 /utf-8 /FID:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\_compat.h /c /FoD:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated.obj D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated_fixed.cpp
+native-aot.generated_fixed.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(48): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_UNIQUE_PTR'
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(52): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_MAKE_UNIQUE'
+
+
+
+============================================================
+Family: immutable-hash-set OK
+============================================================
+$ C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe /nologo /std:c++17 /utf-8 /FID:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\_compat.h /c /FoD:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated.obj D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated_fixed.cpp
+native-aot.generated_fixed.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(48): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_UNIQUE_PTR'
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(52): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_MAKE_UNIQUE'
+
+
+
+============================================================
+Family: immutable-sorted-set OK
+============================================================
+$ C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe /nologo /std:c++17 /utf-8 /FID:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\_compat.h /c /FoD:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated.obj D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated_fixed.cpp
+native-aot.generated_fixed.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(48): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_UNIQUE_PTR'
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(52): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_MAKE_UNIQUE'
+
+
+
+============================================================
+Family: immutable-queue-stack OK
+============================================================
+$ C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe /nologo /std:c++17 /utf-8 /FID:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\_compat.h /c /FoD:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated.obj D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated_fixed.cpp
+native-aot.generated_fixed.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(48): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_UNIQUE_PTR'
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(52): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_MAKE_UNIQUE'
+
+
+
+============================================================
+Family: immutable-interlocked OK
+============================================================
+$ C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe /nologo /std:c++17 /utf-8 /FID:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\_compat.h /c /FoD:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated.obj D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated_fixed.cpp
+native-aot.generated_fixed.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(48): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_UNIQUE_PTR'
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(52): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_MAKE_UNIQUE'
+
+
+
+============================================================
+Family: frozen-collections OK
+============================================================
+$ C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe /nologo /std:c++17 /utf-8 /FID:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\_compat.h /c /FoD:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated.obj D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated_fixed.cpp
+native-aot.generated_fixed.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(48): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_UNIQUE_PTR'
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(52): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_MAKE_UNIQUE'
+
+
+
+============================================================
+Family: extensions-marshal OK
+============================================================
+$ C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe /nologo /std:c++17 /utf-8 /FID:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\_compat.h /c /FoD:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated.obj D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\_phase_c_build\native-aot.generated_fixed.cpp
+native-aot.generated_fixed.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(48): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_UNIQUE_PTR'
+D:\agent\booming-il2cpp\src\native\common\chaos\collection.h(52): warning C4002: too many arguments for function-like macro invocation 'CHAOS_IL2CPP_MAKE_UNIQUE'
+
+

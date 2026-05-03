@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Linq\\filtering\\entrypoint\\build-output\\FilteringNativeEntry.dll"
+    ],
+    "entry": "FilteringNativeEntry/FilteringNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

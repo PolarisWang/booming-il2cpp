@@ -1,7 +1,7 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeReferenceLoweringPlan",
-  "planKind": "generic-analysis-only",
+  "planKind": "managed-generic.stub-fallback.minimal",
   "assemblyName": "ConvertCharNativeEntry",
   "entrySubjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Run:System.Int32(System.Int32)",
   "includeHeader": "codegen_bridge.h",
@@ -9,6 +9,8 @@
   "entrySymbol": "ConvertCharNativeEntry_ConvertCharNativeEntry_Run",
   "referenceTypeToken": "0u",
   "capturedFieldToken": "0u",
-  "entryMethodToken": "0u",
-  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+  "entryMethodToken": "0x06000001u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)",
+  "expectedOutput": "",
+  "expectedOutputByteCount": 0
 }

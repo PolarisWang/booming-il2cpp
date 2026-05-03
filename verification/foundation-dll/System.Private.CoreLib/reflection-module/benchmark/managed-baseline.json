@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/module",
+  "warmupIterations": 100,
+  "measureIterations": 10000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_FullyQualifiedName:System.String()",
+      "elapsedMilliseconds": 4.925500,
+      "opsPerSecond": 2030250.735966,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_Name:System.String()",
+      "elapsedMilliseconds": 0.014700,
+      "opsPerSecond": 680272108.843537,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_Assembly:System.Reflection.Assembly()",
+      "elapsedMilliseconds": 0.022100,
+      "opsPerSecond": 452488687.782805,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetType:System.Type(System.String)",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetTypes:System.Type[]()",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)",
+      "elapsedMilliseconds": 0.022000,
+      "opsPerSecond": 454545454.545455,
+      "iterations": 10000
+    }
+  ]
+}

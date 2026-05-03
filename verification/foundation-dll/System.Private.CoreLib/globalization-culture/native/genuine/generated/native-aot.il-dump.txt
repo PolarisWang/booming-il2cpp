@@ -1,0 +1,41 @@
+.method public static System.Int32 GlobalizationCultureNativeEntry::Run(System.Int32)
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method0()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method1()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method2()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method3()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method4()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method5()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method6()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method7()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method8()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method9()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method10()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method11()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 GlobalizationCultureNativeEntry::Method12()
+// SubjectId: GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method12:System.Int32()

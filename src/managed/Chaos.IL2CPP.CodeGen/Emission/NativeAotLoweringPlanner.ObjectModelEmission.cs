@@ -51,6 +51,8 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_value = 2;");
 		builder.AppendLine("constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_interface = 3;");
 		builder.AppendLine();
+		builder.AppendLine("constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = 1;");
+		builder.AppendLine();
 		builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_normalize_native_int_argument(CHAOS_IL2CPP_INTPTR chaos_value) noexcept");
 		builder.AppendLine("{");
 		builder.AppendLine("    if ((chaos_value & chaos_managed_pointer_local_slot_tag) == 0)");

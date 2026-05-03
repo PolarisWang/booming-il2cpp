@@ -1,0 +1,258 @@
+{
+  "total": 10,
+  "passed": 10,
+  "failed": 0,
+  "results": [
+    {
+      "family": "immutable-queue-stack",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 10,
+      "entryPointSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-queue-stack\\entrypoint\\build-output\\ImmutableQueueStackNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-queue-stack\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "immutable-dictionary",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 3,
+      "entryPointSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-dictionary\\entrypoint\\build-output\\ImmutableDictionaryNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-dictionary\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "frozen-collections",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 8,
+      "entryPointSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\entrypoint\\build-output\\FrozenCollectionsNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "immutable-hash-set",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 5,
+      "entryPointSubjectId": "ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-hash-set\\entrypoint\\build-output\\ImmutableHashSetNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-hash-set\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "immutable-sorted-set",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 5,
+      "entryPointSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-sorted-set\\entrypoint\\build-output\\ImmutableSortedSetNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-sorted-set\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "immutable-interlocked",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 1,
+      "entryPointSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\entrypoint\\build-output\\ImmutableInterlockedNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "extensions-marshal",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 4,
+      "entryPointSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\extensions-marshal\\entrypoint\\build-output\\ExtensionsMarshalNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\extensions-marshal\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "immutable-list",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 6,
+      "entryPointSubjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-list\\entrypoint\\build-output\\ImmutableListNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-list\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "immutable-sorted-dictionary",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 2,
+      "entryPointSubjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-sorted-dictionary\\entrypoint\\build-output\\ImmutableSortedDictionaryNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-sorted-dictionary\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "immutable-array",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 6,
+      "entryPointSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-array\\entrypoint\\build-output\\ImmutableArrayNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-array\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T21:48:43"
+}

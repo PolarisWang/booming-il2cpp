@@ -1,0 +1,17 @@
+.method public static System.Int32 ImmutableHashSetNativeEntry::Run(System.Int32)
+// SubjectId: ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ImmutableHashSetNativeEntry::Method0()
+// SubjectId: ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ImmutableHashSetNativeEntry::Method1()
+// SubjectId: ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ImmutableHashSetNativeEntry::Method2()
+// SubjectId: ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ImmutableHashSetNativeEntry::Method3()
+// SubjectId: ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ImmutableHashSetNativeEntry::Method4()
+// SubjectId: ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Method4:System.Int32()
