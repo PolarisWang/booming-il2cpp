@@ -1,0 +1,84 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

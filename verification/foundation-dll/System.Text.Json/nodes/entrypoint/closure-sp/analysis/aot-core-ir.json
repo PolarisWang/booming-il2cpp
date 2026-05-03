@@ -1,0 +1,4791 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.run",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 NodesNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "nodes-native-entry.nodes-native-entry.run",
+        "signature": "System.Int32 NodesNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            224,
+            235,
+            246,
+            257,
+            268,
+            279,
+            290,
+            301,
+            312,
+            323,
+            334,
+            345,
+            356,
+            367,
+            378,
+            389,
+            400,
+            411,
+            422,
+            433,
+            444,
+            455,
+            466,
+            477,
+            488,
+            499,
+            510,
+            521,
+            532,
+            543,
+            554,
+            565,
+            576,
+            587,
+            598,
+            609,
+            620,
+            628,
+            636,
+            644,
+            652,
+            660,
+            668,
+            676,
+            684,
+            692,
+            700,
+            708,
+            716,
+            724,
+            732,
+            740
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 748,
+          "ilOffset": 219,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 224,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 229,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 230,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 235,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 240,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 241,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 246,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 251,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 252,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 257,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 262,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 263,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 268,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 273,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 274,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 279,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 284,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 285,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 290,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 295,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 296,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 301,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 306,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 307,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 312,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 317,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 318,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 323,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 328,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 329,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 334,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 339,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 340,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 345,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 350,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 351,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 356,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 361,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 362,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 367,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 372,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 373,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 378,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method14:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 383,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 384,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 389,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method15:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method15:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method15:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 394,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 395,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 400,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method16:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method16:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method16:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 405,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 406,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 411,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method17:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method17:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method17:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method17",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 416,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 417,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 422,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method18:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method18:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method18:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method18",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 427,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 428,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 433,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method19:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method19:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method19:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method19",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 438,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 439,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 444,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method20:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method20:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method20:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method20",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 449,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 450,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 455,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method21:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method21:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method21:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method21",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 460,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 461,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 466,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method22:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method22:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method22:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method22",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 471,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 472,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 477,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method23:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method23:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method23:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method23",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 482,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 483,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 488,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method24:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method24:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method24:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method24",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 493,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 494,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 499,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method25:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method25:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method25:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method25",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 504,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 505,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 510,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method26:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method26:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method26:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method26",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 515,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 516,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 521,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method27:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method27:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method27:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method27",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 526,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 527,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 532,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method28:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method28:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method28:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method28",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 537,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 538,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 543,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method29:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method29:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method29:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method29",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 548,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 549,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 554,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method30:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method30:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method30:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method30",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 559,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 560,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 565,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method31:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method31:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method31:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method31",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 570,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 571,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 576,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method32:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method32:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method32:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method32",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 581,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 582,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 587,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method33:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method33:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method33:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method33",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 592,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 593,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 598,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method34:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method34:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method34:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method34",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 603,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 604,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 609,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method35:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method35:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method35:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method35",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 614,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 615,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 620,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method36:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method36:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method36:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method36",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 625,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 626,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 628,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method37:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method37:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method37:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method37",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 633,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 634,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 636,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method38:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method38:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method38:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method38",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 641,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 642,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 644,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method39:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method39:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method39:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method39",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 649,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 650,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 652,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method40:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method40:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method40:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method40",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 657,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 658,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 660,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method41:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method41:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method41:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method41",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 665,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 666,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 668,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method42:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method42:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method42:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method42",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 673,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 674,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 676,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method43:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method43:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method43:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method43",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 681,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 682,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 684,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method44:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method44:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method44:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method44",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 689,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 690,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 692,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method45:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method45:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method45:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method45",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 697,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 698,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 700,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method46:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method46:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method46:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method46",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 705,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 706,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 708,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method47:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method47:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method47:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method47",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 713,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 714,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 716,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method48:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method48:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method48:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method48",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 721,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 722,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 724,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method49:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method49:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method49:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method49",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 729,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 730,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 732,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method50:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method50:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method50:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method50",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 737,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 738,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 740,
+          "resultType": "System.Int32",
+          "callee": "NodesNativeEntry/NodesNativeEntry::Method51:System.Int32()",
+          "reference": {
+            "assemblyName": "NodesNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method51:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "NodesNativeEntry",
+            "subjectId": "NodesNativeEntry/NodesNativeEntry::Method51:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "NodesNativeEntry_NodesNativeEntry_Method51",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 745,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 746,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 748,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 749,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 752,
+          "ilOffset": 750,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 752
+        },
+        {
+          "op": "ret",
+          "ilOffset": 753
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method0",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method0:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method0:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method0",
+        "signature": "System.Int32 NodesNativeEntry::Method0()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method1",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method1:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method1:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method1",
+        "signature": "System.Int32 NodesNativeEntry::Method1()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method2",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method2:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method2:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method2",
+        "signature": "System.Int32 NodesNativeEntry::Method2()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method3",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method3:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method3:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method3",
+        "signature": "System.Int32 NodesNativeEntry::Method3()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method4",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method4:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method4:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method4",
+        "signature": "System.Int32 NodesNativeEntry::Method4()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method5",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method5:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method5:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method5",
+        "signature": "System.Int32 NodesNativeEntry::Method5()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method6",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method6:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method6:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method6",
+        "signature": "System.Int32 NodesNativeEntry::Method6()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method7",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method7:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method7:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method7",
+        "signature": "System.Int32 NodesNativeEntry::Method7()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method8",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method8:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method8:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method8",
+        "signature": "System.Int32 NodesNativeEntry::Method8()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method9",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method9:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method9:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method9",
+        "signature": "System.Int32 NodesNativeEntry::Method9()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method10",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method10:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method10:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method10",
+        "signature": "System.Int32 NodesNativeEntry::Method10()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method11",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method11:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method11:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method11",
+        "signature": "System.Int32 NodesNativeEntry::Method11()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method12",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method12:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method12:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method12",
+        "signature": "System.Int32 NodesNativeEntry::Method12()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method13",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method13:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method13:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method13",
+        "signature": "System.Int32 NodesNativeEntry::Method13()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method14",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method14:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method14:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method14",
+        "signature": "System.Int32 NodesNativeEntry::Method14()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method15",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method15:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method15:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method15",
+        "signature": "System.Int32 NodesNativeEntry::Method15()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method15",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method16",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method16:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method16:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method16",
+        "signature": "System.Int32 NodesNativeEntry::Method16()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method16",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method17",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method17:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method17:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method17",
+        "signature": "System.Int32 NodesNativeEntry::Method17()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method17",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method18",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method18:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method18()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method18:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method18:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method18",
+        "signature": "System.Int32 NodesNativeEntry::Method18()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method18",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method19",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method19:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method19()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method19:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method19:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method19",
+        "signature": "System.Int32 NodesNativeEntry::Method19()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method19",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method20",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method20:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method20()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method20:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method20:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method20",
+        "signature": "System.Int32 NodesNativeEntry::Method20()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method20",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method21",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method21:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method21()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method21:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method21:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method21",
+        "signature": "System.Int32 NodesNativeEntry::Method21()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method21",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method22",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method22:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method22()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method22:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method22:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method22",
+        "signature": "System.Int32 NodesNativeEntry::Method22()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method22",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method23",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method23:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method23()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method23:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method23:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method23",
+        "signature": "System.Int32 NodesNativeEntry::Method23()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method23",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method24",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method24:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method24()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method24:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method24:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method24",
+        "signature": "System.Int32 NodesNativeEntry::Method24()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method24",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method25",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method25:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method25()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method25:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method25:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method25",
+        "signature": "System.Int32 NodesNativeEntry::Method25()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method25",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method26",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method26:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method26()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method26:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method26:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method26",
+        "signature": "System.Int32 NodesNativeEntry::Method26()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method26",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method27",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method27:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method27()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method27:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method27:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method27",
+        "signature": "System.Int32 NodesNativeEntry::Method27()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method27",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method28",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method28:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method28()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method28:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method28:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method28",
+        "signature": "System.Int32 NodesNativeEntry::Method28()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method28",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method29",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method29:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method29()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method29:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method29:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method29",
+        "signature": "System.Int32 NodesNativeEntry::Method29()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method29",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method30",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method30:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method30()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method30:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method30:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method30",
+        "signature": "System.Int32 NodesNativeEntry::Method30()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method30",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method31",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method31:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method31()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method31:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method31:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method31",
+        "signature": "System.Int32 NodesNativeEntry::Method31()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method31",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method32",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method32:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method32()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method32:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method32:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method32",
+        "signature": "System.Int32 NodesNativeEntry::Method32()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method32",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method33",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method33:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method33()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method33:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method33:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method33",
+        "signature": "System.Int32 NodesNativeEntry::Method33()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method33",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method34",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method34:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method34()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method34:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method34:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method34",
+        "signature": "System.Int32 NodesNativeEntry::Method34()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method34",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method35",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method35:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method35()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method35:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method35:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method35",
+        "signature": "System.Int32 NodesNativeEntry::Method35()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method35",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method36",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method36:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method36()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method36:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method36:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method36",
+        "signature": "System.Int32 NodesNativeEntry::Method36()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method36",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method37",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method37:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method37()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method37:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method37:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method37",
+        "signature": "System.Int32 NodesNativeEntry::Method37()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method37",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method38",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method38:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method38()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method38:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method38:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method38",
+        "signature": "System.Int32 NodesNativeEntry::Method38()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method38",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method39",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method39:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method39()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method39:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method39:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method39",
+        "signature": "System.Int32 NodesNativeEntry::Method39()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method39",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method40",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method40:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method40()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method40:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method40:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method40",
+        "signature": "System.Int32 NodesNativeEntry::Method40()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method40",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method41",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method41:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method41()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method41:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method41:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method41",
+        "signature": "System.Int32 NodesNativeEntry::Method41()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method41",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method42",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method42:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method42()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method42:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method42:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method42",
+        "signature": "System.Int32 NodesNativeEntry::Method42()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method42",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method43",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method43:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method43()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method43:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method43:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method43",
+        "signature": "System.Int32 NodesNativeEntry::Method43()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method43",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method44",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method44:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method44()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method44:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method44:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method44",
+        "signature": "System.Int32 NodesNativeEntry::Method44()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method44",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method45",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method45:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method45()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method45:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method45:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method45",
+        "signature": "System.Int32 NodesNativeEntry::Method45()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method45",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method46",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method46:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method46()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method46:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method46:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method46",
+        "signature": "System.Int32 NodesNativeEntry::Method46()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method46",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method47",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method47:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method47()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method47:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method47:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method47",
+        "signature": "System.Int32 NodesNativeEntry::Method47()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method47",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method48",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method48:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method48()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method48:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method48:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method48",
+        "signature": "System.Int32 NodesNativeEntry::Method48()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method48",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method49",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method49:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method49()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method49:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method49:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method49",
+        "signature": "System.Int32 NodesNativeEntry::Method49()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method49",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method50",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method50:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method50()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method50:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method50:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method50",
+        "signature": "System.Int32 NodesNativeEntry::Method50()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method50",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "nodes-native-entry.nodes-native-entry.method51",
+      "subjectId": "NodesNativeEntry/NodesNativeEntry::Method51:System.Int32()",
+      "signature": "System.Int32 NodesNativeEntry::Method51()",
+      "identity": {
+        "assemblyName": "NodesNativeEntry",
+        "declaringTypeSubjectId": "NodesNativeEntry/NodesNativeEntry",
+        "definitionSubjectId": "NodesNativeEntry/NodesNativeEntry::Method51:System.Int32()",
+        "subjectId": "NodesNativeEntry/NodesNativeEntry::Method51:System.Int32()",
+        "methodId": "nodes-native-entry.nodes-native-entry.method51",
+        "signature": "System.Int32 NodesNativeEntry::Method51()"
+      },
+      "nativeSymbol": "NodesNativeEntry_NodesNativeEntry_Method51",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 53,
+    "trimmedMethodCount": 53,
+    "entryPrefix": "NodesNativeEntry"
+  }
+}

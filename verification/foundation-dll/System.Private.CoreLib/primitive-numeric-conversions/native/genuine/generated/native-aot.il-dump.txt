@@ -1,0 +1,47 @@
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Run(System.Int32)
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method0()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method1()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method2()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method3()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method4()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method5()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method6()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method7()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method8()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method9()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method10()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method11()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method12()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method13()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 PrimitiveNumericConversionsNativeEntry::Method14()
+// SubjectId: PrimitiveNumericConversionsNativeEntry/PrimitiveNumericConversionsNativeEntry::Method14:System.Int32()

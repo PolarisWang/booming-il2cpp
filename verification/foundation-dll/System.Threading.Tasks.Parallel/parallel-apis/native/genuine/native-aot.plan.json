@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "ParallelApisNativeEntry",
+  "entrySubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Run:System.Int32(System.Int32)",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "ParallelApisNativeEntry_ParallelApisNativeEntry_Run",
+  "entryMethodToken": "0u",
+  "workloadAbi": "int(int32)"
+}

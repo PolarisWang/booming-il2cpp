@@ -1,0 +1,14 @@
+.method public static System.Int32 ExtensionsMarshalNativeEntry::Run(System.Int32)
+// SubjectId: ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ExtensionsMarshalNativeEntry::Method0()
+// SubjectId: ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ExtensionsMarshalNativeEntry::Method1()
+// SubjectId: ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ExtensionsMarshalNativeEntry::Method2()
+// SubjectId: ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ExtensionsMarshalNativeEntry::Method3()
+// SubjectId: ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method3:System.Int32()

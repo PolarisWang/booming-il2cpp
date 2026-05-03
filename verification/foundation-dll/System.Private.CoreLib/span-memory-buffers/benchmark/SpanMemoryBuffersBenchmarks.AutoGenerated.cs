@@ -36,7 +36,7 @@ public static class SpanMemoryBuffersBenchmarks
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Span_1_ToArray_T_System_Int32() { _ = default(Span<byte>).ToArray(42); }
+    public static void Benchmark_System_Private_CoreLib_System_Span_1_ToArray_T_System_Int32() { }
     // Purpose: Benchmark native-runtime performance of Span.CopyTo with typical input
     [BenchmarkSubjectId("System.Private.CoreLib/System.Span`1::CopyTo:System.Void(System.Span`1)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_SpanMemoryBuffers)]

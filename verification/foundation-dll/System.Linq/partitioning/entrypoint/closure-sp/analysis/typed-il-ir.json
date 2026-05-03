@@ -1,0 +1,4577 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.run",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 PartitioningNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.run",
+        "signature": "System.Int32 PartitioningNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                276,
+                287,
+                298,
+                309,
+                320,
+                331,
+                342,
+                353,
+                364,
+                375,
+                386,
+                397,
+                408,
+                419,
+                430,
+                441,
+                452,
+                463,
+                474,
+                485,
+                496,
+                507,
+                518,
+                529,
+                540,
+                551,
+                562,
+                573,
+                584,
+                595,
+                606,
+                617,
+                628,
+                639,
+                650,
+                661,
+                672,
+                683,
+                694,
+                705,
+                716,
+                727,
+                738,
+                749,
+                760,
+                771,
+                782,
+                793,
+                804,
+                815,
+                823,
+                831,
+                839,
+                847,
+                855,
+                863,
+                871,
+                879,
+                887,
+                895,
+                903,
+                911,
+                919,
+                927,
+                935
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 943,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method16:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method16:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method17:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method17:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method18:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method18:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method19:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method19:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method20:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method20:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method21:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method21:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method22:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method22:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method23:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method23:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method24:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method24:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method25:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method25:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method26:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method26:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method27:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method27:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method28:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method28:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method29:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method29:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method30:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method30:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method31:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method31:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method32:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method32:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method33:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method33:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method34:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method34:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method35:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method35:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method36:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method36:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method37:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method37:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method38:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method38:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method39:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method39:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method40:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method40:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method41:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method41:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method42:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method42:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method43:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method43:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method44:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method44:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method45:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method45:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method46:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method46:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method47:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method47:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method48:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method48:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method49:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method49:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method50:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method50:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method51:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method51:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method52:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method52:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method53:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method53:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method54:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method54:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method55:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method55:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method56:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method56:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method57:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method57:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method58:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method58:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method59:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method59:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method60:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method60:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method61:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method61:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method62:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method62:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method63:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method63:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "PartitioningNativeEntry/PartitioningNativeEntry::Method64:System.Int32()",
+              "reference": {
+                "assemblyName": "PartitioningNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method64:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method0",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method0:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method0:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method0",
+        "signature": "System.Int32 PartitioningNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method1",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method1:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method1:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method1",
+        "signature": "System.Int32 PartitioningNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method2",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method2:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method2:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method2",
+        "signature": "System.Int32 PartitioningNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method3",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method3:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method3:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method3",
+        "signature": "System.Int32 PartitioningNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method4",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method4:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method4:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method4",
+        "signature": "System.Int32 PartitioningNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method5",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method5:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method5:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method5",
+        "signature": "System.Int32 PartitioningNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method6",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method6:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method6:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method6",
+        "signature": "System.Int32 PartitioningNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method7",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method7:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method7:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method7",
+        "signature": "System.Int32 PartitioningNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method8",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method8:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method8:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method8",
+        "signature": "System.Int32 PartitioningNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method9",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method9:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method9:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method9",
+        "signature": "System.Int32 PartitioningNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method10",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method10:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method10:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method10",
+        "signature": "System.Int32 PartitioningNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method11",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method11:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method11:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method11",
+        "signature": "System.Int32 PartitioningNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method12",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method12:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method12:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method12",
+        "signature": "System.Int32 PartitioningNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method13",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method13:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method13:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method13",
+        "signature": "System.Int32 PartitioningNativeEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method14",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method14:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method14:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method14",
+        "signature": "System.Int32 PartitioningNativeEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method15",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method15:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method15:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method15",
+        "signature": "System.Int32 PartitioningNativeEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method16",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method16:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method16:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method16",
+        "signature": "System.Int32 PartitioningNativeEntry::Method16()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method17",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method17:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method17:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method17",
+        "signature": "System.Int32 PartitioningNativeEntry::Method17()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method18",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method18:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method18()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method18:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method18:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method18",
+        "signature": "System.Int32 PartitioningNativeEntry::Method18()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method19",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method19:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method19()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method19:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method19:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method19",
+        "signature": "System.Int32 PartitioningNativeEntry::Method19()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method20",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method20:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method20()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method20:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method20:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method20",
+        "signature": "System.Int32 PartitioningNativeEntry::Method20()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method21",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method21:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method21()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method21:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method21:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method21",
+        "signature": "System.Int32 PartitioningNativeEntry::Method21()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method22",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method22:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method22()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method22:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method22:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method22",
+        "signature": "System.Int32 PartitioningNativeEntry::Method22()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method23",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method23:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method23()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method23:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method23:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method23",
+        "signature": "System.Int32 PartitioningNativeEntry::Method23()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method24",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method24:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method24()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method24:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method24:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method24",
+        "signature": "System.Int32 PartitioningNativeEntry::Method24()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method25",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method25:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method25()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method25:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method25:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method25",
+        "signature": "System.Int32 PartitioningNativeEntry::Method25()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method26",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method26:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method26()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method26:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method26:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method26",
+        "signature": "System.Int32 PartitioningNativeEntry::Method26()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method27",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method27:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method27()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method27:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method27:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method27",
+        "signature": "System.Int32 PartitioningNativeEntry::Method27()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method28",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method28:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method28()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method28:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method28:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method28",
+        "signature": "System.Int32 PartitioningNativeEntry::Method28()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method29",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method29:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method29()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method29:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method29:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method29",
+        "signature": "System.Int32 PartitioningNativeEntry::Method29()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method30",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method30:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method30()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method30:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method30:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method30",
+        "signature": "System.Int32 PartitioningNativeEntry::Method30()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method31",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method31:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method31()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method31:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method31:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method31",
+        "signature": "System.Int32 PartitioningNativeEntry::Method31()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method32",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method32:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method32()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method32:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method32:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method32",
+        "signature": "System.Int32 PartitioningNativeEntry::Method32()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method33",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method33:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method33()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method33:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method33:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method33",
+        "signature": "System.Int32 PartitioningNativeEntry::Method33()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method34",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method34:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method34()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method34:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method34:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method34",
+        "signature": "System.Int32 PartitioningNativeEntry::Method34()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method35",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method35:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method35()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method35:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method35:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method35",
+        "signature": "System.Int32 PartitioningNativeEntry::Method35()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method36",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method36:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method36()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method36:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method36:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method36",
+        "signature": "System.Int32 PartitioningNativeEntry::Method36()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method37",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method37:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method37()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method37:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method37:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method37",
+        "signature": "System.Int32 PartitioningNativeEntry::Method37()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method38",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method38:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method38()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method38:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method38:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method38",
+        "signature": "System.Int32 PartitioningNativeEntry::Method38()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method39",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method39:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method39()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method39:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method39:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method39",
+        "signature": "System.Int32 PartitioningNativeEntry::Method39()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method40",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method40:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method40()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method40:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method40:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method40",
+        "signature": "System.Int32 PartitioningNativeEntry::Method40()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method41",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method41:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method41()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method41:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method41:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method41",
+        "signature": "System.Int32 PartitioningNativeEntry::Method41()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method42",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method42:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method42()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method42:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method42:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method42",
+        "signature": "System.Int32 PartitioningNativeEntry::Method42()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method43",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method43:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method43()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method43:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method43:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method43",
+        "signature": "System.Int32 PartitioningNativeEntry::Method43()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method44",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method44:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method44()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method44:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method44:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method44",
+        "signature": "System.Int32 PartitioningNativeEntry::Method44()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method45",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method45:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method45()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method45:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method45:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method45",
+        "signature": "System.Int32 PartitioningNativeEntry::Method45()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method46",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method46:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method46()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method46:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method46:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method46",
+        "signature": "System.Int32 PartitioningNativeEntry::Method46()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method47",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method47:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method47()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method47:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method47:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method47",
+        "signature": "System.Int32 PartitioningNativeEntry::Method47()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method48",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method48:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method48()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method48:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method48:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method48",
+        "signature": "System.Int32 PartitioningNativeEntry::Method48()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method49",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method49:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method49()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method49:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method49:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method49",
+        "signature": "System.Int32 PartitioningNativeEntry::Method49()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method50",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method50:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method50()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method50:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method50:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method50",
+        "signature": "System.Int32 PartitioningNativeEntry::Method50()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method51",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method51:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method51()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method51:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method51:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method51",
+        "signature": "System.Int32 PartitioningNativeEntry::Method51()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method52",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method52:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method52()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method52:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method52:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method52",
+        "signature": "System.Int32 PartitioningNativeEntry::Method52()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method53",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method53:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method53()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method53:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method53:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method53",
+        "signature": "System.Int32 PartitioningNativeEntry::Method53()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method54",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method54:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method54()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method54:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method54:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method54",
+        "signature": "System.Int32 PartitioningNativeEntry::Method54()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method55",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method55:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method55()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method55:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method55:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method55",
+        "signature": "System.Int32 PartitioningNativeEntry::Method55()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method56",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method56:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method56()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method56:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method56:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method56",
+        "signature": "System.Int32 PartitioningNativeEntry::Method56()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method57",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method57:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method57()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method57:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method57:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method57",
+        "signature": "System.Int32 PartitioningNativeEntry::Method57()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method58",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method58:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method58()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method58:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method58:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method58",
+        "signature": "System.Int32 PartitioningNativeEntry::Method58()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method59",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method59:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method59()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method59:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method59:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method59",
+        "signature": "System.Int32 PartitioningNativeEntry::Method59()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method60",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method60:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method60()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method60:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method60:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method60",
+        "signature": "System.Int32 PartitioningNativeEntry::Method60()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method61",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method61:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method61()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method61:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method61:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method61",
+        "signature": "System.Int32 PartitioningNativeEntry::Method61()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method62",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method62:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method62()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method62:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method62:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method62",
+        "signature": "System.Int32 PartitioningNativeEntry::Method62()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method63",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method63:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method63()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method63:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method63:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method63",
+        "signature": "System.Int32 PartitioningNativeEntry::Method63()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "partitioning-native-entry.partitioning-native-entry.method64",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method64:System.Int32()",
+      "signature": "System.Int32 PartitioningNativeEntry::Method64()",
+      "identity": {
+        "assemblyName": "PartitioningNativeEntry",
+        "declaringTypeSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry",
+        "definitionSubjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method64:System.Int32()",
+        "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method64:System.Int32()",
+        "methodId": "partitioning-native-entry.partitioning-native-entry.method64",
+        "signature": "System.Int32 PartitioningNativeEntry::Method64()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

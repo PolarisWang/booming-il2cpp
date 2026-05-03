@@ -1,0 +1,197 @@
+.method public static System.Int32 AggregationNativeEntry::Run(System.Int32)
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 AggregationNativeEntry::Method0()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method1()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method2()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method3()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method4()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method5()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method6()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method7()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method8()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method9()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method10()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method11()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method12()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method13()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method14()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method15()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method15:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method16()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method16:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method17()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method17:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method18()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method18:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method19()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method19:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method20()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method20:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method21()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method21:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method22()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method22:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method23()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method23:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method24()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method24:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method25()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method25:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method26()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method26:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method27()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method27:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method28()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method28:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method29()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method29:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method30()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method30:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method31()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method31:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method32()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method32:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method33()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method33:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method34()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method34:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method35()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method35:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method36()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method36:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method37()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method37:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method38()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method38:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method39()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method39:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method40()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method40:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method41()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method41:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method42()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method42:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method43()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method43:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method44()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method44:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method45()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method45:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method46()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method46:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method47()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method47:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method48()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method48:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method49()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method49:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method50()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method50:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method51()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method51:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method52()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method52:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method53()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method53:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method54()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method54:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method55()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method55:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method56()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method56:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method57()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method57:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method58()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method58:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method59()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method59:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method60()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method60:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method61()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method61:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method62()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method62:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method63()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method63:System.Int32()
+
+.method public static System.Int32 AggregationNativeEntry::Method64()
+// SubjectId: AggregationNativeEntry/AggregationNativeEntry::Method64:System.Int32()

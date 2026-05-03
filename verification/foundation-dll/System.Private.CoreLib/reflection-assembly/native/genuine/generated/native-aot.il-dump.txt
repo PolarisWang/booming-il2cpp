@@ -1,0 +1,68 @@
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Run(System.Int32)
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method0()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method1()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method2()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method3()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method4()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method5()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method6()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method7()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method8()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method9()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method10()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method11()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method12()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method13()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method14()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method15()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method15:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method16()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method16:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method17()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method17:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method18()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method18:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method19()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method19:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method20()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method20:System.Int32()
+
+.method public static System.Int32 ReflectionAssemblyNativeEntry::Method21()
+// SubjectId: ReflectionAssemblyNativeEntry/ReflectionAssemblyNativeEntry::Method21:System.Int32()

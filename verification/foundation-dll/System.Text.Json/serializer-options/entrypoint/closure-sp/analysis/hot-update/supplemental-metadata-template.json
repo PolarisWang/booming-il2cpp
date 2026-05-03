@@ -1,0 +1,235 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method10:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method11:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method12:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method13:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method14:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method15:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method16:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method16:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method17:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method17:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method18:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method18:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method19:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method19:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method20:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method20:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method21:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method21:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663319,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method22:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method22:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663320,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method23:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method23:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663321,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method24:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method24:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663322,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerOptionsNativeEntry",
+      "subjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method25:System.Int32()",
+      "definitionSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method25:System.Int32()",
+      "declaringTypeSubjectId": "SerializerOptionsNativeEntry/SerializerOptionsNativeEntry",
+      "metadataToken": 100663323,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

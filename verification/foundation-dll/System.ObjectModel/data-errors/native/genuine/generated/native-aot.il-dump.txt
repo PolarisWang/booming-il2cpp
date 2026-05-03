@@ -1,0 +1,26 @@
+.method public static System.Int32 DataErrorsNativeEntry::Run(System.Int32)
+// SubjectId: DataErrorsNativeEntry/DataErrorsNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 DataErrorsNativeEntry::Method0()
+// SubjectId: DataErrorsNativeEntry/DataErrorsNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 DataErrorsNativeEntry::Method1()
+// SubjectId: DataErrorsNativeEntry/DataErrorsNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 DataErrorsNativeEntry::Method2()
+// SubjectId: DataErrorsNativeEntry/DataErrorsNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 DataErrorsNativeEntry::Method3()
+// SubjectId: DataErrorsNativeEntry/DataErrorsNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 DataErrorsNativeEntry::Method4()
+// SubjectId: DataErrorsNativeEntry/DataErrorsNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 DataErrorsNativeEntry::Method5()
+// SubjectId: DataErrorsNativeEntry/DataErrorsNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 DataErrorsNativeEntry::Method6()
+// SubjectId: DataErrorsNativeEntry/DataErrorsNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 DataErrorsNativeEntry::Method7()
+// SubjectId: DataErrorsNativeEntry/DataErrorsNativeEntry::Method7:System.Int32()

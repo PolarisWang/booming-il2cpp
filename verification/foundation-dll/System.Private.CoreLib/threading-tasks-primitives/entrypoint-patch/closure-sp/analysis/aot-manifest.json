@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+      "subjectKind": "method",
+      "subjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "CommandTypeMetadataNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "name": "CommandTypeMetadataNativeEntry",
+      "displayName": "CommandTypeMetadataNativeEntry",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()",
+      "name": "Method13",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()",
+      "name": "Method14",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()",
+      "name": "Method15",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 19,
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

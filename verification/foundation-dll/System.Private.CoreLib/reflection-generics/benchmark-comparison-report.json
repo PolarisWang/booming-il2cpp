@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/generics",
+  "summary": {
+    "totalMethods": 12,
+    "matchedCount": 12,
+    "unmatchedCount": 0,
+    "invalidCount": 0,
+    "nativeFasterCount": 12,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 59.3
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::ContainsGenericParameters:System.Boolean()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetGenericArguments:System.Type[]()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetGenericParameterConstraints:System.Type[]()",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.73
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetGenericTypeDefinition:System.Type()",
+      "status": "matched",
+      "managedElapsedMs": 5.1167,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 99.82
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::MakeArrayType:System.Type()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::MakeByRefType:System.Type()",
+      "status": "matched",
+      "managedElapsedMs": 0.022,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.27
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::MakeGenericType:System.Type(System.Type[])",
+      "status": "matched",
+      "managedElapsedMs": 0.0147,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 36.05
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::MakePointerType:System.Type()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 57.99
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_GenericParameterPosition:System.Int32()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 57.08
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 57.53
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsGenericTypeDefinition:System.Boolean()",
+      "status": "matched",
+      "managedElapsedMs": 0.0219,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 57.99
+    }
+  ]
+}

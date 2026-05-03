@@ -1,0 +1,24 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableInterlockedNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableInterlockedNativeEntry_ImmutableInterlockedNativeEntry_Run",
+          "subjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableInterlockedNativeEntry_ImmutableInterlockedNativeEntry_Method0",
+          "subjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Method0:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "project",
+  "domain": "quality",
+  "name": "dev-requesting-code-review",
+  "summary": "审查新增/修改代码的完整性、正确性，确保满足需求与编码规范。",
+  "trigger_signals": ["完成任务时", "实现主要功能后", "合并之前需要验证时"],
+  "owner": "00-skills-maintainers",
+  "status": "active",
+  "version": "1.0.0",
+  "startup_visible": false,
+  "token_budget": "medium"
+}

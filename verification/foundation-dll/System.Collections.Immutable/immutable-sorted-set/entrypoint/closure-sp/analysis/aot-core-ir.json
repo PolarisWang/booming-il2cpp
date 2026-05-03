@@ -1,0 +1,934 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.run",
+      "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 ImmutableSortedSetNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetNativeEntry",
+        "declaringTypeSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry",
+        "definitionSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.run",
+        "signature": "System.Int32 ImmutableSortedSetNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            33,
+            41,
+            49,
+            57,
+            65
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 73,
+          "ilOffset": 31,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 33,
+          "resultType": "System.Int32",
+          "callee": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 38,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 77,
+          "ilOffset": 39,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 41,
+          "resultType": "System.Int32",
+          "callee": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 46,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 77,
+          "ilOffset": 47,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 49,
+          "resultType": "System.Int32",
+          "callee": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 54,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 77,
+          "ilOffset": 55,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 57,
+          "resultType": "System.Int32",
+          "callee": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 62,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 77,
+          "ilOffset": 63,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 65,
+          "resultType": "System.Int32",
+          "callee": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 70,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 77,
+          "ilOffset": 71,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 73,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 74,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 77,
+          "ilOffset": 75,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 77
+        },
+        {
+          "op": "ret",
+          "ilOffset": 78
+        }
+      ]
+    },
+    {
+      "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.method0",
+      "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 ImmutableSortedSetNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetNativeEntry",
+        "declaringTypeSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry",
+        "definitionSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method0:System.Int32()",
+        "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method0:System.Int32()",
+        "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.method0",
+        "signature": "System.Int32 ImmutableSortedSetNativeEntry::Method0()"
+      },
+      "nativeSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "ImmutableSortedSet<System.Byte>",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>();type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>();type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>();type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>();type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "pop",
+          "ilOffset": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 11,
+          "ilOffset": 9,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 11
+        },
+        {
+          "op": "ret",
+          "ilOffset": 12
+        }
+      ]
+    },
+    {
+      "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.method1",
+      "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 ImmutableSortedSetNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetNativeEntry",
+        "declaringTypeSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry",
+        "definitionSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method1:System.Int32()",
+        "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method1:System.Int32()",
+        "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.method1",
+        "signature": "System.Int32 ImmutableSortedSetNativeEntry::Method1()"
+      },
+      "nativeSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 3,
+          "resultType": "ImmutableSortedSet<System.Byte>",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>(System.Byte)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>(System.Byte)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>(System.Byte)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>(System.Byte)",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0)",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>(System.Byte)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "pop",
+          "ilOffset": 8
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 13,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 13
+        },
+        {
+          "op": "ret",
+          "ilOffset": 14
+        }
+      ]
+    },
+    {
+      "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.method2",
+      "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 ImmutableSortedSetNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetNativeEntry",
+        "declaringTypeSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry",
+        "definitionSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method2:System.Int32()",
+        "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method2:System.Int32()",
+        "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.method2",
+        "signature": "System.Int32 ImmutableSortedSetNativeEntry::Method2()"
+      },
+      "nativeSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldsflda",
+          "operand": "ImmutableSortedSetNativeEntry/<PrivateImplementationDetails>::983987033F0E117011E531DC33AD9BB15290BBA41A414D830FB5CBDBCDA2FF17",
+          "ilOffset": 1,
+          "resultType": "System.IntPtr",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetNativeEntry/<PrivateImplementationDetails>::983987033F0E117011E531DC33AD9BB15290BBA41A414D830FB5CBDBCDA2FF17"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetNativeEntry",
+            "subjectId": "ImmutableSortedSetNativeEntry/<PrivateImplementationDetails>::983987033F0E117011E531DC33AD9BB15290BBA41A414D830FB5CBDBCDA2FF17",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetNativeEntry/<PrivateImplementationDetails>",
+            "declaringTypeShape": 1
+          }
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 2,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newobj",
+          "ilOffset": 7,
+          "resultType": "System.Private.CoreLib/System.ReadOnlySpan<System.Byte>",
+          "callee": "System.Private.CoreLib/System.ReadOnlySpan<System.Byte>::.ctor:System.Void(System.Void*,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan<System.Byte>::.ctor:System.Void(System.Void*,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan<System.Byte>",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "call",
+          "ilOffset": 12,
+          "resultType": "ImmutableSortedSet<System.Byte>",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>(System.ReadOnlySpan<System.Byte>)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>(System.ReadOnlySpan<System.Byte>)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>(System.ReadOnlySpan<System.Byte>)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(System.ReadOnlySpan<!!0>)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(System.ReadOnlySpan<!!0>);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(System.ReadOnlySpan<!!0>);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(System.ReadOnlySpan<!!0>)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(System.ReadOnlySpan<!!0>);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(System.ReadOnlySpan<!!0>);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>:ImmutableSortedSet<System.Byte>(System.ReadOnlySpan<System.Byte>)",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(System.ReadOnlySpan<!!0>)",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Byte>(System.ReadOnlySpan<System.Byte>)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(System.ReadOnlySpan<!!0>)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "pop",
+          "ilOffset": 17
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 22,
+          "ilOffset": 20,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 22
+        },
+        {
+          "op": "ret",
+          "ilOffset": 23
+        }
+      ]
+    },
+    {
+      "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.method3",
+      "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 ImmutableSortedSetNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetNativeEntry",
+        "declaringTypeSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry",
+        "definitionSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method3:System.Int32()",
+        "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method3:System.Int32()",
+        "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.method3",
+        "signature": "System.Int32 ImmutableSortedSetNativeEntry::Method3()"
+      },
+      "nativeSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "ImmutableSortedSet<System.Int32>",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Int32>:ImmutableSortedSet<System.Int32>()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Int32>:ImmutableSortedSet<System.Int32>()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Int32>:ImmutableSortedSet<System.Int32>()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>();type=[];method=[System.Int32]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>();type=[];method=[System.Int32]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>();type=[];method=[System.Int32]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>();type=[];method=[System.Int32]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Int32>:ImmutableSortedSet<System.Int32>()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Int32>()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "pop",
+          "ilOffset": 6
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 11,
+          "ilOffset": 9,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 11
+        },
+        {
+          "op": "ret",
+          "ilOffset": 12
+        }
+      ]
+    },
+    {
+      "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.method4",
+      "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 ImmutableSortedSetNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetNativeEntry",
+        "declaringTypeSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry",
+        "definitionSubjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method4:System.Int32()",
+        "subjectId": "ImmutableSortedSetNativeEntry/ImmutableSortedSetNativeEntry::Method4:System.Int32()",
+        "methodId": "immutable-sorted-set-native-entry.immutable-sorted-set-native-entry.method4",
+        "signature": "System.Int32 ImmutableSortedSetNativeEntry::Method4()"
+      },
+      "nativeSymbol": "ImmutableSortedSetNativeEntry_ImmutableSortedSetNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 3,
+          "resultType": "ImmutableSortedSet<System.Int32>",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Int32>:ImmutableSortedSet<System.Int32>(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Int32>:ImmutableSortedSet<System.Int32>(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Int32>:ImmutableSortedSet<System.Int32>(System.Int32)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0);type=[];method=[System.Int32]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0);type=[];method=[System.Int32]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0);type=[];method=[System.Int32]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0);type=[];method=[System.Int32]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Int32>:ImmutableSortedSet<System.Int32>(System.Int32)",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0)",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create<System.Int32>(System.Int32)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet<!!0>(!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "pop",
+          "ilOffset": 8
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 13,
+          "ilOffset": 11,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 13
+        },
+        {
+          "op": "ret",
+          "ilOffset": 14
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 6,
+    "trimmedMethodCount": 6,
+    "entryPrefix": "ImmutableSortedSetNativeEntry"
+  }
+}

@@ -56,6 +56,26 @@ def _project_template(name: str, project_reference_path: str) -> str:
     )
 
 
+def _benchmark_project_template(name: str, project_reference_path: str) -> str:
+    return (
+        "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
+        "  <PropertyGroup>\n"
+        "    <TargetFramework>net8.0</TargetFramework>\n"
+        "    <Nullable>enable</Nullable>\n"
+        "    <ImplicitUsings>enable</ImplicitUsings>\n"
+        f"    <AssemblyName>{name}</AssemblyName>\n"
+        "  </PropertyGroup>\n"
+        "  <ItemGroup>\n"
+        f"    <ProjectReference Include=\"{project_reference_path}\" />\n"
+        "  </ItemGroup>\n"
+        "  <ItemGroup>\n"
+        '    <Compile Remove="ManagedBenchmarkHarness.cs" />\n'
+        '    <Compile Remove="BenchmarkManagedBody.cs" />\n'
+        "  </ItemGroup>\n"
+        "</Project>\n"
+    )
+
+
 def _project_basename(family_id: str) -> str:
     slug = _family_slug(family_id)
     return "".join(part[:1].upper() + part[1:] for part in slug.split("-") if part)
@@ -85,7 +105,7 @@ def generate_execution_projects(repo_root: Path, *, assembly_name: str, family_i
         if path.is_file():
             path.unlink()
     for path in paths:
-        template = _test_project_template if path.parent.name == "test" else _project_template
+        template = _test_project_template if path.parent.name == "test" else _benchmark_project_template if path.parent.name == "benchmark" else _project_template
         _write_text(path, template(path.stem, project_reference_path))
     return {
         "assemblyName": assembly_name,

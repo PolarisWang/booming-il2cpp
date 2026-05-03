@@ -54,4 +54,4 @@ public static class ObjectEqualityIdentityBenchmarks
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ObjectEqualityIdentity)]
     [BenchmarkRoute(BenchmarkRoute.Native)]
     [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Object_MemberwiseClone_System_Object() { _ = new object().MemberwiseClone(); }}
+    public static void Benchmark_System_Private_CoreLib_System_Object_MemberwiseClone_System_Object() { }}

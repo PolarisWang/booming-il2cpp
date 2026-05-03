@@ -1,0 +1,4577 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.run",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.run",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                276,
+                287,
+                298,
+                309,
+                320,
+                331,
+                342,
+                353,
+                364,
+                375,
+                386,
+                397,
+                408,
+                419,
+                430,
+                441,
+                452,
+                463,
+                474,
+                485,
+                496,
+                507,
+                518,
+                529,
+                540,
+                551,
+                562,
+                573,
+                584,
+                595,
+                606,
+                617,
+                628,
+                639,
+                650,
+                661,
+                672,
+                683,
+                694,
+                705,
+                716,
+                727,
+                738,
+                749,
+                760,
+                771,
+                782,
+                793,
+                804,
+                815,
+                823,
+                831,
+                839,
+                847,
+                855,
+                863,
+                871,
+                879,
+                887,
+                895,
+                903,
+                911,
+                919,
+                927,
+                935
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 943,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method16:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method16:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method17:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method17:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method18:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method18:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method19:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method19:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method20:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method20:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method21:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method21:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method22:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method22:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method23:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method23:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method24:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method24:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method25:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method25:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method26:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method26:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method27:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method27:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method28:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method28:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method29:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method29:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method30:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method30:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method31:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method31:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method32:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method32:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method33:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method33:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method34:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method34:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method35:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method35:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method36:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method36:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method37:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method37:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method38:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method38:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method39:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method39:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method40:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method40:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method41:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method41:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method42:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method42:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method43:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method43:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method44:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method44:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method45:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method45:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method46:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method46:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method47:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method47:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method48:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method48:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method49:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method49:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method50:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method50:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method51:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method51:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method52:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method52:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method53:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method53:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method54:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method54:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method55:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method55:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method56:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method56:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method57:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method57:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method58:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method58:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method59:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method59:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method60:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method60:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method61:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method61:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method62:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method62:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method63:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method63:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method64:System.Int32()",
+              "reference": {
+                "assemblyName": "GenerationConcatNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method64:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method0",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method0:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method0:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method0",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method1",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method1:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method1:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method1",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method2",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method2:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method2:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method2",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method3",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method3:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method3:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method3",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method4",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method4:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method4:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method4",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method5",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method5:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method5:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method5",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method6",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method6:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method6:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method6",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method7",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method7:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method7:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method7",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method8",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method8:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method8:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method8",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method9",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method9:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method9:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method9",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method10",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method10:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method10:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method10",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method11",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method11:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method11:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method11",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method12",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method12:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method12:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method12",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method13",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method13:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method13:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method13",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method14",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method14:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method14:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method14",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method15",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method15:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method15:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method15",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method16",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method16:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method16:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method16",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method16()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method17",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method17:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method17:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method17",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method17()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method18",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method18:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method18()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method18:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method18:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method18",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method18()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method19",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method19:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method19()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method19:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method19:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method19",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method19()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method20",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method20:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method20()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method20:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method20:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method20",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method20()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method21",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method21:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method21()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method21:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method21:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method21",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method21()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method22",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method22:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method22()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method22:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method22:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method22",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method22()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method23",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method23:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method23()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method23:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method23:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method23",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method23()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method24",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method24:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method24()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method24:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method24:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method24",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method24()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method25",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method25:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method25()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method25:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method25:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method25",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method25()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method26",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method26:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method26()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method26:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method26:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method26",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method26()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method27",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method27:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method27()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method27:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method27:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method27",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method27()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method28",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method28:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method28()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method28:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method28:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method28",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method28()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method29",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method29:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method29()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method29:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method29:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method29",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method29()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method30",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method30:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method30()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method30:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method30:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method30",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method30()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method31",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method31:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method31()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method31:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method31:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method31",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method31()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method32",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method32:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method32()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method32:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method32:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method32",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method32()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method33",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method33:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method33()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method33:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method33:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method33",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method33()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method34",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method34:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method34()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method34:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method34:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method34",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method34()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method35",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method35:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method35()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method35:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method35:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method35",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method35()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method36",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method36:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method36()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method36:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method36:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method36",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method36()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method37",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method37:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method37()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method37:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method37:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method37",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method37()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method38",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method38:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method38()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method38:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method38:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method38",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method38()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method39",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method39:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method39()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method39:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method39:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method39",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method39()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method40",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method40:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method40()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method40:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method40:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method40",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method40()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method41",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method41:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method41()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method41:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method41:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method41",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method41()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method42",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method42:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method42()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method42:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method42:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method42",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method42()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method43",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method43:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method43()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method43:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method43:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method43",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method43()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method44",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method44:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method44()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method44:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method44:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method44",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method44()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method45",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method45:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method45()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method45:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method45:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method45",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method45()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method46",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method46:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method46()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method46:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method46:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method46",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method46()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method47",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method47:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method47()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method47:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method47:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method47",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method47()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method48",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method48:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method48()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method48:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method48:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method48",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method48()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method49",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method49:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method49()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method49:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method49:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method49",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method49()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method50",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method50:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method50()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method50:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method50:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method50",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method50()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method51",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method51:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method51()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method51:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method51:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method51",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method51()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method52",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method52:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method52()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method52:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method52:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method52",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method52()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method53",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method53:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method53()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method53:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method53:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method53",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method53()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method54",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method54:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method54()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method54:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method54:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method54",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method54()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method55",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method55:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method55()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method55:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method55:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method55",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method55()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method56",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method56:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method56()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method56:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method56:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method56",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method56()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method57",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method57:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method57()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method57:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method57:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method57",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method57()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method58",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method58:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method58()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method58:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method58:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method58",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method58()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method59",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method59:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method59()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method59:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method59:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method59",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method59()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method60",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method60:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method60()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method60:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method60:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method60",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method60()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method61",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method61:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method61()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method61:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method61:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method61",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method61()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method62",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method62:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method62()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method62:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method62:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method62",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method62()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method63",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method63:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method63()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method63:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method63:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method63",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method63()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "generation-concat-native-entry.generation-concat-native-entry.method64",
+      "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method64:System.Int32()",
+      "signature": "System.Int32 GenerationConcatNativeEntry::Method64()",
+      "identity": {
+        "assemblyName": "GenerationConcatNativeEntry",
+        "declaringTypeSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry",
+        "definitionSubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method64:System.Int32()",
+        "subjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Method64:System.Int32()",
+        "methodId": "generation-concat-native-entry.generation-concat-native-entry.method64",
+        "signature": "System.Int32 GenerationConcatNativeEntry::Method64()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

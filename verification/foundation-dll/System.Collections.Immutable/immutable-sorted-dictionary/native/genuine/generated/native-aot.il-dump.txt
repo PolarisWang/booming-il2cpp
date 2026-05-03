@@ -1,0 +1,8 @@
+.method public static System.Int32 ImmutableSortedDictionaryNativeEntry::Run(System.Int32)
+// SubjectId: ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ImmutableSortedDictionaryNativeEntry::Method0()
+// SubjectId: ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ImmutableSortedDictionaryNativeEntry::Method1()
+// SubjectId: ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method1:System.Int32()

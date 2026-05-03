@@ -1,0 +1,84 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

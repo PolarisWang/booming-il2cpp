@@ -1,0 +1,84 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

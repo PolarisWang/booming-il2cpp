@@ -1,0 +1,35 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ImmutableInterlockedNativeEntry",
+      "subjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry",
+      "definitionSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ImmutableInterlockedNativeEntry",
+      "subjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ImmutableInterlockedNativeEntry",
+      "subjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\entrypoint\\build-output\\CollectionChangeNotificationsNativeEntry.dll"
+    ],
+    "entry": "CollectionChangeNotificationsNativeEntry/CollectionChangeNotificationsNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

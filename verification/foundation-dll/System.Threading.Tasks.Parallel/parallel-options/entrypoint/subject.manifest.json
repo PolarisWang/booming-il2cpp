@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\parallel-options\\entrypoint\\build-output\\ParallelOptionsNativeEntry.dll"
+    ],
+    "entry": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

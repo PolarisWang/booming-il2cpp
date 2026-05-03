@@ -1,0 +1,74 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "managedClosureManifest",
+  "assemblyName": "ImmutableInterlockedNativeEntry",
+  "entrySubjectId": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+  "inputAssemblyPath": "verification/foundation-dll/System.Collections.Immutable/immutable-interlocked/entrypoint/build-output/ImmutableInterlockedNativeEntry.dll",
+  "additionalAssemblyPaths": [],
+  "resolvedAssemblies": [
+    {
+      "assemblyName": "ImmutableInterlockedNativeEntry",
+      "path": "verification/foundation-dll/System.Collections.Immutable/immutable-interlocked/entrypoint/build-output/ImmutableInterlockedNativeEntry.dll"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.Immutable.dll"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
+    }
+  ],
+  "fullAssemblyClosure": false,
+  "inputModuleVersionId": "237037bc-e60b-42bf-92bd-7d7de4b8fb71",
+  "artifacts": [
+    {
+      "kind": "typedIlIr",
+      "path": "typed-il-ir.json"
+    },
+    {
+      "kind": "aotCoreIr",
+      "path": "aot-core-ir.json"
+    },
+    {
+      "kind": "aotManifest",
+      "path": "aot-manifest.json"
+    },
+    {
+      "kind": "metadataRegistration",
+      "path": "metadata-registration.json"
+    },
+    {
+      "kind": "supplementalMetadataTemplate",
+      "path": "hot-update/supplemental-metadata-template.json"
+    },
+    {
+      "kind": "codeRegistration",
+      "path": "code-registration.json"
+    },
+    {
+      "kind": "genericInstantiationDemandGraph",
+      "path": "generic-instantiation-demand-graph.json"
+    },
+    {
+      "kind": "genericCapabilityMatrix",
+      "path": "generic-capability-matrix.json"
+    },
+    {
+      "kind": "optimizationFacts",
+      "path": "optimization-facts.json"
+    },
+    {
+      "kind": "preserveDescriptor",
+      "path": "preserve-descriptor.json"
+    },
+    {
+      "kind": "nativeReferenceLoweringPlan",
+      "path": "native-reference.lowering-plan.json"
+    },
+    {
+      "kind": "nativeAotLoweringPlan",
+      "path": "native-aot.lowering-plan.json"
+    }
+  ]
+}

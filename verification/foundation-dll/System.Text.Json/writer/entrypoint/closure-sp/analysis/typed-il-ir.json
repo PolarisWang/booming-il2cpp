@@ -1,0 +1,989 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "writer-native-entry.writer-native-entry.run",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 WriterNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "writer-native-entry.writer-native-entry.run",
+        "signature": "System.Int32 WriterNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                65,
+                73,
+                81,
+                89,
+                97,
+                105,
+                113,
+                121,
+                129,
+                137,
+                145,
+                153,
+                161
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 169,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "WriterNativeEntry/WriterNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "WriterNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "WriterNativeEntry/WriterNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method0",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method0:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method0:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method0",
+        "signature": "System.Int32 WriterNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method1",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method1:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method1:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method1",
+        "signature": "System.Int32 WriterNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method2",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method2:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method2:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method2",
+        "signature": "System.Int32 WriterNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method3",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method3:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method3:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method3",
+        "signature": "System.Int32 WriterNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method4",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method4:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method4:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method4",
+        "signature": "System.Int32 WriterNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method5",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method5:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method5:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method5",
+        "signature": "System.Int32 WriterNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method6",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method6:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method6:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method6",
+        "signature": "System.Int32 WriterNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method7",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method7:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method7:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method7",
+        "signature": "System.Int32 WriterNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method8",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method8:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method8:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method8",
+        "signature": "System.Int32 WriterNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method9",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method9:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method9:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method9",
+        "signature": "System.Int32 WriterNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method10",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method10:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method10:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method10",
+        "signature": "System.Int32 WriterNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method11",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method11:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method11:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method11",
+        "signature": "System.Int32 WriterNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "writer-native-entry.writer-native-entry.method12",
+      "subjectId": "WriterNativeEntry/WriterNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 WriterNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "WriterNativeEntry",
+        "declaringTypeSubjectId": "WriterNativeEntry/WriterNativeEntry",
+        "definitionSubjectId": "WriterNativeEntry/WriterNativeEntry::Method12:System.Int32()",
+        "subjectId": "WriterNativeEntry/WriterNativeEntry::Method12:System.Int32()",
+        "methodId": "writer-native-entry.writer-native-entry.method12",
+        "signature": "System.Int32 WriterNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

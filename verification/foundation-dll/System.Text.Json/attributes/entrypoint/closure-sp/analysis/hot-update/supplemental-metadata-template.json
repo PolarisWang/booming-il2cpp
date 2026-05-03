@@ -1,0 +1,131 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method10:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method11:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "AttributesNativeEntry",
+      "subjectId": "AttributesNativeEntry/AttributesNativeEntry::Method12:System.Int32()",
+      "definitionSubjectId": "AttributesNativeEntry/AttributesNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "AttributesNativeEntry/AttributesNativeEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

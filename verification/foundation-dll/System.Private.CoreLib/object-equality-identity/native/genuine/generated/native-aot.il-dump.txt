@@ -1,0 +1,23 @@
+.method public static System.Int32 ObjectEqualityIdentityNativeEntry::Run(System.Int32)
+// SubjectId: ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ObjectEqualityIdentityNativeEntry::Method0()
+// SubjectId: ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ObjectEqualityIdentityNativeEntry::Method1()
+// SubjectId: ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ObjectEqualityIdentityNativeEntry::Method2()
+// SubjectId: ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ObjectEqualityIdentityNativeEntry::Method3()
+// SubjectId: ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ObjectEqualityIdentityNativeEntry::Method4()
+// SubjectId: ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ObjectEqualityIdentityNativeEntry::Method5()
+// SubjectId: ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ObjectEqualityIdentityNativeEntry::Method6()
+// SubjectId: ObjectEqualityIdentityNativeEntry/ObjectEqualityIdentityNativeEntry::Method6:System.Int32()

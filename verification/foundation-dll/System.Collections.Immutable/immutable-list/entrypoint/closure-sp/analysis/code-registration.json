@@ -1,0 +1,54 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableListNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableListNativeEntry_ImmutableListNativeEntry_Run",
+          "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableListNativeEntry_ImmutableListNativeEntry_Method0",
+          "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableListNativeEntry_ImmutableListNativeEntry_Method1",
+          "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ImmutableListNativeEntry_ImmutableListNativeEntry_Method2",
+          "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ImmutableListNativeEntry_ImmutableListNativeEntry_Method3",
+          "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ImmutableListNativeEntry_ImmutableListNativeEntry_Method4",
+          "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ImmutableListNativeEntry_ImmutableListNativeEntry_Method5",
+          "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method5:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

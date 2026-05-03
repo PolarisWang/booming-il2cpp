@@ -1,0 +1,4577 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "joins-native-entry.joins-native-entry.run",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 JoinsNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "joins-native-entry.joins-native-entry.run",
+        "signature": "System.Int32 JoinsNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                276,
+                287,
+                298,
+                309,
+                320,
+                331,
+                342,
+                353,
+                364,
+                375,
+                386,
+                397,
+                408,
+                419,
+                430,
+                441,
+                452,
+                463,
+                474,
+                485,
+                496,
+                507,
+                518,
+                529,
+                540,
+                551,
+                562,
+                573,
+                584,
+                595,
+                606,
+                617,
+                628,
+                639,
+                650,
+                661,
+                672,
+                683,
+                694,
+                705,
+                716,
+                727,
+                738,
+                749,
+                760,
+                771,
+                782,
+                793,
+                804,
+                815,
+                823,
+                831,
+                839,
+                847,
+                855,
+                863,
+                871,
+                879,
+                887,
+                895,
+                903,
+                911,
+                919,
+                927,
+                935
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 943,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method16:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method16:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method17:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method17:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method18:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method18:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method19:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method19:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method20:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method20:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method21:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method21:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method22:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method22:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method23:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method23:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method24:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method24:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method25:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method25:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method26:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method26:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method27:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method27:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method28:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method28:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method29:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method29:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method30:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method30:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method31:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method31:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method32:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method32:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method33:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method33:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method34:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method34:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method35:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method35:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method36:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method36:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method37:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method37:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method38:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method38:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method39:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method39:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method40:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method40:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method41:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method41:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method42:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method42:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method43:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method43:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method44:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method44:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method45:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method45:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method46:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method46:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method47:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method47:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method48:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method48:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method49:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method49:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method50:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method50:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method51:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method51:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method52:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method52:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method53:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method53:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method54:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method54:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method55:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method55:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method56:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method56:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method57:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method57:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method58:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method58:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method59:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method59:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method60:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method60:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method61:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method61:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method62:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method62:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method63:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method63:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "JoinsNativeEntry/JoinsNativeEntry::Method64:System.Int32()",
+              "reference": {
+                "assemblyName": "JoinsNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method64:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 947,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method0",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method0:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method0:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method0",
+        "signature": "System.Int32 JoinsNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method1",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method1:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method1:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method1",
+        "signature": "System.Int32 JoinsNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method2",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method2:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method2:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method2",
+        "signature": "System.Int32 JoinsNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method3",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method3:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method3:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method3",
+        "signature": "System.Int32 JoinsNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method4",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method4:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method4:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method4",
+        "signature": "System.Int32 JoinsNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method5",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method5:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method5:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method5",
+        "signature": "System.Int32 JoinsNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method6",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method6:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method6:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method6",
+        "signature": "System.Int32 JoinsNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method7",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method7:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method7:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method7",
+        "signature": "System.Int32 JoinsNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method8",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method8:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method8:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method8",
+        "signature": "System.Int32 JoinsNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method9",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method9:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method9:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method9",
+        "signature": "System.Int32 JoinsNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method10",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method10:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method10:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method10",
+        "signature": "System.Int32 JoinsNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method11",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method11:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method11:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method11",
+        "signature": "System.Int32 JoinsNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method12",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method12:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method12:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method12",
+        "signature": "System.Int32 JoinsNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method13",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method13:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method13:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method13",
+        "signature": "System.Int32 JoinsNativeEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method14",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method14:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method14:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method14",
+        "signature": "System.Int32 JoinsNativeEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method15",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method15:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method15:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method15",
+        "signature": "System.Int32 JoinsNativeEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method16",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method16:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method16:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method16",
+        "signature": "System.Int32 JoinsNativeEntry::Method16()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method17",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method17:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method17:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method17",
+        "signature": "System.Int32 JoinsNativeEntry::Method17()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method18",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method18:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method18()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method18:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method18:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method18",
+        "signature": "System.Int32 JoinsNativeEntry::Method18()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method19",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method19:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method19()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method19:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method19:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method19",
+        "signature": "System.Int32 JoinsNativeEntry::Method19()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method20",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method20:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method20()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method20:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method20:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method20",
+        "signature": "System.Int32 JoinsNativeEntry::Method20()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method21",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method21:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method21()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method21:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method21:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method21",
+        "signature": "System.Int32 JoinsNativeEntry::Method21()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method22",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method22:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method22()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method22:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method22:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method22",
+        "signature": "System.Int32 JoinsNativeEntry::Method22()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method23",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method23:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method23()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method23:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method23:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method23",
+        "signature": "System.Int32 JoinsNativeEntry::Method23()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method24",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method24:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method24()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method24:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method24:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method24",
+        "signature": "System.Int32 JoinsNativeEntry::Method24()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method25",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method25:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method25()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method25:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method25:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method25",
+        "signature": "System.Int32 JoinsNativeEntry::Method25()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method26",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method26:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method26()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method26:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method26:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method26",
+        "signature": "System.Int32 JoinsNativeEntry::Method26()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method27",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method27:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method27()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method27:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method27:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method27",
+        "signature": "System.Int32 JoinsNativeEntry::Method27()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method28",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method28:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method28()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method28:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method28:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method28",
+        "signature": "System.Int32 JoinsNativeEntry::Method28()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method29",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method29:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method29()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method29:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method29:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method29",
+        "signature": "System.Int32 JoinsNativeEntry::Method29()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method30",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method30:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method30()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method30:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method30:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method30",
+        "signature": "System.Int32 JoinsNativeEntry::Method30()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method31",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method31:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method31()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method31:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method31:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method31",
+        "signature": "System.Int32 JoinsNativeEntry::Method31()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method32",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method32:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method32()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method32:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method32:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method32",
+        "signature": "System.Int32 JoinsNativeEntry::Method32()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method33",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method33:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method33()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method33:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method33:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method33",
+        "signature": "System.Int32 JoinsNativeEntry::Method33()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method34",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method34:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method34()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method34:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method34:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method34",
+        "signature": "System.Int32 JoinsNativeEntry::Method34()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method35",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method35:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method35()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method35:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method35:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method35",
+        "signature": "System.Int32 JoinsNativeEntry::Method35()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method36",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method36:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method36()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method36:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method36:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method36",
+        "signature": "System.Int32 JoinsNativeEntry::Method36()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method37",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method37:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method37()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method37:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method37:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method37",
+        "signature": "System.Int32 JoinsNativeEntry::Method37()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method38",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method38:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method38()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method38:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method38:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method38",
+        "signature": "System.Int32 JoinsNativeEntry::Method38()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method39",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method39:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method39()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method39:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method39:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method39",
+        "signature": "System.Int32 JoinsNativeEntry::Method39()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method40",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method40:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method40()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method40:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method40:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method40",
+        "signature": "System.Int32 JoinsNativeEntry::Method40()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method41",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method41:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method41()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method41:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method41:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method41",
+        "signature": "System.Int32 JoinsNativeEntry::Method41()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method42",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method42:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method42()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method42:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method42:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method42",
+        "signature": "System.Int32 JoinsNativeEntry::Method42()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method43",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method43:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method43()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method43:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method43:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method43",
+        "signature": "System.Int32 JoinsNativeEntry::Method43()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method44",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method44:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method44()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method44:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method44:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method44",
+        "signature": "System.Int32 JoinsNativeEntry::Method44()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method45",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method45:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method45()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method45:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method45:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method45",
+        "signature": "System.Int32 JoinsNativeEntry::Method45()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method46",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method46:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method46()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method46:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method46:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method46",
+        "signature": "System.Int32 JoinsNativeEntry::Method46()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method47",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method47:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method47()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method47:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method47:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method47",
+        "signature": "System.Int32 JoinsNativeEntry::Method47()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method48",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method48:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method48()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method48:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method48:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method48",
+        "signature": "System.Int32 JoinsNativeEntry::Method48()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method49",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method49:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method49()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method49:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method49:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method49",
+        "signature": "System.Int32 JoinsNativeEntry::Method49()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method50",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method50:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method50()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method50:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method50:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method50",
+        "signature": "System.Int32 JoinsNativeEntry::Method50()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method51",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method51:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method51()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method51:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method51:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method51",
+        "signature": "System.Int32 JoinsNativeEntry::Method51()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method52",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method52:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method52()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method52:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method52:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method52",
+        "signature": "System.Int32 JoinsNativeEntry::Method52()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method53",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method53:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method53()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method53:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method53:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method53",
+        "signature": "System.Int32 JoinsNativeEntry::Method53()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method54",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method54:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method54()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method54:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method54:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method54",
+        "signature": "System.Int32 JoinsNativeEntry::Method54()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method55",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method55:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method55()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method55:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method55:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method55",
+        "signature": "System.Int32 JoinsNativeEntry::Method55()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method56",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method56:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method56()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method56:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method56:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method56",
+        "signature": "System.Int32 JoinsNativeEntry::Method56()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method57",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method57:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method57()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method57:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method57:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method57",
+        "signature": "System.Int32 JoinsNativeEntry::Method57()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method58",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method58:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method58()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method58:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method58:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method58",
+        "signature": "System.Int32 JoinsNativeEntry::Method58()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method59",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method59:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method59()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method59:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method59:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method59",
+        "signature": "System.Int32 JoinsNativeEntry::Method59()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method60",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method60:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method60()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method60:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method60:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method60",
+        "signature": "System.Int32 JoinsNativeEntry::Method60()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method61",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method61:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method61()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method61:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method61:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method61",
+        "signature": "System.Int32 JoinsNativeEntry::Method61()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method62",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method62:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method62()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method62:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method62:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method62",
+        "signature": "System.Int32 JoinsNativeEntry::Method62()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method63",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method63:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method63()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method63:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method63:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method63",
+        "signature": "System.Int32 JoinsNativeEntry::Method63()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "joins-native-entry.joins-native-entry.method64",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method64:System.Int32()",
+      "signature": "System.Int32 JoinsNativeEntry::Method64()",
+      "identity": {
+        "assemblyName": "JoinsNativeEntry",
+        "declaringTypeSubjectId": "JoinsNativeEntry/JoinsNativeEntry",
+        "definitionSubjectId": "JoinsNativeEntry/JoinsNativeEntry::Method64:System.Int32()",
+        "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method64:System.Int32()",
+        "methodId": "joins-native-entry.joins-native-entry.method64",
+        "signature": "System.Int32 JoinsNativeEntry::Method64()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

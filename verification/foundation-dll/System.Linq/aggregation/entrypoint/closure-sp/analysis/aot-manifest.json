@@ -1,0 +1,402 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method18:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method19:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method20:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method21:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method22:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method23:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method24:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method25:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method26:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method27:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method28:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method29:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method30:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method31:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method32:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method33:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method34:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method35:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method36:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method37:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method38:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method39:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method40:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method41:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method42:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method43:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method44:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method45:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method46:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method47:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method48:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method49:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method50:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method51:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method52:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method53:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method54:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method55:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method56:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method57:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method58:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method59:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method60:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method61:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method62:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method63:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "AggregationNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "AggregationNativeEntry/AggregationNativeEntry::Method64:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

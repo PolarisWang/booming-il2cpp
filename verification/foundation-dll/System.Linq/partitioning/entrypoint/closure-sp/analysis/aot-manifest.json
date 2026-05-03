@@ -1,0 +1,402 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method18:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method19:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method20:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method21:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method22:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method23:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method24:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method25:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method26:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method27:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method28:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method29:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method30:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method31:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method32:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method33:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method34:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method35:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method36:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method37:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method38:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method39:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method40:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method41:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method42:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method43:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method44:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method45:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method46:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method47:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method48:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method49:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method50:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method51:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method52:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method53:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method54:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method55:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method56:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method57:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method58:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method59:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method60:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method61:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method62:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method63:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PartitioningNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "PartitioningNativeEntry/PartitioningNativeEntry::Method64:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

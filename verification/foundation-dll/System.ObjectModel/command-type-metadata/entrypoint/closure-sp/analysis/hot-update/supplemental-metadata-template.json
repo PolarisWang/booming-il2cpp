@@ -1,0 +1,155 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CommandTypeMetadataNativeEntry",
+      "subjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()",
+      "definitionSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "CommandTypeMetadataNativeEntry/CommandTypeMetadataNativeEntry",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

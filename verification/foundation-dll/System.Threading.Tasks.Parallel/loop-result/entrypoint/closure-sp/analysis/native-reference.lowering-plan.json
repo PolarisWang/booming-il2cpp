@@ -1,0 +1,16 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "managed-generic.stub-fallback.minimal",
+  "assemblyName": "LoopResultNativeEntry",
+  "entrySubjectId": "LoopResultNativeEntry/LoopResultNativeEntry::Run:System.Int32(System.Int32)",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReference",
+  "entrySymbol": "LoopResultNativeEntry_LoopResultNativeEntry_Run",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0x06000001u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)",
+  "expectedOutput": "",
+  "expectedOutputByteCount": 0
+}

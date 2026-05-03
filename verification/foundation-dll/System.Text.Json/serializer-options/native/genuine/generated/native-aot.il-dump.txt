@@ -1,0 +1,80 @@
+.method public static System.Int32 SerializerOptionsNativeEntry::Run(System.Int32)
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method0()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method1()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method2()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method3()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method4()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method5()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method6()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method7()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method8()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method9()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method10()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method11()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method12()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method13()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method14()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method15()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method15:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method16()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method16:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method17()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method17:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method18()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method18:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method19()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method19:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method20()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method20:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method21()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method21:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method22()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method22:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method23()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method23:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method24()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method24:System.Int32()
+
+.method public static System.Int32 SerializerOptionsNativeEntry::Method25()
+// SubjectId: SerializerOptionsNativeEntry/SerializerOptionsNativeEntry::Method25:System.Int32()

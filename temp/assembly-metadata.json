@@ -1,0 +1,28 @@
+{
+  "assemblyName": "ImmutableInterlockedNativeEntry",
+  "types": {
+    "ImmutableInterlockedNativeEntry": {
+      "typeName": "ImmutableInterlockedNativeEntry",
+      "fullName": "ImmutableInterlockedNativeEntry",
+      "arity": 0,
+      "isStatic": true,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": "Run",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Int32"
+          ],
+          "returnType": "System.Int32",
+          "isStatic": true,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": []
+    }
+  }
+}

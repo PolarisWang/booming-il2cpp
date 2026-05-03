@@ -1,0 +1,47 @@
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Run(System.Int32)
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method0()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method1()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method2()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method3()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method4()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method5()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method6()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method7()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method8()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method9()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method10()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method11()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method12()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method13()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 ThreadingTasksPrimitivesNativeEntry::Method14()
+// SubjectId: ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Method14:System.Int32()

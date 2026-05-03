@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\entrypoint\\build-output\\ImmutableInterlockedNativeEntry.dll"
+    ],
+    "entry": "ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

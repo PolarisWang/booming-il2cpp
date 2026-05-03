@@ -1,0 +1,41 @@
+.method public static System.Int32 LoopResultNativeEntry::Run(System.Int32)
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 LoopResultNativeEntry::Method0()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method1()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method2()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method3()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method4()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method5()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method6()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method7()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method8()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method9()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method10()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method11()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 LoopResultNativeEntry::Method12()
+// SubjectId: LoopResultNativeEntry/LoopResultNativeEntry::Method12:System.Int32()

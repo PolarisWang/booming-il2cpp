@@ -1,0 +1,547 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method10:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method11:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method12:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method13:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method14:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method15:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method16:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method16:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method17:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method17:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method18:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method18:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method19:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method19:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method20:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method20:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method21:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method21:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663319,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method22:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method22:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663320,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method23:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method23:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663321,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method24:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method24:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663322,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method25:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method25:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663323,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method26:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method26:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663324,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method27:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method27:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663325,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method28:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method28:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663326,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method29:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method29:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663327,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method30:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method30:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663328,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method31:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method31:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663329,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method32:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method32:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663330,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method33:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method33:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663331,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method34:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method34:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663332,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method35:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method35:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663333,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method36:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method36:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663334,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method37:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method37:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663335,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method38:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method38:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663336,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method39:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method39:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663337,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method40:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method40:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663338,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method41:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method41:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663339,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method42:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method42:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663340,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method43:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method43:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663341,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method44:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method44:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663342,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method45:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method45:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663343,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method46:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method46:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663344,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method47:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method47:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663345,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method48:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method48:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663346,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method49:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method49:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663347,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method50:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method50:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663348,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method51:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method51:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663349,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method52:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method52:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663350,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method53:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method53:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663351,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method54:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method54:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663352,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method55:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method55:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663353,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method56:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method56:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663354,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method57:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method57:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663355,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method58:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method58:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663356,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method59:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method59:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663357,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method60:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method60:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663358,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method61:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method61:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663359,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method62:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method62:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663360,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method63:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method63:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663361,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "OrderingNativeEntry",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method64:System.Int32()",
+      "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method64:System.Int32()",
+      "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+      "metadataToken": 100663362,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

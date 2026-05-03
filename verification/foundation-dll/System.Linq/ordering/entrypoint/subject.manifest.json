@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Linq\\ordering\\entrypoint\\build-output\\OrderingNativeEntry.dll"
+    ],
+    "entry": "OrderingNativeEntry/OrderingNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

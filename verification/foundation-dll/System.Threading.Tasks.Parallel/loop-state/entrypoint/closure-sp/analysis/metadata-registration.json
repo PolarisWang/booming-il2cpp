@@ -1,0 +1,182 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "LoopStateNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "name": "LoopStateNativeEntry",
+      "displayName": "LoopStateNativeEntry",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 16,
+      "subjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "LoopStateNativeEntry/LoopStateNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

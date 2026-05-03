@@ -11,6 +11,14 @@
       "path": "generated/native-aot.generated.cpp"
     },
     {
+      "kind": "shapeDispatchHeader",
+      "path": "generated/runtime_helper_shapes.h"
+    },
+    {
+      "kind": "shapeDispatchHeader",
+      "path": "generated/native-aot.metadata.h"
+    },
+    {
       "kind": "codegenMetrics",
       "path": "native-aot.codegen-metrics.json"
     }

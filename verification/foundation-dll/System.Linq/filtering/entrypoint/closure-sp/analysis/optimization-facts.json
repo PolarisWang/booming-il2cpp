@@ -1,0 +1,344 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method13:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method14:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method15:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method16:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method17:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method18:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method19:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method20:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method21:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method22:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method23:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method24:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method25:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method26:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method27:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method28:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method29:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method30:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method31:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method32:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method33:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method34:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method35:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method36:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method37:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method38:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method39:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method40:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method41:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method42:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method43:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method44:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method45:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method46:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method47:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method48:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method49:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method50:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method51:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method52:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method53:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method54:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method55:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method56:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method57:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method58:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method59:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method60:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method61:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method62:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method63:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringNativeEntry/FilteringNativeEntry::Method64:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

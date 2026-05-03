@@ -1,0 +1,133 @@
+{
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "results": [
+    {
+      "family": "read-flush-results",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 26,
+      "entryPointSubjectId": "ReadFlushResultsNativeEntry/ReadFlushResultsNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\read-flush-results\\entrypoint\\build-output\\ReadFlushResultsNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\read-flush-results\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "pipe-core",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 26,
+      "entryPointSubjectId": "PipeCoreNativeEntry/PipeCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\pipe-core\\entrypoint\\build-output\\PipeCoreNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\pipe-core\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "reader-writer",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 26,
+      "entryPointSubjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\reader-writer\\entrypoint\\build-output\\ReaderWriterNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\reader-writer\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "options-scheduler",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 52,
+      "entryPointSubjectId": "OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\options-scheduler\\entrypoint\\build-output\\OptionsSchedulerNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\options-scheduler\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    },
+    {
+      "family": "stream-adapters",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\stream-adapters\\entrypoint\\build-output\\StreamAdaptersNativeEntry.dll",
+      "codegen_validation": {
+        "status": "STUB_DETECTED",
+        "stub_count": 0,
+        "bridge_call_count": 0,
+        "is_real": false,
+        "review_triggered": false,
+        "stub_status_ok": 0,
+        "stub_return_value": 0,
+        "stub_fallback": 0,
+        "il_dump_path": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\stream-adapters\\native\\genuine\\generated\\native-aot.il-dump.txt",
+        "has_il_dump": true
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T21:48:34"
+}

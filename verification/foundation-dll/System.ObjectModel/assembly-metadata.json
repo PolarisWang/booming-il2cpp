@@ -1,0 +1,1544 @@
+{
+  "assemblyName": "System.ObjectModel",
+  "types": {
+    "System.Windows.Markup.ValueSerializerAttribute": {
+      "typeName": "ValueSerializerAttribute",
+      "fullName": "System.Windows.Markup.ValueSerializerAttribute",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Type"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "get_ValueSerializerType",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Type",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "ValueSerializerType",
+          "isConstructor": false
+        },
+        {
+          "name": "get_ValueSerializerTypeName",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.String",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "ValueSerializerTypeName",
+          "isConstructor": false
+        }
+      ],
+      "properties": [
+        "ValueSerializerType",
+        "ValueSerializerTypeName"
+      ]
+    },
+    "System.Windows.Input.ICommand": {
+      "typeName": "ICommand",
+      "fullName": "System.Windows.Input.ICommand",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": "add_CanExecuteChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.EventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "remove_CanExecuteChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.EventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "CanExecute",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Object"
+          ],
+          "returnType": "System.Boolean",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "Execute",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Object"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": []
+    },
+    "System.Reflection.ICustomTypeProvider": {
+      "typeName": "ICustomTypeProvider",
+      "fullName": "System.Reflection.ICustomTypeProvider",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": "GetCustomType",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Type",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": []
+    },
+    "System.ComponentModel.DataErrorsChangedEventArgs": {
+      "typeName": "DataErrorsChangedEventArgs",
+      "fullName": "System.ComponentModel.DataErrorsChangedEventArgs",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "get_PropertyName",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.String",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": true,
+          "propertyName": "PropertyName",
+          "isConstructor": false
+        }
+      ],
+      "properties": [
+        "PropertyName"
+      ]
+    },
+    "System.ComponentModel.INotifyDataErrorInfo": {
+      "typeName": "INotifyDataErrorInfo",
+      "fullName": "System.ComponentModel.INotifyDataErrorInfo",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": "get_HasErrors",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Boolean",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": true,
+          "propertyName": "HasErrors",
+          "isConstructor": false
+        },
+        {
+          "name": "add_ErrorsChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.EventHandler\u00601"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "remove_ErrorsChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.EventHandler\u00601"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "GetErrors",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Collections.IEnumerable",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": [
+        "HasErrors"
+      ]
+    },
+    "System.ComponentModel.INotifyPropertyChanged": {
+      "typeName": "INotifyPropertyChanged",
+      "fullName": "System.ComponentModel.INotifyPropertyChanged",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": "add_PropertyChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.ComponentModel.PropertyChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "remove_PropertyChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.ComponentModel.PropertyChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": []
+    },
+    "System.ComponentModel.INotifyPropertyChanging": {
+      "typeName": "INotifyPropertyChanging",
+      "fullName": "System.ComponentModel.INotifyPropertyChanging",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": "add_PropertyChanging",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.ComponentModel.PropertyChangingEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "remove_PropertyChanging",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.ComponentModel.PropertyChangingEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": []
+    },
+    "System.ComponentModel.PropertyChangedEventArgs": {
+      "typeName": "PropertyChangedEventArgs",
+      "fullName": "System.ComponentModel.PropertyChangedEventArgs",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "get_PropertyName",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.String",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": true,
+          "propertyName": "PropertyName",
+          "isConstructor": false
+        }
+      ],
+      "properties": [
+        "PropertyName"
+      ]
+    },
+    "System.ComponentModel.PropertyChangedEventHandler": {
+      "typeName": "PropertyChangedEventHandler",
+      "fullName": "System.ComponentModel.PropertyChangedEventHandler",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": true,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Object",
+            "System.IntPtr"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "Invoke",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Object",
+            "System.ComponentModel.PropertyChangedEventArgs"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "BeginInvoke",
+          "paramCount": 4,
+          "paramTypes": [
+            "System.Object",
+            "System.ComponentModel.PropertyChangedEventArgs",
+            "System.AsyncCallback",
+            "System.Object"
+          ],
+          "returnType": "System.IAsyncResult",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "EndInvoke",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.IAsyncResult"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": []
+    },
+    "System.ComponentModel.PropertyChangingEventArgs": {
+      "typeName": "PropertyChangingEventArgs",
+      "fullName": "System.ComponentModel.PropertyChangingEventArgs",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "get_PropertyName",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.String",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": true,
+          "propertyName": "PropertyName",
+          "isConstructor": false
+        }
+      ],
+      "properties": [
+        "PropertyName"
+      ]
+    },
+    "System.ComponentModel.PropertyChangingEventHandler": {
+      "typeName": "PropertyChangingEventHandler",
+      "fullName": "System.ComponentModel.PropertyChangingEventHandler",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": true,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Object",
+            "System.IntPtr"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "Invoke",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Object",
+            "System.ComponentModel.PropertyChangingEventArgs"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "BeginInvoke",
+          "paramCount": 4,
+          "paramTypes": [
+            "System.Object",
+            "System.ComponentModel.PropertyChangingEventArgs",
+            "System.AsyncCallback",
+            "System.Object"
+          ],
+          "returnType": "System.IAsyncResult",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "EndInvoke",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.IAsyncResult"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": []
+    },
+    "System.ComponentModel.TypeConverterAttribute": {
+      "typeName": "TypeConverterAttribute",
+      "fullName": "System.ComponentModel.TypeConverterAttribute",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Type"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "get_ConverterTypeName",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.String",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "ConverterTypeName",
+          "isConstructor": false
+        },
+        {
+          "name": "Equals",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Object"
+          ],
+          "returnType": "System.Boolean",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "GetHashCode",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Int32",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": [
+        "ConverterTypeName"
+      ]
+    },
+    "System.ComponentModel.TypeDescriptionProviderAttribute": {
+      "typeName": "TypeDescriptionProviderAttribute",
+      "fullName": "System.ComponentModel.TypeDescriptionProviderAttribute",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Type"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "get_TypeName",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.String",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "TypeName",
+          "isConstructor": false
+        }
+      ],
+      "properties": [
+        "TypeName"
+      ]
+    },
+    "System.Collections.Specialized.INotifyCollectionChanged": {
+      "typeName": "INotifyCollectionChanged",
+      "fullName": "System.Collections.Specialized.INotifyCollectionChanged",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": "add_CollectionChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "remove_CollectionChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": []
+    },
+    "System.Collections.Specialized.NotifyCollectionChangedEventArgs": {
+      "typeName": "NotifyCollectionChangedEventArgs",
+      "fullName": "System.Collections.Specialized.NotifyCollectionChangedEventArgs",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction",
+            "System.Collections.IList"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 3,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction",
+            "System.Collections.IList",
+            "System.Collections.IList"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 4,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction",
+            "System.Collections.IList",
+            "System.Collections.IList",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 3,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction",
+            "System.Collections.IList",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 4,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction",
+            "System.Collections.IList",
+            "System.Int32",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction",
+            "System.Object"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 3,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction",
+            "System.Object",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 4,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction",
+            "System.Object",
+            "System.Int32",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 3,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction",
+            "System.Object",
+            "System.Object"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 4,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedAction",
+            "System.Object",
+            "System.Object",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "get_Action",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Collections.Specialized.NotifyCollectionChangedAction",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "Action",
+          "isConstructor": false
+        },
+        {
+          "name": "get_NewItems",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Collections.IList",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "NewItems",
+          "isConstructor": false
+        },
+        {
+          "name": "get_NewStartingIndex",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Int32",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "NewStartingIndex",
+          "isConstructor": false
+        },
+        {
+          "name": "get_OldItems",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Collections.IList",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "OldItems",
+          "isConstructor": false
+        },
+        {
+          "name": "get_OldStartingIndex",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Int32",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "OldStartingIndex",
+          "isConstructor": false
+        }
+      ],
+      "properties": [
+        "Action",
+        "NewItems",
+        "NewStartingIndex",
+        "OldItems",
+        "OldStartingIndex"
+      ]
+    },
+    "System.Collections.Specialized.NotifyCollectionChangedEventHandler": {
+      "typeName": "NotifyCollectionChangedEventHandler",
+      "fullName": "System.Collections.Specialized.NotifyCollectionChangedEventHandler",
+      "arity": 0,
+      "isStatic": false,
+      "isValueType": true,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Object",
+            "System.IntPtr"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "Invoke",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Object",
+            "System.Collections.Specialized.NotifyCollectionChangedEventArgs"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "BeginInvoke",
+          "paramCount": 4,
+          "paramTypes": [
+            "System.Object",
+            "System.Collections.Specialized.NotifyCollectionChangedEventArgs",
+            "System.AsyncCallback",
+            "System.Object"
+          ],
+          "returnType": "System.IAsyncResult",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "EndInvoke",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.IAsyncResult"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": []
+    },
+    "System.Collections.ObjectModel.KeyedCollection\u00602": {
+      "typeName": "KeyedCollection",
+      "fullName": "System.Collections.ObjectModel.KeyedCollection\u00602",
+      "arity": 2,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Generic.IEqualityComparer\u00601"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Collections.Generic.IEqualityComparer\u00601",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "get_Comparer",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Collections.Generic.IEqualityComparer\u00601",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "Comparer",
+          "isConstructor": false
+        },
+        {
+          "name": "get_Dictionary",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Collections.Generic.IDictionary\u00602",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "Dictionary",
+          "isConstructor": false
+        },
+        {
+          "name": "get_Item",
+          "paramCount": 1,
+          "paramTypes": [
+            "!0"
+          ],
+          "returnType": "!1",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "Item",
+          "isConstructor": false
+        },
+        {
+          "name": "ChangeItemKey",
+          "paramCount": 2,
+          "paramTypes": [
+            "!1",
+            "!0"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "ClearItems",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "Contains",
+          "paramCount": 1,
+          "paramTypes": [
+            "!0"
+          ],
+          "returnType": "System.Boolean",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "GetKeyForItem",
+          "paramCount": 1,
+          "paramTypes": [
+            "!1"
+          ],
+          "returnType": "!0",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "InsertItem",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Int32",
+            "!1"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "Remove",
+          "paramCount": 1,
+          "paramTypes": [
+            "!0"
+          ],
+          "returnType": "System.Boolean",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "RemoveItem",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "SetItem",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Int32",
+            "!1"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "TryGetValue",
+          "paramCount": 2,
+          "paramTypes": [
+            "!0",
+            "!1"
+          ],
+          "returnType": "System.Boolean",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": [
+        "Comparer",
+        "Dictionary",
+        "Item"
+      ]
+    },
+    "System.Collections.ObjectModel.ObservableCollection\u00601": {
+      "typeName": "ObservableCollection",
+      "fullName": "System.Collections.ObjectModel.ObservableCollection\u00601",
+      "arity": 1,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Generic.IEnumerable\u00601"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Generic.List\u00601"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "add_CollectionChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "remove_CollectionChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "add_PropertyChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.ComponentModel.PropertyChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "remove_PropertyChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.ComponentModel.PropertyChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "BlockReentrancy",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.IDisposable",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "CheckReentrancy",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "ClearItems",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "InsertItem",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Int32",
+            "!0"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "Move",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Int32",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "MoveItem",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Int32",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "OnCollectionChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedEventArgs"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "OnPropertyChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.ComponentModel.PropertyChangedEventArgs"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "RemoveItem",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "SetItem",
+          "paramCount": 2,
+          "paramTypes": [
+            "System.Int32",
+            "!0"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": []
+    },
+    "System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601": {
+      "typeName": "ReadOnlyObservableCollection",
+      "fullName": "System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601",
+      "arity": 1,
+      "isStatic": false,
+      "isValueType": false,
+      "methods": [
+        {
+          "name": ".ctor",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.ObjectModel.ObservableCollection\u00601"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": false,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": true
+        },
+        {
+          "name": "get_Empty",
+          "paramCount": 0,
+          "paramTypes": [],
+          "returnType": "System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601",
+          "isStatic": true,
+          "isVirtual": false,
+          "isPropertyAccessor": true,
+          "propertyName": "Empty",
+          "isConstructor": false
+        },
+        {
+          "name": "add_CollectionChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "remove_CollectionChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "add_PropertyChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.ComponentModel.PropertyChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "remove_PropertyChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.ComponentModel.PropertyChangedEventHandler"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "OnCollectionChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.Collections.Specialized.NotifyCollectionChangedEventArgs"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        },
+        {
+          "name": "OnPropertyChanged",
+          "paramCount": 1,
+          "paramTypes": [
+            "System.ComponentModel.PropertyChangedEventArgs"
+          ],
+          "returnType": "System.Void",
+          "isStatic": false,
+          "isVirtual": true,
+          "isPropertyAccessor": false,
+          "propertyName": null,
+          "isConstructor": false
+        }
+      ],
+      "properties": [
+        "Empty"
+      ]
+    }
+  }
+}

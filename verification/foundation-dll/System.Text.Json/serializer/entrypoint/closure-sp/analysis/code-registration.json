@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "SerializerNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Run",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method0",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method1",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method2",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method3",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method4",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method5",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method6",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method7",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method8",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method9",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method10",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method11",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "SerializerNativeEntry_SerializerNativeEntry_Method12",
+          "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method12:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

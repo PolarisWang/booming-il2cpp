@@ -1,0 +1,12 @@
+{
+  "kind": "project",
+  "domain": "knowledge",
+  "name": "dev-project-wiki-maintenance",
+  "summary": "当任务产生长期有效知识时写入项目 wiki 并维护 INDEX.md。",
+  "trigger_signals": ["任务产生长期有效知识时", "需要更新 wiki 时", "需要维护项目知识索引时"],
+  "owner": "00-skills-maintainers",
+  "status": "active",
+  "version": "1.0.0",
+  "startup_visible": false,
+  "token_budget": "small"
+}

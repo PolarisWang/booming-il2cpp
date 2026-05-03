@@ -1,0 +1,20 @@
+.method public static System.Int32 ImmutableArrayNativeEntry::Run(System.Int32)
+// SubjectId: ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ImmutableArrayNativeEntry::Method0()
+// SubjectId: ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ImmutableArrayNativeEntry::Method1()
+// SubjectId: ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ImmutableArrayNativeEntry::Method2()
+// SubjectId: ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ImmutableArrayNativeEntry::Method3()
+// SubjectId: ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ImmutableArrayNativeEntry::Method4()
+// SubjectId: ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ImmutableArrayNativeEntry::Method5()
+// SubjectId: ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method5:System.Int32()

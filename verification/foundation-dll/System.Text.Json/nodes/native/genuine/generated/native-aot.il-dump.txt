@@ -1,0 +1,158 @@
+.method public static System.Int32 NodesNativeEntry::Run(System.Int32)
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 NodesNativeEntry::Method0()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method1()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method2()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method3()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method4()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method5()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method6()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method7()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method8()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method9()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method10()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method11()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method12()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method13()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method14()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method15()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method15:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method16()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method16:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method17()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method17:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method18()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method18:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method19()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method19:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method20()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method20:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method21()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method21:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method22()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method22:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method23()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method23:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method24()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method24:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method25()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method25:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method26()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method26:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method27()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method27:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method28()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method28:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method29()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method29:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method30()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method30:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method31()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method31:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method32()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method32:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method33()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method33:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method34()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method34:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method35()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method35:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method36()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method36:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method37()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method37:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method38()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method38:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method39()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method39:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method40()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method40:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method41()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method41:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method42()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method42:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method43()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method43:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method44()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method44:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method45()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method45:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method46()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method46:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method47()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method47:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method48()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method48:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method49()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method49:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method50()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method50:System.Int32()
+
+.method public static System.Int32 NodesNativeEntry::Method51()
+// SubjectId: NodesNativeEntry/NodesNativeEntry::Method51:System.Int32()

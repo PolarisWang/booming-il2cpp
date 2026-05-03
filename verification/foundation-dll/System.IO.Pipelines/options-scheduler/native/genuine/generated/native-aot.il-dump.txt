@@ -1,0 +1,158 @@
+.method public static System.Int32 OptionsSchedulerNativeEntry::Run(System.Int32)
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method0()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method1()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method2()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method3()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method4()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method5()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method6()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method7()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method8()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method9()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method10()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method11()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method12()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method13()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method14()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method15()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method15:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method16()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method16:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method17()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method17:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method18()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method18:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method19()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method19:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method20()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method20:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method21()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method21:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method22()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method22:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method23()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method23:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method24()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method24:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method25()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method25:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method26()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method26:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method27()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method27:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method28()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method28:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method29()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method29:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method30()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method30:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method31()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method31:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method32()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method32:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method33()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method33:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method34()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method34:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method35()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method35:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method36()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method36:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method37()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method37:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method38()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method38:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method39()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method39:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method40()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method40:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method41()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method41:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method42()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method42:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method43()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method43:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method44()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method44:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method45()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method45:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method46()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method46:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method47()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method47:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method48()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method48:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method49()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method49:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method50()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method50:System.Int32()
+
+.method public static System.Int32 OptionsSchedulerNativeEntry::Method51()
+// SubjectId: OptionsSchedulerNativeEntry/OptionsSchedulerNativeEntry::Method51:System.Int32()

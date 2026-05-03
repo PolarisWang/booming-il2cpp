@@ -1138,7 +1138,7 @@ def _benchmark_generated_source(
         "using Chaos.TestFramework;\n\n"
         f"// Auto-generated benchmark skeletons for {benchmark_class_name}.\n"
         f"// Framework handles timing — body only needs to invoke the method under measurement.\n"
-        f"public static class {benchmark_class_name}\n"
+        f"public static partial class {benchmark_class_name}\n"
         "{\n"
         f"{members}"
         "}\n"
@@ -1190,7 +1190,7 @@ def _hotupdate_generated_source(
         "using Chaos.TestFramework;\n\n"
         f"// Auto-generated hot-update skeletons for {hotupdate_class_name}.\n"
         f"// Each method exercises a method from the {direction} direction.\n"
-        f"public static class {hotupdate_class_name}\n"
+        f"public static partial class {hotupdate_class_name}\n"
         "{\n"
         f"{members}"
         "}\n"
@@ -1242,7 +1242,7 @@ def _patch_generated_source(
         "using Chaos.TestFramework;\n\n"
         f"// Auto-generated patch-side skeletons for {patch_class_name}.\n"
         f"// Each method exercises a method from the patch side back to the host after hot-update.\n"
-        f"public static class {patch_class_name}\n"
+        f"public static partial class {patch_class_name}\n"
         "{\n"
         f"{members}"
         "}\n"
@@ -1315,17 +1315,6 @@ def generate_family_skeleton(repo_root: Path, *, assembly_name: str, family: dic
     generated_path.write_text(generated_source, encoding="utf-8")
     benchmark_generated_path.parent.mkdir(parents=True, exist_ok=True)
     benchmark_generated_path.write_text(
-        _benchmark_generated_source(
-            class_name,
-            method_subject_ids=method_subject_ids,
-            capability_family_enum=capability_family_enum,
-        ),
-        encoding="utf-8",
-    )
-    # Overwrite handwritten benchmark file with real method bodies
-    benchmark_class_name = class_name.replace("Tests", "Benchmarks")
-    benchmark_path = family_root / "benchmark" / f"{benchmark_class_name}.cs"
-    benchmark_path.write_text(
         _benchmark_generated_source(
             class_name,
             method_subject_ids=method_subject_ids,

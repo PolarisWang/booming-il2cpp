@@ -1,0 +1,75 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ImmutableArrayNativeEntry",
+      "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry",
+      "definitionSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ImmutableArrayNativeEntry",
+      "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ImmutableArrayNativeEntry",
+      "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableArrayNativeEntry",
+      "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableArrayNativeEntry",
+      "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableArrayNativeEntry",
+      "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableArrayNativeEntry",
+      "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableArrayNativeEntry",
+      "subjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableArrayNativeEntry/ImmutableArrayNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

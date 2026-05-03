@@ -1,0 +1,29 @@
+.method public static System.Int32 AttributesCustomMetadataNativeEntry::Run(System.Int32)
+// SubjectId: AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 AttributesCustomMetadataNativeEntry::Method0()
+// SubjectId: AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 AttributesCustomMetadataNativeEntry::Method1()
+// SubjectId: AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 AttributesCustomMetadataNativeEntry::Method2()
+// SubjectId: AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 AttributesCustomMetadataNativeEntry::Method3()
+// SubjectId: AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 AttributesCustomMetadataNativeEntry::Method4()
+// SubjectId: AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 AttributesCustomMetadataNativeEntry::Method5()
+// SubjectId: AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 AttributesCustomMetadataNativeEntry::Method6()
+// SubjectId: AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 AttributesCustomMetadataNativeEntry::Method7()
+// SubjectId: AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 AttributesCustomMetadataNativeEntry::Method8()
+// SubjectId: AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method8:System.Int32()

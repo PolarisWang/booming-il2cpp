@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsNativeEntry/ParallelOptionsNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+.method public static System.Int32 SchemaNativeEntry::Run(System.Int32)
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 SchemaNativeEntry::Method0()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method1()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method2()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method3()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method4()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method5()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method6()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method7()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method8()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method9()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method10()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method11()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 SchemaNativeEntry::Method12()
+// SubjectId: SchemaNativeEntry/SchemaNativeEntry::Method12:System.Int32()

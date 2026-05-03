@@ -1,0 +1,41 @@
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Run(System.Int32)
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method0()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method1()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method2()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method3()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method4()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method5()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method6()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method7()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method8()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method9()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method10()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method11()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 TypeRuntimeHandlesNativeEntry::Method12()
+// SubjectId: TypeRuntimeHandlesNativeEntry/TypeRuntimeHandlesNativeEntry::Method12:System.Int32()

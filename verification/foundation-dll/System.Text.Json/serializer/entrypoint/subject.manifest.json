@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\serializer\\entrypoint\\build-output\\SerializerNativeEntry.dll"
+    ],
+    "entry": "SerializerNativeEntry/SerializerNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

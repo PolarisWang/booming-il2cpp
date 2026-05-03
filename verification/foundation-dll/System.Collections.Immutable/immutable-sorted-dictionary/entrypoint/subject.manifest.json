@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-sorted-dictionary\\entrypoint\\build-output\\ImmutableSortedDictionaryNativeEntry.dll"
+    ],
+    "entry": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

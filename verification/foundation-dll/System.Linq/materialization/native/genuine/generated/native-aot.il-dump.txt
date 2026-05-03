@@ -1,0 +1,197 @@
+.method public static System.Int32 MaterializationNativeEntry::Run(System.Int32)
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 MaterializationNativeEntry::Method0()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method1()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method2()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method3()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method4()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method5()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method6()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method7()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method8()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method9()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method10()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method11()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method12()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method13()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method14()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method15()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method15:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method16()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method16:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method17()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method17:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method18()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method18:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method19()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method19:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method20()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method20:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method21()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method21:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method22()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method22:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method23()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method23:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method24()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method24:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method25()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method25:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method26()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method26:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method27()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method27:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method28()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method28:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method29()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method29:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method30()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method30:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method31()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method31:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method32()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method32:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method33()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method33:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method34()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method34:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method35()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method35:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method36()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method36:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method37()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method37:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method38()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method38:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method39()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method39:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method40()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method40:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method41()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method41:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method42()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method42:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method43()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method43:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method44()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method44:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method45()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method45:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method46()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method46:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method47()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method47:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method48()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method48:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method49()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method49:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method50()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method50:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method51()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method51:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method52()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method52:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method53()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method53:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method54()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method54:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method55()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method55:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method56()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method56:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method57()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method57:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method58()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method58:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method59()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method59:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method60()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method60:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method61()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method61:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method62()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method62:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method63()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method63:System.Int32()
+
+.method public static System.Int32 MaterializationNativeEntry::Method64()
+// SubjectId: MaterializationNativeEntry/MaterializationNativeEntry::Method64:System.Int32()

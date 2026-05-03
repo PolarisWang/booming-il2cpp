@@ -1,0 +1,174 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "PolymorphismReferenceNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Run",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method0",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method1",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method2",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method3",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method4",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method5",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method6",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method7",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method8",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method9",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method10",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method11",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method12",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method13",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method14",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method15",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method16",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method17",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method18",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method19",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method19:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method20",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method20:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method21",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method21:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method22",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method22:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method23",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method23:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method24",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method24:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "PolymorphismReferenceNativeEntry_PolymorphismReferenceNativeEntry_Method25",
+          "subjectId": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Method25:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

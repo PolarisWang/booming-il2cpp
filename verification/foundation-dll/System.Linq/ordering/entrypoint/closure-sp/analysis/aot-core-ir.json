@@ -1,0 +1,5961 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.run",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 OrderingNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "ordering-native-entry.ordering-native-entry.run",
+        "signature": "System.Int32 OrderingNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            276,
+            287,
+            298,
+            309,
+            320,
+            331,
+            342,
+            353,
+            364,
+            375,
+            386,
+            397,
+            408,
+            419,
+            430,
+            441,
+            452,
+            463,
+            474,
+            485,
+            496,
+            507,
+            518,
+            529,
+            540,
+            551,
+            562,
+            573,
+            584,
+            595,
+            606,
+            617,
+            628,
+            639,
+            650,
+            661,
+            672,
+            683,
+            694,
+            705,
+            716,
+            727,
+            738,
+            749,
+            760,
+            771,
+            782,
+            793,
+            804,
+            815,
+            823,
+            831,
+            839,
+            847,
+            855,
+            863,
+            871,
+            879,
+            887,
+            895,
+            903,
+            911,
+            919,
+            927,
+            935
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 943,
+          "ilOffset": 271,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 276,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 281,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 282,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 287,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 292,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 293,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 298,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 303,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 304,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 309,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 314,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 315,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 320,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 325,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 326,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 331,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 336,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 337,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 342,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 347,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 348,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 353,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 358,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 359,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 364,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 369,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 370,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 375,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method9:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 380,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 381,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 386,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method10:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method10:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method10:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 391,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 392,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 397,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method11:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method11:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method11:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 402,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 403,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 408,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method12:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method12:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method12:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 413,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 414,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 419,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method13:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 424,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 425,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 430,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method14:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method14:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method14:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 435,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 436,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 441,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method15:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method15:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method15:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 446,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 447,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 452,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method16:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method16:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method16:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 457,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 458,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 463,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method17:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method17:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method17:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method17",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 468,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 469,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 474,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method18:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method18:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method18:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method18",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 479,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 480,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 485,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method19:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method19:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method19:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method19",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 490,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 491,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 496,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method20:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method20:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method20:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method20",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 501,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 502,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 507,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method21:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method21:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method21:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method21",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 512,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 513,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 518,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method22:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method22:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method22:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method22",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 523,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 524,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 529,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method23:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method23:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method23:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method23",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 534,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 535,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 540,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method24:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method24:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method24:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method24",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 545,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 546,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 551,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method25:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method25:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method25:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method25",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 556,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 557,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 562,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method26:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method26:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method26:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method26",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 567,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 568,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 573,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method27:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method27:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method27:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method27",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 578,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 579,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 584,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method28:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method28:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method28:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method28",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 589,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 590,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 595,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method29:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method29:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method29:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method29",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 600,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 601,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 606,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method30:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method30:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method30:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method30",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 611,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 612,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 617,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method31:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method31:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method31:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method31",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 622,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 623,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 628,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method32:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method32:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method32:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method32",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 633,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 634,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 639,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method33:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method33:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method33:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method33",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 644,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 645,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 650,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method34:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method34:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method34:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method34",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 655,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 656,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 661,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method35:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method35:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method35:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method35",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 666,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 667,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 672,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method36:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method36:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method36:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method36",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 677,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 678,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 683,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method37:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method37:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method37:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method37",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 688,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 689,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 694,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method38:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method38:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method38:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method38",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 699,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 700,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 705,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method39:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method39:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method39:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method39",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 710,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 711,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 716,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method40:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method40:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method40:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method40",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 721,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 722,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 727,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method41:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method41:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method41:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method41",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 732,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 733,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 738,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method42:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method42:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method42:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method42",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 743,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 744,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 749,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method43:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method43:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method43:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method43",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 754,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 755,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 760,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method44:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method44:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method44:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method44",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 765,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 766,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 771,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method45:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method45:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method45:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method45",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 776,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 777,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 782,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method46:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method46:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method46:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method46",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 787,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 788,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 793,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method47:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method47:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method47:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method47",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 798,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 799,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 804,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method48:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method48:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method48:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method48",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 809,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 810,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 815,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method49:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method49:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method49:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method49",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 820,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 821,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 823,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method50:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method50:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method50:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method50",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 828,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 829,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 831,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method51:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method51:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method51:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method51",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 836,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 837,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 839,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method52:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method52:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method52:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method52",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 844,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 845,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 847,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method53:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method53:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method53:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method53",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 852,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 853,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 855,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method54:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method54:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method54:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method54",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 860,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 861,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 863,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method55:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method55:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method55:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method55",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 868,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 869,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 871,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method56:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method56:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method56:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method56",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 876,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 877,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 879,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method57:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method57:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method57:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method57",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 884,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 885,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 887,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method58:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method58:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method58:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method58",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 892,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 893,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 895,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method59:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method59:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method59:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method59",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 900,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 901,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 903,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method60:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method60:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method60:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method60",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 908,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 909,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 911,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method61:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method61:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method61:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method61",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 916,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 917,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 919,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method62:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method62:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method62:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method62",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 924,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 925,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 927,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method63:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method63:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method63:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method63",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 932,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 933,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 935,
+          "resultType": "System.Int32",
+          "callee": "OrderingNativeEntry/OrderingNativeEntry::Method64:System.Int32()",
+          "reference": {
+            "assemblyName": "OrderingNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method64:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "OrderingNativeEntry",
+            "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method64:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method64",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 940,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 941,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 943,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 944,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 947,
+          "ilOffset": 945,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 947
+        },
+        {
+          "op": "ret",
+          "ilOffset": 948
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method0",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method0:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method0:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method0",
+        "signature": "System.Int32 OrderingNativeEntry::Method0()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method1",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method1:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method1:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method1",
+        "signature": "System.Int32 OrderingNativeEntry::Method1()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method2",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method2:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method2:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method2",
+        "signature": "System.Int32 OrderingNativeEntry::Method2()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method3",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method3:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method3:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method3",
+        "signature": "System.Int32 OrderingNativeEntry::Method3()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method4",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method4:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method4:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method4",
+        "signature": "System.Int32 OrderingNativeEntry::Method4()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method5",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method5:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method5:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method5",
+        "signature": "System.Int32 OrderingNativeEntry::Method5()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method6",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method6:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method6:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method6",
+        "signature": "System.Int32 OrderingNativeEntry::Method6()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method7",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method7:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method7:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method7",
+        "signature": "System.Int32 OrderingNativeEntry::Method7()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method8",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method8:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method8:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method8",
+        "signature": "System.Int32 OrderingNativeEntry::Method8()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method9",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method9:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method9:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method9",
+        "signature": "System.Int32 OrderingNativeEntry::Method9()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method9",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method10",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method10:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method10:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method10",
+        "signature": "System.Int32 OrderingNativeEntry::Method10()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method10",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method11",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method11:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method11:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method11",
+        "signature": "System.Int32 OrderingNativeEntry::Method11()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method11",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method12",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method12:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method12:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method12",
+        "signature": "System.Int32 OrderingNativeEntry::Method12()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method12",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method13",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method13:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method13:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method13",
+        "signature": "System.Int32 OrderingNativeEntry::Method13()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method14",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method14:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method14:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method14",
+        "signature": "System.Int32 OrderingNativeEntry::Method14()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method14",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method15",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method15:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method15:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method15",
+        "signature": "System.Int32 OrderingNativeEntry::Method15()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method15",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method16",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method16:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method16()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method16:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method16:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method16",
+        "signature": "System.Int32 OrderingNativeEntry::Method16()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method16",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method17",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method17:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method17()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method17:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method17:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method17",
+        "signature": "System.Int32 OrderingNativeEntry::Method17()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method17",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method18",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method18:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method18()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method18:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method18:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method18",
+        "signature": "System.Int32 OrderingNativeEntry::Method18()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method18",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method19",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method19:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method19()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method19:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method19:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method19",
+        "signature": "System.Int32 OrderingNativeEntry::Method19()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method19",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method20",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method20:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method20()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method20:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method20:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method20",
+        "signature": "System.Int32 OrderingNativeEntry::Method20()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method20",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method21",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method21:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method21()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method21:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method21:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method21",
+        "signature": "System.Int32 OrderingNativeEntry::Method21()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method21",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method22",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method22:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method22()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method22:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method22:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method22",
+        "signature": "System.Int32 OrderingNativeEntry::Method22()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method22",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method23",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method23:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method23()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method23:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method23:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method23",
+        "signature": "System.Int32 OrderingNativeEntry::Method23()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method23",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method24",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method24:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method24()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method24:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method24:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method24",
+        "signature": "System.Int32 OrderingNativeEntry::Method24()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method24",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method25",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method25:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method25()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method25:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method25:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method25",
+        "signature": "System.Int32 OrderingNativeEntry::Method25()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method25",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method26",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method26:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method26()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method26:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method26:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method26",
+        "signature": "System.Int32 OrderingNativeEntry::Method26()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method26",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method27",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method27:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method27()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method27:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method27:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method27",
+        "signature": "System.Int32 OrderingNativeEntry::Method27()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method27",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method28",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method28:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method28()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method28:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method28:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method28",
+        "signature": "System.Int32 OrderingNativeEntry::Method28()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method28",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method29",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method29:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method29()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method29:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method29:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method29",
+        "signature": "System.Int32 OrderingNativeEntry::Method29()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method29",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method30",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method30:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method30()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method30:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method30:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method30",
+        "signature": "System.Int32 OrderingNativeEntry::Method30()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method30",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method31",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method31:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method31()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method31:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method31:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method31",
+        "signature": "System.Int32 OrderingNativeEntry::Method31()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method31",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method32",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method32:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method32()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method32:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method32:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method32",
+        "signature": "System.Int32 OrderingNativeEntry::Method32()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method32",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method33",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method33:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method33()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method33:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method33:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method33",
+        "signature": "System.Int32 OrderingNativeEntry::Method33()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method33",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method34",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method34:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method34()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method34:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method34:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method34",
+        "signature": "System.Int32 OrderingNativeEntry::Method34()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method34",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method35",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method35:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method35()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method35:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method35:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method35",
+        "signature": "System.Int32 OrderingNativeEntry::Method35()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method35",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method36",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method36:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method36()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method36:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method36:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method36",
+        "signature": "System.Int32 OrderingNativeEntry::Method36()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method36",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method37",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method37:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method37()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method37:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method37:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method37",
+        "signature": "System.Int32 OrderingNativeEntry::Method37()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method37",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method38",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method38:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method38()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method38:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method38:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method38",
+        "signature": "System.Int32 OrderingNativeEntry::Method38()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method38",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method39",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method39:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method39()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method39:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method39:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method39",
+        "signature": "System.Int32 OrderingNativeEntry::Method39()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method39",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method40",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method40:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method40()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method40:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method40:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method40",
+        "signature": "System.Int32 OrderingNativeEntry::Method40()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method40",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method41",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method41:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method41()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method41:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method41:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method41",
+        "signature": "System.Int32 OrderingNativeEntry::Method41()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method41",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method42",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method42:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method42()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method42:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method42:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method42",
+        "signature": "System.Int32 OrderingNativeEntry::Method42()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method42",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method43",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method43:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method43()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method43:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method43:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method43",
+        "signature": "System.Int32 OrderingNativeEntry::Method43()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method43",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method44",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method44:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method44()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method44:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method44:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method44",
+        "signature": "System.Int32 OrderingNativeEntry::Method44()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method44",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method45",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method45:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method45()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method45:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method45:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method45",
+        "signature": "System.Int32 OrderingNativeEntry::Method45()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method45",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method46",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method46:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method46()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method46:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method46:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method46",
+        "signature": "System.Int32 OrderingNativeEntry::Method46()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method46",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method47",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method47:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method47()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method47:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method47:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method47",
+        "signature": "System.Int32 OrderingNativeEntry::Method47()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method47",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method48",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method48:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method48()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method48:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method48:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method48",
+        "signature": "System.Int32 OrderingNativeEntry::Method48()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method48",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method49",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method49:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method49()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method49:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method49:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method49",
+        "signature": "System.Int32 OrderingNativeEntry::Method49()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method49",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method50",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method50:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method50()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method50:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method50:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method50",
+        "signature": "System.Int32 OrderingNativeEntry::Method50()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method50",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method51",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method51:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method51()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method51:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method51:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method51",
+        "signature": "System.Int32 OrderingNativeEntry::Method51()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method51",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method52",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method52:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method52()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method52:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method52:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method52",
+        "signature": "System.Int32 OrderingNativeEntry::Method52()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method52",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method53",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method53:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method53()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method53:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method53:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method53",
+        "signature": "System.Int32 OrderingNativeEntry::Method53()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method53",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method54",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method54:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method54()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method54:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method54:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method54",
+        "signature": "System.Int32 OrderingNativeEntry::Method54()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method54",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method55",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method55:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method55()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method55:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method55:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method55",
+        "signature": "System.Int32 OrderingNativeEntry::Method55()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method55",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method56",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method56:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method56()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method56:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method56:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method56",
+        "signature": "System.Int32 OrderingNativeEntry::Method56()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method56",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method57",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method57:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method57()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method57:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method57:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method57",
+        "signature": "System.Int32 OrderingNativeEntry::Method57()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method57",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method58",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method58:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method58()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method58:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method58:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method58",
+        "signature": "System.Int32 OrderingNativeEntry::Method58()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method58",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method59",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method59:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method59()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method59:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method59:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method59",
+        "signature": "System.Int32 OrderingNativeEntry::Method59()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method59",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method60",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method60:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method60()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method60:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method60:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method60",
+        "signature": "System.Int32 OrderingNativeEntry::Method60()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method60",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method61",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method61:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method61()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method61:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method61:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method61",
+        "signature": "System.Int32 OrderingNativeEntry::Method61()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method61",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method62",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method62:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method62()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method62:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method62:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method62",
+        "signature": "System.Int32 OrderingNativeEntry::Method62()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method62",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method63",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method63:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method63()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method63:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method63:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method63",
+        "signature": "System.Int32 OrderingNativeEntry::Method63()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method63",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "ordering-native-entry.ordering-native-entry.method64",
+      "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method64:System.Int32()",
+      "signature": "System.Int32 OrderingNativeEntry::Method64()",
+      "identity": {
+        "assemblyName": "OrderingNativeEntry",
+        "declaringTypeSubjectId": "OrderingNativeEntry/OrderingNativeEntry",
+        "definitionSubjectId": "OrderingNativeEntry/OrderingNativeEntry::Method64:System.Int32()",
+        "subjectId": "OrderingNativeEntry/OrderingNativeEntry::Method64:System.Int32()",
+        "methodId": "ordering-native-entry.ordering-native-entry.method64",
+        "signature": "System.Int32 OrderingNativeEntry::Method64()"
+      },
+      "nativeSymbol": "OrderingNativeEntry_OrderingNativeEntry_Method64",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 66,
+    "trimmedMethodCount": 66,
+    "entryPrefix": "OrderingNativeEntry"
+  }
+}

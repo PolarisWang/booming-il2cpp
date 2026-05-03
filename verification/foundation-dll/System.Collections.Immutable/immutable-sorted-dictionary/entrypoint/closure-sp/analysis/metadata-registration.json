@@ -1,0 +1,61 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ImmutableSortedDictionaryNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry",
+      "name": "ImmutableSortedDictionaryNativeEntry",
+      "displayName": "ImmutableSortedDictionaryNativeEntry",
+      "definitionSubjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 5,
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

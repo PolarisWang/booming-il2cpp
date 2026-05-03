@@ -1,0 +1,32 @@
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Run(System.Int32)
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Method0()
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Method1()
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Method2()
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Method3()
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Method4()
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Method5()
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Method6()
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Method7()
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Method8()
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 DelegateCoreInvocationNativeEntry::Method9()
+// SubjectId: DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Method9:System.Int32()

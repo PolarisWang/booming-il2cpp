@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Linq\\materialization\\entrypoint\\build-output\\MaterializationNativeEntry.dll"
+    ],
+    "entry": "MaterializationNativeEntry/MaterializationNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

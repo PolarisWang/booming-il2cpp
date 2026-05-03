@@ -1,219 +1,10 @@
 #include <chaos/common.h>
 #include "runtime_core.h"
+#include "native-aot.metadata.h"
 
 namespace
 {
-static_assert(sizeof(CHAOS_IL2CPP_INTPTR) == sizeof(CHAOS_IL2CPP_UINT64), "native-aot ABI lowering requires 64-bit intptr_t");
-
-constexpr CHAOS_IL2CPP_INTPTR chaos_runtime_managed_pointer_local_slot_tag =
-    ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;
-constexpr CHAOS_IL2CPP_INTPTR chaos_raw_int32_pointer_tag = 2;
-
-struct chaos_managed_exception
-{
-    CHAOS_IL2CPP_INTPTR object_value = 0;
-};
-
-template <typename TAction>
-struct chaos_finally_scope_guard
-{
-    explicit chaos_finally_scope_guard(TAction init_action)
-        : action(init_action)
-    {
-    }
-
-    chaos_finally_scope_guard(const chaos_finally_scope_guard&) = delete;
-    chaos_finally_scope_guard& operator=(const chaos_finally_scope_guard&) = delete;
-
-    ~chaos_finally_scope_guard()
-    {
-        if (active)
-        {
-            action();
-        }
-    }
-
-    TAction action;
-    bool active = true;
-};
-
-template <typename TAction>
-chaos_finally_scope_guard<TAction> chaos_make_finally_scope_guard(TAction action)
-{
-    return chaos_finally_scope_guard<TAction>(action);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_store_float32(float value) noexcept
-{
-    CHAOS_IL2CPP_UINT32 bits = 0;
-    CHAOS_IL2CPP_MEMCPY(&bits, &value, sizeof(value));
-    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT64>(bits));
-}
-
-float chaos_load_float32(CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    const auto bits = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_UINT64>(value));
-    float result = 0.0f;
-    CHAOS_IL2CPP_MEMCPY(&result, &bits, sizeof(result));
-    return result;
-}
-
-CHAOS_IL2CPP_INTPTR chaos_store_float64(double value) noexcept
-{
-    CHAOS_IL2CPP_UINT64 bits = 0;
-    CHAOS_IL2CPP_MEMCPY(&bits, &value, sizeof(value));
-    CHAOS_IL2CPP_INTPTR result = 0;
-    CHAOS_IL2CPP_MEMCPY(&result, &bits, sizeof(result));
-    return result;
-}
-
-double chaos_load_float64(CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    CHAOS_IL2CPP_UINT64 bits = 0;
-    CHAOS_IL2CPP_MEMCPY(&bits, &value, sizeof(bits));
-    double result = 0.0;
-    CHAOS_IL2CPP_MEMCPY(&result, &bits, sizeof(result));
-    return result;
-}
-
-CHAOS_IL2CPP_INTPTR chaos_store_int64(CHAOS_IL2CPP_INT64 value) noexcept
-{
-    CHAOS_IL2CPP_INTPTR result = 0;
-    CHAOS_IL2CPP_MEMCPY(&result, &value, sizeof(result));
-    return result;
-}
-
-CHAOS_IL2CPP_INT64 chaos_load_int64(CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    CHAOS_IL2CPP_INT64 result = 0;
-    CHAOS_IL2CPP_MEMCPY(&result, &value, sizeof(result));
-    return result;
-}
-
-CHAOS_IL2CPP_INTPTR chaos_store_uint64(CHAOS_IL2CPP_UINT64 value) noexcept
-{
-    CHAOS_IL2CPP_INTPTR result = 0;
-    CHAOS_IL2CPP_MEMCPY(&result, &value, sizeof(result));
-    return result;
-}
-
-CHAOS_IL2CPP_UINT64 chaos_load_uint64(CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    CHAOS_IL2CPP_UINT64 result = 0;
-    CHAOS_IL2CPP_MEMCPY(&result, &value, sizeof(result));
-    return result;
-}
-
-CHAOS_IL2CPP_INT32 chaos_wrap_add(CHAOS_IL2CPP_INT32 left, CHAOS_IL2CPP_INT32 right) noexcept
-{
-    return static_cast<CHAOS_IL2CPP_INT32>(
-        static_cast<CHAOS_IL2CPP_UINT32>(left) + static_cast<CHAOS_IL2CPP_UINT32>(right));
-}
-
-CHAOS_IL2CPP_INT32 chaos_wrap_sub(CHAOS_IL2CPP_INT32 left, CHAOS_IL2CPP_INT32 right) noexcept
-{
-    return static_cast<CHAOS_IL2CPP_INT32>(
-        static_cast<CHAOS_IL2CPP_UINT32>(left) - static_cast<CHAOS_IL2CPP_UINT32>(right));
-}
-
-CHAOS_IL2CPP_INT32 chaos_wrap_mul(CHAOS_IL2CPP_INT32 left, CHAOS_IL2CPP_INT32 right) noexcept
-{
-    return static_cast<CHAOS_IL2CPP_INT32>(
-        static_cast<CHAOS_IL2CPP_UINT32>(left) * static_cast<CHAOS_IL2CPP_UINT32>(right));
-}
-
-CHAOS_IL2CPP_INT32 chaos_div(CHAOS_IL2CPP_INT32 left, CHAOS_IL2CPP_INT32 right)
-{
-    if (right == 0)
-    {
-        CHAOS_IL2CPP_ABORT();
-    }
-
-    if (left == CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT32) && right == -1)
-    {
-        CHAOS_IL2CPP_ABORT();
-    }
-
-    return static_cast<CHAOS_IL2CPP_INT32>(left / right);
-}
-
-CHAOS_IL2CPP_INT32 chaos_rem(CHAOS_IL2CPP_INT32 left, CHAOS_IL2CPP_INT32 right)
-{
-    if (right == 0)
-    {
-        CHAOS_IL2CPP_ABORT();
-    }
-
-    if (left == CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT32) && right == -1)
-    {
-        return 0;
-    }
-
-    return static_cast<CHAOS_IL2CPP_INT32>(left % right);
-}
-
-CHAOS_IL2CPP_INT32 chaos_shift_left_int32(CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INT32 amount) noexcept
-{
-    const auto shift = static_cast<CHAOS_IL2CPP_UINT32>(amount) & 31U;
-    return static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(value) << shift);
-}
-
-CHAOS_IL2CPP_INT32 chaos_shift_right_int32(CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INT32 amount) noexcept
-{
-    const auto shift = static_cast<CHAOS_IL2CPP_UINT32>(amount) & 31U;
-    if (shift == 0U)
-    {
-        return value;
-    }
-
-    const auto bits = static_cast<CHAOS_IL2CPP_UINT32>(value);
-    if (value >= 0)
-    {
-        return static_cast<CHAOS_IL2CPP_INT32>(bits >> shift);
-    }
-
-    const auto fill = CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_UINT32) << (32U - shift);
-    return static_cast<CHAOS_IL2CPP_INT32>((bits >> shift) | fill);
-}
-
-CHAOS_IL2CPP_INT32 chaos_shift_right_un_int32(CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INT32 amount) noexcept
-{
-    const auto shift = static_cast<CHAOS_IL2CPP_UINT32>(amount) & 31U;
-    return static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(value) >> shift);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_checked_conv_ovf_i1(CHAOS_IL2CPP_INTPTR value)
-{
-    if (value < static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT8)) ||
-        value > static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_INT8)))
-    {
-        CHAOS_IL2CPP_ABORT();
-    }
-
-    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(value));
-}
-
-CHAOS_IL2CPP_INTPTR chaos_checked_conv_ovf_u1(CHAOS_IL2CPP_INTPTR value)
-{
-    if (value < static_cast<CHAOS_IL2CPP_INTPTR>(0) ||
-        value > static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(CHAOS_IL2CPP_UINT8)))
-    {
-        CHAOS_IL2CPP_ABORT();
-    }
-
-    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT8>(value));
-}
-
-CHAOS_IL2CPP_INTPTR* chaos_resolve_native_int_slot(CHAOS_IL2CPP_INTPTR chaos_address)
-{
-    if ((chaos_address & chaos_runtime_managed_pointer_local_slot_tag) != 0)
-    {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
-            static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_runtime_managed_pointer_local_slot_tag));
-    }
-
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address);
-}
+#include <chaos/common.h>
 
 struct chaos_object_header
 {
@@ -225,7 +16,6 @@ constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;
 struct chaos_managed_array
 {
     chaos_object_header header{};
-    // compatibility marker: std::CHAOS_IL2CPP_UINT8 element_type_shape = 0;
     CHAOS_IL2CPP_UINT8 element_type_shape = 0;
     CHAOS_IL2CPP_INTPTR element_type_id = 0;
     CHAOS_IL2CPP_INTPTR length = 0;
@@ -235,26 +25,6 @@ struct chaos_managed_array
 constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_reference = 1;
 constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_value = 2;
 constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_interface = 3;
-
-// compatibility marker: constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = 1;
-constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;
-constexpr CHAOS_IL2CPP_INTPTR chaos_string_id_tag = static_cast<CHAOS_IL2CPP_INTPTR>(1) << (sizeof(CHAOS_IL2CPP_INTPTR) * 8 - 1);
-static_assert(sizeof(CHAOS_IL2CPP_INTPTR) == sizeof(CHAOS_IL2CPP_UINT64), "string id tagging requires 64-bit native int");
-
-inline bool chaos_is_string_id(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
-{
-    return (chaos_value & chaos_string_id_tag) != 0;
-}
-
-inline CHAOS_IL2CPP_UINT64 chaos_extract_string_id(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
-{
-    return static_cast<CHAOS_IL2CPP_UINT64>(chaos_value & ~chaos_string_id_tag);
-}
-
-inline CHAOS_IL2CPP_INTPTR chaos_make_string_id_value(CHAOS_IL2CPP_UINT64 chaos_id) noexcept
-{
-    return chaos_string_id_tag | static_cast<CHAOS_IL2CPP_INTPTR>(chaos_id);
-}
 
 CHAOS_IL2CPP_INTPTR chaos_normalize_native_int_argument(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -281,6 +51,11 @@ TValue* chaos_resolve_managed_value_pointer(CHAOS_IL2CPP_INTPTR chaos_managed_po
     }
 
     return reinterpret_cast<TValue*>(chaos_managed_pointer);
+}
+
+inline CHAOS_IL2CPP_INTPTR* chaos_resolve_native_int_slot(CHAOS_IL2CPP_INTPTR chaos_value)
+{
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_value));
 }
 
 constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Decimal = 2;
@@ -433,16 +208,197 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Run(
 
 
 // StringId constants for compile-time-known string literals.
-constexpr CHAOS_IL2CPP_UINT64 chaos_string_id_2F63FC4C860222ED = 3414850348072968941U;
 constexpr CHAOS_IL2CPP_UINT64 chaos_string_id_2430D84680AABD0B = 2607821981565500683U;
 
 // AOT-baked string table: sorted by StringId for binary search at runtime.
 constexpr chaos::il2cpp::string_table::StringEntry chaos_aot_string_entries[] = {
     { chaos_string_id_2430D84680AABD0B, "hello", 5u },
-    { chaos_string_id_2F63FC4C860222ED, "A", 1u },
 };
 
 constexpr CHAOS_IL2CPP_UINT32 chaos_aot_string_entry_count = sizeof(chaos_aot_string_entries) / sizeof(chaos_aot_string_entries[0]);
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method0_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method0();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method10_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method10();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method11_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method11();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method12_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method12();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method13_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method13();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method14_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method14();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method15_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method15();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method16_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method16();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method17_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method17();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method1_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method1();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method2_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method2();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method3_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method3();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method4_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method4();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method5_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method5();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method6_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method6();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method7_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method7();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method8_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method8();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_external_runtime_ConvertCharNativeEntry_ConvertCharNativeEntry__Method9_System_Int32__(void)
+{
+    return ConvertCharNativeEntry_ConvertCharNativeEntry_Method9();
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Boolean_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Byte_(CHAOS_IL2CPP_UINT8 chaos_arg_0)
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Char_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(chaos_arg_0);
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_DateTime_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Decimal_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Double_(double chaos_arg_0)
+{
+    if (chaos_arg_0 < 0.0 || chaos_arg_0 > 65535.0 || !std::isfinite(chaos_arg_0)) { return static_cast<CHAOS_IL2CPP_INTPTR>(0); }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int16_(CHAOS_IL2CPP_INT16 chaos_arg_0)
+{
+    if (static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0) < 0) { return static_cast<CHAOS_IL2CPP_INTPTR>(0); }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int32_(CHAOS_IL2CPP_INT32 chaos_arg_0)
+{
+    if (chaos_arg_0 < 0 || chaos_arg_0 > 0xFFFF) { return static_cast<CHAOS_IL2CPP_INTPTR>(0); }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int64_(CHAOS_IL2CPP_INT64 chaos_arg_0)
+{
+    if (chaos_arg_0 < INT64_C(0) || chaos_arg_0 > INT64_C(0xFFFF)) { return static_cast<CHAOS_IL2CPP_INTPTR>(0); }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_SByte_(CHAOS_IL2CPP_INT8 chaos_arg_0)
+{
+    if (static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0) < 0) { return static_cast<CHAOS_IL2CPP_INTPTR>(0); }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Single_(float chaos_arg_0)
+{
+    if (chaos_arg_0 < 0.0f || chaos_arg_0 > 65535.0f || !std::isfinite(chaos_arg_0)) { return static_cast<CHAOS_IL2CPP_INTPTR>(0); }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt16_(CHAOS_IL2CPP_UINT16 chaos_arg_0)
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(chaos_arg_0);
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt32_(CHAOS_IL2CPP_INT32 chaos_arg_0)
+{
+    if (chaos_arg_0 > UINT32_C(0xFFFF)) { return static_cast<CHAOS_IL2CPP_INTPTR>(0); }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt64_(CHAOS_IL2CPP_UINT64 chaos_arg_0)
+{
+    if (chaos_arg_0 > UINT64_C(0xFFFF)) { return static_cast<CHAOS_IL2CPP_INTPTR>(0); }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__(void)
+{
+    return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+}
+
+extern "C" void chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1)
+{
+    chaos_decimal_ctor_int32(chaos_arg_0, chaos_arg_1);
+}
 }
 
 extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Method0(void);
@@ -474,28 +430,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-    goto chaos_ip_2;
 
-chaos_ip_2:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_7;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Boolean_(chaos_arg_0);
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_7:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_8;
 
-chaos_ip_8:
-    goto chaos_ip_10;
-
-chaos_ip_10:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_11;
 
-chaos_ip_11:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -509,28 +456,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-    goto chaos_ip_3;
 
-chaos_ip_3:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_8;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Byte_(static_cast<CHAOS_IL2CPP_UINT8>(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_8:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_9;
 
-chaos_ip_9:
-    goto chaos_ip_11;
-
-chaos_ip_11:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_12;
 
-chaos_ip_12:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -544,28 +482,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(65);
-    goto chaos_ip_3;
 
-chaos_ip_3:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_8;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Char_(chaos_arg_0);
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_8:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_9;
 
-chaos_ip_9:
-    goto chaos_ip_11;
-
-chaos_ip_11:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_12;
 
-chaos_ip_12:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -579,28 +508,22 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
+    {
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__();
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_1:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_6;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_DateTime_(chaos_arg_0);
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_6:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_11;
-
-chaos_ip_11:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_12;
 
-chaos_ip_12:
-    goto chaos_ip_14;
-
-chaos_ip_14:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_15;
 
-chaos_ip_15:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -614,36 +537,29 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-    goto chaos_ip_3;
 
-chaos_ip_3:
     {
+        const auto chaos_raw_arg_1 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_1 = chaos_raw_arg_1;
         auto* chaos_object = new chaos_type_System_Private_CoreLib_System_Decimal{};
         chaos_object->header.type_id = chaos_type_id_System_Private_CoreLib_System_Decimal;
+        const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+        chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
         chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
     }
-    goto chaos_ip_8;
 
-chaos_ip_8:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_13;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Decimal_(chaos_arg_0);
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_13:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_14;
 
-chaos_ip_14:
-    goto chaos_ip_16;
-
-chaos_ip_16:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_17;
 
-chaos_ip_17:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -657,28 +573,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = chaos_store_float64(42);
-    goto chaos_ip_10;
 
-chaos_ip_10:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_15;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Double_(chaos_load_float64(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_15:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_16;
 
-chaos_ip_16:
-    goto chaos_ip_18;
-
-chaos_ip_18:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_19;
 
-chaos_ip_19:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -692,28 +599,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-    goto chaos_ip_3;
 
-chaos_ip_3:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_8;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int16_(static_cast<CHAOS_IL2CPP_INT16>(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_8:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_9;
 
-chaos_ip_9:
-    goto chaos_ip_11;
-
-chaos_ip_11:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_12;
 
-chaos_ip_12:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -727,28 +625,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-    goto chaos_ip_3;
 
-chaos_ip_3:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_8;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_8:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_9;
 
-chaos_ip_9:
-    goto chaos_ip_11;
-
-chaos_ip_11:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_12;
 
-chaos_ip_12:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -762,32 +651,21 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-    goto chaos_ip_3;
 
-chaos_ip_3:
     chaos_eval_stack[chaos_stack_top - 1] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT64>(chaos_eval_stack[chaos_stack_top - 1]));
-    goto chaos_ip_4;
 
-chaos_ip_4:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_9;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int64_(chaos_load_int64(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_9:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_10;
 
-chaos_ip_10:
-    goto chaos_ip_12;
-
-chaos_ip_12:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_13;
 
-chaos_ip_13:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -801,28 +679,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-    goto chaos_ip_3;
 
-chaos_ip_3:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_8;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_8:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_9;
 
-chaos_ip_9:
-    goto chaos_ip_11;
-
-chaos_ip_11:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_12;
 
-chaos_ip_12:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -832,42 +701,16 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
 {
     CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
     CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 7) chaos_eval_stack{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 
-chaos_ip_1:
-    {
-        auto* chaos_string = new chaos_type_System_Private_CoreLib_System_String{};
-        chaos_string->header.type_id = chaos_type_id_System_Private_CoreLib_System_String;
-        chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-        chaos_string->utf8_data = "A";
-        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-    }
-    goto chaos_ip_6;
-
-chaos_ip_6:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_11;
-
-chaos_ip_11:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_16;
-
-chaos_ip_16:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_17;
 
-chaos_ip_17:
-    goto chaos_ip_19;
-
-chaos_ip_19:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_20;
 
-chaos_ip_20:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -881,28 +724,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-    goto chaos_ip_3;
 
-chaos_ip_3:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_8;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_SByte_(static_cast<CHAOS_IL2CPP_INT8>(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_8:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_9;
 
-chaos_ip_9:
-    goto chaos_ip_11;
-
-chaos_ip_11:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_12;
 
-chaos_ip_12:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -916,28 +750,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
+    chaos_eval_stack[chaos_stack_top++] = chaos_store_float32(42f);
 
-chaos_ip_1:
-    chaos_eval_stack[chaos_stack_top++] = chaos_store_float32(42.0f);
-    goto chaos_ip_6;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Single_(chaos_load_float32(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_6:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_11;
-
-chaos_ip_11:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_12;
 
-chaos_ip_12:
-    goto chaos_ip_14;
-
-chaos_ip_14:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_15;
 
-chaos_ip_15:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -951,9 +776,6 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     {
         auto* chaos_string = new chaos_type_System_Private_CoreLib_System_String{};
         chaos_string->header.type_id = chaos_type_id_System_Private_CoreLib_System_String;
@@ -961,24 +783,18 @@ chaos_ip_1:
         chaos_string->utf8_data = "hello";
         chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
     }
-    goto chaos_ip_6;
 
-chaos_ip_6:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_11;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_(chaos_arg_0);
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_11:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_12;
 
-chaos_ip_12:
-    goto chaos_ip_14;
-
-chaos_ip_14:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_15;
 
-chaos_ip_15:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -988,42 +804,16 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
 {
     CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
     CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 7) chaos_eval_stack{};
+    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_eval_stack{};
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
+    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 
-chaos_ip_1:
-    {
-        auto* chaos_string = new chaos_type_System_Private_CoreLib_System_String{};
-        chaos_string->header.type_id = chaos_type_id_System_Private_CoreLib_System_String;
-        chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-        chaos_string->utf8_data = "A";
-        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-    }
-    goto chaos_ip_6;
-
-chaos_ip_6:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_11;
-
-chaos_ip_11:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_16;
-
-chaos_ip_16:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_17;
 
-chaos_ip_17:
-    goto chaos_ip_19;
-
-chaos_ip_19:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_20;
 
-chaos_ip_20:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -1037,28 +827,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-    goto chaos_ip_3;
 
-chaos_ip_3:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_8;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt16_(static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_8:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_9;
 
-chaos_ip_9:
-    goto chaos_ip_11;
-
-chaos_ip_11:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_12;
 
-chaos_ip_12:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -1072,28 +853,19 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-    goto chaos_ip_3;
 
-chaos_ip_3:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_8;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_8:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_9;
 
-chaos_ip_9:
-    goto chaos_ip_11;
-
-chaos_ip_11:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_12;
 
-chaos_ip_12:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -1107,32 +879,21 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Meth
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-    goto chaos_ip_3;
 
-chaos_ip_3:
     chaos_eval_stack[chaos_stack_top - 1] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT64>(chaos_eval_stack[chaos_stack_top - 1]));
-    goto chaos_ip_4;
 
-chaos_ip_4:
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(0));
-    goto chaos_ip_9;
+    {
+        const auto chaos_raw_arg_0 = chaos_eval_stack[--chaos_stack_top];
+        const auto chaos_arg_0 = chaos_raw_arg_0;
+        const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt64_(chaos_load_uint64(chaos_arg_0));
+        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+    }
 
-chaos_ip_9:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_10;
 
-chaos_ip_10:
-    goto chaos_ip_12;
-
-chaos_ip_12:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_13;
 
-chaos_ip_13:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }
@@ -1146,345 +907,195 @@ extern "C" CHAOS_IL2CPP_INT32 ConvertCharNativeEntry_ConvertCharNativeEntry_Run(
     CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
     chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_arg_0);
 
-    goto chaos_ip_1;
-
-chaos_ip_1:
     chaos_eval_stack[chaos_stack_top++] = chaos_args[0];
-    goto chaos_ip_2;
 
-chaos_ip_2:
     chaos_locals[1] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_3;
 
-chaos_ip_3:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[1];
-    goto chaos_ip_4;
 
-chaos_ip_4:
     chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_5;
 
-chaos_ip_5:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-    goto chaos_ip_6;
 
-chaos_ip_6:
     {
         const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
         switch (chaos_switch_value)
         {
             case 0:
-                goto chaos_ip_88;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method0();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 1:
-                goto chaos_ip_99;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method1();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 2:
-                goto chaos_ip_110;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method2();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 3:
-                goto chaos_ip_118;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method3();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 4:
-                goto chaos_ip_126;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method4();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 5:
-                goto chaos_ip_134;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method5();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 6:
-                goto chaos_ip_142;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method6();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 7:
-                goto chaos_ip_150;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method7();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 8:
-                goto chaos_ip_158;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method8();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 9:
-                goto chaos_ip_166;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method9();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 10:
-                goto chaos_ip_174;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method10();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 11:
-                goto chaos_ip_182;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method11();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 12:
-                goto chaos_ip_190;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method12();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 13:
-                goto chaos_ip_198;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method13();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 14:
-                goto chaos_ip_206;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method14();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 15:
-                goto chaos_ip_214;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method15();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 16:
-                goto chaos_ip_222;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method16();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             case 17:
-                goto chaos_ip_230;
+            {
+                {
+                    const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method17();
+                    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+                }
+                chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
+                goto chaos_ip_238;
+            }
             default:
-                goto chaos_ip_83;
+            {
+                goto chaos_ip_238;
+            }
         }
     }
-
-chaos_ip_83:
-    goto chaos_ip_238;
-
-chaos_ip_88:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method0();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_93;
-
-chaos_ip_93:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_94;
-
-chaos_ip_94:
-    goto chaos_ip_242;
-
-chaos_ip_99:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method1();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_104;
-
-chaos_ip_104:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_105;
-
-chaos_ip_105:
-    goto chaos_ip_242;
-
-chaos_ip_110:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method2();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_115;
-
-chaos_ip_115:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_116;
-
-chaos_ip_116:
-    goto chaos_ip_242;
-
-chaos_ip_118:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method3();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_123;
-
-chaos_ip_123:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_124;
-
-chaos_ip_124:
-    goto chaos_ip_242;
-
-chaos_ip_126:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method4();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_131;
-
-chaos_ip_131:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_132;
-
-chaos_ip_132:
-    goto chaos_ip_242;
-
-chaos_ip_134:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method5();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_139;
-
-chaos_ip_139:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_140;
-
-chaos_ip_140:
-    goto chaos_ip_242;
-
-chaos_ip_142:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method6();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_147;
-
-chaos_ip_147:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_148;
-
-chaos_ip_148:
-    goto chaos_ip_242;
-
-chaos_ip_150:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method7();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_155;
-
-chaos_ip_155:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_156;
-
-chaos_ip_156:
-    goto chaos_ip_242;
-
-chaos_ip_158:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method8();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_163;
-
-chaos_ip_163:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_164;
-
-chaos_ip_164:
-    goto chaos_ip_242;
-
-chaos_ip_166:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method9();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_171;
-
-chaos_ip_171:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_172;
-
-chaos_ip_172:
-    goto chaos_ip_242;
-
-chaos_ip_174:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method10();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_179;
-
-chaos_ip_179:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_180;
-
-chaos_ip_180:
-    goto chaos_ip_242;
-
-chaos_ip_182:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method11();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_187;
-
-chaos_ip_187:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_188;
-
-chaos_ip_188:
-    goto chaos_ip_242;
-
-chaos_ip_190:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method12();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_195;
-
-chaos_ip_195:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_196;
-
-chaos_ip_196:
-    goto chaos_ip_242;
-
-chaos_ip_198:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method13();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_203;
-
-chaos_ip_203:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_204;
-
-chaos_ip_204:
-    goto chaos_ip_242;
-
-chaos_ip_206:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method14();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_211;
-
-chaos_ip_211:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_212;
-
-chaos_ip_212:
-    goto chaos_ip_242;
-
-chaos_ip_214:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method15();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_219;
-
-chaos_ip_219:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_220;
-
-chaos_ip_220:
-    goto chaos_ip_242;
-
-chaos_ip_222:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method16();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_227;
-
-chaos_ip_227:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_228;
-
-chaos_ip_228:
-    goto chaos_ip_242;
-
-chaos_ip_230:
-    {
-        const auto chaos_result = ConvertCharNativeEntry_ConvertCharNativeEntry_Method17();
-        chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-    }
-    goto chaos_ip_235;
-
-chaos_ip_235:
-    chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_236;
-
-chaos_ip_236:
-    goto chaos_ip_242;
-
-chaos_ip_238:
+chaos_ip_238: ;
     chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-    goto chaos_ip_239;
 
-chaos_ip_239:
     chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-    goto chaos_ip_240;
 
-chaos_ip_240:
-    goto chaos_ip_242;
-
-chaos_ip_242:
     chaos_eval_stack[chaos_stack_top++] = chaos_locals[2];
-    goto chaos_ip_243;
 
-chaos_ip_243:
     return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 
 }

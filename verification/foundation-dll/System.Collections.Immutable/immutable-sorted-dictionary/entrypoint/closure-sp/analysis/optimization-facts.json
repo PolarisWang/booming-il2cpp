@@ -1,0 +1,29 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedDictionaryNativeEntry/ImmutableSortedDictionaryNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

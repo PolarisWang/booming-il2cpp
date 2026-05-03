@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\object-model-collections\\entrypoint\\build-output\\ObjectModelCollectionsNativeEntry.dll"
+    ],
+    "entry": "ObjectModelCollectionsNativeEntry/ObjectModelCollectionsNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

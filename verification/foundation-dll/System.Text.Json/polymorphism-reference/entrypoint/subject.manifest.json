@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\polymorphism-reference\\entrypoint\\build-output\\PolymorphismReferenceNativeEntry.dll"
+    ],
+    "entry": "PolymorphismReferenceNativeEntry/PolymorphismReferenceNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

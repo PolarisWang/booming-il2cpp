@@ -1,0 +1,26 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotManifest",
+  "assemblyName": "ImmutableHashSetNativeEntry",
+  "entrySubjectId": "ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Run:System.Int32(System.Int32)",
+  "managedClosureRootPath": "verification/foundation-dll/System.Collections.Immutable/immutable-hash-set/entrypoint/closure-sp/analysis",
+  "planArtifactPath": "native-aot.plan.json",
+  "generatedArtifacts": [
+    {
+      "kind": "generatedTranslationUnit",
+      "path": "generated/native-aot.generated.cpp"
+    },
+    {
+      "kind": "shapeDispatchHeader",
+      "path": "generated/runtime_helper_shapes.h"
+    },
+    {
+      "kind": "shapeDispatchHeader",
+      "path": "generated/native-aot.metadata.h"
+    },
+    {
+      "kind": "codegenMetrics",
+      "path": "native-aot.codegen-metrics.json"
+    }
+  ]
+}

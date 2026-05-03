@@ -1,0 +1,113 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "metadataToken": 33554435
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableQueueStackNativeEntry",
+      "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

@@ -1,0 +1,50 @@
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Run(System.Int32)
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method0()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method1()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method2()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method3()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method4()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method5()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method6()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method7()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method8()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method9()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method10()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method11()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method12()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method13()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method14()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 CollectionsGenericCoreNativeEntry::Method15()
+// SubjectId: CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method15:System.Int32()

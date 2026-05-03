@@ -1,0 +1,131 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method10:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method11:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderNativeEntry",
+      "subjectId": "ReaderNativeEntry/ReaderNativeEntry::Method12:System.Int32()",
+      "definitionSubjectId": "ReaderNativeEntry/ReaderNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "ReaderNativeEntry/ReaderNativeEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ImmutableDictionaryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ImmutableDictionaryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableDictionaryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableDictionaryNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.Int32\u003E:ImmutableDictionary\u003CSystem.String,System.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.Byte,System.Byte\u003E:ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.String\u003E:ImmutableDictionary\u003CSystem.String,System.String\u003E()",
+      "reason": "external-call"
+    }
+  ]
+}

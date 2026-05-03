@@ -1,0 +1,78 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableQueueStackNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Run",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Method0",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Method1",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Method2",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Method3",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Method4",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Method5",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Method6",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Method7",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Method8",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ImmutableQueueStackNativeEntry_ImmutableQueueStackNativeEntry_Method9",
+          "subjectId": "ImmutableQueueStackNativeEntry/ImmutableQueueStackNativeEntry::Method9:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableHashSetNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableHashSetNativeEntry_ImmutableHashSetNativeEntry_Run",
+          "subjectId": "ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableHashSetNativeEntry_ImmutableHashSetNativeEntry_Method0",
+          "subjectId": "ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableHashSetNativeEntry_ImmutableHashSetNativeEntry_Method1",
+          "subjectId": "ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ImmutableHashSetNativeEntry_ImmutableHashSetNativeEntry_Method2",
+          "subjectId": "ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ImmutableHashSetNativeEntry_ImmutableHashSetNativeEntry_Method3",
+          "subjectId": "ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ImmutableHashSetNativeEntry_ImmutableHashSetNativeEntry_Method4",
+          "subjectId": "ImmutableHashSetNativeEntry/ImmutableHashSetNativeEntry::Method4:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

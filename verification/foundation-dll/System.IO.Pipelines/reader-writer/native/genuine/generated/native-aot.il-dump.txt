@@ -1,0 +1,80 @@
+.method public static System.Int32 ReaderWriterNativeEntry::Run(System.Int32)
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Run:System.Int32(System.Int32)
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method0()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method0:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method1()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method1:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method2()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method2:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method3()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method3:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method4()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method4:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method5()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method5:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method6()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method6:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method7()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method7:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method8()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method8:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method9()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method9:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method10()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method10:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method11()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method11:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method12()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method12:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method13()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method13:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method14()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method14:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method15()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method15:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method16()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method16:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method17()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method17:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method18()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method18:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method19()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method19:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method20()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method20:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method21()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method21:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method22()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method22:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method23()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method23:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method24()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method24:System.Int32()
+
+.method public static System.Int32 ReaderWriterNativeEntry::Method25()
+// SubjectId: ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method25:System.Int32()

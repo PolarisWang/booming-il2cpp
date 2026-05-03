@@ -1,0 +1,131 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method10:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method11:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisNativeEntry",
+      "subjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method12:System.Int32()",
+      "definitionSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "ParallelApisNativeEntry/ParallelApisNativeEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

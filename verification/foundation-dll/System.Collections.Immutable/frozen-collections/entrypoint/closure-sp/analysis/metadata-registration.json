@@ -1,0 +1,162 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "FrozenCollectionsNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "name": "FrozenCollectionsNativeEntry",
+      "displayName": "FrozenCollectionsNativeEntry",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 2,
+      "subjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "name": "\u003CPrivateImplementationDetails\u003E",
+      "displayName": "\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 3,
+      "subjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E::684888C0EBB17F374298B65EE2807526C066094C701BCC7EBBE1C1095F494FC1",
+      "name": "684888C0EBB17F374298B65EE2807526C066094C701BCC7EBBE1C1095F494FC1",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E::684888C0EBB17F374298B65EE2807526C066094C701BCC7EBBE1C1095F494FC1",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "System.Byte"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 4,
+      "subjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E::983987033F0E117011E531DC33AD9BB15290BBA41A414D830FB5CBDBCDA2FF17",
+      "name": "983987033F0E117011E531DC33AD9BB15290BBA41A414D830FB5CBDBCDA2FF17",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E::983987033F0E117011E531DC33AD9BB15290BBA41A414D830FB5CBDBCDA2FF17",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "System.Int16"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 5,
+      "subjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E::E8A4B2EE7EDE79A3AFB332B5B6CC3D952A65FD8CFFB897F5D18016577C33D7CC4",
+      "name": "E8A4B2EE7EDE79A3AFB332B5B6CC3D952A65FD8CFFB897F5D18016577C33D7CC4",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E::E8A4B2EE7EDE79A3AFB332B5B6CC3D952A65FD8CFFB897F5D18016577C33D7CC4",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=4_Align=4"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 15,
+      "subjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "FrozenCollectionsNativeEntry/FrozenCollectionsNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

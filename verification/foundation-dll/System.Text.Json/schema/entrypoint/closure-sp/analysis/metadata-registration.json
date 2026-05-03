@@ -1,0 +1,182 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SchemaNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "name": "SchemaNativeEntry",
+      "displayName": "SchemaNativeEntry",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "SchemaNativeEntry/SchemaNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 16,
+      "subjectId": "SchemaNativeEntry/SchemaNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "SchemaNativeEntry/SchemaNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

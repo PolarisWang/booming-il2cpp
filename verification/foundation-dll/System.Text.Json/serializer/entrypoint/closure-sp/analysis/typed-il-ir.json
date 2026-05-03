@@ -1,0 +1,989 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.run",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 SerializerNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "serializer-native-entry.serializer-native-entry.run",
+        "signature": "System.Int32 SerializerNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                65,
+                73,
+                81,
+                89,
+                97,
+                105,
+                113,
+                121,
+                129,
+                137,
+                145,
+                153,
+                161
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 169,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "SerializerNativeEntry/SerializerNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "SerializerNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 173,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method0",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method0:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method0:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method0",
+        "signature": "System.Int32 SerializerNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method1",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method1:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method1:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method1",
+        "signature": "System.Int32 SerializerNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method2",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method2:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method2:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method2",
+        "signature": "System.Int32 SerializerNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method3",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method3:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method3:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method3",
+        "signature": "System.Int32 SerializerNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method4",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method4:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method4:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method4",
+        "signature": "System.Int32 SerializerNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method5",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method5:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method5:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method5",
+        "signature": "System.Int32 SerializerNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method6",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method6:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method6:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method6",
+        "signature": "System.Int32 SerializerNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method7",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method7:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method7:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method7",
+        "signature": "System.Int32 SerializerNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method8",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method8:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method8:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method8",
+        "signature": "System.Int32 SerializerNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method9",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method9:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method9:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method9",
+        "signature": "System.Int32 SerializerNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method10",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method10:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method10:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method10",
+        "signature": "System.Int32 SerializerNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method11",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method11:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method11:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method11",
+        "signature": "System.Int32 SerializerNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "serializer-native-entry.serializer-native-entry.method12",
+      "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 SerializerNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "SerializerNativeEntry",
+        "declaringTypeSubjectId": "SerializerNativeEntry/SerializerNativeEntry",
+        "definitionSubjectId": "SerializerNativeEntry/SerializerNativeEntry::Method12:System.Int32()",
+        "subjectId": "SerializerNativeEntry/SerializerNativeEntry::Method12:System.Int32()",
+        "methodId": "serializer-native-entry.serializer-native-entry.method12",
+        "signature": "System.Int32 SerializerNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

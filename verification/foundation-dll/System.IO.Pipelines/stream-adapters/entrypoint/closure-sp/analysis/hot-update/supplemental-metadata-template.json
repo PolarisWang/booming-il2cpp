@@ -1,0 +1,131 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method10:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method11:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "StreamAdaptersNativeEntry",
+      "subjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method12:System.Int32()",
+      "definitionSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

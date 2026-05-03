@@ -1,0 +1,402 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method14:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method15:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method16:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method17:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method18:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method19:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method20:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method21:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method22:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method23:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method24:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method25:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method26:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method27:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method28:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method29:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method30:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method31:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method32:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method33:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method34:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method35:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method36:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method37:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method38:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method39:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method40:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method41:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method42:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method43:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method44:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method45:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method46:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method47:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method48:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method49:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method50:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method51:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method52:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method53:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method54:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method55:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method56:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method57:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method58:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method59:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method60:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method61:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method62:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method63:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "JoinsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "JoinsNativeEntry/JoinsNativeEntry::Method64:System.Int32()",
+      "reason": "generated-direct-call"
+    }
+  ]
+}

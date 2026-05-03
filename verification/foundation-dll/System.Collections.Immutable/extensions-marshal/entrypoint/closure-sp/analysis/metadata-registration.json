@@ -1,0 +1,83 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ExtensionsMarshalNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry",
+      "name": "ExtensionsMarshalNativeEntry",
+      "displayName": "ExtensionsMarshalNativeEntry",
+      "definitionSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 7,
+      "subjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ExtensionsMarshalNativeEntry/ExtensionsMarshalNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

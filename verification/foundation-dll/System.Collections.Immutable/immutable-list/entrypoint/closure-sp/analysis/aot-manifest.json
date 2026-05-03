@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ImmutableListNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ImmutableListNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListNativeEntry/ImmutableListNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListNativeEntry",
+      "subjectKind": "field",
+      "subjectId": "ImmutableListNativeEntry/\u003CPrivateImplementationDetails\u003E::983987033F0E117011E531DC33AD9BB15290BBA41A414D830FB5CBDBCDA2FF17",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Byte\u003E:ImmutableList\u003CSystem.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Byte\u003E:ImmutableList\u003CSystem.Byte\u003E(System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::.ctor:System.Void(System.Void*,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Byte\u003E:ImmutableList\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Int32\u003E:ImmutableList\u003CSystem.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Int32\u003E:ImmutableList\u003CSystem.Int32\u003E(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.String\u003E:ImmutableList\u003CSystem.String\u003E(System.String)",
+      "reason": "external-call"
+    }
+  ]
+}

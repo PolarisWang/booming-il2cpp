@@ -1,0 +1,182 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ConverterFactoryNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "name": "ConverterFactoryNativeEntry",
+      "displayName": "ConverterFactoryNativeEntry",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 16,
+      "subjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ConverterFactoryNativeEntry/ConverterFactoryNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

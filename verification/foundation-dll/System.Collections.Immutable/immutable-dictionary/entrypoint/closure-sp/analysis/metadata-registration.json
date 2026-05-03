@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ImmutableDictionaryNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry",
+      "name": "ImmutableDictionaryNativeEntry",
+      "displayName": "ImmutableDictionaryNativeEntry",
+      "definitionSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 6,
+      "subjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ImmutableDictionaryNativeEntry/ImmutableDictionaryNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

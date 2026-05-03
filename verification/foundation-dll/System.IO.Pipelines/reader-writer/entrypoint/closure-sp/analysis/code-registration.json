@@ -1,0 +1,174 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReaderWriterNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Run",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method0",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method1",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method2",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method3",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method4",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method5",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method6",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method7",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method8",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method9",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method10",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method11",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method12",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method13",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method14",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method15",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method16",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method17",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method18",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method19",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method19:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method20",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method20:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method21",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method21:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method22",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method22:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method23",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method23:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method24",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method24:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "ReaderWriterNativeEntry_ReaderWriterNativeEntry_Method25",
+          "subjectId": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Method25:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

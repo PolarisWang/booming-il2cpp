@@ -1,0 +1,12 @@
+{
+  "kind": "project",
+  "domain": "workflow",
+  "name": "dev-systematic-debugging",
+  "summary": "通过证据链和根因分析定位 bug，避免只修症状。",
+  "trigger_signals": ["出现 bug 或异常行为时", "测试失败但根因未知时", "需要系统性定位问题时"],
+  "owner": "00-skills-maintainers",
+  "status": "active",
+  "version": "1.0.0",
+  "startup_visible": false,
+  "token_budget": "large"
+}

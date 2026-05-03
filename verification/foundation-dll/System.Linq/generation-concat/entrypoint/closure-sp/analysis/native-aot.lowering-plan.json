@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "GenerationConcatNativeEntry",
+  "entrySubjectId": "GenerationConcatNativeEntry/GenerationConcatNativeEntry::Run:System.Int32(System.Int32)",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "GenerationConcatNativeEntry_GenerationConcatNativeEntry_Run",
+  "entryMethodToken": "0u",
+  "workloadAbi": "int(int32)"
+}
