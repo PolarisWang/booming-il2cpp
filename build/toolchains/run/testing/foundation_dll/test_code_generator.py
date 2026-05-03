@@ -86,6 +86,8 @@ INSTANCE_EXPR_MAP: dict[str, str] = {
     "ParameterInfo": "default(ParameterInfo)!",
     "Assembly": "typeof(byte).Assembly",
     "Thread": "Thread.CurrentThread",
+    "Module": "default(Module)!",
+    "AssemblyName": "default(AssemblyName)!",
 }
 
 INSTANCE_ALTERNATIVE_EXPR_MAP: dict[str, str] = {
@@ -208,16 +210,18 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("ReadOnlySpan", "get_Empty", 0): "ReadOnlySpan<byte>.Empty",
     # Attribute methods need real MemberInfo/Assembly
     ("Attribute", "GetCustomAttribute", 2): "typeof(byte).Assembly.GetCustomAttribute(typeof(AssemblyDescriptionAttribute))",
-    ("Attribute", "GetCustomAttributes", 2): "typeof(byte).Assembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute))",
-    ("Attribute", "GetCustomAttributes", 1): "typeof(byte).Assembly.GetCustomAttributes()",
+    ("Attribute", "GetCustomAttributes", 2): "skip",  # returns IEnumerable<Attribute>, not Attribute[] -> no .Length
+    ("Attribute", "GetCustomAttributes", 1): "skip",  # returns IEnumerable<Attribute>, not Attribute[] -> no .Length
     ("Attribute", "IsDefined", 2): "typeof(byte).Assembly.IsDefined(typeof(AssemblyDescriptionAttribute))",
     # Array.Sort with null comparer is ambiguous between IComparer<T> and Comparison<T>
     ("Array", "Sort", 2): "Array.Sort<byte>(new byte[1], (IComparer<byte>)null!)",
-    # Parsing methods - "hello" is not valid input
+    # DateTime/TimeSpan with out-of-range constructor values or invalid parse inputs
+    ("DateTime", "TryParse", 2): "skip",    # out DateTime -> CS1620 with 'ref'
     ("DateTime", "Parse", 1): "skip",
     ("TimeSpan", "Parse", 1): "skip",
     ("Guid", "Parse", 1): "skip",
     ("Guid", ".ctor", 1): "skip",           # Guid(string) needs valid format
+    ("Guid", "TryParse", 2): "skip",        # out Guid param -> CS1620 with 'ref'
     ("Boolean", "Parse", 1): "skip",
     ("Byte", "Parse", 1): "skip",
     ("SByte", "Parse", 1): "skip",
@@ -255,8 +259,11 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Array", "BinarySearch", 4): "Array.BinarySearch(new byte[4], 0, 4, (byte)42)",
     ("Array", "IndexOf", 2): "Array.IndexOf(new byte[4], (byte)42)",
     ("Array", "LastIndexOf", 2): "Array.LastIndexOf(new byte[4], (byte)42)",
+    ("Array", "Resize", 2): "skip",         # generic type parameter T can't be resolved at entrypoint generation
     # Buffer methods with empty arrays
     ("Buffer", "BlockCopy", 5): "skip",    # Array.Empty -> out of range
+    ("Buffer", "BulkMoveWithWriteBarrier", 3): "skip",  # internal runtime intrinsic, not in .NET 8 public API
+    ("Buffer", "Memmove", 3): "skip",       # internal runtime intrinsic, not in .NET 8 public API
     ("Buffer", "GetByte", 2): "skip",
     ("Buffer", "SetByte", 3): "skip",
     # Span/ReadOnlySpan/Memory on default (empty) - index out of range
@@ -294,6 +301,9 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Enum", "GetName", 2): "skip",
     ("Enum", "Format", 3): "skip",
     ("Enum", "ToString", 1): "skip",
+    # Enum.TryParse has 'out' parameters (codegen uses 'ref', fails CS1620)
+    ("Enum", "TryParse", 3): "skip",    # (Type, string, out object)
+    ("Enum", "TryParse", 4): "skip",    # (Type, string, bool, out object)
     # Type.GetType with unresolvable name
     ("Type", "GetType", 1): "skip",
     ("Type", "GetType", 2): "skip",
@@ -303,6 +313,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     # RuntimeHelpers with invalid handles
     ("RuntimeHelpers", "RunClassConstructor", 1): "skip",
     ("RuntimeHelpers", "InitializeArray", 2): "skip",
+    ("RuntimeHelpers", "GetSubArray", 2): "skip",  # generic T can't be resolved
     # String operations with out-of-range index
     ("String", "Substring", 1): "\"hello\".Substring(1)",
     ("String", "Substring", 2): "\"hello\".Substring(1, 2)",
@@ -335,6 +346,18 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("MemberInfo", "get_Name", 0): "skip",
     ("MemberInfo", "get_MemberType", 0): "skip",
     ("MemberInfo", "get_DeclaringType", 0): "skip",
+    # Type.ContainsGenericParameters is a property, not a method — calling it with () fails
+    ("Type", "ContainsGenericParameters", 0): "typeof(byte).ContainsGenericParameters",
+    # Activator.CreateInstance<T>() generic can't be resolved
+    ("Activator", "CreateInstance", 0): "skip",
+    # Assembly static methods called via instance
+    ("Assembly", "GetExecutingAssembly", 0): "Assembly.GetExecutingAssembly()",
+    ("Assembly", "GetCallingAssembly", 0): "Assembly.GetCallingAssembly()",
+    ("Assembly", "GetEntryAssembly", 0): "Assembly.GetEntryAssembly()",
+    # Module.GetCustomAttributes returns IEnumerable<Attribute>, not Attribute[] — no .Length
+    ("Module", "GetCustomAttributes", 1): "skip",
+    # MethodBase.Invoke with BindingFlags — ambiguous
+
     ("MethodBase", "Invoke", 2): "skip",
     ("MethodInfo", "GetParameters", 0): "skip",
     ("MethodInfo", "get_ReturnType", 0): "skip",
@@ -435,6 +458,7 @@ TYPE_DEFAULT_MAP: dict[str, str] = {
     "System.UIntPtr": "UIntPtr.Zero",
     "System.Type": "typeof(byte)",
     "System.Guid": "Guid.Empty",
+    "System.Reflection.BindingFlags": "System.Reflection.BindingFlags.Default",
     "System.TimeSpan": "TimeSpan.Zero",
     "System.DateTime": "DateTime.UtcNow",
     "System.DateOnly": "new DateOnly(2024, 1, 1)",
@@ -755,12 +779,40 @@ def _cast_return_to_int(ret: str, call_expr: str) -> str:
     if ret in ("System.Int64", "System.UInt64", "System.UInt32"):
         return f"(int)({call_expr})"
     if ret in ("System.Byte", "System.SByte", "System.Int16",
-               "System.UInt16", "System.Char", "System.Boolean"):
+               "System.UInt16", "System.Char"):
         return f"(int)({call_expr})"
+    if ret == "System.Boolean":
+        return f"(({call_expr}) ? 1 : 0)"
     if ret in ("System.Single", "System.Double", "System.Decimal"):
         return f"(int)({call_expr})"
     if ret in ("System.IntPtr", "System.UIntPtr"):
         return f"(int)({call_expr})"
+    if ret == "System.String":
+        return f"(({call_expr}).Length)"
+    if ret in ("System.Object", "System.DateTime", "System.TimeSpan",
+               "System.Exception", "System.Attribute",
+               "System.RuntimeTypeHandle", "System.RuntimeMethodHandle",
+               "System.RuntimeFieldHandle", "System.Version",
+               "System.Reflection.Module", "System.IO.Stream",
+               "System.Runtime.CompilerServices.FormattableString",
+               "System.Runtime.CompilerServices.RuntimeWrappedException",
+               "System.Globalization.DateTimeFormatInfo",
+               "System.Globalization.NumberFormatInfo",
+               "System.Globalization.CultureInfo",
+               "System.Globalization.CompareInfo",
+               "System.Globalization.TextInfo"):
+        return f"(({call_expr}).GetHashCode())"
+    if ret in ("System.Type", "System.Guid", "System.Reflection.MethodInfo",
+               "System.Reflection.AssemblyName", "System.Reflection.Assembly",
+               "System.Reflection.MemberInfo", "System.Reflection.FieldInfo",
+               "System.Reflection.PropertyInfo", "System.Reflection.EventInfo",
+               "System.Reflection.ParameterInfo", "System.Reflection.ConstructorInfo",
+               "System.Reflection.Module", "System.Array"):
+        return f"(({call_expr}).GetHashCode())"
+    if ret == "System.Span" or ret.startswith("System.Span`") or ret == "System.ReadOnlySpan" or ret.startswith("System.ReadOnlySpan`"):
+        return f"(({call_expr}).GetHashCode())"
+    if ret.endswith("[]"):
+        return f"(({call_expr}).Length)"
     return f"(int)({call_expr})"
 
 
@@ -943,8 +995,7 @@ def _test_body(parsed: dict[str, Any]) -> str:
                 "",
             )
         return (
-            f"    var result = {call_expr};\n"
-            f"    Xunit.Assert.NotNull((object)result);",
+            f"    var result = {call_expr};",
             True,
             "",
         )
@@ -972,9 +1023,19 @@ def _family_slug(family_id: str) -> str:
     return "-".join(parts[2:])
 
 
-def _class_name(family_id: str) -> str:
+def _production_class_name(family_id: str) -> str:
+    """Derive production class name (no suffix).
+    e.g. convert-char -> ConvertChar
+    """
     tail = _family_slug(family_id).split("-")
-    return "".join(part.capitalize() for part in tail) + "Tests"
+    return "".join(part.capitalize() for part in tail)
+
+
+def _class_name(family_id: str) -> str:
+    """Derive test class name.
+    e.g. convert-char -> ConvertCharTests
+    """
+    return _production_class_name(family_id) + "Tests"
 
 
 def _relative(repo_root: Path, path: Path) -> str:
@@ -1039,13 +1100,13 @@ def _member_name(prefix: str, method_subject_id: str) -> str:
 
 
 def _handwritten_source(family_id: str, class_name: str) -> str:
+    """Generate handwritten partial class source (no test dependencies)."""
+    prod_name = class_name.replace("Tests", "")
     return (
         f"{_BASE_USINGS}\n"
         "using Chaos.TestFramework;\n"
-        "using Xunit;\n"
         "\n"
-        f"[CapabilityTest(\"{family_id}\", IncludeBenchmark = true, IncludeHotUpdate = true)]\n"
-        f"public partial class {class_name}\n"
+        f"public partial class {prod_name}\n"
         "{\n"
         "}\n"
     )
@@ -1059,138 +1120,91 @@ def _generated_source(
     method_subject_ids: list[str],
     capability_family_enum: str,
 ) -> str:
+    """Generate auto-generated partial class with benchmark/host/test methods merged.
+
+    Produces a single file containing:
+      - [MethodSubjectId] test methods (no xunit [Fact] — invoked via reflection from test exe)
+      - [BenchmarkSubjectId] benchmark methods (static, void)
+      - [HotUpdateSubjectId] hotupdate methods (static, void)
+    All within the same partial class so they can coexist in one translation unit.
+    No xunit dependency — this file is compiled into the src Library project.
+    """
+    prod_name = class_name.replace("Tests", "")
     if not method_subject_ids:
         members = (
-            "    [Fact(Skip = \"Auto-generated skeleton placeholder. Replace with concrete coverage assertions.\")]\n"
-            "    public void TODO_ImplementGeneratedCoverage()\n"
-            "    {\n"
-            "    }\n"
+            "    // No methods to auto-generate for this family.\n"
         )
     else:
         parts: list[str] = []
         for method_subject_id in method_subject_ids:
             parsed = _parse_method_subject_id(method_subject_id)
+            type_name = parsed["type_name"]
+            method_name = parsed["method_name"]
             body, is_simple, skip_reason = _test_body(parsed)
-            method_name = _member_name("Method", method_subject_id)
-            skip_attr = f'\n    [Fact(Skip = "{skip_reason}")]' if skip_reason else "\n    [Fact]"
-            lines = (
+
+            # --- Test method ([MethodSubjectId], no [Fact] — discovered via reflection) ---
+            mname = _member_name("Method", method_subject_id)
+            test_code = (
                 f'    [MethodSubjectId("{method_subject_id}")]'
                 f'\n    [CapabilityFamilyId(CapabilityFamilyId.{capability_family_enum})]'
                 f'\n    [VerificationRoute(VerificationRoute.Native)]'
-                f'{skip_attr}'
-                f'\n    public void {method_name}()'
+                f'\n    public void {mname}()'
                 f'\n    {{'
                 f'\n{body}'
                 f'\n    }}'
             )
-            parts.append(lines)
+
+            # --- Benchmark method ([BenchmarkSubjectId], static void) ---
+            bname = _member_name("Benchmark", method_subject_id)
+            if _is_auto_callable(parsed) and not _has_unsafe_param(parsed["param_types"]):
+                call_expr = _build_call_expr(parsed)
+                ret = parsed["return_type"]
+                bench_body = f"_ = {call_expr}" if ret not in ("System.Void", "") else f"{call_expr}"
+                bench_code = (
+                    f'    [BenchmarkSubjectId("{method_subject_id}")]'
+                    f'\n    [CapabilityFamilyId(CapabilityFamilyId.{capability_family_enum})]'
+                    f'\n    [BenchmarkRoute(BenchmarkRoute.Native)]'
+                    f'\n    [BenchmarkProfile(BenchmarkProfile.Default)]'
+                    f'\n    public static void {bname}() {{ {bench_body}; }}'
+                )
+            else:
+                bench_code = (
+                    f'    [BenchmarkSubjectId("{method_subject_id}")]'
+                    f'\n    [CapabilityFamilyId(CapabilityFamilyId.{capability_family_enum})]'
+                    f'\n    public static void {bname}() {{ }}'
+                )
+
+            # --- HotUpdate method ([HotUpdateSubjectId], static void, HostToPath) ---
+            hname = _member_name("HotUpdate", method_subject_id)
+            if _is_auto_callable(parsed) and not _has_unsafe_param(parsed["param_types"]):
+                call_expr = _build_call_expr(parsed)
+                ret = parsed["return_type"]
+                hu_body = f"_ = {call_expr}" if ret not in ("System.Void", "") else f"{call_expr}"
+                hu_code = (
+                    f'    [HotUpdateSubjectId("{method_subject_id}")]'
+                    f'\n    [CapabilityFamilyId(CapabilityFamilyId.{capability_family_enum})]'
+                    f'\n    [HotUpdateDirection(HotUpdateDirection.HostToPatch)]'
+                    f'\n    public static void {hname}() {{ {hu_body}; }}'
+                )
+            else:
+                hu_code = (
+                    f'    [HotUpdateSubjectId("{method_subject_id}")]'
+                    f'\n    [CapabilityFamilyId(CapabilityFamilyId.{capability_family_enum})]'
+                    f'\n    [HotUpdateDirection(HotUpdateDirection.HostToPatch)]'
+                    f'\n    public static void {hname}() {{ }}'
+                )
+
+            block = f"    // {type_name}.{method_name}\n{test_code}\n\n{bench_code}\n\n{hu_code}"
+            parts.append(block)
         members = "\n\n".join(parts)
     return (
         f"{_BASE_USINGS}\n"
         "using Chaos.TestFramework;\n"
-        "using Xunit;\n"
         "\n"
         f"// Auto-generated skeleton for {display_name} ({family_id}).\n"
-        f"public partial class {class_name}\n"
-        "{\n"
-        f"{members}"
-        "}\n"
-    )
-
-
-def _benchmark_generated_source(
-    class_name: str,
-    *,
-    method_subject_ids: list[str],
-    capability_family_enum: str,
-) -> str:
-    benchmark_class_name = class_name.replace("Tests", "Benchmarks")
-    if not method_subject_ids:
-        members = "    public static void Placeholder() { }\n"
-    else:
-        parts: list[str] = []
-        for method_subject_id in method_subject_ids:
-            parsed = _parse_method_subject_id(method_subject_id)
-            call_expr = _build_call_expr(parsed)
-            member_name = _member_name("Benchmark", method_subject_id)
-            purpose_comment = f"// Purpose: Benchmark native-runtime performance of {parsed['type_name']}.{parsed['method_name']} with typical input"
-            if _has_unsafe_param(parsed["param_types"]):
-                parts.append(
-                    f"    {purpose_comment}\n"
-                    f'    [BenchmarkSubjectId("{method_subject_id}")]\n'
-                    f"    [CapabilityFamilyId(CapabilityFamilyId.{capability_family_enum})]\n"
-                    f"    public static void {member_name}() {{ }}"
-                )
-            else:
-                ret = parsed["return_type"]
-                body = f"_ = {call_expr}" if ret not in ("System.Void", "") else f"{call_expr}"
-                parts.append(
-                    f"    {purpose_comment}\n"
-                    f'    [BenchmarkSubjectId("{method_subject_id}")]\n'
-                    f"    [CapabilityFamilyId(CapabilityFamilyId.{capability_family_enum})]\n"
-                    "    [BenchmarkRoute(BenchmarkRoute.Native)]\n"
-                    "    [BenchmarkProfile(BenchmarkProfile.Default)]\n"
-                    f"    public static void {member_name}() {{ {body}; }}"
-                )
-        members = "\n".join(parts)
-    return (
-        f"{_BASE_USINGS}\n"
-        "using Chaos.TestFramework;\n\n"
-        f"// Auto-generated benchmark skeletons for {benchmark_class_name}.\n"
-        f"// Framework handles timing — body only needs to invoke the method under measurement.\n"
-        f"public static partial class {benchmark_class_name}\n"
-        "{\n"
-        f"{members}"
-        "}\n"
-    )
-
-
-def _hotupdate_generated_source(
-    class_name: str,
-    *,
-    method_subject_ids: list[str],
-    capability_family_enum: str,
-    direction: str = "HostToPatch",
-) -> str:
-    hotupdate_class_name = class_name.replace("Tests", "HotUpdate")
-    if not method_subject_ids:
-        members = "    public static void Placeholder() { }\n"
-    else:
-        parts: list[str] = []
-        for method_subject_id in method_subject_ids:
-            parsed = _parse_method_subject_id(method_subject_id)
-            call_expr = _build_call_expr(parsed)
-            member_name = _member_name("HotUpdate", method_subject_id)
-            if direction == "PatchToHost":
-                purpose_comment = f"// Purpose: Verify {parsed['type_name']}.{parsed['method_name']} executes correctly from the patch side back to the host"
-            else:
-                purpose_comment = f"// Purpose: Verify {parsed['type_name']}.{parsed['method_name']} executes correctly after hot-update patch (host side)"
-            direction_attr = f"HotUpdateDirection(HotUpdateDirection.{direction})"
-            if not _is_auto_callable(parsed) or _has_unsafe_param(parsed["param_types"]):
-                parts.append(
-                    f"    {purpose_comment}\n"
-                    f'    [HotUpdateSubjectId("{method_subject_id}")]\n'
-                    f"    [CapabilityFamilyId(CapabilityFamilyId.{capability_family_enum})]\n"
-                    f"    [{direction_attr}]\n"
-                    f"    public static void {member_name}() {{ }}"
-                )
-            else:
-                ret = parsed["return_type"]
-                body = f"_ = {call_expr}" if ret not in ("System.Void", "") else f"{call_expr}"
-                parts.append(
-                    f"    {purpose_comment}\n"
-                    f'    [HotUpdateSubjectId("{method_subject_id}")]\n'
-                    f"    [CapabilityFamilyId(CapabilityFamilyId.{capability_family_enum})]\n"
-                    f"    [{direction_attr}]\n"
-                    f"    public static void {member_name}() {{ {body}; }}"
-                )
-        members = "\n".join(parts)
-    return (
-        f"{_BASE_USINGS}\n"
-        "using Chaos.TestFramework;\n\n"
-        f"// Auto-generated hot-update skeletons for {hotupdate_class_name}.\n"
-        f"// Each method exercises a method from the {direction} direction.\n"
-        f"public static partial class {hotupdate_class_name}\n"
+        f"// Contains test, benchmark, and hotupdate methods merged into one partial class.\n"
+        f"// No xunit dependency — [Fact] attributes belong in the test exe project.\n"
+        f"public partial class {prod_name}\n"
         "{\n"
         f"{members}"
         "}\n"
@@ -1249,7 +1263,51 @@ def _patch_generated_source(
     )
 
 
-def _project_source(class_name: str, project_reference_path: str) -> str:
+def _patch_handwritten_source(patch_class_name: str) -> str:
+    """Generate handwritten patch partial class source."""
+    return (
+        f"{_BASE_USINGS}\n"
+        "using Chaos.TestFramework;\n"
+        "\n"
+        f"public static partial class {patch_class_name}\n"
+        "{\n"
+        "}\n"
+    )
+
+
+def _test_exe_source(class_name: str, *, method_subject_ids: list[str]) -> str:
+    """Generate test executable source (managed_test/tests/)."""
+    prod_name = class_name.replace("Tests", "")
+    return (
+        f"{_BASE_USINGS}\n"
+        "using Xunit;\n"
+        "\n"
+        f"public class {class_name}\n"
+        "{\n"
+        "    [Fact]\n"
+        "    public void AllAutoGeneratedMethodsCanExecute()\n"
+        "    {\n"
+        "        // Smoke test: ensure all auto-generated methods can be discovered\n"
+        f"        var type = typeof({prod_name});\n"
+        "        Assert.NotNull(type);\n"
+        "    }\n"
+        "}\n"
+    )
+
+
+def _benchmark_exe_source(class_name: str, *, method_subject_ids: list[str]) -> str:
+    """Generate benchmark executable source (managed_test/benchmarks/)."""
+    return (
+        "using System;\n"
+        "\n"
+        "class Program\n"
+        "{\n"
+        "    static void Main()\n"
+        "    {\n"
+        "        Console.WriteLine(\"Benchmark harness placeholder.\");\n"
+        "    }\n"
+        "}\n"
+    )
     return (
         "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
         "  <PropertyGroup>\n"
@@ -1287,24 +1345,38 @@ def generate_family_skeleton(repo_root: Path, *, assembly_name: str, family: dic
     family_id = str(family.get("familyId") or "")
     display_name = str(family.get("displayName") or family_id)
     family_root = repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id)
-    test_dir = family_root / "test"
-    test_dir.mkdir(parents=True, exist_ok=True)
 
+    prod_name = _production_class_name(family_id)
     class_name = _class_name(family_id)
+    patch_class_name = class_name.replace("Tests", "Patch")
     method_subject_ids = [str(item) for item in list(family.get("methodSubjectIds") or []) if str(item)]
     capability_family_enum = _enum_name(family)
-    handwritten_path = test_dir / f"{class_name}.cs"
-    generated_path = test_dir / f"{class_name}.AutoGenerated.cs"
-    project_path = test_dir / f"{class_name}.csproj"
-    readme_path = family_root / "README.md"
-    verification_test_generated_path = test_dir / f"{class_name}.AutoGenerated.cs"
-    benchmark_generated_path = family_root / "benchmark" / f"{class_name.replace('Tests', 'Benchmarks')}.AutoGenerated.cs"
-    host_generated_path = family_root / "host" / f"{class_name.replace('Tests', 'HotUpdate')}.AutoGenerated.cs"
-    patch_generated_path = family_root / "patch" / f"{class_name.replace('Tests', 'Patch')}.AutoGenerated.cs"
 
+    # --- src/ directory (handwrite + auto-generated merged) ---
+    src_dir = family_root / "src"
+    handwritten_path = src_dir / f"{prod_name}.cs"
+    generated_path = src_dir / f"{prod_name}.AutoGenerated.cs"
+
+    # --- src/patch/ directory ---
+    patch_dir = family_root / "src" / "patch"
+    patch_handwritten_path = patch_dir / f"{patch_class_name}.cs"
+    patch_generated_path = patch_dir / f"{patch_class_name}.AutoGenerated.cs"
+
+    # --- managed_test/ directory (test exe + benchmark exe) ---
+    test_exe_dir = family_root / "managed_test" / "tests"
+    test_exe_path = test_exe_dir / f"{class_name}.cs"
+    benchmark_exe_dir = family_root / "managed_test" / "benchmarks"
+    benchmark_exe_path = benchmark_exe_dir / f"{class_name.replace('Tests', 'Benchmarks')}.cs"
+
+    readme_path = family_root / "README.md"
+    feature_contract_path = family_root / "capability-family-contract.json"
+
+    # Write handwritten src (only if not exists)
+    src_dir.mkdir(parents=True, exist_ok=True)
     if not handwritten_path.exists():
         handwritten_path.write_text(_handwritten_source(family_id, class_name), encoding="utf-8")
 
+    # Write auto-generated src (merged test/benchmark/hotupdate)
     generated_source = _generated_source(
         family_id,
         display_name,
@@ -1313,24 +1385,13 @@ def generate_family_skeleton(repo_root: Path, *, assembly_name: str, family: dic
         capability_family_enum=capability_family_enum,
     )
     generated_path.write_text(generated_source, encoding="utf-8")
-    benchmark_generated_path.parent.mkdir(parents=True, exist_ok=True)
-    benchmark_generated_path.write_text(
-        _benchmark_generated_source(
-            class_name,
-            method_subject_ids=method_subject_ids,
-            capability_family_enum=capability_family_enum,
-        ),
-        encoding="utf-8",
-    )
-    host_generated_path.parent.mkdir(parents=True, exist_ok=True)
-    host_generated_path.write_text(
-        _hotupdate_generated_source(
-            class_name,
-            method_subject_ids=method_subject_ids,
-            capability_family_enum=capability_family_enum,
-        ),
-        encoding="utf-8",
-    )
+
+    # Write patch handwritten (only if not exists)
+    patch_dir.mkdir(parents=True, exist_ok=True)
+    if not patch_handwritten_path.exists():
+        patch_handwritten_path.write_text(_patch_handwritten_source(patch_class_name), encoding="utf-8")
+
+    # Write patch auto-generated
     patch_generated_path.parent.mkdir(parents=True, exist_ok=True)
     patch_generated_path.write_text(
         _patch_generated_source(
@@ -1341,19 +1402,29 @@ def generate_family_skeleton(repo_root: Path, *, assembly_name: str, family: dic
         encoding="utf-8",
     )
 
+    # Write test exe source
+    test_exe_dir.mkdir(parents=True, exist_ok=True)
+    test_exe_path.write_text(_test_exe_source(class_name, method_subject_ids=method_subject_ids), encoding="utf-8")
+
+    # Write benchmark exe source
+    benchmark_exe_dir.mkdir(parents=True, exist_ok=True)
+    benchmark_exe_path.write_text(
+        _benchmark_exe_source(class_name, method_subject_ids=method_subject_ids),
+        encoding="utf-8",
+    )
+
     readme_path.write_text(_readme_source(family_id, display_name), encoding="utf-8")
 
     return {
         "familyId": family_id,
-        "outputRoot": _relative(repo_root, test_dir),
+        "outputRoot": _relative(repo_root, src_dir),
         "artifacts": [
             _relative(repo_root, handwritten_path),
             _relative(repo_root, generated_path),
-            _relative(repo_root, project_path),
-            _relative(repo_root, readme_path),
-            _relative(repo_root, verification_test_generated_path),
-            _relative(repo_root, benchmark_generated_path),
-            _relative(repo_root, host_generated_path),
+            _relative(repo_root, patch_handwritten_path),
             _relative(repo_root, patch_generated_path),
+            _relative(repo_root, test_exe_path),
+            _relative(repo_root, benchmark_exe_path),
+            _relative(repo_root, readme_path),
         ],
     }

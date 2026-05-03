@@ -1,8 +1,0 @@
-{
-  "subjectDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\entrypoint-semantic-patch",
-  "outputDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\entrypoint-semantic-patch\\closure-sp",
-  "sourceType": "managed-dlls",
-  "analysisDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\entrypoint-semantic-patch\\closure-sp\\analysis",
-  "generatedDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\entrypoint-semantic-patch\\closure-sp\\generated",
-  "status": "ok"
-}

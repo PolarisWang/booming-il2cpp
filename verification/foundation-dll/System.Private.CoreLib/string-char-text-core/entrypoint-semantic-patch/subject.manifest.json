@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\string-char-text-core\\entrypoint-semantic-patch\\build-output\\StringCharTextCoreSemanticPatchEntry.dll"
-    ],
-    "entry": "StringCharTextCoreSemanticPatchEntry/StringCharTextCoreSemanticPatchEntry::Run:System.Int32(System.Int32)"
-  }
-}

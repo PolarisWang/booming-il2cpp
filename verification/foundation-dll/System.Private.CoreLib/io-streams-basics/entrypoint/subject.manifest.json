@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\io-streams-basics\\entrypoint\\build-output\\IoStreamsBasicsNativeEntry.dll"
-    ],
-    "entry": "IoStreamsBasicsNativeEntry/IoStreamsBasicsNativeEntry::Run:System.Int32(System.Int32)"
-  }
-}

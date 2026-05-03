@@ -10,6 +10,18 @@
 
 namespace chaos::il2cpp::vector_fixed {
 
+// Bring carrier types into scope for MSVC two-phase lookup inside templates.
+using ::chaos::il2cpp::numerics_carriers::RuntimeNumericsVector2Carrier;
+using ::chaos::il2cpp::numerics_carriers::RuntimeNumericsVector3Carrier;
+using ::chaos::il2cpp::numerics_carriers::RuntimeNumericsVector4Carrier;
+using ::chaos::il2cpp::numerics_carriers::RuntimeNumericsMatrix3x2Carrier;
+using ::chaos::il2cpp::numerics_carriers::RuntimeNumericsMatrix4x4Carrier;
+using ::chaos::il2cpp::numerics_carriers::RuntimeNumericsQuaternionCarrier;
+using ::chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector64Carrier;
+using ::chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector128Carrier;
+using ::chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector256Carrier;
+using ::chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector512Carrier;
+
 template <typename TScalar, typename TCarrier, typename TBinaryOp>
 inline TCarrier VectorFixedApplyBinary(TCarrier left_value, TCarrier right_value, TBinaryOp operation) {
     static_assert(sizeof(TCarrier) % sizeof(TScalar) == 0u, "carrier size must be divisible by scalar size");
@@ -123,7 +135,7 @@ inline TCarrier VectorFixedShiftLeft(TCarrier value, CHAOS_IL2CPP_INT32 shift_am
         value,
         VectorFixedBroadcast<TScalar, TCarrier>(static_cast<TScalar>(shift_amount)),
         [shift_amount](TScalar lane, TScalar) {
-            using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+            using TUnsigned = std::make_unsigned_t<TScalar>;
             constexpr auto bit_width = static_cast<CHAOS_IL2CPP_INT32>(sizeof(TScalar) * 8u);
             if (shift_amount <= 0) {
                 return lane;
@@ -143,7 +155,7 @@ inline TCarrier VectorFixedShiftRightLogical(TCarrier value, CHAOS_IL2CPP_INT32 
         value,
         VectorFixedBroadcast<TScalar, TCarrier>(static_cast<TScalar>(shift_amount)),
         [shift_amount](TScalar lane, TScalar) {
-            using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+            using TUnsigned = std::make_unsigned_t<TScalar>;
             constexpr auto bit_width = static_cast<CHAOS_IL2CPP_INT32>(sizeof(TScalar) * 8u);
             if (shift_amount <= 0) {
                 return lane;
@@ -159,7 +171,7 @@ inline TCarrier VectorFixedShiftRightLogical(TCarrier value, CHAOS_IL2CPP_INT32 
 
 template <typename TScalar, typename TCarrier>
 inline TCarrier VectorFixedShiftRightArithmetic(TCarrier value, CHAOS_IL2CPP_INT32 shift_amount) {
-    static_assert(CHAOS_IL2CPP_IS_SIGNED<TScalar>, "arithmetic right shift requires signed scalar");
+    static_assert(std::is_signed_v<TScalar>, "arithmetic right shift requires signed scalar");
     return VectorFixedApplyBinary<TScalar, TCarrier>(
         value,
         VectorFixedBroadcast<TScalar, TCarrier>(static_cast<TScalar>(shift_amount)),
@@ -183,7 +195,7 @@ inline TCarrier VectorFixedShiftLeftVariable(TCarrier value, TCarrier shift_amou
         value,
         shift_amounts,
         [](TScalar lane, TScalar shift_lane) {
-            using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+            using TUnsigned = std::make_unsigned_t<TScalar>;
             constexpr auto bit_width = static_cast<CHAOS_IL2CPP_INT32>(sizeof(TScalar) * 8u);
             const auto shift_amount = static_cast<CHAOS_IL2CPP_INT32>(shift_lane);
             if (shift_amount <= 0) {
@@ -204,7 +216,7 @@ inline TCarrier VectorFixedShiftRightLogicalVariable(TCarrier value, TCarrier sh
         value,
         shift_amounts,
         [](TScalar lane, TScalar shift_lane) {
-            using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+            using TUnsigned = std::make_unsigned_t<TScalar>;
             constexpr auto bit_width = static_cast<CHAOS_IL2CPP_INT32>(sizeof(TScalar) * 8u);
             const auto shift_amount = static_cast<CHAOS_IL2CPP_INT32>(shift_lane);
             if (shift_amount <= 0) {
@@ -221,7 +233,7 @@ inline TCarrier VectorFixedShiftRightLogicalVariable(TCarrier value, TCarrier sh
 
 template <typename TScalar, typename TCarrier>
 inline TCarrier VectorFixedShiftRightArithmeticVariable(TCarrier value, TCarrier shift_amounts) {
-    static_assert(CHAOS_IL2CPP_IS_SIGNED<TScalar>, "arithmetic right shift requires signed scalar");
+    static_assert(std::is_signed_v<TScalar>, "arithmetic right shift requires signed scalar");
     return VectorFixedApplyBinary<TScalar, TCarrier>(
         value,
         shift_amounts,
@@ -242,7 +254,7 @@ inline TCarrier VectorFixedShiftRightArithmeticVariable(TCarrier value, TCarrier
 
 template <typename TScalar, typename TCarrier>
 inline TCarrier VectorFixedRotateLeft(TCarrier value, CHAOS_IL2CPP_UINT8 rotate_amount) {
-    using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+    using TUnsigned = std::make_unsigned_t<TScalar>;
     constexpr auto bit_width = static_cast<CHAOS_IL2CPP_UINT32>(sizeof(TScalar) * 8u);
     const auto normalized_rotate = static_cast<CHAOS_IL2CPP_UINT32>(rotate_amount) % bit_width;
     if (normalized_rotate == 0u) {
@@ -261,7 +273,7 @@ inline TCarrier VectorFixedRotateLeft(TCarrier value, CHAOS_IL2CPP_UINT8 rotate_
 
 template <typename TScalar, typename TCarrier>
 inline TCarrier VectorFixedRotateRight(TCarrier value, CHAOS_IL2CPP_UINT8 rotate_amount) {
-    using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+    using TUnsigned = std::make_unsigned_t<TScalar>;
     constexpr auto bit_width = static_cast<CHAOS_IL2CPP_UINT32>(sizeof(TScalar) * 8u);
     const auto normalized_rotate = static_cast<CHAOS_IL2CPP_UINT32>(rotate_amount) % bit_width;
     if (normalized_rotate == 0u) {
@@ -280,7 +292,7 @@ inline TCarrier VectorFixedRotateRight(TCarrier value, CHAOS_IL2CPP_UINT8 rotate
 
 template <typename TScalar, typename TRotateScalar, typename TCarrier>
 inline TCarrier VectorFixedRotateLeftVariable(TCarrier value, TCarrier rotate_amounts) {
-    using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+    using TUnsigned = std::make_unsigned_t<TScalar>;
     constexpr auto bit_width = static_cast<CHAOS_IL2CPP_UINT32>(sizeof(TScalar) * 8u);
     return VectorFixedApplyBinary<TScalar, TCarrier>(
         value,
@@ -301,7 +313,7 @@ inline TCarrier VectorFixedRotateLeftVariable(TCarrier value, TCarrier rotate_am
 
 template <typename TScalar, typename TRotateScalar, typename TCarrier>
 inline TCarrier VectorFixedRotateRightVariable(TCarrier value, TCarrier rotate_amounts) {
-    using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+    using TUnsigned = std::make_unsigned_t<TScalar>;
     constexpr auto bit_width = static_cast<CHAOS_IL2CPP_UINT32>(sizeof(TScalar) * 8u);
     return VectorFixedApplyBinary<TScalar, TCarrier>(
         value,
@@ -459,7 +471,7 @@ inline TOutputScalar VectorFixedConvertScalarUnchecked(TInputScalar value) {
 
 template <typename TOutputScalar, typename TInputScalar>
 inline TOutputScalar VectorFixedConvertScalarTruncating(TInputScalar value) {
-    if constexpr (CHAOS_IL2CPP_IS_FLOATING_POINT<TInputScalar>) {
+    if constexpr (std::is_floating_point_v<TInputScalar>) {
         if (!CHAOS_IL2CPP_ISFINITE(value)) {
             return static_cast<TOutputScalar>(0);
         }
@@ -472,19 +484,19 @@ inline TOutputScalar VectorFixedConvertScalarTruncating(TInputScalar value) {
 
 template <typename TOutputScalar, typename TInputScalar>
 inline TOutputScalar VectorFixedConvertScalarSaturating(TInputScalar value) {
-    if constexpr (CHAOS_IL2CPP_IS_FLOATING_POINT<TInputScalar>) {
+    if constexpr (std::is_floating_point_v<TInputScalar>) {
         if (!CHAOS_IL2CPP_ISFINITE(value)) {
             return static_cast<TOutputScalar>(0);
         }
     }
 
-    using TOutputLimits = CHAOS_IL2CPP_NUMERIC_LIMITS<TOutputScalar>;
-    using TInputLimits = CHAOS_IL2CPP_NUMERIC_LIMITS<TInputScalar>;
+    using TOutputLimits = std::numeric_limits<TOutputScalar>;
+    using TInputLimits = std::numeric_limits<TInputScalar>;
 
-    if constexpr (CHAOS_IL2CPP_IS_SAME<TOutputScalar, TInputScalar>) {
+    if constexpr (std::is_same_v<TOutputScalar, TInputScalar>) {
         return value;
-    } else if constexpr (CHAOS_IL2CPP_IS_INTEGRAL<TInputScalar> && CHAOS_IL2CPP_IS_INTEGRAL<TOutputScalar>) {
-        if constexpr (CHAOS_IL2CPP_IS_SIGNED<TInputScalar> == CHAOS_IL2CPP_IS_SIGNED<TOutputScalar>) {
+    } else if constexpr (std::is_integral_v<TInputScalar> && std::is_integral_v<TOutputScalar>) {
+        if constexpr (std::is_signed_v<TInputScalar> == std::is_signed_v<TOutputScalar>) {
             if (value < static_cast<TInputScalar>(TOutputLimits::lowest())) {
                 return TOutputLimits::lowest();
             }
@@ -494,12 +506,12 @@ inline TOutputScalar VectorFixedConvertScalarSaturating(TInputScalar value) {
             }
 
             return static_cast<TOutputScalar>(value);
-        } else if constexpr (CHAOS_IL2CPP_IS_SIGNED<TInputScalar>) {
+        } else if constexpr (std::is_signed_v<TInputScalar>) {
             if (value <= static_cast<TInputScalar>(0)) {
                 return static_cast<TOutputScalar>(0);
             }
 
-            using TUnsignedInput = CHAOS_IL2CPP_MAKE_UNSIGNED<TInputScalar>;
+            using TUnsignedInput = std::make_unsigned_t<TInputScalar>;
             const auto unsigned_value = static_cast<TUnsignedInput>(value);
             if (unsigned_value > static_cast<TUnsignedInput>(TOutputLimits::max())) {
                 return TOutputLimits::max();
@@ -507,7 +519,7 @@ inline TOutputScalar VectorFixedConvertScalarSaturating(TInputScalar value) {
 
             return static_cast<TOutputScalar>(value);
         } else {
-            if (value > static_cast<CHAOS_IL2CPP_MAKE_UNSIGNED<TOutputScalar>>(TOutputLimits::max())) {
+            if (value > static_cast<std::make_unsigned_t<TOutputScalar>>(TOutputLimits::max())) {
                 return TOutputLimits::max();
             }
 
@@ -787,7 +799,7 @@ inline CHAOS_IL2CPP_INT32 VectorFixedGetHashCode(TCarrier value) {
     CHAOS_IL2CPP_INT32 hash = 0;
     for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
         CHAOS_IL2CPP_INT32 lane_hash;
-        if constexpr (CHAOS_IL2CPP_IS_FLOATING_POINT<TScalar>) {
+        if constexpr (std::is_floating_point_v<TScalar>) {
             if constexpr (sizeof(TScalar) == sizeof(CHAOS_IL2CPP_UINT32)) {
                 CHAOS_IL2CPP_UINT32 bits;
                 CHAOS_IL2CPP_MEMCPY(&bits, &lanes[i], sizeof(CHAOS_IL2CPP_UINT32));
@@ -800,7 +812,7 @@ inline CHAOS_IL2CPP_INT32 VectorFixedGetHashCode(TCarrier value) {
                 lane_hash = static_cast<CHAOS_IL2CPP_INT32>(bits) ^ static_cast<CHAOS_IL2CPP_INT32>(bits >> 32);
             }
         } else if constexpr (sizeof(TScalar) <= sizeof(CHAOS_IL2CPP_INT32)) {
-            using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TScalar>;
+            using TUnsigned = std::make_unsigned_t<TScalar>;
             lane_hash = static_cast<CHAOS_IL2CPP_INT32>(static_cast<TUnsigned>(lanes[i]));
         } else {
             CHAOS_IL2CPP_UINT64 raw;
@@ -837,7 +849,7 @@ inline void* VectorFixedFormatToString(TCarrier value) {
 
 template <typename TMaskScalar>
 inline TMaskScalar VectorFixedAllBitsSetMaskLane() {
-    if constexpr (CHAOS_IL2CPP_IS_FLOATING_POINT<TMaskScalar>) {
+    if constexpr (std::is_floating_point_v<TMaskScalar>) {
         if constexpr (sizeof(TMaskScalar) == sizeof(CHAOS_IL2CPP_UINT32)) {
             constexpr CHAOS_IL2CPP_UINT32 all_bits = 0xFFFFFFFFu;
             TMaskScalar value = static_cast<TMaskScalar>(0);
@@ -850,7 +862,7 @@ inline TMaskScalar VectorFixedAllBitsSetMaskLane() {
             return value;
         }
     } else {
-        using TUnsigned = CHAOS_IL2CPP_MAKE_UNSIGNED<TMaskScalar>;
+        using TUnsigned = std::make_unsigned_t<TMaskScalar>;
         return static_cast<TMaskScalar>(~static_cast<TUnsigned>(0));
     }
 }
@@ -956,9 +968,9 @@ inline TCarrier VectorFixedAbs(TCarrier value) {
     CHAOS_IL2CPP_MEMCPY(input_lanes, &value, sizeof(TCarrier));
     for (CHAOS_IL2CPP_SIZE lane_index = 0; lane_index < lane_count; ++lane_index) {
         const TInputScalar lane = input_lanes[lane_index];
-        if constexpr (CHAOS_IL2CPP_IS_FLOATING_POINT<TInputScalar>) {
+        if constexpr (std::is_floating_point_v<TInputScalar>) {
             output_lanes[lane_index] = static_cast<TOutputScalar>(CHAOS_IL2CPP_FABS(lane));
-        } else if constexpr (CHAOS_IL2CPP_IS_UNSIGNED<TInputScalar>) {
+        } else if constexpr (std::is_unsigned_v<TInputScalar>) {
             output_lanes[lane_index] = static_cast<TOutputScalar>(lane);
         } else {
             output_lanes[lane_index] = lane < static_cast<TInputScalar>(0)

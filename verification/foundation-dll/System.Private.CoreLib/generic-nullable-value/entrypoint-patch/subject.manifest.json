@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\entrypoint-patch\\build-output\\GenericNullableValuePatchEntry.dll"
-    ],
-    "entry": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Run:System.Int32(System.Int32)"
-  }
-}

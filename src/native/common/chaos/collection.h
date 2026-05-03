@@ -23,11 +23,12 @@ ListRuntimeStorage<TValue>* require_list_runtime_storage(CHAOS_IL2CPP_INTPTR han
     {
         CHAOS_IL2CPP_ABORT();
     }
-    static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_UNIQUE_PTR(ListRuntimeStorage<TValue))) storage_by_handle;
+    using StorageMap = std::unordered_map<CHAOS_IL2CPP_INTPTR, std::unique_ptr<ListRuntimeStorage<TValue>>>;
+    static StorageMap storage_by_handle;
     auto& storage = storage_by_handle[handle];
     if (storage == nullptr)
     {
-        storage = CHAOS_IL2CPP_MAKE_UNIQUE(ListRuntimeStorage<TValue))();
+        storage = std::make_unique<ListRuntimeStorage<TValue>>();
     }
     return storage.get();
 }
@@ -45,11 +46,12 @@ DictionaryRuntimeStorage<TKey, TValue>* require_dictionary_runtime_storage(CHAOS
     {
         CHAOS_IL2CPP_ABORT();
     }
-    static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_UNIQUE_PTR(DictionaryRuntimeStorage<TKey, TValue))) storage_by_handle;
+    using StorageMap = std::unordered_map<CHAOS_IL2CPP_INTPTR, std::unique_ptr<DictionaryRuntimeStorage<TKey, TValue>>>;
+    static StorageMap storage_by_handle;
     auto& storage = storage_by_handle[handle];
     if (storage == nullptr)
     {
-        storage = CHAOS_IL2CPP_MAKE_UNIQUE(DictionaryRuntimeStorage<TKey, TValue))();
+        storage = std::make_unique<DictionaryRuntimeStorage<TKey, TValue>>();
     }
     return storage.get();
 }

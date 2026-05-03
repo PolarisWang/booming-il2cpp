@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\entrypoint-patch\\build-output\\ReflectionModulePatchEntry.dll"
-    ],
-    "entry": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Int32(System.Int32)"
-  }
-}

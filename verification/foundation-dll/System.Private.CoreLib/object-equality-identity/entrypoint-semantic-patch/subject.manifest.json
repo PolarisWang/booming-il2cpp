@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\object-equality-identity\\entrypoint-semantic-patch\\build-output\\ObjectEqualityIdentitySemanticPatchEntry.dll"
-    ],
-    "entry": "ObjectEqualityIdentitySemanticPatchEntry/ObjectEqualityIdentitySemanticPatchEntry::Run:System.Int32(System.Int32)"
-  }
-}

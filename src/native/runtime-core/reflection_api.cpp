@@ -239,6 +239,50 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_constructors(CHAOS_IL2CPP_IN
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(desc->methods);
 }
 
+extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_constructors(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) {
+    using namespace chaos::il2cpp::runtime_core;
+    (void)binding_flags;
+    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    if (desc == nullptr || desc->methods == nullptr) return 0;
+
+    // Return pointer to methods array (caller iterates by method_count)
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(desc->methods);
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_methods(CHAOS_IL2CPP_INTPTR type_handle) {
+    using namespace chaos::il2cpp::runtime_core;
+    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    if (desc == nullptr || desc->methods == nullptr) return 0;
+
+    // Return pointer to methods array (caller iterates by method_count)
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(desc->methods);
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_fields(CHAOS_IL2CPP_INTPTR type_handle) {
+    using namespace chaos::il2cpp::runtime_core;
+    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    if (desc == nullptr || desc->fields == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(desc->fields);
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_interfaces(CHAOS_IL2CPP_INTPTR type_handle) {
+    using namespace chaos::il2cpp::runtime_core;
+    (void)type_handle;
+    return 0;
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_members(CHAOS_IL2CPP_INTPTR type_handle) {
+    using namespace chaos::il2cpp::runtime_core;
+    (void)type_handle;
+    return 0;
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_nested_types(CHAOS_IL2CPP_INTPTR type_handle) {
+    using namespace chaos::il2cpp::runtime_core;
+    (void)type_handle;
+    return 0;
+}
+
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_field(
     CHAOS_IL2CPP_INTPTR type_handle,
     CHAOS_IL2CPP_INTPTR name_string_id)
