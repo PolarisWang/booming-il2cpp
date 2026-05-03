@@ -1,9 +1,10 @@
 #!/bin/sh
-# Chaos IL2CPP — Pre-commit hook: architecture compliance + foundation DLL pipeline
+# Chaos IL2CPP — Pre-commit hook: architecture compliance + foundation DLL pipeline + trace check
 #
 # Runs:
 #   1. build/check_arch.py on staged native C++ files
 #   2. build/check_foundation_dll_pipeline.py when test generator/ledger files change
+#   3. CHAOS_IL2CPP_TRACE() coverage check on staged .cpp files (advisory)
 #
 # To install: git config core.hooksPath .githooks
 # You can skip this check with: git commit --no-verify
@@ -49,6 +50,28 @@ else
         exit 1
     fi
     echo "=== [foundation-dll] Pipeline check passed ==="
+fi
+
+echo "=== [trace] Checking trace point coverage in staged C++ files ==="
+
+STAGED_CPP_TRACE=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^src/native/.*\.cpp' || true)
+
+if [ -z "$STAGED_CPP_TRACE" ]; then
+    echo "=== [trace] No staged .cpp files, skipping ==="
+else
+    MISSING_TRACE=0
+    for FILE in $STAGED_CPP_TRACE; do
+        HAS_TRACE=$(grep -c "CHAOS_IL2CPP_TRACE" "$FILE" || true)
+        if [ "$HAS_TRACE" -eq 0 ]; then
+            echo "WARNING: $FILE has no CHAOS_IL2CPP_TRACE() calls — add trace points or confirm they are not needed"
+            MISSING_TRACE=1
+        fi
+    done
+    if [ "$MISSING_TRACE" -ne 0 ]; then
+        echo "=== [trace] Trace coverage advisory issued ==="
+    else
+        echo "=== [trace] All staged .cpp files have CHAOS_IL2CPP_TRACE() ==="
+    fi
 fi
 
 exit 0
