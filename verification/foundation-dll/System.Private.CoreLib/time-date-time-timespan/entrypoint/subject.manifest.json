@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\time-date-time-timespan\\entrypoint\\build-output\\TimeDateTimeTimespanNativeEntry.dll"
-    ],
-    "entry": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Run:System.Int32(System.Int32)"
-  }
-}

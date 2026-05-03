@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\entrypoint-patch\\build-output\\SpanMemoryBuffersPatchEntry.dll"
-    ],
-    "entry": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Int32(System.Int32)"
-  }
-}

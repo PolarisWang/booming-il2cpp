@@ -10,17 +10,36 @@
 #include <limits>
 #include <type_traits>
 
-// ── Type-only sub-headers (no dependency on runtime_core namespace types) ──
+// ── Compatibility declarations for older generated .cpp files ──
+// Must be included early (before any namespace) so declarations are at
+// global scope and visible inside anonymous namespaces in generated files.
+#include "generated_code_compat.h"
+
+// ── Type-only sub-headers (each declares types in its own namespace) ──
 #include "marshal_abi.h"
 #include "runtime_capability.h"
 #include "numerics_carriers.h"
+#include "string_table.h"
 
-// ── Template/inline helpers in their own namespaces ──
-#include "vector_fixed_templates.h"
-#include "math_kernel_helpers.h"
-#include "marshal_copy_helpers.h"
-
+// ── Phase 1: Declare types needed by sub-headers below ──
+#include "reflection_api.h"
 namespace chaos::il2cpp::runtime_core {
+
+// Bring types from other namespaces into runtime_core for convenient use.
+using chaos::il2cpp::marshal_abi::MarshalPlatformAbiRootV1;
+using chaos::il2cpp::marshal_abi::TaskRuntimeKernelV1;
+using chaos::il2cpp::runtime_capability::ValueTypeKernelBackendKind;
+using chaos::il2cpp::runtime_capability::VectorKernelBackendKind;
+using chaos::il2cpp::numerics_carriers::RuntimeNumericsVector2Carrier;
+using chaos::il2cpp::numerics_carriers::RuntimeNumericsVector3Carrier;
+using chaos::il2cpp::numerics_carriers::RuntimeNumericsVector4Carrier;
+using chaos::il2cpp::numerics_carriers::RuntimeNumericsMatrix3x2Carrier;
+using chaos::il2cpp::numerics_carriers::RuntimeNumericsMatrix4x4Carrier;
+using chaos::il2cpp::numerics_carriers::RuntimeNumericsQuaternionCarrier;
+using chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector64Carrier;
+using chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector128Carrier;
+using chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector256Carrier;
+using chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector512Carrier;
 
 /// Thread-local RuntimeState for code paths that do not carry
 /// an explicit RuntimeState* parameter (e.g. NativeAot external helpers).
@@ -39,20 +58,29 @@ enum class RuntimeMode {
     Mixed = 1,
 };
 
-// Bring capability enums into runtime_core namespace for backward compatibility
-// with function declarations that were originally in this namespace.
-using chaos::il2cpp::runtime_capability::ValueTypeKernelBackendKind;
-using chaos::il2cpp::runtime_capability::VectorKernelBackendKind;
-
 const RuntimeAbiV0* GetRuntimeAbiV0();
 const MarshalPlatformAbiRootV1* GetMarshalPlatformAbiRootV1();
 const TaskRuntimeKernelV1* GetTaskRuntimeKernelV1();
 
-// ── Function declaration sub-headers (share runtime_core types above) ──
+}  // namespace chaos::il2cpp::runtime_core
+
+// ── Sub-headers providing additional runtime_core function declarations ──
+// Each opens its own namespace chaos::il2cpp::runtime_core { ... } block.
 #include "gc_helpers.h"
 #include "engine_binding.h"
 #include "char_classification.h"
 #include "half_classification.h"
+
+// ── Template/inline helpers in their own sub-namespaces ──
+// These must come AFTER gc_helpers.h so that qualified names like
+// chaos::il2cpp::runtime_core::GetCurrentRuntimeState() are visible at
+// template definition time (MSVC two-phase lookup).
+#include "vector_fixed_templates.h"
+#include "math_kernel_helpers.h"
+#include "marshal_copy_helpers.h"
+
+// ── Phase 2: Remaining runtime_core declarations ──
+namespace chaos::il2cpp::runtime_core {
 
 // ── Single / Double / NFloat classification (implemented in runtime_core.cpp) ──
 
@@ -265,6 +293,16 @@ inline void chaos_decimal_ctor_int32(DecimalCarrier* carrier, CHAOS_IL2CPP_INT32
     carrier->hi32 = 0u;
 }
 
+// Overload: intptr_t convenience wrapper for older generated code that
+// passes an intptr_t (treated as DecimalCarrier*) rather than a typed pointer.
+inline void chaos_decimal_ctor_int32(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 value) {
+    chaos_decimal_ctor_int32(reinterpret_cast<DecimalCarrier*>(carrier_ptr), value);
+}
+
 }  // namespace chaos::il2cpp::runtime_core
+
+// File-scope using declaration so older generated code (inside anonymous
+// namespaces) can call chaos_decimal_ctor_int32 as a bare identifier.
+using chaos::il2cpp::runtime_core::chaos_decimal_ctor_int32;
 
 #endif  // CHAOS_IL2CPP_RUNTIME_CORE_H_

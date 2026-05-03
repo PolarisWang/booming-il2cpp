@@ -59,6 +59,26 @@ extern "C" void chaos_reflection_set_exception_metadata(
     *message_slot = message_value;
 }
 
+extern "C" void chaos_reflection_set_exception_metadata(
+    CHAOS_IL2CPP_INTPTR exception_obj,
+    CHAOS_IL2CPP_INTPTR message_value,
+    CHAOS_IL2CPP_INTPTR param_name_value)
+{
+    using namespace chaos::il2cpp::runtime_core;
+
+    // Set message field
+    auto* message_slot = GetExceptionFieldPtr(
+        reinterpret_cast<void*>(exception_obj),
+        kExceptionMessageOffset);
+    if (message_slot != nullptr) {
+        *message_slot = message_value;
+    }
+
+    // For ArgumentException subclasses, param_name is stored in a subclass field
+    // at a different offset. For the generic case, we don't set it here.
+    (void)param_name_value;
+}
+
 extern "C" void chaos_reflection_set_exception_metadata_2params(
     CHAOS_IL2CPP_INTPTR exception_obj,
     CHAOS_IL2CPP_INTPTR message_value,

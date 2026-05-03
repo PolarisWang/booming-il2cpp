@@ -21,12 +21,12 @@ inline MonitorRuntimeEntry& require_monitor_runtime_entry(CHAOS_IL2CPP_INTPTR ob
         CHAOS_IL2CPP_ABORT();
     }
     static CHAOS_IL2CPP_MUTEX table_mutex;
-    static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_UNIQUE_PTR(MonitorRuntimeEntry)) table;
+    static std::unordered_map<CHAOS_IL2CPP_INTPTR, std::unique_ptr<MonitorRuntimeEntry>> table;
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(table_mutex);
     auto& entry = table[object_value];
     if (!entry)
     {
-        entry = CHAOS_IL2CPP_MAKE_UNIQUE(MonitorRuntimeEntry);
+        entry = std::make_unique<MonitorRuntimeEntry>();
     }
     return *entry;
 }

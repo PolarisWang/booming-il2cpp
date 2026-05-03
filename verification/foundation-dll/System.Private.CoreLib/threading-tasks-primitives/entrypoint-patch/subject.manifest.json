@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-tasks-primitives\\entrypoint-patch\\build-output\\ThreadingTasksPrimitivesPatchEntry.dll"
-    ],
-    "entry": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Run:System.Int32(System.Int32)"
-  }
-}
