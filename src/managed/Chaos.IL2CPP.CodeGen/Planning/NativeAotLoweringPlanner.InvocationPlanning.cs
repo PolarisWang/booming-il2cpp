@@ -409,6 +409,22 @@ public sealed partial class NativeAotLoweringPlanner
             routes.Add(new VirtualDispatchRoute(candidateTypeSubjectId, implementationMethod));
         }
 
+        // ── Phase 3: detect single-implementation interface dispatch ──
+        {
+            var uniqueImpls = routes
+                .Select(r => r.ImplementationMethod.SubjectId)
+                .Distinct(StringComparer.Ordinal)
+                .ToArray();
+            var key = instruction.Callee ?? instruction.TargetReference?.SubjectId ?? "";
+            if (uniqueImpls.Length == 1 && key.Length > 0)
+            {
+                _devirtualizationHints[key] = new DevirtualizationHint(
+                    true,
+                    routes[0].ImplementationMethod.SubjectId,
+                    routes[0].ImplementationMethod.Identity.DeclaringTypeSubjectId);
+            }
+        }
+
         return routes
             .OrderBy(route => route.ReceiverTypeSubjectId, StringComparer.Ordinal)
             .ToArray();

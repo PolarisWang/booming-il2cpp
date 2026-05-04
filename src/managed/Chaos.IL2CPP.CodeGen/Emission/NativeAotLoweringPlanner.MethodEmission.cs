@@ -1015,6 +1015,28 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendLiteral(" chaos_callvirt_result{};");
 			stringBuilder4.AppendLine(ref handler);
 		}
+				// ── Phase 3: AOT Devirtualization fast-path ──
+		string devirtKey = instruction.Callee ?? instruction.TargetReference?.SubjectId ?? "";
+		if (devirtKey.Length > 0 && _devirtualizationHints.TryGetValue(devirtKey, out DevirtualizationHint devirtHint) && devirtHint.CanDevirtualize)
+		{
+			AotCoreIrMethodArtifact devirtMethod = _methodsBySubjectId[devirtHint.ImplementationMethodSubjectId];
+			IReadOnlyList<AotCoreIrAbiSlotArtifact> devirtParams = GetMethodAbiParameterSlots(devirtMethod);
+			string devirtRet = MapAbiSlotReturnType(devirtMethod.ReturnAbi);
+			string devirtSymbol = devirtMethod.NativeSymbol;
+			string devirtArgs = FormatAbiInvocationArgumentList(devirtParams);
+			if (string.Equals(devirtRet, "void", StringComparison.Ordinal))
+			{
+				builder.AppendLine($"        {devirtSymbol}({devirtArgs});");
+			}
+			else
+			{
+				builder.AppendLine($"        auto chaos_devirt_result = {devirtSymbol}({devirtArgs});");
+				EmitAbiReturnPush(builder, devirtMethod.ReturnAbi, "chaos_devirt_result", "        ");
+			}
+			AppendGotoNext(builder, nextOffset, op);
+			builder.AppendLine("    }");
+			return;
+		}
 		// ── Exact type match via TypeInfo* pointer ──
 		foreach (VirtualDispatchRoute item in readOnlyList)
 		{
@@ -1026,7 +1048,9 @@ public sealed partial class NativeAotLoweringPlanner
 			StringBuilder.AppendInterpolatedStringHandler handler2 = new StringBuilder.AppendInterpolatedStringHandler(46, 1, stringBuilder);
 			handler2.AppendLiteral("        if (chaos_header->type_info == ");
 			handler2.AppendFormatted(virtualDispatchTargetTypeInfoPointer);
-			handler2.AppendLiteral(")");
+			handler2.AppendLiteral(" || chaos_header->type_info->stable_id == (");
+			handler2.AppendFormatted(virtualDispatchTargetTypeInfoPointer);
+			handler2.AppendLiteral(")->stable_id)");
 			stringBuilder5.AppendLine(ref handler2);
 			builder.AppendLine("        {");
 			if (string.Equals(text, "void", StringComparison.Ordinal))
@@ -1076,7 +1100,9 @@ public sealed partial class NativeAotLoweringPlanner
 			StringBuilder.AppendInterpolatedStringHandler handler6 = new StringBuilder.AppendInterpolatedStringHandler(46, 1, stringBuilder);
 			handler6.AppendLiteral("            if (chaos_current_type_info == ");
 			handler6.AppendFormatted(virtualDispatchTargetTypeInfoPointer2);
-			handler6.AppendLiteral(")");
+			handler6.AppendLiteral(" || chaos_current_type_info->stable_id == (");
+			handler6.AppendFormatted(virtualDispatchTargetTypeInfoPointer2);
+			handler6.AppendLiteral(")->stable_id)");
 			stringBuilder9.AppendLine(ref handler6);
 			builder.AppendLine("            {");
 			if (string.Equals(text, "void", StringComparison.Ordinal))
@@ -1446,40 +1472,57 @@ public sealed partial class NativeAotLoweringPlanner
 		AppendGotoNext(builder, nextOffset, op);
 	}
 
-	private static void EmitLoadStringLiteral(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
+	private void EmitLoadStringLiteral(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
 		string requiredStringOperand = GetRequiredStringOperand(instruction);
-		builder.AppendLine("    {");
-		StringBuilder stringBuilder = builder;
-		StringBuilder stringBuilder2 = stringBuilder;
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(36, 1, stringBuilder);
-		handler.AppendLiteral("        auto* chaos_string = new ");
-		handler.AppendFormatted(GetNativeTypeSymbol("System.Private.CoreLib/System.String"));
-		handler.AppendLiteral("{};");
-		stringBuilder2.AppendLine(ref handler);
-		stringBuilder = builder;
-		StringBuilder stringBuilder3 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(40, 1, stringBuilder);
-		handler.AppendLiteral("        chaos_string->header.type_info = &");
-		handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String"));
-		handler.AppendLiteral(";");
-		stringBuilder3.AppendLine(ref handler);
-		stringBuilder = builder;
-		StringBuilder stringBuilder4 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(60, 1, stringBuilder);
-		handler.AppendLiteral("        chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(");
-		handler.AppendFormatted(Encoding.UTF8.GetByteCount(requiredStringOperand));
-		handler.AppendLiteral(");");
-		stringBuilder4.AppendLine(ref handler);
-		stringBuilder = builder;
-		StringBuilder stringBuilder5 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(35, 1, stringBuilder);
-		handler.AppendLiteral("        chaos_string->utf8_data = ");
-		handler.AppendFormatted(ToCppStringLiteral(requiredStringOperand));
-		handler.AppendLiteral(";");
-		stringBuilder5.AppendLine(ref handler);
-		builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);");
-		builder.AppendLine("    }");
+
+		// StringId-first: push tagged StringId instead of per-call heap allocation.
+		// The StringId is precomputed at compile time (see StringIdEmission.cs).
+		if (TryGetStringId(requiredStringOperand, out ulong stringId))
+		{
+			builder.AppendLine("    {");
+			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(50, 1, builder);
+			handler.AppendLiteral("        chaos_eval_stack[chaos_stack_top++] = chaos_make_string_id_value(");
+			handler.AppendFormatted(GetNativeStringIdSymbol(stringId));
+			handler.AppendLiteral(");");
+			builder.AppendLine(ref handler);
+			builder.AppendLine("    }");
+		}
+		else
+		{
+			// Fallback: per-call heap allocation (should not happen for AOT-known strings).
+			builder.AppendLine("    {");
+			StringBuilder stringBuilder = builder;
+			StringBuilder stringBuilder2 = stringBuilder;
+			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(36, 1, stringBuilder);
+			handler.AppendLiteral("        auto* chaos_string = new ");
+			handler.AppendFormatted(GetNativeTypeSymbol("System.Private.CoreLib/System.String"));
+			handler.AppendLiteral("{};");
+			stringBuilder2.AppendLine(ref handler);
+			stringBuilder = builder;
+			StringBuilder stringBuilder3 = stringBuilder;
+			handler = new StringBuilder.AppendInterpolatedStringHandler(40, 1, stringBuilder);
+			handler.AppendLiteral("        chaos_string->header.type_info = &");
+			handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String"));
+			handler.AppendLiteral(";");
+			stringBuilder3.AppendLine(ref handler);
+			stringBuilder = builder;
+			StringBuilder stringBuilder4 = stringBuilder;
+			handler = new StringBuilder.AppendInterpolatedStringHandler(60, 1, stringBuilder);
+			handler.AppendLiteral("        chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(");
+			handler.AppendFormatted(Encoding.UTF8.GetByteCount(requiredStringOperand));
+			handler.AppendLiteral(");");
+			stringBuilder4.AppendLine(ref handler);
+			stringBuilder = builder;
+			StringBuilder stringBuilder5 = stringBuilder;
+			handler = new StringBuilder.AppendInterpolatedStringHandler(35, 1, stringBuilder);
+			handler.AppendLiteral("        chaos_string->utf8_data = ");
+			handler.AppendFormatted(ToCppStringLiteral(requiredStringOperand));
+			handler.AppendLiteral(";");
+			stringBuilder5.AppendLine(ref handler);
+			builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);");
+			builder.AppendLine("    }");
+		}
 		AppendGotoNext(builder, nextOffset, op);
 	}
 
@@ -1774,7 +1817,9 @@ public sealed partial class NativeAotLoweringPlanner
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(42, 1, stringBuilder);
 			handler.AppendLiteral("            if (chaos_header->type_info != &");
 			handler.AppendFormatted(GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId));
-			handler.AppendLiteral(")");
+			handler.AppendLiteral(" && chaos_header->type_info->stable_id != (&");
+			handler.AppendFormatted(GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId));
+			handler.AppendLiteral(")->stable_id)");
 			stringBuilder5.AppendLine(ref handler);
 		}
 		builder.AppendLine("            {");
@@ -1841,7 +1886,9 @@ public sealed partial class NativeAotLoweringPlanner
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(54, 1, stringBuilder);
 			handler.AppendLiteral("            chaos_matches = chaos_header->type_info == &");
 			handler.AppendFormatted(GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId));
-			handler.AppendLiteral(";");
+			handler.AppendLiteral(" || chaos_header->type_info->stable_id == (&");
+			handler.AppendFormatted(GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId));
+			handler.AppendLiteral(")->stable_id;");
 			stringBuilder5.AppendLine(ref handler);
 		}
 		builder.AppendLine("        }");

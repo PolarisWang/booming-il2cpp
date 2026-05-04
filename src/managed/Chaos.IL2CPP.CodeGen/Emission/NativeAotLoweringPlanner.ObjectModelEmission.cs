@@ -40,7 +40,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("};");
 		builder.AppendLine();
 		builder.AppendLine("constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;");
-		builder.AppendLine("inline constexpr TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, 2 };");
+		builder.AppendLine("inline constexpr TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, 0, 2 }");
 		builder.AppendLine();
 		builder.AppendLine("struct chaos_managed_array");
 		builder.AppendLine("{");
@@ -360,6 +360,35 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				parentExpr = "&" + GetNativeTypeInfoSymbol(baseTypeId);
 			}
+			// ── iface_map (sorted array of implemented interface stable_ids) ──
+			bool hasIfaceMap = _referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item, out var ifaceSubjectIds) && ifaceSubjectIds.Count > 0;
+			string ifaceMapExpr;
+			string ifaceCountExpr;
+			if (hasIfaceMap)
+			{
+				var sortedIfaceIds = ifaceSubjectIds.OrderBy(id => ComputeStableTypeId(id)).ToArray();
+				ifaceMapExpr = GetNativeIfaceMapSymbol(item);
+				ifaceCountExpr = sortedIfaceIds.Length.ToString();
+				{
+					StringBuilder sb = builder;
+					sb.Append("static constexpr CHAOS_IL2CPP_UINT64 ");
+					sb.Append(ifaceMapExpr);
+					sb.AppendLine("[] = {");
+					for (int i = 0; i < sortedIfaceIds.Length; i++)
+					{
+						sb.Append("    ");
+						sb.Append(GetNativeTypeIdSymbol(sortedIfaceIds[i]));
+						if (i < sortedIfaceIds.Length - 1) sb.AppendLine(",");
+						else sb.AppendLine();
+					}
+					sb.AppendLine("};");
+				}
+			}
+			else
+			{
+				ifaceMapExpr = "nullptr";
+				ifaceCountExpr = "0";
+			}
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
@@ -369,6 +398,10 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(parentExpr);
 				handler.AppendLiteral(", ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(", ");
+				handler.AppendFormatted(ifaceMapExpr);
+				handler.AppendLiteral(", ");
+				handler.AppendFormatted(ifaceCountExpr);
 				handler.AppendLiteral(", 1 /* reference */ };");
 				stringBuilder.AppendLine(ref handler);
 			}
@@ -394,7 +427,7 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item2));
 				handler.AppendLiteral(" = { nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 3 /* interface */ };");
+				handler.AppendLiteral(", nullptr, 0, 3 /* interface */ };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -419,7 +452,7 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
 				handler.AppendLiteral(" = { nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 2 /* value */ };");
+				handler.AppendLiteral(", nullptr, 0, 2 /* value */ };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -438,6 +471,35 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (string item3 in sortedHashSet3)
 		{
 			ulong stableId = ComputeStableTypeId(item3);
+			// ── iface_map (sorted array of implemented interface stable_ids) ──
+			bool hasIfaceMap = _referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item3, out var ifaceSubjectIds) && ifaceSubjectIds.Count > 0;
+			string ifaceMapExpr;
+			string ifaceCountExpr;
+			if (hasIfaceMap)
+			{
+				var sortedIfaceIds = ifaceSubjectIds.OrderBy(id => ComputeStableTypeId(id)).ToArray();
+				ifaceMapExpr = GetNativeIfaceMapSymbol(item3);
+				ifaceCountExpr = sortedIfaceIds.Length.ToString();
+				{
+					StringBuilder sb = builder;
+					sb.Append("static constexpr CHAOS_IL2CPP_UINT64 ");
+					sb.Append(ifaceMapExpr);
+					sb.AppendLine("[] = {");
+					for (int i = 0; i < sortedIfaceIds.Length; i++)
+					{
+						sb.Append("    ");
+						sb.Append(GetNativeTypeIdSymbol(sortedIfaceIds[i]));
+						if (i < sortedIfaceIds.Length - 1) sb.AppendLine(",");
+						else sb.AppendLine();
+					}
+					sb.AppendLine("};");
+				}
+			}
+			else
+			{
+				ifaceMapExpr = "nullptr";
+				ifaceCountExpr = "0";
+			}
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
@@ -445,6 +507,10 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
 				handler.AppendLiteral(" = { nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(", ");
+				handler.AppendFormatted(ifaceMapExpr);
+				handler.AppendLiteral(", ");
+				handler.AppendFormatted(ifaceCountExpr);
 				handler.AppendLiteral(", 2 /* value (boxed) */ };");
 				stringBuilder.AppendLine(ref handler);
 			}
@@ -484,7 +550,7 @@ public sealed partial class NativeAotLoweringPlanner
 				typeMethods.Sort((a, b) => string.Compare(a.SubjectId, b.SubjectId, StringComparison.Ordinal));
 				foreach (var method in typeMethods)
 				{
-					if (method.IsStatic || !CanEmitMethodBody(method)) continue;
+					if (method.IsStatic) continue;
 					var sig = GetMethodSignatureSuffix(method.SubjectId);
 					if (!slotMap.ContainsKey(sig))
 					{
@@ -494,6 +560,8 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			vtableLengths[typeId] = nextSlot;
 		}
+		_vtableSlotMap = slotMap;
+		_vtableTypes = new HashSet<string>(vtableLengths.Where(x => x.Value > 0).Select(x => x.Key), StringComparer.Ordinal);
 		// ── VTable arrays ──
 		if (referenceTypeSubjectIds.Count > 0)
 		{
@@ -504,86 +572,6 @@ public sealed partial class NativeAotLoweringPlanner
 				var entries = new string[vtLen];
 				// Walk hierarchy to fill entries (most derived first)
 				string current = typeId;
-				while (current != null && referenceTypeSubjectIds.Contains(current))
-				{
-					if (methodsByDeclaringTypeVT.TryGetValue(current, out var typeMethods))
-					{
-						foreach (var method in typeMethods)
-						{
-							if (method.IsStatic || !CanEmitMethodBody(method)) continue;
-							var sig = GetMethodSignatureSuffix(method.SubjectId);
-							if (slotMap.TryGetValue(sig, out int slot) && slot < vtLen && entries[slot] == null)
-							{
-								entries[slot] = TryGetInstantiationStubSymbol(method) ?? method.NativeSymbol;
-							}
-						}
-					}
-					referenceTypeBaseSubjectIds.TryGetValue(current, out current);
-				}
-				// Emit vtable array
-				StringBuilder stringBuilder = builder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(24, 1, stringBuilder);
-				handler.AppendLiteral("static const void* ");
-				handler.AppendFormatted(GetNativeVTableSymbol(typeId));
-				handler.AppendLiteral("[] =");
-				stringBuilder.AppendLine(ref handler);
-				builder.AppendLine("{");
-				foreach (var entry in entries)
-				{
-					if (entry != null)
-					{
-						builder.Append("    reinterpret_cast<void*>(");
-						builder.Append(entry);
-						builder.AppendLine("),");
-					}
-					else
-					{
-						builder.AppendLine("    nullptr,");
-					}
-				}
-				builder.AppendLine("};");
-				builder.AppendLine();
-			}
-		}
-		var slotMap = new Dictionary<string, int>(StringComparer.Ordinal);
-		var vtableLengths = new Dictionary<string, int>(StringComparer.Ordinal);
-		var methodsByDeclaringTypeVT = new Dictionary<string, List<AotCoreIrMethodArtifact>>(StringComparer.Ordinal);
-		foreach (var method in _methodsBySubjectId.Values)
-		{
-			var dt = method.Identity.DeclaringTypeSubjectId;
-			if (string.IsNullOrEmpty(dt)) continue;
-			if (!methodsByDeclaringTypeVT.TryGetValue(dt, out var list))
-				methodsByDeclaringTypeVT[dt] = list = new List<AotCoreIrMethodArtifact>();
-			list.Add(method);
-		}
-		int nextSlot = 0;
-		foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
-		{
-			if (methodsByDeclaringTypeVT.TryGetValue(typeId, out var typeMethods))
-			{
-				typeMethods.Sort((a, b) => string.Compare(a.SubjectId, b.SubjectId, StringComparison.Ordinal));
-				foreach (var method in typeMethods)
-				{
-					if (method.IsStatic || !CanEmitMethodBody(method)) continue;
-					var sig = GetMethodSignatureSuffix(method.SubjectId);
-					if (!slotMap.ContainsKey(sig))
-					{
-						slotMap[sig] = nextSlot++;
-					}
-				}
-			}
-			vtableLengths[typeId] = nextSlot;
-		}
-		// ── VTable arrays ──
-		if (referenceTypeSubjectIds.Count > 0)
-		{
-			builder.AppendLine("// ── Virtual method table arrays ──");
-			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
-			{
-				if (!vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
-				var entries = new string?[vtLen];
-				// Walk hierarchy to fill entries (most derived first)
-				string? current = typeId;
 				while (current != null && referenceTypeSubjectIds.Contains(current))
 				{
 					if (methodsByDeclaringTypeVT.TryGetValue(current, out var typeMethods))
@@ -646,7 +634,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    auto* chaos_current = chaos_actual_type_info;");
 		builder.AppendLine("    while (chaos_current != nullptr)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        if (chaos_current == chaos_target_type_info)");
+		builder.AppendLine("        if (chaos_current == chaos_target_type_info || chaos_current->stable_id == chaos_target_type_info->stable_id)");
 		builder.AppendLine("        {");
 		builder.AppendLine("            return true;");
 		builder.AppendLine("        }");
@@ -657,66 +645,23 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    return false;");
 		builder.AppendLine("}");
 		builder.AppendLine();
-		// ── Interface check (switch on stable_id) ──
+		// ── Interface check (iface_map linear scan) ──
 		builder.AppendLine("bool chaos_type_implements_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept");
 		builder.AppendLine("{");
-		builder.AppendLine("    switch (chaos_actual_type_info->stable_id)");
+		builder.AppendLine("    if (chaos_actual_type_info->iface_count == 0)");
 		builder.AppendLine("    {");
-		foreach (string item6 in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
-		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder9 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder);
-			handler.AppendLiteral("        case ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol(item6));
-			handler.AppendLiteral(":");
-			stringBuilder9.AppendLine(ref handler);
-			if (referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item6, out HashSet<string> value2) && value2.Count > 0)
-			{
-				string value3 = string.Join(" || ", from interfaceSubjectId in value2.OrderBy<string, string>((string result) => result, StringComparer.Ordinal)
-					select "chaos_target_interface_type_info->stable_id == " + GetNativeTypeIdSymbol(interfaceSubjectId));
-				stringBuilder = builder;
-				StringBuilder stringBuilder10 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(20, 1, stringBuilder);
-				handler.AppendLiteral("            return ");
-				handler.AppendFormatted(value3);
-				handler.AppendLiteral(";");
-				stringBuilder10.AppendLine(ref handler);
-			}
-			else
-			{
-				builder.AppendLine("            return false;");
-			}
-		}
-		foreach (string item7 in sortedHashSet3)
-		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder11 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder);
-			handler.AppendLiteral("        case ");
-			handler.AppendFormatted(GetNativeBoxTypeIdSymbol(item7));
-			handler.AppendLiteral(":");
-			stringBuilder11.AppendLine(ref handler);
-			if (referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item7, out HashSet<string> value4) && value4.Count > 0)
-			{
-				string value5 = string.Join(" || ", from interfaceSubjectId in value4.OrderBy<string, string>((string result) => result, StringComparer.Ordinal)
-					select "chaos_target_interface_type_info->stable_id == " + GetNativeTypeIdSymbol(interfaceSubjectId));
-				stringBuilder = builder;
-				StringBuilder stringBuilder12 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(20, 1, stringBuilder);
-				handler.AppendLiteral("            return ");
-				handler.AppendFormatted(value5);
-				handler.AppendLiteral(";");
-				stringBuilder12.AppendLine(ref handler);
-			}
-			else
-			{
-				builder.AppendLine("            return false;");
-			}
-		}
-		builder.AppendLine("        default:");
-		builder.AppendLine("            return false;");
+		builder.AppendLine("        return false;");
 		builder.AppendLine("    }");
+		builder.AppendLine();
+		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_actual_type_info->iface_count; chaos_i++)");
+		builder.AppendLine("    {");
+		builder.AppendLine("        if (chaos_actual_type_info->iface_map[chaos_i] == chaos_target_interface_type_info->stable_id)");
+		builder.AppendLine("        {");
+		builder.AppendLine("            return true;");
+		builder.AppendLine("        }");
+		builder.AppendLine("    }");
+		builder.AppendLine();
+		builder.AppendLine("    return false;");
 		builder.AppendLine("}");
 		builder.AppendLine();
 		builder.AppendLine("bool chaos_does_type_implement_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept");
@@ -800,6 +745,11 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (string typeSubjectId in GetReferenceTypeEmissionOrder(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 		{
 			var ns = ManagedNaming.NormalizeSubjectIdAssembly(typeSubjectId);
+			// Decimal leaks into referenceTypeSubjectIds as a value type — skip to avoid unnecessary chaos_object_header
+			if (string.Equals(ns, "System.Private.CoreLib/System.Decimal", StringComparison.Ordinal))
+			{
+				continue;
+			}
 			bool num2 = string.Equals(ns, "System.Private.CoreLib/System.String", StringComparison.Ordinal);
 			bool flag3 = string.Equals(ns, "System.Private.CoreLib/System.Delegate", StringComparison.Ordinal);
 			bool flag4 = string.Equals(ns, "System.Private.CoreLib/System.Type", StringComparison.Ordinal);
