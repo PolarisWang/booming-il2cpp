@@ -153,6 +153,8 @@ public sealed partial class NativeAotLoweringPlanner
             .ToList();
         var entryBridgeArguments = BuildEntryBridgeArguments(entryMethod);
 
+        var moduleRegistrationCode = BuildModuleRegistration(loweringPlan);
+
         return new NativeAotTemplateModel
         {
             Includes =
@@ -160,6 +162,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "<chaos/common.h>",
                 "\"runtime_core.h\"",
                 "\"codegen_bridge.h\"",
+                "\"module_registry.h\"",
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
             GenericRegistrationCode = genericRegistrationHelperCode,
@@ -171,6 +174,7 @@ public sealed partial class NativeAotLoweringPlanner
             NativeEntryFunctionName = loweringPlan.NativeEntryFunctionName,
             EntryBridgeArguments = entryBridgeArguments,
             ShapeDispatchHeaderContent = _shapeRegistry.GenerateCppShapeHeader(),
+            ModuleRegistrationCode = moduleRegistrationCode,
         };
     }
 
@@ -1659,6 +1663,14 @@ public sealed record NativeAotTemplateModel
     /// there are no generic arrays to expose.
     /// </summary>
     public required string GenericRegistrationCode { get; init; }
+
+    /// <summary>
+    /// C++ code for per-DLL module registration via RegisterModule().
+    /// Emitted inside the anonymous namespace so the static initializer
+    /// runs at module load time. Includes a ModuleDescriptor and the
+    /// registration call. Empty string for audit/inventory plan kinds.
+    /// </summary>
+    public required string ModuleRegistrationCode { get; init; }
 }
 
 public sealed record NativeAotMethodTemplateModel

@@ -8,6 +8,8 @@
 namespace
 {
 {{ object_model_section }}
+
+{{ module_registration_code }}
 }
 #pragma warning(pop)
 

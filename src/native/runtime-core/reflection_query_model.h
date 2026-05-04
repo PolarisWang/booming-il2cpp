@@ -66,13 +66,13 @@ constexpr CHAOS_IL2CPP_UINTPTR kReflectionQueryHandleTag =
 template <typename THandle, typename TDescriptor>
 inline THandle EncodeReflectionQueryHandle(const TDescriptor* descriptor) {
     return descriptor == nullptr
-        ? nullptr
-        : reinterpret_cast<THandle>(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(descriptor) | kReflectionQueryHandleTag);
+        ? static_cast<THandle>(0)
+        : static_cast<THandle>(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(descriptor) | kReflectionQueryHandleTag);
 }
 
 template <typename TDescriptor, typename THandle>
 inline const TDescriptor* TryDecodeReflectionQueryHandle(THandle handle) {
-    const CHAOS_IL2CPP_UINTPTR raw_handle = reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(handle);
+    const CHAOS_IL2CPP_UINTPTR raw_handle = static_cast<CHAOS_IL2CPP_UINTPTR>(handle);
     if ((raw_handle & kReflectionQueryHandleTag) == 0u) {
         return nullptr;
     }

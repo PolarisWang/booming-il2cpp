@@ -1,5 +1,6 @@
 #include "vtable_registry.h"
 #include "reflection_query_model.h"
+#include "runtime_core.h"
 
 #include <chaos/native_types.h>
 
@@ -49,7 +50,7 @@ bool RegisterRuntimeVTable(
     CHAOS_IL2CPP_UINT32         slot_count,
     const VTableSlot*           slots)
 {
-    if (type == nullptr || slots == nullptr || slot_count == 0u) {
+    if (type == 0 || slots == nullptr || slot_count == 0u) {
         return false;
     }
 
@@ -65,7 +66,7 @@ bool RegisterRuntimeVTable(
 
     // Extract base token.
     CHAOS_IL2CPP_UINT32 base_token = 0u;
-    if (base_type != nullptr) {
+    if (base_type != 0) {
         const auto* base_desc = TryDecodeReflectionQueryTypeHandle(base_type);
         if (base_desc != nullptr) {
             base_token = base_desc->metadata_token;

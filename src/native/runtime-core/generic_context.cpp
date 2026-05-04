@@ -159,12 +159,12 @@ CHAOS_IL2CPP_UINT32 GetClassTypeArgCount(GenericContextHandle generic_context) {
 
 TypeInfoHandle GetClassTypeArg(GenericContextHandle generic_context, CHAOS_IL2CPP_UINT32 index) {
     if (generic_context == nullptr) {
-        return nullptr;
+        return 0;
     }
 
     const auto* entry = reinterpret_cast<const MethodGenericContextEntry*>(generic_context);
     if (index >= entry->class_type_args.size()) {
-        return nullptr;
+        return 0;
     }
 
     return entry->class_type_args[index];
@@ -181,12 +181,12 @@ CHAOS_IL2CPP_UINT32 GetMethodTypeArgCount(GenericContextHandle generic_context) 
 
 TypeInfoHandle GetMethodTypeArg(GenericContextHandle generic_context, CHAOS_IL2CPP_UINT32 index) {
     if (generic_context == nullptr) {
-        return nullptr;
+        return 0;
     }
 
     const auto* entry = reinterpret_cast<const MethodGenericContextEntry*>(generic_context);
     if (index >= entry->method_type_args.size()) {
-        return nullptr;
+        return 0;
     }
 
     return entry->method_type_args[index];
@@ -369,8 +369,8 @@ TypeInfoHandle TryResolveClosedType(
     const TypeInfoHandle* type_args,
     CHAOS_IL2CPP_UINT32 arg_count)
 {
-    if (open_type == nullptr) {
-        return nullptr;
+    if (open_type == 0) {
+        return 0;
     }
 
     auto& registry = GetRegistry();
@@ -378,7 +378,7 @@ TypeInfoHandle TryResolveClosedType(
 
     auto it = registry.by_open_type.find(open_type);
     if (it == registry.by_open_type.end()) {
-        return nullptr;
+        return 0;
     }
 
     for (const auto& entry : it->second) {
