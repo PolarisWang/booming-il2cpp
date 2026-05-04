@@ -8,27 +8,6 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed partial class NativeReferenceLoweringPlanner
 {
-    private const string ManagedAsyncAwaitIntMinimal = NativeReferenceProofCatalog.ManagedAsyncAwaitIntMinimal;
-    private const string ManagedThreadingThreadStaticMonitorMinimal = NativeReferenceProofCatalog.ManagedThreadingThreadStaticMonitorMinimal;
-    private const string ManagedInterfaceDispatchMessageMinimal = NativeReferenceProofCatalog.ManagedInterfaceDispatchMessageMinimal;
-    private const string ManagedDispatchVirtualInstanceMessageMinimal = NativeReferenceProofCatalog.ManagedDispatchVirtualInstanceMessageMinimal;
-    private const string ManagedObjectCapturedStateInstanceMessageMinimal = NativeReferenceProofCatalog.ManagedObjectCapturedStateInstanceMessageMinimal;
-    private const string ManagedGenericStaticForwarderCapturedGetterMinimal = NativeReferenceProofCatalog.ManagedGenericStaticForwarderCapturedGetterMinimal;
-    private const string ManagedArraysReverseReferenceArrayMinimal = NativeReferenceProofCatalog.ManagedArraysReverseReferenceArrayMinimal;
-    private const string ManagedArraysClearReferenceArrayMinimal = NativeReferenceProofCatalog.ManagedArraysClearReferenceArrayMinimal;
-    private const string ManagedArraysCopyReferenceArrayMinimal = NativeReferenceProofCatalog.ManagedArraysCopyReferenceArrayMinimal;
-    private const string ManagedArraysBoxingReferenceArrayBoxedIntMinimal = NativeReferenceProofCatalog.ManagedArraysBoxingReferenceArrayBoxedIntMinimal;
-    private const string DelegateClosedTargetRelayMinimal = NativeReferenceProofCatalog.DelegateClosedTargetRelayMinimal;
-    private const string NestedExceptionThrowCatchFinallyMinimal = NativeReferenceProofCatalog.NestedExceptionThrowCatchFinallyMinimal;
-    private const string ExceptionThrowCatchFinallyMinimal = NativeReferenceProofCatalog.ExceptionThrowCatchFinallyMinimal;
-    private const string ReflectionInteropClosureMinimal = NativeReferenceProofCatalog.ReflectionInteropClosureMinimal;
-    private const string ReflectionClosedTypeQueryMinimal = NativeReferenceProofCatalog.ReflectionClosedTypeQueryMinimal;
-    private const string MarshalingUtf8ExportMinimal = NativeReferenceProofCatalog.MarshalingUtf8ExportMinimal;
-    private const string InteropPInvokeDirectCallMinimal = NativeReferenceProofCatalog.InteropPInvokeDirectCallMinimal;
-    private const string EngineLogWriteMinimal = NativeReferenceProofCatalog.EngineLogWriteMinimal;
-    private const string EngineObjectHandleRoundtripMinimal = NativeReferenceProofCatalog.EngineObjectHandleRoundtripMinimal;
-    private const string EngineLifecycleCallbackMinimal = NativeReferenceProofCatalog.EngineLifecycleCallbackMinimal;
-    private const string EngineHostProofMinimal = NativeReferenceProofCatalog.EngineHostProofMinimal;
     private const string GeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.GeneratedTranslationUnitTemplateRelativePath;
     private const string DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath;
     private const string InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath;
@@ -76,21 +55,21 @@ public sealed partial class NativeReferenceLoweringPlanner
 
         var selectedFamily = SelectLoweringFamily(linkedWorld, methodShapes, methodCapabilities);
         NativeReferenceLoweringPlanArtifact planned;
-        if (string.Equals(selectedFamily, ManagedAsyncAwaitIntMinimal, StringComparison.Ordinal))
+        if (selectedFamily == NativeReferencePlanKind.ManagedAsyncAwaitIntMinimal)
         {
             planned = CreateAsyncAwaitIntLoweringPlan(
                 linkedWorld,
                 metadataRegistration,
                 methodPointers);
         }
-        else if (string.Equals(selectedFamily, ManagedThreadingThreadStaticMonitorMinimal, StringComparison.Ordinal))
+        else if (selectedFamily == NativeReferencePlanKind.ManagedThreadingThreadStaticMonitorMinimal)
         {
             planned = CreateThreadingThreadStaticMonitorLoweringPlan(
                 linkedWorld,
                 metadataRegistration,
                 methodPointers);
         }
-        else if (string.Equals(selectedFamily, ManagedInterfaceDispatchMessageMinimal, StringComparison.Ordinal))
+        else if (selectedFamily == NativeReferencePlanKind.ManagedInterfaceDispatchMessageMinimal)
         {
             planned = CreateInterfaceDispatchMessageLoweringPlan(
                 linkedWorld,
@@ -98,7 +77,7 @@ public sealed partial class NativeReferenceLoweringPlanner
                 metadataRegistration,
                 methodPointers);
         }
-        else if (string.Equals(selectedFamily, ManagedDispatchVirtualInstanceMessageMinimal, StringComparison.Ordinal))
+        else if (selectedFamily == NativeReferencePlanKind.ManagedDispatchVirtualInstanceMessageMinimal)
         {
             planned = CreateDispatchVirtualInstanceMessageLoweringPlan(
                 linkedWorld,
@@ -117,15 +96,15 @@ public sealed partial class NativeReferenceLoweringPlanner
         }
         var mappedLegacyFamily = MapLegacyPlanKind(planned.PlanKind);
 
-        if (!string.Equals(selectedFamily, mappedLegacyFamily, StringComparison.Ordinal))
+        if (selectedFamily != mappedLegacyFamily)
         {
             throw new InvalidOperationException(
-                $"semantic lowering family '{selectedFamily}' disagrees with legacy proof-shape lowering family '{mappedLegacyFamily}' for '{linkedWorld.EntryPointSubjectId}'");
+                $"semantic lowering family '{NativeReferenceProofCatalog.Stringify(selectedFamily)}' disagrees with legacy proof-shape lowering family '{NativeReferenceProofCatalog.Stringify(mappedLegacyFamily)}' for '{linkedWorld.EntryPointSubjectId}'");
         }
 
         return planned with
         {
-            PlanKind = selectedFamily,
+            PlanKind = NativeReferenceProofCatalog.Stringify(selectedFamily),
         };
     }
 }

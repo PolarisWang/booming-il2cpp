@@ -1051,27 +1051,6 @@ public sealed partial class NativeReferenceProofEmitter
     }
 
     private const int AuditTranslationUnitPageSize = 1024;
-    private const string ManagedAsyncAwaitIntMinimal = NativeReferenceProofCatalog.ManagedAsyncAwaitIntMinimal;
-    private const string ManagedThreadingThreadStaticMonitorMinimal = NativeReferenceProofCatalog.ManagedThreadingThreadStaticMonitorMinimal;
-    private const string ManagedInterfaceDispatchMessageMinimal = NativeReferenceProofCatalog.ManagedInterfaceDispatchMessageMinimal;
-    private const string ManagedDispatchVirtualInstanceMessageMinimal = NativeReferenceProofCatalog.ManagedDispatchVirtualInstanceMessageMinimal;
-    private const string ManagedObjectCapturedStateInstanceMessageMinimal = NativeReferenceProofCatalog.ManagedObjectCapturedStateInstanceMessageMinimal;
-    private const string ManagedGenericStaticForwarderCapturedGetterMinimal = NativeReferenceProofCatalog.ManagedGenericStaticForwarderCapturedGetterMinimal;
-    private const string ManagedArraysReverseReferenceArrayMinimal = NativeReferenceProofCatalog.ManagedArraysReverseReferenceArrayMinimal;
-    private const string ManagedArraysClearReferenceArrayMinimal = NativeReferenceProofCatalog.ManagedArraysClearReferenceArrayMinimal;
-    private const string ManagedArraysCopyReferenceArrayMinimal = NativeReferenceProofCatalog.ManagedArraysCopyReferenceArrayMinimal;
-    private const string ManagedArraysBoxingReferenceArrayBoxedIntMinimal = NativeReferenceProofCatalog.ManagedArraysBoxingReferenceArrayBoxedIntMinimal;
-    private const string DelegateClosedTargetRelayMinimal = NativeReferenceProofCatalog.DelegateClosedTargetRelayMinimal;
-    private const string NestedExceptionThrowCatchFinallyMinimal = NativeReferenceProofCatalog.NestedExceptionThrowCatchFinallyMinimal;
-    private const string ExceptionThrowCatchFinallyMinimal = NativeReferenceProofCatalog.ExceptionThrowCatchFinallyMinimal;
-    private const string ReflectionInteropClosureMinimal = NativeReferenceProofCatalog.ReflectionInteropClosureMinimal;
-    private const string ReflectionClosedTypeQueryMinimal = NativeReferenceProofCatalog.ReflectionClosedTypeQueryMinimal;
-    private const string MarshalingUtf8ExportMinimal = NativeReferenceProofCatalog.MarshalingUtf8ExportMinimal;
-    private const string InteropPInvokeDirectCallMinimal = NativeReferenceProofCatalog.InteropPInvokeDirectCallMinimal;
-    private const string EngineLogWriteMinimal = NativeReferenceProofCatalog.EngineLogWriteMinimal;
-    private const string EngineObjectHandleRoundtripMinimal = NativeReferenceProofCatalog.EngineObjectHandleRoundtripMinimal;
-    private const string EngineLifecycleCallbackMinimal = NativeReferenceProofCatalog.EngineLifecycleCallbackMinimal;
-    private const string EngineHostProofMinimal = NativeReferenceProofCatalog.EngineHostProofMinimal;
     private const string GeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.GeneratedTranslationUnitTemplateRelativePath;
     private const string DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath;
     private const string InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath;
@@ -3356,7 +3335,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
         loweringPlan = new NativeReferenceLoweringPlanArtifact
         {
-            PlanKind = MarshalingUtf8ExportMinimal,
+            PlanKind = NativeReferenceProofCatalog.Stringify(NativeReferencePlanKind.MarshalingUtf8ExportMinimal),
             AssemblyName = assemblyName,
             EntrySubjectId = subjectId,
             IncludeHeader = "codegen_bridge.h",
@@ -3437,7 +3416,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
         loweringPlan = new NativeReferenceLoweringPlanArtifact
         {
-            PlanKind = ReflectionInteropClosureMinimal,
+            PlanKind = NativeReferenceProofCatalog.Stringify(NativeReferencePlanKind.ReflectionInteropClosureMinimal),
             AssemblyName = assemblyName,
             EntrySubjectId = subjectId,
             IncludeHeader = "reflection_query_model.h",
@@ -3520,7 +3499,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
         loweringPlan = new NativeReferenceLoweringPlanArtifact
         {
-            PlanKind = InteropPInvokeDirectCallMinimal,
+            PlanKind = NativeReferenceProofCatalog.Stringify(NativeReferencePlanKind.InteropPInvokeDirectCallMinimal),
             AssemblyName = assemblyName,
             EntrySubjectId = subjectId,
             IncludeHeader = "codegen_bridge.h",
@@ -4191,7 +4170,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
         loweringPlan = new NativeReferenceLoweringPlanArtifact
         {
-            PlanKind = ManagedThreadingThreadStaticMonitorMinimal,
+            PlanKind = NativeReferenceProofCatalog.Stringify(NativeReferencePlanKind.ManagedThreadingThreadStaticMonitorMinimal),
             AssemblyName = assemblyName,
             EntrySubjectId = subjectId,
             IncludeHeader = "codegen_bridge.h",
@@ -4262,7 +4241,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
         loweringPlan = new NativeReferenceLoweringPlanArtifact
         {
-            PlanKind = ExceptionThrowCatchFinallyMinimal,
+            PlanKind = NativeReferenceProofCatalog.Stringify(NativeReferencePlanKind.ExceptionThrowCatchFinallyMinimal),
             AssemblyName = assemblyName,
             EntrySubjectId = subjectId,
             IncludeHeader = "codegen_bridge.h",
@@ -4342,7 +4321,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
         loweringPlan = new NativeReferenceLoweringPlanArtifact
         {
-            PlanKind = NestedExceptionThrowCatchFinallyMinimal,
+            PlanKind = NativeReferenceProofCatalog.Stringify(NativeReferencePlanKind.NestedExceptionThrowCatchFinallyMinimal),
             AssemblyName = assemblyName,
             EntrySubjectId = subjectId,
             IncludeHeader = "codegen_bridge.h",
@@ -8067,16 +8046,18 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         RequireStringField(loweringPlan.EntryMethodToken, nameof(loweringPlan.EntryMethodToken));
         RequireStringField(loweringPlan.ConsoleWriteLineStringIcall, nameof(loweringPlan.ConsoleWriteLineStringIcall));
 
-        switch (loweringPlan.PlanKind)
+        var planKind = NativeReferenceProofCatalog.Parse(loweringPlan.PlanKind);
+        switch (planKind)
         {
-            case ManagedAsyncAwaitIntMinimal:
-            case ManagedThreadingThreadStaticMonitorMinimal:
-            case MarshalingUtf8ExportMinimal:
+            case NativeReferencePlanKind.ManagedAsyncAwaitIntMinimal:
+            case NativeReferencePlanKind.ManagedThreadingThreadStaticMonitorMinimal:
+            case NativeReferencePlanKind.MarshalingUtf8ExportMinimal:
                 RequireStringField(loweringPlan.ExpectedOutput, nameof(loweringPlan.ExpectedOutput));
                 RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
                 return;
 
-            case "interfaceDispatchMessage":
+            case NativeReferencePlanKind.ManagedInterfaceDispatchMessageMinimal:
+            case NativeReferencePlanKind.ManagedDispatchVirtualInstanceMessageMinimal:
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
                 RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
@@ -8093,26 +8074,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.MessageSuffixLiteralByteCount, nameof(loweringPlan.MessageSuffixLiteralByteCount));
                 return;
 
-            case ManagedInterfaceDispatchMessageMinimal:
-            case ManagedDispatchVirtualInstanceMessageMinimal:
-                RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
-                RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
-                RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
-                RequireStringField(loweringPlan.CapturedFieldToken, nameof(loweringPlan.CapturedFieldToken));
-                RequireStringField(loweringPlan.ConstructorMethodToken, nameof(loweringPlan.ConstructorMethodToken));
-                RequireStringField(loweringPlan.InstanceMethodToken, nameof(loweringPlan.InstanceMethodToken));
-                RequireStringField(loweringPlan.DispatchStrategy, nameof(loweringPlan.DispatchStrategy));
-                RequireStringField(loweringPlan.StringConcatPairIcall, nameof(loweringPlan.StringConcatPairIcall));
-                RequireStringField(loweringPlan.ConstructorLiteral, nameof(loweringPlan.ConstructorLiteral));
-                RequireIntField(loweringPlan.ConstructorLiteralByteCount, nameof(loweringPlan.ConstructorLiteralByteCount));
-                RequireStringField(loweringPlan.MessagePrefixLiteral, nameof(loweringPlan.MessagePrefixLiteral));
-                RequireIntField(loweringPlan.MessagePrefixLiteralByteCount, nameof(loweringPlan.MessagePrefixLiteralByteCount));
-                RequireStringField(loweringPlan.MessageSuffixLiteral, nameof(loweringPlan.MessageSuffixLiteral));
-                RequireIntField(loweringPlan.MessageSuffixLiteralByteCount, nameof(loweringPlan.MessageSuffixLiteralByteCount));
-                return;
-
-            case ManagedObjectCapturedStateInstanceMessageMinimal:
-            case "constructorThenInstanceCall":
+            case NativeReferencePlanKind.ManagedObjectCapturedStateInstanceMessageMinimal:
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
                 RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
@@ -8128,8 +8090,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.MessageSuffixLiteralByteCount, nameof(loweringPlan.MessageSuffixLiteralByteCount));
                 return;
 
-            case ManagedArraysCopyReferenceArrayMinimal:
-            case "arrayCopyReferenceArray":
+            case NativeReferencePlanKind.ManagedArraysCopyReferenceArrayMinimal:
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
                 RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
@@ -8152,8 +8113,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.CopyLength, nameof(loweringPlan.CopyLength));
                 return;
 
-            case ManagedArraysReverseReferenceArrayMinimal:
-            case "arrayReverseReferenceArray":
+            case NativeReferencePlanKind.ManagedArraysReverseReferenceArrayMinimal:
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
                 RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
@@ -8174,8 +8134,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.ArrayReadIndex, nameof(loweringPlan.ArrayReadIndex));
                 return;
 
-            case ManagedArraysClearReferenceArrayMinimal:
-            case "arrayClearReferenceArray":
+            case NativeReferencePlanKind.ManagedArraysClearReferenceArrayMinimal:
                 RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
                 RequireStringField(loweringPlan.StringConcatPairIcall, nameof(loweringPlan.StringConcatPairIcall));
                 RequireStringField(loweringPlan.StoredLiteral, nameof(loweringPlan.StoredLiteral));
@@ -8189,8 +8148,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.ArrayReadIndex, nameof(loweringPlan.ArrayReadIndex));
                 return;
 
-            case ManagedGenericStaticForwarderCapturedGetterMinimal:
-            case "staticCallCtorGetter":
+            case NativeReferencePlanKind.ManagedGenericStaticForwarderCapturedGetterMinimal:
                 RequireStringField(loweringPlan.EchoMethodSymbol, nameof(loweringPlan.EchoMethodSymbol));
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.GetterSymbol, nameof(loweringPlan.GetterSymbol));
@@ -8203,8 +8161,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.EchoLiteralByteCount, nameof(loweringPlan.EchoLiteralByteCount));
                 return;
 
-            case ManagedArraysBoxingReferenceArrayBoxedIntMinimal:
-            case "arrayBoxingReferenceArray":
+            case NativeReferencePlanKind.ManagedArraysBoxingReferenceArrayBoxedIntMinimal:
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
                 RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
@@ -8222,8 +8179,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.MessageSuffixLiteralByteCount, nameof(loweringPlan.MessageSuffixLiteralByteCount));
                 return;
 
-            case DelegateClosedTargetRelayMinimal:
-            case "delegateClosedTargetRelayMinimal":
+            case NativeReferencePlanKind.DelegateClosedTargetRelayMinimal:
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
                 RequireStringField(loweringPlan.StaticMethodSymbol, nameof(loweringPlan.StaticMethodSymbol));
@@ -8243,8 +8199,8 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.TrailingLiteralByteCount, nameof(loweringPlan.TrailingLiteralByteCount));
                 return;
 
-            case NestedExceptionThrowCatchFinallyMinimal:
-            case ExceptionThrowCatchFinallyMinimal:
+            case NativeReferencePlanKind.NestedExceptionThrowCatchFinallyMinimal:
+            case NativeReferencePlanKind.ExceptionThrowCatchFinallyMinimal:
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
                 RequireStringField(loweringPlan.ThrowMethodSymbol, nameof(loweringPlan.ThrowMethodSymbol));
@@ -8258,7 +8214,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
                 return;
 
-            case ReflectionInteropClosureMinimal:
+            case NativeReferencePlanKind.ReflectionInteropClosureMinimal:
                 RequireStringField(loweringPlan.ClosedTypeSubjectId, nameof(loweringPlan.ClosedTypeSubjectId));
                 RequireStringField(loweringPlan.GenericTypeDefinitionSubjectId, nameof(loweringPlan.GenericTypeDefinitionSubjectId));
                 RequireStringField(loweringPlan.FieldSubjectId, nameof(loweringPlan.FieldSubjectId));
@@ -8279,7 +8235,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
                 return;
 
-            case ReflectionClosedTypeQueryMinimal:
+            case NativeReferencePlanKind.ReflectionClosedTypeQueryMinimal:
                 RequireStringField(loweringPlan.ClosedTypeSubjectId, nameof(loweringPlan.ClosedTypeSubjectId));
                 RequireStringField(loweringPlan.GenericTypeDefinitionSubjectId, nameof(loweringPlan.GenericTypeDefinitionSubjectId));
                 RequireStringField(loweringPlan.FieldSubjectId, nameof(loweringPlan.FieldSubjectId));
@@ -8301,7 +8257,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
                 return;
 
-            case InteropPInvokeDirectCallMinimal:
+            case NativeReferencePlanKind.InteropPInvokeDirectCallMinimal:
                 RequireStringField(loweringPlan.ImportMethodSymbol, nameof(loweringPlan.ImportMethodSymbol));
                 RequireStringField(loweringPlan.ImportModuleName, nameof(loweringPlan.ImportModuleName));
                 RequireStringField(loweringPlan.ImportEntryPointName, nameof(loweringPlan.ImportEntryPointName));
@@ -8311,10 +8267,10 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 RequireStringField(loweringPlan.OutputPrefix, nameof(loweringPlan.OutputPrefix));
                 return;
 
-            case EngineLogWriteMinimal:
-            case EngineObjectHandleRoundtripMinimal:
-            case EngineLifecycleCallbackMinimal:
-            case EngineHostProofMinimal:
+            case NativeReferencePlanKind.EngineLogWriteMinimal:
+            case NativeReferencePlanKind.EngineObjectHandleRoundtripMinimal:
+            case NativeReferencePlanKind.EngineLifecycleCallbackMinimal:
+            case NativeReferencePlanKind.EngineHostProofMinimal:
                 RequireStringField(loweringPlan.ExpectedOutput, nameof(loweringPlan.ExpectedOutput));
                 RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
                 if (loweringPlan.EngineBindings is null)
@@ -8682,7 +8638,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
         loweringPlan = new NativeReferenceLoweringPlanArtifact
         {
-            PlanKind = InteropPInvokeDirectCallMinimal,
+            PlanKind = NativeReferenceProofCatalog.Stringify(NativeReferencePlanKind.InteropPInvokeDirectCallMinimal),
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",

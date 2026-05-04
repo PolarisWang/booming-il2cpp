@@ -22,7 +22,7 @@ public sealed partial class NativeReferenceLoweringPlanner
             "EngineLogWriteLite/EngineLogWriteEntry::Run()" => CreateEngineLoweringPlan(
                 assemblyName,
                 entryPointSubjectId,
-                planKind: EngineLogWriteMinimal,
+                planKind: NativeReferencePlanKind.EngineLogWriteMinimal,
                 focusArea: "service-call",
                 entrySymbol: "RunEngineLogWriteEntry",
                 capabilityIds: ["engine.log.write"],
@@ -32,7 +32,7 @@ public sealed partial class NativeReferenceLoweringPlanner
             "EngineObjectHandleLite/EngineObjectHandleEntry::Run()" => CreateEngineLoweringPlan(
                 assemblyName,
                 entryPointSubjectId,
-                planKind: EngineObjectHandleRoundtripMinimal,
+                planKind: NativeReferencePlanKind.EngineObjectHandleRoundtripMinimal,
                 focusArea: "object-handle",
                 entrySymbol: "RunEngineObjectHandleEntry",
                 capabilityIds: ["engine.object.handle.create", "engine.object.handle.resolve"],
@@ -42,7 +42,7 @@ public sealed partial class NativeReferenceLoweringPlanner
             "EngineLifecycleCallbackLite/EngineLifecycleCallbackEntry::Run()" => CreateEngineLoweringPlan(
                 assemblyName,
                 entryPointSubjectId,
-                planKind: EngineLifecycleCallbackMinimal,
+                planKind: NativeReferencePlanKind.EngineLifecycleCallbackMinimal,
                 focusArea: "lifecycle-callback",
                 entrySymbol: "RunEngineLifecycleCallbackEntry",
                 capabilityIds: ["engine.lifecycle.callback.register", "engine.lifecycle.dispatch", "engine.thread.main-lane"],
@@ -52,7 +52,7 @@ public sealed partial class NativeReferenceLoweringPlanner
             "EngineHostProof/EngineHostEntry::Run()" => CreateEngineLoweringPlan(
                 assemblyName,
                 entryPointSubjectId,
-                planKind: EngineHostProofMinimal,
+                planKind: NativeReferencePlanKind.EngineHostProofMinimal,
                 focusArea: "host-proof",
                 entrySymbol: "RunEngineHostEntry",
                 capabilityIds:
@@ -91,7 +91,7 @@ public sealed partial class NativeReferenceLoweringPlanner
     private static NativeReferenceLoweringPlanArtifact CreateEngineLoweringPlan(
         string assemblyName,
         string entryPointSubjectId,
-        string planKind,
+        NativeReferencePlanKind planKind,
         string focusArea,
         string entrySymbol,
         IReadOnlyList<string> capabilityIds,
@@ -101,7 +101,7 @@ public sealed partial class NativeReferenceLoweringPlanner
     {
         return new NativeReferenceLoweringPlanArtifact
         {
-            PlanKind = planKind,
+            PlanKind = NativeReferenceProofCatalog.Stringify(planKind),
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
@@ -343,7 +343,7 @@ public sealed partial class NativeReferenceLoweringPlanner
             ?.SubjectId;
     }
 
-    private static string SelectLoweringFamily(
+    private static NativeReferencePlanKind SelectLoweringFamily(
         LinkedWorldModel linkedWorld,
         IReadOnlyDictionary<string, MethodShapeModel> methodShapes,
         IReadOnlyDictionary<string, IReadOnlyList<string>> methodCapabilities)
@@ -365,17 +365,17 @@ public sealed partial class NativeReferenceLoweringPlanner
 
         if (MatchesReflectionInteropClosureCandidate(worldCapabilities))
         {
-            return ReflectionInteropClosureMinimal;
+            return NativeReferencePlanKind.ReflectionInteropClosureMinimal;
         }
 
         if (MatchesMarshalingUtf8ExportCandidate(linkedWorld, worldCapabilities))
         {
-            return MarshalingUtf8ExportMinimal;
+            return NativeReferencePlanKind.MarshalingUtf8ExportMinimal;
         }
 
         if (MatchesPInvokeDirectCallCandidate(methodShapes, worldCapabilities))
         {
-            return InteropPInvokeDirectCallMinimal;
+            return NativeReferencePlanKind.InteropPInvokeDirectCallMinimal;
         }
 
         if (MatchesReflectionClosedTypeQueryCandidate(worldCapabilities))
@@ -383,29 +383,29 @@ public sealed partial class NativeReferenceLoweringPlanner
             RequireDependencyReason(
                 dependencyReasons,
                 "reflection-query",
-                ReflectionClosedTypeQueryMinimal,
+                NativeReferencePlanKind.ReflectionClosedTypeQueryMinimal,
                 linkedWorld.EntryPointSubjectId);
-            return ReflectionClosedTypeQueryMinimal;
+            return NativeReferencePlanKind.ReflectionClosedTypeQueryMinimal;
         }
 
         if (MatchesDelegateClosedTargetRelayCandidate(worldCapabilities, entryCapabilities))
         {
-            return DelegateClosedTargetRelayMinimal;
+            return NativeReferencePlanKind.DelegateClosedTargetRelayMinimal;
         }
 
         if (MatchesNestedExceptionCandidate(linkedWorld, worldCapabilities, entryCapabilities))
         {
-            return NestedExceptionThrowCatchFinallyMinimal;
+            return NativeReferencePlanKind.NestedExceptionThrowCatchFinallyMinimal;
         }
 
         if (MatchesExceptionThrowCatchFinallyCandidate(worldCapabilities, entryCapabilities))
         {
-            return ExceptionThrowCatchFinallyMinimal;
+            return NativeReferencePlanKind.ExceptionThrowCatchFinallyMinimal;
         }
 
         if (MatchesThreadingThreadStaticMonitorCandidate(linkedWorld, worldCapabilities))
         {
-            return ManagedThreadingThreadStaticMonitorMinimal;
+            return NativeReferencePlanKind.ManagedThreadingThreadStaticMonitorMinimal;
         }
 
         if (MatchesAsyncAwaitIntCandidate(linkedWorld, worldCapabilities, entryCapabilities))
@@ -413,19 +413,19 @@ public sealed partial class NativeReferenceLoweringPlanner
             RequireDependencyReason(
                 dependencyReasons,
                 "stdout-path",
-                ManagedAsyncAwaitIntMinimal,
+                NativeReferencePlanKind.ManagedAsyncAwaitIntMinimal,
                 linkedWorld.EntryPointSubjectId);
-            return ManagedAsyncAwaitIntMinimal;
+            return NativeReferencePlanKind.ManagedAsyncAwaitIntMinimal;
         }
 
         if (MatchesInterfaceDispatchMessageCandidate(linkedWorld, entryCapabilities))
         {
-            return ManagedInterfaceDispatchMessageMinimal;
+            return NativeReferencePlanKind.ManagedInterfaceDispatchMessageMinimal;
         }
 
         if (MatchesDispatchVirtualInstanceMessageCandidate(linkedWorld, entryCapabilities))
         {
-            return ManagedDispatchVirtualInstanceMessageMinimal;
+            return NativeReferencePlanKind.ManagedDispatchVirtualInstanceMessageMinimal;
         }
 
         if (MatchesArrayCopyReferenceArrayCandidate(linkedWorld, entryCapabilities))
@@ -433,9 +433,9 @@ public sealed partial class NativeReferenceLoweringPlanner
             RequireDependencyReason(
                 dependencyReasons,
                 "stdout-path",
-                ManagedArraysCopyReferenceArrayMinimal,
+                NativeReferencePlanKind.ManagedArraysCopyReferenceArrayMinimal,
                 linkedWorld.EntryPointSubjectId);
-            return ManagedArraysCopyReferenceArrayMinimal;
+            return NativeReferencePlanKind.ManagedArraysCopyReferenceArrayMinimal;
         }
 
         if (MatchesArrayClearReferenceArrayCandidate(linkedWorld, entryCapabilities))
@@ -443,9 +443,9 @@ public sealed partial class NativeReferenceLoweringPlanner
             RequireDependencyReason(
                 dependencyReasons,
                 "stdout-path",
-                ManagedArraysClearReferenceArrayMinimal,
+                NativeReferencePlanKind.ManagedArraysClearReferenceArrayMinimal,
                 linkedWorld.EntryPointSubjectId);
-            return ManagedArraysClearReferenceArrayMinimal;
+            return NativeReferencePlanKind.ManagedArraysClearReferenceArrayMinimal;
         }
 
         if (MatchesArrayReverseReferenceArrayCandidate(linkedWorld, entryCapabilities))
@@ -453,9 +453,9 @@ public sealed partial class NativeReferenceLoweringPlanner
             RequireDependencyReason(
                 dependencyReasons,
                 "stdout-path",
-                ManagedArraysReverseReferenceArrayMinimal,
+                NativeReferencePlanKind.ManagedArraysReverseReferenceArrayMinimal,
                 linkedWorld.EntryPointSubjectId);
-            return ManagedArraysReverseReferenceArrayMinimal;
+            return NativeReferencePlanKind.ManagedArraysReverseReferenceArrayMinimal;
         }
 
         if (MatchesArrayBoxingReferenceArrayCandidate(linkedWorld, entryCapabilities))
@@ -463,9 +463,9 @@ public sealed partial class NativeReferenceLoweringPlanner
             RequireDependencyReason(
                 dependencyReasons,
                 "stdout-path",
-                ManagedArraysBoxingReferenceArrayBoxedIntMinimal,
+                NativeReferencePlanKind.ManagedArraysBoxingReferenceArrayBoxedIntMinimal,
                 linkedWorld.EntryPointSubjectId);
-            return ManagedArraysBoxingReferenceArrayBoxedIntMinimal;
+            return NativeReferencePlanKind.ManagedArraysBoxingReferenceArrayBoxedIntMinimal;
         }
 
         if (MatchesStaticForwarderCapturedGetterCandidate(methodShapes, worldCapabilities, entryCapabilities))
@@ -473,9 +473,9 @@ public sealed partial class NativeReferenceLoweringPlanner
             RequireDependencyReason(
                 dependencyReasons,
                 "stdout-path",
-                ManagedGenericStaticForwarderCapturedGetterMinimal,
+                NativeReferencePlanKind.ManagedGenericStaticForwarderCapturedGetterMinimal,
                 linkedWorld.EntryPointSubjectId);
-            return ManagedGenericStaticForwarderCapturedGetterMinimal;
+            return NativeReferencePlanKind.ManagedGenericStaticForwarderCapturedGetterMinimal;
         }
 
         if (MatchesCapturedStateInstanceMessageCandidate(methodShapes, worldCapabilities, entryCapabilities))
@@ -483,9 +483,9 @@ public sealed partial class NativeReferenceLoweringPlanner
             RequireDependencyReason(
                 dependencyReasons,
                 "stdout-path",
-                ManagedObjectCapturedStateInstanceMessageMinimal,
+                NativeReferencePlanKind.ManagedObjectCapturedStateInstanceMessageMinimal,
                 linkedWorld.EntryPointSubjectId);
-            return ManagedObjectCapturedStateInstanceMessageMinimal;
+            return NativeReferencePlanKind.ManagedObjectCapturedStateInstanceMessageMinimal;
         }
 
         throw new InvalidOperationException(
@@ -724,37 +724,37 @@ public sealed partial class NativeReferenceLoweringPlanner
     private static void RequireDependencyReason(
         IReadOnlySet<string> dependencyReasons,
         string requiredReason,
-        string loweringFamily,
+        NativeReferencePlanKind loweringFamily,
         string entryPointSubjectId)
     {
         if (!dependencyReasons.Contains(requiredReason))
         {
             throw new InvalidOperationException(
-                $"CodeGen lowering family '{loweringFamily}' for '{entryPointSubjectId}' is missing dependency reason '{requiredReason}'");
+                $"CodeGen lowering family '{NativeReferenceProofCatalog.Stringify(loweringFamily)}' for '{entryPointSubjectId}' is missing dependency reason '{requiredReason}'");
         }
     }
 
-    private static string MapLegacyPlanKind(string legacyPlanKind)
+    private static NativeReferencePlanKind MapLegacyPlanKind(string legacyPlanKind)
     {
         return legacyPlanKind switch
         {
-            "asyncAwaitIntMinimal" => ManagedAsyncAwaitIntMinimal,
-            "threadingThreadStaticMonitorMinimal" => ManagedThreadingThreadStaticMonitorMinimal,
-            "interfaceDispatchMessage" => ManagedInterfaceDispatchMessageMinimal,
-            "dispatchVirtualInstanceMessage" => ManagedDispatchVirtualInstanceMessageMinimal,
-            "constructorThenInstanceCall" => ManagedObjectCapturedStateInstanceMessageMinimal,
-            "staticCallCtorGetter" => ManagedGenericStaticForwarderCapturedGetterMinimal,
-            "arrayReverseReferenceArray" => ManagedArraysReverseReferenceArrayMinimal,
-            "arrayClearReferenceArray" => ManagedArraysClearReferenceArrayMinimal,
-            "arrayCopyReferenceArray" => ManagedArraysCopyReferenceArrayMinimal,
-            "arrayBoxingReferenceArray" => ManagedArraysBoxingReferenceArrayBoxedIntMinimal,
-            "delegateClosedTargetRelayMinimal" => DelegateClosedTargetRelayMinimal,
-            "nestedExceptionThrowCatchFinallyMinimal" => NestedExceptionThrowCatchFinallyMinimal,
-            "exceptionThrowCatchFinallyMinimal" => ExceptionThrowCatchFinallyMinimal,
-            "reflectionInteropClosureMinimal" => ReflectionInteropClosureMinimal,
-            "reflectionQueryMinimal" => ReflectionClosedTypeQueryMinimal,
-            "marshalingUtf8ExportMinimal" => MarshalingUtf8ExportMinimal,
-            "pinvokeDllImportMinimal" => InteropPInvokeDirectCallMinimal,
+            "asyncAwaitIntMinimal" => NativeReferencePlanKind.ManagedAsyncAwaitIntMinimal,
+            "threadingThreadStaticMonitorMinimal" => NativeReferencePlanKind.ManagedThreadingThreadStaticMonitorMinimal,
+            "interfaceDispatchMessage" => NativeReferencePlanKind.ManagedInterfaceDispatchMessageMinimal,
+            "dispatchVirtualInstanceMessage" => NativeReferencePlanKind.ManagedDispatchVirtualInstanceMessageMinimal,
+            "constructorThenInstanceCall" => NativeReferencePlanKind.ManagedObjectCapturedStateInstanceMessageMinimal,
+            "staticCallCtorGetter" => NativeReferencePlanKind.ManagedGenericStaticForwarderCapturedGetterMinimal,
+            "arrayReverseReferenceArray" => NativeReferencePlanKind.ManagedArraysReverseReferenceArrayMinimal,
+            "arrayClearReferenceArray" => NativeReferencePlanKind.ManagedArraysClearReferenceArrayMinimal,
+            "arrayCopyReferenceArray" => NativeReferencePlanKind.ManagedArraysCopyReferenceArrayMinimal,
+            "arrayBoxingReferenceArray" => NativeReferencePlanKind.ManagedArraysBoxingReferenceArrayBoxedIntMinimal,
+            "delegateClosedTargetRelayMinimal" => NativeReferencePlanKind.DelegateClosedTargetRelayMinimal,
+            "nestedExceptionThrowCatchFinallyMinimal" => NativeReferencePlanKind.NestedExceptionThrowCatchFinallyMinimal,
+            "exceptionThrowCatchFinallyMinimal" => NativeReferencePlanKind.ExceptionThrowCatchFinallyMinimal,
+            "reflectionInteropClosureMinimal" => NativeReferencePlanKind.ReflectionInteropClosureMinimal,
+            "reflectionQueryMinimal" => NativeReferencePlanKind.ReflectionClosedTypeQueryMinimal,
+            "marshalingUtf8ExportMinimal" => NativeReferencePlanKind.MarshalingUtf8ExportMinimal,
+            "pinvokeDllImportMinimal" => NativeReferencePlanKind.InteropPInvokeDirectCallMinimal,
             _ => throw new InvalidOperationException(
                 $"unsupported legacy native-reference lowering plan kind '{legacyPlanKind}'"),
         };

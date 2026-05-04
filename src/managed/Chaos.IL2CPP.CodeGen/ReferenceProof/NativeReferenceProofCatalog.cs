@@ -7,48 +7,63 @@ internal static class NativeReferenceProofCatalog
     public static IReadOnlyList<ICodegenTemplateBundlePlugin> GetRegisteredTemplateBundles() =>
         NativeReferenceTemplateBundleRegistry.Plugins;
 
-    public const string ManagedAsyncAwaitIntMinimal =
-        "managed-async.awaitable-int.minimal";
-    public const string ManagedThreadingThreadStaticMonitorMinimal =
-        "managed-threading.threadstatic-monitor.minimal";
-    public const string ManagedInterfaceDispatchMessageMinimal =
-        "managed-dispatch.interface-message.minimal";
-    public const string ManagedDispatchVirtualInstanceMessageMinimal =
-        "managed-dispatch.virtual-instance-message.minimal";
-    public const string ManagedObjectCapturedStateInstanceMessageMinimal =
-        "managed-object.captured-state-instance-message.minimal";
-    public const string ManagedGenericStaticForwarderCapturedGetterMinimal =
-        "managed-generic.static-forwarder-captured-getter.minimal";
-    public const string ManagedArraysReverseReferenceArrayMinimal =
-        "managed-arrays-reverse.reference-array.minimal";
-    public const string ManagedArraysClearReferenceArrayMinimal =
-        "managed-arrays-clear.reference-array.minimal";
-    public const string ManagedArraysCopyReferenceArrayMinimal =
-        "managed-arrays-copy.reference-array.minimal";
-    public const string ManagedArraysBoxingReferenceArrayBoxedIntMinimal =
-        "managed-arrays-boxing.reference-array-boxed-int.minimal";
-    public const string DelegateClosedTargetRelayMinimal =
-        "managed-delegates.closed-target-relay-message.minimal";
-    public const string NestedExceptionThrowCatchFinallyMinimal =
-        "managed-exceptions.nested-throw-catch-finally.minimal";
-    public const string ExceptionThrowCatchFinallyMinimal =
-        "managed-exceptions.throw-catch-finally-message.minimal";
-    public const string ReflectionInteropClosureMinimal =
-        "managed-reflection-interop.closure.minimal";
-    public const string ReflectionClosedTypeQueryMinimal =
-        "reflection.closed-type-query.minimal";
-    public const string MarshalingUtf8ExportMinimal =
-        "interop.marshaling-utf8-export.minimal";
-    public const string InteropPInvokeDirectCallMinimal =
-        "interop.pinvoke-direct-call.minimal";
-    public const string EngineLogWriteMinimal =
-        "engine.log-write.minimal";
-    public const string EngineObjectHandleRoundtripMinimal =
-        "engine.object-handle.roundtrip.minimal";
-    public const string EngineLifecycleCallbackMinimal =
-        "engine.lifecycle-callback.minimal";
-    public const string EngineHostProofMinimal =
-        "engine.host-proof.minimal";
+    private static readonly Dictionary<NativeReferencePlanKind, string> PlanKindStringValues = new()
+    {
+        [NativeReferencePlanKind.ManagedAsyncAwaitIntMinimal] = "managed-async.awaitable-int.minimal",
+        [NativeReferencePlanKind.ManagedThreadingThreadStaticMonitorMinimal] = "managed-threading.threadstatic-monitor.minimal",
+        [NativeReferencePlanKind.ManagedInterfaceDispatchMessageMinimal] = "managed-dispatch.interface-message.minimal",
+        [NativeReferencePlanKind.ManagedDispatchVirtualInstanceMessageMinimal] = "managed-dispatch.virtual-instance-message.minimal",
+        [NativeReferencePlanKind.ManagedObjectCapturedStateInstanceMessageMinimal] = "managed-object.captured-state-instance-message.minimal",
+        [NativeReferencePlanKind.ManagedGenericStaticForwarderCapturedGetterMinimal] = "managed-generic.static-forwarder-captured-getter.minimal",
+        [NativeReferencePlanKind.ManagedArraysReverseReferenceArrayMinimal] = "managed-arrays-reverse.reference-array.minimal",
+        [NativeReferencePlanKind.ManagedArraysClearReferenceArrayMinimal] = "managed-arrays-clear.reference-array.minimal",
+        [NativeReferencePlanKind.ManagedArraysCopyReferenceArrayMinimal] = "managed-arrays-copy.reference-array.minimal",
+        [NativeReferencePlanKind.ManagedArraysBoxingReferenceArrayBoxedIntMinimal] = "managed-arrays-boxing.reference-array-boxed-int.minimal",
+        [NativeReferencePlanKind.DelegateClosedTargetRelayMinimal] = "managed-delegates.closed-target-relay-message.minimal",
+        [NativeReferencePlanKind.NestedExceptionThrowCatchFinallyMinimal] = "managed-exceptions.nested-throw-catch-finally.minimal",
+        [NativeReferencePlanKind.ExceptionThrowCatchFinallyMinimal] = "managed-exceptions.throw-catch-finally-message.minimal",
+        [NativeReferencePlanKind.ReflectionInteropClosureMinimal] = "managed-reflection-interop.closure.minimal",
+        [NativeReferencePlanKind.ReflectionClosedTypeQueryMinimal] = "reflection.closed-type-query.minimal",
+        [NativeReferencePlanKind.MarshalingUtf8ExportMinimal] = "interop.marshaling-utf8-export.minimal",
+        [NativeReferencePlanKind.InteropPInvokeDirectCallMinimal] = "interop.pinvoke-direct-call.minimal",
+        [NativeReferencePlanKind.EngineLogWriteMinimal] = "engine.log-write.minimal",
+        [NativeReferencePlanKind.EngineObjectHandleRoundtripMinimal] = "engine.object-handle.roundtrip.minimal",
+        [NativeReferencePlanKind.EngineLifecycleCallbackMinimal] = "engine.lifecycle-callback.minimal",
+        [NativeReferencePlanKind.EngineHostProofMinimal] = "engine.host-proof.minimal",
+    };
+
+    private static readonly Dictionary<string, NativeReferencePlanKind> PlanKindLookup =
+        PlanKindStringValues.ToDictionary(kvp => kvp.Value, kvp => kvp.Key, StringComparer.Ordinal);
+
+    public static string Stringify(NativeReferencePlanKind kind) => PlanKindStringValues[kind];
+
+    public static NativeReferencePlanKind Parse(string planKind)
+    {
+        if (PlanKindLookup.TryGetValue(planKind, out var kind))
+            return kind;
+
+        return planKind switch
+        {
+            "asyncAwaitIntMinimal" => NativeReferencePlanKind.ManagedAsyncAwaitIntMinimal,
+            "threadingThreadStaticMonitorMinimal" => NativeReferencePlanKind.ManagedThreadingThreadStaticMonitorMinimal,
+            "interfaceDispatchMessage" => NativeReferencePlanKind.ManagedInterfaceDispatchMessageMinimal,
+            "dispatchVirtualInstanceMessage" => NativeReferencePlanKind.ManagedDispatchVirtualInstanceMessageMinimal,
+            "constructorThenInstanceCall" => NativeReferencePlanKind.ManagedObjectCapturedStateInstanceMessageMinimal,
+            "staticCallCtorGetter" => NativeReferencePlanKind.ManagedGenericStaticForwarderCapturedGetterMinimal,
+            "arrayReverseReferenceArray" => NativeReferencePlanKind.ManagedArraysReverseReferenceArrayMinimal,
+            "arrayClearReferenceArray" => NativeReferencePlanKind.ManagedArraysClearReferenceArrayMinimal,
+            "arrayCopyReferenceArray" => NativeReferencePlanKind.ManagedArraysCopyReferenceArrayMinimal,
+            "arrayBoxingReferenceArray" => NativeReferencePlanKind.ManagedArraysBoxingReferenceArrayBoxedIntMinimal,
+            "delegateClosedTargetRelayMinimal" => NativeReferencePlanKind.DelegateClosedTargetRelayMinimal,
+            "nestedExceptionThrowCatchFinallyMinimal" => NativeReferencePlanKind.NestedExceptionThrowCatchFinallyMinimal,
+            "exceptionThrowCatchFinallyMinimal" => NativeReferencePlanKind.ExceptionThrowCatchFinallyMinimal,
+            "reflectionInteropClosureMinimal" => NativeReferencePlanKind.ReflectionInteropClosureMinimal,
+            "reflectionQueryMinimal" => NativeReferencePlanKind.ReflectionClosedTypeQueryMinimal,
+            "marshalingUtf8ExportMinimal" => NativeReferencePlanKind.MarshalingUtf8ExportMinimal,
+            "pinvokeDllImportMinimal" => NativeReferencePlanKind.InteropPInvokeDirectCallMinimal,
+            _ => throw new InvalidOperationException($"unknown native-reference lowering plan kind '{planKind}'"),
+        };
+    }
 
     public const string GeneratedTranslationUnitTemplateRelativePath = "Templates/NativeReferenceProof.cpp.scriban";
     public const string DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath =
@@ -284,46 +299,30 @@ internal static class NativeReferenceProofCatalog
     public const string RuntimeSkeletonThreadingSyncKernelStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.ThreadingSyncKernelStub.cpp.scriban";
 
-    private static readonly IReadOnlyDictionary<string, string> TemplateRelativePathByPlanKind =
-        new Dictionary<string, string>(StringComparer.Ordinal)
+    private static readonly IReadOnlyDictionary<NativeReferencePlanKind, string> TemplateRelativePathByPlanKind =
+        new Dictionary<NativeReferencePlanKind, string>
         {
-            [ManagedAsyncAwaitIntMinimal] = AsyncAwaitIntGeneratedTranslationUnitTemplateRelativePath,
-            [ManagedThreadingThreadStaticMonitorMinimal] = ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplateRelativePath,
-            [ManagedInterfaceDispatchMessageMinimal] = InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath,
-            [ManagedDispatchVirtualInstanceMessageMinimal] = DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath,
-            [ManagedObjectCapturedStateInstanceMessageMinimal] = GeneratedTranslationUnitTemplateRelativePath,
-            [ManagedGenericStaticForwarderCapturedGetterMinimal] = StaticCallCtorGetterGeneratedTranslationUnitTemplateRelativePath,
-            [ManagedArraysReverseReferenceArrayMinimal] = ArrayReverseReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
-            [ManagedArraysClearReferenceArrayMinimal] = ArrayClearReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
-            [ManagedArraysCopyReferenceArrayMinimal] = ArrayCopyReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
-            [ManagedArraysBoxingReferenceArrayBoxedIntMinimal] = ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
-            [DelegateClosedTargetRelayMinimal] = DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath,
-            [NestedExceptionThrowCatchFinallyMinimal] = NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath,
-            [ExceptionThrowCatchFinallyMinimal] = ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath,
-            [ReflectionInteropClosureMinimal] = ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath,
-            [ReflectionClosedTypeQueryMinimal] = ReflectionQueryMinimalGeneratedTranslationUnitTemplateRelativePath,
-            [MarshalingUtf8ExportMinimal] = MarshalingUtf8ExportGeneratedTranslationUnitTemplateRelativePath,
-            [InteropPInvokeDirectCallMinimal] = PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath,
-            [EngineLogWriteMinimal] = EngineLogWriteGeneratedTranslationUnitTemplateRelativePath,
-            [EngineObjectHandleRoundtripMinimal] = EngineObjectHandleGeneratedTranslationUnitTemplateRelativePath,
-            [EngineLifecycleCallbackMinimal] = EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath,
-            [EngineHostProofMinimal] = EngineHostProofGeneratedTranslationUnitTemplateRelativePath,
-            ["asyncAwaitIntMinimal"] = AsyncAwaitIntGeneratedTranslationUnitTemplateRelativePath,
-            ["interfaceDispatchMessage"] = InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath,
-            ["dispatchVirtualInstanceMessage"] = DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath,
-            ["constructorThenInstanceCall"] = GeneratedTranslationUnitTemplateRelativePath,
-            ["staticCallCtorGetter"] = StaticCallCtorGetterGeneratedTranslationUnitTemplateRelativePath,
-            ["arrayReverseReferenceArray"] = ArrayReverseReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
-            ["arrayClearReferenceArray"] = ArrayClearReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
-            ["arrayCopyReferenceArray"] = ArrayCopyReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
-            ["arrayBoxingReferenceArray"] = ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
-            ["delegateClosedTargetRelayMinimal"] = DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath,
-            ["nestedExceptionThrowCatchFinallyMinimal"] = NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath,
-            ["exceptionThrowCatchFinallyMinimal"] = ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath,
-            ["reflectionInteropClosureMinimal"] = ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath,
-            ["reflectionQueryMinimal"] = ReflectionQueryMinimalGeneratedTranslationUnitTemplateRelativePath,
-            ["marshalingUtf8ExportMinimal"] = MarshalingUtf8ExportGeneratedTranslationUnitTemplateRelativePath,
-            ["pinvokeDllImportMinimal"] = PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ManagedAsyncAwaitIntMinimal] = AsyncAwaitIntGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ManagedThreadingThreadStaticMonitorMinimal] = ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ManagedInterfaceDispatchMessageMinimal] = InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ManagedDispatchVirtualInstanceMessageMinimal] = DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ManagedObjectCapturedStateInstanceMessageMinimal] = GeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ManagedGenericStaticForwarderCapturedGetterMinimal] = StaticCallCtorGetterGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ManagedArraysReverseReferenceArrayMinimal] = ArrayReverseReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ManagedArraysClearReferenceArrayMinimal] = ArrayClearReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ManagedArraysCopyReferenceArrayMinimal] = ArrayCopyReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ManagedArraysBoxingReferenceArrayBoxedIntMinimal] = ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.DelegateClosedTargetRelayMinimal] = DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.NestedExceptionThrowCatchFinallyMinimal] = NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ExceptionThrowCatchFinallyMinimal] = ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ReflectionInteropClosureMinimal] = ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.ReflectionClosedTypeQueryMinimal] = ReflectionQueryMinimalGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.MarshalingUtf8ExportMinimal] = MarshalingUtf8ExportGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.InteropPInvokeDirectCallMinimal] = PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.EngineLogWriteMinimal] = EngineLogWriteGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.EngineObjectHandleRoundtripMinimal] = EngineObjectHandleGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.EngineLifecycleCallbackMinimal] = EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath,
+            [NativeReferencePlanKind.EngineHostProofMinimal] = EngineHostProofGeneratedTranslationUnitTemplateRelativePath,
         };
 
     public static Template GetTemplateForPlan(string planKind)
@@ -334,11 +333,6 @@ internal static class NativeReferenceProofCatalog
 
     public static string GetRequiredTemplateRelativePath(string planKind)
     {
-        if (TemplateRelativePathByPlanKind.TryGetValue(planKind, out var relativePath))
-        {
-            return relativePath;
-        }
-
-        throw new InvalidOperationException($"unsupported native-reference lowering plan kind '{planKind}'");
+        return TemplateRelativePathByPlanKind[Parse(planKind)];
     }
 }
