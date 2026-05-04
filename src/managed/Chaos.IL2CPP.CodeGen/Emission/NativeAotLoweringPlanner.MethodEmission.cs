@@ -2685,11 +2685,20 @@ public sealed partial class NativeAotLoweringPlanner
 					}
 				}
 
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
-				handler.AppendLiteral("    goto chaos_ip_");
-				handler.AppendFormatted(target);
-				handler.AppendLiteral(";");
-				builder.AppendLine(ref handler);
+				if (_suppressGotoNext)
+				{
+					builder.Append("chaos_ip_");
+					builder.Append(target);
+					builder.AppendLine(":");
+				}
+				else
+				{
+					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
+					handler.AppendLiteral("    goto chaos_ip_");
+					handler.AppendFormatted(target);
+					handler.AppendLiteral(";");
+					builder.AppendLine(ref handler);
+				}
 			}
 			else if (block.IsTerminal)
 			{
@@ -2787,7 +2796,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    }");
 		}
 
-		if (ite.MergeOffset.HasValue)
+		if (!_suppressGotoNext && ite.MergeOffset.HasValue)
 		{
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
 			handler.AppendLiteral("    goto chaos_ip_");
@@ -2877,7 +2886,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
 
-		if (sw.MergeOffset.HasValue)
+		if (!_suppressGotoNext && sw.MergeOffset.HasValue)
 		{
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
 			handler.AppendLiteral("    goto chaos_ip_");
@@ -3021,7 +3030,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine("    } while (true);");
 				}
 
-				if (exitOffset >= 0)
+				if (!_suppressGotoNext && exitOffset >= 0)
 				{
 					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
 					handler.AppendLiteral("    goto chaos_ip_");
