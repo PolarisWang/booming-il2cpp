@@ -13,6 +13,13 @@
 
 #include <chaos/load_store.h>
 
+// ── Wrappers exposed inside runtime_core namespace ──
+// The emitter references these as bare identifiers (e.g. ChaosStoreFloat32).
+// After wrapping in the namespace, global-scope using declarations make
+// them visible to generated code (which lives in anonymous namespaces).
+
+namespace chaos::il2cpp::runtime_core {
+
 inline CHAOS_IL2CPP_INTPTR chaos_store_float32(float value) noexcept
 {
     return ChaosIl2cpp::Common::store_float32(value);
@@ -52,5 +59,18 @@ inline CHAOS_IL2CPP_UINT64 chaos_load_uint64(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     return ChaosIl2cpp::Common::load_uint64(value);
 }
+
+}  // namespace chaos::il2cpp::runtime_core
+
+// Expose at global scope so generated code (inside anonymous namespaces)
+// can call these as bare identifiers.
+using chaos::il2cpp::runtime_core::chaos_store_float32;
+using chaos::il2cpp::runtime_core::chaos_load_float32;
+using chaos::il2cpp::runtime_core::chaos_store_float64;
+using chaos::il2cpp::runtime_core::chaos_load_float64;
+using chaos::il2cpp::runtime_core::chaos_store_int64;
+using chaos::il2cpp::runtime_core::chaos_load_int64;
+using chaos::il2cpp::runtime_core::chaos_store_uint64;
+using chaos::il2cpp::runtime_core::chaos_load_uint64;
 
 #endif  // CHAOS_IL2CPP_LOAD_STORE_CHAOS_BRIDGE_H_

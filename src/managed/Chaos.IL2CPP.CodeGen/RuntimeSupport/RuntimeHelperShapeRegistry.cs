@@ -321,7 +321,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === String operations ===
             registry.Register("System.String", "Concat", ["System.String", "System.String"],
-                ShapeKind.SimpleForward, "chaos_reflection_concat_string_pair_values",
+                ShapeKind.SimpleForward, "ChaosReflectionConcatStringPairValues",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -332,7 +332,7 @@ public sealed partial class NativeAotLoweringPlanner
             // Concat 3-arg and 4-arg use pair-call composition (not single forward), so they need GenericShapeDescriptors.
             // The InlineBody entries below are used for C++ dispatch header generation only.
             registry.Register("System.String", "Concat", ["System.String", "System.String", "System.String"],
-                ShapeKind.InlineBody, "chaos_reflection_concat_string_pair_values",
+                ShapeKind.InlineBody, "ChaosReflectionConcatStringPairValues",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -342,7 +342,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1, 2 });
 
             registry.Register("System.String", "Concat", ["System.String", "System.String", "System.String", "System.String"],
-                ShapeKind.InlineBody, "chaos_reflection_concat_string_pair_values",
+                ShapeKind.InlineBody, "ChaosReflectionConcatStringPairValues",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -368,8 +368,8 @@ public sealed partial class NativeAotLoweringPlanner
                         var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
                         [
-                            "    const auto chaos_left_pair = chaos_reflection_concat_string_pair_values(chaos_arg_0, chaos_arg_1);",
-                            "    return chaos_reflection_concat_string_pair_values(chaos_left_pair, chaos_arg_2);",
+                            "    const auto chaos_left_pair = ChaosReflectionConcatStringPairValues(chaos_arg_0, chaos_arg_1);",
+                            "    return ChaosReflectionConcatStringPairValues(chaos_left_pair, chaos_arg_2);",
                         ]);
                         return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
@@ -383,9 +383,9 @@ public sealed partial class NativeAotLoweringPlanner
                         var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2, CHAOS_IL2CPP_INTPTR chaos_arg_3",
                         [
-                            "    const auto chaos_left_pair = chaos_reflection_concat_string_pair_values(chaos_arg_0, chaos_arg_1);",
-                            "    const auto chaos_right_pair = chaos_reflection_concat_string_pair_values(chaos_arg_2, chaos_arg_3);",
-                            "    return chaos_reflection_concat_string_pair_values(chaos_left_pair, chaos_right_pair);",
+                            "    const auto chaos_left_pair = ChaosReflectionConcatStringPairValues(chaos_arg_0, chaos_arg_1);",
+                            "    const auto chaos_right_pair = ChaosReflectionConcatStringPairValues(chaos_arg_2, chaos_arg_3);",
+                            "    return ChaosReflectionConcatStringPairValues(chaos_left_pair, chaos_right_pair);",
                         ]);
                         return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
@@ -414,7 +414,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0 });
 
             registry.Register("System.String", "StartsWith", ["System.String", "System.StringComparison"],
-                ShapeKind.SimpleForward, "chaos_string_starts_with",
+                ShapeKind.SimpleForward, "ChaosStringStartsWith",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -424,7 +424,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
 
             registry.Register("System.String", "Contains", ["System.String", "System.StringComparison"],
-                ShapeKind.SimpleForward, "chaos_string_contains",
+                ShapeKind.SimpleForward, "ChaosStringContains",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -631,7 +631,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Exception operations ===
             registry.Register("System.Exception", ".ctor", ["System.String"],
-                ShapeKind.SimpleForward, "chaos_reflection_set_exception_metadata",
+                ShapeKind.SimpleForward, "ChaosReflectionSetExceptionMetadata",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -640,7 +640,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
 
             registry.Register("System.InvalidOperationException", ".ctor", ["System.String"],
-                ShapeKind.SimpleForward, "chaos_reflection_set_exception_metadata",
+                ShapeKind.SimpleForward, "ChaosReflectionSetExceptionMetadata",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -649,7 +649,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
 
             registry.Register("System.ArgumentOutOfRangeException", ".ctor", ["System.String", "System.String"],
-                ShapeKind.SimpleForward, "chaos_reflection_set_exception_metadata",
+                ShapeKind.SimpleForward, "ChaosReflectionSetExceptionMetadata",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -659,7 +659,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1, 2 });
 
             registry.Register("System.Exception", "get_Message", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_exception_message",
+                ShapeKind.SimpleForward, "ChaosReflectionGetExceptionMessage",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -711,7 +711,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Object ===
             registry.Register("System.Object", ".ctor", [],
-                ShapeKind.SimpleForward, "chaos_object_ctor",
+                ShapeKind.SimpleForward, "ChaosObjectCtor",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateVoidAbiSlot(),
@@ -789,7 +789,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Object::Equals static (two-arg overload) ===
             registry.Register("System.Object", "Equals", ["System.Object", "System.Object"],
-                ShapeKind.SimpleForward, "chaos_object_equals_static",
+                ShapeKind.SimpleForward, "ChaosObjectEqualsStatic",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -1305,7 +1305,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "        CHAOS_IL2CPP_ABORT();",
                         "    }",
                         string.Empty,
-                        "    const CHAOS_IL2CPP_STRING chaos_formatted = ChaosIl2cpp::Common::format_double(chaos_load_float64(chaos_arg_0));",
+                        "    const CHAOS_IL2CPP_STRING chaos_formatted = ChaosIl2cpp::Common::format_double(ChaosLoadFloat64(chaos_arg_0));",
                         "    const auto chaos_id = chaos::il2cpp::string_table::Intern(",
                         "        chaos_formatted.c_str(), static_cast<CHAOS_IL2CPP_UINT32>(chaos_formatted.size()));",
                         "    return chaos_make_string_id_value(chaos_id);",
@@ -1537,7 +1537,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === String::Join(System.String,System.String[]) (non-generic overload, stub returning null) ===
             registry.Register("System.String", "Join", ["System.String", "System.String[]"],
-                ShapeKind.SimpleForward, "chaos_string_join_ss",
+                ShapeKind.SimpleForward, "ChaosStringJoinSs",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -1574,7 +1574,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "        return 0;",
                         "    }",
                         string.Empty,
-                        "    return chaos_reflection_get_custom_attribute(chaos_arg_0, chaos_type->runtime_type_handle) == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+                        "    return ChaosReflectionGetCustomAttribute(chaos_arg_0, chaos_type->runtime_type_handle) == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
                         "        ? 0",
                         "        : 1;",
                     ]);
@@ -1715,7 +1715,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === DateTime ===
             registry.Register("System.DateTime", "get_UtcNow", [],
-                ShapeKind.SimpleForward, "chaos_datetime_get_utc_now",
+                ShapeKind.SimpleForward, "ChaosDatetimeGetUtcNow",
                 Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 new AotCoreIrAbiSlotArtifact
                 {
@@ -1744,28 +1744,28 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Reflection: Type ===
             registry.Register("System.Type", "GetTypeFromHandle", ["System.RuntimeTypeHandle"],
-                ShapeKind.SimpleForward, "chaos_reflection_get_type_from_handle",
+                ShapeKind.SimpleForward, "ChaosReflectionGetTypeFromHandle",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot()),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Type", "get_Assembly", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_assembly",
+                ShapeKind.SimpleForward, "ChaosReflectionGetAssembly",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Type", "GetGenericTypeDefinition", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_generic_type_definition",
+                ShapeKind.SimpleForward, "ChaosReflectionGetGenericTypeDefinition",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Type", "GetGenericArguments", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_generic_arguments",
+                ShapeKind.SimpleForward, "ChaosReflectionGetGenericArguments",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -1782,14 +1782,14 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
 
             registry.Register("System.Reflection.Assembly", "GetName", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_assembly_name",
+                ShapeKind.SimpleForward, "ChaosReflectionGetAssembly_name",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Reflection.AssemblyName", "get_Name", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_assembly_name_value",
+                ShapeKind.SimpleForward, "ChaosReflectionGetAssembly_name_value",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -1797,21 +1797,21 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Reflection: MethodBase ===
             registry.Register("System.Reflection.MethodBase", "get_MethodHandle", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_method_handle",
+                ShapeKind.SimpleForward, "ChaosReflectionGetMethod_handle",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Reflection.MethodBase", "GetParameters", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_parameters",
+                ShapeKind.SimpleForward, "ChaosReflectionGetParameters",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Reflection.MethodBase", "Invoke", ["System.Object", "System.Object[]"],
-                ShapeKind.SimpleForward, "chaos_reflection_invoke_method",
+                ShapeKind.SimpleForward, "ChaosReflectionInvokeMethod",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -1848,21 +1848,21 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Reflection: MemberInfo ===
             registry.Register("System.Reflection.MemberInfo", "get_Name", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_member_name",
+                ShapeKind.SimpleForward, "ChaosReflectionGetMemberName",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Reflection.MemberInfo", "get_DeclaringType", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_declaring_type",
+                ShapeKind.SimpleForward, "ChaosReflectionGetDeclaringType",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Reflection.MemberInfo", "get_MetadataToken", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_metadata_token",
+                ShapeKind.SimpleForward, "ChaosReflectionGetMetadataToken",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),
@@ -1870,7 +1870,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Activator ===
             registry.Register("System.Activator", "CreateInstance", ["System.Type"],
-                ShapeKind.SimpleForward, "chaos_reflection_create_instance",
+                ShapeKind.SimpleForward, "ChaosReflectionCreateInstance",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
@@ -1878,14 +1878,14 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Reflection: Type (additional) ===
             registry.Register("System.Type", "get_TypeHandle", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_type_handle",
+                ShapeKind.SimpleForward, "ChaosReflectionGetTypeHandle",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Type", "GetField", ["System.String"],
-                ShapeKind.SimpleForward, "chaos_reflection_get_field",
+                ShapeKind.SimpleForward, "ChaosReflectionGetField",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -1966,7 +1966,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
 
             registry.Register("System.Type", "GetMethod", ["System.String"],
-                ShapeKind.SimpleForward, "chaos_reflection_get_method",
+                ShapeKind.SimpleForward, "ChaosReflectionGetMethod",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -1975,14 +1975,14 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
 
             registry.Register("System.Type", "GetType", ["System.String"],
-                ShapeKind.SimpleForward, "chaos_reflection_get_type_by_name",
+                ShapeKind.SimpleForward, "ChaosReflectionGetTypeByName",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Type", "GetConstructors", ["System.Reflection.BindingFlags"],
-                ShapeKind.SimpleForward, "chaos_reflection_get_constructors",
+                ShapeKind.SimpleForward, "ChaosReflectionGetConstructors",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -1992,14 +1992,14 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::GetConstructors (0-param fallback) ===
             registry.Register("System.Type", "GetConstructors", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_constructors_default",
+                ShapeKind.SimpleForward, "ChaosReflectionGetConstructors_default",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
             registry.Register("System.Type", "GetMethod", ["System.String", "System.Reflection.BindingFlags"],
-                ShapeKind.SimpleForward, "chaos_reflection_get_method",
+                ShapeKind.SimpleForward, "ChaosReflectionGetMethod",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2014,7 +2014,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Reflection: MethodInfo ===
             registry.Register("System.Reflection.MethodInfo", "MakeGenericMethod", ["System.Type[]"],
-                ShapeKind.SimpleForward, "chaos_reflection_make_generic_method",
+                ShapeKind.SimpleForward, "ChaosReflectionMakeGenericMethod",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2024,7 +2024,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Assembly::GetType(System.String,System.Boolean) overload ===
             registry.Register("System.Reflection.Assembly", "GetType", ["System.String", "System.Boolean"],
-                ShapeKind.SimpleForward, "chaos_reflection_get_type_from_assembly_bool",
+                ShapeKind.SimpleForward, "ChaosReflectionGetTypeFromAssemblyBool",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2035,7 +2035,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Reflection: ParameterInfo ===
             registry.Register("System.Reflection.ParameterInfo", "get_Name", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_parameter_name",
+                ShapeKind.SimpleForward, "ChaosReflectionGetParameterName",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.ParameterInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2180,7 +2180,7 @@ public sealed partial class NativeAotLoweringPlanner
             // === CustomAttributeExtensions.GetCustomAttribute ===
             registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttribute",
                 ["System.Reflection.Assembly", "System.Type"],
-                ShapeKind.SimpleForward, "chaos_reflection_get_custom_attribute",
+                ShapeKind.SimpleForward, "ChaosReflectionGetCustomAttribute",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2260,7 +2260,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Buffer::ByteLength ===
             registry.Register("System.Buffer", "ByteLength", ["System.Array"],
-                ShapeKind.SimpleForward, "chaos_buffer_byte_length",
+                ShapeKind.SimpleForward, "ChaosBufferByteLength",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),
@@ -2268,7 +2268,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Exception::get_InnerException ===
             registry.Register("System.Exception", "get_InnerException", [],
-                ShapeKind.SimpleForward, "chaos_exception_get_inner_exception",
+                ShapeKind.SimpleForward, "ChaosExceptionGetInnerException",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Exception", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Exception", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2276,14 +2276,14 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === CultureInfo::get_CurrentCulture ===
             registry.Register("System.Globalization.CultureInfo", "get_CurrentCulture", [],
-                ShapeKind.SimpleForward, "chaos_culture_get_current",
+                ShapeKind.SimpleForward, "ChaosCultureGetCurrent",
                 Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
                 EmptyRawArgumentIndices);
 
             // === Guid::NewGuid ===
             registry.Register("System.Guid", "NewGuid", [],
-                ShapeKind.SimpleForward, "chaos_guid_new_guid",
+                ShapeKind.SimpleForward, "ChaosGuidNewGuid",
                 Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 new AotCoreIrAbiSlotArtifact
                 {
@@ -2374,14 +2374,14 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Assembly::GetExecutingAssembly ===
             registry.Register("System.Reflection.Assembly", "GetExecutingAssembly", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_executing_assembly",
+                ShapeKind.SimpleForward, "ChaosReflectionGetExecutingAssembly",
                 Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType),
                 EmptyRawArgumentIndices);
 
             // === Type::MakeGenericType ===
             registry.Register("System.Type", "MakeGenericType", ["System.Type[]"],
-                ShapeKind.SimpleForward, "chaos_reflection_make_generic_type",
+                ShapeKind.SimpleForward, "ChaosReflectionMakeGenericType",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2391,7 +2391,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === MemberInfo::get_ReflectedType ===
             registry.Register("System.Reflection.MemberInfo", "get_ReflectedType", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_reflected_type",
+                ShapeKind.SimpleForward, "ChaosReflectionGetReflectedType",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2399,7 +2399,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Module::get_FullyQualifiedName ===
             registry.Register("System.Reflection.Module", "get_FullyQualifiedName", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_module_name",
+                ShapeKind.SimpleForward, "ChaosReflectionGetModuleName",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2407,7 +2407,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === ParameterInfo::get_ParameterType ===
             registry.Register("System.Reflection.ParameterInfo", "get_ParameterType", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_parameter_type",
+                ShapeKind.SimpleForward, "ChaosReflectionGetParameterType",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2415,7 +2415,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_FullName ===
             registry.Register("System.Type", "get_FullName", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_type_full_name",
+                ShapeKind.SimpleForward, "ChaosReflectionGetTypeFullName",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2423,7 +2423,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_IsValueType ===
             registry.Register("System.Type", "get_IsValueType", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_value_type",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsValueType",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -2431,7 +2431,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === RuntimeHelpers::GetHashCode ===
             registry.Register("System.Runtime.CompilerServices.RuntimeHelpers", "GetHashCode", ["System.Object"],
-                ShapeKind.SimpleForward, "chaos_runtime_helpers_get_hash_code",
+                ShapeKind.SimpleForward, "ChaosRuntimeHelpersGetHashCode",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),
@@ -2556,7 +2556,7 @@ public sealed partial class NativeAotLoweringPlanner
             // === CustomAttributeExtensions::IsDefined ===
             registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
                 ["System.Reflection.Assembly", "System.Type"],
-                ShapeKind.SimpleForward, "chaos_reflection_is_defined",
+                ShapeKind.SimpleForward, "ChaosReflectionIsDefined",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2566,7 +2566,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Exception::get_HResult ===
             registry.Register("System.Exception", "get_HResult", [],
-                ShapeKind.SimpleForward, "chaos_exception_get_hresult",
+                ShapeKind.SimpleForward, "ChaosExceptionGetHresult",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Exception", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),
@@ -2574,7 +2574,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === CultureInfo::get_InvariantCulture ===
             registry.Register("System.Globalization.CultureInfo", "get_InvariantCulture", [],
-                ShapeKind.SimpleForward, "chaos_culture_get_invariant",
+                ShapeKind.SimpleForward, "ChaosCultureGetInvariant",
                 Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
                 EmptyRawArgumentIndices);
@@ -2657,7 +2657,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Random::NextDouble ===
             registry.Register("System.Random", "NextDouble", [],
-                ShapeKind.SimpleForward, "chaos_random_next_double",
+                ShapeKind.SimpleForward, "ChaosRandomNextDouble",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
@@ -2700,14 +2700,14 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Assembly::GetCallingAssembly ===
             registry.Register("System.Reflection.Assembly", "GetCallingAssembly", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_calling_assembly",
+                ShapeKind.SimpleForward, "ChaosReflectionGetCallingAssembly",
                 Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType),
                 EmptyRawArgumentIndices);
 
             // === MethodInfo::GetBaseDefinition ===
             registry.Register("System.Reflection.MethodInfo", "GetBaseDefinition", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_base_definition",
+                ShapeKind.SimpleForward, "ChaosReflectionGetBaseDefinition",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2715,7 +2715,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Module::get_Name ===
             registry.Register("System.Reflection.Module", "get_Name", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_module_name_only",
+                ShapeKind.SimpleForward, "ChaosReflectionGetModuleName_only",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2723,7 +2723,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === ParameterInfo::get_DefaultValue ===
             registry.Register("System.Reflection.ParameterInfo", "get_DefaultValue", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_default_value",
+                ShapeKind.SimpleForward, "ChaosReflectionGetDefaultValue",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -2731,7 +2731,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_Namespace ===
             registry.Register("System.Type", "get_Namespace", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_namespace",
+                ShapeKind.SimpleForward, "ChaosReflectionGetNamespace",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2739,7 +2739,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_IsEnum ===
             registry.Register("System.Type", "get_IsEnum", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_enum",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsEnum",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -2747,7 +2747,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::GetGenericParameterConstraints ===
             registry.Register("System.Type", "GetGenericParameterConstraints", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_generic_param_constraints",
+                ShapeKind.SimpleForward, "ChaosReflectionGetGenericParamConstraints",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -2755,7 +2755,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === RuntimeHelpers::Equals ===
             registry.Register("System.Runtime.CompilerServices.RuntimeHelpers", "Equals", ["System.Object", "System.Object"],
-                ShapeKind.SimpleForward, "chaos_runtime_helpers_equals",
+                ShapeKind.SimpleForward, "ChaosRuntimeHelpersEquals",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -2859,7 +2859,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Array::Clear ===
             registry.Register("System.Array", "Clear", ["System.Array", "System.Int32", "System.Int32"],
-                ShapeKind.SimpleForward, "chaos_array_clear",
+                ShapeKind.SimpleForward, "ChaosArrayClear",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -2870,7 +2870,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::IsAssignableFrom ===
             registry.Register("System.Type", "IsAssignableFrom", ["System.Type"],
-                ShapeKind.SimpleForward, "chaos_reflection_is_assignable_from",
+                ShapeKind.SimpleForward, "ChaosReflectionIsAssignableFrom",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2880,7 +2880,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Exception::GetBaseException ===
             registry.Register("System.Exception", "GetBaseException", [],
-                ShapeKind.SimpleForward, "chaos_exception_get_base_exception",
+                ShapeKind.SimpleForward, "ChaosExceptionGetBaseException",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Exception", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Exception", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2888,7 +2888,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === CultureInfo::get_Name ===
             registry.Register("System.Globalization.CultureInfo", "get_Name", [],
-                ShapeKind.SimpleForward, "chaos_culture_get_name",
+                ShapeKind.SimpleForward, "ChaosCultureGetName",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2937,14 +2937,14 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Assembly::GetEntryAssembly ===
             registry.Register("System.Reflection.Assembly", "GetEntryAssembly", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_entry_assembly",
+                ShapeKind.SimpleForward, "ChaosReflectionGetEntryAssembly",
                 Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType),
                 EmptyRawArgumentIndices);
 
             // === Type::get_GenericParameterPosition ===
             registry.Register("System.Type", "get_GenericParameterPosition", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_generic_param_pos",
+                ShapeKind.SimpleForward, "ChaosReflectionGetGenericParamPos",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),
@@ -2952,7 +2952,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === RuntimeMethodHandle::GetHashCode ===
             registry.Register("System.RuntimeMethodHandle", "GetHashCode", [],
-                ShapeKind.SimpleForward, "chaos_runtimemethodhandle_get_hash_code",
+                ShapeKind.SimpleForward, "ChaosRuntimemethodhandleGetHashCode",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     new AotCoreIrAbiSlotArtifact
                     {
@@ -2965,7 +2965,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Module::get_Assembly ===
             registry.Register("System.Reflection.Module", "get_Assembly", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_module_assembly",
+                ShapeKind.SimpleForward, "ChaosReflectionGetModuleAssembly",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2973,7 +2973,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === ParameterInfo::get_RawDefaultValue ===
             registry.Register("System.Reflection.ParameterInfo", "get_RawDefaultValue", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_raw_default_value",
+                ShapeKind.SimpleForward, "ChaosReflectionGetRawDefaultValue",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -2981,7 +2981,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_AssemblyQualifiedName ===
             registry.Register("System.Type", "get_AssemblyQualifiedName", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_assembly_qualified_name",
+                ShapeKind.SimpleForward, "ChaosReflectionGetAssembly_qualified_name",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -2989,7 +2989,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === RuntimeHelpers::GetObjectValue ===
             registry.Register("System.Runtime.CompilerServices.RuntimeHelpers", "GetObjectValue", ["System.Object"],
-                ShapeKind.SimpleForward, "chaos_runtime_helpers_get_object_value",
+                ShapeKind.SimpleForward, "ChaosRuntimeHelpersGetObjectValue",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3090,7 +3090,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_IsArray ===
             registry.Register("System.Type", "get_IsArray", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_array",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsArray",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -3152,7 +3152,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::IsInstanceOfType ===
             registry.Register("System.Type", "IsInstanceOfType", ["System.Object"],
-                ShapeKind.SimpleForward, "chaos_reflection_is_instance_of_type",
+                ShapeKind.SimpleForward, "ChaosReflectionIsInstanceOfType",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3162,7 +3162,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === CultureInfo::get_DisplayName ===
             registry.Register("System.Globalization.CultureInfo", "get_DisplayName", [],
-                ShapeKind.SimpleForward, "chaos_culture_get_display_name",
+                ShapeKind.SimpleForward, "ChaosCultureGetDisplayName",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3211,7 +3211,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Assembly::get_FullName ===
             registry.Register("System.Reflection.Assembly", "get_FullName", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_assembly_full_name",
+                ShapeKind.SimpleForward, "ChaosReflectionGetAssembly_full_name",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3219,7 +3219,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_ContainsGenericParameters ===
             registry.Register("System.Type", "get_ContainsGenericParameters", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_contains_generic_params",
+                ShapeKind.SimpleForward, "ChaosReflectionGetContainsGenericParams",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -3227,7 +3227,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === MethodBase::get_CallingConvention ===
             registry.Register("System.Reflection.MethodBase", "get_CallingConvention", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_calling_convention",
+                ShapeKind.SimpleForward, "ChaosReflectionGetCallingConvention",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),
@@ -3235,7 +3235,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Module::GetType ===
             registry.Register("System.Reflection.Module", "GetType", ["System.String"],
-                ShapeKind.SimpleForward, "chaos_reflection_module_get_type",
+                ShapeKind.SimpleForward, "ChaosReflectionModuleGetType",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3245,7 +3245,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === ParameterInfo::get_HasDefaultValue ===
             registry.Register("System.Reflection.ParameterInfo", "get_HasDefaultValue", [],
-                ShapeKind.SimpleForward, "chaos_reflection_has_default_value",
+                ShapeKind.SimpleForward, "ChaosReflectionHasDefaultValue",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -3253,7 +3253,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === RuntimeTypeHandle::GetHashCode ===
             registry.Register("System.RuntimeTypeHandle", "GetHashCode", [],
-                ShapeKind.SimpleForward, "chaos_runtimetypehandle_get_hash_code",
+                ShapeKind.SimpleForward, "ChaosRuntimetypehandleGetHashCode",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     new AotCoreIrAbiSlotArtifact
                     {
@@ -3266,7 +3266,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === RuntimeFieldHandle::GetHashCode ===
             registry.Register("System.RuntimeFieldHandle", "GetHashCode", [],
-                ShapeKind.SimpleForward, "chaos_runtimefieldhandle_get_hash_code",
+                ShapeKind.SimpleForward, "ChaosRuntimefieldhandleGetHashCode",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     new AotCoreIrAbiSlotArtifact
                     {
@@ -3280,7 +3280,7 @@ public sealed partial class NativeAotLoweringPlanner
             // === FormattableStringFactory::Create ===
             registry.Register("System.Runtime.CompilerServices.FormattableStringFactory", "Create",
                 ["System.String", "System.Object[]"],
-                ShapeKind.SimpleForward, "chaos_formattablestring_factory_create",
+                ShapeKind.SimpleForward, "ChaosFormattablestringFactoryCreate",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3290,7 +3290,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === DateTime::GetHashCode ===
             registry.Register("System.DateTime", "GetHashCode", [],
-                ShapeKind.SimpleForward, "chaos_datetime_get_hash_code",
+                ShapeKind.SimpleForward, "ChaosDatetimeGetHashCode",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     new AotCoreIrAbiSlotArtifact
                     {
@@ -3402,7 +3402,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::IsSubclassOf ===
             registry.Register("System.Type", "IsSubclassOf", ["System.Type"],
-                ShapeKind.SimpleForward, "chaos_reflection_is_subclass_of",
+                ShapeKind.SimpleForward, "ChaosReflectionIsSubclassOf",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3432,7 +3432,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === CultureInfo::get_DateTimeFormat ===
             registry.Register("System.Globalization.CultureInfo", "get_DateTimeFormat", [],
-                ShapeKind.SimpleForward, "chaos_culture_get_date_time_format",
+                ShapeKind.SimpleForward, "ChaosCultureGetDateTimeFormat",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3440,7 +3440,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Random::NextBytes ===
             registry.Register("System.Random", "NextBytes", ["System.Byte[]"],
-                ShapeKind.SimpleForward, "chaos_random_next_bytes",
+                ShapeKind.SimpleForward, "ChaosRandomNextBytes",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3494,7 +3494,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Assembly::get_Location ===
             registry.Register("System.Reflection.Assembly", "get_Location", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_assembly_location",
+                ShapeKind.SimpleForward, "ChaosReflectionGetAssembly_location",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3502,7 +3502,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_IsGenericType ===
             registry.Register("System.Type", "get_IsGenericType", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_generic_type",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsGenericType",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -3510,7 +3510,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === MethodBase::get_IsPublic ===
             registry.Register("System.Reflection.MethodBase", "get_IsPublic", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_public",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsPublic",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -3518,7 +3518,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Module::GetTypes ===
             registry.Register("System.Reflection.Module", "GetTypes", [],
-                ShapeKind.SimpleForward, "chaos_reflection_module_get_types",
+                ShapeKind.SimpleForward, "ChaosReflectionModuleGetTypes",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3526,7 +3526,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === ParameterInfo::get_Attributes ===
             registry.Register("System.Reflection.ParameterInfo", "get_Attributes", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_param_attributes",
+                ShapeKind.SimpleForward, "ChaosReflectionGetParamAttributes",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),
@@ -3534,7 +3534,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_IsAbstract ===
             registry.Register("System.Type", "get_IsAbstract", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_abstract",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsAbstract",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -3542,7 +3542,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === RuntimeWrappedException::get_WrappedException ===
             registry.Register("System.Runtime.CompilerServices.RuntimeWrappedException", "get_WrappedException", [],
-                ShapeKind.SimpleForward, "chaos_runtimewrapped_get_wrapped_exception",
+                ShapeKind.SimpleForward, "ChaosRuntimewrappedGetWrappedException",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3610,7 +3610,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Interlocked::MemoryBarrier ===
             registry.Register("Interlocked", "MemoryBarrier", [],
-                ShapeKind.SimpleForward, "chaos_interlocked_memory_barrier",
+                ShapeKind.SimpleForward, "ChaosInterlockedMemoryBarrier",
                 Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 CreateVoidAbiSlot(),
                 EmptyRawArgumentIndices);
@@ -3654,7 +3654,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_BaseType ===
             registry.Register("System.Type", "get_BaseType", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_base_type",
+                ShapeKind.SimpleForward, "ChaosReflectionGetBaseType",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3685,7 +3685,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::IsAssignableTo ===
             registry.Register("System.Type", "IsAssignableTo", ["System.Type"],
-                ShapeKind.SimpleForward, "chaos_reflection_is_assignable_to",
+                ShapeKind.SimpleForward, "ChaosReflectionIsAssignableTo",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3695,7 +3695,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === CultureInfo::get_NumberFormat ===
             registry.Register("System.Globalization.CultureInfo", "get_NumberFormat", [],
-                ShapeKind.SimpleForward, "chaos_culture_get_number_format",
+                ShapeKind.SimpleForward, "ChaosCultureGetNumberFormat",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3769,7 +3769,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Assembly::get_ImageRuntimeVersion ===
             registry.Register("System.Reflection.Assembly", "get_ImageRuntimeVersion", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_image_runtime_version",
+                ShapeKind.SimpleForward, "ChaosReflectionGetImageRuntimeVersion",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3777,7 +3777,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_IsGenericTypeDefinition ===
             registry.Register("System.Type", "get_IsGenericTypeDefinition", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_generic_type_def",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsGenericType_def",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -3793,7 +3793,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === ParameterInfo::get_Position ===
             registry.Register("System.Reflection.ParameterInfo", "get_Position", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_param_position",
+                ShapeKind.SimpleForward, "ChaosReflectionGetParamPosition",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),
@@ -3801,7 +3801,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_IsSealed ===
             registry.Register("System.Type", "get_IsSealed", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_sealed",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsSealed",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -3829,7 +3829,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === String::StartsWith ===
             registry.Register("System.String", "StartsWith", ["System.String"],
-                ShapeKind.SimpleForward, "chaos_string_starts_with",
+                ShapeKind.SimpleForward, "ChaosStringStartsWith",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3839,7 +3839,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Volatile::Read ===
             registry.Register("Volatile", "Read", ["System.Int32&"],
-                ShapeKind.SimpleForward, "chaos_volatile_read",
+                ShapeKind.SimpleForward, "ChaosVolatileRead",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),
@@ -3879,7 +3879,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::GetMethods ===
             registry.Register("System.Type", "GetMethods", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_methods",
+                ShapeKind.SimpleForward, "ChaosReflectionGetMethods",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3887,7 +3887,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::GetMethods (BindingFlags overload) ===
             registry.Register("System.Type", "GetMethods", ["System.Reflection.BindingFlags"],
-                ShapeKind.SimpleForward, "chaos_reflection_get_methods_bindingflags",
+                ShapeKind.SimpleForward, "ChaosReflectionGetMethods_bindingflags",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
@@ -3897,7 +3897,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Array::GetLength ===
             registry.Register("System.Array", "GetLength", ["System.Int32"],
-                ShapeKind.SimpleForward, "chaos_array_get_length",
+                ShapeKind.SimpleForward, "ChaosArrayGetLength",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3924,7 +3924,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === CultureInfo::get_CompareInfo ===
             registry.Register("System.Globalization.CultureInfo", "get_CompareInfo", [],
-                ShapeKind.SimpleForward, "chaos_culture_get_compare_info",
+                ShapeKind.SimpleForward, "ChaosCultureGetCompareInfo",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3952,7 +3952,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Math::Sqrt ===
             registry.Register("System.Math", "Sqrt", ["System.Double"],
-                ShapeKind.SimpleForward, "chaos_math_sqrt",
+                ShapeKind.SimpleForward, "ChaosMathSqrt",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
@@ -3960,7 +3960,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Assembly::GetTypes ===
             registry.Register("System.Reflection.Assembly", "GetTypes", [],
-                ShapeKind.SimpleForward, "chaos_reflection_assembly_get_types",
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyGetTypes",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3968,7 +3968,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_IsConstructedGenericType ===
             registry.Register("System.Type", "get_IsConstructedGenericType", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_constructed_generic",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsConstructedGeneric",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -3976,7 +3976,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === MethodBase::get_IsVirtual ===
             registry.Register("System.Reflection.MethodBase", "get_IsVirtual", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_virtual",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsVirtual",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -3984,7 +3984,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === ParameterInfo::GetRequiredCustomModifiers ===
             registry.Register("System.Reflection.ParameterInfo", "GetRequiredCustomModifiers", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_required_custom_modifiers",
+                ShapeKind.SimpleForward, "ChaosReflectionGetRequiredCustomModifiers",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -3992,7 +3992,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::get_IsInterface ===
             registry.Register("System.Type", "get_IsInterface", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_is_interface",
+                ShapeKind.SimpleForward, "ChaosReflectionGetIsInterface",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(),
@@ -4035,7 +4035,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === String::Contains ===
             registry.Register("System.String", "Contains", ["System.String"],
-                ShapeKind.SimpleForward, "chaos_string_contains",
+                ShapeKind.SimpleForward, "ChaosStringContains",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -4080,7 +4080,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::GetFields ===
             registry.Register("System.Type", "GetFields", [],
-                ShapeKind.SimpleForward, "chaos_reflection_get_fields",
+                ShapeKind.SimpleForward, "ChaosReflectionGetFields",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -4088,7 +4088,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Type::GetFields (BindingFlags overload) ===
             registry.Register("System.Type", "GetFields", ["System.Reflection.BindingFlags"],
-                ShapeKind.SimpleForward, "chaos_reflection_get_fields_bindingflags",
+                ShapeKind.SimpleForward, "ChaosReflectionGetFields_bindingflags",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),

@@ -199,7 +199,8 @@ B2+ vtable 系统与现有的 `vtable_registry.*`（token-based 运行时注册�
 | **1** | 对象头 + vtable 数组 + virtual dispatch 迁移 | ObjectModelEmission, MethodEmission, generated_code_compat | ✅ 已完成 |
 | **2** | Interface dispatch 迁移 | iface_map + InterfaceMapEntry | ✅ 已完成 (2026-05-04) |
 | **3** | AOT 去虚化优化 | codegen 静态分析 | 已部分实现 (monomorphic) |
-| **4** | HotUpdate vtable 支持 | 运行时 vtable 构造 API | 待规划 |
+| **4a** | vtableLengths 截断 + HotUpdate 类型注册验证 | ObjectModelEmission.cs, type_registry.cpp | **✅ 完成** (2026-05-04) |
+| **4b** | runtime_iface_map + 接口追加 | 运行时 API | 待规划 |
 
 ### 实施进度 (2026-05-04)
 
@@ -213,6 +214,7 @@ B2+ vtable 系统与现有的 `vtable_registry.*`（token-based 运行时注册�
 | **EmitVirtualDispatchCall vtable[slot/offset]** | **✅ 完成 (2026-05-04)** | MethodEmission.cs:1052-1101 — vtable[slot] + interface dispatch via chaos_find_interface_offset |
 | Interface dispatch via vtable_offset | ✅ 已实现 | InterfaceMapEntry struct, chaos_find_interface_offset(), vtable[offset + method_index] |
 | type_registry.cpp iface_map bug | ✅ 已修复 | chaos_register_type() 现在保存 iface_map/iface_count |
+| **vtableLengths 精确计算** | **✅ Phase 4a 完成** | ObjectModelEmission.cs:402-426 -- maxSlotInHierarchy + 1 |
 
 ## 位置
 

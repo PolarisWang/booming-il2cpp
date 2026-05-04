@@ -399,7 +399,30 @@ public sealed partial class NativeAotLoweringPlanner
 						}
 					}
 				}
-				vtableLengths[typeId] = nextSlot;
+			}
+			// ── Compute per-type vtable length: max slot in hierarchy + 1 ──
+			// Global nextSlot ensures slot uniqueness (interface dispatch correctness),
+			// but vtableLengths must only cover the type's own hierarchy to avoid
+			// unnecessary trailing nullptr entries from unrelated hierarchies.
+			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+			{
+				int maxSlot = -1;
+				string? current = typeId;
+				while (current != null && referenceTypeSubjectIds.Contains(current))
+				{
+					if (methodsByDeclaringTypeVT.TryGetValue(current, out var typeMethods))
+					{
+						foreach (var method in typeMethods)
+						{
+							if (method.IsStatic) continue;
+							var sig = GetMethodSignatureSuffix(method.SubjectId);
+							if (slotMap.TryGetValue(sig, out int slot) && slot > maxSlot)
+								maxSlot = slot;
+						}
+					}
+					referenceTypeBaseSubjectIds.TryGetValue(current, out current);
+				}
+				vtableLengths[typeId] = maxSlot + 1;
 			}
 			_vtableSlotMap = slotMap;
 			_vtableLengths = vtableLengths;

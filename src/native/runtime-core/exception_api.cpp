@@ -46,7 +46,7 @@ static inline CHAOS_IL2CPP_INTPTR* GetExceptionFieldPtr(void* exception_obj, CHA
 
 }  // namespace chaos::il2cpp::runtime_core
 
-extern "C" void chaos_reflection_set_exception_metadata(
+extern "C" void ChaosReflectionSetExceptionMetadata(
     CHAOS_IL2CPP_INTPTR exception_obj,
     CHAOS_IL2CPP_INTPTR message_value)
 {
@@ -60,7 +60,7 @@ extern "C" void chaos_reflection_set_exception_metadata(
     *message_slot = message_value;
 }
 
-extern "C" void chaos_reflection_set_exception_metadata(
+extern "C" void ChaosReflectionSetExceptionMetadata(
     CHAOS_IL2CPP_INTPTR exception_obj,
     CHAOS_IL2CPP_INTPTR message_value,
     CHAOS_IL2CPP_INTPTR param_name_value)
@@ -80,7 +80,7 @@ extern "C" void chaos_reflection_set_exception_metadata(
     (void)param_name_value;
 }
 
-extern "C" void chaos_reflection_set_exception_metadata_2params(
+extern "C" void ChaosReflectionSetExceptionMetadata_2params(
     CHAOS_IL2CPP_INTPTR exception_obj,
     CHAOS_IL2CPP_INTPTR message_value,
     CHAOS_IL2CPP_INTPTR param_name_value)
@@ -100,7 +100,7 @@ extern "C" void chaos_reflection_set_exception_metadata_2params(
     (void)param_name_value;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_exception_message(
+extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetExceptionMessage(
     CHAOS_IL2CPP_INTPTR exception_obj)
 {
     using namespace chaos::il2cpp::runtime_core;

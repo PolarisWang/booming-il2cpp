@@ -451,7 +451,7 @@ public sealed partial class NativeAotLoweringPlanner
 			StringBuilder stringBuilder11 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(58, 2, stringBuilder);
 			handler.AppendFormatted(indentation);
-			handler.AppendLiteral("chaos_eval_stack[chaos_stack_top++] = chaos_store_int64(");
+			handler.AppendLiteral("chaos_eval_stack[chaos_stack_top++] = ChaosStoreInt64(");
 			handler.AppendFormatted(FormatInt64Literal(GetRequiredInt64Operand(instruction)));
 			handler.AppendLiteral(");");
 			stringBuilder11.AppendLine(ref handler);
@@ -576,19 +576,19 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitLinearComparisonResult(builder, instruction, indentation, "CHAOS_IL2CPP_INT32", "<");
 			break;
 		case "add":
-			EmitLinearBinaryArithmetic(builder, indentation, "chaos_wrap_add");
+			EmitLinearBinaryArithmetic(builder, indentation, "ChaosWrapAdd");
 			break;
 		case "sub":
-			EmitLinearBinaryArithmetic(builder, indentation, "chaos_wrap_sub");
+			EmitLinearBinaryArithmetic(builder, indentation, "ChaosWrapSub");
 			break;
 		case "mul":
-			EmitLinearBinaryArithmetic(builder, indentation, "chaos_wrap_mul");
+			EmitLinearBinaryArithmetic(builder, indentation, "ChaosWrapMul");
 			break;
 		case "div":
-			EmitLinearBinaryArithmetic(builder, indentation, "chaos_div");
+			EmitLinearBinaryArithmetic(builder, indentation, "ChaosDiv");
 			break;
 		case "rem":
-			EmitLinearBinaryArithmetic(builder, indentation, "chaos_rem");
+			EmitLinearBinaryArithmetic(builder, indentation, "ChaosRem");
 			break;
 		case "shl":
 			EmitLinearShift(builder, instruction, indentation, "chaos_shift_left_int32");

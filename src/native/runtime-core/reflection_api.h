@@ -9,33 +9,64 @@
 // but reflection_api.cpp is a separate compilation unit.
 
 extern "C" {
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_from_handle(CHAOS_IL2CPP_INTPTR runtime_type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_by_name(CHAOS_IL2CPP_INTPTR name_string_id, CHAOS_IL2CPP_INT32 throw_on_error, CHAOS_IL2CPP_INT32 ignore_case);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_assembly(CHAOS_IL2CPP_INTPTR type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_assembly_name(CHAOS_IL2CPP_INTPTR assembly_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_assembly_name_value(CHAOS_IL2CPP_INTPTR assembly_name_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_declaring_type(CHAOS_IL2CPP_INTPTR type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_member_name(CHAOS_IL2CPP_INTPTR member_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters(CHAOS_IL2CPP_INTPTR method_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameter_name(CHAOS_IL2CPP_INTPTR parameter_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_method_handle(CHAOS_IL2CPP_INTPTR method_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_metadata_token(CHAOS_IL2CPP_INTPTR member_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_handle(CHAOS_IL2CPP_INTPTR type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_constructors(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_methods(CHAOS_IL2CPP_INTPTR type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_fields(CHAOS_IL2CPP_INTPTR type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_interfaces(CHAOS_IL2CPP_INTPTR type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_members(CHAOS_IL2CPP_INTPTR type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_nested_types(CHAOS_IL2CPP_INTPTR type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_field(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_method(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id, CHAOS_IL2CPP_INTPTR param_types);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_generic_arguments(CHAOS_IL2CPP_INTPTR type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_generic_type_definition(CHAOS_IL2CPP_INTPTR type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_create_instance(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR args);
-CHAOS_IL2CPP_INTPTR chaos_reflection_invoke_method(CHAOS_IL2CPP_INTPTR method_handle, CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR args);
-CHAOS_IL2CPP_INTPTR chaos_reflection_make_generic_method(CHAOS_IL2CPP_INTPTR method_handle, CHAOS_IL2CPP_INTPTR type_args);
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_custom_attribute(CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attribute_type_handle);
-CHAOS_IL2CPP_INTPTR chaos_reflection_concat_string_pair_values(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+namespace chaos::il2cpp::runtime_core {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime_type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeByName(CHAOS_IL2CPP_INTPTR name_string_id, CHAOS_IL2CPP_INT32 throw_on_error, CHAOS_IL2CPP_INT32 ignore_case);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssembly(CHAOS_IL2CPP_INTPTR type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyName(CHAOS_IL2CPP_INTPTR assembly_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyNameValue(CHAOS_IL2CPP_INTPTR assembly_name_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetDeclaringType(CHAOS_IL2CPP_INTPTR type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMemberName(CHAOS_IL2CPP_INTPTR member_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameters(CHAOS_IL2CPP_INTPTR method_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameterName(CHAOS_IL2CPP_INTPTR parameter_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodHandle(CHAOS_IL2CPP_INTPTR method_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMetadataToken(CHAOS_IL2CPP_INTPTR member_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeHandle(CHAOS_IL2CPP_INTPTR type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetInterfaces(CHAOS_IL2CPP_INTPTR type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypes(CHAOS_IL2CPP_INTPTR type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetField(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id, CHAOS_IL2CPP_INTPTR param_types);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericArguments(CHAOS_IL2CPP_INTPTR type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericTypeDefinition(CHAOS_IL2CPP_INTPTR type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionCreateInstance(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR args);
+CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(CHAOS_IL2CPP_INTPTR method_handle, CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR args);
+CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(CHAOS_IL2CPP_INTPTR method_handle, CHAOS_IL2CPP_INTPTR type_args);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attribute_type_handle);
+CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+}  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"
+
+// Expose at global scope for generated code.
+using chaos::il2cpp::runtime_core::ChaosReflectionGetTypeFromHandle;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetTypeByName;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetAssembly;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetAssemblyName;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetAssemblyNameValue;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetDeclaringType;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetMemberName;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetParameters;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetParameterName;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetMethodHandle;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetMetadataToken;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetTypeHandle;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetConstructors;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetMethods;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetFields;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetInterfaces;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetMembers;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetNestedTypes;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetField;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetMethod;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetGenericArguments;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetGenericTypeDefinition;
+using chaos::il2cpp::runtime_core::ChaosReflectionCreateInstance;
+using chaos::il2cpp::runtime_core::ChaosReflectionInvokeMethod;
+using chaos::il2cpp::runtime_core::ChaosReflectionMakeGenericMethod;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetCustomAttribute;
+using chaos::il2cpp::runtime_core::ChaosReflectionConcatStringPairValues;
 
 #endif  // CHAOS_IL2CPP_REFLECTION_API_H_
