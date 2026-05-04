@@ -12,7 +12,11 @@ add_library(chaos_runtime_core STATIC
     string_table.h
     string_table.cpp
     type_registry.cpp
-    runtime_stubs.cpp)
+    runtime_stubs.cpp
+    module_registry.cpp
+    module_registry.h
+    reflection_api.cpp
+    reflection_api.h)
 
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)

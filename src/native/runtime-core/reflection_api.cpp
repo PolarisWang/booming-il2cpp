@@ -1,13 +1,21 @@
 // reflection_api.cpp — Native AOT reflection API implementation
 //
 // Provides extern "C" implementations for chaos_reflection_* functions
-// called from generated C++ code. Uses the shared AOT constexpr metadata
-// tables in reflection_metadata_impl.h for type/method/field queries.
+// called from generated C++ code. Uses Module Registry + Two-Tier Metadata
+// for type/method/field queries:
+//
+//   - Given a (module_id, token) encoded TypeInfoHandle, the registry
+//     locates the module descriptor, then the Tier 2 image descriptor
+//     for full type/method/field metadata.
+//   - Legacy ReflectionQuery encoded handles (tag bit 63) are decoded
+//     directly to constexpr ReflectionQueryTypeDescriptor pointers.
+//   - Raw metadata tokens fall back to the aot_metadata shared tables.
 //
 // These functions are called via SimpleForward dispatch from generated code,
 // NOT through the bridge vtable.
 
 #include "runtime_core.h"
+#include "module_registry.h"
 #include "reflection_query_model.h"
 #include "reflection_metadata_impl.h"
 
@@ -18,56 +26,84 @@ namespace chaos::il2cpp::runtime_core {
 
 // ── Internal helpers ──
 
-// Resolve the current AOT image descriptor.
-// In AOT mode, each translation unit sets its image via SetCurrentAotImage().
-// The thread_local image pointer allows reflection functions to locate the
-// correct constexpr metadata table for the calling family.
-static inline const ReflectionQueryImageDescriptor* GetCurrentImage() {
-    auto* image = static_cast<const ReflectionQueryImageDescriptor*>(GetCurrentAotImage());
-    if (image == nullptr) {
-        // Fallback: use CoreLib shared metadata
-        return &aot_metadata::kImageCoreLib;
-    }
-    return image;
-}
-
 // Extract metadata token from a type handle.
 // The handle can be:
-//   - A raw metadata token (ldtoken output) — just use it directly
 //   - A ReflectionQuery encoded handle (tag bit 63) — decode and read token
-//   - Zero/null — return 0
+//   - A Module Registry handle (module_id in upper 32 bits) — low 32 bits = token
+//   - A raw metadata token — just return it
+//   - Zero — return 0
 static inline uint32_t DecodeMetadataToken(CHAOS_IL2CPP_INTPTR handle) {
     if (handle == 0) return 0;
 
     // Check if it's a ReflectionQuery encoded handle
-    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(reinterpret_cast<TypeInfoHandle>(handle));
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(static_cast<TypeInfoHandle>(handle));
     if (decoded != nullptr) {
         return decoded->metadata_token;
     }
 
-    // Raw metadata token (fits in 32 bits)
+    // For Module Registry handles and raw tokens: low 32 bits = token
     return static_cast<uint32_t>(handle & 0xFFFFFFFFu);
 }
 
-// Get a type descriptor from a handle
+// Get a type descriptor from a handle using the full lookup chain:
+//   1. ReflectionQuery encoded handle → direct pointer decode
+//   2. Module Registry handle → extract module_id → LookupModule → image → FindReflectionQueryTypeByToken
+//   3. Raw metadata token → aot_metadata shared tables
 static inline const ReflectionQueryTypeDescriptor* GetTypeDescriptorFromHandle(CHAOS_IL2CPP_INTPTR handle) {
     if (handle == 0) return nullptr;
 
-    // Try ReflectionQuery encoded handle first
-    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(reinterpret_cast<TypeInfoHandle>(handle));
-    if (decoded != nullptr) return decoded;
+    // Try ReflectionQuery encoded handle first (tag bit 63 set)
+    {
+        auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(static_cast<TypeInfoHandle>(handle));
+        if (decoded != nullptr) return decoded;
+    }
 
-    // Fall back to metadata token lookup
-    uint32_t token = static_cast<uint32_t>(handle & 0xFFFFFFFFu);
-    return aot_metadata::FindTypeByMetadataToken(token);
+    // Try Module Registry handle (module_id in upper 32 bits)
+    {
+        TypeInfoHandle type_handle = static_cast<TypeInfoHandle>(handle);
+        uint32_t module_id = GetModuleId(type_handle);
+        if (module_id != 0) {
+            const auto* module = LookupModule(module_id);
+            if (module != nullptr && module->image != nullptr) {
+                uint32_t token = GetTypeToken(type_handle);
+                return FindReflectionQueryTypeByToken(module->image, token);
+            }
+        }
+    }
+
+    // Fall back to raw metadata token lookup
+    {
+        uint32_t token = static_cast<uint32_t>(handle & 0xFFFFFFFFu);
+        if (token != 0) {
+            return aot_metadata::FindTypeByMetadataToken(token);
+        }
+    }
+
+    return nullptr;
+}
+
+// Resolve image descriptor from a type handle via Module Registry.
+// Returns nullptr if the handle is zero or the module has no Tier 2 image.
+static inline const ReflectionQueryImageDescriptor* GetImageFromTypeHandle(CHAOS_IL2CPP_INTPTR handle) {
+    if (handle == 0) return nullptr;
+
+    TypeInfoHandle type_handle = static_cast<TypeInfoHandle>(handle);
+    uint32_t module_id = GetModuleId(type_handle);
+    if (module_id == 0) {
+        return nullptr;
+    }
+
+    const auto* module = LookupModule(module_id);
+    if (module == nullptr) {
+        return nullptr;
+    }
+
+    return module->image;
 }
 
 // Decode a CHAOS_IL2CPP_INTPTR that may be a StringId or a native pointer
 static inline const char* DecodeStringValue(CHAOS_IL2CPP_INTPTR value) {
     if (value == 0) return nullptr;
-    // If it's a StringId, we'd need to resolve it via string_table.
-    // For now, assume it's a native string pointer (or just return the string_id as-is)
-    // Full StringId resolution requires access to the string table.
     return reinterpret_cast<const char*>(value);
 }
 
@@ -86,7 +122,7 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_from_handle(CHAOS_IL2CP
     auto* typeDesc = aot_metadata::FindTypeByMetadataToken(token);
     if (typeDesc == nullptr) return 0;
 
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(typeDesc));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(typeDesc));
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_by_name(
@@ -99,38 +135,37 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_by_name(
     (void)ignore_case;
 
     if (name_string_id == 0) return 0;
-
-    // For AOT mode, we scan the image's type table by display name.
-    // The input is a StringId, which we'd need to resolve to a UTF-8 string.
-    // For now, return 0 — future implementation with string table resolution.
     (void)name_string_id;
     return 0;
 }
 
 // =====================================================================
-// Type properties — metadata table queries
+// Type properties — Module Registry / Image queries
 // =====================================================================
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_assembly(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
-    auto* image = GetCurrentImage();
-    if (image == nullptr) return 0;
 
-    // Return the image handle as a reflection query encoded handle
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryImageHandle(image));
+    // Resolve the image from the type handle via Module Registry
+    auto* image = GetImageFromTypeHandle(type_handle);
+    if (image == nullptr) {
+        // Fallback: CoreLib shared metadata
+        image = &aot_metadata::kImageCoreLib;
+    }
+
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryImageHandle(image));
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_assembly_name(CHAOS_IL2CPP_INTPTR assembly_handle) {
     using namespace chaos::il2cpp::runtime_core;
-    auto* decoded = TryDecodeReflectionQueryImageHandle(reinterpret_cast<ImageHandle>(assembly_handle));
-    if (decoded == nullptr) {
-        // Try the current image as fallback
-        decoded = GetCurrentImage();
-    }
-    if (decoded == nullptr) return 0;
 
-    // Return assembly name as a raw pointer (the utf8 string lives in constexpr data)
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(decoded->image_name_utf8);
+    auto* decoded = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly_handle));
+    if (decoded == nullptr) {
+        // Fallback: CoreLib shared metadata
+        decoded = &aot_metadata::kImageCoreLib;
+    }
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(decoded->image_name_utf8));
 }
 
 // Placeholder for AssemblyName value object
@@ -144,12 +179,10 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_declaring_type(CHAOS_IL2CPP_
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr) return 0;
 
-    // Declaring type is the generic_type_definition if this is a nested type.
-    // For non-nested types, return 0 (declaring type = null).
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
         desc->generic_type_definition != nullptr
             ? EncodeReflectionQueryTypeHandle(desc->generic_type_definition)
-            : nullptr);
+            : static_cast<TypeInfoHandle>(0));
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_member_name(CHAOS_IL2CPP_INTPTR member_handle) {
@@ -157,19 +190,19 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_member_name(CHAOS_IL2CPP_INT
     if (member_handle == 0) return 0;
 
     // Try decoding as each descriptor type
-    auto* typeDesc = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(reinterpret_cast<TypeInfoHandle>(member_handle));
+    auto* typeDesc = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(static_cast<TypeInfoHandle>(member_handle));
     if (typeDesc != nullptr) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(typeDesc->name_utf8);
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(typeDesc->name_utf8));
     }
 
-    auto* methodDesc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(reinterpret_cast<MethodInfoHandle>(member_handle));
+    auto* methodDesc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(static_cast<MethodInfoHandle>(member_handle));
     if (methodDesc != nullptr) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(methodDesc->name_utf8);
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(methodDesc->name_utf8));
     }
 
-    auto* fieldDesc = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(reinterpret_cast<FieldInfoHandle>(member_handle));
+    auto* fieldDesc = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(static_cast<FieldInfoHandle>(member_handle));
     if (fieldDesc != nullptr) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(fieldDesc->name_utf8);
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(fieldDesc->name_utf8));
     }
 
     return 0;
@@ -177,11 +210,10 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_member_name(CHAOS_IL2CPP_INT
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters(CHAOS_IL2CPP_INTPTR method_handle) {
     using namespace chaos::il2cpp::runtime_core;
-    auto* desc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(reinterpret_cast<MethodInfoHandle>(method_handle));
+    auto* desc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(static_cast<MethodInfoHandle>(method_handle));
     if (desc == nullptr) return 0;
 
-    // Return a pointer to the parameter descriptor array
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(desc->parameters);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryParameterDescriptor*>(desc->parameters));
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameter_name(
@@ -191,15 +223,14 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameter_name(
     auto* paramDesc = reinterpret_cast<const ReflectionQueryParameterDescriptor*>(parameter_handle);
     if (paramDesc == nullptr) return 0;
 
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(paramDesc->name_utf8);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(paramDesc->name_utf8));
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_method_handle(CHAOS_IL2CPP_INTPTR method_handle) {
     using namespace chaos::il2cpp::runtime_core;
-    auto* desc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(reinterpret_cast<MethodInfoHandle>(method_handle));
+    auto* desc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(static_cast<MethodInfoHandle>(method_handle));
     if (desc == nullptr) return 0;
 
-    // Return the metadata token as a raw handle
     return static_cast<CHAOS_IL2CPP_INTPTR>(desc->metadata_token);
 }
 
@@ -207,13 +238,13 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_metadata_token(CHAOS_IL2CPP_
     using namespace chaos::il2cpp::runtime_core;
     if (member_handle == 0) return 0;
 
-    auto* typeDesc = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(reinterpret_cast<TypeInfoHandle>(member_handle));
+    auto* typeDesc = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(static_cast<TypeInfoHandle>(member_handle));
     if (typeDesc != nullptr) return static_cast<CHAOS_IL2CPP_INTPTR>(typeDesc->metadata_token);
 
-    auto* methodDesc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(reinterpret_cast<MethodInfoHandle>(member_handle));
+    auto* methodDesc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(static_cast<MethodInfoHandle>(member_handle));
     if (methodDesc != nullptr) return static_cast<CHAOS_IL2CPP_INTPTR>(methodDesc->metadata_token);
 
-    auto* fieldDesc = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(reinterpret_cast<FieldInfoHandle>(member_handle));
+    auto* fieldDesc = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(static_cast<FieldInfoHandle>(member_handle));
     if (fieldDesc != nullptr) return static_cast<CHAOS_IL2CPP_INTPTR>(fieldDesc->metadata_token);
 
     // Raw metadata token passthrough
@@ -225,17 +256,15 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_handle(CHAOS_IL2CPP_INT
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr) return 0;
 
-    // Return the metadata token as a handle (matches ldtoken output)
     return static_cast<CHAOS_IL2CPP_INTPTR>(desc->metadata_token);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_constructors(CHAOS_IL2CPP_INTPTR type_handle) {
+extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_constructors_default(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
 
-    // Return pointer to methods array (caller iterates by method_count)
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(desc->methods);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryMethodDescriptor*>(desc->methods));
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_constructors(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) {
@@ -244,8 +273,7 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_constructors(CHAOS_IL2CPP_IN
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
 
-    // Return pointer to methods array (caller iterates by method_count)
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(desc->methods);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryMethodDescriptor*>(desc->methods));
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_methods(CHAOS_IL2CPP_INTPTR type_handle) {
@@ -253,15 +281,14 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_methods(CHAOS_IL2CPP_INTPTR 
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
 
-    // Return pointer to methods array (caller iterates by method_count)
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(desc->methods);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryMethodDescriptor*>(desc->methods));
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_fields(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->fields == nullptr) return 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(desc->fields);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryFieldDescriptor*>(desc->fields));
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_interfaces(CHAOS_IL2CPP_INTPTR type_handle) {
@@ -290,8 +317,6 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_field(
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->fields == nullptr) return 0;
 
-    // Search fields by name
-    // For now, return 0 — string comparison needs StringId resolution
     (void)name_string_id;
     return 0;
 }
@@ -305,7 +330,6 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_method(
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
 
-    // Search methods by name
     (void)name_string_id;
     (void)param_types;
     return 0;
@@ -321,7 +345,7 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_generic_type_definition(CHAO
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->generic_type_definition == nullptr) return 0;
 
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+    return static_cast<CHAOS_IL2CPP_INTPTR>(
         EncodeReflectionQueryTypeHandle(desc->generic_type_definition));
 }
 
@@ -331,7 +355,6 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_create_instance(
 {
     (void)type_handle;
     (void)args;
-    // Requires RuntimeState for GC allocation — placeholder
     return 0;
 }
 
@@ -374,6 +397,5 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_concat_string_pair_values(
 {
     (void)left;
     (void)right;
-    // String concatenation requires heap allocation — placeholder
     return 0;
 }

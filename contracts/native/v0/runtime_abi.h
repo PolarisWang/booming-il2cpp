@@ -27,16 +27,19 @@ extern "C" {
 #define CHAOS_RUNTIME_ABI_V0 0u
 #define CHAOS_GC_HANDLE_INVALID ((GCHandle)0u)
 
-/* Opaque reflection and runtime handles carried across the ABI boundary. */
-typedef struct TypeInfoOpaque* TypeInfoHandle;
-typedef struct MethodInfoOpaque* MethodInfoHandle;
-typedef struct FieldInfoOpaque* FieldInfoHandle;
-typedef struct PropertyInfoOpaque* PropertyInfoHandle;
-typedef struct EventInfoOpaque* EventInfoHandle;
-typedef struct ParameterInfoOpaque* ParameterInfoHandle;
+/* Reflection and runtime handles — uint64_t encoding for cross-DLL identity.
+ * TypeInfoHandle: [module_id:32 << 32 | token:32] (B2 Module Registry).
+ * Other handles follow the same (module_id, token) pattern where applicable.
+ * GenericContextHandle/AssemblyHandle/ExceptionHandle remain opaque pointers. */
+typedef uint64_t TypeInfoHandle;
+typedef uint64_t MethodInfoHandle;
+typedef uint64_t FieldInfoHandle;
+typedef uint64_t PropertyInfoHandle;
+typedef uint64_t EventInfoHandle;
+typedef uint64_t ParameterInfoHandle;
 typedef struct GenericContextOpaque* GenericContextHandle;
 typedef struct AssemblyOpaque* AssemblyHandle;
-typedef struct ImageOpaque* ImageHandle;
+typedef uint64_t ImageHandle;
 typedef struct ExceptionOpaque* ExceptionHandle;
 
 typedef struct RuntimeState RuntimeState;

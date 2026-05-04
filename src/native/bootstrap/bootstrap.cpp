@@ -65,7 +65,7 @@ static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, void*) g_invoker_table;
 
 template <typename THandle>
 THandle MakeOpaqueHandle(CHAOS_IL2CPP_UINT32 token) {
-    return reinterpret_cast<THandle>(static_cast<CHAOS_IL2CPP_UINTPTR>(token));
+    return static_cast<THandle>(static_cast<CHAOS_IL2CPP_UINTPTR>(token));
 }
 
 bool IsStructSizeValid(
@@ -81,11 +81,11 @@ bool IsStructSizeValid(
 }
 
 bool IsBootstrapped(ImageHandle image) {
-    return g_bootstrap_state.is_bootstrapped && image != nullptr;
+    return g_bootstrap_state.is_bootstrapped && image != 0;
 }
 
-CHAOS_IL2CPP_UINT32 DecodeOpaqueToken(const void* handle) {
-    return static_cast<CHAOS_IL2CPP_UINT32>(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(handle));
+CHAOS_IL2CPP_UINT32 DecodeOpaqueToken(CHAOS_IL2CPP_UINTPTR handle) {
+    return static_cast<CHAOS_IL2CPP_UINT32>(handle);
 }
 
 const MethodPointerEntry* GetMethodPointerEntries() {
@@ -134,13 +134,13 @@ const UnresolvedVirtualCallEntry* FindUnresolvedVirtualCallEntry(
 }
 
 bool IsKnownResolvedVirtualHandle(MethodInfoHandle method) {
-    if (method == nullptr) return false;
+    if (method == 0) return false;
 
     // Accept any method pointer that came from the vtable registry.
     // (vtable registry stores raw function pointers, not opaque tokens.)
     // We distinguish vtable pointers from token handles by checking the token range:
     // tokens are <= 0x0FFFFFFF; real function pointers are usually larger addresses.
-    const CHAOS_IL2CPP_UINTPTR raw = reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(method);
+    const CHAOS_IL2CPP_UINTPTR raw = static_cast<CHAOS_IL2CPP_UINTPTR>(method);
     if (raw > static_cast<CHAOS_IL2CPP_UINTPTR>(0x0FFFFFFFu)) {
         // Likely a real function pointer from vtable registry or unresolved-virtual table.
         return true;
@@ -272,7 +272,7 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveTypeByToken(
     ImageHandle image,
     CHAOS_IL2CPP_UINT32 type_token) {
     if (!IsBootstrapped(image) || type_token == 0u) {
-        return nullptr;
+        return 0;
     }
 
     if (const auto* reflection_image = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryImageHandle(image)) {
@@ -320,7 +320,7 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveMethodByToken(
     ImageHandle image,
     CHAOS_IL2CPP_UINT32 method_token) {
     if (!IsBootstrapped(image) || method_token == 0u) {
-        return nullptr;
+        return 0;
     }
 
     if (const auto* reflection_image = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryImageHandle(image)) {
@@ -335,7 +335,7 @@ FieldInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveFieldByToken(
     ImageHandle image,
     CHAOS_IL2CPP_UINT32 field_token) {
     if (!IsBootstrapped(image) || field_token == 0u) {
-        return nullptr;
+        return 0;
     }
 
     if (const auto* reflection_image = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryImageHandle(image)) {
@@ -378,21 +378,21 @@ static CHAOS_IL2CPP_UINT32 DecodeVirtualMethodToken(MethodInfoHandle method) {
     if (const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryMethodHandle(method)) {
         return desc->metadata_token;
     }
-    return DecodeOpaqueToken(method);
+    return DecodeOpaqueToken(static_cast<CHAOS_IL2CPP_UINTPTR>(method));
 }
 
 static CHAOS_IL2CPP_UINT32 DecodeVirtualTypeToken(TypeInfoHandle type) {
     if (const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(type)) {
         return desc->metadata_token;
     }
-    return DecodeOpaqueToken(type);
+    return DecodeOpaqueToken(static_cast<CHAOS_IL2CPP_UINTPTR>(type));
 }
 
 MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethod(
     TypeInfoHandle instance_type,
     MethodInfoHandle declared_method) {
-    if (instance_type == nullptr || declared_method == nullptr) {
-        return nullptr;
+    if (instance_type == 0 || declared_method == 0) {
+        return 0;
     }
 
     const CHAOS_IL2CPP_UINT32 instance_type_token  = DecodeVirtualTypeToken(instance_type);
@@ -427,14 +427,14 @@ static MethodInfoHandle ResolveVirtualMethodTokenImpl(
         return reinterpret_cast<MethodInfoHandle>(entry->resolved_method);
     }
 
-    return nullptr;
+    return 0;
 }
 
 MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethodByToken(
     CHAOS_IL2CPP_UINT32 instance_type_token,
     CHAOS_IL2CPP_UINT32 declared_method_token) {
     if (instance_type_token == 0u || declared_method_token == 0u) {
-        return nullptr;
+        return 0;
     }
     return ResolveVirtualMethodTokenImpl(instance_type_token, declared_method_token);
 }
@@ -452,7 +452,7 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
     if (runtime_state == nullptr
         || thread_state == nullptr
         || object_instance == nullptr
-        || method == nullptr
+        || method == 0
         || (argv == nullptr && argc > 0u)
         || argc > 4u
         || out_return_value == nullptr

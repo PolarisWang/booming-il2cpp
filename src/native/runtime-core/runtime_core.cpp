@@ -588,11 +588,11 @@ static bool TryPopulateVectorCapabilityFromDisplayName(
 static bool TryPopulateRegisteredTypeCapability(
     TypeInfoHandle type,
     RuntimeTypeCapabilityInfoV0* out_capability_info) {
-    if (type == nullptr) {
+    if (type == 0) {
         return false;
     }
 
-    const CHAOS_IL2CPP_UINTPTR raw_handle = reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(type);
+    const CHAOS_IL2CPP_UINTPTR raw_handle = static_cast<CHAOS_IL2CPP_UINTPTR>(type);
     if ((raw_handle & kReflectionQueryHandleTag) != 0u) {
         return false;
     }
@@ -745,7 +745,7 @@ void* CHAOS_RUNTIME_ABI_CALL ArrayNew(
     ThreadState* thread_state,
     TypeInfoHandle element_type,
     CHAOS_IL2CPP_UINTPTR length) {
-    if (!IsAttached(runtime_state, thread_state) || element_type == nullptr) {
+    if (!IsAttached(runtime_state, thread_state) || element_type == 0) {
         return nullptr;
     }
 
@@ -808,7 +808,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ClassInit(
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
 
-    return type != nullptr ? CHAOS_RUNTIME_STATUS_OK : CHAOS_RUNTIME_STATUS_NOT_FOUND;
+    return type != 0 ? CHAOS_RUNTIME_STATUS_OK : CHAOS_RUNTIME_STATUS_NOT_FOUND;
 }
 
 RuntimeStatus TypeQueryCapabilityImpl(
@@ -927,7 +927,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldGetValue(
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
 
-    if (field == nullptr) {
+    if (field == 0) {
         return CHAOS_RUNTIME_STATUS_NOT_FOUND;
     }
 
@@ -951,7 +951,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldSetValue(
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
 
-    if (field == nullptr) {
+    if (field == 0) {
         return CHAOS_RUNTIME_STATUS_NOT_FOUND;
     }
 
@@ -1053,8 +1053,8 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL ImageFindType(
     ImageHandle image,
     const char* namespace_utf8,
     const char* type_name_utf8) {
-    if (image == nullptr || namespace_utf8 == nullptr || type_name_utf8 == nullptr) {
-        return nullptr;
+    if (image == 0 || namespace_utf8 == nullptr || type_name_utf8 == nullptr) {
+        return 0;
     }
 
     if (const auto* reflection_image = TryDecodeReflectionQueryImageHandle(image)) {
@@ -1062,15 +1062,15 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL ImageFindType(
         return EncodeReflectionQueryTypeHandle(type);
     }
 
-    return reinterpret_cast<TypeInfoHandle>(image);
+    return static_cast<TypeInfoHandle>(image);
 }
 
 MethodInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindMethod(
     TypeInfoHandle type,
     const char* method_name_utf8,
     CHAOS_IL2CPP_INT32 parameter_count) {
-    if (type == nullptr || method_name_utf8 == nullptr || parameter_count < 0) {
-        return nullptr;
+    if (type == 0 || method_name_utf8 == nullptr || parameter_count < 0) {
+        return 0;
     }
 
     if (const auto* reflection_type = TryDecodeReflectionQueryTypeHandle(type)) {
@@ -1078,14 +1078,14 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindMethod(
         return EncodeReflectionQueryMethodHandle(method);
     }
 
-    return reinterpret_cast<MethodInfoHandle>(type);
+    return static_cast<MethodInfoHandle>(type);
 }
 
 FieldInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindField(
     TypeInfoHandle type,
     const char* field_name_utf8) {
-    if (type == nullptr || field_name_utf8 == nullptr) {
-        return nullptr;
+    if (type == 0 || field_name_utf8 == nullptr) {
+        return 0;
     }
 
     if (const auto* reflection_type = TryDecodeReflectionQueryTypeHandle(type)) {
@@ -1093,14 +1093,14 @@ FieldInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindField(
         return EncodeReflectionQueryFieldHandle(field);
     }
 
-    return reinterpret_cast<FieldInfoHandle>(type);
+    return static_cast<FieldInfoHandle>(type);
 }
 
 PropertyInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindProperty(
     TypeInfoHandle type,
     const char* property_name_utf8) {
-    if (type == nullptr || property_name_utf8 == nullptr) {
-        return nullptr;
+    if (type == 0 || property_name_utf8 == nullptr) {
+        return 0;
     }
 
     if (const auto* reflection_type = TryDecodeReflectionQueryTypeHandle(type)) {
@@ -1108,7 +1108,7 @@ PropertyInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindProperty(
         return EncodeReflectionQueryPropertyHandle(property);
     }
 
-    return nullptr;
+    return 0;
 }
 
 EventInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindEvent(
@@ -1116,26 +1116,26 @@ EventInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindEvent(
     const char* event_name_utf8) {
     (void)type;
     (void)event_name_utf8;
-    return nullptr;
+    return 0;
 }
 
 TypeInfoHandle CHAOS_RUNTIME_ABI_CALL TypeGetGenericTypeDefinition(TypeInfoHandle type) {
-    if (type == nullptr) {
-        return nullptr;
+    if (type == 0) {
+        return 0;
     }
 
     if (const auto* reflection_type = TryDecodeReflectionQueryTypeHandle(type)) {
         return EncodeReflectionQueryTypeHandle(reflection_type->generic_type_definition);
     }
 
-    return nullptr;
+    return 0;
 }
 
 ParameterInfoHandle CHAOS_RUNTIME_ABI_CALL MethodGetParameter(
     MethodInfoHandle method,
     CHAOS_IL2CPP_UINT32 parameter_index) {
-    if (method == nullptr) {
-        return nullptr;
+    if (method == 0) {
+        return 0;
     }
 
     if (const auto* reflection_method = TryDecodeReflectionQueryMethodHandle(method)) {
@@ -1143,14 +1143,14 @@ ParameterInfoHandle CHAOS_RUNTIME_ABI_CALL MethodGetParameter(
         return EncodeReflectionQueryParameterHandle(parameter);
     }
 
-    return nullptr;
+    return 0;
 }
 
 GenericContextHandle CHAOS_RUNTIME_ABI_CALL MethodGetGenericContext(MethodInfoHandle method) {
-    if (method == nullptr) {
+    if (method == 0) {
         return nullptr;
     }
-    const CHAOS_IL2CPP_UINT32 method_token = static_cast<CHAOS_IL2CPP_UINT32>(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(method));
+    const CHAOS_IL2CPP_UINT32 method_token = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_UINTPTR>(method));
     return chaos::il2cpp::generic_context::GetGenericContextForMethod(method_token);
 }
 
