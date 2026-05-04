@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/convert/char",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "elapsedMilliseconds": 0.0932,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)"
+    },
+    {
+      "methodIndex": 1,
+      "elapsedMilliseconds": 0.0924,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)"
+    },
+    {
+      "methodIndex": 2,
+      "elapsedMilliseconds": 0.0919,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)"
+    },
+    {
+      "methodIndex": 3,
+      "elapsedMilliseconds": 0.0919,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)"
+    },
+    {
+      "methodIndex": 4,
+      "elapsedMilliseconds": 0.0929,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)"
+    },
+    {
+      "methodIndex": 5,
+      "elapsedMilliseconds": 0.0926,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)"
+    },
+    {
+      "methodIndex": 6,
+      "elapsedMilliseconds": 0.0923,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)"
+    },
+    {
+      "methodIndex": 7,
+      "elapsedMilliseconds": 0.0925,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)"
+    },
+    {
+      "methodIndex": 8,
+      "elapsedMilliseconds": 0.092,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)"
+    },
+    {
+      "methodIndex": 9,
+      "elapsedMilliseconds": 0.0974,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)"
+    },
+    {
+      "methodIndex": 10,
+      "elapsedMilliseconds": 0.0911,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)"
+    },
+    {
+      "methodIndex": 11,
+      "elapsedMilliseconds": 0.0922,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)"
+    },
+    {
+      "methodIndex": 12,
+      "elapsedMilliseconds": 0.0911,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)"
+    },
+    {
+      "methodIndex": 13,
+      "elapsedMilliseconds": 0.0917,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)"
+    },
+    {
+      "methodIndex": 14,
+      "elapsedMilliseconds": 0.092,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)"
+    },
+    {
+      "methodIndex": 15,
+      "elapsedMilliseconds": 0.0914,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)"
+    },
+    {
+      "methodIndex": 16,
+      "elapsedMilliseconds": 0.0919,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)"
+    },
+    {
+      "methodIndex": 17,
+      "elapsedMilliseconds": 0.0911,
+      "checksum": 0,
+      "iterations": 100000,
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)"
+    }
+  ]
+}

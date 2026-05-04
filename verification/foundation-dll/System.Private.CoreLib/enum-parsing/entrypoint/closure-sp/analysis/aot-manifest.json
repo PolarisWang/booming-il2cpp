@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingNativeEntry/EnumParsingNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    }
+  ]
+}

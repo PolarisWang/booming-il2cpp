@@ -1,0 +1,138 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "StringCharTextCoreNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Run",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method0",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method1",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method2",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method3",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method4",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method5",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method6",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method7",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method8",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method9",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method10",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method11",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method12",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method13",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method14",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method15",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method15:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method16",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method16:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method17",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method17:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method18",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method18:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "StringCharTextCoreNativeEntry_StringCharTextCoreNativeEntry_Method19",
+          "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method19:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

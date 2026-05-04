@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-30T05:06:55.400112Z",
+  "generatedAtUtc": "2026-05-04T01:20:07.979621Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "mergeKey": "capabilityId",
@@ -2755,7 +2755,7 @@
         "semantic",
         "perf"
       ],
-      "verificationState": "failed",
+      "verificationState": "missing",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",
@@ -2805,7 +2805,7 @@
         "contract",
         "semantic"
       ],
-      "verificationState": "planned",
+      "verificationState": "missing",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",
@@ -2908,7 +2908,7 @@
         "contract",
         "semantic"
       ],
-      "verificationState": "planned",
+      "verificationState": "missing",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",
@@ -2958,7 +2958,7 @@
         "contract",
         "semantic"
       ],
-      "verificationState": "planned",
+      "verificationState": "missing",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",
@@ -3008,7 +3008,7 @@
         "contract",
         "semantic"
       ],
-      "verificationState": "planned",
+      "verificationState": "missing",
       "supportState": "supported",
       "blockers": [],
       "latestClosureId": "closure/completed/testing-inventory",

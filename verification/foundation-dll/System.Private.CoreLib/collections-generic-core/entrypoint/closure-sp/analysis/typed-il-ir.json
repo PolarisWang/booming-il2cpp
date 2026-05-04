@@ -1,0 +1,1280 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.run",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.run",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                80,
+                88,
+                96,
+                104,
+                112,
+                120,
+                128,
+                136,
+                144,
+                152,
+                160,
+                168,
+                176,
+                184,
+                192,
+                200
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 208,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method10:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method10:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method11:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method11:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method12:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method12:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method13:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method13:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method14:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method14:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method15:System.Int32()",
+              "reference": {
+                "assemblyName": "CollectionsGenericCoreNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method15:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 212,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method0",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method0:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method0:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method0",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method1",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method1:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method1:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method1",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E",
+              "callee": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Collections",
+                "subjectKind": "method",
+                "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Void",
+              "callee": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Clear:System.Void()",
+              "reference": {
+                "assemblyName": "System.Collections",
+                "subjectKind": "method",
+                "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Clear:System.Void()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 16,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method2",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method2:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method2:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method2",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method3",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method3:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method3:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method3",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method4",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method4:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method4:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method4",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method5",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method5:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method5:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method5",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method6",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method6:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method6:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method6",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E",
+              "callee": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Collections",
+                "subjectKind": "method",
+                "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Void",
+              "callee": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Sort:System.Void()",
+              "reference": {
+                "assemblyName": "System.Collections",
+                "subjectKind": "method",
+                "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Sort:System.Void()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 16,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method7",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method7:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method7:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method7",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [
+        "requires-array-length-query"
+      ],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E",
+              "callee": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Collections",
+                "subjectKind": "method",
+                "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32[]",
+              "callee": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::ToArray:System.Int32[]()",
+              "reference": {
+                "assemblyName": "System.Collections",
+                "subjectKind": "method",
+                "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::ToArray:System.Int32[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "ldlen",
+              "resultType": "System.IntPtr"
+            },
+            {
+              "op": "conv.i4",
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 16,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method8",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method8:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method8:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method8",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method9",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method9:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method9:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method9",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "newobj",
+              "resultType": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E",
+              "callee": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::.ctor:System.Void()",
+              "reference": {
+                "assemblyName": "System.Collections",
+                "subjectKind": "method",
+                "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::.ctor:System.Void()"
+              }
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+              "reference": {
+                "assemblyName": "System.Collections",
+                "subjectKind": "method",
+                "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 14,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method10",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method10:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method10()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method10:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method10:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method10",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method10()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method11",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method11:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method11()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method11:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method11:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method11",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method11()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method12",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method12:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method12()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method12:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method12:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method12",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method12()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method13",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method13:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method13()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method13:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method13:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method13",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method13()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method14",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method14:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method14()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method14:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method14:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method14",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method14()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method15",
+      "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method15:System.Int32()",
+      "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method15()",
+      "identity": {
+        "assemblyName": "CollectionsGenericCoreNativeEntry",
+        "declaringTypeSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry",
+        "definitionSubjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method15:System.Int32()",
+        "subjectId": "CollectionsGenericCoreNativeEntry/CollectionsGenericCoreNativeEntry::Method15:System.Int32()",
+        "methodId": "collections-generic-core-native-entry.collections-generic-core-native-entry.method15",
+        "signature": "System.Int32 CollectionsGenericCoreNativeEntry::Method15()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

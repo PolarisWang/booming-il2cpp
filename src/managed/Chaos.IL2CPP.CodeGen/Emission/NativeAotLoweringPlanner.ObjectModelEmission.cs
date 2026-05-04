@@ -40,7 +40,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("};");
 		builder.AppendLine();
 		builder.AppendLine("constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;");
-		builder.AppendLine("inline constexpr TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, 0, 2 }");
+		builder.AppendLine("inline constexpr TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, 0, 2 };");
 		builder.AppendLine();
 		builder.AppendLine("struct chaos_managed_array");
 		builder.AppendLine("{");
@@ -745,11 +745,8 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (string typeSubjectId in GetReferenceTypeEmissionOrder(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 		{
 			var ns = ManagedNaming.NormalizeSubjectIdAssembly(typeSubjectId);
-			// Decimal leaks into referenceTypeSubjectIds as a value type — skip to avoid unnecessary chaos_object_header
-			if (string.Equals(ns, "System.Private.CoreLib/System.Decimal", StringComparison.Ordinal))
-			{
-				continue;
-			}
+			// Decimal is a value type that may appear in referenceTypeSubjectIds when
+			// used via newobj (boxed heap allocation). Emit a minimal struct with header only.
 			bool num2 = string.Equals(ns, "System.Private.CoreLib/System.String", StringComparison.Ordinal);
 			bool flag3 = string.Equals(ns, "System.Private.CoreLib/System.Delegate", StringComparison.Ordinal);
 			bool flag4 = string.Equals(ns, "System.Private.CoreLib/System.Type", StringComparison.Ordinal);

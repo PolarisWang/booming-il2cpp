@@ -1,0 +1,210 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "GuidRandomHashcodeNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "name": "GuidRandomHashcodeNativeEntry",
+      "displayName": "GuidRandomHashcodeNativeEntry",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 2,
+      "subjectId": "GuidRandomHashcodeNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "name": "\u003CPrivateImplementationDetails\u003E",
+      "displayName": "\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/\u003CPrivateImplementationDetails\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 3,
+      "subjectId": "GuidRandomHashcodeNativeEntry/\u003CPrivateImplementationDetails\u003E::039058C6F2C0CB492C533B0A4D14EF77CC0F78ABCCCED5287D84A1A2011CFB81",
+      "name": "039058C6F2C0CB492C533B0A4D14EF77CC0F78ABCCCED5287D84A1A2011CFB81",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/\u003CPrivateImplementationDetails\u003E::039058C6F2C0CB492C533B0A4D14EF77CC0F78ABCCCED5287D84A1A2011CFB81",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=3"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method13:System.Int32()",
+      "name": "Method13",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 19,
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

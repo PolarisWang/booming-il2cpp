@@ -1,0 +1,1457 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.run",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataNativeEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+        "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.run",
+        "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Run",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 3,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 1,
+          "ilOffset": 3
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "switch",
+          "operand": [
+            49,
+            57,
+            65,
+            73,
+            81,
+            89,
+            97,
+            105,
+            113
+          ],
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 121,
+          "ilOffset": 47,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 49,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method0:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 54,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 55,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 57,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method1:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 62,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 63,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 65,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method2:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method2:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method2:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 70,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 71,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 73,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method3:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method3:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method3:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 78,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 79,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 81,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method4:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method4:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method4:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 86,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 87,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 89,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method5:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 94,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 95,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 97,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method6:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method6:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method6:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 102,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 103,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method7:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method7:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method7:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 110,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 111,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "call",
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "callee": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method8:System.Int32()",
+          "reference": {
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectKind": "method",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method8:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "AttributesCustomMetadataNativeEntry",
+            "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method8:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 118,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 119,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 121,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 2,
+          "ilOffset": 122,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 125,
+          "ilOffset": 123,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 2,
+          "ilOffset": 125
+        },
+        {
+          "op": "ret",
+          "ilOffset": 126
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method0",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataNativeEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+        "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method0:System.Int32()",
+        "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method0:System.Int32()",
+        "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method0",
+        "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method0()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method0",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 11,
+          "resultType": "System.Reflection.Assembly",
+          "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+          "ilOffset": 16,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 21,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 26,
+          "resultType": "System.Attribute",
+          "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 31,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 36,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 39,
+          "ilOffset": 37,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 39
+        },
+        {
+          "op": "ret",
+          "ilOffset": 40
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method1",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataNativeEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+        "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method1:System.Int32()",
+        "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method1:System.Int32()",
+        "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method1",
+        "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method1()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method1",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 11,
+          "resultType": "System.Reflection.Assembly",
+          "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+          "ilOffset": 16,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 21,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 26,
+          "resultType": "System.Attribute",
+          "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 31,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 36,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 39,
+          "ilOffset": 37,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 39
+        },
+        {
+          "op": "ret",
+          "ilOffset": 40
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method2",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataNativeEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+        "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method2:System.Int32()",
+        "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method2:System.Int32()",
+        "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method2",
+        "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method2()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method2",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method3",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataNativeEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+        "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method3:System.Int32()",
+        "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method3:System.Int32()",
+        "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method3",
+        "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method3()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method3",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method4",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataNativeEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+        "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method4:System.Int32()",
+        "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method4:System.Int32()",
+        "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method4",
+        "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method4()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method5",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataNativeEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+        "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method5:System.Int32()",
+        "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method5:System.Int32()",
+        "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method5",
+        "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method5()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method5",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method6",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataNativeEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+        "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method6:System.Int32()",
+        "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method6:System.Int32()",
+        "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method6",
+        "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method6()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method6",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 11,
+          "resultType": "System.Reflection.Assembly",
+          "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+          "ilOffset": 16,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 21,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 26,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 36,
+          "ilOffset": 31,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 33,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 37,
+          "ilOffset": 34,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 36,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 37,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 40,
+          "ilOffset": 38,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 40
+        },
+        {
+          "op": "ret",
+          "ilOffset": 41
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method7",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataNativeEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+        "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method7:System.Int32()",
+        "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method7:System.Int32()",
+        "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method7",
+        "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method7()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method7",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 1,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "callvirt",
+          "ilOffset": 11,
+          "resultType": "System.Reflection.Assembly",
+          "callee": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldtoken",
+          "operand": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+          "ilOffset": 16,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.AssemblyDescriptionAttribute",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 21,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "call",
+          "ilOffset": 26,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "brtrue",
+          "operand": 36,
+          "ilOffset": 31,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 33,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "br",
+          "operand": 37,
+          "ilOffset": 34,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 36,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 37,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 40,
+          "ilOffset": 38,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 40
+        },
+        {
+          "op": "ret",
+          "ilOffset": 41
+        }
+      ]
+    },
+    {
+      "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method8",
+      "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "AttributesCustomMetadataNativeEntry",
+        "declaringTypeSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry",
+        "definitionSubjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method8:System.Int32()",
+        "subjectId": "AttributesCustomMetadataNativeEntry/AttributesCustomMetadataNativeEntry::Method8:System.Int32()",
+        "methodId": "attributes-custom-metadata-native-entry.attributes-custom-metadata-native-entry.method8",
+        "signature": "System.Int32 AttributesCustomMetadataNativeEntry::Method8()"
+      },
+      "nativeSymbol": "AttributesCustomMetadataNativeEntry_AttributesCustomMetadataNativeEntry_Method8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "br",
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    }
+  ],
+  "_trimmed": {
+    "originalMethodCount": 10,
+    "trimmedMethodCount": 10,
+    "entryPrefix": "AttributesCustomMetadataNativeEntry"
+  }
+}

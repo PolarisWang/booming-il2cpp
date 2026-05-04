@@ -459,31 +459,32 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_get_calling_assembly(void) noexcept
 CHAOS_IL2CPP_INTPTR chaos_reflection_get_entry_assembly(void) noexcept
 {
     return 0;
-n	// Reflection supplementary
-	CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_sealed(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-	{
-	    return 0;
-	}
+}
 
-	CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_generic_type_def(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-	{
-	    return 0;
-	}
+// Reflection supplementary
+CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_sealed(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+{
+    return 0;
+}
 
-	CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_from_assembly_bool(CHAOS_IL2CPP_INTPTR /*assembly*/, CHAOS_IL2CPP_INTPTR /*name*/, CHAOS_IL2CPP_INT32 /*throw_on_error*/) noexcept
-	{
-	    return 0;
-	}
+CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_generic_type_def(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+{
+    return 0;
+}
 
-	CHAOS_IL2CPP_INTPTR chaos_reflection_get_executing_assembly(void) noexcept
-	{
-	    return 0;
-	}
+CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_from_assembly_bool(CHAOS_IL2CPP_INTPTR /*assembly*/, CHAOS_IL2CPP_INTPTR /*name*/, CHAOS_IL2CPP_INT32 /*throw_on_error*/) noexcept
+{
+    return 0;
+}
 
-	CHAOS_IL2CPP_INTPTR chaos_reflection_get_assembly_location(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
-	{
-	    return 0;
-	}
+CHAOS_IL2CPP_INTPTR chaos_reflection_get_executing_assembly(void) noexcept
+{
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR chaos_reflection_get_assembly_location(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
+{
+    return 0;
 }
 
 // ─── Generic type reflection ────────────────────────────────────
@@ -534,5 +535,8 @@ CHAOS_IL2CPP_INT32 chaos_volatile_read(CHAOS_IL2CPP_INTPTR ptr) noexcept
 {
     return *reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(ptr);
 }
+
+// -- Generic registration callback (defined by generated code via static init) --
+extern "C" void (*g_chaos_populate_generic_registration)(void) = nullptr;
 
 }  // extern "C"

@@ -1,0 +1,114 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "TimeDateTimeTimespanNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Run",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method0",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method1",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method2",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method3",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method4",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method5",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method6",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method7",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method8",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method9",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method10",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method11",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method12",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method13",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method14",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method14:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "TimeDateTimeTimespanNativeEntry_TimeDateTimeTimespanNativeEntry_Method15",
+          "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method15:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

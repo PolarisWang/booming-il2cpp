@@ -1,0 +1,799 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.run",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Run:System.Int32(System.Int32)",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Run:System.Int32(System.Int32)",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Run:System.Int32(System.Int32)",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.run",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Run(System.Int32)"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [
+        {
+          "name": "entryIndex",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 1,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "switch",
+              "operand": [
+                53,
+                61,
+                69,
+                77,
+                85,
+                93,
+                101,
+                109,
+                117,
+                125
+              ],
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 133,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method0:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method0:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method1:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method1:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method2:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method2:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method3:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method3:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method4:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method4:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method5:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method5:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method6:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method6:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method7:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method7:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method8:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method8:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method9:System.Int32()",
+              "reference": {
+                "assemblyName": "BufferMemoryNativeEntry",
+                "subjectKind": "method",
+                "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method9:System.Int32()"
+              },
+              "dispatchKindCode": 1
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldc.i4",
+              "operand": -1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 2,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 137,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 2
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method0",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method0:System.Int32()",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Method0()",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method0:System.Int32()",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method0:System.Int32()",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method0",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Method0()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method1",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method1:System.Int32()",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Method1()",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method1:System.Int32()",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method1:System.Int32()",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method1",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Method1()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method2",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method2:System.Int32()",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Method2()",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method2:System.Int32()",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method2:System.Int32()",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method2",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Method2()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "call",
+              "resultType": "System.Byte[]",
+              "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "call",
+              "resultType": "System.Int32",
+              "callee": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+              "reference": {
+                "assemblyName": "System.Private.CoreLib",
+                "subjectKind": "method",
+                "subjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)"
+              },
+              "dispatchKindCode": 4
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 14,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method3",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method3:System.Int32()",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Method3()",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method3:System.Int32()",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method3:System.Int32()",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method3",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Method3()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method4",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method4:System.Int32()",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Method4()",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method4:System.Int32()",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method4:System.Int32()",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method4",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Method4()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method5",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method5:System.Int32()",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Method5()",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method5:System.Int32()",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method5:System.Int32()",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method5",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Method5()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method6",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method6:System.Int32()",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Method6()",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method6:System.Int32()",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method6:System.Int32()",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method6",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Method6()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method7",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method7:System.Int32()",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Method7()",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method7:System.Int32()",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method7:System.Int32()",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method7",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Method7()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method8",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method8:System.Int32()",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Method8()",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method8:System.Int32()",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method8:System.Int32()",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method8",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Method8()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method9",
+      "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method9:System.Int32()",
+      "signature": "System.Int32 BufferMemoryNativeEntry::Method9()",
+      "identity": {
+        "assemblyName": "BufferMemoryNativeEntry",
+        "declaringTypeSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry",
+        "definitionSubjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method9:System.Int32()",
+        "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method9:System.Int32()",
+        "methodId": "buffer-memory-native-entry.buffer-memory-native-entry.method9",
+        "signature": "System.Int32 BufferMemoryNativeEntry::Method9()"
+      },
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "bodyAvailabilityCode": 2,
+      "capabilities": [],
+      "parameters": [],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldc.i4",
+              "operand": 0,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "stloc",
+              "operand": 0,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "br",
+              "operand": 5,
+              "resultType": "System.Void"
+            },
+            {
+              "op": "ldloc",
+              "operand": 0
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

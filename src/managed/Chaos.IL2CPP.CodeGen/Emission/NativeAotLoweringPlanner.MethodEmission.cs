@@ -668,7 +668,17 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitDirectCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
 		InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
-		EmitResolvedInvocation(builder, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: false);
+		string targetSymbol = invocationTarget.TargetSymbol;
+
+		// Cross-module calls use method_table dispatch instead of direct symbol calls.
+		if (TryGetMethodTableIndex(instruction.Callee, targetSymbol, out uint methodTableIndex))
+		{
+			string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
+			string paramSig = FormatAbiSlotParameterSignature(invocationTarget.ParameterAbis);
+			targetSymbol = $"(*reinterpret_cast<{returnType}(*)({paramSig})>(::chaos::il2cpp::method_table::g_method_table[{methodTableIndex}].fn_ptr))";
+		}
+
+		EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: false);
 	}
 
 	private void EmitCallVirt(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
@@ -685,7 +695,14 @@ public sealed partial class NativeAotLoweringPlanner
 		case HybridDispatchKind.ExternalRuntime:
 		{
 			InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
-			EmitResolvedInvocation(builder, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: true);
+			string targetSymbol = invocationTarget.TargetSymbol;
+			if (TryGetMethodTableIndex(instruction.Callee, targetSymbol, out uint methodTableIndex))
+			{
+				string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
+				string paramSig = FormatAbiSlotParameterSignature(invocationTarget.ParameterAbis);
+				targetSymbol = $"(*reinterpret_cast<{returnType}(*)({paramSig})>(::chaos::il2cpp::method_table::g_method_table[{methodTableIndex}].fn_ptr))";
+			}
+			EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: true);
 			break;
 		}
 		case HybridDispatchKind.Virtual:
@@ -2734,9 +2751,12 @@ public sealed partial class NativeAotLoweringPlanner
 
 				if (_suppressGotoNext)
 				{
-					builder.Append("chaos_ip_");
-					builder.Append(target);
-					builder.AppendLine(":");
+					// goto avoids duplicate label (compiler optimizes to fallthrough)
+					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
+					handler.AppendLiteral("    goto chaos_ip_");
+					handler.AppendFormatted(target);
+					handler.AppendLiteral(";");
+					builder.AppendLine(ref handler);
 				}
 				else
 				{
@@ -2843,13 +2863,16 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    }");
 		}
 
-		if (!_suppressGotoNext && ite.MergeOffset.HasValue)
+		if (ite.MergeOffset.HasValue)
 		{
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
-			handler.AppendLiteral("    goto chaos_ip_");
-			handler.AppendFormatted(ite.MergeOffset.Value);
-			handler.AppendLiteral(";");
-			builder.AppendLine(ref handler);
+			if (!_suppressGotoNext)
+			{
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
+				handler.AppendLiteral("    goto chaos_ip_");
+				handler.AppendFormatted(ite.MergeOffset.Value);
+				handler.AppendLiteral(";");
+				builder.AppendLine(ref handler);
+			}
 			builder.Append("chaos_ip_");
 			builder.Append(ite.MergeOffset.Value);
 			builder.AppendLine(":");
@@ -2933,13 +2956,16 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
 
-		if (!_suppressGotoNext && sw.MergeOffset.HasValue)
+		if (sw.MergeOffset.HasValue)
 		{
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
-			handler.AppendLiteral("    goto chaos_ip_");
-			handler.AppendFormatted(sw.MergeOffset.Value);
-			handler.AppendLiteral(";");
-			builder.AppendLine(ref handler);
+			if (!_suppressGotoNext)
+			{
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
+				handler.AppendLiteral("    goto chaos_ip_");
+				handler.AppendFormatted(sw.MergeOffset.Value);
+				handler.AppendLiteral(";");
+				builder.AppendLine(ref handler);
+			}
 			builder.Append("chaos_ip_");
 			builder.Append(sw.MergeOffset.Value);
 			builder.AppendLine(":");

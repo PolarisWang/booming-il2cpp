@@ -1,0 +1,145 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "metadataToken": 33554435
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method10:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method11:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method12:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method13:System.Int32()",
+      "definitionSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

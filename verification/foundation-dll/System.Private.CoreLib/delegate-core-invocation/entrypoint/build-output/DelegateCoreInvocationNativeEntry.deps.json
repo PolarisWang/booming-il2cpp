@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "DelegateCoreInvocationNativeEntry/1.0.0": {
+        "runtime": {
+          "DelegateCoreInvocationNativeEntry.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DelegateCoreInvocationNativeEntry/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
