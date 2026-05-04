@@ -230,6 +230,56 @@ if (string.Equals(ns, "System.Private.CoreLib/System.Decimal", StringComparison.
 }
 ```
 
+### 6. ABI Manifest（Phase 2）
+
+每个 NativeAOT DLL 在编译时生成一份 `ChaosAbiManifestV0` 常量，描述模块中所有跨 DLL 方法的 ABI carrier 签名：
+
+```c
+struct ChaosAbiManifestV0 {
+    uint32_t abi_version;            // CHAOS_ABI_MANIFEST_VERSION (0)
+    uint32_t method_count;           // 方法总数
+    uint32_t parameters_byte_count;  // 参数 carrier 数组长度
+    uint32_t checksum;               // FNV-1a over entries+params
+};
+```
+
+Manifest 在 `ModuleDescriptor.abi_manifest` 中注册到 `module_registry`。`RegisterModule()` 时调用 `ChaosAbiManifestValidate()` 执行版本、carrier 范围、checksum 三层校验。
+
+**关键设计**：
+- Variable-length 结构：entries[] 和 parameters[] 紧跟在固定头部之后
+- C# codegen 端（`BuildAbiManifest()`）计算 FNV-1a checksum 并写入常量
+- native 端（`abi_manifest.cpp`）在校验时重算 checksum 对比
+- 开发阶段可设 checksum=0 跳过验证
+
+### 7. Origin Tracking + Cross-DLL ABI 校验（Phase 3 + 4）
+
+为 method_table 每个槽位添加 `MethodTableOrigin{module_id, manifest_method_index}` 并行数组，追踪槽位所属模块及其在 ABI manifest 中的索引：
+
+```cpp
+extern MethodTableOrigin g_method_origins[kMethodTableSize];
+
+void SetMethodOrigin(uint32_t index, uint32_t module_id, uint32_t manifest_method_index);
+MethodTableOrigin GetMethodOrigin(uint32_t index);
+```
+
+Cross-DLL 调用方可用 `ResolveMethodTableWithAbiCheck()` 替代裸 `g_method_table[index].fn_ptr` 访问：
+
+```cpp
+void* ResolveMethodTableWithAbiCheck(
+    uint32_t index,
+    uint8_t expected_return_carrier,
+    const uint8_t* expected_param_carriers,
+    uint8_t expected_param_count);
+```
+
+校验流程：
+1. 读 `fn_ptr` → 若 null 返回 nullptr
+2. 读 `origin` → 若 `module_id == kInvalidModuleId`（未设置 origin），跳过校验
+3. 查 `LookupModuleAbiManifest(module_id)` → 若无 manifest，跳过校验
+4. 调用 `ChaosAbiManifestCheckMethodSignature(manifest, index, ...)` → 返回 fn_ptr 或不匹配时返回 nullptr
+
+Codegen 在每个跨 DLL 模块注册时同时发射 `SetMethodOrigin()` 调用，将 module_id 和 manifest 索引写入 origin 数组。这样解析路径具备自描述的 ABI 安全保证：即使调用方编码错误或热更后签名变化，也能在调用点捕获不匹配。`kInvalidModuleId = 0xFFFFFFFF` 作为未初始化哨兵值（module_id=0 是有效的 CoreLib 模块，不可用作哨兵）。
+
 ### 验证状态
 
 | 验证项 | 状态 |

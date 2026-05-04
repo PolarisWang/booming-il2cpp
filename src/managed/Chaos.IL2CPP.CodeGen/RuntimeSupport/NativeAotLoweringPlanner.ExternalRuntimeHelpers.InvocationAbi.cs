@@ -187,6 +187,9 @@ public sealed partial class NativeAotLoweringPlanner
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.NativeInt:
+		case AotCoreIrAbiCarrierKind.ByRef:
+		case AotCoreIrAbiCarrierKind.MultiReturn:
+		case AotCoreIrAbiCarrierKind.ByRefToValueType:
 			returnLines =
 			[
 				"    return chaos_eval_stack[--chaos_stack_top];"
@@ -222,6 +225,9 @@ public sealed partial class NativeAotLoweringPlanner
 		case AotCoreIrAbiCarrierKind.UInt8:
 		case AotCoreIrAbiCarrierKind.Int16:
 		case AotCoreIrAbiCarrierKind.UInt16:
+		case AotCoreIrAbiCarrierKind.ByRef:
+		case AotCoreIrAbiCarrierKind.MultiReturn:
+		case AotCoreIrAbiCarrierKind.ByRefToValueType:
 			pushLines =
 			[
 				$"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>({resultExpression});"
@@ -510,8 +516,11 @@ public sealed partial class NativeAotLoweringPlanner
 			AotCoreIrAbiCarrierKind.Float64 => "double", 
 			AotCoreIrAbiCarrierKind.Int64 => "CHAOS_IL2CPP_INT64", 
 			AotCoreIrAbiCarrierKind.UInt64 => "CHAOS_IL2CPP_UINT64", 
-			AotCoreIrAbiCarrierKind.NativeInt => "CHAOS_IL2CPP_INTPTR", 
-			AotCoreIrAbiCarrierKind.ValueTypeByValue => GetRequiredAbiValueTypeSymbol(abiSlot), 
+			AotCoreIrAbiCarrierKind.NativeInt => "CHAOS_IL2CPP_INTPTR",
+			AotCoreIrAbiCarrierKind.ByRef => "CHAOS_IL2CPP_INTPTR",
+			AotCoreIrAbiCarrierKind.MultiReturn => "CHAOS_IL2CPP_INTPTR",
+			AotCoreIrAbiCarrierKind.ByRefToValueType => "CHAOS_IL2CPP_INTPTR",
+			AotCoreIrAbiCarrierKind.ValueTypeByValue => GetRequiredAbiValueTypeSymbol(abiSlot),
 			_ => throw new NotSupportedException($"native-aot lowering does not support ABI return carrier '{abiSlot.CarrierKindCode}'."), 
 		};
 	}
@@ -540,6 +549,9 @@ public sealed partial class NativeAotLoweringPlanner
 			case AotCoreIrAbiCarrierKind.UInt8:
 			case AotCoreIrAbiCarrierKind.Int16:
 			case AotCoreIrAbiCarrierKind.UInt16:
+			case AotCoreIrAbiCarrierKind.ByRef:
+			case AotCoreIrAbiCarrierKind.MultiReturn:
+			case AotCoreIrAbiCarrierKind.ByRefToValueType:
 				lines.Add($"    chaos_args[{i}] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_arg_{i});");
 				break;
 			case AotCoreIrAbiCarrierKind.Float32:
@@ -598,15 +610,21 @@ public sealed partial class NativeAotLoweringPlanner
 			AotCoreIrAbiCarrierKind.Float64 => "ChaosLoadFloat64(" + sourceName + ")", 
 			AotCoreIrAbiCarrierKind.Int64 => "ChaosLoadInt64(" + sourceName + ")", 
 			AotCoreIrAbiCarrierKind.UInt64 => "chaos_load_uint64(" + sourceName + ")", 
-			AotCoreIrAbiCarrierKind.NativeInt => sourceName, 
-			AotCoreIrAbiCarrierKind.ValueTypeByValue => $"*chaos_resolve_managed_value_pointer<{GetRequiredAbiValueTypeSymbol(abiSlot)}>({sourceName})", 
+			AotCoreIrAbiCarrierKind.NativeInt => sourceName,
+			AotCoreIrAbiCarrierKind.ByRef => sourceName,
+			AotCoreIrAbiCarrierKind.MultiReturn => sourceName,
+			AotCoreIrAbiCarrierKind.ByRefToValueType => sourceName,
+			AotCoreIrAbiCarrierKind.ValueTypeByValue => $"*chaos_resolve_managed_value_pointer<{GetRequiredAbiValueTypeSymbol(abiSlot)}>({sourceName})",
 			_ => throw new NotSupportedException($"native-aot lowering does not support ABI argument carrier '{abiSlot.CarrierKindCode}'."), 
 		};
 	}
 
 	private static string FormatInboundAbiArgumentExpression(AotCoreIrAbiSlotArtifact abiSlot, string sourceName)
 	{
-		if (abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt)
+		if (abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt
+		    || abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.ByRef
+		    || abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.ByRefToValueType
+		    || abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.MultiReturn)
 		{
 			return "chaos_normalize_native_int_argument(" + sourceName + ")";
 		}
@@ -632,8 +650,11 @@ public sealed partial class NativeAotLoweringPlanner
 			AotCoreIrAbiCarrierKind.Float64 => "double", 
 			AotCoreIrAbiCarrierKind.Int64 => "CHAOS_IL2CPP_INT64", 
 			AotCoreIrAbiCarrierKind.UInt64 => "CHAOS_IL2CPP_UINT64", 
-			AotCoreIrAbiCarrierKind.NativeInt => "CHAOS_IL2CPP_INTPTR", 
-			AotCoreIrAbiCarrierKind.ValueTypeByValue => GetRequiredAbiValueTypeSymbol(abiSlot), 
+			AotCoreIrAbiCarrierKind.NativeInt => "CHAOS_IL2CPP_INTPTR",
+			AotCoreIrAbiCarrierKind.ByRef => "CHAOS_IL2CPP_INTPTR",
+			AotCoreIrAbiCarrierKind.MultiReturn => "CHAOS_IL2CPP_INTPTR",
+			AotCoreIrAbiCarrierKind.ByRefToValueType => "CHAOS_IL2CPP_INTPTR",
+			AotCoreIrAbiCarrierKind.ValueTypeByValue => GetRequiredAbiValueTypeSymbol(abiSlot),
 			_ => throw new NotSupportedException($"native-aot lowering does not support ABI parameter carrier '{abiSlot.CarrierKindCode}'."), 
 		};
 	}

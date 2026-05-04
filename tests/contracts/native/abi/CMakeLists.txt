@@ -16,3 +16,19 @@ target_include_directories(
     PRIVATE
         "${REPO_ROOT}/contracts/native/v0")
 
+# ── method_table + ABI manifest executable test ──────────────────────────────
+add_executable(chaos_method_table_abi_test
+    method_table_abi_test.cpp)
+target_compile_features(chaos_method_table_abi_test PRIVATE cxx_std_17)
+target_compile_definitions(chaos_method_table_abi_test PRIVATE CHAOS_RUNTIME_ABI_STATIC)
+target_include_directories(
+    chaos_method_table_abi_test
+    PRIVATE
+        "${REPO_ROOT}/src/native/runtime-core"
+        "${REPO_ROOT}/src/native/common"
+        "${REPO_ROOT}/contracts/native/v0")
+target_link_libraries(
+    chaos_method_table_abi_test
+    PRIVATE
+        chaos_runtime_core)
+

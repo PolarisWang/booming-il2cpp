@@ -30,6 +30,12 @@ struct RuntimeInstantiatedType {
     CHAOS_IL2CPP_UINT32* field_offsets = nullptr;
     CHAOS_IL2CPP_UINT32  field_offset_count = 0u;
 
+    /// Resolved field type handles (heap-allocated, optional cache).
+    /// Phase 3: each field's resolved TypeInfoHandle after generic parameter
+    /// substitution.  Populated by the LayoutEngine during ComputeValueTypeLayout.
+    TypeInfoHandle*       resolved_field_types = nullptr;
+    CHAOS_IL2CPP_UINT32  resolved_field_count = 0u;
+
     /// Module ownership (0 = AOT root).
     CHAOS_IL2CPP_UINT32  module_id = 0u;
 

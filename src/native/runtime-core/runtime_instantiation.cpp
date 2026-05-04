@@ -1,5 +1,7 @@
 #include "runtime_instantiation.h"
 #include "generic_context.h"
+#include "generic_method_instantiation.h"
+#include "layout_engine.h"
 #include "reflection_query_model.h"
 
 #include <chaos/native_types.h>
@@ -114,12 +116,46 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveOrInstantiateMethod(
     const TypeInfoHandle*  type_args,
     CHAOS_IL2CPP_UINT32   arg_count)
 {
-    /* Phase 5 adds full method instantiation support.
-     * For now, return nullptr (caller should handle the uninstantiated case). */
-    (void)open_method_definition;
-    (void)type_args;
-    (void)arg_count;
-    return 0;
+    if (open_method_definition == 0u) {
+        return 0u;
+    }
+
+    /* Fast path: registry lookup. */
+    MethodInfoHandle closed = generic_context::TryResolveClosedMethod(
+        open_method_definition, type_args, arg_count);
+    if (closed != 0u) {
+        return closed;
+    }
+
+    /* Slow path: build a RuntimeInstantiatedMethod descriptor. */
+    auto* rt_method = CreateClosedMethodDescriptor(
+        open_method_definition, type_args, arg_count);
+    if (rt_method == nullptr) {
+        return 0u;
+    }
+
+    /* Encode the closed descriptor as a MethodInfoHandle. */
+    MethodInfoHandle closed_handle = EncodeReflectionQueryMethodHandle(
+        &rt_method->descriptor);
+    if (closed_handle == 0u) {
+        std::free(rt_method->descriptor.subject_id_utf8);
+        std::free(rt_method->descriptor.name_utf8);
+        std::free(rt_method->descriptor.member_type_utf8);
+        std::free(rt_method->type_args);
+        std::free(rt_method);
+        return 0u;
+    }
+
+    /* Register in GenericContextRegistry so subsequent lookups hit the fast path. */
+    generic_context::RegisterGenericMethodInstantiation(
+        open_method_definition, closed_handle, rt_method->type_args, rt_method->arg_count);
+    rt_method->is_registered = true;
+
+    /* Note: RuntimeInstantiatedMethod cleanup during module unload is deferred
+     * to Phase 5b (IL execution).  For Phase 5a (metadata-only), all method
+     * instantiation objects are process-lifetime (module_id = 0 = AOT root). */
+
+    return closed_handle;
 }
 
 void CHAOS_RUNTIME_ABI_CALL UnregisterModuleGenerics(
@@ -139,6 +175,7 @@ void CHAOS_RUNTIME_ABI_CALL UnregisterModuleGenerics(
             std::free(rt->descriptor.display_name_utf8);
             std::free(rt->type_args);
             std::free(rt->field_offsets);
+            std::free(rt->resolved_field_types);
             std::free(rt);
             s_runtime_types.erase(s_runtime_types.begin() +
                 static_cast<CHAOS_IL2CPP_SIZE>(i));
@@ -146,6 +183,12 @@ void CHAOS_RUNTIME_ABI_CALL UnregisterModuleGenerics(
             ++i;
         }
     }
+
+    /* Mark the module as tombstone in the Module Registry.
+     * This ensures LookupModule(module_id) still returns a valid pointer
+     * for any old TypeInfoHandle values, but with type_count=0 and nulled
+     * image/type_flags to prevent access to freed memory. */
+    runtime_core::MarkModuleTombstone(module_id);
 }
 
 /* Process-wide bridge instance. */
@@ -298,36 +341,48 @@ void ComputeValueTypeLayout(RuntimeInstantiatedType* rt_type) {
         return;
     }
 
-    const auto* open_desc = rt_type->descriptor.generic_type_definition;
-
-    // For now, compute layout only if the type has fields.
-    // Full value type layout requires:
-    //   1. Knowing the size of each field's type (depends on type_args substitution)
-    //   2. Alignment computation
-    //   3. Padding insertion
-    //
-    // Phase 3 milestone: store field_count so consumers can compute offsets.
-    if (open_desc->field_count == 0u) {
+    // Delegate layout computation to the LayoutEngine.
+    TypeInfoHandle closed_handle = EncodeReflectionQueryTypeHandle(&rt_type->descriptor);
+    if (closed_handle == 0u) {
         return;
     }
 
-    rt_type->field_offset_count = open_desc->field_count;
-    rt_type->field_offsets = static_cast<CHAOS_IL2CPP_UINT32*>(
-        std::calloc(open_desc->field_count, sizeof(CHAOS_IL2CPP_UINT32)));
-    if (rt_type->field_offsets == nullptr) {
-        rt_type->field_offset_count = 0u;
+    auto* engine = layout::GetLayoutEngine();
+    const auto* layout = engine->GetOrComputeLayout(
+        closed_handle, rt_type->type_args, rt_type->arg_count);
+
+    if (layout == nullptr) {
         return;
     }
 
-    // Simplified layout: lay out fields sequentially at CHAOS_IL2CPP_INTPTR alignment.
-    // A proper implementation would resolve each field's type handle → size via
-    // reflection query, apply alignment rules, and compute padding.
-    CHAOS_IL2CPP_UINT32 offset = 0u;
-    for (CHAOS_IL2CPP_UINT32 i = 0u; i < open_desc->field_count; ++i) {
-        rt_type->field_offsets[i] = offset;
-        offset += static_cast<CHAOS_IL2CPP_UINT32>(sizeof(CHAOS_IL2CPP_INTPTR));
+    // Copy layout results into the RuntimeInstantiatedType record
+    // (LayoutEngine owns the layout memory; we copy field offsets and
+    // resolved type handles into our own storage).
+    rt_type->value_size = layout->value_size;
+    rt_type->field_offset_count = layout->field_count;
+
+    if (layout->field_count > 0u && layout->fields != nullptr) {
+        // ── Copy field offsets ──
+        auto* offsets = static_cast<CHAOS_IL2CPP_UINT32*>(
+            std::malloc(sizeof(CHAOS_IL2CPP_UINT32) * layout->field_count));
+        if (offsets != nullptr) {
+            for (CHAOS_IL2CPP_UINT32 i = 0u; i < layout->field_count; ++i) {
+                offsets[i] = layout->fields[i].offset;
+            }
+            rt_type->field_offsets = offsets;
+        }
+
+        // ── Copy resolved field types (optional cache) ──
+        auto* resolved = static_cast<TypeInfoHandle*>(
+            std::malloc(sizeof(TypeInfoHandle) * layout->field_count));
+        if (resolved != nullptr) {
+            for (CHAOS_IL2CPP_UINT32 i = 0u; i < layout->field_count; ++i) {
+                resolved[i] = layout->fields[i].resolved_type;
+            }
+            rt_type->resolved_field_types = resolved;
+            rt_type->resolved_field_count = layout->field_count;
+        }
     }
-    rt_type->value_size = offset;
 }
 
 const RuntimeInstantiationBridgeV0* GetBridgeV0() {

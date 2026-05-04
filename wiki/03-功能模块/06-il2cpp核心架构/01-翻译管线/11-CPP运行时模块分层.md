@@ -95,6 +95,8 @@ chaos_common      (无依赖)
 | 泛型上下文 | chaos_runtime_core | `src/native/runtime-core/generic_context.*` |
 | 字符串表 | chaos_runtime_core | `src/native/runtime-core/string_table.*` |
 | 反射查询模型 | chaos_runtime_core | `src/native/runtime-core/reflection_query_model.*` |
+| 方法表 (method_table) | chaos_runtime_core | `src/native/runtime-core/method_table.*` |
+| ABI Manifest | chaos_runtime_core | `contracts/native/v0/abi_manifest.h` + `src/native/runtime-core/abi_manifest.cpp` |
 | 热更新包加载 | chaos_hot_update | `src/native/hot-update/hot_update.*` |
 | 方法替换 | chaos_hot_update | `src/native/hot-update/method_replacement.*` |
 | 解释器 VM | chaos_interpreter | `src/native/interpreter/interpreter_vm.*` |

@@ -73,6 +73,28 @@ TypeInfoHandle TryResolveClosedType(
     const TypeInfoHandle* type_args,
     CHAOS_IL2CPP_UINT32 arg_count);
 
+// ── Method instantiation registration and lookup ──
+
+/// Register a closed generic method instantiation.
+/// `open_method`  — handle of the open generic method definition (e.g. M<>)
+/// `closed_method` — handle of the closed instantiation (e.g. M<int>)
+/// `type_args`    — array of type argument handles
+/// `arg_count`    — length of type_args
+/// Thread-safe, idempotent (duplicate closed_method is a no-op).
+void RegisterGenericMethodInstantiation(
+    MethodInfoHandle        open_method,
+    MethodInfoHandle        closed_method,
+    const TypeInfoHandle*   type_args,
+    CHAOS_IL2CPP_UINT32    arg_count);
+
+/// Try to find a closed generic method by its open definition and type arguments.
+/// Returns the closed_method handle or nullptr on miss.
+/// O(n) in the number of instantiations for the given open method (typically small).
+MethodInfoHandle TryResolveClosedMethod(
+    MethodInfoHandle        open_method,
+    const TypeInfoHandle*   type_args,
+    CHAOS_IL2CPP_UINT32    arg_count);
+
 }  // namespace chaos::il2cpp::generic_context
 
 #endif  // CHAOS_IL2CPP_GENERIC_CONTEXT_H_
