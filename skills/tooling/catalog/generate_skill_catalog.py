@@ -122,6 +122,7 @@ def load_skill_entry(skill_dir: Path, kind: str, known_domains: dict[str, dict])
         "token_budget": manifest["token_budget"],
         "startup_visible": bool(manifest["startup_visible"]),
         "skill_path": f"library/skills/{skill_dir.name}/{skill_path.name}",
+        "version": manifest.get("version", "1.0.0"),
     }
 
 
@@ -208,8 +209,8 @@ def generate_domain_registry(domain: dict, entries: list[dict]) -> str:
         "",
         "## 技能清单",
         "",
-        markdown_table_line(["skill.name", "触发信号", "摘要", "owner", "budget", "status"]),
-        markdown_table_line(["-----------", "--------", "----", "-----", "------", "------"]),
+        markdown_table_line(["skill.name", "触发信号", "摘要", "version", "owner", "budget", "status"]),
+        markdown_table_line(["-----------", "--------", "----", "-------", "-----", "------", "------"]),
     ]
 
     for entry in entries:
@@ -218,6 +219,7 @@ def generate_domain_registry(domain: dict, entries: list[dict]) -> str:
                 markdown_link(inline_code(entry["name"]), "../../" + entry["skill_path"]),
                 trigger_text(entry["trigger_signals"]),
                 entry["summary"],
+                entry.get("version", "1.0.0"),
                 inline_code(entry["owner"]),
                 entry["token_budget"],
                 entry["status"],

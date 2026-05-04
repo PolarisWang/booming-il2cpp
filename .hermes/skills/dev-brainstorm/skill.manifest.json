@@ -3,10 +3,28 @@
   "domain": "workflow",
   "name": "dev-brainstorm",
   "summary": "在编码前把想法整理成设计规格，并决定进入 roadmap 还是直接计划。",
-  "trigger_signals": ["创建功能前", "修改现有行为前", "需求和约束尚未厘清时"],
+  "trigger_signals": [
+    "创建功能前",
+    "修改现有行为前",
+    "需求和约束尚未厘清时"
+  ],
   "owner": "00-skills-maintainers",
   "status": "active",
   "version": "1.0.0",
   "startup_visible": false,
-  "token_budget": "large"
+  "token_budget": "large",
+  "version_history": [
+    {
+      "version": "1.0.0",
+      "date": "2025-01-01",
+      "type": "initial"
+    }
+  ],
+  "evolution_lineage": {
+    "parent": null,
+    "derived_from": null,
+    "derived_to": [],
+    "fixes": [],
+    "captured_from": null
+  }
 }

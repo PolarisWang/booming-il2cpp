@@ -118,6 +118,36 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
 
 运行命令。阅读输出。然后再声明结果。
 
+## 进化系统健康检查（新增）
+
+如果本轮改动触及 skills/ 下的技能内容或进化系统，完成前运行以下检查：
+
+```
+## 进化系统验证清单
+[ ] python skills/tooling/learning/health_engine.py report --window 30
+     — 确认无异常指标（LOW-TOOL、HIGH-FALLBACK 等）
+[ ] python skills/tooling/learning/evolve.py propose --dry-run
+     — 确认无意外进化提案
+[ ] python skills/tooling/verification/verify-skill-pipeline.ps1
+     — 确认 junction、manifest、catalog、evolution 目录一致
+```
+
+### 每日/每周维护
+
+```powershell
+# 计算健康指标
+python skills/tooling/learning/health_engine.py compute --all --window 30
+
+# 生成报告
+python skills/tooling/learning/health_engine.py report --window 30
+
+# 预览进化提案
+python skills/tooling/learning/evolve.py propose --dry-run
+
+# 执行进化（需要 review 后 promote）
+python skills/tooling/learning/evolve.py auto-evolve
+```
+
 ## Dashboard 数据约束检查（新增）
 
 如果本轮改动触及以下任一文件，完成前必须运行 dashboard 数据约束检查：

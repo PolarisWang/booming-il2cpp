@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\math-numerics\\entrypoint\\build-output\\MathNumericsNativeEntry.dll"
+    ],
+    "entry": "MathNumericsNativeEntry/MathNumericsNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}

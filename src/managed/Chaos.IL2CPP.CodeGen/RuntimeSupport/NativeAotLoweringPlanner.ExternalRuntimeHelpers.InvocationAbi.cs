@@ -652,7 +652,12 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string FormatFloat32Literal(float value)
 	{
-		return value.ToString("R", CultureInfo.InvariantCulture) + "f";
+		var s = value.ToString("R", CultureInfo.InvariantCulture);
+		// C++ requires a decimal point for float literals with f suffix
+		// (e.g. 42f is invalid, must be 42.0f)
+		if (!s.Contains('.') && !s.Contains('e') && !s.Contains('E'))
+			s += ".0";
+		return s + "f";
 	}
 
 	private static string FormatFloat64Literal(double value)

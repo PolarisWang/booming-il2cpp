@@ -18,6 +18,7 @@ Results are written to a summary JSON file.
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import subprocess
@@ -32,6 +33,14 @@ _VERIFICATION = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private
 sys.path.insert(0, str(_HERE))
 
 from family_entrypoint_generator import generate_and_build
+
+try:
+    from testing.trace import trace_init, trace
+except ImportError:
+    def trace_init(*args, **kwargs):
+        pass
+    def trace(*args, **kwargs):
+        pass
 
 # Same 23 families as the benchmark pipeline
 FAMILIES = [
@@ -94,7 +103,7 @@ def _build_patch_entrypoint(
 
     The patch variant uses MethodN that returns 0xB0000000+N sentinel values.
     """
-    entrypoint_dir = _VERIFICATION / family_slug / "entrypoint-patch"
+    entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-patch"
     class_name = f"{family_slug.title().replace('-', '').replace('_', '')}PatchEntry"
 
     result = generate_and_build(
@@ -118,7 +127,7 @@ def _build_semantic_patch_entrypoint(
     different parameter values (from TYPE_ALTERNATIVE_MAP), producing different
     but valid results for semantic hotupdate verification.
     """
-    entrypoint_dir = _VERIFICATION / family_slug / "entrypoint-semantic-patch"
+    entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch"
     class_name = f"{family_slug.title().replace('-', '').replace('_', '')}SemanticPatchEntry"
 
     result = generate_and_build(
@@ -186,7 +195,7 @@ def _trim_ir(family_slug: str) -> bool:
     """Trim aot-core-ir.json to entry-only methods."""
     class_name = f"{family_slug.title().replace('-', '').replace('_', '')}PatchEntry"
     entry_prefix = class_name
-    ir_path = _VERIFICATION / family_slug / "entrypoint-patch" / "closure-sp" / "analysis" / "aot-core-ir.json"
+    ir_path = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-patch" / "closure-sp" / "analysis" / "aot-core-ir.json"
 
     if not ir_path.exists():
         return False
@@ -216,8 +225,8 @@ def _trim_ir(family_slug: str) -> bool:
 
 def _run_emit_native_aot(family_slug: str) -> bool:
     """Run emit-native-aot to produce real C++ for the patch variant."""
-    closure_sp_analysis = _VERIFICATION / family_slug / "entrypoint-patch" / "closure-sp" / "analysis"
-    patch_out = _VERIFICATION / family_slug / "native" / "patch"
+    closure_sp_analysis = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-patch" / "closure-sp" / "analysis"
+    patch_out = _VERIFICATION / family_slug / "il2cpp_dist" / "patch"
     patch_out.mkdir(parents=True, exist_ok=True)
 
     if not closure_sp_analysis.exists():
@@ -275,6 +284,7 @@ def run_family(family_slug: str) -> dict:
     if not mids:
         print(f"  [SKIP] no methods in contract")
         result["error"] = "no method subject IDs"
+        trace("family_skip", family=family_slug, reason="no methods")
         return result
     print(f"  Methods: {len(mids)}")
     result["methodCount"] = len(mids)
@@ -286,6 +296,7 @@ def run_family(family_slug: str) -> dict:
         result["steps"]["build_patch_entrypoint"] = "FAILED"
         result["error"] = build_result.get("error", "build failed")
         print(f"    FAILED: {result['error']}")
+        trace("family_entrypoint_build_failed", family=family_slug, error=result["error"])
         return result
     result["steps"]["build_patch_entrypoint"] = "OK"
     result["entryPointSubjectId"] = build_result["entry_point_subject_id"]
@@ -293,10 +304,11 @@ def run_family(family_slug: str) -> dict:
 
     # Step 2: Convert
     print(f"  [2/4] Convert...")
-    entrypoint_dir = _VERIFICATION / family_slug / "entrypoint-patch"
+    entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-patch"
     if not _run_convert(entrypoint_dir, build_result["dll_path"], build_result["entry_point_subject_id"]):
         result["steps"]["convert"] = "FAILED"
         result["error"] = "convert failed"
+        trace("family_convert_failed", family=family_slug)
         return result
     result["steps"]["convert"] = "OK"
 
@@ -305,6 +317,7 @@ def run_family(family_slug: str) -> dict:
     if not _trim_ir(family_slug):
         result["steps"]["trim"] = "FAILED"
         result["error"] = "trim failed"
+        trace("family_trim_failed", family=family_slug)
         return result
     result["steps"]["trim"] = "OK"
 
@@ -313,24 +326,39 @@ def run_family(family_slug: str) -> dict:
     if not _run_emit_native_aot(family_slug):
         result["steps"]["emit_native_aot"] = "FAILED"
         result["error"] = "emit-native-aot failed"
+        trace("family_emit_failed", family=family_slug)
         return result
     result["steps"]["emit_native_aot"] = "OK"
 
     result["success"] = True
+    trace("family_passed", family=family_slug, method_count=len(mids))
     return result
 
 
 def main() -> None:
-    print(f"Batch hotupdate patch variant CodeGen pipeline - {len(FAMILIES)} families")
+    parser = argparse.ArgumentParser(description="Batch hotupdate CodeGen pipeline")
+    parser.add_argument("--trace", action="store_true", help="Enable JSONL trace logging")
+    parser.add_argument("--families", nargs="*", help="Space-separated subset of family slugs to process")
+    args = parser.parse_args()
+
+    if args.trace:
+        trace_init(_REPO_ROOT, stage="batch-hotupdate")
+        print("[trace] JSONL trace enabled")
+
+    families = args.families or FAMILIES
+
+    print(f"Batch hotupdate patch variant CodeGen pipeline - {len(families)} families")
     print(f"Repo: {_REPO_ROOT}")
     print(f"Verification: {_VERIFICATION}")
     print()
+
+    trace("batch_start", family_count=len(families))
 
     results = []
     passed = 0
     failed = 0
 
-    for idx, family_slug in enumerate(FAMILIES):
+    for idx, family_slug in enumerate(families):
         family_result = run_family(family_slug)
         results.append(family_result)
 

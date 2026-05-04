@@ -197,9 +197,9 @@ def compile_family(
     """
     # Locate the C++ file
     if variant == "genuine":
-        cpp_path = _VERIFICATION_BASE / family_slug / "native" / "genuine" / "generated" / "native-aot.generated.cpp"
+        cpp_path = _VERIFICATION_BASE / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
     elif variant == "patch":
-        cpp_path = _VERIFICATION_BASE / family_slug / "native" / "patch" / "generated" / "native-aot.patch.generated.cpp"
+        cpp_path = _VERIFICATION_BASE / family_slug / "il2cpp_dist" / "patch" / "generated" / "native-aot.patch.generated.cpp"
     elif variant == "hotupdate":
         cpp_path = _VERIFICATION_BASE / family_slug / "native" / "hotupdate" / "HotUpdateTest.cpp"
     else:

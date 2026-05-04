@@ -436,7 +436,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate synthetic C# entry point for a capability family")
     parser.add_argument("--assembly-name", default="System.Private.CoreLib", help="Assembly name")
     parser.add_argument("--family-id", default="family/System.Private.CoreLib/convert/char", help="Family ID")
-    parser.add_argument("--output-dir", type=Path, help="Output directory (default: verification/<assembly>/<slug>/entrypoint)")
+    parser.add_argument("--output-dir", type=Path, help="Output directory (default: verification/<assembly>/<slug>/il2cpp_dist/entrypoint)")
     parser.add_argument("--class-name", help="Custom class name (default: auto-derived from family slug)")
     parser.add_argument("--namespace", dest="namespace_name", help="Optional namespace")
     parser.add_argument("--repo-root", type=Path, default=Path.cwd(), help="Repository root")
@@ -471,7 +471,7 @@ def main() -> None:
         output_dir = args.output_dir
     else:
         family_slug = _slug_from_family_id(args.family_id)
-        output_dir = repo_root / "verification" / "foundation-dll" / args.assembly_name / family_slug / "entrypoint"
+        output_dir = repo_root / "verification" / "foundation-dll" / args.assembly_name / family_slug / "il2cpp_dist" / "entrypoint"
 
     result = generate_and_build(
         output_dir,

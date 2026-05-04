@@ -8,6 +8,6 @@
 
 ## 技能清单
 
-| skill.name | 触发信号 | 摘要 | owner | budget | status |
-| ----------- | -------- | ---- | ----- | ------ | ------ |
-| [`dev-architecture-first-development`](../../library/skills/dev-architecture-first-development/SKILL.md) | 开发新的 IL 特性翻译路径时；修改现有翻译行为时；新增 Emission 或 Planning 策略时；修改 C++ 运行时中与代码生成对应的行为时 | 开发 il2cpp 翻译逻辑前必须执行的架构查询与路径匹配。 | `00-skills-maintainers` | small | active |
+| skill.name | 触发信号 | 摘要 | version | owner | budget | status |
+| ----------- | -------- | ---- | ------- | ----- | ------ | ------ |
+| [`dev-architecture-first-development`](../../library/skills/dev-architecture-first-development/SKILL.md) | 开发新的 IL 特性翻译路径时；修改现有翻译行为时；新增 Emission 或 Planning 策略时；修改 C++ 运行时中与代码生成对应的行为时 | 开发 il2cpp 翻译逻辑前必须执行的架构查询与路径匹配。 | 1.0.0 | `00-skills-maintainers` | small | active |

@@ -89,14 +89,14 @@ def _discover_method_symbols(family_slug: str) -> tuple[list[str], list[str], li
 
     Returns (host_symbols, patch_symbols, semantic_patch_symbols).
     """
-    host_cpp = _VERIFICATION / family_slug / "native" / "genuine" / "generated" / "native-aot.generated.cpp"
+    host_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
     # Emit-native-aot may output to generated/ or generated/generated/ depending on version
-    patch_cpp = _VERIFICATION / family_slug / "native" / "patch" / "generated" / "native-aot.generated.cpp"
+    patch_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "native-aot.generated.cpp"
     if not patch_cpp.exists():
-        patch_cpp = _VERIFICATION / family_slug / "native" / "patch" / "generated" / "generated" / "native-aot.generated.cpp"
-    semantic_patch_cpp = _VERIFICATION / family_slug / "native" / "semantic-patch" / "generated" / "native-aot.generated.cpp"
+        patch_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "generated" / "native-aot.generated.cpp"
+    semantic_patch_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "semantic-patch" / "generated" / "native-aot.generated.cpp"
     if not semantic_patch_cpp.exists():
-        semantic_patch_cpp = _VERIFICATION / family_slug / "native" / "semantic-patch" / "generated" / "generated" / "native-aot.generated.cpp"
+        semantic_patch_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "semantic-patch" / "generated" / "generated" / "native-aot.generated.cpp"
 
     host_symbols = _extract_method_symbols(host_cpp)
     patch_symbols = _extract_method_symbols(patch_cpp)
@@ -544,7 +544,7 @@ def _generate_hotupdate_cmake_piece(family_slug: str, host_symbols: list[str]) -
         f"    {patch_cpp_renamed}\n"
     )
 
-    has_semantic_cpp = Path(_VERIFICATION / family_slug / "native" / semantic_cpp_renamed).exists()
+    has_semantic_cpp = Path(_VERIFICATION / family_slug / "il2cpp_dist" / semantic_cpp_renamed).exists()
     if has_semantic_cpp:
         cmake_sources += f"    {semantic_cpp_renamed}\n"
 
@@ -571,7 +571,7 @@ def _generate_hotupdate_cmake_piece(family_slug: str, host_symbols: list[str]) -
         "# chaos_managed_pointer_local_slot_tag, chaos_is_string_id, etc.\n"
         f"target_compile_options({target} PRIVATE\n"
         '    $<$<CXX_COMPILER_ID:MSVC>:/FI"${CMAKE_SOURCE_DIR}/verification/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h">\n'
-        "    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-include${CMAKE_SOURCE_DIR}/verification/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h>\n"
+        '    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-include${CMAKE_SOURCE_DIR}/verification/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h>\n'
         ")\n"
         "# fmt requires /utf-8 on MSVC\n"
         f"target_compile_options({target} PRIVATE\n"
@@ -596,10 +596,10 @@ def generate_family(family_slug: str) -> dict[str, Any]:
     # Discover symbols
     host_symbols, patch_symbols, semantic_patch_symbols = _discover_method_symbols(family_slug)
     if not host_symbols:
-        print(f"  [SKIP] no host symbols found at {_VERIFICATION / family_slug / 'native/genuine/generated/'}")
+        print(f"  [SKIP] no host symbols found at {_VERIFICATION / family_slug / 'il2cpp_dist/genuine/generated/'}")
         return {"family": family_slug, "artifacts": []}
     if not patch_symbols:
-        print(f"  [SKIP] no patch symbols found at {_VERIFICATION / family_slug / 'native/patch/generated/generated/'}")
+        print(f"  [SKIP] no patch symbols found at {_VERIFICATION / family_slug / 'il2cpp_dist/patch/generated/'}")
         return {"family": family_slug, "artifacts": []}
 
     print(f"  Host symbols: {len(host_symbols)}")
@@ -614,7 +614,7 @@ def generate_family(family_slug: str) -> dict[str, Any]:
         family_slug, host_symbols, patch_symbols, method_subject_ids,
         semantic_patch_symbols=semantic_patch_symbols if len(semantic_patch_symbols) == len(host_symbols) else None,
     )
-    test_dir = _VERIFICATION / family_slug / "native" / "hotupdate"
+    test_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "hotupdate"
     test_dir.mkdir(parents=True, exist_ok=True)
     test_path = test_dir / "HotUpdateTest.cpp"
     test_path.write_text(test_source, encoding="utf-8")
@@ -626,25 +626,25 @@ def generate_family(family_slug: str) -> dict[str, Any]:
     # Fix genuine TU: strip extern wrappers, inject missing type-ids
     _fix_genuine_for_hotupdate(family_slug, ns_slug)
 
-    patch_src = _VERIFICATION / family_slug / "native" / "patch" / "generated" / "native-aot.generated.cpp"
-    patch_dst = _VERIFICATION / family_slug / "native" / "patch" / "native-aot.patch.generated.cpp"
+    patch_src = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "native-aot.generated.cpp"
+    patch_dst = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "native-aot.patch.generated.cpp"
     if not patch_src.exists():
-        patch_src = _VERIFICATION / family_slug / "native" / "patch" / "generated" / "generated" / "native-aot.generated.cpp"
+        patch_src = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "generated" / "native-aot.generated.cpp"
     if patch_src.exists():
         _rename_and_fix_patch_file(patch_src, patch_dst, ns_slug, strip_extern_wrappers=True)
 
     # Copy semantic-patch file with renamed RunNativeAot, KEEP extern wrappers
     # so the linker resolves symbols from the semantic-patch TU.
-    semantic_src = _VERIFICATION / family_slug / "native" / "semantic-patch" / "generated" / "native-aot.generated.cpp"
+    semantic_src = _VERIFICATION / family_slug / "il2cpp_dist" / "semantic-patch" / "generated" / "native-aot.generated.cpp"
     if not semantic_src.exists():
-        semantic_src = _VERIFICATION / family_slug / "native" / "semantic-patch" / "generated" / "generated" / "native-aot.generated.cpp"
-    semantic_dst = _VERIFICATION / family_slug / "native" / "semantic-patch" / "native-aot.semantic-patch.generated.cpp"
+        semantic_src = _VERIFICATION / family_slug / "il2cpp_dist" / "semantic-patch" / "generated" / "generated" / "native-aot.generated.cpp"
+    semantic_dst = _VERIFICATION / family_slug / "il2cpp_dist" / "semantic-patch" / "native-aot.semantic-patch.generated.cpp"
     if semantic_src.exists():
         _rename_and_fix_patch_file(semantic_src, semantic_dst, ns_slug, suffix="semantic", strip_extern_wrappers=False)
 
     # Append hotupdate test target to the existing CMakeLists.txt
     cmake_piece = _generate_hotupdate_cmake_piece(family_slug, host_symbols)
-    cmake_path = _VERIFICATION / family_slug / "native" / "CMakeLists.txt"
+    cmake_path = _VERIFICATION / family_slug / "il2cpp_dist" / "CMakeLists.txt"
     if cmake_path.exists():
         existing = cmake_path.read_text(encoding="utf-8")
         marker = "# Per-family hotupdate test from CodeGen-generated C++"
@@ -673,11 +673,11 @@ def _fix_genuine_for_hotupdate(family_slug: str, ns_slug: str) -> Path | None:
     The fixed copy goes to native/hotupdate/genuine-fixed/native-aot.generated.cpp
     so the original genuine file remains untouched.
     """
-    src = _VERIFICATION / family_slug / "native" / "genuine" / "generated" / "native-aot.generated.cpp"
+    src = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
     if not src.exists():
         return None
 
-    dst = _VERIFICATION / family_slug / "native" / "hotupdate" / "genuine-fixed" / "native-aot.generated.cpp"
+    dst = _VERIFICATION / family_slug / "il2cpp_dist" / "hotupdate" / "genuine-fixed" / "native-aot.generated.cpp"
     _rename_and_fix_patch_file(src, dst, ns_slug, suffix="genuine_fixed", strip_extern_wrappers=True)
     return dst
 
@@ -1056,7 +1056,7 @@ def main() -> None:
     for family_slug in families:
         generate_family(family_slug)
 
-    print(f"\nDone. Test and CMake artifacts in verification/foundation-dll/.../native/hotupdate/")
+    print(f"\nDone. Test and CMake artifacts in verification/foundation-dll/.../il2cpp_dist/hotupdate/")
 
 
 if __name__ == "__main__":

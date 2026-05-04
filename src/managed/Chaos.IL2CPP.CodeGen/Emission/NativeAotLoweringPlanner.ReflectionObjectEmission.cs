@@ -1529,7 +1529,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    return static_cast<CHAOS_IL2CPP_INTPTR>(0);");
 			builder.AppendLine("}");
 			builder.AppendLine();
-			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_reflection_get_method(CHAOS_IL2CPP_INTPTR chaos_type_value, CHAOS_IL2CPP_INTPTR chaos_name_value, CHAOS_IL2CPP_INT32 chaos_binding_flags)");
+			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_reflection_get_method(CHAOS_IL2CPP_INTPTR chaos_type_value, CHAOS_IL2CPP_INTPTR chaos_name_value, CHAOS_IL2CPP_INT32 chaos_binding_flags = CHAOS_IL2CPP_INT32(0))");
 			builder.AppendLine("{");
 			builder.AppendLine("    (void)chaos_binding_flags;");
 			stringBuilder = builder;

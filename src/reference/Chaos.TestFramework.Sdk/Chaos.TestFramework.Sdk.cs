@@ -247,6 +247,15 @@ public enum CapabilityFamilyId : ushort
     SystemPrivateCoreLib_IOStreamsBasics = 22,
     SystemPrivateCoreLib_CollectionsGenericCore = 23,
     SystemPrivateCoreLib_RuntimeCompilerServices = 24,
+    SystemPrivateCoreLib_ReflectionType = 25,
+    SystemPrivateCoreLib_ReflectionAssembly = 26,
+    SystemPrivateCoreLib_ReflectionMemberComplete = 27,
+    SystemPrivateCoreLib_ReflectionGenerics = 28,
+    SystemPrivateCoreLib_ReflectionParameters = 29,
+    SystemPrivateCoreLib_ReflectionModule = 30,
+    SystemPrivateCoreLib_ReflectionBinding = 31,
+    SystemPrivateCoreLib_ReflectionActivation = 32,
+    SystemPrivateCoreLib_ReflectionFieldProperty = 33,
 }
 
 /// <summary>

@@ -113,5 +113,40 @@ if ($formalSkillIssues.Count -gt 0) {
     Write-Host "[skill-verify] All formal skills clean."
 }
 
+# Step 6: Verify evolution infrastructure
+Write-Host "[skill-verify] Checking evolution infrastructure..."
+$evolutionDirs = @(
+    'lifecycle\evolution\proposals',
+    'lifecycle\evolution\lineage',
+    'lifecycle\telemetry\health'
+)
+foreach ($relDir in $evolutionDirs) {
+    $fullPath = Join-Path $chapterRoot $relDir
+    if (-not (Test-Path -LiteralPath $fullPath)) {
+        Write-Warning "[skill-verify] Missing evolution directory: $relDir"
+    } else {
+        Write-Host "[skill-verify] Evolution directory ok: $relDir"
+    }
+}
+
+# Step 7: Check manifest migration (version_history + evolution_lineage)
+Write-Host "[skill-verify] Checking manifest evolution fields..."
+$manifestIssues = New-Object System.Collections.Generic.List[string]
+if (Test-Path -LiteralPath $formalSkillsDir) {
+    foreach ($skillDir in Get-ChildItem -LiteralPath $formalSkillsDir -Directory) {
+        $manifestPath = Join-Path $skillDir.FullName 'skill.manifest.json'
+        if (-not (Test-Path -LiteralPath $manifestPath)) { continue }
+        $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        if (-not $manifest.version_history) { $manifestIssues.Add("$($skillDir.Name): missing version_history") }
+        if (-not $manifest.evolution_lineage) { $manifestIssues.Add("$($skillDir.Name): missing evolution_lineage") }
+    }
+}
+if ($manifestIssues.Count -gt 0) {
+    Write-Warning "[skill-verify] Manifest evolution field issues:"
+    foreach ($issue in $manifestIssues) { Write-Warning "  - $issue" }
+} else {
+    Write-Host "[skill-verify] All manifests have evolution fields."
+}
+
 Write-Host '[skill-verify] Skill creation/loading pipeline looks consistent.'
 exit 0

@@ -6,6 +6,8 @@ from typing import Any
 
 try:
     from . import case_index_scanner as case_index_scanner_module
+    from . import execution_cmake_generator as execution_cmake_generator_module
+    from . import execution_cmake_solution_generator as execution_cmake_solution_generator_module
     from . import execution_project_generator as execution_project_generator_module
     from . import execution_solution_generator as execution_solution_generator_module
     from . import family_verification_claims as family_verification_claims_module
@@ -18,6 +20,8 @@ except ImportError:
 
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     import case_index_scanner as case_index_scanner_module
+    import execution_cmake_generator as execution_cmake_generator_module
+    import execution_cmake_solution_generator as execution_cmake_solution_generator_module
     import execution_project_generator as execution_project_generator_module
     import execution_solution_generator as execution_solution_generator_module
     import family_verification_claims as family_verification_claims_module
@@ -292,12 +296,30 @@ def _analyze_payload(
         solution_generation = execution_solution_generator_module.generate_execution_solution(
             repo_root,
             solution_path=repo_root
-            / "verification"
-            / "foundation-dll"
+            / "solution"
             / "FoundationDllTranslationSolution.sln",
             families=generated_solution_families,
         )
         generated_artifacts.append(solution_generation["solutionPath"])
+
+        # Generate cmake forwarding projects and root CMakeLists.txt
+        cmake_family_slugs = set()
+        for family in generated_solution_families:
+            cmake_generation = execution_cmake_generator_module.generate_cmake_projects(
+                repo_root,
+                assembly_name=str(family.get("assemblyName") or ""),
+                family_id=str(family.get("familyId") or ""),
+            )
+            generated_artifacts.extend(cmake_generation["artifacts"])
+            cmake_family_slugs.add(str(family.get("familyId") or ""))
+        if cmake_family_slugs:
+            # Only generate root if we have families (avoid empty project)
+            cmake_solution_generation = execution_cmake_solution_generator_module.generate_cmake_solution(
+                repo_root,
+                solution_path=repo_root / "solution_native" / "CMakeLists.txt",
+                families=generated_solution_families,
+            )
+            generated_artifacts.append(cmake_solution_generation["solutionPath"])
 
     return {
         "dllCount": dll_count,

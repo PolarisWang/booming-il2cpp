@@ -73,7 +73,7 @@ def generate_native_skeleton(
     family_slug = _slug_from_family_id(family_id)
     ns_slug = _family_namespace_slug(family_id)
     target_suffix = ns_slug  # unique target name per family
-    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / "native"
+    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / "il2cpp_dist"
     artifacts: list[str] = []
 
     if not method_subject_ids:
@@ -165,12 +165,13 @@ def generate_hotupdate_native_skeleton(
     family_id = _string(family.get("familyId"))
     family_slug = _slug_from_family_id(family_id)
     ns_slug = _family_namespace_slug(family_id)
-    subdir = "host" if direction == "host" else "patch"
-    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / subdir
+    target_suffix = family_slug.replace("-", "_")
+    subdir = "hotupdate"  # Always output to native_test/hotupdate/
+    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / "native_test" / subdir
     artifacts: list[str] = []
 
     if not method_subject_ids:
-        cmake = _generate_hotupdate_cmakelists([])
+        cmake = _generate_hotupdate_cmakelists([], target_suffix=target_suffix)
         cmake_path = output_root / "CMakeLists.txt"
         _write_text(cmake_path, cmake)
         artifacts.append(cmake_path.relative_to(repo_root).as_posix())
@@ -188,7 +189,7 @@ def generate_hotupdate_native_skeleton(
     _write_text(cpp_path, cpp)
     artifacts.append(cpp_path.relative_to(repo_root).as_posix())
 
-    cmake = _generate_hotupdate_cmakelists([Path("HotUpdateSkeleton.cpp")])
+    cmake = _generate_hotupdate_cmakelists([Path("HotUpdateSkeleton.cpp")], target_suffix=target_suffix)
     cmake_path = output_root / "CMakeLists.txt"
     _write_text(cmake_path, cmake)
     artifacts.append(cmake_path.relative_to(repo_root).as_posix())
@@ -623,19 +624,21 @@ def _generate_hotupdate_cpp(
     return "\n".join(lines)
 
 
-def _generate_hotupdate_cmakelists(source_files: list[Path]) -> str:
+def _generate_hotupdate_cmakelists(source_files: list[Path], target_suffix: str = "") -> str:
     if not source_files:
         return "# No hotupdate native source files\n"
     source_list = "\n    ".join(str(p) for p in source_files)
+    target_name = f"chaos_family_hotupdate_{target_suffix}" if target_suffix else "chaos_family_hotupdate"
+    var_name = f"CHAOS_FAMILY_HOTUPDATE_{target_suffix.upper()}_SOURCES" if target_suffix else "CHAOS_FAMILY_HOTUPDATE_SOURCES"
     return (
-        "set(CHAOS_FAMILY_HOTUPDATE_SOURCES\n"
+        f"set({var_name}\n"
         f"    {source_list}\n"
         ")\n"
         "\n"
-        "add_library(chaos_family_hotupdate STATIC EXCLUDE_FROM_ALL\n"
-        "    ${CHAOS_FAMILY_HOTUPDATE_SOURCES}\n"
+        f"add_library({target_name} STATIC EXCLUDE_FROM_ALL\n"
+        f"    ${{{var_name}}}\n"
         ")\n"
-        "target_include_directories(chaos_family_hotupdate PRIVATE\n"
+        f"target_include_directories({target_name} PRIVATE\n"
         "    ${CMAKE_SOURCE_DIR}/src/native/runtime-core\n"
         "    ${CMAKE_SOURCE_DIR}/src/native/bootstrap\n"
         "    ${CMAKE_SOURCE_DIR}/contracts/native/v0\n"
@@ -762,7 +765,7 @@ def generate_benchmark_managed_bodies(
     family_id = _string(family.get("familyId"))
     family_slug = _slug_from_family_id(family_id)
     ns_slug = _family_namespace_slug(family_id)
-    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / "benchmark"
+    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / "managed_test" / "benchmarks"
     artifacts: list[str] = []
 
     if not method_subject_ids:
@@ -922,7 +925,7 @@ def generate_benchmark_native_entry(
     family_id = _string(family.get("familyId"))
     family_slug = _slug_from_family_id(family_id)
     ns_slug = _family_namespace_slug(family_id)
-    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / "native"
+    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / "native_test" / "benchmark"
     artifacts: list[str] = []
 
     if not method_subject_ids:

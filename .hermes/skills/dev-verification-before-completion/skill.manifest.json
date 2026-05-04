@@ -3,10 +3,28 @@
   "domain": "quality",
   "name": "dev-verification-before-completion",
   "summary": "在完成前运行验证命令，确认输出后再做任何成功声明。",
-  "trigger_signals": ["即将声称工作完成时", "已修复或已通过时", "提交或创建 PR 之前"],
+  "trigger_signals": [
+    "即将声称工作完成时",
+    "已修复或已通过时",
+    "提交或创建 PR 之前"
+  ],
   "owner": "00-skills-maintainers",
   "status": "active",
   "version": "1.0.0",
   "startup_visible": false,
-  "token_budget": "small"
+  "token_budget": "small",
+  "version_history": [
+    {
+      "version": "1.0.0",
+      "date": "2025-01-01",
+      "type": "initial"
+    }
+  ],
+  "evolution_lineage": {
+    "parent": null,
+    "derived_from": null,
+    "derived_to": [],
+    "fixes": [],
+    "captured_from": null
+  }
 }

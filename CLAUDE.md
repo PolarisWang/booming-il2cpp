@@ -66,5 +66,32 @@
 | `dev:writing-skills` | 编写/修改技能 |
 | `dev:dispatching-parallel-agents` | 并行 Agent 派发 |
 | `dev:using-booming` | Booming 工具 |
+| `dev:skill-evolution` | 技能自进化管线操作入口（健康检查、提案审查与晋升） |
+
+### 技能自进化系统
+
+技能自进化系统通过 telemetry → health → evolution → promote 管线自动优化技能质量。
+
+**Telemetry 采集（HOOK 自动运行）：**
+- `skills/hooks/hook_track_usage.py` — 记录 SKILL.md 读取
+- `skills/hooks/hook_track_tool_outcomes.py` — 记录工具调用成败
+- `skills/hooks/hook_evaluate_session.py` — 评估会话质量
+- `skills/hooks/hook_track_session_outcomes.py` — 记录会话完成状态
+
+**健康度量与进化触发（手动/定时运行）：**
+- `python skills/tooling/learning/health_engine.py check --window 30` — **一键自检：** 计算健康指标 + 生成报告 + 预览进化提案（推荐日常使用）
+- `python skills/tooling/learning/health_engine.py compute --all --window 30` — 计算 per-skill 健康指标（applied_rate、completion_rate、tool_success_rate 等）
+- `python skills/tooling/learning/health_engine.py report --window 30` — 生成健康仪表盘
+- `python skills/tooling/learning/evolve.py propose --dry-run` — 预览进化提案
+- `python skills/tooling/learning/evolve.py auto-evolve` — 执行进化（FIX/DERIVED/CAPTURED）
+
+**PIPELINE（提案审批）：**
+- `python skills/tooling/learning/skill_learn.py evolve-benchmark <proposal-id>` — 准入检查
+- `python skills/tooling/learning/skill_learn.py evolve-review <proposal-id>` — 审查
+- `python skills/tooling/learning/skill_learn.py evolve-promote <proposal-id>` — 晋升到 library/skills/
+- `python skills/tooling/learning/skill_learn.py evolve-history --skill <name>` — 查看版本谱系
+
+**验证：**
+- `python skills/tooling/verification/verify-skill-pipeline.ps1` — 完整管线一致性检查
 
 技能定义见 `.codex/skills/<skill-name>/SKILL.md`。

@@ -11,6 +11,7 @@ For each family:
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import subprocess
@@ -25,6 +26,14 @@ _VERIFICATION = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private
 sys.path.insert(0, str(_HERE))
 
 from family_entrypoint_generator import generate_and_build
+
+try:
+    from testing.trace import trace_init, trace
+except ImportError:
+    def trace_init(*args, **kwargs):
+        pass
+    def trace(*args, **kwargs):
+        pass
 
 FAMILIES = [
     "reflection-type",
@@ -92,7 +101,7 @@ def _run_convert(entrypoint_dir: Path, dll_path: str, entry_point_subject_id: st
 
 def _trim_ir(family_slug: str) -> bool:
     class_name = f"{family_slug.title().replace('-', '').replace('_', '')}SemanticPatchEntry"
-    ir_path = _VERIFICATION / family_slug / "entrypoint-semantic-patch" / "closure-sp" / "analysis" / "aot-core-ir.json"
+    ir_path = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch" / "closure-sp" / "analysis" / "aot-core-ir.json"
     if not ir_path.exists():
         return False
     result = subprocess.run(
@@ -115,8 +124,8 @@ def _trim_ir(family_slug: str) -> bool:
 
 
 def _run_emit_native_aot(family_slug: str) -> bool:
-    closure_sp_analysis = _VERIFICATION / family_slug / "entrypoint-semantic-patch" / "closure-sp" / "analysis"
-    sem_out = _VERIFICATION / family_slug / "native" / "semantic-patch"
+    closure_sp_analysis = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch" / "closure-sp" / "analysis"
+    sem_out = _VERIFICATION / family_slug / "il2cpp_dist" / "semantic-patch"
     sem_out.mkdir(parents=True, exist_ok=True)
     if not closure_sp_analysis.exists():
         print(f"    analysis dir not found at {closure_sp_analysis}")
@@ -158,10 +167,11 @@ def run_family(family_slug: str) -> dict:
     mids = _load_method_subject_ids(family_slug)
     if not mids:
         result["error"] = "no method subject IDs"
+        trace("family_skip", family=family_slug, reason="no methods")
         return result
     print(f"  Methods: {len(mids)}")
 
-    entrypoint_dir = _VERIFICATION / family_slug / "entrypoint-semantic-patch"
+    entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch"
     class_name = f"{family_slug.title().replace('-', '').replace('_', '')}SemanticPatchEntry"
 
     print(f"  [1/4] Building semantic-patch entrypoint...")
@@ -177,6 +187,7 @@ def run_family(family_slug: str) -> dict:
         result["steps"]["build"] = "FAILED"
         result["error"] = build_result.get("error", "build failed")
         print(f"    FAILED: {result['error']}")
+        trace("family_build_failed", family=family_slug, error=result["error"])
         return result
     result["steps"]["build"] = "OK"
 
@@ -184,6 +195,7 @@ def run_family(family_slug: str) -> dict:
     if not _run_convert(entrypoint_dir, build_result["dll_path"], build_result["entry_point_subject_id"]):
         result["steps"]["convert"] = "FAILED"
         result["error"] = "convert failed"
+        trace("family_convert_failed", family=family_slug)
         return result
     result["steps"]["convert"] = "OK"
 
@@ -191,6 +203,7 @@ def run_family(family_slug: str) -> dict:
     if not _trim_ir(family_slug):
         result["steps"]["trim"] = "FAILED"
         result["error"] = "trim failed"
+        trace("family_trim_failed", family=family_slug)
         return result
     result["steps"]["trim"] = "OK"
 
@@ -198,18 +211,33 @@ def run_family(family_slug: str) -> dict:
     if not _run_emit_native_aot(family_slug):
         result["steps"]["emit"] = "FAILED"
         result["error"] = "emit-native-aot failed"
+        trace("family_emit_failed", family=family_slug)
         return result
     result["steps"]["emit"] = "OK"
 
     result["success"] = True
+    trace("family_passed", family=family_slug, method_count=len(mids))
     return result
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Batch semantic-patch CodeGen pipeline")
+    parser.add_argument("--trace", action="store_true", help="Enable JSONL trace logging")
+    parser.add_argument("--families", nargs="*", help="Space-separated subset of family slugs to process")
+    args = parser.parse_args()
+
+    if args.trace:
+        trace_init(_REPO_ROOT, stage="batch-semantic-patch")
+        print("[trace] JSONL trace enabled")
+
+    families = args.families or FAMILIES
+
+    trace("batch_start", family_count=len(families))
+
     results = []
     passed = 0
     failed = 0
-    for idx, family_slug in enumerate(FAMILIES):
+    for idx, family_slug in enumerate(families):
         fr = run_family(family_slug)
         results.append(fr)
         if fr["success"]:
