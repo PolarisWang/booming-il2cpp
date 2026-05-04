@@ -628,6 +628,43 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			throw new NotSupportedException("native-aot structured EH linear lowering does not support delegate callvirt.");
 		}
+
+		// Phase 3: AOT Devirtualization fast-path for linear emission (inside branches of structured nodes)
+		string devirtKey = instruction.Callee ?? instruction.TargetReference?.SubjectId ?? "";
+		if (devirtKey.Length > 0 && _devirtualizationHints.TryGetValue(devirtKey, out DevirtualizationHint devirtHint) && devirtHint.CanDevirtualize)
+		{
+			AotCoreIrMethodArtifact devirtMethod = _methodsBySubjectId[devirtHint.ImplementationMethodSubjectId];
+			IReadOnlyList<AotCoreIrAbiSlotArtifact> devirtParams = GetMethodAbiParameterSlots(devirtMethod);
+			string devirtRet = MapAbiSlotReturnType(devirtMethod.ReturnAbi);
+			string devirtSymbol = devirtMethod.NativeSymbol;
+			// Pop arguments from eval stack and create converted variables (same as EmitLinearResolvedInvocation)
+			builder.AppendLine($"{indentation}{{");
+			for (int devirtIdx = devirtParams.Count - 1; devirtIdx >= 0; devirtIdx--)
+			{
+				builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{devirtIdx} = chaos_eval_stack[--chaos_stack_top];");
+				builder.AppendLine($"{indentation}    const auto chaos_arg_{devirtIdx} = {FormatInboundAbiArgumentExpression(devirtParams[devirtIdx], $"chaos_raw_arg_{devirtIdx}")};");
+			}
+			if (devirtParams.Count > 0)
+			{
+				builder.AppendLine($"{indentation}    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+				builder.AppendLine($"{indentation}    {{");
+				builder.AppendLine($"{indentation}        CHAOS_IL2CPP_ABORT();");
+				builder.AppendLine($"{indentation}    }}");
+			}
+			string devirtArgs = FormatAbiInvocationArgumentList(devirtParams);
+			if (string.Equals(devirtRet, "void", StringComparison.Ordinal))
+			{
+				builder.AppendLine($"{indentation}    {devirtSymbol}({devirtArgs});");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}    auto chaos_devirt_result = {devirtSymbol}({devirtArgs});");
+				EmitAbiReturnPush(builder, devirtMethod.ReturnAbi, "chaos_devirt_result", $"{indentation}    ");
+			}
+			builder.AppendLine($"{indentation}}}");
+			return;
+		}
+
 		switch (instruction.DispatchKindCode.GetValueOrDefault())
 		{
 		case HybridDispatchKind.None:

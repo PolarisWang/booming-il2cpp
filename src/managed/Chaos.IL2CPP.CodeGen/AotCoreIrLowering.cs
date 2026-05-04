@@ -706,6 +706,7 @@ public sealed class AotCoreIrLowering
             RuntimeGenericContext = runtimeGenericContext,
             GenericDiagnostic = genericDiagnostic,
             TypeShape = ResolveTypeShape(managedType, subjectId),
+            IsSealed = managedType?.IsSealed ?? false,
             ArrayElementSubjectId = ResolveArrayElementSubjectId(subjectId),
             ArrayElementTypeShape = ResolveArrayElementTypeShape(managedTypes, ResolveArrayElementSubjectId(subjectId)),
             ArrayElementBaseTypeSubjectId = arrayElementType?.BaseTypeSubjectId,

@@ -259,6 +259,8 @@ public sealed record AotCoreIrReferenceArtifact
 
     public IReadOnlyList<string>? ArrayElementImplementedInterfaceSubjectIds { get; init; }
 
+    public bool IsSealed { get; init; }
+
     public string? BaseTypeSubjectId { get; init; }
 
     public IReadOnlyList<string>? ImplementedInterfaceSubjectIds { get; init; }

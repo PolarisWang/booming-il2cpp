@@ -9,6 +9,7 @@
 
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
+#include "arithmetic_chaos_bridge.h"
 
 // ── Object header definition ──
 // type_info: type identity for GC, casting, reflection

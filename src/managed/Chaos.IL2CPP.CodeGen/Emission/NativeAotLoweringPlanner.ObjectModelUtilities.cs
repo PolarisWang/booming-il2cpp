@@ -138,6 +138,26 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 	}
 
+	private static IReadOnlySet<string> CollectSealedTypeSubjectIds(AotCoreIrArtifact aotCoreIr)
+	{
+		var sealedTypes = new HashSet<string>(StringComparer.Ordinal);
+		foreach (var method in aotCoreIr.Methods)
+		{
+			foreach (var instruction in method.Instructions)
+			{
+				var targetReference = instruction.TargetReference;
+				if ((object)targetReference != null)
+				{
+					if (targetReference.Kind == AotCoreIrReferenceKind.Type && targetReference.IsSealed)
+					{
+						sealedTypes.Add(targetReference.SubjectId);
+					}
+				}
+			}
+		}
+		return sealedTypes;
+	}
+
 	private static string GetDeclaringTypeSubjectId(string fieldSubjectId)
 	{
 		int num = fieldSubjectId.IndexOf("::", StringComparison.Ordinal);
@@ -331,12 +351,6 @@ public sealed partial class NativeAotLoweringPlanner
 		return hash;
 	}
 
-	private static string GetNativeStringIdSymbol(ulong id)
-	{
-		if (!_nativeStringIdSymbolCache.TryGetValue(id, out var cached))
-			_nativeStringIdSymbolCache[id] = cached = "chaos_string_id_" + id.ToString("X16");
-		return cached;
-	}
 
 	private static string GetExternalRuntimeHelperSymbol(string subjectId)
 	{

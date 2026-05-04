@@ -56,6 +56,7 @@
 | 技能 | 说明 |
 |------|------|
 | `dev:foundation-dll-ai-test-generation` | foundation DLL 测试代码生成 |
+| `dev:foundation-dll-family-verification` | foundation DLL 三维验证：Fact → Benchmark → HotUpdate |
 | `dev:project-test-governance` | 测试治理 |
 
 ### 基础设施

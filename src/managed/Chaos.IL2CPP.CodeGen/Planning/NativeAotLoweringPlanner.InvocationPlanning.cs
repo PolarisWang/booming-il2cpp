@@ -409,19 +409,59 @@ public sealed partial class NativeAotLoweringPlanner
             routes.Add(new VirtualDispatchRoute(candidateTypeSubjectId, implementationMethod));
         }
 
-        // ── Phase 3: detect single-implementation interface dispatch ──
+        // ── Phase 3: AOT Devirtualization ──
         {
-            var uniqueImpls = routes
-                .Select(r => r.ImplementationMethod.SubjectId)
-                .Distinct(StringComparer.Ordinal)
-                .ToArray();
             var key = instruction.Callee ?? instruction.TargetReference?.SubjectId ?? "";
-            if (uniqueImpls.Length == 1 && key.Length > 0)
+            if (key.Length > 0)
             {
-                _devirtualizationHints[key] = new DevirtualizationHint(
-                    true,
-                    routes[0].ImplementationMethod.SubjectId,
-                    routes[0].ImplementationMethod.Identity.DeclaringTypeSubjectId);
+                // (a) Sealed class: declaring type is sealed, only one possible implementation
+                bool isSealedType = _sealedTypeSubjectIds != null
+                    && _sealedTypeSubjectIds.Contains(slotDeclaringTypeSubjectId);
+                if (isSealedType)
+                {
+                    var sealedImpl = TryResolveVirtualDispatchImplementationMethod(
+                        slotDeclaringTypeSubjectId,
+                        slotDeclaringTypeSubjectId,
+                        slotDeclaringTypeDefinitionSubjectId,
+                        slotSignatureSuffix);
+                    if (sealedImpl != null)
+                    {
+                        _devirtualizationHints[key] = new DevirtualizationHint(
+                            true,
+                            sealedImpl.SubjectId,
+                            sealedImpl.Identity.DeclaringTypeSubjectId);
+                    }
+                }
+                else
+                {
+                    // (b) Guard-based: exactly 2 implementations, one from declaring type itself
+                    var uniqueImpls = routes
+                        .Select(r => r.ImplementationMethod.SubjectId)
+                        .Distinct(StringComparer.Ordinal)
+                        .ToArray();
+                    if (uniqueImpls.Length == 2)
+                    {
+                        // Find the implementation that belongs to the declaring type itself
+                        var declaringImpl = routes.FirstOrDefault(r =>
+                            string.Equals(r.ReceiverTypeSubjectId, slotDeclaringTypeSubjectId, StringComparison.Ordinal));
+                        if (declaringImpl != null)
+                        {
+                            _devirtualizationHints[key] = new DevirtualizationHint(
+                                true,
+                                declaringImpl.ImplementationMethod.SubjectId,
+                                declaringImpl.ImplementationMethod.Identity.DeclaringTypeSubjectId,
+                                guardTypeSubjectId: slotDeclaringTypeSubjectId);
+                        }
+                    }
+                    else if (uniqueImpls.Length == 1)
+                    {
+                        // (c) Monomorphic: all routes resolve to the same implementation
+                        _devirtualizationHints[key] = new DevirtualizationHint(
+                            true,
+                            routes[0].ImplementationMethod.SubjectId,
+                            routes[0].ImplementationMethod.Identity.DeclaringTypeSubjectId);
+                    }
+                }
             }
         }
 

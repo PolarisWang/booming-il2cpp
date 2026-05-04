@@ -28,18 +28,21 @@ struct chaos_object_header {
 
 每个对象头部增加 8 字节的 vtable 指针。Object header 从 8→16 bytes，所有对象自动调整（堆分配使用 `sizeof(ManagedType)`，包含 header member）。
 
-### TypeInfo（不变）
+### TypeInfo（带 iface_map）
 
 ```cpp
 struct TypeInfo {
-    const TypeInfo* parent;
-    CHAOS_IL2CPP_UINT64 stable_id;
-    CHAOS_IL2CPP_UINT8  type_shape;
+    const TypeInfo* parent;                  // base type (nullptr for Object)
+    CHAOS_IL2CPP_UINT64 stable_id;           // FNV-1a hash
+    const InterfaceMapEntry* iface_map;      // interface dispatch table
+    CHAOS_IL2CPP_UINT32 iface_count;         // number of interfaces
+    CHAOS_IL2CPP_UINT8  type_shape;          // reference/value/interface
+    // 3 bytes padding
 };
-// sizeof = 24 bytes, inline constexpr
+// sizeof = 32 bytes, inline constexpr
 ```
 
-TypeInfo 保持 `inline constexpr` 不变，不携带 vtable 指针。类型身份、GC、类型转换仍通过 `TypeInfo*` pointer equality。
+TypeInfo 保持 `inline constexpr`，携带 iface_map 指针用于接口分派。类型身份、GC、类型转换通过 `TypeInfo*` pointer equality。
 
 ### VTable 数组
 
@@ -191,18 +194,32 @@ B2+ vtable 系统与现有的 `vtable_registry.*`（token-based 运行时注册�
 
 ## 迁移阶段
 
-| Phase | 内容 | 涉及文件 |
-|-------|------|----------|
-| **1** | 对象头 + vtable 数组 + virtual dispatch 迁移 | ObjectModelEmission, MethodEmission, generated_code_compat |
-| **2** | Interface dispatch 迁移 | iface_map + InterfaceMapEntry |
-| **3** | AOT 去虚化优化 | codegen 静态分析 |
-| **4** | HotUpdate vtable 支持 | 运行时 vtable 构造 API |
+| Phase | 内容 | 涉及文件 | 状态 |
+|-------|------|----------|------|
+| **1** | 对象头 + vtable 数组 + virtual dispatch 迁移 | ObjectModelEmission, MethodEmission, generated_code_compat | ✅ 已完成 |
+| **2** | Interface dispatch 迁移 | iface_map + InterfaceMapEntry | ✅ 已完成 (2026-05-04) |
+| **3** | AOT 去虚化优化 | codegen 静态分析 | 已部分实现 (monomorphic) |
+| **4** | HotUpdate vtable 支持 | 运行时 vtable 构造 API | 待规划 |
+
+### 实施进度 (2026-05-04)
+
+| 组件 | 状态 | 位置 |
+|------|------|------|
+| chaos_object_header.vtable | ✅ | `generated_code_compat.h` |
+| VTable slot 分配算法 | ✅ | ObjectModelEmission.cs:534-563 |
+| VTable 数组发射 (chaos_vtable_TypeX[]) | ✅ | ObjectModelEmission.cs:566-627 |
+| VTable 对象赋值 (new/反射/异常) | ✅ | 多个 Emission 文件 |
+| chaos_vtable_resolve() 辅助函数 | ✅ | ObjectModelEmission.cs:629-635 |
+| **EmitVirtualDispatchCall vtable[slot/offset]** | **✅ 完成 (2026-05-04)** | MethodEmission.cs:1052-1101 — vtable[slot] + interface dispatch via chaos_find_interface_offset |
+| Interface dispatch via vtable_offset | ✅ 已实现 | InterfaceMapEntry struct, chaos_find_interface_offset(), vtable[offset + method_index] |
+| type_registry.cpp iface_map bug | ✅ 已修复 | chaos_register_type() 现在保存 iface_map/iface_count |
 
 ## 位置
 
 - TypeInfo 定义: `src/native/common/chaos/type_info.h`
 - 对象头定义: `src/native/runtime-core/generated_code_compat.h`
-- Slot 分配算法: `src/managed/Chaos.IL2CPP.CodeGen/Planning/` (新增 VTableSlotPlanner.cs)
-- VTable emission: `src/managed/Chaos.IL2CPP.CodeGen/Emission/ObjectModelEmission.cs`
-- Virtual dispatch codegen: `src/managed/Chaos.IL2CPP.CodeGen/Emission/MethodEmission.cs`
+- Slot 分配算法: `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` (行 534-563)
+- VTable 数组发射: `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` (行 566-627)
+- Virtual dispatch codegen: `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.MethodEmission.cs` (行 986-1176)
+- DevirtualizationHint: `src/managed/Chaos.IL2CPP.CodeGen/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs` (行 412-426)
 - 运行时 vtable_registry: `src/native/runtime-core/vtable_registry.*`

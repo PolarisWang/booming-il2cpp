@@ -44,6 +44,8 @@ public sealed record ManagedTypeModel
 
     public bool IsValueType { get; init; }
 
+    public bool IsSealed { get; init; }
+
     public string? BaseTypeSubjectId { get; init; }
 
     public IReadOnlyList<string>? ImplementedInterfaceSubjectIds { get; init; }
@@ -120,6 +122,8 @@ public sealed record ManagedMethodModel
     public required bool IsStatic { get; init; }
 
     public required bool IsVirtual { get; init; }
+
+    public bool IsFinal { get; init; }
 
     public bool IsPreserved { get; init; }
 
