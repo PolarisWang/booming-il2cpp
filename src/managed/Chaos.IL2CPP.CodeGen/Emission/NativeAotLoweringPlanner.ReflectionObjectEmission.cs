@@ -154,8 +154,8 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("*>(chaos::il2cpp::runtime_core::GcAllocate(sizeof(");
 			builder.Append(GetNativeTypeSymbol("System.Private.CoreLib/System.String"));
 			builder.AppendLine(")));");
-			builder.Append("    chaos_string->header.type_id = ");
-			builder.Append(GetNativeTypeIdSymbol("System.Private.CoreLib/System.String"));
+			builder.Append("    chaos_string->header.type_info = &");
+			builder.Append(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String"));
 			builder.AppendLine(";");
 			builder.AppendLine("    chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_view.byte_count);");
 			builder.AppendLine("    auto* owned_utf8 = static_cast<char*>(chaos::il2cpp::runtime_core::GcAllocateAtomic(chaos_view.byte_count + 1));");
@@ -286,12 +286,12 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		if (flag2 || flag4 || flag5)
 		{
-			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_reflection_create_reference_array(CHAOS_IL2CPP_INTPTR chaos_element_type_id, CHAOS_IL2CPP_SIZE chaos_length)");
+			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_reflection_create_reference_array(const TypeInfo* chaos_element_type_info, CHAOS_IL2CPP_SIZE chaos_length)");
 			builder.AppendLine("{");
 			builder.AppendLine("    auto* chaos_array = new chaos_managed_array{};");
-			builder.AppendLine("    chaos_array->header.type_id = chaos_type_id_managed_array;");
+			builder.AppendLine("    chaos_array->header.type_info = &chaos_type_info_managed_array;");
 			builder.AppendLine("    chaos_array->element_type_shape = chaos_type_shape_reference;");
-			builder.AppendLine("    chaos_array->element_type_id = chaos_element_type_id;");
+			builder.AppendLine("    chaos_array->element_type_info = chaos_element_type_info;");
 			builder.AppendLine("    chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);");
 			builder.AppendLine("    chaos_array->elements = chaos_length == 0 ? nullptr : new CHAOS_IL2CPP_INTPTR[chaos_length]{};");
 			builder.AppendLine("    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);");
@@ -361,8 +361,8 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder = builder;
 			StringBuilder stringBuilder12 = stringBuilder;
 			handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-			handler.AppendLiteral("    chaos_type->header.type_id = ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Type"));
+			handler.AppendLiteral("    chaos_type->header.type_info = &");
+			handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Type"));
 			handler.AppendLiteral(";");
 			stringBuilder12.AppendLine(ref handler);
 			builder.AppendLine("    chaos_type->runtime_type_handle = chaos_type_handle;");
@@ -463,8 +463,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder19 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Type"));
+				handler.AppendLiteral("    if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Type"));
 				handler.AppendLiteral(")");
 				stringBuilder19.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -483,8 +483,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder21 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
+				handler.AppendLiteral("    if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder21.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -503,8 +503,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder23 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
+				handler.AppendLiteral("    if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder23.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -523,8 +523,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder25 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.FieldInfo"));
+				handler.AppendLiteral("    if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.FieldInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder25.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -553,8 +553,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder27 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Type"));
+				handler.AppendLiteral("    if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Type"));
 				handler.AppendLiteral(")");
 				stringBuilder27.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -570,8 +570,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder29 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(39, 1, stringBuilder);
-				handler.AppendLiteral("    else if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
+				handler.AppendLiteral("    else if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder29.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -587,8 +587,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder31 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(39, 1, stringBuilder);
-				handler.AppendLiteral("    else if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
+				handler.AppendLiteral("    else if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder31.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -604,8 +604,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder33 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(39, 1, stringBuilder);
-				handler.AppendLiteral("    else if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.FieldInfo"));
+				handler.AppendLiteral("    else if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.FieldInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder33.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -635,8 +635,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder35 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Type"));
+				handler.AppendLiteral("    if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Type"));
 				handler.AppendLiteral(")");
 				stringBuilder35.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -655,8 +655,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder37 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
+				handler.AppendLiteral("    if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder37.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -678,8 +678,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder39 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
+				handler.AppendLiteral("    if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder39.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -701,8 +701,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder41 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.FieldInfo"));
+				handler.AppendLiteral("    if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.FieldInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder41.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -782,8 +782,8 @@ public sealed partial class NativeAotLoweringPlanner
 						stringBuilder = builder;
 						StringBuilder stringBuilder48 = stringBuilder;
 						handler = new StringBuilder.AppendInterpolatedStringHandler(47, 1, stringBuilder);
-						handler.AppendLiteral("                chaos_field->header.type_id = ");
-						handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.FieldInfo"));
+						handler.AppendLiteral("                chaos_field->header.type_info = &");
+						handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.FieldInfo"));
 						handler.AppendLiteral(";");
 						stringBuilder48.AppendLine(ref handler);
 						builder.AppendLine("                chaos_field->declaring_type_handle = chaos_type->runtime_type_handle;");
@@ -868,7 +868,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder55 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(13, 1, stringBuilder);
 				handler.AppendLiteral("            ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Type"));
+				handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Type"));
 				handler.AppendLiteral(",");
 				stringBuilder55.AppendLine(ref handler);
 				builder.AppendLine("            static_cast<CHAOS_IL2CPP_SIZE>(0));");
@@ -892,7 +892,7 @@ public sealed partial class NativeAotLoweringPlanner
 					StringBuilder stringBuilder57 = stringBuilder;
 					handler = new StringBuilder.AppendInterpolatedStringHandler(17, 1, stringBuilder);
 					handler.AppendLiteral("                ");
-					handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Type"));
+					handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Type"));
 					handler.AppendLiteral(",");
 					stringBuilder57.AppendLine(ref handler);
 					stringBuilder = builder;
@@ -924,7 +924,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder60 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(17, 1, stringBuilder);
 				handler.AppendLiteral("                ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Type"));
+				handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Type"));
 				handler.AppendLiteral(",");
 				stringBuilder60.AppendLine(ref handler);
 				builder.AppendLine("                static_cast<CHAOS_IL2CPP_SIZE>(0));");
@@ -948,7 +948,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder62 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(13, 1, stringBuilder);
 				handler.AppendLiteral("            ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
+				handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
 				handler.AppendLiteral(",");
 				stringBuilder62.AppendLine(ref handler);
 				builder.AppendLine("            static_cast<CHAOS_IL2CPP_SIZE>(0));");
@@ -970,7 +970,7 @@ public sealed partial class NativeAotLoweringPlanner
 					StringBuilder stringBuilder64 = stringBuilder;
 					handler = new StringBuilder.AppendInterpolatedStringHandler(113, 2, stringBuilder);
 					handler.AppendLiteral("            const auto chaos_array_value = chaos_reflection_create_reference_array(");
-					handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
+					handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
 					handler.AppendLiteral(", static_cast<CHAOS_IL2CPP_SIZE>(");
 					handler.AppendFormatted(item6.Count());
 					handler.AppendLiteral("));");
@@ -993,8 +993,8 @@ public sealed partial class NativeAotLoweringPlanner
 						handler = new StringBuilder.AppendInterpolatedStringHandler(50, 2, stringBuilder);
 						handler.AppendLiteral("            chaos_constructor_");
 						handler.AppendFormatted(num2);
-						handler.AppendLiteral("->header.type_id = ");
-						handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
+						handler.AppendLiteral("->header.type_info = &");
+						handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
 						handler.AppendLiteral(";");
 						stringBuilder66.AppendLine(ref handler);
 						stringBuilder = builder;
@@ -1062,7 +1062,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder73 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(17, 1, stringBuilder);
 				handler.AppendLiteral("                ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
+				handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
 				handler.AppendLiteral(",");
 				stringBuilder73.AppendLine(ref handler);
 				builder.AppendLine("                static_cast<CHAOS_IL2CPP_SIZE>(0));");
@@ -1078,7 +1078,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder74 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(13, 1, stringBuilder);
 				handler.AppendLiteral("            ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"));
+				handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"));
 				handler.AppendLiteral(",");
 				stringBuilder74.AppendLine(ref handler);
 				builder.AppendLine("            static_cast<CHAOS_IL2CPP_SIZE>(0));");
@@ -1089,8 +1089,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder75 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
+				handler.AppendLiteral("    if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder75.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -1108,8 +1108,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder77 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(39, 1, stringBuilder);
-				handler.AppendLiteral("    else if (chaos_header->type_id == ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
+				handler.AppendLiteral("    else if (chaos_header->type_info == &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
 				handler.AppendLiteral(")");
 				stringBuilder77.AppendLine(ref handler);
 				builder.AppendLine("    {");
@@ -1139,7 +1139,7 @@ public sealed partial class NativeAotLoweringPlanner
 					StringBuilder stringBuilder80 = stringBuilder;
 					handler = new StringBuilder.AppendInterpolatedStringHandler(113, 2, stringBuilder);
 					handler.AppendLiteral("            const auto chaos_array_value = chaos_reflection_create_reference_array(");
-					handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"));
+					handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"));
 					handler.AppendLiteral(", static_cast<CHAOS_IL2CPP_SIZE>(");
 					handler.AppendFormatted(item8.ParameterNames.Count);
 					handler.AppendLiteral("));");
@@ -1162,8 +1162,8 @@ public sealed partial class NativeAotLoweringPlanner
 						handler = new StringBuilder.AppendInterpolatedStringHandler(48, 2, stringBuilder);
 						handler.AppendLiteral("            chaos_parameter_");
 						handler.AppendFormatted(num3);
-						handler.AppendLiteral("->header.type_id = ");
-						handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"));
+						handler.AppendLiteral("->header.type_info = &");
+						handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"));
 						handler.AppendLiteral(";");
 						stringBuilder82.AppendLine(ref handler);
 						stringBuilder = builder;
@@ -1194,7 +1194,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder85 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(17, 1, stringBuilder);
 				handler.AppendLiteral("                ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"));
+				handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"));
 				handler.AppendLiteral(",");
 				stringBuilder85.AppendLine(ref handler);
 				builder.AppendLine("                static_cast<CHAOS_IL2CPP_SIZE>(0));");
@@ -1244,8 +1244,8 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder = builder;
 				StringBuilder stringBuilder89 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(46, 1, stringBuilder);
-				handler.AppendLiteral("            chaos_assembly->header.type_id = ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.Assembly"));
+				handler.AppendLiteral("            chaos_assembly->header.type_info = &");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.Assembly"));
 				handler.AppendLiteral(";");
 				stringBuilder89.AppendLine(ref handler);
 				stringBuilder = builder;
@@ -1377,8 +1377,8 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder = builder;
 			StringBuilder stringBuilder98 = stringBuilder;
 			handler = new StringBuilder.AppendInterpolatedStringHandler(43, 1, stringBuilder);
-			handler.AppendLiteral("    chaos_assembly_name->header.type_id = ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.AssemblyName"));
+			handler.AppendLiteral("    chaos_assembly_name->header.type_info = &");
+			handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.AssemblyName"));
 			handler.AppendLiteral(";");
 			stringBuilder98.AppendLine(ref handler);
 			builder.AppendLine("    chaos_assembly_name->runtime_name_value = chaos_assembly->runtime_assembly_name_value;");
@@ -1426,6 +1426,7 @@ public sealed partial class NativeAotLoweringPlanner
 					.Select(entry => new Scriban.Runtime.ScriptObject
 					{
 						["type_id_symbol"] = GetNativeTypeIdSymbol(entry.TypeSubjectId),
+						["type_info_symbol"] = GetNativeTypeInfoSymbol(entry.TypeSubjectId),
 						["type_handle_literal"] = GetTypeHandleLiteral(entry.TypeSubjectId),
 					})
 					.ToArray(),
@@ -1462,6 +1463,7 @@ public sealed partial class NativeAotLoweringPlanner
 							["type_handle_literal"] = GetTypeHandleLiteral(entry.DeclaringTypeSubjectId),
 							["native_type_symbol"] = GetNativeTypeSymbol(entry.DeclaringTypeSubjectId),
 							["type_id_symbol"] = GetNativeTypeIdSymbol(entry.DeclaringTypeSubjectId),
+							["type_info_symbol"] = GetNativeTypeInfoSymbol(entry.DeclaringTypeSubjectId),
 							["ctor_symbol"] = resolvedCtorTarget.TargetSymbol,
 						};
 					})
@@ -1556,8 +1558,8 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder = builder;
 			StringBuilder stringBuilder106 = stringBuilder;
 			handler = new StringBuilder.AppendInterpolatedStringHandler(36, 1, stringBuilder);
-			handler.AppendLiteral("    chaos_method->header.type_id = ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
+			handler.AppendLiteral("    chaos_method->header.type_info = &");
+			handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
 			handler.AppendLiteral(";");
 			stringBuilder106.AppendLine(ref handler);
 			builder.AppendLine("    chaos_method->declaring_type_handle = chaos_type->runtime_type_handle;");
@@ -1633,8 +1635,8 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder = builder;
 			StringBuilder stringBuilder110 = stringBuilder;
 			handler = new StringBuilder.AppendInterpolatedStringHandler(43, 1, stringBuilder);
-			handler.AppendLiteral("    chaos_closed_method->header.type_id = ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
+			handler.AppendLiteral("    chaos_closed_method->header.type_info = &");
+			handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
 			handler.AppendLiteral(";");
 			stringBuilder110.AppendLine(ref handler);
 			builder.AppendLine("    chaos_closed_method->declaring_type_handle = chaos_method->declaring_type_handle;");
@@ -1757,8 +1759,8 @@ public sealed partial class NativeAotLoweringPlanner
 					stringBuilder = builder;
 					StringBuilder stringBuilder120 = stringBuilder;
 					handler = new StringBuilder.AppendInterpolatedStringHandler(50, 1, stringBuilder);
-					handler.AppendLiteral("            chaos_boxed_result->header.type_id = ");
-					handler.AppendFormatted(GetNativeBoxTypeIdSymbol(item14));
+					handler.AppendLiteral("            chaos_boxed_result->header.type_info = &");
+					handler.AppendFormatted(GetNativeBoxTypeInfoSymbol(item14));
 					handler.AppendLiteral(";");
 					stringBuilder120.AppendLine(ref handler);
 					builder.AppendLine("            chaos_boxed_result->value = chaos_result;");
@@ -1798,8 +1800,8 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder = builder;
 		StringBuilder stringBuilder121 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-		handler.AppendLiteral("    if (chaos_header->type_id == ");
-		handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Type"));
+		handler.AppendLiteral("    if (chaos_header->type_info == &");
+		handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Type"));
 		handler.AppendLiteral(")");
 		stringBuilder121.AppendLine(ref handler);
 		builder.AppendLine("    {");
@@ -1823,8 +1825,8 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder = builder;
 		StringBuilder stringBuilder123 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(39, 1, stringBuilder);
-		handler.AppendLiteral("    else if (chaos_header->type_id == ");
-		handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
+		handler.AppendLiteral("    else if (chaos_header->type_info == &");
+		handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
 		handler.AppendLiteral(")");
 		stringBuilder123.AppendLine(ref handler);
 		builder.AppendLine("    {");
@@ -1881,8 +1883,8 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder = builder;
 			StringBuilder stringBuilder127 = stringBuilder;
 			handler = new StringBuilder.AppendInterpolatedStringHandler(43, 1, stringBuilder);
-			handler.AppendLiteral("        chaos_attribute->header.type_id = ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol(item15.AttributeTypeSubjectId));
+			handler.AppendLiteral("        chaos_attribute->header.type_info = &");
+			handler.AppendFormatted(GetNativeTypeInfoSymbol(item15.AttributeTypeSubjectId));
 			handler.AppendLiteral(";");
 			stringBuilder127.AppendLine(ref handler);
 			foreach (CustomAttributeFieldAssignment assignment in item15.Assignments)

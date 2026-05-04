@@ -33,6 +33,7 @@ public sealed partial class NativeAotLoweringPlanner
             .Select(item => new ScriptObject
             {
                 ["enumerable_type_id_symbol"] = GetNativeTypeIdSymbol(item.EnumerableTypeSubjectId),
+                ["enumerable_type_info_symbol"] = GetNativeTypeInfoSymbol(item.EnumerableTypeSubjectId),
                 ["get_enumerator_symbol"] = item.GetEnumeratorMethod.NativeSymbol,
                 ["move_next_symbol"] = item.MoveNextMethod.NativeSymbol,
                 ["get_current_symbol"] = item.GetCurrentMethod.NativeSymbol,
@@ -60,6 +61,7 @@ public sealed partial class NativeAotLoweringPlanner
             .Select(item => new ScriptObject
             {
                 ["enumerable_type_id_symbol"] = GetNativeTypeIdSymbol(item.EnumerableTypeSubjectId),
+                ["enumerable_type_info_symbol"] = GetNativeTypeInfoSymbol(item.EnumerableTypeSubjectId),
                 ["get_enumerator_symbol"] = item.GetEnumeratorMethod.NativeSymbol,
                 ["move_next_symbol"] = item.MoveNextMethod.NativeSymbol,
                 ["get_current_symbol"] = item.GetCurrentMethod.NativeSymbol,
@@ -70,6 +72,7 @@ public sealed partial class NativeAotLoweringPlanner
             ["helper_symbol"] = GetExternalRuntimeHelperSymbol(callee),
             ["reference_type_shape_value"] = GetNativeTypeShapeValue(AotCoreIrTypeShapeKind.ReferenceType),
             ["string_type_id_symbol"] = GetNativeTypeIdSymbol("System.Private.CoreLib/System.String"),
+            ["string_type_info_symbol"] = GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String"),
             ["variant_entries"] = orderedVariants,
         };
         var rendered = ScribanTemplateRenderer.RenderTemplate(

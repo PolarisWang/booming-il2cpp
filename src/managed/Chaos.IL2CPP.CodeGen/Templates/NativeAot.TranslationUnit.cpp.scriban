@@ -2,11 +2,16 @@
 #include {{ include }}
 {{ end ~}}
 
+#pragma warning(push)
+#pragma warning(disable: 4065 4244)
+
 namespace
 {
 {{ object_model_section }}
 }
+#pragma warning(pop)
 
+{{ generic_registration_code }}
 {{~ for declaration in method_declarations ~}}
 {{ declaration }}
 {{ end ~}}

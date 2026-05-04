@@ -31,18 +31,21 @@ public sealed partial class NativeAotLoweringPlanner
 		HashSet<string> hashSet = new HashSet<string>(StringComparer.Ordinal);
 		HashSet<string> hashSet2 = new HashSet<string>(StringComparer.Ordinal);
 		HashSet<string> hashSet3 = new HashSet<string>(StringComparer.Ordinal);
+		builder.AppendLine("#include <chaos/type_info.h>");
+		builder.AppendLine();
 		builder.AppendLine("struct chaos_object_header");
 		builder.AppendLine("{");
-		builder.AppendLine("    CHAOS_IL2CPP_INTPTR type_id = 0;");
+		builder.AppendLine("    const TypeInfo* type_info = nullptr;");
 		builder.AppendLine("};");
 		builder.AppendLine();
 		builder.AppendLine("constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;");
+		builder.AppendLine("inline constexpr TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, 2 };");
 		builder.AppendLine();
 		builder.AppendLine("struct chaos_managed_array");
 		builder.AppendLine("{");
 		builder.AppendLine("    chaos_object_header header{};");
 		builder.AppendLine("    CHAOS_IL2CPP_UINT8 element_type_shape = 0;");
-		builder.AppendLine("    CHAOS_IL2CPP_INTPTR element_type_id = 0;");
+		builder.AppendLine("    const TypeInfo* element_type_info = nullptr;");
 		builder.AppendLine("    CHAOS_IL2CPP_INTPTR length = 0;");
 		builder.AppendLine("    CHAOS_IL2CPP_INTPTR* elements = nullptr;");
 		builder.AppendLine("};");
@@ -320,6 +323,12 @@ public sealed partial class NativeAotLoweringPlanner
 			TrackReferenceType("System.Private.CoreLib/System.Reflection.Assembly", "System.Private.CoreLib/System.Object");
 			TrackReferenceType("System.Private.CoreLib/System.Reflection.AssemblyName", "System.Private.CoreLib/System.Object");
 		}
+		// Track all types referenced in reflection type entries so their TypeInfo/type_id
+		// declarations are emitted (needed by scriban templates like ReflectionGetObjectType).
+		foreach (var entry in _reflectionMemberSupport.TypeEntries)
+		{
+			TrackReferenceType(entry.TypeSubjectId, "System.Private.CoreLib/System.Object");
+		}
 		// Pre-index fields by declaring type to avoid O(n*m) Where+OrderBy per type.
 		var fieldsByDeclaringType = new Dictionary<string, List<string>>(StringComparer.Ordinal);
 		foreach (var field in hashSet)
@@ -333,130 +342,157 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (var list in fieldsByDeclaringType.Values)
 			list.Sort(StringComparer.Ordinal);
 		int num = 2;
-		foreach (string item in referenceTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
+		// Ensure System.String is always tracked (used in IsArrayStoreCompatible fast path)
+		TrackReferenceType("System.Private.CoreLib/System.String", null);
+		// Ensure reflection types used by ReflectionObjectEmission are tracked
+		TrackReferenceType("System.Private.CoreLib/System.Reflection.MethodInfo", null);
+		TrackReferenceType("System.Private.CoreLib/System.Reflection.ConstructorInfo", null);
+		TrackReferenceType("System.Private.CoreLib/System.Reflection.FieldInfo", null);
+		TrackReferenceType("System.Private.CoreLib/System.Reflection.Assembly", null);
+		TrackReferenceType("System.Private.CoreLib/System.Reflection.AssemblyName", null);
+		// ── TypeInfo instances (replace integer type_id system) ──
+		foreach (string item in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder2 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-			handler.AppendLiteral("constexpr CHAOS_IL2CPP_INTPTR ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol(item));
-			handler.AppendLiteral(" = ");
-			handler.AppendFormatted(num);
-			handler.AppendLiteral(";");
-			stringBuilder2.AppendLine(ref handler);
+			ulong stableId = ComputeStableTypeId(item);
+			string parentExpr = "nullptr";
+			if (referenceTypeBaseSubjectIds.TryGetValue(item, out string? baseTypeId) && !string.IsNullOrEmpty(baseTypeId))
+			{
+				parentExpr = "&" + GetNativeTypeInfoSymbol(baseTypeId);
+			}
+			{
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline constexpr TypeInfo ");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol(item));
+				handler.AppendLiteral(" = { ");
+				handler.AppendFormatted(parentExpr);
+				handler.AppendLiteral(", ");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(", 1 /* reference */ };");
+				stringBuilder.AppendLine(ref handler);
+			}
+			{
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_INTPTR ");
+				handler.AppendFormatted(GetNativeTypeIdSymbol(item));
+				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(");");
+				stringBuilder.AppendLine(ref handler);
+			}
 			num++;
 		}
 		foreach (string item2 in interfaceTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder3 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-			handler.AppendLiteral("constexpr CHAOS_IL2CPP_INTPTR ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol(item2));
-			handler.AppendLiteral(" = ");
-			handler.AppendFormatted(num);
-			handler.AppendLiteral(";");
-			stringBuilder3.AppendLine(ref handler);
+			ulong stableId = ComputeStableTypeId(item2);
+			{
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline constexpr TypeInfo ");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol(item2));
+				handler.AppendLiteral(" = { nullptr, ");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(", 3 /* interface */ };");
+				stringBuilder.AppendLine(ref handler);
+			}
+			{
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_INTPTR ");
+				handler.AppendFormatted(GetNativeTypeIdSymbol(item2));
+				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(");");
+				stringBuilder.AppendLine(ref handler);
+			}
 			num++;
 		}
 		foreach (string item3 in valueTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder17 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-			handler.AppendLiteral("constexpr CHAOS_IL2CPP_INTPTR ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol(item3));
-			handler.AppendLiteral(" = ");
-			handler.AppendFormatted(num);
-			handler.AppendLiteral(";");
-			stringBuilder17.AppendLine(ref handler);
+			ulong stableId = ComputeStableTypeId(item3);
+			{
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline constexpr TypeInfo ");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
+				handler.AppendLiteral(" = { nullptr, ");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(", 2 /* value */ };");
+				stringBuilder.AppendLine(ref handler);
+			}
+			{
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_INTPTR ");
+				handler.AppendFormatted(GetNativeTypeIdSymbol(item3));
+				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(");");
+				stringBuilder.AppendLine(ref handler);
+			}
 			num++;
 		}
 		var sortedHashSet3 = hashSet3.OrderBy<string, string>((string result) => result, StringComparer.Ordinal).ToArray();
 		foreach (string item3 in sortedHashSet3)
 		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder4 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-			handler.AppendLiteral("constexpr CHAOS_IL2CPP_INTPTR ");
-			handler.AppendFormatted(GetNativeBoxTypeIdSymbol(item3));
-			handler.AppendLiteral(" = ");
-			handler.AppendFormatted(num);
-			handler.AppendLiteral(";");
-			stringBuilder4.AppendLine(ref handler);
+			ulong stableId = ComputeStableTypeId(item3);
+			{
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline constexpr TypeInfo ");
+				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
+				handler.AppendLiteral(" = { nullptr, ");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(", 2 /* value (boxed) */ };");
+				stringBuilder.AppendLine(ref handler);
+			}
+			{
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_INTPTR ");
+				handler.AppendFormatted(GetNativeBoxTypeIdSymbol(item3));
+				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(");");
+				stringBuilder.AppendLine(ref handler);
+			}
 			num++;
 		}
 		if (referenceTypeSubjectIds.Count > 0 || interfaceTypeSubjectIds.Count > 0 || valueTypeSubjectIds.Count > 0 || hashSet3.Count > 0)
 		{
 			builder.AppendLine();
 		}
-		builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_get_base_type_id(CHAOS_IL2CPP_INTPTR chaos_type_id) noexcept");
+		// ── Parent type info resolver (replaces chaos_get_base_type_id switch) ──
+		builder.AppendLine("inline const TypeInfo* chaos_get_parent_type_info(const TypeInfo* chaos_ti) noexcept");
 		builder.AppendLine("{");
-		builder.AppendLine("    switch (chaos_type_id)");
-		builder.AppendLine("    {");
-		foreach (string item4 in referenceTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
-		{
-			if (referenceTypeBaseSubjectIds.TryGetValue(item4, out string value) && !string.IsNullOrEmpty(value))
-			{
-				StringBuilder stringBuilder = builder;
-				StringBuilder stringBuilder5 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder);
-				handler.AppendLiteral("        case ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol(item4));
-				handler.AppendLiteral(":");
-				stringBuilder5.AppendLine(ref handler);
-				stringBuilder = builder;
-				StringBuilder stringBuilder6 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(20, 1, stringBuilder);
-				handler.AppendLiteral("            return ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol(value));
-				handler.AppendLiteral(";");
-				stringBuilder6.AppendLine(ref handler);
-			}
-		}
-		foreach (string item5 in sortedHashSet3)
-		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder7 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder);
-			handler.AppendLiteral("        case ");
-			handler.AppendFormatted(GetNativeBoxTypeIdSymbol(item5));
-			handler.AppendLiteral(":");
-			stringBuilder7.AppendLine(ref handler);
-			stringBuilder = builder;
-			StringBuilder stringBuilder8 = stringBuilder;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(20, 1, stringBuilder);
-			handler.AppendLiteral("            return ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.Object"));
-			handler.AppendLiteral(";");
-			stringBuilder8.AppendLine(ref handler);
-		}
-		builder.AppendLine("        default:");
-		builder.AppendLine("            return static_cast<CHAOS_IL2CPP_INTPTR>(0);");
-		builder.AppendLine("    }");
+		builder.AppendLine("    if (chaos_ti == nullptr) return nullptr;");
+		builder.AppendLine("    return chaos_ti->parent;");
 		builder.AppendLine("}");
 		builder.AppendLine();
-		builder.AppendLine("bool chaos_is_type_compatible(CHAOS_IL2CPP_INTPTR chaos_actual_type_id, CHAOS_IL2CPP_INTPTR chaos_target_type_id) noexcept");
+		// ── Type compatibility (TypeInfo* pointer based, replaces integer walk) ──
+		builder.AppendLine("bool chaos_is_type_compatible(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_type_info) noexcept");
 		builder.AppendLine("{");
-		builder.AppendLine("    auto chaos_current_type_id = chaos_actual_type_id;");
-		builder.AppendLine("    while (chaos_current_type_id != static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine("    auto* chaos_current = chaos_actual_type_info;");
+		builder.AppendLine("    while (chaos_current != nullptr)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        if (chaos_current_type_id == chaos_target_type_id)");
+		builder.AppendLine("        if (chaos_current == chaos_target_type_info)");
 		builder.AppendLine("        {");
 		builder.AppendLine("            return true;");
 		builder.AppendLine("        }");
 		builder.AppendLine();
-		builder.AppendLine("        chaos_current_type_id = chaos_get_base_type_id(chaos_current_type_id);");
+		builder.AppendLine("        chaos_current = chaos_current->parent;");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    return false;");
 		builder.AppendLine("}");
 		builder.AppendLine();
-		builder.AppendLine("bool chaos_type_implements_interface(CHAOS_IL2CPP_INTPTR chaos_actual_type_id, CHAOS_IL2CPP_INTPTR chaos_target_interface_type_id) noexcept");
+		// ── Interface check (switch on stable_id) ──
+		builder.AppendLine("bool chaos_type_implements_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept");
 		builder.AppendLine("{");
-		builder.AppendLine("    switch (chaos_actual_type_id)");
+		builder.AppendLine("    switch (chaos_actual_type_info->stable_id)");
 		builder.AppendLine("    {");
-		foreach (string item6 in referenceTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
+		foreach (string item6 in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 		{
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder9 = stringBuilder;
@@ -468,7 +504,7 @@ public sealed partial class NativeAotLoweringPlanner
 			if (referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item6, out HashSet<string> value2) && value2.Count > 0)
 			{
 				string value3 = string.Join(" || ", from interfaceSubjectId in value2.OrderBy<string, string>((string result) => result, StringComparer.Ordinal)
-					select "chaos_target_interface_type_id == " + GetNativeTypeIdSymbol(interfaceSubjectId));
+					select "chaos_target_interface_type_info->stable_id == " + GetNativeTypeIdSymbol(interfaceSubjectId));
 				stringBuilder = builder;
 				StringBuilder stringBuilder10 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(20, 1, stringBuilder);
@@ -494,7 +530,7 @@ public sealed partial class NativeAotLoweringPlanner
 			if (referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item7, out HashSet<string> value4) && value4.Count > 0)
 			{
 				string value5 = string.Join(" || ", from interfaceSubjectId in value4.OrderBy<string, string>((string result) => result, StringComparer.Ordinal)
-					select "chaos_target_interface_type_id == " + GetNativeTypeIdSymbol(interfaceSubjectId));
+					select "chaos_target_interface_type_info->stable_id == " + GetNativeTypeIdSymbol(interfaceSubjectId));
 				stringBuilder = builder;
 				StringBuilder stringBuilder12 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(20, 1, stringBuilder);
@@ -513,17 +549,17 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    }");
 		builder.AppendLine("}");
 		builder.AppendLine();
-		builder.AppendLine("bool chaos_does_type_implement_interface(CHAOS_IL2CPP_INTPTR chaos_actual_type_id, CHAOS_IL2CPP_INTPTR chaos_target_interface_type_id) noexcept");
+		builder.AppendLine("bool chaos_does_type_implement_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept");
 		builder.AppendLine("{");
-		builder.AppendLine("    auto chaos_current_type_id = chaos_actual_type_id;");
-		builder.AppendLine("    while (chaos_current_type_id != static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine("    auto* chaos_current = chaos_actual_type_info;");
+		builder.AppendLine("    while (chaos_current != nullptr)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        if (chaos_type_implements_interface(chaos_current_type_id, chaos_target_interface_type_id))");
+		builder.AppendLine("        if (chaos_type_implements_interface(chaos_current, chaos_target_interface_type_info))");
 		builder.AppendLine("        {");
 		builder.AppendLine("            return true;");
 		builder.AppendLine("        }");
 		builder.AppendLine();
-		builder.AppendLine("        chaos_current_type_id = chaos_get_base_type_id(chaos_current_type_id);");
+		builder.AppendLine("        chaos_current = chaos_current->parent;");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    return false;");
@@ -531,27 +567,27 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine();
 		builder.AppendLine("bool chaos_is_array_type_compatible(");
 		builder.AppendLine("    CHAOS_IL2CPP_UINT8 chaos_actual_element_shape,");
-		builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_actual_element_type_id,");
+		builder.AppendLine("    const TypeInfo* chaos_actual_element_type_info,");
 		builder.AppendLine("    CHAOS_IL2CPP_UINT8 chaos_target_element_shape,");
-		builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_target_element_type_id) noexcept");
+		builder.AppendLine("    const TypeInfo* chaos_target_element_type_info) noexcept");
 		builder.AppendLine("{");
 		builder.AppendLine("    if (chaos_actual_element_shape == chaos_type_shape_reference)");
 		builder.AppendLine("    {");
 		builder.AppendLine("        if (chaos_target_element_shape == chaos_type_shape_reference)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            return chaos_is_type_compatible(chaos_actual_element_type_id, chaos_target_element_type_id);");
+		builder.AppendLine("            return chaos_is_type_compatible(chaos_actual_element_type_info, chaos_target_element_type_info);");
 		builder.AppendLine("        }");
 		builder.AppendLine();
 		builder.AppendLine("        if (chaos_target_element_shape == chaos_type_shape_interface)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            return chaos_does_type_implement_interface(chaos_actual_element_type_id, chaos_target_element_type_id);");
+		builder.AppendLine("            return chaos_does_type_implement_interface(chaos_actual_element_type_info, chaos_target_element_type_info);");
 		builder.AppendLine("        }");
 		builder.AppendLine();
 		builder.AppendLine("        return false;");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    return chaos_actual_element_shape == chaos_target_element_shape");
-		builder.AppendLine("        && chaos_actual_element_type_id == chaos_target_element_type_id;");
+		builder.AppendLine("        && chaos_actual_element_type_info == chaos_target_element_type_info;");
 		builder.AppendLine("}");
 		builder.AppendLine();
 		builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept");
@@ -572,19 +608,20 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    {");
 		builder.Append("        return chaos_array->element_type_shape == chaos_type_shape_reference");
 		builder.Append("            && chaos_is_type_compatible(");
-		builder.Append(GetNativeTypeIdSymbol("System.Private.CoreLib/System.String"));
-		builder.AppendLine(", chaos_array->element_type_id);");
+		string stringTypeInfoSymbol = GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String");
+		builder.Append("&" + stringTypeInfoSymbol);
+		builder.AppendLine(", chaos_array->element_type_info);");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_value);");
 		builder.AppendLine("    if (chaos_array->element_type_shape == chaos_type_shape_interface)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        return chaos_does_type_implement_interface(chaos_header->type_id, chaos_array->element_type_id);");
+		builder.AppendLine("        return chaos_does_type_implement_interface(chaos_header->type_info, chaos_array->element_type_info);");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    if (chaos_array->element_type_shape == chaos_type_shape_reference)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        return chaos_is_type_compatible(chaos_header->type_id, chaos_array->element_type_id);");
+		builder.AppendLine("        return chaos_is_type_compatible(chaos_header->type_info, chaos_array->element_type_info);");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    return false;");
@@ -835,6 +872,38 @@ public sealed partial class NativeAotLoweringPlanner
 				TrackInterfaceType(implementedInterfaceSubjectId);
 			}
 		}
+	}
+
+	private static IEnumerable<string> TopologicalSortReferenceTypes(
+		HashSet<string> types,
+		Dictionary<string, string?> baseTypes)
+	{
+		var visited = new HashSet<string>();
+		var result = new List<string>();
+
+		void Dfs(string type)
+		{
+			if (visited.Contains(type)) return;
+			visited.Add(type);
+
+			// Visit parent first (ensures parents emitted before children)
+			if (baseTypes.TryGetValue(type, out var parent) &&
+				!string.IsNullOrEmpty(parent) &&
+				types.Contains(parent))
+			{
+				Dfs(parent);
+			}
+
+			result.Add(type);
+		}
+
+		// Iterate in deterministic order via sorted initial sequence
+		foreach (var type in types.OrderBy(x => x, StringComparer.Ordinal))
+		{
+			Dfs(type);
+		}
+
+		return result;
 	}
 
 }

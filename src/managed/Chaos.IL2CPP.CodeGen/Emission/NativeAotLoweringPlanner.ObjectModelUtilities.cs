@@ -289,9 +289,36 @@ public sealed partial class NativeAotLoweringPlanner
 		return GetNativeSymbol("chaos_type_id_", subjectId);
 	}
 
+	private static string GetNativeTypeInfoSymbol(string subjectId)
+	{
+		return GetNativeSymbol("chaos_type_info_", subjectId);
+	}
+
 	private static string GetNativeBoxTypeIdSymbol(string subjectId)
 	{
 		return GetNativeSymbol("chaos_boxed_type_id_", subjectId);
+	}
+
+	private static string GetNativeBoxTypeInfoSymbol(string subjectId)
+	{
+		return GetNativeSymbol("chaos_type_info_", subjectId);
+	}
+
+	/// <summary>
+	/// Compute FNV-1a 64-bit stable type ID from a subject ID.
+	/// Must match chaos_compute_type_stable_id() in type_info.h.
+	/// </summary>
+	private static ulong ComputeStableTypeId(string subjectId)
+	{
+		const ulong fnvOffsetBasis64 = 14695981039346656037;
+		const ulong fnvPrime64 = 1099511628211;
+		ulong hash = fnvOffsetBasis64;
+		foreach (char c in subjectId)
+		{
+			hash ^= (byte)c;
+			hash *= fnvPrime64;
+		}
+		return hash;
 	}
 
 	private static string GetNativeStringIdSymbol(ulong id)
@@ -518,13 +545,19 @@ public sealed partial class NativeAotLoweringPlanner
 		return prefix | num2;
 	}
 
-	private static string GetRuntimeTypeIdExpression(string? subjectId, AotCoreIrTypeShapeKind typeShape)
+	private static string GetRuntimeTypeInfoExpression(string? subjectId)
 	{
 		if (string.IsNullOrEmpty(subjectId))
 		{
-			return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+			return "nullptr";
 		}
-		return GetNativeTypeIdSymbol(subjectId);
+		return "&" + GetNativeTypeInfoSymbol(subjectId);
+	}
+
+	[Obsolete("Use GetRuntimeTypeInfoExpression instead")]
+	private static string GetRuntimeTypeIdExpression(string? subjectId, AotCoreIrTypeShapeKind typeShape)
+	{
+		return GetRuntimeTypeInfoExpression(subjectId);
 	}
 
 	private static byte GetNativeTypeShapeValue(AotCoreIrTypeShapeKind typeShape)

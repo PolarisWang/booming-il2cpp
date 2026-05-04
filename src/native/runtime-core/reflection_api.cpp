@@ -185,8 +185,7 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters(CHAOS_IL2CPP_INTP
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameter_name(
-    CHAOS_IL2CPP_INTPTR parameter_handle,
-    CHAOS_IL2CPP_INT32 index)
+    CHAOS_IL2CPP_INTPTR parameter_handle)
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* paramDesc = reinterpret_cast<const ReflectionQueryParameterDescriptor*>(parameter_handle);

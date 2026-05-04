@@ -1,8 +1,10 @@
 #include "hot_update.h"
 
+#include "generic_context.h"
 #include "memory_domain.h"
 #include "string_table.h"
 
+#include <atomic>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -116,6 +118,26 @@ char* DuplicateCString(const CHAOS_IL2CPP_STRING& value) {
 
 }  // namespace
 
+// ── Module ID allocation for hot-update packages (>0, unique) ──
+static std::atomic<CHAOS_IL2CPP_UINT32> s_next_module_id{1u};
+
+// ── Hot-update generic registration ───────────────────────────────────────
+
+void RegisterHotUpdateModuleGenerics(
+    const ModuleGenericRegistrationV0* registration_data)
+{
+    if (registration_data == nullptr) {
+        return;
+    }
+
+    // The caller is responsible for providing:
+    //   - registration_data->module_id  (matching HotUpdatePackageHandle::module_id)
+    //   - registration_data->source_image (for token→handle resolution)
+    // If source_image is nullptr, tokens are stored as opaque handles
+    // (MakeOpaqueHandle-style) and will be resolved lazily.
+    chaos::il2cpp::generic_context::RegisterModuleGenerics(registration_data);
+}
+
 bool LoadAssemblyImageFromPath(const char* assembly_path_utf8, HotUpdateAssemblyImage* out_image) {
     return LoadBinaryImageFromPath(assembly_path_utf8, out_image);
 }
@@ -170,6 +192,7 @@ bool LoadHotUpdatePackage(const char* package_root_utf8, HotUpdatePackageHandle*
     out_handle->package_id = DuplicateCString(package_id);
     out_handle->target_aot_version = DuplicateCString(target_aot_version);
     out_handle->assembly_name = DuplicateCString(assembly_name);
+    out_handle->module_id = s_next_module_id.fetch_add(1u, std::memory_order_relaxed);
     out_handle->loaded = true;
 
     // Register a per-package memory domain so marshal allocations during
@@ -191,7 +214,13 @@ void UnloadHotUpdatePackage(HotUpdatePackageHandle* handle) {
         return;
     }
 
-    // Unregister the memory domain first, which destroys the domain heap
+    // Unregister generic instantiations before releasing memory resources.
+    if (handle->module_id != 0u) {
+        chaos::il2cpp::generic_context::UnregisterModuleGenerics(handle->module_id);
+        handle->module_id = 0u;
+    }
+
+    // Unregister the memory domain next, which destroys the domain heap
     // and releases all marshal allocations attributed to this package.
     if (handle->domain_id != 0u) {
         chaos::il2cpp::string_table::UnregisterDomain(handle->domain_id);

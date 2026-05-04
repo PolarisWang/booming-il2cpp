@@ -255,6 +255,7 @@ public sealed class NativeAotEmitter
             ["entry_native_symbol"] = templateModel.EntryNativeSymbol,
             ["native_entry_function_name"] = templateModel.NativeEntryFunctionName,
             ["entry_bridge_arguments"] = templateModel.EntryBridgeArguments,
+            ["generic_registration_code"] = templateModel.GenericRegistrationCode,
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
     }

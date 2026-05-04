@@ -27,12 +27,29 @@ struct TypeVTable {
 /// Returns true if registration succeeded (duplicate registrations are ignored).
 bool RegisterTypeVTable(const TypeVTable* vtable);
 
+/// Register a vtable for a runtime-instantiated type (TypeInfoHandle-based).
+/// The type_token is extracted from the TypeInfoHandle's descriptor metadata_token.
+/// `base_vtable` is the vtable of the open generic definition (copied as template).
+/// Returns true if registration succeeded.
+bool RegisterRuntimeVTable(
+    TypeInfoHandle               type,
+    TypeInfoHandle               base_type,
+    CHAOS_IL2CPP_UINT32         slot_count,
+    const VTableSlot*           slots);
+
 /// Look up the concrete method pointer for a virtual call.
 /// Walks the inheritance chain from `instance_type_token` upward until the
 /// declared method is found.
 /// Returns nullptr if no entry is found.
 void* ResolveVirtualMethodPointer(CHAOS_IL2CPP_UINT32 instance_type_token,
                                   CHAOS_IL2CPP_UINT32 declared_method_token);
+
+/// Resolve a virtual method pointer using a TypeInfoHandle.
+/// Decodes the handle to extract the type_token, then delegates to
+/// ResolveVirtualMethodPointer.
+void* ResolveVirtualMethodPointerByHandle(
+    TypeInfoHandle               instance_type,
+    CHAOS_IL2CPP_UINT32         declared_method_token);
 
 /// Returns the number of registered vtables (useful for diagnostics).
 CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount();

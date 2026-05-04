@@ -141,6 +141,7 @@ public sealed partial class NativeAotLoweringPlanner
         EmitDelegateRuntimeSupportDefinitions(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
         EmitExternalRuntimeHelperDefinitions(objectModelBuilder, externalRuntimeHelpers);
         EmitStaticInitializationDefinitions(objectModelBuilder);
+        EmitGenericRegistration(objectModelBuilder, supplementalMetadataTemplate, metadataRegistration, out var genericRegistrationHelperCode);
 
         var methodDeclarations = BuildMethodDeclarations(reachableMethods);
         var methods = reachableMethods
@@ -158,8 +159,10 @@ public sealed partial class NativeAotLoweringPlanner
             [
                 "<chaos/common.h>",
                 "\"runtime_core.h\"",
+                "\"codegen_bridge.h\"",
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
+            GenericRegistrationCode = genericRegistrationHelperCode,
             MethodDeclarations = methodDeclarations,
             Methods = methods,
             EntrySubjectId = loweringPlan.EntrySubjectId,
@@ -286,7 +289,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine();
         builder.AppendLine("    const auto* chaos_left = reinterpret_cast<const chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_left_value);");
         builder.AppendLine("    const auto* chaos_right = reinterpret_cast<const chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_right_value);");
-        builder.AppendLine("    return chaos_left->header.type_id == chaos_right->header.type_id &&");
+        builder.AppendLine("    return chaos_left->header.type_info == chaos_right->header.type_info &&");
         builder.AppendLine("           chaos_left->chaos_delegate_target == chaos_right->chaos_delegate_target &&");
         builder.AppendLine("           chaos_left->chaos_delegate_method_ptr == chaos_right->chaos_delegate_method_ptr;");
         builder.AppendLine("}");
@@ -336,23 +339,23 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("    for (const auto chaos_entry_value : chaos_entries)");
         builder.AppendLine("    {");
         builder.AppendLine("        const auto* chaos_entry = chaos_require_delegate(chaos_entry_value);");
-        builder.AppendLine("        if (chaos_entry->header.type_id != chaos_first->header.type_id)");
+        builder.AppendLine("        if (chaos_entry->header.type_info != chaos_first->header.type_info)");
         builder.AppendLine("        {");
         builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
         builder.AppendLine("        }");
         builder.AppendLine("    }");
         builder.AppendLine("}");
         builder.AppendLine();
-        builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_id(CHAOS_IL2CPP_INTPTR chaos_delegate_type_id)");
+        builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_info(const TypeInfo* chaos_delegate_type_info)");
         builder.AppendLine("{");
-        builder.AppendLine("    switch (chaos_delegate_type_id)");
+        builder.AppendLine("    switch (chaos_delegate_type_info->stable_id)");
         builder.AppendLine("    {");
         foreach (var delegateTypeSubjectId in delegateTypeSubjectIds)
         {
             builder.AppendLine($"        case {GetNativeTypeIdSymbol(delegateTypeSubjectId)}:");
             builder.AppendLine("        {");
             builder.AppendLine($"            auto* chaos_delegate = new {GetNativeTypeSymbol(delegateTypeSubjectId)}{{}};");
-            builder.AppendLine($"            chaos_delegate->header.type_id = {GetNativeTypeIdSymbol(delegateTypeSubjectId)};");
+            builder.AppendLine($"            chaos_delegate->header.type_info = &{GetNativeTypeInfoSymbol(delegateTypeSubjectId)};");
             builder.AppendLine("            return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);");
             builder.AppendLine("        }");
         }
@@ -378,7 +381,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine();
         builder.AppendLine("    const auto* chaos_template_delegate = chaos_require_delegate(chaos_template_delegate_value);");
         builder.AppendLine(
-            "    const auto chaos_delegate_value = chaos_delegate_allocate_with_type_id(chaos_template_delegate->header.type_id);");
+            "    const auto chaos_delegate_value = chaos_delegate_allocate_with_type_info(chaos_template_delegate->header.type_info);");
         builder.AppendLine("    auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);");
         builder.AppendLine("    auto* chaos_invocation_list = new chaos_delegate_invocation_list(chaos_entries);");
         builder.AppendLine("    chaos_delegate->chaos_delegate_target = static_cast<CHAOS_IL2CPP_INTPTR>(0);");
@@ -1648,6 +1651,14 @@ public sealed record NativeAotTemplateModel
     public required string EntryBridgeArguments { get; init; }
 
     public required string ShapeDispatchHeaderContent { get; init; }
+
+    /// <summary>
+    /// C++ code emitted outside the anonymous namespace that exposes
+    /// generic registration arrays (kGenericTypeEntries, etc.) to the
+    /// proof host via an extern "C" helper function. Empty string when
+    /// there are no generic arrays to expose.
+    /// </summary>
+    public required string GenericRegistrationCode { get; init; }
 }
 
 public sealed record NativeAotMethodTemplateModel

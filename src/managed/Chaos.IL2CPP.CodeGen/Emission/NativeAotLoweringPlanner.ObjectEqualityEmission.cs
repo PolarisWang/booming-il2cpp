@@ -49,7 +49,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine();
 		builder.AppendLine("    auto* chaos_left_header = reinterpret_cast<chaos_object_header*>(chaos_left_value);");
 		builder.AppendLine("    auto* chaos_right_header = reinterpret_cast<chaos_object_header*>(chaos_right_value);");
-		builder.AppendLine("    if (chaos_left_header->type_id != chaos_right_header->type_id)");
+		builder.AppendLine("    if (chaos_left_header->type_info != chaos_right_header->type_info)");
 		builder.AppendLine("    {");
 		builder.AppendLine("        return false;");
 		builder.AppendLine("    }");
@@ -59,8 +59,8 @@ public sealed partial class NativeAotLoweringPlanner
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder2 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(39, 1, stringBuilder);
-			handler.AppendLiteral("    if (chaos_left_header->type_id == ");
-			handler.AppendFormatted(GetNativeTypeIdSymbol("System.Private.CoreLib/System.String"));
+			handler.AppendLiteral("    if (chaos_left_header->type_info == &");
+			handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String"));
 			handler.AppendLiteral(")");
 			stringBuilder2.AppendLine(ref handler);
 			builder.AppendLine("    {");
@@ -92,7 +92,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    }");
 			builder.AppendLine();
 		}
-		builder.AppendLine("    switch (chaos_left_header->type_id)");
+		builder.AppendLine("    switch (chaos_left_header->type_info->stable_id)");
 		builder.AppendLine("    {");
 		foreach (string item in boxedTypeSubjectIds.OrderBy<string, string>((string value) => value, StringComparer.Ordinal))
 		{
