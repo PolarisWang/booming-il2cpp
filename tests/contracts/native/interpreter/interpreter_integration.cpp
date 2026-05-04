@@ -11,6 +11,7 @@
 #include "il_to_ir_lowerer.h"
 #include "interpreter_vm.h"
 #include "vtable_registry.h"
+#include "token_resolver.h"
 
 #include <iostream>
 #include <cstring>
@@ -31,6 +32,9 @@ using chaos::il2cpp::interpreter::MethodBodyHeader;
 using chaos::il2cpp::interpreter::ParseMethodBodyHeader;
 using chaos::il2cpp::interpreter::SEHClause;
 using chaos::il2cpp::interpreter::SEHFlags;
+using chaos::il2cpp::interpreter::DefaultTokenResolver;
+using chaos::il2cpp::interpreter::TokenResolverContext;
+using chaos::il2cpp::interpreter::ValueTag;
 
 // ════════════════════════════════════════════════════════════════════════════
 // Helpers (file-scope linkage)
@@ -187,6 +191,12 @@ static bool TestThrowFinallyUnwind();
 static bool TestLeaveFinally();
 static bool TestRethrow();
 
+// Runtime-generic-method simulation tests
+static bool TestRuntimeMethodExecute();
+static bool TestRuntimeMethodReturnValueDispatch();
+static bool TestRuntimeMethodTypeParamResolution();
+static bool TestRuntimeMethodExceptionPropagation();
+
 // ════════════════════════════════════════════════════════════════════════════
 // Test runner
 // ════════════════════════════════════════════════════════════════════════════
@@ -249,6 +259,12 @@ int main()
     TEST(TestThrowFinallyUnwind);
     TEST(TestLeaveFinally);
     TEST(TestRethrow);
+
+    // Runtime-generic-method simulation tests (bridge core logic)
+    TEST(TestRuntimeMethodExecute);
+    TEST(TestRuntimeMethodReturnValueDispatch);
+    TEST(TestRuntimeMethodTypeParamResolution);
+    TEST(TestRuntimeMethodExceptionPropagation);
 
     std::cout << "interpreter-integration=failures=" << failures << std::endl;
 
@@ -963,7 +979,188 @@ bool TestLeaveFinally()
     return !result.threw_exception && result.has_return_value && result.int32_value == 1;
 }
 
-// --- TestRethrow -----------------------------------------------------------
+// ── Runtime-generic-method simulation tests ──────────────────────────────
+// These tests simulate what the RuntimeInstantiationBridgeV0::interpret_method_call
+// does: lower IL → build frame → execute → extract result.
+
+// Test: Lower IL for a generic-like method and execute with args.
+// Simulates what the bridge does: LowerILToIR → ExecutionFrame → Execute.
+static bool TestRuntimeMethodExecute()
+{
+    // IL: add(ldarg.0, ldarg.1) → ret
+    // Using tiny header: 0x02 | (code_size << 2)
+    // code_size = 3 bytes: ldarg.0 (02), ldarg.1 (03), add (58), ret (2a) → actually 4 bytes
+    // Wait, let me count: ldarg.0=0x02, ldarg.1=0x03, add=0x58, ret=0x2A → 4 bytes
+    // tiny header = 0x02 | (4 << 2) = 0x12
+    uint8_t il[] = {
+        0x12,       // tiny header: code_size=4
+        0x02,       // ldarg.0
+        0x03,       // ldarg.1
+        0x58,       // add
+        0x2A        // ret
+    };
+
+    MethodBodyHeader header;
+    if (!ParseMethodBodyHeader(il, sizeof(il), header)) {
+        return false;
+    }
+
+    // Token resolver: none needed for this IL (no metadata tokens).
+    IRMethod method = LowerILToIR(
+        header.code_start, sizeof(il) - (header.code_start - il),
+        header.code_size, header.max_stack,
+        nullptr, nullptr);
+
+    if (method.instructions.empty()) {
+        return false;
+    }
+
+    // Build frame with two int32 arguments.
+    ExecutionFrame frame;
+    frame.arguments.push_back(InterpreterValue::from_i32(10));
+    frame.arguments.push_back(InterpreterValue::from_i32(20));
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    return result.has_return_value
+        && result.return_value.tag == ValueTag::Int32
+        && result.return_value.i32 == 30;
+}
+
+// Test: Return value extraction via InterpreterValue tag dispatch.
+// The bridge uses tag dispatch to write return_value into raw out_return_value.
+static bool TestRuntimeMethodReturnValueDispatch()
+{
+    // IL: ldc.i4.s 42 → ret
+    uint8_t il[] = {
+        0x0E,       // tiny header: code_size=3  (0x02 | (3<<2))
+        0x1F,       // ldc.i4.s               (short form, 1 opcode + 1 operand)
+        0x2A,       // operand = 42
+        0x2A        // ret
+    };
+
+    MethodBodyHeader header;
+    if (!ParseMethodBodyHeader(il, sizeof(il), header)) {
+        return false;
+    }
+
+    IRMethod method = LowerILToIR(
+        header.code_start, sizeof(il) - (header.code_start - il),
+        header.code_size, header.max_stack,
+        nullptr, nullptr);
+
+    if (method.instructions.empty()) {
+        return false;
+    }
+
+    ExecutionFrame frame;
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    if (!result.has_return_value || result.return_value.tag != ValueTag::Int32) {
+        return false;
+    }
+
+    // Simulate the bridge's tag dispatch.
+    int32_t extracted = 0;
+    switch (result.return_value.tag) {
+        case ValueTag::Int32:
+            extracted = result.return_value.i32;
+            break;
+        default:
+            return false;
+    }
+
+    return extracted == 42;
+}
+
+// Test: Generic type parameter resolution via DefaultTokenResolver.
+// Simulates what happens during lowering of a generic method body that
+// references ELEMENT_TYPE_VAR.  The resolution is done using type_args
+// from the TokenResolverContext.
+static bool TestRuntimeMethodTypeParamResolution()
+{
+    // IL for a method that takes a type parameter and boxes it:
+    // ldarg.0, box 0x11000000, ret
+    // The token 0x11000000 represents ELEMENT_TYPE_VAR with index 0 (!0).
+    uint8_t il[] = {
+        0x0A,       // tiny header: code_size=2
+        0x02,       // ldarg.0
+        0x8C,       // box <token>
+        0x00, 0x00, 0x00, 0x11,  // token = 0x11000000 (ELEMENT_TYPE_VAR, index 0)
+        0x2A        // ret
+    };
+
+    MethodBodyHeader header;
+    if (!ParseMethodBodyHeader(il, sizeof(il), header)) {
+        return false;
+    }
+
+    // Set up TokenResolverContext with type_args.
+    // Use a sentinel pointer as the "resolved type handle" for the type param.
+    TypeInfoHandle dummy_type = static_cast<TypeInfoHandle>(0xDEADBEEFu);
+
+    auto ctx = chaos::il2cpp::interpreter::TokenResolverContext();
+    ctx.type_args = &dummy_type;
+    ctx.arg_count = 1u;
+    // No bridge needed — generic param resolution happens before bridge check.
+
+    IRMethod method = LowerILToIR(
+        header.code_start, sizeof(il) - (header.code_start - il),
+        header.code_size, header.max_stack,
+        chaos::il2cpp::interpreter::DefaultTokenResolver, &ctx);
+
+    if (method.instructions.empty()) {
+        return false;
+    }
+
+    // After lowering, the box instruction should have its call_target set
+    // to dummy_type (resolved from ELEMENT_TYPE_VAR).
+    for (const auto& insn : method.instructions) {
+        if (insn.op_code == IROpCode::Box) {
+            void* expected = reinterpret_cast<void*>(
+                static_cast<CHAOS_IL2CPP_UINTPTR>(0xDEADBEEFu));
+            return insn.call_target == expected;
+        }
+    }
+
+    return false;  // Box instruction not found
+}
+
+// Test: Exception propagation matching bridge path.
+// When the interpreter throws an unhandled exception, threw_exception is set
+// and exception_value captures the exception object.
+// The bridge checks threw_exception and throws ManagedExceptionCarrier.
+static bool TestRuntimeMethodExceptionPropagation()
+{
+    IRMethod method;
+
+    // 0: push 99 (exception object)
+    IRInstruction push;
+    push.op_code = IROpCode::LdcI4;
+    push.immediate_i4 = 99;
+    method.instructions.push_back(push);
+
+    // 1: throw
+    IRInstruction throw_insn;
+    throw_insn.op_code = IROpCode::Throw;
+    method.instructions.push_back(throw_insn);
+
+    ExecutionFrame frame;
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    // Verify: threw_exception is true, and exception_value captures the object.
+    if (!result.threw_exception) {
+        return false;
+    }
+
+    // The exception_value should be Int32 with value 99.
+    return result.exception_value.tag == ValueTag::Int32
+        && result.exception_value.i32 == 99;
+}
+
 // Rethrow inside a catch handler → propagates out.
 bool TestRethrow()
 {

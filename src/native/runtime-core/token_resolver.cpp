@@ -57,6 +57,35 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
     }
 
     const auto* ctx = static_cast<const TokenResolverContext*>(user_data);
+
+    // ── Generic parameter token resolution (ELEMENT_TYPE_VAR / ELEMENT_TYPE_MVAR) ──
+    // ECMA 335 II.23.1.16: ELEMENT_TYPE_VAR = 0x11, ELEMENT_TYPE_MVAR = 0x12
+    // Encoded as metadata tokens: 0x11xxxxxx = class type param, 0x12xxxxxx = method type param
+    // These appear in generic method IL bodies where type parameters (!0, !!1, etc.)
+    // are referenced (e.g., Box !0, CastClass !!1).
+    // We resolve them against the TokenResolverContext's type_args / method_type_args.
+    if ((token & 0xFF000000u) == 0x11000000u) {
+        // ELEMENT_TYPE_VAR — class-level type parameter (!N)
+        const CHAOS_IL2CPP_UINT32 index = token & 0x00FFFFFFu;
+        if (ctx->type_args != nullptr && index < ctx->arg_count) {
+            instruction.call_target = reinterpret_cast<void*>(
+                static_cast<CHAOS_IL2CPP_UINTPTR>(ctx->type_args[index]));
+            return true;
+        }
+        return false;  // index out of range or no type_args
+    }
+    if ((token & 0xFF000000u) == 0x12000000u) {
+        // ELEMENT_TYPE_MVAR — method-level type parameter (!!N)
+        const CHAOS_IL2CPP_UINT32 index = token & 0x00FFFFFFu;
+        if (ctx->method_type_args != nullptr && index < ctx->method_arg_count) {
+            instruction.call_target = reinterpret_cast<void*>(
+                static_cast<CHAOS_IL2CPP_UINTPTR>(ctx->method_type_args[index]));
+            return true;
+        }
+        return false;  // index out of range or no method_type_args
+    }
+
+    // ── Standard metadata token resolution (requires bridge) ──
     if (ctx->bridge == nullptr) {
         return false;
     }

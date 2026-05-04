@@ -3,6 +3,7 @@
 /// ResolveVirtualMethodPointer without pulling in the full runtime-core
 /// dependency chain (codegen_bridge, reflection_query_model, etc.).
 #include "vtable_registry.h"
+#include "layout_engine.h"   // LayoutEngine stub
 
 #include <cstdlib>
 #include <unordered_map>
@@ -81,3 +82,22 @@ CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount() {
 }
 
 }  // namespace chaos::il2cpp::vtable_registry
+
+// ════════════════════════════════════════════════════════════════════════════
+// LayoutEngine stub — needed by token_resolver.cpp for field offset resolution.
+// The full LayoutEngine requires runtime_core infrastructure; this stub
+// returns nullptr (no layout available), which is sufficient for tests that
+// don't exercise struct field access with generic type parameters.
+// ════════════════════════════════════════════════════════════════════════════
+
+namespace chaos::il2cpp::layout {
+
+const TypeLayout* LayoutEngine::GetOrComputeLayout(
+    TypeInfoHandle /*closed_type*/,
+    const TypeInfoHandle* /*type_args*/,
+    CHAOS_IL2CPP_UINT32 /*arg_count*/)
+{
+    return nullptr;  // stub: no layout available
+}
+
+}  // namespace chaos::il2cpp::layout

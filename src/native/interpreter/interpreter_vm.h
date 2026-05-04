@@ -204,6 +204,7 @@ struct ExecutionResult {
 
     // Exception propagation (cross-frame)
     bool threw_exception = false;
+    InterpreterValue exception_value = {};  // exception object when threw_exception == true
 };
 
 class InterpreterVM {

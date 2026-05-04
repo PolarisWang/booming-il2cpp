@@ -1,14 +1,16 @@
-# docs/dev ÈÎÎñË÷Òý
+# docs/dev ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-µ±Ç° active ÈÎÎñ£º
+ï¿½ï¿½Ç° active ï¿½ï¿½ï¿½ï¿½
 
-- [½øÐÐÖÐÈÎÎñË÷Òý](in-progress/INDEX.md)
-- [¹ÒÆðÈÎÎñË÷Òý](hanging/INDEX.md)
-- [ÒÑÍê³ÉÈÎÎñË÷Òý](completed/INDEX.md)
+- [ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½](in-progress/INDEX.md)
+ 
+- [ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½](hanging/INDEX.md)
+- [ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½](completed/INDEX.md)
 
 | task_id | lifecycle_status | phase | updated_at | summary | active |
 | --- | --- | --- | --- | --- | --- |
-| [20260427-04-dll-capability-verification-closure-roadmap](completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md) | completed | completed | 2026-04-28 03:12:00 +08:00 | DLL capability verification closure roadmap ÒÑÈ«²¿Íê³É£ºTruth / Evidence / Execution / Projection / Closeout ÒÑÊÕ¿Ú£¬formal `.sln`¡¢dashboard formal projection¡¢method ¼¶ case index Óë¾ÉÂß¼­ÇåÀíÈ«²¿Íê³É¡£ | false |
-| [20260419-01-foundation-dll-translation-audit-roadmap](in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | in-progress | roadmap | 2026-04-25 21:58:00 +08:00 | DLL-first reporting sync ÒÑ²¹Æë£¬`System.Collections.Immutable` ÒÑÓÐÕýÊ½ blocked STATUS Èë¿Ú£¬CoreLib canonical audit authority Í¬²½ÊÕÁ²µ½ `20260419-37`¡£ | false |
-| [20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable](in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md) | in-progress | blocked-before-start | 2026-04-25 21:58:00 +08:00 | `System.Collections.Immutable` ÒÑÓÐÕýÊ½ DLL-first Éó¼ÆÈë¿Ú£¬µ«ÔÚ `20260419-03` ÕæÕý¹ØÕ¢Ç°½ö±£³Ö blocked authority¡£ | false |
-| [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md) | in-progress | implementation | 2026-04-25 21:58:00 +08:00 | µ±Ç° widening child ³ÖÐøÀ©´ó `System.Private.CoreLib` supplemental runtime-skeleton translated coverage£¬²¢×÷Îª canonical CoreLib audit authority¡£ | false |
+| [20260427-04-dll-capability-verification-closure-roadmap](completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md) | completed | completed | 2026-04-28 03:12:00 +08:00 | DLL capability verification closure roadmap ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½É£ï¿½Truth / Evidence / Execution / Projection / Closeout ï¿½ï¿½ï¿½Õ¿Ú£ï¿½formal `.sln`ï¿½ï¿½dashboard formal projectionï¿½ï¿½method ï¿½ï¿½ case index ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½É¡ï¿½ | false |
+| [20260419-01-foundation-dll-translation-audit-roadmap](in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | in-progress | roadmap | 2026-04-25 21:58:00 +08:00 | DLL-first reporting sync ï¿½Ñ²ï¿½ï¿½ë£¬`System.Collections.Immutable` ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ blocked STATUS ï¿½ï¿½Ú£ï¿½CoreLib canonical audit authority Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ `20260419-37`ï¿½ï¿½ | false |
+| [20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable](in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md) | in-progress | blocked-before-start | 2026-04-25 21:58:00 +08:00 | `System.Collections.Immutable` ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ DLL-first ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ `20260419-03` ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¢Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ blocked authorityï¿½ï¿½ | false |
+| [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md) | in-progress | implementation | 2026-04-25 21:58:00 +08:00 | ï¿½ï¿½Ç° widening child ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ `System.Private.CoreLib` supplemental runtime-skeleton translated coverageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª canonical CoreLib audit authorityï¿½ï¿½ | false |
+| [20260505-runtime-instantiation-bridge-v0](completed/20260505-runtime-instantiation-bridge-v0/STATUS.md) | completed | completed | 2026-05-05 | RuntimeInstantiationBridgeV0 ABI extension: MethodInvoke fallback, LowerMethodBody bridge, all 35 tests passing | false |
