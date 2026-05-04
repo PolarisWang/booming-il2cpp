@@ -1,6 +1,8 @@
 # Local workflow state
 .booming/
 .claude/
+.codex/
+.hermes/
 docs/executions/
 
 # Editor / IDE state
@@ -66,5 +68,16 @@ CMakeCache.txt
 compile_commands.json
 
 # Temporary scratch directories
-.tmp_*/
+.tmp*/
 .tmp-tools/
+temp/
+
+# Root-level temporary/scratch files (shell redirect artifacts)
+*agentbooming-il2cpp_*
+_compile_*.txt
+_benchmark_*.txt
+_test_*.cpp
+native-benchmark.json
+
+# Native build artifacts
+build/native/
