@@ -50,10 +50,10 @@ CHAOS_IL2CPP_VECTOR(RuntimeInstantiatedMethodRecord) s_runtime_methods;
 /* ── Helper: compute a short display name for a type argument handle.    ── */
 
 static const char* GetTypeDisplayName(TypeInfoHandle handle) {
-    if (handle == nullptr) {
+    if (handle == 0) {
         return "?";
     }
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(handle);
+    const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(handle);
     if (desc != nullptr && desc->display_name_utf8 != nullptr) {
         return desc->display_name_utf8;
     }
@@ -72,6 +72,78 @@ static char* StrDup(const char* src) {
     if (buf == nullptr) return nullptr;
     std::memcpy(buf, src, len + 1);
     return buf;
+}
+
+/* ── V1: Signature-aware type mapping for argument marshalling ──────── */
+
+/// Map a .NET fully-qualified type name ("System.Int32", etc.) to the
+/// corresponding InterpreterValue tag for argument marshalling.
+/// Falls back to Int32 (V0 compat) for null/generic-parameter references.
+static interpreter::ValueTag MapMemberTypeToValueTag(const char* member_type) {
+    if (member_type == nullptr)
+        return interpreter::ValueTag::Int32;
+
+    // Generic parameter references ("!N", "!!N") — cannot determine the
+    // concrete tag statically; V0 int32 fallback.
+    if (member_type[0] == '!') {
+        return interpreter::ValueTag::Int32;
+    }
+
+    // 4-byte or promoted-to-4-byte primitives
+    if (std::strcmp(member_type, "System.Int32") == 0 ||
+        std::strcmp(member_type, "System.UInt32") == 0 ||
+        std::strcmp(member_type, "System.Boolean") == 0 ||
+        std::strcmp(member_type, "System.Byte") == 0 ||
+        std::strcmp(member_type, "System.SByte") == 0 ||
+        std::strcmp(member_type, "System.Int16") == 0 ||
+        std::strcmp(member_type, "System.UInt16") == 0 ||
+        std::strcmp(member_type, "System.Char") == 0) {
+        return interpreter::ValueTag::Int32;
+    }
+
+    // 8-byte primitives
+    if (std::strcmp(member_type, "System.Int64") == 0 ||
+        std::strcmp(member_type, "System.UInt64") == 0) {
+        return interpreter::ValueTag::Int64;
+    }
+
+    // 4-byte floating point
+    if (std::strcmp(member_type, "System.Single") == 0) {
+        return interpreter::ValueTag::Float32;
+    }
+
+    // 8-byte floating point
+    if (std::strcmp(member_type, "System.Double") == 0) {
+        return interpreter::ValueTag::Float64;
+    }
+
+    // Native-sized integers
+    if (std::strcmp(member_type, "System.IntPtr") == 0 ||
+        std::strcmp(member_type, "System.UIntPtr") == 0) {
+        return (sizeof(void*) == 8u)
+            ? interpreter::ValueTag::Int64
+            : interpreter::ValueTag::Int32;
+    }
+
+    // Everything else (String, Object, arrays, value types) — ObjectRef
+    return interpreter::ValueTag::ObjectRef;
+}
+
+/// Scan all registered modules for a type identified by the given metadata
+/// token.  Returns the TypeInfoHandle (reflection-query encoding) or 0.
+static TypeInfoHandle FindTypeByModuleToken(CHAOS_IL2CPP_UINT32 type_token) {
+    for (CHAOS_IL2CPP_UINT32 mid = 0u; mid < runtime_core::kMaxModules; ++mid) {
+        const auto* module = runtime_core::LookupModule(mid);
+        if (module == nullptr || module->image == nullptr || module->tombstone) {
+            continue;
+        }
+        const auto* type_desc = runtime_core::FindReflectionQueryTypeByToken(
+            module->image, type_token);
+        if (type_desc != nullptr) {
+            return runtime_core::EncodeReflectionQueryTypeHandle(type_desc);
+        }
+    }
+    return 0u;
 }
 
 /* ── Bridge function implementations ── */
@@ -147,12 +219,12 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveOrInstantiateMethod(
     }
 
     /* Encode the closed descriptor as a MethodInfoHandle. */
-    MethodInfoHandle closed_handle = EncodeReflectionQueryMethodHandle(
+    MethodInfoHandle closed_handle = chaos::il2cpp::runtime_core::EncodeReflectionQueryMethodHandle(
         &rt_method->descriptor);
     if (closed_handle == 0u) {
-        std::free(rt_method->descriptor.subject_id_utf8);
-        std::free(rt_method->descriptor.name_utf8);
-        std::free(rt_method->descriptor.member_type_utf8);
+        std::free(const_cast<char*>(rt_method->descriptor.subject_id_utf8));
+        std::free(const_cast<char*>(rt_method->descriptor.name_utf8));
+        std::free(const_cast<char*>(rt_method->descriptor.member_type_utf8));
         std::free(rt_method->type_args);
         std::free(rt_method);
         return 0u;
@@ -183,11 +255,11 @@ void CHAOS_RUNTIME_ABI_CALL UnregisterModuleGenerics(
         for (CHAOS_IL2CPP_SIZE i = 0u; i < s_runtime_types.size(); ) {
             if (s_runtime_types[i].module_id == module_id) {
                 auto* rt = s_runtime_types[i].type;
-                std::free(rt->descriptor.subject_id_utf8);
-                std::free(rt->descriptor.definition_subject_id_utf8);
-                std::free(rt->descriptor.namespace_name_utf8);
-                std::free(rt->descriptor.name_utf8);
-                std::free(rt->descriptor.display_name_utf8);
+                std::free(const_cast<char*>(rt->descriptor.subject_id_utf8));
+                std::free(const_cast<char*>(rt->descriptor.definition_subject_id_utf8));
+                std::free(const_cast<char*>(rt->descriptor.namespace_name_utf8));
+                std::free(const_cast<char*>(rt->descriptor.name_utf8));
+                std::free(const_cast<char*>(rt->descriptor.display_name_utf8));
                 std::free(rt->type_args);
                 std::free(rt->field_offsets);
                 std::free(rt->resolved_field_types);
@@ -243,7 +315,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
     }
 
     // ── Recover RuntimeInstantiatedMethod* from MethodInfoHandle ──
-    const auto* desc = TryDecodeReflectionQueryMethodHandle(method);
+    const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryMethodHandle(method);
     if (desc == nullptr) {
         return CHAOS_RUNTIME_STATUS_NOT_FOUND;
     }
@@ -274,8 +346,10 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
     }
 
     // ── Build ExecutionFrame ──
-    // V0 argument marshalling: argv contains pointers to raw argument values.
+    // V1 argument marshalling: argv contains pointers to raw argument values.
     // For instance methods, object_instance is the 'this' pointer.
+    // Parameter type info from the method descriptor drives the
+    // InterpreterValue tag (i32/i64/f32/f64/obj) instead of V0's all-int32.
     interpreter::ExecutionFrame frame;
 
     if (object_instance != nullptr) {
@@ -283,13 +357,66 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
             interpreter::InterpreterValue::from_obj(object_instance));
     }
 
+    // Determine available parameter descriptor count.
+    const CHAOS_IL2CPP_UINT32 param_count =
+        (desc->parameters != nullptr) ? desc->parameter_descriptor_count : 0u;
+
     for (CHAOS_IL2CPP_UINT32 ai = 0u; ai < argc; ++ai) {
         if (argv != nullptr && argv[ai] != nullptr) {
-            // V0: default to int32 marshalling.
-            // EXTEND (V1+): read type from method signature for correct tag.
-            frame.arguments.push_back(
-                interpreter::InterpreterValue::from_i32(
-                    *static_cast<const CHAOS_IL2CPP_INT32*>(argv[ai])));
+            // V1: signature-aware marshalling when parameter type info exists.
+            if (ai < param_count && desc->parameters[ai].member_type_utf8 != nullptr) {
+                const interpreter::ValueTag tag = MapMemberTypeToValueTag(
+                    desc->parameters[ai].member_type_utf8);
+
+                switch (tag) {
+                    case interpreter::ValueTag::Int32: {
+                        CHAOS_IL2CPP_INT32 val;
+                        std::memcpy(&val, argv[ai], sizeof(val));
+                        frame.arguments.push_back(
+                            interpreter::InterpreterValue::from_i32(val));
+                        break;
+                    }
+                    case interpreter::ValueTag::Int64: {
+                        CHAOS_IL2CPP_INT64 val;
+                        std::memcpy(&val, argv[ai], sizeof(val));
+                        frame.arguments.push_back(
+                            interpreter::InterpreterValue::from_i64(val));
+                        break;
+                    }
+                    case interpreter::ValueTag::Float32: {
+                        float val;
+                        std::memcpy(&val, argv[ai], sizeof(val));
+                        frame.arguments.push_back(
+                            interpreter::InterpreterValue::from_f32(val));
+                        break;
+                    }
+                    case interpreter::ValueTag::Float64: {
+                        double val;
+                        std::memcpy(&val, argv[ai], sizeof(val));
+                        frame.arguments.push_back(
+                            interpreter::InterpreterValue::from_f64(val));
+                        break;
+                    }
+                    default: {
+                        // ObjectRef or unknown: read the pointer value.
+                        void* obj_ptr = nullptr;
+                        std::memcpy(&obj_ptr, argv[ai], sizeof(obj_ptr));
+                        if (obj_ptr != nullptr) {
+                            frame.arguments.push_back(
+                                interpreter::InterpreterValue::from_obj(obj_ptr));
+                        } else {
+                            frame.arguments.push_back(
+                                interpreter::InterpreterValue::null_val());
+                        }
+                        break;
+                    }
+                }
+            } else {
+                // V0 fallback: default to int32 when no type info available.
+                frame.arguments.push_back(
+                    interpreter::InterpreterValue::from_i32(
+                        *static_cast<const CHAOS_IL2CPP_INT32*>(argv[ai])));
+            }
         } else {
             frame.arguments.push_back(interpreter::InterpreterValue::null_val());
         }
@@ -302,9 +429,32 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
 
     // ── Exception handling ──
     if (result.threw_exception) {
-        // EXTEND (V1+): convert result.exception_value to ExceptionHandle.
-        // V0: throw ManagedExceptionCarrier with null handle.
-        throw runtime_core::ManagedExceptionCarrier{nullptr};
+        // V1: attempt to convert result.exception_value to an ExceptionHandle.
+        ExceptionHandle ex_handle = nullptr;
+
+        if (result.exception_value.tag == interpreter::ValueTag::ObjectRef &&
+            result.exception_value.obj != nullptr) {
+            auto* ex_obj = static_cast<interpreter::InterpreterObject*>(
+                result.exception_value.obj);
+
+            if (ex_obj->type_token != 0u) {
+                // Resolve type_token → TypeInfoHandle by scanning modules.
+                const TypeInfoHandle ex_type = FindTypeByModuleToken(ex_obj->type_token);
+                if (ex_type != 0u) {
+                    const auto* abi = runtime_core::GetRuntimeAbiV0();
+                    if (abi != nullptr && abi->object_new != nullptr) {
+                        void* real_obj = abi->object_new(
+                            runtime_state, thread_state, ex_type);
+                        if (real_obj != nullptr) {
+                            ex_handle = static_cast<ExceptionHandle>(real_obj);
+                        }
+                    }
+                }
+            }
+        }
+
+        // If we couldn't materialize a real handle, ex_handle remains nullptr.
+        throw runtime_core::ManagedExceptionCarrier{ex_handle};
     }
 
     // ── Return value extraction (V0: tag dispatch) ──
@@ -359,14 +509,14 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
 
 /* Process-wide bridge instance. */
 const RuntimeInstantiationBridgeV0 g_bridge = {
-    .abi_version                        = CHAOS_RUNTIME_INSTANTIATION_BRIDGE_V0,
-    .struct_size                        = sizeof(RuntimeInstantiationBridgeV0),
-    .resolve_or_instantiate_type        = ResolveOrInstantiateType,
-    .resolve_or_instantiate_method      = ResolveOrInstantiateMethod,
-    .unregister_module_generics         = UnregisterModuleGenerics,
-    .interpret_method_call              = InterpretMethodCall,
-    .runtime_instantiation_count        = 0u,
-    .interpreted_method_call_count      = 0u,
+    CHAOS_RUNTIME_INSTANTIATION_BRIDGE_V0,
+    sizeof(RuntimeInstantiationBridgeV0),
+    ResolveOrInstantiateType,
+    ResolveOrInstantiateMethod,
+    UnregisterModuleGenerics,
+    InterpretMethodCall,
+    0u,
+    0u
 };
 
 }  // anonymous namespace
@@ -380,7 +530,7 @@ CHAOS_IL2CPP_UINT32 AllocateRuntimeToken() {
 }
 
 char* BuildClosedSubjectId(
-    const ReflectionQueryTypeDescriptor* open_desc,
+    const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor* open_desc,
     const TypeInfoHandle*                type_args,
     CHAOS_IL2CPP_UINT32                  arg_count)
 {
@@ -415,11 +565,11 @@ RuntimeInstantiatedType* BuildClosedDescriptor(
     const TypeInfoHandle*  type_args,
     CHAOS_IL2CPP_UINT32   arg_count)
 {
-    if (open_type_definition == nullptr || type_args == nullptr || arg_count == 0u) {
+    if (open_type_definition == 0 || type_args == nullptr || arg_count == 0u) {
         return 0;
     }
 
-    const auto* open_desc = TryDecodeReflectionQueryTypeHandle(
+    const auto* open_desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(
         open_type_definition);
     if (open_desc == nullptr) {
         return 0;  // Not a reflection-query type; cannot instantiate.
@@ -485,7 +635,7 @@ RuntimeInstantiatedType* BuildClosedDescriptor(
     auto* args_buf = static_cast<TypeInfoHandle*>(
         std::malloc(sizeof(TypeInfoHandle) * arg_count));
     if (args_buf == nullptr) {
-        std::free(rt_type->descriptor.subject_id_utf8);
+        std::free(const_cast<char*>(rt_type->descriptor.subject_id_utf8));
         std::free(rt_type);
         return 0;
     }

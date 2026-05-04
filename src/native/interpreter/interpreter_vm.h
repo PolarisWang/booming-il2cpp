@@ -87,6 +87,31 @@ enum class IROpCode {
     LdArgA = 75,
     LdLocA = 76,
     LocAlloc = 77,
+
+    // -- Full coverage expansion (Phase A+) --
+    Break = 78,
+    BneUn = 79,
+    BgeUn = 80,
+    BgtUn = 81,
+    BleUn = 82,
+    BltUn = 83,
+    AddOvf = 84,
+    SubOvf = 85,
+    MulOvf = 86,
+    ConvOvfI = 87,
+    ConvOvfI4 = 88,
+    ConvOvfI8 = 89,
+    ConvOvfU = 90,
+    ConvOvfU4 = 91,
+    ConvOvfU8 = 92,
+    LdObj = 93,
+    StObj = 94,
+    LdElemA = 95,
+    Cpblk = 96,
+    InitBlk = 97,
+
+    // -- Constrained CallVirt --
+    CallVirtConstrained = 98,
 };
 
 enum class ValueTag : uint8_t {

@@ -19,10 +19,10 @@ void CompileOnlyCodegenBridgeSmoke(const CodegenBridgeV0* bridge) {
 
     RuntimeState* runtime = nullptr;
     ThreadState* thread = nullptr;
-    ImageHandle image = nullptr;
-    TypeInfoHandle type = nullptr;
-    MethodInfoHandle method = nullptr;
-    FieldInfoHandle field = nullptr;
+    ImageHandle image = 0;
+    TypeInfoHandle type = 0;
+    MethodInfoHandle method = 0;
+    FieldInfoHandle field = 0;
     ExceptionHandle exception = nullptr;
     RuntimeTypeCapabilityInfoV0 capability_info = {};
 

@@ -2,6 +2,7 @@
 #define CHAOS_IL2CPP_HOT_UPDATE_H_
 
 #include <chaos/native_types.h>
+#include <codegen_bridge.h>
 
 #include <cstddef>
 #include <cstdint>

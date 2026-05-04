@@ -56,7 +56,7 @@ bool RegisterRuntimeVTable(
 
     // Extract the runtime token from the TypeInfoHandle.
     CHAOS_IL2CPP_UINT32 type_token = 0u;
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(type);
+    const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(type);
     if (desc != nullptr) {
         type_token = desc->metadata_token;
     }
@@ -67,7 +67,7 @@ bool RegisterRuntimeVTable(
     // Extract base token.
     CHAOS_IL2CPP_UINT32 base_token = 0u;
     if (base_type != 0) {
-        const auto* base_desc = TryDecodeReflectionQueryTypeHandle(base_type);
+        const auto* base_desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(base_type);
         if (base_desc != nullptr) {
             base_token = base_desc->metadata_token;
         }

@@ -153,7 +153,7 @@ bool IsKnownResolvedVirtualHandle(MethodInfoHandle method) {
     }
 
     for (CHAOS_IL2CPP_UINT32 index = 0u; index < g_bootstrap_state.code_registration->unresolved_virtual_call_count; index++) {
-        if (entries[index].resolved_method == method) {
+        if (entries[index].resolved_method == reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(method))) {
             return true;
         }
     }
@@ -540,7 +540,7 @@ void* CHAOS_RUNTIME_ABI_CALL CreateDelegate(
     (void)runtime_state;
     (void)thread_state;
 
-    if (method == nullptr) {
+    if (method == 0) {
         return nullptr;
     }
 

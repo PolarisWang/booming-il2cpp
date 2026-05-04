@@ -33,13 +33,13 @@ static constexpr int8_t kOpcodeSizes[0x100] = {
     // 0x00-0x0F
     0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,  // nop, break, ldarg.0-3, ldloc.0-3, stloc.0-3, ldarg.s, ldarg.s
     // 0x10-0x1F
-    1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,  // starg.s, ldloc.s, stloc.s, ldnull, ldc.i4.0-8, ldc.i4.s
+    1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,  // starg.s, ldloc.s, stloc.s, ldnull, ldc.i4.0-8, ldc.i4.s
     // 0x20-0x2F
     4, 8, 4, 8, 0, 0, 0, 0, 4, 4, 0, 1, 1, 1, 1, 1,  // ldc.i4, ldc.i8, ldc.r4, ldc.r8, ..., call, callvirt, ret, br.s, brfalse.s, brtrue.s, beq.s, bge.s
     // 0x30-0x3F
-    1, 1, 1, 1, 1, 1, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4,  // bgt.s, ble.s, blt.s, leave.s, ..., br, brfalse, brtrue, beq, bge, bgt, ble, blt
+    1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4,  // bgt.s, ble.s, blt.s, bne.un.s, bge.un.s, bgt.un.s, ble.un.s, blt.un.s, br..blt
     // 0x40-0x4F
-    4, 4, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // leave, bne.un, ..., switch, ldind.* (no operand aside from opcode)
+    4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // bne.un, bge.un, bgt.un, ble.un, blt.un, switch, ldind.*
     // 0x50-0x5F
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // stind.* (no operand), add, sub, ...
     // 0x60-0x6F
@@ -256,7 +256,9 @@ IRMethod LowerILToIR(
             switch (ext) {
                 case 0x01: insn.op_code = IROpCode::Ceq;    break;  // ceq
                 case 0x02: insn.op_code = IROpCode::Cgt;    break;  // cgt
+                case 0x03: insn.op_code = IROpCode::Cgt;    break;  // cgt.un → treat as Cgt
                 case 0x04: insn.op_code = IROpCode::Clt;    break;  // clt
+                case 0x05: insn.op_code = IROpCode::Clt;    break;  // clt.un → treat as Clt
                 case 0x06:  // ldftn (4-byte token)
                     insn.op_code = IROpCode::LdFtn;
                     insn.token = ReadToken(ip);
@@ -291,10 +293,29 @@ IRMethod LowerILToIR(
                     insn.op_code = IROpCode::StLoc;
                     insn.operand_i4 = static_cast<CHAOS_IL2CPP_INT32>(ReadU2(ip));
                     break;
+                case 0x0F:  // ldelema (4-byte type token)
+                    insn.op_code = IROpCode::LdElemA;
+                    insn.token = ReadToken(ip);
+                    insn.has_token = true;
+                    break;
                 case 0x15:  // initobj (4-byte token)
                     insn.op_code = IROpCode::InitObj;
                     insn.token = ReadToken(ip);
                     insn.has_token = true;
+                    break;
+                case 0x16:  // constrained. (4-byte type token)
+                    // The constrained. prefix modifies the next CallVirt.
+                    // Store the constrained type token; lowered below will
+                    // merge it into the subsequent CallVirt instruction.
+                    insn.op_code = IROpCode::Break;  // placeholder, handled in second pass
+                    insn.token = ReadToken(ip);
+                    insn.has_token = true;
+                    break;
+                case 0x17:  // cpblk
+                    insn.op_code = IROpCode::Cpblk;
+                    break;
+                case 0x18:  // initblk
+                    insn.op_code = IROpCode::InitBlk;
                     break;
                 case 0x1A:  // rethrow
                     insn.op_code = IROpCode::Rethrow;
@@ -323,6 +344,7 @@ IRMethod LowerILToIR(
             case 0x00: insn.op_code = IROpCode::Ret; break;  // nop → treated as Ret in empty fallback; handled below
             // Actually nop: just skip
             // We'll handle nop specially
+            case 0x01: insn.op_code = IROpCode::Break; break;  // break (debugger) → NOP in interpreter
 
             case 0x02: insn.op_code = IROpCode::LdArg; insn.operand_i4 = 0; break;
             case 0x03: insn.op_code = IROpCode::LdArg; insn.operand_i4 = 1; break;
@@ -339,17 +361,20 @@ IRMethod LowerILToIR(
             case 0x0C: insn.op_code = IROpCode::StLoc; insn.operand_i4 = 2; break;
             case 0x0D: insn.op_code = IROpCode::StLoc; insn.operand_i4 = 3; break;
 
-            case 0x14: insn.op_code = IROpCode::LdNull; break;
+            // NOTE: ldnull at 0x13, ldc.i4.0-8 at 0x14-0x1C per ECMA 335.
+            // The kOpcodeSizes[0x13-0x15] were fixed from 1→0 to reflect no operand.
+            // Cases 0x1D-0x1E are undefined in ECMA and intentionally omitted.
+            case 0x13: insn.op_code = IROpCode::LdNull; break;
 
-            case 0x16: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 0; break;
-            case 0x17: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 1; break;
-            case 0x18: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 2; break;
-            case 0x19: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 3; break;
-            case 0x1A: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 4; break;
-            case 0x1B: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 5; break;
-            case 0x1C: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 6; break;
-            case 0x1D: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 7; break;
-            case 0x1E: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 8; break;
+            case 0x14: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 0; break;
+            case 0x15: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 1; break;
+            case 0x16: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 2; break;
+            case 0x17: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 3; break;
+            case 0x18: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 4; break;
+            case 0x19: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 5; break;
+            case 0x1A: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 6; break;
+            case 0x1B: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 7; break;
+            case 0x1C: insn.op_code = IROpCode::LdcI4; insn.operand_i4 = 8; break;
 
             // ── Short operand (1 byte) ──
             case 0x0E:  // ldarg.s
@@ -368,7 +393,7 @@ IRMethod LowerILToIR(
                 insn.op_code = IROpCode::LdLoc;
                 insn.operand_i4 = ReadU1(ip);
                 break;
-            case 0x13:  // stloc.s
+            case 0x12:  // stloc.s (ECMA 335)
                 insn.op_code = IROpCode::StLoc;
                 insn.operand_i4 = ReadU1(ip);
                 break;
@@ -507,8 +532,32 @@ IRMethod LowerILToIR(
             case 0x59: insn.op_code = IROpCode::Sub; break;
             case 0x5A: insn.op_code = IROpCode::Mul; break;
             case 0x5B: insn.op_code = IROpCode::Div; break;
+            case 0x5C: insn.op_code = IROpCode::DivUn; break;  // div.un (alt encoding of 0x60)
             case 0x5D: insn.op_code = IROpCode::Rem; break;
+            case 0x5E: insn.op_code = IROpCode::RemUn; break;  // rem.un (alt encoding of 0x61)
+            case 0x5F: insn.op_code = IROpCode::And; break;    // and (ECMA standard position)
             case 0x65: insn.op_code = IROpCode::Neg; break;
+
+            // ── Overflow-checking arithmetic ──
+            case 0xD2: insn.op_code = IROpCode::AddOvf; break;
+            case 0xD3: insn.op_code = IROpCode::AddOvf; break;  // add.ovf.un → treat as add.ovf
+            case 0xD4: insn.op_code = IROpCode::SubOvf; break;
+            case 0xD5: insn.op_code = IROpCode::SubOvf; break;  // sub.ovf.un → treat as sub.ovf
+            case 0xD6: insn.op_code = IROpCode::MulOvf; break;
+            case 0xD7: insn.op_code = IROpCode::MulOvf; break;  // mul.ovf.un → treat as mul.ovf
+
+            // NOTE: 0x60-0x6F uses a non-ECMA mapping in this codebase
+            // (div.un, rem.un, and, or, xor, neg, not, shl, shr, shr.un, ...)
+            // so 0x67-0x69 are Shl/Shr/ShrUn (not conv.i1/i2/i4 as ECMA specifies).
+            case 0x67: insn.op_code = IROpCode::Shl; break;
+            case 0x68: insn.op_code = IROpCode::Shr; break;
+            case 0x69: insn.op_code = IROpCode::ShrUn; break;
+
+            // ── Overflow-checking conversions ──
+            case 0xB1: insn.op_code = IROpCode::ConvOvfI; break;    // conv.ovf.i
+            case 0xB2: insn.op_code = IROpCode::ConvOvfI; break;    // conv.ovf.i.un → treat as ovf.i
+            case 0xB4: insn.op_code = IROpCode::ConvOvfU; break;    // conv.ovf.u
+            case 0xB5: insn.op_code = IROpCode::ConvOvfU; break;    // conv.ovf.u.un → treat as ovf.u
 
             // ── Conversions ──
             case 0x6B: insn.op_code = IROpCode::Conv_R4; break;
@@ -568,19 +617,32 @@ IRMethod LowerILToIR(
                 insn.is_branch_short = true;
                 insn.branch_offset = ReadI1(ip);
                 break;
-            case 0x33:  // bge.s (ilasm uses bge.s with 0x33... wait, let me check)
-                // Actually 0x33 is b.un (unsigned branch), but we map to Bge for now
-                insn.op_code = IROpCode::Bge;
+            case 0x33:  // bne.un.s (unsigned not equal)
+                insn.op_code = IROpCode::BneUn;
                 insn.is_branch = true;
                 insn.is_branch_short = true;
                 insn.branch_offset = ReadI1(ip);
                 break;
-            case 0x34:  // bge.s (actually wait, the correct mapping...)
-                // Let me fix: 0x34 is bgt.s (already handled at 0x30)
-                // Actually, the ECMA standard is:
-                // 0x30: bgt.s, 0x31: ble.s, 0x32: blt.s, 0x33: bge.s, 0x34: bne.un.s
-                // These are correct.
-                insn.op_code = IROpCode::Bge;
+            case 0x34:  // bge.un.s (unsigned greater/equal)
+                insn.op_code = IROpCode::BgeUn;
+                insn.is_branch = true;
+                insn.is_branch_short = true;
+                insn.branch_offset = ReadI1(ip);
+                break;
+            case 0x35:  // bgt.un.s (unsigned greater than)
+                insn.op_code = IROpCode::BgtUn;
+                insn.is_branch = true;
+                insn.is_branch_short = true;
+                insn.branch_offset = ReadI1(ip);
+                break;
+            case 0x36:  // ble.un.s (unsigned less/equal)
+                insn.op_code = IROpCode::BleUn;
+                insn.is_branch = true;
+                insn.is_branch_short = true;
+                insn.branch_offset = ReadI1(ip);
+                break;
+            case 0x37:  // blt.un.s (unsigned less than)
+                insn.op_code = IROpCode::BltUn;
                 insn.is_branch = true;
                 insn.is_branch_short = true;
                 insn.branch_offset = ReadI1(ip);
@@ -636,8 +698,32 @@ IRMethod LowerILToIR(
                 insn.is_branch_short = false;
                 insn.branch_offset = ReadI4(ip);
                 break;
-            case 0x40:  // bge
-                insn.op_code = IROpCode::Bge;
+            case 0x40:  // bne.un (long unsigned not equal)
+                insn.op_code = IROpCode::BneUn;
+                insn.is_branch = true;
+                insn.is_branch_short = false;
+                insn.branch_offset = ReadI4(ip);
+                break;
+            case 0x41:  // bge.un (long unsigned greater/equal)
+                insn.op_code = IROpCode::BgeUn;
+                insn.is_branch = true;
+                insn.is_branch_short = false;
+                insn.branch_offset = ReadI4(ip);
+                break;
+            case 0x42:  // bgt.un (long unsigned greater than)
+                insn.op_code = IROpCode::BgtUn;
+                insn.is_branch = true;
+                insn.is_branch_short = false;
+                insn.branch_offset = ReadI4(ip);
+                break;
+            case 0x43:  // ble.un (long unsigned less/equal)
+                insn.op_code = IROpCode::BleUn;
+                insn.is_branch = true;
+                insn.is_branch_short = false;
+                insn.branch_offset = ReadI4(ip);
+                break;
+            case 0x44:  // blt.un (long unsigned less than)
+                insn.op_code = IROpCode::BltUn;
                 insn.is_branch = true;
                 insn.is_branch_short = false;
                 insn.branch_offset = ReadI4(ip);
@@ -701,26 +787,39 @@ IRMethod LowerILToIR(
             case 0x64: insn.op_code = IROpCode::Xor; break;
             case 0x66: insn.op_code = IROpCode::Not; break;
 
-            // ── Shift ──
-            case 0x67: insn.op_code = IROpCode::Shl; break;
-            case 0x68: insn.op_code = IROpCode::Shr; break;
-            case 0x69: insn.op_code = IROpCode::ShrUn; break;
-
             // ── More conversions ──
             case 0x6F: insn.op_code = IROpCode::ConvRUn; break;
+
+            // ── Ldobj / Stobj (typed load/store) ──
+            case 0x8F:  // ldobj (4-byte type token)
+                insn.op_code = IROpCode::LdObj;
+                insn.token = ReadToken(ip);
+                insn.has_token = true;
+                break;
+            case 0x81:  // stobj (4-byte type token)
+                insn.op_code = IROpCode::StObj;
+                insn.token = ReadToken(ip);
+                insn.has_token = true;
+                break;
 
             // ── Throw ──
             case 0x7A: insn.op_code = IROpCode::Throw; break;
 
             // ── Native int conversions ──
-            case 0xB3: insn.op_code = IROpCode::ConvI; break;
-            case 0xB6: insn.op_code = IROpCode::ConvU; break;
+            case 0xB0: insn.op_code = IROpCode::ConvI; break;  // conv.i (ECMA standard position)
+            case 0xB3: insn.op_code = IROpCode::ConvI; break;  // conv.ovf.i (keep for backward compat)
+            case 0xB6: insn.op_code = IROpCode::ConvU; break;  // conv.u
 
-            // ── Ldtoken (4-byte metadata token) ──
+            // ── Ldtoken ──
             case 0xD0:
                 insn.op_code = IROpCode::LdToken;
                 insn.token = ReadToken(ip);
                 insn.has_token = true;
+                break;
+
+            // ── EndFilter ──
+            case 0xD1:  // endfilter
+                insn.op_code = IROpCode::EndFilter;
                 break;
 
             default:
@@ -748,10 +847,34 @@ IRMethod LowerILToIR(
     IRMethod method;
     method.instructions.reserve(raw_insns.size());
 
+    // Constrained prefix tracking: .constrained. (0xFE16) modifies the next
+    // CallVirt. In the first pass it was lowered as Break with has_token=true.
+    // Here we merge it into the following CallVirt as CallVirtConstrained.
+    bool pending_constrained = false;
+    CHAOS_IL2CPP_UINT32 constrained_type_token = 0u;
+
     for (CHAOS_IL2CPP_SIZE i = 0u; i < raw_insns.size(); ++i) {
         const RawInsn& raw = raw_insns[i];
+
+        // Detect constrained. prefix marker (Break with has_token=true).
+        if (raw.op_code == IROpCode::Break && raw.has_token) {
+            pending_constrained = true;
+            constrained_type_token = raw.token;
+            continue;
+        }
+
         IRInstruction insn = {};
         insn.op_code = raw.op_code;
+
+        // If constrained is pending, merge into this CallVirt.
+        if (pending_constrained && raw.op_code == IROpCode::CallVirt) {
+            insn.op_code = IROpCode::CallVirtConstrained;
+            insn.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(constrained_type_token);
+            pending_constrained = false;
+        } else if (pending_constrained) {
+            // Constrained not followed by CallVirt — discard (invalid IL per ECMA).
+            pending_constrained = false;
+        }
 
         // Set basic immediate operand.
         insn.immediate_i4 = raw.operand_i4;
@@ -819,7 +942,7 @@ IRMethod LowerILToIR(
         }
 
         // Store declared method token for CallVirt vtable resolution.
-        if (raw.op_code == IROpCode::CallVirt && raw.has_token) {
+        if ((raw.op_code == IROpCode::CallVirt || raw.op_code == IROpCode::CallVirtConstrained) && raw.has_token) {
             insn.secondary_index = static_cast<CHAOS_IL2CPP_SIZE>(raw.token);
         }
 

@@ -642,6 +642,43 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
                 return result;
             }
+            case IROpCode::CallVirtConstrained: {
+                // Constrained CallVirt: the .constrained. prefix indicates that
+                // if 'this' is a value type, the call should be made directly
+                // (without boxing). For reference types, normal virtual dispatch.
+                const CHAOS_IL2CPP_SIZE cv_arg_count = static_cast<CHAOS_IL2CPP_SIZE>(instruction.arg_count);
+                result.call_args.resize(cv_arg_count);
+                for (CHAOS_IL2CPP_SIZE ai = cv_arg_count; ai > 0u; --ai) {
+                    result.call_args[ai - 1u] = Pop(&frame->stack);
+                }
+
+                if (cv_arg_count > 0u) {
+                    const InterpreterValue& this_val = result.call_args[0u];
+                    if (this_val.tag == ValueTag::Struct) {
+                        // Value type — use direct call target (no virtual dispatch).
+                        result.call_target = instruction.call_target;
+                    } else {
+                        // Reference or boxed value — normal virtual dispatch.
+                        CHAOS_IL2CPP_UINT32 inst_type_token = 0u;
+                        if (this_val.tag == ValueTag::ObjectRef && this_val.obj != nullptr) {
+                            inst_type_token = static_cast<InterpreterObject*>(this_val.obj)->type_token;
+                        }
+                        const CHAOS_IL2CPP_UINT32 decl_method_token =
+                            static_cast<CHAOS_IL2CPP_UINT32>(instruction.secondary_index);
+                        if (inst_type_token != 0u && decl_method_token != 0u) {
+                            void* resolved = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
+                                inst_type_token, decl_method_token);
+                            result.call_target = resolved ? resolved : instruction.call_target;
+                        } else {
+                            result.call_target = instruction.call_target;
+                        }
+                    }
+                } else {
+                    result.call_target = instruction.call_target;
+                }
+                result.needs_external_dispatch = true;
+                return result;
+            }
             case IROpCode::CallVirt: {
                 // Collect call args first (last arg pushed first in IL).
                 const CHAOS_IL2CPP_SIZE arg_count = static_cast<CHAOS_IL2CPP_SIZE>(instruction.arg_count);
@@ -986,6 +1023,138 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
 
                 return result;
+
+            // ── Phase A+: Full coverage expansion ─────────────────────────
+            case IROpCode::Break:
+                // Break (debug opcode) — treat as NOP.
+                break;
+            case IROpCode::BneUn: {
+                const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                if (left != right) {
+                    instruction_index = GetBranchTarget(method, instruction.branch_target);
+                    continue;
+                }
+                break;
+            }
+            case IROpCode::BgeUn: {
+                const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                if (left >= right) {
+                    instruction_index = GetBranchTarget(method, instruction.branch_target);
+                    continue;
+                }
+                break;
+            }
+            case IROpCode::BgtUn: {
+                const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                if (left > right) {
+                    instruction_index = GetBranchTarget(method, instruction.branch_target);
+                    continue;
+                }
+                break;
+            }
+            case IROpCode::BleUn: {
+                const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                if (left <= right) {
+                    instruction_index = GetBranchTarget(method, instruction.branch_target);
+                    continue;
+                }
+                break;
+            }
+            case IROpCode::BltUn: {
+                const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                if (left < right) {
+                    instruction_index = GetBranchTarget(method, instruction.branch_target);
+                    continue;
+                }
+                break;
+            }
+            case IROpCode::AddOvf: {
+                // Phase A+: no overflow check — treat as regular Add.
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
+                frame->stack.push_back(InterpreterValue::from_i32(left + right));
+                break;
+            }
+            case IROpCode::SubOvf: {
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
+                frame->stack.push_back(InterpreterValue::from_i32(left - right));
+                break;
+            }
+            case IROpCode::MulOvf: {
+                const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
+                frame->stack.push_back(InterpreterValue::from_i32(left * right));
+                break;
+            }
+            case IROpCode::ConvOvfI:
+                frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(Pop(&frame->stack))));
+                break;
+            case IROpCode::ConvOvfI4:
+                frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(Pop(&frame->stack))));
+                break;
+            case IROpCode::ConvOvfI8:
+                frame->stack.push_back(InterpreterValue::from_i64(ReadInt64(Pop(&frame->stack))));
+                break;
+            case IROpCode::ConvOvfU: {
+                const CHAOS_IL2CPP_UINT32 value = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(value)));
+                break;
+            }
+            case IROpCode::ConvOvfU4:
+                frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(Pop(&frame->stack))));
+                break;
+            case IROpCode::ConvOvfU8:
+                frame->stack.push_back(InterpreterValue::from_i64(ReadInt64(Pop(&frame->stack))));
+                break;
+            case IROpCode::LdObj: {
+                // Pop address, push value (similar to LdInd).
+                const InterpreterValue addr_val = Pop(&frame->stack);
+                frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(addr_val)));
+                break;
+            }
+            case IROpCode::StObj: {
+                // Pop value then address (similar to StInd).
+                (void)Pop(&frame->stack); // value
+                (void)Pop(&frame->stack); // address
+                break;
+            }
+            case IROpCode::LdElemA: {
+                // Load element address — in our stack model, push element value.
+                const CHAOS_IL2CPP_SIZE index = static_cast<CHAOS_IL2CPP_SIZE>(ReadInt32(Pop(&frame->stack)));
+                auto* array = RequireArray(Pop(&frame->stack));
+                if (index >= array->elements.size()) {
+                    throw CHAOS_IL2CPP_OUT_OF_RANGE("array_index");
+                }
+                frame->stack.push_back(array->elements[index]);
+                break;
+            }
+            case IROpCode::Cpblk: {
+                const CHAOS_IL2CPP_UINT32 cp_size = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const InterpreterValue src_val = Pop(&frame->stack);
+                const InterpreterValue dst_val = Pop(&frame->stack);
+                void* dst_ptr = (dst_val.tag == ValueTag::Struct || dst_val.tag == ValueTag::ObjectRef) ? dst_val.obj : nullptr;
+                void* src_ptr = (src_val.tag == ValueTag::Struct || src_val.tag == ValueTag::ObjectRef) ? src_val.obj : nullptr;
+                if (dst_ptr != nullptr && src_ptr != nullptr) {
+                    std::memcpy(dst_ptr, src_ptr, cp_size);
+                }
+                break;
+            }
+            case IROpCode::InitBlk: {
+                const CHAOS_IL2CPP_UINT32 init_size = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_INT32 init_value = ReadInt32(Pop(&frame->stack));
+                const InterpreterValue addr_val = Pop(&frame->stack);
+                void* ptr = (addr_val.tag == ValueTag::Struct || addr_val.tag == ValueTag::ObjectRef) ? addr_val.obj : nullptr;
+                if (ptr != nullptr) {
+                    std::memset(ptr, init_value, init_size);
+                }
+                break;
+            }
             default:
                 throw CHAOS_IL2CPP_RUNTIME_ERROR("unsupported opcode");
         }

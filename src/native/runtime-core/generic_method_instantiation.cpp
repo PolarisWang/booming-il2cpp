@@ -20,7 +20,7 @@ static const char* GetTypeDisplayName(TypeInfoHandle handle) {
     if (handle == 0u) {
         return "?";
     }
-    const auto* desc = TryDecodeReflectionQueryTypeHandle(handle);
+    const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(handle);
     if (desc != nullptr && desc->display_name_utf8 != nullptr) {
         return desc->display_name_utf8;
     }
@@ -59,7 +59,7 @@ RuntimeInstantiatedMethod* CreateClosedMethodDescriptor(
     /* Decode the open method descriptor.  Must be a tag-encoded
      * ReflectionQueryMethodDescriptor pointer (the codegen bridge returns
      * handles in this format for generic method definitions). */
-    const auto* open_desc = TryDecodeReflectionQueryMethodHandle(
+    const auto* open_desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryMethodHandle(
         open_method_definition);
     if (open_desc == nullptr) {
         return nullptr;  // Not a reflection-query method; cannot instantiate.
@@ -108,9 +108,9 @@ RuntimeInstantiatedMethod* CreateClosedMethodDescriptor(
     auto* args_buf = static_cast<TypeInfoHandle*>(
         std::malloc(sizeof(TypeInfoHandle) * arg_count));
     if (args_buf == nullptr) {
-        std::free(rt_method->descriptor.subject_id_utf8);
-        std::free(rt_method->descriptor.name_utf8);
-        std::free(rt_method->descriptor.member_type_utf8);
+        std::free(const_cast<char*>(rt_method->descriptor.subject_id_utf8));
+        std::free(const_cast<char*>(rt_method->descriptor.name_utf8));
+        std::free(const_cast<char*>(rt_method->descriptor.member_type_utf8));
         std::free(rt_method);
         return nullptr;
     }

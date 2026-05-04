@@ -7,7 +7,7 @@
 //
 // See generated_code_compat.h for the extern "C" declarations.
 
-#include <chaos/common.h>
+#include <chaos/native_types.h>
 #include <cstring>
 
 namespace chaos::il2cpp::runtime_core {

@@ -17,6 +17,8 @@ add_library(chaos_runtime_core STATIC
     module_registry.h
     layout_engine.cpp
     layout_engine.h
+    runtime_instantiation.cpp
+    runtime_instantiation.h
     generic_method_instantiation.cpp
     generic_method_instantiation.h
     method_table.cpp

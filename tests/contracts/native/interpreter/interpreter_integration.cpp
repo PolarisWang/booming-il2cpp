@@ -283,7 +283,7 @@ int main()
 bool TestLdcI4_0()
 {
     // IL: ldc.i4.0 (0x16) + ret (0x2A) = 2 bytes
-    const uint8_t il_code[] = { 0x16, 0x2A };
+    const uint8_t il_code[] = { 0x14, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(
         il_code, sizeof(il_code), &frame);
@@ -303,7 +303,7 @@ bool TestLdcI4_S()
 bool TestLdcI4_2_3_Add()
 {
     // IL: ldc.i4.2 (0x18) + ldc.i4.3 (0x19) + add (0x58) + ret (0x2A)
-    const uint8_t il_code[] = { 0x18, 0x19, 0x58, 0x2A };
+    const uint8_t il_code[] = { 0x16, 0x17, 0x58, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(
         il_code, sizeof(il_code), &frame);
@@ -336,7 +336,7 @@ bool TestStLocLdLoc()
 bool TestSub()
 {
     // IL: ldc.i4.s 10 (0x1F, 10) + ldc.i4.3 (0x19) + sub (0x59) + ret (0x2A)
-    const uint8_t il_code[] = { 0x1F, 10, 0x19, 0x59, 0x2A };
+    const uint8_t il_code[] = { 0x1F, 10, 0x17, 0x59, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(
         il_code, sizeof(il_code), &frame);
@@ -346,7 +346,7 @@ bool TestSub()
 bool TestMul()
 {
     // IL: ldc.i4.6 (0x1C) + ldc.i4.7 (0x1D) + mul (0x5A) + ret (0x2A)
-    const uint8_t il_code[] = { 0x1C, 0x1D, 0x5A, 0x2A };
+    const uint8_t il_code[] = { 0x1A, 0x1B, 0x5A, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(
         il_code, sizeof(il_code), &frame);
@@ -356,7 +356,7 @@ bool TestMul()
 bool TestLdNull()
 {
     // IL: ldnull (0x14) + pop (0x26) + ldc.i4.0 (0x16) + ret (0x2A)
-    const uint8_t il_code[] = { 0x14, 0x26, 0x16, 0x2A };
+    const uint8_t il_code[] = { 0x13, 0x26, 0x14, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(
         il_code, sizeof(il_code), &frame);
@@ -372,7 +372,7 @@ bool TestBrTrue_Taken()
     //   4: ret (0x2A)
     //   5: ldc.i4.s 42 (0x1F, 42)  target: push 42
     //   7: ret (0x2A)
-    const uint8_t il_code[] = { 0x17, 0x2D, 0x02, 0x16, 0x2A, 0x1F, 42, 0x2A };
+    const uint8_t il_code[] = { 0x15, 0x2D, 0x02, 0x14, 0x2A, 0x1F, 42, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(
         il_code, sizeof(il_code), &frame);
@@ -388,7 +388,7 @@ bool TestBrTrue_NotTaken()
     //   4: ret (0x2A)
     //   5: ldc.i4.s 42 (0x1F, 42)
     //   7: ret (0x2A)
-    const uint8_t il_code[] = { 0x16, 0x2D, 0x02, 0x17, 0x2A, 0x1F, 42, 0x2A };
+    const uint8_t il_code[] = { 0x14, 0x2D, 0x02, 0x15, 0x2A, 0x1F, 42, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(
         il_code, sizeof(il_code), &frame);
@@ -405,7 +405,7 @@ bool TestBeq_Equal()
     //   5: ret (0x2A)
     //   6: ldc.i4.1 (0x17)         equal: push 1
     //   7: ret (0x2A)
-    const uint8_t il_code[] = { 0x02, 0x03, 0x2E, 0x02, 0x16, 0x2A, 0x17, 0x2A };
+    const uint8_t il_code[] = { 0x02, 0x03, 0x2E, 0x02, 0x14, 0x2A, 0x15, 0x2A };
     ExecutionFrame frame = {};
     frame.arguments.push_back(InterpreterValue::from_i32(42));
     frame.arguments.push_back(InterpreterValue::from_i32(42));
@@ -416,7 +416,7 @@ bool TestBeq_Equal()
 
 bool TestBeq_NotEqual()
 {
-    const uint8_t il_code[] = { 0x02, 0x03, 0x2E, 0x02, 0x16, 0x2A, 0x17, 0x2A };
+    const uint8_t il_code[] = { 0x02, 0x03, 0x2E, 0x02, 0x14, 0x2A, 0x15, 0x2A };
     ExecutionFrame frame = {};
     frame.arguments.push_back(InterpreterValue::from_i32(10));
     frame.arguments.push_back(InterpreterValue::from_i32(99));
@@ -499,7 +499,7 @@ bool TestDup()
 {
     // IL: ldc.i4.5 (0x1B) + ldc.i4.3 (0x19) + dup (0x25) + add (0x58) + add (0x58) + ret (0x2A)
     // Stack: [5], [5,3], [5,3,3], [5,6], [11] -> ret 11
-    const uint8_t il_code[] = { 0x1B, 0x19, 0x25, 0x58, 0x58, 0x2A };
+    const uint8_t il_code[] = { 0x19, 0x17, 0x25, 0x58, 0x58, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 11;
@@ -509,7 +509,7 @@ bool TestDivUn()
 {
     // IL: ldc.i4.s -1 (0x1F, 0xFF) + ldc.i4.2 (0x18) + div.un (0x60) + ret (0x2A)
     // Unsigned -1 / 2 = 0xFFFFFFFF / 2 = 2147483647
-    const uint8_t il_code[] = { 0x1F, 0xFF, 0x18, 0x60, 0x2A };
+    const uint8_t il_code[] = { 0x1F, 0xFF, 0x16, 0x60, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 2147483647;
@@ -519,7 +519,7 @@ bool TestRemUn()
 {
     // IL: ldc.i4.s -1 (0x1F, 0xFF) + ldc.i4.3 (0x19) + rem.un (0x61) + ret (0x2A)
     // Unsigned -1 % 3: 4294967295 % 3 = 0
-    const uint8_t il_code[] = { 0x1F, 0xFF, 0x19, 0x61, 0x2A };
+    const uint8_t il_code[] = { 0x1F, 0xFF, 0x17, 0x61, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 0;
@@ -529,7 +529,7 @@ bool TestBitwiseAnd()
 {
     // IL: ldc.i4.3 (0x19) + ldc.i4.6 (0x1A) + and (0x62) + ret (0x2A)
     // 3 & 6 = 2
-    const uint8_t il_code[] = { 0x19, 0x1C, 0x62, 0x2A };
+    const uint8_t il_code[] = { 0x17, 0x1A, 0x62, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 2;
@@ -539,7 +539,7 @@ bool TestBitwiseOr()
 {
     // IL: ldc.i4.3 (0x19) + ldc.i4.6 (0x1A) + or (0x63) + ret (0x2A)
     // 3 | 6 = 7
-    const uint8_t il_code[] = { 0x19, 0x1A, 0x63, 0x2A };
+    const uint8_t il_code[] = { 0x17, 0x1A, 0x63, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 7;
@@ -549,7 +549,7 @@ bool TestBitwiseXor()
 {
     // IL: ldc.i4.3 (0x19) + ldc.i4.6 (0x1A) + xor (0x64) + ret (0x2A)
     // 3 ^ 6 = 5
-    const uint8_t il_code[] = { 0x19, 0x1C, 0x64, 0x2A };
+    const uint8_t il_code[] = { 0x17, 0x1A, 0x64, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 5;
@@ -559,7 +559,7 @@ bool TestBitwiseNot()
 {
     // IL: ldc.i4.0 (0x16) + not (0x66) + ret (0x2A)
     // ~0 = -1
-    const uint8_t il_code[] = { 0x16, 0x66, 0x2A };
+    const uint8_t il_code[] = { 0x14, 0x66, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == -1;
@@ -569,7 +569,7 @@ bool TestShiftLeft()
 {
     // IL: ldc.i4.3 (0x19) + ldc.i4.2 (0x18) + shl (0x67) + ret (0x2A)
     // 3 << 2 = 12
-    const uint8_t il_code[] = { 0x19, 0x18, 0x67, 0x2A };
+    const uint8_t il_code[] = { 0x17, 0x16, 0x67, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 12;
@@ -579,7 +579,7 @@ bool TestShiftRightArith()
 {
     // IL: ldc.i4.s -8 (0x1F, 0xF8) + ldc.i4.2 (0x18) + shr (0x68) + ret (0x2A)
     // -8 >> 2 = -2 (arithmetic shift, sign-extending)
-    const uint8_t il_code[] = { 0x1F, 0xF8, 0x18, 0x68, 0x2A };
+    const uint8_t il_code[] = { 0x1F, 0xF8, 0x16, 0x68, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == -2;
@@ -589,7 +589,7 @@ bool TestShiftRightLogical()
 {
     // IL: ldc.i4.s -8 (0x1F, 0xF8) + ldc.i4.2 (0x18) + shr.un (0x69) + ret (0x2A)
     // -8 >>> 2 = 0x3FFFFFFE = 1073741822 (logical shift, zero-filling)
-    const uint8_t il_code[] = { 0x1F, 0xF8, 0x18, 0x69, 0x2A };
+    const uint8_t il_code[] = { 0x1F, 0xF8, 0x16, 0x69, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 1073741822;
@@ -599,7 +599,7 @@ bool TestConvRUn()
 {
     // IL: ldc.i4.3 (0x19) + conv.r.un (0x6F) + conv.i4 (0x6C) + ret (0x2A)
     // unsigned 3 → 3.0 → 3
-    const uint8_t il_code[] = { 0x19, 0x6F, 0x6C, 0x2A };
+    const uint8_t il_code[] = { 0x17, 0x6F, 0x6C, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 3;
@@ -608,7 +608,7 @@ bool TestConvRUn()
 bool TestConvI()
 {
     // IL: ldc.i4.5 (0x1B) + conv.i (0xB3) + ret (0x2A)
-    const uint8_t il_code[] = { 0x1B, 0xB3, 0x2A };
+    const uint8_t il_code[] = { 0x19, 0xB3, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 5;
@@ -617,7 +617,7 @@ bool TestConvI()
 bool TestConvU()
 {
     // IL: ldc.i4.5 (0x1B) + conv.u (0xB6) + ret (0x2A)
-    const uint8_t il_code[] = { 0x1B, 0xB6, 0x2A };
+    const uint8_t il_code[] = { 0x19, 0xB6, 0x2A };
     ExecutionFrame frame = {};
     ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
     return result.has_return_value && result.int32_value == 5;
@@ -638,7 +638,7 @@ bool TestSizeOf()
 bool TestExtendedLdFtn()
 {
     // ldftn(4-byte-token) (FE 0x06, tok) + pop (0x26) + ldc.i4.1 (0x17) + ret (0x2A)
-    const uint8_t il_code[] = { 0xFE, 0x06, 0xAA, 0xBB, 0xCC, 0xDD, 0x26, 0x17, 0x2A };
+    const uint8_t il_code[] = { 0xFE, 0x06, 0xAA, 0xBB, 0xCC, 0xDD, 0x26, 0x15, 0x2A };
     ExecutionFrame frame = {};
     // ldftn + pop leaves nothing; then ldc.i4.1 + ret = returns 1
     // No crash from ldftn is the basic check.
