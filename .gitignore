@@ -42,6 +42,12 @@ il2cpp_dist/
 # Test reports
 reports/
 
+# Auto-generated verification evidence (regenerated on every pipeline run)
+docs/verification/foundation-dll-audit/
+verification/archive/
+verification/evidence/
+verification/projections/
+
 # .NET outputs
 bin/
 obj/
