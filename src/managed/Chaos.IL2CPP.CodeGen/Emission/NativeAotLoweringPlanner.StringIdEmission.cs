@@ -56,48 +56,28 @@ public sealed partial class NativeAotLoweringPlanner
             return ImmutableDictionary<string, ulong>.Empty;
         }
 
-        // First pass: compute raw hashes.
+        // Compute FNV-1a hash for each string literal.
         var mapping = new Dictionary<string, ulong>(stringLiterals.Count, StringComparer.Ordinal);
-        var usedValues = new HashSet<ulong>(stringLiterals.Count);
         foreach (var literal in stringLiterals)
         {
             var hash = ComputeStringId(literal);
             mapping[literal] = hash;
-            usedValues.Add(hash);
         }
 
-        // Second pass: detect and resolve collisions.
-        var collisionGroups = mapping
+        // Detect collisions.  FNV-1a 63-bit collision in <1000 entries is
+        // virtually impossible, but we check anyway since the C++ constexpr
+        // macro (CHAOS_IL2CPP_STRING_ID) always uses the raw hash.
+        var collisions = mapping
             .GroupBy(kvp => kvp.Value)
             .Where(g => g.Skip(1).Any())
             .ToList();
 
-        if (collisionGroups.Count == 0)
+        if (collisions.Count > 0)
         {
-            return mapping.ToImmutableDictionary(StringComparer.Ordinal);
-        }
-
-        var nextSyntheticId = (ulong)mapping.Values.Max() + 1;
-
-        foreach (var group in collisionGroups)
-        {
-            // Keep the first entry with its content hash; assign overflow IDs to the rest.
-            var skipFirst = true;
-            foreach (var kvp in group)
-            {
-                if (skipFirst)
-                {
-                    skipFirst = false;
-                    continue;
-                }
-                // Ensure synthetic ID does not collide with any existing hash.
-                while (!usedValues.Add(nextSyntheticId))
-                {
-                    nextSyntheticId++;
-                }
-                mapping[kvp.Key] = nextSyntheticId;
-                nextSyntheticId++;
-            }
+            var msgs = collisions.Select(g =>
+                $"hash {g.Key} collides between: {string.Join(", ", g.Select(kvp => $"'{kvp.Key}'"))}");
+            throw new InvalidOperationException(
+                $"StringId FNV-1a collision in this family -- rename a literal to resolve.\n{string.Join("\n", msgs)}");
         }
 
         return mapping.ToImmutableDictionary(StringComparer.Ordinal);
@@ -115,16 +95,6 @@ public sealed partial class NativeAotLoweringPlanner
         var mapping = _stringIdMapping ??= BuildStringIdMapping(stringLiterals);
 
         builder.AppendLine();
-        builder.AppendLine("// StringId constants for compile-time-known string literals.");
-
-        // Emit constexpr CHAOS_IL2CPP_UINT64 constant for each string literal.
-        foreach (var literal in stringLiterals.OrderBy(l => l, StringComparer.Ordinal))
-        {
-            var id = mapping[literal];
-            builder.AppendLine($"constexpr CHAOS_IL2CPP_UINT64 {GetNativeStringIdSymbol(id)} = {id}U;");
-        }
-
-        builder.AppendLine();
         builder.AppendLine("// AOT-baked string table: sorted by StringId for binary search at runtime.");
         builder.AppendLine("constexpr chaos::il2cpp::string_table::StringEntry chaos_aot_string_entries[] = {");
 
@@ -133,7 +103,7 @@ public sealed partial class NativeAotLoweringPlanner
             var id = mapping[literal];
             var byteCount = Encoding.UTF8.GetByteCount(literal);
             var cppLiteral = ToCppStringLiteral(literal);
-            builder.AppendLine($"    {{ {GetNativeStringIdSymbol(id)}, {cppLiteral}, {byteCount}u }},");
+            builder.AppendLine($"    {{ {id}U, {cppLiteral}, {byteCount}u }},");
         }
 
         builder.Append('}');

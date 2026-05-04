@@ -111,10 +111,45 @@ def _build_entrypoint(
     verification: Path | None = None,
     variant: str = "benchmark",
 ) -> dict:
-    """Build the synthetic entry point DLL for a family."""
+    """Build the synthetic entry point DLL for a family.
+
+    If a hand-written directory exists at verification/<family_slug>/handwritten/,
+    use it directly instead of auto-generating.
+    """
     v = verification or _VERIFICATION
     entrypoint_dir = v / family_slug / "il2cpp_dist" / "entrypoint"
     class_name = f"{family_slug.title().replace('-', '').replace('_', '')}NativeEntry"
+
+    # Check for hand-written entrypoint
+    handwritten_dir = v / family_slug / "handwritten"
+    if handwritten_dir.exists():
+        print(f"    using hand-written entrypoint from {handwritten_dir}")
+        entrypoint_dir.mkdir(parents=True, exist_ok=True)
+        for f in handwritten_dir.iterdir():
+            if f.is_file():
+                dest = entrypoint_dir / f.name
+                dest.write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
+        # Build
+        csproj = next(entrypoint_dir.glob("*.csproj"), None)
+        if not csproj:
+            return {"success": False, "error": "no .csproj in handwritten entrypoint"}
+        build_out = entrypoint_dir / "build-output"
+        result = subprocess.run(
+            ["dotnet", "build", str(csproj), "-o", str(build_out), "--nologo", "-v", "quiet"],
+            capture_output=True, text=True,
+        )
+        if result.returncode != 0:
+            return {"success": False, "error": result.stderr or result.stdout}
+        dll = next(build_out.glob("*.dll"), None)
+        if not dll:
+            return {"success": False, "error": "no DLL produced"}
+        return {
+            "success": True,
+            "dll_path": str(dll),
+            "csproj_path": str(csproj),
+            "source_path": str(next(entrypoint_dir.glob("*.cs"), None)),
+            "entry_point_subject_id": f"{class_name}/{class_name}::Run:System.Int32(System.Int32)",
+        }
 
     result = generate_and_build(
         entrypoint_dir,

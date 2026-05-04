@@ -37,12 +37,26 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_compute_type_stable_id(const char* na
     return hash;
 }
 
+// ── InterfaceMapEntry ───────────────────────────────────────────
+// Each entry maps an interface type to its method slots in the type's vtable.
+// Used for O(1) interface dispatch: vtable[entry.vtable_offset + method_index].
+// Linear scanned during dispatch (interface count is typically 1-5).
+
+struct InterfaceMapEntry {
+    CHAOS_IL2CPP_UINT64 iface_stable_id;    // FNV-1a hash of interface subject ID (8 bytes)
+    CHAOS_IL2CPP_UINT32 vtable_offset;      // starting vtable slot index for this interface (4 bytes)
+    CHAOS_IL2CPP_UINT32 method_count;       // number of methods in this interface (4 bytes)
+};
+
+static_assert(sizeof(InterfaceMapEntry) == 16,
+              "InterfaceMapEntry: stable_id(8) + vtable_offset(4) + method_count(4) = 16 bytes");
+
 // ── TypeInfo ────────────────────────────────────────────────────
 
 struct TypeInfo {
     const TypeInfo* parent;                  // base type, nullptr = System.Object (8 bytes)
     CHAOS_IL2CPP_UINT64 stable_id;           // FNV-1a hash of type subject ID (8 bytes)
-    const CHAOS_IL2CPP_UINT64* iface_map;    // sorted array of implemented interface stable_ids (8 bytes)
+    const InterfaceMapEntry* iface_map;      // sorted array of InterfaceMapEntry (8 bytes)
     CHAOS_IL2CPP_UINT32 iface_count;         // number of entries in iface_map (4 bytes)
     CHAOS_IL2CPP_UINT8  type_shape;          // 1=reference, 2=value, 3=interface (1 byte)
     // 3 bytes padding
@@ -86,6 +100,8 @@ inline constexpr CHAOS_IL2CPP_SIZE kChaosMaxDynamicTypes = 256;
 /// @param parent      Pointer to the base type's TypeInfo (nullptr for
 ///                    System.Object).
 /// @param type_shape  One of chaos_type_shape_reference/value/interface.
+/// @param iface_map   Pointer to array of InterfaceMapEntry for this type (optional).
+/// @param iface_count Number of entries in iface_map (0 if none).
 /// @param out_stable_id  Optional output parameter; receives the computed
 ///                       stable_id on success, or 0 on failure.
 ///
@@ -95,7 +111,7 @@ TypeInfo* chaos_register_type(
     const char* name,
     const TypeInfo* parent,
     CHAOS_IL2CPP_UINT8 type_shape,
-    const CHAOS_IL2CPP_UINT64* iface_map = nullptr,
+    const InterfaceMapEntry* iface_map = nullptr,
     CHAOS_IL2CPP_UINT32 iface_count = 0,
     CHAOS_IL2CPP_UINT64* out_stable_id = nullptr) noexcept;
 

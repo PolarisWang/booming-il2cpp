@@ -1,0 +1,31 @@
+{
+  "kind": "project",
+  "domain": "testing",
+  "name": "dev-foundation-dll-family-verification",
+  "summary": "对 foundation DLL capability family 执行三维验证：Fact (managed xUnit) → Benchmark (native vs managed) → HotUpdate (native patch/revert)。",
+  "trigger_signals": [
+    "需要验证 foundation DLL family 的正确性时",
+    "完成架构改动后需要回归验证时",
+    "需要基准测试数据时",
+    "需要确认 hotupdate 机制正常时"
+  ],
+  "owner": "00-skills-maintainers",
+  "status": "active",
+  "version": "1.0.0",
+  "startup_visible": false,
+  "token_budget": "medium",
+  "version_history": [
+    {
+      "version": "1.0.0",
+      "date": "2026-05-04",
+      "type": "initial"
+    }
+  ],
+  "evolution_lineage": {
+    "parent": null,
+    "derived_from": "dev-foundation-dll-ai-test-generation",
+    "derived_to": [],
+    "fixes": [],
+    "captured_from": "session-20260504-family-verification"
+  }
+}

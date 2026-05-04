@@ -37,6 +37,8 @@ TypeInfo* chaos_register_type(
     const char* name,
     const TypeInfo* parent,
     CHAOS_IL2CPP_UINT8 type_shape,
+    const InterfaceMapEntry* iface_map,
+    CHAOS_IL2CPP_UINT32 iface_count,
     CHAOS_IL2CPP_UINT64* out_stable_id) noexcept
 {
     if (name == nullptr)
@@ -68,6 +70,8 @@ TypeInfo* chaos_register_type(
     ti->parent     = parent;
     ti->stable_id  = stable_id;
     ti->type_shape = type_shape;
+    ti->iface_map  = iface_map;
+    ti->iface_count = iface_count;
 
     reg.types[reg.count] = ti;
     reg.count++;

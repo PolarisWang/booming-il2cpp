@@ -241,7 +241,54 @@ inline intptr_t chaos_make_string_id_value(uint64_t id) noexcept
 
 #ifdef __cplusplus
 }
-#endif
+
+// ── Strong StringId type with compile-time FNV-1a ──────────────────
+
+/// Strong type for a compile-time string identity value.
+/// Use CHAOS_IL2CPP_STRING_ID("literal") to construct one.
+/// Implicitly converts to tagged intptr_t for eval stack assignment.
+struct chaos_string_id_t {
+    uint64_t value;
+
+    /// Tagged for eval stack push (sets bit 63).
+    constexpr intptr_t tagged() const noexcept {
+        return CHAOS_STRING_ID_TAG | static_cast<intptr_t>(value);
+    }
+
+    /// Implicit conversion -> tagged intptr_t for stack assignment.
+    constexpr operator intptr_t() const noexcept {
+        return tagged();
+    }
+};
+
+/// Compile-time FNV-1a 64-bit hash.  Must stay in sync with
+/// string_table.cpp:Register() so that runtime Intern/Resolve
+/// produce / consume the same StringId values.
+constexpr uint64_t chaos_constexpr_string_hash(
+    const char* str, size_t len) noexcept
+{
+    uint64_t hash = 14695981039346656037ULL;
+    for (size_t i = 0; i < len; ++i) {
+        hash ^= static_cast<unsigned char>(str[i]);
+        hash *= 1099511628211ULL;
+    }
+    return (hash & ~(1ULL << 63)) | 1ULL;
+}
+
+/// Compile-time StringId from a string literal.
+constexpr chaos_string_id_t chaos_make_string_id(
+    const char* str, size_t len) noexcept
+{
+    return chaos_string_id_t{ chaos_constexpr_string_hash(str, len) };
+}
+
+/// Compile-time StringId — replaces per-call heap allocation in ldstr.
+/// The hash is computed at C++ compile time (zero runtime overhead).
+/// Example:  chaos_eval_stack[top++] = CHAOS_IL2CPP_STRING_ID("hello");
+#define CHAOS_IL2CPP_STRING_ID(literal) \
+    chaos_make_string_id((literal), sizeof((literal)) - 1)
+
+#endif  // __cplusplus
 
 #endif  // CHAOS_CODEGEN_BRIDGE_H_
 

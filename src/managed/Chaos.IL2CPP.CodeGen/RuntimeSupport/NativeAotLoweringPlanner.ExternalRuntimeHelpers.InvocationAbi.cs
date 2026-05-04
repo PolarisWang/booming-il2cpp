@@ -613,6 +613,12 @@ public sealed partial class NativeAotLoweringPlanner
 		return sourceName;
 	}
 
+	private static bool IsStringParameterSlot(AotCoreIrAbiSlotArtifact abiSlot)
+	{
+		return abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt &&
+			string.Equals(abiSlot.TypeSubjectId, "System.Private.CoreLib/System.String", StringComparison.Ordinal);
+	}
+
 	private static string MapAbiSlotParameterType(AotCoreIrAbiSlotArtifact abiSlot)
 	{
 		return abiSlot.CarrierKindCode switch

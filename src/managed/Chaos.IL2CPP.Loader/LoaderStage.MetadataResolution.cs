@@ -115,6 +115,7 @@ public sealed partial class LoaderStage
             Signature = ManagedNaming.CreateMethodSignature(signature.ReturnType, declaringType.DisplayName, methodName, parameterTypes),
             IsStatic = methodDefinition.Attributes.HasFlag(MethodAttributes.Static),
             IsVirtual = methodDefinition.Attributes.HasFlag(MethodAttributes.Virtual),
+            IsFinal = methodDefinition.Attributes.HasFlag(MethodAttributes.Final),
             IsPreserved = isPreserved,
             IsUnmanagedCallersOnly = isUnmanagedCallersOnly,
             MetadataToken = MetadataTokens.GetToken(handle),

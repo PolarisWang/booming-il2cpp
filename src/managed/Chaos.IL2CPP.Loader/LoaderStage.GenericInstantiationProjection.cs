@@ -74,6 +74,7 @@ public sealed partial class LoaderStage
                 DisplayName = typeIdentity.DisplayName,
                 IsInterface = definitionType.IsInterface,
                 IsValueType = definitionType.IsValueType,
+                IsSealed = definitionType.IsSealed,
                 BaseTypeSubjectId = definitionType.BaseTypeSubjectId is null
                     ? null
                     : ProjectInstantiationText(
@@ -257,6 +258,7 @@ public sealed partial class LoaderStage
                     parameters.Select(parameter => parameter.Type).ToList()),
                 IsStatic = definitionMethod.IsStatic,
                 IsVirtual = definitionMethod.IsVirtual,
+                IsFinal = definitionMethod.IsFinal,
                 IsPreserved = definitionMethod.IsPreserved,
                 IsUnmanagedCallersOnly = definitionMethod.IsUnmanagedCallersOnly,
                 MetadataToken = syntheticMethodMetadataToken++,
@@ -414,6 +416,7 @@ public sealed partial class LoaderStage
                 parameters.Select(parameter => parameter.Type).ToList()),
             IsStatic = definitionMethod.IsStatic,
             IsVirtual = definitionMethod.IsVirtual,
+            IsFinal = definitionMethod.IsFinal,
             IsPreserved = definitionMethod.IsPreserved,
             IsUnmanagedCallersOnly = definitionMethod.IsUnmanagedCallersOnly,
             MetadataToken = methodReference.MetadataToken,

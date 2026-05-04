@@ -18,6 +18,32 @@ namespace Chaos.IL2CPP.CodeGen;
 public sealed partial class NativeAotLoweringPlanner
 {
 	private static readonly List<string> s_emptyFieldList = new List<string>(0);
+
+	private (int vtableOffset, int methodCount) ComputeInterfaceVtableInfo(string ifaceSubjectId)
+	{
+		if (_vtableSlotMap == null)
+			return (0, 0);
+
+		var slots = new List<int>();
+		foreach (var method in _methodsBySubjectId.Values)
+		{
+			if (method.IsStatic) continue;
+			if (!string.Equals(method.Identity.DeclaringTypeSubjectId, ifaceSubjectId, StringComparison.Ordinal))
+				continue;
+
+			var sig = GetMethodSignatureSuffix(method.SubjectId);
+			if (_vtableSlotMap.TryGetValue(sig, out int slot))
+			{
+				slots.Add(slot);
+			}
+		}
+
+		if (slots.Count == 0)
+			return (0, 0);
+
+		return (slots.Min(), slots.Count);
+	}
+
 	private void EmitObjectModelDeclarations(
 		StringBuilder builder,
 		IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
@@ -32,12 +58,6 @@ public sealed partial class NativeAotLoweringPlanner
 		HashSet<string> hashSet2 = new HashSet<string>(StringComparer.Ordinal);
 		HashSet<string> hashSet3 = new HashSet<string>(StringComparer.Ordinal);
 		builder.AppendLine("#include <chaos/type_info.h>");
-		builder.AppendLine();
-		builder.AppendLine("struct chaos_object_header");
-		builder.AppendLine("{");
-		builder.AppendLine("    const void** vtable = nullptr;");
-		builder.AppendLine("    const TypeInfo* type_info = nullptr;");
-		builder.AppendLine("};");
 		builder.AppendLine();
 		builder.AppendLine("constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;");
 		builder.AppendLine("inline constexpr TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, 0, 2 };");
@@ -351,6 +371,49 @@ public sealed partial class NativeAotLoweringPlanner
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.FieldInfo", null);
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.Assembly", null);
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.AssemblyName", null);
+		// ── VTable slot allocation (must precede iface_map emission)
+			var vtableLengths = new Dictionary<string, int>(StringComparer.Ordinal);
+			var slotMap = new Dictionary<string, int>(StringComparer.Ordinal);
+			var methodsByDeclaringTypeVT = new Dictionary<string, List<AotCoreIrMethodArtifact>>(StringComparer.Ordinal);
+			foreach (var method in _methodsBySubjectId.Values)
+			{
+				var dt = method.Identity.DeclaringTypeSubjectId;
+				if (string.IsNullOrEmpty(dt)) continue;
+				if (!methodsByDeclaringTypeVT.TryGetValue(dt, out var list))
+					methodsByDeclaringTypeVT[dt] = list = new List<AotCoreIrMethodArtifact>();
+				list.Add(method);
+			}
+			int nextSlot = 0;
+			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+			{
+				if (methodsByDeclaringTypeVT.TryGetValue(typeId, out var typeMethods))
+				{
+					typeMethods.Sort((a, b) => string.Compare(a.SubjectId, b.SubjectId, StringComparison.Ordinal));
+					foreach (var method in typeMethods)
+					{
+						if (method.IsStatic) continue;
+						var sig = GetMethodSignatureSuffix(method.SubjectId);
+						if (!slotMap.ContainsKey(sig))
+						{
+							slotMap[sig] = nextSlot++;
+						}
+					}
+				}
+				vtableLengths[typeId] = nextSlot;
+			}
+			_vtableSlotMap = slotMap;
+			_vtableLengths = vtableLengths;
+			_vtableTypes = new HashSet<string>(vtableLengths.Where(x => x.Value > 0).Select(x => x.Key), StringComparer.Ordinal);
+			// ── Pre-declare interface type_ids so iface_map arrays can reference them ──
+		foreach (string ifaceId in interfaceTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+		{
+			ulong ifaceStableId = ComputeStableTypeId(ifaceId);
+			builder.Append("inline constexpr CHAOS_IL2CPP_INTPTR ");
+			builder.Append(GetNativeTypeIdSymbol(ifaceId));
+			builder.Append(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
+			builder.Append(ifaceStableId.ToString());
+			builder.AppendLine("ULL);");
+		}
 		// ── TypeInfo instances (replace integer type_id system) ──
 		foreach (string item in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 		{
@@ -360,7 +423,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				parentExpr = "&" + GetNativeTypeInfoSymbol(baseTypeId);
 			}
-			// ── iface_map (sorted array of implemented interface stable_ids) ──
+			// ── iface_map (InterfaceMapEntry array with vtable_offset) ──
 			bool hasIfaceMap = _referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item, out var ifaceSubjectIds) && ifaceSubjectIds.Count > 0;
 			string ifaceMapExpr;
 			string ifaceCountExpr;
@@ -371,13 +434,19 @@ public sealed partial class NativeAotLoweringPlanner
 				ifaceCountExpr = sortedIfaceIds.Length.ToString();
 				{
 					StringBuilder sb = builder;
-					sb.Append("static constexpr CHAOS_IL2CPP_UINT64 ");
+					sb.Append("static constexpr InterfaceMapEntry ");
 					sb.Append(ifaceMapExpr);
 					sb.AppendLine("[] = {");
 					for (int i = 0; i < sortedIfaceIds.Length; i++)
 					{
-						sb.Append("    ");
+						var (vtableOffset, methodCount) = ComputeInterfaceVtableInfo(sortedIfaceIds[i]);
+						sb.Append("    { ");
 						sb.Append(GetNativeTypeIdSymbol(sortedIfaceIds[i]));
+						sb.Append(", ");
+						sb.Append(vtableOffset.ToString());
+						sb.Append(", ");
+						sb.Append(methodCount.ToString());
+						sb.Append(" }");
 						if (i < sortedIfaceIds.Length - 1) sb.AppendLine(",");
 						else sb.AppendLine();
 					}
@@ -430,16 +499,7 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendLiteral(", nullptr, 0, 3 /* interface */ };");
 				stringBuilder.AppendLine(ref handler);
 			}
-			{
-				StringBuilder stringBuilder = builder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_INTPTR ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol(item2));
-				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
-				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(");");
-				stringBuilder.AppendLine(ref handler);
-			}
+
 			num++;
 		}
 		foreach (string item3 in valueTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
@@ -471,7 +531,7 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (string item3 in sortedHashSet3)
 		{
 			ulong stableId = ComputeStableTypeId(item3);
-			// ── iface_map (sorted array of implemented interface stable_ids) ──
+			// ── iface_map (InterfaceMapEntry array with vtable_offset) ──
 			bool hasIfaceMap = _referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item3, out var ifaceSubjectIds) && ifaceSubjectIds.Count > 0;
 			string ifaceMapExpr;
 			string ifaceCountExpr;
@@ -482,13 +542,19 @@ public sealed partial class NativeAotLoweringPlanner
 				ifaceCountExpr = sortedIfaceIds.Length.ToString();
 				{
 					StringBuilder sb = builder;
-					sb.Append("static constexpr CHAOS_IL2CPP_UINT64 ");
+					sb.Append("static constexpr InterfaceMapEntry ");
 					sb.Append(ifaceMapExpr);
 					sb.AppendLine("[] = {");
 					for (int i = 0; i < sortedIfaceIds.Length; i++)
 					{
-						sb.Append("    ");
+						var (vtableOffset, methodCount) = ComputeInterfaceVtableInfo(sortedIfaceIds[i]);
+						sb.Append("    { ");
 						sb.Append(GetNativeTypeIdSymbol(sortedIfaceIds[i]));
+						sb.Append(", ");
+						sb.Append(vtableOffset.ToString());
+						sb.Append(", ");
+						sb.Append(methodCount.ToString());
+						sb.Append(" }");
 						if (i < sortedIfaceIds.Length - 1) sb.AppendLine(",");
 						else sb.AppendLine();
 					}
@@ -530,45 +596,14 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine();
 		}
-		// ── VTable slot allocation ──
-		var slotMap = new Dictionary<string, int>(StringComparer.Ordinal);
-		var vtableLengths = new Dictionary<string, int>(StringComparer.Ordinal);
-		var methodsByDeclaringTypeVT = new Dictionary<string, List<AotCoreIrMethodArtifact>>(StringComparer.Ordinal);
-		foreach (var method in _methodsBySubjectId.Values)
-		{
-			var dt = method.Identity.DeclaringTypeSubjectId;
-			if (string.IsNullOrEmpty(dt)) continue;
-			if (!methodsByDeclaringTypeVT.TryGetValue(dt, out var list))
-				methodsByDeclaringTypeVT[dt] = list = new List<AotCoreIrMethodArtifact>();
-			list.Add(method);
-		}
-		int nextSlot = 0;
-		foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
-		{
-			if (methodsByDeclaringTypeVT.TryGetValue(typeId, out var typeMethods))
-			{
-				typeMethods.Sort((a, b) => string.Compare(a.SubjectId, b.SubjectId, StringComparison.Ordinal));
-				foreach (var method in typeMethods)
-				{
-					if (method.IsStatic) continue;
-					var sig = GetMethodSignatureSuffix(method.SubjectId);
-					if (!slotMap.ContainsKey(sig))
-					{
-						slotMap[sig] = nextSlot++;
-					}
-				}
-			}
-			vtableLengths[typeId] = nextSlot;
-		}
-		_vtableSlotMap = slotMap;
-		_vtableTypes = new HashSet<string>(vtableLengths.Where(x => x.Value > 0).Select(x => x.Key), StringComparer.Ordinal);
-		// ── VTable arrays ──
+		// ── VTable arrays (uses pre-computed _vtableSlotMap, _vtableLengths) ──
 		if (referenceTypeSubjectIds.Count > 0)
 		{
+				builder.AppendLine("// ── Virtual method table arrays ──");
 			builder.AppendLine("// ── Virtual method table arrays ──");
 			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 			{
-				if (!vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
+				if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
 				var entries = new string[vtLen];
 				// Walk hierarchy to fill entries (most derived first)
 				string current = typeId;
@@ -580,13 +615,24 @@ public sealed partial class NativeAotLoweringPlanner
 						{
 							if (method.IsStatic || !CanEmitMethodBody(method)) continue;
 							var sig = GetMethodSignatureSuffix(method.SubjectId);
-							if (slotMap.TryGetValue(sig, out int slot) && slot < vtLen && entries[slot] == null)
+							if (_vtableSlotMap.TryGetValue(sig, out int slot) && slot < vtLen && entries[slot] == null)
 							{
 								entries[slot] = TryGetInstantiationStubSymbol(method) ?? method.NativeSymbol;
 							}
 						}
 					}
 					referenceTypeBaseSubjectIds.TryGetValue(current, out current);
+				}
+				// Emit extern declarations for methods referenced in vtable array
+				var externDeclared = new HashSet<string>(StringComparer.Ordinal);
+				foreach (var entry in entries)
+				{
+					if (entry != null && externDeclared.Add(entry))
+					{
+						builder.Append("extern void ");
+						builder.Append(entry);
+						builder.AppendLine("();");
+					}
 				}
 				// Emit vtable array
 				StringBuilder stringBuilder = builder;
@@ -655,13 +701,27 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine();
 		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_actual_type_info->iface_count; chaos_i++)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        if (chaos_actual_type_info->iface_map[chaos_i] == chaos_target_interface_type_info->stable_id)");
+		builder.AppendLine("        if (chaos_actual_type_info->iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
 		builder.AppendLine("        {");
 		builder.AppendLine("            return true;");
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    return false;");
+		builder.AppendLine("}");
+		builder.AppendLine();
+		builder.Append("inline CHAOS_IL2CPP_UINT32 chaos_find_interface_offset(\n");
+		builder.Append("    const TypeInfo* chaos_actual_type_info,\n");
+		builder.Append("    const TypeInfo* chaos_target_interface_type_info) noexcept\n");
+		builder.AppendLine("{");
+		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_actual_type_info->iface_count; chaos_i++)");
+		builder.AppendLine("    {");
+		builder.AppendLine("        if (chaos_actual_type_info->iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
+		builder.AppendLine("        {");
+		builder.AppendLine("            return chaos_actual_type_info->iface_map[chaos_i].vtable_offset;");
+		builder.AppendLine("        }");
+		builder.AppendLine("    }");
+		builder.AppendLine("    CHAOS_IL2CPP_ABORT();");
 		builder.AppendLine("}");
 		builder.AppendLine();
 		builder.AppendLine("bool chaos_does_type_implement_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept");
@@ -988,6 +1048,7 @@ public sealed partial class NativeAotLoweringPlanner
 				referenceTypeImplementedInterfaceSubjectIds[subjectId].Add(implementedInterfaceSubjectId);
 				TrackInterfaceType(implementedInterfaceSubjectId);
 			}
+			_interfaceTypeSubjectIds = interfaceTypeSubjectIds;
 		}
 	}
 

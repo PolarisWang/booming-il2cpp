@@ -39,19 +39,22 @@ public sealed partial class NativeAotLoweringPlanner
     // ── Phase 3: AOT Devirtualization ──
     private readonly struct DevirtualizationHint
     {
-        public static readonly DevirtualizationHint None = new(false, null!, null!);
+        public static readonly DevirtualizationHint None = new(false, null!, null!, null);
         public bool CanDevirtualize { get; }
         public string ImplementationMethodSubjectId { get; }
         public string DeclaringTypeSubjectId { get; }
+        public string? GuardTypeSubjectId { get; }  // non-null = conditional guard check
 
         public DevirtualizationHint(
             bool canDevirtualize,
             string implementationMethodSubjectId,
-            string declaringTypeSubjectId)
+            string declaringTypeSubjectId,
+            string? guardTypeSubjectId = null)
         {
             CanDevirtualize = canDevirtualize;
             ImplementationMethodSubjectId = implementationMethodSubjectId;
             DeclaringTypeSubjectId = declaringTypeSubjectId;
+            GuardTypeSubjectId = guardTypeSubjectId;
         }
     }
 
@@ -68,8 +71,6 @@ public sealed partial class NativeAotLoweringPlanner
 	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _pseudoMetadataHandleCache =
 		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
 
-	private static readonly System.Collections.Concurrent.ConcurrentDictionary<ulong, string> _nativeStringIdSymbolCache =
-		new System.Collections.Concurrent.ConcurrentDictionary<ulong, string>();
 
     private StringBuilder _sharedMethodSourceBuilder = new(4096);
 
@@ -80,7 +81,10 @@ public sealed partial class NativeAotLoweringPlanner
         Array.Empty<AotCoreIrMethodArtifact>();
 
     private IReadOnlyDictionary<string, int>? _vtableSlotMap;
+    private IReadOnlyDictionary<string, int>? _vtableLengths;
     private IReadOnlySet<string>? _vtableTypes;
+    private IReadOnlySet<string>? _interfaceTypeSubjectIds;
+    private IReadOnlySet<string>? _sealedTypeSubjectIds;
 
     private readonly RuntimeHelperShapeRegistry _shapeRegistry = RuntimeHelperShapeRegistry.BuildDefault();
 
@@ -132,6 +136,7 @@ public sealed partial class NativeAotLoweringPlanner
         _referenceTypeBaseSubjectIds = CollectReferenceTypeBaseSubjectIds(aotCoreIr);
         _referenceTypeImplementedInterfaceSubjectIds = CollectReferenceTypeImplementedInterfaceSubjectIds(aotCoreIr);
         _valueTypeSubjectIds = CollectValueTypeSubjectIds(aotCoreIr);
+        _sealedTypeSubjectIds = CollectSealedTypeSubjectIds(aotCoreIr);
 
         var reachableMethods = CollectReachableMethods(aotCoreIr, entryMethod);
         var stringLiterals = CollectStringLiterals(reachableMethods);
