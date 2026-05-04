@@ -102,7 +102,7 @@ TypeInfo 保持 `inline constexpr`，不添加 vtable/iface_map 字段。vtable 
 | Virtual dispatch (MethodEmission) | ✅ 已实现 (vtable[slot]) | `MethodEmission.cs:986-1101` |
 | Interface dispatch (iface_map) | ✅ 已实现 (InterfaceMapEntry + vtable_offset) | `ObjectModelEmission.cs`, `MethodEmission.cs` |
 | AOT 去虚化 | ✅ 已实现 (monomorphic + sealed class) | `InvocationPlanning.cs:412-442`, `MethodEmission.cs:1030-1051` |
-| HotUpdate vtable 支持 | ❌ 待实现 (Phase 3) | 运行时 API |
+| HotUpdate vtable 支持 | ✅ Phase 4a 完成 (类型注册); ❌ Phase 4b 待实现 (接口追加) | 运行时 API |
 
 ## 迁移计划（更新版）
 
@@ -111,7 +111,8 @@ TypeInfo 保持 `inline constexpr`，不添加 vtable/iface_map 字段。vtable 
 | 1 | Virtual dispatch: if-else → vtable[slot] | `MethodEmission.cs:986-1086` | **✅ 完成** (2026-05-04) |
 | 2 | Interface dispatch: iface_map → InterfaceMapEntry | `ObjectModelEmission.cs`, `TypeInfo`, `type_registry.cpp` | **✅ 完成** (2026-05-04) |
 | 3 | AOT 去虚化扩展 | codegen 静态分析 | **✅ Phase 3a 完成** (2026-05-04) |
-| 4 | HotUpdate vtable 支持 | 运行时 API | 待规划 |
+| 4a | vtableLengths 截断 + HotUpdate 类型注册验证 | ObjectModelEmission.cs, type_registry.cpp | **✅ 完成** (2026-05-04) |
+| 4b | runtime_iface_map + 接口追加 | 运行时 API | 待规划 |
 
 ## Phase 1 实施记录 (2026-05-04)
 
@@ -206,6 +207,26 @@ struct InterfaceMapEntry {
 
 ### 验证
 - `dotnet build Chaos.IL2CPP.CodeGen.csproj` — 0 errors, 89 warnings (pre-existing)
+
+## Phase 4a 实施记录 (2026-05-04)
+
+### 决策背景
+
+全局 slot counter 是接口派发正确性的前提（非疏忽）。跨继承链的 vtable nullptr 空位是已知且接受的代价。
+
+### 变更内容
+
+**ObjectModelEmission.cs** -- vtableLengths 精确计算（行 402-426）：
+
+**删除：**
+- `vtableLengths[typeId] = nextSlot` 全局 nextSlot 赋值 -- 导致跨链 vtable 数组尾部含 nullptr
+
+**新增：**
+- 独立的 vtableLengths 计算 pass，遍历每个类型的继承链，取其 `maxSlotInHierarchy + 1`
+- 全局 slot 分配算法保持不变（`_vtableSlotMap` 仍用全局 nextSlot，保证接口派发正确性）
+
+### 验证
+- `dotnet build Chaos.IL2CPP.CodeGen.csproj` -- 0 errors, 90 warnings (pre-existing)
 
 ## 参考
 

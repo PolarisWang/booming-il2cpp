@@ -337,6 +337,6 @@ const RuntimeInstantiationBridgeV0* GetBridgeV0() {
 }  // namespace chaos::il2cpp::runtime_instantiation
 
 extern "C" CHAOS_RUNTIME_ABI_EXPORT const RuntimeInstantiationBridgeV0*
-CHAOS_RUNTIME_ABI_CALL chaos_runtime_instantiation_get_bridge_v0(void) {
+CHAOS_RUNTIME_ABI_CALL ChaosRuntimeInstantiationGetBridgeV0(void) {
     return chaos::il2cpp::runtime_instantiation::GetBridgeV0();
 }

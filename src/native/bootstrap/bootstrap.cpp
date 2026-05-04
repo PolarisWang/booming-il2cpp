@@ -256,14 +256,10 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
         }
     }
 
+    // The AOT module registers its string table via a static initializer in the
+    // generated translation unit.  Nothing to do here — g_aot_entries defaults
+    // to nullptr, which makes Resolve() fall through to the dynamic table only.
     g_bootstrap_state.is_bootstrapped = true;
-
-    // Native-reference proof hosts do not guarantee an AOT-baked string table.
-    // Initialize the runtime table with an empty AOT view; generated entrypoints
-    // can still intern strings dynamically when they need them.
-    chaos::il2cpp::string_table::InitializeFromAot(
-        nullptr,
-        0u);
 
     return CHAOS_BRIDGE_STATUS_OK;
 }

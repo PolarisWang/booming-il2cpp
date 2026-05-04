@@ -8,7 +8,9 @@
 // Tables are in the chaos::il2cpp::runtime_core::aot_metadata namespace and are looked up
 // by metadata token range or by name.
 
-#pragma once
+#ifndef CHAOS_IL2CPP_REFLECTION_METADATA_IMPL_H_
+#define CHAOS_IL2CPP_REFLECTION_METADATA_IMPL_H_
+
 #include "reflection_query_model.h"
 
 namespace chaos::il2cpp::runtime_core::aot_metadata {
@@ -244,3 +246,5 @@ inline const ReflectionQueryTypeDescriptor* FindTypeByName(const char* namespace
 }
 
 }  // namespace chaos::il2cpp::runtime_core::aot_metadata
+
+#endif  // CHAOS_IL2CPP_REFLECTION_METADATA_IMPL_H_

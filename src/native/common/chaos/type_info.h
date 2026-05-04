@@ -21,6 +21,8 @@
 
 #include <chaos/native_types.h>
 
+namespace ChaosIl2cpp::Common {
+
 // ── 64-bit FNV-1a hash ─────────────────────────────────────────
 // The C# codegen side (NativeAotLoweringPlanner.ObjectModelUtilities.cs)
 // implements the identical algorithm in ComputeStableTypeId() so that
@@ -56,14 +58,16 @@ static_assert(sizeof(InterfaceMapEntry) == 16,
 struct TypeInfo {
     const TypeInfo* parent;                  // base type, nullptr = System.Object (8 bytes)
     CHAOS_IL2CPP_UINT64 stable_id;           // FNV-1a hash of type subject ID (8 bytes)
-    const InterfaceMapEntry* iface_map;      // sorted array of InterfaceMapEntry (8 bytes)
+    const InterfaceMapEntry* iface_map;      // AOT compile-time iface_map (8 bytes)
+    const InterfaceMapEntry* runtime_iface_map; // HotUpdate-追加的接口映射, heap 分配 (8 bytes)
     CHAOS_IL2CPP_UINT32 iface_count;         // number of entries in iface_map (4 bytes)
+    CHAOS_IL2CPP_UINT32 runtime_iface_count; // number of entries in runtime_iface_map (4 bytes)
     CHAOS_IL2CPP_UINT8  type_shape;          // 1=reference, 2=value, 3=interface (1 byte)
-    // 3 bytes padding
+    // 7 bytes padding
 };
 
-static_assert(sizeof(TypeInfo) == 32,
-              "TypeInfo layout: parent(8) + stable_id(8) + iface_map(8) + iface_count(4) + type_shape(1) + padding(3) = 32 bytes");
+static_assert(sizeof(TypeInfo) == 48,
+              "TypeInfo layout: parent(8) + stable_id(8) + iface_map(8) + runtime_iface_map(8) + iface_count(4) + runtime_iface_count(4) + type_shape(1) + padding(7) = 48 bytes");
 
 // ── Common type-shape constants ─────────────────────────────────
 
@@ -107,22 +111,16 @@ inline constexpr CHAOS_IL2CPP_SIZE kChaosMaxDynamicTypes = 256;
 ///
 /// @return Pointer to the newly allocated TypeInfo, or nullptr if the
 ///         registry is full.
-TypeInfo* chaos_register_type(
-    const char* name,
-    const TypeInfo* parent,
-    CHAOS_IL2CPP_UINT8 type_shape,
-    const InterfaceMapEntry* iface_map = nullptr,
-    CHAOS_IL2CPP_UINT32 iface_count = 0,
-    CHAOS_IL2CPP_UINT64* out_stable_id = nullptr) noexcept;
+}  // namespace ChaosIl2cpp::Common
 
-/// Find a registered dynamic type by its stable_id.
-///
-/// Searches the dynamic type registry.  Does NOT search static
-/// (inline constexpr) TypeInfo instances — static types already have
-/// known addresses accessed via `&chaos_type_info_X` symbols.
-///
-/// @return Pointer to the matching TypeInfo, or nullptr if not found.
-const TypeInfo* chaos_find_type_by_stable_id(
-    CHAOS_IL2CPP_UINT64 stable_id) noexcept;
+// Bring all common type identities into global scope so that all
+// translation units (including generated code inside anonymous
+// namespaces) can reference TypeInfo/InterfaceMapEntry etc. without
+// namespace qualification.
+using namespace ChaosIl2cpp::Common;
+
+// Note: chaos_register_type() and chaos_find_type_by_stable_id() are
+// now declared in src/native/runtime-core/type_registry.h under the
+// chaos::il2cpp::runtime_core namespace.
 
 #endif  // CHAOS_IL2CPP_COMMON_TYPE_INFO_H_

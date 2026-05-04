@@ -286,7 +286,7 @@ public sealed partial class NativeAotLoweringPlanner
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder10 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(62, 1, stringBuilder);
-			handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top++] = chaos_store_int64(");
+			handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top++] = ChaosStoreInt64(");
 			handler.AppendFormatted(FormatInt64Literal(GetRequiredInt64Operand(instruction)));
 			handler.AppendLiteral(");");
 			stringBuilder10.AppendLine(ref handler);
@@ -298,7 +298,7 @@ public sealed partial class NativeAotLoweringPlanner
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder9 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(64, 1, stringBuilder);
-			handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top++] = chaos_store_float32(");
+			handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top++] = ChaosStoreFloat32(");
 			handler.AppendFormatted(FormatFloat32Literal(GetRequiredSingleOperand(instruction)));
 			handler.AppendLiteral(");");
 			stringBuilder9.AppendLine(ref handler);
@@ -310,7 +310,7 @@ public sealed partial class NativeAotLoweringPlanner
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder8 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(64, 1, stringBuilder);
-			handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top++] = chaos_store_float64(");
+			handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top++] = ChaosStoreFloat64(");
 			handler.AppendFormatted(FormatFloat64Literal(GetRequiredDoubleOperand(instruction)));
 			handler.AppendLiteral(");");
 			stringBuilder8.AppendLine(ref handler);
@@ -364,10 +364,10 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitStackTopWideIntegralConversion(builder, "CHAOS_IL2CPP_UINT64", "chaos_store_uint64", nextOffset, instruction.Op);
 			break;
 		case "conv.r4":
-			EmitStackTopFloatingPointConversion(builder, "float", "chaos_store_float32", nextOffset, instruction.Op);
+			EmitStackTopFloatingPointConversion(builder, "float", "ChaosStoreFloat32", nextOffset, instruction.Op);
 			break;
 		case "conv.r8":
-			EmitStackTopFloatingPointConversion(builder, "double", "chaos_store_float64", nextOffset, instruction.Op);
+			EmitStackTopFloatingPointConversion(builder, "double", "ChaosStoreFloat64", nextOffset, instruction.Op);
 			break;
 		case "conv.u":
 			EmitStackTopConversion(builder, "CHAOS_IL2CPP_UINTPTR", nextOffset, instruction.Op);
@@ -436,28 +436,28 @@ public sealed partial class NativeAotLoweringPlanner
 			break;
 		}
 		case "add":
-			EmitBinaryArithmetic(builder, "chaos_wrap_add", nextOffset, instruction.Op);
+			EmitBinaryArithmetic(builder, "ChaosWrapAdd", nextOffset, instruction.Op);
 			break;
 		case "add.ovf":
 			EmitOverflowingBinaryArithmetic(builder, instruction, "+", nextOffset, instruction.Op);
 			break;
 		case "sub":
-			EmitBinaryArithmetic(builder, "chaos_wrap_sub", nextOffset, instruction.Op);
+			EmitBinaryArithmetic(builder, "ChaosWrapSub", nextOffset, instruction.Op);
 			break;
 		case "sub.ovf":
 			EmitOverflowingBinaryArithmetic(builder, instruction, "-", nextOffset, instruction.Op);
 			break;
 		case "mul":
-			EmitBinaryArithmetic(builder, "chaos_wrap_mul", nextOffset, instruction.Op);
+			EmitBinaryArithmetic(builder, "ChaosWrapMul", nextOffset, instruction.Op);
 			break;
 		case "mul.ovf":
 			EmitOverflowingBinaryArithmetic(builder, instruction, "*", nextOffset, instruction.Op);
 			break;
 		case "div":
-			EmitBinaryArithmetic(builder, "chaos_div", nextOffset, instruction.Op);
+			EmitBinaryArithmetic(builder, "ChaosDiv", nextOffset, instruction.Op);
 			break;
 		case "rem":
-			EmitBinaryArithmetic(builder, "chaos_rem", nextOffset, instruction.Op);
+			EmitBinaryArithmetic(builder, "ChaosRem", nextOffset, instruction.Op);
 			break;
 		case "shl":
 			EmitShift(builder, instruction, "chaos_shift_left_int32", nextOffset, instruction.Op);
@@ -555,10 +555,10 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitLoadIndirect(builder, "CHAOS_IL2CPP_INT64", "static_cast<CHAOS_IL2CPP_INT64>", nextOffset, instruction.Op);
 			break;
 		case "ldind.r4":
-			EmitLoadIndirect(builder, "CHAOS_IL2CPP_FLOAT32", "chaos_store_float32", nextOffset, instruction.Op);
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_FLOAT32", "ChaosStoreFloat32", nextOffset, instruction.Op);
 			break;
 		case "ldind.r8":
-			EmitLoadIndirect(builder, "CHAOS_IL2CPP_FLOAT64", "chaos_store_float64", nextOffset, instruction.Op);
+			EmitLoadIndirect(builder, "CHAOS_IL2CPP_FLOAT64", "ChaosStoreFloat64", nextOffset, instruction.Op);
 			break;
 		case "ldind.ref":
 			EmitLoadIndirect(builder, "CHAOS_IL2CPP_INTPTR", "static_cast<CHAOS_IL2CPP_INTPTR>", nextOffset, instruction.Op);

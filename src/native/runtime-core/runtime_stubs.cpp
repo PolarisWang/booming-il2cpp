@@ -10,16 +10,17 @@
 #include <chaos/common.h>
 #include <cstring>
 
+namespace chaos::il2cpp::runtime_core {
 extern "C"
 {
 
 // ── Array operations ───────────────────────────────────────────────
 
-void chaos_array_clear(CHAOS_IL2CPP_INTPTR /*array*/, CHAOS_IL2CPP_INT32 /*index*/, CHAOS_IL2CPP_INT32 /*count*/) noexcept
+void ChaosArrayClear(CHAOS_IL2CPP_INTPTR /*array*/, CHAOS_IL2CPP_INT32 /*index*/, CHAOS_IL2CPP_INT32 /*count*/) noexcept
 {
 }
 
-CHAOS_IL2CPP_INT32 chaos_array_get_length(CHAOS_IL2CPP_INTPTR /*array*/, CHAOS_IL2CPP_INT32 /*dimension*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosArrayGetLength(CHAOS_IL2CPP_INTPTR /*array*/, CHAOS_IL2CPP_INT32 /*dimension*/) noexcept
 {
     return 0;
 }
@@ -29,24 +30,24 @@ CHAOS_IL2CPP_INT32 chaos_array_get_length(CHAOS_IL2CPP_INTPTR /*array*/, CHAOS_I
 // pack/unpack 64-bit integer and double values. On x64, CHAOS_IL2CPP_INTPTR
 // is already 64 bits so store/load_int64 are identity operations.
 
-CHAOS_IL2CPP_INTPTR chaos_store_int64(CHAOS_IL2CPP_INT64 value) noexcept
+CHAOS_IL2CPP_INTPTR ChaosStoreInt64(CHAOS_IL2CPP_INT64 value) noexcept
 {
     return static_cast<CHAOS_IL2CPP_INTPTR>(value);
 }
 
-CHAOS_IL2CPP_INTPTR chaos_store_float64(CHAOS_IL2CPP_FLOAT64 value) noexcept
+CHAOS_IL2CPP_INTPTR ChaosStoreFloat64(CHAOS_IL2CPP_FLOAT64 value) noexcept
 {
     CHAOS_IL2CPP_INT64 bits;
     std::memcpy(&bits, &value, sizeof(bits));
     return static_cast<CHAOS_IL2CPP_INTPTR>(bits);
 }
 
-CHAOS_IL2CPP_INT64 chaos_load_int64(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_INT64 ChaosLoadInt64(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     return static_cast<CHAOS_IL2CPP_INT64>(value);
 }
 
-CHAOS_IL2CPP_FLOAT64 chaos_load_float64(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_FLOAT64 ChaosLoadFloat64(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     CHAOS_IL2CPP_INT64 bits = static_cast<CHAOS_IL2CPP_INT64>(value);
     CHAOS_IL2CPP_FLOAT64 result;
@@ -56,26 +57,26 @@ CHAOS_IL2CPP_FLOAT64 chaos_load_float64(CHAOS_IL2CPP_INTPTR value) noexcept
 
 // ─── Buffer operations ─────────────────────────────────────────────
 
-CHAOS_IL2CPP_INT32 chaos_buffer_byte_length(CHAOS_IL2CPP_INTPTR /*array*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosBufferByteLength(CHAOS_IL2CPP_INTPTR /*array*/) noexcept
 {
     return 0;
 }
 
 // ─── DateTime operations ──────────────────────────────────────────
 
-CHAOS_IL2CPP_INT64 chaos_datetime_get_utc_now(void) noexcept
+CHAOS_IL2CPP_INT64 ChaosDatetimeGetUtcNow(void) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INT32 chaos_datetime_get_hash_code(CHAOS_IL2CPP_INTPTR /*datetime*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosDatetimeGetHashCode(CHAOS_IL2CPP_INTPTR /*datetime*/) noexcept
 {
     return 0;
 }
 
 // ─── Math operations ──────────────────────────────────────────────
 
-CHAOS_IL2CPP_INT64 chaos_math_sqrt(CHAOS_IL2CPP_INT64 value) noexcept
+CHAOS_IL2CPP_INT64 ChaosMathSqrt(CHAOS_IL2CPP_INT64 value) noexcept
 {
     double d;
     CHAOS_IL2CPP_MEMCPY(&d, &value, sizeof(d));
@@ -87,230 +88,230 @@ CHAOS_IL2CPP_INT64 chaos_math_sqrt(CHAOS_IL2CPP_INT64 value) noexcept
 
 // ─── Interlocked / threading ──────────────────────────────────────
 
-void chaos_interlocked_memory_barrier(void) noexcept
+void ChaosInterlockedMemoryBarrier(void) noexcept
 {
 }
 
 // ─── Exception helpers ────────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_exception_get_base_exception(CHAOS_IL2CPP_INTPTR exc) noexcept
+CHAOS_IL2CPP_INTPTR ChaosExceptionGetBaseException(CHAOS_IL2CPP_INTPTR exc) noexcept
 {
     return exc;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_exception_get_inner_exception(CHAOS_IL2CPP_INTPTR exc) noexcept
+CHAOS_IL2CPP_INTPTR ChaosExceptionGetInnerException(CHAOS_IL2CPP_INTPTR exc) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INT32 chaos_exception_get_hresult(CHAOS_IL2CPP_INTPTR /*exc*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosExceptionGetHresult(CHAOS_IL2CPP_INTPTR /*exc*/) noexcept
 {
     return 0;
 }
 
 // ─── Object helpers ───────────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_object_equals_static(CHAOS_IL2CPP_INTPTR /*left*/, CHAOS_IL2CPP_INTPTR /*right*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosObjectEqualsStatic(CHAOS_IL2CPP_INTPTR /*left*/, CHAOS_IL2CPP_INTPTR /*right*/) noexcept
 {
     return 0;
 }
 
-void chaos_object_ctor(CHAOS_IL2CPP_INTPTR /*obj*/) noexcept
+void ChaosObjectCtor(CHAOS_IL2CPP_INTPTR /*obj*/) noexcept
 {
 }
 
 // ─── GUID / Random ────────────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_guid_new_guid(void) noexcept
+CHAOS_IL2CPP_INTPTR ChaosGuidNewGuid(void) noexcept
 {
     return 0;
 }
 
-void chaos_random_next_bytes(CHAOS_IL2CPP_INTPTR /*rng*/, CHAOS_IL2CPP_INTPTR /*buffer*/) noexcept
+void ChaosRandomNextBytes(CHAOS_IL2CPP_INTPTR /*rng*/, CHAOS_IL2CPP_INTPTR /*buffer*/) noexcept
 {
 }
 
-CHAOS_IL2CPP_INT64 chaos_random_next_double(CHAOS_IL2CPP_INTPTR /*rng*/) noexcept
+CHAOS_IL2CPP_INT64 ChaosRandomNextDouble(CHAOS_IL2CPP_INTPTR /*rng*/) noexcept
 {
     return 0;
 }
 
 // ─── Culture helpers ──────────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_culture_get_current(void) noexcept
+CHAOS_IL2CPP_INTPTR ChaosCultureGetCurrent(void) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_culture_get_invariant(void) noexcept
+CHAOS_IL2CPP_INTPTR ChaosCultureGetInvariant(void) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_culture_get_compare_info(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosCultureGetCompareInfo(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_culture_get_date_time_format(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosCultureGetDateTimeFormat(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_culture_get_display_name(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosCultureGetDisplayName(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_culture_get_name(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosCultureGetName(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_culture_get_number_format(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosCultureGetNumberFormat(CHAOS_IL2CPP_INTPTR /*culture*/) noexcept
 {
     return 0;
 }
 
 // ─── String helpers ───────────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_string_contains(CHAOS_IL2CPP_INTPTR /*str*/, CHAOS_IL2CPP_INTPTR /*value*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosStringContains(CHAOS_IL2CPP_INTPTR /*str*/, CHAOS_IL2CPP_INTPTR /*value*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_string_join_ss(CHAOS_IL2CPP_INTPTR /*separator*/, CHAOS_IL2CPP_INTPTR /*value*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR /*separator*/, CHAOS_IL2CPP_INTPTR /*value*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_string_starts_with(CHAOS_IL2CPP_INTPTR /*str*/, CHAOS_IL2CPP_INTPTR /*value*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosStringStartsWith(CHAOS_IL2CPP_INTPTR /*str*/, CHAOS_IL2CPP_INTPTR /*value*/) noexcept
 {
     return 0;
 }
 
 // ─── Reflection helpers ───────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_is_defined(CHAOS_IL2CPP_INTPTR /*assembly*/, CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsDefined(CHAOS_IL2CPP_INTPTR /*assembly*/, CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_is_subclass_of(CHAOS_IL2CPP_INTPTR /*type*/, CHAOS_IL2CPP_INTPTR /*base*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOf(CHAOS_IL2CPP_INTPTR /*type*/, CHAOS_IL2CPP_INTPTR /*base*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_generic_type(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsGenericType(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_value_type(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsValueType(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_namespace(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetNamespace(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_reflected_type(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INT32 chaos_reflection_get_calling_convention(CHAOS_IL2CPP_INTPTR /*method*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosReflectionGetCallingConvention(CHAOS_IL2CPP_INTPTR /*method*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_public(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsPublic(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
 {
     return 0;
 }
 
 // ─── Module reflection ────────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_module_get_type(CHAOS_IL2CPP_INTPTR /*module*/, CHAOS_IL2CPP_INTPTR /*name*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetType(CHAOS_IL2CPP_INTPTR /*module*/, CHAOS_IL2CPP_INTPTR /*name*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_module_get_types(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetTypes(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_module_assembly(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleAssembly(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
 {
     return 0;
 }
 
 // ─── Parameter reflection ─────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_required_custom_modifiers(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INT32 chaos_reflection_get_param_attributes(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosReflectionGetParamAttributes(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_default_value(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
 {
     return 0;
 }
 
 // ─── Runtime helpers ──────────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_formattablestring_factory_create(CHAOS_IL2CPP_INTPTR /*format*/, CHAOS_IL2CPP_INTPTR /*args*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosFormattablestringFactoryCreate(CHAOS_IL2CPP_INTPTR /*format*/, CHAOS_IL2CPP_INTPTR /*args*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_runtime_helpers_equals(CHAOS_IL2CPP_INTPTR /*left*/, CHAOS_IL2CPP_INTPTR /*right*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersEquals(CHAOS_IL2CPP_INTPTR /*left*/, CHAOS_IL2CPP_INTPTR /*right*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INT32 chaos_runtime_helpers_get_hash_code(CHAOS_IL2CPP_INTPTR /*value*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosRuntimeHelpersGetHashCode(CHAOS_IL2CPP_INTPTR /*value*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_runtime_helpers_get_object_value(CHAOS_IL2CPP_INTPTR /*value*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetObjectValue(CHAOS_IL2CPP_INTPTR /*value*/) noexcept
 {
     return 0;
 }
 
 // ─── Method handle operations ─────────────────────────────────────
 
-CHAOS_IL2CPP_INT32 chaos_runtimemethodhandle_get_hash_code(CHAOS_IL2CPP_INT64 /*handle*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosRuntimemethodhandleGetHashCode(CHAOS_IL2CPP_INT64 /*handle*/) noexcept
 {
     return 0;
 }
 
 // ─── Runtime-wrapped exception ────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_runtimewrapped_get_wrapped_exception(CHAOS_IL2CPP_INTPTR /*exc*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosRuntimewrappedGetWrappedException(CHAOS_IL2CPP_INTPTR /*exc*/) noexcept
 {
     return 0;
 }
 
 // ─── Reflection assignable ─────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_is_assignable_from(CHAOS_IL2CPP_INTPTR /*target*/, CHAOS_IL2CPP_INTPTR /*source*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFrom(CHAOS_IL2CPP_INTPTR /*target*/, CHAOS_IL2CPP_INTPTR /*source*/) noexcept
 {
     return 0;
 }
 
 // ─── Float32 marshalling ───────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_store_float32(CHAOS_IL2CPP_FLOAT32 value) noexcept
+CHAOS_IL2CPP_INTPTR ChaosStoreFloat32(CHAOS_IL2CPP_FLOAT32 value) noexcept
 {
     CHAOS_IL2CPP_INT32 bits;
     std::memcpy(&bits, &value, sizeof(bits));
@@ -319,69 +320,69 @@ CHAOS_IL2CPP_INTPTR chaos_store_float32(CHAOS_IL2CPP_FLOAT32 value) noexcept
 
 // ─── Reflection generic ────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_generic_param_constraints(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamConstraints(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
 // ─── Reflection member info ────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_virtual(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsVirtual(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_base_definition(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseDefinition(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
 {
     return 0;
 }
 
 // ─── Reflection field handle ───────────────────────────────────
 
-CHAOS_IL2CPP_INT32 chaos_runtimefieldhandle_get_hash_code(CHAOS_IL2CPP_INTPTR /*handle*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosRuntimefieldhandleGetHashCode(CHAOS_IL2CPP_INTPTR /*handle*/) noexcept
 {
     return 0;
 }
 
 // ─── Reflection module ─────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_module_name(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleName(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_module_name_only(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleNameOnly(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
 {
     return 0;
 }
 
 // ─── Reflection parameter helpers ──────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_has_default_value(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionHasDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameter_type(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameterType(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_param_position(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetParamPosition(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
 {
     return 0;
 }
 
 // ─── Reflection type handle ────────────────────────────────────
 
-CHAOS_IL2CPP_INT32 chaos_runtimetypehandle_get_hash_code(CHAOS_IL2CPP_INTPTR /*handle*/) noexcept
+CHAOS_IL2CPP_INT32 ChaosRuntimetypehandleGetHashCode(CHAOS_IL2CPP_INTPTR /*handle*/) noexcept
 {
     return 0;
 }
 
 // ─── Reflection constructors ───────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_constructors_default(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
@@ -389,141 +390,141 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_get_constructors_default(CHAOS_IL2CPP_INTPT
 
 // ─── Reflection assignable (supplementary) ──────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_is_assignable_to(CHAOS_IL2CPP_INTPTR /*target*/, CHAOS_IL2CPP_INTPTR /*source*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableTo(CHAOS_IL2CPP_INTPTR /*target*/, CHAOS_IL2CPP_INTPTR /*source*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_is_instance_of_type(CHAOS_IL2CPP_INTPTR /*obj*/, CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfType(CHAOS_IL2CPP_INTPTR /*obj*/, CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
 // ─── Assembly reflection ────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_image_runtime_version(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetImageRuntimeVersion(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_constructed_generic(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsConstructedGeneric(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_interface(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsInterface(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_array(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsArray(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_assembly_full_name(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyFullName(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_generic_param_pos(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamPos(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_enum(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsEnum(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_abstract(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsAbstract(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_assembly_qualified_name(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_assembly_get_types(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetTypes(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_calling_assembly(void) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetCallingAssembly(void) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_entry_assembly(void) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetEntryAssembly(void) noexcept
 {
     return 0;
 }
 
 // Reflection supplementary
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_sealed(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsSealed(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_is_generic_type_def(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsGenericTypeDef(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_from_assembly_bool(CHAOS_IL2CPP_INTPTR /*assembly*/, CHAOS_IL2CPP_INTPTR /*name*/, CHAOS_IL2CPP_INT32 /*throw_on_error*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromAssemblyBool(CHAOS_IL2CPP_INTPTR /*assembly*/, CHAOS_IL2CPP_INTPTR /*name*/, CHAOS_IL2CPP_INT32 /*throw_on_error*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_executing_assembly(void) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetExecutingAssembly(void) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_assembly_location(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyLocation(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
 {
     return 0;
 }
 
 // ─── Generic type reflection ────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_make_generic_type(CHAOS_IL2CPP_INTPTR /*def*/, CHAOS_IL2CPP_INTPTR /*args*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericType(CHAOS_IL2CPP_INTPTR /*def*/, CHAOS_IL2CPP_INTPTR /*args*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_contains_generic_params(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetContainsGenericParams(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
 // ─── Parameter default value ────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_raw_default_value(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetRawDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
 {
     return 0;
 }
 
 // ─── Type reflection ────────────────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_fields_bindingflags(CHAOS_IL2CPP_INTPTR /*type*/, CHAOS_IL2CPP_INT32 /*flags*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR /*type*/, CHAOS_IL2CPP_INT32 /*flags*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_methods_bindingflags(CHAOS_IL2CPP_INTPTR /*type*/, CHAOS_IL2CPP_INT32 /*flags*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodsBindingflags(CHAOS_IL2CPP_INTPTR /*type*/, CHAOS_IL2CPP_INT32 /*flags*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_base_type(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_full_name(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
@@ -531,7 +532,7 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_get_type_full_name(CHAOS_IL2CPP_INTPTR /*ty
 
 // ─── Volatile operations ──────────────────────────────────────────
 
-CHAOS_IL2CPP_INT32 chaos_volatile_read(CHAOS_IL2CPP_INTPTR ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept
 {
     return *reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(ptr);
 }
@@ -540,3 +541,4 @@ CHAOS_IL2CPP_INT32 chaos_volatile_read(CHAOS_IL2CPP_INTPTR ptr) noexcept
 extern "C" void (*g_chaos_populate_generic_registration)(void) = nullptr;
 
 }  // extern "C"
+}  // namespace chaos::il2cpp::runtime_core

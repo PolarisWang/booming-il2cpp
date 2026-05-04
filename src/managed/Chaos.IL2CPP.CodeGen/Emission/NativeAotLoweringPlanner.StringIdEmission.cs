@@ -111,6 +111,15 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine();
         builder.AppendLine("constexpr CHAOS_IL2CPP_UINT32 chaos_aot_string_entry_count = sizeof(chaos_aot_string_entries) / sizeof(chaos_aot_string_entries[0]);");
         builder.AppendLine();
+        builder.AppendLine("// Register the AOT-baked string table with the runtime before any code uses it.");
+        builder.AppendLine("static const CHAOS_IL2CPP_UINT32 s_aot_string_table_registered = []()");
+        builder.AppendLine("{");
+        builder.AppendLine("    ::chaos::il2cpp::string_table::InitializeFromAot(");
+        builder.AppendLine("        chaos_aot_string_entries,");
+        builder.AppendLine("        chaos_aot_string_entry_count);");
+        builder.AppendLine("    return 0u;");
+        builder.AppendLine("}();");
+        builder.AppendLine();
     }
 
     private bool TryGetStringId(string literal, out ulong id)
