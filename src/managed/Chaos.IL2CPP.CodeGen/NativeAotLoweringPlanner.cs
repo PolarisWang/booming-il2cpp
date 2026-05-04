@@ -36,6 +36,28 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlyList<string> _cachedClosureAssemblyPaths = Array.Empty<string>();
     private IReadOnlyDictionary<string, string> _closureAssemblyPathByName =
         new Dictionary<string, string>(StringComparer.Ordinal);
+    // ── Phase 3: AOT Devirtualization ──
+    private readonly struct DevirtualizationHint
+    {
+        public static readonly DevirtualizationHint None = new(false, null!, null!);
+        public bool CanDevirtualize { get; }
+        public string ImplementationMethodSubjectId { get; }
+        public string DeclaringTypeSubjectId { get; }
+
+        public DevirtualizationHint(
+            bool canDevirtualize,
+            string implementationMethodSubjectId,
+            string declaringTypeSubjectId)
+        {
+            CanDevirtualize = canDevirtualize;
+            ImplementationMethodSubjectId = implementationMethodSubjectId;
+            DeclaringTypeSubjectId = declaringTypeSubjectId;
+        }
+    }
+
+    private Dictionary<string, DevirtualizationHint> _devirtualizationHints =
+        new Dictionary<string, DevirtualizationHint>(StringComparer.Ordinal);
+
 
 	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _cppStringLiteralCache =
 		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
@@ -56,6 +78,9 @@ public sealed partial class NativeAotLoweringPlanner
 
     private IReadOnlyList<AotCoreIrMethodArtifact> _genericStaticMethodCandidates =
         Array.Empty<AotCoreIrMethodArtifact>();
+
+    private IReadOnlyDictionary<string, int>? _vtableSlotMap;
+    private IReadOnlySet<string>? _vtableTypes;
 
     private readonly RuntimeHelperShapeRegistry _shapeRegistry = RuntimeHelperShapeRegistry.BuildDefault();
 
@@ -360,6 +385,10 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine("        {");
             builder.AppendLine($"            auto* chaos_delegate = new {GetNativeTypeSymbol(delegateTypeSubjectId)}{{}};");
             builder.AppendLine($"            chaos_delegate->header.type_info = &{GetNativeTypeInfoSymbol(delegateTypeSubjectId)};");
+            if (_vtableTypes?.Contains(delegateTypeSubjectId) == true)
+            {
+                builder.AppendLine($"            chaos_delegate->header.vtable = {GetNativeVTableSymbol(delegateTypeSubjectId)};");
+            }
             builder.AppendLine("            return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);");
             builder.AppendLine("        }");
         }
