@@ -25,11 +25,11 @@ extern "C" CHAOS_IL2CPP_INTPTR {{ helper_symbol }}(CHAOS_IL2CPP_INTPTR chaos_arg
     };
 
     auto* chaos_enumerable_header = reinterpret_cast<chaos_object_header*>(chaos_arg_1);
-    if (chaos_enumerable_header->type_id == chaos_type_id_managed_array)
+    if (chaos_enumerable_header->type_info == &chaos_type_info_managed_array)
     {
         auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_arg_1);
         if (chaos_array->element_type_shape != {{ reference_type_shape_value }} ||
-            chaos_array->element_type_id != {{ string_type_id_symbol }})
+            chaos_array->element_type_info != {{ string_type_info_symbol }})
         {
             CHAOS_IL2CPP_ABORT();
         }
@@ -54,7 +54,7 @@ extern "C" CHAOS_IL2CPP_INTPTR {{ helper_symbol }}(CHAOS_IL2CPP_INTPTR chaos_arg
     }
 
 {{~ for entry in variant_entries }}
-    if (chaos_enumerable_header->type_id == {{ entry.enumerable_type_id_symbol }})
+    if (chaos_enumerable_header->type_info == &{{ entry.enumerable_type_info_symbol }})
     {
         const auto chaos_enumerator = {{ entry.get_enumerator_symbol }}(chaos_arg_1);
         while (true)

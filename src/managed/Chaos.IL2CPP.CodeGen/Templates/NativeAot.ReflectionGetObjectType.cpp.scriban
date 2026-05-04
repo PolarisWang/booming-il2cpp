@@ -6,7 +6,7 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_get_object_type(CHAOS_IL2CPP_INTPTR chaos_o
     }
 
     auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_object_value);
-    switch (chaos_header->type_id)
+    switch (chaos_header->type_info->stable_id)
     {
 {{~ for entry in type_entries ~}}
         case {{ entry.type_id_symbol }}:

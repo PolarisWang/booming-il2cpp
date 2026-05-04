@@ -3,6 +3,7 @@
 
 #include "codegen_bridge.h"
 #include "memory_domain.h"
+#include "runtime_abi.h"
 
 #include <cstdint>
 
@@ -12,7 +13,8 @@ struct BootstrapState {
     const CodeRegistrationV0* code_registration;
     const MetadataRegistrationV0* metadata_registration;
     const CodegenRegistrationOptionsV0* options;
-    CHAOS_IL2CPP_UINT32 aot_domain_id;          ///< MemoryDomain for the AOT root module (0 = not registered).
+    ImageHandle aot_image_handle;                 ///< ImageHandle for the AOT root module (set by caller).
+    CHAOS_IL2CPP_UINT32 aot_domain_id;           ///< MemoryDomain for the AOT root module (0 = not registered).
     bool is_registered;
     bool is_bootstrapped;
 };

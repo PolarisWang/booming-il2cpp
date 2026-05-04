@@ -12,7 +12,7 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_create_instance(CHAOS_IL2CPP_INTPTR chaos_t
         case {{ ctor.type_handle_literal }}:
         {
             auto* chaos_object = new {{ ctor.native_type_symbol }}{};
-            chaos_object->header.type_id = {{ ctor.type_id_symbol }};
+            chaos_object->header.type_info = &{{ ctor.type_info_symbol }};
             {{ ctor.ctor_symbol }}(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
             return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
         }

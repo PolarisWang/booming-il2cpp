@@ -7,7 +7,7 @@
 // (defined in each family's native-aot.generated.cpp). The common prefix is:
 //
 //   struct chaos_type_System_Private_CoreLib_System_Exception {
-//       chaos_object_header header;          // 8 bytes (type_id)
+//       chaos_object_header header;          // 8 bytes (type_info*)
 //       CHAOS_IL2CPP_INTPTR _message;        // offset +8
 //       CHAOS_IL2CPP_INTPTR _innerException; // offset +16
 //       CHAOS_IL2CPP_INTPTR _stackTrace;     // offset +24
@@ -18,6 +18,7 @@
 // Message field is at offset 8 from the object base.
 
 #include "runtime_core.h"
+#include <chaos/type_info.h>
 
 #include <cstring>
 
@@ -26,7 +27,7 @@
 // in exception field offset computation.
 struct chaos_object_header
 {
-    CHAOS_IL2CPP_INTPTR type_id = 0;
+    const TypeInfo* type_info = nullptr;
 };
 
 namespace chaos::il2cpp::runtime_core {

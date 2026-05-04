@@ -40,12 +40,65 @@ typedef struct CodeRegistrationV0 {
     uint32_t type_capability_count;
 } CodeRegistrationV0;
 
+/*
+ * ── Generic instantiation registration entries ──
+ *
+ * Codegen emits flat arrays of these structs into the AOT data section.
+ * Bootstrap iterates them, resolves tokens→handles, and populates the
+ * GenericContextRegistry at startup.
+ */
+typedef struct GenericTypeRegistrationEntryV0 {
+    uint32_t open_token;          /* e.g. 0x02000010 (List<T> definition)   */
+    uint32_t closed_token;        /* e.g. 0x02000050 (List<int>)           */
+    uint32_t arg_count;           /* number of type arguments              */
+    uint32_t args_start_index;    /* offset into the parallel token pool   */
+} GenericTypeRegistrationEntryV0;
+
+/* Method generic context entries use the same layout as type entries. */
+typedef GenericTypeRegistrationEntryV0 GenericMethodRegistrationEntryV0;
+
+/*
+ * Aggregate registration bundle for one module (AOT or hot-update).
+ * Codegen data + runtime-filled fields (source_image, bridge).
+ */
+typedef struct ModuleGenericRegistrationV0 {
+    uint32_t struct_size;
+
+    /* Module identity. */
+    uint32_t     module_id;          /* 0 = AOT root, >0 = hot-update */
+    const char*  module_name_utf8;   /* diagnostic only                */
+
+    /* Type generic instantiations (GenericTypeRegistrationEntryV0[]). */
+    const GenericTypeRegistrationEntryV0*  generic_types;
+    uint32_t generic_type_count;
+    const uint32_t* generic_type_args;      /* flat token pool */
+    uint32_t generic_type_arg_count;
+
+    /* Method generic contexts (GenericMethodRegistrationEntryV0[]). */
+    const GenericMethodRegistrationEntryV0*  generic_methods;
+    uint32_t generic_method_count;
+    const uint32_t* generic_method_args;    /* flat token pool */
+    uint32_t generic_method_arg_count;
+
+    /* Runtime-filled: the image owning every token in this bundle. */
+    ImageHandle source_image;
+} ModuleGenericRegistrationV0;
+
 typedef struct MetadataRegistrationV0 {
     uint32_t struct_size;
-    const void* generic_types;
+
+    /* Generic type instantiation entries (GenericTypeRegistrationEntryV0[]). */
+    const GenericTypeRegistrationEntryV0*  generic_types;
     uint32_t generic_type_count;
-    const void* generic_methods;
+    const uint32_t* generic_type_args;      /* flat token pool */
+    uint32_t generic_type_arg_count;
+
+    /* Generic method context entries (GenericMethodRegistrationEntryV0[]). */
+    const GenericMethodRegistrationEntryV0*  generic_methods;
     uint32_t generic_method_count;
+    const uint32_t* generic_method_args;    /* flat token pool */
+    uint32_t generic_method_arg_count;
+
     const void* field_offsets;
     uint32_t field_offset_count;
     const void* metadata_usages;

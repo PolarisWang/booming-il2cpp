@@ -1,8 +1,23 @@
 #include "bootstrap.h"
 #include "runtime_core.h"
 #include "support.h"
+#include "codegen_bridge.h"
 
 #include <cstdint>
+
+// ── Optional generic registration callback ──
+// The C# codegen TU sets this via a static initializer if it has
+// generic type/method registration arrays.  Python skeletons don't
+// set it, so the pointer remains null and registration is skipped.
+extern "C" void (*g_chaos_populate_generic_registration)(
+    uint32_t* out_type_count,
+    const GenericTypeRegistrationEntryV0** out_type_entries,
+    const uint32_t** out_type_args,
+    uint32_t* out_type_arg_count,
+    uint32_t* out_method_count,
+    const GenericMethodRegistrationEntryV0** out_method_entries,
+    const uint32_t** out_method_args,
+    uint32_t* out_method_arg_count) = nullptr;
 
 namespace chaos::il2cpp::generated {
 
@@ -74,6 +89,33 @@ int32_t RunProofHost() {
 
     MetadataRegistrationV0 metadata_registration = {};
     metadata_registration.struct_size = sizeof(metadata_registration);
+
+    // ── Populate generic registration from the generated TU ──
+    // If a C# codegen TU is linked, g_chaos_populate_generic_registration
+    // is set by a static initializer.  Python skeletons leave it null.
+    if (g_chaos_populate_generic_registration != nullptr) {
+        uint32_t type_count = 0;
+        const GenericTypeRegistrationEntryV0* type_entries = nullptr;
+        const uint32_t* type_args = nullptr;
+        uint32_t type_arg_count = 0;
+        uint32_t method_count = 0;
+        const GenericMethodRegistrationEntryV0* method_entries = nullptr;
+        const uint32_t* method_args = nullptr;
+        uint32_t method_arg_count = 0;
+
+        g_chaos_populate_generic_registration(
+            &type_count, &type_entries, &type_args, &type_arg_count,
+            &method_count, &method_entries, &method_args, &method_arg_count);
+
+        metadata_registration.generic_types         = type_entries;
+        metadata_registration.generic_type_count    = type_count;
+        metadata_registration.generic_type_args     = type_args;
+        metadata_registration.generic_type_arg_count = type_arg_count;
+        metadata_registration.generic_methods       = method_entries;
+        metadata_registration.generic_method_count  = method_count;
+        metadata_registration.generic_method_args   = method_args;
+        metadata_registration.generic_method_arg_count = method_arg_count;
+    }
 
     CodegenRegistrationOptionsV0 options = {};
     options.struct_size = sizeof(options);

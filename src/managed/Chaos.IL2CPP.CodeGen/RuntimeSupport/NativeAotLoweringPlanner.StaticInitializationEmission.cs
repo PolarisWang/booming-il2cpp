@@ -97,6 +97,7 @@ public sealed partial class NativeAotLoweringPlanner
             ["static_field_symbol"] = GetNativeStaticFieldSymbol(action.FieldSubjectId),
             ["native_type_symbol"] = GetNativeTypeSymbol(action.ConstructedTypeSubjectId),
             ["native_type_id_symbol"] = GetNativeTypeIdSymbol(action.ConstructedTypeSubjectId),
+            ["native_type_info_symbol"] = GetNativeTypeInfoSymbol(action.ConstructedTypeSubjectId),
             ["constructor_block"] = string.Empty,
         };
 

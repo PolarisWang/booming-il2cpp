@@ -1,8 +1,11 @@
 #include "vtable_registry.h"
+#include "reflection_query_model.h"
 
 #include <chaos/native_types.h>
 
+#include <cstdlib>
 #include <mutex>
+#include <new>
 #include <unordered_map>
 #include <vector>
 
@@ -40,8 +43,62 @@ bool RegisterTypeVTable(const TypeVTable* vtable) {
     return true;
 }
 
-void* ResolveVirtualMethodPointer(CHAOS_IL2CPP_UINT32 instance_type_token,
-                                  CHAOS_IL2CPP_UINT32 declared_method_token) {
+bool RegisterRuntimeVTable(
+    TypeInfoHandle               type,
+    TypeInfoHandle               base_type,
+    CHAOS_IL2CPP_UINT32         slot_count,
+    const VTableSlot*           slots)
+{
+    if (type == nullptr || slots == nullptr || slot_count == 0u) {
+        return false;
+    }
+
+    // Extract the runtime token from the TypeInfoHandle.
+    CHAOS_IL2CPP_UINT32 type_token = 0u;
+    const auto* desc = TryDecodeReflectionQueryTypeHandle(type);
+    if (desc != nullptr) {
+        type_token = desc->metadata_token;
+    }
+    if (type_token == 0u) {
+        return false;  // Cannot register without a valid token.
+    }
+
+    // Extract base token.
+    CHAOS_IL2CPP_UINT32 base_token = 0u;
+    if (base_type != nullptr) {
+        const auto* base_desc = TryDecodeReflectionQueryTypeHandle(base_type);
+        if (base_desc != nullptr) {
+            base_token = base_desc->metadata_token;
+        }
+    }
+
+    // Heap-allocate a TypeVTable that lives for the process lifetime.
+    auto* vtable = static_cast<TypeVTable*>(std::malloc(sizeof(TypeVTable)));
+    if (vtable == nullptr) {
+        return false;
+    }
+    vtable->type        = type;
+    vtable->type_token  = type_token;
+    vtable->base_type   = base_type;
+    vtable->base_token  = base_token;
+    vtable->slot_count  = slot_count;
+    vtable->slots       = slots;
+
+    auto& state = GetState();
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(state.mutex);
+
+    if (state.by_type_token.count(type_token)) {
+        std::free(vtable);
+        return true;  // idempotent
+    }
+
+    state.by_type_token[type_token] = vtable;
+    return true;
+}
+
+void* ResolveVirtualMethodPointer(
+    CHAOS_IL2CPP_UINT32 instance_type_token,
+    CHAOS_IL2CPP_UINT32 declared_method_token) {
     if (instance_type_token == 0u || declared_method_token == 0u) {
         return nullptr;
     }

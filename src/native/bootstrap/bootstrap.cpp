@@ -196,11 +196,41 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
         return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
     }
 
-    // Note: MetadataRegistrationV0.generic_types / generic_methods are reserved for
-    // generic instantiation registration. When the codegen emits a concrete struct layout
-    // for these arrays (Phase A.11), we will iterate them here and call
-    // chaos::il2cpp::generic_context::RegisterGenericInstantiation().
-    // For now the pointers may be null; this is a no-op.
+    // ── Register AOT generic type instantiations and method contexts ──
+    //
+    // The codegen emits GenericTypeRegistrationEntryV0[] and
+    // GenericMethodRegistrationEntryV0[] arrays into the MetadataRegistrationV0.
+    // We iterate them here, resolve tokens → handles, and populate the
+    // GenericContextRegistry (Gen-2 Handle scheme).
+    //
+    // The source_image is required for token→handle resolution. When no
+    // explicit ImageHandle has been provided (aot_image_handle == nullptr),
+    // we fall back to MakeOpaqueHandle-style token handles so that basic
+    // metadata queries still function during early bootstrap.
+    if (g_bootstrap_state.metadata_registration != nullptr
+        && g_bootstrap_state.metadata_registration->generic_type_count > 0u)
+    {
+        ModuleGenericRegistrationV0 aot_reg;
+        aot_reg.struct_size         = sizeof(ModuleGenericRegistrationV0);
+        aot_reg.module_id           = 0u;          // AOT root module
+        aot_reg.module_name_utf8    = g_bootstrap_state.options != nullptr
+            ? g_bootstrap_state.options->image_name_utf8 : nullptr;
+        aot_reg.source_image        = g_bootstrap_state.aot_image_handle;
+        aot_reg.generic_types       = static_cast<const GenericTypeRegistrationEntryV0*>(
+            g_bootstrap_state.metadata_registration->generic_types);
+        aot_reg.generic_type_count  = g_bootstrap_state.metadata_registration->generic_type_count;
+        aot_reg.generic_type_args   = static_cast<const uint32_t*>(
+            g_bootstrap_state.metadata_registration->generic_type_args);
+        aot_reg.generic_type_arg_count = g_bootstrap_state.metadata_registration->generic_type_arg_count;
+        aot_reg.generic_methods     = static_cast<const GenericMethodRegistrationEntryV0*>(
+            g_bootstrap_state.metadata_registration->generic_methods);
+        aot_reg.generic_method_count = g_bootstrap_state.metadata_registration->generic_method_count;
+        aot_reg.generic_method_args = static_cast<const uint32_t*>(
+            g_bootstrap_state.metadata_registration->generic_method_args);
+        aot_reg.generic_method_arg_count = g_bootstrap_state.metadata_registration->generic_method_arg_count;
+
+        chaos::il2cpp::generic_context::RegisterModuleGenerics(&aot_reg);
+    }
 
     // Register an AOT root memory domain for this module so that marshal
     // allocations originating from the main AOT module are domain-tracked.

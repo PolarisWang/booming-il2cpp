@@ -19,7 +19,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 PHASE1 = REPO / "build" / "toolchains" / "run" / "testing" / "foundation_dll" / "gap_analyzer.py"
 PHASE2 = REPO / "build" / "toolchains" / "run" / "testing" / "foundation_dll" / "run_phase2.py"
-REFRESH = ["python3", str(REPO / "build" / "toolchains" / "run" / "run.py"), "verify", "verification-v1", "--json"]
+REFRESH = ["python", str(REPO / "build" / "toolchains" / "run" / "run.py"), "verify", "verification-v1", "--json"]
 
 
 def run(cmd, label):

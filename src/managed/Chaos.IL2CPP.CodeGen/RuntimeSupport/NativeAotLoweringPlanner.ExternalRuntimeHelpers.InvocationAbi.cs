@@ -37,6 +37,15 @@ public sealed partial class NativeAotLoweringPlanner
 		return GetNativeBoxTypeIdSymbol(subjectId);
 	}
 
+	private string GetVirtualDispatchTargetTypeInfoPointer(string subjectId)
+	{
+		if (!IsTrackedValueTypeSubjectId(subjectId))
+		{
+			return "&" + GetNativeTypeInfoSymbol(subjectId);
+		}
+		return "&" + GetNativeBoxTypeInfoSymbol(subjectId);
+	}
+
 	private string GetVirtualDispatchInstanceExpression(string subjectId, string instanceExpression)
 	{
 		if (!IsTrackedValueTypeSubjectId(subjectId))
