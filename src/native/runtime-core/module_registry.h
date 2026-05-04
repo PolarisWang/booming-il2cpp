@@ -3,6 +3,7 @@
 
 #include "runtime_abi.h"
 #include "reflection_query_model.h"
+#include "abi_manifest.h"
 
 #include <cstdint>
 
@@ -11,7 +12,7 @@ namespace chaos::il2cpp::runtime_core {
 // ── Constants ──────────────────────────────────────────────────────────
 
 constexpr uint32_t kModuleIdBits = 32;
-constexpr uint32_t kMaxModules = 64;
+constexpr uint32_t kMaxModules = 256;
 constexpr uint32_t kInvalidModuleId = 0xFFFFFFFFu;
 
 // ── Type flag bit definitions ──────────────────────────────────────────
@@ -38,6 +39,8 @@ struct ModuleDescriptor {
     const char* const* type_namespaces;     // Tier 1: per-type namespaces
     const uint32_t* type_parent_tokens;     // Tier 1: per-type parent tokens
     uint32_t type_count;                    // Number of types managed by this module
+    const ChaosAbiManifestV0* abi_manifest; // Per-module ABI manifest (null = no validation)
+    bool tombstone = false;                 // true after hot-unload (module entry retained for handle safety)
 };
 
 // ── TypeInfoHandle encode/decode ───────────────────────────────────────
@@ -71,6 +74,22 @@ inline uint32_t TokenToIndex(uint32_t token) {
 uint32_t RegisterModule(const char* name, const ModuleDescriptor* descriptor);
 const ModuleDescriptor* LookupModule(uint32_t module_id);
 const ModuleDescriptor* LookupModuleByName(const char* name);
+
+/// Mark a module entry as tombstone (hot-unloaded).
+/// The module_id is recycled: subsequent RegisterModule calls may reuse it.
+/// After marking, LookupModule(module_id) still returns a valid pointer,
+/// but type_count is 0 and image/type_flags/type_parent_tokens are nulled
+/// to prevent access to freed memory.
+void MarkModuleTombstone(uint32_t module_id);
+
+/// Returns true if the given module_id refers to a tombstone (unloaded) module.
+bool IsModuleTombstone(uint32_t module_id);
+
+/// Returns the ABI manifest for the given module, or nullptr if none registered.
+inline const ChaosAbiManifestV0* LookupModuleAbiManifest(uint32_t module_id) {
+    const auto* desc = LookupModule(module_id);
+    return desc != nullptr ? desc->abi_manifest : nullptr;
+}
 
 }  // namespace chaos::il2cpp::runtime_core
 

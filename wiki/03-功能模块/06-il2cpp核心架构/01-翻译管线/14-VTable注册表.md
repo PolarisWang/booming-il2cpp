@@ -229,6 +229,52 @@ B2+ vtable 系统与现有的 `vtable_registry.*`（token-based 运行时注册�
 | **chaos_type_implements_interface runtime_iface_map 扫描** | **✅ Phase 4b 完成** | ObjectModelEmission.cs:718-743 -- 双扫描: AOT + runtime |
 | **TypeInfo 7-field initializer codegen** | **✅ Phase 4b 完成** | ObjectModelEmission.cs:487-603 -- 全部 5 种初始化模式更新 |
 
+## 解释器虚方法分派
+
+解释器（InterpreterVM）使用 `vtable_registry` 在执行期解析 `CallVirt` 指令，而非 AOT 的 static vtable 数组：
+
+### 调用流程
+
+```
+CallVirt 指令 → 检查 this 对象的 type_token → 
+  ResolveVirtualMethodPointer(instance_token, declared_method_token) → 
+  沿继承链查找 → call_target 供外部派发
+```
+
+### 对象类型跟踪
+
+解释器对象（`InterpreterObject`）新增 `type_token` 字段，在 `NewObj` 时从 metadata token 赋值：
+
+```cpp
+struct InterpreterObject {
+    CHAOS_IL2CPP_VECTOR(InterpreterValue) fields = {};
+    CHAOS_IL2CPP_UINT32 type_token = 0u;  // 虚方法分派用
+};
+```
+
+### 继承链解析
+
+`ResolveVirtualMethodPointer` 从 `instance_type_token` 开始，沿 `TypeVTable.base_token` 向上遍历，查找 method_token 匹配的 slot：
+
+```cpp
+current = instance_type_token;
+while (current != 0) {
+    vt = by_token[current];
+    for (slot in vt.slots) {
+        if (slot.method_token == declared_method_token)
+            return slot.method_pointer;
+    }
+    current = vt.base_token;
+}
+```
+
+### 测试覆盖
+
+| 测试 | 场景 |
+|------|------|
+| TestCallVirtDirectResolution | 一元类型：instance_token 直接匹配已注册 vtable |
+| TestCallVirtInheritanceChain | 继承链解析：derived 重写方法 → 返回 derived 的 method_pointer |
+
 ## 位置
 
 - TypeInfo 定义: `src/native/common/chaos/type_info.h`
@@ -238,3 +284,4 @@ B2+ vtable 系统与现有的 `vtable_registry.*`（token-based 运行时注册�
 - Virtual dispatch codegen: `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.MethodEmission.cs` (行 986-1176)
 - DevirtualizationHint: `src/managed/Chaos.IL2CPP.CodeGen/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs` (行 412-426)
 - 运行时 vtable_registry: `src/native/runtime-core/vtable_registry.*`
+- 解释器虚方法分派: `src/native/interpreter/interpreter_vm.cpp` (CallVirt case)

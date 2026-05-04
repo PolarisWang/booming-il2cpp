@@ -217,6 +217,24 @@ public enum AotCoreIrAbiCarrierKind : byte
     /// Unsigned 64-bit integer carrier.
     /// </summary>
     UInt64 = 11,
+
+    /// <summary>
+    /// By-reference parameter (ref/out). Carried as tagged pointer on eval stack,
+    /// formalized for ABI manifest validation across DLL boundaries.
+    /// </summary>
+    ByRef = 12,
+
+    /// <summary>
+    /// Multi-return value marker — indicates an out parameter that is part of the
+    /// logical return value set. Codegen emits as hidden pointer or struct return.
+    /// </summary>
+    MultiReturn = 13,
+
+    /// <summary>
+    /// By-reference to value type (ref struct). Carries type identity of the
+    /// underlying value type for ABI compatibility checks.
+    /// </summary>
+    ByRefToValueType = 14,
 }
 
 /// <summary>

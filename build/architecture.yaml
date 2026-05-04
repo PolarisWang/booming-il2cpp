@@ -40,6 +40,9 @@ modules:
     path: src/native/runtime-core
     namespace: chaos::il2cpp::runtime_core
     sub_namespaces:
+      - chaos::il2cpp::generic_context
+      - chaos::il2cpp::interpreter
+      - chaos::il2cpp::layout
       - chaos::il2cpp::marshal_abi
       - chaos::il2cpp::marshal_copy_helpers
       - chaos::il2cpp::math_kernel_helpers
@@ -52,7 +55,6 @@ modules:
       - chaos::il2cpp::string_table
       - chaos::il2cpp::vector_fixed
       - chaos::il2cpp::vtable_registry
-      - chaos::il2cpp::generic_context
     visibility: public
     dependencies:
       - chaos_bdwgc

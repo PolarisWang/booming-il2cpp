@@ -108,6 +108,11 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private readonly List<(uint Index, string NativeSymbol)> _methodTableEntries = new();
 
+    /// <summary>
+    /// Maps method native symbol → index in reachableMethods (used for ABI manifest origin).
+    /// </summary>
+    private Dictionary<string, int> _methodNativeSymbolToManifestIndex = new();
+
     public NativeAotTemplateModel Create(
         NativeAotLoweringPlanArtifact loweringPlan,
         AotCoreIrArtifact aotCoreIr,
@@ -139,6 +144,10 @@ public sealed partial class NativeAotLoweringPlanner
         _sealedTypeSubjectIds = CollectSealedTypeSubjectIds(aotCoreIr);
 
         var reachableMethods = CollectReachableMethods(aotCoreIr, entryMethod);
+        _methodNativeSymbolToManifestIndex = reachableMethods
+            .Select((method, idx) => (method.NativeSymbol, idx))
+            .DistinctBy(t => t.NativeSymbol)
+            .ToDictionary(t => t.NativeSymbol, t => t.idx);
         var stringLiterals = CollectStringLiterals(reachableMethods);
         _stringIdMapping = BuildStringIdMapping(stringLiterals);
         _cachedClosureAssemblyPaths = EnumerateClosureAssemblyPaths(closureManifest).ToArray();
@@ -205,6 +214,11 @@ public sealed partial class NativeAotLoweringPlanner
         var entryBridgeArguments = BuildEntryBridgeArguments(entryMethod);
 
         var moduleRegistrationCode = BuildModuleRegistration(loweringPlan);
+        var abiManifestCode = BuildAbiManifest(reachableMethods);
+        if (!string.IsNullOrEmpty(abiManifestCode))
+        {
+            moduleRegistrationCode += Environment.NewLine + abiManifestCode;
+        }
         if (_methodTableEntries.Count > 0)
         {
             moduleRegistrationCode += BuildMethodTableInitialization();
@@ -218,6 +232,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "\"runtime_core.h\"",
                 "\"codegen_bridge.h\"",
                 "\"module_registry.h\"",
+                "\"abi_manifest.h\"",
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
             GenericRegistrationCode = genericRegistrationHelperCode,
@@ -308,6 +323,15 @@ public sealed partial class NativeAotLoweringPlanner
             sb.Append(", reinterpret_cast<void*>(");
             sb.Append(nativeSymbol);
             sb.AppendLine("), 1u);");
+            // Record ABI origin for cross-module validation
+            if (_methodNativeSymbolToManifestIndex.TryGetValue(nativeSymbol, out int manifestIdx))
+            {
+                sb.Append("    ::chaos::il2cpp::method_table::SetMethodOrigin(");
+                sb.Append(entryIndex);
+                sb.Append(", s_native_aot_module_id, ");
+                sb.Append(manifestIdx);
+                sb.AppendLine("u);");
+            }
         }
         sb.AppendLine("    return 0u;");
         sb.AppendLine("}();");

@@ -855,6 +855,10 @@ public sealed partial class NativeAotLoweringPlanner
 			bool flag8 = string.Equals(ns, "System.Private.CoreLib/System.Reflection.ParameterInfo", StringComparison.Ordinal);
 			bool flag9 = string.Equals(ns, "System.Private.CoreLib/System.Reflection.Assembly", StringComparison.Ordinal);
 			bool flag10 = string.Equals(ns, "System.Private.CoreLib/System.Reflection.AssemblyName", StringComparison.Ordinal);
+			if (string.Equals(ns, "System.Private.CoreLib/System.Decimal", StringComparison.Ordinal))
+			{
+				continue;
+			}
 			if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string value6) && !string.IsNullOrWhiteSpace(value6) && referenceTypeSubjectIds.Contains(value6))
 			{
 				StringBuilder stringBuilder = builder;

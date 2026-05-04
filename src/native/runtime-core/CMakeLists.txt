@@ -15,10 +15,19 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs.cpp
     module_registry.cpp
     module_registry.h
+    layout_engine.cpp
+    layout_engine.h
+    generic_method_instantiation.cpp
+    generic_method_instantiation.h
     method_table.cpp
     method_table.h
     reflection_api.cpp
-    reflection_api.h)
+    reflection_api.h
+    il_to_ir_lowerer.cpp
+    il_to_ir_lowerer.h
+    token_resolver.cpp
+    token_resolver.h
+    abi_manifest.cpp)
 
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)
@@ -32,5 +41,6 @@ target_include_directories(
 
 target_link_libraries(chaos_runtime_core PUBLIC chaos_bdwgc)
 target_include_directories(chaos_runtime_core PRIVATE
-    "${REPO_ROOT}/third_party/bdwgc/include")
+    "${REPO_ROOT}/third_party/bdwgc/include"
+    "${REPO_ROOT}/src/native/interpreter")
 

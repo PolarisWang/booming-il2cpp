@@ -22,6 +22,14 @@ struct GenericInstantiationEntry {
     CHAOS_IL2CPP_UINT32                module_id;     // 0 = AOT, >0 = hotupdate
 };
 
+/// Describes a single closed generic method instantiation.
+struct MethodInstantiationEntry {
+    MethodInfoHandle                    open_method;     // open generic method definition
+    MethodInfoHandle                    closed_method;   // closed instantiation
+    CHAOS_IL2CPP_VECTOR(TypeInfoHandle) type_args;       // type argument handles
+    CHAOS_IL2CPP_UINT32                module_id;        // 0 = AOT, >0 = hotupdate
+};
+
 /// A minimal generic context stored per method token.
 /// Wraps class-level and method-level type argument handle arrays.
 struct MethodGenericContextEntry {
@@ -41,6 +49,10 @@ struct GenericContextRegistry {
     using InstantiationVector = CHAOS_IL2CPP_VECTOR(GenericInstantiationEntry);
     CHAOS_IL2CPP_UNORDERED_MAP(TypeInfoHandle, InstantiationVector) by_open_type;
 
+    // ── Method instantiation index ──
+    using MethodInstantiationVector = CHAOS_IL2CPP_VECTOR(MethodInstantiationEntry);
+    CHAOS_IL2CPP_UNORDERED_MAP(MethodInfoHandle, MethodInstantiationVector) by_open_method;
+
     // ── Method generic context index ──
     CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, MethodGenericContextEntry*) by_method_token;
     using EntryPtrVector = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UNIQUE_PTR(MethodGenericContextEntry));
@@ -51,6 +63,8 @@ struct GenericContextRegistry {
         CHAOS_IL2CPP_VECTOR(TypeInfoHandle)) types_by_module;
     CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32,
         CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UINT32)) methods_by_module;
+    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32,
+        CHAOS_IL2CPP_VECTOR(MethodInfoHandle)) method_instantiations_by_module;
 };
 
 GenericContextRegistry& GetRegistry() {
@@ -344,6 +358,94 @@ void UnregisterModuleGenerics(CHAOS_IL2CPP_UINT32 module_id) {
         }
         registry.methods_by_module.erase(meth_it);
     }
+
+    // Remove method instantiations belonging to this module.
+    auto meth_inst_it = registry.method_instantiations_by_module.find(module_id);
+    if (meth_inst_it != registry.method_instantiations_by_module.end()) {
+        const auto& closed_methods = meth_inst_it->second;
+        for (auto& [open_method, entries] : registry.by_open_method) {
+            entries.erase(
+                std::remove_if(entries.begin(), entries.end(),
+                    [&](const MethodInstantiationEntry& e) {
+                        for (auto cm : closed_methods) {
+                            if (e.closed_method == cm) return true;
+                        }
+                        return false;
+                    }),
+                entries.end());
+        }
+        registry.method_instantiations_by_module.erase(meth_inst_it);
+    }
+}
+
+// ═════════════════════════════════════════════════════════════
+// Method instantiation registration and lookup
+// ═════════════════════════════════════════════════════════════
+
+void RegisterGenericMethodInstantiation(
+    MethodInfoHandle       open_method,
+    MethodInfoHandle       closed_method,
+    const TypeInfoHandle*  type_args,
+    CHAOS_IL2CPP_UINT32   arg_count)
+{
+    if (open_method == 0u || closed_method == 0u) {
+        return;
+    }
+
+    auto& registry = GetRegistry();
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
+
+    // Idempotency check.
+    auto& entries = registry.by_open_method[open_method];
+    for (const auto& entry : entries) {
+        if (entry.closed_method == closed_method) {
+            return;  // already registered
+        }
+    }
+
+    MethodInstantiationEntry entry;
+    entry.open_method   = open_method;
+    entry.closed_method = closed_method;
+    entry.module_id     = 0u;  // default: AOT root
+    if (type_args != nullptr && arg_count > 0u) {
+        entry.type_args.assign(type_args, type_args + arg_count);
+    }
+    entries.push_back(CHAOS_IL2CPP_MOVE(entry));
+}
+
+MethodInfoHandle TryResolveClosedMethod(
+    MethodInfoHandle       open_method,
+    const TypeInfoHandle*  type_args,
+    CHAOS_IL2CPP_UINT32   arg_count)
+{
+    if (open_method == 0u) {
+        return 0u;
+    }
+
+    auto& registry = GetRegistry();
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
+
+    auto it = registry.by_open_method.find(open_method);
+    if (it == registry.by_open_method.end()) {
+        return 0u;
+    }
+
+    for (const auto& entry : it->second) {
+        if (entry.type_args.size() != arg_count) continue;
+
+        bool match = true;
+        for (CHAOS_IL2CPP_UINT32 i = 0u; i < arg_count; i++) {
+            if (entry.type_args[i] != type_args[i]) {
+                match = false;
+                break;
+            }
+        }
+        if (match) {
+            return entry.closed_method;
+        }
+    }
+
+    return 0u;  // not found
 }
 
 // ═════════════════════════════════════════════════════════════
@@ -358,45 +460,6 @@ CHAOS_IL2CPP_UINT32 GetRegisteredInstantiationCount() {
         count += static_cast<CHAOS_IL2CPP_UINT32>(v.size());
     }
     return count;
-}
-
-// ═════════════════════════════════════════════════════════════
-// Fast-path lookup for RuntimeInstantiationBridge
-// ═════════════════════════════════════════════════════════════
-
-TypeInfoHandle TryResolveClosedType(
-    TypeInfoHandle open_type,
-    const TypeInfoHandle* type_args,
-    CHAOS_IL2CPP_UINT32 arg_count)
-{
-    if (open_type == 0) {
-        return 0;
-    }
-
-    auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
-
-    auto it = registry.by_open_type.find(open_type);
-    if (it == registry.by_open_type.end()) {
-        return 0;
-    }
-
-    for (const auto& entry : it->second) {
-        if (entry.type_args.size() != arg_count) continue;
-
-        bool match = true;
-        for (CHAOS_IL2CPP_UINT32 i = 0u; i < arg_count; i++) {
-            if (entry.type_args[i] != type_args[i]) {
-                match = false;
-                break;
-            }
-        }
-        if (match) {
-            return entry.closed_type;
-        }
-    }
-
-    return nullptr;  // not found
 }
 
 }  // namespace chaos::il2cpp::generic_context

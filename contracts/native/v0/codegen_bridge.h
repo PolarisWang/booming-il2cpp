@@ -202,6 +202,17 @@ typedef struct CodegenBridgeV0 {
 
     /* Internal call resolution. */
     void* (CHAOS_RUNTIME_ABI_CALL* resolve_icall)(const char* icall_name_utf8);
+
+    /* ── String token resolution ─────────────────────────────────────────────
+
+       Resolve a metadata string token (0x70xxxxxx) from the #US heap of
+       the given image.  Returns a null-terminated UTF-8 string owned by the
+       bridge (caller must not free).  Returns nullptr on failure.
+
+       Added late to V0 — callers MUST check for nullptr before calling. */
+    const char* (CHAOS_RUNTIME_ABI_CALL* resolve_string_by_token)(
+        ImageHandle image,
+        uint32_t string_token);
 } CodegenBridgeV0;
 
 /* Returns the process-wide v0 bridge table or null when unavailable. */

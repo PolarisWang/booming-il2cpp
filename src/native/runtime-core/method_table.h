@@ -26,33 +26,53 @@ struct MethodTableEntry {
     uint32_t reserved;     ///< Reserved for future use (alignment / flags)
 };
 
-// ── Global table declaration ───────────────────────────────────────────
+// ── MethodTableOrigin ──────────────────────────────────────────────────
+
+/// Origin tracking for cross-DLL ABI validation.
+/// Records which module owns this method table slot and its index within
+/// that module's ABI manifest.
+struct MethodTableOrigin {
+    uint32_t module_id;            ///< Module that owns this method (0 = unknown)
+    uint32_t manifest_method_index; ///< Index into the module's ABI manifest
+};
+
+// ── Global table declarations ──────────────────────────────────────────
 
 /// The global method table, pre-allocated at link time.
-/// Generated AOT code reads from this table via g_method_table[index].fn_ptr.
-/// Hotupdate code writes to this table via WriteMethodTable().
 extern MethodTableEntry g_method_table[kMethodTableSize];
+
+/// Parallel origin array (one entry per method table slot).
+extern MethodTableOrigin g_method_origins[kMethodTableSize];
 
 // ── API ────────────────────────────────────────────────────────────────
 
-/// Initialize the entire method table to zero (fn_ptr = nullptr, gen = 0).
-/// Called once during runtime bootstrap.
+/// Initialize the entire method table and origins to zero.
 void InitializeMethodTable();
 
 /// Write a single method table entry.
-/// Used by hotupdate modules to register replacement functions.
-/// @param index       Slot index (0 <= index < kMethodTableSize)
-/// @param fn_ptr      Function pointer to install
-/// @param module_gen  Module generation stamp (0 = invalid)
-/// @return true if the write was accepted, false on invalid index.
 bool WriteMethodTable(uint32_t index, void* fn_ptr, uint32_t module_gen);
 
-/// Read a function pointer from the method table, or nullptr if uninitialized.
+/// Read a function pointer, or nullptr if uninitialized.
 void* ResolveMethodTable(uint32_t index);
 
 /// Clear all entries associated with a given module generation.
-/// Used during hotupdate domain unload.
 void ClearMethodTableByGeneration(uint32_t module_gen);
+
+/// Record the ABI origin for a method table slot.
+/// Must be called after WriteMethodTable() for cross-DLL ABI validation to work.
+void SetMethodOrigin(uint32_t index, uint32_t module_id, uint32_t manifest_method_index);
+
+/// Read the origin for a method table slot.
+MethodTableOrigin GetMethodOrigin(uint32_t index);
+
+/// Resolve a method table entry AND validate the method's ABI signature against
+/// the owning module's manifest.  Returns the function pointer if valid, or
+/// nullptr on mismatch (or if the slot is uninitialized).
+void* ResolveMethodTableWithAbiCheck(
+    uint32_t index,
+    uint8_t expected_return_carrier,
+    const uint8_t* expected_param_carriers,
+    uint8_t expected_param_count);
 
 }  // namespace chaos::il2cpp::method_table
 

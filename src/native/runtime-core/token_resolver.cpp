@@ -1,0 +1,186 @@
+#include "token_resolver.h"
+#include "reflection_query_model.h"
+#include "layout_engine.h"
+
+#include <chaos/native_types.h>
+
+namespace chaos::il2cpp::interpreter {
+
+namespace {
+
+using namespace chaos::il2cpp::runtime_core;
+
+/// Scan an image's types to find the declaring type that contains a field
+/// with the given metadata token.  Also returns the field's index within
+/// the type's field array.
+///
+/// Returns nullptr if no type owns the field token.
+static const runtime_core::ReflectionQueryTypeDescriptor*
+FindDeclaringTypeByFieldToken(
+    const runtime_core::ReflectionQueryImageDescriptor* image,
+    CHAOS_IL2CPP_UINT32 field_token,
+    CHAOS_IL2CPP_UINT32* out_field_index)
+{
+    if (image == nullptr || image->types == nullptr) {
+        return nullptr;
+    }
+    for (CHAOS_IL2CPP_UINT32 ti = 0u; ti < image->type_count; ++ti) {
+        const auto* type = image->types[ti];
+        if (type == nullptr || type->fields == nullptr) {
+            continue;
+        }
+        for (CHAOS_IL2CPP_UINT32 fi = 0u; fi < type->field_count; ++fi) {
+            if (type->fields[fi].metadata_token == field_token) {
+                if (out_field_index != nullptr) {
+                    *out_field_index = fi;
+                }
+                return type;
+            }
+        }
+    }
+    return nullptr;
+}
+
+}  // anonymous namespace
+
+// ════════════════════════════════════════════════════════════════════════════
+// Default token resolver callback
+// ════════════════════════════════════════════════════════════════════════════
+
+bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
+    CHAOS_IL2CPP_UINT32  token,
+    IRInstruction&        instruction,
+    void*                 user_data)
+{
+    if (user_data == nullptr) {
+        return false;
+    }
+
+    const auto* ctx = static_cast<const TokenResolverContext*>(user_data);
+    if (ctx->bridge == nullptr) {
+        return false;
+    }
+
+    switch (instruction.op_code) {
+        // ── Method token opcodes ──
+        case IROpCode::Call:
+        case IROpCode::NewObj: {
+            if (ctx->bridge->resolve_method_by_token == nullptr) {
+                return false;
+            }
+            MethodInfoHandle method_handle = ctx->bridge->resolve_method_by_token(
+                ctx->source_image, token);
+            if (method_handle == 0u) {
+                return false;
+            }
+            instruction.call_target = reinterpret_cast<void*>(
+                static_cast<CHAOS_IL2CPP_UINTPTR>(method_handle));
+
+            // For newobj, try to determine the declaring type's field count
+            // from the resolved method's declaring type.
+            if (instruction.op_code == IROpCode::NewObj) {
+                const auto* method_desc = TryDecodeReflectionQueryMethodHandle(method_handle);
+                if (method_desc != nullptr) {
+                    // Walk up to find the declaring type's field count.
+                    // For now we use 1 as a safe minimum; the token resolver
+                    // can be refined as real test cases demand.
+                    instruction.secondary_index = 1u;
+                }
+            }
+            return true;
+        }
+
+        // ── Type token opcodes ──
+        case IROpCode::Box:
+        case IROpCode::CastClass:
+        case IROpCode::IsInst:
+        case IROpCode::Unbox:
+        case IROpCode::NewArr:
+        case IROpCode::LdElem:
+        case IROpCode::StElem: {
+            if (ctx->bridge->resolve_type_by_token == nullptr) {
+                return false;
+            }
+            TypeInfoHandle type_handle = ctx->bridge->resolve_type_by_token(
+                ctx->source_image, token);
+            if (type_handle == 0u) {
+                return false;
+            }
+            instruction.call_target = reinterpret_cast<void*>(
+                static_cast<CHAOS_IL2CPP_UINTPTR>(type_handle));
+            return true;
+        }
+
+        // ── Field token opcodes ──
+        case IROpCode::LdFld:
+        case IROpCode::StFld:
+        case IROpCode::LdSFld:
+        case IROpCode::StSFld: {
+            if (ctx->bridge->resolve_field_by_token == nullptr) {
+                return false;
+            }
+            FieldInfoHandle field_handle = ctx->bridge->resolve_field_by_token(
+                ctx->source_image, token);
+            if (field_handle == 0u) {
+                return false;
+            }
+            // Store the field handle; the interpreter or layout pass will
+            // extract the byte offset via the layout engine at execution time.
+            instruction.call_target = reinterpret_cast<void*>(
+                static_cast<CHAOS_IL2CPP_UINTPTR>(field_handle));
+
+            // ── Resolve real field offset via LayoutEngine ──
+            // For instance fields (LdFld/StFld), compute the declaring type's
+            // layout and find the field's byte offset.  Static fields
+            // (LdSFld/StSFld) use a separate global offset scheme and don't
+            // participate in struct layout.
+            instruction.field_offset = 0u;
+            if (instruction.op_code == IROpCode::LdFld ||
+                instruction.op_code == IROpCode::StFld) {
+                if (ctx->layout_engine != nullptr) {
+                    const auto* image_desc =
+                        TryDecodeReflectionQueryImageHandle(ctx->source_image);
+                    if (image_desc != nullptr) {
+                        // Find the declaring type by scanning types for the
+                        // field token.
+                        CHAOS_IL2CPP_UINT32 field_idx = 0u;
+                        const auto* declaring_type = FindDeclaringTypeByFieldToken(
+                            image_desc, token, &field_idx);
+                        if (declaring_type != nullptr) {
+                            TypeInfoHandle decl_handle =
+                                EncodeReflectionQueryTypeHandle(declaring_type);
+                            const auto* layout =
+                                ctx->layout_engine->GetOrComputeLayout(
+                                    decl_handle, ctx->type_args, ctx->arg_count);
+                            if (layout != nullptr &&
+                                field_idx < layout->field_count) {
+                                instruction.field_offset =
+                                    layout->fields[field_idx].offset;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        case IROpCode::LdStr: {
+            if (ctx->bridge->resolve_string_by_token == nullptr) {
+                return false;
+            }
+            const char* str = ctx->bridge->resolve_string_by_token(
+                ctx->source_image, token);
+            if (str == nullptr) {
+                return false;
+            }
+            instruction.string_operand = str;
+            return true;
+        }
+
+        default:
+            // Opcode doesn't carry a token — silently succeed.
+            return true;
+    }
+}
+
+}  // namespace chaos::il2cpp::interpreter

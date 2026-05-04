@@ -3,6 +3,8 @@
 
 #include "codegen_bridge.h"
 
+#include <chaos/native_types.h>
+
 #include <cstdint>
 #include <cstring>
 
