@@ -1,0 +1,160 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "BoxingUnboxingCastsNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "name": "BoxingUnboxingCastsNativeEntry",
+      "displayName": "BoxingUnboxingCastsNativeEntry",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 14,
+      "subjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "BoxingUnboxingCastsNativeEntry/BoxingUnboxingCastsNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "StringCharTextCoreNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "name": "StringCharTextCoreNativeEntry",
+      "displayName": "StringCharTextCoreNativeEntry",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method13:System.Int32()",
+      "name": "Method13",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method14:System.Int32()",
+      "name": "Method14",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method15:System.Int32()",
+      "name": "Method15",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method16:System.Int32()",
+      "name": "Method16",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method16:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method17:System.Int32()",
+      "name": "Method17",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method17:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 21,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method18:System.Int32()",
+      "name": "Method18",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method18:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 22,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method19:System.Int32()",
+      "name": "Method19",
+      "definitionSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method19:System.Int32()",
+      "declaringTypeSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 23,
+      "subjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

@@ -18,3 +18,7 @@
 | [`10-Loader与操作流决策.md`](./10-Loader%E4%B8%8E%E6%93%8D%E4%BD%9C%E6%B5%81%E5%86%B3%E7%AD%96.md) | Loader/SemanticWorld 职责、操作流粒度、操作词汇表、Payload 合约 |
 | [`11-ValueRef与SemanticBody决策.md`](./11-ValueRef%E4%B8%8ESemanticBody%E5%86%B3%E7%AD%96.md) | ValueRef 模型、LiteralRef 池化、SpanId 合约、MethodSemanticBody 合约 |
 | [`12-诊断与CanonicalSubjects决策.md`](./12-%E8%AF%8A%E6%96%AD%E4%B8%8ECanonicalSubjects%E5%86%B3%E7%AD%96.md) | SW 诊断、CapabilityBundle 词汇表、SemanticShapes、CanonicalSubjects、StableMetadataLookup |
+| [`13-泛型注册Gen2Handle方案决策.md`](./13-%E6%B3%9B%E5%9E%8B%E6%B3%A8%E5%86%8CGen2Handle%E6%96%B9%E6%A1%88%E5%86%B3%E7%AD%96.md) | Gen-2 Handle 双路径架构、Interpreted Fallback、方案对比评估、值类型布局与虚方法决策 |
+| [`14-B2-ModuleRegistry-TwoTier-决策.md`](./14-B2-ModuleRegistry-TwoTier-%E5%86%B3%E7%AD%96.md) | B2 Module Registry + Two-Tier 反射元数据架构，替代 TLS constexpr 指针方案，解决跨 DLL 类型身份、Binary 膨胀和 HotUpdate 问题 |
+| [`15-B2+VTable虚方法分派决策.md`](./15-B2+VTable%E8%99%9A%E6%96%B9%E6%B3%95%E5%88%86%E6%B4%BE%E5%86%B3%E7%AD%96.md) | B2+ 虚方法分派架构：Per-Object VTable + 继承链 slot 自动编号 + iface_map 接口分派 |
+| [`16-RuntimeCentricCrossDllDispatch决策.md`](./16-RuntimeCentricCrossDllDispatch%E5%86%B3%E7%AD%96.md) | Runtime-Centric 跨 DLL 分派 + STRING_ID 完整架构：method_table、StringId-first ldstr、TypeInfo stable_id 双路径比较 |

@@ -1,0 +1,155 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method0:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method1:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method2:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method3:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method4:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method5:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method6:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method7:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method8:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method9:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method10:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method11:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method12:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method13:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method13:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method14:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method14:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "TimeDateTimeTimespanNativeEntry",
+      "subjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method15:System.Int32()",
+      "definitionSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry::Method15:System.Int32()",
+      "declaringTypeSubjectId": "TimeDateTimeTimespanNativeEntry/TimeDateTimeTimespanNativeEntry",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

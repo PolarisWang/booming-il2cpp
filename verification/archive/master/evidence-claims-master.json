@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-30T05:06:55.400112Z",
+  "generatedAtUtc": "2026-05-04T01:20:07.979621Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "mergeKey": "evidenceClaimId",
@@ -99,9 +99,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -120,9 +126,9 @@
           "InterpreterReady"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-output",
         "evidenceLabels": [],
@@ -351,9 +357,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -372,9 +384,9 @@
           "InterpreterReady"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-output",
         "evidenceLabels": [],
@@ -603,9 +615,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -624,9 +642,9 @@
           "InterpreterReady"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-output",
         "evidenceLabels": [],
@@ -855,9 +873,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -876,9 +900,9 @@
           "InterpreterReady"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-output",
         "evidenceLabels": [],
@@ -1107,9 +1131,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -1128,9 +1158,9 @@
           "InterpreterReady"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-output",
         "evidenceLabels": [],
@@ -1359,9 +1389,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -1380,9 +1416,9 @@
           "InterpreterReady"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-output",
         "evidenceLabels": [],
@@ -1611,9 +1647,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -1632,9 +1674,9 @@
           "InterpreterReady"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-output",
         "evidenceLabels": [],
@@ -3417,9 +3459,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -3438,9 +3486,9 @@
           "MetadataOnly"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -3675,9 +3723,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -3696,9 +3750,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -3931,9 +3985,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -3951,9 +4011,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -4183,9 +4243,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -4203,9 +4269,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -4435,9 +4501,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -4455,9 +4527,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -4687,9 +4759,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -4707,9 +4785,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -4939,9 +5017,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -4959,9 +5043,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -5191,9 +5275,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -5211,9 +5301,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -5445,9 +5535,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -5466,9 +5562,9 @@
           "MetadataOnly"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -5701,9 +5797,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -5721,9 +5823,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -5953,9 +6055,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -5973,9 +6081,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -6205,9 +6313,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -6225,9 +6339,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -6457,9 +6571,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -6477,9 +6597,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -6711,9 +6831,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -6732,9 +6858,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -6969,9 +7095,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -6990,9 +7122,9 @@
           "ExternalRuntime"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -7225,9 +7357,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -7245,9 +7383,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -7477,9 +7615,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -7497,9 +7641,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -7731,9 +7875,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -7752,9 +7902,9 @@
           "MetadataOnly"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -7987,9 +8137,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -8007,9 +8163,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -8239,9 +8395,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -8259,9 +8421,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -8491,9 +8653,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -8511,9 +8679,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -8743,9 +8911,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -8763,9 +8937,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -8995,9 +9169,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -9015,9 +9195,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -9247,9 +9427,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -9267,9 +9453,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -9501,9 +9687,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -9522,9 +9714,9 @@
           "MetadataOnly"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -9757,9 +9949,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -9777,9 +9975,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -10009,9 +10207,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -10029,9 +10233,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -10261,9 +10465,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -10281,9 +10491,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -10513,9 +10723,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -10533,9 +10749,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -10767,9 +10983,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -10788,9 +11010,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -11023,9 +11245,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -11043,9 +11271,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -11275,9 +11503,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -11295,9 +11529,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -11527,9 +11761,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -11547,9 +11787,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -11779,9 +12019,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -11799,9 +12045,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -12033,9 +12279,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -12054,9 +12306,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -12291,9 +12543,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -12312,9 +12570,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -12549,9 +12807,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -12570,9 +12834,9 @@
           "MetadataOnly"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -12807,9 +13071,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -12828,9 +13098,9 @@
           "ExternalRuntime"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -13065,9 +13335,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -13086,9 +13362,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -13321,9 +13597,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -13341,9 +13623,9 @@
           "MetadataOnly"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -13573,9 +13855,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -13593,9 +13881,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -13827,9 +14115,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -13848,9 +14142,9 @@
           "ExternalRuntime"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -14083,9 +14377,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -14103,9 +14403,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -14337,9 +14637,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -14358,9 +14664,9 @@
           "MetadataOnly"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -14595,9 +14901,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -14616,9 +14928,9 @@
           "MetadataOnly"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -14851,9 +15163,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -14871,9 +15189,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -15103,9 +15421,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -15123,9 +15447,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -15357,9 +15681,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -15378,9 +15708,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -15615,9 +15945,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -15636,9 +15972,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -15873,9 +16209,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -15894,9 +16236,9 @@
           "MetadataOnly"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -16131,9 +16473,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -16152,9 +16500,9 @@
           "MetadataOnly"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -16387,9 +16735,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -16407,9 +16761,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -16641,9 +16995,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -16662,9 +17022,9 @@
           "ExternalRuntime"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -16897,9 +17257,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -16917,9 +17283,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -17149,9 +17515,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -17169,9 +17541,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -17401,9 +17773,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -17421,9 +17799,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -17653,9 +18031,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -17673,9 +18057,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -17905,9 +18289,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -17925,9 +18315,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -18157,9 +18547,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -18177,9 +18573,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -18409,9 +18805,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -18429,9 +18831,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -30480,9 +30882,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -30501,9 +30909,9 @@
           "InterpreterReady"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-corelib-reference-hotupdate-proof",
         "evidenceLabels": [
@@ -30618,7 +31026,7 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "semantic",
       "executionContractId": "inventory-bridge/hotupdate-proof",
-      "verificationState": "failed",
+      "verificationState": "passed",
       "supportState": "supported",
       "blockers": [],
       "latestEvidenceId": "",
@@ -30639,9 +31047,9 @@
           "InterpreterReady"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "failed",
-        "stageStatus": "failed",
-        "statusReason": "hotupdate-proof 阶段已有正式执行记录，但最新 proof 失败。",
+        "stageCoverage": "covered",
+        "stageStatus": "covered",
+        "statusReason": "hotupdate-proof 阶段已经有对应的机器可见证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-corelib-reference-hotupdate-proof",
         "evidenceLabels": [
@@ -32662,9 +33070,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -32683,9 +33097,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],
@@ -32920,9 +33334,15 @@
       "deviceProfileCode": "inventory-host",
       "evidenceKind": "contract",
       "executionContractId": "inventory-bridge/workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "latestEvidenceId": "",
       "stageKind": "workspace",
       "projectionMeta": {
@@ -32941,9 +33361,9 @@
           "NativeGenerated"
         ],
         "stageRequirement": "required",
-        "stageCoverage": "covered",
-        "stageStatus": "covered",
-        "statusReason": "workspace 阶段已经有对应的机器可见证据。",
+        "stageCoverage": "missing-evidence",
+        "stageStatus": "missing-evidence",
+        "statusReason": "workspace 阶段是必经阶段，但当前没有找到对应证据。",
         "defaultGoalId": "correctness.dev",
         "defaultMatrixId": "windows-managed-proof",
         "evidenceLabels": [],

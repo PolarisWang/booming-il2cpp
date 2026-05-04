@@ -1,0 +1,89 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Method13:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [],
+  "exceptionFacts": []
+}

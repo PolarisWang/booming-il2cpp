@@ -1,0 +1,8 @@
+{
+  "subjectDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\entrypoint",
+  "outputDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\entrypoint\\closure-sp",
+  "sourceType": "managed-dlls",
+  "analysisDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\entrypoint\\closure-sp\\analysis",
+  "generatedDir": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\entrypoint\\closure-sp\\generated",
+  "status": "ok"
+}

@@ -2101,12 +2101,35 @@ public sealed partial class NativeAotLoweringPlanner
                     foreach (var pt in paramTypes)
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
+                    var body = new List<string>();
+                    // Generate StringId-aware code for System.String parameters:
+                    // ldstr now pushes a tagged StringId instead of a heap pointer.
+                    for (int i = 0; i < paramTypes.Count; i++)
+                    {
+                        if (paramTypes[i] == "System.String")
+                        {
+                            body.Add($"    if (chaos_is_string_id(chaos_arg_{i}))");
+                            body.Add($"    {{");
+                            body.Add($"        const auto chaos_view = chaos::il2cpp::string_table::Resolve(chaos_extract_string_id(chaos_arg_{i}));");
+                            // For single-string-parameter overloads (like ToChar(string)),
+                            // read the first UTF-8 byte. Multi-param overloads return 0.
+                            if (paramTypes.Count == 1)
+                            {
+                                body.Add("        return chaos_view.byte_count > 0");
+                                body.Add("            ? static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(chaos_view.utf8_data[0]))");
+                                body.Add("            : static_cast<CHAOS_IL2CPP_UINT16>(0);");
+                            }
+                            else
+                            {
+                                body.Add("        return static_cast<CHAOS_IL2CPP_UINT16>(0);");
+                            }
+                            body.Add($"    }}");
+                        }
+                    }
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_UINT16", symbol, paramSig,
-                    [
-                        $"    {voidExprs};",
-                        "    return static_cast<CHAOS_IL2CPP_UINT16>(0);",
-                    ]);
+                    body.Add($"    {voidExprs};");
+                    body.Add("    return static_cast<CHAOS_IL2CPP_UINT16>(0);");
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_UINT16", symbol, paramSig, body.ToArray());
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                         new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt16, TypeShape = AotCoreIrTypeShapeKind.ValueType },

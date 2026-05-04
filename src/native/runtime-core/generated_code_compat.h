@@ -11,8 +11,11 @@
 #include <chaos/type_info.h>
 
 // ── Object header definition ──
+// type_info: type identity for GC, casting, reflection
+// vtable: virtual method dispatch table
 struct chaos_object_header {
-    const TypeInfo* type_info = nullptr;
+    const void**    vtable      = nullptr;  // [0] virtual method table
+    const TypeInfo* type_info   = nullptr;   // [8] type identity
 };
 
 // ── Managed string type ──────────────────────────────────────────

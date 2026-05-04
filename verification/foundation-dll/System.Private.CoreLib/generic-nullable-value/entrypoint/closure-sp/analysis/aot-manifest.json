@@ -1,0 +1,120 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericNullableValueNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::get_HasValue:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::GetValueOrDefault:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    }
+  ]
+}

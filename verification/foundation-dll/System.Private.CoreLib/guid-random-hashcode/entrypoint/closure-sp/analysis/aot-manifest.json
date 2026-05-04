@@ -1,0 +1,192 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GuidRandomHashcodeNativeEntry",
+      "subjectKind": "field",
+      "subjectId": "GuidRandomHashcodeNativeEntry/\u003CPrivateImplementationDetails\u003E::039058C6F2C0CB492C533B0A4D14EF77CC0F78ABCCCED5287D84A1A2011CFB81",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.HashCode",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Int32\u003E:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.HashCode::Combine\u003CSystem.Int32,System.Int32\u003E:System.Int32(System.Int32,System.Int32)",
+      "reason": "external-call"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "GlobalizationCultureNativeEntry"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "name": "GlobalizationCultureNativeEntry",
+      "displayName": "GlobalizationCultureNativeEntry",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method0:System.Int32()",
+      "name": "Method0",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method0:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method1:System.Int32()",
+      "name": "Method1",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method1:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method2:System.Int32()",
+      "name": "Method2",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method2:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method3:System.Int32()",
+      "name": "Method3",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method3:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method4:System.Int32()",
+      "name": "Method4",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method4:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method5:System.Int32()",
+      "name": "Method5",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method5:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method6:System.Int32()",
+      "name": "Method6",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method6:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method7:System.Int32()",
+      "name": "Method7",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method7:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method8:System.Int32()",
+      "name": "Method8",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method8:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method9:System.Int32()",
+      "name": "Method9",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method9:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method10:System.Int32()",
+      "name": "Method10",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method10:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method11:System.Int32()",
+      "name": "Method11",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method11:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method12:System.Int32()",
+      "name": "Method12",
+      "definitionSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Method12:System.Int32()",
+      "declaringTypeSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 16,
+      "subjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

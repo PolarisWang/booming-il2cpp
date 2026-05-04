@@ -1,0 +1,78 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "BufferMemoryNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Run",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Method0",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Method1",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Method2",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Method3",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Method4",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Method5",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Method6",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Method7",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Method8",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "BufferMemoryNativeEntry_BufferMemoryNativeEntry_Method9",
+          "subjectId": "BufferMemoryNativeEntry/BufferMemoryNativeEntry::Method9:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

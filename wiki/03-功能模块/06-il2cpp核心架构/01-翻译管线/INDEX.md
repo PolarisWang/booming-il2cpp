@@ -14,7 +14,7 @@
 | [`05-异常处理架构.md`](./05-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84.md) | 5种 EH shape 的 C++ 模式 |
 | [`06-字符串ID系统.md`](./06-%E5%AD%97%E7%AC%A6%E4%B8%B2ID%E7%B3%BB%E7%BB%9F.md) | FNV-1a 64-bit hash、碰撞处理、AOT baked table |
 | [`07-对象模型与相等性.md`](./07-%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%9B%B8%E7%AD%89%E6%80%A7.md) | C++ struct 定义、类型身份辅助函数、相等性 7 级优先级 |
-| [`08-泛型执行模型.md`](./08-%E6%B3%9B%E5%9E%8B%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B.md) | GenericContextShapeKind、实例化存根、封闭泛型 method handle |
+| [`08-泛型执行模型.md`](./08-%E6%B3%9B%E5%9E%8B%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B.md) | GenericContextShapeKind、Gen-2 Handle 双路径架构（AOT 快路径 + Interpreted Fallback）、RuntimeInstantiationEngine |
 | [`09-运行时Helper生态.md`](./09-%E8%BF%90%E8%A1%8C%E6%97%B6Helper%E7%94%9F%E6%80%81.md) | 16 类 helper 及其文件分布 |
 | [`10-静态初始化模型.md`](./10-%E9%9D%99%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E6%A8%A1%E5%9E%8B.md) | std::call_once 模式 |
 | [`11-CPP运行时模块分层.md`](./11-CPP%E8%BF%90%E8%A1%8C%E6%97%B6%E6%A8%A1%E5%9D%97%E5%88%86%E5%B1%82.md) | 8 模块 DAG、禁止包含列表、命名约定、验证层级 |
@@ -24,8 +24,8 @@
 | 文档 | 说明 |
 |------|------|
 | [`13-MemoryDomain系统.md`](./13-MemoryDomain%E7%B3%BB%E7%BB%9F.md) | 内存域分配隔离、3 种堆策略、TLS 域栈 |
-| [`14-VTable注册表.md`](./14-VTable%E6%B3%A8%E5%86%8C%E8%A1%A8.md) | 虚方法分派注册中心、继承链遍历解析 |
-| [`15-泛型上下文运行时.md`](./15-%E6%B3%9B%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E8%BF%90%E8%A1%8C%E6%97%B6.md) | 封闭泛型实例化注册、类型参数查询 |
+| [`14-VTable注册表.md`](./14-VTable%E6%B3%A8%E5%86%8C%E8%A1%A8.md) | B2+ 虚方法分派架构：Per-Object VTable + 继承链 slot 自动编号 + iface_map 接口分派 |
+| [`15-泛型上下文运行时.md`](./15-%E6%B3%9B%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8C%BA%E8%BF%90%E8%A1%8C%E6%97%B6.md) | Handle-based API、ModuleGenericRegistrationV0 注册束、token→handle 解析注册、by_module hotupdate 清理、RuntimeInstantiationBridgeV0 |
 | [`16-字符串表运行时.md`](./16-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A8%E8%BF%90%E8%A1%8C%E6%97%B6.md) | 运行时字符串解析、AOT 二分查找、动态注册 |
 | [`17-反射查询模型.md`](./17-%E5%8F%8D%E5%B0%84%E6%9F%A5%E8%AF%A2%E6%A8%A1%E5%9E%8B.md) | 不可变反射描述符、指针标记句柄、AOT const 数据 |
 | [`18-热更新架构.md`](./18-%E7%83%AD%E6%9B%B4%E6%96%B0%E6%9E%B6%E6%9E%84.md) | 包加载/卸载、方法替换表、MemoryDomain 关联 |

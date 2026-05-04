@@ -1,0 +1,232 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "genericCapabilityMatrix",
+  "ownerSubjectId": "StringCharTextCoreNativeEntry",
+  "entrySubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Run:System.Int32(System.Int32)",
+  "hotUpdateModes": [
+    "HotUpdateNone",
+    "HotUpdateMetadataAugmented",
+    "HotUpdateGenericSharing"
+  ],
+  "gates": {
+    "status": "ok",
+    "unsupportedLeakCount": 0,
+    "missingAuthorityCount": 0,
+    "nonCanonicalHotUpdateNameCount": 0,
+    "leaks": []
+  },
+  "familyBudgets": [
+    {
+      "familyId": "ClosedGenericType",
+      "displayName": "Closed Generic Type",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedMethodOnGenericType",
+      "displayName": "Closed Method On Generic Type",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "ClosedGenericMethod",
+      "displayName": "Closed Generic Method",
+      "budgetLimit": 512,
+      "observedCount": 2
+    },
+    {
+      "familyId": "ClosedGenericMethodOnGenericType",
+      "displayName": "Closed Generic Method On Generic Type",
+      "budgetLimit": 512,
+      "observedCount": 0
+    },
+    {
+      "familyId": "CrossAssemblyBoundary",
+      "displayName": "Cross Assembly Boundary",
+      "budgetLimit": 512,
+      "observedCount": 2
+    },
+    {
+      "familyId": "DispatchBoundary",
+      "displayName": "Dispatch Boundary",
+      "budgetLimit": 128,
+      "observedCount": 10
+    },
+    {
+      "familyId": "ReflectionBoundary",
+      "displayName": "Reflection Boundary",
+      "budgetLimit": 64,
+      "observedCount": 0
+    },
+    {
+      "familyId": "HotUpdateBoundary",
+      "displayName": "HotUpdate Boundary",
+      "budgetLimit": 64,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncTaskFamily",
+      "displayName": "Async Task Family",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncValueTaskFamily",
+      "displayName": "Async ValueTask Family",
+      "budgetLimit": 256,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncBuilderFamily",
+      "displayName": "Async Builder Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "AsyncAwaiterFamily",
+      "displayName": "Async Awaiter Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "PointerByRefFamily",
+      "displayName": "Pointer And ByRef Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    },
+    {
+      "familyId": "RefStructFamily",
+      "displayName": "Ref Struct Family",
+      "budgetLimit": 128,
+      "observedCount": 0
+    }
+  ],
+  "boundaryCases": [
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method11:System.Int32()",
+      "ilOffset": 21,
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method13:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method14:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method15:System.Int32()",
+      "ilOffset": 11,
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method16:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method2:System.Int32()",
+      "ilOffset": 12,
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method3:System.Int32()",
+      "ilOffset": 13,
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method6:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method7:System.Int32()",
+      "ilOffset": 21,
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    },
+    {
+      "boundaryKind": "DispatchBoundary",
+      "sourceMethodSubjectId": "StringCharTextCoreNativeEntry/StringCharTextCoreNativeEntry::Method8:System.Int32()",
+      "ilOffset": 16,
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "evidenceKind": "external-runtime-callvirt",
+      "status": "observed"
+    }
+  ],
+  "entries": [
+    {
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+      "demandSourceKind": "methodSpec",
+      "requestingAssemblyName": "StringCharTextCoreNativeEntry",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "familyKindCode": 3,
+      "contextKindCode": 2,
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "isCrossAssembly": true,
+      "statusReasonCode": "loader-demand:methodSpec",
+      "authoritySource": "aot-core-ir",
+      "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+      "sharedGenericBodyId": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]",
+      "instantiationStubId": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]",
+      "hasOpenDefinitionAuthority": true,
+      "hasSharedBodyAuthority": true,
+      "hasInstantiationStubAuthority": true,
+      "hasRuntimeGenericContextAuthority": true
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.String\u003E:System.String[]()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+      "demandSourceKind": "methodSpec",
+      "requestingAssemblyName": "StringCharTextCoreNativeEntry",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "familyKindCode": 3,
+      "contextKindCode": 2,
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "isCrossAssembly": true,
+      "statusReasonCode": "loader-demand:methodSpec",
+      "authoritySource": "aot-core-ir",
+      "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+      "sharedGenericBodyId": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.String]",
+      "instantiationStubId": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.String]",
+      "hasOpenDefinitionAuthority": true,
+      "hasSharedBodyAuthority": true,
+      "hasInstantiationStubAuthority": true,
+      "hasRuntimeGenericContextAuthority": true
+    }
+  ]
+}

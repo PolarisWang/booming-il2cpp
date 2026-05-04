@@ -657,6 +657,10 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine(indentation + "    const auto chaos_target = chaos_eval_stack[--chaos_stack_top];");
 			builder.AppendLine($"{indentation}    auto* chaos_object = new {GetNativeTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
 			builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
+			if (_vtableTypes?.Contains(requiredTargetReference.SubjectId) == true)
+			{
+				builder.AppendLine($"{indentation}    chaos_object->header.vtable = {GetNativeVTableSymbol(requiredTargetReference.SubjectId)};");
+			}
 			builder.AppendLine(indentation + "    chaos_object->chaos_delegate_target = chaos_target;");
 			builder.AppendLine(indentation + "    chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;");
 			builder.AppendLine(indentation + "    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);");
@@ -709,6 +713,10 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			builder.AppendLine($"{indentation}    auto* chaos_object = new {GetNativeTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
 			builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
+			if (_vtableTypes?.Contains(requiredTargetReference.SubjectId) == true)
+			{
+				builder.AppendLine($"{indentation}    chaos_object->header.vtable = {GetNativeVTableSymbol(requiredTargetReference.SubjectId)};");
+			}
 			builder.AppendLine(indentation + "    const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);");
 			builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({FormatAbiInvocationArgumentList(constructorTarget.ParameterAbis)});");
 			builder.AppendLine(indentation + "    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);");
@@ -718,6 +726,10 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine(indentation + "{");
 		builder.AppendLine($"{indentation}    auto* chaos_object = new {GetNativeTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
 		builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
+		if (_vtableTypes?.Contains(requiredTargetReference.SubjectId) == true)
+		{
+			builder.AppendLine($"{indentation}    chaos_object->header.vtable = {GetNativeVTableSymbol(requiredTargetReference.SubjectId)};");
+		}
 		builder.AppendLine(indentation + "    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);");
 		builder.AppendLine(indentation + "}");
 	}
@@ -930,7 +942,7 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder8.AppendLine(ref handler);
 	}
 
-	private static void EmitLinearLoadStringLiteral(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+	private void EmitLinearLoadStringLiteral(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 		string requiredStringOperand = GetRequiredStringOperand(instruction);
 		StringBuilder stringBuilder = builder;
@@ -955,6 +967,16 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String"));
 		handler.AppendLiteral(";");
 		stringBuilder4.AppendLine(ref handler);
+		if (_vtableTypes?.Contains("System.Private.CoreLib/System.String") == true)
+		{
+			stringBuilder = builder;
+			StringBuilder stringBuilder_vt4 = stringBuilder;
+			handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
+			handler.AppendLiteral("    chaos_string->header.vtable = ");
+			handler.AppendFormatted(GetNativeVTableSymbol("System.Private.CoreLib/System.String"));
+			handler.AppendLiteral(";");
+			stringBuilder_vt4.AppendLine(ref handler);
+		}
 		stringBuilder = builder;
 		StringBuilder stringBuilder5 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(56, 2, stringBuilder);

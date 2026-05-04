@@ -1,0 +1,192 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "entrypoint"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method0:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method1:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method2:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method3:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method4:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method5:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method6:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method7:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method8:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method9:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method10:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method11:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method12:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsNativeEntry",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsNativeEntry/ExceptionThrowDiagnosticsNativeEntry::Method13:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Exception::get_Message:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    }
+  ]
+}

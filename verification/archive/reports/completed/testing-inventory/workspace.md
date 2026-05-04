@@ -4,7 +4,7 @@
 - stageKind: workspace
 - closureId: closure/completed/testing-inventory
 - scopeCode: testing-inventory
-- verificationState: passed
+- verificationState: missing
 - supportState: supported
 
 ## Covered Obligations
@@ -74,6 +74,20 @@
 - obligation/10/45
 
 ## Success Evidence
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/workspace
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/workspace
+
+## Failed Evidence
+- n/a
+
+## Blocked Evidence
+- n/a
+
+## Missing Claims
 - evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/workspace
 - evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MetadataSupplementProofEntry::Run()/workspace
 - evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()/workspace
@@ -81,12 +95,6 @@
 - evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()/workspace
 - evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()/workspace
 - evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/workspace
-- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/workspace
@@ -151,14 +159,74 @@
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/workspace
 
-## Failed Evidence
-- n/a
-
-## Blocked Evidence
-- n/a
-
-## Missing Claims
-- n/a
-
 ## Blockers
-- n/a
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
+- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。

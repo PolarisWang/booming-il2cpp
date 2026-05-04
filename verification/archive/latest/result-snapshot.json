@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-30T05:06:55.400112Z",
+  "generatedAtUtc": "2026-05-04T01:20:07.979621Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "closureId": "closure/completed/testing-inventory",
@@ -3649,7 +3649,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "failed",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/collector",
@@ -3721,7 +3721,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()/collector",
@@ -3855,7 +3855,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MetadataSupplementProofEntry::Run()/collector",
@@ -3920,7 +3920,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()/collector",
@@ -3985,7 +3985,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()/collector",

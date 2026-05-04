@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "GuidRandomHashcodeNativeEntry.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Run",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method0",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method0:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method1",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method2",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method2:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method3",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method3:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method4",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method5",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method5:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method6",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method6:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method7",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method8",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method9",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method9:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method10",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method10:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method11",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method11:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method12",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method12:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "GuidRandomHashcodeNativeEntry_GuidRandomHashcodeNativeEntry_Method13",
+          "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method13:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

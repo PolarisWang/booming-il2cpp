@@ -15,18 +15,18 @@
     "progressPercent": 0.0,
     "activeAssembly": "System.Private.CoreLib",
     "capabilityClosure": {
-      "totalFamilies": 116,
+      "totalFamilies": 125,
       "closedFamilies": 0,
       "waivedFamilies": 0,
       "excludedFamilies": 0,
       "platformBlockedFamilies": 0,
-      "inProgressFamilies": 116,
+      "inProgressFamilies": 125,
       "closurePercent": 0.0
     },
     "workflowProgress": {
-      "totalRequiredGates": 696,
-      "passedGates": 144,
-      "progressPercent": 20.69
+      "totalRequiredGates": 750,
+      "passedGates": 198,
+      "progressPercent": 26.4
     },
     "dllCompletion": {
       "completedDllCount": 0,

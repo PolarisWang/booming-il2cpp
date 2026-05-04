@@ -1,0 +1,144 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GuidRandomHashcodeNativeEntry/\u003CPrivateImplementationDetails\u003E",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method4:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method5:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method6:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method7:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method8:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method10:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method13:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method2:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method5:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method7:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method8:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method9:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeNativeEntry/GuidRandomHashcodeNativeEntry::Method10:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "GuidRandomHashcodeNativeEntry/\u003CPrivateImplementationDetails\u003E::039058C6F2C0CB492C533B0A4D14EF77CC0F78ABCCCED5287D84A1A2011CFB81",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    }
+  ],
+  "exceptionFacts": []
+}

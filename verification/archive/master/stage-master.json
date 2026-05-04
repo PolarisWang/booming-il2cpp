@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-30T05:06:55.400112Z",
+  "generatedAtUtc": "2026-05-04T01:20:07.979621Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "mergeKey": "stageId+scopeCode",
@@ -167,7 +167,7 @@
       "closureId": "closure/completed/testing-inventory",
       "scopeCode": "testing-inventory",
       "stageKind": "hotupdate-proof",
-      "verificationState": "failed",
+      "verificationState": "planned",
       "supportState": "supported",
       "coveredObligationClaimIds": [
         "obligation/13/54",
@@ -235,10 +235,10 @@
         "obligation/8/35",
         "obligation/10/45"
       ],
-      "successEvidenceIds": [],
-      "failedEvidenceIds": [
+      "successEvidenceIds": [
         "evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/hotupdate-proof"
       ],
+      "failedEvidenceIds": [],
       "blockedEvidenceIds": [],
       "missingEvidenceClaimIds": [],
       "blockers": [],
@@ -1249,7 +1249,7 @@
       "closureId": "closure/completed/testing-inventory",
       "scopeCode": "testing-inventory",
       "stageKind": "workspace",
-      "verificationState": "passed",
+      "verificationState": "missing",
       "supportState": "supported",
       "coveredObligationClaimIds": [
         "obligation/13/54",
@@ -1318,6 +1318,16 @@
         "obligation/10/45"
       ],
       "successEvidenceIds": [
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/workspace",
+        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/workspace"
+      ],
+      "failedEvidenceIds": [],
+      "blockedEvidenceIds": [],
+      "missingEvidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/workspace",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MetadataSupplementProofEntry::Run()/workspace",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()/workspace",
@@ -1325,12 +1335,6 @@
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()/workspace",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()/workspace",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/workspace",
-        "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ActivatorCreateInstanceProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/workspace",
@@ -1395,10 +1399,358 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/workspace",
         "evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/workspace"
       ],
-      "failedEvidenceIds": [],
-      "blockedEvidenceIds": [],
-      "missingEvidenceClaimIds": [],
-      "blockers": [],
+      "blockers": [
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        },
+        {
+          "code": "missing-evidence",
+          "lane": "contracts",
+          "message": "workspace 阶段是必经阶段，但当前没有找到对应证据。"
+        }
+      ],
       "reportRefs": []
     }
   ]

@@ -20,6 +20,7 @@
 #include "runtime_capability.h"
 #include "numerics_carriers.h"
 #include "string_table.h"
+#include "method_table.h"
 
 // ── Phase 1: Declare types needed by sub-headers below ──
 #include "reflection_api.h"

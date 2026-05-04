@@ -15,6 +15,8 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs.cpp
     module_registry.cpp
     module_registry.h
+    method_table.cpp
+    method_table.h
     reflection_api.cpp
     reflection_api.h)
 

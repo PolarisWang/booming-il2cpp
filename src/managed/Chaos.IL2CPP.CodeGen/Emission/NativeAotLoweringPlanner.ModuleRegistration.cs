@@ -23,7 +23,7 @@ public sealed partial class NativeAotLoweringPlanner
         var sb = new StringBuilder(512);
         sb.AppendLine("// ── Module registration ──────────────────────────────────────");
         sb.AppendLine("static constexpr ::chaos::il2cpp::runtime_core::ModuleDescriptor s_native_aot_module = {");
-        sb.AppendLine("    /* .name_utf8         = */ \"").Append(EscapeCppStringLiteral(assemblyName)).AppendLine("\",");
+        sb.Append("    /* .name_utf8         = */ \"").Append(EscapeCppStringLiteral(assemblyName)).AppendLine("\",");
         sb.AppendLine("    /* .image             = */ nullptr,  // Tier 2 metadata — deferred");
         sb.AppendLine("    /* .type_flags        = */ nullptr,  // Tier 1 — deferred");
         sb.AppendLine("    /* .type_names        = */ nullptr,");

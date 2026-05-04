@@ -84,6 +84,26 @@ public sealed partial class NativeAotLoweringPlanner
 
     private readonly RuntimeHelperShapeRegistry _shapeRegistry = RuntimeHelperShapeRegistry.BuildDefault();
 
+    /// <summary>
+    /// Assembly name for the current AOT module. Used for cross-module call detection.
+    /// </summary>
+    private string _assemblyName = string.Empty;
+
+    /// <summary>
+    /// Maps method SubjectId → method_table index for cross-module calls.
+    /// </summary>
+    private readonly Dictionary<string, uint> _methodTableIndices = new(StringComparer.Ordinal);
+
+    /// <summary>
+    /// Next available method table index (sequential allocation).
+    /// </summary>
+    private uint _nextMethodTableIndex;
+
+    /// <summary>
+    /// Collected method table entries for initialization code generation.
+    /// </summary>
+    private readonly List<(uint Index, string NativeSymbol)> _methodTableEntries = new();
+
     public NativeAotTemplateModel Create(
         NativeAotLoweringPlanArtifact loweringPlan,
         AotCoreIrArtifact aotCoreIr,
@@ -107,6 +127,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         _methodsBySubjectId = aotCoreIr.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
+        _assemblyName = loweringPlan.AssemblyName;
         _attributeStorageFieldIndex = BuildAttributeStorageFieldIndex(_methodsBySubjectId);
         _referenceTypeBaseSubjectIds = CollectReferenceTypeBaseSubjectIds(aotCoreIr);
         _referenceTypeImplementedInterfaceSubjectIds = CollectReferenceTypeImplementedInterfaceSubjectIds(aotCoreIr);
@@ -179,6 +200,10 @@ public sealed partial class NativeAotLoweringPlanner
         var entryBridgeArguments = BuildEntryBridgeArguments(entryMethod);
 
         var moduleRegistrationCode = BuildModuleRegistration(loweringPlan);
+        if (_methodTableEntries.Count > 0)
+        {
+            moduleRegistrationCode += BuildMethodTableInitialization();
+        }
 
         return new NativeAotTemplateModel
         {
@@ -226,6 +251,62 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         return "chaos_entry_index";
+    }
+
+    /// <summary>
+    /// Determines whether a call target should use method_table dispatch (cross-module call).
+    /// If so, allocates or retrieves the method table index.
+    /// </summary>
+    private bool TryGetMethodTableIndex(string? callee, string nativeSymbol, out uint index)
+    {
+        index = 0;
+        if (string.IsNullOrEmpty(callee))
+            return false;
+
+        // Extract assembly name from callee SubjectId (format: "AssemblyName/Type::Method").
+        int slashIndex = callee.IndexOf('/');
+        if (slashIndex < 0)
+            return false;
+
+        string calleeAssembly = callee.Substring(0, slashIndex);
+        if (string.Equals(calleeAssembly, _assemblyName, StringComparison.Ordinal))
+            return false;
+
+        // Cross-module call: allocate or retrieve method table index.
+        if (!_methodTableIndices.TryGetValue(callee, out index))
+        {
+            index = _nextMethodTableIndex++;
+            _methodTableIndices[callee] = index;
+            _methodTableEntries.Add((index, nativeSymbol));
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Builds C++ code that initializes method table entries for cross-module calls.
+    /// Called once during template model creation, after all methods are emitted.
+    /// </summary>
+    private string BuildMethodTableInitialization()
+    {
+        var sb = new System.Text.StringBuilder(512);
+        sb.AppendLine();
+        sb.AppendLine("// ── Method table initialization ────────────────────────────────");
+        sb.AppendLine("// Fills the global method table with function pointers for");
+        sb.AppendLine("// cross-module dispatch targets.");
+        sb.AppendLine("static const uint32_t s_method_table_init = []()");
+        sb.AppendLine("{");
+        foreach (var (entryIndex, nativeSymbol) in _methodTableEntries)
+        {
+            sb.Append("    ::chaos::il2cpp::method_table::WriteMethodTable(");
+            sb.Append(entryIndex);
+            sb.Append(", reinterpret_cast<void*>(");
+            sb.Append(nativeSymbol);
+            sb.AppendLine("), 1u);");
+        }
+        sb.AppendLine("    return 0u;");
+        sb.AppendLine("}();");
+        return sb.ToString();
     }
 
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
