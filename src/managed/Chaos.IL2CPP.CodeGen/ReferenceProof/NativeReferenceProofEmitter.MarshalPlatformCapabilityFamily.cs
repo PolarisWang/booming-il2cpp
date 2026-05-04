@@ -71,7 +71,7 @@ public sealed partial class NativeReferenceProofEmitter
                 ["helper_statements"] = fastPathPlan.HelperStatements,
             };
             stub = ScribanTemplateRenderer.RenderTemplate(
-                NativeReferenceProofCatalog.GetRuntimeSkeletonMarshalPlatformFastPathStubTemplate(),
+                ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonMarshalPlatformFastPathStubTemplateRelativePath),
                 fastModel);
             return true;
         }
@@ -110,7 +110,7 @@ public sealed partial class NativeReferenceProofEmitter
             ["return_value_is_indirect"] = fallbackAbi.ReturnShape.ReturnValueIsIndirectExpression,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonUnsafeManagedInvokeStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonUnsafeManagedInvokeStubTemplateRelativePath),
             fallbackModel);
         return true;
     }
@@ -255,7 +255,7 @@ const auto result = static_cast<CHAOS_IL2CPP_INTPTR>(0);
             ["helper_statements"] = helperStatements,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonMarshalPlatformFastPathStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonMarshalPlatformFastPathStubTemplateRelativePath),
             model);
         return true;
     }

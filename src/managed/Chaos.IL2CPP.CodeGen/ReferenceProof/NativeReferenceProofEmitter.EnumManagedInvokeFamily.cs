@@ -107,7 +107,7 @@ public sealed partial class NativeReferenceProofEmitter
             ["return_value_is_indirect"] = abi.ReturnShape.ReturnValueIsIndirectExpression,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonEnumManagedInvokeStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonEnumManagedInvokeStubTemplateRelativePath),
             model);
         return true;
     }
@@ -169,7 +169,7 @@ public sealed partial class NativeReferenceProofEmitter
             ["import_method_symbol"] = registration.Symbol,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonEnumImportedBridgeStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonEnumImportedBridgeStubTemplateRelativePath),
             model);
         return true;
     }

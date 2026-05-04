@@ -103,7 +103,7 @@ public sealed partial class NativeReferenceProofEmitter
             }
 
             stub = ScribanTemplateRenderer.RenderTemplate(
-                NativeReferenceProofCatalog.GetRuntimeSkeletonVectorCapabilityQueryStubTemplate(),
+                ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonVectorCapabilityQueryStubTemplateRelativePath),
                 capabilityModel);
             return true;
         }
@@ -135,7 +135,7 @@ public sealed partial class NativeReferenceProofEmitter
             };
 
             stub = ScribanTemplateRenderer.RenderTemplate(
-                NativeReferenceProofCatalog.GetRuntimeSkeletonVectorCopyKernelStubTemplate(),
+                ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonVectorCopyKernelStubTemplateRelativePath),
                 vectorCopyModel);
             return true;
         }
@@ -156,7 +156,7 @@ public sealed partial class NativeReferenceProofEmitter
         };
 
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonValueTypeKernelStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonValueTypeKernelStubTemplateRelativePath),
             kernelModel);
         return true;
     }

@@ -27,7 +27,7 @@ internal static class RuntimeSkeletonThreadingAtomicCore
             ["return_managed_type"] = managedType ?? "System.Void",
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonThreadingAtomicStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonThreadingAtomicStubTemplateRelativePath),
             model);
         return true;
     }

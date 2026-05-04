@@ -73,7 +73,7 @@ public sealed partial class NativeReferenceProofEmitter
         };
 
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonValueTypeKernelStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonValueTypeKernelStubTemplateRelativePath),
             model);
         return true;
     }

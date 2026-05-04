@@ -83,7 +83,7 @@ public sealed partial class NativeReferenceProofEmitter
             ["return_assignment_statement"] = abi.ReturnShape.AssignmentStatement,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStringManagedInvokeStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStringManagedInvokeStubTemplateRelativePath),
             model);
         return true;
     }

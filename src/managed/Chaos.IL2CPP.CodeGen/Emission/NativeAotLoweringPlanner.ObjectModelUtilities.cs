@@ -294,6 +294,11 @@ public sealed partial class NativeAotLoweringPlanner
 		return GetNativeSymbol("chaos_type_info_", subjectId);
 	}
 
+	private static string GetNativeVTableSymbol(string subjectId)
+	{
+		return GetNativeSymbol("chaos_vtable_", subjectId);
+	}
+
 	private static string GetNativeBoxTypeIdSymbol(string subjectId)
 	{
 		return GetNativeSymbol("chaos_boxed_type_id_", subjectId);
