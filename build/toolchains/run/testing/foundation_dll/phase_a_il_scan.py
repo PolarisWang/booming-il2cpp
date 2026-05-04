@@ -75,7 +75,7 @@ def _normalize_opcode_name(op: str) -> str:
 
 def scan_family_opcodes(family_slug: str) -> dict:
     """Scan one family's typed-il-ir.json and return opcode data."""
-    ir_path = _VERIFICATION / family_slug / "entrypoint" / "closure-sp" / "analysis" / "typed-il-ir.json"
+    ir_path = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint" / "closure-sp" / "analysis" / "typed-il-ir.json"
     if not ir_path.exists():
         return {"family": family_slug, "status": "NO_IR", "opcodes": [], "method_count": 0}
 

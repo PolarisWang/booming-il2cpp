@@ -18,7 +18,7 @@ if [ -z "$STAGED_CPP" ]; then
 else
     HAS_ERROR=0
     for FILE in $STAGED_CPP; do
-        OUTPUT=$(python3 build/check_arch.py --file "$FILE" 2>&1)
+        OUTPUT=$(python build/check_arch.py --file "$FILE" 2>&1)
         if echo "$OUTPUT" | grep -q "architecture issue"; then
             echo "$OUTPUT"
             HAS_ERROR=1
@@ -41,7 +41,7 @@ if [ -z "$STAGED_FOUNDATION" ]; then
     echo "=== [foundation-dll] No foundation DLL files staged, skipping ==="
 else
     echo "Staged foundation DLL files — running pipeline check..."
-    python3 build/check_foundation_dll_pipeline.py
+    python build/check_foundation_dll_pipeline.py
     PIPELINE_EXIT=$?
     if [ "$PIPELINE_EXIT" -ne 0 ]; then
         echo ""

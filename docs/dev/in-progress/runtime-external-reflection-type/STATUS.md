@@ -45,6 +45,9 @@ clearance_source: brainstorming-approval
 - src/native/runtime-core/runtime_core.h — 添加 SetCurrentAotImage/GetCurrentAotImage 声明 + 28 个 extern "C" 声明
 - src/native/runtime-core/runtime_core.cpp — 添加 g_tls_aot_image + setter/getter
 - src/native/runtime-core/CMakeLists.txt — 添加 reflection_api.cpp, reflection_metadata_impl.h, exception_api.cpp
+- **src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs** — 新增 `chaos_managed_pointer_local_slot_tag` constexpr 定义（fix pre-existing 编译错误）
+- **src/native/common/chaos/native_types.h** — 新增 `chaos_resolve_native_int_slot` 内联函数（fix pre-existing 编译错误）
+- **build/toolchains/run/testing/foundation_dll/native_compile_runner.py** — 修复 MSVC 路径 Professional、vcvarsall env 捕获、缺失 include dirs、/utf-8 标志、missing argparse import（5 项 pre-existing 修复）
 
 ### Created
 - src/native/runtime-core/reflection_metadata_impl.h — constexpr 元数据表（7 个核心类型）

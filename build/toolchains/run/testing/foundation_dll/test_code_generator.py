@@ -552,7 +552,24 @@ def _parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
     # Return type is after the last ':' before the paren
     colon = method_and_ret.rfind(":")
     method_name = method_and_ret[:colon] if colon >= 0 else method_and_ret
+    # Strip trailing colons (e.g. "AsnDecoder:" from "AsnDecoder::Void(...)")
+    method_name = method_name.rstrip(":")
     return_type = method_and_ret[colon + 1:] if colon >= 0 else ""
+
+    # CLR constructor subject IDs use the type name instead of ".ctor",
+    # e.g. "AsnDecoder::Void(...)". Normalize to ".ctor" for downstream.
+    # Also handle the case where the "method" part before return type equals the type name.
+    raw_method = method_and_ret[:colon] if colon >= 0 else ""
+    raw_method = raw_method.rstrip(":")
+    if raw_method == type_name and method_name == type_name:
+        method_name = ".ctor"
+
+    # Normalize CLR abbreviated return types to fully-qualified form
+    _CLR_TO_SYSTEM = {
+        "Void": "System.Void",
+    }
+    if return_type in _CLR_TO_SYSTEM:
+        return_type = _CLR_TO_SYSTEM[return_type]
 
     # Parse parameter types (handle nested generics carefully)
     param_types = _split_param_types(params_part)
@@ -846,7 +863,11 @@ def _method_skip_reason(parsed: dict[str, Any]) -> str:
     return ""
 
 
-def _build_call_expr(parsed: dict[str, Any]) -> str:
+def _build_call_expr(
+    parsed: dict[str, Any],
+    type_map: dict[str, str] | None = None,
+    instance_map: dict[str, str] | None = None,
+) -> str:
     """Build a C# method call expression, e.g. ``Convert.ToChar(42)``.
 
     Handles:
@@ -854,10 +875,15 @@ def _build_call_expr(parsed: dict[str, Any]) -> str:
       - Property accessors: ``inst.Length``, ``inst[42]``
       - Instance methods: ``inst.ToString()``
       - Static methods: ``Convert.ToInt32("42")``
+
+    Args:
+        type_map: Optional custom type→default-value map (e.g. TYPE_ALTERNATIVE_MAP).
+        instance_map: Optional custom type→instance-expr map.
     """
     type_name = parsed["type_name"]
     method_name = parsed["method_name"]
-    args = ", ".join(_default_expr(pt) for pt in parsed["param_types"])
+    tm = type_map or TYPE_DEFAULT_MAP
+    args = ", ".join(_default_expr_for_type(pt, tm) for pt in parsed["param_types"])
 
     # Check override map first (for known problematic signatures)
     param_count = len(parsed["param_types"])
@@ -888,12 +914,14 @@ def _build_call_expr(parsed: dict[str, Any]) -> str:
         return f"{type_name}.{method_name}({args})"
 
     # Instance method on a type we know about
-    inst = INSTANCE_EXPR_MAP.get(type_name)
+    im = instance_map or INSTANCE_EXPR_MAP
+    inst = im.get(type_name)
     if inst is not None:
         return f"{inst}.{method_name}({args})"
 
     # Fallback: assume static
     return f"{type_name}.{method_name}({args})"
+
 
 
 def _build_ctor_expr(type_name: str, args: str) -> str:
@@ -1206,7 +1234,7 @@ def _generated_source(
         f"// No xunit dependency — [Fact] attributes belong in the test exe project.\n"
         f"public partial class {prod_name}\n"
         "{\n"
-        f"{members}"
+        f"{members}\n"
         "}\n"
     )
 
@@ -1297,6 +1325,36 @@ def _test_exe_source(class_name: str, *, method_subject_ids: list[str]) -> str:
 
 def _benchmark_exe_source(class_name: str, *, method_subject_ids: list[str]) -> str:
     """Generate benchmark executable source (managed_test/benchmarks/)."""
+    if method_subject_ids:
+        call_exprs = []
+        for mid in method_subject_ids[:10]:
+            parsed = _parse_method_subject_id(mid)
+            if _is_auto_callable(parsed) and not _has_unsafe_param(parsed["param_types"]):
+                try:
+                    call_exprs.append((_member_name("Benchmark", mid), _build_call_expr(parsed)))
+                except Exception:
+                    pass
+        if call_exprs:
+            lines = [
+                "using System;",
+                "using System.Diagnostics;",
+                "",
+                f"// Auto-generated benchmark harness for {class_name}",
+                f"// Runs {len(call_exprs)} methods as quick smoke-benchmark.",
+                "class Program",
+                "{",
+                "    static void Main()",
+                "    {",
+            ]
+            for idx, (name, expr) in enumerate(call_exprs):
+                lines.append(f"        // Benchmark entry {idx}: {name}")
+                lines.append(f"        var sw{idx} = Stopwatch.StartNew();")
+                lines.append(f"        _ = {expr};")
+                lines.append(f"        sw{idx}.Stop();")
+                lines.append(f'        Console.WriteLine($"Entry {idx}: {{sw{idx}.Elapsed.TotalMilliseconds:F3}} ms");')
+            lines.append("    }")
+            lines.append("}")
+            return "\n".join(lines) + "\n"
     return (
         "using System;\n"
         "\n"
@@ -1304,31 +1362,9 @@ def _benchmark_exe_source(class_name: str, *, method_subject_ids: list[str]) -> 
         "{\n"
         "    static void Main()\n"
         "    {\n"
-        "        Console.WriteLine(\"Benchmark harness placeholder.\");\n"
+        '        Console.WriteLine("No auto-generable methods for this family.");\n'
         "    }\n"
         "}\n"
-    )
-    return (
-        "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
-        "  <PropertyGroup>\n"
-        "    <TargetFramework>net8.0</TargetFramework>\n"
-        "    <Nullable>enable</Nullable>\n"
-        "    <ImplicitUsings>enable</ImplicitUsings>\n"
-        "    <IsTestProject>true</IsTestProject>\n"
-        f"    <AssemblyName>{class_name}</AssemblyName>\n"
-        "  </PropertyGroup>\n"
-        "  <ItemGroup>\n"
-        f"    <ProjectReference Include=\"{project_reference_path}\" />\n"
-        "  </ItemGroup>\n"
-        "  <ItemGroup>\n"
-        "    <PackageReference Include=\"Microsoft.NET.Test.Sdk\" Version=\"17.11.1\" />\n"
-        "    <PackageReference Include=\"xunit\" Version=\"2.9.0\" />\n"
-        "    <PackageReference Include=\"xunit.runner.visualstudio\" Version=\"2.8.2\">\n"
-        "      <PrivateAssets>all</PrivateAssets>\n"
-        "      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>\n"
-        "    </PackageReference>\n"
-        "  </ItemGroup>\n"
-        "</Project>\n"
     )
 
 

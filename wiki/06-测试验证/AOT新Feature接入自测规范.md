@@ -345,7 +345,7 @@ When a new DLL enters translation-verification scope, all four layers must be ge
 
 - Truth Layer: DLL / family / method authority
 - Evidence Layer: functional / benchmark / hotupdate case mapping and review bundle skeleton
-- Execution Layer: generated `test/native/benchmark/host/patch` projects and solution wiring
+- Execution Layer: generated `src/`, `src/patch/`, `managed_test/`, `il2cpp_dist/`, `native_test/` artifacts and solution/cmake wiring
 - Projection Layer: DLL / family / method aggregate skeleton
 
 It is not allowed to only add dashboard data or only add partial proof hosts.
@@ -374,12 +374,19 @@ Annotations should prefer enum-backed attributes. String should be kept only for
 
 Per family, fixed directories are:
 
-- `verification/foundation-dll/<assembly>/<family>/test/`
-- `verification/foundation-dll/<assembly>/<family>/native/`
-- `verification/foundation-dll/<assembly>/<family>/benchmark/`
-- `verification/foundation-dll/<assembly>/<family>/host/`
-- `verification/foundation-dll/<assembly>/<family>/patch/`
-- `verification/foundation-dll/<assembly>/<family>/review/`
+- `verification/foundation-dll/<assembly>/<family>/src/` — handwrite managed source
+- `verification/foundation-dll/<assembly>/<family>/src/patch/` — handwrite patch source
+- `verification/foundation-dll/<assembly>/<family>/managed_test/tests/` — managed xunit tests
+- `verification/foundation-dll/<assembly>/<family>/managed_test/benchmarks/` — managed benchmarks
+- `verification/foundation-dll/<assembly>/<family>/il2cpp_dist/` — generated il2cpp output (not committed)
+- `verification/foundation-dll/<assembly>/<family>/native_test/benchmark/` — native benchmark entry (committed)
+- `verification/foundation-dll/<assembly>/<family>/native_test/hotupdate/` — native hotupdate skeleton (committed)
+- `verification/foundation-dll/<assembly>/<family>/reports/` — test reports (not committed)
+
+Generated project/solution artifacts are centralized outside the family tree:
+
+- `solution/` — managed .sln + .csproj (not committed)
+- `solution_native/` — cmake project forwarding (not committed)
 
 ### 8.5 completed-before Gate
 
@@ -403,6 +410,6 @@ The system must also support local accelerated execution:
 
 - by DLL
 - by family
-- by family `test/benchmark/host/patch`
+- by family `managed_test/`, `native_test/`, `il2cpp_dist/`
 
 These local entries are development accelerators only and are not new formal main entries.

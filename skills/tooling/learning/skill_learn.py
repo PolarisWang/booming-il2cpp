@@ -14,7 +14,11 @@ Usage:
   python skill_learn.py auto-collect [--min-uses 3]
   python skill_learn.py auto-assess
   python skill_learn.py auto-report [--output json|md|both]
-  python skill_learn.py auto-cleanup [--lookback-days 90] [--dry-run]
+  python skill_learn.py auto-cleanup [--lookback-days 90] [--dry-run] [--health-engine/--no-health-engine]
+  python skill_learn.py evolve-benchmark <proposal-id>
+  python skill_learn.py evolve-review <proposal-id>
+  python skill_learn.py evolve-promote <proposal-id> [--dry-run]
+  python skill_learn.py evolve-history [--skill <name>]
 """
 
 from __future__ import annotations
@@ -460,8 +464,9 @@ def _refresh_catalog() -> None:
             print(f"[skill-learn] Catalog refresh failed: {e.stderr}")
 
     # Also run verification if available
-    verify_script = Path(__file__).resolve().parent.parent / "verification" / "verify-skill-pipeline.ps1"
-    if verify_script.exists():
+    verify_ps1 = Path(__file__).resolve().parent.parent / "verification" / "verify-skill-pipeline.ps1"
+    verify_py = Path(__file__).resolve().parent.parent / "verification" / "verify_skill_pipeline.py"
+    if verify_ps1.exists():
         try:
             pwsh_path = subprocess.run(
                 ["where", "pwsh"], capture_output=True, text=True
@@ -469,15 +474,29 @@ def _refresh_catalog() -> None:
             if not pwsh_path:
                 pwsh_path = "pwsh"
             result = subprocess.run(
-                [pwsh_path, str(verify_script)],
+                [pwsh_path, str(verify_ps1)],
                 check=False, capture_output=True, text=True, timeout=60,
             )
             if result.returncode == 0:
                 print(f"[skill-learn] Pipeline verification passed.")
             else:
                 print(f"[skill-learn] Pipeline verification reported issues:\n{result.stderr[:500]}")
-        except FileNotFoundError:
-            print(f"[skill-learn] Skipping pipeline verification (pwsh not found).")
+        except (FileNotFoundError, OSError):
+            # Fallback to Python verify script
+            if verify_py.exists():
+                try:
+                    result = subprocess.run(
+                        [sys.executable, str(verify_py)],
+                        check=False, capture_output=True, text=True, timeout=60,
+                    )
+                    if result.returncode == 0:
+                        print(f"[skill-learn] Pipeline verification passed (python).")
+                    else:
+                        print(f"[skill-learn] Pipeline verification reported issues:\n{result.stdout[:500]}")
+                except subprocess.TimeoutExpired:
+                    print(f"[skill-learn] Pipeline verification timed out (python).")
+            else:
+                print(f"[skill-learn] Skipping pipeline verification (no pwsh or python verify script).")
         except subprocess.TimeoutExpired:
             print(f"[skill-learn] Pipeline verification timed out.")
 
@@ -752,10 +771,32 @@ def auto_cleanup(paths: Paths, args: argparse.Namespace) -> int:
             if d.name not in used_skills:
                 stale.append(d.name)
 
+    # Optional: also flag LOW-USE skills from health engine
+    health_low_use: list[str] = []
+    if args.health_engine:
+        health_dir = paths.telemetry / "health"
+        if health_dir.exists():
+            snapshots = sorted(health_dir.glob("health-snapshot-*.json"))
+            if snapshots:
+                try:
+                    snap = json.loads(snapshots[-1].read_text(encoding="utf-8"))
+                    for name, data in snap.get("skills", {}).items():
+                        m = data.get("metrics", {})
+                        raw = data.get("raw_counts", {})
+                        if m.get("applied_rate", 1.0) < 0.4 and raw.get("sessions", 0) >= 5:
+                            if name not in stale and name not in health_low_use:
+                                health_low_use.append(name)
+                except (json.JSONDecodeError, OSError):
+                    pass
+
     if args.dry_run:
         print(f"[skill-learn] DRY RUN: {len(stale)} stale skill(s) would be retired:")
         for s in stale:
             print(f"  - {s}")
+        if health_low_use:
+            print(f"\n[skill-learn] {len(health_low_use)} LOW-USE skill(s) from health snapshot:")
+            for s in health_low_use:
+                print(f"  - {s} (LOW-USE)")
         return 0
 
     for skill_name in stale:
@@ -769,8 +810,283 @@ def auto_cleanup(paths: Paths, args: argparse.Namespace) -> int:
         log_line = f"| {datetime.now().strftime('%Y-%m-%d')} | {skill_name} | - | 自动退役: 无使用记录 |\n"
         append_text(paths.promotion_log, log_line)
 
+    for skill_name in health_low_use:
+        if skill_name in stale:
+            continue
+        target_dir = paths.library / skill_name
+        manifest = read_json(target_dir / "skill.manifest.json", {})
+        manifest["status"] = "deprecated"
+        manifest["retire_reason"] = "auto-cleanup: LOW-USE from health engine"
+        manifest["retired_at"] = now_iso()
+        write_json(target_dir / "skill.manifest.json", manifest)
+        log_line = f"| {datetime.now().strftime('%Y-%m-%d')} | {skill_name} | - | 自动退役: LOW-USE |\n"
+        append_text(paths.promotion_log, log_line)
+
     _refresh_catalog()
-    print(f"[skill-learn] Auto-cleanup: {len(stale)} skill(s) retired.")
+    total = len(stale) + len(health_low_use)
+    print(f"[skill-learn] Auto-cleanup: {len(stale)} zero-usage + {len(health_low_use)} LOW-USE = {total} skill(s) retired.")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# Evolution subcommands: benchmark/review/promote proposals from evolve.py
+# ---------------------------------------------------------------------------
+
+def evolve_benchmark(paths: Paths, args: argparse.Namespace) -> int:
+    """Benchmark an evolution proposal (from lifecycle/evolution/proposals/)."""
+    proposals_dir = paths.root / "lifecycle" / "evolution" / "proposals"
+    proposal_dir = proposals_dir / args.proposal_id
+    if not proposal_dir.exists():
+        print(f"[skill-learn] Evolution proposal '{args.proposal_id}' not found.")
+        return 1
+
+    prop = read_json(proposal_dir / "evolution-proposal.json", {})
+    manifest = read_json(proposal_dir / "skill.manifest.json", {})
+    issues: list[str] = []
+
+    # 1. Version lineage integrity
+    evo_type = prop.get("type", "")
+    version_from = prop.get("version_from", "")
+    version_to = prop.get("version_to", prop.get("version", ""))
+    if evo_type == "fix":
+        if not version_to or not version_from:
+            issues.append("FIX proposal missing version_from or version_to")
+        elif version_to <= version_from:
+            issues.append(f"Version must increase: {version_from} -> {version_to}")
+
+    # 2. Manifest has version
+    if not manifest.get("version"):
+        issues.append("Manifest missing version field")
+
+    # 3. SKILL.md exists and has frontmatter
+    skill_file = proposal_dir / "SKILL.md"
+    if not skill_file.exists():
+        issues.append("Missing SKILL.md in proposal")
+    else:
+        try:
+            fm = parse_frontmatter(skill_file)
+            if not fm.get("name"):
+                issues.append("SKILL.md frontmatter missing name")
+        except RuntimeError:
+            issues.append("SKILL.md missing frontmatter")
+
+    # 4. Check overlap with formal skills for capture/derive
+    if evo_type in ("capture", "derive"):
+        summary = manifest.get("summary", "")
+        if paths.library.exists():
+            for formal_dir in sorted(paths.library.iterdir()):
+                if not formal_dir.is_dir():
+                    continue
+                fm_file = formal_dir / "skill.manifest.json"
+                if not fm_file.exists():
+                    continue
+                fm_manifest = read_json(fm_file)
+                fm_summary = fm_manifest.get("summary", "")
+                score = overlap_score(summary, fm_summary)
+                if score > 0.78:
+                    if fm_manifest.get("name") != prop.get("parent_skill"):
+                        issues.append(f"High overlap ({score:.2f}) with formal skill '{formal_dir.name}'")
+
+    result = {
+        "proposal_id": args.proposal_id,
+        "type": evo_type,
+        "timestamp": now_iso(),
+        "passed": len(issues) == 0,
+        "issues": issues,
+    }
+    write_json(proposal_dir / "evolve-benchmark.json", result)
+
+    if result["passed"]:
+        print(f"[skill-learn] Evolve benchmark PASSED for '{args.proposal_id}'")
+    else:
+        print(f"[skill-learn] Evolve benchmark FAILED for '{args.proposal_id}':")
+        for issue in issues:
+            print(f"  - {issue}")
+    return 0 if result["passed"] else 1
+
+
+def evolve_review(paths: Paths, args: argparse.Namespace) -> int:
+    """Review an evolution proposal benchmark."""
+    proposals_dir = paths.root / "lifecycle" / "evolution" / "proposals"
+    proposal_dir = proposals_dir / args.proposal_id
+    if not proposal_dir.exists():
+        print(f"[skill-learn] Evolution proposal '{args.proposal_id}' not found.")
+        return 1
+
+    benchmark = read_json(proposal_dir / "evolve-benchmark.json", {})
+    issues = benchmark.get("issues", [])
+
+    review_result = {
+        "proposal_id": args.proposal_id,
+        "timestamp": now_iso(),
+        "benchmark_passed": benchmark.get("passed", False),
+        "blocking_issues": issues,
+        "approved": benchmark.get("passed", False) and len(issues) == 0,
+    }
+    write_json(proposal_dir / "evolve-review.json", review_result)
+
+    if review_result["approved"]:
+        print(f"[skill-learn] Evolve review APPROVED for '{args.proposal_id}'")
+    else:
+        print(f"[skill-learn] Evolve review DENIED for '{args.proposal_id}':")
+        for issue in issues:
+            print(f"  - {issue}")
+    return 0
+
+
+def evolve_promote(paths: Paths, args: argparse.Namespace) -> int:
+    """Promote an approved evolution proposal to formal library."""
+    proposals_dir = paths.root / "lifecycle" / "evolution" / "proposals"
+    proposal_dir = proposals_dir / args.proposal_id
+    if not proposal_dir.exists():
+        print(f"[skill-learn] Evolution proposal '{args.proposal_id}' not found.")
+        return 1
+
+    review = read_json(proposal_dir / "evolve-review.json", {})
+    if not review.get("approved", False):
+        print(f"[skill-learn] Cannot promote '{args.proposal_id}': not approved.")
+        return 1
+
+    prop = read_json(proposal_dir / "evolution-proposal.json", {})
+    manifest = read_json(proposal_dir / "skill.manifest.json", {})
+    evo_type = prop.get("type", "")
+    skill_name_from_prop = prop.get("skill", "")
+
+    if args.dry_run:
+        if evo_type == "fix":
+            print(f"[skill-learn] DRY RUN: Would FIX '{skill_name_from_prop}' -> library/skills/{skill_name_from_prop}")
+        elif evo_type == "derive":
+            print(f"[skill-learn] DRY RUN: Would DERIVE '{skill_name_from_prop}' -> library/skills/{skill_name_from_prop}")
+        elif evo_type == "capture":
+            print(f"[skill-learn] DRY RUN: Would promote CAPTURED '{skill_name_from_prop}' -> library/skills/{skill_name_from_prop}")
+        return 0
+
+    if evo_type == "fix":
+        target_dir = paths.library / skill_name_from_prop
+        if not target_dir.exists():
+            print(f"[skill-learn] Target skill '{skill_name_from_prop}' not found in library.")
+            return 1
+
+        backup_dir = paths.governance / "backups" / f"{skill_name_from_prop}-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+        shutil.copytree(target_dir, backup_dir)
+        remove_tree(target_dir)
+        shutil.copytree(proposal_dir, target_dir)
+
+        for sidecar in ["evolution-proposal.json", "evolve-benchmark.json", "evolve-review.json"]:
+            (target_dir / sidecar).unlink(missing_ok=True)
+
+        tgt_manifest = read_json(target_dir / "skill.manifest.json")
+        tgt_manifest["status"] = "active"
+        write_json(target_dir / "skill.manifest.json", tgt_manifest)
+
+        log_line = f"| {datetime.now().strftime('%Y-%m-%d')} | {skill_name_from_prop} | evolution/{args.proposal_id} | FIX: {prop.get('version_from', '')} -> {prop.get('version_to', '')} |\n"
+        append_text(paths.promotion_log, log_line)
+        print(f"[skill-learn] FIX promoted: {skill_name_from_prop} ({prop.get('version_from', '')} -> {prop.get('version_to', '')})")
+
+    elif evo_type == "derive":
+        target_dir = paths.library / skill_name_from_prop
+        if target_dir.exists():
+            print(f"[skill-learn] Target '{skill_name_from_prop}' already exists.")
+            return 1
+
+        shutil.copytree(proposal_dir, target_dir)
+        for sidecar in ["evolution-proposal.json", "evolve-benchmark.json", "evolve-review.json"]:
+            (target_dir / sidecar).unlink(missing_ok=True)
+
+        tgt_manifest = read_json(target_dir / "skill.manifest.json")
+        tgt_manifest["status"] = "active"
+        write_json(target_dir / "skill.manifest.json", tgt_manifest)
+
+        parent_name = prop.get("parent_skill", "")
+        if parent_name:
+            parent_dir = paths.library / parent_name
+            if parent_dir.exists():
+                parent_manifest = read_json(parent_dir / "skill.manifest.json")
+                if "evolution_lineage" not in parent_manifest:
+                    parent_manifest["evolution_lineage"] = {"parent": None, "derived_from": None, "derived_to": [], "fixes": [], "captured_from": None}
+                if "derived_to" not in parent_manifest["evolution_lineage"]:
+                    parent_manifest["evolution_lineage"]["derived_to"] = []
+                if skill_name_from_prop not in parent_manifest["evolution_lineage"]["derived_to"]:
+                    parent_manifest["evolution_lineage"]["derived_to"].append(skill_name_from_prop)
+                write_json(parent_dir / "skill.manifest.json", parent_manifest)
+
+        log_line = f"| {datetime.now().strftime('%Y-%m-%d')} | {skill_name_from_prop} | evolution/{args.proposal_id} | DERIVE from {parent_name} |\n"
+        append_text(paths.promotion_log, log_line)
+        print(f"[skill-learn] DERIVE promoted: {skill_name_from_prop} (derived from {parent_name})")
+
+    elif evo_type == "capture":
+        target_dir = paths.library / skill_name_from_prop
+        if target_dir.exists():
+            print(f"[skill-learn] Target '{skill_name_from_prop}' already exists.")
+            return 1
+
+        shutil.copytree(proposal_dir, target_dir)
+        for sidecar in ["evolution-proposal.json", "evolve-benchmark.json", "evolve-review.json"]:
+            (target_dir / sidecar).unlink(missing_ok=True)
+
+        tgt_manifest = read_json(target_dir / "skill.manifest.json")
+        tgt_manifest["status"] = "active"
+        tgt_manifest["version"] = "1.0.0"
+        if "version_history" not in tgt_manifest:
+            tgt_manifest["version_history"] = []
+        tgt_manifest["version_history"].append({
+            "version": "1.0.0",
+            "date": now_iso()[:10],
+            "type": "captured",
+            "description": "Promoted from 0.1.0 to 1.0.0 (formal release)"
+        })
+        write_json(target_dir / "skill.manifest.json", tgt_manifest)
+
+        log_line = f"| {datetime.now().strftime('%Y-%m-%d')} | {skill_name_from_prop} | evolution/{args.proposal_id} | CAPTURE: 0.1.0 -> 1.0.0 |\n"
+        append_text(paths.promotion_log, log_line)
+        print(f"[skill-learn] CAPTURE promoted: {skill_name_from_prop} (0.1.0 -> 1.0.0)")
+
+    _refresh_catalog()
+    return 0
+
+
+def evolve_history(paths: Paths, args: argparse.Namespace) -> int:
+    """Show evolution history for a skill."""
+    lineage_dir = paths.root / "lifecycle" / "evolution" / "lineage"
+
+    if args.skill:
+        lineage_file = lineage_dir / f"{args.skill}.jsonl"
+        if not lineage_file.exists():
+            print(f"[skill-learn] No evolution history for '{args.skill}'.")
+            return 0
+        records = read_jsonl(lineage_file)
+        print(f"=== Evolution History: {args.skill} ===\n")
+        for r in records:
+            evo_type = r.get("type", "unknown").upper()
+            v_from = r.get("version_from", r.get("version", ""))
+            v_to = r.get("version_to", "")
+            ts = r.get("timestamp", "")[:19]
+            reason = r.get("reason", "")[:80]
+            if v_to:
+                print(f"  [{evo_type}] {ts}  {v_from} -> {v_to}")
+            else:
+                print(f"  [{evo_type}] {ts}  v{r.get('version', '?')}")
+            if reason:
+                print(f"       {reason}")
+            print()
+    else:
+        if not lineage_dir.exists():
+            print("[skill-learn] No evolution lineage data found.")
+            return 0
+        files = sorted(lineage_dir.glob("*.jsonl"))
+        if not files:
+            print("[skill-learn] No lineage files found.")
+            return 0
+        print("=== Skills with Evolution History ===\n")
+        for f in files:
+            records = read_jsonl(f)
+            count = len(records)
+            last = records[-1] if records else {}
+            evo_type = last.get("type", "initial").upper()
+            version = last.get("version_to", last.get("version", "?"))
+            print(f"  {f.stem}: {count} change(s), latest={version} ({evo_type})")
+        print()
+
     return 0
 
 
@@ -839,6 +1155,26 @@ def build_parser() -> argparse.ArgumentParser:
     cp.add_argument("--lookback-days", type=int, default=90)
     cp.add_argument("--dry-run", action="store_true", default=True)
     cp.add_argument("--no-dry-run", action="store_false", dest="dry_run")
+    cp.add_argument("--health-engine", action="store_true", default=True,
+                    help="Also check health snapshots for LOW-USE skills (default: True)")
+    cp.add_argument("--no-health-engine", action="store_false", dest="health_engine")
+
+    # evolve-benchmark
+    cp = subparsers.add_parser("evolve-benchmark", help="Benchmark an evolution proposal")
+    cp.add_argument("proposal_id")
+
+    # evolve-review
+    cp = subparsers.add_parser("evolve-review", help="Review evolution benchmark")
+    cp.add_argument("proposal_id")
+
+    # evolve-promote
+    cp = subparsers.add_parser("evolve-promote", help="Promote evolution proposal to library")
+    cp.add_argument("proposal_id")
+    cp.add_argument("--dry-run", action="store_true")
+
+    # evolve-history
+    cp = subparsers.add_parser("evolve-history", help="Show evolution history for a skill")
+    cp.add_argument("--skill", type=str, default=None)
 
     return parser
 
@@ -862,6 +1198,10 @@ def main() -> int:
         "auto-assess": auto_assess,
         "auto-report": auto_report,
         "auto-cleanup": auto_cleanup,
+        "evolve-benchmark": evolve_benchmark,
+        "evolve-review": evolve_review,
+        "evolve-promote": evolve_promote,
+        "evolve-history": evolve_history,
     }
 
     handler = handlers.get(args.command)

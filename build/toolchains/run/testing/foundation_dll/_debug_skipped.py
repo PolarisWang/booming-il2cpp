@@ -10,7 +10,7 @@ from pathlib import Path
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
 family_slug = "threading-tasks-primitives"
-entrypoint_dir = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib" / family_slug / "entrypoint"
+entrypoint_dir = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib" / family_slug / "il2cpp_dist" / "entrypoint"
 dll_path = str(entrypoint_dir / "build-output" / "ThreadingTasksPrimitivesNativeEntry.dll")
 entry_pt = "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Run:System.Int32(System.Int32)"
 
@@ -65,7 +65,7 @@ print(f"After trim: {len(trimmed.get('methods', []))} methods")
 
 # Emit with error capture
 print("\n=== Step 3: Emit ===")
-genuine_out = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib" / family_slug / "native" / "genuine"
+genuine_out = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib" / family_slug / "il2cpp_dist" / "genuine"
 genuine_out.mkdir(parents=True, exist_ok=True)
 emit = subprocess.run(
     ["dotnet", "run", "--no-build", "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),

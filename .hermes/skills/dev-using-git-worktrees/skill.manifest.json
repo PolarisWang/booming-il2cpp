@@ -3,10 +3,28 @@
   "domain": "git",
   "name": "dev-using-git-worktrees",
   "summary": "隔离开发的 worktree 管理和本地提交与备份分支工作流。",
-  "trigger_signals": ["需要创建隔离开发环境时", "需要管理多个并行分支时", "需要规范化提交流程时"],
+  "trigger_signals": [
+    "需要创建隔离开发环境时",
+    "需要管理多个并行分支时",
+    "需要规范化提交流程时"
+  ],
   "owner": "00-skills-maintainers",
   "status": "active",
   "version": "1.0.0",
   "startup_visible": false,
-  "token_budget": "small"
+  "token_budget": "small",
+  "version_history": [
+    {
+      "version": "1.0.0",
+      "date": "2025-01-01",
+      "type": "initial"
+    }
+  ],
+  "evolution_lineage": {
+    "parent": null,
+    "derived_from": null,
+    "derived_to": [],
+    "fixes": [],
+    "captured_from": null
+  }
 }

@@ -10,4 +10,4 @@
 | `knowledge` | 长期知识沉淀与 wiki 维护技能。 | [knowledge](./knowledge.md) | 1 |
 | `testing` | 测试治理、测试代码生成与 foundation-dll 测试技能。 | [testing](./testing.md) | 2 |
 | `il2cpp` | il2cpp 核心翻译路径与架构约束技能。 | [il2cpp](./il2cpp.md) | 1 |
-| `skilling` | 技能发现、创建、自学习与治理技能。 | [skilling](./skilling.md) | 2 |
+| `skilling` | 技能发现、创建、自学习与治理技能。 | [skilling](./skilling.md) | 3 |

@@ -1,411 +1,380 @@
 {
   "total": 31,
-  "passed": 31,
-  "failed": 0,
+  "passed": 0,
+  "failed": 31,
   "results": [
     {
       "family": "array-indexing-copy",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 13,
       "entryPointSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\entrypoint-patch\\build-output\\ArrayIndexingCopyPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\il2cpp_dist\\entrypoint-patch\\build-output\\ArrayIndexingCopyPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "buffer-memory",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 10,
       "entryPointSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\entrypoint-patch\\build-output\\BufferMemoryPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\il2cpp_dist\\entrypoint-patch\\build-output\\BufferMemoryPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "collections-generic-core",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 16,
       "entryPointSubjectId": "CollectionsGenericCorePatchEntry/CollectionsGenericCorePatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\collections-generic-core\\entrypoint-patch\\build-output\\CollectionsGenericCorePatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\collections-generic-core\\il2cpp_dist\\entrypoint-patch\\build-output\\CollectionsGenericCorePatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "convert-char",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 18,
       "entryPointSubjectId": "ConvertCharPatchEntry/ConvertCharPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\entrypoint-patch\\build-output\\ConvertCharPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint-patch\\build-output\\ConvertCharPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "enum-parsing",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 12,
       "entryPointSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\entrypoint-patch\\build-output\\EnumParsingPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\il2cpp_dist\\entrypoint-patch\\build-output\\EnumParsingPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "generic-nullable-value",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 10,
       "entryPointSubjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\entrypoint-patch\\build-output\\GenericNullableValuePatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\il2cpp_dist\\entrypoint-patch\\build-output\\GenericNullableValuePatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "guid-random-hashcode",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 14,
       "entryPointSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\entrypoint-patch\\build-output\\GuidRandomHashcodePatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\il2cpp_dist\\entrypoint-patch\\build-output\\GuidRandomHashcodePatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "math-numerics",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 18,
       "entryPointSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\math-numerics\\entrypoint-patch\\build-output\\MathNumericsPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\math-numerics\\il2cpp_dist\\entrypoint-patch\\build-output\\MathNumericsPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "object-equality-identity",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 7,
       "entryPointSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\object-equality-identity\\entrypoint-patch\\build-output\\ObjectEqualityIdentityPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\object-equality-identity\\il2cpp_dist\\entrypoint-patch\\build-output\\ObjectEqualityIdentityPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "primitive-numeric-conversions",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 15,
       "entryPointSubjectId": "PrimitiveNumericConversionsPatchEntry/PrimitiveNumericConversionsPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions\\entrypoint-patch\\build-output\\PrimitiveNumericConversionsPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions\\il2cpp_dist\\entrypoint-patch\\build-output\\PrimitiveNumericConversionsPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "string-char-text-core",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 20,
       "entryPointSubjectId": "StringCharTextCorePatchEntry/StringCharTextCorePatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\string-char-text-core\\entrypoint-patch\\build-output\\StringCharTextCorePatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\string-char-text-core\\il2cpp_dist\\entrypoint-patch\\build-output\\StringCharTextCorePatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "time-date-time-timespan",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 16,
       "entryPointSubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\time-date-time-timespan\\entrypoint-patch\\build-output\\TimeDateTimeTimespanPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\time-date-time-timespan\\il2cpp_dist\\entrypoint-patch\\build-output\\TimeDateTimeTimespanPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "threading-monitor-interlocked",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 14,
       "entryPointSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\entrypoint-patch\\build-output\\ThreadingMonitorInterlockedPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\il2cpp_dist\\entrypoint-patch\\build-output\\ThreadingMonitorInterlockedPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "attributes-custom-metadata",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 9,
       "entryPointSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\attributes-custom-metadata\\entrypoint-patch\\build-output\\AttributesCustomMetadataPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\attributes-custom-metadata\\il2cpp_dist\\entrypoint-patch\\build-output\\AttributesCustomMetadataPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "boxing-unboxing-casts",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 11,
       "entryPointSubjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\boxing-unboxing-casts\\entrypoint-patch\\build-output\\BoxingUnboxingCastsPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\boxing-unboxing-casts\\il2cpp_dist\\entrypoint-patch\\build-output\\BoxingUnboxingCastsPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "delegate-core-invocation",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 10,
       "entryPointSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\delegate-core-invocation\\entrypoint-patch\\build-output\\DelegateCoreInvocationPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\delegate-core-invocation\\il2cpp_dist\\entrypoint-patch\\build-output\\DelegateCoreInvocationPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "exception-throw-diagnostics",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 14,
       "entryPointSubjectId": "ExceptionThrowDiagnosticsPatchEntry/ExceptionThrowDiagnosticsPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\entrypoint-patch\\build-output\\ExceptionThrowDiagnosticsPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\il2cpp_dist\\entrypoint-patch\\build-output\\ExceptionThrowDiagnosticsPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "globalization-culture",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 13,
       "entryPointSubjectId": "GlobalizationCulturePatchEntry/GlobalizationCulturePatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\globalization-culture\\entrypoint-patch\\build-output\\GlobalizationCulturePatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\globalization-culture\\il2cpp_dist\\entrypoint-patch\\build-output\\GlobalizationCulturePatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "io-streams-basics",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 18,
       "entryPointSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\io-streams-basics\\entrypoint-patch\\build-output\\IoStreamsBasicsPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\io-streams-basics\\il2cpp_dist\\entrypoint-patch\\build-output\\IoStreamsBasicsPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "reflection-member-basics",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 14,
       "entryPointSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-basics\\entrypoint-patch\\build-output\\ReflectionMemberBasicsPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-basics\\il2cpp_dist\\entrypoint-patch\\build-output\\ReflectionMemberBasicsPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "runtime-compiler-services",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 10,
       "entryPointSubjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\runtime-compiler-services\\entrypoint-patch\\build-output\\RuntimeCompilerServicesPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\runtime-compiler-services\\il2cpp_dist\\entrypoint-patch\\build-output\\RuntimeCompilerServicesPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "span-memory-buffers",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 14,
       "entryPointSubjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\entrypoint-patch\\build-output\\SpanMemoryBuffersPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\il2cpp_dist\\entrypoint-patch\\build-output\\SpanMemoryBuffersPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "type-runtime-handles",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 13,
       "entryPointSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\type-runtime-handles\\entrypoint-patch\\build-output\\TypeRuntimeHandlesPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\type-runtime-handles\\il2cpp_dist\\entrypoint-patch\\build-output\\TypeRuntimeHandlesPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "reflection-type",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 43,
       "entryPointSubjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-type\\entrypoint-patch\\build-output\\ReflectionTypePatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-type\\il2cpp_dist\\entrypoint-patch\\build-output\\ReflectionTypePatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "reflection-assembly",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 22,
       "entryPointSubjectId": "ReflectionAssemblyPatchEntry/ReflectionAssemblyPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-assembly\\entrypoint-patch\\build-output\\ReflectionAssemblyPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-assembly\\il2cpp_dist\\entrypoint-patch\\build-output\\ReflectionAssemblyPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "reflection-member-complete",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 22,
       "entryPointSubjectId": "ReflectionMemberCompletePatchEntry/ReflectionMemberCompletePatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-complete\\entrypoint-patch\\build-output\\ReflectionMemberCompletePatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-complete\\il2cpp_dist\\entrypoint-patch\\build-output\\ReflectionMemberCompletePatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "reflection-generics",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 12,
       "entryPointSubjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-generics\\entrypoint-patch\\build-output\\ReflectionGenericsPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-generics\\il2cpp_dist\\entrypoint-patch\\build-output\\ReflectionGenericsPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "reflection-parameters",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 10,
       "entryPointSubjectId": "ReflectionParametersPatchEntry/ReflectionParametersPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-parameters\\entrypoint-patch\\build-output\\ReflectionParametersPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-parameters\\il2cpp_dist\\entrypoint-patch\\build-output\\ReflectionParametersPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "reflection-module",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 6,
       "entryPointSubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\entrypoint-patch\\build-output\\ReflectionModulePatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-module\\il2cpp_dist\\entrypoint-patch\\build-output\\ReflectionModulePatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "reflection-binding",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 12,
       "entryPointSubjectId": "ReflectionBindingPatchEntry/ReflectionBindingPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-binding\\entrypoint-patch\\build-output\\ReflectionBindingPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-binding\\il2cpp_dist\\entrypoint-patch\\build-output\\ReflectionBindingPatchEntry.dll",
+      "error": "convert failed"
     },
     {
       "family": "reflection-activation",
       "steps": {
         "build_patch_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert": "FAILED"
       },
-      "success": true,
+      "success": false,
       "methodCount": 8,
       "entryPointSubjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-activation\\entrypoint-patch\\build-output\\ReflectionActivationPatchEntry.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-activation\\il2cpp_dist\\entrypoint-patch\\build-output\\ReflectionActivationPatchEntry.dll",
+      "error": "convert failed"
     }
   ],
-  "timestamp": "2026-04-29T23:37:27"
+  "timestamp": "2026-05-04T08:49:32"
 }

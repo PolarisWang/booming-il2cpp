@@ -1,0 +1,9 @@
+{
+  "source": {
+    "type": "managed-dlls",
+    "assemblies": [
+      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\entrypoint\\build-output\\ThreadingMonitorInterlockedNativeEntry.dll"
+    ],
+    "entry": "ThreadingMonitorInterlockedNativeEntry/ThreadingMonitorInterlockedNativeEntry::Run:System.Int32(System.Int32)"
+  }
+}
