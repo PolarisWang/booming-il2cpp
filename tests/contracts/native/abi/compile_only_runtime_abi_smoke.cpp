@@ -16,17 +16,17 @@ void CompileOnlyRuntimeAbiSmoke(const RuntimeAbiV0* abi) {
 
     RuntimeState* runtime = nullptr;
     ThreadState* thread = nullptr;
-    TypeInfoHandle type = nullptr;
-    MethodInfoHandle method = nullptr;
-    FieldInfoHandle field = nullptr;
-    PropertyInfoHandle property = nullptr;
-    EventInfoHandle event_handle = nullptr;
-    TypeInfoHandle generic_type_definition = nullptr;
-    ParameterInfoHandle parameter = nullptr;
-    GenericContextHandle generic_context = nullptr;
-    AssemblyHandle assembly = nullptr;
-    ImageHandle image = nullptr;
-    ExceptionHandle exception = nullptr;
+    TypeInfoHandle type = 0;
+    MethodInfoHandle method = 0;
+    FieldInfoHandle field = 0;
+    PropertyInfoHandle property = 0;
+    EventInfoHandle event_handle = 0;
+    TypeInfoHandle generic_type_definition = 0;
+    ParameterInfoHandle parameter = 0;
+    GenericContextHandle generic_context = 0;
+    AssemblyHandle assembly = 0;
+    ImageHandle image = 0;
+    ExceptionHandle exception = 0;
     RuntimeTypeCapabilityInfoV0 capability_info = {};
 
     int input_value = 7;

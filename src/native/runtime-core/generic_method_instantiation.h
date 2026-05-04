@@ -16,7 +16,7 @@ struct RuntimeInstantiatedMethod {
     /// Core method descriptor (heap-allocated, embedded).
     /// Must be first field so that the struct* doubles as descriptor* for
     /// EncodeReflectionQueryMethodHandle / TryDecodeReflectionQueryMethodHandle.
-    ReflectionQueryMethodDescriptor descriptor;
+    chaos::il2cpp::runtime_core::ReflectionQueryMethodDescriptor descriptor;
 
     /// Type arguments used to close the generic method.
     TypeInfoHandle* type_args = nullptr;

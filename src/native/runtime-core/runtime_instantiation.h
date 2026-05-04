@@ -1,9 +1,9 @@
-#ifndef CHAOS_IL2CPP_RUNTIME_INSTANTIATION_H_
-#define CHAOS_IL2CPP_RUNTIME_INSTANTIATION_H_
+#ifndef CHAOS_IL2CPP_RUNTIME_CORE_RUNTIME_INSTANTIATION_H_
+#define CHAOS_IL2CPP_RUNTIME_CORE_RUNTIME_INSTANTIATION_H_
 
 #include "runtime_abi.h"
 #include "reflection_query_model.h"
-#include <chaos/runtime_instantiation.h>
+#include <runtime_instantiation.h>
 
 #include <cstdint>
 #include <cstdlib>
@@ -19,7 +19,7 @@ namespace chaos::il2cpp::runtime_instantiation {
 /// Lifecycle: allocated on first miss, lives for process lifetime.
 struct RuntimeInstantiatedType {
     /// Core type descriptor (heap-allocated, embedded).
-    ReflectionQueryTypeDescriptor descriptor;
+    chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor descriptor;
 
     /// Type arguments used to close the generic type.
     TypeInfoHandle* type_args = nullptr;
@@ -66,7 +66,7 @@ RuntimeInstantiatedType* BuildClosedDescriptor(
 /// Build a subject_id string for the closed type: "OpenType[arg1,arg2,...]"
 /// The returned buffer is heap-allocated; caller takes ownership.
 char* BuildClosedSubjectId(
-    const ReflectionQueryTypeDescriptor* open_desc,
+    const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor* open_desc,
     const TypeInfoHandle*                type_args,
     CHAOS_IL2CPP_UINT32                  arg_count);
 
@@ -83,4 +83,4 @@ const RuntimeInstantiationBridgeV0* GetBridgeV0();
 
 }  // namespace chaos::il2cpp::runtime_instantiation
 
-#endif  // CHAOS_IL2CPP_RUNTIME_INSTANTIATION_H_
+#endif  // CHAOS_IL2CPP_RUNTIME_CORE_RUNTIME_INSTANTIATION_H_

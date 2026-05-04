@@ -5,7 +5,7 @@
 #include "generic_context.h"
 #include "vtable_registry.h"
 #include "../bootstrap/bootstrap.h"
-#include <chaos/runtime_instantiation.h>
+#include "runtime_instantiation.h"
 
 #include <gc.h>
 
@@ -59,6 +59,8 @@ struct ThreadState {
 };
 
 namespace chaos::il2cpp::runtime_core {
+
+using namespace chaos::il2cpp::runtime_capability;
 
 namespace {
 
@@ -493,7 +495,7 @@ CHAOS_IL2CPP_SHARED_PTR(CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX) GetOrCreateMonitor(vo
 }
 
 bool IsLikelyMetadataTokenHandle(MethodInfoHandle method) {
-    const CHAOS_IL2CPP_UINTPTR raw_method = reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(method);
+    const CHAOS_IL2CPP_UINTPTR raw_method = static_cast<CHAOS_IL2CPP_UINTPTR>(method);
     if (raw_method == 0u) return false;
     // On 64-bit platforms, real pointers always have nonzero high 32 bits,
     // while metadata tokens are zero-extended 32-bit values (table code in
@@ -506,7 +508,7 @@ bool IsLikelyMetadataTokenHandle(MethodInfoHandle method) {
 }
 
 static const ReflectionQueryTypeDescriptor* TryResolveRuntimeCoreTypeDescriptor(TypeInfoHandle type) {
-    if (type == nullptr) {
+    if (type == 0) {
         return nullptr;
     }
 
@@ -790,7 +792,7 @@ void* CHAOS_RUNTIME_ABI_CALL StringNewUtf8(
     }
 
     auto* header = reinterpret_cast<StringObjectHeader*>(storage);
-    header->type = nullptr;
+    header->type = 0;
     header->byte_count = byte_count;
 
     char* text = reinterpret_cast<char*>(storage + sizeof(StringObjectHeader));
@@ -978,7 +980,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL MethodInvoke(
         void* const* argv,
         CHAOS_IL2CPP_UINT32 argc);
 
-    if (!IsAttached(runtime_state, thread_state) || method == nullptr) {
+    if (!IsAttached(runtime_state, thread_state) || method == 0) {
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
 
@@ -995,7 +997,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL MethodInvoke(
     bool is_token_based = false;
 
     if (IsLikelyMetadataTokenHandle(method)) {
-        method_token = static_cast<CHAOS_IL2CPP_UINT32>(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(method));
+        method_token = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_UINTPTR>(method));
         is_token_based = true;
     } else if (const auto* desc = TryDecodeReflectionQueryMethodHandle(method)) {
         method_token = desc->metadata_token;
@@ -1259,7 +1261,7 @@ void* BoxValueObject(
     const void* value,
     CHAOS_IL2CPP_SIZE value_size) {
     if (!IsAttached(runtime_state, thread_state)
-        || value_type == nullptr
+        || value_type == 0
         || value == nullptr
         || value_size == 0u) {
         return nullptr;
@@ -1343,8 +1345,8 @@ bool ArrayCopyReferenceRange(
 
     auto* source_header = reinterpret_cast<ArrayHeader*>(source_array_instance);
     auto* target_header = reinterpret_cast<ArrayHeader*>(target_array_instance);
-    if (source_header->element_type == nullptr ||
-        target_header->element_type == nullptr ||
+    if (source_header->element_type == 0 ||
+        target_header->element_type == 0 ||
         source_header->element_type != target_header->element_type) {
         return false;
     }
@@ -1378,7 +1380,7 @@ bool ArrayClearReferenceRange(
     }
 
     auto* header = reinterpret_cast<ArrayHeader*>(array_instance);
-    if (header->element_type == nullptr) {
+    if (header->element_type == 0) {
         return false;
     }
 
@@ -1403,7 +1405,7 @@ bool ArrayReverseReferenceRange(
     }
 
     auto* header = reinterpret_cast<ArrayHeader*>(array_instance);
-    if (header->element_type == nullptr) {
+    if (header->element_type == 0) {
         return false;
     }
 

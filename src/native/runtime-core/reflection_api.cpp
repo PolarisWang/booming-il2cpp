@@ -112,10 +112,15 @@ static inline const char* DecodeStringValue(CHAOS_IL2CPP_INTPTR value) {
 // =====================================================================
 // Type resolution
 // =====================================================================
+// Functions are declared in reflection_api.h as
+//   extern "C" { namespace chaos::il2cpp::runtime_core { ... } }
+// with using-declarations at global scope for generated code.
+// Define them in the same linkage/namespace scope to avoid C2883.
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime_type_handle) {
-    using namespace chaos::il2cpp::runtime_core;
+extern "C" {
+namespace chaos::il2cpp::runtime_core {
 
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime_type_handle) {
     if (runtime_type_handle == 0) return 0;
 
     uint32_t token = DecodeMetadataToken(runtime_type_handle);
@@ -125,12 +130,11 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INT
     return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(typeDesc));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeByName(
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeByName(
     CHAOS_IL2CPP_INTPTR name_string_id,
     CHAOS_IL2CPP_INT32 throw_on_error,
     CHAOS_IL2CPP_INT32 ignore_case)
 {
-    using namespace chaos::il2cpp::runtime_core;
     (void)throw_on_error;
     (void)ignore_case;
 
@@ -143,9 +147,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeByName(
 // Type properties — Module Registry / Image queries
 // =====================================================================
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssembly(CHAOS_IL2CPP_INTPTR type_handle) {
-    using namespace chaos::il2cpp::runtime_core;
-
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssembly(CHAOS_IL2CPP_INTPTR type_handle) {
     // Resolve the image from the type handle via Module Registry
     auto* image = GetImageFromTypeHandle(type_handle);
     if (image == nullptr) {
@@ -156,7 +158,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssembly(CHAOS_IL2CPP_INTPTR ty
     return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryImageHandle(image));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyName(CHAOS_IL2CPP_INTPTR assembly_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyName(CHAOS_IL2CPP_INTPTR assembly_handle) {
     using namespace chaos::il2cpp::runtime_core;
 
     auto* decoded = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly_handle));
@@ -169,23 +171,23 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyName(CHAOS_IL2CPP_INTPT
 }
 
 // Placeholder for AssemblyName value object
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyNameValue(CHAOS_IL2CPP_INTPTR assembly_name_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyNameValue(CHAOS_IL2CPP_INTPTR assembly_name_handle) {
     (void)assembly_name_handle;
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetDeclaringType(CHAOS_IL2CPP_INTPTR type_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetDeclaringType(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr) return 0;
 
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+    return static_cast<CHAOS_IL2CPP_INTPTR>(
         desc->generic_type_definition != nullptr
             ? EncodeReflectionQueryTypeHandle(desc->generic_type_definition)
             : static_cast<TypeInfoHandle>(0));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMemberName(CHAOS_IL2CPP_INTPTR member_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMemberName(CHAOS_IL2CPP_INTPTR member_handle) {
     using namespace chaos::il2cpp::runtime_core;
     if (member_handle == 0) return 0;
 
@@ -208,7 +210,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMemberName(CHAOS_IL2CPP_INTPTR 
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameters(CHAOS_IL2CPP_INTPTR method_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameters(CHAOS_IL2CPP_INTPTR method_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(static_cast<MethodInfoHandle>(method_handle));
     if (desc == nullptr) return 0;
@@ -216,7 +218,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameters(CHAOS_IL2CPP_INTPTR 
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryParameterDescriptor*>(desc->parameters));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameterName(
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameterName(
     CHAOS_IL2CPP_INTPTR parameter_handle)
 {
     using namespace chaos::il2cpp::runtime_core;
@@ -226,7 +228,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameterName(
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(paramDesc->name_utf8));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodHandle(CHAOS_IL2CPP_INTPTR method_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodHandle(CHAOS_IL2CPP_INTPTR method_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(static_cast<MethodInfoHandle>(method_handle));
     if (desc == nullptr) return 0;
@@ -234,7 +236,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodHandle(CHAOS_IL2CPP_INTPT
     return static_cast<CHAOS_IL2CPP_INTPTR>(desc->metadata_token);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMetadataToken(CHAOS_IL2CPP_INTPTR member_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMetadataToken(CHAOS_IL2CPP_INTPTR member_handle) {
     using namespace chaos::il2cpp::runtime_core;
     if (member_handle == 0) return 0;
 
@@ -251,7 +253,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMetadataToken(CHAOS_IL2CPP_INTP
     return member_handle;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeHandle(CHAOS_IL2CPP_INTPTR type_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeHandle(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr) return 0;
@@ -259,7 +261,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeHandle(CHAOS_IL2CPP_INTPTR 
     return static_cast<CHAOS_IL2CPP_INTPTR>(desc->metadata_token);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
@@ -267,7 +269,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CP
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryMethodDescriptor*>(desc->methods));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) {
     using namespace chaos::il2cpp::runtime_core;
     (void)binding_flags;
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
@@ -276,7 +278,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPT
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryMethodDescriptor*>(desc->methods));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
@@ -284,32 +286,32 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR typ
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryMethodDescriptor*>(desc->methods));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->fields == nullptr) return 0;
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryFieldDescriptor*>(desc->fields));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetInterfaces(CHAOS_IL2CPP_INTPTR type_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetInterfaces(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     (void)type_handle;
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     (void)type_handle;
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypes(CHAOS_IL2CPP_INTPTR type_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypes(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     (void)type_handle;
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetField(
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetField(
     CHAOS_IL2CPP_INTPTR type_handle,
     CHAOS_IL2CPP_INTPTR name_string_id)
 {
@@ -321,7 +323,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetField(
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(
     CHAOS_IL2CPP_INTPTR type_handle,
     CHAOS_IL2CPP_INTPTR name_string_id,
     CHAOS_IL2CPP_INTPTR param_types)
@@ -335,12 +337,12 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericArguments(CHAOS_IL2CPP_INTPTR type_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericArguments(CHAOS_IL2CPP_INTPTR type_handle) {
     (void)type_handle;
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericTypeDefinition(CHAOS_IL2CPP_INTPTR type_handle) {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericTypeDefinition(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = GetTypeDescriptorFromHandle(type_handle);
     if (desc == nullptr || desc->generic_type_definition == nullptr) return 0;
@@ -349,7 +351,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericTypeDefinition(CHAOS_IL2
         EncodeReflectionQueryTypeHandle(desc->generic_type_definition));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionCreateInstance(
+CHAOS_IL2CPP_INTPTR ChaosReflectionCreateInstance(
     CHAOS_IL2CPP_INTPTR type_handle,
     CHAOS_IL2CPP_INTPTR args)
 {
@@ -358,7 +360,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionCreateInstance(
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(
+CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(
     CHAOS_IL2CPP_INTPTR method_handle,
     CHAOS_IL2CPP_INTPTR obj,
     CHAOS_IL2CPP_INTPTR args)
@@ -369,7 +371,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(
+CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(
     CHAOS_IL2CPP_INTPTR method_handle,
     CHAOS_IL2CPP_INTPTR type_args)
 {
@@ -378,7 +380,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(
     return 0;
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(
     CHAOS_IL2CPP_INTPTR member_handle,
     CHAOS_IL2CPP_INTPTR attribute_type_handle)
 {
@@ -391,7 +393,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(
 // String helpers
 // =====================================================================
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(
+CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(
     CHAOS_IL2CPP_INTPTR left,
     CHAOS_IL2CPP_INTPTR right)
 {
@@ -399,3 +401,6 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(
     (void)right;
     return 0;
 }
+
+}  // namespace chaos::il2cpp::runtime_core
+}  // extern "C"
