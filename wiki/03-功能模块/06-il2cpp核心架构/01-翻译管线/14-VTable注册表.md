@@ -34,15 +34,16 @@ struct chaos_object_header {
 struct TypeInfo {
     const TypeInfo* parent;                  // base type (nullptr for Object)
     CHAOS_IL2CPP_UINT64 stable_id;           // FNV-1a hash
-    const InterfaceMapEntry* iface_map;      // interface dispatch table
-    CHAOS_IL2CPP_UINT32 iface_count;         // number of interfaces
+    const InterfaceMapEntry* iface_map;      // AOT compile-time iface_map
+    const InterfaceMapEntry* runtime_iface_map; // HotUpdate-追加的接口映射 (heap allocated)
+    CHAOS_IL2CPP_UINT32 iface_count;         // AOT iface count
+    CHAOS_IL2CPP_UINT32 runtime_iface_count; // HotUpdate 追加数
     CHAOS_IL2CPP_UINT8  type_shape;          // reference/value/interface
-    // 3 bytes padding
 };
-// sizeof = 32 bytes, inline constexpr
+// sizeof = 48 bytes, inline (非 constexpr，因为 runtime_iface_map 可在运行时修改)
 ```
 
-TypeInfo 保持 `inline constexpr`，携带 iface_map 指针用于接口分派。类型身份、GC、类型转换通过 `TypeInfo*` pointer equality。
+TypeInfo 携带 AOT iface_map + runtime_iface_map 双指针，分别用于静态编译和 HotUpdate 的接口映射。类型身份、GC、类型转换通过 `TypeInfo*` pointer equality。
 
 ### VTable 数组
 
@@ -148,7 +149,7 @@ auto fn = reinterpret_cast<int(*)(void*,void*)>(
 return fn(obj, other);
 ```
 
-**`chaos_find_interface_offset` — 线性扫描（接口数通常 1-5）：**
+**`chaos_find_interface_offset` — 线性扫描 AOT iface_map + runtime_iface_map（接口数通常 1-5）：**
 
 ```cpp
 inline uint32_t chaos_find_interface_offset(
@@ -156,6 +157,12 @@ inline uint32_t chaos_find_interface_offset(
     for (uint32_t i = 0; i < ti->iface_count; ++i) {
         if (ti->iface_map[i].iface_stable_id == iface_ti->stable_id) {
             return ti->iface_map[i].vtable_offset;
+        }
+    }
+    // 未在 AOT iface_map 中找到，扫描 HotUpdate runtime_iface_map
+    for (uint32_t i = 0; i < ti->runtime_iface_count; ++i) {
+        if (ti->runtime_iface_map[i].iface_stable_id == iface_ti->stable_id) {
+            return ti->runtime_iface_map[i].vtable_offset;
         }
     }
     CHAOS_IL2CPP_ABORT();
@@ -200,7 +207,7 @@ B2+ vtable 系统与现有的 `vtable_registry.*`（token-based 运行时注册�
 | **2** | Interface dispatch 迁移 | iface_map + InterfaceMapEntry | ✅ 已完成 (2026-05-04) |
 | **3** | AOT 去虚化优化 | codegen 静态分析 | 已部分实现 (monomorphic) |
 | **4a** | vtableLengths 截断 + HotUpdate 类型注册验证 | ObjectModelEmission.cs, type_registry.cpp | **✅ 完成** (2026-05-04) |
-| **4b** | runtime_iface_map + 接口追加 | 运行时 API | 待规划 |
+| **4b** | runtime_iface_map + 接口追加 | 运行时 API + TypeInfo 扩展 | **✅ 完成** (2026-05-04) |
 
 ### 实施进度 (2026-05-04)
 
@@ -215,6 +222,12 @@ B2+ vtable 系统与现有的 `vtable_registry.*`（token-based 运行时注册�
 | Interface dispatch via vtable_offset | ✅ 已实现 | InterfaceMapEntry struct, chaos_find_interface_offset(), vtable[offset + method_index] |
 | type_registry.cpp iface_map bug | ✅ 已修复 | chaos_register_type() 现在保存 iface_map/iface_count |
 | **vtableLengths 精确计算** | **✅ Phase 4a 完成** | ObjectModelEmission.cs:402-426 -- maxSlotInHierarchy + 1 |
+| **runtime_iface_map 扩展** | **✅ Phase 4b 完成** | TypeInfo 新增 runtime_iface_map/runtime_iface_count (48 bytes) |
+| **ChaosTypeAddInterface 运行时 API** | **✅ Phase 4b 完成** | type_registry.cpp:103-143 -- realloc 追加接口映射 |
+| **TypeInfo codegen 非 constexpr 化** | **✅ Phase 4b 完成** | ObjectModelEmission.cs: `inline constexpr TypeInfo` → `inline TypeInfo` |
+| **chaos_find_interface_offset runtime_iface_map 扫描** | **✅ Phase 4b 完成** | ObjectModelEmission.cs:745-764 -- 双扫描: AOT + runtime |
+| **chaos_type_implements_interface runtime_iface_map 扫描** | **✅ Phase 4b 完成** | ObjectModelEmission.cs:718-743 -- 双扫描: AOT + runtime |
+| **TypeInfo 7-field initializer codegen** | **✅ Phase 4b 完成** | ObjectModelEmission.cs:487-603 -- 全部 5 种初始化模式更新 |
 
 ## 位置
 
