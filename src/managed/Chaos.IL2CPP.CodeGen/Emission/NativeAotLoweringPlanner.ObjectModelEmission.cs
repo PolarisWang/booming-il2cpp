@@ -60,7 +60,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("#include <chaos/type_info.h>");
 		builder.AppendLine();
 		builder.AppendLine("constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;");
-		builder.AppendLine("inline constexpr TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, 0, 2 };");
+		builder.AppendLine("inline TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, nullptr, 0, 0, 2 };");
 		builder.AppendLine();
 		builder.AppendLine("struct chaos_managed_array");
 		builder.AppendLine("{");
@@ -484,7 +484,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline constexpr TypeInfo ");
+				handler.AppendLiteral("inline TypeInfo ");
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item));
 				handler.AppendLiteral(" = { ");
 				handler.AppendFormatted(parentExpr);
@@ -492,9 +492,9 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(", ");
 				handler.AppendFormatted(ifaceMapExpr);
-				handler.AppendLiteral(", ");
+				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 1 /* reference */ };");
+				handler.AppendLiteral(", 0, 1 /* reference */ };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -515,11 +515,11 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline constexpr TypeInfo ");
+				handler.AppendLiteral("inline TypeInfo ");
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item2));
 				handler.AppendLiteral(" = { nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", nullptr, 0, 3 /* interface */ };");
+				handler.AppendLiteral(", nullptr, nullptr, 0, 0, 3 /* interface */ };");
 				stringBuilder.AppendLine(ref handler);
 			}
 
@@ -531,11 +531,11 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline constexpr TypeInfo ");
+				handler.AppendLiteral("inline TypeInfo ");
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
 				handler.AppendLiteral(" = { nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", nullptr, 0, 2 /* value */ };");
+				handler.AppendLiteral(", nullptr, nullptr, 0, 0, 2 /* value */ };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -592,15 +592,15 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline constexpr TypeInfo ");
+				handler.AppendLiteral("inline TypeInfo ");
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
 				handler.AppendLiteral(" = { nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(", ");
 				handler.AppendFormatted(ifaceMapExpr);
-				handler.AppendLiteral(", ");
+				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 2 /* value (boxed) */ };");
+				handler.AppendLiteral(", 0, 2 /* value (boxed) */ };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -714,10 +714,11 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    return false;");
 		builder.AppendLine("}");
 		builder.AppendLine();
-		// ── Interface check (iface_map linear scan) ──
+		// ── Interface check (iface_map + runtime_iface_map linear scan) ──
 		builder.AppendLine("bool chaos_type_implements_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept");
 		builder.AppendLine("{");
-		builder.AppendLine("    if (chaos_actual_type_info->iface_count == 0)");
+		builder.AppendLine("    if (chaos_actual_type_info->iface_count == 0 &&");
+		builder.AppendLine("        chaos_actual_type_info->runtime_iface_count == 0)");
 		builder.AppendLine("    {");
 		builder.AppendLine("        return false;");
 		builder.AppendLine("    }");
@@ -725,6 +726,14 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_actual_type_info->iface_count; chaos_i++)");
 		builder.AppendLine("    {");
 		builder.AppendLine("        if (chaos_actual_type_info->iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
+		builder.AppendLine("        {");
+		builder.AppendLine("            return true;");
+		builder.AppendLine("        }");
+		builder.AppendLine("    }");
+		builder.AppendLine();
+		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_actual_type_info->runtime_iface_count; chaos_i++)");
+		builder.AppendLine("    {");
+		builder.AppendLine("        if (chaos_actual_type_info->runtime_iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
 		builder.AppendLine("        {");
 		builder.AppendLine("            return true;");
 		builder.AppendLine("        }");
@@ -742,6 +751,13 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        if (chaos_actual_type_info->iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
 		builder.AppendLine("        {");
 		builder.AppendLine("            return chaos_actual_type_info->iface_map[chaos_i].vtable_offset;");
+		builder.AppendLine("        }");
+		builder.AppendLine("    }");
+		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_actual_type_info->runtime_iface_count; chaos_i++)");
+		builder.AppendLine("    {");
+		builder.AppendLine("        if (chaos_actual_type_info->runtime_iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
+		builder.AppendLine("        {");
+		builder.AppendLine("            return chaos_actual_type_info->runtime_iface_map[chaos_i].vtable_offset;");
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
 		builder.AppendLine("    CHAOS_IL2CPP_ABORT();");

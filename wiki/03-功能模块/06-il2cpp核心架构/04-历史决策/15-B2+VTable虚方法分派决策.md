@@ -102,7 +102,7 @@ TypeInfo 保持 `inline constexpr`，不添加 vtable/iface_map 字段。vtable 
 | Virtual dispatch (MethodEmission) | ✅ 已实现 (vtable[slot]) | `MethodEmission.cs:986-1101` |
 | Interface dispatch (iface_map) | ✅ 已实现 (InterfaceMapEntry + vtable_offset) | `ObjectModelEmission.cs`, `MethodEmission.cs` |
 | AOT 去虚化 | ✅ 已实现 (monomorphic + sealed class) | `InvocationPlanning.cs:412-442`, `MethodEmission.cs:1030-1051` |
-| HotUpdate vtable 支持 | ✅ Phase 4a 完成 (类型注册); ❌ Phase 4b 待实现 (接口追加) | 运行时 API |
+| HotUpdate vtable 支持 | ✅ Phase 4a+4b 完成 (类型注册 + 运行时接口追加) | TypeInfo struct, type_registry.cpp |
 
 ## 迁移计划（更新版）
 
@@ -112,7 +112,7 @@ TypeInfo 保持 `inline constexpr`，不添加 vtable/iface_map 字段。vtable 
 | 2 | Interface dispatch: iface_map → InterfaceMapEntry | `ObjectModelEmission.cs`, `TypeInfo`, `type_registry.cpp` | **✅ 完成** (2026-05-04) |
 | 3 | AOT 去虚化扩展 | codegen 静态分析 | **✅ Phase 3a 完成** (2026-05-04) |
 | 4a | vtableLengths 截断 + HotUpdate 类型注册验证 | ObjectModelEmission.cs, type_registry.cpp | **✅ 完成** (2026-05-04) |
-| 4b | runtime_iface_map + 接口追加 | 运行时 API | 待规划 |
+| 4b | runtime_iface_map + 接口追加 | 运行时 API + TypeInfo 扩展 | **✅ 完成** (2026-05-04) |
 
 ## Phase 1 实施记录 (2026-05-04)
 
@@ -227,6 +227,71 @@ struct InterfaceMapEntry {
 
 ### 验证
 - `dotnet build Chaos.IL2CPP.CodeGen.csproj` -- 0 errors, 90 warnings (pre-existing)
+
+## Phase 4b 实施记录 (2026-05-04)
+
+### 决策背景
+
+Phase 4b 在 Phase 4a（类型注册）基础上，增加运行时接口追加能力。HotUpdate 场景下动态类型需要能追加接口映射到已有 TypeInfo，而 AOT 编译期的 iface_map 是 `const` 数组无法修改。解决方案：TypeInfo 增加 `runtime_iface_map` 指针 + `runtime_iface_count` 计数器。
+
+### 变更内容
+
+**`src/native/common/chaos/type_info.h`** — TypeInfo 结构体扩展（32→48 字节）：
+
+```cpp
+struct TypeInfo {
+    const TypeInfo* parent;                  // 8 bytes
+    CHAOS_IL2CPP_UINT64 stable_id;           // 8 bytes
+    const InterfaceMapEntry* iface_map;       // 8 bytes (AOT)
+    const InterfaceMapEntry* runtime_iface_map; // 8 bytes (NEW, HotUpdate)
+    CHAOS_IL2CPP_UINT32 iface_count;         // 4 bytes (AOT)
+    CHAOS_IL2CPP_UINT32 runtime_iface_count;  // 4 bytes (NEW)
+    CHAOS_IL2CPP_UINT8  type_shape;           // 1 byte
+    // 7 bytes padding
+};
+// sizeof = 48 bytes
+```
+
+**`src/native/runtime-core/type_registry.h/.cpp`** — 新增 `ChaosTypeAddInterface()` API：
+
+- `bool ChaosTypeAddInterface(TypeInfo* ti, uint64 iface_stable_id, uint32 vtable_offset, uint32 method_count)`
+- `CHAOS_IL2CPP_REALLOC` 动态扩展 runtime_iface_map 数组
+- 先去重检查（AOT iface_map + runtime_iface_map），防止重复追加
+- mutex 保护并发安全
+
+**`NativeAotLoweringPlanner.ObjectModelEmission.cs`** — TypeInfo codegen 更新：
+
+1. **TypeInfo 声明** (lines 487-603)：`inline constexpr TypeInfo` → `inline TypeInfo`（因为 runtime_iface_map 可在运行时修改）
+2. **TypeInfo 初始化器** (lines 487-603)：5 个发射点全部从 5 字段升级到 7 字段，插入 `nullptr`（runtime_iface_map）+ `0`（runtime_iface_count）
+   - Reference types: `{ parent, stable_id, iface_map, nullptr, iface_count, 0, 1 }`
+   - Interface types: `{ nullptr, stable_id, nullptr, nullptr, 0, 0, 3 }`
+   - Value types: `{ nullptr, stable_id, nullptr, nullptr, 0, 0, 2 }`
+   - Boxed value types: `{ nullptr, stable_id, iface_map, nullptr, iface_count, 0, 2 }`
+   - Managed array: `{ nullptr, 1ULL, nullptr, nullptr, 0, 0, 2 }`
+3. **chaos_find_interface_offset** (lines 745-764)：AOT iface_map 循环后追加 runtime_iface_map 扫描循环
+4. **chaos_type_implements_interface** (lines 718-743)：早退条件从 `iface_count == 0` 改为 `iface_count == 0 && runtime_iface_count == 0`，追加 runtime_iface_map 扫描循环
+
+### 生成代码示例
+
+```cpp
+// AOT 类型 (无 HotUpdate 接口)
+inline TypeInfo chaos_type_info_String = {
+    &chaos_type_info_Object, 14695981039346656037ULL,
+    chaos_iface_map_String, nullptr, 3, 0, 1 /* reference */
+};
+
+// HotUpdate 调用点：追加接口
+ChaosTypeAddInterface(&chaos_type_info_MyDynamicType,
+    CHAOS_IL2CPP_INTPTR(0x12345678ULL), /* iface_stable_id */
+    5,   /* vtable_offset */
+    2    /* method_count */
+);
+```
+
+### 验证
+- `dotnet build Chaos.IL2CPP.CodeGen.csproj` — 0 errors, 96 warnings (pre-existing)
+- `batch_native_aot_runner.py` — 29/33 PASS (4 pre-existing failures)
+- `interface-dispatch` family — PASS (关键回归测试)
 
 ## 参考
 
