@@ -87,7 +87,7 @@ public sealed partial class NativeReferenceProofEmitter
                 IsReflectionDirectReferenceReturnType))
         {
             return TryRenderValueTypeManagedInvokeStub(
-                NativeReferenceProofCatalog.GetRuntimeSkeletonIdentityStructManagedInvokeStubTemplate(),
+                ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonIdentityStructManagedInvokeStubTemplateRelativePath),
                 assemblyName,
                 subjectId,
                 metadataRegistration,
@@ -149,7 +149,7 @@ public sealed partial class NativeReferenceProofEmitter
             ["helper_statements"] = helperStatements,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonMarshalPlatformFastPathStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonMarshalPlatformFastPathStubTemplateRelativePath),
             model);
         return true;
     }

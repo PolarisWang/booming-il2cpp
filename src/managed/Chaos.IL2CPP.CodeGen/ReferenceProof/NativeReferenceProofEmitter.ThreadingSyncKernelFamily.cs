@@ -94,7 +94,7 @@ public sealed partial class NativeReferenceProofEmitter
             ["helper_call_expression"] = abi.HelperCallExpression,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonThreadingSyncKernelStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonThreadingSyncKernelStubTemplateRelativePath),
             model);
         return true;
     }

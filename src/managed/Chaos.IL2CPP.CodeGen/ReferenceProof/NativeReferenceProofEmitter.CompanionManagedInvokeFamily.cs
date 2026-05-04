@@ -54,7 +54,7 @@ public sealed partial class NativeReferenceProofEmitter
         }
 
         return TryRenderValueTypeManagedInvokeStub(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonCompanionManagedInvokeStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonCompanionManagedInvokeStubTemplateRelativePath),
             assemblyName,
             subjectId,
             metadataRegistration,

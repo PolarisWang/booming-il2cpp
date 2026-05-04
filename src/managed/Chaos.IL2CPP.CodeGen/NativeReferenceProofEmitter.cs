@@ -1491,7 +1491,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["native_entry_function_name"] = loweringPlan.NativeEntryFunctionName,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetAssemblyFullClosureRuntimeSkeletonSummaryTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.AssemblyFullClosureRuntimeSkeletonSummaryTemplateRelativePath),
             model);
     }
 
@@ -1642,7 +1642,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 LastMethodSubjectId = lastEmittedSubjectId,
             },
             ScribanTemplateRenderer.RenderTemplate(
-                NativeReferenceProofCatalog.GetAssemblyFullClosureRuntimeSkeletonPageTemplate(),
+                ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.AssemblyFullClosureRuntimeSkeletonPageTemplateRelativePath),
                 model),
             supportedMethods,
             unsupportedMethods);
@@ -2781,7 +2781,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticCallCtorGetterStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticCallCtorGetterStubTemplateRelativePath),
             model);
     }
 
@@ -2816,7 +2816,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonConstructorThenInstanceCallStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonConstructorThenInstanceCallStubTemplateRelativePath),
             model);
     }
 
@@ -2852,7 +2852,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonDelegateClosedTargetRelayStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonDelegateClosedTargetRelayStubTemplateRelativePath),
             model);
     }
 
@@ -2893,7 +2893,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonArrayBoxingReferenceArrayStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonArrayBoxingReferenceArrayStubTemplateRelativePath),
             model);
     }
 
@@ -2935,7 +2935,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonArrayCopyReferenceArrayStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonArrayCopyReferenceArrayStubTemplateRelativePath),
             model);
     }
 
@@ -2970,7 +2970,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonArrayClearReferenceArrayStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonArrayClearReferenceArrayStubTemplateRelativePath),
             model);
     }
 
@@ -3010,7 +3010,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonArrayReverseReferenceArrayStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonArrayReverseReferenceArrayStubTemplateRelativePath),
             model);
     }
 
@@ -3037,7 +3037,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["message_suffix_literal_byte_count"] = loweringPlan.MessageSuffixLiteralByteCount ?? 0,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonInterfaceDispatchMessageStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonInterfaceDispatchMessageStubTemplateRelativePath),
             model);
     }
 
@@ -3054,7 +3054,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["expected_output_byte_count"] = loweringPlan.ExpectedOutputByteCount ?? 0,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonThreadingThreadStaticMonitorStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonThreadingThreadStaticMonitorStubTemplateRelativePath),
             model);
     }
 
@@ -3075,7 +3075,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["finally_literal_byte_count"] = loweringPlan.FinallyLiteralByteCount ?? 0,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonExceptionThrowCatchFinallyStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonExceptionThrowCatchFinallyStubTemplateRelativePath),
             model);
     }
 
@@ -3096,7 +3096,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["finally_literal_byte_count"] = loweringPlan.FinallyLiteralByteCount ?? 0,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonNestedExceptionThrowCatchFinallyStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonNestedExceptionThrowCatchFinallyStubTemplateRelativePath),
             model);
     }
 
@@ -3113,7 +3113,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["expected_output_byte_count"] = loweringPlan.ExpectedOutputByteCount ?? 0,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonMarshalingUtf8ExportStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonMarshalingUtf8ExportStubTemplateRelativePath),
             model);
     }
 
@@ -3150,7 +3150,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["expected_output_byte_count"] = loweringPlan.ExpectedOutputByteCount ?? 0,
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonReflectionInteropClosureStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonReflectionInteropClosureStubTemplateRelativePath),
             model);
     }
 
@@ -3171,7 +3171,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         return ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonPInvokeDirectCallStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonPInvokeDirectCallStubTemplateRelativePath),
             model);
     }
 
@@ -4416,7 +4416,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["literal_byte_count"] = literalByteCount,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4463,7 +4463,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["arg1_cpp_type"] = argc > 1 ? methodShape.ParameterTypeShapes[1].CppType : "void*",
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonAsyncTaskFactoryStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonAsyncTaskFactoryStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4504,7 +4504,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["get_result_runtime_return_initializer"] = wrapperShape.ProducerFamilyShape.ResultTypeShape.RuntimeReturnInitializer,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonAsyncGetResultStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonAsyncGetResultStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4550,7 +4550,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["stub_name"] = stubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonAsyncStateMachineNoOpStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonAsyncStateMachineNoOpStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4596,7 +4596,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["stub_name"] = stubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticVoidObjectSinkNoOpStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticVoidObjectSinkNoOpStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4638,7 +4638,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["exception_literal_byte_count"] = Encoding.UTF8.GetByteCount(exceptionLiteral),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticExceptionThrowLiteralStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticExceptionThrowLiteralStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4686,7 +4686,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["exception_type_token"] = CreateTypeTokenLiteral(metadataRegistration, exceptionTypeSubjectId),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticExceptionThrowStringProducerStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticExceptionThrowStringProducerStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4734,7 +4734,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["caught_literal_byte_count"] = Encoding.UTF8.GetByteCount(caughtLiteral),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticExceptionCatchStringReturnStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticExceptionCatchStringReturnStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4780,7 +4780,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["target_stub_name"] = targetStubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticIntForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticIntForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4840,7 +4840,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["target_stub_name"] = targetStubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticIntForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticIntForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4882,7 +4882,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["stub_name"] = stubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoolIdentityForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticBoolIdentityForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -4958,7 +4958,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["forwarder_stub_name"] = forwarderStubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoolProducerForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticBoolProducerForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5010,7 +5010,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["converted_value_expression"] = convertedValueExpression,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticPrimitiveConvertStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticPrimitiveConvertStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5403,7 +5403,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["throw_stub_name"] = throwStubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticCheckedPrimitiveConvertStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticCheckedPrimitiveConvertStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5459,7 +5459,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["output_cpp_type"] = outputCppType,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticValueTypeIdentityForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticValueTypeIdentityForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5504,7 +5504,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["exception_message_byte_count"] = Encoding.UTF8.GetByteCount(exceptionMessage),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoxedIConvertibleCharInvalidCastStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticBoxedIConvertibleCharInvalidCastStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5553,7 +5553,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["input_size"] = inputSize,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoxedValueTypeCharInvalidCastStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticBoxedValueTypeCharInvalidCastStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5586,7 +5586,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["target_method_token"] = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", targetMethodSubjectId)),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringCharProviderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringCharProviderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5613,7 +5613,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["stub_name"] = stubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProviderPassthroughStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProviderPassthroughStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5646,7 +5646,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["target_method_token"] = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", targetMethodSubjectId)),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticObjectCharProviderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticObjectCharProviderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5715,7 +5715,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["argc"] = argCount,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoxedValueTypeStringInstanceCallStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticBoxedValueTypeStringInstanceCallStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5788,7 +5788,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["argc"] = argCount,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoxedValueTypeInstanceCallStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticBoxedValueTypeInstanceCallStubTemplateRelativePath),
             model);
         return true;
     }
@@ -5934,7 +5934,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["arg_refs"] = string.Join(",\n        ", argRefs),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringCallForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringCallForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6011,7 +6011,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["output_cpp_type"] = outputCppType,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticValueTypeCallForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticValueTypeCallForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6089,7 +6089,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["output_cpp_type"] = outputCppType,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonInstanceValueTypeCallForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonInstanceValueTypeCallForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6195,7 +6195,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["target_stub_name"] = targetStubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticByteForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticByteForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6233,7 +6233,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["stub_name"] = stubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6280,7 +6280,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringLiteralAppendStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringLiteralAppendStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6326,7 +6326,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["target_stub_name"] = targetStubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringReturnForwarderStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringReturnForwarderStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6397,7 +6397,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["literal_byte_count"] = Encoding.UTF8.GetByteCount(literal),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringForwarderConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringForwarderConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6485,7 +6485,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerForwarderConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerForwarderConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6595,7 +6595,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerCtorGetterConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerCtorGetterConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6715,7 +6715,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6845,7 +6845,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -6963,7 +6963,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7090,7 +7090,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7217,7 +7217,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7353,7 +7353,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7489,7 +7489,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7634,7 +7634,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7674,7 +7674,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["literal_byte_count"] = Encoding.UTF8.GetByteCount(literal),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticLiteralStringReturnStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7721,7 +7721,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["literal_byte_count"] = Encoding.UTF8.GetByteCount(literal),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticLiteralStringReturnStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7777,7 +7777,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerConsoleWriteLineStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonStaticStringProducerConsoleWriteLineStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7821,7 +7821,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonConstructorFieldSetterStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonConstructorFieldSetterStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7880,7 +7880,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonFieldBackedStringReturnStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonFieldBackedStringReturnStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7943,7 +7943,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonFieldArgumentStringReturnStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonFieldArgumentStringReturnStubTemplateRelativePath),
             model);
         return true;
     }
@@ -7992,7 +7992,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["descriptor_index"] = descriptorIndex,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonFieldGetterStringReturnStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonFieldGetterStringReturnStubTemplateRelativePath),
             model);
         return true;
     }

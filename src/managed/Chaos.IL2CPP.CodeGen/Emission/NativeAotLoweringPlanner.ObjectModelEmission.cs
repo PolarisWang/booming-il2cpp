@@ -35,6 +35,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine();
 		builder.AppendLine("struct chaos_object_header");
 		builder.AppendLine("{");
+		builder.AppendLine("    const void** vtable = nullptr;");
 		builder.AppendLine("    const TypeInfo* type_info = nullptr;");
 		builder.AppendLine("};");
 		builder.AppendLine();
@@ -463,6 +464,175 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine();
 		}
+		// ── VTable slot allocation ──
+		var slotMap = new Dictionary<string, int>(StringComparer.Ordinal);
+		var vtableLengths = new Dictionary<string, int>(StringComparer.Ordinal);
+		var methodsByDeclaringTypeVT = new Dictionary<string, List<AotCoreIrMethodArtifact>>(StringComparer.Ordinal);
+		foreach (var method in _methodsBySubjectId.Values)
+		{
+			var dt = method.Identity.DeclaringTypeSubjectId;
+			if (string.IsNullOrEmpty(dt)) continue;
+			if (!methodsByDeclaringTypeVT.TryGetValue(dt, out var list))
+				methodsByDeclaringTypeVT[dt] = list = new List<AotCoreIrMethodArtifact>();
+			list.Add(method);
+		}
+		int nextSlot = 0;
+		foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+		{
+			if (methodsByDeclaringTypeVT.TryGetValue(typeId, out var typeMethods))
+			{
+				typeMethods.Sort((a, b) => string.Compare(a.SubjectId, b.SubjectId, StringComparison.Ordinal));
+				foreach (var method in typeMethods)
+				{
+					if (method.IsStatic || !CanEmitMethodBody(method)) continue;
+					var sig = GetMethodSignatureSuffix(method.SubjectId);
+					if (!slotMap.ContainsKey(sig))
+					{
+						slotMap[sig] = nextSlot++;
+					}
+				}
+			}
+			vtableLengths[typeId] = nextSlot;
+		}
+		// ── VTable arrays ──
+		if (referenceTypeSubjectIds.Count > 0)
+		{
+			builder.AppendLine("// ── Virtual method table arrays ──");
+			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+			{
+				if (!vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
+				var entries = new string[vtLen];
+				// Walk hierarchy to fill entries (most derived first)
+				string current = typeId;
+				while (current != null && referenceTypeSubjectIds.Contains(current))
+				{
+					if (methodsByDeclaringTypeVT.TryGetValue(current, out var typeMethods))
+					{
+						foreach (var method in typeMethods)
+						{
+							if (method.IsStatic || !CanEmitMethodBody(method)) continue;
+							var sig = GetMethodSignatureSuffix(method.SubjectId);
+							if (slotMap.TryGetValue(sig, out int slot) && slot < vtLen && entries[slot] == null)
+							{
+								entries[slot] = TryGetInstantiationStubSymbol(method) ?? method.NativeSymbol;
+							}
+						}
+					}
+					referenceTypeBaseSubjectIds.TryGetValue(current, out current);
+				}
+				// Emit vtable array
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(24, 1, stringBuilder);
+				handler.AppendLiteral("static const void* ");
+				handler.AppendFormatted(GetNativeVTableSymbol(typeId));
+				handler.AppendLiteral("[] =");
+				stringBuilder.AppendLine(ref handler);
+				builder.AppendLine("{");
+				foreach (var entry in entries)
+				{
+					if (entry != null)
+					{
+						builder.Append("    reinterpret_cast<void*>(");
+						builder.Append(entry);
+						builder.AppendLine("),");
+					}
+					else
+					{
+						builder.AppendLine("    nullptr,");
+					}
+				}
+				builder.AppendLine("};");
+				builder.AppendLine();
+			}
+		}
+		var slotMap = new Dictionary<string, int>(StringComparer.Ordinal);
+		var vtableLengths = new Dictionary<string, int>(StringComparer.Ordinal);
+		var methodsByDeclaringTypeVT = new Dictionary<string, List<AotCoreIrMethodArtifact>>(StringComparer.Ordinal);
+		foreach (var method in _methodsBySubjectId.Values)
+		{
+			var dt = method.Identity.DeclaringTypeSubjectId;
+			if (string.IsNullOrEmpty(dt)) continue;
+			if (!methodsByDeclaringTypeVT.TryGetValue(dt, out var list))
+				methodsByDeclaringTypeVT[dt] = list = new List<AotCoreIrMethodArtifact>();
+			list.Add(method);
+		}
+		int nextSlot = 0;
+		foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+		{
+			if (methodsByDeclaringTypeVT.TryGetValue(typeId, out var typeMethods))
+			{
+				typeMethods.Sort((a, b) => string.Compare(a.SubjectId, b.SubjectId, StringComparison.Ordinal));
+				foreach (var method in typeMethods)
+				{
+					if (method.IsStatic || !CanEmitMethodBody(method)) continue;
+					var sig = GetMethodSignatureSuffix(method.SubjectId);
+					if (!slotMap.ContainsKey(sig))
+					{
+						slotMap[sig] = nextSlot++;
+					}
+				}
+			}
+			vtableLengths[typeId] = nextSlot;
+		}
+		// ── VTable arrays ──
+		if (referenceTypeSubjectIds.Count > 0)
+		{
+			builder.AppendLine("// ── Virtual method table arrays ──");
+			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+			{
+				if (!vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
+				var entries = new string?[vtLen];
+				// Walk hierarchy to fill entries (most derived first)
+				string? current = typeId;
+				while (current != null && referenceTypeSubjectIds.Contains(current))
+				{
+					if (methodsByDeclaringTypeVT.TryGetValue(current, out var typeMethods))
+					{
+						foreach (var method in typeMethods)
+						{
+							if (method.IsStatic || !CanEmitMethodBody(method)) continue;
+							var sig = GetMethodSignatureSuffix(method.SubjectId);
+							if (slotMap.TryGetValue(sig, out int slot) && slot < vtLen && entries[slot] == null)
+							{
+								entries[slot] = TryGetInstantiationStubSymbol(method) ?? method.NativeSymbol;
+							}
+						}
+					}
+					referenceTypeBaseSubjectIds.TryGetValue(current, out current);
+				}
+				// Emit vtable array
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(24, 1, stringBuilder);
+				handler.AppendLiteral("static const void* ");
+				handler.AppendFormatted(GetNativeVTableSymbol(typeId));
+				handler.AppendLiteral("[] =");
+				stringBuilder.AppendLine(ref handler);
+				builder.AppendLine("{");
+				foreach (var entry in entries)
+				{
+					if (entry != null)
+					{
+						builder.Append("    reinterpret_cast<void*>(");
+						builder.Append(entry);
+						builder.AppendLine("),");
+					}
+					else
+					{
+						builder.AppendLine("    nullptr,");
+					}
+				}
+				builder.AppendLine("};");
+				builder.AppendLine();
+			}
+		}
+		// ── Virtual dispatch helper (replaces switch-based dispatch) ──
+		builder.AppendLine("inline void* chaos_vtable_resolve(const void** vtable, CHAOS_IL2CPP_UINT32 slot) noexcept");
+		builder.AppendLine("{");
+		builder.AppendLine("    if (vtable == nullptr) CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine("    if (vtable[slot] == nullptr) CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine("    return const_cast<void*>(vtable[slot]);");
+		builder.AppendLine("}");
+		builder.AppendLine();
 		// ── Parent type info resolver (replaces chaos_get_base_type_id switch) ──
 		builder.AppendLine("inline const TypeInfo* chaos_get_parent_type_info(const TypeInfo* chaos_ti) noexcept");
 		builder.AppendLine("{");

@@ -38,7 +38,7 @@ public sealed partial class NativeReferenceProofEmitter
         };
 
         var stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonMathKernelStubTemplate(),
+            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonMathKernelStubTemplateRelativePath),
             model);
 
         return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stub);
