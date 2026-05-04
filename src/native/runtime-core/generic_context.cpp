@@ -1,10 +1,13 @@
 #include "generic_context.h"
-#include "bootstrap.h"
-#include "codegen_bridge.h"
+#include "../bootstrap/bootstrap.h"
+#include <codegen_bridge.h>
 #include "reflection_query_model.h"
 
 #include <chaos/native_types.h>
 
+#include <atomic>
+#include <cstdint>
+#include <cstring>
 #include <mutex>
 #include <unordered_map>
 #include <vector>
@@ -13,63 +16,222 @@ namespace chaos::il2cpp::generic_context {
 
 namespace {
 
-/// Describes a single closed generic type instantiation.
-/// All type identities are TypeInfoHandle (tag-encoded ReflectionQueryTypeDescriptor*).
+/// Describes a single closed generic type instantiation (global index entry).
 struct GenericInstantiationEntry {
-    TypeInfoHandle                     open_type;     // open generic definition
-    TypeInfoHandle                     closed_type;   // closed instantiation
-    CHAOS_IL2CPP_VECTOR(TypeInfoHandle) type_args;    // type argument handles
-    CHAOS_IL2CPP_UINT32                module_id;     // 0 = AOT, >0 = hotupdate
+    TypeInfoHandle                     open_type;
+    TypeInfoHandle                     closed_type;
+    CHAOS_IL2CPP_VECTOR(TypeInfoHandle) type_args;
+    CHAOS_IL2CPP_UINT32                module_id;
 };
 
-/// Describes a single closed generic method instantiation.
+/// Describes a single closed generic method instantiation (global index entry).
 struct MethodInstantiationEntry {
-    MethodInfoHandle                    open_method;     // open generic method definition
-    MethodInfoHandle                    closed_method;   // closed instantiation
-    CHAOS_IL2CPP_VECTOR(TypeInfoHandle) type_args;       // type argument handles
-    CHAOS_IL2CPP_UINT32                module_id;        // 0 = AOT, >0 = hotupdate
+    MethodInfoHandle                    open_method;
+    MethodInfoHandle                    closed_method;
+    CHAOS_IL2CPP_VECTOR(TypeInfoHandle) type_args;
+    CHAOS_IL2CPP_UINT32                module_id;
 };
 
-/// A minimal generic context stored per method token.
-/// Wraps class-level and method-level type argument handle arrays.
+/// Minimal generic context stored per method token.
 struct MethodGenericContextEntry {
     CHAOS_IL2CPP_VECTOR(TypeInfoHandle) class_type_args;
     CHAOS_IL2CPP_VECTOR(TypeInfoHandle) method_type_args;
     CHAOS_IL2CPP_UINT32                module_id;
 };
 
-// The opaque GenericContextHandle IS the MethodGenericContextEntry pointer.
-// We use an owning store to keep entries alive for the process lifetime.
+// ── Per-module shard: holds raw token data and owns entries ──
 
-struct GenericContextRegistry {
-    CHAOS_IL2CPP_MUTEX mutex;
+/// A single raw-token entry for a closed generic type whose resolution is deferred.
+struct LazyTypeEntry {
+    TypeInfoHandle         open_type;       // resolved open handle
+    CHAOS_IL2CPP_UINT32    closed_token;    // unresolved raw token
+    CHAOS_IL2CPP_UINT32    args_start;      // index into shard.token_pool
+    CHAOS_IL2CPP_UINT32    arg_count;
+};
 
-    // ── Type instantiation index ──
-    // Keyed by open_type handle (tag-encoded pointer, O(1) comparison).
+/// A single raw-token entry for a method generic context whose resolution is deferred.
+struct LazyMethodContextEntry {
+    CHAOS_IL2CPP_UINT32    method_token;
+    CHAOS_IL2CPP_UINT32    class_args_start;
+    CHAOS_IL2CPP_UINT32    class_arg_count;
+    CHAOS_IL2CPP_UINT32    method_args_start;
+    CHAOS_IL2CPP_UINT32    method_arg_count;
+};
+
+/// All per-module data. Created during RegisterModuleGenerics, destroyed
+/// during UnregisterModuleGenerics (O(1) shard drop).
+struct ModuleShard {
+    CHAOS_IL2CPP_MUTEX     shard_mutex;
+    CHAOS_IL2CPP_UINT32    module_id;
+    ImageHandle            source_image;    // for token→handle resolution
+
+    CHAOS_IL2CPP_VECTOR(TypeInfoHandle)        open_definitions;   // resolved open handles
+    CHAOS_IL2CPP_VECTOR(LazyTypeEntry)          lazy_types;
+    CHAOS_IL2CPP_VECTOR(LazyMethodContextEntry) lazy_contexts;
+    CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UINT32)   token_pool;         // flat raw token storage
+
+    using EntryPtrVector = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UNIQUE_PTR(MethodGenericContextEntry));
+    EntryPtrVector owned_entries;   // destroyed with shard → no leak
+
+    CHAOS_IL2CPP_VECTOR(bool) resolve_state;    // parallel to open_definitions; true = resolved
+
+    explicit ModuleShard(CHAOS_IL2CPP_UINT32 mod_id, ImageHandle img)
+        : module_id(mod_id), source_image(img) {}
+};
+
+// ── Lock-free routing table (open addressing, linear probing) ──
+
+constexpr CHAOS_IL2CPP_UINT32 kRouteCapacity = 347;  // prime > 256 * 1.33
+
+struct ShardEntry {
+    std::atomic<CHAOS_IL2CPP_UINT32> module_id{0};
+    ModuleShard* shard{nullptr};
+};
+
+ShardEntry s_routing_table[kRouteCapacity];
+
+static CHAOS_IL2CPP_UINT32 RouteSlot(CHAOS_IL2CPP_UINT32 mid) {
+    return mid % kRouteCapacity;
+}
+
+static bool RoutingTableInsert(CHAOS_IL2CPP_UINT32 module_id, ModuleShard* shard) {
+    CHAOS_IL2CPP_UINT32 slot = RouteSlot(module_id);
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < kRouteCapacity; i++) {
+        CHAOS_IL2CPP_UINT32 idx = (slot + i) % kRouteCapacity;
+        CHAOS_IL2CPP_UINT32 expected = 0;
+        if (s_routing_table[idx].module_id.compare_exchange_strong(expected, module_id)) {
+            s_routing_table[idx].shard = shard;
+            return true;
+        }
+        if (s_routing_table[idx].module_id.load(std::memory_order_relaxed) == module_id)
+            return false;  // duplicate
+    }
+    return false;  // table full
+}
+
+static ModuleShard* RoutingTableLookup(CHAOS_IL2CPP_UINT32 module_id) {
+    if (module_id == 0) return nullptr;
+    CHAOS_IL2CPP_UINT32 slot = RouteSlot(module_id);
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < kRouteCapacity; i++) {
+        CHAOS_IL2CPP_UINT32 idx = (slot + i) % kRouteCapacity;
+        auto mid = s_routing_table[idx].module_id.load(std::memory_order_acquire);
+        if (mid == module_id) return s_routing_table[idx].shard;
+        if (mid == 0) break;  // end of probe chain
+    }
+    return nullptr;
+}
+
+static ModuleShard* RoutingTableRemove(CHAOS_IL2CPP_UINT32 module_id) {
+    if (module_id == 0) return nullptr;
+    CHAOS_IL2CPP_UINT32 slot = RouteSlot(module_id);
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < kRouteCapacity; i++) {
+        CHAOS_IL2CPP_UINT32 idx = (slot + i) % kRouteCapacity;
+        auto mid = s_routing_table[idx].module_id.load(std::memory_order_acquire);
+        if (mid == module_id) {
+            auto* shard = s_routing_table[idx].shard;
+            s_routing_table[idx].shard = nullptr;
+            s_routing_table[idx].module_id.store(0, std::memory_order_release);
+            return shard;
+        }
+        if (mid == 0) break;
+    }
+    return nullptr;
+}
+
+// ── Slimmed global registry (shared indices only) ──
+
+struct Registry {
+    CHAOS_IL2CPP_MUTEX global_mutex;
+
+    // Type instantiation index (open → closed vector) with shard owner for lazy resolve.
     using InstantiationVector = CHAOS_IL2CPP_VECTOR(GenericInstantiationEntry);
-    CHAOS_IL2CPP_UNORDERED_MAP(TypeInfoHandle, InstantiationVector) by_open_type;
+    struct TypeEntry {
+        InstantiationVector closed_types;
+        ModuleShard*        owner_shard;   // nullptr = no lazy data (standalone registration)
+    };
+    CHAOS_IL2CPP_UNORDERED_MAP(TypeInfoHandle, TypeEntry) by_open_type;
 
-    // ── Method instantiation index ──
+    // Method instantiation index.
     using MethodInstantiationVector = CHAOS_IL2CPP_VECTOR(MethodInstantiationEntry);
     CHAOS_IL2CPP_UNORDERED_MAP(MethodInfoHandle, MethodInstantiationVector) by_open_method;
 
-    // ── Method generic context index ──
+    // Method generic context index (bare ptr owned by shard).
     CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, MethodGenericContextEntry*) by_method_token;
-    using EntryPtrVector = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UNIQUE_PTR(MethodGenericContextEntry));
-    EntryPtrVector owned_entries;
+    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, ModuleShard*) method_token_owners;
 
-    // ── Module ownership index (for hot-update unregistration) ──
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32,
-        CHAOS_IL2CPP_VECTOR(TypeInfoHandle)) types_by_module;
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32,
-        CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UINT32)) methods_by_module;
-    CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32,
-        CHAOS_IL2CPP_VECTOR(MethodInfoHandle)) method_instantiations_by_module;
+    // Orphan entries for AOT-root (module_id=0) standalone registrations.
+    using EntryPtrVector = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UNIQUE_PTR(MethodGenericContextEntry));
+    EntryPtrVector orphan_entries;
 };
 
-GenericContextRegistry& GetRegistry() {
-    static GenericContextRegistry s_registry;
+Registry& GetRegistry() {
+    static Registry s_registry;
     return s_registry;
+}
+
+/// Batch-resolve all lazy type entries for a given open_type from a shard.
+/// Must be called with shard->shard_mutex held (double-checked locking).
+static void DoLazyResolveOpenType(Registry& registry, ModuleShard* shard,
+                                   TypeInfoHandle open_type, CHAOS_IL2CPP_SIZE open_idx)
+{
+    const auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
+    if (bridge == nullptr || bridge->resolve_type_by_token == nullptr)
+        return;
+
+    auto& type_entry = registry.by_open_type[open_type];
+    for (const auto& lazy : shard->lazy_types) {
+        if (lazy.open_type != open_type)
+            continue;
+
+        TypeInfoHandle closed_handle = bridge->resolve_type_by_token(
+            shard->source_image, lazy.closed_token);
+        if (closed_handle == 0)
+            continue;
+
+        CHAOS_IL2CPP_VECTOR(TypeInfoHandle) arg_handles;
+        arg_handles.reserve(lazy.arg_count);
+        for (CHAOS_IL2CPP_UINT32 j = 0; j < lazy.arg_count; j++) {
+            arg_handles.push_back(bridge->resolve_type_by_token(
+                shard->source_image,
+                shard->token_pool[lazy.args_start + j]));
+        }
+
+        GenericInstantiationEntry inst;
+        inst.open_type   = open_type;
+        inst.closed_type = closed_handle;
+        inst.module_id   = shard->module_id;
+        inst.type_args   = CHAOS_IL2CPP_MOVE(arg_handles);
+        type_entry.closed_types.push_back(CHAOS_IL2CPP_MOVE(inst));
+    }
+
+    shard->resolve_state[open_idx] = true;
+}
+
+/// Batch-resolve a single method generic context from raw tokens.
+static void DoLazyResolveMethodContext(Registry& registry, ModuleShard* shard,
+                                        CHAOS_IL2CPP_UINT32 method_token,
+                                        const LazyMethodContextEntry& lazy)
+{
+    const auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
+    if (bridge == nullptr || bridge->resolve_type_by_token == nullptr)
+        return;
+
+    auto ctx = CHAOS_IL2CPP_MAKE_UNIQUE(MethodGenericContextEntry)();
+    ctx->module_id = shard->module_id;
+
+    for (CHAOS_IL2CPP_UINT32 j = 0; j < lazy.class_arg_count; j++) {
+        ctx->class_type_args.push_back(bridge->resolve_type_by_token(
+            shard->source_image,
+            shard->token_pool[lazy.class_args_start + j]));
+    }
+    for (CHAOS_IL2CPP_UINT32 j = 0; j < lazy.method_arg_count; j++) {
+        ctx->method_type_args.push_back(bridge->resolve_type_by_token(
+            shard->source_image,
+            shard->token_pool[lazy.method_args_start + j]));
+    }
+
+    registry.by_method_token[method_token] = ctx.get();
+    shard->owned_entries.push_back(CHAOS_IL2CPP_MOVE(ctx));
 }
 
 }  // namespace
@@ -84,29 +246,26 @@ void RegisterGenericInstantiation(
     const TypeInfoHandle* type_args,
     CHAOS_IL2CPP_UINT32 arg_count)
 {
-    if (open_type == nullptr || closed_type == nullptr) {
+    if (open_type == 0 || closed_type == 0)
         return;
-    }
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
 
-    // Idempotency: O(m) where m = instantiations for this open_type (typically 1-5).
-    auto& entries = registry.by_open_type[open_type];
-    for (const auto& entry : entries) {
-        if (entry.closed_type == closed_type) {
-            return;  // already registered
-        }
+    auto& type_entry = registry.by_open_type[open_type];
+    for (const auto& entry : type_entry.closed_types) {
+        if (entry.closed_type == closed_type)
+            return;  // idempotent
     }
 
     GenericInstantiationEntry entry;
     entry.open_type   = open_type;
     entry.closed_type = closed_type;
-    entry.module_id   = 0u;  // default: AOT root
+    entry.module_id   = 0u;
     if (type_args != nullptr && arg_count > 0u) {
         entry.type_args.assign(type_args, type_args + arg_count);
     }
-    entries.push_back(CHAOS_IL2CPP_MOVE(entry));
+    type_entry.closed_types.push_back(CHAOS_IL2CPP_MOVE(entry));
 }
 
 // ═════════════════════════════════════════════════════════════
@@ -114,16 +273,32 @@ void RegisterGenericInstantiation(
 // ═════════════════════════════════════════════════════════════
 
 GenericContextHandle GetGenericContextForMethod(CHAOS_IL2CPP_UINT32 method_token) {
-    if (method_token == 0u) {
+    if (method_token == 0u)
         return nullptr;
-    }
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
 
     auto it = registry.by_method_token.find(method_token);
     if (it == registry.by_method_token.end()) {
-        return nullptr;
+        // Not registered → check if we have a lazy entry pending.
+        auto owner_it = registry.method_token_owners.find(method_token);
+        if (owner_it == registry.method_token_owners.end())
+            return nullptr;
+
+        ModuleShard* shard = owner_it->second;
+        // Find the lazy entry and resolve it.
+        for (const auto& lazy : shard->lazy_contexts) {
+            if (lazy.method_token == method_token) {
+                DoLazyResolveMethodContext(registry, shard, method_token, lazy);
+                break;
+            }
+        }
+        // method_token_owners entry is intentionally kept (tombstone); we
+        // re-check by_method_token after resolution.
+        it = registry.by_method_token.find(method_token);
+        if (it == registry.by_method_token.end())
+            return nullptr;
     }
 
     return reinterpret_cast<GenericContextHandle>(it->second);
@@ -134,248 +309,276 @@ void RegisterMethodGenericContext(
     const TypeInfoHandle* class_type_args, CHAOS_IL2CPP_UINT32 class_arg_count,
     const TypeInfoHandle* method_type_args, CHAOS_IL2CPP_UINT32 method_arg_count)
 {
-    if (method_token == 0u) {
+    if (method_token == 0u)
         return;
-    }
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
 
-    if (registry.by_method_token.count(method_token)) {
+    if (registry.by_method_token.count(method_token))
         return;  // already registered
-    }
 
     auto entry = CHAOS_IL2CPP_MAKE_UNIQUE(MethodGenericContextEntry)();
     entry->module_id = 0u;
-    if (class_type_args != nullptr && class_arg_count > 0u) {
+    if (class_type_args != nullptr && class_arg_count > 0u)
         entry->class_type_args.assign(class_type_args, class_type_args + class_arg_count);
-    }
-    if (method_type_args != nullptr && method_arg_count > 0u) {
+    if (method_type_args != nullptr && method_arg_count > 0u)
         entry->method_type_args.assign(method_type_args, method_type_args + method_arg_count);
-    }
 
     registry.by_method_token[method_token] = entry.get();
-    registry.owned_entries.push_back(CHAOS_IL2CPP_MOVE(entry));
+    registry.orphan_entries.push_back(CHAOS_IL2CPP_MOVE(entry));
 }
 
 // ═════════════════════════════════════════════════════════════
-// Accessors (unchanged semantics, now operate on handle vectors)
+// Accessors
 // ═════════════════════════════════════════════════════════════
 
 CHAOS_IL2CPP_UINT32 GetClassTypeArgCount(GenericContextHandle generic_context) {
-    if (generic_context == nullptr) {
-        return 0u;
-    }
-
+    if (generic_context == nullptr) return 0u;
     const auto* entry = reinterpret_cast<const MethodGenericContextEntry*>(generic_context);
     return static_cast<CHAOS_IL2CPP_UINT32>(entry->class_type_args.size());
 }
 
 TypeInfoHandle GetClassTypeArg(GenericContextHandle generic_context, CHAOS_IL2CPP_UINT32 index) {
-    if (generic_context == nullptr) {
-        return 0;
-    }
-
+    if (generic_context == nullptr) return 0;
     const auto* entry = reinterpret_cast<const MethodGenericContextEntry*>(generic_context);
-    if (index >= entry->class_type_args.size()) {
-        return 0;
-    }
-
-    return entry->class_type_args[index];
+    return index < entry->class_type_args.size() ? entry->class_type_args[index] : 0;
 }
 
 CHAOS_IL2CPP_UINT32 GetMethodTypeArgCount(GenericContextHandle generic_context) {
-    if (generic_context == nullptr) {
-        return 0u;
-    }
-
+    if (generic_context == nullptr) return 0u;
     const auto* entry = reinterpret_cast<const MethodGenericContextEntry*>(generic_context);
     return static_cast<CHAOS_IL2CPP_UINT32>(entry->method_type_args.size());
 }
 
 TypeInfoHandle GetMethodTypeArg(GenericContextHandle generic_context, CHAOS_IL2CPP_UINT32 index) {
-    if (generic_context == nullptr) {
-        return 0;
-    }
-
+    if (generic_context == nullptr) return 0;
     const auto* entry = reinterpret_cast<const MethodGenericContextEntry*>(generic_context);
-    if (index >= entry->method_type_args.size()) {
-        return 0;
-    }
-
-    return entry->method_type_args[index];
+    return index < entry->method_type_args.size() ? entry->method_type_args[index] : 0;
 }
 
 // ═════════════════════════════════════════════════════════════
-// Bulk registration from codegen-emitted data
+// Fast-path: resolve closed type from registry (with lazy trigger)
+// ═════════════════════════════════════════════════════════════
+
+TypeInfoHandle TryResolveClosedType(
+    TypeInfoHandle open_type,
+    const TypeInfoHandle* type_args,
+    CHAOS_IL2CPP_UINT32 arg_count)
+{
+    if (open_type == 0)
+        return 0;
+
+    auto& registry = GetRegistry();
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
+
+    auto it = registry.by_open_type.find(open_type);
+    if (it == registry.by_open_type.end())
+        return 0;
+
+    auto& type_entry = it->second;
+
+    // If the closed_types vector is empty but we have an owner shard and
+    // the open type hasn't been resolved yet → trigger lazy batch resolve.
+    if (type_entry.closed_types.empty() && type_entry.owner_shard != nullptr) {
+        // Find the open index in the shard.
+        for (CHAOS_IL2CPP_SIZE i = 0; i < type_entry.owner_shard->open_definitions.size(); i++) {
+            if (type_entry.owner_shard->open_definitions[i] == open_type) {
+                // Double-checked locking: already checked resolve_state without lock,
+                // now do it under the shard mutex.
+                {
+                    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) slock(type_entry.owner_shard->shard_mutex);
+                    if (!type_entry.owner_shard->resolve_state[i]) {
+                        DoLazyResolveOpenType(registry, type_entry.owner_shard, open_type, i);
+                    }
+                }
+                break;
+            }
+        }
+        // After resolution, the shard owner is no longer needed for this open type.
+        type_entry.owner_shard = nullptr;
+    }
+
+    // Linear scan of now-populated (or previously populated) entries.
+    for (const auto& entry : type_entry.closed_types) {
+        if (entry.type_args.size() != arg_count)
+            continue;
+        bool match = true;
+        for (CHAOS_IL2CPP_UINT32 i = 0; i < arg_count; i++) {
+            if (entry.type_args[i] != type_args[i]) {
+                match = false;
+                break;
+            }
+        }
+        if (match)
+            return entry.closed_type;
+    }
+
+    return 0;  // not found
+}
+
+// ═════════════════════════════════════════════════════════════
+// Bulk registration from codegen-emitted data (Eager + Lazy)
 // ═════════════════════════════════════════════════════════════
 
 void RegisterModuleGenerics(const struct ModuleGenericRegistrationV0* reg) {
-    if (reg == nullptr) {
+    if (reg == nullptr)
         return;
-    }
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
 
     const auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
-    if (bridge == nullptr || bridge->resolve_type_by_token == nullptr) {
+    if (bridge == nullptr || bridge->resolve_type_by_token == nullptr)
         return;
-    }
 
-    TypeInfoHandle arg_buffer[8];  // sufficient for all .NET generic arities
+    // ── Create shard ──
+    auto shard = CHAOS_IL2CPP_MAKE_UNIQUE(ModuleShard)(reg->module_id, reg->source_image);
 
-    // ── Register type generic instantiations ──
+    // ── Phase 1 (Eager): Register open definitions only ──
     if (reg->generic_types != nullptr && reg->generic_type_count > 0u) {
-        CHAOS_IL2CPP_VECTOR(TypeInfoHandle) module_types;
-        module_types.reserve(reg->generic_type_count);
+        shard->lazy_types.reserve(reg->generic_type_count);
 
         for (CHAOS_IL2CPP_UINT32 i = 0u; i < reg->generic_type_count; i++) {
             const auto& entry = reg->generic_types[i];
 
-            TypeInfoHandle open_type   = bridge->resolve_type_by_token(
+            TypeInfoHandle open_type = bridge->resolve_type_by_token(
                 reg->source_image, entry.open_token);
-            TypeInfoHandle closed_type = bridge->resolve_type_by_token(
-                reg->source_image, entry.closed_token);
+            if (open_type == 0)
+                continue;
 
-            const CHAOS_IL2CPP_UINT32 ac = entry.arg_count > 8u ? 8u : entry.arg_count;
-            for (CHAOS_IL2CPP_UINT32 j = 0u; j < ac; j++) {
-                arg_buffer[j] = bridge->resolve_type_by_token(
-                    reg->source_image,
+            // Store in global by_open_type with empty vector + shard owner.
+            auto& type_entry = registry.by_open_type[open_type];
+            if (type_entry.owner_shard == nullptr) {
+                type_entry.owner_shard = shard.get();
+                shard->open_definitions.push_back(open_type);
+                shard->resolve_state.push_back(false);
+            }
+
+            // Record lazy entry (raw tokens, no resolution yet).
+            LazyTypeEntry lazy;
+            lazy.open_type    = open_type;
+            lazy.closed_token = entry.closed_token;
+            lazy.args_start   = static_cast<CHAOS_IL2CPP_UINT32>(shard->token_pool.size());
+            lazy.arg_count    = entry.arg_count;
+
+            // Copy raw arg tokens into the token pool.
+            for (CHAOS_IL2CPP_UINT32 j = 0u; j < entry.arg_count; j++) {
+                shard->token_pool.push_back(
                     reg->generic_type_args[entry.args_start_index + j]);
             }
 
-            // Idempotency check.
-            auto& existing = registry.by_open_type[open_type];
-            bool found = false;
-            for (const auto& ex : existing) {
-                if (ex.closed_type == closed_type) { found = true; break; }
-            }
-            if (found) continue;
-
-            GenericInstantiationEntry inst;
-            inst.open_type   = open_type;
-            inst.closed_type = closed_type;
-            inst.module_id   = reg->module_id;
-            if (ac > 0u) {
-                inst.type_args.assign(arg_buffer, arg_buffer + ac);
-            }
-            existing.push_back(CHAOS_IL2CPP_MOVE(inst));
-
-            module_types.push_back(closed_type);
-        }
-
-        if (!module_types.empty()) {
-            registry.types_by_module[reg->module_id] = CHAOS_IL2CPP_MOVE(module_types);
+            shard->lazy_types.push_back(lazy);
         }
     }
 
-    // ── Register method generic contexts ──
+    // ── Phase 2 (Eager): Register method generic contexts (raw tokens) ──
+    //
+    // Note: GenericMethodRegistrationEntryV0 reuses GenericTypeRegistrationEntryV0:
+    //   entry.open_token    = methodToken
+    //   entry.closed_token  = classArgCount
+    //   entry.arg_count     = methodArgCount
+    //   entry.args_start_index = argsStartIndex
     if (reg->generic_methods != nullptr && reg->generic_method_count > 0u) {
-        CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UINT32) module_methods;
-        module_methods.reserve(reg->generic_method_count);
+        shard->lazy_contexts.reserve(reg->generic_method_count);
 
         for (CHAOS_IL2CPP_UINT32 i = 0u; i < reg->generic_method_count; i++) {
             const auto& entry = reg->generic_methods[i];
 
-            if (registry.by_method_token.count(entry.method_token)) {
+            CHAOS_IL2CPP_UINT32 method_token  = entry.open_token;
+            CHAOS_IL2CPP_UINT32 class_arg_cnt = entry.closed_token;
+            CHAOS_IL2CPP_UINT32 method_arg_cnt = entry.arg_count;
+
+            if (registry.by_method_token.count(method_token) ||
+                registry.method_token_owners.count(method_token))
+            {
                 continue;  // idempotent
             }
 
-            // class_type_args occupy the first class_arg_count slots in the
-            // arg pool, followed by method_arg_count method-level args.
-            const CHAOS_IL2CPP_UINT32 total = entry.arg_count > 8u ? 8u : entry.arg_count;
-            for (CHAOS_IL2CPP_UINT32 j = 0u; j < total; j++) {
-                arg_buffer[j] = bridge->resolve_type_by_token(
-                    reg->source_image,
+            LazyMethodContextEntry lazy;
+            lazy.method_token = method_token;
+
+            // class_type_args occupy the first class_arg_cnt slots.
+            lazy.class_args_start = static_cast<CHAOS_IL2CPP_UINT32>(shard->token_pool.size());
+            lazy.class_arg_count  = class_arg_cnt;
+            for (CHAOS_IL2CPP_UINT32 j = 0u; j < class_arg_cnt; j++) {
+                shard->token_pool.push_back(
                     reg->generic_method_args[entry.args_start_index + j]);
             }
 
-            // Split into class/method args.
-            const CHAOS_IL2CPP_UINT32 cc = total > entry.class_arg_count
-                ? entry.class_arg_count : total;
-            auto* class_args = cc > 0u ? arg_buffer : nullptr;
-            auto* method_args = nullptr;
-            CHAOS_IL2CPP_UINT32 mc = 0u;
-            if (total > cc) {
-                mc = total - cc;
-                method_args = arg_buffer + cc;
+            // method_type_args follow.
+            lazy.method_args_start = static_cast<CHAOS_IL2CPP_UINT32>(shard->token_pool.size());
+            lazy.method_arg_count  = method_arg_cnt;
+            for (CHAOS_IL2CPP_UINT32 j = 0u; j < method_arg_cnt; j++) {
+                shard->token_pool.push_back(
+                    reg->generic_method_args[entry.args_start_index + class_arg_cnt + j]);
             }
 
-            auto ctx = CHAOS_IL2CPP_MAKE_UNIQUE(MethodGenericContextEntry)();
-            ctx->module_id = reg->module_id;
-            if (class_args != nullptr) {
-                ctx->class_type_args.assign(class_args, class_args + cc);
-            }
-            if (method_args != nullptr) {
-                ctx->method_type_args.assign(method_args, method_args + mc);
-            }
-
-            registry.by_method_token[entry.method_token] = ctx.get();
-            registry.owned_entries.push_back(CHAOS_IL2CPP_MOVE(ctx));
-            module_methods.push_back(entry.method_token);
-        }
-
-        if (!module_methods.empty()) {
-            registry.methods_by_module[reg->module_id] = CHAOS_IL2CPP_MOVE(module_methods);
+            shard->lazy_contexts.push_back(lazy);
+            registry.method_token_owners[method_token] = shard.get();
         }
     }
+
+    // ── Insert shard into routing table ──
+    if (!RoutingTableInsert(reg->module_id, shard.get())) {
+        // Duplicate module_id — shard is discarded.
+        return;
+    }
+
+    // Release ownership to the routing table.
+    static_cast<void>(shard.release());
 }
 
 // ═════════════════════════════════════════════════════════════
-// Module-level unregistration (hot-update)
+// Module-level unregistration (O(1) shard drop)
 // ═════════════════════════════════════════════════════════════
 
 void UnregisterModuleGenerics(CHAOS_IL2CPP_UINT32 module_id) {
+    if (module_id == 0u)
+        return;
+
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
 
-    // Remove type instantiations belonging to this module.
-    auto type_it = registry.types_by_module.find(module_id);
-    if (type_it != registry.types_by_module.end()) {
-        // Build a set of closed_type handles to remove.
-        const auto& closed_types = type_it->second;
-        for (auto& [open_type, entries] : registry.by_open_type) {
-            entries.erase(
-                std::remove_if(entries.begin(), entries.end(),
-                    [&](const GenericInstantiationEntry& e) {
-                        for (auto ct : closed_types) {
-                            if (e.closed_type == ct) return true;
-                        }
-                        return false;
-                    }),
-                entries.end());
+    ModuleShard* shard = RoutingTableRemove(module_id);
+    if (shard == nullptr)
+        return;
+
+    // ── Remove all open_type entries owned by this shard ──
+    for (CHAOS_IL2CPP_SIZE i = 0; i < shard->open_definitions.size(); i++) {
+        TypeInfoHandle open_type = shard->open_definitions[i];
+        auto type_it = registry.by_open_type.find(open_type);
+        if (type_it == registry.by_open_type.end())
+            continue;
+
+        auto& closed_types = type_it->second.closed_types;
+
+        // Remove entries whose closed_type was lazily resolved from this shard.
+        // We cannot use module_id directly because multiple modules could register
+        // instantiations for the same open_type. Instead, we remove entries that
+        // were added during lazy resolve of this shard's open_type.
+        // The only entries that belong to this shard are those added by
+        // DoLazyResolveOpenType, which always sets module_id = shard->module_id.
+        closed_types.erase(
+            std::remove_if(closed_types.begin(), closed_types.end(),
+                [&](const GenericInstantiationEntry& e) {
+                    return e.module_id == shard->module_id;
+                }),
+            closed_types.end());
+
+        if (closed_types.empty() && type_it->second.owner_shard == nullptr) {
+            registry.by_open_type.erase(type_it);
         }
-        registry.types_by_module.erase(type_it);
     }
 
-    // Remove method contexts belonging to this module.
-    auto meth_it = registry.methods_by_module.find(module_id);
-    if (meth_it != registry.methods_by_module.end()) {
-        const auto& tokens = meth_it->second;
-        for (auto token : tokens) {
-            registry.by_method_token.erase(token);
-        }
-        registry.methods_by_module.erase(meth_it);
+    // ── Remove method token entries owned by this shard ──
+    for (const auto& lazy : shard->lazy_contexts) {
+        registry.by_method_token.erase(lazy.method_token);
+        registry.method_token_owners.erase(lazy.method_token);
     }
 
-    // Remove method instantiations belonging to this module.
-    auto meth_inst_it = registry.method_instantiations_by_module.find(module_id);
-    if (meth_inst_it != registry.method_instantiations_by_module.end()) {
-        const auto& closed_methods = meth_inst_it->second;
-        for (auto& [open_method, entries] : registry.by_open_method) {
-            entries.erase(
-                std::remove_if(entries.begin(), entries.end(),
-                    [&](const MethodInstantiationEntry& e) {
-                        for (auto cm : closed_methods) {
-                            if (e.closed_method == cm) return true;
-                        }
-                        return false;
-                    }),
-                entries.end());
-        }
-        registry.method_instantiations_by_module.erase(meth_inst_it);
-    }
+    // ── Discard shard (owned_entries freed by unique_ptr, token_pool freed by vector) ──
+    delete shard;
 }
 
 // ═════════════════════════════════════════════════════════════
@@ -388,28 +591,24 @@ void RegisterGenericMethodInstantiation(
     const TypeInfoHandle*  type_args,
     CHAOS_IL2CPP_UINT32   arg_count)
 {
-    if (open_method == 0u || closed_method == 0u) {
+    if (open_method == 0u || closed_method == 0u)
         return;
-    }
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
 
-    // Idempotency check.
     auto& entries = registry.by_open_method[open_method];
     for (const auto& entry : entries) {
-        if (entry.closed_method == closed_method) {
-            return;  // already registered
-        }
+        if (entry.closed_method == closed_method)
+            return;  // idempotent
     }
 
     MethodInstantiationEntry entry;
     entry.open_method   = open_method;
     entry.closed_method = closed_method;
-    entry.module_id     = 0u;  // default: AOT root
-    if (type_args != nullptr && arg_count > 0u) {
+    entry.module_id     = 0u;
+    if (type_args != nullptr && arg_count > 0u)
         entry.type_args.assign(type_args, type_args + arg_count);
-    }
     entries.push_back(CHAOS_IL2CPP_MOVE(entry));
 }
 
@@ -418,21 +617,19 @@ MethodInfoHandle TryResolveClosedMethod(
     const TypeInfoHandle*  type_args,
     CHAOS_IL2CPP_UINT32   arg_count)
 {
-    if (open_method == 0u) {
+    if (open_method == 0u)
         return 0u;
-    }
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
 
     auto it = registry.by_open_method.find(open_method);
-    if (it == registry.by_open_method.end()) {
+    if (it == registry.by_open_method.end())
         return 0u;
-    }
 
     for (const auto& entry : it->second) {
-        if (entry.type_args.size() != arg_count) continue;
-
+        if (entry.type_args.size() != arg_count)
+            continue;
         bool match = true;
         for (CHAOS_IL2CPP_UINT32 i = 0u; i < arg_count; i++) {
             if (entry.type_args[i] != type_args[i]) {
@@ -440,12 +637,11 @@ MethodInfoHandle TryResolveClosedMethod(
                 break;
             }
         }
-        if (match) {
+        if (match)
             return entry.closed_method;
-        }
     }
 
-    return 0u;  // not found
+    return 0u;
 }
 
 // ═════════════════════════════════════════════════════════════
@@ -454,10 +650,10 @@ MethodInfoHandle TryResolveClosedMethod(
 
 CHAOS_IL2CPP_UINT32 GetRegisteredInstantiationCount() {
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
     CHAOS_IL2CPP_UINT32 count = 0u;
     for (const auto& [_, v] : registry.by_open_type) {
-        count += static_cast<CHAOS_IL2CPP_UINT32>(v.size());
+        count += static_cast<CHAOS_IL2CPP_UINT32>(v.closed_types.size());
     }
     return count;
 }

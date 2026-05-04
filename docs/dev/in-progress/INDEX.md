@@ -1,10 +1,13 @@
-# ½øĞĞÖĞÈÎÎñË÷Òı
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-µ±Ç° active ÈÎÎñ£º
+ï¿½ï¿½Ç° active ï¿½ï¿½ï¿½ï¿½
 - none
 
 | task_id | task_type | phase | updated_at | next_step | active |
 | --- | --- | --- | --- | --- | --- |
-| [20260419-01-foundation-dll-translation-audit-roadmap](20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | roadmap | roadmap | 2026-04-25 21:58:00 +08:00 | ¼ÌĞøÎ¬»¤ DLL-first reporting authority£¬²¢°´ phase-2 DLL ½Ú×àÍÆ½øÉó¼Æ×´Ì¬Ò³¡£ | false |
-| [20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable](20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md) | plan | blocked-before-start | 2026-04-25 21:58:00 +08:00 | ÔÚ `20260419-03` ÕæÕı¹ØÕ¢Ç°£¬½ö±£³Ö `System.Collections.Immutable` µÄ blocked authority£¬²»Æô¶¯ÕæÊµ proof¡£ | false |
-| [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md) | plan | implementation | 2026-04-25 21:58:00 +08:00 | »ùÓÚ 4C family/router framework ¼ÌĞøÀ©´ó `System.Private.CoreLib` supplemental runtime-skeleton translated coverage¡£ | false |
+| [20260419-01-foundation-dll-translation-audit-roadmap](20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | roadmap | roadmap | 2026-04-25 21:58:00 +08:00 | ç»´æŠ¤ DLL-first reporting authorityï¼Œè·Ÿè¸ª phase-2 DLL æ¨è¿›çŠ¶æ€ | false |
+| [20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable](20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md) | plan | blocked-before-start | 2026-04-25 21:58:00 +08:00 | ç­‰å¾… `20260419-03` è§£é—¸ï¼Œéœ€è¦ `System.Collections.Immutable` çš„ blocked authority å’Œ proof | false |
+| [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md) | plan | implementation | 2026-04-25 21:58:00 +08:00 | é€šè¿‡ 4C family/router framework æ‰©å±• `System.Private.CoreLib` supplemental runtime-skeleton translated coverage | false |
+| [foundation-dll-full-development](foundation-dll-full-development/STATUS.md) | roadmap | in-progress | 2026-05-05 | Foundation DLL å…¨é‡ il2cpp å¼€å‘ | false |
+| [foundation-dll-phase-1-corelib](foundation-dll-phase-1-corelib/STATUS.md) | plan | in-progress | 2026-05-05 | Phase 1 System.Private.CoreLib å…¨é‡ il2cpp å¼€å‘ | false |
+| [runtime-external-reflection-type](runtime-external-reflection-type/STATUS.md) | plan | completed | 2026-05-05 | Runtime External ä¾èµ–å®ç° â€” Reflection/Type + Exception | false |

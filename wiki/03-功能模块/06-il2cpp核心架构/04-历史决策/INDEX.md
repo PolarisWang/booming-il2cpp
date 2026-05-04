@@ -22,3 +22,4 @@
 | [`14-B2-ModuleRegistry-TwoTier-决策.md`](./14-B2-ModuleRegistry-TwoTier-%E5%86%B3%E7%AD%96.md) | B2 Module Registry + Two-Tier 反射元数据架构，替代 TLS constexpr 指针方案，解决跨 DLL 类型身份、Binary 膨胀和 HotUpdate 问题 |
 | [`15-B2+VTable虚方法分派决策.md`](./15-B2+VTable%E8%99%9A%E6%96%B9%E6%B3%95%E5%88%86%E6%B4%BE%E5%86%B3%E7%AD%96.md) | B2+ 虚方法分派架构：Per-Object VTable + 继承链 slot 自动编号 + iface_map 接口分派 |
 | [`16-RuntimeCentricCrossDllDispatch决策.md`](./16-RuntimeCentricCrossDllDispatch%E5%86%B3%E7%AD%96.md) | Runtime-Centric 跨 DLL 分派 + STRING_ID 完整架构：method_table、StringId-first ldstr、TypeInfo stable_id 双路径比较 |
+| [`17-GenericContextRegistry-B+SegmentedShard-决策.md`](./17-GenericContextRegistry-B%2BSegmentedShard-%E5%86%B3%E7%AD%96.md) | GenericContextRegistry B+ 重构：Per-Module Shard + 两级注册 (Eager Open + Lazy Closed) + O(1) 热更卸载，消除 arg_buffer[8] 和 owned_entries 泄漏 |

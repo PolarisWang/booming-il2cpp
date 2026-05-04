@@ -31,6 +31,10 @@ struct RuntimeInstantiatedMethod {
     /// True once registered in the GenericContextRegistry.
     bool is_registered = false;
 
+    /// Set to true by UnregisterModuleGenerics when the owning module is unloaded.
+    /// The interpret_method_call bridge checks this flag before executing.
+    bool is_unloaded = false;
+
     /// IL bytecodes of the open method definition (not owned; must stay alive
     /// for the process lifetime of this instantiation).
     const void*         il_bytes = nullptr;

@@ -25,8 +25,12 @@ struct TokenResolverContext {
 
     /// Generic type arguments for parameter substitution.
     /// Set when lowering the body of a closed generic method.
+    /// Class-level type arguments (ELEMENT_TYPE_VAR / !N) resolved from type_args.
     const TypeInfoHandle* type_args = nullptr;
     CHAOS_IL2CPP_UINT32  arg_count = 0u;
+    /// Method-level type arguments (ELEMENT_TYPE_MVAR / !!N) resolved from method_type_args.
+    const TypeInfoHandle* method_type_args = nullptr;
+    CHAOS_IL2CPP_UINT32  method_arg_count = 0u;
 
     /// Optional: layout engine for field offset resolution (LdFld/StFld).
     /// When non-null, the resolver computes real byte offsets for field

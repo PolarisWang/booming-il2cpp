@@ -5,6 +5,7 @@
 #include "generic_context.h"
 #include "vtable_registry.h"
 #include "../bootstrap/bootstrap.h"
+#include <chaos/runtime_instantiation.h>
 
 #include <gc.h>
 
@@ -1007,6 +1008,18 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL MethodInvoke(
     if (is_token_based) {
         invoker_ptr = chaos::il2cpp::bootstrap::FindInvokerPointer(method_token);
         if (invoker_ptr == nullptr) {
+            // Runtime-allocated token (>= 0x80000000): fall back to interpreted
+            // bridge for MakeGenericMethod-created methods.
+            if (method_token >= 0x80000000u) {
+                const auto* bridge = ChaosRuntimeInstantiationGetBridgeV0();
+                if (bridge != nullptr && bridge->interpret_method_call != nullptr) {
+                    return bridge->interpret_method_call(
+                        runtime_state, thread_state, method,
+                        object_instance, argv, argc,
+                        out_return_value, out_return_value_size,
+                        out_exception);
+                }
+            }
             return CHAOS_RUNTIME_STATUS_NOT_FOUND;
         }
     }

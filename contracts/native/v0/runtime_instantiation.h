@@ -57,6 +57,32 @@ typedef struct RuntimeInstantiationBridgeV0 {
     void (CHAOS_RUNTIME_ABI_CALL* unregister_module_generics)(
         uint32_t module_id);
 
+    /*
+     * Interpret a runtime-instantiated generic method call.
+     *
+     * Called by MethodInvoke when FindInvokerPointer returns nullptr for a
+     * runtime-allocated token (>= 0x80000000).  The bridge lazily lowers the
+     * open method's IL body on first call and then dispatches via the
+     * InterpreterVM.
+     *
+     * `method` is the MethodInfoHandle (used to recover RuntimeInstantiatedMethod*
+     * via container_of on TryDecodeReflectionQueryMethodHandle).
+     *
+     * Returns CHAOS_RUNTIME_STATUS_OK on success,
+     *         CHAOS_RUNTIME_STATUS_MANAGED_EXCEPTION on exception,
+     *         CHAOS_RUNTIME_STATUS_NOT_FOUND if the method is unloaded.
+     */
+    RuntimeStatus (CHAOS_RUNTIME_ABI_CALL* interpret_method_call)(
+        RuntimeState*           runtime_state,
+        ThreadState*            thread_state,
+        MethodInfoHandle        method,
+        void*                   object_instance,
+        void* const*            argv,
+        CHAOS_IL2CPP_UINT32    argc,
+        void*                   out_return_value,
+        CHAOS_IL2CPP_SIZE       out_return_value_size,
+        ExceptionHandle*        out_exception);
+
     /* Diagnostic counters. */
     uint32_t runtime_instantiation_count;
     uint32_t interpreted_method_call_count;

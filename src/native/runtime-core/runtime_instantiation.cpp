@@ -3,6 +3,8 @@
 #include "generic_method_instantiation.h"
 #include "layout_engine.h"
 #include "reflection_query_model.h"
+#include "runtime_core.h"       // ManagedExceptionCarrier
+#include "token_resolver.h"     // DefaultTokenResolver, TokenResolverContext
 
 #include <chaos/native_types.h>
 
@@ -34,6 +36,16 @@ struct RuntimeInstantiatedTypeRecord {
 
 CHAOS_IL2CPP_MUTEX s_runtime_types_mutex;
 CHAOS_IL2CPP_VECTOR(RuntimeInstantiatedTypeRecord) s_runtime_types;
+
+/* ── Track all heap-allocated RuntimeInstantiatedMethod instances so we can
+ *    mark them as unloaded during hot-update unload.                     ── */
+struct RuntimeInstantiatedMethodRecord {
+    RuntimeInstantiatedMethod* method;
+    CHAOS_IL2CPP_UINT32 module_id;
+};
+
+CHAOS_IL2CPP_MUTEX s_runtime_methods_mutex;
+CHAOS_IL2CPP_VECTOR(RuntimeInstantiatedMethodRecord) s_runtime_methods;
 
 /* ── Helper: compute a short display name for a type argument handle.    ── */
 
@@ -151,9 +163,11 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveOrInstantiateMethod(
         open_method_definition, closed_handle, rt_method->type_args, rt_method->arg_count);
     rt_method->is_registered = true;
 
-    /* Note: RuntimeInstantiatedMethod cleanup during module unload is deferred
-     * to Phase 5b (IL execution).  For Phase 5a (metadata-only), all method
-     * instantiation objects are process-lifetime (module_id = 0 = AOT root). */
+    /* Track for module unload cleanup. */
+    {
+        CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(s_runtime_methods_mutex);
+        s_runtime_methods.push_back({rt_method, rt_method->module_id});
+    }
 
     return closed_handle;
 }
@@ -164,31 +178,183 @@ void CHAOS_RUNTIME_ABI_CALL UnregisterModuleGenerics(
     generic_context::UnregisterModuleGenerics(module_id);
 
     /* Also free RuntimeInstantiatedType records for this module. */
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(s_runtime_types_mutex);
-    for (CHAOS_IL2CPP_SIZE i = 0u; i < s_runtime_types.size(); ) {
-        if (s_runtime_types[i].module_id == module_id) {
-            auto* rt = s_runtime_types[i].type;
-            std::free(rt->descriptor.subject_id_utf8);
-            std::free(rt->descriptor.definition_subject_id_utf8);
-            std::free(rt->descriptor.namespace_name_utf8);
-            std::free(rt->descriptor.name_utf8);
-            std::free(rt->descriptor.display_name_utf8);
-            std::free(rt->type_args);
-            std::free(rt->field_offsets);
-            std::free(rt->resolved_field_types);
-            std::free(rt);
-            s_runtime_types.erase(s_runtime_types.begin() +
-                static_cast<CHAOS_IL2CPP_SIZE>(i));
-        } else {
-            ++i;
+    {
+        CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(s_runtime_types_mutex);
+        for (CHAOS_IL2CPP_SIZE i = 0u; i < s_runtime_types.size(); ) {
+            if (s_runtime_types[i].module_id == module_id) {
+                auto* rt = s_runtime_types[i].type;
+                std::free(rt->descriptor.subject_id_utf8);
+                std::free(rt->descriptor.definition_subject_id_utf8);
+                std::free(rt->descriptor.namespace_name_utf8);
+                std::free(rt->descriptor.name_utf8);
+                std::free(rt->descriptor.display_name_utf8);
+                std::free(rt->type_args);
+                std::free(rt->field_offsets);
+                std::free(rt->resolved_field_types);
+                std::free(rt);
+                s_runtime_types.erase(s_runtime_types.begin() +
+                    static_cast<CHAOS_IL2CPP_SIZE>(i));
+            } else {
+                ++i;
+            }
         }
     }
 
-    /* Mark the module as tombstone in the Module Registry.
-     * This ensures LookupModule(module_id) still returns a valid pointer
-     * for any old TypeInfoHandle values, but with type_count=0 and nulled
-     * image/type_flags to prevent access to freed memory. */
+    /* Mark RuntimeInstantiatedMethod records as unloaded for this module.
+     * We do NOT free the methods themselves because stale MethodInfoHandle
+     * values may still be in use; is_unloaded blocks re-entry. */
+    {
+        CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(s_runtime_methods_mutex);
+        for (CHAOS_IL2CPP_SIZE i = 0u; i < s_runtime_methods.size(); ) {
+            if (s_runtime_methods[i].module_id == module_id) {
+                s_runtime_methods[i].method->is_unloaded = true;
+                s_runtime_methods.erase(s_runtime_methods.begin() +
+                    static_cast<CHAOS_IL2CPP_SIZE>(i));
+            } else {
+                ++i;
+            }
+        }
+    }
+
+    /* Mark the module as tombstone in the Module Registry. */
     runtime_core::MarkModuleTombstone(module_id);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// interpret_method_call — bridge from MethodInvoke to InterpreterVM
+// ════════════════════════════════════════════════════════════════════════════
+
+RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
+    RuntimeState*           runtime_state,
+    ThreadState*            thread_state,
+    MethodInfoHandle        method,
+    void*                   object_instance,
+    void* const*            argv,
+    CHAOS_IL2CPP_UINT32    argc,
+    void*                   out_return_value,
+    CHAOS_IL2CPP_SIZE       out_return_value_size,
+    ExceptionHandle*        out_exception)
+{
+    (void)runtime_state;
+    (void)thread_state;
+
+    if (out_exception != nullptr) {
+        *out_exception = nullptr;
+    }
+
+    // ── Recover RuntimeInstantiatedMethod* from MethodInfoHandle ──
+    const auto* desc = TryDecodeReflectionQueryMethodHandle(method);
+    if (desc == nullptr) {
+        return CHAOS_RUNTIME_STATUS_NOT_FOUND;
+    }
+    auto* rt_method = const_cast<RuntimeInstantiatedMethod*>(
+        reinterpret_cast<const RuntimeInstantiatedMethod*>(desc));
+
+    // ── Check module unload ──
+    if (rt_method->is_unloaded) {
+        return CHAOS_RUNTIME_STATUS_NOT_FOUND;
+    }
+
+    // ── Ensure IR method body is available ──
+    if (rt_method->ir_method_body == nullptr) {
+        if (rt_method->il_bytes != nullptr && rt_method->il_length > 0u) {
+            interpreter::TokenResolverContext resolver_ctx;
+            resolver_ctx.type_args = rt_method->type_args;
+            resolver_ctx.arg_count = rt_method->arg_count;
+
+            if (!LowerMethodBody(rt_method, rt_method->il_bytes,
+                    rt_method->il_length,
+                    interpreter::DefaultTokenResolver, &resolver_ctx))
+            {
+                return CHAOS_RUNTIME_STATUS_INTERNAL_ERROR;
+            }
+        } else {
+            return CHAOS_RUNTIME_STATUS_NOT_FOUND;
+        }
+    }
+
+    // ── Build ExecutionFrame ──
+    // V0 argument marshalling: argv contains pointers to raw argument values.
+    // For instance methods, object_instance is the 'this' pointer.
+    interpreter::ExecutionFrame frame;
+
+    if (object_instance != nullptr) {
+        frame.arguments.push_back(
+            interpreter::InterpreterValue::from_obj(object_instance));
+    }
+
+    for (CHAOS_IL2CPP_UINT32 ai = 0u; ai < argc; ++ai) {
+        if (argv != nullptr && argv[ai] != nullptr) {
+            // V0: default to int32 marshalling.
+            // EXTEND (V1+): read type from method signature for correct tag.
+            frame.arguments.push_back(
+                interpreter::InterpreterValue::from_i32(
+                    *static_cast<const CHAOS_IL2CPP_INT32*>(argv[ai])));
+        } else {
+            frame.arguments.push_back(interpreter::InterpreterValue::null_val());
+        }
+    }
+
+    // ── Execute ──
+    const interpreter::InterpreterVM vm = {};
+    interpreter::ExecutionResult result = vm.Execute(
+        *rt_method->ir_method_body, &frame);
+
+    // ── Exception handling ──
+    if (result.threw_exception) {
+        // EXTEND (V1+): convert result.exception_value to ExceptionHandle.
+        // V0: throw ManagedExceptionCarrier with null handle.
+        throw runtime_core::ManagedExceptionCarrier{nullptr};
+    }
+
+    // ── Return value extraction (V0: tag dispatch) ──
+    if (result.has_return_value && out_return_value != nullptr) {
+        switch (result.return_value.tag) {
+            case interpreter::ValueTag::Int32:
+                if (out_return_value_size >= sizeof(int32_t)) {
+                    CHAOS_IL2CPP_MEMCPY(out_return_value,
+                        &result.return_value.i32, sizeof(int32_t));
+                }
+                break;
+            case interpreter::ValueTag::Int64:
+                if (out_return_value_size >= sizeof(int64_t)) {
+                    CHAOS_IL2CPP_MEMCPY(out_return_value,
+                        &result.return_value.i64, sizeof(int64_t));
+                }
+                break;
+            case interpreter::ValueTag::Float32:
+                if (out_return_value_size >= sizeof(float)) {
+                    CHAOS_IL2CPP_MEMCPY(out_return_value,
+                        &result.return_value.f32, sizeof(float));
+                }
+                break;
+            case interpreter::ValueTag::Float64:
+                if (out_return_value_size >= sizeof(double)) {
+                    CHAOS_IL2CPP_MEMCPY(out_return_value,
+                        &result.return_value.f64, sizeof(double));
+                }
+                break;
+            case interpreter::ValueTag::ObjectRef:
+            case interpreter::ValueTag::Null:
+                if (out_return_value_size >= sizeof(void*)) {
+                    CHAOS_IL2CPP_MEMCPY(out_return_value,
+                        &result.return_value.obj, sizeof(void*));
+                }
+                break;
+            case interpreter::ValueTag::Struct:
+                // V0: struct return values not yet supported.
+                break;
+            default:
+                break;
+        }
+    }
+
+    // ── Update diagnostic counter ──
+    const_cast<RuntimeInstantiationBridgeV0*>(
+        chaos::il2cpp::runtime_instantiation::GetBridgeV0()
+    )->interpreted_method_call_count++;
+
+    return CHAOS_RUNTIME_STATUS_OK;
 }
 
 /* Process-wide bridge instance. */
@@ -198,6 +364,7 @@ const RuntimeInstantiationBridgeV0 g_bridge = {
     .resolve_or_instantiate_type        = ResolveOrInstantiateType,
     .resolve_or_instantiate_method      = ResolveOrInstantiateMethod,
     .unregister_module_generics         = UnregisterModuleGenerics,
+    .interpret_method_call              = InterpretMethodCall,
     .runtime_instantiation_count        = 0u,
     .interpreted_method_call_count      = 0u,
 };

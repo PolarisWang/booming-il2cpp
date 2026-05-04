@@ -753,6 +753,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 } else {
                     // No catch handler — propagate to caller.
                     result.threw_exception = true;
+                    result.exception_value = exception_obj;
                     return result;
                 }
                 continue;
