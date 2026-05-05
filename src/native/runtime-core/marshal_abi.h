@@ -77,6 +77,31 @@ struct MarshalPlatformAbiRootV1 {
     const VariantInteropAbiV1* variant_interop;
 };
 
+// ── Struct marshalling descriptor (for complex/nested structs) ──────────
+
+/// Field classification for descriptor-driven marshalling.
+enum class StructFieldKind : uint8_t {
+    Blittable,       ///< Fixed-size blittable field — direct memcpy.
+    StringField,     ///< System.String field — UTF-8 CoTaskMem marshalling.
+    NestedStruct,    ///< Nested value type — recursive descriptor.
+};
+
+/// Descriptor for a single struct field.
+struct StructFieldDescriptorV1 {
+    StructFieldKind  kind;
+    uint16_t         offset;          ///< Byte offset within the struct.
+    uint16_t         size;            ///< Field size in bytes (0 for StringField).
+    const struct StructMarshallingDescriptorV1* nested;  ///< For NestedStruct kind; nullptr otherwise.
+};
+
+/// Descriptor-driven struct marshalling plan.
+/// Emitted by codegen into .rodata; consumed by runtime marshallers.
+struct StructMarshallingDescriptorV1 {
+    uint16_t total_size;              ///< Total struct size in bytes.
+    uint16_t field_count;             ///< Number of fields in the descriptor.
+    StructFieldDescriptorV1 fields[]; ///< Variable-length field array.
+};
+
 struct TaskRuntimeKernelV1 {
     CHAOS_IL2CPP_UINT32 abi_version;
     CHAOS_IL2CPP_SIZE struct_size;

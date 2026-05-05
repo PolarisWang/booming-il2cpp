@@ -140,12 +140,12 @@ static inline uint32_t PatchData_TotalSize(const PatchDataHeader* hdr) {
 
 static inline const char* PatchData_String(const PatchDataHeader* hdr, uint32_t offset) {
     if (offset == 0) return "";
-    return (const char*)hdr + offset;
+    return (const char*)hdr + hdr->string_heap_offset + offset;
 }
 
 static inline const void* PatchData_Blob(const PatchDataHeader* hdr, uint32_t offset) {
     if (offset == 0) return NULL;
-    return (const uint8_t*)hdr + offset;
+    return (const uint8_t*)hdr + hdr->blob_heap_offset + offset;
 }
 
 static inline const void* PatchData_Body(const PatchDataHeader* hdr, uint32_t offset) {
