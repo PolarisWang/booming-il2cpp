@@ -235,6 +235,7 @@ public sealed partial class LoaderStage
             IsInterface = typeDefinition.Attributes.HasFlag(TypeAttributes.Interface),
             IsValueType = ResolveIsValueType(metadataReader, typeResolver, typeDefinition),
             IsSealed = typeDefinition.Attributes.HasFlag(TypeAttributes.Sealed),
+            IsComImport = typeDefinition.Attributes.HasFlag(TypeAttributes.Import),
             BaseTypeSubjectId = ResolveBaseTypeSubjectId(metadataReader, typeResolver, typeDefinition),
             ImplementedInterfaceSubjectIds = ResolveImplementedInterfaceSubjectIds(metadataReader, typeResolver, typeDefinition),
             IsPreserved = HasPreserveAttribute(metadataReader, typeHandle),

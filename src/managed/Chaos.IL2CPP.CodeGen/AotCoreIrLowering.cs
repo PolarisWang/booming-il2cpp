@@ -86,6 +86,26 @@ public sealed class AotCoreIrLowering
 
                 var directCallTarget = ResolveDirectCallTarget(typedInstruction, managedMethods, targetSymbols);
 
+                var targetReference = ResolveTargetReference(
+                    managedInstruction,
+                    typedInstruction,
+                    managedTypes,
+                    managedFields,
+                    managedMethods,
+                    genericDemandLookup);
+
+                // Detect ComImport interface methods → COM vtable dispatch
+                int? comVtableSlot = null;
+                var dispatchKind = typedInstruction.DispatchKindCode;
+                if (targetReference?.IsComImport == true &&
+                    (string.Equals(typedInstruction.Op, "callvirt", StringComparison.Ordinal) ||
+                     string.Equals(typedInstruction.Op, "call", StringComparison.Ordinal)))
+                {
+                    dispatchKind = HybridDispatchKind.ComVtable;
+                    comVtableSlot = ComputeComVtableSlot(
+                        typedInstruction, managedMethods, targetReference);
+                }
+
                 instructions.Add(new AotCoreIrInstructionArtifact
                 {
                     Op = typedInstruction.Op,
@@ -95,18 +115,13 @@ public sealed class AotCoreIrLowering
                     Callee = typedInstruction.Callee,
                     CallSiteSignature = typedInstruction.CallSiteSignature,
                     Reference = managedInstruction.Reference,
-                    TargetReference = ResolveTargetReference(
-                        managedInstruction,
-                        typedInstruction,
-                        managedTypes,
-                        managedFields,
-                        managedMethods,
-                        genericDemandLookup),
+                    TargetReference = targetReference,
                     RuntimeServiceKind = ResolveRuntimeServiceKind(typedInstruction),
                     TargetSymbol = directCallTarget.TargetSymbol,
                     TargetParameterCount = directCallTarget.TargetParameterCount,
                     TargetReturnType = directCallTarget.TargetReturnType,
-                    DispatchKindCode = typedInstruction.DispatchKindCode,
+                    DispatchKindCode = dispatchKind,
+                    ComVtableSlot = comVtableSlot,
                 });
             }
         }
@@ -142,6 +157,7 @@ public sealed class AotCoreIrLowering
             ExceptionRegions = ResolveExceptionRegions(method.Body.ExceptionRegions),
             Instructions = instructions,
             IsPInvoke = method.Import is not null,
+            IsUnmanagedCallersOnly = method.IsUnmanagedCallersOnly,
             ImportModuleName = method.Import?.ModuleName,
             ImportEntryPointName = method.Import?.EntryPointName,
             StringParameterIndices = method.Import is not null
@@ -735,6 +751,7 @@ public sealed class AotCoreIrLowering
             GenericDiagnostic = genericDiagnostic,
             TypeShape = ResolveTypeShape(managedType, subjectId),
             IsSealed = managedType?.IsSealed ?? false,
+            IsComImport = managedType?.IsComImport ?? false,
             ArrayElementSubjectId = ResolveArrayElementSubjectId(subjectId),
             ArrayElementTypeShape = ResolveArrayElementTypeShape(managedTypes, ResolveArrayElementSubjectId(subjectId)),
             ArrayElementBaseTypeSubjectId = arrayElementType?.BaseTypeSubjectId,
@@ -1208,4 +1225,44 @@ public sealed class AotCoreIrLowering
         stringFieldSubjectIds = null;
         return null;
     }
+
+    /// <summary>
+    /// Compute the COM vtable slot index for a method call on a ComImport interface.
+    /// Slot = 3 (IUnknown reserved) + method ordinal within the interface's method list.
+    /// The method ordinal is determined by MetadataToken order within the declaring type.
+    /// </summary>
+    private static int? ComputeComVtableSlot(
+        TypedIlInstructionArtifact typedInstruction,
+        IReadOnlyDictionary<string, ManagedMethodModel> managedMethods,
+        AotCoreIrReferenceArtifact targetReference)
+    {
+        var declaringTypeId = targetReference.DeclaringTypeSubjectId;
+        if (string.IsNullOrEmpty(declaringTypeId))
+            return null;
+
+        var calleeSubjectId = typedInstruction.Callee;
+        if (string.IsNullOrEmpty(calleeSubjectId))
+            return null;
+
+        // Filter all methods belonging to the declaring interface, ordered by metadata token.
+        var interfaceMethods = managedMethods.Values
+            .Where(m => string.Equals(m.DeclaringTypeSubjectId, declaringTypeId, StringComparison.Ordinal))
+            .OrderBy(m => m.MetadataToken)
+            .ToList();
+
+        if (interfaceMethods.Count == 0)
+            return null;
+
+        // Find the index of the target method in the ordered list.
+        for (var i = 0; i < interfaceMethods.Count; i++)
+        {
+            if (string.Equals(interfaceMethods[i].SubjectId, calleeSubjectId, StringComparison.Ordinal))
+            {
+                return 3 + i; // 3 IUnknown reserved slots + method ordinal
+            }
+        }
+
+        return null;
+    }
+
 }

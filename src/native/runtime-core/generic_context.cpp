@@ -663,4 +663,39 @@ CHAOS_IL2CPP_UINT32 GetRegisteredInstantiationCount() {
     return count;
 }
 
+// ═════════════════════════════════════════════════════════════
+// Reverse lookup: get type arguments for a closed generic type
+// ═════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_UINT32 GetClosedTypeGenericArgs(
+    TypeInfoHandle       closed_type,
+    TypeInfoHandle*      out_handles,
+    CHAOS_IL2CPP_UINT32 max_count)
+{
+    if (closed_type == 0)
+        return 0;
+
+    auto& registry = GetRegistry();
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
+
+    // Linear scan across all open-type buckets for a closed_type match.
+    for (const auto& [open_type, type_entry] : registry.by_open_type) {
+        (void)open_type;
+        for (const auto& entry : type_entry.closed_types) {
+            if (entry.closed_type == closed_type) {
+                uint32_t count = static_cast<uint32_t>(entry.type_args.size());
+                if (out_handles != nullptr && max_count > 0) {
+                    uint32_t copy_count = (count < max_count) ? count : max_count;
+                    for (uint32_t i = 0; i < copy_count; i++) {
+                        out_handles[i] = entry.type_args[i];
+                    }
+                }
+                return count;
+            }
+        }
+    }
+
+    return 0;  // not found
+}
+
 }  // namespace chaos::il2cpp::generic_context

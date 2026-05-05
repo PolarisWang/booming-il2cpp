@@ -1,213 +1,297 @@
-# Roadmap: 传统 IL2CPP 全量翻译（方案 C — 混合策略）
+# Roadmap: 传统 IL2CPP 全量翻译 — chaos-il2cpp 模式
 
 ## 目标
 
-将 managed DLL（System.Private.CoreLib 等）的 IL bytecode 全量翻译为语义等价的 C++ 代码，替代现有的 extern stub (`return 0`) 方案。实现真正的 IL→C++ 全量翻译，在此之上重建 Fact、Benchmark、HotUpdate 验证。
-
-## 当前资产
-
-| 资产 | 状态 | 位置 |
-|------|------|------|
-| PE 文件加载 & IL 字节码读取 | ✅ | `LoaderStage`, `InstructionDecoding.cs` |
-| 跨程序集可达性分析 | ✅ | `LinkerStage.Reachability.cs` |
-| IL→IR lowering（208 opcodes） | ✅ | `il_to_ir_lowerer.cpp` |
-| IR→C++ emission | ✅ | `NativeAotLoweringPlanner.*.cs` |
-
-## 当前缺口
-
-```
-Managed DLL (System.Private.CoreLib)
-  │
-  ▼
-LoaderStage (已加载全部 method body)       ✅
-  │
-  ▼
-LinkerStage (已追踪全部 reachable method)   ✅
-  │
-  ▼
-Driver convert → aot-core-ir.json  ❌ 只输出 entrypoint 的 IR
-  │                                   不包含 CoreLib 方法
-  ▼
-emit-native-aot → extern stub           ❌ 没拿到 CoreLib 的 IL
+```bash
+chaos-il2cpp convert-to-cpp \
+  --assembly System.Private.CoreLib.dll \
+  --output il2cpp_dist/ \
+  --additional-assembly-dir references/
 ```
 
-## 架构：三层混合模型（方案 C）
+直接输出 `System.Private.CoreLib.generated.cpp`，完整 IL→C++ 翻译。
 
-```
-┌─────────────────────────────────────────────────────────┐
-│ Layer 3: Cold Path (Interpreter)                        │
-│ 从未被静态 reachability 触及的方法                       │
-│ 保留 IL 字节码，运行时解释执行                            │
-│ 反射调用 / 动态生成 / 边界情况                            │
-├─────────────────────────────────────────────────────────┤
-│ Layer 2: Warm Path (Dispatch AOT) — 本次 roadmap 主要工作│
-│   System.Private.CoreLib.dll → corelib.generated.cpp     │
-│   System.Linq.dll            → linq.generated.cpp        │
-│   ... 200+ reachable DLLs    → *.generated.cpp           │
-│   跨模块调用 → dispatch table (已有)                     │
-│   每 assembly 独立 C++ translation unit                  │
-├─────────────────────────────────────────────────────────┤
-│ Layer 1: Hot Path (Inlined AOT) — 后续优化              │
-│   PGO / profiling 驱动，选择高频方法内联到调用方          │
-│   消除 dispatch table 间接调用开销                        │
-└─────────────────────────────────────────────────────────┘
-```
+用法与 Unity IL2CPP 一致。`chaos-il2cpp.exe` 是已有的 Driver 项目，新增 `convert-to-cpp` 命令。
 
 ---
 
-## Phase 1：全量 IR 输出（开启全闭包翻译）
-
-### 目标
-
-让 `chaos-il2cpp convert` 输出的 `aot-core-ir.json` 包含所有 reachable method 的 IR，而不仅仅是 entrypoint 的 IR。
-
-### 改动
-
-| 文件 | 改动 |
-|------|------|
-| `DriverEntry.cs — RunConvert()` | 传递 `FullAssemblyClosure = true` 给 pipeline |
-| `PipelinePlan.cs` | 确保 `ManagedClosureRequest.FullAssemblyClosure` 被 LinkerStage 消费 |
-| `LinkerStage.Reachability.cs` | 现有逻辑已支持：当 `FullAssemblyClosure=true` 时包含所有方法 |
-| `CodeGenStage.cs` | 确保 `TypedIlIrArtifact` 包含所有 reachable method 的 IL body |
-
-### 验证
+## 具体用法
 
 ```bash
-# 跑 convert 后检查 IR 中的 CoreLib 方法数
-python -c "
-import json
-ir = json.load(open('.../aot-core-ir.json'))
-splib = [m for m in ir['methods'] if 'System.Private.CoreLib' in m['subjectId']]
-print(f'CoreLib methods in IR: {len(splib)}')  # 期望: >0
-"
+# 编译单个 assembly
+chaos-il2cpp convert-to-cpp \
+  --assembly System.Private.CoreLib.dll \
+  --output build/native/
+  --additional-assembly-dir packages/
+  --additional-assembly-dir lib/
+
+# 编译多个 assembly（创建 multi-assembly 解决方案）
+chaos-il2cpp convert-to-cpp \
+  --assembly App.dll \
+  --assembly System.Linq.dll \
+  --output build/native/
+
+# 输出内容
+build/native/
+  System.Private.CoreLib.generated.cpp    ← 所有 methods 的 lowering
+  System.Private.CoreLib.types.h          ← TypeInfo 等类型元数据
+  System.Linq.generated.cpp
+  System.Linq.types.h
+  ...
 ```
 
-### 风险
+### 入口代码生成
 
-- **IR 体积暴增**：19 entrypoint methods → ~2000+ reachable methods
-- **convert 内存占用增加**：所有 reachable method 的 IL body 需要加载到内存
-- **trim 步骤需要保留 CoreLib 方法**：当前 trim 按 entry prefix 过滤，需要改为也保留所有被引用的方法
+```bash
+# 生成入口点（Foundation DLL 验证用的小桩）
+chaos-il2cpp convert-to-cpp \
+  --assembly ConvertCharNativeEntry.dll \
+  --entry-point Class::Run \
+  --output il2cpp_dist/genuine/
+```
+
+但这与 Foundation DLL 场景无关——上面已产出全量翻译的 C++ 文件。Native exe 用 `generated.cpp` 直接链接。
 
 ---
 
-## Phase 2：Per-Assembly C++ Emission
-
-### 目标
-
-按程序集为单位生成独立 C++ 文件，每个文件包含该 assembly 中所有 reachable method 的 lowered C++ 代码。
-
-### 改动
-
-| 文件 | 改动 |
-|------|------|
-| `NativeAotLoweringPlanner.InvocationPlanning.cs` | 修改 planner 遍历所有 reachable method（不限于 entry assembly） |
-| `NativeAotLoweringPlanner.MethodEmission.cs` | 修复 `CanEmitMethodBody` 逻辑，确保含指令的方法均被 emit |
-| `NativeAotEmitter.cs` | 改为 `emit-native-aot` 输出多文件：每 assembly 一个 `.generated.cpp` |
-| `ExternalRuntimeHelpers.InvocationAbi.cs` | 将跨程序集 `call` 解析为 dispatch table 调用，而非 extern stub |
-
-### Dispatch Table 调用（替换 extern stub）
+## 数据流
 
 ```
-当前:  extern stub → return 0
-目标:  dispatch_table::Invoke("Math.Abs", args) → real implementation
-```
-
-当两个 assembly 都已翻译：
-```
-A.dll → call B.dll::Foo()
+input.dll (System.Private.CoreLib)
   │
   ▼
-生成:  #include "B.generated.cpp" 中的符号
-       直接 C++ 函数调用 B_generated_Foo()
+LoaderStage.LoadMultiple()
+  │ 读取 PE → 所有 type / method / field / IL body
+  │ 加载所有依赖 assembly 的元数据（但不翻译）
+  │
+  ▼
+SemanticWorldStage.Build()
+  │ 构建完整语义模型：类型层级、方法签名、泛型参数
+  │
+  ▼
+FullAssemblyLinker (新, 替代 LinkerStage.Reachability)
+  │ 不做 reachability 裁剪 — 保留 assembly 中所有方法
+  │ 只标记 InternalCall / PInvoke（需要 runtime bridge）
+  │
+  ▼
+MetadataWriterStage.Write()
+  │ 为所有 type 生成完整 metadata graph
+  │
+  ▼
+FullAssemblyEmitter (新, 替代 CodeGenStage)
+  │ 按 assembly 输出：
+  │   *.generated.cpp    ← 每个 method 的 IL→C++ lowering
+  │   *.types.h          ← TypeInfo + type_flags + type_names
+  │   *.metadata.cpp     ← GC stack maps + exception tables
+  │   *.module.cpp       ← ModuleDescriptor + dispatch table
+  │
+  ▼
+System.Private.CoreLib.cpp  (约 50K 行 C++)
+  + System.Private.CoreLib.types.h
+  + System.Private.CoreLib.metadata.cpp
+  + System.Private.CoreLib.module.cpp
 ```
 
-### 文件结构
+### 跨程序集调用
 
 ```
-il2cpp_dist/
-  genuine/
-    generated/
-      native-aot.generated.cpp          (main entrypoint dispatch)
-      System.Private.CoreLib.cpp        (CoreLib methods)
-      System.Linq.cpp                   (Linq methods)
-      ...
-    module-registry.cfa.json            (per-module coverage)
+// 当前: 全 extern stub → return 0
+
+// 目标: 直接 extern "C" 声明
+// B.dll 调用 A.dll::Foo()
+// B.generated.cpp 中包含:
+extern "C" CHAOS_IL2CPP_INT32 A_dll_Foo(CHAOS_IL2CPP_INT32 x);
+// 调用时直接使用
+int result = A_dll_Foo(42);
+
+// A.generated.cpp 中定义了:
+extern "C" CHAOS_IL2CPP_INT32 A_dll_Foo(CHAOS_IL2CPP_INT32 x) {
+    // IL lowering 代码
+    return x * 2;
+}
 ```
 
-### 风险
-
-- **C++ 编译时间**：200 files × 30s each = ~100 min (可并行)
-- **链接时间**：200 .obj → 1 executable
-- **跨模块 ABI 一致性**：需要确保函数签名在不同 .cpp 间一致
+跨程序集调用不需要 dispatch table——直接通过 `extern "C"` 符号链接。Linker 在链接阶段解析所有跨模块符号。
 
 ---
 
-## Phase 3：Metadata + GC + VTable 全覆盖
+## 分层策略
 
-### 目标
+```
+Layer 1: il2cpp.exe 直接编译（本次 roadmap 全部）
+  ├── full assembly → 单个 .generated.cpp
+  ├── self-contained: 所有 IL 被翻译，无 extern stub
+  └── InternalCall / PInvoke → 保留 runtime bridge
 
-为所有 translated types 生成完整的类型元数据、GC 栈映射、虚表，使 native exe 能正确运行翻译后的代码。
+Layer 2: 多程序集联合编译（后续）
+  ├── il2cpp.exe --link A.dll B.dll
+  ├── 跨模块 extern "C" 解析在编译时完成
+  └── 支持 200+ DLL 联合产出
 
-### 改动
-
-| 领域 | 当前状态 | 目标 |
-|------|---------|------|
-| **TypeInfo** | 只有 entry types 有 | 所有 reachable types 都有 |
-| **GC stack maps** | skeleton-only | 每个 method 有精确的 GC 根描述 |
-| **VTable** | skeleton-only | 所有 virtual 方法有完整 vtable |
-| **Exception handling** | try/catch lowering 已有 | 需要扩展到所有 translated methods |
+Layer 3: Hot Path Inlining（后续优化）
+  ├── PGO 数据驱动
+  └── 高频路径跨模块内联
+```
 
 ---
 
-## Phase 4：Native Correct 全绿
+## Phase 1：`chaos-il2cpp.exe convert-to-cpp` 实现
 
-### 目标
+不需新建项目。`chaos-il2cpp.exe` 就是已有的 `Chaos.IL2CPP.Driver`。新增一个命令模式。
 
-`fact_l2_verifier.py` 对每个 family 的验证全部通过（checksum 匹配）。
+### DriverEntry.cs — 新增命令
 
-### 改动
+```csharp
+// DriverEntry.cs 的 Main() 中增加:
+"convert-to-cpp" => RunConvertToCpp(args[1..]),
 
-| 文件 | 改动 |
-|------|------|
-| `fact_l2_verifier.py` | 更新编译流程：编译多文件 IL2CPP output |
-| `native_verify_main.cpp` | 更新 include 路径 |
-| `dashboard` | Native Correct 列显示实际通过率 |
+// 新增方法:
+private static int RunConvertToCpp(string[] args)
+{
+    var config = ParseConvertToCppArgs(args);
+    // config.Assembly → 目标程序集
+    // config.OutputDir → 输出目录
+    // config.AdditionalAssemblyDirs → 依赖搜索路径
+    
+    // 1. 加载 assembly + 所有依赖
+    var loader = new LoaderStage();
+    var world = loader.LoadAssembly(
+        config.Assembly, config.AdditionalAssemblyDirs);
+    
+    // 2. 构建全量语义模型（无 entrypoint 约束）
+    var semantic = new SemanticWorldStage();
+    var fullWorld = semantic.BuildFull(world);
+    
+    // 3. 标记 InternalCall / PInvoke
+    var linker = new FullAssemblyLinker();
+    var linked = linker.Link(fullWorld);
+    
+    // 4. 生成 C++
+    var emitter = new FullAssemblyEmitter();
+    emitter.Emit(linked, config.OutputDir);
+    
+    return 0;
+}
+```
 
-### Phase 4 的时间线
+### 新增文件
 
-在 Phase 1-3 完成后，**每个 family 逐个验证**。从 simplest family（如 `convert-char`）开始，逐步扩展到全部 33 families。
+```
+src/managed/Chaos.IL2CPP.Driver/
+  ConvertToCpp/                              ← 新建目录
+    ConvertToCppConfig.cs                    ← 参数模型
+    ConvertToCppHandler.cs                   ← 入口处理
+    FullAssemblyEmitter.cs                   ← 遍历 method → lowering
+    FullAssemblyLinker.cs                    ← 标记 InternalCall/PInvoke
+    AssemblyCppWriter.cs                     ← 组织 C++ 输出
+    CrossModuleResolver.cs                   ← extern "C" 符号
+    
+  DriverEntry.cs                             ← 修改: 增加 convert-to-cpp 命令
+```
+
+### 复用的现有组件
+
+| 组件 | 来源 | 说明 |
+|------|------|------|
+| `LoaderStage` | `Chaos.IL2CPP.Loader` | 读取 PE → IL body，直接复用 |
+| `SemanticWorldStage` | `Chaos.IL2CPP.Pipeline` | 需增加 `BuildFull()` 无 entrypoint 模式 |
+| `ManagedMethodModel.Body` | `Chaos.IL2CPP.Contracts` | 已有 decoded IL instructions |
+| `NativeAotLoweringPlanner.*` | `Chaos.IL2CPP.CodeGen` | 复用 lowering 逻辑，修改 planner |
+| `AotCoreIrMethodArtifact` | `Chaos.IL2CPP.Contracts` | 现有 IR 模型 |
 
 ---
 
-## 阶段依赖
+## Phase 2：Foundation DLL 验证接入
+
+### batch_native_aot_runner.py 改造
+
+```python
+# 当前: entrypoint → convert → trim → emit 四步
+# 目标: chaos-il2cpp convert-to-cpp 直接翻译
+def run_family(family_slug):
+    dll_path = build_entrypoint(family_slug)
+    
+    subprocess.run([
+        "dotnet", "run", "--project", "src/managed/Chaos.IL2CPP.Driver",
+        "--", "convert-to-cpp",
+        "--assembly", dll_path,
+        "--output", f"il2cpp_dist/genuine/",
+    ])
+    
+    # 产出: il2cpp_dist/genuine/<entry>.generated.cpp
+    #       + il2cpp_dist/genuine/System.Private.CoreLib.generated.cpp
+    #       + native-reference.runtime-skeleton.coverage.json
+```
+
+---
+
+## Phase 3：多程序集联合编译（200+ DLL）
+
+```bash
+dotnet run --project src/managed/Chaos.IL2CPP.Driver -- convert-to-cpp \
+  --assembly System.Private.CoreLib \
+  --assembly System.Linq \
+  --output il2cpp_dist/full/
+```
+
+---
+
+## 文件改动清单
+
+### Phase 1（核心）
+
+| 文件 | 类型 | 改动 |
+|------|------|------|
+| `DriverEntry.cs` | 修改 | Main() 增加 `convert-to-cpp` 命令 |
+| `DriverEntry/ConvertToCppConfig.cs` | **新建** | --assembly / --output 参数模型 |
+| `DriverEntry/ConvertToCppHandler.cs` | **新建** | 命令主入口 |
+| `DriverEntry/FullAssemblyEmitter.cs` | **新建** | 遍历所有 method → lowering → 写 .cpp |
+| `DriverEntry/AssemblyCppWriter.cs` | **新建** | 组织多文件 C++ 输出 |
+| `DriverEntry/CrossModuleResolver.cs` | **新建** | extern "C" 跨模块符号 |
+| `DriverEntry/InternalCallHandler.cs` | **新建** | InternalCall → runtime bridge |
+| `SemanticWorldStage.cs` | 修改 | 增加 `BuildFull()` —— 无 entrypoint 模式 |
+| `NativeAotLoweringPlanner.*.cs` | 修改 | Planner 适配全量方法集（不限于 entry） |
+
+### Phase 2（验证集成）
+
+| 文件 | 类型 | 改动 |
+|------|------|------|
+| `batch_native_aot_runner.py` | 修改 | 调用 `convert-to-cpp` 替代三步流程 |
+| `native_compile_runner.py` | 修改 | 编译多文件 C++ |
+| `fact_l2_verifier.py` | 修改 | 适配多文件编译 |
+| `native_verify_main.cpp` | 修改 | include 新路径 |
+
+---
+
+## 依赖关系
 
 ```
-Phase 1: 全量 IR 输出   ← 无前置依赖
-   │
-   ▼
-Phase 2: Per-Assembly C++  ← Phase 1 完成后
-   │
-   ▼
-Phase 3: Metadata+GC+VTable  ← 可以与 Phase 2 部分并行
-   │
-   ▼
-Phase 4: Native Correct 全绿  ← Phase 2+3 完成后
+Phase 1: il2cpp.exe 核心（~7 个新文件 + ~5 个修改）
+    │
+    ▼
+Phase 2: 验证接入（4 个文件修改）
+    │
+    ▼
+Phase 3: 多程序集联合（按需，200+ DLL）
 ```
+
+---
 
 ## 风险评估
 
-| 风险 | 影响 | 缓解 |
-|------|------|------|
-| IR 暴增导致 OOM | 高 | 增量输出，batch 处理 method groups |
-| C++ 编译时间过长 | 中 | 并行编译 200+ .cpp，增量编译 |
-| 跨模块 ABI 不一致 | 高 | 统一 `AbiManifestV0` 校验，编译期 assert |
-| GC 栈映射不准导致 crash | 高 | 逐步验证每个 family，Native Correct 门 |
-| Dispatch table 性能开销 | 低 | Phase 4 后可通过 Hot Path 内联优化 |
+| 风险 | 概率 | 影响 | 缓解 |
+|------|------|------|------|
+| InternalCall 列表不全 | 中 | 运行时 crash | Phase 1 只标记已知的，运行时 interpreter 兜底 |
+| lowering 不完备 | 中 | 生成代码编译失败 | Phase 1 验证 convert-char 等简单 family |
+| C++ 文件过大 | 中 | 编译 OOM | Phase 1 验证单 assembly，后续按 namespace 分文件 |
+| 跨模块符号冲突 | 低 | 链接失败 | `extern "C"` 用名称修饰避免冲突 |
+
+---
 
 ## 优先级评估
 
-| 优先级 | 评估 |
-|--------|------|
-| P1 性能 | 方案 C 的 Layer 2 (Dispatch AOT) 性能可接受；Layer 1 (Hot Path Inlining) 是后续优化 |
-| P2 架构 | Per-assembly translation unit 清晰可维护，与 managed assembly 结构 1:1 映射 |
-| P3 热更新 | Dispatch table 原生支持 patch 注入；Layer 3 (Interpreter) 无缝加载 patch IL |
+| 优先级 | 方案满足情况 |
+|--------|------------|
+| **P1 性能最优** | Full assembly lowering 无分发开销；后续 L1 内联补性能 |
+| **P2 架构完美** | `il2cpp.exe` 1:1 对应传统 IL2CPP 工具链，架构清晰 |
+| **P3 热更新适配** | 生成的 C++ 通过 dispatch table 注册（复用），patch 取代原入口 |

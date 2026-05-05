@@ -14,6 +14,10 @@ public sealed class PatchDataExtractor
 {
     private const uint Magic = 0x50415854; // "PADT"
 
+    // Track string insertion order for correct offset computation.
+    // Dictionary<>.Last() is unreliable (Dictionary does not guarantee ordering).
+    private readonly List<(string Key, uint Offset)> _insertOrder = new();
+
     public void Extract(string dllPath, string outputPath)
     {
         using var stream = File.OpenRead(dllPath);
@@ -24,14 +28,25 @@ public sealed class PatchDataExtractor
         var strings = new Dictionary<string, uint>(StringComparer.Ordinal);
         var blobHandles = new List<BlobHandle>();
 
+        // ── String offset computation ──────────────────────────────
+        // We use _insertOrder to track insertion order so that each new
+        // string is placed immediately after the most recently added one.
+        // Dictionary<>.Last() is NOT reliable for this — Dictionary does
+        // not guarantee ordering.
+        _insertOrder.Clear();
         uint AllocString(string s)
         {
             if (string.IsNullOrEmpty(s)) return 0;
             if (strings.TryGetValue(s, out var o)) return o;
-            o = (uint)(strings.Count > 0
-                ? strings.Values.Max() + (uint)Encoding.UTF8.GetByteCount(strings.Last().Key) + 1
-                : 1);
+            uint baseOff = 1;
+            if (_insertOrder.Count > 0)
+            {
+                var (lastKey, lastOff) = _insertOrder[^1];
+                baseOff = lastOff + (uint)Encoding.UTF8.GetByteCount(lastKey) + 1;
+            }
+            o = baseOff;
             strings[s] = o;
+            _insertOrder.Add((s, o));
             return o;
         }
 

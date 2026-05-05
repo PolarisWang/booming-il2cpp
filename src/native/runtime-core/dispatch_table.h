@@ -81,12 +81,25 @@ NameIndexRegistry& GetNameIndexRegistry() noexcept;
 // register a module's name index and dispatch table.
 void RegisterModuleNameIndex(const NameIndexModuleV0* module) noexcept;
 
+/// Register an array of function pointers for <see cref="System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"/>
+/// methods. Each entry is a C-ABI function pointer that native code can call directly.
+/// Called by codegen-generated static initializers during module load.
+/// `wrappers` must remain valid for process lifetime (points into .rodata).
+void RegisterReversePInvokeWrappers(void* const* wrappers, uint32_t count) noexcept;
+
 // ── Dispatch helpers ──────────────────────────────────────────────────
 
 // RuntimeDispatchLookup: given an AOT metadata token, return the
 // corresponding dispatch entry (or nullptr if not found).
 inline DispatchEntryV0* RuntimeDispatchLookup(uint32_t token) noexcept {
     return GetNameIndexRegistry().GetDispatchEntry(token);
+}
+
+// RuntimeDispatchLookupBySlot: lookup dispatch entry by module index and slot.
+// Used by the test harness to verify D3 dispatch state without knowing the
+// AOT token (slot indices are deterministic per MethodN ordering).
+inline DispatchEntryV0* RuntimeDispatchLookupBySlot(size_t module_index, uint32_t slot) noexcept {
+    return GetNameIndexRegistry().GetDispatchEntryBySlot(module_index, slot);
 }
 
 // CallViaSlot: invoke a method through the dispatch table.  If the entry

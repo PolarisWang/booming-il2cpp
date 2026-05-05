@@ -17,6 +17,7 @@
 
 // ── Type-only sub-headers (each declares types in its own namespace) ──
 #include "marshal_abi.h"
+#include "com_abi.h"
 #include "runtime_capability.h"
 #include "numerics_carriers.h"
 #include "string_table.h"
@@ -66,6 +67,35 @@ enum class RuntimeMode {
 const RuntimeAbiV0* GetRuntimeAbiV0();
 const MarshalPlatformAbiRootV1* GetMarshalPlatformAbiRootV1();
 const TaskRuntimeKernelV1* GetTaskRuntimeKernelV1();
+
+// ── Delegate thunk registry (P/Invoke delegate marshalling) ──
+/// Called at startup (from generated code) to register a pre-compiled
+/// native thunk function for a delegate type.  target_slot is a module-level
+/// static variable that the thunk reads to get the current delegate instance.
+void RegisterDelegateThunk(const char* type_id, void* thunk_fn, CHAOS_IL2CPP_INTPTR* target_slot);
+
+/// Look up a thunk function pointer by delegate type ID.
+/// Returns nullptr if the type was not registered at startup.
+void* FindDelegateThunk(const char* type_id);
+
+/// Runtime helper for Marshal.GetFunctionPointerForDelegate.
+/// Stores the delegate in the per-type target slot and returns the thunk address.
+/// Returns nullptr if the delegate type has no registered thunk.
+void* MarshalGetFunctionPointerForDelegateImpl(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    CHAOS_IL2CPP_INTPTR delegate_obj,
+    const char* delegate_type_id);
+
+/// Runtime helper for Marshal.GetDelegateForFunctionPointer.
+/// Creates a wrapper delegate that forwards to the native function pointer.
+/// V1: returns nullptr (not yet fully implemented — use GetFunctionPointerForDelegate
+/// for the reverse direction when possible).
+void* MarshalGetDelegateForFunctionPointerImpl(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    CHAOS_IL2CPP_INTPTR native_fn_ptr,
+    const char* delegate_type_id);
 
 }  // namespace chaos::il2cpp::runtime_core
 

@@ -122,6 +122,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// Collected method table entries for initialization code generation.
     /// </summary>
     private readonly List<(uint Index, string NativeSymbol)> _methodTableEntries = new();
+    private readonly List<(string SubjectId, string NativeSymbol)> _reversePInvokeEntries = new();
 
     /// <summary>
     /// Maps method native symbol → index in reachableMethods (used for ABI manifest origin).
@@ -222,10 +223,19 @@ public sealed partial class NativeAotLoweringPlanner
 
         var methodDeclarations = BuildMethodDeclarations(reachableMethods);
         var methods = reachableMethods
-            .Select(method => new NativeAotMethodTemplateModel
+            .Select(method =>
             {
-                SubjectId = method.SubjectId,
-                MethodSource = BuildMethodSource(method),
+                // Collect UnmanagedCallersOnly methods for reverse P/Invoke registration.
+                if (method.IsUnmanagedCallersOnly)
+                {
+                    _reversePInvokeEntries.Add((method.SubjectId, method.NativeSymbol));
+                }
+
+                return new NativeAotMethodTemplateModel
+                {
+                    SubjectId = method.SubjectId,
+                    MethodSource = BuildMethodSource(method),
+                };
             })
             .ToList();
         var entryBridgeArguments = BuildEntryBridgeArguments(entryMethod);

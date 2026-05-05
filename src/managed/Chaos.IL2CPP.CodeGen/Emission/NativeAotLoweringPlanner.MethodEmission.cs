@@ -329,6 +329,27 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 
+		// Pre-call: marshal string fields in non-blittable struct copies to native UTF-8.
+		if (hasSimpleNonBlittableStructParams)
+		{
+			int fieldGroupIdx = 0;
+			foreach (int paramIdx in method.SimpleNonBlittableStructParameterIndices!)
+			{
+				var stringFields = method.SimpleNonBlittableStructStringFieldSubjectIds![fieldGroupIdx];
+				foreach (string fieldSubjectId in stringFields)
+				{
+					string fieldMember = GetNativeFieldMemberName(fieldSubjectId);
+					builder.AppendLine($"    if (chaos_struct_copy_{paramIdx}.{fieldMember} != 0)");
+					builder.AppendLine("    {");
+					builder.AppendLine($"        auto* chaos_marshal_str_ = ::chaos::il2cpp::runtime_core::MarshalStringToCoTaskMemUtf8(");
+					builder.AppendLine($"            chaos_rs_, chaos_ts_, reinterpret_cast<void*>(chaos_struct_copy_{paramIdx}.{fieldMember}));");
+					builder.AppendLine($"        chaos_struct_copy_{paramIdx}.{fieldMember} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_marshal_str_);");
+					builder.AppendLine("    }");
+				}
+				fieldGroupIdx++;
+			}
+		}
+
 		// Native call — four code paths:
 		//   1. Pure blittable (no marshalling): direct call-and-return, early exit.
 		//   2. Blittable struct on non-void return: capture result, cleanup, return.
@@ -378,21 +399,21 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 
-			// Free CoTaskMem buffers in non-blittable struct copies.
-			if (hasSimpleNonBlittableStructParams)
+		// Free CoTaskMem buffers in non-blittable struct copies.
+		if (hasSimpleNonBlittableStructParams)
+		{
+			int fieldGroupIdx = 0;
+			foreach (int paramIdx in method.SimpleNonBlittableStructParameterIndices!)
 			{
-				int fieldGroupIdx = 0;
-				foreach (int paramIdx in method.SimpleNonBlittableStructParameterIndices!)
+				var stringFields = method.SimpleNonBlittableStructStringFieldSubjectIds![fieldGroupIdx];
+				foreach (string fieldSubjectId in stringFields)
 				{
-					var stringFields = method.SimpleNonBlittableStructStringFieldSubjectIds![fieldGroupIdx];
-					foreach (string fieldSubjectId in stringFields)
-					{
-						string fieldMember = GetNativeFieldMemberName(fieldSubjectId);
-						builder.AppendLine($"    if (chaos_struct_copy_{paramIdx}.{fieldMember} != 0)");
-						builder.AppendLine("    {");
-						builder.AppendLine($"        ::chaos::il2cpp::runtime_core::MarshalFreeCoTaskMem(");
-						builder.AppendLine($"            chaos_rs_, chaos_struct_copy_{paramIdx}.{fieldMember});");
-						builder.AppendLine("    }");
+					string fieldMember = GetNativeFieldMemberName(fieldSubjectId);
+					builder.AppendLine($"    if (chaos_struct_copy_{paramIdx}.{fieldMember} != 0)");
+					builder.AppendLine("    {");
+					builder.AppendLine($"        ::chaos::il2cpp::runtime_core::MarshalFreeCoTaskMem(");
+					builder.AppendLine($"            chaos_rs_, chaos_struct_copy_{paramIdx}.{fieldMember});");
+					builder.AppendLine("    }");
 					}
 					fieldGroupIdx++;
 				}
@@ -984,6 +1005,9 @@ public sealed partial class NativeAotLoweringPlanner
 		case HybridDispatchKind.Virtual:
 			EmitVirtualDispatchCall(builder, instruction, nextOffset, op);
 			break;
+		case HybridDispatchKind.ComVtable:
+			EmitComVtableCall(builder, instruction, nextOffset, op);
+			break;
 		default:
 			throw new NotSupportedException($"native-aot lowering does not support callvirt dispatch kind '{instruction.DispatchKindCode}'.");
 		}
@@ -1417,6 +1441,66 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendFormatted(functionPointerExpression);
 		handler.AppendLiteral(");");
 		builder.AppendLine(ref handler);
+		AppendGotoNext(builder, nextOffset, op);
+	}
+
+	private void EmitComVtableCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
+	{
+		var slot = instruction.ComVtableSlot ?? 0;
+		var invocationTarget = ResolveDirectInvocationTarget(instruction);
+		var returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
+		var paramAbis = invocationTarget.ParameterAbis;
+
+		builder.AppendLine("    {");
+		// Pop real arguments (reverse order), skipping index 0 (the instance/COM ptr)
+		for (var i = paramAbis.Count - 1; i >= 1; i--)
+		{
+			builder.AppendLine($"        auto chaos_raw_arg_{i} = chaos_eval_stack[--chaos_stack_top];");
+			if (_stringIdMapping is { Count: > 0 } && IsStringParameterSlot(paramAbis[i]))
+			{
+				builder.AppendLine($"        if (chaos_is_string_id(chaos_raw_arg_{i}))");
+				builder.AppendLine("        {");
+				builder.AppendLine($"            chaos_raw_arg_{i} = chaos_string_materialize(chaos_raw_arg_{i});");
+				builder.AppendLine("        }");
+			}
+			builder.AppendLine(invocationTarget.RawArgumentIndices.Contains(i)
+				? $"        const auto chaos_arg_{i} = chaos_raw_arg_{i};"
+				: $"        const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(paramAbis[i], $"chaos_raw_arg_{i}")};");
+		}
+
+		// Pop the COM interface instance
+		builder.AppendLine("        const auto chaos_instance = chaos_eval_stack[--chaos_stack_top];");
+		builder.AppendLine("        if (chaos_instance == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine("        {");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine("        }");
+
+		// COM vtable dispatch: read vtable from the COM pointer, call through slot
+		builder.AppendLine("        auto* __com_ptr = reinterpret_cast<void*>(chaos_instance);");
+		builder.AppendLine("        auto* __vtbl = *reinterpret_cast<void***>(__com_ptr);");
+
+		// Build COM function pointer type: void* replaces the managed this (chaos_arg_0)
+		var paramSig = FormatAbiSlotParameterSignature(paramAbis);
+		var firstComma = paramSig.IndexOf(',');
+		var comParamSig = firstComma >= 0 ? paramSig[(firstComma + 1)..].TrimStart() : "";
+		var fnType = string.IsNullOrEmpty(comParamSig)
+			? $"{returnType}(*)(void*)"
+			: $"{returnType}(*)(void*, {comParamSig})";
+		var argSig = FormatAbiInvocationArgumentList(paramAbis);
+		var firstComma2 = argSig.IndexOf(',');
+		var comArgsString = firstComma2 >= 0 ? "__com_ptr," + argSig[firstComma2..] : "__com_ptr";
+
+		if (string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"        reinterpret_cast<{fnType}>(__vtbl[{slot}])({comArgsString});");
+		}
+		else
+		{
+			builder.AppendLine($"        const auto chaos_result = reinterpret_cast<{fnType}>(__vtbl[{slot}])({comArgsString});");
+			EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_result", "        ");
+		}
+
+		builder.AppendLine("    }");
 		AppendGotoNext(builder, nextOffset, op);
 	}
 
@@ -3364,5 +3448,16 @@ public sealed partial class NativeAotLoweringPlanner
 				LoopContextStack.Pop();
 			}
 		}
+
+    private static IReadOnlyList<AotCoreIrAbiSlotArtifact> ResolveComMethodParameterAbis(AotCoreIrInstructionArtifact instruction)
+    {
+        // COM parameter ABI resolution is not yet implemented.
+        return System.Array.Empty<AotCoreIrAbiSlotArtifact>();
+    }
+
+    private static AotCoreIrAbiSlotArtifact ResolveComMethodReturnAbi(AotCoreIrInstructionArtifact instruction)
+    {
+        return new AotCoreIrAbiSlotArtifact { CarrierKindCode = default, TypeShape = default };
+    }
 
 }

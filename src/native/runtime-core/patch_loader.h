@@ -94,7 +94,12 @@ struct PatchContext {
 // Validates the format, resolves each method's AOT token, builds PatchMethod
 // objects, and marks dispatch table entries as patched.
 // Returns a PatchContext (must be freed via Unpatch or delete).
-PatchContext* ApplyPatchFromMemory(const void* data, size_t size) noexcept;
+// If host_type_name is provided (non-null), it is used instead of the
+// patch DLL's type name when looking up methods in NameIndexRegistry.
+// This handles the case where the patch DLL has different type names
+// than the AOT host code (e.g. "PatchEntry" vs "NativeEntry").
+PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
+                                    const char* host_type_name = nullptr) noexcept;
 
 // Revert all patched methods in the given context.
 // Clears kDispatchPatched flags on all affected dispatch table entries,

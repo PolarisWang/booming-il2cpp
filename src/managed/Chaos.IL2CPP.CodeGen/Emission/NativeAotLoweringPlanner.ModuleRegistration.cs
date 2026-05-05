@@ -345,6 +345,30 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("    return 1u;");
         sb.AppendLine("}();");
 
+        // ── Reverse P/Invoke (UnmanagedCallersOnly) wrapper registration ──
+        if (_reversePInvokeEntries.Count > 0)
+        {
+            sb.AppendLine();
+            sb.AppendLine("// ── Reverse P/Invoke wrapper registration ──────────────────");
+            sb.Append("static constexpr void* s_reverse_pinvoke_wrappers[")
+              .Append(_reversePInvokeEntries.Count).AppendLine("] =");
+            sb.AppendLine("{");
+            for (int i = 0; i < _reversePInvokeEntries.Count; i++)
+            {
+                sb.Append("    reinterpret_cast<void*>(&")
+                  .Append(_reversePInvokeEntries[i].NativeSymbol).AppendLine("),");
+            }
+            sb.AppendLine("};");
+            sb.AppendLine();
+            sb.AppendLine("static const uint32_t s_reverse_pinvoke_registered = []()");
+            sb.AppendLine("{");
+            sb.AppendLine("    ::chaos::il2cpp::runtime_core::RegisterReversePInvokeWrappers(");
+            sb.Append("        s_reverse_pinvoke_wrappers, ")
+              .Append(_reversePInvokeEntries.Count).AppendLine("u);");
+            sb.AppendLine("    return 1u;");
+            sb.AppendLine("}();");
+        }
+
         return sb.ToString();
     }
 
