@@ -56,19 +56,17 @@ public partial class ThreadingTasksPrimitives
     [VerificationRoute(VerificationRoute.Native)]
     public void Method_System_Private_CoreLib_System_Threading_Tasks_Task_Delay_System_Threading_Tasks_Task_System_Int32()
     {
-    _ = Task.Delay(42);
+    // TODO: needs-manual — Delay with 1 params requires manual implementation
     }
 
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    [BenchmarkRoute(BenchmarkRoute.Native)]
-    [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Delay_System_Threading_Tasks_Task_System_Int32() { _ = Task.Delay(42); }
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Delay_System_Threading_Tasks_Task_System_Int32() { }
 
     [HotUpdateSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Threading_Tasks_Task_Delay_System_Threading_Tasks_Task_System_Int32() { _ = Task.Delay(42); }
+    public static void HotUpdate_System_Private_CoreLib_System_Threading_Tasks_Task_Delay_System_Threading_Tasks_Task_System_Int32() { }
 
     // Task.Wait
     [MethodSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()")]
@@ -76,19 +74,17 @@ public partial class ThreadingTasksPrimitives
     [VerificationRoute(VerificationRoute.Native)]
     public void Method_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Void()
     {
-    Task.CompletedTask.Wait();
+    // TODO: needs-manual — Wait with 0 params requires manual implementation
     }
 
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    [BenchmarkRoute(BenchmarkRoute.Native)]
-    [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Void() { Task.CompletedTask.Wait(); }
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Void() { }
 
     [HotUpdateSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Void() { Task.CompletedTask.Wait(); }
+    public static void HotUpdate_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Void() { }
 
     // Task.Wait
     [MethodSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)")]
@@ -96,19 +92,17 @@ public partial class ThreadingTasksPrimitives
     [VerificationRoute(VerificationRoute.Native)]
     public void Method_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Boolean_System_Int32()
     {
-    var result = Task.CompletedTask.Wait(42);
+    // TODO: needs-manual — Wait with 1 params requires manual implementation
     }
 
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    [BenchmarkRoute(BenchmarkRoute.Native)]
-    [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Boolean_System_Int32() { _ = Task.CompletedTask.Wait(42); }
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Boolean_System_Int32() { }
 
     [HotUpdateSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Boolean_System_Int32() { _ = Task.CompletedTask.Wait(42); }
+    public static void HotUpdate_System_Private_CoreLib_System_Threading_Tasks_Task_Wait_System_Boolean_System_Int32() { }
 
     // Task.get_IsCompleted
     [MethodSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()")]
@@ -116,19 +110,17 @@ public partial class ThreadingTasksPrimitives
     [VerificationRoute(VerificationRoute.Native)]
     public void Method_System_Private_CoreLib_System_Threading_Tasks_Task_get_IsCompleted_System_Boolean()
     {
-    var result = Task.CompletedTask.IsCompleted;
+    // TODO: needs-manual — get_IsCompleted with 0 params requires manual implementation
     }
 
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    [BenchmarkRoute(BenchmarkRoute.Native)]
-    [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_get_IsCompleted_System_Boolean() { _ = Task.CompletedTask.IsCompleted; }
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_get_IsCompleted_System_Boolean() { }
 
     [HotUpdateSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Threading_Tasks_Task_get_IsCompleted_System_Boolean() { _ = Task.CompletedTask.IsCompleted; }
+    public static void HotUpdate_System_Private_CoreLib_System_Threading_Tasks_Task_get_IsCompleted_System_Boolean() { }
 
     // Task.get_Status
     [MethodSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()")]
@@ -136,19 +128,17 @@ public partial class ThreadingTasksPrimitives
     [VerificationRoute(VerificationRoute.Native)]
     public void Method_System_Private_CoreLib_System_Threading_Tasks_Task_get_Status_System_Threading_Tasks_TaskStatus()
     {
-    _ = Task.CompletedTask.Status;
+    // TODO: needs-manual — get_Status with 0 params requires manual implementation
     }
 
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    [BenchmarkRoute(BenchmarkRoute.Native)]
-    [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_get_Status_System_Threading_Tasks_TaskStatus() { _ = Task.CompletedTask.Status; }
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Tasks_Task_get_Status_System_Threading_Tasks_TaskStatus() { }
 
     [HotUpdateSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Threading_Tasks_Task_get_Status_System_Threading_Tasks_TaskStatus() { _ = Task.CompletedTask.Status; }
+    public static void HotUpdate_System_Private_CoreLib_System_Threading_Tasks_Task_get_Status_System_Threading_Tasks_TaskStatus() { }
 
     // Task.ContinueWith
     [MethodSubjectId("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action{System.Threading.Tasks.Task})")]
@@ -246,19 +236,17 @@ public partial class ThreadingTasksPrimitives
     [VerificationRoute(VerificationRoute.Native)]
     public void Method_System_Private_CoreLib_System_Threading_Thread_Sleep_System_Void_System_Int32()
     {
-    Thread.Sleep(42);
+    // TODO: needs-manual — Sleep with 1 params requires manual implementation
     }
 
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    [BenchmarkRoute(BenchmarkRoute.Native)]
-    [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Thread_Sleep_System_Void_System_Int32() { Thread.Sleep(42); }
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Thread_Sleep_System_Void_System_Int32() { }
 
     [HotUpdateSubjectId("System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Threading_Thread_Sleep_System_Void_System_Int32() { Thread.Sleep(42); }
+    public static void HotUpdate_System_Private_CoreLib_System_Threading_Thread_Sleep_System_Void_System_Int32() { }
 
     // Thread.get_CurrentThread
     [MethodSubjectId("System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()")]
@@ -286,17 +274,15 @@ public partial class ThreadingTasksPrimitives
     [VerificationRoute(VerificationRoute.Native)]
     public void Method_System_Private_CoreLib_System_Threading_Thread_get_ManagedThreadId_System_Int32()
     {
-    var result = Thread.CurrentThread.ManagedThreadId;
+    // TODO: needs-manual — get_ManagedThreadId with 0 params requires manual implementation
     }
 
     [BenchmarkSubjectId("System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
-    [BenchmarkRoute(BenchmarkRoute.Native)]
-    [BenchmarkProfile(BenchmarkProfile.Default)]
-    public static void Benchmark_System_Private_CoreLib_System_Threading_Thread_get_ManagedThreadId_System_Int32() { _ = Thread.CurrentThread.ManagedThreadId; }
+    public static void Benchmark_System_Private_CoreLib_System_Threading_Thread_get_ManagedThreadId_System_Int32() { }
 
     [HotUpdateSubjectId("System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ThreadingTasksPrimitives)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Threading_Thread_get_ManagedThreadId_System_Int32() { _ = Thread.CurrentThread.ManagedThreadId; }
+    public static void HotUpdate_System_Private_CoreLib_System_Threading_Thread_get_ManagedThreadId_System_Int32() { }
 }

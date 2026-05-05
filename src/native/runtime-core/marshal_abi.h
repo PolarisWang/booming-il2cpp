@@ -82,8 +82,31 @@ struct MarshalPlatformAbiRootV1 {
 /// Field classification for descriptor-driven marshalling.
 enum class StructFieldKind : uint8_t {
     Blittable,       ///< Fixed-size blittable field — direct memcpy.
+    BoolField,       ///< 1-byte C# bool ↔ 4-byte Win32 BOOL.
     StringField,     ///< System.String field — UTF-8 CoTaskMem marshalling.
     NestedStruct,    ///< Nested value type — recursive descriptor.
+    ByValArray,      ///< Inline fixed-size array (e.g. [MarshalAs(UnmanagedType.ByValArray, SizeConst=N)]).
+    LPArray,         ///< Pointer to array (LPArray style — element pointer + optional length).
+    DecimalField,    ///< 16-byte System.Decimal ↔ COM DECIMAL.
+    DateTimeField,   ///< 8-byte System.DateTime ↔ FILETIME / DATE.
+    ObjectField,     ///< object marshalled as IUnknown* (IntPtr on non-COM platforms).
+    GuidField,       ///< 16-byte System.Guid — effectively blittable.
+};
+
+/// Native type classification for array element marshalling.
+enum class NativeElementType : uint8_t {
+    None,            ///< Not an array element context.
+    U1,              ///< unsigned char / byte
+    I1,              ///< signed char / sbyte
+    U2,              ///< unsigned short / char16_t
+    I2,              ///< signed short
+    U4,              ///< unsigned int
+    I4,              ///< signed int
+    U8,              ///< unsigned long long
+    I8,              ///< signed long long
+    R4,              ///< float
+    R8,              ///< double
+    Struct,          ///< struct element — use nested descriptor
 };
 
 /// Descriptor for a single struct field.
@@ -91,6 +114,9 @@ struct StructFieldDescriptorV1 {
     StructFieldKind  kind;
     uint16_t         offset;          ///< Byte offset within the struct.
     uint16_t         size;            ///< Field size in bytes (0 for StringField).
+    uint16_t         array_count;     ///< For ByValArray: element count. 0 for non-array fields.
+    NativeElementType element_type;   ///< Native element type for arrays; otherwise None.
+    uint8_t          reserved;        ///< Reserved for future use (padding to 12 bytes).
     const struct StructMarshallingDescriptorV1* nested;  ///< For NestedStruct kind; nullptr otherwise.
 };
 

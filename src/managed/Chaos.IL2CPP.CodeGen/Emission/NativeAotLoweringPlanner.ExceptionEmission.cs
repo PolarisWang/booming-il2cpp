@@ -510,6 +510,12 @@ public sealed partial class NativeAotLoweringPlanner
 		case "newobj":
 			EmitLinearNewObject(builder, instruction, indentation);
 			break;
+		case "ldftn":
+		{
+			var targetSymbol = GetRequiredFunctionPointerTargetSymbol(instruction);
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&{targetSymbol});");
+			break;
+		}
 		case "stloc":
 		{
 			StringBuilder stringBuilder = builder;
@@ -758,7 +764,16 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		case "stsfld":
 		{
-			builder.AppendLine($"{indentation}// stsfld: placeholder");
+			var targetRef = GetRequiredTargetReference(instruction);
+			if (targetRef.Kind != AotCoreIrReferenceKind.Field)
+			{
+				throw new NotSupportedException($"native-aot structured EH linear field store requires field target reference, got '{targetRef.Kind}'.");
+			}
+			builder.AppendLine($"{indentation}{{");
+			builder.AppendLine($"{indentation}    auto chaos_value = chaos_eval_stack[--chaos_stack_top];");
+			EmitStaticInitializationForField(builder, targetRef.SubjectId, indentation);
+			builder.AppendLine($"{indentation}    {GetNativeStaticFieldSymbol(targetRef.SubjectId)} = chaos_value;");
+			builder.AppendLine($"{indentation}}}");
 			break;
 		}
 		case "stfld":
@@ -855,7 +870,13 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine($"{indentation}// stelem.ref: placeholder");
 			break;
-		}		default:
+		}
+		case "ret":
+		{
+			builder.AppendLine($"{indentation}// ret (handled via terminator in structured IR)");
+			break;
+		}
+		default:
 			throw new NotSupportedException("native-aot structured EH linear lowering does not support opcode '" + instruction.Op + "'.");
 		}
 	}
@@ -870,7 +891,8 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		if (IsDelegateInvokeInstruction(instruction))
 		{
-			throw new NotSupportedException("native-aot structured EH linear lowering does not support delegate callvirt.");
+			EmitLinearDelegateInvoke(builder, instruction, indentation);
+			return;
 		}
 
 		// Phase 3: AOT Devirtualization fast-path for linear emission (inside branches of structured nodes)
@@ -924,6 +946,128 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 	}
 
+	private void EmitLinearDelegateInvoke(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+	{
+		string methodDeclaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(instruction.Callee);
+		IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis = ResolveDelegateInvokeParameterAbis(instruction);
+		AotCoreIrAbiSlotArtifact returnAbi = ResolveDelegateInvokeReturnAbi(instruction);
+		string returnType = MapAbiSlotReturnType(returnAbi);
+		string sigCache = FormatAbiSlotParameterSignature(parameterAbis);
+		string openFnType = string.IsNullOrEmpty(sigCache) ? (returnType + "(*)()") : string.Concat(returnType, "(*)(", sigCache, ")");
+		string closedFnType = (string.IsNullOrEmpty(sigCache) ? (returnType + "(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)") : (returnType + "(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target, " + sigCache + ")"));
+
+		builder.AppendLine($"{indentation}{{");
+		for (int i = parameterAbis.Count - 1; i >= 0; i--)
+		{
+			builder.AppendLine($"{indentation}    auto chaos_raw_arg_{i} = chaos_eval_stack[--chaos_stack_top];");
+			if (_stringIdMapping is { Count: > 0 } && IsStringParameterSlot(parameterAbis[i]))
+			{
+				builder.AppendLine($"{indentation}    if (chaos_is_string_id(chaos_raw_arg_{i}))");
+				builder.AppendLine($"{indentation}    {{");
+				builder.AppendLine($"{indentation}        chaos_raw_arg_{i} = chaos_string_materialize(chaos_raw_arg_{i});");
+				builder.AppendLine($"{indentation}    }}");
+			}
+			builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(parameterAbis[i], $"chaos_raw_arg_{i}")};");
+		}
+		builder.AppendLine($"{indentation}    const auto chaos_delegate_value = chaos_eval_stack[--chaos_stack_top];");
+		builder.AppendLine($"{indentation}    if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine($"{indentation}    {{");
+		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine($"{indentation}    }}");
+		builder.AppendLine($"{indentation}    auto* chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_delegate_value);");
+		builder.AppendLine($"{indentation}    if (chaos_delegate->chaos_delegate_invocation_count > static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine($"{indentation}    {{");
+		builder.AppendLine($"{indentation}        const auto* chaos_invocation_list = reinterpret_cast<const CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR)*>(chaos_delegate->chaos_delegate_invocation_list);");
+		builder.AppendLine($"{indentation}        if (chaos_invocation_list == nullptr ||");
+		builder.AppendLine($"{indentation}            static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)");
+		builder.AppendLine($"{indentation}        {{");
+		builder.AppendLine($"{indentation}            CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine($"{indentation}        }}");
+		builder.AppendLine();
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}        {returnType} chaos_result{{}};");
+		}
+		builder.AppendLine($"{indentation}        for (CHAOS_IL2CPP_SIZE chaos_delegate_index = 0; chaos_delegate_index < chaos_invocation_list->size(); ++chaos_delegate_index)");
+		builder.AppendLine($"{indentation}        {{");
+		builder.AppendLine($"{indentation}            const auto chaos_invocation_delegate_value = (*chaos_invocation_list)[chaos_delegate_index];");
+		builder.AppendLine($"{indentation}            if (chaos_invocation_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine($"{indentation}            {{");
+		builder.AppendLine($"{indentation}                CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine($"{indentation}            }}");
+		builder.AppendLine($"{indentation}            auto* chaos_invocation_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_invocation_delegate_value);");
+		builder.AppendLine($"{indentation}            if (chaos_invocation_delegate->chaos_delegate_method_ptr == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine($"{indentation}            {{");
+		builder.AppendLine($"{indentation}                CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine($"{indentation}            }}");
+		builder.AppendLine($"{indentation}            if (chaos_invocation_delegate->chaos_delegate_target == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine($"{indentation}            {{");
+		builder.AppendLine($"{indentation}                const auto chaos_open_function = reinterpret_cast<{openFnType}>(chaos_invocation_delegate->chaos_delegate_method_ptr);");
+		string openCall = "chaos_open_function(" + FormatAbiInvocationArgumentList(parameterAbis) + ")";
+		if (string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}                {openCall};");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}                chaos_result = {openCall};");
+		}
+		builder.AppendLine($"{indentation}            }}");
+		builder.AppendLine($"{indentation}            else");
+		builder.AppendLine($"{indentation}            {{");
+		builder.AppendLine($"{indentation}                const auto chaos_closed_function = reinterpret_cast<{closedFnType}>(chaos_invocation_delegate->chaos_delegate_method_ptr);");
+		string closedCall = "chaos_closed_function(chaos_invocation_delegate->chaos_delegate_target" + ((parameterAbis.Count == 0) ? string.Empty : (", " + FormatAbiInvocationArgumentList(parameterAbis))) + ")";
+		if (string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}                {closedCall};");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}                chaos_result = {closedCall};");
+		}
+		builder.AppendLine($"{indentation}            }}");
+		builder.AppendLine($"{indentation}        }}");
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}        ");
+		}
+		builder.AppendLine($"{indentation}    }}");
+		builder.AppendLine($"{indentation}    else");
+		builder.AppendLine($"{indentation}    {{");
+		builder.AppendLine($"{indentation}        if (chaos_delegate->chaos_delegate_method_ptr == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine($"{indentation}        {{");
+		builder.AppendLine($"{indentation}            CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine($"{indentation}        }}");
+		builder.AppendLine($"{indentation}        if (chaos_delegate->chaos_delegate_target == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine($"{indentation}        {{");
+		builder.AppendLine($"{indentation}            const auto chaos_open_function = reinterpret_cast<{openFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
+		if (string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}            {openCall};");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}            const auto chaos_result = {openCall};");
+			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}            ");
+		}
+		builder.AppendLine($"{indentation}        }}");
+		builder.AppendLine($"{indentation}        else");
+		builder.AppendLine($"{indentation}        {{");
+		builder.AppendLine($"{indentation}            const auto chaos_closed_function = reinterpret_cast<{closedFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
+		if (string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}            {closedCall};");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}            const auto chaos_result = {closedCall};");
+			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}            ");
+		}
+		builder.AppendLine($"{indentation}        }}");
+		builder.AppendLine($"{indentation}    }}");
+		builder.AppendLine($"{indentation}}}");
+	}
+
 	private void EmitLinearNewObject(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 		AotCoreIrReferenceArtifact requiredTargetReference = GetRequiredTargetReference(instruction);
@@ -968,8 +1112,10 @@ public sealed partial class NativeAotLoweringPlanner
 					: $"{indentation}    const auto chaos_arg_{num} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[num], $"chaos_raw_arg_{num}")};");
 			}
 			builder.AppendLine(indentation + "    CHAOS_IL2CPP_INTPTR chaos_value = static_cast<CHAOS_IL2CPP_INTPTR>(0);");
-			builder.AppendLine(indentation + "    const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_value) | chaos_managed_pointer_local_slot_tag;");
-			builder.AppendLine($"{indentation}    {invocationTarget.TargetSymbol}({FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis)});");
+			var ctorArgs0 = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
+			if (ctorArgs0.StartsWith("chaos_arg_0", StringComparison.Ordinal))
+				ctorArgs0 = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_value) | chaos_managed_pointer_local_slot_tag" + ctorArgs0.Substring(11);
+			builder.AppendLine($"{indentation}    {invocationTarget.TargetSymbol}({ctorArgs0});");
 			builder.AppendLine(indentation + "    chaos_eval_stack[chaos_stack_top++] = chaos_value;");
 			builder.AppendLine(indentation + "}");
 			return;
@@ -998,8 +1144,10 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				builder.AppendLine($"{indentation}    chaos_object->header.vtable = {GetNativeVTableSymbol(requiredTargetReference.SubjectId)};");
 			}
-			builder.AppendLine(indentation + "    const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);");
-			builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({FormatAbiInvocationArgumentList(constructorTarget.ParameterAbis)});");
+			var ctorArgs2 = FormatAbiInvocationArgumentList(constructorTarget.ParameterAbis);
+			if (ctorArgs2.StartsWith("chaos_arg_0", StringComparison.Ordinal))
+				ctorArgs2 = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)" + ctorArgs2.Substring(11);
+			builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({ctorArgs2});");
 			builder.AppendLine(indentation + "    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);");
 			builder.AppendLine(indentation + "}");
 			return;

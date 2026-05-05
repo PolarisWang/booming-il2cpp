@@ -1508,6 +1508,120 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                 }));
 
+            // === Marshal.StructureToPtr<T> — deep-copy managed struct to native memory ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "StructureToPtr",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    if (typeArgs.Count == 0) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var structDescSymbol = NativeAotLoweringPlanner.GetNativeStructMarshallingDescriptorSymbol(typeArgs[0]);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
+                    [
+                        "    auto* chaos_runtime = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
+                        "    if (chaos_runtime == nullptr) { CHAOS_IL2CPP_ABORT(); }",
+                        $"    const auto* chaos_desc = {structDescSymbol};",
+                        "    if (chaos_desc != nullptr) {",
+                        "        if (chaos_arg_2 != 0) {",
+                        "            chaos::il2cpp::struct_marshal::DestroyMarshalledStruct(",
+                        "                chaos_desc, reinterpret_cast<unsigned char*>(chaos_arg_1), chaos_runtime);",
+                        "        }",
+                        "        chaos::il2cpp::struct_marshal::MarshalStructManagedToNative(",
+                        "            chaos_desc,",
+                        "            reinterpret_cast<unsigned char*>(chaos_arg_1),",
+                        "            reinterpret_cast<unsigned char*>(chaos_arg_0),",
+                        "            chaos_runtime, nullptr);",
+                        "    }",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                        {
+                            CreateNativeIntAbiSlot(typeArgs[0], AotCoreIrTypeShapeKind.ValueType),
+                            CreateNativeIntAbiSlot(),
+                            CreateInt32AbiSlot(),
+                        }), CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1, 2 });
+                }));
+
+            // === Marshal.PtrToStructure<T> — deep-copy native memory to managed struct ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "PtrToStructure",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    if (typeArgs.Count == 0) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var structDescSymbol = NativeAotLoweringPlanner.GetNativeStructMarshallingDescriptorSymbol(typeArgs[0]);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    auto* chaos_runtime = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
+                        "    if (chaos_runtime == nullptr) { CHAOS_IL2CPP_ABORT(); }",
+                        $"    const auto* chaos_desc = {structDescSymbol};",
+                        "    if (chaos_desc == nullptr) return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    auto* chaos_blob = static_cast<unsigned char*>(",
+                        "        CHAOS_IL2CPP_MALLOC(chaos_desc->total_size));",
+                        "    if (chaos_blob == nullptr) return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    chaos::il2cpp::struct_marshal::MarshalStructNativeToManaged(",
+                        "        chaos_desc, chaos_blob,",
+                        "        reinterpret_cast<const unsigned char*>(chaos_arg_0),",
+                        "        chaos_runtime, nullptr);",
+                        "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_blob);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(typeArgs[0], AotCoreIrTypeShapeKind.ValueType),
+                        new HashSet<int> { 0 });
+                }));
+
+            // === Marshal.DestroyStructure — free native resources for marshalled struct ===
+            // Generic overload: DestroyStructure<T>(IntPtr) — uses static descriptor.
+            // Non-generic overload: DestroyStructure(IntPtr, Type) — V1: no-op (runtime reflection path).
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "DestroyStructure",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    if (typeArgs.Count == 1)
+                    {
+                        var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                        var structDescSymbol = NativeAotLoweringPlanner.GetNativeStructMarshallingDescriptorSymbol(typeArgs[0]);
+                        var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            "    auto* chaos_runtime = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
+                            "    if (chaos_runtime == nullptr) { CHAOS_IL2CPP_ABORT(); }",
+                            $"    const auto* chaos_desc = {structDescSymbol};",
+                            "    if (chaos_desc != nullptr) {",
+                            "        chaos::il2cpp::struct_marshal::DestroyMarshalledStruct(",
+                            "            chaos_desc, reinterpret_cast<unsigned char*>(chaos_arg_0), chaos_runtime);",
+                            "    }",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateNativeIntAbiSlot()),
+                            CreateVoidAbiSlot(),
+                            new HashSet<int> { 0 });
+                    }
+                    // Non-generic overload: V1 no-op stub — runtime-reflection descriptor not yet available.
+                    var nonGenericSymbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var nonGenericSrc = RenderSimpleExternalRuntimeHelper("void", nonGenericSymbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    (void)chaos_arg_0; (void)chaos_arg_1;",
+                    ]);
+                    return new GenericShapeResolution(nonGenericSrc, nonGenericSymbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        }), CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1 });
+                }));
+
             // === String.Join (IEnumerable<T> — resolves variants at planning time) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",

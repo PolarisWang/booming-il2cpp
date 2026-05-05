@@ -26,6 +26,13 @@
 
 // ── Phase 1: Declare types needed by sub-headers below ──
 #include "reflection_api.h"
+
+// ── D3 dispatch: InterpreterEntryDirect for patched-method dispatch ──
+// Generated code (codegen-emitted module registration) references
+// chaos::il2cpp::runtime_core::InterpreterEntryDirect in dispatch table
+// entries.  Include the declaration here so it is visible to all generated
+// code that includes runtime_core.h.
+#include "interpreter_entry.h"
 namespace chaos::il2cpp::runtime_core {
 
 // Bring types from other namespaces into runtime_core for convenient use.
@@ -97,6 +104,17 @@ void* MarshalGetDelegateForFunctionPointerImpl(
     ThreadState* thread_state,
     CHAOS_IL2CPP_INTPTR native_fn_ptr,
     const char* delegate_type_id);
+
+// ── Struct marshalling descriptor registry ──
+/// Register a codegen-emitted static StructMarshallingDescriptorV1 for a type.
+void RegisterStaticMarshallingDescriptor(
+    CHAOS_IL2CPP_UINT64 stable_id,
+    const marshal_abi::StructMarshallingDescriptorV1* desc) noexcept;
+
+/// Look up a struct marshalling descriptor by TypeInfo*.
+/// Priority: 1) static registry (codegen) → 2) runtime reflection build (cached).
+const marshal_abi::StructMarshallingDescriptorV1*
+ResolveStructMarshallingDescriptor(const TypeInfo* type) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

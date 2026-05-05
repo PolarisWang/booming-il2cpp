@@ -7,6 +7,17 @@ public sealed record ManagedClosureRequest(
     IReadOnlyList<string>? AdditionalAssemblyPaths = null,
     bool FullAssemblyClosure = false);
 
+/// <summary>
+/// Request to process multiple assemblies in a single pipeline run.
+/// All assemblies are loaded into a unified semantic world, linked together,
+/// and produce per-assembly codegen outputs.
+/// </summary>
+public sealed record MultiAssemblyClosureRequest(
+    IReadOnlyList<string> InputAssemblyPaths,
+    string OutputRootPath,
+    string? EntryPointSubjectIdOverride = null,
+    IReadOnlyList<string>? AdditionalAssemblyPaths = null);
+
 public static class ManagedClosureArtifactNames
 {
     public const string TypedIlIr = "typed-il-ir.json";

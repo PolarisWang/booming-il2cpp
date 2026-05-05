@@ -17,7 +17,7 @@ public static partial class ReflectionMemberBasicsPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Reflection_MemberInfo_get_Name_System_String() { }
+    public static void Patch_System_Private_CoreLib_System_Reflection_MemberInfo_get_Name_System_String() { _ = default(MemberInfo)!.Name; }
     // Purpose: Verify MemberInfo.get_MemberType executes correctly from patch side back to host
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
@@ -27,7 +27,7 @@ public static partial class ReflectionMemberBasicsPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Reflection_MemberInfo_get_DeclaringType_System_Type() { }
+    public static void Patch_System_Private_CoreLib_System_Reflection_MemberInfo_get_DeclaringType_System_Type() { _ = default(MemberInfo)!.DeclaringType; }
     // Purpose: Verify MethodBase.Invoke executes correctly from patch side back to host
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]

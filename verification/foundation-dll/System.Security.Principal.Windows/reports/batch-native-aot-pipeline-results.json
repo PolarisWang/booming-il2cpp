@@ -1,5 +1,6 @@
 {
   "assembly": "System.Security.Principal.Windows",
+  "mode": "family-entrypoint",
   "total": 6,
   "passed": 6,
   "failed": 0,
@@ -8,9 +9,7 @@
       "family": "identity-reference",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 26,
@@ -21,9 +20,7 @@
       "family": "nt-account",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -34,9 +31,7 @@
       "family": "security-identifier",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -47,9 +42,7 @@
       "family": "token-access",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 26,
@@ -60,9 +53,7 @@
       "family": "windows-identity",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -73,9 +64,7 @@
       "family": "windows-principal-roles",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 39,
@@ -83,5 +72,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Security.Principal.Windows\\windows-principal-roles\\il2cpp_dist\\entrypoint\\build-output\\WindowsPrincipalRolesPatchEntry.dll"
     }
   ],
-  "timestamp": "2026-05-04T01:18:42"
+  "timestamp": "2026-05-05T19:23:59"
 }

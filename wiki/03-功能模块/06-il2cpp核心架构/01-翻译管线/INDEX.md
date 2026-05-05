@@ -38,3 +38,4 @@
 | 文档 | 说明 |
 |------|------|
 | [`23-托管线程模型与GC协作.md`](./23-%E6%89%98%E7%AE%A1%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%8EGC%E5%8D%8F%E4%BD%9C.md) | 托管线程标识、Monitor Thin Lock、Hybrid GC Safepoint、ThreadPool 基础 |
+| [`24-全量IL2CPP编译器架构.md`](./24-%E5%85%A8%E9%87%8FIL2CPP%E7%BC%96%E8%AF%91%E5%99%A8%E6%9E%B6%E6%9E%84.md) | 多程序集输入、每程序集C++输出、跨程序集调用决议、CMake构建、Phase 0-5路线图 |

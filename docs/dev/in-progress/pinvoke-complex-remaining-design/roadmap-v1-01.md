@@ -4,13 +4,15 @@
 
 **目标：** 完成 Phase 6 (Complex P/Invoke 结构体编组 + COM RCW + 委托编组) + Phase 7 (Reverse P/Invoke) 的全部实现
 
+**状态：** P1-P4 已完成。当前执行 P6（Complex struct 编组 + StructureToPtr/PtrToStructure/DestroyStructure 运行时桥接）。
+
 **架构方案：** C — 混合分层 (Hybrid Layered)
-- Layer 1 (Blittable struct): AOT 内联 memcpy
-- Layer 2 (Simple non-blittable struct): AOT 逐字段展开 + string helper
-- Layer 3 (Complex struct): 运行时 descriptor 引擎
-- COM RCW: 编译期 vtable 索引 + 运行时解析
-- Delegate: 编译期 native thunk + 运行时缓存
-- Reverse P/Invoke: 编译期 stub + bootstrap 注册
+- Layer 1 (Blittable struct): AOT 内联 memcpy ✅
+- Layer 2 (Simple non-blittable struct): AOT 逐字段展开 + string helper ✅
+- Layer 3 (Complex struct): 静态 descriptor 发射 + 运行时反射兜底（混合方案 C）
+- COM RCW: 编译期 vtable 索引 + 运行时解析 ❌
+- Delegate: 编译期 native thunk + 运行时缓存 ✅
+- Reverse P/Invoke: 编译期 stub + bootstrap 注册 ✅
 
 **设计文档：** STATUS.md (本目录)
 **问题清零来源：** brainstorming 已确认方案 C，用户确认执行
@@ -333,65 +335,197 @@ int vtableIndex = GetVtableIndex(method);
 
 ---
 
-## P6: Struct Layer 3 — 复杂结构体运行时 Descriptor 引擎
+## P6: Struct Layer 3 — 复杂结构体编组（混合方案 C）
 
 ### 目标
-含嵌套结构体、复杂字段的结构体通过运行时 descriptor 引擎完成 marshalling。
+全量非 blittable struct 字段类型编组。codegen 发射静态 `StructMarshallingDescriptorV1`，P/Invoke wrapper 直接引用；`Marshal.StructureToPtr` / `PtrToStructure` / `DestroyStructure` 运行时桥接通过静态注册表优先、反射元数据兜底。
 
-### 实现
+### 实现步骤
 
-**6a. StructMarshallingDescriptor (运行时)**
+**6a. StructFieldKind 扩展（marshal_abi.h → struct_marshal.cpp）**
+
+当前 3 种字段类型 → 扩展至 **9 种**：
+
+```
+Blittable       → memcpy(field.offset, field.size)          // 已有
+BoolField       → 1字节 C# bool ↔ 4字节 Win32 BOOL         // 新增
+StringField     → String ↔ UTF-8 CoTaskMem                  // 已有
+NestedStruct    → 递归子 descriptor                          // 已有
+ByValArray      → 定长内联数组，元素类型+元素数              // 新增
+LPArray         → 指针数组，元素类型                          // 新增
+DecimalField    → 16字节 .NET decimal ↔ COMDECIMAL           // 新增
+DateTimeField   → 8字节 DateTime ↔ FILETIME                  // 新增
+ObjectField     → object → IUnknown* (IntPtr)                // 新增
+GuidField       → 16字节 blittable                            // 新增
+```
+
+`StructFieldDescriptorV1` 扩展新增字段：
+```cpp
+struct StructFieldDescriptorV1 {
+    StructFieldKind  kind;
+    uint16_t         offset;          // 字节偏移
+    uint16_t         size;            // 字段字节大小
+    uint16_t         array_count;     // ByValArray 的元素数
+    uint16_t         element_type;    // 数组/字段的元素原生类型标记
+    const struct StructMarshallingDescriptorV1* nested;  // NestedStruct
+};
+```
+
+`struct_marshal.cpp` 新增 6 种字段编组逻辑：
+- `BoolField`：read/write 1-byte bool ↔ 4-byte native
+- `ByValArray`：按元素逐个编组（支持元素递归）
+- `LPArray`：长度前缀或 null-terminated 数组指针
+- `DecimalField`：memcpy（COM 兼容布局）
+- `DateTimeField`：int64 ↔ double (DATE)
+- `ObjectField`：IntPtr 传递（无 COM 包装）
+- `GuidField`：memcpy（16 字节 blittable）
+
+**6b. ResolveStructMarshallingDescriptor（runtime 反射兜底）**
+
+新增运行时函数（runtime_core.h/.cpp）：
 
 ```cpp
-enum class StructFieldKind : uint8_t {
-    Blittable,    // 定长 blittable 字段，memcpy
-    String,       // string ↔ UTF-8 CoTaskMem
-    NestedStruct, // 嵌套结构体，递归
-};
-
-struct StructFieldDescriptor {
-    StructFieldKind kind;
-    uint16_t offset;          // 在结构体中的 offset
-    uint16_t size;            // 字段大小
-    uint16_t element_count;   // >1 表示数组
-    const StructMarshallingDescriptor* nested; // NestedStruct 时指向子描述符
-};
-
-struct StructMarshallingDescriptor {
-    uint16_t total_size;
-    uint16_t field_count;
-    StructFieldDescriptor fields[];
-};
+/// 获取 struct 类型的编组 descriptor。
+/// 优先级：1) codegen 静态注册表 → 2) 运行时反射构建（缓存）。
+const StructMarshallingDescriptorV1* 
+ResolveStructMarshallingDescriptor(const TypeInfo* type);
 ```
 
-**6b. RuntimeStructMarshaller**
+反射构建路径通过 `RuntimeInstantiatedType` 的字段元数据遍历，按字段类型映射到 `StructFieldKind`。
 
 ```cpp
-CHAGetCurrentRuntimeStateS_IL2CPP_INTPTR RuntimeStructMarshaller(
-    const StructMarshallingDescriptor* desc,
-    void* native_ptr,           // 目标 native 缓冲区
-    void* managed_ptr,          // 源 managed 对象
-    MarshalDirection direction // NativeToManaged / ManagedToNative
-);
+/// 注册 codegen 发射的静态 descriptor。
+void RegisterStaticMarshallingDescriptor(
+    CHAOS_IL2CPP_UINT64 stable_id,
+    const StructMarshallingDescriptorV1* desc);
 ```
 
-**6c. Codegen 生成 descriptor**
+**6c. Codegen 发射 StructMarshallingDescriptorV1（ObjectModelEmission.cs）**
 
-```csharp
-// 代码生成 StructMarshallingDescriptor 静态实例
-// 调用 RuntimeStructMarshaller
+在 `EmitObjectModelDeclarations` 中：
+1. 收集所有出现在 P/Invoke 签名中的 value type
+2. 为每个类型递归构建 descriptor 字段列表
+3. 发射 `constinit StructMarshallingDescriptorV1 chaos_marshal_desc_{sanitizedName}`
+4. 在 module 注册代码中调用 `RegisterStaticMarshallingDescriptor(stable_id, &desc)`
+
+检测方法：扩展 `ClassifyValueTypeFields` 可以同时构建 descriptor 树。当字段类型为：
+- 基元 blittable → `Blittable`
+- `bool` → `BoolField`
+- `System.String` → `StringField`
+- `System.Decimal` → `DecimalField`
+- `System.DateTime` → `DateTimeField`
+- `System.Guid` → `GuidField`
+- value type → 递归构建子 descriptor → `NestedStruct`
+- 数组 → 需要 `[MarshalAs]` 的 SizeConst（暂无 → 先标记 Unsupported）
+- `object` → `ObjectField`
+
+**6d. P/Invoke wrapper 引用 descriptor（MethodEmission.cs）**
+
+在 `EmitPInvokeMethod` 中，当参数是 Complex struct 时：
+
+```cpp
+// 生成：
+const auto* chaos_desc = &chaos_marshal_desc_{TypeName};
+// Pre-call: managed → native
+auto chaos_struct_copy_ = chaos_arg_0;  // 栈拷贝
+::chaos::il2cpp::struct_marshal::MarshalStructManagedToNative(
+    chaos_desc,
+    reinterpret_cast<unsigned char*>(&chaos_struct_copy_),
+    reinterpret_cast<const unsigned char*>(&chaos_arg_0),
+    chaos_rs_, chaos_ts_);
+
+// Call
+chaos_ret_ = s_pinvoke_fn_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_struct_copy_));
+
+// Post-call: native → managed（回写 string/object 等）
+::chaos::il2cpp::struct_marshal::MarshalStructNativeToManaged(
+    chaos_desc,
+    reinterpret_cast<unsigned char*>(&chaos_arg_0),
+    reinterpret_cast<const unsigned char*>(&chaos_struct_copy_),
+    chaos_rs_, chaos_ts_);
 ```
 
-### 涉及文件
-- `src/native/runtime-core/marshal_abi.h` — descriptor 类型定义
-- `src/native/runtime-core/runtime_core.cpp` — RuntimeStructMarshaller
-- `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.MethodEmission.cs` — descriptor 生成
+**6e. Marshal.StructureToPtr / PtrToStructure / DestroyStructure（runtime_stubs.cpp）**
+
+```cpp
+// Marshal.StructureToPtr
+CHAOS_IL2CPP_INTPTR ChaosMarshalStructureToPtr(
+    CHAOS_IL2CPP_INTPTR managed_struct,   // boxed value type
+    CHAOS_IL2CPP_INTPTR native_ptr,        // destination native pointer
+    bool delete_old) noexcept
+{
+    auto* type = ResolveManagedObjectType(managed_struct);
+    auto* desc = ResolveStructMarshallingDescriptor(type);
+    if (desc == nullptr) return 0;
+    
+    if (delete_old) DestroyStructure(native_ptr, type);
+    
+    MarshalStructManagedToNative(desc,
+        reinterpret_cast<unsigned char*>(native_ptr),
+        UnboxValueType(managed_struct),
+        GetCurrentRuntimeState(), GetCurrentThreadState());
+    return native_ptr;
+}
+
+// Marshal.PtrToStructure
+CHAOS_IL2CPP_INTPTR ChaosMarshalPtrToStructure(
+    CHAOS_IL2CPP_INTPTR native_ptr,
+    CHAOS_IL2CPP_INTPTR structure_type_handle) noexcept
+{
+    auto* type = ResolveType(structure_type_handle);
+    auto* desc = ResolveStructMarshallingDescriptor(type);
+    if (desc == nullptr) return 0;
+    
+    auto* result = ObjectNew(type);
+    MarshalStructNativeToManaged(desc,
+        reinterpret_cast<unsigned char*>(result) + sizeof(ObjectHeader),
+        reinterpret_cast<const unsigned char*>(native_ptr),
+        GetCurrentRuntimeState(), GetCurrentThreadState());
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
+}
+
+// Marshal.DestroyStructure
+CHAOS_IL2CPP_INTPTR ChaosMarshalDestroyStructure(
+    CHAOS_IL2CPP_INTPTR native_ptr,
+    CHAOS_IL2CPP_INTPTR structure_type_handle) noexcept
+{
+    // Free CoTaskMem buffers for string fields, etc.
+    auto* type = ResolveType(structure_type_handle);
+    auto* desc = ResolveStructMarshallingDescriptor(type);
+    if (desc == nullptr) return 0;
+    
+    DestroyMarshalledStruct(desc, 
+        reinterpret_cast<unsigned char*>(native_ptr),
+        GetCurrentRuntimeState());
+    return 0;
+}
+```
+
+### 文件变更清单
+
+| 文件 | 变更 | 预估行数 |
+|------|------|----------|
+| `src/native/runtime-core/marshal_abi.h` | StructFieldKind + StructFieldDescriptorV1 扩展 | +20 |
+| `src/native/runtime-core/struct_marshal.h` | 新增 DestroyMarshalledStruct 声明 | +5 |
+| `src/native/runtime-core/struct_marshal.cpp` | 6 种新字段编组逻辑 | +120 |
+| `src/native/runtime-core/runtime_core.h` | ResolveStructMarshallingDescriptor + RegisterStaticMarshallingDescriptor | +10 |
+| `src/native/runtime-core/runtime_core.cpp` | 反射构建 + 注册表 | +80 |
+| `src/native/runtime-core/runtime_stubs.cpp` | StructureToPtr/PtrToStructure/DestroyStructure | +80 |
+| `src/managed/Chaos.IL2CPP.Contracts/TypedIlAndAotCoreIrContracts.cs` | ComplexStruct 元数据字段 | +10 |
+| `src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs` | ClassifyValueTypeFields 扩展为构建descriptor | +60 |
+| `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` | EmitStructMarshallingDescriptors | +80 |
+| `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.MethodEmission.cs` | P/Invoke wrapper 引用 descriptor | +40 |
+| `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs` | 注册静态 descriptor | +15 |
 
 ### 完成定义
-- [ ] 嵌套结构体递归 marshalling 正确
-- [ ] descriptor 路径不泄漏内存
-- [ ] build 通过
-- [ ] 测试通过
+- [ ] P6a: StructFieldKind 扩展 + runtime 编组器扩充
+- [ ] P6b: ResolveStructMarshallingDescriptor + 反射兜底
+- [ ] P6c: Codegen 发射 StructMarshallingDescriptorV1
+- [ ] P6d: P/Invoke wrapper 引用 descriptor
+- [ ] P6e: Marshal.StructureToPtr / PtrToStructure / DestroyStructure
+- [ ] dotnet build 通过
+- [ ] cmake --build 通过
+- [ ] 关键测试通过
 
 ---
 

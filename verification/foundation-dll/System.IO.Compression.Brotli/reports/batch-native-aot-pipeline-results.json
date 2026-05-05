@@ -1,5 +1,6 @@
 {
   "assembly": "System.IO.Compression.Brotli",
+  "mode": "family-entrypoint",
   "total": 4,
   "passed": 4,
   "failed": 0,
@@ -8,9 +9,7 @@
       "family": "decoder",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -21,9 +20,7 @@
       "family": "encoder",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -34,9 +31,7 @@
       "family": "options",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -47,9 +42,7 @@
       "family": "stream",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -57,5 +50,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Compression.Brotli\\stream\\il2cpp_dist\\entrypoint\\build-output\\StreamPatchEntry.dll"
     }
   ],
-  "timestamp": "2026-05-04T01:14:43"
+  "timestamp": "2026-05-05T19:23:41"
 }

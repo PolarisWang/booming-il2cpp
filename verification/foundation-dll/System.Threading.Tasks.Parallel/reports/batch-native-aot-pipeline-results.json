@@ -1,5 +1,6 @@
 {
   "assembly": "System.Threading.Tasks.Parallel",
+  "mode": "family-entrypoint",
   "total": 4,
   "passed": 4,
   "failed": 0,
@@ -8,9 +9,7 @@
       "family": "loop-result",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -21,9 +20,7 @@
       "family": "loop-state",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -34,9 +31,7 @@
       "family": "parallel-apis",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -47,9 +42,7 @@
       "family": "parallel-options",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -57,5 +50,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\parallel-options\\il2cpp_dist\\entrypoint\\build-output\\ParallelOptionsPatchEntry.dll"
     }
   ],
-  "timestamp": "2026-05-04T01:20:33"
+  "timestamp": "2026-05-05T19:23:42"
 }

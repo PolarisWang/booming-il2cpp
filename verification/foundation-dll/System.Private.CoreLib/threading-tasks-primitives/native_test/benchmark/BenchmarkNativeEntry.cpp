@@ -1,7 +1,9 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/threading/tasks-primitives
 #include <chaos/native_types.h>
-#include <chaos/native_types.h>
+#include <cctype>
+#include <cstring>
+#include <string>
 
 namespace chaos::benchmark::threading_tasks_primitives
 {
@@ -17,7 +19,7 @@ namespace chaos::benchmark::threading_tasks_primitives
 
     // [2] System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_2() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [3] System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()
@@ -27,7 +29,7 @@ namespace chaos::benchmark::threading_tasks_primitives
 
     // [4] System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_4() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [5] System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()
@@ -67,7 +69,7 @@ namespace chaos::benchmark::threading_tasks_primitives
 
     // [12] System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_12() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [13] System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()

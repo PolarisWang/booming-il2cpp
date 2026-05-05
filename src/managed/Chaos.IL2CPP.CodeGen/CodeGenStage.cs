@@ -138,7 +138,62 @@ public sealed class CodeGenStage
         };
     }
 
-    private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAssemblies(
+    /// <summary>
+    /// Generate per-assembly codegen results from a multi-assembly pipeline run.
+    /// Each input assembly gets its own filtered AotCoreIr, CodeRegistration, and LoweringPlan.
+    /// </summary>
+        /// <summary>
+    /// Filter a full pipeline result into per-assembly results.
+    /// Each input assembly gets its own output root and filtered method set.
+    /// </summary>
+    public IReadOnlyList<ManagedClosureResult> FilterResultPerAssembly(
+        ManagedClosureResult fullResult,
+        IReadOnlyList<string> inputAssemblyPaths)
+    {
+        var results = new List<ManagedClosureResult>();
+
+        foreach (var asmPath in inputAssemblyPaths)
+        {
+            var asmName = System.IO.Path.GetFileNameWithoutExtension(asmPath);
+            var asmOutputRoot = System.IO.Path.Combine(fullResult.OutputRootPath, asmName);
+            System.IO.Directory.CreateDirectory(asmOutputRoot);
+
+            // Filter AotCoreIr methods to this assembly
+            var assemblyMethods = fullResult.AotCoreIr?.Methods
+                .Where(m => m.SubjectId.StartsWith(asmName + "/", System.StringComparison.Ordinal)
+                         || m.SubjectId.StartsWith(asmName + ".", System.StringComparison.Ordinal))
+                .ToList() ?? [];
+
+            var filteredAotCoreIr = fullResult.AotCoreIr is null ? null : fullResult.AotCoreIr with
+            {
+                Methods = assemblyMethods,
+            };
+
+            results.Add(new ManagedClosureResult
+            {
+                OutputRootPath = asmOutputRoot,
+                TypedIlIr = fullResult.TypedIlIr,
+                AotCoreIr = filteredAotCoreIr,
+                AotManifest = fullResult.AotManifest,
+                MetadataRegistration = fullResult.MetadataRegistration,
+                SupplementalMetadataTemplate = fullResult.SupplementalMetadataTemplate,
+                CodeRegistration = fullResult.CodeRegistration,
+                GenericInstantiationDemandGraph = fullResult.GenericInstantiationDemandGraph,
+                GenericCapabilityMatrix = fullResult.GenericCapabilityMatrix,
+                OptimizationFacts = fullResult.OptimizationFacts,
+                PreserveDescriptor = fullResult.PreserveDescriptor,
+                NativeReferenceLoweringPlan = fullResult.NativeReferenceLoweringPlan,
+                NativeAotLoweringPlan = fullResult.NativeAotLoweringPlan,
+                ClosureManifest = fullResult.ClosureManifest,
+            });
+        }
+
+        return results;
+    }
+
+
+
+private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAssemblies(
         ManagedClosureRequest request,
         LinkedWorldModel linkedWorld)
     {

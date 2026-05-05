@@ -634,7 +634,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return "void";
 		}
-		return string.Join(", ", abiSlots.Select((AotCoreIrAbiSlotArtifact slot, int index) => $"{MapAbiSlotParameterType(slot)} chaos_arg_{index}"));
+		return string.Join(", ", abiSlots.Select((AotCoreIrAbiSlotArtifact slot, int index) => $"{MapAbiSlotParameterType(slot)} chaos_fn_arg_{index}"));
 	}
 
 	/// <summary>
@@ -670,22 +670,22 @@ public sealed partial class NativeAotLoweringPlanner
 			case AotCoreIrAbiCarrierKind.ByRef:
 			case AotCoreIrAbiCarrierKind.MultiReturn:
 			case AotCoreIrAbiCarrierKind.ByRefToValueType:
-				lines.Add($"    chaos_args[{i}] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_arg_{i});");
+				lines.Add($"    chaos_args[{i}] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_{i});");
 				break;
 			case AotCoreIrAbiCarrierKind.Float32:
-				lines.Add($"    chaos_args[{i}] = ChaosStoreFloat32(chaos_arg_{i});");
+				lines.Add($"    chaos_args[{i}] = ChaosStoreFloat32(chaos_fn_arg_{i});");
 				break;
 			case AotCoreIrAbiCarrierKind.Float64:
-				lines.Add($"    chaos_args[{i}] = ChaosStoreFloat64(chaos_arg_{i});");
+				lines.Add($"    chaos_args[{i}] = ChaosStoreFloat64(chaos_fn_arg_{i});");
 				break;
 			case AotCoreIrAbiCarrierKind.Int64:
-				lines.Add($"    chaos_args[{i}] = ChaosStoreInt64(chaos_arg_{i});");
+				lines.Add($"    chaos_args[{i}] = ChaosStoreInt64(chaos_fn_arg_{i});");
 				break;
 			case AotCoreIrAbiCarrierKind.UInt64:
-				lines.Add($"    chaos_args[{i}] = chaos_store_uint64(chaos_arg_{i});");
+				lines.Add($"    chaos_args[{i}] = chaos_store_uint64(chaos_fn_arg_{i});");
 				break;
 			case AotCoreIrAbiCarrierKind.ValueTypeByValue:
-				lines.Add($"    auto chaos_abi_param_{i} = chaos_arg_{i};");
+				lines.Add($"    auto chaos_abi_param_{i} = chaos_fn_arg_{i};");
 				lines.Add($"    chaos_args[{i}] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_abi_param_{i});");
 				break;
 			default:

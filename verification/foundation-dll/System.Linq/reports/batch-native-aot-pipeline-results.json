@@ -1,5 +1,6 @@
 {
   "assembly": "System.Linq",
+  "mode": "family-entrypoint",
   "total": 12,
   "passed": 12,
   "failed": 0,
@@ -8,9 +9,7 @@
       "family": "aggregation",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -21,9 +20,7 @@
       "family": "filtering",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -34,9 +31,7 @@
       "family": "generation-concat",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -47,9 +42,7 @@
       "family": "grouping-lookup",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -60,9 +53,7 @@
       "family": "joins",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -73,9 +64,7 @@
       "family": "materialization",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -86,9 +75,7 @@
       "family": "numeric-aggregation",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -99,9 +86,7 @@
       "family": "ordering",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -112,9 +97,7 @@
       "family": "partitioning",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -125,9 +108,7 @@
       "family": "projection",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -138,9 +119,7 @@
       "family": "set-operations",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -151,9 +130,7 @@
       "family": "shuffle-index",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 65,
@@ -161,5 +138,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Linq\\shuffle-index\\il2cpp_dist\\entrypoint\\build-output\\ShuffleIndexPatchEntry.dll"
     }
   ],
-  "timestamp": "2026-05-04T01:16:43"
+  "timestamp": "2026-05-05T19:24:41"
 }

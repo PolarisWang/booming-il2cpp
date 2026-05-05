@@ -334,6 +334,11 @@ public sealed partial class NativeAotLoweringPlanner
 		return GetNativeSymbol("chaos_type_info_", subjectId);
 	}
 
+	private static string GetNativeStructMarshallingDescriptorSymbol(string subjectId)
+	{
+		return GetNativeSymbol("chaos_marshal_desc_", subjectId);
+	}
+
 	/// <summary>
 	/// Compute FNV-1a 64-bit stable type ID from a subject ID.
 	/// Must match chaos_compute_type_stable_id() in type_info.h.

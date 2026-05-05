@@ -367,30 +367,116 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
     return result
 
 
+def _run_direct_assembly_translation(assembly_name: str) -> dict:
+    """Run convert-to-cpp directly on an assembly DLL (no synthetic entrypoint).
+
+    Translates the actual assembly DLL through the full IL2CPP pipeline,
+    producing per-assembly C++ output. This is the 'final form' IL2CPP
+    translation that foundation DLL verification should use.
+    """
+    # Find the actual assembly DLL
+    dll_path = _find_assembly_dll(assembly_name)
+    if dll_path is None:
+        return {"assembly": assembly_name, "success": False, "error": f"DLL not found for {assembly_name}"}
+
+    assembly_out = _VERIFICATION_BASE / assembly_name / "il2cpp_dist" / "genuine"
+    assembly_out.mkdir(parents=True, exist_ok=True)
+
+    print(f"\n{'='*60}")
+    print(f"Assembly: {assembly_name}")
+    print(f"DLL: {dll_path}")
+    print(f"{'='*60}")
+
+    result = subprocess.run(
+        [
+            "dotnet", "run", "--no-build",
+            "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
+            "--", "convert-to-cpp",
+            "--assembly", dll_path,
+            "--output", str(assembly_out),
+            "--full-closure",
+        ],
+        capture_output=True, text=True,
+        timeout=300,
+    )
+
+    if result.returncode != 0:
+        print(f"  convert-to-cpp FAILED (rc={result.returncode})")
+        for line in result.stderr.splitlines()[-10:]:
+            print(f"    {line}")
+        trace("assembly_translate_failed", assembly=assembly_name)
+        return {"assembly": assembly_name, "success": False, "error": result.stderr.splitlines()[-1][:200] if result.stderr.splitlines() else "unknown"}
+
+    # Check output
+    cpp_path = assembly_out / "generated" / "native-aot.generated.cpp"
+    if cpp_path.exists():
+        size = cpp_path.stat().st_size
+        print(f"  convert-to-cpp OK: {size} bytes")
+    else:
+        print(f"  convert-to-cpp OK (no .cpp output found)")
+
+    trace("assembly_translate_passed", assembly=assembly_name)
+    return {"assembly": assembly_name, "success": True, "error": None}
+
+
+def _find_assembly_dll(assembly_name: str) -> str | None:
+    """Find the actual assembly DLL for a given assembly name.
+
+    Searches trusted platform assemblies and common locations.
+    """
+    # Check TRUSTED_PLATFORM_ASSEMBLIES env (set by dotnet host)
+    tpa = os.environ.get("TRUSTED_PLATFORM_ASSEMBLIES", "")
+    if tpa:
+        for path in tpa.split(os.pathsep):
+            if os.path.basename(path).lower() == f"{assembly_name.lower()}.dll":
+                return path
+
+    # Check common locations
+    search_dirs = [
+        _VERIFICATION_BASE / assembly_name,
+        _REPO_ROOT / "src" / "managed" / assembly_name / "bin" / "Debug" / "net8.0",
+        _REPO_ROOT / "verification" / "foundation-dll" / assembly_name,
+        Path(os.environ.get("DOTNET_ROOT", "C:/Program Files/dotnet")) / "shared" / "Microsoft.NETCore.App" / "8.0",
+    ]
+    for d in search_dirs:
+        if d.exists():
+            for f in d.iterdir():
+                if f.is_file() and f.name.lower() == f"{assembly_name.lower()}.dll":
+                    return str(f.resolve())
+
+    return None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Batch native AOT CodeGen pipeline")
     parser.add_argument("--assembly-name", default="System.Private.CoreLib", help="Assembly name to process")
     parser.add_argument("--trace", action="store_true", default=True, help="Enable JSONL trace logging (default: on)")
     parser.add_argument("--no-trace", action="store_true", help="Disable JSONL trace logging")
     parser.add_argument("--families", nargs="*", help="Space-separated subset of family slugs to process. Auto-discovers from contracts if not specified.")
+    parser.add_argument("--translate-assemblies", action="store_true", help="Translate actual assembly DLLs directly (final-form IL2CPP, no synthetic entrypoints)")
+    parser.add_argument("--assembly-dlls", nargs="*", help="Space-separated assembly DLL paths for direct translation")
     args = parser.parse_args()
 
     global _VERIFICATION
     _VERIFICATION = _VERIFICATION_BASE / args.assembly_name
 
+    if args.trace and not args.no_trace:
+        trace_init(_REPO_ROOT, stage="batch-native-aot")
+
+    if args.translate_assemblies:
+        _run_assembly_translation_mode(args)
+        return
+
+    # Original per-family entrypoint mode
     if not _VERIFICATION.exists():
         print(f"FATAL: verification directory not found: {_VERIFICATION}", file=sys.stderr)
         sys.exit(1)
-
-    if args.trace and not args.no_trace:
-        trace_init(_REPO_ROOT, stage="batch-native-aot")
 
     families = args.families
     if not families:
         families = _discover_families(args.assembly_name)
         if not families:
             print(f"No families found for {args.assembly_name} (no contracts)")
-            # Fall back to FAMILIES constant for backward compat
             families = FAMILIES
 
     print(f"Batch native AOT CodeGen pipeline - {len(families)} families")
@@ -429,7 +515,63 @@ def main() -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     summary = {
         "assembly": args.assembly_name,
+        "mode": "family-entrypoint",
         "total": len(families),
+        "passed": passed,
+        "failed": failed,
+        "results": results,
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+    }
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2, ensure_ascii=False)
+    print(f"\nResults written to {output_path}")
+
+
+def _run_assembly_translation_mode(args: argparse.Namespace) -> None:
+    """Run in assembly translation mode — translates actual DLLs directly."""
+    print(f"{'='*60}")
+    print(f"Batch native AOT: Assembly Translation Mode")
+    print(f"{'='*60}")
+
+    assemblies = args.assembly_dlls
+    if not assemblies:
+        # Auto-discover: use the assembly name
+        assemblies = [args.assembly_name]
+
+    print(f"Assemblies to translate: {len(assemblies)}")
+    for a in assemblies:
+        print(f"  {a}")
+    print()
+
+    results = []
+    passed = 0
+    failed = 0
+
+    for idx, asm_name in enumerate(assemblies):
+        asm_result = _run_direct_assembly_translation(asm_name)
+        results.append(asm_result)
+
+        if asm_result["success"]:
+            passed += 1
+            print(f"  >>> PASSED ({passed}/{idx+1})")
+        else:
+            failed += 1
+            print(f"  >>> FAILED ({failed}/{idx+1}): {asm_result.get('error', 'unknown')}")
+
+    # Summary
+    print(f"\n{'='*60}")
+    print(f"Assembly translation: {passed} passed, {failed} failed, {len(assemblies)} total")
+    print(f"{'='*60}")
+    for r in results:
+        status = "PASS" if r["success"] else "FAIL"
+        print(f"  {status:4s}  {r['assembly']}")
+
+    # Write results
+    output_path = _VERIFICATION_BASE / args.assembly_name / "reports" / "batch-assembly-translation-results.json"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    summary = {
+        "mode": "assembly-translation",
+        "total": len(assemblies),
         "passed": passed,
         "failed": failed,
         "results": results,

@@ -1,5 +1,6 @@
 {
   "assembly": "System.Runtime.Serialization.Formatters",
+  "mode": "family-entrypoint",
   "total": 6,
   "passed": 6,
   "failed": 0,
@@ -8,9 +9,7 @@
       "family": "binary-formatter",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 16,
@@ -21,9 +20,7 @@
       "family": "binder-type-style",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 3,
@@ -34,9 +31,7 @@
       "family": "formatter-base",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 84,
@@ -47,9 +42,7 @@
       "family": "formatter-services-converter",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 33,
@@ -60,9 +53,7 @@
       "family": "object-manager-id-generator",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 15,
@@ -73,9 +64,7 @@
       "family": "surrogate-selection",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 11,
@@ -83,5 +72,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.Serialization.Formatters\\surrogate-selection\\il2cpp_dist\\entrypoint\\build-output\\SurrogateSelectionPatchEntry.dll"
     }
   ],
-  "timestamp": "2026-05-04T01:23:28"
+  "timestamp": "2026-05-05T19:24:09"
 }

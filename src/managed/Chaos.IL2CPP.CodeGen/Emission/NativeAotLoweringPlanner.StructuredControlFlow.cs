@@ -899,9 +899,11 @@ public sealed partial class NativeAotLoweringPlanner
         if (mergeOffset.HasValue && cfg.OffsetToBlockIndex.TryGetValue(mergeOffset.Value, out var mergeIdx))
         {
             thenBranch = RecoverStructure(cfg, trueBlockIdx, mergeIdx - 1, loopHeaderOffset, loopExitOffset);
-            if (falseBlockIdx < mergeIdx)
+            // Else range must not overlap with the true-target block.
+            int elseEnd = Math.Min(mergeIdx - 1, trueBlockIdx - 1);
+            if (falseBlockIdx <= elseEnd)
             {
-                elseBranch = RecoverStructure(cfg, falseBlockIdx, mergeIdx - 1, loopHeaderOffset, loopExitOffset);
+                elseBranch = RecoverStructure(cfg, falseBlockIdx, elseEnd, loopHeaderOffset, loopExitOffset);
             }
             else
             {
@@ -912,8 +914,10 @@ public sealed partial class NativeAotLoweringPlanner
         else
         {
             thenBranch = RecoverStructure(cfg, trueBlockIdx, endIdx, loopHeaderOffset, loopExitOffset);
-            if (falseBlockIdx <= endIdx)
-                elseBranch = RecoverStructure(cfg, falseBlockIdx, endIdx, loopHeaderOffset, loopExitOffset);
+            // Else range must not overlap with the true-target block.
+            int elseEnd2 = Math.Min(endIdx, trueBlockIdx - 1);
+            if (falseBlockIdx <= elseEnd2)
+                elseBranch = RecoverStructure(cfg, falseBlockIdx, elseEnd2, loopHeaderOffset, loopExitOffset);
             else
                 elseBranch = null;
         }

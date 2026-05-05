@@ -1,17 +1,18 @@
-"""Generate per-family hotupdate C++ test from CodeGen-generated host and patch C++.
+"""Generate per-family D3 hotupdate C++ test from CodeGen-generated host C++.
 
 For each family, this script:
-  1. Copies the patch native-aot.generated.cpp with RunNativeAot renamed to avoid collision
-  2. Generates a HotUpdateTest.cpp that:
-     - Forward-declares all extern "C" MethodN symbols from both host and patch
-     - Links to the renamed patch file via extern declarations
-     - Implements the 9-step verification cycle for each method
-  3. Creates CMakeLists.txt with proper linkage
+  1. Reads the host (genuine) native-aot.generated.cpp to discover MethodN symbols
+  2. Fixes the genuine TU by injecting missing structs/type-ids (→ genuine-fixed)
+  3. Embeds .patchdata as a C++ byte array in HotUpdateTest.cpp
+  4. Generates HotUpdateTest.cpp that:
+     - Bootstraps the runtime through the ABI bridge
+     - Calls ApplyPatchFromMemory to apply D3 dispatch hotpatch
+     - For each method: verifies dispatch entry flags, calls InterpreterEntryDirect
+     - Calls Unpatch, verifies dispatch entry flags are cleared
+  5. Creates/updates CMakeLists.txt with proper linkage (no patch C++ TU)
 
-Usage:
-    python generate_hotupdate_test.py
-        --families math-numerics convert-char
-    (runs for all families if --families omitted)
+The test verifies the D3 dual-layer dispatch lifecycle:
+  ApplyPatchFromMemory → dispatch table patching → InterpreterEntryDirect → Unpatch
 """
 
 from __future__ import annotations
@@ -82,20 +83,13 @@ def _class_name(family_slug: str, variant: str) -> str:
     return f"{base}NativeEntry" if variant == "host" else f"{base}PatchEntry"
 
 
-def _discover_method_symbols(family_slug: str) -> tuple[list[str], list[str]]:
+def _discover_host_symbols(family_slug: str) -> list[str]:
     """Scan the genuine (host) generated C++ to discover MethodN symbols.
 
-    Returns (host_symbols, patch_symbols).
+    Returns host_symbols list.
     """
     host_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
-    patch_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "native-aot.generated.cpp"
-    if not patch_cpp.exists():
-        patch_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "generated" / "native-aot.generated.cpp"
-
-    host_symbols = _extract_method_symbols(host_cpp)
-    patch_symbols = _extract_method_symbols(patch_cpp)
-
-    return host_symbols, patch_symbols
+    return _extract_method_symbols(host_cpp)
 
 
 def _extract_method_symbols(cpp_path: Path) -> list[str]:
@@ -133,10 +127,9 @@ def _load_contract(family_slug: str) -> list[str]:
 def _generate_hotupdate_test(
     family_slug: str,
     host_symbols: list[str],
-    patch_symbols: list[str],
     method_subject_ids: list[str],
 ) -> str:
-    """Generate the per-family hotupdate C++ test source."""
+    """Generate the per-family D3 hotupdate C++ test source."""
     family_id = f"family/System.Private.CoreLib/{family_slug.replace('-', '/')}"
     ns_slug = _ns_slug_from_family_id(family_id)
     method_count = len(host_symbols)
@@ -149,8 +142,8 @@ def _generate_hotupdate_test(
     if patch_data_cxx:
         lines.append(patch_data_cxx)
     _emit_header(lines, family_id, method_count)
-    _emit_forward_decls(lines, host_symbols, patch_symbols)
-    _emit_namespace_block(lines, host_symbols, patch_symbols, method_count)
+    _emit_forward_decls(lines, host_symbols)
+    _emit_namespace_block(lines, host_symbols, method_count)
     _emit_main_function(lines, method_count, family_id, bool(patch_data_cxx), host_class_name)
 
     return "\n".join(lines)
@@ -196,20 +189,17 @@ def _emit_header(
         f"// Family: {family_id}",
         f"// {method_count} methods",
         "//",
-        "// Uses CodeGen-generated C++ for both host (real API calls) and",
-        "// patch (sentinel returns). Verifies the D3 dispatch hotpatch lifecycle:",
-        "//   ApplyPatchFromMemory -> dispatch table patching -> Unpatch",
+        "// Uses the codegen-emitted dispatch table + .patchdata for D3 verification:",
+        "//   ApplyPatchFromMemory -> dispatch table patching -> InterpreterEntryDirect -> Unpatch",
         "//",
     ])
     lines.extend([
         '#include "bootstrap.h"',
         '#include "codegen_bridge.h"',
-        '#include "method_replacement.h"',
-        '#include "method_table.h"',
-        '#include "module_registry.h"',
-        '#include "abi_manifest.h"',
         '#include "patch_loader.h"',
         '#include "dispatch_table.h"',
+        '#include "runtime_core.h"',
+        '#include "interpreter_entry.h"',
         "",
         "#include <cstdio>",
         "#include <cstdint>",
@@ -221,7 +211,6 @@ def _emit_header(
 def _emit_forward_decls(
     lines: list[str],
     host_symbols: list[str],
-    patch_symbols: list[str],
 ) -> None:
     lines.append("// ---------------------------------------------------------------")
     lines.append("// Forward declarations: host methods (real API calls via CodeGen)")
@@ -229,18 +218,10 @@ def _emit_forward_decls(
     for sym in host_symbols:
         lines.append(f'extern "C" CHAOS_IL2CPP_INT32 {sym}(void);')
 
-    lines.append("")
-    lines.append("// ---------------------------------------------------------------")
-    lines.append("// Forward declarations: patch methods (sentinel returns via CodeGen)")
-    lines.append("// ---------------------------------------------------------------")
-    for sym in patch_symbols:
-        lines.append(f'extern "C" CHAOS_IL2CPP_INT32 {sym}(void);')
-
 
 def _emit_namespace_block(
     lines: list[str],
     host_symbols: list[str],
-    patch_symbols: list[str],
     method_count: int,
 ) -> None:
     lines.extend([
@@ -266,43 +247,6 @@ def _emit_namespace_block(
     lines.extend([
         "};",
         "",
-        "// Patch method pointer array (auto-indexed by MethodN ordering)",
-        "void* (*kPatchThunks[])() = {",
-    ])
-    for sym in patch_symbols:
-        lines.append(f"    reinterpret_cast<void* (*)()>(&{sym}),")
-    lines.append("};")
-
-
-    lines.extend([
-        "",
-        "constexpr uint32_t kAotDomainIdFallback = 0u;",
-        "",
-        "// ── ABI validation module ────────────────────────────────────────",
-        "// Register a module with a uniform manifest (all thunks return Int32, no params)",
-        "// so the test can validate ResolveMethodTableWithAbiCheck.",
-        "static uint32_t RegisterAbiModule() {",
-        "    alignas(ChaosAbiManifestV0) static uint8_t s_manifest_buf[",
-        "        sizeof(ChaosAbiManifestV0) + sizeof(ChaosAbiMethodEntryV0)] = {};",
-        "    auto* m = reinterpret_cast<ChaosAbiManifestV0*>(s_manifest_buf);",
-        "    m->abi_version = CHAOS_ABI_MANIFEST_VERSION;",
-        "    m->method_count = 1;",
-        "    m->parameters_byte_count = 0;",
-        "    m->checksum = 0;",
-        "    auto* e = reinterpret_cast<ChaosAbiMethodEntryV0*>(",
-        "        s_manifest_buf + sizeof(ChaosAbiManifestV0));",
-        "    e[0].return_carrier = CHAOS_ABI_CARRIER_INT32;",
-        "    e[0].parameter_count = 0;",
-        "",
-        "    static ::chaos::il2cpp::runtime_core::ModuleDescriptor s_abi_mod = {};",
-        "    s_abi_mod.name_utf8 = \"hotupdate-abi-test\";",
-        "    s_abi_mod.abi_manifest = reinterpret_cast<const ChaosAbiManifestV0*>(s_manifest_buf);",
-        "",
-        "    return ::chaos::il2cpp::runtime_core::RegisterModule(",
-        "        \"hotupdate-abi-test\", &s_abi_mod);",
-        "}",
-        "static const uint32_t kAbiTestModuleId = RegisterAbiModule();",
-        "",
         "}  // namespace",
     ])
 
@@ -313,18 +257,12 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
     lines.extend([
         "",
         "int main() {",
-        "    using chaos::il2cpp::bootstrap::FindMethodPointerByToken;",
         "    using chaos::il2cpp::bootstrap::PeekBootstrapState;",
-        "    using chaos::il2cpp::method_replacement::ActiveCount;",
-        "    using chaos::il2cpp::method_replacement::Register;",
-        "    using chaos::il2cpp::method_replacement::Resolve;",
-        "    using chaos::il2cpp::method_replacement::Revert;",
-        "    using chaos::il2cpp::method_replacement::RevertAll;",
         "    using chaos::il2cpp::runtime_core::ApplyPatchFromMemory;",
         "    using chaos::il2cpp::runtime_core::Unpatch;",
-        "    using chaos::il2cpp::runtime_core::RuntimeDispatchLookup;",
-            "    using chaos::il2cpp::runtime_core::RuntimeDispatchLookupBySlot;",
+        "    using chaos::il2cpp::runtime_core::RuntimeDispatchLookupBySlot;",
         "    using chaos::il2cpp::runtime_core::PatchContext;",
+        "    using chaos::il2cpp::runtime_core::InterpreterEntryDirect;",
         "",
         "    // Build synthetic method pointer table with host methods.",
         "    MethodPointerEntry entries[kMethodCount];",
@@ -365,13 +303,25 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         '        std::fprintf(stderr, "FATAL: bootstrap state is null after bootstrap\\n");',
         "        return 1;",
         "    }",
+        "",
+        "    // Force-reference to ensure runtime_core.obj is pulled in on MSVC",
+        "    // before reflection_api.obj (both in chaos_runtime_core.lib).",
+        "    (void)chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
+        "",
+        "    // Verify dispatch table is registered (codegen static initializer).",
+        "    auto* first_entry = RuntimeDispatchLookupBySlot(0u, 0u);",
+        "    if (first_entry == nullptr) {",
+        '        std::fprintf(stderr, "FATAL: no dispatch table registered by codegen TU\\n");',
+        "        return 1;",
+        "    }",
+        "    (void)first_entry;",
     ])
 
-    # Apply D3 patch BEFORE JSON output so d3_patched_count is available
+    # Apply D3 patch
     if has_patch_data:
         lines.extend([
             "",
-            "    // ── D3 dispatch hotpatch: ApplyPatchFromMemory ─────────────────",
+            "    // ── D3 dispatch hotpatch via ApplyPatchFromMemory ────────────────",
             f'    PatchContext* patch_ctx = ApplyPatchFromMemory(kPatchData, kPatchDataSize, "{host_class_name}");',
             "    if (patch_ctx == nullptr) {",
             '        std::fprintf(stderr, "FATAL: ApplyPatchFromMemory failed\\n");',
@@ -401,134 +351,65 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         '    std::printf("  \\"verificationKind\\": \\"hotupdate-proof\\",\\n");',
         '    std::printf("  \\"totalMethods\\": %u,\\n", kMethodCount);',
         '    std::printf("  \\"d3PatchApplied\\": %s,\\n", (d3_patched_count > 0u) ? "true" : "false");',
+        '    std::printf("  \\"d3PatchedCount\\": %u,\\n", d3_patched_count);',
         '    std::printf("  \\"results\\": [\\n");',
         "",
         "    uint32_t passed_count = 0u;",
         "    uint32_t failed_count = 0u;",
-        "    RevertAll();",
-    ])
-    lines.extend([
+        "",
         "    for (uint32_t i = 0u; i < kMethodCount; i++) {",
-        "        const uint32_t token = kBaseToken + i;",
-        "        const uintptr_t expected_sentinel_b = kSentinelPatchBase + i;",
-        "",
         "        bool step_ok = true;",
+        "        const uintptr_t expected_patched = kSentinelPatchBase + i;",
         "",
-        "        // Step 1: Find original pointer via bootstrap dispatch chain.",
-        "        void* original_ptr = FindMethodPointerByToken(token);",
-        "        if (original_ptr == nullptr) {",
-        '            std::fprintf(stderr, "FAIL[%u]: FindMethodPointerByToken returned null\\n", i);',
+        "        // Step 1: Get dispatch entry via RuntimeDispatchLookupBySlot.",
+        "        auto* entry = RuntimeDispatchLookupBySlot(0u, i);",
+        "        if (entry == nullptr) {",
+        '            std::fprintf(stderr, "FAIL[%u]: RuntimeDispatchLookupBySlot returned null\\n", i);',
         "            step_ok = false;",
         "        }",
         "",
-        "        // Step 2: Note original pointer (don't call — host thunks use runtime API stubs",
-        "        // that return 0 and may trigger CHAOS_IL2CPP_ABORT on null-sensitive paths).",
-        "        uintptr_t original_value = 0u;",
+        "        // Step 2: Verify direct_ptr is non-null (AOT codegen function).",
+        "        if (entry != nullptr && entry->direct_ptr == nullptr) {",
+        '            std::fprintf(stderr, "FAIL[%u]: dispatch entry direct_ptr is null\\n", i);',
+        "            step_ok = false;",
+        "        }",
         "",
     ])
     if has_patch_data:
         lines.extend([
-            "        // Step 2c: Verify D3 dispatch entry has kDispatchPatched flag.",
-            "        if (d3_patched_count > 0) {",
-            "            auto* dispatch_entry = RuntimeDispatchLookupBySlot(0u, i);",
-            "            if (dispatch_entry == nullptr) {",
-            '            std::fprintf(stderr, "FAIL[%u]: RuntimeDispatchLookupBySlot returned null\\n", i);',
-            "                step_ok = false;",
-            "            } else if (!(dispatch_entry->flags & kDispatchPatched)) {",
-            '            std::fprintf(stderr, "FAIL[%u]: dispatch entry not patched (flags=0x%08x)\\n", i, dispatch_entry->flags);',
-            "                step_ok = false;",
-            "            }",
+            "        // Step 3: Verify dispatch entry has kDispatchPatched flag set.",
+            "        bool patched_flag = (entry != nullptr) && (entry->flags & kDispatchPatched);",
+            "        if (!patched_flag) {",
+            '            std::fprintf(stderr, "FAIL[%u]: dispatch entry not patched (flags=0x%08x)\\n",',
+            "                i, entry ? entry->flags : 0u);",
+            "            step_ok = false;",
+            "        }",
+            "",
+            "        // Step 4: Verify method_key is set (PatchMethod*).",
+            "        uintptr_t method_key = (entry != nullptr) ? entry->method_key : 0u;",
+            "        if (method_key == 0u) {",
+            '            std::fprintf(stderr, "FAIL[%u]: method_key is null (PatchMethod* not set)\\n", i);',
+            "            step_ok = false;",
+            "        }",
+            "",
+            "        // Step 5: Call via InterpreterEntryDirect and verify sentinel return.",
+            "        CHAOS_IL2CPP_INT32 patched_value = 0;",
+            "        if (method_key != 0u) {",
+            "            InterpreterEntryDirect(method_key, nullptr, &patched_value);",
+            "        }",
+            "        if (static_cast<uintptr_t>(patched_value) != expected_patched) {",
+            '            std::fprintf(stderr, "FAIL[%u]: InterpreterEntryDirect returned 0x%08x, expected 0x%08zx\\n",',
+            "                i, static_cast<unsigned>(patched_value), static_cast<size_t>(expected_patched));",
+            "            step_ok = false;",
             "        }",
         ])
-
-
-    lines.extend([
-        "        // Step 3: Register patch replacement (CodeGen-generated sentinel).",
-        "        if (!Register(token, reinterpret_cast<void*>(kPatchThunks[i]))) {",
-        '            std::fprintf(stderr, "FAIL[%u]: Register returned false\\n", i);',
-        "            step_ok = false;",
-        "        }",
-        "",
-        "        // Step 4: Resolve directly - must return patched thunk.",
-        "        void* resolved_after_patch = Resolve(token);",
-        "        if (resolved_after_patch == nullptr) {",
-        '            std::fprintf(stderr, "FAIL[%u]: Resolve returned null after Register\\n", i);',
-        "            step_ok = false;",
-        "        }",
-        "        if (resolved_after_patch != reinterpret_cast<void*>(kPatchThunks[i])) {",
-        '            std::fprintf(stderr, "FAIL[%u]: Resolve returned wrong pointer after Register\\n", i);',
-        "            step_ok = false;",
-        "        }",
-        "",
-        "        // Step 5: FindMethodPointerByToken - must return patched thunk (integration test).",
-        "        void* dispatch_ptr = FindMethodPointerByToken(token);",
-        "        if (dispatch_ptr == nullptr) {",
-        '            std::fprintf(stderr, "FAIL[%u]: FindMethodPointerByToken returned null after Register\\n", i);',
-        "            step_ok = false;",
-        "        }",
-        "        if (dispatch_ptr != reinterpret_cast<void*>(kPatchThunks[i])) {",
-        '            std::fprintf(stderr, "FAIL[%u]: FindMethodPointerByToken did not return patched thunk\\n", i);',
-        "            step_ok = false;",
-        "        }",
-        "",
-        "        // Step 6: Call the dispatch pointer - must return sentinel B.",
-        "        uintptr_t patched_value = 0u;",
-        "        if (dispatch_ptr != nullptr) {",
-        "            auto* thunk = reinterpret_cast<void* (*)()>(dispatch_ptr);",
-        "            patched_value = reinterpret_cast<uintptr_t>(thunk());",
-        "            if (patched_value != expected_sentinel_b) {",
-        '                std::fprintf(stderr, "FAIL[%u]: patched returned 0x%08zx, expected 0x%08zx\\n",',
-        "                    i, static_cast<size_t>(patched_value), static_cast<size_t>(expected_sentinel_b));",
-        "                step_ok = false;",
-        "            }",
-        "        }",
-        "",
-        "        // Step 7: Revert replacement.",
-        "        if (!Revert(token)) {",
-        '            std::fprintf(stderr, "FAIL[%u]: Revert returned false\\n", i);',
-        "            step_ok = false;",
-        "        }",
-        "",
-        "        // Step 8: After revert, FindMethodPointerByToken must return original pointer.",
-        "        void* after_revert_ptr = FindMethodPointerByToken(token);",
-        "        if (after_revert_ptr == nullptr) {",
-        '            std::fprintf(stderr, "FAIL[%u]: FindMethodPointerByToken returned null after Revert\\n", i);',
-        "            step_ok = false;",
-        "        }",
-        "        if (after_revert_ptr != original_ptr) {",
-        '            std::fprintf(stderr, "FAIL[%u]: after Revert, pointer does not match original\\n", i);',
-        "            step_ok = false;",
-        "        }",
-        "",
-        "        // Step 9: After revert, pointer must match original (don't call — same stub limitation as Step 2).",
-        "        if (after_revert_ptr != nullptr) {",
-        "            if (after_revert_ptr != original_ptr) {",
-        '                std::fprintf(stderr, "FAIL[%u]: after Revert, pointer does not match original (reverted ptr check already passed in Step 8)\\n", i);',
-        "                step_ok = false;",
-        "            }",
-        "        }",
-        "",
-        "        // Step 10: ABI validation via method table.",
-        "        // Write the original thunk to the method table, set its origin to",
-        "        // the registered test module, and validate via",
-        "        // ResolveMethodTableWithAbiCheck (expects return=Int32, no params).",
-        "        ::chaos::il2cpp::method_table::WriteMethodTable(i, original_ptr, 1u);",
-        "        ::chaos::il2cpp::method_table::SetMethodOrigin(i, kAbiTestModuleId, 0);",
-        "        void* abi_ptr = ::chaos::il2cpp::method_table::ResolveMethodTableWithAbiCheck(",
-        "            i, CHAOS_ABI_CARRIER_INT32, nullptr, 0);",
-        "        if (abi_ptr == nullptr) {",
-        '            std::fprintf(stderr, "FAIL[%u]: ResolveMethodTableWithAbiCheck returned null\\n", i);',
-        "            step_ok = false;",
-        "        }",
-        "        if (abi_ptr != original_ptr) {",
-        '            std::fprintf(stderr, "FAIL[%u]: ResolveMethodTableWithAbiCheck wrong pointer\\n", i);',
-        "            step_ok = false;",
-        "        }",
-        "",
-    ])
-
+    else:
+        lines.extend([
+            "        // No .patchdata — skip patched-flag and interpreter verification.",
+        ])
 
     lines.extend([
+        "",
         "        if (step_ok) {",
         "            passed_count++;",
         "        } else {",
@@ -541,26 +422,15 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         '            "    {\\n"',
         '            "      \\"methodToken\\": %u,\\n"',
         '            "      \\"status\\": \\"%s\\",\\n"',
-        '            "      \\"originalReturnValue\\": \\"0x%08zx\\",\\n"',
-        '            "      \\"patchedReturnValue\\": \\"0x%08zx\\",\\n"',
-        '            "      \\"expectedPatchedValue\\": \\"0x%08zx\\",\\n"',
-        '            "      \\"revertVerified\\": true,\\n"',
-    ])
-
-    lines.extend([
+        '            "      \\"d3Patched\\": %s,\\n"',
+        '            "      \\"revertVerified\\": false,\\n"',
         '            "      \\"semanticVerified\\": false\\n"',
         '            "    }%s\\n",',
     ])
-
     lines.extend([
-        "            static_cast<unsigned>(token),",
+        "            static_cast<unsigned>(kBaseToken + i),",
         "            step_ok ? \"passed\" : \"failed\",",
-        "            static_cast<size_t>(original_value),",
-        "            static_cast<size_t>(patched_value),",
-        "            static_cast<size_t>(expected_sentinel_b),",
-    ])
-
-    lines.extend([
+        "            (d3_patched_count > 0u) ? \"true\" : \"false\",",
         "            comma);",
         "    }",
         "",
@@ -578,6 +448,16 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             '            std::fprintf(stderr, "FATAL: Unpatch failed\\n");',
             "            return 1;",
             "        }",
+            "",
+            "        // Verify all dispatch entry flags are cleared after Unpatch.",
+            "        for (uint32_t j = 0u; j < kMethodCount; j++) {",
+            "            auto* e = RuntimeDispatchLookupBySlot(0u, j);",
+            "            if (e != nullptr && (e->flags & kDispatchPatched)) {",
+            '                std::fprintf(stderr, "FAIL[unpatch]: entry[%u] still patched after Unpatch (flags=0x%08x)\\n",',
+            "                    j, e->flags);",
+            "                failed_count++;",
+            "            }",
+            "        }",
             "    }",
         ])
     lines.extend([
@@ -586,26 +466,27 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
     ])
 
 
-def _generate_hotupdate_cmake_piece(family_slug: str, host_symbols: list[str]) -> str:
-    """Generate the hotupdate CMake portion to append to existing CMakeLists.txt."""
+def _generate_hotupdate_cmake_full(family_slug: str) -> str:
+    """Generate the complete CMakeLists.txt with D3 hotupdate target."""
     ns_slug = _ns_slug_from_family_id(family_id=f"family/System.Private.CoreLib/{family_slug.replace('-', '/')}")
     target = f"chaos_hotupdate_{ns_slug}"
 
     host_cpp = "hotupdate/genuine-fixed/native-aot.generated.cpp"
-    patch_cpp_renamed = "patch/native-aot.patch.generated.cpp"
     test_cpp = "hotupdate/HotUpdateTest.cpp"
 
     cmake_sources = (
         f"    {test_cpp}\n"
         f"    {host_cpp}\n"
-        f"    {patch_cpp_renamed}\n"
     )
 
+    dummy_lib = f"family_{ns_slug}_dummy"
     return (
-        "# Per-family hotupdate test from CodeGen-generated C++\n"
-        "# The patch file (native-aot.patch.generated.cpp) has RunNativeAot\n"
-        "# renamed to RunNativeAot_{ns_slug} to avoid symbol collision with\n"
-        "# the host file's RunNativeAot.\n"
+        f"add_library({dummy_lib} INTERFACE)\n"
+        "\n"
+        "# Per-family D3 hotupdate test.\n"
+        "# The genuine AOT TU provides dispatch table + NameIndex via static init;\n"
+        "# HotUpdateTest.cpp embeds .patchdata and calls ApplyPatchFromMemory.\n"
+        "# No patch C++ TU needed — the interpreter runs the patched IL directly.\n"
         "\n"
         f"if(EXISTS ${{CMAKE_CURRENT_SOURCE_DIR}}/{test_cpp})\n"
         f"add_executable({target}\n"
@@ -638,36 +519,33 @@ def _generate_hotupdate_cmake_piece(family_slug: str, host_symbols: list[str]) -
         "    chaos_interpreter\n"
         "    chaos_bdwgc\n"
         "    chaos_common\n"
+        # Note: force-reference in HotUpdateTest.cpp (GetCurrentRuntimeState())
+        # resolves MSVC intra-lib circular deps — no WHOLEARCHIVE needed.
         ")\n"
         "endif()\n"
     )
 
 
 def generate_family(family_slug: str) -> dict[str, Any]:
-    """Generate the hotupdate test for a single family."""
+    """Generate the D3 hotupdate test for a single family."""
     print(f"\n{'='*60}")
     print(f"Family: {family_slug}")
     print(f"{'='*60}")
 
     # Discover symbols
-    host_symbols, patch_symbols = _discover_method_symbols(family_slug)
+    host_symbols = _discover_host_symbols(family_slug)
     if not host_symbols:
         print(f"  [SKIP] no host symbols found at {_VERIFICATION / family_slug / 'il2cpp_dist/genuine/generated/'}")
         return {"family": family_slug, "artifacts": []}
-    if not patch_symbols:
-        print(f"  [SKIP] no patch symbols found at {_VERIFICATION / family_slug / 'il2cpp_dist/patch/generated/'}")
-        return {"family": family_slug, "artifacts": []}
 
     print(f"  Host symbols: {len(host_symbols)}")
-    print(f"  Patch symbols: {len(patch_symbols)}")
 
     method_subject_ids = _load_contract(family_slug)
     print(f"  Contract methods: {len(method_subject_ids)}")
 
-    # Generate test (host thunks use runtime API stubs that return 0 and
-    # may trigger CHAOS_IL2CPP_ABORT on null-sensitive paths).
+    # Generate test
     test_source = _generate_hotupdate_test(
-        family_slug, host_symbols, patch_symbols, method_subject_ids,
+        family_slug, host_symbols, method_subject_ids,
     )
     test_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "hotupdate"
     test_dir.mkdir(parents=True, exist_ok=True)
@@ -675,42 +553,26 @@ def generate_family(family_slug: str) -> dict[str, Any]:
     test_path.write_text(test_source, encoding="utf-8")
     print(f"  Test: {test_path.relative_to(_REPO_ROOT)}")
 
-    # Copy patch file with renamed RunNativeAot to avoid symbol collision
+    # Fix genuine TU: inject missing structs/type-ids so it compiles standalone.
     ns_slug = _ns_slug_from_family_id(f"family/System.Private.CoreLib/{family_slug.replace('-', '/')}")
-
-    # Fix genuine TU: function bodies must be in the genuine-fixed TU.
     _fix_genuine_for_hotupdate_keep_extern(family_slug, ns_slug)
 
-    patch_src = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "native-aot.generated.cpp"
-    patch_dst = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "native-aot.patch.generated.cpp"
-    if not patch_src.exists():
-        patch_src = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "generated" / "native-aot.generated.cpp"
-    if patch_src.exists():
-        _rename_and_fix_patch_file(patch_src, patch_dst, ns_slug)
-
-    # The host (genuine-fixed) provides the chaos_external_runtime_* function
-    # bodies; the test verifies the hotupdate mechanism (register/resolve/revert)
-    # via pointer comparison, not by calling host thunks.
-
-    # Append hotupdate test target to the existing CMakeLists.txt
-    cmake_piece = _generate_hotupdate_cmake_piece(family_slug, host_symbols)
+    # Append D3 hotupdate target to existing CMakeLists.txt
+    # (preserves benchmark static library target already in the file).
+    cmake_hotupdate_section = _generate_hotupdate_cmake_full(family_slug)
     cmake_path = _VERIFICATION / family_slug / "il2cpp_dist" / "CMakeLists.txt"
-    if cmake_path.exists():
-        existing = cmake_path.read_text(encoding="utf-8")
-        marker = "# Per-family hotupdate test from CodeGen-generated C++"
-        if marker not in existing:
-            with open(cmake_path, "a", encoding="utf-8") as f:
-                f.write("\n" + cmake_piece)
-            print(f"  CMake: appended hotupdate target to {cmake_path.relative_to(_REPO_ROOT)}")
-        else:
-            print(f"  CMake: already has hotupdate target (skipped)")
+    existing_cmake = cmake_path.read_text(encoding="utf-8") if cmake_path.exists() else ""
+    # Check if hotupdate section is already present (idempotent).
+    hotupdate_marker = f"Per-family D3 hotupdate test"
+    if hotupdate_marker not in existing_cmake:
+        combined = existing_cmake.rstrip() + "\n\n" + cmake_hotupdate_section
+        cmake_path.write_text(combined, encoding="utf-8")
+        print(f"  CMake: {cmake_path.relative_to(_REPO_ROOT)} (appended hotupdate target)")
     else:
-        cmake_path.write_text(cmake_piece, encoding="utf-8")
-        print(f"  CMake: {cmake_path.relative_to(_REPO_ROOT)} (new file)")
+        print(f"  CMake: {cmake_path.relative_to(_REPO_ROOT)} (hotupdate target already present, skipped)")
 
     artifacts = [
         str(test_path.relative_to(_REPO_ROOT)),
-        str(patch_dst.relative_to(_REPO_ROOT)) if patch_src.exists() else "",
     ]
     return {"family": family_slug, "artifacts": [a for a in artifacts if a]}
 
@@ -1006,6 +868,31 @@ def _inject_reflection_bridge_stubs(content: str) -> str:
     return content
 
 
+def _inject_interpreter_entry_include(content: str) -> str:
+    """Inject #include "interpreter_entry.h" and using declaration.
+
+    The codegen emits &InterpreterEntryDirect as the interrupt_ptr value for
+    every dispatch table entry, but the generated TU does not include the
+    header.  This injection adds the include + using so the dispatch table
+    compiles.
+    """
+    marker = '#include "dispatch_table.h"'
+    include_line = '#include "interpreter_entry.h"'
+    if include_line in content:
+        return content  # already injected
+
+    idx = content.find(marker)
+    if idx < 0:
+        return content  # can't find insertion point
+
+    # Insert #include + using after the dispatch_table.h line
+    line_end = content.find('\n', idx)
+    insert_at = line_end + 1
+    inject = '\n' + include_line + '\nusing chaos::il2cpp::runtime_core::InterpreterEntryDirect;\n'
+    content = content[:insert_at] + inject + content[insert_at:]
+    return content
+
+
 def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str = "patch") -> None:
     """Copy a CodeGen-generated C++ file with RunNativeAot renamed to avoid symbol collision.
 
@@ -1034,6 +921,20 @@ def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str =
     # Inject missing struct definitions and type-id constexprs
     content = _inject_missing_structs_and_type_ids(content)
 
+    # Fix `__s[N] = &chaos_locals[N]` → `__s[N] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[N])`
+    # Codegen emits ldloca as bare `&chaos_locals[N]` which fails on MSVC (cannot
+    # implicitly convert pointer to intptr_t).
+    content = re.sub(
+        r'(&chaos_locals\[\d+\])',
+        r'reinterpret_cast<CHAOS_IL2CPP_INTPTR>(\1)',
+        content,
+    )
+
+    # Inject InterpreterEntryDirect reference (needed by codegen-emitted dispatch table).
+    # The codegen emits &InterpreterEntryDirect as the interrupt_ptr value for every
+    # dispatch table entry, but the generated TU does not include interpreter_entry.h.
+    content = _inject_interpreter_entry_include(content)
+
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_text(content, encoding="utf-8")
     print(f"  {suffix.capitalize()} renamed: {dst.relative_to(_REPO_ROOT)}")
@@ -1046,12 +947,12 @@ def main() -> None:
     args = parser.parse_args()
 
     families = args.families or FAMILIES
-    print(f"Generating per-family hotupdate tests - {len(families)} families")
+    print(f"Generating per-family D3 hotupdate tests (pure dispatch-table + interpreter) - {len(families)} families")
 
     for family_slug in families:
         generate_family(family_slug)
 
-    print(f"\nDone. Test and CMake artifacts in verification/foundation-dll/.../il2cpp_dist/hotupdate/")
+    print(f"\nDone. D3 test and CMake artifacts in verification/foundation-dll/.../il2cpp_dist/hotupdate/")
 
 
 if __name__ == "__main__":

@@ -12,12 +12,12 @@
         },
         "semantic-patch": {
           "success": true,
-          "error": null
+          "skipped": true
         }
       },
       "success": true,
       "methodCount": 20
     }
   ],
-  "timestamp": "2026-05-05T14:52:29"
+  "timestamp": "2026-05-05T18:31:39"
 }

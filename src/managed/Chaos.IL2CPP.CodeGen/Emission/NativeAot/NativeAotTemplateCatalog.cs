@@ -28,6 +28,12 @@ internal static class NativeAotTemplateCatalog
     public const string ReflectionGetObjectTypeTemplateRelativePath = "Templates/NativeAot.ReflectionGetObjectType.cpp.scriban";
     public const string ReflectionCreateInstanceTemplateRelativePath = "Templates/NativeAot.ReflectionCreateInstance.cpp.scriban";
     public const string RuntimeHelperShapeDispatchHeaderTemplateRelativePath = "Templates/NativeAot.RuntimeHelperShapeDispatch.h.scriban";
+    public const string TypeDeclarationsHeaderTemplateRelativePath = "Templates/NativeAot.TypeDeclarations.h.scriban";
+
+    public static Template GetTypeDeclarationsTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(TypeDeclarationsHeaderTemplateRelativePath);
+    }
 
     public static Template GetTranslationUnitTemplate()
     {

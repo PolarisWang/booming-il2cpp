@@ -36,9 +36,34 @@ public sealed class AotCoreIrLowering
             .Select(method => method!)
             .ToList();
 
+        // Build marshalling descriptors for complex struct types used in P/Invoke.
+        var complexStructTypeIds = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var method in methods)
+        {
+            if (!method.IsPInvoke || method.ComplexStructParameterTypeSubjectIds == null)
+                continue;
+            foreach (var typeId in method.ComplexStructParameterTypeSubjectIds)
+                complexStructTypeIds.Add(typeId);
+        }
+
+        IReadOnlyList<StructMarshallingDescriptorArtifact>? descriptors = null;
+        if (complexStructTypeIds.Count > 0)
+        {
+            var list = new List<StructMarshallingDescriptorArtifact>();
+            foreach (var typeId in complexStructTypeIds.OrderBy(x => x, StringComparer.Ordinal))
+            {
+                var desc = BuildStructMarshallingDescriptor(typeId, managedTypes, managedFields);
+                if (desc != null)
+                    list.Add(desc);
+            }
+            if (list.Count > 0)
+                descriptors = list;
+        }
+
         return new AotCoreIrArtifact
         {
             Methods = methods,
+            StructMarshallingDescriptors = descriptors,
         };
     }
 
@@ -135,6 +160,29 @@ public sealed class AotCoreIrLowering
             method.DefinitionSubjectId,
             genericDemandLookup);
 
+        // Complex non-blittable struct parameters (descriptor-driven)
+        IReadOnlyList<int>? complexParamIndices = null;
+        IReadOnlyList<string>? complexParamTypeIds = null;
+        if (method.Import is not null)
+        {
+            complexParamIndices = DetectComplexStructParameters(
+                method.Parameters, managedTypes, managedFields);
+
+            if (complexParamIndices != null)
+            {
+                var typeIds = new List<string>(complexParamIndices.Count);
+                foreach (int idx in complexParamIndices)
+                {
+                    var paramType = method.Parameters[idx].Type;
+                    if (managedTypes.TryGetValue(paramType, out var paramManagedType))
+                        typeIds.Add(paramManagedType.SubjectId);
+                    else
+                        typeIds.Add(paramType);
+                }
+                complexParamTypeIds = typeIds;
+            }
+        }
+
         var artifact = new AotCoreIrMethodArtifact
         {
             MethodId = typedMethod.MethodId,
@@ -170,6 +218,10 @@ public sealed class AotCoreIrLowering
             BlittableStructParameterIndices = method.Import is not null
                 ? DetectBlittableStructParameters(method.Parameters, managedTypes, managedFields)
                 : null,
+            HasBlittableStructReturn = method.Import is not null
+                && IsBlittableStructType(method.ReturnType, managedTypes, managedFields),
+            ComplexStructParameterIndices = complexParamIndices,
+            ComplexStructParameterTypeSubjectIds = complexParamTypeIds,
         };
 
         // Simple non-blittable struct detection needs separate computation
@@ -1176,6 +1228,19 @@ public sealed class AotCoreIrLowering
     }
 
     /// <summary>
+    /// Returns true when the given type identity names a value type whose fields
+    /// are all blittable primitives (or nested blittable value types).
+    /// </summary>
+    private static bool IsBlittableStructType(
+        string typeIdentity,
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, ManagedFieldModel> managedFields)
+    {
+        if (string.IsNullOrEmpty(typeIdentity)) return false;
+        return ClassifyValueTypeFields(typeIdentity, managedTypes, managedFields) == StructFieldClassification.Blittable;
+    }
+
+    /// <summary>
     /// For a P/Invoke method, detect which parameter indices are blittable value types.
     /// </summary>
     private static IReadOnlyList<int>? DetectBlittableStructParameters(
@@ -1224,6 +1289,162 @@ public sealed class AotCoreIrLowering
         }
         stringFieldSubjectIds = null;
         return null;
+    }
+
+    /// <summary>
+    /// For a P/Invoke method, detect which parameter indices are complex non-blittable
+    /// value types (structs containing fields beyond blittable primitives and simple strings).
+    /// These require descriptor-driven marshalling via StructMarshallingDescriptorV1.
+    /// </summary>
+    private static IReadOnlyList<int>? DetectComplexStructParameters(
+        IReadOnlyList<ManagedParameterModel> parameters,
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, ManagedFieldModel> managedFields)
+    {
+        var indices = new List<int>();
+        for (int i = 0; i < parameters.Count; i++)
+        {
+            var classification = ClassifyValueTypeFields(parameters[i].Type, managedTypes, managedFields);
+            if (classification == StructFieldClassification.Complex)
+            {
+                indices.Add(i);
+            }
+        }
+        return indices.Count > 0 ? indices : null;
+    }
+
+    /// <summary>
+    /// Determine the native-size equivalent for a managed primitive type.
+    /// Returns the native byte size, or null if the type is not a recognized primitive.
+    /// </summary>
+    private static int? GetNativePrimitiveSize(string fieldType)
+    {
+        return fieldType switch
+        {
+            "System.Boolean" => 4,   // Win32 BOOL
+            "System.Byte" => 1,
+            "System.SByte" => 1,
+            "System.Char" => 2,      // UNICODE char16_t
+            "System.Int16" => 2,
+            "System.UInt16" => 2,
+            "System.Int32" => 4,
+            "System.UInt32" => 4,
+            "System.Int64" => 8,
+            "System.UInt64" => 8,
+            "System.Single" => 4,
+            "System.Double" => 8,
+            "System.IntPtr" => 8,
+            "System.UIntPtr" => 8,
+            _ => null,
+        };
+    }
+
+    /// <summary>
+    /// Build a marshalling descriptor tree for a value type, classifying each field
+    /// and computing its native offset/size. Uses the AOT model layout where managed
+    /// fields are sequential IntPtr-sized slots; native offsets match for V1.
+    /// </summary>
+    private static StructMarshallingDescriptorArtifact? BuildStructMarshallingDescriptor(
+        string typeIdentity,
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, ManagedFieldModel> managedFields)
+    {
+        if (!managedTypes.TryGetValue(typeIdentity, out var typeModel) || !typeModel.IsValueType)
+            return null;
+
+        var fields = managedFields.Values
+            .Where(f => string.Equals(f.DeclaringTypeSubjectId, typeIdentity, StringComparison.Ordinal)
+                        && !f.IsStatic)
+            .OrderBy(f => f.Name, StringComparer.Ordinal)
+            .ToList();
+
+        if (fields.Count == 0)
+            return null;
+
+        const int ptrSize = 8; // sizeof(CHAOS_IL2CPP_INTPTR)
+        var fieldDescriptors = new List<StructFieldDescriptorArtifact>();
+        int currentOffset = 0;
+
+        foreach (var field in fields)
+        {
+            var (kind, size, arrayCount, elementType, nestedTypeId) = ClassifyFieldForMarshalling(
+                field, managedTypes, managedFields);
+
+            fieldDescriptors.Add(new StructFieldDescriptorArtifact
+            {
+                Kind = kind,
+                Offset = currentOffset,
+                Size = size,
+                ArrayCount = arrayCount,
+                ElementType = elementType,
+                NestedTypeSubjectId = nestedTypeId,
+            });
+
+            currentOffset += ptrSize; // managed offset stride
+        }
+
+        return new StructMarshallingDescriptorArtifact
+        {
+            TypeSubjectId = typeIdentity,
+            TotalSize = currentOffset,
+            Fields = fieldDescriptors,
+        };
+    }
+
+    /// <summary>
+    /// Classify a single field for marshalling and determine its native parameters.
+    /// Returns (kind, size, arrayCount, elementType, nestedTypeSubjectId).
+    /// </summary>
+    private static (string Kind, int Size, int ArrayCount, string? ElementType, string? NestedTypeSubjectId)
+        ClassifyFieldForMarshalling(
+            ManagedFieldModel field,
+            IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+            IReadOnlyDictionary<string, ManagedFieldModel> managedFields)
+    {
+        var ft = field.FieldType;
+
+        // String fields
+        if (ft == "System.String")
+            return ("StringField", 8, 0, null, null);
+
+        // Boolean → Win32 BOOL
+        if (ft == "System.Boolean")
+            return ("BoolField", 4, 0, null, null);
+
+        // Decimal (16 bytes, COM DECIMAL compatible layout)
+        if (ft == "System.Decimal")
+            return ("DecimalField", 16, 0, null, null);
+
+        // DateTime (8 bytes, FILETIME compatible)
+        if (ft == "System.DateTime")
+            return ("DateTimeField", 8, 0, null, null);
+
+        // Guid (16 bytes, blittable)
+        if (ft == "System.Guid")
+            return ("GuidField", 16, 0, null, null);
+
+        // object → ObjectField
+        if (ft == "System.Object")
+            return ("ObjectField", 8, 0, null, null);
+
+        // Blittable primitive
+        var nativeSize = GetNativePrimitiveSize(ft);
+        if (nativeSize.HasValue)
+            return ("Blittable", nativeSize.Value, 0, null, null);
+
+        // Nested value type — recurse
+        if (managedTypes.TryGetValue(ft, out var nestedType) && nestedType.IsValueType)
+        {
+            // Check if the nested type is at least partially supported
+            var nestedClass = ClassifyValueTypeFields(ft, managedTypes, managedFields);
+            if (nestedClass != StructFieldClassification.NonValueType)
+            {
+                return ("NestedStruct", 8, 0, null, ft);
+            }
+        }
+
+        // Default: treat as blittable pointer-sized (managed reference or opaque)
+        return ("Blittable", 8, 0, null, null);
     }
 
     /// <summary>
