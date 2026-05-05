@@ -637,6 +637,22 @@ public sealed partial class NativeAotLoweringPlanner
 		return string.Join(", ", abiSlots.Select((AotCoreIrAbiSlotArtifact slot, int index) => $"{MapAbiSlotParameterType(slot)} chaos_arg_{index}"));
 	}
 
+	/// <summary>
+	/// Returns only the C++ parameter types without argument names.
+	/// Used when constructing function-pointer type signatures in
+	/// reinterpret_cast expressions where named parameters would shadow
+	/// local variables.
+	/// </summary>
+	private static string FormatAbiSlotParameterTypes(IReadOnlyList<AotCoreIrAbiSlotArtifact> abiSlots)
+	{
+		ArgumentNullException.ThrowIfNull(abiSlots, "abiSlots");
+		if (abiSlots.Count == 0)
+		{
+			return "void";
+		}
+		return string.Join(", ", abiSlots.Select(slot => MapAbiSlotParameterType(slot)));
+	}
+
 	private static void EmitAbiArgumentInitialization(StringBuilder builder, IReadOnlyList<AotCoreIrAbiSlotArtifact> abiSlots)
 	{
 		var lines = new List<string>();

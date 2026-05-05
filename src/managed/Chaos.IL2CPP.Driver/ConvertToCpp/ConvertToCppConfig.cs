@@ -15,6 +15,8 @@ internal sealed class ConvertToCppConfig
     /// <summary>Additional directories to search for dependency assemblies</summary>
     public IReadOnlyList<string> AssemblyDirs { get; init; } = [];
 
+    public bool Verbose { get; init; } = false;
+
     /// <summary>
     /// Parse CLI arguments.
     /// Expected: --assembly &lt;path&gt; --output &lt;dir&gt; [--assembly-dir &lt;dir&gt; ...]
@@ -24,6 +26,7 @@ internal sealed class ConvertToCppConfig
         string assemblyPath = "";
         string outputDir = "il2cpp_dist";
         var assemblyDirs = new List<string>();
+        bool verbose = false;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -34,6 +37,9 @@ internal sealed class ConvertToCppConfig
                     break;
                 case "--output" or "-o" when i + 1 < args.Length:
                     outputDir = args[++i];
+                    break;
+                case "--verbose" or "-v":
+                    verbose = true;
                     break;
                 case "--assembly-dir" when i + 1 < args.Length:
                     assemblyDirs.Add(args[++i]);
@@ -51,12 +57,7 @@ internal sealed class ConvertToCppConfig
             Environment.Exit(1);
         }
 
-        return new ConvertToCppConfig
-        {
-            AssemblyPath = assemblyPath,
-            OutputDir = outputDir,
-            AssemblyDirs = assemblyDirs,
-        };
+        return new ConvertToCppConfig { AssemblyPath = assemblyPath, OutputDir = outputDir, AssemblyDirs = assemblyDirs, Verbose = verbose };
     }
 
     private static void PrintHelp()
@@ -70,6 +71,7 @@ internal sealed class ConvertToCppConfig
         Console.WriteLine("  --assembly, -a <path>         Input assembly (.dll) to translate");
         Console.WriteLine("  --output, -o <dir>            Output directory for generated C++ files");
         Console.WriteLine("  --assembly-dir <dir>          Additional dependency search path (repeatable)");
+        Console.WriteLine("  --verbose, -v                 Enable verbose diagnostics");
         Console.WriteLine("  --help, -h                    Show this help");
     }
 }

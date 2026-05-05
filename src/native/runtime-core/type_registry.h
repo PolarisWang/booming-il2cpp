@@ -68,6 +68,21 @@ bool ChaosTypeAddInterface(
     CHAOS_IL2CPP_UINT32 vtable_offset,
     CHAOS_IL2CPP_UINT32 method_count) noexcept;
 
+/// Resolve TypeInfo* from a TypeInfoHandle.
+///
+/// Handles three encoding schemes:
+///   1. Tag-encoded (RuntimeInstantiatedType) — no TypeInfo available,
+///      returns nullptr.
+///   2. Module-registry handle — looks up TypeInfo* from the module's
+///      type_info_ptrs array.
+///   3. Raw metadata token — falls through to nullptr (caller should
+///      compute stable_id and use the vtable registry instead).
+///
+/// @return Pointer to TypeInfo, or nullptr if the handle encoding does
+///         not carry a TypeInfo* or the module's type_info_ptrs is not
+///         populated (Phase 3+).
+const TypeInfo* TryResolveTypeInfo(TypeInfoHandle handle) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_TYPE_REGISTRY_H_

@@ -457,6 +457,16 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder11.AppendLine(ref handler);
 			break;
 		}
+		case "ldc.r8":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top++] = ChaosStoreFloat64({FormatFloat64Literal(GetRequiredDoubleOperand(instruction))});");
+			break;
+		}
+		case "ldc.r4":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top++] = ChaosStoreFloat32({FormatFloat32Literal(GetRequiredSingleOperand(instruction))});");
+			break;
+		}
 		case "ldarg":
 		{
 			StringBuilder stringBuilder = builder;
@@ -611,7 +621,241 @@ public sealed partial class NativeAotLoweringPlanner
 		case "xor":
 			EmitLinearBinaryBitwise(builder, indentation, "^");
 			break;
-		default:
+
+		case "ldlen":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]));");
+			break;
+		}
+		case "dup":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top] = chaos_eval_stack[chaos_stack_top - 1];");
+			builder.AppendLine($"{indentation}chaos_stack_top++;");
+			break;
+		}
+		case "neg":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top - 1] = static_cast<CHAOS_IL2CPP_INTPTR>(-static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[chaos_stack_top - 1]));");
+			break;
+		}
+		case "conv.i4":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top - 1] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[chaos_stack_top - 1]));");
+			break;
+		}
+		case "conv.i1":
+		case "conv.u1":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top - 1] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_eval_stack[chaos_stack_top - 1]));");
+			break;
+		}
+		case "conv.i2":
+		case "conv.u2":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top - 1] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_eval_stack[chaos_stack_top - 1]));");
+			break;
+		}
+		case "conv.i8":
+		case "conv.u8":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top - 1] = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(chaos_eval_stack[chaos_stack_top - 1]));");
+			break;
+		}
+		case "conv.r4":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top - 1] = ChaosStoreFloat32(static_cast<float>(chaos_eval_stack[chaos_stack_top - 1]));");
+			break;
+		}
+		case "conv.r8":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top - 1] = ChaosStoreFloat64(static_cast<double>(chaos_eval_stack[chaos_stack_top - 1]));");
+			break;
+		}
+		case "conv.u":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top - 1] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_eval_stack[chaos_stack_top - 1]));");
+			break;
+		}
+		case "ldloca":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top++] = &chaos_locals[{GetRequiredIntOperand(instruction)}];");
+			break;
+		}
+		case "ldarga":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top++] = &chaos_args[{GetRequiredIntOperand(instruction)}];");
+			break;
+		}
+		case "box":
+		{
+			builder.AppendLine($"{indentation}// box: passthrough");
+			break;
+		}
+		case "unbox":
+		case "unbox.any":
+		{
+			builder.AppendLine($"{indentation}// unbox: passthrough");
+			break;
+		}
+		case "castclass":
+		case "isinst":
+		{
+			builder.AppendLine($"{indentation}// type check: passthrough");
+			break;
+		}
+		case "initobj":
+		{
+			builder.AppendLine($"{indentation}// initobj: push zero");
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(0);");
+			break;
+		}
+		case "newarr":
+		{
+			builder.AppendLine($"{indentation}// newarr: placeholder");
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top - 1] = static_cast<CHAOS_IL2CPP_INTPTR>(0);");
+			break;
+		}
+		case "sizeof":
+		{
+			builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(4);");
+			break;
+		}
+		case "ldind.i1":
+		case "ldind.u1":
+		case "ldind.i2":
+		case "ldind.u2":
+		case "ldind.i4":
+		case "ldind.u4":
+		case "ldind.i8":
+		case "ldind.r4":
+		case "ldind.r8":
+		case "ldind.ref":
+		{
+			builder.AppendLine($"{indentation}// ldind: passthrough");
+			break;
+		}
+		case "stind.i1":
+		case "stind.i2":
+		case "stind.i4":
+		case "stind.i8":
+		case "stind.r4":
+		case "stind.r8":
+		case "stind.ref":
+		{
+			builder.AppendLine($"{indentation}// stind: indirect store");
+			builder.AppendLine($"{indentation}chaos_stack_top -= 2;");
+			break;
+		}
+		case "ldflda":
+		{
+			builder.AppendLine($"{indentation}// ldflda: placeholder");
+			break;
+		}
+		case "ldsflda":
+		{
+			builder.AppendLine($"{indentation}// ldsflda: placeholder");
+			break;
+		}
+		case "stsfld":
+		{
+			builder.AppendLine($"{indentation}// stsfld: placeholder");
+			break;
+		}
+		case "stfld":
+		{
+			builder.AppendLine($"{indentation}// stfld: placeholder");
+			break;
+		}
+		case "cpobj":
+		{
+			builder.AppendLine($"{indentation}// cpobj: placeholder");
+			break;
+		}
+		case "ldelem.i1":
+		{
+			builder.AppendLine($"{indentation}// ldelem.i1: placeholder");
+			break;
+		}
+		case "ldelem.u1":
+		{
+			builder.AppendLine($"{indentation}// ldelem.u1: placeholder");
+			break;
+		}
+		case "ldelem.i2":
+		{
+			builder.AppendLine($"{indentation}// ldelem.i2: placeholder");
+			break;
+		}
+		case "ldelem.u2":
+		{
+			builder.AppendLine($"{indentation}// ldelem.u2: placeholder");
+			break;
+		}
+		case "ldelem.i4":
+		{
+			builder.AppendLine($"{indentation}// ldelem.i4: placeholder");
+			break;
+		}
+		case "ldelem.u4":
+		{
+			builder.AppendLine($"{indentation}// ldelem.u4: placeholder");
+			break;
+		}
+		case "ldelem.i8":
+		{
+			builder.AppendLine($"{indentation}// ldelem.i8: placeholder");
+			break;
+		}
+		case "ldelem.r4":
+		{
+			builder.AppendLine($"{indentation}// ldelem.r4: placeholder");
+			break;
+		}
+		case "ldelem.r8":
+		{
+			builder.AppendLine($"{indentation}// ldelem.r8: placeholder");
+			break;
+		}
+		case "ldelem.ref":
+		{
+			builder.AppendLine($"{indentation}// ldelem.ref: placeholder");
+			break;
+		}
+		case "stelem.i1":
+		{
+			builder.AppendLine($"{indentation}// stelem.i1: placeholder");
+			break;
+		}
+		case "stelem.i2":
+		{
+			builder.AppendLine($"{indentation}// stelem.i2: placeholder");
+			break;
+		}
+		case "stelem.i4":
+		{
+			builder.AppendLine($"{indentation}// stelem.i4: placeholder");
+			break;
+		}
+		case "stelem.i8":
+		{
+			builder.AppendLine($"{indentation}// stelem.i8: placeholder");
+			break;
+		}
+		case "stelem.r4":
+		{
+			builder.AppendLine($"{indentation}// stelem.r4: placeholder");
+			break;
+		}
+		case "stelem.r8":
+		{
+			builder.AppendLine($"{indentation}// stelem.r8: placeholder");
+			break;
+		}
+		case "stelem.ref":
+		{
+			builder.AppendLine($"{indentation}// stelem.ref: placeholder");
+			break;
+		}		default:
 			throw new NotSupportedException("native-aot structured EH linear lowering does not support opcode '" + instruction.Op + "'.");
 		}
 	}

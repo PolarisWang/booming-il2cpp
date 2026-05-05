@@ -162,19 +162,6 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
         return;
     }
 
-    // We need a PatchMetadataCache for token resolution.
-    // The PatchMethod doesn't store a cache pointer directly, so we'll
-    // create a minimal resolution context for the lowering.
-    //
-    // Full token resolution requires the PatchContext from which this
-    // PatchMethod was created.  For now, use the PatchTokenResolver
-    // which handles tokens locally; external references will be
-    // unresolved (lowerer falls back to empty IR).
-    //
-    // TODO(Step 5+): Store PatchMetadataCache* on PatchMethod or
-    // pass it through a thread-local/context parameter so that
-    // the lowerer can fully resolve cross-assembly references.
-
     auto* ir = new interpreter::IRMethod();
 
     // Lower using the IL bytes (after the method body header).
@@ -187,7 +174,7 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
         header.code_size,
         header.max_stack,
         PatchTokenResolver,
-        nullptr);  // user_data = nullptr since we don't have the cache here
+        patch_method->metadata_cache);
 
     patch_method->cached_ir = ir;
 }
