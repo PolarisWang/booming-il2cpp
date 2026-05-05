@@ -319,10 +319,9 @@ def _has_synthetic_method_ids(method_subject_ids: list[str]) -> bool:
         # Constructor pattern: method_name == type_name (e.g. AsnDecoder::Void)
         if raw_method == type_name:
             return True
-        # Synthetic method names
-        if raw_method in ("Method1", "Method2", "Method3", "get_Property", "set_Property",
-                          "get_Value", "set_Value", "get_Count", "set_Count",
-                          "get_IsEmpty", "set_IsEmpty", "get_Key", "set_Key"):
+        # Genuinely synthetic method names (property-like names are real API methods
+        # e.g. Nullable<T>.get_Value, MemberInfo.get_Name, Delegate.get_Method)
+        if raw_method in ("Method1", "Method2", "Method3"):
             return True
     return False
 
