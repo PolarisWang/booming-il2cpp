@@ -1,0 +1,87 @@
+{
+  "assembly": "System.Runtime.Serialization.Formatters",
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "results": [
+    {
+      "family": "binary-formatter",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 16,
+      "entryPointSubjectId": "BinaryFormatterPatchEntry/BinaryFormatterPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.Serialization.Formatters\\binary-formatter\\il2cpp_dist\\entrypoint\\build-output\\BinaryFormatterPatchEntry.dll"
+    },
+    {
+      "family": "binder-type-style",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 3,
+      "entryPointSubjectId": "BinderTypeStylePatchEntry/BinderTypeStylePatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.Serialization.Formatters\\binder-type-style\\il2cpp_dist\\entrypoint\\build-output\\BinderTypeStylePatchEntry.dll"
+    },
+    {
+      "family": "formatter-base",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 84,
+      "entryPointSubjectId": "FormatterBasePatchEntry/FormatterBasePatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.Serialization.Formatters\\formatter-base\\il2cpp_dist\\entrypoint\\build-output\\FormatterBasePatchEntry.dll"
+    },
+    {
+      "family": "formatter-services-converter",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 33,
+      "entryPointSubjectId": "FormatterServicesConverterPatchEntry/FormatterServicesConverterPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.Serialization.Formatters\\formatter-services-converter\\il2cpp_dist\\entrypoint\\build-output\\FormatterServicesConverterPatchEntry.dll"
+    },
+    {
+      "family": "object-manager-id-generator",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 15,
+      "entryPointSubjectId": "ObjectManagerIdGeneratorPatchEntry/ObjectManagerIdGeneratorPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.Serialization.Formatters\\object-manager-id-generator\\il2cpp_dist\\entrypoint\\build-output\\ObjectManagerIdGeneratorPatchEntry.dll"
+    },
+    {
+      "family": "surrogate-selection",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 11,
+      "entryPointSubjectId": "SurrogateSelectionPatchEntry/SurrogateSelectionPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.Serialization.Formatters\\surrogate-selection\\il2cpp_dist\\entrypoint\\build-output\\SurrogateSelectionPatchEntry.dll"
+    }
+  ],
+  "timestamp": "2026-05-04T01:23:28"
+}

@@ -29,7 +29,7 @@ from typing import Any
 _HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(_HERE))
 
-from test_code_generator import (_build_call_expr, _build_call_expr_with_refs, _cast_return_to_int,
+from test_code_generator import (_METHOD_OVERRIDES, _build_call_expr, _build_call_expr_with_refs, _cast_return_to_int,
                                  _default_expr, _has_blocked_param, _has_ref_param, _is_auto_callable,
                                  _parse_method_subject_id, _ref_return_expr,
                                  INSTANCE_ALTERNATIVE_EXPR_MAP, TYPE_ALTERNATIVE_MAP)
@@ -76,6 +76,8 @@ def _add_type_using_from_full_path(full_type_path: str, usings: set[str]) -> Non
 def _add_type_using(t: str, usings: set[str]) -> None:
     """Add using directive based on a CLR type string (parameter or return type)."""
     bare = t.rstrip("&*?").strip()
+    # Strip CLR generic argument braces: Action{System.Threading.Tasks.Task} -> Action
+    bare = re.sub(r"\{.*\}", "", bare)
     # Strip array brackets
     while bare.endswith("[]"):
         bare = bare[:-2].strip()
@@ -98,6 +100,12 @@ def _build_call_expr_for_benchmark(subject_id: str) -> tuple[str, str]:
 
     if not _is_auto_callable(parsed):
         return ("", "")
+
+    # Check override map first — known problematic signatures bypass param checks
+    param_count = len(parsed["param_types"])
+    override = _METHOD_OVERRIDES.get((parsed["type_name"], parsed["method_name"], param_count))
+    if override is not None and override != "skip":
+        return ("", override)
 
     if _has_blocked_param(parsed["param_types"]):
         return ("", "")
@@ -127,6 +135,12 @@ def _build_call_expr_for_semantic_patch(subject_id: str) -> tuple[str, str]:
 
     if not _is_auto_callable(parsed):
         return ("", "")
+
+    # Check override map first — known problematic signatures bypass param checks
+    param_count = len(parsed["param_types"])
+    override = _METHOD_OVERRIDES.get((parsed["type_name"], parsed["method_name"], param_count))
+    if override is not None and override != "skip":
+        return ("", override)
 
     if _has_blocked_param(parsed["param_types"]):
         return ("", "")

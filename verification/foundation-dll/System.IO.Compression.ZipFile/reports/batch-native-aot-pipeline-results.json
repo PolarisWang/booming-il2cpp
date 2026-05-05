@@ -1,0 +1,35 @@
+{
+  "assembly": "System.IO.Compression.ZipFile",
+  "total": 2,
+  "passed": 2,
+  "failed": 0,
+  "results": [
+    {
+      "family": "zip-file-apis",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "ZipFileApisPatchEntry/ZipFileApisPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Compression.ZipFile\\zip-file-apis\\il2cpp_dist\\entrypoint\\build-output\\ZipFileApisPatchEntry.dll"
+    },
+    {
+      "family": "zip-file-extensions",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "ZipFileExtensionsPatchEntry/ZipFileExtensionsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Compression.ZipFile\\zip-file-extensions\\il2cpp_dist\\entrypoint\\build-output\\ZipFileExtensionsPatchEntry.dll"
+    }
+  ],
+  "timestamp": "2026-05-04T01:14:56"
+}

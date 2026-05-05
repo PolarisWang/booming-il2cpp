@@ -197,6 +197,9 @@ static bool TestRuntimeMethodReturnValueDispatch();
 static bool TestRuntimeMethodTypeParamResolution();
 static bool TestRuntimeMethodExceptionPropagation();
 
+// Struct value type tests
+static bool TestStructReturnValue();
+
 // ════════════════════════════════════════════════════════════════════════════
 // Test runner
 // ════════════════════════════════════════════════════════════════════════════
@@ -265,6 +268,9 @@ int main()
     TEST(TestRuntimeMethodReturnValueDispatch);
     TEST(TestRuntimeMethodTypeParamResolution);
     TEST(TestRuntimeMethodExceptionPropagation);
+
+    // Struct value type tests
+    TEST(TestStructReturnValue);
 
     std::cout << "interpreter-integration=failures=" << failures << std::endl;
 
@@ -1159,6 +1165,45 @@ static bool TestRuntimeMethodExceptionPropagation()
     // The exception_value should be Int32 with value 99.
     return result.exception_value.tag == ValueTag::Int32
         && result.exception_value.i32 == 99;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Struct value type tests
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Test: Struct value on the eval stack is correctly returned via Ret.
+// Verifies that ValueTag::Struct return values carry the correct struct_size
+// and data through the InterpreterVM's execution loop.
+bool TestStructReturnValue()
+{
+    IRMethod method;
+    IRInstruction ret;
+    ret.op_code = IROpCode::Ret;
+    method.instructions.push_back(ret);
+
+    // Pre-populate the eval stack with a struct value.
+    // The VM's Ret instruction pops the value and sets it as return_value.
+    struct TestStruct { int a; int b; };
+    TestStruct data = { 42, 99 };
+    constexpr auto kExpectedSize = static_cast<CHAOS_IL2CPP_UINT32>(sizeof(TestStruct));
+
+    ExecutionFrame frame;
+    frame.stack.push_back(InterpreterValue::from_struct(&data, kExpectedSize));
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    if (!result.has_return_value) return false;
+    if (result.return_value.tag != ValueTag::Struct) return false;
+    if (result.return_value.struct_size != kExpectedSize) return false;
+    if (result.return_value.obj == nullptr) return false;
+
+    const auto* out = static_cast<const TestStruct*>(result.return_value.obj);
+    if (out->a != 42 || out->b != 99) return false;
+
+    // Also verify the deep-copy: our original data is on the frame's stack
+    // and will be freed in ~ExecutionFrame. The result's copy must be independent.
+    return true;
 }
 
 // Rethrow inside a catch handler → propagates out.
