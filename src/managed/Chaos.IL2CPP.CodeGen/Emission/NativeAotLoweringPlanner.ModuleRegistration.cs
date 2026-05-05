@@ -31,7 +31,7 @@ public sealed partial class NativeAotLoweringPlanner
             int count = _moduleTypeCount;
 
             // ── type_flags array ──────────────────────────────────────────
-            sb.Append("static constexpr uint32_t s_type_flags[").Append(count).AppendLine("] =");
+            sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[").Append(count).AppendLine("] =");
             sb.AppendLine("{");
             for (int i = 0; i < count; i++)
             {
@@ -63,7 +63,7 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine();
 
             // ── type_parent_tokens array ──────────────────────────────────
-            sb.Append("static constexpr uint32_t s_type_parent_tokens[").Append(count).AppendLine("] =");
+            sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[").Append(count).AppendLine("] =");
             sb.AppendLine("{");
             for (int i = 0; i < count; i++)
             {
@@ -92,7 +92,7 @@ public sealed partial class NativeAotLoweringPlanner
             bool hasNestedTypes = _moduleNestedTypeChildren.Count > 0;
             if (hasNestedTypes)
             {
-                sb.Append("static constexpr uint32_t s_nested_type_children[").Append(_moduleNestedTypeChildren.Count).AppendLine("] =");
+                sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[").Append(_moduleNestedTypeChildren.Count).AppendLine("] =");
                 sb.AppendLine("{");
                 for (int i = 0; i < _moduleNestedTypeChildren.Count; i++)
                 {
@@ -105,7 +105,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             // nested_type_offset always emitted (type_count + 1 entries, prefix-sum sentinel)
-            sb.Append("static constexpr uint32_t s_nested_type_offset[").Append(_moduleNestedTypeOffsets.Count).AppendLine("] =");
+            sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[").Append(_moduleNestedTypeOffsets.Count).AppendLine("] =");
             sb.AppendLine("{");
             for (int i = 0; i < _moduleNestedTypeOffsets.Count; i++)
             {
@@ -120,7 +120,7 @@ public sealed partial class NativeAotLoweringPlanner
             bool hasConstraints = _moduleGenericParamConstraintData.Count > 0;
             if (hasConstraints)
             {
-                sb.Append("static constexpr uint32_t s_generic_param_constraint_data[").Append(_moduleGenericParamConstraintData.Count).AppendLine("] =");
+                sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_data[").Append(_moduleGenericParamConstraintData.Count).AppendLine("] =");
                 sb.AppendLine("{");
                 for (int i = 0; i < _moduleGenericParamConstraintData.Count; i++)
                 {
@@ -132,7 +132,7 @@ public sealed partial class NativeAotLoweringPlanner
                 sb.AppendLine();
             }
 
-            sb.Append("static constexpr uint32_t s_generic_param_constraint_offset[").Append(_moduleGenericParamConstraintOffsets.Count).AppendLine("] =");
+            sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[").Append(_moduleGenericParamConstraintOffsets.Count).AppendLine("] =");
             sb.AppendLine("{");
             for (int i = 0; i < _moduleGenericParamConstraintOffsets.Count; i++)
             {
@@ -187,7 +187,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
         sb.AppendLine("    /* .abi_manifest      = */ s_abi_manifest,");
         sb.AppendLine("};");
-        sb.AppendLine("static const uint32_t s_native_aot_module_id =");
+        sb.AppendLine("static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =");
         sb.Append("    ::chaos::il2cpp::runtime_core::RegisterModule(\"").Append(EscapeCppStringLiteral(assemblyName)).AppendLine("\", &s_native_aot_module);");
         return sb.ToString();
     }
@@ -204,7 +204,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// static constexpr TokenSlotEntryV0       s_token_slot_entries[] = { ... };
     /// static DispatchEntryV0                  s_dispatch_table[] = { ... };
     /// static constexpr NameIndexModuleV0      s_name_index_module = { ... };
-    /// static const uint32_t s_name_index_registered = [](){
+    /// static const CHAOS_IL2CPP_UINT32 s_name_index_registered = [](){
     ///     RegisterModuleNameIndex(&amp;s_name_index_module);
     ///     return 1u;
     /// }();
@@ -338,7 +338,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         // ── Static initializer: register with runtime ──
         sb.AppendLine("// Register NameIndex with the runtime on load");
-        sb.AppendLine("static const uint32_t s_name_index_registered = []()");
+        sb.AppendLine("static const CHAOS_IL2CPP_UINT32 s_name_index_registered = []()");
         sb.AppendLine("{");
         sb.AppendLine("    ::chaos::il2cpp::runtime_core::RegisterModuleNameIndex(");
         sb.AppendLine("        &s_name_index_module);");
@@ -360,7 +360,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
             sb.AppendLine("};");
             sb.AppendLine();
-            sb.AppendLine("static const uint32_t s_reverse_pinvoke_registered = []()");
+            sb.AppendLine("static const CHAOS_IL2CPP_UINT32 s_reverse_pinvoke_registered = []()");
             sb.AppendLine("{");
             sb.AppendLine("    ::chaos::il2cpp::runtime_core::RegisterReversePInvokeWrappers(");
             sb.Append("        s_reverse_pinvoke_wrappers, ")
@@ -563,11 +563,11 @@ public sealed partial class NativeAotLoweringPlanner
         var sb = new StringBuilder(4096);
         sb.AppendLine("// ── CustomAttribute blob ─────────────────────────────────────────");
 
-        // Emit blob as constexpr uint8_t[]
+        // Emit blob as constexpr CHAOS_IL2CPP_UINT8[]
         var blobBytes = blobStream.ToArray();
         if (blobBytes.Length > 0)
         {
-            sb.Append("static constexpr uint8_t s_custom_attribute_blob[")
+            sb.Append("static constexpr CHAOS_IL2CPP_UINT8 s_custom_attribute_blob[")
                 .Append(blobBytes.Length).AppendLine("] =");
             sb.AppendLine("{");
             for (int i = 0; i < blobBytes.Length; i++)
@@ -581,7 +581,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         // Emit offset array
-        sb.Append("static constexpr uint32_t s_custom_attribute_offset[")
+        sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_custom_attribute_offset[")
             .Append(_moduleTypeCount + 1).AppendLine("] =");
         sb.AppendLine("{");
         for (int i = 0; i <= _moduleTypeCount; i++)
@@ -594,7 +594,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Emit materializer switch
         sb.AppendLine("static CHAOS_IL2CPP_INTPTR ModuleCustomAttributeMaterializer(");
-        sb.AppendLine("    uint32_t attr_type_token, const uint8_t* field_data)");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 attr_type_token, const CHAOS_IL2CPP_UINT8* field_data)");
         sb.AppendLine("{");
         sb.AppendLine("    switch (attr_type_token)");
         sb.AppendLine("    {");
@@ -617,7 +617,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (fields.Count > 0)
             {
-                sb.AppendLine("            const uint8_t* p = field_data;");
+                sb.AppendLine("            const CHAOS_IL2CPP_UINT8* p = field_data;");
                 foreach (var (fieldSubjectId, fieldValue) in fields)
                 {
                     string fieldName = GetNativeFieldMemberName(fieldSubjectId);
@@ -688,19 +688,19 @@ public sealed partial class NativeAotLoweringPlanner
                 $"{{ int16_t __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Int32 =>
-                $"{{ int32_t __v; std::memcpy(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_INT32 __v; std::memcpy(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Int64 =>
-                $"{{ int64_t __v; std::memcpy(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_INT64 __v; std::memcpy(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.UInt16 =>
-                $"{{ uint16_t __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_UINT16 __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.UInt32 =>
-                $"{{ uint32_t __v; std::memcpy(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_UINT32 __v; std::memcpy(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.UInt64 =>
-                $"{{ uint64_t __v; std::memcpy(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_UINT64 __v; std::memcpy(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Single =>
                 $"{{ float __v; std::memcpy(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
@@ -709,10 +709,10 @@ public sealed partial class NativeAotLoweringPlanner
                 $"{{ double __v; std::memcpy(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Char =>
-                $"{{ uint16_t __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_UINT16 __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.String =>
-                $"{{ uint16_t __len; std::memcpy(&__len, p, 2); p += 2; auto* __rt = chaos::il2cpp::runtime_core::GetCurrentRuntimeState(); auto* __th = chaos::il2cpp::runtime_core::GetCurrentThreadState(); auto* __abi = chaos::il2cpp::runtime_core::GetRuntimeAbiV0(); attr->{fieldName} = (__abi != nullptr && __abi->string_new_utf8 != nullptr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__abi->string_new_utf8(__rt, __th, reinterpret_cast<const char*>(p), __len)) : 0; p += __len; }}",
+                $"{{ CHAOS_IL2CPP_UINT16 __len; std::memcpy(&__len, p, 2); p += 2; auto* __rt = chaos::il2cpp::runtime_core::GetCurrentRuntimeState(); auto* __th = chaos::il2cpp::runtime_core::GetCurrentThreadState(); auto* __abi = chaos::il2cpp::runtime_core::GetRuntimeAbiV0(); attr->{fieldName} = (__abi != nullptr && __abi->string_new_utf8 != nullptr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__abi->string_new_utf8(__rt, __th, reinterpret_cast<const char*>(p), __len)) : 0; p += __len; }}",
 
             CustomAttributeLiteralKind.Type when value.Value is string typeSubjectId =>
                 $"{{ p += 4; attr->{fieldName} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>({GetNativeTypeInfoSymbol(typeSubjectId)}); }}",
@@ -783,7 +783,7 @@ public sealed partial class NativeAotLoweringPlanner
         sb.Append("static constexpr struct {").AppendLine();
         sb.Append("    ::ChaosAbiManifestV0 header;").AppendLine();
         sb.Append("    ::ChaosAbiMethodEntryV0 entries[").Append(reachableMethods.Count).AppendLine("];");
-        sb.Append("    uint8_t params[").Append(totalParams).AppendLine("];");
+        sb.Append("    CHAOS_IL2CPP_UINT8 params[").Append(totalParams > 0 ? totalParams : 1).AppendLine("];");
         sb.Append("} s_abi_manifest_storage = {").AppendLine();
         sb.AppendLine("    {");
         sb.AppendLine("        CHAOS_ABI_MANIFEST_VERSION,");
