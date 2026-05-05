@@ -157,57 +157,47 @@ def _build_entrypoint(
     return result
 
 
-def _run_convert(entrypoint_dir: Path, dll_path: str, entry_point_subject_id: str) -> bool:
-    """Run chaos-il2cpp convert on the entrypoint DLL."""
-    # Create/overwrite subject.manifest.json with correct format
-    # (assemblies must be an array of path strings, not objects)
-    manifest_path = entrypoint_dir / "subject.manifest.json"
-    manifest = {
-        "source": {
-            "type": "managed-dlls",
-            "assemblies": [
-                dll_path,
-            ],
-            "entry": entry_point_subject_id,
-        }
-    }
-    with open(manifest_path, "w", encoding="utf-8") as f:
-        json.dump(manifest, f, indent=2)
+def _run_convert_to_cpp(
+    family_slug: str,
+    dll_path: str,
+    *,
+    verification: Path | None = None,
+) -> bool:
+    """Run chaos-il2cpp convert-to-cpp on the entrypoint DLL.
 
-    # Delete old closure-sp if it exists (to force clean convert)
-    closure_sp = entrypoint_dir / "closure-sp"
-    if closure_sp.exists():
-        import shutil
-        shutil.rmtree(closure_sp)
-    closure_sp.mkdir(parents=True, exist_ok=True)
+    Replaces the old 3-step flow (convert + trim + emit-native-aot) with a
+    single PipelinePlan execution that produces real C++ lowering via
+    NativeAotEmitter.
+    """
+    v = verification or _VERIFICATION
+    genuine_out = v / family_slug / "il2cpp_dist" / "genuine"
+    genuine_out.mkdir(parents=True, exist_ok=True)
 
     result = subprocess.run(
         [
             "dotnet", "run", "--no-build",
             "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
-            "--", "convert", str(entrypoint_dir),
-            "--output", str(closure_sp),
+            "--", "convert-to-cpp",
+            "--assembly", dll_path,
+            "--output", str(genuine_out),
         ],
         capture_output=True, text=True,
-        timeout=120,
+        timeout=300,
     )
 
     if result.returncode != 0:
-        print(f"    convert FAILED (rc={result.returncode})")
-        for line in result.stderr.splitlines()[-10:]:
+        print(f"    convert-to-cpp FAILED (rc={result.returncode})")
+        for line in result.stderr.splitlines()[-15:]:
             print(f"      {line}")
         return False
 
-    # Verify aot-core-ir.json exists (convert puts it in analysis/ subdir)
-    ir_path = closure_sp / "analysis" / "aot-core-ir.json"
-    if not ir_path.exists():
-        print(f"    convert produced no aot-core-ir.json")
-        return False
-
-    with open(ir_path, encoding="utf-8") as f:
-        ir = json.load(f)
-    method_count = len(ir.get("methods", []))
-    print(f"    convert OK: {method_count} methods in IR")
+    # Check output
+    cpp_path = genuine_out / "generated" / "native-aot.generated.cpp"
+    if cpp_path.exists():
+        size = cpp_path.stat().st_size
+        print(f"    convert-to-cpp OK: {size} bytes")
+    else:
+        print(f"    convert-to-cpp OK (no .cpp output found)")
     return True
 
 
@@ -363,37 +353,14 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
     result["entryPointSubjectId"] = build_result["entry_point_subject_id"]
     result["dllPath"] = build_result["dll_path"]
 
-    # Step 2: Convert
-    print(f"  [2/4] Convert...")
-    entrypoint_dir = verification / family_slug / "il2cpp_dist" / "entrypoint"
-    if not _run_convert(entrypoint_dir, build_result["dll_path"], build_result["entry_point_subject_id"]):
-        result["steps"]["convert"] = "FAILED"
-        result["error"] = "convert failed"
-        trace("family_convert_failed", family=family_slug)
+    # Step 2: Convert-to-CPP (full pipeline — replaces old convert + trim + emit)
+    print(f"  [2/2] Running convert-to-cpp...")
+    if not _run_convert_to_cpp(family_slug, build_result["dll_path"], verification=verification):
+        result["steps"]["convert_to_cpp"] = "FAILED"
+        result["error"] = "convert-to-cpp failed"
+        trace("family_c2c_failed", family=family_slug)
         return result
-    result["steps"]["convert"] = "OK"
-
-    # Step 3: Trim (use correct class name prefix matching the variant)
-    # Step 3: Trim (use correct class name prefix matching the variant)
-    trim_class_name = build_result.get("entry_point_subject_id", "").split("/")[0] if build_result.get("entry_point_subject_id") else ""
-    if not trim_class_name:
-        trim_class_name = f"{family_slug.title().replace('-', '').replace('_', '')}NativeEntry"
-    print(f"  [3/4] Trimming (prefix={trim_class_name})...")
-    if not _trim_ir(family_slug, verification=verification, class_name=trim_class_name):
-        result["steps"]["trim"] = "FAILED"
-        result["error"] = "trim failed"
-        trace("family_trim_failed", family=family_slug)
-        return result
-    result["steps"]["trim"] = "OK"
-
-    # Step 4: Emit native AOT
-    print(f"  [4/4] Emitting native AOT...")
-    if not _run_emit_native_aot(family_slug, verification=verification):
-        result["steps"]["emit_native_aot"] = "FAILED"
-        result["error"] = "emit-native-aot failed"
-        trace("family_emit_failed", family=family_slug)
-        return result
-    result["steps"]["emit_native_aot"] = "OK"
+    result["steps"]["convert_to_cpp"] = "OK"
 
     result["success"] = True
     trace("family_passed", family=family_slug, method_count=len(mids))

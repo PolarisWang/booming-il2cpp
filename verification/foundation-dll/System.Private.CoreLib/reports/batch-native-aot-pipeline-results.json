@@ -1,23 +1,20 @@
 {
   "assembly": "System.Private.CoreLib",
   "total": 1,
-  "passed": 0,
-  "failed": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
     {
-      "family": "math-numerics",
+      "family": "convert-char",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "FAILED"
+        "convert_to_cpp": "OK"
       },
-      "success": false,
+      "success": true,
       "methodCount": 18,
-      "entryPointSubjectId": "MathNumericsNativeEntry/MathNumericsNativeEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\math-numerics\\il2cpp_dist\\entrypoint\\build-output\\MathNumericsNativeEntry.dll",
-      "error": "emit-native-aot failed"
+      "entryPointSubjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll"
     }
   ],
-  "timestamp": "2026-05-05T16:04:05"
+  "timestamp": "2026-05-05T16:13:39"
 }
