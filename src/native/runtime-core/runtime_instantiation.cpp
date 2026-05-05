@@ -7,6 +7,7 @@
 #include "runtime_core.h"       // ManagedExceptionCarrier
 #include "runtime_vtable.h"
 #include "token_resolver.h"     // DefaultTokenResolver, TokenResolverContext
+#include "../bootstrap/bootstrap.h"  // GetCodegenBridgeV0
 
 #include <chaos/native_types.h>
 
@@ -310,6 +311,11 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveOrInstantiateMethod(
     if (rt_method == nullptr) {
         return 0u;
     }
+
+    /* Populate token resolution context fields. */
+    rt_method->bridge        = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
+    rt_method->source_image  = 0u;  // set from module registration if available
+    rt_method->layout_engine = layout::GetLayoutEngine();
 
     /* Encode the closed descriptor as a MethodInfoHandle. */
     MethodInfoHandle closed_handle = chaos::il2cpp::runtime_core::EncodeReflectionQueryMethodHandle(
@@ -659,8 +665,11 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
     if (rt_method->ir_method_body == nullptr) {
         if (rt_method->il_bytes != nullptr && rt_method->il_length > 0u) {
             interpreter::TokenResolverContext resolver_ctx;
-            resolver_ctx.type_args = rt_method->type_args;
-            resolver_ctx.arg_count = rt_method->arg_count;
+            resolver_ctx.bridge        = rt_method->bridge;
+            resolver_ctx.source_image  = rt_method->source_image;
+            resolver_ctx.type_args     = rt_method->type_args;
+            resolver_ctx.arg_count     = rt_method->arg_count;
+            resolver_ctx.layout_engine = rt_method->layout_engine;
 
             if (!LowerMethodBody(rt_method, rt_method->il_bytes,
                     rt_method->il_length,

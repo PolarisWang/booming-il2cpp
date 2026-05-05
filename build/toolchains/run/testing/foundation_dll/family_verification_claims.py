@@ -5,6 +5,12 @@ import re
 from pathlib import Path
 from typing import Any
 
+try:
+    from testing.trace import trace
+except ImportError:
+    def trace(*args, **kwargs):
+        pass
+
 
 def _string(value: Any) -> str:
     return str(value or "").strip()
@@ -139,6 +145,7 @@ def build_family_verification_claims_snapshot(
 ) -> dict[str, Any]:
     method_universe, source_paths = _load_latest_method_universe(repo_root, projects)
     claims: list[dict[str, Any]] = []
+    trace("claims.build_snapshot", stage="kernel", assembly_name=assembly_name, family_count=len(families), claim_count=len(families) * 5)
     for family in families:
         family_id = _string(family.get("familyId"))
         truth_method_subject_ids, truth_refs = _load_truth_method_subject_ids(

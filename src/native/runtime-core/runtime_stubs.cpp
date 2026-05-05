@@ -9,6 +9,8 @@
 
 #include <chaos/native_types.h>
 #include <chaos/trace.h>
+
+#include <atomic>
 #include <cstring>
 
 #include "runtime_instantiation.h"
@@ -94,6 +96,7 @@ CHAOS_IL2CPP_INT64 ChaosMathSqrt(CHAOS_IL2CPP_INT64 value) noexcept
 
 void ChaosInterlockedMemoryBarrier(void) noexcept
 {
+    std::atomic_thread_fence(std::memory_order_seq_cst);
 }
 
 // ─── Exception helpers ────────────────────────────────────────────
@@ -206,36 +209,43 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPT
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionHasDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept
 {
-    return 0;
+    if (param == 0) return 0;
+    auto* p = reinterpret_cast<const ReflectionQueryParameterDescriptor*>(
+        static_cast<CHAOS_IL2CPP_INTPTR>(param));
+    return (p->default_value_blob != 0 && p->default_value_size > 0) ? 1 : 0;
 }
 
-CHAOS_IL2CPP_INTPTR ChaosReflectionHasDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept
 {
-    return 0;
+    if (param == 0) return 0;
+    auto* p = reinterpret_cast<const ReflectionQueryParameterDescriptor*>(
+        static_cast<CHAOS_IL2CPP_INTPTR>(param));
+    return p->default_value_blob;
 }
 
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetRawDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetRawDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept
 {
-    return 0;
+    // Same as GetDefaultValue — the blob IS the raw ECMA Constant value
+    return ChaosReflectionGetDefaultValue(param);
 }
 
 // ─── Reflection deferred stubs ──────────────────────────────────
 
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamConstraints(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsVirtual(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
 {
+    // Requires method flags in the descriptor — deferred until codegen
+    // adds a flags field to ReflectionQueryMethodDescriptor.
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseDefinition(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseDefinition(CHAOS_IL2CPP_INTPTR member_handle) noexcept
 {
-    return 0;
+    // For non-override methods the base definition is the method itself.
+    // Override-chain resolution (walking parent vtable slots) requires
+    // metadata beyond the current query model — deferred.
+    return member_handle;
 }
 
 // ─── Runtime helpers ──────────────────────────────────────────────

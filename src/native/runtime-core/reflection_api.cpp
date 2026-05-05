@@ -799,6 +799,68 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetInterfaces(CHAOS_IL2CPP_INTPTR type_handle
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buffer);
 }
 
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamConstraints(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    if (type_handle == 0) return 0;
+
+    // Generic params are ReflectionQuery-encoded descriptors with subject_id like
+    // "Namespace.Type`N/!M". Need owning type + param index for constraint lookup.
+    auto* desc = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(
+        static_cast<TypeInfoHandle>(type_handle));
+    if (desc == nullptr || desc->subject_id_utf8 == nullptr) return 0;
+
+    // Parse "!N" suffix to extract param_index
+    const char* bang = std::strrchr(desc->subject_id_utf8, '!');
+    if (bang == nullptr) return 0;
+    int param_index = 0;
+    for (const char* p = bang + 1; *p >= '0' && *p <= '9'; p++) {
+        param_index = param_index * 10 + (*p - '0');
+    }
+    if (param_index < 0 || param_index > 7) return 0;
+
+    // subject_id = "Namespace.Type`1/!0"  → owning_type_subject = "Namespace.Type`1"
+    ptrdiff_t owning_len = bang - desc->subject_id_utf8 - 1; // skip the '/'
+    if (owning_len <= 0) return 0;
+
+    // Scan all modules looking for the owning type
+    uint32_t module_count = GetModuleCount();
+    for (uint32_t mid = 0; mid < module_count; mid++) {
+        const auto* mod = GetModuleByIndex(mid);
+        if (mod == nullptr || mod->image == nullptr || mod->image->types == nullptr) continue;
+        if (mod->generic_param_constraint_data == nullptr) continue;
+
+        for (uint32_t ti = 0; ti < mod->image->type_count; ti++) {
+            auto* t = mod->image->types[ti];
+            if (t == nullptr || t->subject_id_utf8 == nullptr) continue;
+            if (static_cast<ptrdiff_t>(std::strlen(t->subject_id_utf8)) != owning_len) continue;
+            if (std::strncmp(t->subject_id_utf8, desc->subject_id_utf8, static_cast<size_t>(owning_len)) == 0) {
+                // Found owning type at index ti in module mid. Look up constraints.
+                uint32_t start = mod->generic_param_constraint_offset[ti];
+                uint32_t end = mod->generic_param_constraint_offset[ti + 1];
+                if (start == end) return 0;
+
+                uint32_t matches[32];
+                uint32_t match_count = 0;
+                for (uint32_t ci = start; ci < end && match_count < 32; ci++) {
+                    uint32_t entry = mod->generic_param_constraint_data[ci];
+                    if (static_cast<int>((entry >> 29) & 0x7u) == param_index) {
+                        matches[match_count++] = entry & 0x1FFFFFFFu;
+                    }
+                }
+                if (match_count == 0) return 0;
+
+                static CHAOS_IL2CPP_INTPTR buffer[33];
+                buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(match_count));
+                for (uint32_t i = 0; i < match_count; i++) {
+                    buffer[1 + i] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                        MakeTypeHandle(mid, matches[i]));
+                }
+                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(buffer);
+            }
+        }
+    }
+    return 0;
+}
+
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     (void)type_handle;
@@ -806,9 +868,23 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle) {
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypes(CHAOS_IL2CPP_INTPTR type_handle) {
-    using namespace chaos::il2cpp::runtime_core;
-    (void)type_handle;
-    return 0;
+    TypeRef tr;
+    if (!ResolveTypeRef(type_handle, tr)) return 0;
+    if (tr.module->nested_type_offset == nullptr) return 0;
+
+    uint32_t start = tr.module->nested_type_offset[tr.type_index];
+    uint32_t end = tr.module->nested_type_offset[tr.type_index + 1];
+    uint32_t count = end - start;
+    if (count == 0 || count > 32) return 0;
+
+    static CHAOS_IL2CPP_INTPTR buffer[33];
+    buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(count));
+    for (uint32_t i = 0; i < count; i++) {
+        uint32_t child_token = tr.module->nested_type_children[start + i];
+        buffer[1 + i] = static_cast<CHAOS_IL2CPP_INTPTR>(
+            MakeTypeHandle(tr.module_id, child_token));
+    }
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(buffer);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetField(
@@ -867,7 +943,25 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericArguments(CHAOS_IL2CPP_INTPTR type_handle) {
-    (void)type_handle;
+    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    if (desc == nullptr) return 0;
+
+    // Runtime-instantiated type: token >= 0x80000000, descriptor embedded in
+    // RuntimeInstantiatedType — recover type_args from container struct.
+    if (desc->metadata_token >= 0x80000000u) {
+        using rt_type = chaos::il2cpp::runtime_instantiation::RuntimeInstantiatedType;
+        auto* rti = reinterpret_cast<const rt_type*>(desc);
+        if (rti == nullptr || rti->type_args == nullptr || rti->arg_count == 0) return 0;
+
+        static CHAOS_IL2CPP_INTPTR s_buffer[33];
+        uint32_t count = rti->arg_count > 32 ? 32 : rti->arg_count;
+        for (uint32_t i = 0; i < count; i++) {
+            s_buffer[1 + i] = static_cast<CHAOS_IL2CPP_INTPTR>(rti->type_args[i]);
+        }
+        s_buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(count));
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buffer);
+    }
+
     return 0;
 }
 
@@ -977,9 +1071,22 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(
     CHAOS_IL2CPP_INTPTR method_handle,
     CHAOS_IL2CPP_INTPTR type_args)
 {
-    (void)method_handle;
+    if (method_handle == 0) return 0;
+
+    auto* bridge = chaos::il2cpp::runtime_instantiation::GetBridgeV0();
+    if (bridge == nullptr || bridge->resolve_or_instantiate_method == nullptr)
+        return 0;
+
+    MethodInfoHandle open_method = static_cast<MethodInfoHandle>(static_cast<uint64_t>(method_handle));
+
+    if (type_args == 0) {
+        return static_cast<CHAOS_IL2CPP_INTPTR>(
+            bridge->resolve_or_instantiate_method(open_method, nullptr, 0u));
+    }
+
+    // V1: type_args is a managed System.Type[] — TypeInfoHandle extraction deferred
     (void)type_args;
-    return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(open_method);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(
@@ -1046,13 +1153,35 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetContainsGenericParams(CHAOS_IL2CPP_INTPTR 
 }
 
 // ── GetGenericParamPos ────────────────────────────────────────────
+// Returns the zero-based position of a generic parameter in its owning
+// type/method's generic parameter list. Parses "!N"/"!!N" from subject_id.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamPos(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    // Module Registry handles are concrete types, not generic params — return 0.
     TypeRef tr;
     if (ResolveTypeRef(type_handle, tr)) {
-        (void)tr;
-        // Generic param position would need subject_id parsing of "!N"/"!!N"
+        return 0;
     }
-    return 0;
+
+    // ReflectionQuery-encoded descriptors have subject_id with "!N" or "!!N" suffix.
+    auto* desc = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(
+        static_cast<TypeInfoHandle>(type_handle));
+    if (desc == nullptr || desc->subject_id_utf8 == nullptr) return 0;
+
+    // subject_id = "Namespace.Type`1/!0" or "Namespace.Method!!0"
+    // Find the last '!' which introduces the position.
+    const char* bang = std::strrchr(desc->subject_id_utf8, '!');
+    if (bang == nullptr) return 0;
+
+    // Skip past '!' (or "!!") to the digits
+    const char* digits = bang + 1;
+    if (*digits == '!') digits++;  // skip second '!' for "!!N"
+
+    int pos = 0;
+    for (; *digits >= '0' && *digits <= '9'; digits++) {
+        pos = pos * 10 + (*digits - '0');
+    }
+
+    return static_cast<CHAOS_IL2CPP_INTPTR>(pos);
 }
 
 // ── GetModuleAssembly ─────────────────────────────────────────────
@@ -1235,9 +1364,25 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(
     CHAOS_IL2CPP_INTPTR left,
     CHAOS_IL2CPP_INTPTR right)
 {
-    (void)left;
-    (void)right;
-    return 0;
+    if (left == 0 && right == 0) return 0;
+
+    auto* runtime = GetCurrentRuntimeState();
+    auto* thread  = GetCurrentThreadState();
+    const auto* abi = GetRuntimeAbiV0();
+    if (runtime == nullptr || thread == nullptr || abi == nullptr || abi->string_new_utf8 == nullptr)
+        return 0;
+
+    const char* left_str = DecodeStringValue(left);
+    const char* right_str = DecodeStringValue(right);
+    if (left_str == nullptr) left_str = "";
+    if (right_str == nullptr) right_str = "";
+
+    static char s_buf[4096];
+    size_t len = std::snprintf(s_buf, sizeof(s_buf), "%s%s", left_str, right_str);
+    if (len >= sizeof(s_buf)) len = sizeof(s_buf) - 1;
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+        abi->string_new_utf8(runtime, thread, s_buf, len));
 }
 
 }  // namespace chaos::il2cpp::runtime_core
