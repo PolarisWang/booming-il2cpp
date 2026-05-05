@@ -15,6 +15,8 @@ struct ReflectionQueryParameterDescriptor {
     const char* name_utf8;
     CHAOS_IL2CPP_UINT32 parameter_index;
     const char* member_type_utf8;
+    CHAOS_IL2CPP_INTPTR default_value_blob;   // 0 = no default value; raw ECMA Constant blob
+    CHAOS_IL2CPP_UINT32 default_value_size;    // 0 = no default value
 };
 
 struct ReflectionQueryMethodDescriptor {

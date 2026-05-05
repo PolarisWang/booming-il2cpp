@@ -141,6 +141,16 @@ public sealed class AotCoreIrLowering
             ExceptionRegionCount = method.Body.ExceptionRegions.Count,
             ExceptionRegions = ResolveExceptionRegions(method.Body.ExceptionRegions),
             Instructions = instructions,
+            IsPInvoke = method.Import is not null,
+            ImportModuleName = method.Import?.ModuleName,
+            ImportEntryPointName = method.Import?.EntryPointName,
+            StringParameterIndices = method.Import is not null
+                ? method.Parameters
+                    .Select((p, i) => (p.Type, i))
+                    .Where(x => IsPInvokeStringType(x.Type))
+                    .Select(x => x.i)
+                    .ToArray()
+                : null,
         };
     }
 
@@ -1038,5 +1048,10 @@ public sealed class AotCoreIrLowering
         }
 
         return memberSubjectId[..separatorIndex];
+    }
+
+    private static bool IsPInvokeStringType(string typeIdentity)
+    {
+        return string.Equals(typeIdentity, "System.String", StringComparison.Ordinal);
     }
 }

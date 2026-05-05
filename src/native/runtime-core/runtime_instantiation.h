@@ -1,7 +1,7 @@
 #ifndef CHAOS_IL2CPP_RUNTIME_CORE_RUNTIME_INSTANTIATION_H_
 #define CHAOS_IL2CPP_RUNTIME_CORE_RUNTIME_INSTANTIATION_H_
 
-#include "runtime_abi.h"
+#include <runtime_abi.h>
 #include "reflection_query_model.h"
 #include <runtime_instantiation.h>
 
@@ -79,6 +79,7 @@ void ComputeValueTypeLayout(RuntimeInstantiatedType* rt_type);
 // ── Bridge access ──────────────────────────────────────────────────────────
 
 /// Returns the process-wide RuntimeInstantiationBridgeV0 instance.
+struct RuntimeInstantiationBridgeV0;
 const RuntimeInstantiationBridgeV0* GetBridgeV0();
 
 // ── AOT method map (generic method promotion) ────────────────────────────

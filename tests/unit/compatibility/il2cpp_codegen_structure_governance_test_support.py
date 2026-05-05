@@ -994,5 +994,22 @@ NATIVE_REFERENCE_RUNTIME_SKELETON_BUFFER_MEMORY_KERNEL_STUB_TEMPLATE_PATH = (
     / "NativeReferenceProof.RuntimeSkeleton.BufferMemoryKernelStub.cpp.scriban"
 )
 
+NATIVE_AOT_GENERIC_REGISTRATION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Emission"
+    / "NativeAotLoweringPlanner.GenericRegistration.cs"
+)
+
+CODEGEN_BRIDGE_HEADER_PATH = (
+    REPO_ROOT
+    / "contracts"
+    / "native"
+    / "v0"
+    / "codegen_bridge.h"
+)
+
 class Il2CppCodeGenStructureGovernanceTestSupport(unittest.TestCase):
     pass

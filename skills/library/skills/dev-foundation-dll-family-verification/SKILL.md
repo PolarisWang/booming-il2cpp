@@ -9,9 +9,19 @@ description: Execute per-family three-gate verification (Fact -> Benchmark -> Ho
 
 对选定的 capability family 执行三个验证门。**本技能是 `dev:foundation-dll-verification-pipeline` 的子步骤**，在管线中由 Step 2 调用。
 
+**Fact 验证有两个层次**：
+
+| 层次 | 验证内容 | 当前状态 |
+|------|---------|---------|
+| **L1: Codegen Success** | entrypoint C++ 编译通过，生成 native-aot.generated.cpp | 已实现，dashboard 显示为"Fact Pass Rate" |
+| **L2: Semantic Correctness** | 生成的 C++ 代码编译为 native exe 后，执行结果与预期一致 | **待实现** — 需要 native exec 验证 |
+
+> L1 只说明 codegen 管线没断。L2 才真正验证翻译语义正确性。完成验证必须通过 L2。
+
 | 门 | 验证内容 | 工具 |
 |----|---------|------|
-| **Fact** | Managed xUnit `[Fact]` 测试全部通过 | `dotnet test` |
+| **Fact L1** | entrypoint C++ 编译通过（codegen pipeline 成功） | `batch_native_aot_runner.py` |
+| **Fact L2** | 生成的 C++ 编译为 native exe，执行结果正确 | native exec + 结果断言 |
 | **Benchmark** | Native AOT 性能不退化、计算结果正确 | native benchmark exe + managed baseline |
 | **HotUpdate** | Native hotupdate patch/revert 机制正确 | native hotupdate exe |
 
@@ -44,29 +54,57 @@ description: Execute per-family three-gate verification (Fact -> Benchmark -> Ho
 
 ## 执行步骤
 
-### Step 1: Fact -- Managed xUnit 测试
+### Step 1: Fact -- Native AOT 语义正确性验证
 
-> 数据完整性已在管线 Step 0 中验证（独立运行请先执行 `dev:foundation-dll-verify-data-integrity`）
+> Fact 验证分两级。**L2（语义正确性）是最终通过标准**。
 
+#### L1: Codegen Success（管线已自动完成）
+
+batch pipeline 成功后即确认 L1 通过——生成的 C++ 代码有 native AOT lowering（`chaos_eval_stack` IL 降级），不是桩/SimpleForward。
+
+验证方式：
 ```bash
-# 单 family
-dotnet test solution/System.Private.CoreLib/<family-slug>/tests/<ProjectBase>.Tests.csproj --configuration Release
-
-# 多 family 并行（注意 SDK 锁竞争）
-dotnet test solution/System.Private.CoreLib/convert-char/tests/ConvertChar.Tests.csproj --configuration Release &
-dotnet test solution/System.Private.CoreLib/reflection-type/tests/ReflectionType.Tests.csproj --configuration Release &
-wait
+python -c "
+import re
+cpp = open('verification/foundation-dll/System.Private.CoreLib/<family>/il2cpp_dist/genuine/generated/native-aot.generated.cpp').read()
+# 检查是否有真实 AOT lowering（而非 SimpleForward 转发）
+has_lowering = 'chaos_eval_stack' in cpp
+has_simple_forward = 'SimpleForward' in cpp
+print(f'L1: AOT lowering={\"YES\" if has_lowering else \"NO\"} SimpleForward={\"YES\" if has_simple_forward else \"NO\"}')
+"
 ```
 
-如果因 `Chaos.TestFramework.Sdk.dll` 文件锁导致 CS2012 错误，先单独 build SDK：
+#### L2: Semantic Correctness（核心验证）
+
+将生成的 native-aot.generated.cpp 编译为可执行文件，运行并验证结果：
 
 ```bash
-dotnet build src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj --configuration Release
+# 1. 编译为 native exe
+python build/toolchains/run/testing/foundation_dll/native_compile_runner.py <family> --variant genuine
+
+# 2. 如果有 benchmark host，编译并运行 benchmark
+python build/toolchains/run/testing/foundation_dll/native_benchmark_runner.py <family> --methods 0
+
+# 3. 验证每个 entry 的返回值 checksum 与预期一致
+#    预期值来自 C# entrypoint 的 int 返回值（MethodN）
+#    实际值来自 native exe 对同一 entry 的执行结果
+python -c "
+import subprocess, json
+# family 的 entrypoint DLL 定义了预期的 checksum
+# native exe 执行后返回 checksum
+# 两者应一致 ⇒ 翻译语义正确
+"
 ```
 
-然后重跑失败的项目。
+**验证标准**：
+1. L1: 生成代码包含 `chaos_eval_stack` lowering 模式（非 SimpleForward）
+2. L2 native exec: 所有 entry 的返回 checksum == 预期值
+3. L2 benchmark: 所有方法输出与 managed baseline 一致
 
-验证标准：`Failed: 0`，所有 `[Fact]` 断言通过。
+如果 L1 不通过（代码为 SimpleForward），说明该方法的 AOT 翻译尚未实现，标记为 "not-translated"。
+如果 L1 通过但 L2 返回 checksum 不匹配，说明翻译有语义错误，**阻塞**。
+
+> 注意：当前 dashboard 上的 "Fact Pass Rate" 只反映 L1 Codegen Success。语义正确性（L2）需要额外的 native exec 验证步骤。
 
 ### Step 2: Benchmark -- Managed vs Native 性能对比
 

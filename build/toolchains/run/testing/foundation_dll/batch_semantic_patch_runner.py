@@ -24,6 +24,7 @@ _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
 _VERIFICATION = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib"
 sys.path.insert(0, str(_HERE))
+sys.path.insert(0, str(_HERE.parent.parent))  # for testing.trace
 
 from family_entrypoint_generator import generate_and_build
 

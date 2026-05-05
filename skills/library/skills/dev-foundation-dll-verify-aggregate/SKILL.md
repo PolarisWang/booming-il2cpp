@@ -9,9 +9,13 @@ description: Aggregate per-family verification results, detect regressions, prod
 
 所有 family 的三闸门验证完成后，聚合结果、检测回归、生成汇总报告。
 
+> **注意**：当前 dashboard 上的 "Fact Pass Rate" 只反映 L1 Codegen Success（entrypoint C++ 编译通过）。
+> L2 Semantic Correctness（native exec checksum 匹配）需要额外的 native exec 验证步骤，
+> 尚未集成到 dashboard 自动计算中。
+
 **入口信号**：`dev:foundation-dll-verify-aggregate`
 
-**前置**：一个或多个 family 已完成 Fact/Benchmark/HotUpdate 验证
+**前置**：一个或多个 family 已完成 Fact L1 + L2 / Benchmark / HotUpdate 验证
 
 ## 聚合步骤
 
@@ -93,9 +97,9 @@ else:
 ### 3. 生成汇总表
 
 ```
-| Family | Methods | Fact | Benchmark Avg Speedup | HotUpdate | Status |
-|--------|---------|------|---------------------|-----------|--------|
-| convert-char | 18 | 18/18 | +12.5% | 18/18 | ✅ PASS |
+| Family | Methods | Fact L1 | Fact L2 | Benchmark | HotUpdate | Status |
+|--------|---------|--------|--------|-----------|-----------|--------|
+| convert-char | 18 | ✅ 18/18 | 🔲 pending | +12.5% | 18/18 | ⏳ |
 | math-numerics | 18 | 18/18 | +8.3% | 18/18 | ✅ PASS |
 | ... | | | | | |
 ```

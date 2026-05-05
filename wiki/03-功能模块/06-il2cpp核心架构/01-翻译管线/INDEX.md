@@ -33,3 +33,8 @@
 | [`20-Chaos公共库.md`](./20-Chaos%E5%85%AC%E5%85%B1%E5%BA%93.md) | 15 个头文件、native_types 宏、指针标记、async/await 基元 |
 | [`21-引导程序与引擎桥接.md`](./21-%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F%E4%B8%8E%E5%BC%95%E6%93%8E%E6%A1%A5%E6%8E%A5.md) | BootstrapState、codegen 注册、engine C++ 实现 |
 | [`22-Planner设计模式.md`](./22-Planner%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md) | CustomAttribute物化、反射元数据、RVA字段、委托组合、签名解码、符号命名 |
+
+### C++ 运行时子系统（23+）
+| 文档 | 说明 |
+|------|------|
+| [`23-托管线程模型与GC协作.md`](./23-%E6%89%98%E7%AE%A1%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%8EGC%E5%8D%8F%E4%BD%9C.md) | 托管线程标识、Monitor Thin Lock、Hybrid GC Safepoint、ThreadPool 基础 |

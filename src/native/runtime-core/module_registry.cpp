@@ -113,6 +113,10 @@ void MarkModuleTombstone(uint32_t module_id) {
     g_module_storage[module_id].image        = nullptr;
     g_module_storage[module_id].type_flags   = nullptr;
     g_module_storage[module_id].type_parent_tokens = nullptr;
+    g_module_storage[module_id].custom_attribute_blob    = nullptr;
+    g_module_storage[module_id].custom_attribute_offset  = nullptr;
+    g_module_storage[module_id].custom_attribute_entity_count = 0u;
+    g_module_storage[module_id].custom_attribute_materializer = nullptr;
     // Keep name_utf8, type_names, type_namespaces (string literals from codegen).
 
     // Add to the free list so RegisterModule can reuse this slot.

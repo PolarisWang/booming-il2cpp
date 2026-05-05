@@ -25,6 +25,7 @@ _REPO_ROOT = _HERE.parents[4]  # D:/agent/booming-il2cpp
 _VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
 _VERIFICATION: Path | None = None  # set per-assembly in main()
 sys.path.insert(0, str(_HERE))
+sys.path.insert(0, str(_HERE.parent.parent))  # for testing.trace (build/toolchains/run/)
 
 from family_entrypoint_generator import generate_and_build
 

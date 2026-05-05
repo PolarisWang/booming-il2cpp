@@ -4,6 +4,7 @@
 #include "runtime_abi.h"
 #include "reflection_query_model.h"
 #include "abi_manifest.h"
+#include "dispatch_table.h"
 #include <chaos/type_info.h>
 
 #include <cstdint>
@@ -40,7 +41,17 @@ struct ModuleDescriptor {
     const char* const* type_namespaces;     // Tier 1: per-type namespaces
     const uint32_t* type_parent_tokens;     // Tier 1: per-type parent tokens
     const TypeInfo* const* type_info_ptrs;   // Tier 1: per-type TypeInfo* pointers (Phase 3+)
+    const uint32_t* nested_type_children;    // Tier 1: flat array of child tokens, grouped by parent type
+    const uint32_t* nested_type_offset;      // Tier 1: [type_count+1] prefix-sum into nested_type_children
+    const uint32_t* generic_param_constraint_data;   // Tier 1: flat array of (param_index<<28|token) per constraint
+    const uint32_t* generic_param_constraint_offset; // Tier 1: [type_count+1] prefix-sum into constraint_data
     uint32_t type_count;                    // Number of types managed by this module
+    const uint8_t* custom_attribute_blob;                    // CustomAttribute compact binary data (Tier 1)
+    const uint32_t* custom_attribute_offset;                 // [type_count+1] prefix-sum into blob by TokenToIndex
+    uint32_t custom_attribute_entity_count;                  // type_count for validation (0 = no attributes)
+    CHAOS_IL2CPP_INTPTR (*custom_attribute_materializer)(   // Per-module materializer: resolves TypeInfo*/VTable*
+        uint32_t attr_type_token,                            //   by attr type token, creates + assigns from field_data
+        const uint8_t* field_data);                          //   Returns object pointer or 0
     const ChaosAbiManifestV0* abi_manifest; // Per-module ABI manifest (null = no validation)
     bool tombstone = false;                 // true after hot-unload (module entry retained for handle safety)
 };

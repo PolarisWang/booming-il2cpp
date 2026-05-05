@@ -108,6 +108,14 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitManagedMethod(StringBuilder builder, AotCoreIrMethodArtifact method)
 	{
 		ValidateMethod(method);
+
+		// P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.
+		if (method.IsPInvoke)
+		{
+			EmitPInvokeMethod(builder, method);
+			return;
+		}
+
 		IReadOnlyList<AotCoreIrInstructionArtifact> instructions = method.Instructions;
 		ValidateInstructions(method, instructions);
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
@@ -190,6 +198,154 @@ public sealed partial class NativeAotLoweringPlanner
 			return;
 		}
 		EmitStructuredInstructionRange(builder, method, instructions, nextOffsetsByIlOffset, offsets);
+		builder.AppendLine("}");
+	}
+
+	private void EmitPInvokeMethod(StringBuilder builder, AotCoreIrMethodArtifact method)
+	{
+		IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
+		string returnType = MapAbiSlotReturnType(method.ReturnAbi);
+		string parameterSignature = FormatAbiSlotParameterSignature(methodAbiParameterSlots);
+		string moduleName = method.ImportModuleName ?? "?";
+		string entryPointName = method.ImportEntryPointName ?? method.NativeSymbol;
+
+		bool hasStringParams = method.StringParameterIndices is { Count: > 0 };
+		bool hasStringReturn = string.Equals(method.ReturnType, "System.String", StringComparison.Ordinal);
+		bool needsMarshalling = hasStringParams || hasStringReturn;
+		var stringParamSet = hasStringParams
+			? new HashSet<int>(method.StringParameterIndices!)
+			: new HashSet<int>();
+
+		// Build arg names and native call args (substituting marshalled pointers for string params).
+		var argNames = new string[methodAbiParameterSlots.Count];
+		var nativeArgs = new string[methodAbiParameterSlots.Count];
+		for (int i = 0; i < methodAbiParameterSlots.Count; i++)
+		{
+			argNames[i] = "chaos_arg_" + i.ToString();
+			nativeArgs[i] = stringParamSet.Contains(i)
+				? "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_marshal_" + i + ")"
+				: argNames[i];
+		}
+		string nativeArgList = string.Join(", ", nativeArgs);
+
+		// Function pointer type string without parameter names.
+		string rawParamTypes = string.Join(", ", methodAbiParameterSlots.Select(s => MapAbiSlotReturnType(s)));
+		string fnPtrType = string.IsNullOrEmpty(rawParamTypes)
+			? $"{returnType}(*)()"
+			: $"{returnType}(*)({rawParamTypes})";
+
+		string pinvokeTag = needsMarshalling ? "simple non-blittable" : "blittable";
+		builder.AppendLine($"// P/Invoke: {moduleName}!{entryPointName} ({pinvokeTag})");
+		builder.AppendLine($"extern \"C\" {returnType} {method.NativeSymbol}({parameterSignature})");
+		builder.AppendLine("{");
+		builder.AppendLine("    static void* s_pinvoke_lib_ = nullptr;");
+		builder.AppendLine($"    static {fnPtrType} s_pinvoke_fn_ = nullptr;");
+
+		// Marshalling local variables for string parameters.
+		if (hasStringParams)
+		{
+			foreach (int idx in method.StringParameterIndices!)
+			{
+				builder.AppendLine($"    void* chaos_marshal_{idx} = nullptr;");
+			}
+		}
+
+		// Runtime state TLS access for marshalling helpers.
+		if (needsMarshalling)
+		{
+			builder.AppendLine("    auto* chaos_rs_ = ::chaos::il2cpp::runtime_core::GetCurrentRuntimeState();");
+			builder.AppendLine("    auto* chaos_ts_ = ::chaos::il2cpp::runtime_core::GetCurrentThreadState();");
+		}
+
+		builder.AppendLine("    if (s_pinvoke_fn_ == nullptr)");
+		builder.AppendLine("    {");
+		builder.AppendLine($"        s_pinvoke_lib_ = ::chaos::il2cpp::runtime_core::NativeLibraryLoad(\"{moduleName}\");");
+		builder.AppendLine("        if (s_pinvoke_lib_ == nullptr) CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine($"        s_pinvoke_fn_ = reinterpret_cast<{fnPtrType}>(");
+		builder.AppendLine($"            ::chaos::il2cpp::runtime_core::NativeLibraryGetProcAddress(s_pinvoke_lib_, \"{entryPointName}\"));");
+		builder.AppendLine("        if (s_pinvoke_fn_ == nullptr) CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine("    }");
+
+		// Pre-call: marshal string parameters to native UTF-8 CoTaskMem buffers.
+		if (hasStringParams)
+		{
+			builder.AppendLine();
+			foreach (int idx in method.StringParameterIndices!)
+			{
+				builder.AppendLine($"    if (chaos_arg_{idx} != 0)");
+				builder.AppendLine("    {");
+				builder.AppendLine($"        chaos_marshal_{idx} = reinterpret_cast<void*>(");
+				builder.AppendLine($"            ::chaos::il2cpp::runtime_core::MarshalStringToCoTaskMemUtf8(");
+				builder.AppendLine($"                chaos_rs_, chaos_ts_, reinterpret_cast<void*>(chaos_arg_{idx})));");
+				builder.AppendLine("    }");
+			}
+		}
+
+		// Native call — three code paths:
+		//   1. Blittable (no marshalling): direct call-and-return, early exit.
+		//   2. Non-blittable, non-void return: capture result, cleanup, return.
+		//   3. Non-blittable, void return: call, cleanup, fall through.
+		builder.AppendLine();
+		if (!needsMarshalling)
+		{
+			// Path 1: blittable — return directly.
+			bool isVoidLocal = method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void;
+			if (isVoidLocal && methodAbiParameterSlots.Count == 0)
+				builder.AppendLine("    s_pinvoke_fn_();");
+			else if (isVoidLocal)
+				builder.AppendLine($"    s_pinvoke_fn_({nativeArgList});");
+			else if (methodAbiParameterSlots.Count == 0)
+				builder.AppendLine("    return s_pinvoke_fn_();");
+			else
+				builder.AppendLine($"    return s_pinvoke_fn_({nativeArgList});");
+			builder.AppendLine("}");
+			return;
+		}
+
+		// Paths 2 & 3: non-blittable — capture result if non-void.
+		bool isNonVoid = method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void;
+		if (isNonVoid)
+		{
+			builder.AppendLine($"    {returnType} chaos_ret_ = s_pinvoke_fn_({nativeArgList});");
+		}
+		else
+		{
+			builder.AppendLine($"    s_pinvoke_fn_({nativeArgList});");
+		}
+
+		// Post-call: free marshalled string buffers and handle string return.
+		builder.AppendLine();
+
+		// Free marshalled input string buffers.
+		if (hasStringParams)
+		{
+			foreach (int idx in method.StringParameterIndices!)
+			{
+				builder.AppendLine($"    if (chaos_marshal_{idx} != nullptr)");
+				builder.AppendLine("    {");
+				builder.AppendLine($"        ::chaos::il2cpp::runtime_core::MarshalFreeCoTaskMem(");
+				builder.AppendLine($"            chaos_rs_, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_marshal_{idx}));");
+				builder.AppendLine("    }");
+			}
+		}
+
+		// String return: convert native char* to managed string.
+		// V1: does NOT free the native buffer (the callee owns it).
+		if (hasStringReturn)
+		{
+			builder.AppendLine("    if (chaos_ret_ != 0)");
+			builder.AppendLine("    {");
+			builder.AppendLine("        auto* chaos_managed_str_ = ::chaos::il2cpp::runtime_core::MarshalPtrToStringUtf8(");
+			builder.AppendLine("            chaos_rs_, chaos_ts_, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ret_), -1, false);");
+			builder.AppendLine("        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_managed_str_);");
+			builder.AppendLine("    }");
+			builder.AppendLine("    return 0;");
+		}
+		else if (isNonVoid)
+		{
+			builder.AppendLine("    return chaos_ret_;");
+		}
+
 		builder.AppendLine("}");
 	}
 

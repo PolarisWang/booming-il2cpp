@@ -10,6 +10,7 @@
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
 #include "arithmetic_chaos_bridge.h"
+#include "codegen_bridge.h"       // DispatchEntryV0, NameIndex structs, kDispatchPatched
 
 // ── Object header definition ──
 // type_info: type identity for GC, casting, reflection
@@ -159,6 +160,7 @@ CHAOS_IL2CPP_INT32  ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept;
 	CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromAssemblyBool(CHAOS_IL2CPP_INTPTR assembly, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 throw_on_error) noexcept;
 	CHAOS_IL2CPP_INTPTR ChaosReflectionGetExecutingAssembly(void) noexcept;
 	CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyLocation(CHAOS_IL2CPP_INTPTR assembly) noexcept;
+	CHAOS_IL2CPP_INTPTR ChaosGetCustomAttributeFromBlob(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attr_type_handle) noexcept;
 // Float32 marshalling
 CHAOS_IL2CPP_INTPTR ChaosStoreFloat32(CHAOS_IL2CPP_FLOAT32 value) noexcept;
 // Reflection assignable
@@ -301,5 +303,6 @@ using chaos::il2cpp::runtime_core::ChaosStringContains;
 using chaos::il2cpp::runtime_core::ChaosStringJoinSs;
 using chaos::il2cpp::runtime_core::ChaosStringStartsWith;
 using chaos::il2cpp::runtime_core::ChaosVolatileRead;
+using chaos::il2cpp::runtime_core::ChaosGetCustomAttributeFromBlob;
 
 #endif  // CHAOS_IL2CPP_GENERATED_CODE_COMPAT_H_

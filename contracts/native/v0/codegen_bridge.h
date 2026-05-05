@@ -136,6 +136,66 @@ typedef struct MetadataRegistrationV0 {
     uint32_t metadata_usage_count;
 } MetadataRegistrationV0;
 
+/* ── Dispatch Table entry ──────────────────────────────────────────────
+ *
+ * Each AOT module emits a static dispatch table with one entry per public
+ * method.  Codegen-generated call sites use pattern-aware branching:
+ *   if (entry.flags & kDispatchPatched) call InterpreterEntryDirect
+ *   else                               call direct_ptr directly.
+ *
+ * The dispatch table is an extern "C" symbol emitted by codegen and consumed
+ * by both generated code and the runtime PatchLoader.                           */
+#define kDispatchPatched    (1u << 0)
+
+typedef struct DispatchEntryV0 {
+    void*       direct_ptr;        /* AOT function pointer (set by codegen)   */
+    void*       interrupt_ptr;     /* = &InterpreterEntryDirect              */
+    uintptr_t   method_key;        /* = PatchMethod* (0 when not patched)   */
+    uint32_t    flags;             /* bit 0: kDispatchPatched                 */
+} DispatchEntryV0;
+
+/* ── NameIndex entries ──────────────────────────────────────────────
+ *
+ * Two-level name-based method index used by PatchLoader at runtime to map
+ * (type_name, method_name) → AOT token.  Codegen emits flat sorted arrays
+ * in .rodata; the NameIndexRegistry performs binary search on them.       */
+typedef struct NameIndexTypeEntryV0 {
+    const char* type_name;          /* fully-qualified type name (UTF-8)    */
+    uint32_t    first_method_index; /* index into the parallel method array */
+    uint16_t    method_count;       /* number of methods in this type       */
+} NameIndexTypeEntryV0;
+
+typedef struct NameIndexMethodEntryV0 {
+    const char* method_name;        /* method name (UTF-8)                  */
+    uint32_t    method_token;       /* AOT metadata token (0x06xxxxxx)     */
+    uint16_t    param_count;        /* number of parameters                 */
+} NameIndexMethodEntryV0;
+
+/* ── Token→Slot entry ───────────────────────────────────────────────
+ *
+ * Reverse mapping from metadata token to dispatch table slot index.
+ * Sorted by token for binary search.                                     */
+typedef struct TokenSlotEntryV0 {
+    uint32_t    token;              /* AOT metadata token                   */
+    uint32_t    slot;               /* dispatch table slot index            */
+} TokenSlotEntryV0;
+
+/* ── Per-module name index registration bundle ──────────────────────
+ *
+ * Codegen emits one of these per AOT module.  Bootstrap passes it to
+ * NameIndexRegistry::RegisterModule().  All arrays point into .rodata.     */
+typedef struct NameIndexModuleV0 {
+    const char*                 module_name;          /* diagnostic only   */
+    const NameIndexTypeEntryV0* type_entries;
+    uint32_t                    type_entry_count;
+    const NameIndexMethodEntryV0* method_entries;
+    uint32_t                    method_entry_count;
+    const TokenSlotEntryV0*     token_slot_entries;
+    uint32_t                    token_slot_entry_count;
+    DispatchEntryV0*            dispatch_table;       /* pointer to table  */
+    uint32_t                    dispatch_table_size;
+} NameIndexModuleV0;
+
 typedef struct CodegenRegistrationOptionsV0 {
     uint32_t struct_size;
     uint32_t registration_flags;

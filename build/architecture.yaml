@@ -51,6 +51,7 @@ modules:
       - chaos::il2cpp::numerics_carriers
       - chaos::il2cpp::runtime_capability
       - chaos::il2cpp::runtime_core::aot_metadata
+      - chaos::il2cpp::runtime_core::threading
       - chaos::il2cpp::runtime_instantiation
       - chaos::il2cpp::runtime_vtable
       - chaos::il2cpp::string_table

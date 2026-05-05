@@ -382,7 +382,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool CanEmitMethodBody(AotCoreIrMethodArtifact method)
 	{
-		return method.Instructions.Count > 0;
+		return method.Instructions.Count > 0 || method.IsPInvoke;
 	}
 
 	private static IReadOnlyList<AotCoreIrAbiSlotArtifact> GetMethodAbiParameterSlots(AotCoreIrMethodArtifact method)

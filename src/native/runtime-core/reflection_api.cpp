@@ -861,10 +861,70 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamConstraints(CHAOS_IL2CPP_INTPT
     return 0;
 }
 
+// ── GetMembers ────────────────────────────────────────────────────
+// Merges fields, methods, properties, and nested types into a single
+// flat buffer: [total_count, (kind_0, handle_0), (kind_1, handle_1), ...]
+// (kind = 0 field, 1 method, 2 property, 3 nested type)
+// The managed wrapper iterates this buffer to construct MemberInfo[].
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
-    (void)type_handle;
-    return 0;
+
+    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    if (desc == nullptr) return 0;
+
+    uint32_t field_count    = (desc->fields    != nullptr) ? desc->field_count    : 0;
+    uint32_t method_count   = (desc->methods   != nullptr) ? desc->method_count   : 0;
+    uint32_t property_count = (desc->properties != nullptr) ? desc->property_count : 0;
+
+    // Nested types via Module Registry Tier 0 (tag-bit-63 handles skip this)
+    TypeRef tr;
+    uint32_t nested_count = 0;
+    uint32_t nested_module_id = 0;
+    uint32_t nested_start = 0;
+    if (ResolveTypeRef(type_handle, tr) && tr.module->nested_type_offset != nullptr) {
+        nested_start      = tr.module->nested_type_offset[tr.type_index];
+        uint32_t end      = tr.module->nested_type_offset[tr.type_index + 1];
+        nested_count      = end - nested_start;
+        nested_module_id  = tr.module_id;
+    }
+
+    uint32_t total = field_count + method_count + property_count + nested_count;
+    if (total == 0 || total > 128) return 0;
+
+    // Buffer entries: [count, (kind, handle) × total] = 1 + 2*total
+    static CHAOS_IL2CPP_INTPTR s_buffer[257];
+    s_buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(total));
+
+    constexpr CHAOS_IL2CPP_INTPTR kField      = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    constexpr CHAOS_IL2CPP_INTPTR kMethod     = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+    constexpr CHAOS_IL2CPP_INTPTR kProperty   = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+    constexpr CHAOS_IL2CPP_INTPTR kNestedType = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+
+    uint32_t idx = 1;
+
+    for (uint32_t i = 0; i < field_count; i++) {
+        s_buffer[idx++] = kField;
+        s_buffer[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+            EncodeReflectionQueryFieldHandle(&desc->fields[i]));
+    }
+    for (uint32_t i = 0; i < method_count; i++) {
+        s_buffer[idx++] = kMethod;
+        s_buffer[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+            EncodeReflectionQueryMethodHandle(&desc->methods[i]));
+    }
+    for (uint32_t i = 0; i < property_count; i++) {
+        s_buffer[idx++] = kProperty;
+        s_buffer[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+            EncodeReflectionQueryPropertyHandle(&desc->properties[i]));
+    }
+    for (uint32_t i = 0; i < nested_count; i++) {
+        s_buffer[idx++] = kNestedType;
+        uint32_t child_token = tr.module->nested_type_children[nested_start + i];
+        s_buffer[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+            MakeTypeHandle(nested_module_id, child_token));
+    }
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buffer);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypes(CHAOS_IL2CPP_INTPTR type_handle) {
@@ -1089,13 +1149,73 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(
     return static_cast<CHAOS_IL2CPP_INTPTR>(open_method);
 }
 
+// ── CustomAttribute blob query ──────────────────────────────────────
+// Called from per-family generated code (the short extraction wrapper)
+// after it has decoded (kind, handle) from the managed reflection object.
+
+CHAOS_IL2CPP_INTPTR ChaosGetCustomAttributeFromBlob(
+    CHAOS_IL2CPP_INTPTR member_kind,
+    CHAOS_IL2CPP_INTPTR member_handle,
+    CHAOS_IL2CPP_INTPTR attr_type_handle) noexcept
+{
+    if (member_kind == 0 || member_handle == 0 || attr_type_handle == 0) return 0;
+
+    // Phase 1: only Type kind (kind == 1). Method kind deferred.
+    if (member_kind != 1) return 0;
+
+    TypeInfoHandle handle = static_cast<TypeInfoHandle>(member_handle);
+    uint32_t module_id = GetModuleId(handle);
+    uint32_t token = GetTypeToken(handle);
+    uint32_t entity_idx = TokenToIndex(token);
+
+    const auto* mod = LookupModule(module_id);
+    if (mod == nullptr || mod->custom_attribute_blob == nullptr) return 0;
+    if (entity_idx >= mod->custom_attribute_entity_count) return 0;
+
+    uint32_t start = mod->custom_attribute_offset[entity_idx];
+    uint32_t end = mod->custom_attribute_offset[entity_idx + 1];
+    if (start >= end) return 0;  // no attributes for this entity
+
+    uint32_t target_attr_token = GetTypeToken(attr_type_handle);
+
+    // Parse blob: [attr_count:uint16] then per-attribute records
+    const uint8_t* p = mod->custom_attribute_blob + start;
+    uint16_t attr_count;
+    std::memcpy(&attr_count, p, sizeof(attr_count)); p += 2;
+
+    for (uint16_t i = 0; i < attr_count; ++i) {
+        uint32_t attr_type_token;
+        uint16_t packed_size;
+        std::memcpy(&attr_type_token, p, sizeof(attr_type_token)); p += 4;
+        std::memcpy(&packed_size, p, sizeof(packed_size)); p += 2;
+
+        if (attr_type_token == target_attr_token) {
+            // Found matching attribute — call materializer
+            if (mod->custom_attribute_materializer != nullptr) {
+                return mod->custom_attribute_materializer(
+                    attr_type_token, packed_size > 0 ? p : nullptr);
+            }
+            // No materializer registered — return sentinel non-null to
+            // signal "attribute exists" (no-field attributes).
+            return static_cast<CHAOS_IL2CPP_INTPTR>(1);
+        }
+        p += packed_size;
+    }
+
+    return 0;
+}
+
+// Legacy entry point — kept as fallback for families that don't generate
+// the per-family extraction wrapper. The per-family generated code
+// overrides this in practice.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(
     CHAOS_IL2CPP_INTPTR member_handle,
     CHAOS_IL2CPP_INTPTR attribute_type_handle)
 {
-    (void)member_handle;
-    (void)attribute_type_handle;
-    return 0;
+    return ChaosGetCustomAttributeFromBlob(
+        static_cast<CHAOS_IL2CPP_INTPTR>(1),
+        member_handle,
+        attribute_type_handle);
 }
 
 // =====================================================================

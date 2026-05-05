@@ -36,6 +36,8 @@ const chaos::il2cpp::runtime_core::ReflectionQueryParameterDescriptor kMethodPar
         "input",
         kParameterIndex,
         "",
+        static_cast<CHAOS_IL2CPP_INTPTR>(0),
+        0u,
     },
 };
 
