@@ -9,7 +9,7 @@ description: Master orchestrator for foundation DLL verification — codegen →
 
 完整的 foundation DLL 验证管线编排。从 codegen 管线开始，经过数据校验、三闸门验证、结果聚合到 dashboard 刷新。
 
-**入口信号**：`dev:foundation-dll-verification-pipeline`
+**入口信号**：`dev-foundation-dll-verification-pipeline`
 
 ## 前置条件
 
@@ -52,7 +52,7 @@ Step 3: Three-Gate Verification (per family)
   │  └── HotUpdate:  native hotupdate exe
   │
   │  ⚠ 任何闸门失败 → 先查看 trace 定位根因，再决定继续还是停止
-  │  ⚠ `dev:systematic-debugging` + `run trace` 是调试闸门失败的首选手段
+  │  ⚠ `dev-systematic-debugging` + `run trace` 是调试闸门失败的首选手段
   ▼
 Step 4: Aggregate & Report
   │  dev:foundation-dll-verify-aggregate
@@ -112,7 +112,7 @@ ls verification/foundation-dll/System.Private.CoreLib/<family>/il2cpp_dist/nativ
 | Step 1 | claims 为空 | `write_foundation_dll_audit_outputs()` regenerate → 重试 |
 | Step 1 | coverage 缺失 | Step 0 未完成 → 回退 codegen |
 | Step 3 | Fact L1 失败（无 AOT lowering） | 标记为 "not-translated"，该 family AOT 翻译未完成，不阻塞其他 family |
-| Step 3 | Fact L2 失败（native exec checksum 不匹配） | **阻塞** → **查看 trace** → `dev:systematic-debugging` → 确认翻译语义错误 |
+| Step 3 | Fact L2 失败（native exec checksum 不匹配） | **阻塞** → **查看 trace** → `dev-systematic-debugging` → 确认翻译语义错误 |
 | Step 3 | Benchmark 退化 | **查看 trace** → 排查翻译质量 → 标记 regression |
 | Step 3 | HotUpdate 失败 | **查看 trace** → 检查 stub 返回值 → 标记失败 |
 | Step 4 | Dashboard 不一致 | `write_foundation_dll_audit_outputs()` 重新生成 |
@@ -144,7 +144,7 @@ python -m build.toolchains.run.commands.trace_viewer --exception
 
 - 前置: 翻译路径实现完成
 - Step 0: `batch_native_aot_runner.py` + native codegen
-- Step 1: `dev:foundation-dll-verify-data-integrity`
-- Step 3: `dev:foundation-dll-family-verification`
-- Step 4: `dev:foundation-dll-verify-aggregate`
-- Step 5: `dev:verification-before-completion`
+- Step 1: `dev-foundation-dll-verify-data-integrity`
+- Step 3: `dev-foundation-dll-family-verification`
+- Step 4: `dev-foundation-dll-verify-aggregate`
+- Step 5: `dev-verification-before-completion`

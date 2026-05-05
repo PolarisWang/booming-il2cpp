@@ -196,7 +196,7 @@ description: Use when encountering any bug, test failure, or unexpected behavior
    - 如果可能，使用自动化测试
    - 如果没有框架，使用一次性测试脚本
    - 修复前必须有
-   - 使用 `dev:test-driven-development` 技能编写正确的失败测试
+   - 使用 `dev-test-driven-development` 技能编写正确的失败测试
 
 2. **实现单一修复**
    - 解决已识别的根本原因

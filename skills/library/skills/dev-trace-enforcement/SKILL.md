@@ -69,5 +69,5 @@ python -m build.toolchains.run.commands.trace_viewer --json
 
 ## 关联技能
 
-- `dev:systematic-debugging` — 标准调试流程，trace 作为第一步证据收集手段
+- `dev-systematic-debugging` — 标准调试流程，trace 作为第一步证据收集手段
 - 详细文档：`wiki/04-工具与集成/统一追踪体系.md#错误排查工作流`
