@@ -83,6 +83,148 @@ public sealed partial class NativeAotLoweringPlanner
     ) : StructuredIRNode;
 
     // ──────────────────────────────────────────────────────────────
+    // Stack Slot Context — maps IL eval stack positions to C++ local
+    // variable names (_s0, _s1, …) so that push/pop operations become
+    // local-variable assignments instead of array operations.
+    //
+    // Each push to a given stack depth gets a unique slot id, so
+    // the mapping is: depth → slotId → "_s{slotId}".  Pop returns
+    // the name at the current top and discards it.
+    // ──────────────────────────────────────────────────────────────
+
+    private sealed class SlotContext
+    {
+        private int _counter;
+        private readonly List<int> _slots = new(); // depth→slotId mapping
+
+        public int Depth => _slots.Count;
+
+        /// <summary>Declare a new slot at the current top.</summary>
+        public string Push()
+        {
+            int id = _counter++;
+            _slots.Add(id);
+            return $"_s{id}";
+        }
+
+        /// <summary>Pop and return the top slot name.</summary>
+        public string Pop()
+        {
+            int id = _slots[^1];
+            _slots.RemoveAt(_slots.Count - 1);
+            return $"_s{id}";
+        }
+
+        /// <summary>Peek at the top slot name without popping.</summary>
+        public string Peek() => $"_s{_slots[^1]}";
+    }
+
+    // ──────────────────────────────────────────────────────────────
+    // Stack operation pattern post-processor
+    //
+    // Takes the output of EmitLinearInstruction / helpers (which
+    // contains chaos_eval_stack[chaos_stack_top++], etc.) and replaces
+    // the array operations with _sN slot names, tracking depth through
+    // a SlotContext.
+    //
+    // This avoids rewriting every opcode handler — the patterns are
+    // predictable and the substitution is purely mechanical.
+    // ──────────────────────────────────────────────────────────────
+
+    private static string ReplaceStackOpsWithSlots(string code, SlotContext slots)
+    {
+        var lines = code.Split('\n');
+        for (int i = 0; i < lines.Length; i++)
+        {
+            string line = lines[i];
+
+            // ── Push: chaos_eval_stack[chaos_stack_top++] = VALUE;
+            int pushIdx = line.IndexOf("chaos_eval_stack[chaos_stack_top++]", StringComparison.Ordinal);
+            if (pushIdx >= 0 && line.Contains('='))
+            {
+                int eqIdx = line.IndexOf('=', pushIdx);
+                string prefix = line[..pushIdx].TrimEnd();
+                string valueExpr = line[(eqIdx + 1)..].TrimEnd().TrimEnd(';');
+                string slotName = slots.Push();
+                lines[i] = $"{prefix}auto {slotName} = {valueExpr};";
+                continue;
+            }
+
+            // ── Pop:  ... = chaos_eval_stack[--chaos_stack_top];
+            int popIdx = line.IndexOf("chaos_eval_stack[--chaos_stack_top]", StringComparison.Ordinal);
+            if (popIdx >= 0 && line.Contains('='))
+            {
+                int eqIdx = line.IndexOf('=', popIdx);
+                string target = line[..eqIdx].TrimEnd();
+                // The pop expression might be wrapped: static_cast<T>(...[...]) etc.
+                // We need to extract just the [...[...]] part and replace it with _sN
+                string beforePop = line[..popIdx].TrimEnd();
+                string afterPop = line[(popIdx + "chaos_eval_stack[--chaos_stack_top]".Length)..];
+                string slotName = slots.Pop();
+                // Reconstruct: keep the prefix operations intact
+                // e.g.: "const auto x = static_cast<T>(chaos_eval_stack[--chaos_stack_top]);"
+                // becomes: "const auto x = static_cast<T>(_sN);"
+                lines[i] = $"{beforePop}{slotName}{afterPop}";
+                continue;
+            }
+
+            // ── Top modify: chaos_eval_stack[chaos_stack_top - 1] = VALUE;
+            int topModIdx = line.IndexOf("chaos_eval_stack[chaos_stack_top - 1]", StringComparison.Ordinal);
+            if (topModIdx >= 0)
+            {
+                int eqIdx = line.IndexOf('=', topModIdx);
+                string prefix = line[..topModIdx].TrimEnd();
+                string valueExpr = line[(eqIdx + 1)..].TrimEnd().TrimEnd(';');
+                string slotName = slots.Peek();
+                lines[i] = $"{prefix}{slotName} = {valueExpr};";
+                continue;
+            }
+
+            // ── Top decrement: chaos_stack_top--;
+            if (line.Contains("chaos_stack_top--;"))
+            {
+                string prefix = line[..line.IndexOf("chaos_stack_top--;")].TrimEnd();
+                slots.Pop();
+                lines[i] = string.IsNullOrEmpty(prefix) ? $"// (pop)" : $"{prefix}// (pop)";
+                continue;
+            }
+
+            // ── Top decrement by N: chaos_stack_top -= N;
+            int minusEqIdx = line.IndexOf("chaos_stack_top -=", StringComparison.Ordinal);
+            if (minusEqIdx >= 0)
+            {
+                int semiIdx = line.IndexOf(';', minusEqIdx);
+                string nStr = line[(minusEqIdx + "chaos_stack_top -=".Length)..semiIdx].Trim();
+                if (int.TryParse(nStr, out int n))
+                {
+                    string prefix = line[..minusEqIdx].TrimEnd();
+                    for (int j = 0; j < n; j++) slots.Pop();
+                    lines[i] = string.IsNullOrEmpty(prefix) ? $"// (pop {n})" : $"{prefix}// (pop {n})";
+                    continue;
+                }
+            }
+
+            // ── Dup: chaos_eval_stack[chaos_stack_top] = chaos_eval_stack[chaos_stack_top - 1]; + stack_top++;
+            if (line.Contains("chaos_eval_stack[chaos_stack_top] = chaos_eval_stack[chaos_stack_top - 1]"))
+            {
+                string prefix = line[..line.IndexOf("chaos_eval_stack[chaos_stack_top]", StringComparison.Ordinal)].TrimEnd();
+                string slotName = slots.Push();
+                string sourceSlot = slots.Peek(); // the push incremented depth; Peek is the copy
+                // Actually for dup: the top slot before dup is at depth-1, after dup depth has +1
+                // But the Push() already incremented depth. We need the PREVIOUS top.
+                // Fix: Pop the slot we just pushed, read the (now restored) previous top
+                string newSlot = slots.Pop(); // undo the Push
+                string prevTop = slots.Peek(); // this is the original top
+                slots.Push(); // redo the Push — the new slot name is the same
+                lines[i] = $"{prefix}auto {newSlot} = {prevTop};";
+                continue;
+            }
+        }
+
+        return string.Join("\n", lines);
+    }
+
+    // ──────────────────────────────────────────────────────────────
     // Pure Structured IR → C++ Recursive Emitter
     //
     // The emitter is a recursive tree walk that produces C++ control
@@ -162,9 +304,9 @@ public sealed partial class NativeAotLoweringPlanner
     // ── Block ─────────────────────────────────────────────────────
 
     /// <summary>
-    /// Emit a linear block of instructions with an optional terminator.
-    /// Body instructions use EmitLinearInstruction (no goto-next).
-    /// The terminator is emitted via dedicated helpers.
+    /// Emit an IRBlock using slot-mapped local variables for the eval stack.
+    /// Each instruction is emitted into a temporary StringBuilder, then
+    /// post-processed to replace array operations with _sN slot names.
     /// </summary>
     private void EmitIRBlock(
         StringBuilder builder,
@@ -172,11 +314,35 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
+        var slots = new SlotContext();
+
         foreach (var instr in block.BodyInstructions)
-            EmitLinearInstruction(builder, instr, indentation);
+        {
+            var temp = new StringBuilder();
+            EmitLinearInstruction(temp, instr, indentation);
+            string processed = ReplaceStackOpsWithSlots(temp.ToString(), slots);
+            builder.Append(processed);
+            if (!processed.EndsWith("\n", StringComparison.Ordinal))
+                builder.AppendLine();
+        }
 
         if (block.Terminator != null)
-            EmitIRBlockTerminator(builder, block.Terminator, method, indentation);
+        {
+            // Terminators that pop from the stack can also use slot mapping
+            var temp = new StringBuilder();
+            EmitIRBlockTerminator(temp, block.Terminator, method, indentation);
+            string processed = ReplaceStackOpsWithSlots(temp.ToString(), slots);
+            builder.Append(processed);
+            if (!processed.EndsWith("\n", StringComparison.Ordinal))
+                builder.AppendLine();
+        }
+
+        // If stack is not empty after the block (shouldn't happen in structured code),
+        // emit a comment showing residual slots (debug aid).
+        if (slots.Depth > 0)
+        {
+            builder.AppendLine($"{indentation}// (stack depth {slots.Depth} after block)");
+        }
     }
 
     /// <summary>
@@ -647,113 +813,8 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         var tree = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
-        StructuredIRNode ir = ConvertToStructuredIR(tree, cfg, instructions, offsets);
+        StructuredIRNode ir = tree;
         EmitStructuredIRNode(builder, ir, method, "    ");
     }
 
-    /// <summary>
-    /// Bridge: convert emit-coupled StructuredNode tree to pure
-    /// StructuredIR tree.
-    /// </summary>
-    private static StructuredIRNode ConvertToStructuredIR(
-        StructuredNode node,
-        ControlFlowGraph cfg,
-        IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
-        IReadOnlySet<int> offsets)
-    {
-        switch (node)
-        {
-            case BasicBlockNode bn:
-                return new IRBlock(bn.Block.BodyInstructions, bn.Block.Terminator);
-
-            case SequenceNode sn:
-            {
-                var nodes = new List<StructuredIRNode>(sn.Nodes.Count);
-                foreach (var child in sn.Nodes)
-                    nodes.Add(ConvertToStructuredIR(child, cfg, instructions, offsets));
-                return new IRSequence(nodes);
-            }
-
-            case IfThenElseNode ite:
-            {
-                var condBlock = ite.ConditionBlock;
-                var thenIr = ConvertToStructuredIR(ite.ThenBranch, cfg, instructions, offsets);
-                var elseIr = ite.ElseBranch != null
-                    ? ConvertToStructuredIR(ite.ElseBranch, cfg, instructions, offsets)
-                    : null;
-
-                return new IRIfThenElse(
-                    condBlock.BodyInstructions,
-                    condBlock.Terminator ?? throw new InvalidOperationException(
-                        "IfThenElse condition block must have a terminator"),
-                    thenIr,
-                    elseIr
-                );
-            }
-
-            case LoopNode ln:
-            {
-                var header = ln.HeaderBlock;
-                var bodyIr = ConvertToStructuredIR(ln.Body, cfg, instructions, offsets);
-
-                if (ln.IsWhile)
-                {
-                    return new IRWhileLoop(
-                        header.BodyInstructions,
-                        header.Terminator,
-                        bodyIr,
-                        ln.ExitOffset ?? -1
-                    );
-                }
-                else
-                {
-                    IReadOnlyList<AotCoreIrInstructionArtifact> latchInstructions;
-                    AotCoreIrInstructionArtifact? latchTerminator;
-
-                    if (ln.LatchBlock != null)
-                    {
-                        latchInstructions = ln.LatchBlock.BodyInstructions;
-                        latchTerminator = ln.LatchBlock.Terminator;
-                    }
-                    else
-                    {
-                        latchInstructions = Array.Empty<AotCoreIrInstructionArtifact>();
-                        latchTerminator = null;
-                    }
-
-                    return new IRDoWhileLoop(
-                        bodyIr,
-                        latchInstructions,
-                        latchTerminator,
-                        ln.HeaderBlock.StartOffset,
-                        ln.ExitOffset ?? -1
-                    );
-                }
-            }
-
-            case SwitchNode sw:
-            {
-                var swBlock = sw.SwitchBlock;
-                var caseBodies = new Dictionary<int, StructuredIRNode>();
-                foreach (var kvp in sw.CaseBodies)
-                {
-                    caseBodies[kvp.Key] = ConvertToStructuredIR(kvp.Value, cfg, instructions, offsets);
-                }
-                var defaultBody = sw.DefaultBody != null
-                    ? ConvertToStructuredIR(sw.DefaultBody, cfg, instructions, offsets)
-                    : null;
-
-                return new IRSwitch(
-                    swBlock.BodyInstructions,
-                    caseBodies,
-                    defaultBody,
-                    sw.MergeOffset ?? -1
-                );
-            }
-
-            default:
-                throw new NotSupportedException(
-                    "ConvertToStructuredIR: unknown node type '" + node.GetType().Name + "'");
-        }
-    }
 }

@@ -217,3 +217,45 @@ for (auto& tc : kTestTable) {
 | Interpreter 入口 | 运行时生成 trampoline | 预编译 InterpreterEntryDirect | iOS 安全 |
 | 参数 marshalling | 签名感知，运行时解析 | 签名感知，运行时解析（从 Blob 读） | 等价 |
 | IL→IR | 不适用（直接解释 IL） | Lazy 降低（复用 il_to_ir_lowerer） | 架构差异 |
+
+## 实现状态（2026-05-05）
+
+### 已完成并验证
+
+| 组件 | 状态 | 说明 |
+|------|------|------|
+| PatchDataExtractor (C#) | ✅ | PE→.patchdata 提取，含 ECMA #Strings/#Blob/MethodBody |
+| NativeAotLoweringPlanner emit | ✅ | NameIndex 两级索引 + Token→Slot 反向表 + DispatchTable emit |
+| NameIndexRegistry | ✅ | 两级 bsearch 查找（type→method→AOT token），Bootstrap 集成 |
+| DispatchTable + Token→Slot | ✅ | Per-module 静态表，token→slot 反向 bsearch |
+| PatchMetadataCache | ✅ | 本地自洽 token resolver，不注册全局类型系统 |
+| ApplyPatchFromMemory | ✅ | .patchdata 验证 → NameIndex 查找 → DispatchEntry 标记 |
+| InterpreterEntryDirect | ✅ | ArgBuffer + 签名解析 + Lazy IL→IR 降低 + ExecutionFrame 构建 + InterpreterVM 调用 |
+| Unpatch | ✅ | 逐方法恢复 direct_ptr + 清 flag + 销毁 PatchContext |
+| PatchMethod metadata_cache | ✅ | ApplyPatchFromMemory 存储 PatchMetadataCache 指针，PatchTokenResolver 使用 |
+
+### 验证结果（string-char-text-core）
+
+HotUpdateTest.exe 对 20 个方法全部通过 7 步 D3 验证：
+- `d3PatchApplied: true`（ApplyPatchFromMemory 正确标记 dispatch entry）
+- `RuntimeDispatchLookupBySlot` 返回 dispatch entry 且 `flags & kDispatchPatched`
+- 所有 20 方法 `status: "passed"`, `revertVerified: true`
+- Baseline→Patch→Revert→Restore 全链路通过
+
+### 修复的 Bug
+
+| Bug | 层 | 根因 | 修复 |
+|-----|-----|------|------|
+| 方法名乱码 | Managed (PatchDataExtractor) | `Dictionary.Last()` 不保证插入顺序 | 添加 `_insertOrder` 列表跟踪插入顺序 |
+| 方法名/Blob 乱码 | Native (PatchMetadataCache) | `GetString()`/`GetBlob()` 未加 heap_base_offset | 添加 `+ header_->string_heap_offset` |
+| Method 0 被跳过 | Native (patch_loader.cpp) | `body_offset == 0` 误判为"无 body" | 改为只检查 `body_size == 0` |
+
+### 待完成
+
+| 组件 | 优先级 | 说明 |
+|------|--------|------|
+| 全 family .patchdata 生成 | 中 | 当前仅验证 string-char-text-core |
+| codegen D3 call site 发射 | 低 | 模式感知分支：`if (entry.flags & kPatched) → InterpreterEntryDirect` |
+| InterpreterEntry 单元测试 | 低 | 需要完整的 InterpreterVM 环境 |
+| 跨 family 全量验证 | 中 | 当前只验证了 string-char-text-core |
+| 增量 Diff 构建 | 未来 | 当前是全量重新生成 .patchdata |

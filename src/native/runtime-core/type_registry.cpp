@@ -8,6 +8,8 @@
 #include "runtime_core.h"
 #include "runtime_vtable.h"
 #include "type_registry.h"
+#include "module_registry.h"
+#include "reflection_query_model.h"
 
 #include <mutex>
 
@@ -146,6 +148,37 @@ bool ChaosTypeAddInterface(
     ti->runtime_iface_map  = newMap;
     ti->runtime_iface_count = newCount;
     return true;
+}
+
+const TypeInfo* TryResolveTypeInfo(TypeInfoHandle handle) noexcept
+{
+    if (handle == 0u || handle == TypeInfoHandle{}) return nullptr;
+
+    // ── Path 1: Tag-encoded handles are RuntimeInstantiatedType pointers ──
+    // These carry a ReflectionQueryTypeDescriptor, not a TypeInfo*, so we
+    // cannot resolve to TypeInfo* from this path. The caller should compute
+    // stable_id from the descriptor's subject_id_utf8 and use FindVTable().
+    const auto* desc = TryDecodeReflectionQueryTypeHandle(handle);
+    if (desc != nullptr) {
+        return nullptr;
+    }
+
+    // ── Path 2: Module-registry handle ──
+    // Encoding: [module_id:32 bits] [metadata_token:32 bits]
+    uint32_t module_id = GetModuleId(handle);
+    uint32_t token = GetTypeToken(handle);
+    if (token != 0) {
+        const auto* mod = LookupModule(module_id != 0u ? module_id : 0u);
+        if (mod != nullptr && !mod->tombstone && mod->type_flags != nullptr) {
+            uint32_t idx = TokenToIndex(token);
+            if (idx < mod->type_count && mod->type_info_ptrs != nullptr) {
+                return mod->type_info_ptrs[idx];
+            }
+        }
+    }
+
+    // ── Path 3: Raw metadata token or unknown encoding ──
+    return nullptr;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

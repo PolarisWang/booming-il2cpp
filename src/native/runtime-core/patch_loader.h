@@ -34,6 +34,7 @@ struct PatchMethod {
     uint32_t       max_stack       = 8;          // max stack depth (tiny default)
     void*          cached_ir       = nullptr;   // cached IRMethod (lazy, null = not lowered)
     uint32_t       token;                        // AOT metadata token for this method
+    class PatchMetadataCache* metadata_cache = nullptr;  // token resolution cache
 };
 
 // ── PatchMetadataCache ───────────────────────────────────────────────────

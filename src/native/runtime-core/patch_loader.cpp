@@ -291,6 +291,9 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
             // Tiny format: max_stack = 8 (ECMA 335 II.15.4.2.1).
         }
 
+        // Store reference to the metadata cache for token resolution during IR lowering.
+        patch_method.metadata_cache = cache;
+
         // Get signature blob for runtime signature parsing.
         if (method_entry->signature_offset != 0) {
             patch_method.signature_blob = static_cast<const uint8_t*>(
