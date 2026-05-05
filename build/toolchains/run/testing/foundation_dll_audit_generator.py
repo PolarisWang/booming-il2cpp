@@ -1088,9 +1088,10 @@ def _status_class(value: Any) -> str:
     return normalized or "unknown"
 
 
-def _status_badge(value: Any) -> str:
+def _status_badge(value: Any, *, label: str | None = None) -> str:
     text = _string(value) or "unknown"
-    return f'<span class="status status-{_status_class(text)}">{escape(text)}</span>'
+    display = label if label else text
+    return f'<span class="status status-{_status_class(text)}">{escape(display)}</span>'
 
 
 def _dll_detail_relative_path(assembly_name: str) -> str:
@@ -2015,14 +2016,16 @@ def _render_source_links_block(sl: dict[str, Any], *, repo_root: Path, root_pref
 
 
 FAMILY_GATE_LABELS: dict[str, str] = {
-    "native-proof": "Fact\u901a\u8fc7\u7387",
+    "native-proof": "CodeGen\u7ffb\u8bd1\u7387",
+    "native-correct": "Native\u6b63\u786e\u7387",
     "benchmark": "Benchmark\u52a0\u901f\u6bd4",
     "hotupdate-proof": "HotUpdate\u901a\u8fc7\u7387",
 }
 FAMILY_GATE_COLUMNS = tuple(FAMILY_GATE_LABELS.keys())
 
 ALL_GATE_LABELS: dict[str, str] = {
-    "native-proof": "Native Proof",
+    "native-proof": "Native Proof (CodeGen)",
+    "native-correct": "Native Correct",
     "benchmark": "Benchmark",
     "hotupdate-proof": "HotUpdate",
     "managed-proof": "Managed Proof",
@@ -2043,11 +2046,18 @@ def _gate_header_tooltip(gate_code: str) -> str:
             "悬停查看详细测试用例列表"
         ),
         "native-proof": (
-            "Native Proof: 表示该家族的原生侧代码生成覆盖情况。"
+            "Native Proof (CodeGen): 表示该家族的原生侧代码生成覆盖情况。"
             "计算方式: 分母 = 该家族中需要进行原生证明的方法总数 (methodSubjectIds)，"
             "分子 = 已通过覆盖率检查的方法数。"
             "进度 = 分子 / 分母 * 100%。"
             "悬停查看每个方法的覆盖状态"
+        ),
+        "native-correct": (
+            "Native Correct: 表示生成的 C++ AOT 代码语义正确性。"
+            "验证方式: 将生成的 C++ 编译为 native exe，与 managed entrypoint 对比 checksum。"
+            "通过 = 翻译结果与期望一致。"
+            "待验证 = 未运行 L2 验证。"
+            "失败 = 翻译语义有误。"
         ),
         "hotupdate-proof": (
             "HotUpdate: 表示该家族的热更新验证覆盖情况。"
@@ -2285,8 +2295,11 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
         )
         hotupdate_proof = dict(family.get("hotupdateProof") or {})
         benchmark_proof = dict(family.get("benchmarkProof") or {})
+        native_correct_proof = dict(family.get("nativeCorrect") or {})
+        native_correct_cell = _render_native_correct_cell(native_correct_proof)
         gate_badges = "".join(
             f"<td class=\"primary-cell\"><a href=\"{escape(assembly_name)}/families/{escape(slug)}-fact.html\" class=\"primary-cell-link\">{native_proof_cell}</a></td>" if col == "native-proof"
+            else f"<td class=\"primary-cell\">{native_correct_cell}</td>" if col == "native-correct"
             else f"<td class=\"primary-cell\"><a href=\"{escape(assembly_name)}/families/{escape(slug)}-benchmark.html\" class=\"primary-cell-link\">{_render_benchmark_speedup_cell(benchmark_proof, assembly_name=assembly_name, family_id=family_id, root_prefix=root_prefix, is_detail_page=True, link_to_family_page=True)}</a></td>" if col == "benchmark"
             else f"<td class=\"primary-cell\"><a href=\"{escape(assembly_name)}/families/{escape(slug)}-hotupdate.html\" class=\"primary-cell-link\">{_render_generic_gate_progress_cell(family, gate_proof=hotupdate_proof, root_prefix=root_prefix, label='HotUpdate Proof')}</a></td>" if col == "hotupdate-proof"
             else f"<td>{_status_badge(gates.get(col, ''))}</td>"
@@ -2313,6 +2326,25 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
     </table>
   </div>
 </section>""".strip()
+
+
+def _render_native_correct_cell(native_correct: dict[str, Any]) -> str:
+    """Render the Native Correct cell (L2 verification status)."""
+    status = _string(native_correct.get("status", ""))
+    passed = int(native_correct.get("passed", 0))
+    total = int(native_correct.get("total", 0))
+
+    if not status or status == "pending":
+        return _status_badge("pending", label="Pending")
+    if status == "passed" and total > 0:
+        pct = round(passed / total * 100, 1)
+        return f'{_status_badge("passed", label="Pass")} {pct:.0f}%'
+    if status == "failed":
+        detail = f"{passed}/{total}" if total > 0 else ""
+        return f'{_status_badge("failed", label="Fail")} {detail}'
+    if status == "skip":
+        return _status_badge("not-required", label="Skip")
+    return _status_badge(status)
 
 
 def _render_waiver_table(families: list[dict[str, Any]]) -> str:

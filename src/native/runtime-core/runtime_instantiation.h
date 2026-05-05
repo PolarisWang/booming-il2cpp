@@ -79,7 +79,9 @@ void ComputeValueTypeLayout(RuntimeInstantiatedType* rt_type);
 // ── Bridge access ──────────────────────────────────────────────────────────
 
 /// Returns the process-wide RuntimeInstantiationBridgeV0 instance.
-struct RuntimeInstantiationBridgeV0;
+/// The struct is defined in contracts/native/v0/runtime_instantiation.h
+/// (typedef struct inside extern "C", at global scope).  No local forward
+/// declaration needed -- the include above provides the full definition.
 const RuntimeInstantiationBridgeV0* GetBridgeV0();
 
 // ── AOT method map (generic method promotion) ────────────────────────────

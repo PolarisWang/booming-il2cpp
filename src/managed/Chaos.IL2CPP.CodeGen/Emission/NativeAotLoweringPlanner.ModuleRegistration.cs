@@ -376,7 +376,7 @@ public sealed partial class NativeAotLoweringPlanner
         };
     }
 
-    private static byte[] EncodeCustomAttributeFieldValue(CustomAttributeLiteralValue value)
+    private byte[] EncodeCustomAttributeFieldValue(CustomAttributeLiteralValue value)
     {
         if (value.Kind == CustomAttributeLiteralKind.Null)
             return Array.Empty<byte>();
@@ -398,9 +398,29 @@ public sealed partial class NativeAotLoweringPlanner
             CustomAttributeLiteralKind.String when value.Value != null
                 => EncodePackedString((string)value.Value!),
             CustomAttributeLiteralKind.String => new byte[] { 0, 0 }, // empty string
-            CustomAttributeLiteralKind.Type => new byte[] { 0, 0 },  // deferred
-            CustomAttributeLiteralKind.Enum => new byte[] { 0 },     // deferred
+            CustomAttributeLiteralKind.Type when value.Value is string typeSubjectId
+                => BitConverter.GetBytes(GetTypeTokenForSubjectId(typeSubjectId)),
+            CustomAttributeLiteralKind.Type => new byte[] { 0, 0, 0, 0 },
+            CustomAttributeLiteralKind.Enum when value.Value != null
+                => EncodeEnumValue(value.Value),
+            CustomAttributeLiteralKind.Enum => new byte[] { 0 },
             _ => throw new NotSupportedException($"unknown CA literal kind {value.Kind}"),
+        };
+    }
+
+    private static byte[] EncodeEnumValue(object value)
+    {
+        return value switch
+        {
+            int i => BitConverter.GetBytes(i),
+            long l => BitConverter.GetBytes(l),
+            short s => BitConverter.GetBytes(s),
+            byte b => new[] { b },
+            sbyte sb => new[] { unchecked((byte)sb) },
+            ushort us => BitConverter.GetBytes(us),
+            uint ui => BitConverter.GetBytes(ui),
+            ulong ul => BitConverter.GetBytes(ul),
+            _ => BitConverter.GetBytes(Convert.ToInt32(value)),
         };
     }
 
@@ -577,7 +597,7 @@ public sealed partial class NativeAotLoweringPlanner
                 foreach (var (fieldSubjectId, fieldValue) in fields)
                 {
                     string fieldName = GetNativeFieldMemberName(fieldSubjectId);
-                    string decodeCode = EmitFieldDecodeStmt(fieldName, fieldValue.Kind);
+                    string decodeCode = EmitFieldDecodeStmt(fieldName, fieldValue, attrSubjectId);
                     sb.Append("            ").AppendLine(decodeCode);
                 }
             }
@@ -623,8 +643,9 @@ public sealed partial class NativeAotLoweringPlanner
         return 0; // not found in this module
     }
 
-    private static string EmitFieldDecodeStmt(string fieldName, CustomAttributeLiteralKind kind)
+    private string EmitFieldDecodeStmt(string fieldName, CustomAttributeLiteralValue value, string attrSubjectId)
     {
+        var kind = value.Kind;
         return kind switch
         {
             CustomAttributeLiteralKind.Null =>
@@ -667,15 +688,37 @@ public sealed partial class NativeAotLoweringPlanner
                 $"{{ uint16_t __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.String =>
-                $"{{ uint16_t __len; std::memcpy(&__len, p, 2); p += 2 + __len; attr->{fieldName} = 0; }}",
+                $"{{ uint16_t __len; std::memcpy(&__len, p, 2); p += 2; auto* __rt = chaos::il2cpp::runtime_core::GetCurrentRuntimeState(); auto* __th = chaos::il2cpp::runtime_core::GetCurrentThreadState(); auto* __abi = chaos::il2cpp::runtime_core::GetRuntimeAbiV0(); attr->{fieldName} = (__abi != nullptr && __abi->string_new_utf8 != nullptr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__abi->string_new_utf8(__rt, __th, reinterpret_cast<const char*>(p), __len)) : 0; p += __len; }}",
+
+            CustomAttributeLiteralKind.Type when value.Value is string typeSubjectId =>
+                $"{{ p += 4; attr->{fieldName} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>({GetNativeTypeInfoSymbol(typeSubjectId)}); }}",
 
             CustomAttributeLiteralKind.Type =>
-                $"attr->{fieldName} = 0;",
+                $"{{ p += 4; attr->{fieldName} = 0; }}",
+
+            CustomAttributeLiteralKind.Enum when value.Value != null =>
+                $"attr->{fieldName} = {FormatEnumLiteral(value.Value)};",
 
             CustomAttributeLiteralKind.Enum =>
-                $"{{ uint8_t __ek; std::memcpy(&__ek, p, 1); p += 1; attr->{fieldName} = 0; }}",
+                $"attr->{fieldName} = 0;",
 
             _ => $"attr->{fieldName} = 0;",
+        };
+    }
+
+    private static string FormatEnumLiteral(object value)
+    {
+        return value switch
+        {
+            int i => $"static_cast<CHAOS_IL2CPP_INTPTR>({i})",
+            long l => $"static_cast<CHAOS_IL2CPP_INTPTR>({l})",
+            short s => $"static_cast<CHAOS_IL2CPP_INTPTR>({s})",
+            byte b => $"static_cast<CHAOS_IL2CPP_INTPTR>({b})",
+            sbyte sb => $"static_cast<CHAOS_IL2CPP_INTPTR>({sb})",
+            ushort us => $"static_cast<CHAOS_IL2CPP_INTPTR>({us})",
+            uint ui => $"static_cast<CHAOS_IL2CPP_INTPTR>({ui})",
+            ulong ul => $"static_cast<CHAOS_IL2CPP_INTPTR>({ul})",
+            _ => $"static_cast<CHAOS_IL2CPP_INTPTR>({Convert.ToInt32(value)})",
         };
     }
 

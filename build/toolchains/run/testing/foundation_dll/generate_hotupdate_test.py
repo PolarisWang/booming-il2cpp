@@ -155,11 +155,16 @@ def _generate_hotupdate_test(
     method_count = len(host_symbols)
     has_semantic = bool(semantic_patch_symbols and len(semantic_patch_symbols) == method_count)
 
+    # Embed .patchdata for D3 dispatch hotpatch
+    patch_data_cxx, _ = _embed_patch_data(family_slug)
+
     lines = []
+    if patch_data_cxx:
+        lines.append(patch_data_cxx)
     _emit_header(lines, family_id, method_count, has_semantic)
     _emit_forward_decls(lines, host_symbols, patch_symbols, semantic_patch_symbols, has_semantic)
     _emit_namespace_block(lines, host_symbols, patch_symbols, semantic_patch_symbols, has_semantic, method_count)
-    _emit_main_function(lines, method_count, family_id, has_semantic)
+    _emit_main_function(lines, method_count, family_id, has_semantic, has_patch_data=bool(patch_data_cxx))
 
     return "\n".join(lines)
 
@@ -194,6 +199,12 @@ def _embed_patch_data(family_slug: str) -> tuple[str, int]:
     lines.append("")
 
     return "\n".join(lines), len(data)
+def _emit_header(
+    lines: list[str],
+    family_id: str,
+    method_count: int,
+    has_semantic: bool,
+) -> None:
     lines.extend([
         "// Per-family hotupdate verification test",
         f"// Family: {family_id}",
@@ -218,6 +229,8 @@ def _embed_patch_data(family_slug: str) -> tuple[str, int]:
         '#include "method_table.h"',
         '#include "module_registry.h"',
         '#include "abi_manifest.h"',
+        '#include "patch_loader.h"',
+        '#include "dispatch_table.h"',
         "",
         "#include <cstdio>",
         "#include <cstdint>",
@@ -336,7 +349,7 @@ def _emit_namespace_block(
     ])
 
 
-def _emit_main_function(lines: list[str], method_count: int, family_id: str, has_semantic: bool) -> None:
+def _emit_main_function(lines: list[str], method_count: int, family_id: str, has_semantic: bool, has_patch_data: bool = False) -> None:
     lines.extend([
         "",
         "int main() {",
@@ -347,6 +360,10 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str, has
         "    using chaos::il2cpp::method_replacement::Resolve;",
         "    using chaos::il2cpp::method_replacement::Revert;",
         "    using chaos::il2cpp::method_replacement::RevertAll;",
+        "    using chaos::il2cpp::runtime_core::ApplyPatchFromMemory;",
+        "    using chaos::il2cpp::runtime_core::Unpatch;",
+        "    using chaos::il2cpp::runtime_core::RuntimeDispatchLookup;",
+        "    using chaos::il2cpp::runtime_core::PatchContext;",
         "",
         "    // Build synthetic method pointer table with host methods.",
         "    MethodPointerEntry entries[kMethodCount];",
@@ -400,7 +417,25 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str, has
         "    uint32_t passed_count = 0u;",
         "    uint32_t failed_count = 0u;",
         "    RevertAll();",
-        "",
+    ])
+    if has_patch_data:
+        lines.extend([
+            "",
+            "    // ── D3 dispatch hotpatch: ApplyPatchFromMemory ─────────────────",
+            "    PatchContext* patch_ctx = ApplyPatchFromMemory(kPatchData, kPatchDataSize);",
+            "    if (patch_ctx == nullptr) {",
+            '        std::fprintf(stderr, "FATAL: ApplyPatchFromMemory failed\\n");',
+            "        return 1;",
+            "    }",
+            "    uint32_t d3_patched_count = patch_ctx->method_count;",
+            "    if (d3_patched_count > 0) {",
+            '        std::fprintf(stdout, "  \\"d3PatchApplied\\": true,\\n");',
+            "    } else {",
+            '        std::fprintf(stdout, "  \\"d3PatchApplied\\": false,\\n");',
+            '        std::fprintf(stderr, "WARN: ApplyPatchFromMemory patched 0 methods (type name mismatch)\\n");',
+            "    }",
+        ])
+    lines.extend([
         "    for (uint32_t i = 0u; i < kMethodCount; i++) {",
         "        const uint32_t token = kBaseToken + i;",
         "        const uintptr_t expected_sentinel_b = kSentinelPatchBase + i;",
@@ -422,6 +457,20 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str, has
         "        }",
         "",
     ])
+    if has_patch_data:
+        lines.extend([
+            "        // Step 2c: Verify D3 dispatch entry has kDispatchPatched flag.",
+            "        if (d3_patched_count > 0) {",
+            "            auto* dispatch_entry = RuntimeDispatchLookup(token);",
+            "            if (dispatch_entry == nullptr) {",
+            '            std::fprintf(stderr, "FAIL[%u]: RuntimeDispatchLookup returned null\\n", i);',
+            "                step_ok = false;",
+            "            } else if (!(dispatch_entry->flags & kDispatchPatched)) {",
+            '            std::fprintf(stderr, "FAIL[%u]: dispatch entry not patched (flags=0x%08x)\\n", i, dispatch_entry->flags);',
+            "                step_ok = false;",
+            "            }",
+            "        }",
+        ])
 
     if has_semantic:
         lines.extend([
@@ -597,6 +646,18 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str, has
         '    std::printf("  \\"failedMethods\\": %u\\n", static_cast<unsigned>(failed_count));',
         '    std::printf("}\\n");',
         "",
+        "    // ── D3 Unpatch ────────────────────────────────────────────────────",
+    ])
+    if has_patch_data:
+        lines.extend([
+            "    if (patch_ctx != nullptr) {",
+            "        if (!Unpatch(patch_ctx)) {",
+            '            std::fprintf(stderr, "FATAL: Unpatch failed\\n");',
+            "            return 1;",
+            "        }",
+            "    }",
+        ])
+    lines.extend([
         "    return (failed_count == 0u) ? 0 : 1;",
         "}",
     ])
@@ -636,10 +697,10 @@ def _generate_hotupdate_cmake_piece(family_slug: str, host_symbols: list[str]) -
         f"target_compile_definitions({target} PRIVATE CHAOS_RUNTIME_ABI_STATIC)\n"
         f"target_include_directories({target} PRIVATE\n"
         "    ${CMAKE_SOURCE_DIR}/src/native/common\n"
+        "    ${CMAKE_SOURCE_DIR}/contracts/native/v0\n"
         "    ${CMAKE_SOURCE_DIR}/src/native/runtime-core\n"
         "    ${CMAKE_SOURCE_DIR}/src/native/bootstrap\n"
         "    ${CMAKE_SOURCE_DIR}/src/native/interpreter\n"
-        "    ${CMAKE_SOURCE_DIR}/contracts/native/v0\n"
         "    ${CMAKE_SOURCE_DIR}/verification/foundation-dll/System.Private.CoreLib\n"
         ")\n"
         "# Force-include hotupdate config so CodeGen-generated code can find\n"
