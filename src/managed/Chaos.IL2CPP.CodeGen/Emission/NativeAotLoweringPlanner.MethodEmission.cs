@@ -211,30 +211,69 @@ public sealed partial class NativeAotLoweringPlanner
 
 		bool hasStringParams = method.StringParameterIndices is { Count: > 0 };
 		bool hasStringReturn = string.Equals(method.ReturnType, "System.String", StringComparison.Ordinal);
-		bool needsMarshalling = hasStringParams || hasStringReturn;
+		bool hasBlittableStructParams = method.BlittableStructParameterIndices is { Count: > 0 };
+		bool hasBlittableStructReturn = false; // V1: no blittable struct return support
+		bool hasSimpleNonBlittableStructParams = method.SimpleNonBlittableStructParameterIndices is { Count: > 0 };
+		bool needsMarshalling = hasStringParams || hasStringReturn || hasBlittableStructParams || hasSimpleNonBlittableStructParams;
 		var stringParamSet = hasStringParams
 			? new HashSet<int>(method.StringParameterIndices!)
 			: new HashSet<int>();
+		var blittableStructParamSet = hasBlittableStructParams
+			? new HashSet<int>(method.BlittableStructParameterIndices!)
+			: new HashSet<int>();
+		var simpleNonBlittableSet = hasSimpleNonBlittableStructParams
+			? new HashSet<int>(method.SimpleNonBlittableStructParameterIndices!)
+			: new HashSet<int>();
 
-		// Build arg names and native call args (substituting marshalled pointers for string params).
+		// Build arg names and native call args.
 		var argNames = new string[methodAbiParameterSlots.Count];
 		var nativeArgs = new string[methodAbiParameterSlots.Count];
 		for (int i = 0; i < methodAbiParameterSlots.Count; i++)
 		{
 			argNames[i] = "chaos_arg_" + i.ToString();
-			nativeArgs[i] = stringParamSet.Contains(i)
-				? "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_marshal_" + i + ")"
-				: argNames[i];
+			if (stringParamSet.Contains(i))
+			{
+				nativeArgs[i] = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_marshal_" + i + ")";
+			}
+			else if (simpleNonBlittableSet.Contains(i))
+			{
+				// Non-blittable struct with string fields: pass pointer to the copy
+				// with pre-converted UTF-8 string fields.
+				nativeArgs[i] = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_struct_copy_" + i + ")";
+			}
+			else if (blittableStructParamSet.Contains(i))
+			{
+				// Blittable struct: take address of the by-value parameter to get a pointer.
+				nativeArgs[i] = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_arg_" + i + ")";
+			}
+			else
+			{
+				nativeArgs[i] = argNames[i];
+			}
 		}
 		string nativeArgList = string.Join(", ", nativeArgs);
 
-		// Function pointer type string without parameter names.
-		string rawParamTypes = string.Join(", ", methodAbiParameterSlots.Select(s => MapAbiSlotReturnType(s)));
+		// Function pointer type — override blittable struct slots to CHAOS_IL2CPP_INTPTR
+		// since native P/Invoke expects pointers, not by-value structs.
+		var fnParamTypes = new string[methodAbiParameterSlots.Count];
+		for (int i = 0; i < methodAbiParameterSlots.Count; i++)
+		{
+			fnParamTypes[i] = blittableStructParamSet.Contains(i) || simpleNonBlittableSet.Contains(i)
+				? "CHAOS_IL2CPP_INTPTR"
+				: MapAbiSlotReturnType(methodAbiParameterSlots[i]);
+		}
+		string rawParamTypes = string.Join(", ", fnParamTypes);
 		string fnPtrType = string.IsNullOrEmpty(rawParamTypes)
 			? $"{returnType}(*)()"
 			: $"{returnType}(*)({rawParamTypes})";
 
-		string pinvokeTag = needsMarshalling ? "simple non-blittable" : "blittable";
+		string pinvokeTag = hasStringParams || hasStringReturn
+			? "simple non-blittable"
+			: hasSimpleNonBlittableStructParams
+				? "simple non-blittable struct"
+				: hasBlittableStructParams
+					? "blittable struct"
+					: "blittable";
 		builder.AppendLine($"// P/Invoke: {moduleName}!{entryPointName} ({pinvokeTag})");
 		builder.AppendLine($"extern \"C\" {returnType} {method.NativeSymbol}({parameterSignature})");
 		builder.AppendLine("{");
@@ -255,6 +294,15 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine("    auto* chaos_rs_ = ::chaos::il2cpp::runtime_core::GetCurrentRuntimeState();");
 			builder.AppendLine("    auto* chaos_ts_ = ::chaos::il2cpp::runtime_core::GetCurrentThreadState();");
+		}
+
+		// Stack-local copies for non-blittable struct parameters with string fields.
+		if (hasSimpleNonBlittableStructParams)
+		{
+			foreach (int idx in method.SimpleNonBlittableStructParameterIndices!)
+			{
+				builder.AppendLine($"    auto chaos_struct_copy_{idx} = chaos_arg_{idx};");
+			}
 		}
 
 		builder.AppendLine("    if (s_pinvoke_fn_ == nullptr)");
@@ -281,14 +329,15 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 
-		// Native call — three code paths:
-		//   1. Blittable (no marshalling): direct call-and-return, early exit.
-		//   2. Non-blittable, non-void return: capture result, cleanup, return.
-		//   3. Non-blittable, void return: call, cleanup, fall through.
+		// Native call — four code paths:
+		//   1. Pure blittable (no marshalling): direct call-and-return, early exit.
+		//   2. Blittable struct on non-void return: capture result, cleanup, return.
+		//   3. Blittable struct on void return: call, cleanup, fall through.
+		//   4. Non-blittable (string): existing string marshal paths.
 		builder.AppendLine();
-		if (!needsMarshalling)
+		if (!hasStringParams && !hasStringReturn && !hasBlittableStructParams && !hasSimpleNonBlittableStructParams)
 		{
-			// Path 1: blittable — return directly.
+			// Path 1: pure blittable — return directly.
 			bool isVoidLocal = method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void;
 			if (isVoidLocal && methodAbiParameterSlots.Count == 0)
 				builder.AppendLine("    s_pinvoke_fn_();");
@@ -302,7 +351,7 @@ public sealed partial class NativeAotLoweringPlanner
 			return;
 		}
 
-		// Paths 2 & 3: non-blittable — capture result if non-void.
+		// Paths 2-4: capture result if non-void.
 		bool isNonVoid = method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void;
 		if (isNonVoid)
 		{
@@ -313,7 +362,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"    s_pinvoke_fn_({nativeArgList});");
 		}
 
-		// Post-call: free marshalled string buffers and handle string return.
+		// Post-call: cleanup.
 		builder.AppendLine();
 
 		// Free marshalled input string buffers.
@@ -329,8 +378,27 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 
+			// Free CoTaskMem buffers in non-blittable struct copies.
+			if (hasSimpleNonBlittableStructParams)
+			{
+				int fieldGroupIdx = 0;
+				foreach (int paramIdx in method.SimpleNonBlittableStructParameterIndices!)
+				{
+					var stringFields = method.SimpleNonBlittableStructStringFieldSubjectIds![fieldGroupIdx];
+					foreach (string fieldSubjectId in stringFields)
+					{
+						string fieldMember = GetNativeFieldMemberName(fieldSubjectId);
+						builder.AppendLine($"    if (chaos_struct_copy_{paramIdx}.{fieldMember} != 0)");
+						builder.AppendLine("    {");
+						builder.AppendLine($"        ::chaos::il2cpp::runtime_core::MarshalFreeCoTaskMem(");
+						builder.AppendLine($"            chaos_rs_, chaos_struct_copy_{paramIdx}.{fieldMember});");
+						builder.AppendLine("    }");
+					}
+					fieldGroupIdx++;
+				}
+			}
+
 		// String return: convert native char* to managed string.
-		// V1: does NOT free the native buffer (the callee owns it).
 		if (hasStringReturn)
 		{
 			builder.AppendLine("    if (chaos_ret_ != 0)");

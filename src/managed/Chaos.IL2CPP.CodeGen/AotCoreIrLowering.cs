@@ -120,7 +120,7 @@ public sealed class AotCoreIrLowering
             method.DefinitionSubjectId,
             genericDemandLookup);
 
-        return new AotCoreIrMethodArtifact
+        var artifact = new AotCoreIrMethodArtifact
         {
             MethodId = typedMethod.MethodId,
             SubjectId = typedMethod.SubjectId,
@@ -151,7 +151,25 @@ public sealed class AotCoreIrLowering
                     .Select(x => x.i)
                     .ToArray()
                 : null,
+            BlittableStructParameterIndices = method.Import is not null
+                ? DetectBlittableStructParameters(method.Parameters, managedTypes, managedFields)
+                : null,
         };
+
+        // Simple non-blittable struct detection needs separate computation
+        // because of the out parameter.
+        if (method.Import is not null)
+        {
+            var p2Indices = DetectSimpleNonBlittableStructParameters(
+                method.Parameters, managedTypes, managedFields, out var p2StringFields);
+            artifact = artifact with
+            {
+                SimpleNonBlittableStructParameterIndices = p2Indices,
+                SimpleNonBlittableStructStringFieldSubjectIds = p2StringFields,
+            };
+        }
+
+        return artifact;
     }
 
     private static IReadOnlyList<AotCoreIrExceptionRegionArtifact> ResolveExceptionRegions(
@@ -1053,5 +1071,141 @@ public sealed class AotCoreIrLowering
     private static bool IsPInvokeStringType(string typeIdentity)
     {
         return string.Equals(typeIdentity, "System.String", StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Checks if a type identity refers to a blittable primitive that has the same
+    /// managed and native representation (no conversion needed).
+    /// </summary>
+    private static bool IsBlittablePrimitiveType(string typeIdentity)
+    {
+        return typeIdentity switch
+        {
+            "System.Boolean" => true,
+            "System.Byte" => true,
+            "System.SByte" => true,
+            "System.Int16" => true,
+            "System.UInt16" => true,
+            "System.Int32" => true,
+            "System.UInt32" => true,
+            "System.Int64" => true,
+            "System.UInt64" => true,
+            "System.IntPtr" => true,
+            "System.UIntPtr" => true,
+            "System.Single" => true,
+            "System.Double" => true,
+            "System.Char" => true,
+            _ => false,
+        };
+    }
+
+    private enum StructFieldClassification { NonValueType, Empty, Blittable, HasStringFields, Complex }
+
+    /// <summary>
+    /// Classifies the instance fields of a value type for P/Invoke marshalling decisions.
+    /// When <paramref name="stringFieldSubjectIds"/> is provided, populates it with the
+    /// SubjectId of each string field found.
+    /// </summary>
+    private static StructFieldClassification ClassifyValueTypeFields(
+        string typeIdentity,
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, ManagedFieldModel> managedFields,
+        List<string>? stringFieldSubjectIds = null)
+    {
+        if (!managedTypes.TryGetValue(typeIdentity, out var typeModel))
+            return StructFieldClassification.NonValueType;
+
+        if (!typeModel.IsValueType)
+            return StructFieldClassification.NonValueType;
+
+        var fields = managedFields.Values
+            .Where(f => string.Equals(f.DeclaringTypeSubjectId, typeIdentity, StringComparison.Ordinal)
+                        && !f.IsStatic)
+            .ToList();
+
+        if (fields.Count == 0)
+            return StructFieldClassification.Empty;
+
+        bool hasString = false;
+        foreach (var field in fields)
+        {
+            if (IsBlittablePrimitiveType(field.FieldType))
+                continue;
+
+            if (field.FieldType == "System.String")
+            {
+                hasString = true;
+                stringFieldSubjectIds?.Add(field.SubjectId);
+                continue;
+            }
+
+            // Nested value type — recurse
+            var nestedClass = ClassifyValueTypeFields(field.FieldType, managedTypes, managedFields, stringFieldSubjectIds);
+            if (nestedClass == StructFieldClassification.Blittable)
+                continue;
+            if (nestedClass == StructFieldClassification.HasStringFields)
+            {
+                hasString = true;
+                continue;
+            }
+
+            return StructFieldClassification.Complex;
+        }
+
+        if (hasString)
+            return StructFieldClassification.HasStringFields;
+
+        return StructFieldClassification.Blittable;
+    }
+
+    /// <summary>
+    /// For a P/Invoke method, detect which parameter indices are blittable value types.
+    /// </summary>
+    private static IReadOnlyList<int>? DetectBlittableStructParameters(
+        IReadOnlyList<ManagedParameterModel> parameters,
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, ManagedFieldModel> managedFields)
+    {
+        var indices = new List<int>();
+        for (int i = 0; i < parameters.Count; i++)
+        {
+            if (ClassifyValueTypeFields(parameters[i].Type, managedTypes, managedFields) == StructFieldClassification.Blittable)
+            {
+                indices.Add(i);
+            }
+        }
+        return indices.Count > 0 ? indices : null;
+    }
+
+    /// <summary>
+    /// For a P/Invoke method, detect which parameter indices are value types containing
+    /// string fields (simple non-blittable structs). Collects the SubjectIds of string
+    /// fields into <paramref name="stringFieldSubjectIds"/> grouped per parameter.
+    /// </summary>
+    private static IReadOnlyList<int>? DetectSimpleNonBlittableStructParameters(
+        IReadOnlyList<ManagedParameterModel> parameters,
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, ManagedFieldModel> managedFields,
+        out IReadOnlyList<IReadOnlyList<string>>? stringFieldSubjectIds)
+    {
+        var indices = new List<int>();
+        var allStringFields = new List<IReadOnlyList<string>>();
+        for (int i = 0; i < parameters.Count; i++)
+        {
+            var fieldSubjectIds = new List<string>();
+            var classification = ClassifyValueTypeFields(parameters[i].Type, managedTypes, managedFields, fieldSubjectIds);
+            if (classification == StructFieldClassification.HasStringFields)
+            {
+                indices.Add(i);
+                allStringFields.Add(fieldSubjectIds);
+            }
+        }
+        if (indices.Count > 0)
+        {
+            stringFieldSubjectIds = allStringFields;
+            return indices;
+        }
+        stringFieldSubjectIds = null;
+        return null;
     }
 }

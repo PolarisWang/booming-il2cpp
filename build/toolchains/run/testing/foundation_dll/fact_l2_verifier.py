@@ -1,18 +1,20 @@
-"""Fact L2: Semantic Correctness Verification.
+"""Fact L2: Semantic Correctness Verification (Native Self-Verify).
 
-Verifies that the generated native AOT C++ code produces correct results
-by comparing the output of the native executable against the expected
-checksums from the managed C# entrypoint.
+Generates expected_checksums.h from the managed entrypoint, compiles
+it into a native verification executable with the generated AOT code,
+and runs the executable -- which self-asserts each method's checksum.
 
 Usage:
     python fact_l2_verifier.py <family-slug>
     python fact_l2_verifier.py convert-char --verbose
-    python fact_l2_verifier.py reflection-type --assembly System.Private.CoreLib
+    python fact_l2_verifier.py math-numerics --assembly System.Private.CoreLib
 
 Flow:
-  1. Build & run C# entrypoint -> expected_checksums[]
-  2. Build native AOT executable -> actual_checksums[]
-  3. Compare: expected[N] == actual[N] for all N
+  1. Run C# entrypoint via reflection -> expected checksums
+  2. Generate expected_checksums.h
+  3. Compile native_verify_main.cpp + native-aot.generated.cpp + runtime_stubs.cpp
+  4. Run native exe -> exit code 0 = all pass, >0 = failures
+  5. Report L2: {passed}/{total}
 """
 
 from __future__ import annotations
@@ -25,7 +27,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import time
 from pathlib import Path
 from typing import Any
 
@@ -33,96 +34,26 @@ _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
 _VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
 
+try:
+    from testing.trace import trace
+except ImportError:
+    def trace(*args, **kwargs):
+        pass
 
-# ── Step 1: Get expected checksums from C# entrypoint ────────────────────
+
+# ── Helpers ────────────────────────────────────────────────────────────
 
 def _get_method_count(family_slug: str, *, assembly: str) -> int:
-    """Read method count from the C# entrypoint source (count cases in switch)."""
     entry_dir = _VERIFICATION_BASE / assembly / family_slug / "il2cpp_dist" / "entrypoint"
     cs_files = list(entry_dir.glob("*NativeEntry.cs")) + list(entry_dir.glob("*Entry.cs"))
     if not cs_files:
         return 0
     source = cs_files[0].read_text(encoding="utf-8")
-    # Count the switch cases (case N: return MethodN())
     cases = re.findall(r'case (\d+):', source)
     return max(int(c) for c in cases) + 1 if cases else 0
 
 
-_L2_HARNESS_DIR = _HERE / "l2-harness"
-_L2_HARNESS_BUILT: bool = False
-
-
-def _ensure_l2_harness() -> bool:
-    """Build the L2 reflection-based harness once and reuse."""
-    global _L2_HARNESS_BUILT
-    if _L2_HARNESS_BUILT:
-        return True
-    result = subprocess.run(
-        ["dotnet", "build", str(_L2_HARNESS_DIR / "L2Harness.csproj"), "--nologo", "-v", "q"],
-        capture_output=True, text=True, timeout=60,
-    )
-    _L2_HARNESS_BUILT = result.returncode == 0
-    return _L2_HARNESS_BUILT
-
-
-def _get_expected_checksums(family_slug: str, *, assembly: str) -> list[int]:
-    """Run the C# entrypoint DLL via reflection harness and collect expected checksums."""
-    entry_dir = _VERIFICATION_BASE / assembly / family_slug / "il2cpp_dist" / "entrypoint"
-    cs_path = next(entry_dir.glob("*NativeEntry.cs"), None)
-    dll_candidates = list(entry_dir.glob("build-output/*.dll"))
-    if not dll_candidates:
-        dll_candidates = list(entry_dir.glob("*.dll"))
-    dll_path = dll_candidates[0] if dll_candidates else None
-
-    if not dll_path or not dll_path.exists() or cs_path is None:
-        print(f"  [L2] Entrypoint DLL not found for {family_slug}")
-        return []
-
-    method_count = _get_method_count(family_slug, assembly=assembly)
-    if method_count == 0:
-        return []
-
-    if not _ensure_l2_harness():
-        print(f"  [L2] Failed to build L2 harness")
-        return []
-
-    class_name = cs_path.stem
-    result = subprocess.run(
-        ["dotnet", "run", "--project", str(_L2_HARNESS_DIR / "L2Harness.csproj"),
-         "--no-build", "--", str(dll_path), class_name, str(method_count)],
-        capture_output=True, text=True, timeout=120,
-    )
-    if result.returncode != 0:
-        print(f"  [L2] Runner failed: {result.stderr[:300]}")
-        return []
-    try:
-        return json.loads(result.stdout.strip())
-    except json.JSONDecodeError as e:
-        print(f"  [L2] JSON parse error: {e}")
-        print(f"  stdout: {result.stdout[:500]}")
-        return []
-
-
-# ── Step 2: Get actual checksums from native executable ────────────────
-
-def _find_latest_msvc_cl() -> Path | None:
-    """Find the latest MSVC cl.exe."""
-    base_paths = [
-        Path("C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC"),
-        Path("C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC"),
-    ]
-    for base in base_paths:
-        if base.exists():
-            versions = sorted([d for d in base.iterdir() if d.is_dir() and d.name[0].isdigit()])
-            if versions:
-                cl = versions[-1] / "bin" / "Hostx64" / "x64" / "cl.exe"
-                if cl.exists():
-                    return cl
-    return None
-
-
 def _find_vcvars() -> Path | None:
-    """Find vcvarsall.bat path."""
     candidates = [
         Path("C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvarsall.bat"),
         Path("C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Auxiliary/Build/vcvarsall.bat"),
@@ -130,50 +61,100 @@ def _find_vcvars() -> Path | None:
     return next((c for c in candidates if c.exists()), None)
 
 
-def _find_msvc_env() -> dict[str, str]:
-    """Find MSVC environment via vcvarsall.bat."""
-    vcvars = _find_vcvars()
-    if not vcvars:
-        return {}
-    try:
-        result = subprocess.run(
-            f'"{vcvars}" x64 && set',
-            shell=True, capture_output=True, text=True, timeout=30,
-        )
-        env = {}
-        for line in result.stdout.splitlines():
-            if "=" in line:
-                k, v = line.split("=", 1)
-                env[k.upper()] = v
-        return env
-    except (subprocess.TimeoutExpired, OSError):
-        return {}
+# ── Step 1: Generate expected_checksums.h ─────────────────────────────
+
+_L2_HARNESS_DIR = _HERE / "l2-harness"
+_L2_HARNESS_BUILT: bool = False
 
 
-def _build_and_run_native(
-    family_slug: str,
-    *,
-    assembly: str,
-    verbose: bool = False,
-) -> list[int]:
-    """Build the native AOT executable and run each entry to get actual checksums."""
-    family_dir = _VERIFICATION_BASE / assembly / family_slug
-    generated_cpp = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
-    runtime_stubs = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_stubs.cpp"
-    benchmark_host = _REPO_ROOT / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
+def _ensure_harness() -> bool:
+    global _L2_HARNESS_BUILT
+    if _L2_HARNESS_BUILT:
+        return True
+    r = subprocess.run(["dotnet", "build", str(_L2_HARNESS_DIR / "L2Harness.csproj"),
+                        "--nologo", "-v", "q"], capture_output=True, text=True, timeout=60)
+    _L2_HARNESS_BUILT = r.returncode == 0
+    return _L2_HARNESS_BUILT
 
-    if not generated_cpp.exists():
-        print(f"  [L2] Generated C++ not found at {generated_cpp}")
-        return []
+
+def _generate_checksums_h(family_slug: str, *, assembly: str,
+                          output_dir: Path) -> Path | None:
+    """Generate expected_checksums.h from managed entrypoint via reflection."""
+    entry_dir = _VERIFICATION_BASE / assembly / family_slug / "il2cpp_dist" / "entrypoint"
+    dll_candidates = list(entry_dir.glob("build-output/*.dll"))
+    if not dll_candidates:
+        dll_candidates = list(entry_dir.glob("*.dll"))
+    dll_path = dll_candidates[0] if dll_candidates else None
+    cs_path = next(entry_dir.glob("*NativeEntry.cs"), None)
+    if not dll_path or not dll_path.exists() or cs_path is None:
+        print("  [L2] Entrypoint DLL not found")
+        return None
 
     method_count = _get_method_count(family_slug, assembly=assembly)
     if method_count == 0:
-        return []
+        print("  [L2] No methods found")
+        return None
+
+    if not _ensure_harness():
+        print("  [L2] Failed to build reflection harness")
+        return None
+
+    class_name = cs_path.stem
+    r = subprocess.run(
+        ["dotnet", "run", "--project", str(_L2_HARNESS_DIR / "L2Harness.csproj"),
+         "--no-build", "--", str(dll_path), class_name, str(method_count)],
+        capture_output=True, text=True, timeout=120,
+    )
+    if r.returncode != 0:
+        print(f"  [L2] Harness failed: {r.stderr[:300]}")
+        return None
+
+    try:
+        checksums = json.loads(r.stdout.strip())
+    except json.JSONDecodeError:
+        print(f"  [L2] JSON parse error: {r.stdout[:200]}")
+        return None
+
+    header_path = output_dir / "expected_checksums.h"
+    lines = [
+        "#pragma once",
+        "// Auto-generated by fact_l2_verifier.py",
+        f"// Family: {family_slug}",
+        "// DO NOT EDIT",
+        "",
+        f"constexpr int kExpectedCount = {len(checksums)};",
+        "constexpr int kExpectedChecksums[kExpectedCount] = {",
+    ]
+    for i, c in enumerate(checksums):
+        comma = "," if i < len(checksums) - 1 else ""
+        lines.append(f"    {c}{comma}")
+    lines.extend([
+        "};",
+        "",
+    ])
+    header_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"  [L2] Generated {header_path.name} ({len(checksums)} checksums)")
+    return header_path
+
+
+# ── Step 2: Compile and verify native exe ─────────────────────────────
+
+def _verify_native(family_slug: str, *, assembly: str,
+                   verbose: bool = False) -> dict[str, Any]:
+    """Compile native_verify_main.cpp + generated code, run self-verify."""
+    family_dir = _VERIFICATION_BASE / assembly / family_slug
+    generated_cpp = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    runtime_stubs = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_stubs.cpp"
+    verify_host = _REPO_ROOT / "src" / "native" / "benchmark-host" / "native_verify_main.cpp"
+
+    for f in [generated_cpp, runtime_stubs, verify_host]:
+        if not f.exists():
+            print(f"  [L2] Required file not found: {f}")
+            return {"status": "skip", "reason": f"missing {f.name}"}
 
     vcvars = _find_vcvars()
     if not vcvars:
-        print("  [L2] MSVC not found. Install Visual Studio 2022 with C++ workload.")
-        return []
+        return {"status": "skip", "reason": "MSVC not found"}
     vcvars_prefix = f'"{vcvars}" x64 >nul 2>nul &&'
 
     include_dirs = [
@@ -189,12 +170,16 @@ def _build_and_run_native(
     build_dir.mkdir(parents=True, exist_ok=True)
     exe_path = build_dir / f"verify_{family_slug}.exe"
 
+    # Step 2a: Generate expected_checksums.h in the build directory
+    header = _generate_checksums_h(family_slug, assembly=assembly, output_dir=build_dir)
+    if header is None:
+        return {"status": "skip", "reason": "failed to generate expected checksums"}
+
+    # Step 2b: Compile
     compile_flags = "/nologo /std:c++20 /c /EHsc /W3 /utf-8 /O2"
-    link_flags = "/nologo /EHsc /utf-8 /O2"
     defines = "-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED"
 
-    # Compile each source with vcvars in same shell
-    source_files = [benchmark_host, generated_cpp, runtime_stubs]
+    source_files = [verify_host, generated_cpp, runtime_stubs]
     obj_files = []
     for src in source_files:
         obj = build_dir / f"{src.stem}.obj"
@@ -202,168 +187,125 @@ def _build_and_run_native(
         cmd = f'{vcvars_prefix} cl {compile_flags} {include_flags} {defines} -Fo"{obj}" "{src}"'
         r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=120)
         if r.returncode != 0:
-            err = [l for l in (r.stdout + r.stderr).splitlines() if l.strip() and "Microsoft" not in l]
-            print(f"  [L2] Compile failed for {src.name}:\n" + "\n".join(err[-5:]))
-            return []
+            err = [l for l in (r.stdout + r.stderr).splitlines()
+                   if l.strip() and "Microsoft" not in l]
+            print(f"  [L2] Compile failed for {src.name}")
+            for e in err[-3:]:
+                print(f"    {e}")
+            return {"status": "compile_failed", "reason": f"{src.name} failed"}
         if verbose:
             print(f"  [L2]   Compiled {src.name}")
 
-    # Link (find link.exe next to cl.exe, use captured env)
-    cl_exe = _find_latest_msvc_cl()
-    link_exe = cl_exe.parent / "link.exe" if cl_exe else None
-    if not link_exe or not link_exe.exists():
-        print("  [L2] MSVC linker not found")
-        return []
+    # Step 2c: Link (use PE environment for lib paths)
     msvc_env = _find_msvc_env()
+    link_exe = _find_msvc_cl()
+    if link_exe:
+        link_exe = link_exe.parent / "link.exe"
+    if not link_exe or not link_exe.exists():
+        return {"status": "link_failed", "reason": "linker not found"}
+
     obj_list = " ".join(f'"{o}"' for o in obj_files)
     link_cmd = f'"{link_exe}" /nologo /out:"{exe_path}" {obj_list}'
     r = subprocess.run(link_cmd, shell=True, capture_output=True, text=True, timeout=60,
                        env={**os.environ, **msvc_env})
     if r.returncode != 0:
         err = [l for l in r.stderr.splitlines() if l.strip() and "Microsoft" not in l]
-        print(f"  [L2] Link failed:\n" + "\n".join(err[-5:]))
-        return []
+        print("  [L2] Link failed:")
+        for e in err[-3:]:
+            print(f"    {e}")
+        return {"status": "link_failed", "reason": "link failed"}
 
     if verbose:
-        size = exe_path.stat().st_size if exe_path.exists() else 0
-        print(f"  [L2]   Linked: {exe_path.name} ({size} bytes)")
+        print(f"  [L2]   Linked: {exe_path.name}")
 
-    # Run each method
-    results: list[int] = []
-    for idx in range(method_count):
-        cmd = [str(exe_path), "--entry-index", str(idx), "--iterations", "1"]
-        try:
-            r = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
-            if r.returncode == 0:
-                data = json.loads(r.stdout.strip())
-                checksum = data.get("checksum", -1)
-                results.append(checksum)
-                if verbose:
-                    print(f"  [L2]   [{idx}] checksum={checksum}")
-            else:
-                results.append(-1)
-                if verbose:
-                    print(f"  [L2]   [{idx}] FAILED (rc={r.returncode})")
-        except (subprocess.TimeoutExpired, json.JSONDecodeError, OSError) as e:
-            results.append(-1)
-            if verbose:
-                print(f"  [L2]   [{idx}] ERROR: {e}")
+    # Step 2d: Run native self-verify exe
+    r = subprocess.run([str(exe_path)], capture_output=True, text=True, timeout=120)
+    output = (r.stdout + r.stderr).strip()
 
-    return results
+    # Parse result from output
+    passed = total = 0
+    for line in output.splitlines():
+        if "L2:" in line:
+            parts = line.split()
+            if len(parts) >= 2:
+                m = re.search(r'(\d+)/(\d+)', line)
+                if m:
+                    passed, total = int(m.group(1)), int(m.group(2))
+        if "FAIL" in line and "[0-9]" in line:
+            print(f"  {line}")
 
+    status = "passed" if r.returncode == 0 else "failed"
+    trace("fact_l2.verify", stage="proof", family=family_slug,
+          status=status, passed=passed, total=total)
 
-# ── Step 3: Compare ─────────────────────────────────────────────────────
-
-def _compare_checksums(expected: list[int], actual: list[int], *, verbose: bool = False) -> dict[str, Any]:
-    """Compare expected vs actual checksums. Return per-method and aggregate results."""
-    results = []
-    passed = 0
-    failed = 0
-    max_len = min(len(expected), len(actual))
-
-    for i in range(max_len):
-        match = expected[i] == actual[i]
-        if match:
-            passed += 1
-        else:
-            failed += 1
-        results.append({
-            "index": i,
-            "expected": expected[i],
-            "actual": actual[i],
-            "passed": match,
-        })
-
-    # Handle length mismatch
-    for i in range(max_len, len(expected)):
-        failed += 1
-        results.append({"index": i, "expected": expected[i], "actual": None, "passed": False})
-    for i in range(max_len, len(actual)):
-        failed += 1
-        results.append({"index": i, "expected": None, "actual": actual[i], "passed": False})
+    print(f"  [L2] Native self-verify: {status} ({passed}/{total})")
+    if r.returncode != 0 and verbose:
+        print(output)
 
     return {
-        "total": len(expected),
+        "status": status,
         "passed": passed,
-        "failed": failed,
-        "passed_pct": round(passed / len(expected) * 100, 1) if expected else 0.0,
-        "results": results,
+        "total": total,
+        "exit_code": r.returncode,
     }
 
 
-# ── Main ────────────────────────────────────────────────────────────────
+# ── MSVC helpers ──────────────────────────────────────────────────────
+
+def _find_latest_msvc_cl() -> Path | None:
+    base_paths = [
+        Path("C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC"),
+        Path("C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC"),
+    ]
+    for base in base_paths:
+        if base.exists():
+            versions = sorted([d for d in base.iterdir() if d.is_dir() and d.name[0].isdigit()])
+            if versions:
+                cl = versions[-1] / "bin" / "Hostx64" / "x64" / "cl.exe"
+                if cl.exists():
+                    return cl
+    return None
+
+
+def _find_msvc_env() -> dict[str, str]:
+    vcvars = _find_vcvars()
+    if not vcvars:
+        return {}
+    try:
+        r = subprocess.run(f'"{vcvars}" x64 && set', shell=True,
+                           capture_output=True, text=True, timeout=30)
+        env = {}
+        for line in r.stdout.splitlines():
+            if "=" in line:
+                k, v = line.split("=", 1)
+                env[k.upper()] = v
+        return env
+    except (subprocess.TimeoutExpired, OSError):
+        return {}
+
+
+# ── Entry point ───────────────────────────────────────────────────────
 
 def verify_family(family_slug: str, *, assembly: str = "System.Private.CoreLib",
                   verbose: bool = False) -> dict[str, Any]:
-    """Run L2 verification for a single family."""
-
     print(f"=== Fact L2: {family_slug} ===")
-    trace("fact_l2.verify", stage="proof", family=family_slug)
-
-    method_count = _get_method_count(family_slug, assembly=assembly)
-    if method_count == 0:
-        print(f"  No methods found for {family_slug}")
-        return {"family": family_slug, "status": "skip", "reason": "no methods"}
-
-    print(f"  Methods: {method_count}")
-
-    # Step 1: Expected
-    print(f"  [1/3] Getting expected checksums from C# entrypoint...")
-    expected = _get_expected_checksums(family_slug, assembly=assembly)
-    if not expected:
-        print(f"  SKIP: could not get expected checksums")
-        trace("fact_l2.skip", family=family_slug, reason="no expected checksums")
-        return {"family": family_slug, "status": "skip", "reason": "no expected checksums"}
-    print(f"  [1/3] Got {len(expected)} expected checksums")
-
-    # Step 2: Actual
-    print(f"  [2/3] Building native AOT and running...")
-    actual = _build_and_run_native(family_slug, assembly=assembly, verbose=verbose)
-    if not actual:
-        print(f"  SKIP: could not run native executable")
-        trace("fact_l2.skip", family=family_slug, reason="native build/run failed")
-        return {"family": family_slug, "status": "skip", "reason": "native build/run failed"}
-    print(f"  [2/3] Got {len(actual)} native checksums")
-
-    # Step 3: Compare
-    print(f"  [3/3] Comparing checksums...")
-    comparison = _compare_checksums(expected, actual, verbose=verbose)
-    trace("fact_l2.done", family=family_slug, passed=comparison["passed"],
-          failed=comparison["failed"], total=comparison["total"])
-
-    print(f"  [3/3] Result: {comparison['passed']}/{comparison['total']} passed "
-          f"({comparison['passed_pct']}%)")
-    if comparison["failed"] > 0:
-        print(f"  FAILED methods:")
-        for r in comparison["results"]:
-            if not r["passed"]:
-                print(f"    [{r['index']}] expected={r['expected']} actual={r['actual']}")
-
-    status = "passed" if comparison["failed"] == 0 else "failed"
-    return {
-        "family": family_slug,
-        "status": status,
-        **comparison,
-    }
-
-
-try:
-    from testing.trace import trace
-except ImportError:
-    def trace(*args, **kwargs):
-        pass
+    run_script = ("cmd.exe", "/c", sys.executable, __file__, family_slug,
+                  "--assembly", assembly)
+    result = _verify_native(family_slug, assembly=assembly, verbose=verbose)
+    print(f"=== L2 Result: {result.get('status','error')} "
+          f"({result.get('passed','?')}/{result.get('total','?')}) ===")
+    return result
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Fact L2: Semantic Correctness Verification")
+    parser = argparse.ArgumentParser(description="Fact L2: Native Self-Verify")
     parser.add_argument("family_slug", help="Family slug (e.g., convert-char)")
-    parser.add_argument("--assembly", default="System.Private.CoreLib", help="Assembly name")
-    parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
+    parser.add_argument("--assembly", default="System.Private.CoreLib")
+    parser.add_argument("--verbose", "-v", action="store_true")
     args = parser.parse_args()
 
     result = verify_family(args.family_slug, assembly=args.assembly, verbose=args.verbose)
-    print(f"\n=== L2 Result: {result['status']} ({result.get('passed',0)}/{result.get('total',0)}) ===")
-    sys.exit(0 if result["status"] == "passed" else 1)
+    sys.exit(0 if result.get("status") == "passed" else 1)
 
 
 if __name__ == "__main__":

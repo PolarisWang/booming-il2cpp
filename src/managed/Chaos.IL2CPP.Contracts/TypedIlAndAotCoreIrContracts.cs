@@ -349,6 +349,21 @@ public sealed record AotCoreIrMethodArtifact
     /// For P/Invoke methods: indices of parameters whose managed type is
     /// System.String and therefore need UTF-8 marshalling.
     public IReadOnlyList<int>? StringParameterIndices { get; init; }
+
+    /// For P/Invoke methods: indices of parameters whose managed type is a
+    /// blittable value type (struct composed of blittable primitive fields).
+    /// These are marshalled via a stack copy + pointer pass, no conversion.
+    public IReadOnlyList<int>? BlittableStructParameterIndices { get; init; }
+
+    /// For P/Invoke methods: indices of parameters whose managed type is a
+    /// value type containing string fields (besides blittable primitives).
+    /// Each string field is converted to/from UTF-8 CoTaskMem around the call.
+    public IReadOnlyList<int>? SimpleNonBlittableStructParameterIndices { get; init; }
+
+    /// For each entry in <see cref="SimpleNonBlittableStructParameterIndices"/>,
+    /// the SubjectIds of the string fields in that struct, grouped per parameter.
+    /// Indexed by the same order as <see cref="SimpleNonBlittableStructParameterIndices"/>.
+    public IReadOnlyList<IReadOnlyList<string>>? SimpleNonBlittableStructStringFieldSubjectIds { get; init; }
 }
 
 public sealed record AotCoreIrExceptionRegionArtifact

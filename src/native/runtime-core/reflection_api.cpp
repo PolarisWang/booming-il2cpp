@@ -1069,8 +1069,11 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionCreateInstance(
         }
         if (ctor != 0 && abi->method_invoke != nullptr) {
             ExceptionHandle ex = nullptr;
-            abi->method_invoke(runtime, thread, ctor, obj,
+            RuntimeStatus ctor_status = abi->method_invoke(runtime, thread, ctor, obj,
                                argv, argc, nullptr, 0, &ex);
+            if (ctor_status == CHAOS_RUNTIME_STATUS_MANAGED_EXCEPTION) {
+                throw ManagedExceptionCarrier{ex};
+            }
         }
     }
 
@@ -1117,8 +1120,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(
         argv, argc, ret_buf, sizeof(ret_buf), &ex);
 
     if (status == CHAOS_RUNTIME_STATUS_MANAGED_EXCEPTION) {
-        // TODO: propagate exception through managed exception carrier
-        return 0;
+        throw ManagedExceptionCarrier{ex};
     }
 
     // For reference-type returns ret_buf[0] is the managed object pointer.
