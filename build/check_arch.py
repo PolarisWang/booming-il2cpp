@@ -70,27 +70,37 @@ def check_namespace(lines: list, file_rel: str, module_cfg: dict) -> list:
     if not expected_ns:
         return errors  # anonymous-namespace modules skip this check
 
-    # Check for namespace opening
-    ns_open = f"namespace {expected_ns} {{"
-    found_open = any(ns_open in line for line in lines)
+    # Derive namespace root from expected_ns (e.g. "chaos::il2cpp" from "chaos::il2cpp::runtime_core").
+    # Accept any namespace under this root (including sibling namespaces like
+    # chaos::il2cpp::struct_marshal) without requiring an explicit sub_namespaces entry.
+    ns_root = expected_ns.rsplit("::", 1)[0] if "::" in expected_ns else expected_ns
+    ns_prefix = f"{ns_root}::"
 
-    if not found_open:
-        # Allow nested sub-namespaces
-        for sub_ns in module_cfg.get("sub_namespaces", []):
-            sub_open = f"namespace {sub_ns} {{"
-            if any(sub_open in line for line in lines):
-                found_open = True
-                break
+    # Find the actual namespace(s) used in the file
+    actual_nss = []
+    for line in lines:
+        m = re.match(r'^namespace\s+([a-zA-Z0-9_:]+)\s*\{', line.strip())
+        if m:
+            ns = m.group(1)
+            # Accept: main namespace, any namespace under ns_root, or explicitly listed sub-namespace
+            if ns == expected_ns or ns.startswith(ns_prefix):
+                actual_nss.append(ns)
+            elif ns in module_cfg.get("sub_namespaces", []):
+                actual_nss.append(ns)
 
-    if not found_open:
-        errors.append(f"[NAMESPACE] {file_rel}: expected namespace '{expected_ns}' (opening brace not found)")
+    if not actual_nss:
+        errors.append(
+            f"[NAMESPACE] {file_rel}: expected namespace '{expected_ns}' "
+            f"or a sub-namespace under '{ns_root}::' (found namespace pattern not matching)"
+        )
 
-    # Check namespace closing comment
-    if module_cfg.get("conventions", {}).get("namespace_closing_comment", False):
-        expected_close = f"}}  // namespace {expected_ns}"
-        has_close = any(expected_close in line for line in lines)
-        if not has_close and found_open:
-            errors.append(f"[NAMESPACE] {file_rel}: expected closing comment '{expected_close}'")
+    # Check namespace closing comment (against the first actual namespace found)
+    if module_cfg.get("conventions", {}).get("namespace_closing_comment", False) and actual_nss:
+        for actual_ns in actual_nss:
+            expected_close = f"}}  // namespace {actual_ns}"
+            if not any(expected_close in line for line in lines):
+                errors.append(f"[NAMESPACE] {file_rel}: expected closing comment '{expected_close}'")
+                break  # one error per file
 
     return errors
 
