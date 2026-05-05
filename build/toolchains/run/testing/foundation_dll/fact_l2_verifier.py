@@ -164,9 +164,8 @@ def _verify_native(family_slug: str, *, assembly: str,
         _REPO_ROOT / "contracts" / "native" / "v0",
         _REPO_ROOT / "third_party" / "fmt" / "include",
     ]
-    include_flags = " ".join(f'-I"{d}"' for d in include_dirs)
-
     build_dir = family_dir / "native_test" / "l2-verify" / "build"
+    include_flags = " ".join(f'-I"{d}"' for d in include_dirs) + f' -I"{build_dir}"'
     build_dir.mkdir(parents=True, exist_ok=True)
     exe_path = build_dir / f"verify_{family_slug}.exe"
 
