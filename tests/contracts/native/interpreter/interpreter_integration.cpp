@@ -35,6 +35,8 @@ using chaos::il2cpp::interpreter::SEHFlags;
 using chaos::il2cpp::interpreter::DefaultTokenResolver;
 using chaos::il2cpp::interpreter::TokenResolverContext;
 using chaos::il2cpp::interpreter::ValueTag;
+using chaos::il2cpp::interpreter::DispatchResult;
+using chaos::il2cpp::interpreter::DispatchCallback;
 
 // ════════════════════════════════════════════════════════════════════════════
 // Helpers (file-scope linkage)
@@ -200,6 +202,11 @@ static bool TestRuntimeMethodExceptionPropagation();
 // Struct value type tests
 static bool TestStructReturnValue();
 
+// Phase 8: Dispatch callback integration tests
+static bool TestDispatchBasic();
+static bool TestDispatchException();
+static bool TestDispatchArgs();
+
 // ════════════════════════════════════════════════════════════════════════════
 // Test runner
 // ════════════════════════════════════════════════════════════════════════════
@@ -271,6 +278,11 @@ int main()
 
     // Struct value type tests
     TEST(TestStructReturnValue);
+
+    // Phase 8: Dispatch callback integration tests
+    TEST(TestDispatchBasic);
+    TEST(TestDispatchException);
+    TEST(TestDispatchArgs);
 
     std::cout << "interpreter-integration=failures=" << failures << std::endl;
 
@@ -1258,4 +1270,208 @@ bool TestRethrow()
 
     // Rethrow throws again, no further catch → threw_exception = true
     return result.threw_exception;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Phase 8: Dispatch callback integration tests
+// ═══════════════════════════════════════════════════════════════════════════
+
+// ── Mock dispatch state ──────────────────────────────────────────────────
+// Holds state shared between the test function and MockDispatchCallback.
+
+struct MockDispatchState {
+    bool called = false;
+    void* received_target = nullptr;
+    CHAOS_IL2CPP_UINT32 received_arg_count = 0;
+    bool received_is_instance = false;
+    CHAOS_IL2CPP_VECTOR(InterpreterValue) captured_args;
+    DispatchResult result_to_return = {};
+};
+
+// ── Mock dispatch callback ───────────────────────────────────────────────
+// Captures call parameters into MockDispatchState and returns a
+// preconfigured DispatchResult.  Used to verify that the interpreter's
+// call dispatch path correctly bridges to the callback.
+
+static DispatchResult MockDispatchCallback(
+    void*                               call_target,
+    const InterpreterValue*             call_args,
+    CHAOS_IL2CPP_UINT32                 arg_count,
+    bool                                is_instance_call,
+    void*                               dispatch_context)
+{
+    auto* state = static_cast<MockDispatchState*>(dispatch_context);
+    if (state == nullptr) {
+        return {};
+    }
+    state->called = true;
+    state->received_target = call_target;
+    state->received_arg_count = arg_count;
+    state->received_is_instance = is_instance_call;
+    state->captured_args.assign(call_args, call_args + arg_count);
+    return state->result_to_return;
+}
+
+// Test: Call instruction with dispatch callback (tail call path).
+//   IR: [Call(X, 0), Ret]
+//   Mock returns Int32(42).
+//   Expected: has_return_value=true, return_value.i32 == 42.
+//   Exercises: dispatch_fn invoked for Call, tail call optimization
+//   (next instruction is Ret → result set directly, no push/pop).
+bool TestDispatchBasic()
+{
+    void* const kTestTarget = reinterpret_cast<void*>(
+        static_cast<CHAOS_IL2CPP_UINTPTR>(0x1234u));
+
+    // Build IR: Call(target=0x1234, arg_count=0), Ret (tail call)
+    IRMethod method;
+    {
+        IRInstruction call_insn;
+        call_insn.op_code = IROpCode::Call;
+        call_insn.call_target = kTestTarget;
+        call_insn.arg_count = 0;
+        call_insn.is_instance_call = false;
+        method.instructions.push_back(call_insn);
+    }
+    {
+        IRInstruction ret_insn;
+        ret_insn.op_code = IROpCode::Ret;
+        method.instructions.push_back(ret_insn);
+    }
+
+    // Set up dispatch callback.
+    MockDispatchState state;
+    state.result_to_return.has_value = true;
+    state.result_to_return.value = InterpreterValue::from_i32(42);
+
+    ExecutionFrame frame;
+    frame.dispatch_fn = MockDispatchCallback;
+    frame.dispatch_context = &state;
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    // Verify callback was invoked.
+    if (!state.called) return false;
+    if (state.received_target != kTestTarget) return false;
+    if (state.received_arg_count != 0u) return false;
+
+    // Verify tail call result.
+    if (!result.has_return_value) return false;
+    if (result.return_value.tag != ValueTag::Int32) return false;
+    if (result.return_value.i32 != 42) return false;
+    if (result.threw_exception) return false;
+
+    return true;
+}
+
+// Test: Exception propagation through dispatch callback.
+//   IR: [Call(X, 0), Ret]
+//   Mock returns threw_exception=true with exception_value=null.
+//   Expected: threw_exception=true.
+//   Exercises: exception propagation from dispatch callback through
+//   Execute's SEH path, falling through to caller when no handler.
+bool TestDispatchException()
+{
+    IRMethod method;
+    {
+        IRInstruction call_insn;
+        call_insn.op_code = IROpCode::Call;
+        call_insn.call_target = reinterpret_cast<void*>(
+            static_cast<CHAOS_IL2CPP_UINTPTR>(0xABCDu));
+        call_insn.arg_count = 0;
+        call_insn.is_instance_call = false;
+        method.instructions.push_back(call_insn);
+    }
+    {
+        IRInstruction ret_insn;
+        ret_insn.op_code = IROpCode::Ret;
+        method.instructions.push_back(ret_insn);
+    }
+
+    MockDispatchState state;
+    state.result_to_return.threw_exception = true;
+    state.result_to_return.exception_value = InterpreterValue::null_val();
+
+    ExecutionFrame frame;
+    frame.dispatch_fn = MockDispatchCallback;
+    frame.dispatch_context = &state;
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    // Must propagate the exception — no SEH clause → threw_exception.
+    if (!state.called) return false;
+    if (!result.threw_exception) return false;
+    if (result.has_return_value) return false;
+
+    return true;
+}
+
+// Test: Arguments correctly forwarded to dispatch callback.
+//   IR: [LdcI4(10), LdcI4(20), Call(X, 2), Ret]
+//   Mock captures call_args and arg_count.
+//   Expected: callback receives 2 args: Int32(20), Int32(10)
+//   (ECMA order — args are pushed in reverse).
+//   Exercises: argument collection from eval stack and forwarding
+//   to dispatch callback.
+bool TestDispatchArgs()
+{
+    IRMethod method;
+    {
+        IRInstruction push1;
+        push1.op_code = IROpCode::LdcI4;
+        push1.immediate_i4 = 10;
+        method.instructions.push_back(push1);
+    }
+    {
+        IRInstruction push2;
+        push2.op_code = IROpCode::LdcI4;
+        push2.immediate_i4 = 20;
+        method.instructions.push_back(push2);
+    }
+    {
+        IRInstruction call_insn;
+        call_insn.op_code = IROpCode::Call;
+        call_insn.call_target = reinterpret_cast<void*>(
+            static_cast<CHAOS_IL2CPP_UINTPTR>(0x5678u));
+        call_insn.arg_count = 2;
+        call_insn.is_instance_call = false;
+        method.instructions.push_back(call_insn);
+    }
+    {
+        IRInstruction ret_insn;
+        ret_insn.op_code = IROpCode::Ret;
+        method.instructions.push_back(ret_insn);
+    }
+
+    MockDispatchState state;
+    state.result_to_return.has_value = true;
+    state.result_to_return.value = InterpreterValue::from_i32(99);
+
+    ExecutionFrame frame;
+    frame.dispatch_fn = MockDispatchCallback;
+    frame.dispatch_context = &state;
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    // Verify callback was invoked with correct args.
+    if (!state.called) return false;
+    if (state.received_arg_count != 2u) return false;
+    if (state.received_is_instance) return false;
+
+    // Args pushed 10 then 20; pop order (LIFO) gives arg_buf[0]=10, arg_buf[1]=20.
+    if (state.captured_args.size() < 2u) return false;
+    if (state.captured_args[0].tag != ValueTag::Int32) return false;
+    if (state.captured_args[0].i32 != 10) return false;
+    if (state.captured_args[1].tag != ValueTag::Int32) return false;
+    if (state.captured_args[1].i32 != 20) return false;
+
+    // Return value from dispatch should propagate through tail call.
+    if (!result.has_return_value) return false;
+    if (result.return_value.tag != ValueTag::Int32) return false;
+    if (result.return_value.i32 != 99) return false;
+
+    return true;
 }

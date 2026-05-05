@@ -15,3 +15,4 @@
 | [`07-已消除的禁止模式.md`](./07-%E5%B7%B2%E6%B6%88%E9%99%A4%E7%9A%84%E7%A6%81%E6%AD%A2%E6%A8%A1%E5%BC%8F.md) | 已修复的性能反模式及其替代方案 |
 | [`08-collections-kernel翻译表.md`](./08-collections-kernel%E7%BF%BB%E8%AF%91%E8%A1%A8.md) | Collection 类型热路径 Kernel 优化翻译路径 |
 | [`09-结构化控制流恢复翻译表.md`](./09-%E7%BB%93%E6%9E%84%E5%8C%96%E6%8E%A7%E5%88%B6%E6%B5%81%E6%81%A2%E5%A4%8D%E7%BF%BB%E8%AF%91%E8%A1%A8.md) | CFG 构建、结构化恢复算法与发射策略 |
+| [`10-解释器调用分发翻译表.md`](./10-%E8%A7%A3%E9%87%8A%E5%99%A8%E8%B0%83%E7%94%A8%E5%88%86%E5%8F%91%E7%BF%BB%E8%AF%91%E8%A1%A8.md) | Interpreter → AOT bridge 架构、DispatchCallback、尾调用优化、Depth Guard、异常穿越 |

@@ -11,3 +11,4 @@
 | [foundation-dll-full-development](foundation-dll-full-development/STATUS.md) | roadmap | in-progress | 2026-05-05 | Foundation DLL 全量 il2cpp 开发 | false |
 | [foundation-dll-phase-1-corelib](foundation-dll-phase-1-corelib/STATUS.md) | plan | in-progress | 2026-05-05 | Phase 1 System.Private.CoreLib 全量 il2cpp 开发 | false |
 | [runtime-external-reflection-type](runtime-external-reflection-type/STATUS.md) | plan | completed | 2026-05-05 | Runtime External 依赖实现 — Reflection/Type + Exception | false |
+| [20260505-interpreter-full-completion](20260505-interpreter-full-completion/STATUS.md) | plan | planning-complete | 2026-05-05 | Interpreter → AOT Bridge (Dispatch Callback) | true |

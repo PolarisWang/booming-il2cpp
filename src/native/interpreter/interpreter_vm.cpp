@@ -13,6 +13,10 @@ namespace {
 
 using ObjectStorage = InterpreterObject;
 
+/// Max argument count for stack-allocated call_args buffer in Call handler.
+/// The vast majority of managed methods have < 8 parameters.
+static constexpr CHAOS_IL2CPP_UINT32 kMaxCallArgs = 8u;
+
 struct ArrayStorage {
     CHAOS_IL2CPP_VECTOR(InterpreterValue) elements = {};
 };
@@ -318,6 +322,95 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
     int32_t     unwind_finally_list[kMaxUnwindDepth] = {};
     int32_t     unwind_finally_count    = 0;
     int32_t     unwind_finally_current  = 0;
+
+    // ── SEH helper lambdas (capture locals by reference) ──────────────────
+
+    // Phase 1: find the innermost catch/filter handler covering ip.
+    auto findCatchHandler = [&](CHAOS_IL2CPP_SIZE ip) -> int {
+        for (int i = static_cast<int>(method.seh_clauses.size()) - 1; i >= 0; --i) {
+            const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(i)];
+            if (ip >= clause.try_start_idx && ip < clause.try_end_idx) {
+                const auto flags = static_cast<uint32_t>(clause.flags);
+                if (flags == static_cast<uint32_t>(SEHFlags::Exception) ||
+                    flags == static_cast<uint32_t>(SEHFlags::Filter)) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    };
+
+    // Phase 2: build the finally/fault unwind list for a given catch clause.
+    // Stores indices in unwind_finally_list and returns the count.
+    auto setupFinallyUnwind = [&](int catch_idx, CHAOS_IL2CPP_SIZE ip) {
+        unwind_finally_count = 0;
+        const auto& catch_clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(catch_idx)];
+        for (int i = 0; i < static_cast<int>(method.seh_clauses.size()); ++i) {
+            if (i == catch_idx) continue;
+            const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(i)];
+            const auto flags = static_cast<uint32_t>(clause.flags);
+            if (flags == static_cast<uint32_t>(SEHFlags::Finally) ||
+                flags == static_cast<uint32_t>(SEHFlags::Fault)) {
+                if (ip >= clause.try_start_idx &&
+                    ip < clause.try_end_idx &&
+                    clause.try_start_idx >= catch_clause.try_start_idx &&
+                    clause.try_end_idx <= catch_clause.try_end_idx &&
+                    unwind_finally_count < kMaxUnwindDepth) {
+                    unwind_finally_list[unwind_finally_count++] = i;
+                }
+            }
+        }
+    };
+
+    // ── Action for handleDispatchResult — controls switch flow in call handlers. ──
+    enum class DispatchAction { Return, Continue, Break };
+
+    // Shared post-dispatch handler for Call/CallVirt/CallBridge.
+    // Encapsulates SEH catch/finally dispatch and tail-call optimization.
+    // Called after frame->dispatch_fn returns a DispatchResult.
+    // Returns DispatchAction to control the outer switch/loop flow.
+    auto handleDispatchResult = [&](const DispatchResult& dret) -> DispatchAction {
+        if (dret.threw_exception) {
+            exception_obj = dret.exception_value;
+            const int catch_idx = findCatchHandler(instruction_index);
+            if (catch_idx >= 0) {
+                const auto& catch_clause = method.seh_clauses[
+                    static_cast<CHAOS_IL2CPP_SIZE>(catch_idx)];
+                setupFinallyUnwind(catch_idx, instruction_index);
+                if (unwind_finally_count > 0) {
+                    exception_in_flight = true;
+                    unwind_catch_clause = catch_idx;
+                    unwind_finally_current = 0;
+                    instruction_index = method.seh_clauses[
+                        static_cast<CHAOS_IL2CPP_SIZE>(unwind_finally_list[0])].handler_start_idx;
+                    in_handler = true;
+                    active_handler_clause = unwind_finally_list[0];
+                } else {
+                    instruction_index = catch_clause.handler_start_idx;
+                    in_handler = true;
+                    active_handler_clause = catch_idx;
+                    frame->stack.push_back(exception_obj);
+                }
+                return DispatchAction::Continue;
+            }
+            // No catch handler — propagate to caller.
+            result.threw_exception = true;
+            result.exception_value = exception_obj;
+            return DispatchAction::Return;
+        }
+
+        if (dret.has_value) {
+            // Tail call: if the next instruction is Ret, skip the stack round-trip.
+            if (instruction_index + 1u < method.instructions.size() &&
+                method.instructions[instruction_index + 1u].op_code == IROpCode::Ret) {
+                result.has_return_value = true;
+                result.return_value = dret.value;
+                return DispatchAction::Return;
+            }
+            frame->stack.push_back(dret.value);
+        }
+        return DispatchAction::Break;
+    };
 
     while (instruction_index < method.instructions.size()) {
         const IRInstruction& instruction = method.instructions[instruction_index];
@@ -631,11 +724,38 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             case IROpCode::Call:
             case IROpCode::CallBridge: {
-                // External dispatch: collect call args from the stack.
+                const CHAOS_IL2CPP_SIZE arg_count = static_cast<CHAOS_IL2CPP_SIZE>(instruction.arg_count);
+
+                if (frame->dispatch_fn != nullptr) {
+                    // Inline dispatch via callback (Phase 4+).
+                    // Stack-allocate for small arg counts (common case).
+                    InterpreterValue local_buf[kMaxCallArgs];
+                    auto* arg_buf = (arg_count <= kMaxCallArgs)
+                        ? local_buf
+                        : static_cast<InterpreterValue*>(std::malloc(
+                            sizeof(InterpreterValue) * arg_count));
+
+                    for (CHAOS_IL2CPP_SIZE ai = arg_count; ai > 0u; --ai) {
+                        arg_buf[ai - 1u] = Pop(&frame->stack);
+                    }
+
+                    DispatchResult dret = frame->dispatch_fn(
+                        instruction.call_target, arg_buf,
+                        static_cast<CHAOS_IL2CPP_UINT32>(arg_count),
+                        instruction.is_instance_call,
+                        frame->dispatch_context);
+
+                    if (arg_count > kMaxCallArgs) std::free(arg_buf);
+
+                    const DispatchAction da = handleDispatchResult(dret);
+                    if (da == DispatchAction::Return) return result;
+                    if (da == DispatchAction::Continue) continue;
+                    break;
+                }
+
+                // Fallback: existing external-dispatch behavior.
                 result.needs_external_dispatch = true;
                 result.call_target = instruction.call_target;
-
-                const CHAOS_IL2CPP_SIZE arg_count = static_cast<CHAOS_IL2CPP_SIZE>(instruction.arg_count);
                 result.call_args.resize(arg_count);
                 for (CHAOS_IL2CPP_SIZE ai = arg_count; ai > 0u; --ai) {
                     result.call_args[ai - 1u] = Pop(&frame->stack);
@@ -647,17 +767,22 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 // if 'this' is a value type, the call should be made directly
                 // (without boxing). For reference types, normal virtual dispatch.
                 const CHAOS_IL2CPP_SIZE cv_arg_count = static_cast<CHAOS_IL2CPP_SIZE>(instruction.arg_count);
-                result.call_args.resize(cv_arg_count);
+
+                // Collect call args (needed by both paths).
+                InterpreterValue local_buf[kMaxCallArgs];
+                auto* cv_args = (cv_arg_count <= kMaxCallArgs)
+                    ? local_buf
+                    : static_cast<InterpreterValue*>(std::malloc(
+                        sizeof(InterpreterValue) * cv_arg_count));
                 for (CHAOS_IL2CPP_SIZE ai = cv_arg_count; ai > 0u; --ai) {
-                    result.call_args[ai - 1u] = Pop(&frame->stack);
+                    cv_args[ai - 1u] = Pop(&frame->stack);
                 }
 
+                // Resolve call target (vtable or direct).
+                void* resolved_target = instruction.call_target;
                 if (cv_arg_count > 0u) {
-                    const InterpreterValue& this_val = result.call_args[0u];
-                    if (this_val.tag == ValueTag::Struct) {
-                        // Value type — use direct call target (no virtual dispatch).
-                        result.call_target = instruction.call_target;
-                    } else {
+                    const InterpreterValue& this_val = cv_args[0u];
+                    if (this_val.tag != ValueTag::Struct) {
                         // Reference or boxed value — normal virtual dispatch.
                         CHAOS_IL2CPP_UINT32 inst_type_token = 0u;
                         if (this_val.tag == ValueTag::ObjectRef && this_val.obj != nullptr) {
@@ -666,30 +791,58 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         const CHAOS_IL2CPP_UINT32 decl_method_token =
                             static_cast<CHAOS_IL2CPP_UINT32>(instruction.secondary_index);
                         if (inst_type_token != 0u && decl_method_token != 0u) {
-                            void* resolved = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
+                            void* vtable_resolved = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
                                 inst_type_token, decl_method_token);
-                            result.call_target = resolved ? resolved : instruction.call_target;
-                        } else {
-                            result.call_target = instruction.call_target;
+                            if (vtable_resolved != nullptr) {
+                                resolved_target = vtable_resolved;
+                            }
                         }
                     }
-                } else {
-                    result.call_target = instruction.call_target;
                 }
+
+                if (frame->dispatch_fn != nullptr) {
+                    DispatchResult dret = frame->dispatch_fn(
+                        resolved_target, cv_args,
+                        static_cast<CHAOS_IL2CPP_UINT32>(cv_arg_count),
+                        true, /* CallVirtConstrained is always instance */
+                        frame->dispatch_context);
+
+                    if (cv_arg_count > kMaxCallArgs) std::free(cv_args);
+
+                    const DispatchAction da_cv = handleDispatchResult(dret);
+                    if (da_cv == DispatchAction::Return) return result;
+                    if (da_cv == DispatchAction::Continue) continue;
+                    break;
+                }
+
+                // Fallback: existing external-dispatch behavior.
+                if (cv_arg_count > kMaxCallArgs) std::free(cv_args);
+                // Restore args to result.call_args for external dispatch.
+                result.call_args.resize(cv_arg_count);
+                for (CHAOS_IL2CPP_SIZE ai = 0u; ai < cv_arg_count; ++ai) {
+                    result.call_args[ai] = cv_args[ai];
+                }
+                result.call_target = resolved_target;
                 result.needs_external_dispatch = true;
                 return result;
             }
             case IROpCode::CallVirt: {
-                // Collect call args first (last arg pushed first in IL).
-                const CHAOS_IL2CPP_SIZE arg_count = static_cast<CHAOS_IL2CPP_SIZE>(instruction.arg_count);
-                result.call_args.resize(arg_count);
-                for (CHAOS_IL2CPP_SIZE ai = arg_count; ai > 0u; --ai) {
-                    result.call_args[ai - 1u] = Pop(&frame->stack);
+                const CHAOS_IL2CPP_SIZE arg_count_v = static_cast<CHAOS_IL2CPP_SIZE>(instruction.arg_count);
+
+                // Collect call args.
+                InterpreterValue local_buf_v[kMaxCallArgs];
+                auto* cv_args_v = (arg_count_v <= kMaxCallArgs)
+                    ? local_buf_v
+                    : static_cast<InterpreterValue*>(std::malloc(
+                        sizeof(InterpreterValue) * arg_count_v));
+                for (CHAOS_IL2CPP_SIZE ai = arg_count_v; ai > 0u; --ai) {
+                    cv_args_v[ai - 1u] = Pop(&frame->stack);
                 }
 
-                // If instance method, resolve virtual dispatch.
-                if (arg_count > 0u) {
-                    const InterpreterValue& this_val = result.call_args[0u];
+                // Resolve virtual dispatch.
+                void* resolved_target_v = instruction.call_target;
+                if (arg_count_v > 0u) {
+                    const InterpreterValue& this_val = cv_args_v[0u];
                     CHAOS_IL2CPP_UINT32 instance_type_token = 0u;
                     if (this_val.tag == ValueTag::ObjectRef && this_val.obj != nullptr) {
                         instance_type_token = static_cast<InterpreterObject*>(this_val.obj)->type_token;
@@ -699,21 +852,36 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         static_cast<CHAOS_IL2CPP_UINT32>(instruction.secondary_index);
 
                     if (instance_type_token != 0u && declared_method_token != 0u) {
-                        void* resolved = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
+                        void* vtable_resolved = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
                             instance_type_token, declared_method_token);
-                        if (resolved != nullptr) {
-                            result.call_target = resolved;
-                        } else {
-                            // Fall back to declared method if vtable resolution fails.
-                            result.call_target = instruction.call_target;
+                        if (vtable_resolved != nullptr) {
+                            resolved_target_v = vtable_resolved;
                         }
-                    } else {
-                        result.call_target = instruction.call_target;
                     }
-                } else {
-                    result.call_target = instruction.call_target;
                 }
 
+                if (frame->dispatch_fn != nullptr) {
+                    DispatchResult dret_v = frame->dispatch_fn(
+                        resolved_target_v, cv_args_v,
+                        static_cast<CHAOS_IL2CPP_UINT32>(arg_count_v),
+                        true, /* CallVirt is always instance */
+                        frame->dispatch_context);
+
+                    if (arg_count_v > kMaxCallArgs) std::free(cv_args_v);
+
+                    const DispatchAction da_v = handleDispatchResult(dret_v);
+                    if (da_v == DispatchAction::Return) return result;
+                    if (da_v == DispatchAction::Continue) continue;
+                    break;
+                }
+
+                // Fallback: existing external-dispatch behavior.
+                if (arg_count_v > kMaxCallArgs) std::free(cv_args_v);
+                result.call_args.resize(arg_count_v);
+                for (CHAOS_IL2CPP_SIZE ai = 0u; ai < arg_count_v; ++ai) {
+                    result.call_args[ai] = cv_args_v[ai];
+                }
+                result.call_target = resolved_target_v;
                 result.needs_external_dispatch = true;
                 return result;
             }
@@ -735,41 +903,12 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 exception_obj = Pop(&frame->stack);
 
                 // Phase 1: Search for a matching catch handler (innermost first).
-                int catch_idx = -1;
-                for (int i = static_cast<int>(method.seh_clauses.size()) - 1; i >= 0; --i) {
-                    const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(i)];
-                    if (instruction_index >= clause.try_start_idx && instruction_index < clause.try_end_idx) {
-                        const auto flags = static_cast<uint32_t>(clause.flags);
-                        if (flags == static_cast<uint32_t>(SEHFlags::Exception) ||
-                            flags == static_cast<uint32_t>(SEHFlags::Filter)) {
-                            catch_idx = i;
-                            break;
-                        }
-                    }
-                }
+                const int catch_idx = findCatchHandler(instruction_index);
 
                 if (catch_idx >= 0) {
-                    // Found a catch handler.  Build the unwind list: collect
-                    // finally/fault clauses whose try range covers the throw
-                    // point and is nested within (or equal to) the catch
-                    // clause's try range.
+                    // Found a catch handler.  Build the unwind list.
                     const auto& catch_clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(catch_idx)];
-                    unwind_finally_count = 0;
-                    for (int i = 0; i < static_cast<int>(method.seh_clauses.size()); ++i) {
-                        if (i == catch_idx) continue;
-                        const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(i)];
-                        const auto flags = static_cast<uint32_t>(clause.flags);
-                        if (flags == static_cast<uint32_t>(SEHFlags::Finally) ||
-                            flags == static_cast<uint32_t>(SEHFlags::Fault)) {
-                            if (instruction_index >= clause.try_start_idx &&
-                                instruction_index < clause.try_end_idx &&
-                                clause.try_start_idx >= catch_clause.try_start_idx &&
-                                clause.try_end_idx <= catch_clause.try_end_idx &&
-                                unwind_finally_count < kMaxUnwindDepth) {
-                                unwind_finally_list[unwind_finally_count++] = i;
-                            }
-                        }
-                    }
+                    setupFinallyUnwind(catch_idx, instruction_index);
 
                     if (unwind_finally_count > 0) {
                         // Phase 2: start unwinding through finally/fault handlers.
