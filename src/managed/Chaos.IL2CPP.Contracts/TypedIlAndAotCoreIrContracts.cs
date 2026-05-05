@@ -1,4 +1,4 @@
-﻿namespace Chaos.IL2CPP.Contracts;
+namespace Chaos.IL2CPP.Contracts;
 
 public sealed record TypedIlIrArtifact
 {
@@ -336,6 +336,19 @@ public sealed record AotCoreIrMethodArtifact
     public required IReadOnlyList<AotCoreIrExceptionRegionArtifact> ExceptionRegions { get; init; }
 
     public required IReadOnlyList<AotCoreIrInstructionArtifact> Instructions { get; init; }
+
+    /// Whether this method is a P/Invoke (DllImport) external method.
+    public bool IsPInvoke { get; init; }
+
+    /// For P/Invoke methods: the native DLL module name (e.g. "kernel32").
+    public string? ImportModuleName { get; init; }
+
+    /// For P/Invoke methods: the native entry-point name (e.g. "Sleep").
+    public string? ImportEntryPointName { get; init; }
+
+    /// For P/Invoke methods: indices of parameters whose managed type is
+    /// System.String and therefore need UTF-8 marshalling.
+    public IReadOnlyList<int>? StringParameterIndices { get; init; }
 }
 
 public sealed record AotCoreIrExceptionRegionArtifact
@@ -437,4 +450,3 @@ public sealed record TypedIlInstructionArtifact
 
     public HybridDispatchKind? DispatchKindCode { get; init; }
 }
-

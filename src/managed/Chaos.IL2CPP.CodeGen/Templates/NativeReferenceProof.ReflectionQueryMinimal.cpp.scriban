@@ -29,6 +29,8 @@ const chaos::il2cpp::runtime_core::ReflectionQueryParameterDescriptor kMethodPar
         {{ parameter_subject_id_literal }},
         kParameterIndex,
         "",
+        static_cast<CHAOS_IL2CPP_INTPTR>(0),
+        0u,
     },
 };
 

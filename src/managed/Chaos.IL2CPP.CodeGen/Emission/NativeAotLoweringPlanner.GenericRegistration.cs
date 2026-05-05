@@ -26,13 +26,16 @@ public partial class NativeAotLoweringPlanner
     /// Emit the constexpr arrays into the object-model StringBuilder,
     /// and produce a C-linkage helper function that exposes the arrays
     /// for the proof host to populate MetadataRegistrationV0.
+    /// Also emits per-module GenericMethodAotEntryV0[] and returns the
+    /// corresponding registration-call snippet for the module registration.
     /// Called from <see cref="Create"/> after EmitRuntimePrelude etc.
     /// </summary>
     private void EmitGenericRegistration(
         StringBuilder builder,
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate,
         MetadataRegistrationArtifact metadataRegistration,
-        out string helperCode)
+        out string helperCode,
+        out string aotRegistrationCode)
     {
         // Phase 1: collect generic types and methods with their token info.
         BuildGenericTypeRegistration(
@@ -48,6 +51,13 @@ public partial class NativeAotLoweringPlanner
             metadataRegistration,
             out var methodEntries,
             out var methodArgTokens);
+
+        // Phase 2: collector generic method AOT entries (pre-compiled).
+        BuildMethodAotRegistration(
+            supplementalMetadataTemplate,
+            metadataRegistration,
+            out var methodAotEntries,
+            out var methodAotArgTokens);
 
         // ── Type arg tokens ──
         if (typeArgTokens.Count > 0)
@@ -105,6 +115,56 @@ public partial class NativeAotLoweringPlanner
             builder.AppendLine("static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { { 0, 0, 0, 0 } };");
         }
 
+        // ── Method AOT entries (GenericMethodAotEntryV0[]) ──
+        int methodAotEntryCount = methodAotEntries.Count;
+        int methodAotArgTokenCount = methodAotArgTokens.Count;
+
+        if (methodAotEntries.Count > 0)
+        {
+            builder.AppendLine("static constexpr GenericMethodAotEntryV0 s_method_aot_entries[] = {");
+            foreach (var entry in methodAotEntries)
+            {
+                builder.AppendLine(
+                    $"    {{ 0x{entry.OpenToken:X8}u, 0x{entry.ClosedToken:X8}u, {entry.ArgCount}u, {entry.ArgsStartIndex}u }},");
+            }
+            builder.AppendLine("};");
+
+            builder.Append("static constexpr uint32_t s_method_aot_entry_args[] = { ");
+            builder.Append(string.Join(", ", methodAotArgTokens));
+            builder.AppendLine(" };");
+        }
+        else
+        {
+            builder.AppendLine("static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };");
+            builder.AppendLine("static constexpr uint32_t s_method_aot_entry_args[1] = { 0 };");
+        }
+
+        // ── AOT registration code (emitted into module registration section) ──
+        // Registered at module load via a static-init lambda that calls
+        // RegisterMethodAotEntries().  The lambda lives in the anonymous
+        // namespace of the module registration code section where
+        // s_native_aot_module_id is already declared.
+        var aotReg = new StringBuilder(256);
+        if (methodAotEntryCount > 0)
+        {
+            aotReg.AppendLine("// ── Register method AOT entries ─────────────────────────────");
+            aotReg.AppendLine("static const uint32_t s_register_method_aot = []()");
+            aotReg.AppendLine("{");
+            aotReg.AppendLine("    ::chaos::il2cpp::runtime_instantiation::RegisterMethodAotEntries(");
+            aotReg.AppendLine("        s_native_aot_module_id,");
+            aotReg.AppendLine("        s_method_aot_entries,");
+            aotReg.Append("        ").Append(methodAotEntryCount).AppendLine("u,");
+            aotReg.AppendLine("        s_method_aot_entry_args,");
+            aotReg.Append("        ").Append(methodAotArgTokenCount).AppendLine("u);");
+            aotReg.AppendLine("    return 0u;");
+            aotReg.AppendLine("}();");
+        }
+        else
+        {
+            aotReg.AppendLine("// (no method AOT entries for this module)");
+        }
+        aotRegistrationCode = aotReg.ToString();
+
         // ── Generic registration helper for proof host ──
         // A static initializer sets a global function pointer that the
         // proof host checks before calling.  No extern symbol conflict
@@ -153,6 +213,7 @@ public partial class NativeAotLoweringPlanner
 
     private sealed record TypeEntry(uint OpenToken, uint ClosedToken, uint ArgCount, uint ArgsStartIndex);
     private sealed record MethodEntry(uint MethodToken, uint ClassArgCount, uint MethodArgCount, uint ArgsStartIndex);
+    private sealed record MethodAotEntry(uint OpenToken, uint ClosedToken, uint ArgCount, uint ArgsStartIndex);
 
     private void BuildGenericTypeRegistration(
         StringBuilder builder,
@@ -297,6 +358,119 @@ public partial class NativeAotLoweringPlanner
         }
     }
 
+    // ── Method AOT entry builder (for GenericMethodAotEntryV0[]) ──────────────
+
+    /// <summary>
+    /// Build per-module AOT method entries by scanning supplemental registered
+    /// methods that have a RuntimeGenericContext AND a resolvable open-definition
+    /// metadata token in the same module.
+    ///
+    /// Each entry maps (open_definition_token, type_args[]) → closed_token,
+    /// enabling the runtime to bypass the GenericContextRegistry/Interpreter for
+    /// generic method calls whose instantiation was pre-compiled by AOT.
+    ///
+    /// Cross-module definitions (where the open method is defined in a different
+    /// assembly) are skipped — they fall back to the interpreter gracefully.
+    ///
+    /// The emitted array is sorted by open_token for per-module binary search.
+    /// </summary>
+    private void BuildMethodAotRegistration(
+        SupplementalMetadataTemplateArtifact supplemental,
+        MetadataRegistrationArtifact metadataRegistration,
+        out List<MethodAotEntry> entries,
+        out List<string> argTokens)
+    {
+        entries = new List<MethodAotEntry>();
+        argTokens = new List<string>();
+
+        // ── Build metadata-token lookups from supplemental entries ──────
+        // The AOT map uses REAL metadata tokens (0x060000xx / 0x020000xx),
+        // NOT the Slot indices used by the GenericContextRegistry.
+        var methodTokenBySubjectId = new Dictionary<string, uint>(StringComparer.Ordinal);
+        foreach (var m in supplemental.RegisteredMethods)
+        {
+            if (m.MetadataToken > 0)
+                methodTokenBySubjectId[m.SubjectId] = (uint)m.MetadataToken;
+        }
+
+        var typeTokenBySubjectId = new Dictionary<string, uint>(StringComparer.Ordinal);
+        foreach (var t in supplemental.RegisteredTypes)
+        {
+            if (t.MetadataToken > 0)
+                typeTokenBySubjectId[t.SubjectId] = (uint)t.MetadataToken;
+        }
+
+        uint ResolveTypeToken(string subjectId)
+        {
+            return typeTokenBySubjectId.TryGetValue(subjectId, out var t) ? t : 0u;
+        }
+
+        // ── Collect entries (with temp args) before sorting ─────────────
+        var unsorted = new List<(MethodAotEntry Entry, List<string> Args)>();
+
+        foreach (var methodEntry in supplemental.RegisteredMethods)
+        {
+            if (methodEntry.RuntimeGenericContext is not { } ctx)
+                continue;
+            if (methodEntry.MetadataToken <= 0)
+                continue;
+
+            uint closedToken = (uint)methodEntry.MetadataToken;
+
+            // Resolve open definition token from DefinitionSubjectId.
+            // This succeeds only when the open method is defined in the same
+            // module (cross-module definitions → 0 → skip → interpreter).
+            if (string.IsNullOrEmpty(methodEntry.DefinitionSubjectId))
+                continue;
+            if (!methodTokenBySubjectId.TryGetValue(methodEntry.DefinitionSubjectId, out var openToken))
+                continue;
+
+            // Collect ALL type arguments (class-level + method-level) into
+            // one flat pool.  Each value must be a resolvable metadata token.
+            var args = new List<string>();
+
+            // Class-level type arguments
+            if (ctx.InstantiationKey.TypeArguments is { Count: > 0 } typeArgs)
+            {
+                foreach (var arg in typeArgs)
+                {
+                    uint token = ResolveTypeToken(arg);
+                    if (token == 0) { args.Clear(); break; }
+                    args.Add($"0x{token:X8}u");
+                }
+                if (args.Count == 0 && typeArgs.Count > 0)
+                    continue;
+            }
+
+            // Method-level type arguments
+            if (ctx.InstantiationKey.MethodArguments is { Count: > 0 } methArgs)
+            {
+                foreach (var arg in methArgs)
+                {
+                    uint token = ResolveTypeToken(arg);
+                    if (token == 0) { args.Clear(); break; }
+                    args.Add($"0x{token:X8}u");
+                }
+                if (args.Count == 0 && methArgs.Count > 0)
+                    continue;
+            }
+
+            unsorted.Add((new MethodAotEntry(openToken, closedToken, (uint)args.Count, 0), args));
+        }
+
+        // ── Sort by open_token for binary search ────────────────────────
+        unsorted.Sort((a, b) => a.Entry.OpenToken.CompareTo(b.Entry.OpenToken));
+
+        // ── Rebuild flat arg pool in sorted order ───────────────────────
+        uint argPoolIndex = 0;
+        foreach (var (entry, entryArgs) in unsorted)
+        {
+            entries.Add(entry with { ArgsStartIndex = argPoolIndex });
+            argTokens.AddRange(entryArgs);
+            argPoolIndex += entry.ArgCount;
+        }
+    }
+
     /// <summary>
     /// Minimal token lookup for the codegen phase.
     /// In Phase 1 this handles the common case where subject IDs are
@@ -353,5 +527,9 @@ public partial class NativeAotLoweringPlanner
         builder.AppendLine("    .generic_method_count  = sizeof(kGenericMethodEntries) / sizeof(kGenericMethodEntries[0]),");
         builder.AppendLine("    .generic_method_args   = kGenericMethodArgTokens,");
         builder.AppendLine("    .generic_method_arg_count = sizeof(kGenericMethodArgTokens) / sizeof(kGenericMethodArgTokens[0]),");
+        builder.AppendLine("    .method_aot_entries       = s_method_aot_entries,");
+        builder.AppendLine("    .method_aot_entry_count  = sizeof(s_method_aot_entries) / sizeof(s_method_aot_entries[0]),");
+        builder.AppendLine("    .method_aot_entry_args   = s_method_aot_entry_args,");
+        builder.AppendLine("    .method_aot_entry_arg_count = sizeof(s_method_aot_entry_args) / sizeof(s_method_aot_entry_args[0]),");
     }
 }

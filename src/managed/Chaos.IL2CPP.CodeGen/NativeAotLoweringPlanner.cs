@@ -94,6 +94,12 @@ public sealed partial class NativeAotLoweringPlanner
     private readonly List<string> _moduleTypeNamespaces = new();
     private readonly List<uint> _moduleTypeParentTokens = new();
     private readonly List<string?> _moduleTypeInfoSymbols = new();
+    private readonly List<uint> _moduleNestedTypeChildren = new();
+    private readonly List<uint> _moduleNestedTypeOffsets = new();
+    private readonly List<uint> _moduleGenericParamConstraintData = new();
+    private readonly List<uint> _moduleGenericParamConstraintOffsets = new();
+    private readonly List<string> _moduleTypeSubjectIds = new();
+    private bool _hasCustomAttributeBlob;
 
     private readonly RuntimeHelperShapeRegistry _shapeRegistry = RuntimeHelperShapeRegistry.BuildDefault();
 
@@ -212,7 +218,7 @@ public sealed partial class NativeAotLoweringPlanner
         EmitDelegateRuntimeSupportDefinitions(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
         EmitExternalRuntimeHelperDefinitions(objectModelBuilder, externalRuntimeHelpers);
         EmitStaticInitializationDefinitions(objectModelBuilder);
-        EmitGenericRegistration(objectModelBuilder, supplementalMetadataTemplate, metadataRegistration, out var genericRegistrationHelperCode);
+        EmitGenericRegistration(objectModelBuilder, supplementalMetadataTemplate, metadataRegistration, out var genericRegistrationHelperCode, out var aotRegistrationCode);
 
         var methodDeclarations = BuildMethodDeclarations(reachableMethods);
         var methods = reachableMethods
@@ -225,7 +231,16 @@ public sealed partial class NativeAotLoweringPlanner
         var entryBridgeArguments = BuildEntryBridgeArguments(entryMethod);
 
         var abiManifestCode = BuildAbiManifest(reachableMethods);
+        var nameIndexCode = BuildNameIndex(reachableMethods, metadataRegistration);
         var moduleRegistrationCode = BuildModuleRegistration();
+        if (!string.IsNullOrEmpty(nameIndexCode))
+        {
+            moduleRegistrationCode += Environment.NewLine + nameIndexCode;
+        }
+        if (!string.IsNullOrEmpty(aotRegistrationCode))
+        {
+            moduleRegistrationCode += Environment.NewLine + aotRegistrationCode;
+        }
         if (!string.IsNullOrEmpty(abiManifestCode))
         {
             moduleRegistrationCode = abiManifestCode + Environment.NewLine + moduleRegistrationCode;
@@ -245,6 +260,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "\"module_registry.h\"",
                 "\"abi_manifest.h\"",
                 "\"runtime_vtable.h\"",
+                "\"runtime_instantiation.h\"",
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
             GenericRegistrationCode = genericRegistrationHelperCode,
@@ -313,6 +329,8 @@ public sealed partial class NativeAotLoweringPlanner
                 return;
 
             // Enumerate all TypeDef entries (row-indexed by ECMA TypeDef table)
+            var nestedTypeMap = new Dictionary<uint, List<uint>>();
+            var typeTokenToConstraints = new Dictionary<uint, List<uint>>();
             foreach (var handle in metadataReader.TypeDefinitions)
             {
                 var typeDef = metadataReader.GetTypeDefinition(handle);
@@ -337,13 +355,75 @@ public sealed partial class NativeAotLoweringPlanner
                     ? "&" + GetNativeTypeInfoSymbol(subjectId)
                     : null;
 
+                // Nested type relationship: record parent → child token
+                var declaringHandle = typeDef.GetDeclaringType();
+                if (!declaringHandle.IsNil)
+                {
+                    uint declaringToken = (uint)MetadataTokens.GetToken(declaringHandle);
+                    uint childToken = (uint)MetadataTokens.GetToken(handle);
+                    if (!nestedTypeMap.TryGetValue(declaringToken, out var childList))
+                    {
+                        childList = new List<uint>();
+                        nestedTypeMap[declaringToken] = childList;
+                    }
+                    childList.Add(childToken);
+                }
+
+                // Generic param constraint extraction: build per-type flat array
+                // of (param_index << 29 | constraint_token) entries.
+                uint typeToken = (uint)MetadataTokens.GetToken(handle);
+                var gpHandles = typeDef.GetGenericParameters();
+                if (gpHandles.Count > 0)
+                {
+                    var constraintEntries = new List<uint>();
+                    foreach (var gpHandle in gpHandles)
+                    {
+                        var gp = metadataReader.GetGenericParameter(gpHandle);
+                        int paramIdx = gp.Index;
+                        foreach (var gpcHandle in gp.GetConstraints())
+                        {
+                            var gpc = metadataReader.GetGenericParameterConstraint(gpcHandle);
+                            uint ct = (uint)MetadataTokens.GetToken(gpc.Type);
+                            constraintEntries.Add(((uint)paramIdx << 29) | (ct & 0x1FFFFFFFu));
+                        }
+                    }
+                    if (constraintEntries.Count > 0)
+                        typeTokenToConstraints[typeToken] = constraintEntries;
+                }
+
                 _moduleTypeFlags.Add(flags);
                 _moduleTypeNames.Add(name);
                 _moduleTypeNamespaces.Add(ns);
                 _moduleTypeParentTokens.Add(parentToken);
                 _moduleTypeInfoSymbols.Add(typeInfoSymbol);
+                _moduleTypeSubjectIds.Add(subjectId);
                 _moduleTypeCount++;
             }
+
+            // Build prefix-sum nested type arrays from the collected parent→children map.
+            // Type index i corresponds to token 0x02000000 | (i + 1).
+            for (int i = 0; i < _moduleTypeCount; i++)
+            {
+                uint typeToken = 0x02000000u | (uint)(i + 1);
+                _moduleNestedTypeOffsets.Add((uint)_moduleNestedTypeChildren.Count);
+                if (nestedTypeMap.TryGetValue(typeToken, out var children))
+                {
+                    _moduleNestedTypeChildren.AddRange(children);
+                }
+            }
+            _moduleNestedTypeOffsets.Add((uint)_moduleNestedTypeChildren.Count);
+
+            // Build prefix-sum generic param constraint arrays (same token→index mapping).
+            for (int i = 0; i < _moduleTypeCount; i++)
+            {
+                uint typeToken = 0x02000000u | (uint)(i + 1);
+                _moduleGenericParamConstraintOffsets.Add((uint)_moduleGenericParamConstraintData.Count);
+                if (typeTokenToConstraints.TryGetValue(typeToken, out var entries))
+                {
+                    _moduleGenericParamConstraintData.AddRange(entries);
+                }
+            }
+            _moduleGenericParamConstraintOffsets.Add((uint)_moduleGenericParamConstraintData.Count);
         }
         catch (Exception ex) when (ex is IOException or InvalidOperationException or BadImageFormatException)
         {
@@ -354,6 +434,10 @@ public sealed partial class NativeAotLoweringPlanner
             _moduleTypeNamespaces.Clear();
             _moduleTypeParentTokens.Clear();
             _moduleTypeInfoSymbols.Clear();
+            _moduleNestedTypeChildren.Clear();
+            _moduleNestedTypeOffsets.Clear();
+            _moduleGenericParamConstraintData.Clear();
+            _moduleGenericParamConstraintOffsets.Clear();
         }
     }
 
@@ -1647,14 +1731,16 @@ public sealed partial class NativeAotLoweringPlanner
             null => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Null, null),
             bool booleanValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Boolean, booleanValue),
             byte byteValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Byte, byteValue),
-            sbyte byteValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Int16, (short)byteValue),
+            sbyte byteValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.SByte, byteValue),
             short shortValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Int16, shortValue),
             int intValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Int32, intValue),
             long longValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Int64, longValue),
             ushort shortValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.UInt16, shortValue),
             uint intValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.UInt32, intValue),
             ulong longValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.UInt64, longValue),
-            char charValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.UInt16, (ushort)charValue),
+            float floatValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Single, floatValue),
+            double doubleValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Double, doubleValue),
+            char charValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Char, charValue),
             string stringValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.String, stringValue),
             _ => throw new NotSupportedException(
                 $"native-aot custom-attribute materialization does not support literal value '{value.GetType().FullName}'."),

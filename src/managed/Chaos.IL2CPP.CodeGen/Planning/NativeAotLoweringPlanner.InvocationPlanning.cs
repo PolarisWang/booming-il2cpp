@@ -648,7 +648,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         if (string.IsNullOrEmpty(subjectId) ||
             !_methodsBySubjectId.TryGetValue(subjectId, out var method) ||
-            !CanEmitMethodBody(method))
+            (!CanEmitMethodBody(method) && !method.IsPInvoke))
         {
             return null;
         }

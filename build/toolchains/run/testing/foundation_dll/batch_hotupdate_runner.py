@@ -73,6 +73,30 @@ FAMILIES = [
 ]
 
 
+def _run_emit_patch_data(dll_path: str, output_path: str) -> bool:
+    """Run emit-patch-data to produce .patchdata from a patch DLL."""
+    result = subprocess.run(
+        [
+            "dotnet", "run", "--no-build",
+            "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
+            "--", "emit-patch-data",
+            dll_path,
+            output_path,
+        ],
+        capture_output=True, text=True,
+        timeout=120,
+    )
+
+    if result.returncode != 0:
+        print(f"    emit-patch-data FAILED (rc={result.returncode})")
+        for line in result.stderr.splitlines()[-5:]:
+            print(f"      {line}")
+        return False
+
+    print(f"    emit-patch-data OK: {output_path}")
+    return True
+
+
 def _load_method_subject_ids(family_slug: str) -> list[str]:
     """Load method subject IDs from the capability family contract."""
     contract_path = _VERIFICATION / family_slug / "capability-family-contract.json"
@@ -272,57 +296,6 @@ def _run_emit_native_aot(family_slug: str, variant: str = "semantic-patch") -> b
     return True
 
 
-def _generate_patch_cpp_direct(family_slug: str, method_count: int) -> bool:
-    """Generate patch C++ directly for the sentinel-return variant.
-
-    The chaos-il2cpp pipeline cannot classify a DLL that only returns
-    sentinel values (no real API calls). Instead, we generate the C++
-    directly with 0xB0000000+N returns for each method.
-    """
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}PatchEntry"
-    patch_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated"
-    patch_dir.mkdir(parents=True, exist_ok=True)
-    cpp_path = patch_dir / "native-aot.generated.cpp"
-
-    lines = [
-        '#include <chaos/common.h>',
-        '#include "codegen_bridge.h"',
-        '',
-        '// Auto-generated patch variant: sentinel returns 0xB0000000+N',
-        f'// Family: {family_slug}',
-        f'// Methods: {method_count}',
-        '',
-    ]
-
-    # Method stubs
-    for i in range(method_count):
-        sentinel = 0xB0000000 + i
-        lines.append(
-            f'extern "C" CHAOS_IL2CPP_INT32 {class_name}_Method{i}(void)'
-        )
-        lines.append('{')
-        # Use unsigned arithmetic to avoid signed overflow warnings on MSVC
-        lines.append(f'    return static_cast<CHAOS_IL2CPP_INT32>(0xB0000000u + {i}u);')
-        lines.append('}')
-        lines.append('')
-
-    # RunNativeAot dispatcher
-    lines.append('extern "C" int RunNativeAot(CHAOS_IL2CPP_INT32 chaos_entry_index)')
-    lines.append('{')
-    lines.append('    switch (chaos_entry_index)')
-    lines.append('    {')
-    for i in range(method_count):
-        lines.append(f'        case {i}: return static_cast<int>({class_name}_Method{i}());')
-    lines.append('        default: return -1;')
-    lines.append('    }')
-    lines.append('}')
-
-    cpp_path.write_text('\n'.join(lines) + '\n', encoding="utf-8")
-    size = cpp_path.stat().st_size
-    print(f"    [patch] Generated patch C++ directly: {size} bytes at {cpp_path.relative_to(_REPO_ROOT)}")
-    return True
-
-
 def _run_variant_pipeline(
     family_slug: str,
     mids: list[str],
@@ -353,15 +326,18 @@ def _run_variant_pipeline(
     result["entryPointSubjectId"] = build_result["entry_point_subject_id"]
 
     if variant == "patch":
-        # Patch variant: generate sentinel-return C++ directly (pipeline
-        # cannot classify a DLL with only sentinel returns).
-        print(f"    [patch] Generating patch C++ directly (sentinel returns)...")
-        method_count = len(mids)
-        if not _generate_patch_cpp_direct(family_slug, method_count):
-            result["steps"]["generate_patch_cpp"] = "FAILED"
-            result["error"] = "patch C++ generation failed"
+        # Patch variant: extract .patchdata from DLL using emit-patch-data.
+        # The .patchdata binary is consumed at runtime by PatchLoader for
+        # IL interpretation via InterpreterEntryDirect (D3 dispatch).
+        print(f"    [patch] Extracting patch data via emit-patch-data...")
+        patchdata_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "patchdata"
+        patchdata_dir.mkdir(parents=True, exist_ok=True)
+        patchdata_path = patchdata_dir / f"{family_slug}.patchdata"
+        if not _run_emit_patch_data(build_result["dll_path"], str(patchdata_path)):
+            result["steps"]["emit_patch_data"] = "FAILED"
+            result["error"] = "emit-patch-data failed"
             return result
-        result["steps"]["generate_patch_cpp"] = "OK"
+        result["steps"]["emit_patch_data"] = "OK"
     else:
         # Step 2: Convert
         print(f"    [{variant}] Convert...")

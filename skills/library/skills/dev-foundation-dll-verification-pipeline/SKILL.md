@@ -46,7 +46,8 @@ Step 2: Select Families
   ▼
 Step 3: Three-Gate Verification (per family)
   │  dev:foundation-dll-family-verification
-  │  ├── Fact:       dotnet test (managed)
+  │  ├── Fact L1:    Codegen success (AOT lowering compiled)
+  │  ├── Fact L2:    Semantic correctness (native exec checksum match)
   │  ├── Benchmark:  native exe + managed baseline
   │  └── HotUpdate:  native hotupdate exe
   │
@@ -110,7 +111,8 @@ ls verification/foundation-dll/System.Private.CoreLib/<family>/il2cpp_dist/nativ
 | Step 0 | codegen 失败 | 先 `run trace --exception` 查看失败原因，修复后重跑 |
 | Step 1 | claims 为空 | `write_foundation_dll_audit_outputs()` regenerate → 重试 |
 | Step 1 | coverage 缺失 | Step 0 未完成 → 回退 codegen |
-| Step 3 | Fact 失败 | **查看 trace** → `dev:systematic-debugging` → 确认是真实失败后记录 |
+| Step 3 | Fact L1 失败（无 AOT lowering） | 标记为 "not-translated"，该 family AOT 翻译未完成，不阻塞其他 family |
+| Step 3 | Fact L2 失败（native exec checksum 不匹配） | **阻塞** → **查看 trace** → `dev:systematic-debugging` → 确认翻译语义错误 |
 | Step 3 | Benchmark 退化 | **查看 trace** → 排查翻译质量 → 标记 regression |
 | Step 3 | HotUpdate 失败 | **查看 trace** → 检查 stub 返回值 → 标记失败 |
 | Step 4 | Dashboard 不一致 | `write_foundation_dll_audit_outputs()` 重新生成 |

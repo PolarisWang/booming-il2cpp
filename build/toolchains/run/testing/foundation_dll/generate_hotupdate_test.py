@@ -164,7 +164,36 @@ def _generate_hotupdate_test(
     return "\n".join(lines)
 
 
-def _emit_header(lines: list[str], family_id: str, method_count: int, has_semantic: bool) -> None:
+def _embed_patch_data(family_slug: str) -> tuple[str, int]:
+    """Read .patchdata binary and generate C++ byte array for embedding.
+
+    Returns (cxx_array_source, byte_count).
+    Returns empty string if .patchdata not found.
+    """
+    patchdata_path = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "patchdata" / f"{family_slug}.patchdata"
+    if not patchdata_path.exists():
+        return "", 0
+
+    data = patchdata_path.read_bytes()
+    lines = [
+        "// ── Embedded .patchdata for D3 dispatch hotpatch ──────────────",
+        "// Generated from: " + str(patchdata_path.relative_to(_VERIFICATION)),
+        f"// Size: {len(data)} bytes",
+        "",
+        "static const uint8_t kPatchData[] = {",
+    ]
+
+    # Emit as 16-byte wide hex dump
+    for i in range(0, len(data), 16):
+        chunk = data[i:i+16]
+        hex_bytes = ", ".join(f"0x{b:02X}" for b in chunk)
+        lines.append(f"    {hex_bytes},")
+
+    lines.append("};")
+    lines.append(f"static constexpr size_t kPatchDataSize = {len(data)}u;")
+    lines.append("")
+
+    return "\n".join(lines), len(data)
     lines.extend([
         "// Per-family hotupdate verification test",
         f"// Family: {family_id}",

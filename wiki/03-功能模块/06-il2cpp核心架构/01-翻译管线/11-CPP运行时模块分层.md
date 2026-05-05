@@ -102,3 +102,7 @@ chaos_common      (无依赖)
 | 解释器 VM | chaos_interpreter | `src/native/interpreter/interpreter_vm.*` |
 | 引导程序 | chaos_bootstrap | `src/native/bootstrap/bootstrap.*` |
 | 引擎桥接 | chaos_engine_bridge | `src/native/engine-bridge/engine_bridge.*` |
+| 托管线程模型 | chaos_runtime_core | `src/native/runtime-core/thread_state.*` |
+| ThreadPool 基础 | chaos_runtime_core | `src/native/runtime-core/thread_pool.*` |
+| Monitor 轻量锁 | chaos_runtime_core | `src/native/runtime-core/runtime_core.cpp` |
+| Hybrid GC Safepoint | chaos_runtime_core | `src/native/runtime-core/thread_state.*` |

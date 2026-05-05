@@ -457,3 +457,57 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
             "private static string FormatGenericArgumentList(",
         ]:
             self.assertIn(required_fragment, object_model_utilities_source)
+
+    def test_native_aot_generic_method_aot_registration_is_wired_to_codegen_and_contract(self) -> None:
+        generic_registration_source = NATIVE_AOT_GENERIC_REGISTRATION_PATH.read_text(encoding="utf-8")
+        codegen_bridge_source = CODEGEN_BRIDGE_HEADER_PATH.read_text(encoding="utf-8")
+
+        self.assertTrue(
+            NATIVE_AOT_GENERIC_REGISTRATION_PATH.is_file(),
+            msg=f"missing generic registration split file: {NATIVE_AOT_GENERIC_REGISTRATION_PATH}",
+        )
+
+        # The codegen must define BuildMethodAotRegistration to build AOT entries.
+        self.assertIn(
+            "private void BuildMethodAotRegistration(",
+            generic_registration_source,
+        )
+
+        # The codegen must reference GenericMethodAotEntryV0 (the contract struct).
+        self.assertIn(
+            "GenericMethodAotEntryV0",
+            generic_registration_source,
+        )
+
+        # The emitted AOT registration code must call RegisterMethodAotEntries.
+        self.assertIn(
+            "RegisterMethodAotEntries(",
+            generic_registration_source,
+        )
+
+        # The module registration fields must include method_aot_entries pointers.
+        self.assertIn(
+            ".method_aot_entries",
+            generic_registration_source,
+        )
+
+        # The contract header must define GenericMethodAotEntryV0 struct.
+        self.assertIn(
+            "struct GenericMethodAotEntryV0",
+            codegen_bridge_source,
+        )
+
+        # The contract header must define ModuleGenericRegistrationV0 with
+        # method_aot_entries fields (wired to the GenericMethodAotEntryV0[] arrays).
+        self.assertIn(
+            "method_aot_entries",
+            codegen_bridge_source,
+        )
+
+        # The codegen must reference the runtime_instantiation.h include
+        # (which declares RegisterMethodAotEntries and QueryAotMethod).
+        planner_source = NATIVE_AOT_PLANNER_PATH.read_text(encoding="utf-8")
+        self.assertIn(
+            "runtime_instantiation.h",
+            planner_source,
+        )

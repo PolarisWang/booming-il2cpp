@@ -21,6 +21,10 @@ add_library(chaos_runtime_core STATIC
     layout_engine.h
     runtime_instantiation.cpp
     runtime_instantiation.h
+    thread_state.cpp
+    thread_state.h
+    thread_pool.cpp
+    thread_pool.h
     generic_method_instantiation.cpp
     generic_method_instantiation.h
     method_table.cpp
@@ -31,7 +35,15 @@ add_library(chaos_runtime_core STATIC
     il_to_ir_lowerer.h
     token_resolver.cpp
     token_resolver.h
-    abi_manifest.cpp)
+    abi_manifest.cpp
+    dispatch_table.h
+    dispatch_table.cpp
+    patch_loader.h
+    patch_loader.cpp
+    interpreter_entry.h
+    interpreter_entry.cpp
+    native_library.h
+    native_library.cpp)
 
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)
