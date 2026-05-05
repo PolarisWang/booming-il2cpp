@@ -64,29 +64,6 @@ static bool TestBridgeBasicAdd();
 static bool TestBridgeSignatureAwareArg();
 static bool TestBridgeExceptionPropagation();
 
-// ── Debug: step-by-step to isolate crash ──
-static bool DebugBridgeAccess()
-{
-    std::cerr << "[DEBUG] GetBridge()..." << std::endl;
-    const auto* bridge = GetBridge();
-    std::cerr << "[DEBUG] bridge=" << (void*)bridge << std::endl;
-    if (bridge == nullptr) {
-        std::cerr << "[DEBUG] bridge is null!" << std::endl;
-        return false;
-    }
-    std::cerr << "[DEBUG] abi_version=" << bridge->abi_version << std::endl;
-    std::cerr << "[DEBUG] struct_size=" << bridge->struct_size << std::endl;
-    std::cerr << "[DEBUG] resolve_or_instantiate_type="
-              << (void*)bridge->resolve_or_instantiate_type << std::endl;
-    std::cerr << "[DEBUG] resolve_or_instantiate_method="
-              << (void*)bridge->resolve_or_instantiate_method << std::endl;
-    std::cerr << "[DEBUG] unregister_module_generics="
-              << (void*)bridge->unregister_module_generics << std::endl;
-    std::cerr << "[DEBUG] interpret_method_call="
-              << (void*)bridge->interpret_method_call << std::endl;
-    return true;
-}
-
 // ════════════════════════════════════════════════════════════════════════════
 // Test runner
 // ════════════════════════════════════════════════════════════════════════════
@@ -103,10 +80,6 @@ static int failures = 0;
 
 int main()
 {
-    if (!DebugBridgeAccess()) {
-        std::cerr << "DebugBridgeAccess FAILED" << std::endl;
-        return 1;
-    }
     TEST(TestBridgeBasicAdd);
     TEST(TestBridgeSignatureAwareArg);
     TEST(TestBridgeExceptionPropagation);
@@ -131,7 +104,6 @@ int main()
 //   Exercises: lowering, execution, return value extraction.
 static bool TestBridgeBasicAdd()
 {
-    std::cerr << "[DEBUG] TestBridgeBasicAdd: start" << std::endl;
     // ── IL: ldc.i4.1 (0x15) + ldc.i4.2 (0x16) + add (0x58) + ret (0x2A) = 4 bytes ──
     const uint8_t il_code[] = { 0x15, 0x16, 0x58, 0x2A };
     uint8_t method_body[1 + sizeof(il_code)];
@@ -154,17 +126,12 @@ static bool TestBridgeBasicAdd()
     rt_method.il_length = total_size;
     rt_method.is_unloaded = false;
 
-    std::cerr << "[DEBUG] TestBridgeBasicAdd: data ready" << std::endl;
     const auto method_handle = EncodeMethod(&rt_method.descriptor);
-    std::cerr << "[DEBUG] method_handle=" << (void*)method_handle << std::endl;
     const auto* bridge = GetBridge();
-    std::cerr << "[DEBUG] bridge=" << (void*)bridge << std::endl;
     if (bridge == nullptr) return false;
     if (bridge->interpret_method_call == nullptr) return false;
-    std::cerr << "[DEBUG] interpret_method_call=" << (void*)bridge->interpret_method_call << std::endl;
 
     // ── Call bridge ──
-    std::cerr << "[DEBUG] about to call interpret_method_call" << std::endl;
     int32_t result_value = 0;
     ExceptionHandle ex = nullptr;
     const RuntimeStatus status = bridge->interpret_method_call(

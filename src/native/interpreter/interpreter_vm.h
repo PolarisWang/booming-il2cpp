@@ -170,6 +170,7 @@ struct IRInstruction {
     CHAOS_IL2CPP_SIZE secondary_index = 0;
     void* call_target = nullptr;   // MethodInfoHandle or bridge target for Call/CallVirt/CallBridge
     CHAOS_IL2CPP_UINT32 arg_count = 0u;  // Number of arguments for call instructions
+    bool is_instance_call = false;  // true = call_args[0] is 'this' pointer (CallVirt/CallVirtConstrained, or instance Call)
 };
 
 // ── SEH (Structured Exception Handling) ──────────────────────────────────
@@ -199,10 +200,38 @@ struct IRMethod {
     CHAOS_IL2CPP_VECTOR(SEHClause)     seh_clauses  = {};
 };
 
+/// Result of an external dispatch operation (DispatchCallback).
+/// Normal return: has_value=true, value=return_value.
+/// Exception:     threw_exception=true, exception_value=the thrown object.
+/// This avoids C++ exception propagation through the callback function pointer.
+struct DispatchResult {
+    bool has_value = false;
+    InterpreterValue value = {};
+    bool threw_exception = false;
+    InterpreterValue exception_value = {};
+};
+
+/// Callback for dispatching call instructions synchronously within Execute.
+/// Implemented by the bridge layer (runtime_instantiation.cpp).
+/// Returns DispatchResult to communicate both normal returns and exceptions.
+using DispatchCallback = auto (*)(
+    void*                               call_target,       // MethodInfoHandle
+    const InterpreterValue*             call_args,         // arguments array
+    CHAOS_IL2CPP_UINT32                 arg_count,         // number of args
+    bool                                is_instance_call,  // true = call_args[0] is 'this'
+    void*                               dispatch_context   // per-execution context
+    ) -> DispatchResult;
+
 struct ExecutionFrame {
     CHAOS_IL2CPP_VECTOR(InterpreterValue) arguments = {};
     CHAOS_IL2CPP_VECTOR(InterpreterValue) locals = {};
     CHAOS_IL2CPP_VECTOR(InterpreterValue) stack = {};
+
+    // Optional dispatch callback for inline call resolution.
+    // When non-null, Call/CallVirt/CallBridge invoke this synchronously
+    // instead of returning needs_external_dispatch=true.
+    DispatchCallback dispatch_fn = nullptr;
+    void*            dispatch_context = nullptr;
 
     ~ExecutionFrame();
     ExecutionFrame() = default;

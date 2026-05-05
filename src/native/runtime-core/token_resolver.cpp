@@ -93,6 +93,8 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
     switch (instruction.op_code) {
         // ── Method token opcodes ──
         case IROpCode::Call:
+        case IROpCode::CallVirt:
+        case IROpCode::CallVirtConstrained:
         case IROpCode::NewObj: {
             if (ctx->bridge->resolve_method_by_token == nullptr) {
                 return false;
@@ -104,6 +106,23 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
             }
             instruction.call_target = reinterpret_cast<void*>(
                 static_cast<CHAOS_IL2CPP_UINTPTR>(method_handle));
+
+            // Set arg_count and instance flag from the method descriptor.
+            // arg_count = total values on the evaluation stack (including 'this'
+            // for instance calls).  CallVirt/CallVirtConstrained are always
+            // instance calls; the `call` opcode may be static or instance
+            // depending on the method's calling convention.
+            const auto* method_desc = TryDecodeReflectionQueryMethodHandle(method_handle);
+            if (method_desc != nullptr) {
+                const bool is_cv = (instruction.op_code == IROpCode::CallVirt ||
+                                    instruction.op_code == IROpCode::CallVirtConstrained);
+                // For now, `call` opcode is conservatively treated as static.
+                // Phase 5b: add calling-convention detection from the method
+                // signature to handle instance `call` correctly.
+                instruction.is_instance_call = is_cv;
+                instruction.arg_count = static_cast<CHAOS_IL2CPP_UINT32>(
+                    method_desc->parameter_count + (is_cv ? 1 : 0));
+            }
 
             // For newobj, try to determine the declaring type's field count
             // from the resolved method's declaring type.
