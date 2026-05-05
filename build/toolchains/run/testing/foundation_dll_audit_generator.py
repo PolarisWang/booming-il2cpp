@@ -8,6 +8,12 @@ from pathlib import Path
 from typing import Any
 
 try:
+    from testing.trace import trace
+except ImportError:
+    def trace(*args, **kwargs):
+        pass
+
+try:
     from .foundation_dll import case_index_loader as case_index_loader_module
     from ..core.common import write_json
     from .foundation_dll import family_verification_claims as family_verification_claims_module
@@ -287,11 +293,18 @@ def _project_artifacts(
     evidence_paths: list[str],
     support_paths: list[str],
 ) -> tuple[list[dict[str, Any]], list[str], bool]:
+    code = _string(project_template.get("code"))
     keywords = [_normalized(item).lower() for item in _list(project_template.get("artifactKeywords"))]
+    trace("audit.project_artifacts", stage="audit", code=code, evidence_count=len(evidence_paths))
     matched_evidence: list[str] = []
     for evidence_path in evidence_paths:
         normalized = _normalized(evidence_path).lower()
-        if not normalized.startswith("artifacts/"):
+        # Primary artifacts must be under artifacts/. But coverage JSONs
+        # produced by the batch pipeline live under verification/ — allow
+        # those as evidence too since they are the native-proof gate's
+        # primary coverage source.
+        if not (normalized.startswith("artifacts/") or
+                (normalized.startswith("verification/foundation-dll/") and normalized.endswith(".coverage.json"))):
             continue
         if any(keyword in normalized for keyword in keywords):
             matched_evidence.append(evidence_path)
@@ -311,6 +324,8 @@ def _project_artifacts(
         artifact["exists"] and artifact["path"] in primary_path_set
         for artifact in artifacts
     )
+    trace("audit.project_artifacts.done", stage="audit", code=code,
+          matched=len(primary_paths), has_evidence=has_primary_evidence)
     return artifacts, support_refs, has_primary_evidence
 
 
@@ -583,12 +598,23 @@ def _build_projects(
 ) -> tuple[list[dict[str, Any]], str]:
     project_templates = list(program_manifest.get("projectTemplates") or [])
     assembly_name = _string(assembly_entry.get("assemblyName"))
+    trace("audit.build_projects", stage="audit", assembly_name=assembly_name, template_count=len(project_templates))
     task_ids = _evidence_task_ids(assembly_entry)
     task_status_paths = [path for path in (_task_status_path(repo_root, task_id) for task_id in task_ids) if path is not None]
     evidence_paths: list[str] = []
     for status_path in task_status_paths:
         evidence_paths.extend(_extract_path_references(repo_root, status_path))
     evidence_paths = list(dict.fromkeys(evidence_paths))
+
+    # Fallback: scan for native-reference runtime skeleton coverage JSONs
+    # when no task evidence references them yet. The batch pipeline produces
+    # these files but they may not be registered as formal task evidence.
+    coverage_glob = repo_root / "verification" / "foundation-dll" / assembly_name / "*" / "il2cpp_dist" / "native-reference.runtime-skeleton.coverage.json"
+    for cov_path in repo_root.glob(str(coverage_glob.relative_to(repo_root))):
+        rel = cov_path.relative_to(repo_root).as_posix()
+        if rel not in evidence_paths:
+            evidence_paths.append(rel)
+
     support_paths = _collect_support_refs(
         repo_root,
         program_manifest=program_manifest,
@@ -722,6 +748,7 @@ def _active_task_ids(repo_root: Path) -> set[str]:
 
 
 def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
+    trace("audit.build_payload", stage="audit")
     program_manifest = _load_program_manifest(repo_root)
     roadmap_rows = _roadmap_rows(repo_root, _string(program_manifest.get("roadmapPath")))
     active_task_ids = _active_task_ids(repo_root)
@@ -745,6 +772,7 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
             active_task_ids=active_task_ids,
         )
         assembly_name = _string(assembly_entry.get("assemblyName"))
+        trace("audit.build_dll_payload", stage="audit", assembly_name=assembly_name, dll_state=dll_state)
         dll_record = {
             "assemblyName": assembly_name,
             "orderIndex": int(assembly_entry.get("orderIndex") or 0),

@@ -18,6 +18,14 @@
 #include <atomic>
 #include <limits>
 #include <cstdlib>
+
+// Spin-loop hint (x86 PAUSE / ARM YIELD)
+#if defined(_M_ARM64) || defined(__aarch64__)
+    #define CHAOS_SPIN_HINT()  __yield()
+#else
+    #include <immintrin.h>
+    #define CHAOS_SPIN_HINT()  _mm_pause()
+#endif
 #include <cstring>
 #include <memory>
 #include <mutex>
@@ -74,7 +82,8 @@ constexpr CHAOS_IL2CPP_UINT64 kDateTimeTicksMask = 0x3FFFFFFFFFFFFFFFull;
 
 struct ObjectHeader {
     const void**    vtable      = nullptr;  // B2+ vtable dispatch
-    const TypeInfo* type_info   = nullptr;   // Hybrid TypeInfo* identity
+    const TypeInfo* type_info   = nullptr;  // Hybrid TypeInfo* identity
+    uint64_t        sync_state  = 0;        // Thin lock / sync block index
     unsigned char   field_storage[kInlineFieldStorageSize];
 };
 
@@ -242,8 +251,6 @@ CHAOS_IL2CPP_MUTEX g_engine_binding_mutex;
 CHAOS_IL2CPP_UINTPTR g_next_engine_handle = 1u;
 CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINTPTR, void*) g_engine_handles = {};
 CHAOS_IL2CPP_VECTOR(EngineLifecycleRegistration) g_engine_lifecycle_registrations = {};
-CHAOS_IL2CPP_MUTEX g_monitor_registry_mutex;
-CHAOS_IL2CPP_UNORDERED_MAP(void*, CHAOS_IL2CPP_SHARED_PTR(CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX)) g_monitor_registry = {};
 const CHAOS_IL2CPP_THREAD::id g_main_thread_id = CHAOS_IL2CPP_THIS_THREAD_GET_ID();
 CHAOS_IL2CPP_ATOMIC(RuntimeMode) g_runtime_mode = RuntimeMode::Aot;
 CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_INT32) g_next_task_id{1};
@@ -499,18 +506,138 @@ ThreadInternalState* GetThreadInternalState(ThreadState* thread_state) {
     return thread_state != nullptr ? thread_state->internal_state : nullptr;
 }
 
-CHAOS_IL2CPP_SHARED_PTR(CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX) GetOrCreateMonitor(void* monitor_target) {
-    if (monitor_target == nullptr) {
-        return nullptr;
+// ── Atomic helpers for uint64_t (sync_state) ──────────────────────────
+// ObjectHeader keeps a plain uint64_t field (GC_MALLOC memory doesn't
+// run constructors, so std::atomic<uint64_t> is unsafe).  These helpers
+// use platform intrinsics directly.
+//
+// On x64, Interlocked intrinsics include full memory barriers (seq_cst),
+// which is stronger than what we strictly need for thin-lock CAS, but
+// the performance cost is negligible on x64 hardware.
+
+#if defined(_MSC_VER)
+    #include <intrin.h>
+    #pragma intrinsic(_InterlockedCompareExchange64, _InterlockedExchange64)
+    // MSVC doesn't define __ATOMIC_* constants (they are GCC built-in).
+    // Our MSVC AtomicCAS() ignores memory-order parameters (the Interlocked
+    // intrinsics are already seq_cst), so define them as harmless zeros.
+    #define __ATOMIC_RELAXED 0
+    #define __ATOMIC_ACQUIRE 0
+    #define __ATOMIC_RELEASE 0
+    inline uint64_t AtomicLoadRelaxed(const uint64_t* p) noexcept {
+        return *const_cast<volatile uint64_t*>(p);
+    }
+    inline uint64_t AtomicLoadAcquire(const uint64_t* p) noexcept {
+        uint64_t v = *const_cast<volatile uint64_t*>(p);
+        _ReadWriteBarrier();
+        return v;
+    }
+    inline void AtomicStoreRelease(uint64_t* p, uint64_t val) noexcept {
+        _InterlockedExchange64(reinterpret_cast<volatile LONG64*>(p),
+                               static_cast<LONG64>(val));
+    }
+    inline void AtomicStoreRelaxed(uint64_t* p, uint64_t val) noexcept {
+        *const_cast<volatile uint64_t*>(p) = val;
+    }
+    inline bool AtomicCAS(uint64_t* p, uint64_t& expected, uint64_t desired,
+                          int = 0, int = 0) noexcept {
+        LONG64 prev = _InterlockedCompareExchange64(
+            reinterpret_cast<volatile LONG64*>(p),
+            static_cast<LONG64>(desired),
+            static_cast<LONG64>(expected));
+        if (prev == static_cast<LONG64>(expected)) return true;
+        expected = static_cast<uint64_t>(prev);
+        return false;
+    }
+#else
+    inline uint64_t AtomicLoadRelaxed(const uint64_t* p) noexcept {
+        return __atomic_load_n(p, __ATOMIC_RELAXED);
+    }
+    inline uint64_t AtomicLoadAcquire(const uint64_t* p) noexcept {
+        return __atomic_load_n(p, __ATOMIC_ACQUIRE);
+    }
+    inline void AtomicStoreRelease(uint64_t* p, uint64_t val) noexcept {
+        __atomic_store_n(p, val, __ATOMIC_RELEASE);
+    }
+    inline void AtomicStoreRelaxed(uint64_t* p, uint64_t val) noexcept {
+        __atomic_store_n(p, val, __ATOMIC_RELAXED);
+    }
+    inline bool AtomicCAS(uint64_t* p, uint64_t& expected, uint64_t desired,
+                          int success_order = __ATOMIC_ACQUIRE,
+                          int failure_order = __ATOMIC_RELAXED) noexcept {
+        return __atomic_compare_exchange_n(p, &expected, desired,
+            false, success_order, failure_order);
+    }
+#endif
+
+// Thin lock / SyncBlock constants
+//
+// ObjectHeader::sync_state encoding:
+//   bits [1:0] = 00 : free (unlocked)
+//   bits [1:0] = 01 : thin lock held (bits 2-31 = thread_id, bits 32-63 = recursion)
+//   bits [1:0] = 10 : inflated to SyncBlock table (bits 2-63 = index)
+//   bits [1:0] = 11 : reserved (hash code, not yet used)
+
+constexpr uint64_t kSyncLockedBit     = 1ull << 0;
+constexpr uint64_t kSyncInflatedBit   = 1ull << 1;
+constexpr uint64_t kSyncThreadShift   = 2;
+constexpr uint64_t kSyncRecursionShift = 32;
+
+constexpr uint32_t kSyncBlockStripes  = 64;
+constexpr uint32_t kSyncBlockSpinMax  = 1000;
+
+struct SyncBlock {
+    CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX mutex;
+};
+
+struct SyncBlockStripe {
+    CHAOS_IL2CPP_MUTEX                              table_lock;
+    CHAOS_IL2CPP_UNORDERED_MAP(void*, SyncBlock*)   entries;
+};
+
+SyncBlockStripe g_sync_block_stripes[kSyncBlockStripes];
+
+/// Hash an object pointer to a stripe index.
+inline uint32_t SyncBlockStripeIndex(void* obj) noexcept {
+    return (reinterpret_cast<uintptr_t>(obj) >> 3) % kSyncBlockStripes;
+}
+
+/// Inflate a thin lock to a SyncBlock (contention path).
+/// Must be called after CAS failure & spinning.
+static bool InflateAndEnter(void* obj, uint64_t current_sync) noexcept {
+    const uint32_t stripe_idx = SyncBlockStripeIndex(obj);
+    auto& stripe = g_sync_block_stripes[stripe_idx];
+
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.table_lock);
+
+    // Double-check: another thread may have inflated already.
+    auto* header = static_cast<ObjectHeader*>(obj);
+    uint64_t sync = header->sync_state;
+    if ((sync & kSyncInflatedBit) != 0) {
+        const auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+        if (sb != nullptr) {
+            // Already inflated, find it in the stripe and lock.
+            for (auto& [ptr, block] : stripe.entries) {
+                if (ptr == obj && block != nullptr) {
+                    block->mutex.lock();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_monitor_registry_mutex);
-    auto& monitor = g_monitor_registry[monitor_target];
-    if (!monitor) {
-        monitor = CHAOS_IL2CPP_MAKE_SHARED(CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX)();
-    }
+    // Allocate a new SyncBlock and inflate.
+    auto* sb = new SyncBlock();
+    stripe.entries[obj] = sb;
 
-    return monitor;
+    // Mark inflated in header. The index encodes stripe + entry position.
+    // Simple: use the pointer to SyncBlock* itself (unique, no lookup needed).
+    const uint64_t inflated_val = kSyncInflatedBit | reinterpret_cast<uint64_t>(sb);
+    AtomicStoreRelease(&header->sync_state, inflated_val);
+
+    sb->mutex.lock();
+    return true;
 }
 
 bool IsLikelyMetadataTokenHandle(MethodInfoHandle method) {
@@ -723,6 +850,10 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
 
     *out_thread_state = thread_state;
     SetCurrentThreadState(thread_state);
+
+    // Register the main thread in the managed thread registry.
+    threading::RegisterThread(threading::kMainThreadId, nullptr);
+
     return CHAOS_RUNTIME_STATUS_OK;
 }
 
@@ -745,6 +876,7 @@ void CHAOS_RUNTIME_ABI_CALL ThreadDetach(
         thread_state->internal_state = nullptr;
     }
     SetCurrentThreadState(nullptr);
+    threading::UnregisterThread();
     FreeBytes(runtime_state->config, thread_state);
 }
 
@@ -807,6 +939,7 @@ void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
 
     // Resolve TypeInfo* and vtable from the handle.
     ResolveObjectTypeInfo(type, object->type_info, object->vtable);
+    object->sync_state = 0;
 
     CHAOS_IL2CPP_MEMSET(object->field_storage, 0, sizeof(object->field_storage));
     return object;
@@ -1614,36 +1747,120 @@ bool ThreadStaticInt32Add(
 }
 
 bool MonitorEnter(void* monitor_target) {
-    auto monitor = GetOrCreateMonitor(monitor_target);
-    if (!monitor) {
-        return false;
-    }
+    if (monitor_target == nullptr) return false;
 
-    monitor->lock();
-    return true;
-}
+    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    const int32_t tid = threading::GetCurrentThreadId();
+    if (tid == 0) return false;  // not a managed thread
 
-bool MonitorExit(void* monitor_target) {
-    if (monitor_target == nullptr) {
-        return false;
-    }
+    const uint64_t tid_bits = static_cast<uint64_t>(tid) << kSyncThreadShift;
 
-    CHAOS_IL2CPP_SHARED_PTR(CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX) monitor = nullptr;
-    {
-        CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_monitor_registry_mutex);
-        const auto iterator = g_monitor_registry.find(monitor_target);
-        if (iterator == g_monitor_registry.end()) {
+    // Fast path: thin lock, uncontended CAS.
+    uint64_t sync = header->sync_state;
+    for (;;) {
+        if ((sync & kSyncInflatedBit) != 0) {
+            // Inflated — forward to SyncBlock.
+            auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+            if (sb != nullptr) {
+                sb->mutex.lock();
+                return true;
+            }
             return false;
         }
 
-        monitor = iterator->second;
-    }
+        if ((sync & kSyncLockedBit) == 0) {
+            // Free — try to acquire as thin lock.
+            const uint64_t desired = kSyncLockedBit | tid_bits;  // recursion = 0
+            if (AtomicCAS(&header->sync_state, sync, desired,
+                    __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
+                return true;
+            }
+            // CAS failed, reload sync and retry.
+            continue;
+        }
 
-    if (!monitor) {
+        // Already locked. Check if we already own it (recursive).
+        const int32_t owner_tid = static_cast<int32_t>((sync & ~3ull) >> kSyncThreadShift);
+        if (owner_tid == tid) {
+            // Recursive enter: increment recursion count.
+            const uint64_t recursion = (sync >> kSyncRecursionShift) + 1;
+            const uint64_t desired = kSyncLockedBit | tid_bits |
+                                     (recursion << kSyncRecursionShift);
+            if (AtomicCAS(&header->sync_state, sync, desired,
+                    __ATOMIC_RELAXED, __ATOMIC_RELAXED)) {
+                return true;
+            }
+            continue;
+        }
+
+        // Contention: spin, then inflate.
+        for (uint32_t spin = 0; spin < kSyncBlockSpinMax; ++spin) {
+            CHAOS_SPIN_HINT();
+            sync = header->sync_state;
+            if ((sync & kSyncLockedBit) == 0) {
+                // Lock was released — retry acquisition.
+                const uint64_t desired = kSyncLockedBit | tid_bits;
+                if (AtomicCAS(&header->sync_state, sync, desired,
+                        __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
+                    return true;
+                }
+                break;  // reload sync outside spin loop
+            }
+            if ((sync & kSyncInflatedBit) != 0) {
+                // Another thread inflated during our spin.
+                auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+                if (sb != nullptr) {
+                    sb->mutex.lock();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        // Spin failed — inflate.
+        return InflateAndEnter(monitor_target, sync);
+    }
+}
+
+bool MonitorExit(void* monitor_target) {
+    if (monitor_target == nullptr) return false;
+
+    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    const int32_t tid = threading::GetCurrentThreadId();
+
+    uint64_t sync = header->sync_state;
+
+    if ((sync & kSyncInflatedBit) != 0) {
+        // Inflated — unlock via SyncBlock.
+        auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+        if (sb != nullptr) {
+            sb->mutex.unlock();
+            return true;
+        }
         return false;
     }
 
-    monitor->unlock();
+    if ((sync & kSyncLockedBit) == 0) {
+        return false;  // not locked
+    }
+
+    // Verify we own this thin lock.
+    const int32_t owner_tid = static_cast<int32_t>((sync & ~3ull) >> kSyncThreadShift);
+    if (owner_tid != tid) {
+        return false;  // not the owner
+    }
+
+    const uint64_t recursion = sync >> kSyncRecursionShift;
+    if (recursion > 0) {
+        // Recursive release: decrement.
+        const uint64_t desired = kSyncLockedBit |
+            (static_cast<uint64_t>(tid) << kSyncThreadShift) |
+            ((recursion - 1) << kSyncRecursionShift);
+        AtomicStoreRelaxed(&header->sync_state, desired);
+    } else {
+        // Final release.
+        AtomicStoreRelease(&header->sync_state, 0);
+    }
     return true;
 }
 

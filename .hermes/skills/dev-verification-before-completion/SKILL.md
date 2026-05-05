@@ -9,7 +9,18 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
 
 先有证据，后有声明。
 
-如果当前消息里没有运行验证命令并检查输出，就不能声称“已完成 / 已修复 / 已通过”。
+如果当前消息里没有运行验证命令并检查输出，就不能声称”已完成 / 已修复 / 已通过”。
+
+### Foundation DLL 专项检查
+
+如果当前工作涉及 foundation DLL 能力族，必须在 `dev:foundation-dll-verification-pipeline` 通过后才能声称完成。该管线包含：
+
+1. **Codegen Pipeline** — `batch_native_aot_runner.py` 通过
+2. **Data Integrity** — claims/coverage/ledger 一致
+3. **Three-Gate Verification** — Fact + Benchmark + HotUpdate 全部通过
+4. **Aggregate & Dashboard** — 报告已生成、dashboard 已刷新
+
+**禁止**：未跑完 `dev:foundation-dll-verification-pipeline` 就归档 foundation-dll 相关任务。
 
 ## 闸门
 

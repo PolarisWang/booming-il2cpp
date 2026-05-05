@@ -142,26 +142,26 @@ def evaluate_native_proof(
     runs_by_id: dict[str, dict[str, Any]] = {}
     coverage_by_run_id: dict[str, dict[str, Any]] = {}
     for fact in facts:
-        if fact.runId:
-            bucket = runs_by_id.setdefault(
-                fact.runId,
-                {
-                    "runId": fact.runId,
-                    "status": status,
-                    "evidence": [],
-                },
-            )
-            bucket["evidence"].append(
-                {
-                    "label": Path(fact.artifactPath).name or fact.artifactPath,
-                    "path": fact.artifactPath,
-                    "artifactKind": fact.artifactKind,
-                    "linkTargetType": fact.linkTargetType,
-                }
-            )
-            coverage_payload = _coverage_json_for_artifact_path(repo_root, fact.artifactPath)
-            if coverage_payload is not None:
-                coverage_by_run_id[fact.runId] = coverage_payload
+        run_key = fact.runId if fact.runId else "_fallback_"
+        bucket = runs_by_id.setdefault(
+            run_key,
+            {
+                "runId": fact.runId or "(fallback)",
+                "status": status,
+                "evidence": [],
+            },
+        )
+        bucket["evidence"].append(
+            {
+                "label": Path(fact.artifactPath).name or fact.artifactPath,
+                "path": fact.artifactPath,
+                "artifactKind": fact.artifactKind,
+                "linkTargetType": fact.linkTargetType,
+            }
+        )
+        coverage_payload = _coverage_json_for_artifact_path(repo_root, fact.artifactPath)
+        if coverage_payload is not None:
+            coverage_by_run_id[run_key] = coverage_payload
 
     numerator = 0
     denominator = claim_payload.denominator

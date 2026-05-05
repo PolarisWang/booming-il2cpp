@@ -65,8 +65,12 @@
 ### 领域特定
 | 技能 | 说明 |
 |------|------|
+| `dev:foundation-dll-verification-pipeline` | **入口** foundation DLL 验证管线编排：数据校验 → 三闸门 → 聚合 → dashboard |
+| `dev:foundation-dll-verify-data-integrity` | 验证前数据一致性检查：claims/ledger/coverage |
+| `dev:foundation-dll-family-verification` | 单 family 三维验证：Fact → Benchmark → HotUpdate |
+| `dev:foundation-dll-verify-aggregate` | 跨 family 结果聚合、回归检测、dashboard 刷新 |
 | `dev:foundation-dll-ai-test-generation` | foundation DLL 测试代码生成 |
-| `dev:foundation-dll-family-verification` | foundation DLL 三维验证：Fact → Benchmark → HotUpdate |
+| `dev:foundation-dll-onboard-family` | 新 capability family 接入：ledger → Phase 1/2 → codegen → verification |
 | `dev:project-test-governance` | 测试治理 |
 
 ### 基础设施
