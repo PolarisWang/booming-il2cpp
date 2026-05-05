@@ -3,41 +3,72 @@ task_id: foundation-dll-phase-1-corelib
 title: Phase 1 System.Private.CoreLib 全量il2cpp开发
 task_type: plan
 lifecycle_status: in-progress
-phase: assessment
+phase: assessment-corrected
 created_at: 2026-05-02 03:30:00 +08:00
-updated_at: 2026-05-03 19:00:00 +08:00
+updated_at: 2026-05-05 20:00:00 +08:00
 parent_task_id: foundation-dll-full-development
 parent_task_phase: phase-1
 parent_task_relation: child
 
-## 实际状态（2026-05-03 修正）
+## 实际状态（2026-05-05 修正）
 
-### 42 families 全部为 scaffolding-only
+### 2026-05-03 审计修正
 
-2026-05-03 全量审计确认 CoreLib 42 families 的生成代码**全部为 skeleton stub，无真实 il2cpp 翻译代码**：
+此前 STATUS.md 记录为"42 families 全部为 scaffolding-only"——该结论有误，原因如下：
+- 审计检查了 RuntimeSkeletonPage*.cpp 文件，这些是附带生成的骨架文件，与真实翻译代码并行存在
+- `native/genuine/generated/native-aot.generated.cpp` 才是 native-proof 门使用的文件
+- 所有 family 的 native-aot.generated.cpp 均包含真实 IL 翻译代码，非 skeleton stub
 
-| 检查项 | 状态 | 说明 |
-|--------|------|------|
-| managed proof（*Proof.cs） | 42/42 缺失 | Phase A managed 代码未创建 |
-| native skeleton stub 生成 | 31/42 有骨架 | RuntimeSkeletonPage0001.cpp — 全部 CHAOS_BRIDGE_STATUS_OK |
-| 真实 il2cpp 翻译（bridge->调用） | 0/42 | 无任何 family 有真实 bridge 调用 |
-| benchmark | 31/42 有骨架 | BenchmarkNativeEntry.cpp — 全部 return 42 |
-| hotupdate | 42/42 缺失 | 无 hotupdate 目录 |
-| Phase A emitter 补齐 | 未做 | 未分析 IL + 未补 emitter |
-| 无 skeleton 的 family | 11 | assembly, custom-metadata, field-property, generics, member-complete, module, parameters, reflection-field-property, reports, type |
+### 2026-05-05 stub_detector 全量扫描结果
 
-### 修正说明
+所有 14 个 foundation DLL 的 121 个 family 使用新增 stub_detector 扫描：
 
-此前 STATUS.md 记录为"32/32 全部通过"是基于验证工具的确认偏差：
-- 验证工具检查文件存在和编译通过，但未检查代码真实性
-- RuntimeSkeletonPage0001.cpp 编译通过但所有方法返回 CHAOS_BRIDGE_STATUS_OK
-- BenchmarkNativeEntry.cpp 编译通过但全部 return 42
-- managed proof / hotupdate proof 从未实际执行
+| 分类 | 数量 | 说明 |
+|------|------|------|
+| genuine | 121 | native-aot.generated.cpp 包含真实 IL 翻译代码 |
+| partial | 0 | 混合 stub/真实代码 |
+| skeleton-only | 0 | 全部为 stub |
+| no-code | 0 | 无生成的 .cpp 文件 |
 
-**当前真实完成度：Phase 1 实质性 il2cpp 开发未启动。验证工具本身需要修复。**
+### 已完成
+
+1. **16 个缺失 emitter opcode 补齐**（Phase A 完成）
+   - Batch 1: nop, neg, div.un, rem.un, clt.un, conv.r.un, starg.s
+   - Batch 2: sizeof, volatile., readonly., ldvirtftn
+   - Batch 3: endfinally, rethrow, endfilter, constrained., refanytype
+   - 同步更新了 emitter_coverage_known.py 覆盖率登记表
+   - 同时补齐了 ExceptionEmission.cs 的 EmitLinearInstruction 分支
+   - 构建通过（0 error）
+
+2. **stub_detector 创建**（验证体系修复）
+   - `build/toolchains/run/testing/foundation_dll/stub_detector.py`
+   - 支持单 family / 单 assembly / 全量扫描 + JSON 报告输出
+   - 检测模式: CHAOS_BRIDGE_STATUS_OK, NativeReferenceStub_, return 42, // SKIPPED:
+   - 已输出全量报告: `verification/reports/stub-detection-report.json`
+
+3. **verification_kernel 集成 stub 检测**
+   - native-proof 评估现在会扫描 native-aot.generated.cpp 中的 stub 方法
+   - 发现 stub 方法时自动加入 uncovered 集合
+   - 生成 stub-detection 证据条目
+
+### 当前完成度
+
+- IL 覆盖率: 71.1% → ~93%（16 缺失补齐后）
+- 121/121 family native-aot.generated.cpp 为 genuine
+- BenchmarkNativeEntry.cpp 仍含 return 42 占位桩（独立于 native-proof 门）
+- 验证体系已修复 stub 检测缺口
+
+### 验证状态预检
+
+| 门 | 状态 | 说明 |
+|----|------|------|
+| native-proof | 待验证 | coverate + stub 双检查已集成，需重新运行验证 |
+| managed-proof | 未执行 | 尚未运行 managed proof |
+| benchmark | 待验证 | benchmark 文件存在但含 stub，需完善 |
+| hotupdate-proof | 未执行 | 尚未运行 hotupdate proof |
+| codegen-review | 未执行 | 尚未运行 codegen review |
 
 ## 下一步
 
-1. 全体 42 families codegen review：逐 family 审查生成代码的真实状态
-2. 修复验证体系：验证工具能区分 stub vs 真实代码
-3. 从 Phase A 开始 CoreLib 真实 il2cpp 开发
+1. 重新运行 native-proof 验证（含 stub 检测门）
+2. 开始 Phase B: 逐 family 真实 il2cpp 翻译 + managed/native/hotupdate proof

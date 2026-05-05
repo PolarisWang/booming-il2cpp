@@ -43,7 +43,8 @@ add_library(chaos_runtime_core STATIC
     interpreter_entry.h
     interpreter_entry.cpp
     native_library.h
-    native_library.cpp)
+    native_library.cpp
+    exception_api.cpp)
 
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)

@@ -87,3 +87,17 @@ native-benchmark.json
 
 # Native build artifacts
 build/native/
+
+# CMake-generated project files in build/ root (should use build/native/)
+build/*.vcxproj
+build/*.vcxproj.filters
+build/*.sln
+build/cmake_install.cmake
+build/bdwgc_build/
+build/fmt_build/
+build/src/
+build/tests/
+build/verification/
+
+# Root-level scratch
+chaos-il2cpp

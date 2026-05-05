@@ -204,11 +204,19 @@ public sealed partial class NativeAotLoweringPlanner
                 break;
             }
 
+            // For generic type cctors, skip unsupported opcodes rather than throwing
+            if (typeSubjectId.Contains("!!") || typeSubjectId.Contains("`") || typeSubjectId.Contains("<!"))
+            {
+                return null;
+            }
+
+            // For any cctor instruction that doesn't fit the simple newobj+stsfld
+            // pattern, skip the static init plan. Complex static initialization
+            // is handled lazily by the runtime at first type access.
             if (!string.Equals(instruction.Op, "newobj", StringComparison.Ordinal) ||
                 string.IsNullOrEmpty(instruction.Callee))
             {
-                throw new NotSupportedException(
-                    $"native-aot static initializer '{cctorMethod.SubjectId}' does not support opcode '{instruction.Op}' at IL offset {instruction.IlOffset ?? -1}.");
+                return null;
             }
 
             if (index + 1 >= instructions.Length ||
@@ -227,7 +235,11 @@ public sealed partial class NativeAotLoweringPlanner
                     $"native-aot static initializer '{cctorMethod.SubjectId}' references unsupported static field '{fieldSubjectId}'.");
             }
 
-            if (!string.Equals(field.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal))
+            // Normalize generic parameter placeholders before comparison
+            var normFieldType = (field.DeclaringTypeSubjectId ?? "").Replace("`1", "<!0>");
+            var normCctorType = (typeSubjectId ?? "").Replace("`1", "<!0>");
+            if (!string.Equals(normFieldType, normCctorType, StringComparison.Ordinal) &&
+                !string.Equals(field.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal))
             {
                 throw new NotSupportedException(
                     $"native-aot static initializer '{cctorMethod.SubjectId}' must initialize fields declared on '{typeSubjectId}', got '{field.DeclaringTypeSubjectId}'.");

@@ -1,6 +1,7 @@
 # Active Task
 
-- task: pinvoke-complex-remaining-design
-- phase: P6a (StructFieldKind 扩展 + runtime marshaller 扩展)
-- status_file: docs/dev/in-progress/pinvoke-complex-remaining-design/STATUS.md
-- started: 2026-05-05
+- task: foundation-dll-phase-1-corelib
+- status_file: docs/dev/in-progress/foundation-dll-phase-1-corelib/STATUS.md
+- started: 2026-05-02
+- current_phase: assessment-corrected
+- next: 重新运行 native-proof 验证 → 开始 Phase B 逐 family il2cpp 开发
