@@ -10,6 +10,7 @@
 #include "../bootstrap/bootstrap.h"
 #include "runtime_instantiation.h"
 #include "reflection_query_model.h"
+#include "module_registry.h"
 
 #include <gc.h>
 
@@ -18,6 +19,10 @@
 #include <atomic>
 #include <limits>
 #include <cstdlib>
+#include <condition_variable>
+#include <thread>
+
+#include "gc_transition.h"
 
 // Spin-loop hint (x86 PAUSE / ARM YIELD)
 #if defined(_M_ARM64) || defined(__aarch64__)
@@ -587,7 +592,8 @@ constexpr uint32_t kSyncBlockStripes  = 64;
 constexpr uint32_t kSyncBlockSpinMax  = 1000;
 
 struct SyncBlock {
-    CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX mutex;
+    CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX    mutex;
+    std::condition_variable_any          cond;  // for Monitor.Wait/Pulse
 };
 
 struct SyncBlockStripe {
@@ -913,12 +919,25 @@ static bool ResolveObjectTypeInfo(TypeInfoHandle type_handle,
         return false;
     }
 
-    // ── Path 2: HotUpdate registered type (non-tagged handle) ──
-    // The handle might be a module-registry token.  For HotUpdate types
-    // the TypeInfo* is stored in the dynamic registry by stable_id.
-    // We compute the stable_id from the name and look it up.
-    // For module-registry handles this will fail silently — that's OK,
-    // the AOT-generated code already sets its own vtable at compile time.
+    // ── Path 2: Module-registry / HotUpdate handle ──
+    // Extract module_id and metadata token, then look up TypeInfo*
+    // via the module's type_info_ptrs array (Phase 3+).
+    uint32_t module_id = GetModuleId(type_handle);
+    uint32_t token = GetTypeToken(type_handle);
+    if (token != 0) {
+        const auto* mod = LookupModule(module_id != 0u ? module_id : 0u);
+        if (mod != nullptr && !mod->tombstone && mod->type_flags != nullptr) {
+            uint32_t idx = TokenToIndex(token);
+            if (idx < mod->type_count && mod->type_info_ptrs != nullptr) {
+                out_type_info = mod->type_info_ptrs[idx];
+                if (out_type_info != nullptr && out_type_info->stable_id != 0) {
+                    out_vtable = runtime_vtable::FindVTable(out_type_info->stable_id);
+                    return (out_vtable != nullptr);
+                }
+            }
+        }
+    }
+
     return false;
 }
 
@@ -1862,6 +1881,158 @@ bool MonitorExit(void* monitor_target) {
         AtomicStoreRelease(&header->sync_state, 0);
     }
     return true;
+}
+
+// --- Monitor condition variable primitives ---
+
+bool MonitorTryEnter(void* monitor_target) {
+    if (monitor_target == nullptr) return false;
+    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    const int32_t tid = threading::GetCurrentThreadId();
+    if (tid == 0) return false;
+    uint64_t sync = header->sync_state;
+    for (;;) {
+        if ((sync & kSyncInflatedBit) != 0) {
+            auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+            return sb != nullptr && sb->mutex.try_lock();
+        }
+        if ((sync & kSyncLockedBit) == 0) {
+            const uint64_t desired = kSyncLockedBit |
+                (static_cast<uint64_t>(tid) << kSyncThreadShift);
+            if (AtomicCAS(&header->sync_state, sync, desired,
+                    __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
+                return true;
+            }
+            continue;
+        }
+        return false;
+    }
+}
+
+bool MonitorIsEntered(void* monitor_target) {
+    if (monitor_target == nullptr) return false;
+    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    const int32_t tid = threading::GetCurrentThreadId();
+    if (tid == 0) return false;
+    uint64_t sync = header->sync_state;
+    if ((sync & kSyncInflatedBit) != 0) {
+        return sync != 0;
+    }
+    if ((sync & kSyncLockedBit) != 0) {
+        const uint64_t stored_tid = (sync >> kSyncThreadShift) & 0x3FFFFFFF;
+        return stored_tid == static_cast<uint64_t>(tid);
+    }
+    return false;
+}
+
+bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
+    if (monitor_target == nullptr) return false;
+    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    uint64_t sync = header->sync_state;
+    SyncBlock* sb = nullptr;
+    if ((sync & kSyncInflatedBit) != 0) {
+        sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+    } else {
+        if ((sync & kSyncLockedBit) == 0) return false;
+        sb = new SyncBlock();
+        const uint32_t stripe_idx = SyncBlockStripeIndex(monitor_target);
+        auto& stripe = g_sync_block_stripes[stripe_idx];
+        {
+            CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.table_lock);
+            stripe.entries[monitor_target] = sb;
+            const uint64_t inflated_val = kSyncInflatedBit | reinterpret_cast<uint64_t>(sb);
+            AtomicStoreRelease(&header->sync_state, inflated_val);
+        }
+    }
+    if (sb == nullptr) return false;
+    if (timeout_ms < 0) {
+        sb->cond.wait(sb->mutex);
+        return true;
+    }
+    return sb->cond.wait_for(sb->mutex,
+        std::chrono::milliseconds(timeout_ms)) == std::cv_status::no_timeout;
+}
+
+bool MonitorPulse(void* monitor_target) {
+    if (monitor_target == nullptr) return false;
+    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    uint64_t sync = header->sync_state;
+    if ((sync & kSyncInflatedBit) != 0) {
+        auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+        if (sb != nullptr) {
+            sb->cond.notify_one();
+            return true;
+        }
+    }
+    return false;
+}
+
+bool MonitorPulseAll(void* monitor_target) {
+    if (monitor_target == nullptr) return false;
+    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    uint64_t sync = header->sync_state;
+    if ((sync & kSyncInflatedBit) != 0) {
+        auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+        if (sb != nullptr) {
+            sb->cond.notify_all();
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ThreadSleep(int32_t timeout_ms) {
+    if (timeout_ms < 0) return false;
+    auto* thread = threading::tls_this_thread;
+    if (thread != nullptr && thread->pending_abort.load(std::memory_order_acquire)) {
+        return false;
+    }
+    GC_TRANSITION_TO_PREEMPTIVE();
+    if (timeout_ms == 0) {
+        std::this_thread::yield();
+    } else {
+        std::this_thread::sleep_for(std::chrono::milliseconds(timeout_ms));
+    }
+    GC_TRANSITION_TO_COOPERATIVE();
+    return true;
+}
+
+// --- Missing sync primitives (Scheme C) ---
+
+bool SpinLockExit(void* spinlock_target) {
+    if (spinlock_target == nullptr) return false;
+    auto* header = static_cast<ObjectHeader*>(spinlock_target);
+    const int32_t tid = threading::GetCurrentThreadId();
+    uint64_t sync = header->sync_state;
+    if ((sync & kSyncLockedBit) == 0) return false;
+    const uint64_t stored_tid = (sync >> kSyncThreadShift) & 0x3FFFFFFF;
+    if (stored_tid != static_cast<uint64_t>(tid)) return false;
+    AtomicStoreRelease(&header->sync_state, 0);
+    return true;
+}
+
+bool SpinLockIsHeld(void* spinlock_target) {
+    if (spinlock_target == nullptr) return false;
+    auto* header = static_cast<ObjectHeader*>(spinlock_target);
+    return (header->sync_state & kSyncLockedBit) != 0;
+}
+
+bool LockEnter(void* lock_target) {
+    return MonitorEnter(lock_target);
+}
+
+bool LockExit(void* lock_target) {
+    return MonitorExit(lock_target);
+}
+
+bool WaitHandleSet(void* /*wait_handle*/) {
+    // V1: stub — WaitHandle integration not yet complete.
+    return false;
+}
+
+bool WaitHandleReset(void* /*wait_handle*/) {
+    // V1: stub — WaitHandle integration not yet complete.
+    return false;
 }
 
 bool GcSafepoint(

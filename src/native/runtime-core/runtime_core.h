@@ -22,6 +22,7 @@
 #include "numerics_carriers.h"
 #include "string_table.h"
 #include "method_table.h"
+#include "gc_transition.h"
 
 // ── Phase 1: Declare types needed by sub-headers below ──
 #include "reflection_api.h"

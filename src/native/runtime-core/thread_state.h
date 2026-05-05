@@ -18,9 +18,12 @@ struct ManagedThread {
     void*                    managed_object;      // System.Thread ref (nullable)
     bool                     is_running;          // false after UnregisterThread
     std::atomic<ManagedThread*> next;             // Lock-free list link
-    /// Hybrid GC safepoint cooperation.
-    bool                     at_safepoint{false}; // Thread currently paused at safepoint
-    uint32_t                 safepoint_generation{0}; // Last completed GC generation
+    /// Generation-based GC safepoint cooperation (Scheme C).
+    std::atomic<uint32_t>    gc_mode{0};          // 0=COOPERATIVE, 1=PREEMPTIVE
+    uint32_t                 last_seen_gen{0};     // Last confirmed generation
+    std::atomic<bool>        pending_abort{false}; // Thread.Abort pending flag
+    bool                     at_safepoint{false}; // Currently paused at safepoint (legacy, kept for compat)
+    uint32_t                 safepoint_generation{0}; // Last completed GC generation (legacy)
 };
 
 // ── TLS identity (O(1), no lock) ─────────────────────────────────────
@@ -63,8 +66,18 @@ int32_t GetThreadCount() noexcept;
 /// Called at GC safe points (loop back-edges, method calls).
 /// If a GC safepoint is active, the thread acknowledges and spins until
 /// released.  Threads that are inside native AOT frames (which lack
-/// explicit polls) are handled by bdwgc conservative stack scanning.
-void SafepointPoll() noexcept;
+    // ── Generation-based GC safepoint ───────────────────────────────────
+
+    /// Check if GC needs attention — generation-based fast path.
+    /// Returns true if the calling thread should yield for GC.
+    /// Cost: single atomic load + compare (L1 hit < 1 ns).
+    bool SafepointRequested() noexcept;
+
+    /// Called at GC safe points (loop back-edges, method calls).
+    /// If a GC safepoint is active, the thread acknowledges and spins until
+    /// released.  Threads that are inside native AOT frames (which lack
+    /// explicit polls) are handled by bdwgc conservative stack scanning.
+    void SafepointPoll() noexcept;
 
 /// Request all managed threads to reach a safepoint.
 /// @returns the safepoint generation to pass to ReleaseGlobalSafepoint.
