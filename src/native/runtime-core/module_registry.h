@@ -4,6 +4,7 @@
 #include "runtime_abi.h"
 #include "reflection_query_model.h"
 #include "abi_manifest.h"
+#include <chaos/type_info.h>
 
 #include <cstdint>
 
@@ -38,6 +39,7 @@ struct ModuleDescriptor {
     const char* const* type_names;          // Tier 1: per-type names
     const char* const* type_namespaces;     // Tier 1: per-type namespaces
     const uint32_t* type_parent_tokens;     // Tier 1: per-type parent tokens
+    const TypeInfo* const* type_info_ptrs;   // Tier 1: per-type TypeInfo* pointers (Phase 3+)
     uint32_t type_count;                    // Number of types managed by this module
     const ChaosAbiManifestV0* abi_manifest; // Per-module ABI manifest (null = no validation)
     bool tombstone = false;                 // true after hot-unload (module entry retained for handle safety)
@@ -90,6 +92,14 @@ inline const ChaosAbiManifestV0* LookupModuleAbiManifest(uint32_t module_id) {
     const auto* desc = LookupModule(module_id);
     return desc != nullptr ? desc->abi_manifest : nullptr;
 }
+
+/// Returns the total number of registered module slots (including slot 0).
+/// Iterate [0, GetModuleCount()) with GetModuleByIndex().
+uint32_t GetModuleCount();
+
+/// Returns the module descriptor for the given index, or nullptr if the slot
+/// is unallocated or tombstoned.
+const ModuleDescriptor* GetModuleByIndex(uint32_t index);
 
 }  // namespace chaos::il2cpp::runtime_core
 

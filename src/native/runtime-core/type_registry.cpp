@@ -6,6 +6,7 @@
 // See type_info.h for the design rationale.
 
 #include "runtime_core.h"
+#include "runtime_vtable.h"
 #include "type_registry.h"
 
 #include <mutex>
@@ -78,6 +79,11 @@ TypeInfo* chaos_register_type(
 
     reg.types[reg.count] = ti;
     reg.count++;
+
+    // Build vtable for the new HotUpdate type (copies parent vtable if registered).
+    if (parent != nullptr) {
+        runtime_vtable::BuildRuntimeVTable(stable_id, parent->stable_id);
+    }
 
     if (out_stable_id) *out_stable_id = stable_id;
     return ti;

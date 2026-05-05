@@ -15,6 +15,7 @@ add_library(chaos_common STATIC
     chaos/monitor.h
     chaos/thread.h
     chaos/async.h
+    chaos/trace.h
     span.cpp
     collection.cpp
     monitor.cpp

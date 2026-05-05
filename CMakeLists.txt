@@ -43,6 +43,7 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(tests/contracts/native/hot-update)
     add_subdirectory(tests/contracts/native/interpreter)
     add_subdirectory(tests/contracts/native/gc)
+    add_subdirectory(tests/contracts/native/runtime-core)
 
     # ── Foundation DLL native family skeletons ────────────────────
     add_subdirectory(verification/foundation-dll)

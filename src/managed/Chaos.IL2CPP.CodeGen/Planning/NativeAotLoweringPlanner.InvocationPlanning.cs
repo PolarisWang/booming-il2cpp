@@ -595,10 +595,16 @@ public sealed partial class NativeAotLoweringPlanner
             return directInvocationTarget;
         }
 
+        string? returnType = instruction.TargetReturnType;
+        if (string.IsNullOrEmpty(returnType) && !string.IsNullOrEmpty(instruction.Callee))
+        {
+            returnType = InferReturnTypeFromSubjectId(instruction.Callee);
+        }
+
         return new InvocationTarget(
             GetRequiredTargetSymbol(instruction),
             CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction)),
-            CreateLegacyReturnAbiSlot(instruction.TargetReturnType),
+            CreateLegacyReturnAbiSlot(returnType ?? instruction.TargetReturnType),
             EmptyRawArgumentIndices,
             instruction.TargetReference?.OpenDefinitionSubjectId,
             instruction.TargetReference?.SharedGenericBodyId,

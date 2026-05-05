@@ -1,0 +1,26 @@
+{
+  "group": "inspect",
+  "commands": [
+    {
+      "id": "trace-analyze",
+      "title": "Analyze trace session timing: per-stage, per-operation, span depth",
+      "group": "Inspect",
+      "handler": "trace_analyze.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "trace-analyze"
+      ],
+      "syntax": "trace-analyze [--session N] [--stage STAGE] [--op OP] [--lang LANG] [--json]",
+      "show_in_menu": true,
+      "examples": [
+        "run trace-analyze",
+        "run trace-analyze --stage batch-native-aot",
+        "run trace-analyze --json"
+      ]
+    }
+  ]
+}

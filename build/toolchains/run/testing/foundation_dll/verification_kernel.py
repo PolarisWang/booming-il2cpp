@@ -5,6 +5,12 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
+try:
+    from testing.trace import trace
+except ImportError:
+    def trace(*args, **kwargs):
+        pass
+
 
 def _string(value: Any) -> str:
     return str(value or "").strip()
@@ -110,9 +116,11 @@ def evaluate_native_proof(
     *,
     projects: list[dict[str, Any]],
 ) -> VerificationEvaluation:
+    family_id = _string(claim.get("familyId"))
+    trace("kernel.evaluate_native_proof", stage="kernel", family_id=family_id)
     claim_payload = VerificationClaim(
         claimId=_string(claim.get("claimId")),
-        familyId=_string(claim.get("familyId")),
+        familyId=family_id,
         gateCode=_string(claim.get("gateCode")),
         required=bool(claim.get("required")),
         denominator=int(claim.get("denominator") or 0),
@@ -208,6 +216,8 @@ def evaluate_generic_gate(
     gate_code: str,
     projects: list[dict[str, Any]],
 ) -> VerificationEvaluation:
+    family_id = _string(family.get("familyId"))
+    trace("kernel.evaluate_generic_gate", stage="kernel", family_id=family_id, gate_code=gate_code)
     status = _string(dict(family.get("verificationGates") or {}).get(gate_code)) or "pending"
     evidence: list[dict[str, Any]] = []
     runs_by_id: dict[str, dict[str, Any]] = {}
@@ -285,6 +295,7 @@ def build_family_verification_snapshot(
     native_proof_claims: dict[str, dict[str, Any]],
     projects: list[dict[str, Any]],
 ) -> dict[str, Any]:
+    trace("kernel.build_snapshot", stage="kernel", assembly_name=assembly_name, family_count=len(families))
     snapshot_families: list[dict[str, Any]] = []
     for family in families:
         snapshot_family = dict(family)

@@ -1,6 +1,7 @@
 #include "il_to_ir_lowerer.h"
 
 #include <chaos/native_types.h>
+#include <chaos/trace.h>
 
 #include <cstdint>
 #include <cstring>
@@ -209,6 +210,7 @@ IRMethod LowerILToIR(
     ILTokenResolver      token_resolver,
     void*                user_data)
 {
+    CHAOS_IL2CPP_TRACE("runtime", "LowerILToIR", "\"il_length\"=%zu,\"code_size\"=%zu", il_length, code_size);
     if (il_bytes == nullptr || il_length == 0u) {
         return MakeEmptyMethod();
     }

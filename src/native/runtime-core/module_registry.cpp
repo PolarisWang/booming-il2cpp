@@ -1,6 +1,7 @@
 #include "module_registry.h"
 
 #include <chaos/native_types.h>
+#include <chaos/trace.h>
 
 #include <cstring>
 
@@ -95,6 +96,7 @@ const ModuleDescriptor* LookupModuleByName(const char* name) {
 }
 
 void MarkModuleTombstone(uint32_t module_id) {
+    CHAOS_IL2CPP_TRACE("runtime", "MarkModuleTombstone", "\"module_id\"=%u", module_id);
     if (module_id >= kMaxModules) {
         return;
     }
@@ -122,6 +124,16 @@ bool IsModuleTombstone(uint32_t module_id) {
         return false;
     }
     return g_module_storage[module_id].tombstone;
+}
+
+uint32_t GetModuleCount() {
+    return g_module_count;
+}
+
+const ModuleDescriptor* GetModuleByIndex(uint32_t index) {
+    if (index >= g_module_count) return nullptr;
+    if (g_module_storage[index].tombstone) return nullptr;
+    return &g_module_storage[index];
 }
 
 }  // namespace chaos::il2cpp::runtime_core

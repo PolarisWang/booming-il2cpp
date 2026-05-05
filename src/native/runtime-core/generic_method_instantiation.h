@@ -3,7 +3,10 @@
 
 #include "il_to_ir_lowerer.h"  // ILTokenResolver, LowerILToIR
 #include "reflection_query_model.h"
+#include "codegen_bridge.h"     // CodegenBridgeV0, ImageHandle
 #include <chaos/native_types.h>
+
+namespace chaos::il2cpp::layout { class LayoutEngine; }
 
 namespace chaos::il2cpp::runtime_instantiation {
 
@@ -43,6 +46,15 @@ struct RuntimeInstantiatedMethod {
     /// IR method body cache.  Populated on first call to LowerMethodBody().
     /// Heap-allocated interpreter::IRMethod; delete via ~IRMethod() + std::free.
     chaos::il2cpp::interpreter::IRMethod* ir_method_body = nullptr;
+
+    /// Process-wide codegen bridge for metadata token resolution.
+    const CodegenBridgeV0* bridge = nullptr;
+
+    /// Source image handle for token resolution (assembly/module context).
+    ImageHandle source_image = 0u;
+
+    /// Layout engine for field offset resolution (optional, may be nullptr).
+    chaos::il2cpp::layout::LayoutEngine* layout_engine = nullptr;
 };
 
 // ── Closed method descriptor construction ────────────────────────────────────

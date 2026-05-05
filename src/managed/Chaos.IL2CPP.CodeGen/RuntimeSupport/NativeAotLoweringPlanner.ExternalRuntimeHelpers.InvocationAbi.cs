@@ -97,7 +97,109 @@ public sealed partial class NativeAotLoweringPlanner
 				return valueOrDefault;
 			}
 		}
+		// Fallback: infer parameter count from the method signature when metadata is missing.
+		// This handles external method calls (e.g. property getters, BCL methods) where
+		// targetParameterCount was not populated during IR generation.
+		string? callee = instruction.Callee ?? instruction.TargetReference?.SubjectId;
+		if (!string.IsNullOrEmpty(callee))
+		{
+			int inferred = InferParameterCountFromSubjectId(callee);
+			if (inferred >= 0)
+				return inferred;
+		}
 		throw new NotSupportedException("native-aot lowering does not support call target '" + (instruction.TargetSymbol ?? instruction.Callee ?? "<null>") + "' without parameter metadata");
+	}
+
+	private static int InferParameterCountFromSubjectId(string subjectId)
+	{
+		// Format: "Namespace.Type::MethodName:ReturnType(Param1,Param2,...)"
+		// Find the final top-level pair of parentheses containing parameter types.
+		// Scan backward from end to find the outermost '(' that is at depth 0.
+		int depth = 0;
+		int lastOpenParen = -1;
+		for (int i = subjectId.Length - 1; i >= 0; i--)
+		{
+			char c = subjectId[i];
+			if (c is '>' or ']' or ')')
+				depth++;
+			else if (c is '<' or '[' or '(')
+			{
+				depth--;
+				if (c == '(' && depth == 0)
+				{
+					lastOpenParen = i;
+					break;
+				}
+			}
+		}
+		if (lastOpenParen < 0 || lastOpenParen >= subjectId.Length - 1)
+			return 0;
+
+		// Extract content between the parentheses
+		string paramsPart = subjectId.Substring(lastOpenParen + 1);
+		// Remove trailing ')'
+		if (paramsPart.EndsWith(")"))
+			paramsPart = paramsPart.Substring(0, paramsPart.Length - 1);
+
+		if (string.IsNullOrEmpty(paramsPart))
+			return 0;
+
+		// Count top-level comma-separated parameters
+		depth = 0;
+		int count = 1;
+		foreach (char ch in paramsPart)
+		{
+			if (ch is '<' or '[' or '(')
+				depth++;
+			else if (ch is '>' or ']' or ')')
+				depth--;
+			else if (ch == ',' && depth == 0)
+				count++;
+		}
+		return count;
+	}
+
+	private static string? InferReturnTypeFromSubjectId(string subjectId)
+	{
+		// Format: "...Type::MethodName:ReturnType(Param1,Param2,...)"
+		// Find the last '(' (start of parameter list), then scan backward to find
+		// the ':' that separates method name from return type.
+		int depth = 0;
+		int lastOpenParen = -1;
+		for (int i = subjectId.Length - 1; i >= 0; i--)
+		{
+			char c = subjectId[i];
+			if (c is '>' or ']' or ')')
+				depth++;
+			else if (c is '<' or '[' or '(')
+			{
+				depth--;
+				if (c == '(' && depth == 0)
+				{
+					lastOpenParen = i;
+					break;
+				}
+			}
+		}
+		if (lastOpenParen < 0)
+			return null;
+
+		// Scan backward from lastOpenParen to find the last ':' before it
+		int returnTypeEnd = lastOpenParen;
+		int colonPos = -1;
+		for (int i = returnTypeEnd - 1; i >= 0; i--)
+		{
+			if (subjectId[i] == ':')
+			{
+				colonPos = i;
+				break;
+			}
+		}
+		if (colonPos < 0)
+			return null;
+
+		string returnType = subjectId.Substring(colonPos + 1, returnTypeEnd - colonPos - 1);
+		return string.IsNullOrEmpty(returnType) ? null : returnType;
 	}
 
 	private static AotCoreIrReferenceArtifact GetRequiredTargetReference(AotCoreIrInstructionArtifact instruction)

@@ -4,6 +4,7 @@
 #include "reflection_query_model.h"
 
 #include <chaos/native_types.h>
+#include <chaos/trace.h>
 
 #include <atomic>
 #include <cstdint>
@@ -246,6 +247,8 @@ void RegisterGenericInstantiation(
     const TypeInfoHandle* type_args,
     CHAOS_IL2CPP_UINT32 arg_count)
 {
+    CHAOS_IL2CPP_TRACE("runtime", "RegisterGenericInstantiation",
+        "\"arg_count\"=%u", arg_count);
     if (open_type == 0 || closed_type == 0)
         return;
 
@@ -366,6 +369,8 @@ TypeInfoHandle TryResolveClosedType(
     const TypeInfoHandle* type_args,
     CHAOS_IL2CPP_UINT32 arg_count)
 {
+    CHAOS_IL2CPP_TRACE("runtime", "TryResolveClosedType",
+        "\"arg_count\"=%u", arg_count);
     if (open_type == 0)
         return 0;
 

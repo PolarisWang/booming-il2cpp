@@ -81,6 +81,9 @@ inline void trace_atexit_flush() {
     }
 }
 
+// Global traceId (set from CHAOS_TRACE_ID env var by TRACE_INIT)
+inline char g_trace_id[32] = {};
+
 // Timestamp cache: refreshed at most once per ms to avoid repeated clock_gettime
 inline uint64_t g_last_ts_ms = 0;
 inline char g_cached_timestamp[32] = {};
@@ -115,11 +118,12 @@ inline const char* cached_iso8601() {
 
 #define CHAOS_IL2CPP_TRACE(stage, op, fmt, ...) do {                         \
     auto _ts_ = ChaosIl2cpp::Common::detail::cached_iso8601();                \
+    auto _tid_ = ChaosIl2cpp::Common::detail::g_trace_id;                     \
     char _buf_[ChaosIl2cpp::Common::detail::kTraceLineMax];                   \
     auto _len_ = std::snprintf(_buf_, sizeof(_buf_),                           \
-        "{\"t\":\"%sZ\",\"l\":\"cpp\",\"s\":\"%s\",\"o\":\"%s\","             \
-        "\"f\":\"%s:%d\"",                                                     \
-        _ts_, stage, op, __FILE__, __LINE__);                                  \
+        "{\"t\":\"%sZ\",\"l\":\"cpp\",\"traceId\":\"%s\","                    \
+        "\"s\":\"%s\",\"o\":\"%s\",\"f\":\"%s:%d\"",                          \
+        _ts_, _tid_, stage, op, __FILE__, __LINE__);                           \
     if (_len_ > 0) {                                                           \
         char _extra_[ChaosIl2cpp::Common::detail::kTraceLineMax];              \
         std::snprintf(_extra_, sizeof(_extra_), fmt, ##__VA_ARGS__);            \
@@ -140,6 +144,12 @@ inline const char* cached_iso8601() {
                      _trace_path_,                                             \
                      sizeof(ChaosIl2cpp::Common::detail::g_trace_flush_path) - 1); \
         std::atexit(ChaosIl2cpp::Common::detail::trace_atexit_flush);          \
+    }                                                                          \
+    auto _trace_id_ = std::getenv("CHAOS_TRACE_ID");                           \
+    if (_trace_id_) {                                                           \
+        std::strncpy(ChaosIl2cpp::Common::detail::g_trace_id,                  \
+                     _trace_id_,                                               \
+                     sizeof(ChaosIl2cpp::Common::detail::g_trace_id) - 1);     \
     }                                                                          \
 } while (0)
 

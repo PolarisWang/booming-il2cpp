@@ -52,6 +52,7 @@ modules:
       - chaos::il2cpp::runtime_capability
       - chaos::il2cpp::runtime_core::aot_metadata
       - chaos::il2cpp::runtime_instantiation
+      - chaos::il2cpp::runtime_vtable
       - chaos::il2cpp::string_table
       - chaos::il2cpp::vector_fixed
       - chaos::il2cpp::vtable_registry

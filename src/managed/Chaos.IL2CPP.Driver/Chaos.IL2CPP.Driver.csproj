@@ -5,6 +5,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Chaos.IL2CPP.CodeGen\Chaos.IL2CPP.CodeGen.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.Contracts\Chaos.IL2CPP.Contracts.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.Diagnostics\Chaos.IL2CPP.Diagnostics.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.ProjectGraph\Chaos.IL2CPP.ProjectGraph.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.Pipeline\Chaos.IL2CPP.Pipeline.csproj" />
   </ItemGroup>

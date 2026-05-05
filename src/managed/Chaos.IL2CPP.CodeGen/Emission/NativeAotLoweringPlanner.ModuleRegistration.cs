@@ -12,25 +12,105 @@ namespace Chaos.IL2CPP.CodeGen;
 /// </summary>
 public sealed partial class NativeAotLoweringPlanner
 {
-    internal static string BuildModuleRegistration(NativeAotLoweringPlanArtifact loweringPlan)
+    internal string BuildModuleRegistration()
     {
-        var assemblyName = loweringPlan.AssemblyName;
+        var assemblyName = _assemblyName;
         if (string.IsNullOrWhiteSpace(assemblyName))
         {
             return string.Empty;
         }
 
-        var sb = new StringBuilder(512);
+        var sb = new StringBuilder(8192);
         sb.AppendLine("// ── Module registration ──────────────────────────────────────");
-        sb.AppendLine("static constexpr ::chaos::il2cpp::runtime_core::ModuleDescriptor s_native_aot_module = {");
+
+        bool hasTypeData = _moduleTypeCount > 0 && _moduleTypeFlags.Count == _moduleTypeCount;
+
+        if (hasTypeData)
+        {
+            int count = _moduleTypeCount;
+
+            // ── type_flags array ──────────────────────────────────────────
+            sb.Append("static constexpr uint32_t s_type_flags[").Append(count).AppendLine("] =");
+            sb.AppendLine("{");
+            for (int i = 0; i < count; i++)
+            {
+                sb.Append("    ").Append(_moduleTypeFlags[i]).Append("u,");
+                if (i < count - 1) sb.AppendLine();
+            }
+            sb.AppendLine();
+            sb.AppendLine("};");
+            sb.AppendLine();
+
+            // ── type_names array ──────────────────────────────────────────
+            sb.Append("static constexpr const char* s_type_names[").Append(count).AppendLine("] =");
+            sb.AppendLine("{");
+            for (int i = 0; i < count; i++)
+            {
+                sb.Append("    \"").Append(EscapeCppStringLiteral(_moduleTypeNames[i])).AppendLine("\",");
+            }
+            sb.AppendLine("};");
+            sb.AppendLine();
+
+            // ── type_namespaces array ─────────────────────────────────────
+            sb.Append("static constexpr const char* s_type_namespaces[").Append(count).AppendLine("] =");
+            sb.AppendLine("{");
+            for (int i = 0; i < count; i++)
+            {
+                sb.Append("    \"").Append(EscapeCppStringLiteral(_moduleTypeNamespaces[i])).AppendLine("\",");
+            }
+            sb.AppendLine("};");
+            sb.AppendLine();
+
+            // ── type_parent_tokens array ──────────────────────────────────
+            sb.Append("static constexpr uint32_t s_type_parent_tokens[").Append(count).AppendLine("] =");
+            sb.AppendLine("{");
+            for (int i = 0; i < count; i++)
+            {
+                sb.Append("    ").Append(_moduleTypeParentTokens[i]).Append("u,");
+                if (i < count - 1) sb.AppendLine();
+            }
+            sb.AppendLine();
+            sb.AppendLine("};");
+            sb.AppendLine();
+
+            // ── type_info_ptrs array (NOT constexpr — addresses of inline variables) ──
+            sb.Append("static const TypeInfo* const s_type_info_ptrs[").Append(count).AppendLine("] =");
+            sb.AppendLine("{");
+            for (int i = 0; i < count; i++)
+            {
+                string? symbol = _moduleTypeInfoSymbols[i];
+                if (symbol != null)
+                    sb.Append("    ").Append(symbol).AppendLine(",");
+                else
+                    sb.AppendLine("    nullptr,");
+            }
+            sb.AppendLine("};");
+            sb.AppendLine();
+        }
+
+        sb.Append("static const ::chaos::il2cpp::runtime_core::ModuleDescriptor s_native_aot_module = {");
+        sb.AppendLine();
         sb.Append("    /* .name_utf8         = */ \"").Append(EscapeCppStringLiteral(assemblyName)).AppendLine("\",");
         sb.AppendLine("    /* .image             = */ nullptr,  // Tier 2 metadata — deferred");
-        sb.AppendLine("    /* .type_flags        = */ nullptr,  // Tier 1 — deferred");
-        sb.AppendLine("    /* .type_names        = */ nullptr,");
-        sb.AppendLine("    /* .type_namespaces   = */ nullptr,");
-        sb.AppendLine("    /* .type_parent_tokens= */ nullptr,");
-        sb.AppendLine("    /* .type_count        = */ 0u,");
-        sb.AppendLine("    /* .abi_manifest      = */ &s_abi_manifest,");
+        if (hasTypeData)
+        {
+            sb.AppendLine("    /* .type_flags        = */ s_type_flags,");
+            sb.AppendLine("    /* .type_names        = */ s_type_names,");
+            sb.AppendLine("    /* .type_namespaces   = */ s_type_namespaces,");
+            sb.AppendLine("    /* .type_parent_tokens= */ s_type_parent_tokens,");
+            sb.AppendLine("    /* .type_info_ptrs    = */ s_type_info_ptrs,");
+            sb.Append("    /* .type_count        = */ ").Append(_moduleTypeCount).AppendLine("u,");
+        }
+        else
+        {
+            sb.AppendLine("    /* .type_flags        = */ nullptr,  // Tier 1 — deferred");
+            sb.AppendLine("    /* .type_names        = */ nullptr,");
+            sb.AppendLine("    /* .type_namespaces   = */ nullptr,");
+            sb.AppendLine("    /* .type_parent_tokens= */ nullptr,");
+            sb.AppendLine("    /* .type_info_ptrs    = */ nullptr,");
+            sb.AppendLine("    /* .type_count        = */ 0u,");
+        }
+        sb.AppendLine("    /* .abi_manifest      = */ s_abi_manifest,");
         sb.AppendLine("};");
         sb.AppendLine("static const uint32_t s_native_aot_module_id =");
         sb.Append("    ::chaos::il2cpp::runtime_core::RegisterModule(\"").Append(EscapeCppStringLiteral(assemblyName)).AppendLine("\", &s_native_aot_module);");
@@ -46,11 +126,35 @@ public sealed partial class NativeAotLoweringPlanner
 
         var sb = new StringBuilder(4096);
         sb.AppendLine("// ── ABI manifest ──────────────────────────────────────────────");
+        sb.AppendLine("// Single contiguous struct: header + entries + params in same object");
+        sb.AppendLine("// so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.");
+        sb.AppendLine("// NOTE: reinterpret_cast is needed because MSVC rejects &anon_struct.header");
 
-        // ── Parameter carriers array (flat sequence of uint8_t values) ──
         int totalParams = reachableMethods.Sum(m => m.ParameterAbis.Count);
-        sb.Append("static constexpr uint8_t s_abi_manifest_params[").Append(totalParams).AppendLine("] =");
-        sb.AppendLine("{");
+        uint checksum = ComputeAbiManifestChecksum(reachableMethods);
+
+        sb.Append("static constexpr struct {").AppendLine();
+        sb.Append("    ::ChaosAbiManifestV0 header;").AppendLine();
+        sb.Append("    ::ChaosAbiMethodEntryV0 entries[").Append(reachableMethods.Count).AppendLine("];");
+        sb.Append("    uint8_t params[").Append(totalParams).AppendLine("];");
+        sb.Append("} s_abi_manifest_storage = {").AppendLine();
+        sb.AppendLine("    {");
+        sb.AppendLine("        CHAOS_ABI_MANIFEST_VERSION,");
+        sb.Append("        ").Append(reachableMethods.Count).AppendLine("u,");
+        sb.Append("        ").Append(totalParams).AppendLine("u,");
+        sb.Append("        ").Append(checksum).AppendLine("u,  // FNV-1a over entries+params");
+        sb.AppendLine("    },");
+        sb.AppendLine("    {");
+        for (int i = 0; i < reachableMethods.Count; i++)
+        {
+            var method = reachableMethods[i];
+            sb.Append("        { ").Append((int)method.ReturnAbi.CarrierKindCode).Append("u, ")
+                .Append(method.ParameterAbis.Count).Append("u },");
+            sb.Append("  // ").Append(method.NativeSymbol);
+            sb.AppendLine();
+        }
+        sb.AppendLine("    },");
+        sb.AppendLine("    {");
         if (totalParams > 0)
         {
             int paramIndex = 0;
@@ -58,7 +162,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 foreach (var abi in method.ParameterAbis)
                 {
-                    sb.Append("    ").Append((int)abi.CarrierKindCode).Append("u,");
+                    sb.Append("        ").Append((int)abi.CarrierKindCode).Append("u,");
                     paramIndex++;
                     if (paramIndex < totalParams)
                         sb.AppendLine();
@@ -66,37 +170,11 @@ public sealed partial class NativeAotLoweringPlanner
             }
             sb.AppendLine();
         }
+        sb.AppendLine("    },");
         sb.AppendLine("};");
+        sb.Append("static const ::ChaosAbiManifestV0* const s_abi_manifest =");
+        sb.Append(" reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);");
         sb.AppendLine();
-
-        // ── Method entries array ─────────────────────────────────────────
-        sb.Append("static constexpr ::ChaosAbiMethodEntryV0 s_abi_manifest_entries[")
-            .Append(reachableMethods.Count)
-            .AppendLine("] =");
-        sb.AppendLine("{");
-        for (int i = 0; i < reachableMethods.Count; i++)
-        {
-            var method = reachableMethods[i];
-            sb.Append("    { ").Append((int)method.ReturnAbi.CarrierKindCode).Append("u, ")
-                .Append(method.ParameterAbis.Count).Append("u },");
-            if (i < reachableMethods.Count - 1)
-            {
-                sb.Append("  // ").Append(method.NativeSymbol);
-            }
-            sb.AppendLine();
-        }
-        sb.AppendLine("};");
-        sb.AppendLine();
-
-        // ── Manifest struct ──────────────────────────────────────────────
-        uint checksum = ComputeAbiManifestChecksum(reachableMethods);
-        sb.Append("static constexpr ::ChaosAbiManifestV0 s_abi_manifest =").AppendLine();
-        sb.AppendLine("{");
-        sb.AppendLine("    CHAOS_ABI_MANIFEST_VERSION,");
-        sb.Append("    ").Append(reachableMethods.Count).AppendLine("u,");
-        sb.Append("    static_cast<uint32_t>(sizeof(s_abi_manifest_params)),");
-        sb.Append("    ").Append(checksum).AppendLine("u,  // FNV-1a over entries+params");
-        sb.AppendLine("};");
 
         return sb.ToString();
     }

@@ -86,6 +86,15 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlySet<string>? _interfaceTypeSubjectIds;
     private IReadOnlySet<string>? _sealedTypeSubjectIds;
 
+    // Phase 0: ModuleRegistry Tier 0 type data (populated after EmitObjectModelDeclarations)
+    private HashSet<string>? _allEmittedTypeSubjectIds;
+    private int _moduleTypeCount;
+    private readonly List<uint> _moduleTypeFlags = new();
+    private readonly List<string> _moduleTypeNames = new();
+    private readonly List<string> _moduleTypeNamespaces = new();
+    private readonly List<uint> _moduleTypeParentTokens = new();
+    private readonly List<string?> _moduleTypeInfoSymbols = new();
+
     private readonly RuntimeHelperShapeRegistry _shapeRegistry = RuntimeHelperShapeRegistry.BuildDefault();
 
     /// <summary>
@@ -192,6 +201,8 @@ public sealed partial class NativeAotLoweringPlanner
         var objectModelBuilder = new StringBuilder(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
+        // Phase 0: Collect ModuleRegistry Tier 0 type data from PE metadata
+        CollectModuleTypeData(closureManifest.InputAssemblyPath);
         EmitReachableMethodForwardDeclarations(objectModelBuilder, reachableMethods);
         EmitStringIdTable(objectModelBuilder, stringLiterals);
         if (externalRuntimeHelpers.Any(helper => IsSpanRuntimeHelperSubjectId(helper.SubjectId)))
@@ -213,11 +224,11 @@ public sealed partial class NativeAotLoweringPlanner
             .ToList();
         var entryBridgeArguments = BuildEntryBridgeArguments(entryMethod);
 
-        var moduleRegistrationCode = BuildModuleRegistration(loweringPlan);
         var abiManifestCode = BuildAbiManifest(reachableMethods);
+        var moduleRegistrationCode = BuildModuleRegistration();
         if (!string.IsNullOrEmpty(abiManifestCode))
         {
-            moduleRegistrationCode += Environment.NewLine + abiManifestCode;
+            moduleRegistrationCode = abiManifestCode + Environment.NewLine + moduleRegistrationCode;
         }
         if (_methodTableEntries.Count > 0)
         {
@@ -233,6 +244,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "\"codegen_bridge.h\"",
                 "\"module_registry.h\"",
                 "\"abi_manifest.h\"",
+                "\"runtime_vtable.h\"",
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
             GenericRegistrationCode = genericRegistrationHelperCode,
@@ -271,6 +283,175 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         return "chaos_entry_index";
+    }
+
+    /// <summary>
+    /// Phase 0: Collect ModuleRegistry Tier 0 type data from the assembly PE metadata.
+    /// Populates _moduleTypeFlags, _moduleTypeNames, _moduleTypeNamespaces,
+    /// _moduleTypeParentTokens, _moduleTypeInfoSymbols indexed by TokenToIndex(token).
+    /// On failure (e.g., missing assembly), Tier 0 arrays remain empty — the runtime
+    /// falls back to Tier 2 metadata (ReflectionQueryImageDescriptor).
+    /// </summary>
+    private void CollectModuleTypeData(string assemblyPath)
+    {
+        if (string.IsNullOrEmpty(assemblyPath) || !File.Exists(assemblyPath))
+            return;
+
+        try
+        {
+            using var stream = File.OpenRead(assemblyPath);
+            using var peReader = new PEReader(stream);
+            if (!peReader.HasMetadata)
+                return;
+
+            var metadataReader = peReader.GetMetadataReader();
+
+            // Verify the metadata assembly name matches our lowering plan
+            var assemblyDef = metadataReader.GetAssemblyDefinition();
+            var metadataAssemblyName = metadataReader.GetString(assemblyDef.Name);
+            if (!string.Equals(metadataAssemblyName, _assemblyName, StringComparison.Ordinal))
+                return;
+
+            // Enumerate all TypeDef entries (row-indexed by ECMA TypeDef table)
+            foreach (var handle in metadataReader.TypeDefinitions)
+            {
+                var typeDef = metadataReader.GetTypeDefinition(handle);
+                var name = metadataReader.GetString(typeDef.Name);
+                var ns = metadataReader.GetString(typeDef.Namespace);
+                var attributes = typeDef.Attributes;
+                var parentHandle = typeDef.BaseType;
+
+                // Compute type flags
+                uint flags = ComputeTypeFlags(metadataReader, typeDef, parentHandle);
+
+                // Compute subjectId for cross-referencing with emitted TypeInfo set
+                string subjectId = ComputeTypeDefSubjectId(metadataReader, handle, _assemblyName);
+
+                // Parent token (same-assembly TypeDef only; cross-assembly → 0)
+                uint parentToken = 0;
+                if (!parentHandle.IsNil && parentHandle.Kind == HandleKind.TypeDefinition)
+                    parentToken = (uint)MetadataTokens.GetToken(parentHandle);
+
+                // Check if this type has a TypeInfo emitted (reachable types only)
+                string? typeInfoSymbol = _allEmittedTypeSubjectIds?.Contains(subjectId) == true
+                    ? "&" + GetNativeTypeInfoSymbol(subjectId)
+                    : null;
+
+                _moduleTypeFlags.Add(flags);
+                _moduleTypeNames.Add(name);
+                _moduleTypeNamespaces.Add(ns);
+                _moduleTypeParentTokens.Add(parentToken);
+                _moduleTypeInfoSymbols.Add(typeInfoSymbol);
+                _moduleTypeCount++;
+            }
+        }
+        catch (Exception ex) when (ex is IOException or InvalidOperationException or BadImageFormatException)
+        {
+            // Graceful fallback: Tier 0 arrays remain empty (code emits nullptr)
+            _moduleTypeCount = 0;
+            _moduleTypeFlags.Clear();
+            _moduleTypeNames.Clear();
+            _moduleTypeNamespaces.Clear();
+            _moduleTypeParentTokens.Clear();
+            _moduleTypeInfoSymbols.Clear();
+        }
+    }
+
+    /// <summary>
+    /// Resolve a TypeDef/TypeRef parent handle to a "Namespace.Name" string.
+    /// Returns null for nil handles or unsupported handle kinds (TypeSpec).
+    /// </summary>
+    private static string? ResolveBaseTypeName(MetadataReader reader, EntityHandle parentHandle)
+    {
+        if (parentHandle.IsNil) return null;
+
+        string? parentNs;
+        string? parentName;
+
+        switch (parentHandle.Kind)
+        {
+            case HandleKind.TypeDefinition:
+                var parentDef = reader.GetTypeDefinition((TypeDefinitionHandle)parentHandle);
+                parentNs = reader.GetString(parentDef.Namespace);
+                parentName = reader.GetString(parentDef.Name);
+                break;
+            case HandleKind.TypeReference:
+                var parentRef = reader.GetTypeReference((TypeReferenceHandle)parentHandle);
+                parentNs = reader.GetString(parentRef.Namespace);
+                parentName = reader.GetString(parentRef.Name);
+                break;
+            default:
+                return null;
+        }
+
+        return string.IsNullOrEmpty(parentNs) ? parentName : $"{parentNs}.{parentName}";
+    }
+
+    /// <summary>
+    /// Compute the type-flags bitmask for a TypeDef entry.
+    /// Flags correspond to the kFlag* constants in module_registry.h.
+    /// </summary>
+    private static uint ComputeTypeFlags(MetadataReader reader, TypeDefinition typeDef, EntityHandle parentHandle)
+    {
+        uint flags = 0;
+        var attributes = typeDef.Attributes;
+
+        // Access flags from metadata attributes
+        if ((attributes & TypeAttributes.Public) != 0 || (attributes & TypeAttributes.NestedPublic) != 0)
+            flags |= 1u << 10;  // kFlagIsPublic
+        if ((attributes & (TypeAttributes.NestedAssembly | TypeAttributes.NestedFamANDAssem
+                         | TypeAttributes.NestedFamily | TypeAttributes.NestedFamORAssem
+                         | TypeAttributes.NestedPrivate | TypeAttributes.NestedPublic)) != 0)
+            flags |= 1u << 9;   // kFlagIsNested
+        if ((attributes & TypeAttributes.Abstract) != 0)
+            flags |= 1u << 2;   // kFlagIsAbstract
+        if ((attributes & TypeAttributes.Sealed) != 0)
+            flags |= 1u << 3;   // kFlagIsSealed
+        if ((attributes & TypeAttributes.Interface) != 0)
+            flags |= 1u << 4;   // kFlagIsInterface
+
+        // ValueType / Enum via base type
+        if (!parentHandle.IsNil)
+        {
+            var parentFullName = ResolveBaseTypeName(reader, parentHandle);
+            if (parentFullName != null)
+            {
+                // System.Enum extends System.ValueType but is NOT a value type in reflection
+                // System.ValueType itself extends System.Object — no special handling needed
+                if (string.Equals(parentFullName, "System.Enum", StringComparison.Ordinal))
+                    flags |= 1u << 1;  // kFlagIsEnum
+                else if (string.Equals(parentFullName, "System.ValueType", StringComparison.Ordinal))
+                    flags |= 1u << 0;  // kFlagIsValueType
+            }
+        }
+
+        // Generic type definition: has generic parameters
+        if (typeDef.GetGenericParameters().Count > 0)
+            flags |= (1u << 6) | (1u << 7);  // kFlagIsGenericType | kFlagIsGenericTypeDef
+
+        return flags;
+    }
+
+    /// <summary>
+    /// Compute the SubjectId for a TypeDef from its metadata row.
+    /// Format: "AssemblyName/Namespace.TypeName" or "AssemblyName/DeclaringType+NestedName".
+    /// </summary>
+    private static string ComputeTypeDefSubjectId(MetadataReader reader, TypeDefinitionHandle handle, string assemblyName)
+    {
+        var typeDef = reader.GetTypeDefinition(handle);
+        var name = reader.GetString(typeDef.Name);
+        var ns = reader.GetString(typeDef.Namespace);
+
+        // Nested types use the declaring type's full name as prefix
+        var declaringHandle = typeDef.GetDeclaringType();
+        if (!declaringHandle.IsNil)
+        {
+            var declaringSubjectId = ComputeTypeDefSubjectId(reader, declaringHandle, assemblyName);
+            return $"{declaringSubjectId}+{name}";
+        }
+
+        string fullName = string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}";
+        return $"{assemblyName}/{fullName}";
     }
 
     /// <summary>

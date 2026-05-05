@@ -22,6 +22,8 @@ _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
 _VERIFICATION = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib"
 
+from testing.trace import trace_init, trace
+
 
 def _find_msvc_env() -> dict[str, str]:
     """Find MSVC environment via vcvarsall.bat."""
@@ -210,7 +212,11 @@ def main() -> None:
     parser.add_argument("family_slug", help="Family slug (e.g., convert-char)")
     parser.add_argument("--iterations", type=int, default=10000, help="Iterations per method")
     parser.add_argument("--methods", help="Comma-separated method indices to run (default: all)")
+    parser.add_argument("--no-trace", action="store_true", help="Disable JSONL trace logging")
     args = parser.parse_args()
+
+    trace_init(_REPO_ROOT, stage="native-benchmark")
+    trace("benchmark_start", family=args.family_slug, iterations=args.iterations)
 
     # Load method count
     method_count = _load_method_count(args.family_slug)
@@ -247,6 +253,7 @@ def main() -> None:
     # Summary
     passes = sum(1 for r in run_results if "elapsedMilliseconds" in r)
     fails = sum(1 for r in run_results if "error" in r)
+    trace("benchmark_done", family=args.family_slug, passed=passes, failed=fails, total=len(run_results))
     print(f"\n{'='*50}")
     print(f"Results: {passes} passed, {fails} failed, {len(run_results)} total")
 

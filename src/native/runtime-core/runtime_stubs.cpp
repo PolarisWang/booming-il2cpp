@@ -8,7 +8,11 @@
 // See generated_code_compat.h for the extern "C" declarations.
 
 #include <chaos/native_types.h>
+#include <chaos/trace.h>
 #include <cstring>
+
+#include "runtime_instantiation.h"
+#include "runtime_abi.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C"
@@ -190,78 +194,46 @@ CHAOS_IL2CPP_INTPTR ChaosStringStartsWith(CHAOS_IL2CPP_INTPTR /*str*/, CHAOS_IL2
     return 0;
 }
 
-// ─── Reflection helpers ───────────────────────────────────────────
+// ─── Reflection helpers (deferred — needs ECMA metadata) ──────────
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionIsDefined(CHAOS_IL2CPP_INTPTR /*assembly*/, CHAOS_IL2CPP_INTPTR /*type*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOf(CHAOS_IL2CPP_INTPTR /*type*/, CHAOS_IL2CPP_INTPTR /*base*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsGenericType(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsValueType(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetNamespace(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INT32 ChaosReflectionGetCallingConvention(CHAOS_IL2CPP_INTPTR /*method*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsPublic(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
-{
-    return 0;
-}
-
-// ─── Module reflection ────────────────────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetType(CHAOS_IL2CPP_INTPTR /*module*/, CHAOS_IL2CPP_INTPTR /*name*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetTypes(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleAssembly(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
-{
-    return 0;
-}
-
-// ─── Parameter reflection ─────────────────────────────────────────
-
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INT32 ChaosReflectionGetParamAttributes(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
 {
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosReflectionHasDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+{
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetRawDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
+{
+    return 0;
+}
+
+// ─── Reflection deferred stubs ──────────────────────────────────
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamConstraints(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
+{
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsVirtual(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
+{
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseDefinition(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
 {
     return 0;
 }
@@ -288,23 +260,9 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetObjectValue(CHAOS_IL2CPP_INTPTR /*valu
     return 0;
 }
 
-// ─── Method handle operations ─────────────────────────────────────
-
-CHAOS_IL2CPP_INT32 ChaosRuntimemethodhandleGetHashCode(CHAOS_IL2CPP_INT64 /*handle*/) noexcept
-{
-    return 0;
-}
-
 // ─── Runtime-wrapped exception ────────────────────────────────────
 
 CHAOS_IL2CPP_INTPTR ChaosRuntimewrappedGetWrappedException(CHAOS_IL2CPP_INTPTR /*exc*/) noexcept
-{
-    return 0;
-}
-
-// ─── Reflection assignable ─────────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFrom(CHAOS_IL2CPP_INTPTR /*target*/, CHAOS_IL2CPP_INTPTR /*source*/) noexcept
 {
     return 0;
 }
@@ -317,218 +275,6 @@ CHAOS_IL2CPP_INTPTR ChaosStoreFloat32(CHAOS_IL2CPP_FLOAT32 value) noexcept
     std::memcpy(&bits, &value, sizeof(bits));
     return static_cast<CHAOS_IL2CPP_INTPTR>(bits);
 }
-
-// ─── Reflection generic ────────────────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamConstraints(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-// ─── Reflection member info ────────────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsVirtual(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseDefinition(CHAOS_IL2CPP_INTPTR /*member*/) noexcept
-{
-    return 0;
-}
-
-// ─── Reflection field handle ───────────────────────────────────
-
-CHAOS_IL2CPP_INT32 ChaosRuntimefieldhandleGetHashCode(CHAOS_IL2CPP_INTPTR /*handle*/) noexcept
-{
-    return 0;
-}
-
-// ─── Reflection module ─────────────────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleName(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleNameOnly(CHAOS_IL2CPP_INTPTR /*module*/) noexcept
-{
-    return 0;
-}
-
-// ─── Reflection parameter helpers ──────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionHasDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameterType(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetParamPosition(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
-{
-    return 0;
-}
-
-// ─── Reflection type handle ────────────────────────────────────
-
-CHAOS_IL2CPP_INT32 ChaosRuntimetypehandleGetHashCode(CHAOS_IL2CPP_INTPTR /*handle*/) noexcept
-{
-    return 0;
-}
-
-// ─── Reflection constructors ───────────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-
-// ─── Reflection assignable (supplementary) ──────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableTo(CHAOS_IL2CPP_INTPTR /*target*/, CHAOS_IL2CPP_INTPTR /*source*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfType(CHAOS_IL2CPP_INTPTR /*obj*/, CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-// ─── Assembly reflection ────────────────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetImageRuntimeVersion(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsConstructedGeneric(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsInterface(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsArray(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyFullName(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamPos(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsEnum(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsAbstract(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetTypes(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetCallingAssembly(void) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetEntryAssembly(void) noexcept
-{
-    return 0;
-}
-
-// Reflection supplementary
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsSealed(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsGenericTypeDef(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromAssemblyBool(CHAOS_IL2CPP_INTPTR /*assembly*/, CHAOS_IL2CPP_INTPTR /*name*/, CHAOS_IL2CPP_INT32 /*throw_on_error*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetExecutingAssembly(void) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyLocation(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept
-{
-    return 0;
-}
-
-// ─── Generic type reflection ────────────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericType(CHAOS_IL2CPP_INTPTR /*def*/, CHAOS_IL2CPP_INTPTR /*args*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetContainsGenericParams(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-// ─── Parameter default value ────────────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetRawDefaultValue(CHAOS_IL2CPP_INTPTR /*param*/) noexcept
-{
-    return 0;
-}
-
-// ─── Type reflection ────────────────────────────────────────────
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR /*type*/, CHAOS_IL2CPP_INT32 /*flags*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodsBindingflags(CHAOS_IL2CPP_INTPTR /*type*/, CHAOS_IL2CPP_INT32 /*flags*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR /*type*/) noexcept
-{
-    return 0;
-}
-
 
 // ─── Volatile operations ──────────────────────────────────────────
 

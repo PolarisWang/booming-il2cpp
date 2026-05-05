@@ -1,8 +1,8 @@
 {
   "assembly": "System.Private.CoreLib",
   "total": 33,
-  "passed": 29,
-  "failed": 4,
+  "passed": 33,
+  "failed": 0,
   "results": [
     {
       "family": "array-indexing-copy",
@@ -86,13 +86,14 @@
       "family": "delegate-core-invocation",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "FAILED"
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
       },
-      "success": false,
+      "success": true,
       "methodCount": 10,
       "entryPointSubjectId": "DelegateCoreInvocationNativeEntry/DelegateCoreInvocationNativeEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\delegate-core-invocation\\il2cpp_dist\\entrypoint\\build-output\\DelegateCoreInvocationNativeEntry.dll",
-      "error": "convert failed"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\delegate-core-invocation\\il2cpp_dist\\entrypoint\\build-output\\DelegateCoreInvocationNativeEntry.dll"
     },
     {
       "family": "enum-parsing",
@@ -124,13 +125,14 @@
       "family": "generic-nullable-value",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "FAILED"
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
       },
-      "success": false,
+      "success": true,
       "methodCount": 10,
-      "entryPointSubjectId": "GenericNullableValuePatchEntry/GenericNullableValuePatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\il2cpp_dist\\entrypoint\\build-output\\GenericNullableValuePatchEntry.dll",
-      "error": "convert failed"
+      "entryPointSubjectId": "GenericNullableValueNativeEntry/GenericNullableValueNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\il2cpp_dist\\entrypoint\\build-output\\GenericNullableValueNativeEntry.dll"
     },
     {
       "family": "globalization-culture",
@@ -279,13 +281,14 @@
       "family": "reflection-member-basics",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "FAILED"
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
       },
-      "success": false,
+      "success": true,
       "methodCount": 14,
       "entryPointSubjectId": "ReflectionMemberBasicsNativeEntry/ReflectionMemberBasicsNativeEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-basics\\il2cpp_dist\\entrypoint\\build-output\\ReflectionMemberBasicsNativeEntry.dll",
-      "error": "convert failed"
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-basics\\il2cpp_dist\\entrypoint\\build-output\\ReflectionMemberBasicsNativeEntry.dll"
     },
     {
       "family": "reflection-member-complete",
@@ -395,13 +398,14 @@
       "family": "threading-tasks-primitives",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "FAILED"
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
       },
-      "success": false,
+      "success": true,
       "methodCount": 15,
-      "entryPointSubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-tasks-primitives\\il2cpp_dist\\entrypoint\\build-output\\ThreadingTasksPrimitivesPatchEntry.dll",
-      "error": "convert failed"
+      "entryPointSubjectId": "ThreadingTasksPrimitivesNativeEntry/ThreadingTasksPrimitivesNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-tasks-primitives\\il2cpp_dist\\entrypoint\\build-output\\ThreadingTasksPrimitivesNativeEntry.dll"
     },
     {
       "family": "time-date-time-timespan",
@@ -430,5 +434,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\type-runtime-handles\\il2cpp_dist\\entrypoint\\build-output\\TypeRuntimeHandlesNativeEntry.dll"
     }
   ],
-  "timestamp": "2026-05-05T01:33:14"
+  "timestamp": "2026-05-05T11:03:48"
 }

@@ -284,13 +284,16 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Monitor", "Pulse", 1): "skip",
     ("Monitor", "PulseAll", 1): "skip",
     ("Monitor", "Wait", 1): "skip",
-    # Delegate operations on null/default delegate
+    # Delegate operations default to auto-generated (null instance, but compiles for codegen)
+    # Delegate methods without native-AOT shape support:
     ("Delegate", "DynamicInvoke", 1): "skip",
+    ("Delegate", "get_Method", 0): "skip",
+    ("Delegate", "get_Target", 0): "skip",
     ("Delegate", "CreateDelegate", 3): "skip",
     ("Delegate", "CreateDelegate", 2): "skip",
-    ("Delegate", "get_Target", 0): "skip",
-    ("Delegate", "get_Method", 0): "skip",
     ("MulticastDelegate", "GetInvocationList", 0): "skip",
+    ("Delegate", "op_Equality", 2): "skip",
+    ("Delegate", "op_Inequality", 2): "skip",
     # Enum with non-enum type
     ("Enum", "Parse", 2): "skip",
     ("Enum", "Parse", 3): "skip",
@@ -345,6 +348,14 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Task", "WhenAny", 1): "skip",
     ("Task", "WhenAll", 1): "skip",
     ("Task", "FromResult", 1): "skip",
+    # Task/Thread methods without native-AOT shape support:
+    ("Task", "Delay", 1): "skip",
+    ("Task", "Wait", 0): "skip",
+    ("Task", "Wait", 1): "skip",
+    ("Task", "get_IsCompleted", 0): "skip",
+    ("Task", "get_Status", 0): "skip",
+    ("Thread", "Sleep", 1): "skip",
+    ("Thread", "get_ManagedThreadId", 0): "skip",
     # Type.ContainsGenericParameters is a property, not a method — calling it with () fails
     ("Type", "ContainsGenericParameters", 0): "typeof(byte).ContainsGenericParameters",
     # Activator.CreateInstance<T>() generic can't be resolved
@@ -358,6 +369,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     # MethodBase.Invoke with BindingFlags — ambiguous
 
     ("MethodBase", "Invoke", 2): "skip",
+    ("MemberInfo", "get_MemberType", 0): "skip",
     ("MethodInfo", "GetParameters", 0): "skip",
     ("MethodInfo", "get_ReturnType", 0): "skip",
     ("ConstructorInfo", "Invoke", 1): "skip",
@@ -385,11 +397,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Interlocked", "Add", 2): "skip",
     # Attribute.get_TypeId on default null
     ("Attribute", "get_TypeId", 0): "skip",
-    # NullReferenceException from default(Delegate)! etc.
-    ("Delegate", "Combine", 2): "skip",
-    ("Delegate", "Remove", 2): "skip",
-    # Thread operations that fail
-    ("Thread", "get_ManagedThreadId", 0): "Thread.CurrentThread.ManagedThreadId",
+    # Thread operations that fail (now handled earlier in _METHOD_OVERRIDES with skip)
     # RuntimeWrappedException on new object is fine, but WrappedException should work
     # Collections
     ("List", "Remove", 1): "skip",
