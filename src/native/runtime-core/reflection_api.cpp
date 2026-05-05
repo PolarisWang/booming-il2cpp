@@ -22,6 +22,7 @@
 #include "reflection_metadata_impl.h"
 #include "string_table.h"
 #include "runtime_instantiation.h"
+#include "generic_context.h"
 
 #include <cstring>
 #include <cstdio>
@@ -625,17 +626,48 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR member_h
     auto* methodDesc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
         static_cast<MethodInfoHandle>(member_handle));
     if (methodDesc != nullptr) {
-        // Without a declaring-type back-pointer in the method descriptor,
-        // we can't resolve this. Future: scan the image for the owning type.
-        (void)methodDesc;
+        const uint32_t token = methodDesc->metadata_token;
+        if (token != 0u) {
+            const uint32_t module_count = GetModuleCount();
+            for (uint32_t i = 0u; i < module_count; i++) {
+                const auto* mod = GetModuleByIndex(i);
+                if (mod == nullptr || mod->image == nullptr) continue;
+                for (uint32_t t = 0u; t < mod->image->type_count; t++) {
+                    const auto* type = mod->image->types[t];
+                    if (type == nullptr || type->methods == nullptr) continue;
+                    for (uint32_t m = 0u; m < type->method_count; m++) {
+                        if (type->methods[m].metadata_token == token) {
+                            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                                EncodeReflectionQueryTypeHandle(type));
+                        }
+                    }
+                }
+            }
+        }
         return 0;
     }
 
     auto* fieldDesc = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
         static_cast<FieldInfoHandle>(member_handle));
     if (fieldDesc != nullptr) {
-        // Same limitation as methods — no declaring-type back-pointer.
-        (void)fieldDesc;
+        const uint32_t token = fieldDesc->metadata_token;
+        if (token != 0u) {
+            const uint32_t module_count = GetModuleCount();
+            for (uint32_t i = 0u; i < module_count; i++) {
+                const auto* mod = GetModuleByIndex(i);
+                if (mod == nullptr || mod->image == nullptr) continue;
+                for (uint32_t t = 0u; t < mod->image->type_count; t++) {
+                    const auto* type = mod->image->types[t];
+                    if (type == nullptr || type->fields == nullptr) continue;
+                    for (uint32_t f = 0u; f < type->field_count; f++) {
+                        if (type->fields[f].metadata_token == token) {
+                            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                                EncodeReflectionQueryTypeHandle(type));
+                        }
+                    }
+                }
+            }
+        }
         return 0;
     }
 
@@ -1022,6 +1054,24 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericArguments(CHAOS_IL2CPP_INTPTR type_
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buffer);
     }
 
+    // AOT concrete generic type: look up in generic context registry.
+    // The type_handle (a TypeInfoHandle) was stored at registration time and
+    // is directly usable as a lookup key into the by_open_type closed_types.
+    {
+        TypeInfoHandle closed_handle = static_cast<TypeInfoHandle>(static_cast<uint64_t>(type_handle));
+        if (closed_handle != 0) {
+            static CHAOS_IL2CPP_INTPTR s_args_buffer[33];
+            uint32_t count = generic_context::GetClosedTypeGenericArgs(
+                closed_handle,
+                reinterpret_cast<TypeInfoHandle*>(s_args_buffer + 1),
+                32);
+            if (count > 0) {
+                s_args_buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(count));
+                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_args_buffer);
+            }
+        }
+    }
+
     return 0;
 }
 
@@ -1129,6 +1179,36 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(
     return static_cast<CHAOS_IL2CPP_INTPTR>(ret_buf[0]);
 }
 
+// Extract TypeInfoHandle[] from a managed System.Type[] pointer.
+// Returns the number of handles extracted (clamped to max_count).
+// Each managed Type object has runtime_type_handle at offset 16 (after object header).
+static uint32_t ExtractTypeArgsFromManagedArray(
+    CHAOS_IL2CPP_INTPTR type_args,
+    TypeInfoHandle* out_handles,
+    uint32_t max_count) noexcept
+{
+    if (type_args == 0) return 0u;
+    const auto* raw = reinterpret_cast<const uint8_t*>(
+        static_cast<CHAOS_IL2CPP_INTPTR>(type_args));
+    // Managed array layout: [header(16)][length(4)][pad(4)][elements...]
+    const uint32_t count = static_cast<uint32_t>(
+        *reinterpret_cast<const CHAOS_IL2CPP_INT32*>(raw + 16u));
+    const uint32_t actual = (count < max_count) ? count : max_count;
+    for (uint32_t i = 0u; i < actual; i++) {
+        const void* type_obj = *reinterpret_cast<void* const*>(
+            raw + 24u + i * sizeof(void*));
+        if (type_obj == nullptr) {
+            out_handles[i] = 0u;
+            continue;
+        }
+        // Managed Type layout: [header(16)][runtime_type_handle(8)]...
+        out_handles[i] = static_cast<TypeInfoHandle>(
+            *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
+                static_cast<const uint8_t*>(type_obj) + 16u));
+    }
+    return actual;
+}
+
 CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(
     CHAOS_IL2CPP_INTPTR method_handle,
     CHAOS_IL2CPP_INTPTR type_args)
@@ -1146,9 +1226,15 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(
             bridge->resolve_or_instantiate_method(open_method, nullptr, 0u));
     }
 
-    // V1: type_args is a managed System.Type[] — TypeInfoHandle extraction deferred
-    (void)type_args;
-    return static_cast<CHAOS_IL2CPP_INTPTR>(open_method);
+    TypeInfoHandle arg_handles[32];
+    const uint32_t arg_count = ExtractTypeArgsFromManagedArray(type_args, arg_handles, 32u);
+    if (arg_count == 0u) {
+        return static_cast<CHAOS_IL2CPP_INTPTR>(open_method);
+    }
+
+    MethodInfoHandle result = bridge->resolve_or_instantiate_method(
+        open_method, arg_handles, arg_count);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(result);
 }
 
 // ── CustomAttribute blob query ──────────────────────────────────────
@@ -1423,7 +1509,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetTypes(CHAOS_IL2CPP_INTPTR assembly
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromAssemblyBool(
     CHAOS_IL2CPP_INTPTR assembly_handle,
     CHAOS_IL2CPP_INTPTR name_string_id,
-    CHAOS_IL2CPP_INT32 throw_on_error) noexcept
+    CHAOS_IL2CPP_INT32 throw_on_error)
 {
     auto* decoded = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly_handle));
     if (decoded == nullptr) return 0;
@@ -1438,7 +1524,11 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromAssemblyBool(
 
     auto* type = FindReflectionQueryTypeByName(decoded, ns, type_name);
     if (type == nullptr) {
-        (void)throw_on_error;  // TODO: throw TypeLoadException
+        if (throw_on_error) {
+            // V1: propagate error without a managed TypeLoadException object.
+            // Future: create TypeLoadException via ABI and raise it properly.
+            throw ManagedExceptionCarrier{nullptr};
+        }
         return 0;
     }
     return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(type));
@@ -1473,9 +1563,15 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericType(CHAOS_IL2CPP_INTPTR def, CHAO
             bridge->resolve_or_instantiate_type(open_def, nullptr, 0u));
     }
 
-    // V1: args is a managed System.Type[] — TypeInfoHandle extraction deferred
-    (void)args;
-    return static_cast<CHAOS_IL2CPP_INTPTR>(open_def);
+    TypeInfoHandle arg_handles[32];
+    const uint32_t arg_count = ExtractTypeArgsFromManagedArray(args, arg_handles, 32u);
+    if (arg_count == 0u) {
+        return static_cast<CHAOS_IL2CPP_INTPTR>(open_def);
+    }
+
+    TypeInfoHandle result = bridge->resolve_or_instantiate_type(
+        open_def, arg_handles, arg_count);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(result);
 }
 
 // =====================================================================

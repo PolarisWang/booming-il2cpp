@@ -5732,6 +5732,58 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
 
 
+            // === Marshal.GetFunctionPointerForDelegate<T>(T) — returns native function pointer via thunk registry ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "GetFunctionPointerForDelegate",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    if (typeArgs.Count != 1) return null;
+                    var delegateTypeId = typeArgs[0];
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    auto* rs = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
+                        "    auto* ts = chaos::il2cpp::runtime_core::GetCurrentThreadState();",
+                        "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(",
+                        "        chaos::il2cpp::runtime_core::MarshalGetFunctionPointerForDelegateImpl(",
+                        "            rs, ts, chaos_arg_0, \"" + delegateTypeId + "\"));",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 });
+                }));
+
+            // === Marshal.GetDelegateForFunctionPointer<T>(IntPtr) — V1: delegates to runtime stub (returns nullptr) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.InteropServices.Marshal",
+                MethodName: "GetDelegateForFunctionPointer",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    if (typeArgs.Count != 1) return null;
+                    var delegateTypeId = typeArgs[0];
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    (void)chaos_arg_0;",
+                        "    auto* rs = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
+                        "    auto* ts = chaos::il2cpp::runtime_core::GetCurrentThreadState();",
+                        "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(",
+                        "        chaos::il2cpp::runtime_core::MarshalGetDelegateForFunctionPointerImpl(",
+                        "            rs, ts, chaos_arg_0, \"" + delegateTypeId + "\"));",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        new HashSet<int> { 0 });
+                }));
+
+
             return registry;
         }
 

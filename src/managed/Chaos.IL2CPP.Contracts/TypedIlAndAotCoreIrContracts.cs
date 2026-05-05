@@ -279,6 +279,13 @@ public sealed record AotCoreIrReferenceArtifact
 
     public bool IsSealed { get; init; }
 
+    /// <summary>
+    /// Whether the type is a COM import interface (marked with ComImportAttribute / TypeAttributes.Import).
+    /// When true, method calls on this type must be dispatched through the COM vtable
+    /// instead of the managed vtable.
+    /// </summary>
+    public bool IsComImport { get; init; }
+
     public string? BaseTypeSubjectId { get; init; }
 
     public IReadOnlyList<string>? ImplementedInterfaceSubjectIds { get; init; }
@@ -339,6 +346,10 @@ public sealed record AotCoreIrMethodArtifact
 
     /// Whether this method is a P/Invoke (DllImport) external method.
     public bool IsPInvoke { get; init; }
+
+    /// Whether this method is marked with <see cref="System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"/>.
+    /// When true, the method is callable directly from native code through its <see cref="NativeSymbol"/>.
+    public bool IsUnmanagedCallersOnly { get; init; }
 
     /// For P/Invoke methods: the native DLL module name (e.g. "kernel32").
     public string? ImportModuleName { get; init; }
@@ -410,6 +421,13 @@ public sealed record AotCoreIrInstructionArtifact
     public string? TargetReturnType { get; init; }
 
     public HybridDispatchKind? DispatchKindCode { get; init; }
+
+    /// <summary>
+    /// For <see cref="HybridDispatchKind.ComVtable"/> dispatch: the vtable slot
+    /// index to call. Slot 0-2 are IUnknown (QueryInterface/AddRef/Release);
+    /// slot 3+ are interface-specific methods in declaration order.
+    /// </summary>
+    public int? ComVtableSlot { get; init; }
 }
 
 public sealed record TypedIlMethodArtifact

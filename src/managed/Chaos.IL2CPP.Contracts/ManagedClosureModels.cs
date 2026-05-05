@@ -46,6 +46,12 @@ public sealed record ManagedTypeModel
 
     public bool IsSealed { get; init; }
 
+    /// <summary>
+    /// Whether the type is marked with <see cref="System.Runtime.InteropServices.ComImportAttribute"/>.
+    /// Maps to <see cref="System.Reflection.TypeAttributes.Import"/> in the ECMA 335 metadata.
+    /// </summary>
+    public bool IsComImport { get; init; }
+
     public string? BaseTypeSubjectId { get; init; }
 
     public IReadOnlyList<string>? ImplementedInterfaceSubjectIds { get; init; }
@@ -310,6 +316,13 @@ public enum HybridDispatchKind : byte
     Bridge = 3,
     ExternalRuntime = 4,
     Unsupported = 5,
+
+    /// <summary>
+    /// Method call on a ComImport interface. Dispatched through the COM vtable
+    /// rather than the managed vtable. The <see cref="AotCoreIrInstructionArtifact.ComVtableSlot"/>
+    /// field carries the vtable index.
+    /// </summary>
+    ComVtable = 6,
 }
 
 /// <summary>

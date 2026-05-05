@@ -34,6 +34,19 @@ public sealed partial class NativeAotLoweringPlanner
         return ordered;
     }
 
+    /// <summary>
+    /// Returns ALL methods from the AOT Core IR (full closure mode,
+    /// no entry point pruning).  Used by convert-to-cpp for full
+    /// assembly translation.
+    /// </summary>
+    private static IReadOnlyList<AotCoreIrMethodArtifact> CollectAllMethods(
+        AotCoreIrArtifact aotCoreIr)
+    {
+        return aotCoreIr.Methods
+            .OrderBy(m => m.SubjectId, StringComparer.Ordinal)
+            .ToList();
+    }
+
     private IReadOnlyList<AotCoreIrMethodArtifact> ResolveReachableMethods(
         AotCoreIrInstructionArtifact instruction)
     {

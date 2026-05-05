@@ -106,6 +106,7 @@ public sealed class DriverEntry
             "emit-native-reference" => RunLegacyEmitNativeReference(args),
             "emit-native-aot" => RunLegacyEmitNativeAot(args),
             "emit-patch-data" => RunEmitPatchData(args[1..]),
+            "convert-to-cpp" => ConvertToCppHandler.Run(args[1..]),
             _ when !command.StartsWith('-') => RunLegacyConvert(args),
             _ => ShowHelpAndFail(),
         };
@@ -632,9 +633,10 @@ public sealed class DriverEntry
         Console.WriteLine("chaos-il2cpp - IL2CPP toolchain CLI");
         Console.WriteLine();
         Console.WriteLine("Commands:");
-        Console.WriteLine("  convert   Convert C# project/DLLs to native source code");
-        Console.WriteLine("  build     Build native source code for a target platform");
-        Console.WriteLine("  publish   Convert and build in one step");
+        Console.WriteLine("  convert          Convert C# project/DLLs to native source code");
+        Console.WriteLine("  convert-to-cpp   Full assembly IL→C++ translation (Unity IL2CPP style)");
+        Console.WriteLine("  build            Build native source code for a target platform");
+        Console.WriteLine("  publish          Convert and build in one step");
         Console.WriteLine();
         Console.WriteLine("Legacy commands:");
         Console.WriteLine("  <input.dll> <output-root>                    Managed closure generation");

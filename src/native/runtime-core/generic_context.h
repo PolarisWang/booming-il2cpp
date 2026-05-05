@@ -95,6 +95,21 @@ MethodInfoHandle TryResolveClosedMethod(
     const TypeInfoHandle*   type_args,
     CHAOS_IL2CPP_UINT32    arg_count);
 
+/// Retrieve the generic type arguments for a closed generic type that was
+/// registered via RegisterGenericInstantiation or RegisterModuleGenerics.
+/// Scans all open-type buckets for a matching closed_type.
+///
+/// @param closed_type  Handle of the closed generic type (e.g. List<int>).
+/// @param out_handles  Output buffer for type argument handles (may be nullptr
+///                     to query the count only).
+/// @param max_count    Capacity of out_handles.
+/// @return The number of generic type arguments written (or that would be
+///         written).  0 if the type is not a registered closed generic.
+CHAOS_IL2CPP_UINT32 GetClosedTypeGenericArgs(
+    TypeInfoHandle       closed_type,
+    TypeInfoHandle*      out_handles,
+    CHAOS_IL2CPP_UINT32 max_count);
+
 }  // namespace chaos::il2cpp::generic_context
 
 #endif  // CHAOS_IL2CPP_GENERIC_CONTEXT_H_
