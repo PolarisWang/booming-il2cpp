@@ -146,6 +146,75 @@ static TypeInfoHandle FindTypeByModuleToken(CHAOS_IL2CPP_UINT32 type_token) {
     return 0u;
 }
 
+/* ── V1: Type resolution helpers for struct marshalling ───────────────── */
+
+/// Scan all registered modules to find a type by its fully-qualified
+/// subject_id (e.g. "System.Guid", "System.Numerics.Vector2").
+static TypeInfoHandle FindTypeByName(const char* fully_qualified_name) {
+    if (fully_qualified_name == nullptr) return 0u;
+
+    for (CHAOS_IL2CPP_UINT32 mid = 0u; mid < runtime_core::kMaxModules; ++mid) {
+        const auto* module = runtime_core::LookupModule(mid);
+        if (module == nullptr || module->image == nullptr || module->tombstone) {
+            continue;
+        }
+        const auto* image = runtime_core::TryDecodeReflectionQueryImageHandle(
+            module->image);
+        if (image == nullptr) continue;
+
+        for (CHAOS_IL2CPP_UINT32 ti = 0u; ti < image->type_count; ++ti) {
+            if (image->types[ti].subject_id_utf8 != nullptr &&
+                std::strcmp(image->types[ti].subject_id_utf8,
+                    fully_qualified_name) == 0) {
+                return runtime_core::MakeTypeHandle(
+                    mid, image->types[ti].metadata_token);
+            }
+        }
+    }
+    return 0u;
+}
+
+/// Check whether the given TypeInfoHandle refers to a value type (struct).
+/// Uses the module registry's type_flags bitfield.
+static bool IsValueTypeByHandle(TypeInfoHandle handle) {
+    if (handle == 0u) return false;
+    const CHAOS_IL2CPP_UINT32 mid = runtime_core::GetModuleId(handle);
+    const auto* module = runtime_core::LookupModule(mid);
+    if (module == nullptr || module->type_flags == nullptr) return false;
+    const CHAOS_IL2CPP_UINT32 type_index = runtime_core::TokenToIndex(
+        runtime_core::GetTypeToken(handle));
+    if (type_index >= module->type_count) return false;
+    return (module->type_flags[type_index] &
+            runtime_core::kFlagIsValueType) != 0u;
+}
+
+/// Resolve a parameter's member_type_utf8 to a TypeInfoHandle.
+/// Handles generic parameter references ("!N", "!!N") and named types.
+static TypeInfoHandle ResolveParameterType(
+    const char* member_type_utf8,
+    const TypeInfoHandle* type_args,
+    CHAOS_IL2CPP_UINT32 arg_count)
+{
+    if (member_type_utf8 == nullptr) return 0u;
+
+    // Generic parameter reference: "!N" (type generic) or "!!N" (method generic)
+    if (member_type_utf8[0] == '!') {
+        if (type_args == nullptr || arg_count == 0u) return 0u;
+        const char* num_str = member_type_utf8 + 1;
+        if (member_type_utf8[1] == '!') num_str++;  // "!!N"
+        char* end = nullptr;
+        long idx = std::strtol(num_str, &end, 10);
+        if (end == num_str || idx < 0 ||
+            static_cast<CHAOS_IL2CPP_UINT32>(idx) >= arg_count) {
+            return 0u;
+        }
+        return type_args[idx];
+    }
+
+    // Named type: scan all registered modules.
+    return FindTypeByName(member_type_utf8);
+}
+
 /* ── Bridge function implementations ── */
 
 TypeInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveOrInstantiateType(
@@ -398,7 +467,25 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
                         break;
                     }
                     default: {
-                        // ObjectRef or unknown: read the pointer value.
+                        // Check if the parameter type is a value type (struct).
+                        // If so, marshal the struct data by value using the
+                        // LayoutEngine-computed size rather than reading a pointer.
+                        const TypeInfoHandle param_type = ResolveParameterType(
+                            desc->parameters[ai].member_type_utf8,
+                            rt_method->type_args, rt_method->arg_count);
+                        if (param_type != 0u && IsValueTypeByHandle(param_type)) {
+                            const auto* engine = layout::GetLayoutEngine();
+                            const auto* layout = engine->GetOrComputeLayout(
+                                param_type,
+                                rt_method->type_args, rt_method->arg_count);
+                            if (layout != nullptr && layout->value_size > 0u) {
+                                frame.arguments.push_back(
+                                    interpreter::InterpreterValue::from_struct(
+                                        argv[ai], layout->value_size));
+                                break;
+                            }
+                        }
+                        // Fall through: treat as ObjectRef (read pointer).
                         void* obj_ptr = nullptr;
                         std::memcpy(&obj_ptr, argv[ai], sizeof(obj_ptr));
                         if (obj_ptr != nullptr) {
@@ -492,7 +579,12 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
                 }
                 break;
             case interpreter::ValueTag::Struct:
-                // V0: struct return values not yet supported.
+                if (out_return_value != nullptr &&
+                    out_return_value_size >= result.return_value.struct_size) {
+                    CHAOS_IL2CPP_MEMCPY(out_return_value,
+                        result.return_value.obj,
+                        result.return_value.struct_size);
+                }
                 break;
             default:
                 break;

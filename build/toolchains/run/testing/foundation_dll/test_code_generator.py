@@ -672,10 +672,6 @@ def _has_blocked_param(param_types: list[str]) -> bool:
         # Pointer parameters need unsafe context
         if pt.endswith("*"):
             return True
-        # Delegate-like types
-        if bare in ("System.Delegate", "System.MulticastDelegate",
-                     "System.EventHandler", "System.EventHandler`1"):
-            return True
         # Generic type parameter (not concrete type)
         if "." not in bare and "`" not in bare:
             if bare and ((len(bare) == 1 and bare.isupper()) or
