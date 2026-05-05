@@ -846,4 +846,80 @@ public sealed partial class NativeAotLoweringPlanner
 		return ManagedNaming.CreateInstantiationStubSymbol(instantiationStubId);
 	}
 
+	// ── ArgBuffer helpers for dispatch-table-aware call sites (D3) ──
+
+	/// <summary>
+	/// Returns the byte size needed in an ArgBuffer for a single ABI slot.
+	/// </summary>
+	private static int GetAbiSlotArgBufferSize(AotCoreIrAbiCarrierKind kind)
+	{
+		switch (kind)
+		{
+		case AotCoreIrAbiCarrierKind.Int32:
+		case AotCoreIrAbiCarrierKind.Int8:
+		case AotCoreIrAbiCarrierKind.UInt8:
+		case AotCoreIrAbiCarrierKind.Int16:
+		case AotCoreIrAbiCarrierKind.UInt16:
+		case AotCoreIrAbiCarrierKind.Float32:
+			return 4;
+		case AotCoreIrAbiCarrierKind.Float64:
+		case AotCoreIrAbiCarrierKind.Int64:
+		case AotCoreIrAbiCarrierKind.UInt64:
+		case AotCoreIrAbiCarrierKind.NativeInt:
+		case AotCoreIrAbiCarrierKind.ByRef:
+		case AotCoreIrAbiCarrierKind.MultiReturn:
+		case AotCoreIrAbiCarrierKind.ByRefToValueType:
+		case AotCoreIrAbiCarrierKind.ValueTypeByValue:
+			return 8;
+		default:
+			return 8;
+		}
+	}
+
+	/// <summary>
+	/// Calculate total ArgBuffer size needed for a list of parameter ABIs.
+	/// </summary>
+	private static int CalculateArgBufferSize(IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis)
+	{
+		int size = 0;
+		for (int i = 0; i < parameterAbis.Count; i++)
+			size += GetAbiSlotArgBufferSize(parameterAbis[i].CarrierKindCode);
+		return size;
+	}
+
+	/// <summary>
+	/// Returns the ArgBuffer WriteXxx call expression for a parameter ABI slot.
+	/// The arg value is expected to be in a CHAOS_IL2CPP_INTPTR variable named argName.
+	/// Example: "_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0))"
+	/// </summary>
+	private static string GetArgBufferWriteCall(AotCoreIrAbiCarrierKind kind, string argName)
+	{
+		switch (kind)
+		{
+		case AotCoreIrAbiCarrierKind.Int32:
+			return $"_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>({argName}))";
+		case AotCoreIrAbiCarrierKind.Int8:
+		case AotCoreIrAbiCarrierKind.UInt8:
+		case AotCoreIrAbiCarrierKind.Int16:
+		case AotCoreIrAbiCarrierKind.UInt16:
+			return $"_d_bw.WriteI32({argName})";
+		case AotCoreIrAbiCarrierKind.Float32:
+			return $"_d_bw.WriteF32(chaos_load_float32({argName}))";
+		case AotCoreIrAbiCarrierKind.Float64:
+			return $"_d_bw.WriteF64(ChaosLoadFloat64({argName}))";
+		case AotCoreIrAbiCarrierKind.Int64:
+			return $"_d_bw.WriteI64(ChaosLoadInt64({argName}))";
+		case AotCoreIrAbiCarrierKind.UInt64:
+			return $"_d_bw.WriteI64(chaos_load_uint64({argName}))";
+		case AotCoreIrAbiCarrierKind.NativeInt:
+		case AotCoreIrAbiCarrierKind.ByRef:
+		case AotCoreIrAbiCarrierKind.MultiReturn:
+		case AotCoreIrAbiCarrierKind.ByRefToValueType:
+		case AotCoreIrAbiCarrierKind.ValueTypeByValue:
+			return $"_d_bw.WritePtr(reinterpret_cast<void*>({argName}))";
+		default:
+			return $"_d_bw.WritePtr(reinterpret_cast<void*>({argName}))";
+		}
+	}
+
 }

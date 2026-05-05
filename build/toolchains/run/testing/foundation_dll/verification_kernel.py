@@ -6,6 +6,13 @@ from pathlib import Path
 from typing import Any
 
 try:
+    from testing.foundation_dll.stub_detector import scan_file, StubFileResult
+except ImportError:
+    StubFileResult = None
+    def scan_file(*args, **kwargs):
+        return None
+
+try:
     from testing.trace import trace
 except ImportError:
     def trace(*args, **kwargs):
@@ -163,6 +170,36 @@ def evaluate_native_proof(
         if coverage_payload is not None:
             coverage_by_run_id[run_key] = coverage_payload
 
+    # ── Stub detection ────────────────────────────────────────────────
+    # Scan native-aot.generated.cpp files for stub patterns (CHAOS_BRIDGE_STATUS_OK,
+    # NativeReferenceStub_, etc.) and mark stub methods as uncovered.
+    stub_evidence: list[dict[str, Any]] = []
+    stub_method_subject_ids: set[str] = set()
+    for fact in facts:
+        artifact_path = repo_root / fact.artifactPath
+        if not artifact_path.is_file() or "native-aot.generated" not in artifact_path.name:
+            continue
+        if scan_file is not None:
+            file_result = scan_file(artifact_path)
+            if file_result is not None and file_result.stub_methods > 0:
+                stub_methods = [m for m in file_result.methods if m.is_stub and m.subject_id]
+                for m in stub_methods:
+                    if m.subject_id:
+                        stub_method_subject_ids.add(m.subject_id)
+                stub_evidence.append({
+                    "label": f"stub-detection::{artifact_path.name}",
+                    "path": fact.artifactPath,
+                    "stubMethodCount": file_result.stub_methods,
+                    "totalMethodCount": file_result.total_methods,
+                    "stubMethods": [m.subject_id for m in stub_methods if m.subject_id],
+                })
+    if stub_evidence:
+        evidence.append({
+            "label": "stub-detection",
+            "path": "",
+            "stubFiles": stub_evidence,
+        })
+
     numerator = 0
     denominator = claim_payload.denominator
     reason = ""
@@ -172,6 +209,8 @@ def evaluate_native_proof(
         coverage_payload = coverage_by_run_id.get(latest_run_id)
         if claim_payload.methodSubjectIds and coverage_payload is not None:
             uncovered_ids = {str(item) for item in list(coverage_payload.get("uncoveredMethodSubjectIds") or [])}
+            # Add stub method subject IDs to the uncovered set
+            uncovered_ids |= stub_method_subject_ids
             method_details = [
                 {
                     "subjectId": subject_id,

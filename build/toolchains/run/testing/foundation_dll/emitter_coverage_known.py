@@ -55,6 +55,8 @@ EMITTER_KNOWN_OPCODES = {
     "nop", "neg", "div.un", "rem.un", "clt.un", "conv.r.un",
     "endfinally", "rethrow", "endfilter",
     "sizeof", "ldvirtftn", "starg.s", "refanytype",
+    # Phase 1 expansion: prefix opcodes handled as no-ops in AOT mode
+    "volatile.", "readonly.", "constrained.",
     # Phase 1 expansion: native int indirect + unsigned branch + checked conversions
     "ldind.i", "stind.i",
     "bgt.un", "ble.un", "blt.un",

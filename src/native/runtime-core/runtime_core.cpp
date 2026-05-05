@@ -218,32 +218,6 @@ const TaskRuntimeKernelV1 kTaskRuntimeKernelV1 = {
     TaskRuntimeKernelCapabilityIntrospection,
 };
 
-// ======================================================================
-// Thread-local RuntimeState for code paths without an explicit parameter.
-// ======================================================================
-
-thread_local RuntimeState* g_tls_runtime_state = nullptr;
-
-void SetCurrentRuntimeState(RuntimeState* runtime_state) {
-    g_tls_runtime_state = runtime_state;
-}
-
-RuntimeState* GetCurrentRuntimeState() {
-    return g_tls_runtime_state;
-}
-
-thread_local ThreadState* g_tls_thread_state = nullptr;
-
-void SetCurrentThreadState(ThreadState* thread_state) {
-    g_tls_thread_state = thread_state;
-}
-
-ThreadState* GetCurrentThreadState() {
-    return g_tls_thread_state;
-}
-
-// ======================================================================
-
 struct EngineLifecycleRegistration {
     CHAOS_IL2CPP_STRING phase;
     EngineLifecycleCallback callback;
@@ -296,6 +270,32 @@ void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
 
 void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) {
     return GC_MALLOC_ATOMIC(size);
+}
+
+// ======================================================================
+// Thread-local RuntimeState — must have EXTERNAL linkage (outside
+// anonymous namespace) so reflection_api.obj and codegen-generated
+// TUs can reference them.
+// ======================================================================
+
+thread_local RuntimeState* g_tls_runtime_state = nullptr;
+
+void SetCurrentRuntimeState(RuntimeState* runtime_state) {
+    g_tls_runtime_state = runtime_state;
+}
+
+RuntimeState* GetCurrentRuntimeState() {
+    return g_tls_runtime_state;
+}
+
+thread_local ThreadState* g_tls_thread_state = nullptr;
+
+void SetCurrentThreadState(ThreadState* thread_state) {
+    g_tls_thread_state = thread_state;
+}
+
+ThreadState* GetCurrentThreadState() {
+    return g_tls_thread_state;
 }
 
 namespace {  // re-open anonymous for internal helpers
