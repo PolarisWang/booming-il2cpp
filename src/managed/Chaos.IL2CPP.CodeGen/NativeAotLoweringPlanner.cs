@@ -144,7 +144,9 @@ public sealed partial class NativeAotLoweringPlanner
         ArgumentNullException.ThrowIfNull(metadataRegistration);
         ArgumentNullException.ThrowIfNull(supplementalMetadataTemplate);
 
-        ValidateEntryMethod(entryMethod);
+        // Skip entry ABI validation for full-closure assembly translation
+        if (!closureManifest.FullAssemblyClosure)
+            ValidateEntryMethod(entryMethod);
         if (!string.Equals(entryMethod.NativeSymbol, loweringPlan.EntrySymbol, StringComparison.Ordinal))
         {
             throw new InvalidOperationException(
@@ -590,7 +592,7 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("// ── Method table initialization ────────────────────────────────");
         sb.AppendLine("// Fills the global method table with function pointers for");
         sb.AppendLine("// cross-module dispatch targets.");
-        sb.AppendLine("static const uint32_t s_method_table_init = []()");
+        sb.AppendLine("static const CHAOS_IL2CPP_UINT32 s_method_table_init = []()");
         sb.AppendLine("{");
         foreach (var (entryIndex, nativeSymbol) in _methodTableEntries)
         {
@@ -651,9 +653,10 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
         IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers)
     {
-        if (!externalRuntimeHelpers.Any(helper =>
-                string.Equals(helper.SubjectId, DelegateCombineMethodSubjectId, StringComparison.Ordinal) ||
-                string.Equals(helper.SubjectId, DelegateRemoveMethodSubjectId, StringComparison.Ordinal)))
+        bool hasCombineOrRemove = externalRuntimeHelpers.Any(helper =>
+            helper.TargetSymbol.Contains("Delegate__Combine", StringComparison.Ordinal) ||
+            helper.TargetSymbol.Contains("Delegate__Remove", StringComparison.Ordinal));
+        if (!hasCombineOrRemove)
         {
             return;
         }

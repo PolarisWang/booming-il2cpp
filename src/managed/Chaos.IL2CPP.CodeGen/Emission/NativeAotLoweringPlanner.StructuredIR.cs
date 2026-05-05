@@ -146,9 +146,14 @@ public sealed partial class NativeAotLoweringPlanner
                 int eqIdx = line.IndexOf('=', pushIdx);
                 if (eqIdx < 0) continue;
                 string prefix = line[..pushIdx].TrimEnd();
-                string valueExpr = line[(eqIdx + 1)..].TrimEnd().TrimEnd(';');
+                string valueExpr = line[(eqIdx + 1)..].Trim().TrimEnd(';');
+                // ldloca/ldarga produce pointer values (&chaos_locals[N] / &chaos_args[N])
+                // Cast to CHAOS_IL2CPP_INTPTR since __s[N] is an integer type.
+                string valueForSlot = (valueExpr.StartsWith("&chaos_locals") || valueExpr.StartsWith("&chaos_args"))
+                    ? $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>({valueExpr})"
+                    : valueExpr;
                 string slotExpr = slots.Push();
-                lines[i] = $"{prefix}{slotExpr} = {valueExpr};";
+                lines[i] = $"{prefix}{slotExpr} = {valueForSlot};";
                 continue;
             }
 
@@ -158,10 +163,9 @@ public sealed partial class NativeAotLoweringPlanner
             int popIdx = line.IndexOf("chaos_eval_stack[--chaos_stack_top]", StringComparison.Ordinal);
             if (popIdx >= 0 && slots.Depth > 0)
             {
-                string beforePop = line[..popIdx].TrimEnd();
                 string afterPop = line[(popIdx + "chaos_eval_stack[--chaos_stack_top]".Length)..];
                 string slotName = slots.Pop();
-                lines[i] = $"{beforePop}{slotName}{afterPop}";
+                lines[i] = $"{line[..popIdx]}{slotName}{afterPop}";
                 continue;
             }
 
@@ -171,7 +175,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 int eqIdx = line.IndexOf('=', topModIdx);
                 string prefix = line[..topModIdx].TrimEnd();
-                string valueExpr = line[(eqIdx + 1)..].TrimEnd().TrimEnd(';');
+                string valueExpr = line[(eqIdx + 1)..].Trim().TrimEnd(';');
                 string slotName = slots.Peek();
                 lines[i] = $"{prefix}{slotName} = {valueExpr};";
                 continue;
@@ -205,9 +209,10 @@ public sealed partial class NativeAotLoweringPlanner
             if (line.Contains("chaos_eval_stack[chaos_stack_top] = chaos_eval_stack[chaos_stack_top - 1]"))
             {
                 string prefix = line[..line.IndexOf("chaos_eval_stack[chaos_stack_top]", StringComparison.Ordinal)].TrimEnd();
+                string oldTop = slots.Peek(); // slot before push (will be at depth-1 after push)
                 slots.Push(); // increment depth
-                string top = slots.Peek(); // slot at new depth (same index as old depth - 1)
-                lines[i] = $"{prefix}{top} = {slots.Peek()};";
+                string newTop = slots.Peek(); // slot at new depth
+                lines[i] = $"{prefix}{newTop} = {oldTop};";
                 continue;
             }
         }
@@ -853,6 +858,123 @@ public sealed partial class NativeAotLoweringPlanner
         }
     }
 
+
+    /// <summary>
+    /// Compute the maximum eval-stack depth across all instructions in the method.
+    /// This determines the size of the __s[] slot array.  Simulates the net
+    /// push/pop effect of each IL opcode to find the peak concurrent depth.
+    /// </summary>
+    private static int ComputeMaxEvalStackDepth(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+    {
+        int maxDepth = 0;
+        int depth = 0;
+
+        foreach (var instr in instructions)
+        {
+            string op = instr.Op;
+            int pushes = 0, pops = 0;
+
+            switch (op)
+            {
+                // Pure pushes (+1)
+                case "ldc.i4": case "ldc.i8": case "ldc.r4": case "ldc.r8":
+                case "ldarg": case "ldstr": case "ldtoken": case "ldarga":
+                case "ldnull": case "ldloc": case "ldloca":
+                case "ldsfld": case "ldsflda":
+                case "ldftn": case "newarr":
+                    pushes = 1; pops = 0; break;
+
+                // Dup: push a copy of the top value
+                case "dup":
+                    pushes = 1; pops = 0; break;
+
+                // Pure pops (-1)
+                case "pop": case "stloc": case "initobj":
+                case "stsfld":
+                case "throw":
+                case "brfalse": case "brtrue":
+                    pushes = 0; pops = 1; break;
+
+                // Pops 2 (instance stores, indirect stores, conditional branches)
+                case "stfld":
+                case "stobj":
+                case "stind.i4": case "stind.i1": case "stind.i2":
+                case "stind.i8": case "stind.r4": case "stind.r8": case "stind.ref":
+                case "beq": case "bgt": case "blt": case "bge": case "ble":
+                case "bne.un": case "bge.un":
+                    pushes = 0; pops = 2; break;
+
+                // Pops 3
+                case "stelem": case "stelem.ref":
+                case "cpblk":
+                    pushes = 0; pops = 3; break;
+
+                // Pop 2, push 1 (net -1)
+                case "cgt.un": case "ceq": case "cgt": case "clt":
+                case "add": case "sub": case "mul": case "div": case "rem":
+                case "shl": case "shr": case "shr.un":
+                case "and": case "or": case "xor":
+                case "add.ovf": case "sub.ovf": case "mul.ovf":
+                case "ldelem": case "ldelem.ref": case "ldelema":
+                    pushes = 1; pops = 2; break;
+
+                // Pop 1, push 1 (net 0 — in-place transformation)
+                case "ldfld": case "ldflda":
+                case "ldind.i4": case "ldind.u1": case "ldind.i1":
+                case "ldind.u2": case "ldind.i2": case "ldind.u4":
+                case "ldind.i8": case "ldind.r4": case "ldind.r8": case "ldind.ref":
+                case "box": case "unbox": case "unbox.any":
+                case "castclass": case "isinst":
+                case "ldobj": case "ldlen": case "localloc":
+                case "conv.i4": case "conv.i1": case "conv.i2": case "conv.i8":
+                case "conv.u8": case "conv.r4": case "conv.r8": case "conv.u":
+                case "conv.u1": case "conv.u2":
+                case "conv.ovf.i1": case "conv.ovf.u1":
+                case "not":
+                    pushes = 1; pops = 1; break;
+
+                // Call/callvirt/calli: pop N args, push 0/1 result
+                case "call": case "callvirt": case "calli":
+                    pops = instr.TargetParameterCount ?? 0;
+                    pushes = (instr.TargetReturnType != null && instr.TargetReturnType != "System.Void") ? 1 : 0;
+                    break;
+
+                // newobj: pop constructor args, push new object/value
+                case "newobj":
+                    pops = instr.TargetParameterCount ?? 0;
+                    pushes = 1;
+                    break;
+
+                // ret: method return (depth resets)
+                case "ret":
+                    pushes = 0; pops = 0;
+                    depth = 0;
+                    break;
+
+                // switch: pop index value
+                case "switch":
+                    pushes = 0; pops = 1; break;
+
+                // br/leave: reset depth at unconditional branch target
+                case "br": case "leave":
+                    pushes = 0; pops = 0;
+                    depth = 0;
+                    break;
+
+                default:
+                    // Unknown opcode: be conservative, assume pushes 1
+                    pushes = 1; pops = 0; break;
+            }
+
+            depth -= pops;
+            if (depth < 0) depth = 0;
+            depth += pushes;
+            if (depth > maxDepth) maxDepth = depth;
+        }
+
+        return Math.Max(16, maxDepth);
+    }
+
     // ── Convenience: try to use this emitter for a set of instructions ──
 
     /// <summary>
@@ -871,6 +993,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (instructions.Count == 0)
             return;
 
+        System.Console.Error.WriteLine("TRACE:Em " + (method.SubjectId != null && method.SubjectId.Length > 80 ? method.SubjectId.Substring(0, 80) : method.SubjectId ?? "null") + " instr=" + instructions.Count);
         var cfg = BuildControlFlowGraph(instructions, offsets);
         if (!cfg.IsReducible)
         {
@@ -884,7 +1007,17 @@ public sealed partial class NativeAotLoweringPlanner
         // Each IRBlock's ReplaceStackOpsWithSlots rewrites
         // chaos_eval_stack[...] patterns to __s[N], so declare the
         // backing store here for the whole method body.
-        builder.AppendLine("    CHAOS_IL2CPP_INTPTR __s[64] = {};");
+        int maxDepth = ComputeMaxEvalStackDepth(instructions);
+        builder.AppendLine($"    CHAOS_IL2CPP_INTPTR __s[{maxDepth}] = {{}};");
+
+        // Check for exception regions — route through IRExceptionRegion path for
+        // simple shapes (catch-only, filter-only, finally-only) that would
+        // otherwise go through the old EmitCatchOnlyExceptionMethodBody etc.
+        if (method.ExceptionRegionCount > 0 && method.ExceptionRegions is { Count: > 0 })
+        {
+            EmitViaStructuredIRWithExceptions(builder, method, instructions, nextOffsetsByIlOffset, offsets);
+            return;
+        }
 
         var tree = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
         StructuredIRNode ir = tree;
@@ -905,6 +1038,149 @@ public sealed partial class NativeAotLoweringPlanner
         {
             _irGotoTargets = null;
         }
+    }
+
+    /// <summary>
+    /// Handle exception-region methods through the IRExceptionRegion path.
+    /// Partitions the instruction list using the existing TryCreate* shape
+    /// detection and builds a StructuredIR tree with IRExceptionRegion nodes.
+    /// Complex shapes (CatchAndFinally, FilterAndFinally) fall back to the
+    /// old exception emission path via EmitCatchOnlyExceptionMethodBody etc.
+    /// </summary>
+    private void EmitViaStructuredIRWithExceptions(
+        StringBuilder builder,
+        AotCoreIrMethodArtifact method,
+        IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
+        IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset,
+        IReadOnlySet<int> offsets)
+    {
+        StructuredIRNode? body = null;
+
+        if (TryCreateCatchOnlyExceptionMethodShape(method, out var catchOnly))
+        {
+            body = BuildExceptionIRBody(
+                catchOnly.PrefixInstructions,
+                catchOnly.TryInstructions,
+                catchOnly.HandlerInstructions,
+                catchOnly.TailInstructions,
+                IRExceptionKind.TryCatch,
+                offsets,
+                catchTypeSubjectId: catchOnly.ExceptionRegion.CatchTypeSubjectId);
+        }
+        else if (TryCreateFilterOnlyExceptionMethodShape(method, out var filterOnly))
+        {
+            body = BuildExceptionIRBody(
+                filterOnly.PrefixInstructions,
+                filterOnly.TryInstructions,
+                filterOnly.HandlerInstructions,
+                filterOnly.TailInstructions,
+                IRExceptionKind.TryFilter,
+                offsets,
+                filterInstructions: filterOnly.FilterInstructions,
+                catchTypeSubjectId: filterOnly.FilterRegion.CatchTypeSubjectId);
+        }
+        else if (TryCreateFinallyOnlyExceptionMethodShape(method, out var finallyOnly))
+        {
+            // Handle the common case of a single finally handler.
+            // Multiple finally handlers fall back to flat goto.
+            if (finallyOnly.FinallyHandlers.Count == 1)
+            {
+                body = BuildExceptionIRBody(
+                    finallyOnly.PrefixInstructions,
+                    finallyOnly.TryInstructions,
+                    finallyOnly.FinallyHandlers[0].Instructions,
+                    finallyOnly.TailInstructions,
+                    IRExceptionKind.TryFinally,
+                    offsets);
+            }
+        }
+
+        if (body == null)
+        {
+            // Fallback: flat goto for unrecognized exception shapes
+            EmitInstructionRange(builder, method, instructions, nextOffsetsByIlOffset, offsets);
+            return;
+        }
+
+        var gotoTargets = EnumerateBranchTargets(instructions);
+        CollectGotoTargets(body, gotoTargets);
+        _irGotoTargets = gotoTargets;
+        _emittedLabels.Clear();
+        try
+        {
+            EmitStructuredIRNode(builder, body, method, "    ");
+        }
+        finally
+        {
+            _irGotoTargets = null;
+        }
+    }
+
+    /// <summary>
+    /// Build a StructuredIR tree for an exception region method body.
+    /// Partitions the instructions into prefix/try/handler/tail and wraps
+    /// the try+handler in an IRExceptionRegion node.
+    /// </summary>
+    private StructuredIRNode BuildExceptionIRBody(
+        IReadOnlyList<AotCoreIrInstructionArtifact> prefix,
+        IReadOnlyList<AotCoreIrInstructionArtifact> tryBody,
+        IReadOnlyList<AotCoreIrInstructionArtifact> handler,
+        IReadOnlyList<AotCoreIrInstructionArtifact> tail,
+        IRExceptionKind kind,
+        IReadOnlySet<int> offsets,
+        string? catchTypeSubjectId = null,
+        IReadOnlyList<AotCoreIrInstructionArtifact>? filterInstructions = null)
+    {
+        var nodes = new List<StructuredIRNode>();
+
+        // Build IR tree for prefix (instructions before the try block)
+        if (prefix.Count > 0)
+        {
+            var prefixOffsets = new HashSet<int>(prefix.Select(GetRequiredIlOffset));
+            var prefixCfg = BuildControlFlowGraph(prefix, prefixOffsets);
+            if (prefixCfg.IsReducible)
+                nodes.Add(RecoverStructure(prefixCfg, 0, prefixCfg.Blocks.Count - 1));
+            else
+                nodes.Add(new IRSequence(Array.Empty<StructuredIRNode>()));
+        }
+
+        // Build IR trees for try and handler bodies
+        var tryTree = BuildExceptionPartitionTree(tryBody, offsets);
+        var handlerTree = BuildExceptionPartitionTree(handler, offsets);
+
+        nodes.Add(new IRExceptionRegion(
+            kind, tryTree, handlerTree,
+            CatchTypeSubjectId: catchTypeSubjectId,
+            FilterInstructions: filterInstructions));
+
+        // Build IR tree for tail (instructions after the handler)
+        if (tail.Count > 0)
+        {
+            var tailTree = BuildExceptionPartitionTree(tail, offsets);
+            nodes.Add(tailTree);
+        }
+
+        return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
+    }
+
+    /// <summary>
+    /// Build a structured IR tree from a sub-list of instructions (for exception
+    /// region partitions).  Returns an empty IRSequence if the partition has no
+    /// instructions or the CFG is irreducible.
+    /// </summary>
+    private static StructuredIRNode BuildExceptionPartitionTree(
+        IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
+        IReadOnlySet<int> offsets)
+    {
+        if (instructions.Count == 0)
+            return new IRSequence(Array.Empty<StructuredIRNode>());
+
+        var subOffsets = new HashSet<int>(instructions.Select(GetRequiredIlOffset));
+        var cfg = BuildControlFlowGraph(instructions, subOffsets);
+        if (!cfg.IsReducible)
+            return new IRSequence(Array.Empty<StructuredIRNode>());
+
+        return RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
     }
 
 }

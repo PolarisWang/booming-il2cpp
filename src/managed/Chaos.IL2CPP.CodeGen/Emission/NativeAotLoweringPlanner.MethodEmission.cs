@@ -165,24 +165,9 @@ public sealed partial class NativeAotLoweringPlanner
 		EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
 		EmitStaticInitializationPrologue(builder, method);
 		builder.AppendLine();
-		if (TryCreateCatchOnlyExceptionMethodShape(method, out CatchOnlyExceptionMethodShape catchOnlyShape))
-		{
-			EmitCatchOnlyExceptionMethodBody(builder, method, catchOnlyShape!, nextOffsetsByIlOffset, offsets);
-			builder.AppendLine("}");
-			return;
-		}
-		if (TryCreateFilterOnlyExceptionMethodShape(method, out FilterOnlyExceptionMethodShape filterOnlyShape))
-		{
-			EmitFilterOnlyExceptionMethodBody(builder, method, filterOnlyShape!, nextOffsetsByIlOffset, offsets);
-			builder.AppendLine("}");
-			return;
-		}
-		if (TryCreateFinallyOnlyExceptionMethodShape(method, out FinallyOnlyExceptionMethodShape finallyOnlyShape))
-		{
-			EmitFinallyOnlyExceptionMethodBody(builder, method, finallyOnlyShape!, nextOffsetsByIlOffset, offsets);
-			builder.AppendLine("}");
-			return;
-		}
+		// Complex exception shapes with nested finally handlers use the old path.
+		// Simple shapes (catch-only, filter-only, finally-only) and non-exception
+		// methods are handled by EmitViaStructuredIR with IRExceptionRegion nodes.
 		if (TryCreateCatchAndFinallyExceptionMethodShape(method, out CatchAndFinallyExceptionMethodShape catchAndFinallyShape))
 		{
 			EmitCatchAndFinallyExceptionMethodBody(builder, method, catchAndFinallyShape!, nextOffsetsByIlOffset, offsets);
@@ -227,6 +212,20 @@ public sealed partial class NativeAotLoweringPlanner
 			? new HashSet<int>(method.ComplexStructParameterIndices!)
 			: new HashSet<int>();
 		Dictionary<int, string>? complexStructDescriptorSymbols = null;
+		if (hasComplexStructParams && method.ComplexStructParameterTypeSubjectIds != null)
+		{
+			complexStructDescriptorSymbols = new Dictionary<int, string>(complexStructSet.Count);
+			int typeIdx = 0;
+			foreach (int paramIdx in method.ComplexStructParameterIndices!)
+			{
+				if (typeIdx < method.ComplexStructParameterTypeSubjectIds.Count)
+				{
+					string typeId = method.ComplexStructParameterTypeSubjectIds[typeIdx];
+					complexStructDescriptorSymbols[paramIdx] = GetNativeStructMarshallingDescriptorSymbol(typeId);
+				}
+				typeIdx++;
+			}
+		}
 
 		// Build arg names and native call args.
 		var argNames = new string[methodAbiParameterSlots.Count];
@@ -964,14 +963,25 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitDirectCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
 		InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
-		string targetSymbol = invocationTarget.TargetSymbol;
+		string? targetSymbol = invocationTarget.TargetSymbol;
 
 		// Cross-module calls use method_table dispatch instead of direct symbol calls.
-		if (TryGetMethodTableIndex(instruction.Callee, targetSymbol, out uint methodTableIndex))
+		// When targetSymbol is null (unresolved external generic instantiation),
+		// use "0" (nullptr) as the method table function pointer placeholder.
+		if (TryGetMethodTableIndex(instruction.Callee, targetSymbol ?? "0", out uint methodTableIndex))
 		{
 			string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 			string paramSig = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
 			targetSymbol = $"(*reinterpret_cast<{returnType}(*)({paramSig})>(::chaos::il2cpp::method_table::g_method_table[{methodTableIndex}].fn_ptr))";
+		}
+		else if (targetSymbol is null)
+		{
+			// Same-module call with no target symbol -- this should not happen
+			// for unresolved externals (they are always cross-module), but
+			// guard against generating invalid code.
+			throw new NotSupportedException(
+			    "native-aot lowering cannot resolve call target '" +
+			    (instruction.Callee ?? "<null>") + "'");
 		}
 
 		EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: false);
