@@ -1,3 +1,4 @@
+using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using Chaos.IL2CPP.CodeGen;
 using Chaos.IL2CPP.Contracts;
@@ -34,7 +35,38 @@ internal static class ConvertToCppHandler
         Console.WriteLine($"  Assembly: {config.AssemblyPath}");
         Console.WriteLine($"  Output:   {outputRoot}");
 
-        // ── Step 1: Run full pipeline ────────────────────────────────────
+        // ── Step 1: Resolve assembly paths ──────────────────────────────
+        // Collect all managed DLLs from search directories (skip native DLLs).
+        // A managed DLL has "MZ" header AND CLI metadata header (DOS → PE → CLI).
+        var assemblyDirs = config.AssemblyDirs;
+        var additionalPaths = new List<string>();
+        foreach (var dir in assemblyDirs)
+        {
+            if (Directory.Exists(dir))
+            {
+                foreach (var dll in Directory.GetFiles(dir, "*.dll"))
+                {
+                    try
+                    {
+                        using var peReader = new System.Reflection.PortableExecutable.PEReader(File.OpenRead(dll));
+                        if (peReader.HasMetadata)
+                        {
+                            additionalPaths.Add(dll);
+                        }
+                    }
+                    catch
+                    {
+                        // Skip non-managed DLLs
+                    }
+                }
+            }
+            else if (File.Exists(dir))
+            {
+                additionalPaths.Add(dir);
+            }
+        }
+
+        // ── Step 2: Run full pipeline ────────────────────────────────────
         Console.Write("  [1/3] Running IL2CPP pipeline...");
         ChaosTrace.Point("convert-to-cpp.pipeline", "codegen");
 
@@ -42,7 +74,7 @@ internal static class ConvertToCppHandler
             config.AssemblyPath,
             outputRoot,
             EntryPointSubjectIdOverride: null,
-            AdditionalAssemblyPaths: config.AssemblyDirs,
+            AdditionalAssemblyPaths: additionalPaths,
             FullAssemblyClosure: true);
 
         var pipeline = new PipelinePlan();

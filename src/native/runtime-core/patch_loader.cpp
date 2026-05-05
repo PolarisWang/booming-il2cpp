@@ -1,7 +1,7 @@
 #include "patch_loader.h"
 
-#include <cstring>
 #include <cstdio>
+#include <cstring>
 #include <new>
 
 namespace chaos::il2cpp::runtime_core {
@@ -15,13 +15,13 @@ PatchMetadataCache::PatchMetadataCache(const PatchDataHeader* header) noexcept
 const char* PatchMetadataCache::GetString(uint32_t offset) const noexcept {
     if (offset == 0 || header_ == nullptr) return "";
     const auto* base = reinterpret_cast<const uint8_t*>(header_);
-    return reinterpret_cast<const char*>(base + offset);
+    return reinterpret_cast<const char*>(base + header_->string_heap_offset + offset);
 }
 
 const void* PatchMetadataCache::GetBlob(uint32_t offset) const noexcept {
     if (offset == 0 || header_ == nullptr) return nullptr;
     const auto* base = reinterpret_cast<const uint8_t*>(header_);
-    return base + offset;
+    return base + header_->blob_heap_offset + offset;
 }
 
 const void* PatchMetadataCache::GetBody(uint32_t offset) const noexcept {
@@ -245,45 +245,26 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
 
     // Iterate MethodDef entries and patch each one.
     uint32_t patched_count = 0;
-    std::fprintf(stderr, "DEBUG ApplyPatchFromMemory: MethodCount=%u\n", cache->MethodCount());
     for (uint32_t i = 0; i < cache->MethodCount(); ++i) {
         auto* method_entry = cache->GetMethodDef(i);
-        if (method_entry == nullptr) {
-            std::fprintf(stderr, "DEBUG ApplyPatchFromMemory[%u]: method_entry is null\n", i);
-            continue;
-        }
+        if (method_entry == nullptr) continue;
 
         // Skip methods with no body.
-        if (method_entry->body_offset == 0 || method_entry->body_size == 0) {
-            std::fprintf(stderr, "DEBUG ApplyPatchFromMemory[%u]: no body (offset=%u size=%u)\n", i, method_entry->body_offset, method_entry->body_size);
-            continue;
-        }
+        if (method_entry->body_size == 0) continue;
 
         // Get type name and method name for lookup.
         const char* type_name = cache->GetTypeName(method_entry);
         const char* method_name = cache->GetString(method_entry->name_offset);
-        std::fprintf(stderr, "DEBUG ApplyPatchFromMemory[%u]: type_name='%s' method_name='%s'\n", i, type_name ? type_name : "(null)", method_name ? method_name : "(null)");
-
-        // Skip if we couldn't identify the type.
-        if (type_name == nullptr || method_name == nullptr) {
-            std::fprintf(stderr, "DEBUG ApplyPatchFromMemory[%u]: type_name or method_name is null\n", i);
-            continue;
-        }
+        if (type_name == nullptr || method_name == nullptr) continue;
 
         // Use host_type_name override if provided (handles PatchEntry vs
         // NativeEntry naming mismatch between patch DLL and AOT code).
         const char* lookup_type = (host_type_name != nullptr) ? host_type_name : type_name;
-        std::fprintf(stderr, "DEBUG ApplyPatchFromMemory[%u]: lookup_type='%s' method_name='%s'\n", i, lookup_type, method_name);
 
         // Look up the method in the NameIndexRegistry.
-        // The registry expects format "TypeName" and "MethodName".
         uint32_t aot_token = registry.LookupMethod(lookup_type, method_name);
-        std::fprintf(stderr, "DEBUG ApplyPatchFromMemory[%u]: LookupMethod returned 0x%08x\n", i, aot_token);
         if (aot_token == 0) {
-            // Try with full name format.
-            const char* full_name = cache->GetFullMethodName(method_entry);
-            std::fprintf(stderr, "DEBUG ApplyPatchFromMemory[%u]: full_name='%s'\n", i, full_name ? full_name : "(null)");
-            // The full_name includes assembly prefix; try parsing it.
+            // Try with full name format (includes assembly prefix).
             // For now, just skip unresolved methods.
             continue;
         }
@@ -328,7 +309,6 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
 
     // Update method count to reflect only successfully patched methods.
     ctx->method_count = patched_count;
-    std::fprintf(stderr, "DEBUG ApplyPatchFromMemory: patched_count=%u\n", patched_count);
 
     return ctx;
 }

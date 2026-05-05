@@ -269,6 +269,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "\"codegen_bridge.h\"",
                 "\"module_registry.h\"",
                 "\"abi_manifest.h\"",
+                "\"dispatch_table.h\"",
                 "\"runtime_vtable.h\"",
                 "\"runtime_instantiation.h\"",
             ],
