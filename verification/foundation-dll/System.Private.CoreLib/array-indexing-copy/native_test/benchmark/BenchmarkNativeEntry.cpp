@@ -1,7 +1,9 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/array/indexing-copy
 #include <chaos/native_types.h>
-#include <chaos/native_types.h>
+#include <cctype>
+#include <cstring>
+#include <string>
 
 namespace chaos::benchmark::array_indexing_copy
 {
@@ -62,12 +64,12 @@ namespace chaos::benchmark::array_indexing_copy
 
     // [11] System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_11() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [12] System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_12() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     using BenchmarkEntryFn = CHAOS_IL2CPP_INT32 (*)();

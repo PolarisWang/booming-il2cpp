@@ -1,28 +1,30 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/convert/char
 #include <chaos/native_types.h>
-#include <chaos/native_types.h>
+#include <cctype>
+#include <cstring>
+#include <string>
 
 namespace chaos::benchmark::convert_char
 {
     // [0] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_0() {
-        return static_cast<CHAOS_IL2CPP_UINT8>(42);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [1] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_1() {
-        return static_cast<CHAOS_IL2CPP_UINT8>(42);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [2] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_2() {
-        return static_cast<CHAOS_IL2CPP_INT32>('A');
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [3] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_3() {
-        return static_cast<CHAOS_IL2CPP_INT64>(0);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [4] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)
@@ -37,17 +39,17 @@ namespace chaos::benchmark::convert_char
 
     // [6] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_6() {
-        return static_cast<CHAOS_IL2CPP_INT16>(42);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [7] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_7() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [8] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_8() {
-        return static_cast<CHAOS_IL2CPP_INT64>(42);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [9] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)
@@ -62,7 +64,7 @@ namespace chaos::benchmark::convert_char
 
     // [11] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_11() {
-        return static_cast<CHAOS_IL2CPP_INT8>(42);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [12] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)
@@ -82,17 +84,17 @@ namespace chaos::benchmark::convert_char
 
     // [15] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_15() {
-        return static_cast<CHAOS_IL2CPP_UINT16>(42);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [16] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_16() {
-        return 42u;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [17] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_17() {
-        return static_cast<CHAOS_IL2CPP_UINT64>(42);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     using BenchmarkEntryFn = CHAOS_IL2CPP_INT32 (*)();

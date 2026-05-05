@@ -295,6 +295,71 @@ public sealed record AotCoreIrReferenceArtifact
     public AotCoreIrTypeShapeKind DeclaringTypeShape { get; init; }
 }
 
+/// <summary>
+/// Describes a single field within a struct marshalling descriptor tree.
+/// Maps to mach the C++ <c>StructFieldDescriptorV1</c> layout.
+/// </summary>
+public sealed record StructFieldDescriptorArtifact
+{
+    /// <summary>
+    /// Field kind string matching <c>marshal_abi::StructFieldKind</c> names:
+    /// "Blittable", "BoolField", "StringField", "NestedStruct", "ByValArray",
+    /// "LPArray", "DecimalField", "DateTimeField", "ObjectField", "GuidField".
+    /// </summary>
+    public required string Kind { get; init; }
+
+    /// <summary>
+    /// Byte offset within the native blob (and managed blob, for V1).
+    /// </summary>
+    public required int Offset { get; init; }
+
+    /// <summary>
+    /// Field size in bytes (native representation size).
+    /// </summary>
+    public required int Size { get; init; }
+
+    /// <summary>
+    /// For ByValArray: element count. 0 for non-array fields.
+    /// </summary>
+    public int ArrayCount { get; init; }
+
+    /// <summary>
+    /// For array fields: the native element type ("U1", "I4", "R8", "Struct", etc.).
+    /// Maps to <c>marshal_abi::NativeElementType</c>.
+    /// </summary>
+    public string? ElementType { get; init; }
+
+    /// <summary>
+    /// For NestedStruct: the SubjectId of the nested type, used to look up
+    /// its own StructMarshallingDescriptorArtifact for recursive emission.
+    /// </summary>
+    public string? NestedTypeSubjectId { get; init; }
+}
+
+/// <summary>
+/// Complete marshalling descriptor for a struct type, mapping its managed
+/// representation to native layout. Carried from AotCoreIrLowering to
+/// ObjectModelEmission so that codegen can emit <c>StructMarshallingDescriptorV1</c>
+/// C++ globals.
+/// </summary>
+public sealed record StructMarshallingDescriptorArtifact
+{
+    /// <summary>
+    /// SubjectId of the struct type this descriptor describes.
+    /// </summary>
+    public required string TypeSubjectId { get; init; }
+
+    /// <summary>
+    /// Total struct size in bytes (native layout).
+    /// </summary>
+    public required int TotalSize { get; init; }
+
+    /// <summary>
+    /// Field descriptors, in field declaration order.
+    /// </summary>
+    public required IReadOnlyList<StructFieldDescriptorArtifact> Fields { get; init; }
+}
+
 public sealed record AotCoreIrArtifact
 {
     public string FormatVersion { get; init; } = "v0";
@@ -302,6 +367,13 @@ public sealed record AotCoreIrArtifact
     public string ArtifactKind { get; init; } = "aotCoreIr";
 
     public required IReadOnlyList<AotCoreIrMethodArtifact> Methods { get; init; }
+
+    /// <summary>
+    /// Marshalling descriptors for complex (non-blittable) value types
+    /// used in P/Invoke signatures. Emitted as <c>StructMarshallingDescriptorV1</c>
+    /// C++ globals from ObjectModelEmission.
+    /// </summary>
+    public IReadOnlyList<StructMarshallingDescriptorArtifact>? StructMarshallingDescriptors { get; init; }
 }
 
 public sealed record AotCoreIrMethodArtifact
@@ -366,6 +438,10 @@ public sealed record AotCoreIrMethodArtifact
     /// These are marshalled via a stack copy + pointer pass, no conversion.
     public IReadOnlyList<int>? BlittableStructParameterIndices { get; init; }
 
+    /// For P/Invoke methods: true when the return type is a blittable value type.
+    /// The native function returns the struct by value; the stub returns it directly.
+    public bool HasBlittableStructReturn { get; init; }
+
     /// For P/Invoke methods: indices of parameters whose managed type is a
     /// value type containing string fields (besides blittable primitives).
     /// Each string field is converted to/from UTF-8 CoTaskMem around the call.
@@ -380,6 +456,12 @@ public sealed record AotCoreIrMethodArtifact
     /// complex non-blittable value type with arbitrary field types. These are
     /// marshalled via a deep copy with per-field conversion.
     public IReadOnlyList<int>? ComplexStructParameterIndices { get; init; }
+
+    /// <summary>
+    /// For P/Invoke methods: the SubjectId of each complex struct parameter type.
+    /// Parallel to <see cref="ComplexStructParameterIndices"/> (same order and count).
+    /// </summary>
+    public IReadOnlyList<string>? ComplexStructParameterTypeSubjectIds { get; init; }
 }
 
 public sealed record AotCoreIrExceptionRegionArtifact

@@ -1,7 +1,9 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/reflection/member-basics
 #include <chaos/native_types.h>
-#include <chaos/native_types.h>
+#include <cctype>
+#include <cstring>
+#include <string>
 
 namespace chaos::benchmark::reflection_member_basics
 {

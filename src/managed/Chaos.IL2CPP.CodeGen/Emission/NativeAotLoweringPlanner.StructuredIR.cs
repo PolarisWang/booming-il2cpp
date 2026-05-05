@@ -94,29 +94,30 @@ public sealed partial class NativeAotLoweringPlanner
 
     private sealed class SlotContext
     {
-        private int _counter;
-        private readonly List<int> _slots = new(); // depth→slotId mapping
+        private readonly List<int> _depths = new(); // stack of depth entries
+        private int _maxDepth = 0;
 
-        public int Depth => _slots.Count;
+        public int Depth => _depths.Count;
+        public int MaxDepth => _maxDepth;
 
-        /// <summary>Declare a new slot at the current top.</summary>
+        /// <summary>Push a new slot, returning the C++ expression to assign it.</summary>
         public string Push()
         {
-            int id = _counter++;
-            _slots.Add(id);
-            return $"_s{id}";
+            _depths.Add(_depths.Count);
+            _maxDepth = Math.Max(_maxDepth, _depths.Count);
+            return $"__s[{_depths.Count - 1}]";
         }
 
-        /// <summary>Pop and return the top slot name.</summary>
+        /// <summary>Pop and return the expression to read the top slot.</summary>
         public string Pop()
         {
-            int id = _slots[^1];
-            _slots.RemoveAt(_slots.Count - 1);
-            return $"_s{id}";
+            int depth = _depths.Count - 1;
+            _depths.RemoveAt(depth);
+            return $"__s[{depth}]";
         }
 
-        /// <summary>Peek at the top slot name without popping.</summary>
-        public string Peek() => $"_s{_slots[^1]}";
+        /// <summary>Peek at the top slot expression without popping.</summary>
+        public string Peek() => $"__s[{_depths.Count - 1}]";
     }
 
     // ──────────────────────────────────────────────────────────────
@@ -143,27 +144,23 @@ public sealed partial class NativeAotLoweringPlanner
             if (pushIdx >= 0 && line.Contains('='))
             {
                 int eqIdx = line.IndexOf('=', pushIdx);
+                if (eqIdx < 0) continue;
                 string prefix = line[..pushIdx].TrimEnd();
                 string valueExpr = line[(eqIdx + 1)..].TrimEnd().TrimEnd(';');
-                string slotName = slots.Push();
-                lines[i] = $"{prefix}auto {slotName} = {valueExpr};";
+                string slotExpr = slots.Push();
+                lines[i] = $"{prefix}{slotExpr} = {valueExpr};";
                 continue;
             }
 
             // ── Pop:  ... = chaos_eval_stack[--chaos_stack_top];
+            // Also handles return-value pop: return static_cast<T>(...[...]);
+            // (return lines lack '=', so we match without the Contains('=') guard)
             int popIdx = line.IndexOf("chaos_eval_stack[--chaos_stack_top]", StringComparison.Ordinal);
-            if (popIdx >= 0 && line.Contains('='))
+            if (popIdx >= 0 && slots.Depth > 0)
             {
-                int eqIdx = line.IndexOf('=', popIdx);
-                string target = line[..eqIdx].TrimEnd();
-                // The pop expression might be wrapped: static_cast<T>(...[...]) etc.
-                // We need to extract just the [...[...]] part and replace it with _sN
                 string beforePop = line[..popIdx].TrimEnd();
                 string afterPop = line[(popIdx + "chaos_eval_stack[--chaos_stack_top]".Length)..];
                 string slotName = slots.Pop();
-                // Reconstruct: keep the prefix operations intact
-                // e.g.: "const auto x = static_cast<T>(chaos_eval_stack[--chaos_stack_top]);"
-                // becomes: "const auto x = static_cast<T>(_sN);"
                 lines[i] = $"{beforePop}{slotName}{afterPop}";
                 continue;
             }
@@ -208,15 +205,9 @@ public sealed partial class NativeAotLoweringPlanner
             if (line.Contains("chaos_eval_stack[chaos_stack_top] = chaos_eval_stack[chaos_stack_top - 1]"))
             {
                 string prefix = line[..line.IndexOf("chaos_eval_stack[chaos_stack_top]", StringComparison.Ordinal)].TrimEnd();
-                string slotName = slots.Push();
-                string sourceSlot = slots.Peek(); // the push incremented depth; Peek is the copy
-                // Actually for dup: the top slot before dup is at depth-1, after dup depth has +1
-                // But the Push() already incremented depth. We need the PREVIOUS top.
-                // Fix: Pop the slot we just pushed, read the (now restored) previous top
-                string newSlot = slots.Pop(); // undo the Push
-                string prevTop = slots.Peek(); // this is the original top
-                slots.Push(); // redo the Push — the new slot name is the same
-                lines[i] = $"{prefix}auto {newSlot} = {prevTop};";
+                slots.Push(); // increment depth
+                string top = slots.Peek(); // slot at new depth (same index as old depth - 1)
+                lines[i] = $"{prefix}{top} = {slots.Peek()};";
                 continue;
             }
         }
@@ -232,6 +223,71 @@ public sealed partial class NativeAotLoweringPlanner
     // no merge labels.  Leaf instructions use EmitLinearInstruction
     // (no goto-next appended).
     // ──────────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Goto target offsets collected from the current IR tree, used by
+    /// EmitIRBlock to emit missing label definitions (chaos_ip_OFFSET:)
+    /// for blocks that are targets of IRGoto or residual br/leave.
+    /// </summary>
+    private HashSet<int>? _irGotoTargets;
+
+    /// <summary>
+    /// Labels already emitted in the current method body (C++ labels have
+    /// function scope, so duplicates across then/else bodies are illegal).
+    /// </summary>
+    private readonly HashSet<int> _emittedLabels = new();
+
+    /// <summary>
+    /// Recursively collect all goto/br/leave target offsets from the tree.
+    /// </summary>
+    private static void CollectGotoTargets(StructuredIRNode node, HashSet<int> targets)
+    {
+        switch (node)
+        {
+            case IRBlock block:
+                if (block.Terminator != null &&
+                    (block.Terminator.Op == "br" || block.Terminator.Op == "leave"))
+                    targets.Add(GetRequiredIntOperand(block.Terminator));
+                break;
+
+            case IRSequence seq:
+                foreach (var child in seq.Nodes)
+                    CollectGotoTargets(child, targets);
+                break;
+
+            case IRIfThenElse ite:
+                CollectGotoTargets(ite.ThenBody, targets);
+                if (ite.ElseBody != null)
+                    CollectGotoTargets(ite.ElseBody, targets);
+                break;
+
+            case IRWhileLoop w:
+                CollectGotoTargets(w.Body, targets);
+                break;
+
+            case IRDoWhileLoop dw:
+                CollectGotoTargets(dw.Body, targets);
+                break;
+
+            case IRSwitch sw:
+                foreach (var caseBody in sw.CaseBodies.Values)
+                    CollectGotoTargets(caseBody, targets);
+                if (sw.DefaultBody != null)
+                    CollectGotoTargets(sw.DefaultBody, targets);
+                break;
+
+            case IRGoto g:
+                targets.Add(g.TargetOffset);
+                break;
+
+            case IRExceptionRegion er:
+                CollectGotoTargets(er.TryBody, targets);
+                CollectGotoTargets(er.HandlerBody, targets);
+                break;
+
+            // IRBreak, IRContinue, IRReturn, IRThrow — no target
+        }
+    }
 
     /// <summary>
     /// Top-level entry point: emit a StructuredIR tree as C++ code.
@@ -314,6 +370,18 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
+        // If this block's first instruction is a goto target, emit the label.
+        // This covers both IRGoto and residual br/leave fallback targets.
+        // C++ labels have function scope — guard against duplicates.
+        if (_irGotoTargets != null && block.BodyInstructions.Count > 0)
+        {
+            int offset = GetRequiredIlOffset(block.BodyInstructions[0]);
+            if (_irGotoTargets.Contains(offset) && _emittedLabels.Add(offset))
+            {
+                builder.AppendLine($"{indentation}chaos_ip_{offset}:");
+            }
+        }
+
         var slots = new SlotContext();
 
         foreach (var instr in block.BodyInstructions)
@@ -812,9 +880,31 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
+        // Slot array for structured-IR eval-stack replacement.
+        // Each IRBlock's ReplaceStackOpsWithSlots rewrites
+        // chaos_eval_stack[...] patterns to __s[N], so declare the
+        // backing store here for the whole method body.
+        builder.AppendLine("    CHAOS_IL2CPP_INTPTR __s[64] = {};");
+
         var tree = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
         StructuredIRNode ir = tree;
-        EmitStructuredIRNode(builder, ir, method, "    ");
+
+        // Collect ALL branch target offsets — both from the raw instruction
+        // list (EnumerateBranchTargets) and from any IRGoto nodes the structure
+        // recovery introduced.  This guarantees every goto chaos_ip_N has a
+        // matching label regardless of how the IR tree expresses branches.
+        var gotoTargets = EnumerateBranchTargets(instructions);
+        CollectGotoTargets(ir, gotoTargets);
+        _irGotoTargets = gotoTargets;
+        _emittedLabels.Clear();
+        try
+        {
+            EmitStructuredIRNode(builder, ir, method, "    ");
+        }
+        finally
+        {
+            _irGotoTargets = null;
+        }
     }
 
 }

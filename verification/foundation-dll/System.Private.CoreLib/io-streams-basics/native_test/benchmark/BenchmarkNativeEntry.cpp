@@ -1,7 +1,9 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/io/streams-basics
 #include <chaos/native_types.h>
-#include <chaos/native_types.h>
+#include <cctype>
+#include <cstring>
+#include <string>
 
 namespace chaos::benchmark::io_streams_basics
 {
@@ -22,12 +24,12 @@ namespace chaos::benchmark::io_streams_basics
 
     // [3] System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_3() {
-        return static_cast<CHAOS_IL2CPP_INT64>(42);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [4] System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_4() {
-        return static_cast<CHAOS_IL2CPP_INT64>(42);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [5] System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()
@@ -87,7 +89,7 @@ namespace chaos::benchmark::io_streams_basics
 
     // [16] System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_16() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [17] System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.String)

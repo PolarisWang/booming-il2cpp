@@ -1,4 +1,104 @@
 {
   "schemaVersion": 1,
-  "cases": []
+  "cases": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttribute:System.Attribute(System.Reflection.MemberInfo,System.Type)",
+      "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host/AttributesCustomMetadataHotUpdate.cs",
+      "className": "AttributesCustomMetadataHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttribute_System_Attribute_System_Reflection_MemberInfo_System_Type",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)",
+      "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host/AttributesCustomMetadataHotUpdate.cs",
+      "className": "AttributesCustomMetadataHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttribute_System_Attribute_System_Reflection_Assembly_System_Type",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.MemberInfo,System.Type)",
+      "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host/AttributesCustomMetadataHotUpdate.cs",
+      "className": "AttributesCustomMetadataHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_MemberInfo_System_Type",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.Assembly,System.Type)",
+      "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host/AttributesCustomMetadataHotUpdate.cs",
+      "className": "AttributesCustomMetadataHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_Assembly_System_Type",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.MemberInfo)",
+      "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host/AttributesCustomMetadataHotUpdate.cs",
+      "className": "AttributesCustomMetadataHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_MemberInfo",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.Assembly)",
+      "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host/AttributesCustomMetadataHotUpdate.cs",
+      "className": "AttributesCustomMetadataHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Attribute_GetCustomAttributes_System_Attribute_System_Reflection_Assembly",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::IsDefined:System.Boolean(System.Reflection.MemberInfo,System.Type)",
+      "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host/AttributesCustomMetadataHotUpdate.cs",
+      "className": "AttributesCustomMetadataHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Attribute_IsDefined_System_Boolean_System_Reflection_MemberInfo_System_Type",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)",
+      "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host/AttributesCustomMetadataHotUpdate.cs",
+      "className": "AttributesCustomMetadataHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Attribute_IsDefined_System_Boolean_System_Reflection_Assembly_System_Type",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Attribute::get_TypeId:System.Object()",
+      "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/host/AttributesCustomMetadataHotUpdate.cs",
+      "className": "AttributesCustomMetadataHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Attribute_get_TypeId_System_Object",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    }
+  ]
 }

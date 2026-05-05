@@ -1,5 +1,6 @@
 {
   "assembly": "System.Formats.Asn1",
+  "mode": "family-entrypoint",
   "total": 6,
   "passed": 6,
   "failed": 0,
@@ -8,9 +9,7 @@
       "family": "decoder",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -21,9 +20,7 @@
       "family": "encoding-rules",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -34,9 +31,7 @@
       "family": "options-errors",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 26,
@@ -47,9 +42,7 @@
       "family": "reader",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -60,9 +53,7 @@
       "family": "tag-model",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 39,
@@ -73,9 +64,7 @@
       "family": "writer",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -83,5 +72,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\writer\\il2cpp_dist\\entrypoint\\build-output\\WriterPatchEntry.dll"
     }
   ],
-  "timestamp": "2026-05-04T01:13:59"
+  "timestamp": "2026-05-05T19:23:59"
 }

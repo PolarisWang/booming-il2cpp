@@ -1,4 +1,115 @@
 {
   "schemaVersion": 1,
-  "cases": []
+  "cases": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)",
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host/RuntimeCompilerServicesHotUpdate.cs",
+      "className": "RuntimeCompilerServicesHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_GetHashCode_System_Int32_System_Object",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)",
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host/RuntimeCompilerServicesHotUpdate.cs",
+      "className": "RuntimeCompilerServicesHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_Equals_System_Boolean_System_Object_System_Object",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)",
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host/RuntimeCompilerServicesHotUpdate.cs",
+      "className": "RuntimeCompilerServicesHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_GetObjectValue_System_Object_System_Object",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::RunClassConstructor:System.Void(System.RuntimeTypeHandle)",
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host/RuntimeCompilerServicesHotUpdate.cs",
+      "className": "RuntimeCompilerServicesHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_RunClassConstructor_System_Void_System_RuntimeType",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host/RuntimeCompilerServicesHotUpdate.cs",
+      "className": "RuntimeCompilerServicesHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_InitializeArray_System_Void_System_Array_System_Ru",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetSubArray:T[](T[],System.Range)",
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host/RuntimeCompilerServicesHotUpdate.cs",
+      "className": "RuntimeCompilerServicesHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_GetSubArray_T_T_System_Range",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::BoxEnum:System.Object(T)",
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host/RuntimeCompilerServicesHotUpdate.cs",
+      "className": "RuntimeCompilerServicesHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_BoxEnum_System_Object_T",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.Runtime.CompilerServices.FormattableString(System.String,System.Object[])",
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host/RuntimeCompilerServicesHotUpdate.cs",
+      "className": "RuntimeCompilerServicesHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Runtime_CompilerServices_FormattableStringFactory_Create_System_Runtime_CompilerServices_F",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)",
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host/RuntimeCompilerServicesHotUpdate.cs",
+      "className": "RuntimeCompilerServicesHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeWrappedException_ctor_System_Void_System_Object",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()",
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/host/RuntimeCompilerServicesHotUpdate.cs",
+      "className": "RuntimeCompilerServicesHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeWrappedException_get_WrappedException_System_Object",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    }
+  ]
 }

@@ -281,9 +281,39 @@ public sealed class PatchDataExtractor
             var body = peReader.GetMethodBody(rva);
             var ilBytes = body?.GetILBytes();
             if (ilBytes is null || ilBytes.Length == 0) continue;
+
             entry.body_offset = (uint)ms.Position;
-            entry.body_size = (uint)ilBytes.Length;
-            ms.Write(ilBytes, 0, ilBytes.Length);
+
+            // Reconstruct the method body header (ECMA 335 II.25.4).
+            // body.GetILBytes() returns ONLY the IL code bytes, stripping the header.
+            // ParseMethodBodyHeader on the C++ side expects the full body with header.
+            //
+            // Tiny format (code_size < 64, max_stack <= 8):
+            //   1 byte: (code_size << 2) | 0x02
+            // Fat format:
+            //   12 bytes: flags(2) + max_stack(2) + code_size(4) + local_sig_tok(4)
+            if (ilBytes.Length < 64 && body.MaxStack <= 8)
+            {
+                var hdr = (byte)((ilBytes.Length << 2) | 0x02);
+                ms.WriteByte(hdr);
+                ms.Write(ilBytes, 0, ilBytes.Length);
+                entry.body_size = (uint)ilBytes.Length + 1;
+            }
+            else
+            {
+                var flags = (ushort)0x0003;  // CorILMethod_FatFormat
+                var maxStack = (ushort)body.MaxStack;
+                var codeSize = (uint)ilBytes.Length;
+                var localSig = (uint)MetadataTokens.GetToken(body.LocalSignature);
+
+                ms.Write(BitConverter.GetBytes(flags));
+                ms.Write(BitConverter.GetBytes(maxStack));
+                ms.Write(BitConverter.GetBytes(codeSize));
+                ms.Write(BitConverter.GetBytes(localSig));
+                ms.Write(ilBytes, 0, ilBytes.Length);
+                entry.body_size = (uint)ilBytes.Length + 12;
+            }
+
             methodDefs[i] = entry;
         }
         return ms.ToArray();

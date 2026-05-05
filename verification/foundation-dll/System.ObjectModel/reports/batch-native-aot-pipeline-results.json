@@ -1,5 +1,6 @@
 {
   "assembly": "System.ObjectModel",
+  "mode": "family-entrypoint",
   "total": 6,
   "passed": 6,
   "failed": 0,
@@ -8,9 +9,7 @@
       "family": "collection-change-notifications",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 20,
@@ -21,9 +20,7 @@
       "family": "command-type-metadata",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 16,
@@ -34,9 +31,7 @@
       "family": "data-errors",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 8,
@@ -47,9 +42,7 @@
       "family": "object-model-collections",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 19,
@@ -60,9 +53,7 @@
       "family": "observable-collections",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 25,
@@ -73,9 +64,7 @@
       "family": "property-change-notifications",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 18,
@@ -83,5 +72,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\property-change-notifications\\il2cpp_dist\\entrypoint\\build-output\\PropertyChangeNotificationsPatchEntry.dll"
     }
   ],
-  "timestamp": "2026-05-04T01:24:56"
+  "timestamp": "2026-05-05T19:24:08"
 }

@@ -1,7 +1,9 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/collections/generic-core
 #include <chaos/native_types.h>
-#include <chaos/native_types.h>
+#include <cctype>
+#include <cstring>
+#include <string>
 
 namespace chaos::benchmark::collections_generic_core
 {
@@ -32,7 +34,7 @@ namespace chaos::benchmark::collections_generic_core
 
     // [5] System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_5() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [6] System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()

@@ -35,6 +35,16 @@ void MarshalStructNativeToManaged(
     RuntimeState* rs,
     ThreadState* ts) noexcept;
 
+/// Destroy native resources (e.g. CoTaskMem strings) allocated during
+/// managed-to-native marshalling for this struct and its nested fields.
+/// @param desc      Descriptor tree for the struct type.
+/// @param native_blob  Native-side blob to clean up.
+/// @param rs        Runtime state (for string free).
+void DestroyMarshalledStruct(
+    const marshal_abi::StructMarshallingDescriptorV1* desc,
+    unsigned char* native_blob,
+    RuntimeState* rs) noexcept;
+
 }  // namespace chaos::il2cpp::struct_marshal
 
 #endif  // CHAOS_IL2CPP_STRUCT_MARSHAL_H_

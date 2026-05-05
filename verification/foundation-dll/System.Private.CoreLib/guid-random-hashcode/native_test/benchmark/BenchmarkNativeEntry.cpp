@@ -1,7 +1,9 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/guid/random/hashcode
 #include <chaos/native_types.h>
-#include <chaos/native_types.h>
+#include <cctype>
+#include <cstring>
+#include <string>
 
 namespace chaos::benchmark::guid_random_hashcode
 {
@@ -47,7 +49,7 @@ namespace chaos::benchmark::guid_random_hashcode
 
     // [8] System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_8() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [9] System.Private.CoreLib/System.Random::NextDouble:System.Double()
@@ -72,7 +74,7 @@ namespace chaos::benchmark::guid_random_hashcode
 
     // [13] System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_13() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     using BenchmarkEntryFn = CHAOS_IL2CPP_INT32 (*)();

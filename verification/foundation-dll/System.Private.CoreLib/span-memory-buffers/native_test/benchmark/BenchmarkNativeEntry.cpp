@@ -1,28 +1,30 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/span/memory-buffers
 #include <chaos/native_types.h>
-#include <chaos/native_types.h>
+#include <cctype>
+#include <cstring>
+#include <string>
 
 namespace chaos::benchmark::span_memory_buffers
 {
     // [0] System.Private.CoreLib/System.Span`1::get_Item:T&(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_0() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [1] System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_1() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [2] System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32,System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_2() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [3] System.Private.CoreLib/System.Span`1::ToArray:T[](System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_3() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [4] System.Private.CoreLib/System.Span`1::CopyTo:System.Void(System.Span`1)
@@ -37,12 +39,12 @@ namespace chaos::benchmark::span_memory_buffers
 
     // [6] System.Private.CoreLib/System.ReadOnlySpan`1::get_Item:T&(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_6() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [7] System.Private.CoreLib/System.ReadOnlySpan`1::Slice:System.ReadOnlySpan`1(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_7() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [8] System.Private.CoreLib/System.ReadOnlySpan`1::ToArray:T[]()
@@ -52,7 +54,7 @@ namespace chaos::benchmark::span_memory_buffers
 
     // [9] System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_9() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [10] System.Private.CoreLib/System.Memory`1::get_Span:System.Span`1()

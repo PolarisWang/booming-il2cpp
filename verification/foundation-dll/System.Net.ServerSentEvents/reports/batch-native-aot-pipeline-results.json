@@ -1,5 +1,6 @@
 {
   "assembly": "System.Net.ServerSentEvents",
+  "mode": "family-entrypoint",
   "total": 4,
   "passed": 4,
   "failed": 0,
@@ -8,9 +9,7 @@
       "family": "formatter",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -21,9 +20,7 @@
       "family": "item-parser",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -34,9 +31,7 @@
       "family": "parser",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -47,9 +42,7 @@
       "family": "sse-item",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -57,5 +50,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Net.ServerSentEvents\\sse-item\\il2cpp_dist\\entrypoint\\build-output\\SseItemPatchEntry.dll"
     }
   ],
-  "timestamp": "2026-05-04T01:17:08"
+  "timestamp": "2026-05-05T19:23:42"
 }

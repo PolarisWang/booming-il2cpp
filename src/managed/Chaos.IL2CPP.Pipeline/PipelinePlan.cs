@@ -33,4 +33,39 @@ public sealed class PipelinePlan
 
         return _codeGen.Generate(request, linkedWorld, metadataWriterOutput);
     }
+
+    /// <summary>
+    /// Execute the pipeline for multiple input assemblies.
+    /// All assemblies are loaded into a unified world, linked together,
+    /// and produce per-assembly codegen results.
+    /// </summary>
+    public IReadOnlyList<ManagedClosureResult> ExecuteMulti(MultiAssemblyClosureRequest request)
+    {
+        var loadedWorld = _loader.LoadMultiple(new ManagedClosureRequest(
+            request.InputAssemblyPaths[0],
+            request.OutputRootPath,
+            EntryPointSubjectIdOverride: request.EntryPointSubjectIdOverride,
+            AdditionalAssemblyPaths: request.InputAssemblyPaths.Skip(1)
+                .Concat(request.AdditionalAssemblyPaths ?? [])
+                .ToList(),
+            FullAssemblyClosure: string.IsNullOrWhiteSpace(request.EntryPointSubjectIdOverride)));
+
+        var semanticWorld = _semanticWorld.Build(loadedWorld);
+        var linkedWorld = _linker.Link(semanticWorld);
+        var metadataWriterOutput = _metadataWriter.Write(linkedWorld);
+
+        var fullResult = _codeGen.Generate(
+            new ManagedClosureRequest(
+                request.InputAssemblyPaths[0],
+                request.OutputRootPath,
+                EntryPointSubjectIdOverride: request.EntryPointSubjectIdOverride,
+                AdditionalAssemblyPaths: request.InputAssemblyPaths.Skip(1)
+                    .Concat(request.AdditionalAssemblyPaths ?? [])
+                    .ToList(),
+                FullAssemblyClosure: true),
+            linkedWorld,
+            metadataWriterOutput);
+
+        return _codeGen.FilterResultPerAssembly(fullResult, request.InputAssemblyPaths);
+    }
 }

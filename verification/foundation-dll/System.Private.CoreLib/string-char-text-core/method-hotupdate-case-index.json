@@ -1,4 +1,225 @@
 {
   "schemaVersion": 1,
-  "cases": []
+  "cases": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_IndexOf_System_Int32_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_IndexOf_System_Int32_System_Char",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Substring_System_String_System_Int32",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Substring_System_String_System_Int32_System_Int32",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Compare_System_Int32_System_String_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Compare_System_Int32_System_String_System_Int32_System_String_System_Int32_System_I",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Concat_System_String_System_String_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Concat_System_String_System_String_System_String_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Format_System_String_System_String_System_Object",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_StartsWith_System_Boolean_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Contains_System_Boolean_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Replace_System_String_System_String_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Split:System.String[](System.Char)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Split_System_String_System_Char",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::ToUpper:System.String()",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_ToUpper_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::ToLower:System.String()",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_ToLower_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Trim:System.String()",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Trim_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_String_Join_System_String_System_String_System_String",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Char_IsDigit_System_Boolean_System_Char",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Char_IsLetter_System_Boolean_System_Char",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)",
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "caseKind": "hotupdate",
+      "projectPath": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host",
+      "sourceFile": "verification/foundation-dll/System.Private.CoreLib/string-char-text-core/host/StringCharTextCoreHotUpdate.cs",
+      "className": "StringCharTextCoreHotUpdate",
+      "memberName": "HotUpdate_System_Private_CoreLib_System_Char_IsWhiteSpace_System_Boolean_System_Char",
+      "direction": "HostToPatch",
+      "annotationDigest": "generated-source"
+    }
+  ]
 }

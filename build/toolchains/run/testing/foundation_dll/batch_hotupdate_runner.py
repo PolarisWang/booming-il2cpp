@@ -368,7 +368,7 @@ def _run_variant_pipeline(
     return result
 
 
-def run_family(family_slug: str) -> dict:
+def run_family(family_slug: str, skip_semantic_patch: bool = False) -> dict:
     """Run the full hotupdate pipeline for one family. Returns result dict."""
     result = {
         "family": family_slug,
@@ -402,17 +402,21 @@ def run_family(family_slug: str) -> dict:
         trace("family_patch_failed", family=family_slug, error=patch_result.get("error"))
         return result
 
-    # Process semantic-patch variant (alternative API calls)
-    print(f"\n  --- Semantic-patch variant ---")
-    sp_result = _run_variant_pipeline(family_slug, mids, "semantic-patch", _build_semantic_patch_entrypoint)
-    result["variants"]["semantic-patch"] = {
-        "success": sp_result["success"],
-        "error": sp_result.get("error"),
-    }
-    if not sp_result["success"]:
-        result["error"] = f"semantic-patch variant failed: {sp_result.get('error')}"
-        trace("family_sp_failed", family=family_slug, error=sp_result.get("error"))
-        return result
+    # Semantic-patch variant (optional — D3 dispatch replaces the need for SP C++)
+    if skip_semantic_patch:
+        print(f"\n  --- Semantic-patch variant (skipped) ---")
+        result["variants"]["semantic-patch"] = {"success": True, "skipped": True}
+    else:
+        print(f"\n  --- Semantic-patch variant ---")
+        sp_result = _run_variant_pipeline(family_slug, mids, "semantic-patch", _build_semantic_patch_entrypoint)
+        result["variants"]["semantic-patch"] = {
+            "success": sp_result["success"],
+            "error": sp_result.get("error"),
+        }
+        if not sp_result["success"]:
+            result["error"] = f"semantic-patch variant failed: {sp_result.get('error')}"
+            trace("family_sp_failed", family=family_slug, error=sp_result.get("error"))
+            return result
 
     result["success"] = True
     trace("family_passed", family=family_slug, method_count=len(mids))
@@ -424,6 +428,8 @@ def main() -> None:
     parser.add_argument("--trace", action="store_true", default=True, help="Enable JSONL trace logging (default: on)")
     parser.add_argument("--no-trace", action="store_true", help="Disable JSONL trace logging")
     parser.add_argument("--families", nargs="*", help="Space-separated subset of family slugs to process")
+    parser.add_argument("--skip-semantic-patch", action="store_true", default=True, help="Skip semantic-patch variant (D3 dispatch replaces it)")
+    parser.add_argument("--no-skip-semantic-patch", action="store_false", dest="skip_semantic_patch", help="Include semantic-patch variant")
     args = parser.parse_args()
 
     if args.trace and not args.no_trace:
@@ -431,7 +437,7 @@ def main() -> None:
 
     families = args.families or FAMILIES
 
-    print(f"Batch hotupdate CodeGen pipeline (patch + semantic-patch) - {len(families)} families")
+    print(f"Batch hotupdate CodeGen pipeline (patch + {'(skipped) ' if args.skip_semantic_patch else ''}semantic-patch) - {len(families)} families")
     print(f"Repo: {_REPO_ROOT}")
     print(f"Verification: {_VERIFICATION}")
     print()
@@ -443,7 +449,7 @@ def main() -> None:
     failed = 0
 
     for idx, family_slug in enumerate(families):
-        family_result = run_family(family_slug)
+        family_result = run_family(family_slug, skip_semantic_patch=args.skip_semantic_patch)
         results.append(family_result)
 
         if family_result["success"]:
@@ -461,8 +467,9 @@ def main() -> None:
         status = "PASS" if r["success"] else "FAIL"
         variants = r.get("variants", {})
         patch_ok = variants.get("patch", {}).get("success", False)
-        sp_ok = variants.get("semantic-patch", {}).get("success", False)
-        v_status = f"patch={'OK' if patch_ok else 'FAIL'}, sp={'OK' if sp_ok else 'FAIL'}"
+        sp = variants.get("semantic-patch", {})
+        sp_status = "SKIP" if sp.get("skipped") else ("OK" if sp.get("success") else "FAIL")
+        v_status = f"patch={'OK' if patch_ok else 'FAIL'}, sp={sp_status}"
         print(f"  {status:4s}  {r['family']:35s}  {v_status}")
 
     # Write results

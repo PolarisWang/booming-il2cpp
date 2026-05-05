@@ -1,5 +1,6 @@
 {
   "assembly": "System.IO.Pipelines",
+  "mode": "family-entrypoint",
   "total": 5,
   "passed": 5,
   "failed": 0,
@@ -8,9 +9,7 @@
       "family": "options-scheduler",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 52,
@@ -21,9 +20,7 @@
       "family": "pipe-core",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 26,
@@ -34,9 +31,7 @@
       "family": "read-flush-results",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 26,
@@ -47,9 +42,7 @@
       "family": "reader-writer",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 26,
@@ -60,9 +53,7 @@
       "family": "stream-adapters",
       "steps": {
         "build_entrypoint": "OK",
-        "convert": "OK",
-        "trim": "OK",
-        "emit_native_aot": "OK"
+        "convert_to_cpp": "OK"
       },
       "success": true,
       "methodCount": 13,
@@ -70,5 +61,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\stream-adapters\\il2cpp_dist\\entrypoint\\build-output\\StreamAdaptersPatchEntry.dll"
     }
   ],
-  "timestamp": "2026-05-04T01:15:28"
+  "timestamp": "2026-05-05T19:23:51"
 }

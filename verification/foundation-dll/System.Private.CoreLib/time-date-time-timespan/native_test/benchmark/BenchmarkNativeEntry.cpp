@@ -1,18 +1,20 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/time/date-time-timespan
 #include <chaos/native_types.h>
-#include <chaos/native_types.h>
+#include <cctype>
+#include <cstring>
+#include <string>
 
 namespace chaos::benchmark::time_date_time_timespan
 {
     // [0] System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_0() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [1] System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_1() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [2] System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)
@@ -52,17 +54,17 @@ namespace chaos::benchmark::time_date_time_timespan
 
     // [9] System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_9() {
-        return static_cast<CHAOS_IL2CPP_INT64>(0);
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [10] System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_10() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [11] System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_11() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [12] System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)

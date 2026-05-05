@@ -1,13 +1,15 @@
 // Auto-generated benchmark native entry
 // Family: family/System.Private.CoreLib/math/numerics
 #include <chaos/native_types.h>
-#include <chaos/native_types.h>
+#include <cctype>
+#include <cstring>
+#include <string>
 
 namespace chaos::benchmark::math_numerics
 {
     // [0] System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_0() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [1] System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)
@@ -37,7 +39,7 @@ namespace chaos::benchmark::math_numerics
 
     // [6] System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_6() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [7] System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)
@@ -47,7 +49,7 @@ namespace chaos::benchmark::math_numerics
 
     // [8] System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_8() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [9] System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)
@@ -72,12 +74,12 @@ namespace chaos::benchmark::math_numerics
 
     // [13] System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_13() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [14] System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)
     CHAOS_IL2CPP_INT32 BenchmarkEntry_14() {
-        return 42;
+        return static_cast<CHAOS_IL2CPP_INT32>(42);
     }
 
     // [15] System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)

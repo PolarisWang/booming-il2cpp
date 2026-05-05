@@ -212,7 +212,8 @@ public sealed partial class NativeAotLoweringPlanner
 		bool hasBlittableStructParams = method.BlittableStructParameterIndices is { Count: > 0 };
 		bool hasBlittableStructReturn = false; // V1: no blittable struct return support
 		bool hasSimpleNonBlittableStructParams = method.SimpleNonBlittableStructParameterIndices is { Count: > 0 };
-		bool needsMarshalling = hasStringParams || hasStringReturn || hasBlittableStructParams || hasSimpleNonBlittableStructParams;
+		bool hasComplexStructParams = method.ComplexStructParameterIndices is { Count: > 0 };
+		bool needsMarshalling = hasStringParams || hasStringReturn || hasBlittableStructParams || hasSimpleNonBlittableStructParams || hasComplexStructParams;
 		var stringParamSet = hasStringParams
 			? new HashSet<int>(method.StringParameterIndices!)
 			: new HashSet<int>();
@@ -222,6 +223,10 @@ public sealed partial class NativeAotLoweringPlanner
 		var simpleNonBlittableSet = hasSimpleNonBlittableStructParams
 			? new HashSet<int>(method.SimpleNonBlittableStructParameterIndices!)
 			: new HashSet<int>();
+		var complexStructSet = hasComplexStructParams
+			? new HashSet<int>(method.ComplexStructParameterIndices!)
+			: new HashSet<int>();
+		Dictionary<int, string>? complexStructDescriptorSymbols = null;
 
 		// Build arg names and native call args.
 		var argNames = new string[methodAbiParameterSlots.Count];
@@ -232,6 +237,10 @@ public sealed partial class NativeAotLoweringPlanner
 			if (stringParamSet.Contains(i))
 			{
 				nativeArgs[i] = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_marshal_" + i + ")";
+			}
+			else if (complexStructSet.Contains(i))
+			{
+				nativeArgs[i] = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_struct_complex_copy_" + i + ")";
 			}
 			else if (simpleNonBlittableSet.Contains(i))
 			{
@@ -256,7 +265,7 @@ public sealed partial class NativeAotLoweringPlanner
 		var fnParamTypes = new string[methodAbiParameterSlots.Count];
 		for (int i = 0; i < methodAbiParameterSlots.Count; i++)
 		{
-			fnParamTypes[i] = blittableStructParamSet.Contains(i) || simpleNonBlittableSet.Contains(i)
+			fnParamTypes[i] = blittableStructParamSet.Contains(i) || simpleNonBlittableSet.Contains(i) || complexStructSet.Contains(i) || complexStructSet.Contains(i)
 				? "CHAOS_IL2CPP_INTPTR"
 				: MapAbiSlotReturnType(methodAbiParameterSlots[i]);
 		}
@@ -267,11 +276,14 @@ public sealed partial class NativeAotLoweringPlanner
 
 		string pinvokeTag = hasStringParams || hasStringReturn
 			? "simple non-blittable"
-			: hasSimpleNonBlittableStructParams
-				? "simple non-blittable struct"
-				: hasBlittableStructParams
-					? "blittable struct"
-					: "blittable";
+			: hasComplexStructParams
+				? "complex non-blittable struct"
+				: hasSimpleNonBlittableStructParams
+					? "simple non-blittable struct"
+					: hasBlittableStructParams
+						? "blittable struct"
+						: "blittable";
+
 		builder.AppendLine($"// P/Invoke: {moduleName}!{entryPointName} ({pinvokeTag})");
 		builder.AppendLine($"extern \"C\" {returnType} {method.NativeSymbol}({parameterSignature})");
 		builder.AppendLine("{");
@@ -295,6 +307,15 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 
 		// Stack-local copies for non-blittable struct parameters with string fields.
+
+		// Stack-local copies for complex non-blittable struct parameters.
+		if (hasComplexStructParams)
+		{
+			foreach (int idx in method.ComplexStructParameterIndices!)
+			{
+				builder.AppendLine("    auto chaos_struct_complex_copy_" + idx + " = chaos_arg_" + idx);
+			}
+		}
 		if (hasSimpleNonBlittableStructParams)
 		{
 			foreach (int idx in method.SimpleNonBlittableStructParameterIndices!)
@@ -348,13 +369,29 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 
+		// Pre-call: marshal complex non-blittable struct parameters.
+		if (hasComplexStructParams && complexStructDescriptorSymbols != null)
+		{
+			foreach (int idx in method.ComplexStructParameterIndices!)
+			{
+				if (complexStructDescriptorSymbols.TryGetValue(idx, out string? descSymbol))
+				{
+					builder.AppendLine("    ::chaos::il2cpp::runtime_core::MarshalStructManagedToNative(");
+					builder.AppendLine("        &" + descSymbol + ",");
+					builder.AppendLine("        reinterpret_cast<unsigned char*>(&chaos_struct_complex_copy_" + idx + "),");
+					builder.AppendLine("        reinterpret_cast<const unsigned char*>(&chaos_arg_" + idx + "),");
+					builder.AppendLine("        chaos_rs_, chaos_ts_);");
+				}
+			}
+		}
+
 		// Native call — four code paths:
 		//   1. Pure blittable (no marshalling): direct call-and-return, early exit.
 		//   2. Blittable struct on non-void return: capture result, cleanup, return.
 		//   3. Blittable struct on void return: call, cleanup, fall through.
 		//   4. Non-blittable (string): existing string marshal paths.
 		builder.AppendLine();
-		if (!hasStringParams && !hasStringReturn && !hasBlittableStructParams && !hasSimpleNonBlittableStructParams)
+		if (!hasStringParams && !hasStringReturn && !hasBlittableStructParams && !hasSimpleNonBlittableStructParams && !hasComplexStructParams)
 		{
 			// Path 1: pure blittable — return directly.
 			bool isVoidLocal = method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void;
@@ -416,6 +453,22 @@ public sealed partial class NativeAotLoweringPlanner
 					fieldGroupIdx++;
 				}
 			}
+
+		// Post-call: copy marshalled complex struct data back to managed representation.
+		if (hasComplexStructParams && complexStructDescriptorSymbols != null)
+		{
+			foreach (int idx in method.ComplexStructParameterIndices!)
+			{
+				if (complexStructDescriptorSymbols.TryGetValue(idx, out string? descSymbol))
+				{
+					builder.AppendLine("    ::chaos::il2cpp::runtime_core::MarshalStructNativeToManaged(");
+					builder.AppendLine("        &" + descSymbol + ",");
+					builder.AppendLine("        reinterpret_cast<unsigned char*>(&chaos_arg_" + idx + "),");
+					builder.AppendLine("        reinterpret_cast<const unsigned char*>(&chaos_struct_complex_copy_" + idx + "),");
+					builder.AppendLine("        chaos_rs_, chaos_ts_);");
+				}
+			}
+		}
 
 		// String return: convert native char* to managed string.
 		if (hasStringReturn)

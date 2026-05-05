@@ -867,6 +867,11 @@ public sealed partial class NativeAotLoweringPlanner
 			bool flag10 = string.Equals(ns, "System.Private.CoreLib/System.Reflection.AssemblyName", StringComparison.Ordinal);
 			if (string.Equals(ns, "System.Private.CoreLib/System.Decimal", StringComparison.Ordinal))
 			{
+				builder.AppendLine("struct " + GetNativeTypeSymbol(typeSubjectId));
+				builder.AppendLine("{");
+				builder.AppendLine("    chaos_object_header header{};");
+				builder.AppendLine("};");
+				builder.AppendLine();
 				continue;
 			}
 			if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string value6) && !string.IsNullOrWhiteSpace(value6) && referenceTypeSubjectIds.Contains(value6))
@@ -1141,5 +1146,144 @@ public sealed partial class NativeAotLoweringPlanner
 
 		return result;
 	}
+
+		// ── Struct marshalling descriptor emission ──────────────────────────────
+
+		private static int GetStructFieldKindValue(string kind)
+		{
+			return kind switch
+			{
+				"Blittable" => 0,
+				"BoolField" => 1,
+				"StringField" => 2,
+				"NestedStruct" => 3,
+				"ByValArray" => 4,
+				"LPArray" => 5,
+				"DecimalField" => 6,
+				"DateTimeField" => 7,
+				"ObjectField" => 8,
+				"GuidField" => 9,
+				_ => 0,
+			};
+		}
+
+		private static int GetNativeElementTypeValue(string? elementType)
+		{
+			return elementType switch
+			{
+				"None" or null => 0,
+				"U1" => 1,
+				"I1" => 2,
+				"U2" => 3,
+				"I2" => 4,
+				"U4" => 5,
+				"I4" => 6,
+				"U8" => 7,
+				"I8" => 8,
+				"R4" => 9,
+				"R8" => 10,
+				"Struct" => 11,
+				_ => 0,
+			};
+		}
+
+		private void EmitStructMarshallingDescriptors(
+			StringBuilder builder,
+			IReadOnlyList<StructMarshallingDescriptorArtifact>? descriptors)
+		{
+			if (descriptors == null || descriptors.Count == 0)
+				return;
+
+			builder.AppendLine();
+			builder.AppendLine("// ── Struct marshalling descriptors (codegen static) ──");
+			builder.AppendLine();
+
+			// Build a lookup for nested type references
+			var descriptorByTypeId = descriptors.ToDictionary(d => d.TypeSubjectId, StringComparer.Ordinal);
+
+			// Emit each descriptor
+			foreach (var desc in descriptors)
+			{
+				string safeName = SanitizeSubjectId(desc.TypeSubjectId);
+				string descSymbol = GetNativeStructMarshallingDescriptorSymbol(desc.TypeSubjectId);
+				string fieldArraySymbol = "s_marshal_fields_" + safeName;
+
+				// Emit the field descriptor array as a static constexpr array
+				builder.Append("static constexpr StructFieldDescriptorV1 ");
+				builder.Append(fieldArraySymbol);
+				builder.AppendLine("[] =");
+				builder.AppendLine("{");
+
+				for (int i = 0; i < desc.Fields.Count; i++)
+				{
+					var f = desc.Fields[i];
+
+					// Resolve nested descriptor pointer expression
+					string nestedPtrExpr;
+					if (f.Kind == "NestedStruct" && f.NestedTypeSubjectId != null
+						&& descriptorByTypeId.ContainsKey(f.NestedTypeSubjectId))
+					{
+						nestedPtrExpr = "&" + GetNativeStructMarshallingDescriptorSymbol(f.NestedTypeSubjectId);
+					}
+					else
+					{
+						nestedPtrExpr = "nullptr";
+					}
+
+					int kindVal = GetStructFieldKindValue(f.Kind);
+					int elemTypeVal = GetNativeElementTypeValue(f.ElementType);
+
+					builder.Append("    { static_cast<StructFieldKind>(");
+					builder.Append(kindVal.ToString());
+					builder.Append("), ");
+					builder.Append(f.Offset.ToString());
+					builder.Append(", ");
+					builder.Append(f.Size.ToString());
+					builder.Append(", ");
+					builder.Append(f.ArrayCount.ToString());
+					builder.Append(", static_cast<NativeElementType>(");
+					builder.Append(elemTypeVal.ToString());
+					builder.Append("), 0, ");
+					builder.Append(nestedPtrExpr);
+					builder.Append(" }");
+
+					if (i < desc.Fields.Count - 1)
+						builder.AppendLine(",");
+					else
+						builder.AppendLine();
+				}
+
+				builder.AppendLine("};");
+
+				// Emit the StructMarshallingDescriptorV1 instance
+				builder.Append("constinit StructMarshallingDescriptorV1 ");
+				builder.Append(descSymbol);
+				builder.AppendLine(" =");
+				builder.AppendLine("{");
+				builder.Append("    ");
+				builder.Append(desc.TotalSize.ToString());
+				builder.AppendLine(",");
+				builder.Append("    ");
+				builder.Append(desc.Fields.Count.ToString());
+				builder.AppendLine(",");
+				builder.Append("    "); // fields[] flexible array initialization
+				builder.Append(fieldArraySymbol);
+				builder.AppendLine("[0]");
+				builder.AppendLine("};");
+
+				// Emit static registration (same pattern as VTable registration)
+				ulong stableId = ComputeStableTypeId(desc.TypeSubjectId);
+				builder.Append("static const int s_ms_reg_");
+				builder.Append(safeName);
+				builder.Append(" = (::chaos::il2cpp::runtime_core::RegisterStaticMarshallingDescriptor(");
+				builder.Append("CHAOS_IL2CPP_UINT64_C(");
+				builder.Append(stableId.ToString());
+				builder.Append("), &");
+				builder.Append(descSymbol);
+				builder.AppendLine("), 0);");
+
+				builder.AppendLine();
+			}
+		}
 
 }

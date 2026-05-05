@@ -105,7 +105,7 @@ public sealed partial class NativeAotLoweringPlanner
 		var parameterSignature = FormatAbiSlotParameterSignature(entry.ParameterAbis);
 		var argCount = entry.ParameterAbis.Count;
 		var args = argCount == 0 ? string.Empty :
-			string.Join(", ", Enumerable.Range(0, argCount).Select(i => $"chaos_arg_{i}"));
+			string.Join(", ", Enumerable.Range(0, argCount).Select(i => $"chaos_fn_arg_{i}"));
 		var bodyLines = entry.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void
 			? new[] { $"    {entry.NativeFnSymbol}({args});" }
 			: new[] { $"    return {entry.NativeFnSymbol}({args});" };
