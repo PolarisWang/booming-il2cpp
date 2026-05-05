@@ -375,6 +375,11 @@ public sealed record AotCoreIrMethodArtifact
     /// the SubjectIds of the string fields in that struct, grouped per parameter.
     /// Indexed by the same order as <see cref="SimpleNonBlittableStructParameterIndices"/>.
     public IReadOnlyList<IReadOnlyList<string>>? SimpleNonBlittableStructStringFieldSubjectIds { get; init; }
+
+    /// For P/Invoke methods: indices of parameters whose managed type is a
+    /// complex non-blittable value type with arbitrary field types. These are
+    /// marshalled via a deep copy with per-field conversion.
+    public IReadOnlyList<int>? ComplexStructParameterIndices { get; init; }
 }
 
 public sealed record AotCoreIrExceptionRegionArtifact

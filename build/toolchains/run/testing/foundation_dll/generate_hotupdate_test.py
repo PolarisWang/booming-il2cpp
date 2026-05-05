@@ -6,8 +6,6 @@ For each family, this script:
      - Forward-declares all extern "C" MethodN symbols from both host and patch
      - Links to the renamed patch file via extern declarations
      - Implements the 9-step verification cycle for each method
-     - Uses bootstrap + method_replacement infrastructure
-     - Optionally adds step 10 semantic verification when semantic-patch C++ is available
   3. Creates CMakeLists.txt with proper linkage
 
 Usage:
@@ -84,25 +82,20 @@ def _class_name(family_slug: str, variant: str) -> str:
     return f"{base}NativeEntry" if variant == "host" else f"{base}PatchEntry"
 
 
-def _discover_method_symbols(family_slug: str) -> tuple[list[str], list[str], list[str]]:
+def _discover_method_symbols(family_slug: str) -> tuple[list[str], list[str]]:
     """Scan the genuine (host) generated C++ to discover MethodN symbols.
 
-    Returns (host_symbols, patch_symbols, semantic_patch_symbols).
+    Returns (host_symbols, patch_symbols).
     """
     host_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
-    # Emit-native-aot may output to generated/ or generated/generated/ depending on version
     patch_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "native-aot.generated.cpp"
     if not patch_cpp.exists():
         patch_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "generated" / "native-aot.generated.cpp"
-    semantic_patch_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "semantic-patch" / "generated" / "native-aot.generated.cpp"
-    if not semantic_patch_cpp.exists():
-        semantic_patch_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "semantic-patch" / "generated" / "generated" / "native-aot.generated.cpp"
 
     host_symbols = _extract_method_symbols(host_cpp)
     patch_symbols = _extract_method_symbols(patch_cpp)
-    semantic_patch_symbols = _extract_method_symbols(semantic_patch_cpp)
 
-    return host_symbols, patch_symbols, semantic_patch_symbols
+    return host_symbols, patch_symbols
 
 
 def _extract_method_symbols(cpp_path: Path) -> list[str]:
@@ -142,18 +135,11 @@ def _generate_hotupdate_test(
     host_symbols: list[str],
     patch_symbols: list[str],
     method_subject_ids: list[str],
-    semantic_patch_symbols: list[str] | None = None,
 ) -> str:
-    """Generate the per-family hotupdate C++ test source.
-
-    If semantic_patch_symbols are provided and match the method count, the test
-    also performs semantic verification: comparing host vs semantic-patch return
-    values to prove the hotupdate mechanism replaced real computation.
-    """
+    """Generate the per-family hotupdate C++ test source."""
     family_id = f"family/System.Private.CoreLib/{family_slug.replace('-', '/')}"
     ns_slug = _ns_slug_from_family_id(family_id)
     method_count = len(host_symbols)
-    has_semantic = bool(semantic_patch_symbols and len(semantic_patch_symbols) == method_count)
 
     # Embed .patchdata for D3 dispatch hotpatch
     host_class_name = _class_name(family_slug, "host")
@@ -162,10 +148,10 @@ def _generate_hotupdate_test(
     lines = []
     if patch_data_cxx:
         lines.append(patch_data_cxx)
-    _emit_header(lines, family_id, method_count, has_semantic)
-    _emit_forward_decls(lines, host_symbols, patch_symbols, semantic_patch_symbols, has_semantic)
-    _emit_namespace_block(lines, host_symbols, patch_symbols, semantic_patch_symbols, has_semantic, method_count)
-    _emit_main_function(lines, method_count, family_id, has_semantic, bool(patch_data_cxx), host_class_name)
+    _emit_header(lines, family_id, method_count)
+    _emit_forward_decls(lines, host_symbols, patch_symbols)
+    _emit_namespace_block(lines, host_symbols, patch_symbols, method_count)
+    _emit_main_function(lines, method_count, family_id, bool(patch_data_cxx), host_class_name)
 
     return "\n".join(lines)
 
@@ -204,7 +190,6 @@ def _emit_header(
     lines: list[str],
     family_id: str,
     method_count: int,
-    has_semantic: bool,
 ) -> None:
     lines.extend([
         "// Per-family hotupdate verification test",
@@ -212,17 +197,10 @@ def _emit_header(
         f"// {method_count} methods",
         "//",
         "// Uses CodeGen-generated C++ for both host (real API calls) and",
-        "// patch (sentinel returns). Verifies the method replacement lifecycle:",
-        "//   original -> register patch -> resolve -> call patched -> revert -> verify",
+        "// patch (sentinel returns). Verifies the D3 dispatch hotpatch lifecycle:",
+        "//   ApplyPatchFromMemory -> dispatch table patching -> Unpatch",
         "//",
     ])
-    if has_semantic:
-        lines.extend([
-            "// When semantic-patch C++ is available (via TYPE_ALTERNATIVE_MAP),",
-            "// also verifies that host and semantic-patch produce different (but valid)",
-            "// return values, proving the hotupdate mechanism replaced actual computation.",
-            "//",
-        ])
     lines.extend([
         '#include "bootstrap.h"',
         '#include "codegen_bridge.h"',
@@ -244,8 +222,6 @@ def _emit_forward_decls(
     lines: list[str],
     host_symbols: list[str],
     patch_symbols: list[str],
-    semantic_patch_symbols: list[str] | None,
-    has_semantic: bool,
 ) -> None:
     lines.append("// ---------------------------------------------------------------")
     lines.append("// Forward declarations: host methods (real API calls via CodeGen)")
@@ -260,21 +236,11 @@ def _emit_forward_decls(
     for sym in patch_symbols:
         lines.append(f'extern "C" CHAOS_IL2CPP_INT32 {sym}(void);')
 
-    if has_semantic and semantic_patch_symbols:
-        lines.append("")
-        lines.append("// ---------------------------------------------------------------")
-        lines.append("// Forward declarations: semantic-patch methods (alternative API calls)")
-        lines.append("// ---------------------------------------------------------------")
-        for sym in semantic_patch_symbols:
-            lines.append(f'extern "C" CHAOS_IL2CPP_INT32 {sym}(void);')
-
 
 def _emit_namespace_block(
     lines: list[str],
     host_symbols: list[str],
     patch_symbols: list[str],
-    semantic_patch_symbols: list[str] | None,
-    has_semantic: bool,
     method_count: int,
 ) -> None:
     lines.extend([
@@ -307,15 +273,6 @@ def _emit_namespace_block(
         lines.append(f"    reinterpret_cast<void* (*)()>(&{sym}),")
     lines.append("};")
 
-    if has_semantic and semantic_patch_symbols:
-        lines.extend([
-            "",
-            "// Semantic-patch method pointer array (alternative real API calls)",
-            "void* (*kSemanticPatchThunks[])() = {",
-        ])
-        for sym in semantic_patch_symbols:
-            lines.append(f"    reinterpret_cast<void* (*)()>(&{sym}),")
-        lines.append("};")
 
     lines.extend([
         "",
@@ -351,7 +308,7 @@ def _emit_namespace_block(
 
 
 def _emit_main_function(lines: list[str], method_count: int, family_id: str,
-                         has_semantic: bool, has_patch_data: bool,
+                         has_patch_data: bool,
                          host_class_name: str) -> None:
     lines.extend([
         "",
@@ -484,18 +441,6 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             "        }",
         ])
 
-    if has_semantic:
-        lines.extend([
-            "        // Step 2b: Call semantic-patch thunk before registration to get alternative checksum.",
-            "        bool has_semantic_thunk = (i < sizeof(kSemanticPatchThunks)/sizeof(kSemanticPatchThunks[0])",
-            "            && kSemanticPatchThunks[i] != nullptr);",
-            "        uintptr_t semantic_value = 0u;",
-            "        if (has_semantic_thunk) {",
-            "            auto* thunk = reinterpret_cast<uintptr_t (*)()>(kSemanticPatchThunks[i]);",
-            "            semantic_value = thunk();",
-            "        }",
-            "",
-        ])
 
     lines.extend([
         "        // Step 3: Register patch replacement (CodeGen-generated sentinel).",
@@ -582,28 +527,6 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "",
     ])
 
-    if has_semantic:
-        lines.extend([
-            "        // Step 11: Semantic verification - host and semantic-patch must differ.",
-            "        // This proves the hotupdate mechanism replaced actual computation.",
-            "        bool semantic_ok = true;",
-            "        if (has_semantic_thunk) {",
-            "            if (original_value == 0u && semantic_value == 0u) {",
-            "                // Both returned 0 - likely TODO stubs, cannot verify semantics.",
-            '                std::fprintf(stderr, "WARN[%u]: both host and semantic-patch returned 0 (stub?)\\n", i);',
-            "                semantic_ok = false;",
-            "                // Don't fail the test — the method still passed all hotupdate steps;",
-            "                // only the semantic comparison is inconclusive.",
-            "            } else if (original_value == semantic_value) {",
-            "                // Different inputs should produce different results.",
-            '                std::fprintf(stderr, "FAIL[%u]: host and semantic-patch returned same value 0x%08zx\\n",',
-            "                    i, static_cast<size_t>(original_value));",
-            "                semantic_ok = false;",
-            "                step_ok = false;",
-            "            }",
-            "        }",
-            "",
-        ])
 
     lines.extend([
         "        if (step_ok) {",
@@ -624,16 +547,10 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         '            "      \\"revertVerified\\": true,\\n"',
     ])
 
-    if has_semantic:
-        lines.extend([
-            '            "      \\"semanticVerified\\": %s\\n"',
-            '            "    }%s\\n",',
-        ])
-    else:
-        lines.extend([
-            '            "      \\"semanticVerified\\": false\\n"',
-            '            "    }%s\\n",',
-        ])
+    lines.extend([
+        '            "      \\"semanticVerified\\": false\\n"',
+        '            "    }%s\\n",',
+    ])
 
     lines.extend([
         "            static_cast<unsigned>(token),",
@@ -642,9 +559,6 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "            static_cast<size_t>(patched_value),",
         "            static_cast<size_t>(expected_sentinel_b),",
     ])
-
-    if has_semantic:
-        lines.append('            (semantic_ok ? "true" : "false"),')
 
     lines.extend([
         "            comma);",
@@ -736,7 +650,7 @@ def generate_family(family_slug: str) -> dict[str, Any]:
     print(f"{'='*60}")
 
     # Discover symbols
-    host_symbols, patch_symbols, semantic_patch_symbols = _discover_method_symbols(family_slug)
+    host_symbols, patch_symbols = _discover_method_symbols(family_slug)
     if not host_symbols:
         print(f"  [SKIP] no host symbols found at {_VERIFICATION / family_slug / 'il2cpp_dist/genuine/generated/'}")
         return {"family": family_slug, "artifacts": []}
@@ -746,16 +660,14 @@ def generate_family(family_slug: str) -> dict[str, Any]:
 
     print(f"  Host symbols: {len(host_symbols)}")
     print(f"  Patch symbols: {len(patch_symbols)}")
-    print(f"  Semantic-patch symbols: {len(semantic_patch_symbols)}")
 
     method_subject_ids = _load_contract(family_slug)
     print(f"  Contract methods: {len(method_subject_ids)}")
 
-    # Generate test (semantic-patch disabled — host thunks' runtime API stubs
-    # return 0 which may trigger CHAOS_IL2CPP_ABORT on null-sensitive paths).
+    # Generate test (host thunks use runtime API stubs that return 0 and
+    # may trigger CHAOS_IL2CPP_ABORT on null-sensitive paths).
     test_source = _generate_hotupdate_test(
         family_slug, host_symbols, patch_symbols, method_subject_ids,
-        semantic_patch_symbols=None,
     )
     test_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "hotupdate"
     test_dir.mkdir(parents=True, exist_ok=True)
@@ -766,8 +678,7 @@ def generate_family(family_slug: str) -> dict[str, Any]:
     # Copy patch file with renamed RunNativeAot to avoid symbol collision
     ns_slug = _ns_slug_from_family_id(f"family/System.Private.CoreLib/{family_slug.replace('-', '/')}")
 
-    # Fix genuine TU: keep extern wrappers (no semantic-patch TU linked, so
-    # function bodies must be in the genuine-fixed TU).
+    # Fix genuine TU: function bodies must be in the genuine-fixed TU.
     _fix_genuine_for_hotupdate_keep_extern(family_slug, ns_slug)
 
     patch_src = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "native-aot.generated.cpp"
@@ -775,12 +686,11 @@ def generate_family(family_slug: str) -> dict[str, Any]:
     if not patch_src.exists():
         patch_src = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "generated" / "generated" / "native-aot.generated.cpp"
     if patch_src.exists():
-        _rename_and_fix_patch_file(patch_src, patch_dst, ns_slug, strip_extern_wrappers=True)
+        _rename_and_fix_patch_file(patch_src, patch_dst, ns_slug)
 
-    # NO semantic-patch TU: the host (genuine-fixed) provides the
-    # chaos_external_runtime_* function bodies; no semantic-patch comparison
-    # is needed since the test verifies the hotupdate mechanism (register/
-    # resolve/revert) via pointer comparison, not by calling host thunks.
+    # The host (genuine-fixed) provides the chaos_external_runtime_* function
+    # bodies; the test verifies the hotupdate mechanism (register/resolve/revert)
+    # via pointer comparison, not by calling host thunks.
 
     # Append hotupdate test target to the existing CMakeLists.txt
     cmake_piece = _generate_hotupdate_cmake_piece(family_slug, host_symbols)
@@ -817,7 +727,7 @@ def _fix_genuine_for_hotupdate_keep_extern(family_slug: str, ns_slug: str) -> Pa
         return None
 
     dst = _VERIFICATION / family_slug / "il2cpp_dist" / "hotupdate" / "genuine-fixed" / "native-aot.generated.cpp"
-    _rename_and_fix_patch_file(src, dst, ns_slug, suffix="genuine_fixed", strip_extern_wrappers=False)
+    _rename_and_fix_patch_file(src, dst, ns_slug, suffix="genuine_fixed")
     return dst
 
 
@@ -1096,18 +1006,11 @@ def _inject_reflection_bridge_stubs(content: str) -> str:
     return content
 
 
-def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str = "patch",
-                                strip_extern_wrappers: bool = True) -> None:
+def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str = "patch") -> None:
     """Copy a CodeGen-generated C++ file with RunNativeAot renamed to avoid symbol collision.
 
     Also uncomments the stripped chaos_managed_pointer_local_slot_tag constexpr
-    so each TU has its own anonymous-namespace definition (no ODR violation across
-    host + patch + semantic-patch TUs).
-
-    When strip_extern_wrappers=True, strips `extern "C" chaos_external_runtime_*`
-    helper function bodies, keeping only declarations (replaces { body } with ;).
-    The TU that keeps the definitions (semantic-patch when strip_extern_wrappers=False)
-    provides the symbol definitions; the other TUs declare them and the linker resolves.
+    so each TU has its own anonymous-namespace definition.
     """
     content = src.read_text(encoding="utf-8")
     rename_from = 'extern "C" int RunNativeAot(CHAOS_IL2CPP_INT32 chaos_entry_index)'
@@ -1124,55 +1027,8 @@ def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str =
         'constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;',
     )
 
-    if strip_extern_wrappers:
-        # Strip duplicate extern "C" chaos_external_runtime_ helper definitions.
-        # These are inside the anonymous namespace and are `extern "C"` so they
-        # have external linkage.  When the same family emits the same helpers in
-        # both genuine + semantic-patch TUs, the linker sees duplicate definitions.
-        # We keep a DECLARATION (replace { body } with ;) so entrypoint functions
-        # in this TU can still call the symbol, which the linker resolves from
-        # the TU that kept the definitions (semantic-patch).
-        lines = content.splitlines(keepends=True)
-        filtered: list[str] = []
-        in_external_func = False
-        brace_depth = 0
-
-        for line in lines:
-            stripped = line.strip()
-
-            if not in_external_func and stripped.startswith('extern "C"') and 'chaos_external_runtime_' in stripped:
-                in_external_func = True
-                brace_depth = 0
-                # Emit the signature as a declaration (replace { body } with ;)
-                clean = line.rstrip('\n\r')
-                if clean.endswith('{'):
-                    clean = clean[:-1].rstrip() + ';\n'
-                elif '{' in clean:
-                    idx = clean.index('{')
-                    clean = clean[:idx].rstrip() + ';\n'
-                else:
-                    clean += ';\n'
-                filtered.append(clean)
-                continue
-
-            if in_external_func:
-                for ch in stripped:
-                    if ch == '{':
-                        brace_depth += 1
-                    elif ch == '}':
-                        brace_depth -= 1
-                if brace_depth == 0 and stripped == '}':
-                    # End of function body — skip the closing brace
-                    in_external_func = False
-                    continue
-                continue  # skip everything inside the function
-
-            filtered.append(line)
-
-        content = ''.join(filtered)
-
-    # Inject missing reflection bridge stubs for functions the semantic-patch
-    # TU references but CodeGen didn't emit (e.g., chaos_reflection_get_fields).
+    # Inject missing reflection bridge stubs for functions that CodeGen hasn't
+    # emitted yet (e.g., chaos_reflection_get_fields).
     content = _inject_reflection_bridge_stubs(content)
 
     # Inject missing struct definitions and type-id constexprs
