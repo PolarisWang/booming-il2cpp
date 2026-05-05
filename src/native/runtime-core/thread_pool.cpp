@@ -1,5 +1,6 @@
 #include "thread_pool.h"
 #include "thread_state.h"
+#include "gc_transition.h"
 
 #include <atomic>
 #include <chrono>
@@ -75,9 +76,13 @@ void WorkerLoop() noexcept {
         }
 
         // Execute the work item outside the lock.
+        // Transition to cooperative mode — bridge stubs inside the callback
+        // will transition to preemptive as needed.
         s_busy_workers.fetch_add(1, std::memory_order_relaxed);
         if (item.callback) {
+            GC_TRANSITION_TO_COOPERATIVE();
             item.callback(item.context);
+            GC_TRANSITION_TO_PREEMPTIVE();
         }
         s_busy_workers.fetch_sub(1, std::memory_order_relaxed);
     }

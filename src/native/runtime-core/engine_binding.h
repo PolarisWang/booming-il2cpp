@@ -26,6 +26,18 @@ bool ThreadStaticInt32Add(
     CHAOS_IL2CPP_INT32* out_value);
 bool MonitorEnter(void* monitor_target);
 bool MonitorExit(void* monitor_target);
+bool MonitorTryEnter(void* monitor_target);
+bool MonitorIsEntered(void* monitor_target);
+bool MonitorWait(void* monitor_target, int32_t timeout_ms);
+bool MonitorPulse(void* monitor_target);
+bool MonitorPulseAll(void* monitor_target);
+bool ThreadSleep(int32_t timeout_ms);
+bool SpinLockExit(void* spinlock_target);
+bool SpinLockIsHeld(void* spinlock_target);
+bool LockEnter(void* lock_target);
+bool LockExit(void* lock_target);
+bool WaitHandleSet(void* wait_handle);
+bool WaitHandleReset(void* wait_handle);
 bool GcSafepoint(
     RuntimeState* runtime_state,
     ThreadState* thread_state);

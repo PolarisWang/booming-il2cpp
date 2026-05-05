@@ -78,42 +78,57 @@ int32_t GetThreadCount() noexcept {
     return count;
 }
 
-// ── Hybrid GC safepoint ───────────────────────────────────────────────
+// ── Generation-based GC safepoint ───────────────────────────────────
+//
+// Even generation = idle (no GC activity).  Odd generation = GC in progress.
+// Threads check via single atomic load + compare on every SafepointPoll.
 
 namespace {
-
-/// Non-zero when a GC safepoint is active.  Threads in SafepointPoll()
-/// check this and spin until it returns to 0.
-std::atomic<uint32_t> s_safepoint_active_gen{0};
-
+std::atomic<uint32_t> s_generation{0};
+constexpr uint32_t kGcGenerationMask = 1u;
 }  // anonymous namespace
 
+bool SafepointRequested() noexcept {
+    uint32_t gen = s_generation.load(std::memory_order_acquire);
+    return (gen & kGcGenerationMask) != 0u;
+}
+
 void SafepointPoll() noexcept {
-    uint32_t active_gen = s_safepoint_active_gen.load(std::memory_order_acquire);
-    if (active_gen != 0) {
-        auto* thread = tls_this_thread;
-        if (thread != nullptr) {
-            thread->at_safepoint = true;
-        }
-        // Spin (with yield) until the safepoint is released.
-        while (s_safepoint_active_gen.load(std::memory_order_acquire) != 0) {
+    uint32_t gen = s_generation.load(std::memory_order_acquire);
+    if ((gen & kGcGenerationMask) == 0u) {
+        return;  // fast path: no GC pending, single load + branch
+    }
+
+    auto* thread = tls_this_thread;
+    if (thread == nullptr) return;
+
+    thread->at_safepoint = true;
+    thread->last_seen_gen = gen;
+
+    // Spin with yield until generation flips (even = released).
+    // Timeout: after ~10ms without confirmation, GC proceeds with
+    // conservative stack scanning anyway (bdwgc fallback).
+    int spins = 0;
+    while ((s_generation.load(std::memory_order_acquire) & kGcGenerationMask) != 0u) {
+        if (++spins > 10000) {
             std::this_thread::yield();
-        }
-        if (thread != nullptr) {
-            thread->at_safepoint = false;
-            thread->safepoint_generation = active_gen;
+            spins = 0;
         }
     }
+
+    thread->at_safepoint = false;
 }
 
 uint32_t RequestGlobalSafepoint() noexcept {
-    uint32_t gen = 1;  // simplified: any non-zero value signals active safepoint
-    s_safepoint_active_gen.store(gen, std::memory_order_release);
-    return gen;
+    // Toggle to odd (GC in progress).
+    uint32_t gen = s_generation.load(std::memory_order_acquire);
+    uint32_t desired = (gen + 1) | kGcGenerationMask;
+    s_generation.store(desired, std::memory_order_release);
+    return desired;
 }
 
 void ReleaseGlobalSafepoint(uint32_t /*generation*/) noexcept {
-    s_safepoint_active_gen.store(0, std::memory_order_release);
-}
-
-}  // namespace chaos::il2cpp::runtime_core::threading
+    // Toggle to even (released).
+    uint32_t gen = s_generation.load(std::memory_order_acquire);
+    s_generation.store((gen + 1) & ~kGcGenerationMask, std::memory_order_release);
+}}  // namespace chaos::il2cpp::runtime_core::threading
