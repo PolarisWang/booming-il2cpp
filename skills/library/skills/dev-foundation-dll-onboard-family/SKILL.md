@@ -9,7 +9,7 @@ description: Onboard a new capability family into the foundation DLL verificatio
 
 将一个新的 capability family 接入 foundation DLL 验证体系。覆盖从更新 ledger 到跑通 verification pipeline 的完整流程。
 
-**入口信号**：`dev:foundation-dll-onboard-family`
+**入口信号**：`dev-foundation-dll-onboard-family`
 
 ## 前置条件
 
@@ -142,7 +142,7 @@ for asm in claims['assemblies']:
 
 ## 关联
 
-- 上游: 翻译路径实现完成 (`dev:executing-plans`)
-- 检查路径: `dev:architecture-first-development`
-- 下游: `dev:foundation-dll-verification-pipeline`
-- 完成: `dev:verification-before-completion`
+- 上游: 翻译路径实现完成 (`dev-executing-plans`)
+- 检查路径: `dev-architecture-first-development`
+- 下游: `dev-foundation-dll-verification-pipeline`
+- 完成: `dev-verification-before-completion`

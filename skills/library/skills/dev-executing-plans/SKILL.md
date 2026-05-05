@@ -15,7 +15,7 @@ description: 当你有一个已写好的实现计划，需要在当前会话中�
 
 **开始时宣布：** "我正在使用 executing-plans 技能来实现这个计划。"
 
-**注意：** `dev:subagent-driven-development` 是另一条执行路径。只有当它具备与本技能等价的活动任务处理和状态维护规则时，才应切换过去。
+**注意：** `dev-subagent-driven-development` 是另一条执行路径。只有当它具备与本技能等价的活动任务处理和状态维护规则时，才应切换过去。
 
 **状态原则：** 任务目录中的 `STATUS.md` 是执行真相源；`docs/dev/ACTIVE.md` 只是当前活动任务指针。
 
@@ -156,7 +156,7 @@ description: 当你有一个已写好的实现计划，需要在当前会话中�
    - 验证失败
 8. 仅在生命周期、目录位置或可见入口变化时更新索引文件。
 9. 判断是否产生长期有效知识
-   - 如果有：使用 `dev:project-wiki-maintenance`
+   - 如果有：使用 `dev-project-wiki-maintenance`
    - 如果没有：在 `STATUS.md` 中记录 `wiki: n/a`
 10. 如果当前任务带有 `parent_task_id`：
     - 同步父任务中的 child mapping、最近摘要、`latest_stop_point` 与下一步
@@ -206,7 +206,7 @@ description: 当你有一个已写好的实现计划，需要在当前会话中�
 - `formalVerificationObjects`
 - `requiredGates`
 
-对于 obligation-driven 任务，`completed` 前必须显式调用 `dev:verification-before-completion`，并至少确认：
+对于 obligation-driven 任务，`completed` 前必须显式调用 `dev-verification-before-completion`，并至少确认：
 
 - `requiredGates` 指定的接线闸门；未显式指定时默认 `collector -> registry -> workspace`
 - owner managed proof
@@ -228,16 +228,16 @@ description: 当你有一个已写好的实现计划，需要在当前会话中�
    - 如果存在未解决的 `blocker`：回到任务执行阶段继续修复。
    - 如果任务是 `critical`：确认最新 `权责图审核` 已补齐。
 2. 运行 formal verification gate 与项目级测试
-   - obligation-driven 任务先按 `dev:verification-before-completion` 选择并执行正式对象
+   - obligation-driven 任务先按 `dev-verification-before-completion` 选择并执行正式对象
    - 再运行受影响项目级测试套件或项目约定的完整命令
-   - 如果任务命中 `dev:project-test-governance`、需要新的验证通过记录 / 新的数据，或本轮改动触及 `verification-v1` consumer / projection / codegen-stubs：在 formal object 与项目测试通过后，必须执行 `run verify verification-v1 --json` 刷新正式产物
+   - 如果任务命中 `dev-project-test-governance`、需要新的验证通过记录 / 新的数据，或本轮改动触及 `verification-v1` consumer / projection / codegen-stubs：在 formal object 与项目测试通过后，必须执行 `run verify verification-v1 --json` 刷新正式产物
    - 不要把 `run test inventory` 当成 public verification entry；它只是内部生成命令。
    - 如果本批次只跑了 `benchmark --record`，则只有 raw benchmark records 被更新，还不算刷新 formal archive / projection，仍需要继续执行 `run verify verification-v1 --json`。
    - 只有当 `run verify verification-v1 --json` 返回的 `artifacts` 中出现最新 `verification/archive/latest/*`、`master/*`、`reports/*`，且命中 codegen 主线时出现 `verification/evidence/owners/*/codegen-stubs/*`，本轮才算真正打通新测试流程
    - 如果测试阶段出现 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃：
      - 本次验证立即视为失败
      - 收集 `stderr`、`binlog`、崩溃堆栈或 dump 信息（如果可用）
-     - 使用 `dev:systematic-debugging` 定位并修复根因
+     - 使用 `dev-systematic-debugging` 定位并修复根因
      - 根因未修复前，不得继续归档或收尾
 3. 将结构告警、架构审视结论与验证结果写入 `STATUS.md`
    - 如果本轮执行了 `run verify verification-v1 --json`，同时写入新的 formal verification 数据路径，而不只是运行日志路径
@@ -264,7 +264,7 @@ description: 当你有一个已写好的实现计划，需要在当前会话中�
    - 如果存在 `parent_task_id`：回写父任务的 child mapping、`latest_stop_point`、下一步与对应索引
    - 如果 roadmap 允许自动续跑，且存在 `recommended_next_child`：优先自动切换到下一 child，而不是停下来等待额外确认
    - 宣布：我正在使用 finishing-a-development-branch 技能来完成这项工作。
-   - 使用 `dev:finishing-a-development-branch`
+   - 使用 `dev-finishing-a-development-branch`
 
 ### Completed 结构化证据卡
 
@@ -312,8 +312,8 @@ completed 阶段默认：`STATUS.md` 中写入简短、结构化的证据卡，�
 
 ## 集成
 
-- `dev:using-git-worktrees`
-- `dev:project-wiki-maintenance`
-- `dev:verification-before-completion`
-- `dev:systematic-debugging`
-- `dev:finishing-a-development-branch`
+- `dev-using-git-worktrees`
+- `dev-project-wiki-maintenance`
+- `dev-verification-before-completion`
+- `dev-systematic-debugging`
+- `dev-finishing-a-development-branch`

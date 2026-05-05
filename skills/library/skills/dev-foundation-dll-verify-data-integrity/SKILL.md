@@ -9,7 +9,7 @@ description: Validate foundation DLL dashboard data consistency — claims, ledg
 
 在运行三闸门验证之前，先确认 dashboard 底层数据是正确的。避免"测试全绿但 dashboard 显示为 0"的问题。
 
-**入口信号**：`dev:foundation-dll-verify-data-integrity`
+**入口信号**：`dev-foundation-dll-verify-data-integrity`
 
 ## 检查项
 
@@ -131,5 +131,5 @@ print(f'Regenerated: {len(result[\"artifacts\"])} artifacts')
 
 ## 关联
 
-- 父流程: `dev:foundation-dll-verification-pipeline`
-- 下游: `dev:foundation-dll-family-verification`
+- 父流程: `dev-foundation-dll-verification-pipeline`
+- 下游: `dev-foundation-dll-family-verification`

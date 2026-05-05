@@ -13,7 +13,7 @@ description: Aggregate per-family verification results, detect regressions, prod
 > L2 Semantic Correctness（native exec checksum 匹配）需要额外的 native exec 验证步骤，
 > 尚未集成到 dashboard 自动计算中。
 
-**入口信号**：`dev:foundation-dll-verify-aggregate`
+**入口信号**：`dev-foundation-dll-verify-aggregate`
 
 **前置**：一个或多个 family 已完成 Fact L1 + L2 / Benchmark / HotUpdate 验证
 
@@ -149,5 +149,5 @@ if m: print(f'Fact: {m.group(1)}/{m.group(2)}')
 
 ## 关联
 
-- 父流程: `dev:foundation-dll-verification-pipeline`
-- 上游: `dev:foundation-dll-family-verification`
+- 父流程: `dev-foundation-dll-verification-pipeline`
+- 上游: `dev-foundation-dll-family-verification`

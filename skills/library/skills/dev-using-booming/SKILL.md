@@ -83,11 +83,11 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 
 | 场景 | 入口技能 | 说明 |
 |------|---------|------|
-| 验证一个或多个 family 的全部三闸门 | `dev:foundation-dll-verification-pipeline` | 主管线：codegen → integrity → three-gate → aggregate |
-| 验证前检查 dashboard 数据一致性 | `dev:foundation-dll-verify-data-integrity` | claims/ledger/coverage 一致性校验 |
-| 已有 batch pipeline 产出，跑单 family 三闸门 | `dev:foundation-dll-family-verification` | Fact → Benchmark → HotUpdate |
-| 验证后聚合结果 + 刷新 dashboard | `dev:foundation-dll-verify-aggregate` | 汇总 + 回归检测 + dashboard 刷新 |
-| 接入一个全新的 capability family | `dev:foundation-dll-onboard-family` | ledger → Phase 1/2 → codegen → verification |
+| 验证一个或多个 family 的全部三闸门 | `dev-foundation-dll-verification-pipeline` | 主管线：codegen → integrity → three-gate → aggregate |
+| 验证前检查 dashboard 数据一致性 | `dev-foundation-dll-verify-data-integrity` | claims/ledger/coverage 一致性校验 |
+| 已有 batch pipeline 产出，跑单 family 三闸门 | `dev-foundation-dll-family-verification` | Fact → Benchmark → HotUpdate |
+| 验证后聚合结果 + 刷新 dashboard | `dev-foundation-dll-verify-aggregate` | 汇总 + 回归检测 + dashboard 刷新 |
+| 接入一个全新的 capability family | `dev-foundation-dll-onboard-family` | ledger → Phase 1/2 → codegen → verification |
 
 **触发条件**：只要任务涉及以下任一内容，必须先使用上述技能之一：
 
