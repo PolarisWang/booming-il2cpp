@@ -193,9 +193,9 @@ def _run_convert(entrypoint_dir: Path, dll_path: str, entry_point_subject_id: st
 
 def _trim_ir(family_slug: str) -> bool:
     """Trim aot-core-ir.json to entry-only methods."""
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}PatchEntry"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}SemanticPatchEntry"
     entry_prefix = class_name
-    ir_path = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-patch" / "closure-sp" / "analysis" / "aot-core-ir.json"
+    ir_path = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch" / "closure-sp" / "analysis" / "aot-core-ir.json"
 
     if not ir_path.exists():
         return False
@@ -224,8 +224,8 @@ def _trim_ir(family_slug: str) -> bool:
 
 
 def _run_emit_native_aot(family_slug: str) -> bool:
-    """Run emit-native-aot to produce real C++ for the patch variant."""
-    closure_sp_analysis = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-patch" / "closure-sp" / "analysis"
+    """Run emit-native-aot to produce real C++ for the semantic-patch variant."""
+    closure_sp_analysis = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch" / "closure-sp" / "analysis"
     patch_out = _VERIFICATION / family_slug / "il2cpp_dist" / "patch"
     patch_out.mkdir(parents=True, exist_ok=True)
 
@@ -276,7 +276,7 @@ def run_family(family_slug: str) -> dict:
     }
 
     print(f"\n{'='*60}")
-    print(f"HotUpdate patch variant: {family_slug}")
+    print(f"HotUpdate semantic-patch variant: {family_slug}")
     print(f"{'='*60}")
 
     # Step 0: Load method subject IDs
@@ -289,22 +289,22 @@ def run_family(family_slug: str) -> dict:
     print(f"  Methods: {len(mids)}")
     result["methodCount"] = len(mids)
 
-    # Step 1: Build patch entrypoint
-    print(f"  [1/4] Building patch entrypoint...")
-    build_result = _build_patch_entrypoint(family_slug, mids)
+    # Step 1: Build semantic-patch entrypoint
+    print(f"  [1/4] Building semantic-patch entrypoint...")
+    build_result = _build_semantic_patch_entrypoint(family_slug, mids)
     if not build_result.get("success"):
-        result["steps"]["build_patch_entrypoint"] = "FAILED"
+        result["steps"]["build_semantic_patch_entrypoint"] = "FAILED"
         result["error"] = build_result.get("error", "build failed")
         print(f"    FAILED: {result['error']}")
         trace("family_entrypoint_build_failed", family=family_slug, error=result["error"])
         return result
-    result["steps"]["build_patch_entrypoint"] = "OK"
+    result["steps"]["build_semantic_patch_entrypoint"] = "OK"
     result["entryPointSubjectId"] = build_result["entry_point_subject_id"]
     result["dllPath"] = build_result["dll_path"]
 
     # Step 2: Convert
     print(f"  [2/4] Convert...")
-    entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-patch"
+    entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch"
     if not _run_convert(entrypoint_dir, build_result["dll_path"], build_result["entry_point_subject_id"]):
         result["steps"]["convert"] = "FAILED"
         result["error"] = "convert failed"
@@ -347,7 +347,7 @@ def main() -> None:
 
     families = args.families or FAMILIES
 
-    print(f"Batch hotupdate patch variant CodeGen pipeline - {len(families)} families")
+    print(f"Batch hotupdate semantic-patch variant CodeGen pipeline - {len(families)} families")
     print(f"Repo: {_REPO_ROOT}")
     print(f"Verification: {_VERIFICATION}")
     print()

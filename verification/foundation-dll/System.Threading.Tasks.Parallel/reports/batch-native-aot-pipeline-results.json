@@ -1,0 +1,61 @@
+{
+  "assembly": "System.Threading.Tasks.Parallel",
+  "total": 4,
+  "passed": 4,
+  "failed": 0,
+  "results": [
+    {
+      "family": "loop-result",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "LoopResultPatchEntry/LoopResultPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\loop-result\\il2cpp_dist\\entrypoint\\build-output\\LoopResultPatchEntry.dll"
+    },
+    {
+      "family": "loop-state",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "LoopStatePatchEntry/LoopStatePatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\loop-state\\il2cpp_dist\\entrypoint\\build-output\\LoopStatePatchEntry.dll"
+    },
+    {
+      "family": "parallel-apis",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "ParallelApisPatchEntry/ParallelApisPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\parallel-apis\\il2cpp_dist\\entrypoint\\build-output\\ParallelApisPatchEntry.dll"
+    },
+    {
+      "family": "parallel-options",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "ParallelOptionsPatchEntry/ParallelOptionsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\parallel-options\\il2cpp_dist\\entrypoint\\build-output\\ParallelOptionsPatchEntry.dll"
+    }
+  ],
+  "timestamp": "2026-05-04T01:20:33"
+}

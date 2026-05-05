@@ -1,0 +1,61 @@
+{
+  "assembly": "System.IO.Compression.Brotli",
+  "total": 4,
+  "passed": 4,
+  "failed": 0,
+  "results": [
+    {
+      "family": "decoder",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "DecoderPatchEntry/DecoderPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Compression.Brotli\\decoder\\il2cpp_dist\\entrypoint\\build-output\\DecoderPatchEntry.dll"
+    },
+    {
+      "family": "encoder",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "EncoderPatchEntry/EncoderPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Compression.Brotli\\encoder\\il2cpp_dist\\entrypoint\\build-output\\EncoderPatchEntry.dll"
+    },
+    {
+      "family": "options",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "OptionsPatchEntry/OptionsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Compression.Brotli\\options\\il2cpp_dist\\entrypoint\\build-output\\OptionsPatchEntry.dll"
+    },
+    {
+      "family": "stream",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "StreamPatchEntry/StreamPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Compression.Brotli\\stream\\il2cpp_dist\\entrypoint\\build-output\\StreamPatchEntry.dll"
+    }
+  ],
+  "timestamp": "2026-05-04T01:14:43"
+}

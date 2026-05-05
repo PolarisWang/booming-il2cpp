@@ -39,8 +39,8 @@ solution_native/
 # il2cpp translation output
 il2cpp_dist/
 
-# Test reports
-reports/
+# Test reports (root-level only — not verification/*/reports/)
+/reports/
 
 # Auto-generated verification evidence (regenerated on every pipeline run)
 docs/verification/foundation-dll-audit/

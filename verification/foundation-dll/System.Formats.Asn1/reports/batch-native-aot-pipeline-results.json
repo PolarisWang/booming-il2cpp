@@ -1,0 +1,87 @@
+{
+  "assembly": "System.Formats.Asn1",
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "results": [
+    {
+      "family": "decoder",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "DecoderPatchEntry/DecoderPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\decoder\\il2cpp_dist\\entrypoint\\build-output\\DecoderPatchEntry.dll"
+    },
+    {
+      "family": "encoding-rules",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "EncodingRulesPatchEntry/EncodingRulesPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\encoding-rules\\il2cpp_dist\\entrypoint\\build-output\\EncodingRulesPatchEntry.dll"
+    },
+    {
+      "family": "options-errors",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 26,
+      "entryPointSubjectId": "OptionsErrorsPatchEntry/OptionsErrorsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\options-errors\\il2cpp_dist\\entrypoint\\build-output\\OptionsErrorsPatchEntry.dll"
+    },
+    {
+      "family": "reader",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "ReaderPatchEntry/ReaderPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\reader\\il2cpp_dist\\entrypoint\\build-output\\ReaderPatchEntry.dll"
+    },
+    {
+      "family": "tag-model",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 39,
+      "entryPointSubjectId": "TagModelPatchEntry/TagModelPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\tag-model\\il2cpp_dist\\entrypoint\\build-output\\TagModelPatchEntry.dll"
+    },
+    {
+      "family": "writer",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "WriterPatchEntry/WriterPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\writer\\il2cpp_dist\\entrypoint\\build-output\\WriterPatchEntry.dll"
+    }
+  ],
+  "timestamp": "2026-05-04T01:13:59"
+}

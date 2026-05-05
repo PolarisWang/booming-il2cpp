@@ -158,16 +158,17 @@ static TypeInfoHandle FindTypeByName(const char* fully_qualified_name) {
         if (module == nullptr || module->image == nullptr || module->tombstone) {
             continue;
         }
-        const auto* image = runtime_core::TryDecodeReflectionQueryImageHandle(
-            module->image);
+        const auto* image = module->image;
         if (image == nullptr) continue;
 
         for (CHAOS_IL2CPP_UINT32 ti = 0u; ti < image->type_count; ++ti) {
-            if (image->types[ti].subject_id_utf8 != nullptr &&
-                std::strcmp(image->types[ti].subject_id_utf8,
+            const auto* type_desc = image->types[ti];
+            if (type_desc == nullptr) continue;
+            if (type_desc->subject_id_utf8 != nullptr &&
+                std::strcmp(type_desc->subject_id_utf8,
                     fully_qualified_name) == 0) {
                 return runtime_core::MakeTypeHandle(
-                    mid, image->types[ti].metadata_token);
+                    mid, type_desc->metadata_token);
             }
         }
     }
@@ -379,17 +380,38 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
     (void)runtime_state;
     (void)thread_state;
 
+    std::fprintf(stderr, "[IMC] entered, method=0x%llx, argc=%u, out_ret=%p, out_ret_size=%zu, out_ex=%p\n",
+        (unsigned long long)method, (unsigned)argc, out_return_value, (size_t)out_return_value_size, (void*)out_exception);
+    std::fflush(stderr);
+
     if (out_exception != nullptr) {
         *out_exception = nullptr;
     }
 
     // ── Recover RuntimeInstantiatedMethod* from MethodInfoHandle ──
     const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryMethodHandle(method);
+    std::fprintf(stderr, "[IMC] desc=%p\n", (const void*)desc);
+    std::fflush(stderr);
     if (desc == nullptr) {
         return CHAOS_RUNTIME_STATUS_NOT_FOUND;
     }
     auto* rt_method = const_cast<RuntimeInstantiatedMethod*>(
         reinterpret_cast<const RuntimeInstantiatedMethod*>(desc));
+    std::fprintf(stderr, "[IMC] rt_method=%p\n", (const void*)rt_method);
+    std::fflush(stderr);
+
+    // ── Check module unload ──
+    std::fprintf(stderr, "[IMC] is_unloaded=%d\n", (int)rt_method->is_unloaded);
+    std::fflush(stderr);
+    if (rt_method->is_unloaded) {
+        return CHAOS_RUNTIME_STATUS_NOT_FOUND;
+    }
+
+    std::fprintf(stderr, "[IMC] ir_method_body=%p, il_bytes=%p, il_length=%u\n",
+        (const void*)rt_method->ir_method_body,
+        (const void*)rt_method->il_bytes,
+        (unsigned)rt_method->il_length);
+    std::fflush(stderr);
 
     // ── Check module unload ──
     if (rt_method->is_unloaded) {
@@ -474,7 +496,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
                             desc->parameters[ai].member_type_utf8,
                             rt_method->type_args, rt_method->arg_count);
                         if (param_type != 0u && IsValueTypeByHandle(param_type)) {
-                            const auto* engine = layout::GetLayoutEngine();
+                            auto* engine = layout::GetLayoutEngine();
                             const auto* layout = engine->GetOrComputeLayout(
                                 param_type,
                                 rt_method->type_args, rt_method->arg_count);

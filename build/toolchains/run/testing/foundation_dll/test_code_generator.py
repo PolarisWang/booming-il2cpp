@@ -310,6 +310,8 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Type", "GetType", 3): "skip",
     # Nullable with no value
     ("Nullable", "get_Value", 0): "skip",
+    ("Nullable", "GetValueOrDefault", 0): "default(Nullable<int>).GetValueOrDefault()",
+    ("Nullable", "GetValueOrDefault", 1): "default(Nullable<int>).GetValueOrDefault(42)",
     # RuntimeHelpers with invalid handles
     ("RuntimeHelpers", "RunClassConstructor", 1): "skip",
     ("RuntimeHelpers", "InitializeArray", 2): "skip",
@@ -342,10 +344,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Task", "ContinueWith", 1): "skip",
     ("Task", "WhenAny", 1): "skip",
     ("Task", "WhenAll", 1): "skip",
-    # Reflection on default(MemberInfo) etc.
-    ("MemberInfo", "get_Name", 0): "skip",
-    ("MemberInfo", "get_MemberType", 0): "skip",
-    ("MemberInfo", "get_DeclaringType", 0): "skip",
+    ("Task", "FromResult", 1): "skip",
     # Type.ContainsGenericParameters is a property, not a method — calling it with () fails
     ("Type", "ContainsGenericParameters", 0): "typeof(byte).ContainsGenericParameters",
     # Activator.CreateInstance<T>() generic can't be resolved
@@ -378,8 +377,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("BitConverter", "ToInt32", 2): "skip",
     # Guid constructor with byte[] array that might be wrong format
     ("Guid", "ctor", 1): "skip",
-    # Task operations that throw
-    ("Task", "Run", 1): "skip",
+    # Interlocked operations on default
     ("Interlocked", "CompareExchange", 3): "skip",
     ("Interlocked", "Exchange", 2): "skip",
     ("Interlocked", "Increment", 1): "skip",
@@ -403,12 +401,8 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("HashSet", "Remove", 1): "skip",
     # Object.Equals on default object - actually works
     # But Object.GetHashCode/ToString/GetType on new object() work fine
-    # Task.FromResult with generic param - skip (has generic param issue)
-    ("Task", "FromResult", 1): "skip",
     # Thread.Sleep with 42 works fine
     # Thread.get_CurrentThread works fine
-    # Task.Run with Func-1, 2 generic - skip
-    ("Task", "Run", 1): "skip",
     # Wait on completed task - fine
     # Wait(bool, int) - fine
     # IsCompleted - fine
@@ -820,9 +814,13 @@ def _cast_return_to_int(ret: str, call_expr: str) -> str:
                "System.Reflection.MemberInfo", "System.Reflection.FieldInfo",
                "System.Reflection.PropertyInfo", "System.Reflection.EventInfo",
                "System.Reflection.ParameterInfo", "System.Reflection.ConstructorInfo",
-               "System.Reflection.Module", "System.Array"):
+               "System.Reflection.Module", "System.Array",
+               "System.Delegate", "System.MulticastDelegate",
+               "System.Threading.Tasks.Task", "System.Threading.Thread"):
         return f"(({call_expr}).GetHashCode())"
     if ret == "System.Span" or ret.startswith("System.Span`") or ret == "System.ReadOnlySpan" or ret.startswith("System.ReadOnlySpan`"):
+        return f"(({call_expr}).GetHashCode())"
+    if ret.startswith("System.Threading.Tasks.Task"):
         return f"(({call_expr}).GetHashCode())"
     if ret.endswith("[]"):
         return f"(({call_expr}).Length)"

@@ -1,0 +1,74 @@
+{
+  "assembly": "System.IO.Pipelines",
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "results": [
+    {
+      "family": "options-scheduler",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 52,
+      "entryPointSubjectId": "OptionsSchedulerPatchEntry/OptionsSchedulerPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\options-scheduler\\il2cpp_dist\\entrypoint\\build-output\\OptionsSchedulerPatchEntry.dll"
+    },
+    {
+      "family": "pipe-core",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 26,
+      "entryPointSubjectId": "PipeCorePatchEntry/PipeCorePatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\pipe-core\\il2cpp_dist\\entrypoint\\build-output\\PipeCorePatchEntry.dll"
+    },
+    {
+      "family": "read-flush-results",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 26,
+      "entryPointSubjectId": "ReadFlushResultsPatchEntry/ReadFlushResultsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\read-flush-results\\il2cpp_dist\\entrypoint\\build-output\\ReadFlushResultsPatchEntry.dll"
+    },
+    {
+      "family": "reader-writer",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 26,
+      "entryPointSubjectId": "ReaderWriterPatchEntry/ReaderWriterPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\reader-writer\\il2cpp_dist\\entrypoint\\build-output\\ReaderWriterPatchEntry.dll"
+    },
+    {
+      "family": "stream-adapters",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 13,
+      "entryPointSubjectId": "StreamAdaptersPatchEntry/StreamAdaptersPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\stream-adapters\\il2cpp_dist\\entrypoint\\build-output\\StreamAdaptersPatchEntry.dll"
+    }
+  ],
+  "timestamp": "2026-05-04T01:15:28"
+}

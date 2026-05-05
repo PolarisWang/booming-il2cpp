@@ -1,0 +1,135 @@
+{
+  "assembly": "System.Runtime.InteropServices",
+  "total": 10,
+  "passed": 4,
+  "failed": 6,
+  "results": [
+    {
+      "family": "com-types",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 182,
+      "entryPointSubjectId": "ComTypesPatchEntry/ComTypesPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.InteropServices\\com-types\\il2cpp_dist\\entrypoint\\build-output\\ComTypesPatchEntry.dll"
+    },
+    {
+      "family": "com-wrappers",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 16,
+      "entryPointSubjectId": "ComWrappersPatchEntry/ComWrappersPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.InteropServices\\com-wrappers\\il2cpp_dist\\entrypoint\\build-output\\ComWrappersPatchEntry.dll"
+    },
+    {
+      "family": "exception-errors",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 11,
+      "entryPointSubjectId": "ExceptionErrorsPatchEntry/ExceptionErrorsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.InteropServices\\exception-errors\\il2cpp_dist\\entrypoint\\build-output\\ExceptionErrorsPatchEntry.dll"
+    },
+    {
+      "family": "function-pointers",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 1,
+      "entryPointSubjectId": "FunctionPointersNativeEntry/FunctionPointersNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.InteropServices\\function-pointers\\il2cpp_dist\\entrypoint\\build-output\\FunctionPointersNativeEntry.dll"
+    },
+    {
+      "family": "generated-marshalling",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "FAILED"
+      },
+      "success": false,
+      "methodCount": 165,
+      "entryPointSubjectId": "GeneratedMarshallingPatchEntry/GeneratedMarshallingPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.InteropServices\\generated-marshalling\\il2cpp_dist\\entrypoint\\build-output\\GeneratedMarshallingPatchEntry.dll",
+      "error": "convert failed"
+    },
+    {
+      "family": "marshalling-attributes",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "FAILED"
+      },
+      "success": false,
+      "methodCount": 5,
+      "entryPointSubjectId": "MarshallingAttributesPatchEntry/MarshallingAttributesPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.InteropServices\\marshalling-attributes\\il2cpp_dist\\entrypoint\\build-output\\MarshallingAttributesPatchEntry.dll",
+      "error": "convert failed"
+    },
+    {
+      "family": "native-memory-pointers",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "FAILED"
+      },
+      "success": false,
+      "methodCount": 335,
+      "entryPointSubjectId": "NativeMemoryPointersPatchEntry/NativeMemoryPointersPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.InteropServices\\native-memory-pointers\\il2cpp_dist\\entrypoint\\build-output\\NativeMemoryPointersPatchEntry.dll",
+      "error": "convert failed"
+    },
+    {
+      "family": "objective-c-interop",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "FAILED"
+      },
+      "success": false,
+      "methodCount": 9,
+      "entryPointSubjectId": "ObjectiveCInteropPatchEntry/ObjectiveCInteropPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.InteropServices\\objective-c-interop\\il2cpp_dist\\entrypoint\\build-output\\ObjectiveCInteropPatchEntry.dll",
+      "error": "convert failed"
+    },
+    {
+      "family": "pinvoke-dllimport",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "FAILED"
+      },
+      "success": false,
+      "methodCount": 14,
+      "entryPointSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.InteropServices\\pinvoke-dllimport\\il2cpp_dist\\entrypoint\\build-output\\PinvokeDllimportPatchEntry.dll",
+      "error": "convert failed"
+    },
+    {
+      "family": "secure-string-marshal",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "FAILED"
+      },
+      "success": false,
+      "methodCount": 4,
+      "entryPointSubjectId": "SecureStringMarshalNativeEntry/SecureStringMarshalNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Runtime.InteropServices\\secure-string-marshal\\il2cpp_dist\\entrypoint\\build-output\\SecureStringMarshalNativeEntry.dll",
+      "error": "emit-native-aot failed"
+    }
+  ],
+  "timestamp": "2026-05-04T01:25:41"
+}

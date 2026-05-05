@@ -1,0 +1,87 @@
+{
+  "assembly": "System.ObjectModel",
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "results": [
+    {
+      "family": "collection-change-notifications",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 20,
+      "entryPointSubjectId": "CollectionChangeNotificationsPatchEntry/CollectionChangeNotificationsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\il2cpp_dist\\entrypoint\\build-output\\CollectionChangeNotificationsPatchEntry.dll"
+    },
+    {
+      "family": "command-type-metadata",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 16,
+      "entryPointSubjectId": "CommandTypeMetadataPatchEntry/CommandTypeMetadataPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\command-type-metadata\\il2cpp_dist\\entrypoint\\build-output\\CommandTypeMetadataPatchEntry.dll"
+    },
+    {
+      "family": "data-errors",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 8,
+      "entryPointSubjectId": "DataErrorsPatchEntry/DataErrorsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\data-errors\\il2cpp_dist\\entrypoint\\build-output\\DataErrorsPatchEntry.dll"
+    },
+    {
+      "family": "object-model-collections",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 19,
+      "entryPointSubjectId": "ObjectModelCollectionsPatchEntry/ObjectModelCollectionsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\object-model-collections\\il2cpp_dist\\entrypoint\\build-output\\ObjectModelCollectionsPatchEntry.dll"
+    },
+    {
+      "family": "observable-collections",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 25,
+      "entryPointSubjectId": "ObservableCollectionsPatchEntry/ObservableCollectionsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\observable-collections\\il2cpp_dist\\entrypoint\\build-output\\ObservableCollectionsPatchEntry.dll"
+    },
+    {
+      "family": "property-change-notifications",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert": "OK",
+        "trim": "OK",
+        "emit_native_aot": "OK"
+      },
+      "success": true,
+      "methodCount": 18,
+      "entryPointSubjectId": "PropertyChangeNotificationsPatchEntry/PropertyChangeNotificationsPatchEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\property-change-notifications\\il2cpp_dist\\entrypoint\\build-output\\PropertyChangeNotificationsPatchEntry.dll"
+    }
+  ],
+  "timestamp": "2026-05-04T01:24:56"
+}
