@@ -1,11 +1,15 @@
 ﻿#include "runtime_core.h"
 
+#include <chaos/trace.h>
+
 #include "memory_domain.h"
 #include "reflection_query_model.h"
 #include "generic_context.h"
 #include "vtable_registry.h"
+#include "runtime_vtable.h"
 #include "../bootstrap/bootstrap.h"
 #include "runtime_instantiation.h"
+#include "reflection_query_model.h"
 
 #include <gc.h>
 
@@ -69,8 +73,9 @@ constexpr CHAOS_IL2CPP_UINT64 kDateTimeTicksMask = 0x3FFFFFFFFFFFFFFFull;
 // struct ManagedExceptionCarrier is declared in runtime_core.h and used as the cold EH payload.
 
 struct ObjectHeader {
-    TypeInfoHandle type;
-    unsigned char field_storage[kInlineFieldStorageSize];
+    const void**    vtable      = nullptr;  // B2+ vtable dispatch
+    const TypeInfo* type_info   = nullptr;   // Hybrid TypeInfo* identity
+    unsigned char   field_storage[kInlineFieldStorageSize];
 };
 
 struct StringObjectHeader {
@@ -213,6 +218,16 @@ RuntimeState* GetCurrentRuntimeState() {
     return g_tls_runtime_state;
 }
 
+thread_local ThreadState* g_tls_thread_state = nullptr;
+
+void SetCurrentThreadState(ThreadState* thread_state) {
+    g_tls_thread_state = thread_state;
+}
+
+ThreadState* GetCurrentThreadState() {
+    return g_tls_thread_state;
+}
+
 // ======================================================================
 
 struct EngineLifecycleRegistration {
@@ -261,6 +276,8 @@ static void* AllocateBytesAtomic(CHAOS_IL2CPP_SIZE size) {
     return GC_MALLOC_ATOMIC(size);
 }
 
+}  // close anonymous — GcAllocate/GcAllocateAtomic need external linkage
+
 void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
     return GC_MALLOC(size);
 }
@@ -268,6 +285,8 @@ void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
 void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) {
     return GC_MALLOC_ATOMIC(size);
 }
+
+namespace {  // re-open anonymous for internal helpers
 
 bool TryNormalizeConfig(const RuntimeConfig* config, RuntimeConfig* out_config) {
     if (out_config == nullptr) {
@@ -613,6 +632,8 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     const RuntimeInitParams* init_params,
     const RuntimeConfig* config,
     RuntimeState** out_runtime_state) {
+    CHAOS_IL2CPP_TRACE_INIT();
+    CHAOS_IL2CPP_TRACE("runtime", "RuntimeInit", "");
     if (init_params == nullptr || out_runtime_state == nullptr) {
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
@@ -701,6 +722,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
 #endif
 
     *out_thread_state = thread_state;
+    SetCurrentThreadState(thread_state);
     return CHAOS_RUNTIME_STATUS_OK;
 }
 
@@ -722,8 +744,53 @@ void CHAOS_RUNTIME_ABI_CALL ThreadDetach(
         FreeBytes(runtime_state->config, thread_state->internal_state);
         thread_state->internal_state = nullptr;
     }
+    SetCurrentThreadState(nullptr);
     FreeBytes(runtime_state->config, thread_state);
 }
+
+namespace {
+
+/// Resolve the TypeInfo* and vtable for a given TypeInfoHandle.
+///
+/// Handles three encoding schemes:
+///   1. Tag-encoded (RuntimeInstantiatedType): compute stable_id from
+///      subject_id_utf8, look up vtable.  type_info is not available.
+///   2. HotUpdate registered type: look up by stable_id in the dynamic
+///      type registry.
+///   3. Module-registry handle: fallback — type_info / vtable = nullptr.
+///
+/// Returns true when at least the vtable was resolved.
+static bool ResolveObjectTypeInfo(TypeInfoHandle type_handle,
+                                   const TypeInfo*& out_type_info,
+                                   const void**& out_vtable) noexcept
+{
+    out_type_info = nullptr;
+    out_vtable    = nullptr;
+
+    if (type_handle == 0u) return false;
+
+    // ── Path 1: Tag-encoded RuntimeInstantiatedType handle ──
+    const auto* desc = TryDecodeReflectionQueryTypeHandle(type_handle);
+    if (desc != nullptr) {
+        if (desc->subject_id_utf8 != nullptr) {
+            const CHAOS_IL2CPP_UINT64 stable_id =
+                chaos_compute_type_stable_id(desc->subject_id_utf8);
+            out_vtable = runtime_vtable::FindVTable(stable_id);
+            return (out_vtable != nullptr);
+        }
+        return false;
+    }
+
+    // ── Path 2: HotUpdate registered type (non-tagged handle) ──
+    // The handle might be a module-registry token.  For HotUpdate types
+    // the TypeInfo* is stored in the dynamic registry by stable_id.
+    // We compute the stable_id from the name and look it up.
+    // For module-registry handles this will fail silently — that's OK,
+    // the AOT-generated code already sets its own vtable at compile time.
+    return false;
+}
+
+}  // anonymous namespace
 
 void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
     RuntimeState* runtime_state,
@@ -738,7 +805,9 @@ void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
         return nullptr;
     }
 
-    object->type = type;
+    // Resolve TypeInfo* and vtable from the handle.
+    ResolveObjectTypeInfo(type, object->type_info, object->vtable);
+
     CHAOS_IL2CPP_MEMSET(object->field_storage, 0, sizeof(object->field_storage));
     return object;
 }

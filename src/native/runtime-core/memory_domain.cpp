@@ -1,6 +1,8 @@
 #include "memory_domain.h"
 #include "runtime_core.h"
 
+#include <chaos/trace.h>
+
 #include <atomic>
 #include <cstdlib>
 #include <cstring>

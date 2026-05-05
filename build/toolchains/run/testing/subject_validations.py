@@ -9,12 +9,14 @@ try:
     from ..core.common import combine_process_output, run_process
     from ..core import tooling as tooling_module
     from . import subjects as subjects_module
+    from .trace import trace
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import combine_process_output, run_process
     from core import tooling as tooling_module
     from testing import subjects as subjects_module
+    from testing.trace import trace
 
 
 def _relative(repo_root: Path, path: Path) -> str:
@@ -151,6 +153,8 @@ def run_subject_validations(repo_root: Path, plan: dict[str, Any], *, run_id: st
     variant = str(selection.get("variant") or "")
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
 
+    trace("subject_validations_start", subject_id=subject_id, matrix_id=matrix_id, run_id=run_id)
+
     validation_results: list[dict[str, Any]] = []
     artifacts: list[str] = []
     errors: list[str] = []
@@ -181,8 +185,11 @@ def run_subject_validations(repo_root: Path, plan: dict[str, Any], *, run_id: st
         if driver == "csharp-perf-harness":
             continue
 
+    final_status = _aggregate_status(validation_results)
+    trace("subject_validations_done", subject_id=subject_id, status=final_status,
+          validation_count=len(validation_results), error_count=len(errors))
     return {
-        "status": _aggregate_status(validation_results),
+        "status": final_status,
         "validationResults": validation_results,
         "artifacts": artifacts,
         "errors": errors,

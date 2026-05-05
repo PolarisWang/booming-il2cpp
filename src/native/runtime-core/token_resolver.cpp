@@ -3,6 +3,7 @@
 #include "layout_engine.h"
 
 #include <chaos/native_types.h>
+#include <chaos/trace.h>
 
 namespace chaos::il2cpp::interpreter {
 
@@ -52,6 +53,7 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
     IRInstruction&        instruction,
     void*                 user_data)
 {
+    CHAOS_IL2CPP_TRACE("runtime", "DefaultTokenResolver", "\"token\"=0x%x", token);
     if (user_data == nullptr) {
         return false;
     }

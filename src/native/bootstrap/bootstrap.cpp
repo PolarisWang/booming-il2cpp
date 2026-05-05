@@ -5,6 +5,7 @@
 #include "method_replacement.h"
 #include "reflection_query_model.h"
 #include "runtime_core.h"
+#include "../runtime-core/runtime_instantiation.h"   // RegisterMethodAotEntries
 #include "string_table.h"
 #include "support.h"
 #include "vtable_registry.h"
@@ -229,7 +230,24 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
             g_bootstrap_state.metadata_registration->generic_method_args);
         aot_reg.generic_method_arg_count = g_bootstrap_state.metadata_registration->generic_method_arg_count;
 
+        aot_reg.method_aot_entries = static_cast<const GenericMethodAotEntryV0*>(
+            g_bootstrap_state.metadata_registration->method_aot_entries);
+        aot_reg.method_aot_entry_count = g_bootstrap_state.metadata_registration->method_aot_entry_count;
+        aot_reg.method_aot_entry_args = static_cast<const uint32_t*>(
+            g_bootstrap_state.metadata_registration->method_aot_entry_args);
+        aot_reg.method_aot_entry_arg_count = g_bootstrap_state.metadata_registration->method_aot_entry_arg_count;
+
         chaos::il2cpp::generic_context::RegisterModuleGenerics(&aot_reg);
+
+        // Register AOT method entries for runtime QueryAotMethod.
+        if (aot_reg.method_aot_entry_count > 0u) {
+            chaos::il2cpp::runtime_instantiation::RegisterMethodAotEntries(
+                aot_reg.module_id,
+                aot_reg.method_aot_entries,
+                aot_reg.method_aot_entry_count,
+                aot_reg.method_aot_entry_args,
+                aot_reg.method_aot_entry_arg_count);
+        }
     }
 
     // Register an AOT root memory domain for this module so that marshal

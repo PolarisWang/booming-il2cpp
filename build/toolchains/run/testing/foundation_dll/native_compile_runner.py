@@ -32,6 +32,8 @@ _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
 _VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib"
 
+from testing.trace import trace_init, trace
+
 # Expected MSVC path
 _MSVC_CL = Path("C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC") if os.name == "nt" else None
 
@@ -240,15 +242,22 @@ def main() -> None:
                         choices=["genuine", "patch", "semantic-patch", "hotupdate"],
                         help="Which variant to compile")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
+    parser.add_argument("--no-trace", action="store_true", help="Disable JSONL trace logging")
     args = parser.parse_args()
+
+    trace_init(_REPO_ROOT, stage="native-compile")
+    trace("compile_start", family=args.family_slug, variant=args.variant)
 
     result = compile_family(args.family_slug, args.variant)
 
     if result["compiled"]:
+        trace("compile_ok", family=args.family_slug, variant=args.variant)
         print(f"OK: {args.family_slug} ({args.variant}) compiled successfully")
         if args.verbose and result["output"]:
             print(result["output"])
     else:
+        trace("compile_failed", family=args.family_slug, variant=args.variant,
+              error=result["error"][:200])
         print(f"FAIL: {args.family_slug} ({args.variant}) compilation failed")
         print(f"Error: {result['error'][:300]}")
         sys.exit(1)

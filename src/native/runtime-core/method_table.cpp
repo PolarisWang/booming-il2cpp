@@ -2,6 +2,8 @@
 #include "module_registry.h"
 #include "abi_manifest.h"
 
+#include <chaos/trace.h>
+
 #include <cstring>
 
 namespace chaos::il2cpp::method_table {

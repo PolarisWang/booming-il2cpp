@@ -43,6 +43,17 @@ else:
     from .testing.events import build_event
     from .core.result import CommandResult
 
+# ── Trace system ──
+try:
+    from testing.trace import trace_init, set_run_id, get_trace_id
+except ImportError:
+    from .testing.trace import trace_init, set_run_id, get_trace_id
+
+try:
+    from commands.trace_analyze import handle as handle_trace_analyze
+except ImportError:
+    from .commands.trace_analyze import handle as handle_trace_analyze
+
 
 OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch", "project.dispatch", "deploy.dispatch", "verify.dispatch", "foundation_dll.dispatch"}
 
@@ -231,6 +242,13 @@ def execute_command(
         return inspect_commands.handle_list(manifest, host_platform)
     if command_id == "capability":
         return inspect_commands.handle_capability(manifest, host_platform, target)
+    if command_id == "trace-analyze":
+        return handle_trace_analyze(
+            repo_root,
+            host_platform,
+            command_text,
+            options or {},
+        )
 
     if command_id == "bootstrap":
         return CommandResult.success(
@@ -374,6 +392,8 @@ def execute_parsed_command(
             host_platform=host_platform,
             command_text=str(parsed["command_text"]),
         )
+        # Link trace system with events system: inject runId into trace records
+        set_run_id(str(operation_run_context["runId"]))
         if interactive and not json_output:
             progress_callback = build_operation_progress_callback(repo_root, operation_run_context)
             progress_callback(
@@ -455,6 +475,11 @@ def main(argv: list[str] | None = None) -> int:
     interactive = manifest_module.is_interactive_session()
     host_platform = manifest_module.detect_host_platform_family(runtime_module.detect_host_platform())
     parsed = manifest_module.parse_cli(argv, interactive, manifest, host_platform)
+
+    # Initialize cross-language trace at the top level.
+    # All subsequent calls to trace_init() in batch runners are idempotent.
+    # CHAOS_TRACE_PATH and CHAOS_TRACE_ID are exported for child C#/C++ processes.
+    trace_init(repo_root, stage=parsed.get("command_text", "") or "run")
     json_output = parsed["json"]
     if (
         not json_output

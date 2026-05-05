@@ -3,6 +3,7 @@
 #include "runtime_instantiation.h"  // AllocateRuntimeToken
 
 #include <chaos/native_types.h>
+#include <chaos/trace.h>
 
 #include <atomic>
 #include <cstdlib>
@@ -52,6 +53,7 @@ RuntimeInstantiatedMethod* CreateClosedMethodDescriptor(
     const TypeInfoHandle*   type_args,
     CHAOS_IL2CPP_UINT32    arg_count)
 {
+    CHAOS_IL2CPP_TRACE("runtime", "CreateClosedMethodDescriptor", "\"arg_count\"=%u", arg_count);
     if (open_method_definition == 0u || type_args == nullptr || arg_count == 0u) {
         return nullptr;
     }
@@ -135,6 +137,7 @@ bool LowerMethodBody(
     chaos::il2cpp::interpreter::ILTokenResolver      token_resolver,
     void*                                           user_data)
 {
+    CHAOS_IL2CPP_TRACE("runtime", "LowerMethodBody", "\"il_length\"=%zu", il_length);
     if (rt_method == nullptr) {
         return false;
     }

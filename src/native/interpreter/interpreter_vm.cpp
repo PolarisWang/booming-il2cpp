@@ -816,12 +816,12 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
 
                 // Fallback: existing external-dispatch behavior.
-                if (cv_arg_count > kMaxCallArgs) std::free(cv_args);
-                // Restore args to result.call_args for external dispatch.
+                // Copy args BEFORE freeing the heap buffer (if any).
                 result.call_args.resize(cv_arg_count);
                 for (CHAOS_IL2CPP_SIZE ai = 0u; ai < cv_arg_count; ++ai) {
                     result.call_args[ai] = cv_args[ai];
                 }
+                if (cv_arg_count > kMaxCallArgs) std::free(cv_args);
                 result.call_target = resolved_target;
                 result.needs_external_dispatch = true;
                 return result;
@@ -876,11 +876,12 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
 
                 // Fallback: existing external-dispatch behavior.
-                if (arg_count_v > kMaxCallArgs) std::free(cv_args_v);
+                // Copy args BEFORE freeing the heap buffer (if any).
                 result.call_args.resize(arg_count_v);
                 for (CHAOS_IL2CPP_SIZE ai = 0u; ai < arg_count_v; ++ai) {
                     result.call_args[ai] = cv_args_v[ai];
                 }
+                if (arg_count_v > kMaxCallArgs) std::free(cv_args_v);
                 result.call_target = resolved_target_v;
                 result.needs_external_dispatch = true;
                 return result;

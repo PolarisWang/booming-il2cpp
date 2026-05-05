@@ -155,6 +155,17 @@ private:
     /// Scan all registered modules to find a type by fully qualified name.
     TypeInfoHandle FindTypeByName(const char* fully_qualified_name);
 
+    /// Resolve a compound generic type field signature.
+    ///
+    /// Parses ECMA field signature format "Namespace.Type`N[arg1, arg2]"
+    /// and resolves via the runtime instantiation bridge.
+    /// e.g. "System.Collections.Generic.List`1[!0]" resolves the List<T>
+    /// value type with T = type_args[0].
+    TypeInfoHandle ResolveCompoundGenericType(
+        const char* member_type,
+        const TypeInfoHandle* type_args,
+        CHAOS_IL2CPP_UINT32 arg_count);
+
     // ── Alignment helpers ───────────────────────────────────────────────
 
     static CHAOS_IL2CPP_UINT32 AlignUp(

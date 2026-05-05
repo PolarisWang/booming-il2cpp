@@ -5,15 +5,20 @@ description: Trace 系统强制检查 — 扫描新增/修改代码中缺少 tra
 
 # Trace 强制检查
 
-## 机制
+## 使用原则
 
-trace 强制检查已通过 `.githooks/pre-commit` 钩子自动执行。安装方式：
+trace 系统是日常开发中定位问题的**首选手段**。遇到任何失败、异常或意外行为时：
+1. 先查 trace（`run trace` / `trace-analyze`），再看代码
+2. 只有 trace 信息不足时，再考虑加 print/log 或断点调试
+3. 新功能/新管线的关键路径必须包含 trace 点
+
+## 自动检查
+
+通过的 `.githooks/pre-commit` 钩子自动执行：
 
 ```bash
 git config core.hooksPath .githooks
 ```
-
-## 自动检查项
 
 提交时自动扫描 `src/native/*.cpp` 中是否包含 `CHAOS_IL2CPP_TRACE()` 调用：
 
@@ -46,15 +51,23 @@ git config core.hooksPath .githooks
 ## 命令
 
 ```bash
-# 查看最新 trace 会话
-python run trace
+# 查看最新 trace 会话（span 树）
+python -m build.toolchains.run.commands.trace_viewer
 
 # 按阶段过滤
-python run trace --stage audit
+python -m build.toolchains.run.commands.trace_viewer --stage batch-native-aot
 
-# 按操作过滤
-python run trace --op filter
+# 只看异常
+python -m build.toolchains.run.commands.trace_viewer --exception
+
+# 性能分析（阶段耗时、最慢操作）
+python -m build.toolchains.run.commands.trace_analyze_entry
 
 # JSONL 原始输出
-python run trace --json
+python -m build.toolchains.run.commands.trace_viewer --json
 ```
+
+## 关联技能
+
+- `dev:systematic-debugging` — 标准调试流程，trace 作为第一步证据收集手段
+- 详细文档：`wiki/04-工具与集成/统一追踪体系.md#错误排查工作流`

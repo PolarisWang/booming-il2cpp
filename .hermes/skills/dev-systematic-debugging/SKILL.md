@@ -73,9 +73,27 @@ description: Use when encountering any bug, test failure, or unexpected behavior
 
 4. **在多组件系统中收集证据**
 
-   **当系统有多个组件时（CI → 构建 → 签名，API → 服务 → 数据库）：**
+   **当系统有多个组件时（CI → 构建 → 签名，API → 服务 → 数据库，或 Python/C#/C++ 三层测试管线）：**
 
-   **在提出修复之前，添加诊断埋点：**
+   **在提出修复之前，优先查看 trace 系统，再根据需要添加诊断埋点：**
+
+   ```
+   第一步：打开 trace 查看器
+     run trace                      → 查看最新会话的 span 树
+     run trace --exception          → 只看异常记录
+     trace-analyze                  → 分析阶段耗时
+
+   第二步：定位失败阶段和操作
+     trace 会显示：
+     - 每个 pipeline 阶段的状态（pass/fail）
+     - 异常的 exception 类型和 message
+     - 每个操作的源文件:行号
+     - 跨语言（Python/C#/C++）的调用链
+
+   第三步：trace 信息不够时，再补诊断埋点
+   ```
+
+   **在原系统上加诊断埋点：**
    ```
    对每个组件边界：
      - 记录进入组件的数据

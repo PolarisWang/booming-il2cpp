@@ -77,82 +77,175 @@ def _load_trace(path: Path, max_records: int = 0) -> list[dict[str, Any]]:
     return records
 
 
-def _render_trace_tree(records: list[dict[str, Any]], *, show_source: bool = False) -> str:
-    """Render trace records as an indented tree."""
-    lines = []
-    indent_depth = 0
-    last_op = ""
+def _build_span_tree(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Build a tree from flat trace records using spanId/parentSpanId."""
+    spans: dict[str, dict] = {}
+    roots: list[dict] = []
 
     for r in records:
-        op = r.get("o", "?")
-        stage = r.get("s", "")
-        lang = r.get("l", "?")
-        timestamp = r.get("t", "")[11:19]  # HH:MM:SS
-        phase = r.get("phase", "")
+        span_id = r.get("spanId", "")
+        if span_id:
+            if span_id not in spans:
+                spans[span_id] = {"records": [], "depth": 0}
+            spans[span_id]["records"].append(r)
+            spans[span_id]["span_id"] = span_id
 
-        # Indentation: enter increases, exit decreases
-        if phase == "enter":
-            pass
-        elif phase == "exit" and indent_depth > 0:
-            indent_depth -= 1
-        prefix = "  " * indent_depth
-        if phase == "enter":
-            indent_depth += 1
-        if phase == "exception":
-            pass  # don't change indent
+    # Assign depth by following parentSpanId chain
+    def resolve_depth(span_id: str, visited: set | None = None) -> int:
+        if visited is None:
+            visited = set()
+        if span_id in visited:
+            return 0
+        visited.add(span_id)
+        span = spans.get(span_id)
+        if not span:
+            return 0
+        if span["depth"] > 0:
+            return span["depth"]
+        # Find parent from any record
+        for rec in span["records"]:
+            pid = rec.get("parentSpanId", "")
+            if pid:
+                span["depth"] = resolve_depth(pid, visited) + 1
+                return span["depth"]
+        return 0
 
-        stage_color = _stage_color(stage)
-        lang_tag = _language_tag(lang)
-        time_str = f"{ANSI_DIM}{timestamp}{ANSI_RESET}"
-        stage_str = f"{stage_color}{stage}{ANSI_RESET}" if stage else ""
-        lang_str = f"{ANSI_DIM}[{lang_tag}]{ANSI_RESET}"
+    for sid in spans:
+        spans[sid]["depth"] = resolve_depth(sid)
 
-        # Phase indicator
-        if phase == "enter":
-            phase_char = "▶"
-        elif phase == "exit":
-            phase_char = "✓"
-            if r.get("dur_ms"):
-                phase_char = f"✓ {r['dur_ms']}ms"
-        elif phase == "exception":
-            phase_char = "✗"
-        else:
-            phase_char = "·"
+    return list(spans.values())
 
-        # Build the line
-        line = f"{prefix}{time_str} {lang_str} {phase_char} "
-        if stage:
-            line += f"{stage_str}:"
-        line += f"{ANSI_BOLD}{op}{ANSI_RESET}"
 
-        # Key-value pairs (skip standard fields)
-        skip_keys = {"t", "l", "s", "o", "f", "phase", "dur_ms", "exception", "message"}
-        pairs = []
-        for k, v in r.items():
-            if k in skip_keys:
-                continue
-            if isinstance(v, str):
-                pairs.append(f"{k}={v}")
+def _render_trace_tree(records: list[dict[str, Any]], *, show_source: bool = False) -> str:
+    """Render trace records as a span-indented tree."""
+    lines = []
+
+    # Build span tree
+    spans = _build_span_tree(records)
+
+    # If we have spans, render by span tree; otherwise fall back to flat
+    if spans:
+        # Sort spans by first record's timestamp, then by depth
+        def _first_ts(s: dict) -> str:
+            return s["records"][0].get("t", "") if s["records"] else ""
+        spans.sort(key=lambda s: (_first_ts(s), s["depth"]))
+
+        for span in spans:
+            depth = span["depth"]
+            prefix = "  " * depth
+
+            for i, r in enumerate(span["records"]):
+                op = r.get("o", "?")
+                stage = r.get("s", "")
+                lang = r.get("l", "?")
+                timestamp = r.get("t", "")[11:19]
+                phase = r.get("phase", "")
+                span_id = r.get("spanId", "")
+
+                stage_color = _stage_color(stage)
+                lang_tag = _language_tag(lang)
+                time_str = f"{ANSI_DIM}{timestamp}{ANSI_RESET}"
+                stage_str = f"{stage_color}{stage}{ANSI_RESET}" if stage else ""
+                lang_str = f"{ANSI_DIM}[{lang_tag}]{ANSI_RESET}"
+
+                # Phase indicator
+                if phase == "enter":
+                    phase_char = "▶"
+                elif phase == "exit":
+                    phase_char = "✓"
+                    if r.get("dur_ms"):
+                        phase_char = f"✓ {r['dur_ms']}ms"
+                elif phase == "exception":
+                    phase_char = "✗"
+                else:
+                    phase_char = "·"
+
+                # Show spanId in dim for enter records
+                span_info = f" {ANSI_DIM}[{span_id}]{ANSI_RESET}" if phase == "enter" and span_id else ""
+
+                line = f"{prefix}{time_str} {lang_str} {phase_char}{span_info} "
+                if stage:
+                    line += f"{stage_str}:"
+                line += f"{ANSI_BOLD}{op}{ANSI_RESET}"
+
+                # Key-value pairs
+                skip_keys = {"t", "l", "s", "o", "f", "phase", "dur_ms",
+                             "exception", "message", "spanId", "parentSpanId"}
+                pairs = []
+                for k, v in r.items():
+                    if k in skip_keys:
+                        continue
+                    if isinstance(v, str):
+                        pairs.append(f"{k}={v}")
+                    else:
+                        pairs.append(f"{k}={v}")
+                if pairs:
+                    line += f" {ANSI_DIM}{'  '.join(pairs)}{ANSI_RESET}"
+
+                # Exception detail
+                if phase == "exception":
+                    exc = r.get("exception", "")
+                    msg = r.get("message", "")
+                    line += f"\n{prefix}  {ANSI_RED}✗ {exc}: {msg}{ANSI_RESET}"
+
+                # Source file
+                if show_source and r.get("f"):
+                    source = r["f"]
+                    parts = source.replace("\\", "/").split("/")
+                    short_source = "/".join(parts[-3:]) if len(parts) > 3 else source
+                    line += f"\n{prefix}  {ANSI_DIM}└─ {short_source}{ANSI_RESET}"
+
+                lines.append(line)
+    else:
+        # Flat rendering fallback (no span IDs)
+        for r in records:
+            op = r.get("o", "?")
+            stage = r.get("s", "")
+            lang = r.get("l", "?")
+            timestamp = r.get("t", "")[11:19]
+            phase = r.get("phase", "")
+
+            stage_color = _stage_color(stage)
+            lang_tag = _language_tag(lang)
+            time_str = f"{ANSI_DIM}{timestamp}{ANSI_RESET}"
+            stage_str = f"{stage_color}{stage}{ANSI_RESET}" if stage else ""
+            lang_str = f"{ANSI_DIM}[{lang_tag}]{ANSI_RESET}"
+
+            if phase == "enter":
+                phase_char = "▶"
+            elif phase == "exit":
+                phase_char = "✓"
+                if r.get("dur_ms"):
+                    phase_char = f"✓ {r['dur_ms']}ms"
+            elif phase == "exception":
+                phase_char = "✗"
             else:
-                pairs.append(f"{k}={v}")
-        if pairs:
-            line += f" {ANSI_DIM}{'  '.join(pairs)}{ANSI_RESET}"
+                phase_char = "·"
 
-        # Exception detail
-        if phase == "exception":
-            exc = r.get("exception", "")
-            msg = r.get("message", "")
-            line += f"\n{prefix}  {ANSI_RED}✗ {exc}: {msg}{ANSI_RESET}"
+            line = f"{time_str} {lang_str} {phase_char} "
+            if stage:
+                line += f"{stage_str}:"
+            line += f"{ANSI_BOLD}{op}{ANSI_RESET}"
 
-        # Source file
-        if show_source and r.get("f"):
-            source = r["f"]
-            # Shorten path
-            parts = source.replace("\\", "/").split("/")
-            short_source = "/".join(parts[-3:]) if len(parts) > 3 else source
-            line += f"\n{prefix}  {ANSI_DIM}└─ {short_source}{ANSI_RESET}"
+            skip_keys = {"t", "l", "s", "o", "f", "phase", "dur_ms",
+                         "exception", "message", "spanId", "parentSpanId"}
+            pairs = []
+            for k, v in r.items():
+                if k in skip_keys:
+                    continue
+                if isinstance(v, str):
+                    pairs.append(f"{k}={v}")
+                else:
+                    pairs.append(f"{k}={v}")
+            if pairs:
+                line += f" {ANSI_DIM}{'  '.join(pairs)}{ANSI_RESET}"
 
-        lines.append(line)
+            if phase == "exception":
+                exc = r.get("exception", "")
+                msg = r.get("message", "")
+                line += f"\n  {ANSI_RED}✗ {exc}: {msg}{ANSI_RESET}"
+
+            lines.append(line)
 
     return "\n".join(lines)
 
@@ -227,6 +320,9 @@ def handle(
     lang_filter = opts.get("lang")
     if lang_filter:
         filtered = [r for r in filtered if r.get("l") == lang_filter]
+    trace_id_filter = opts.get("trace_id")
+    if trace_id_filter:
+        filtered = [r for r in filtered if trace_id_filter in r.get("traceId", "")]
 
     # Output
     if opts.get("json"):
@@ -234,11 +330,13 @@ def handle(
     else:
         show_source = opts.get("source", False)
         tree = _render_trace_tree(filtered, show_source=show_source)
+        trace_id_filter = opts.get("trace_id")
         summary = (
             f"Trace: {session['session_id']}  "
             f"({len(filtered)}/{len(all_records)} records"
-            f"{f', filtered by stage={stage_filter}' if stage_filter else ''}"
+            f"{f', stage={stage_filter}' if stage_filter else ''}"
             f"{f', op={op_filter}' if op_filter else ''}"
+            f"{f', traceId={trace_id_filter}' if trace_id_filter else ''}"
             f")\n"
         )
         text = summary + "\n" + tree + "\n"

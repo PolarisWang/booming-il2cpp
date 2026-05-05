@@ -623,7 +623,7 @@ public sealed partial class NativeAotLoweringPlanner
 		if (referenceTypeSubjectIds.Count > 0)
 		{
 				builder.AppendLine("// ── Virtual method table arrays ──");
-			builder.AppendLine("// ── Virtual method table arrays ──");
+				// RegisterVTable is declared via #include "runtime_vtable.h"
 			foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 			{
 				if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
@@ -679,6 +679,16 @@ public sealed partial class NativeAotLoweringPlanner
 					}
 				}
 				builder.AppendLine("};");
+				ulong stableId = ComputeStableTypeId(typeId);
+				builder.Append("static const int s_vtreg_");
+				builder.Append(GetNativeSymbol("", typeId));
+				builder.Append(" = (::chaos::il2cpp::runtime_vtable::RegisterVTable(CHAOS_IL2CPP_UINT64_C(");
+				builder.Append(stableId.ToString());
+				builder.Append("), ");
+				builder.Append(GetNativeVTableSymbol(typeId));
+				builder.Append(", ");
+				builder.Append(vtLen.ToString());
+				builder.AppendLine("u), 0);");
 				builder.AppendLine();
 			}
 		}
@@ -1023,6 +1033,11 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine();
 		}
+		// Capture emitted type subject IDs for Phase 0 ModuleRegistry Tier 0 arrays
+		_allEmittedTypeSubjectIds = new HashSet<string>(referenceTypeSubjectIds, StringComparer.Ordinal);
+		_allEmittedTypeSubjectIds.UnionWith(interfaceTypeSubjectIds);
+		_allEmittedTypeSubjectIds.UnionWith(valueTypeSubjectIds);
+		_allEmittedTypeSubjectIds.UnionWith(hashSet3);
 		void TrackAbiSlotCarrier(AotCoreIrAbiSlotArtifact abiSlot)
 		{
 			if (abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue && !string.IsNullOrEmpty(abiSlot.TypeSubjectId))

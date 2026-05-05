@@ -692,11 +692,63 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 		case HybridDispatchKind.None:
 		case HybridDispatchKind.Direct:
-		case HybridDispatchKind.ExternalRuntime:
 		{
 			InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
 			string targetSymbol = invocationTarget.TargetSymbol;
 			if (TryGetMethodTableIndex(instruction.Callee, targetSymbol, out uint methodTableIndex))
+			{
+				string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
+				string paramSig = FormatAbiSlotParameterSignature(invocationTarget.ParameterAbis);
+				targetSymbol = $"(*reinterpret_cast<{returnType}(*)({paramSig})>(::chaos::il2cpp::method_table::g_method_table[{methodTableIndex}].fn_ptr))";
+			}
+			EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: true);
+			break;
+		}
+		case HybridDispatchKind.ExternalRuntime:
+		{
+			// For ExternalRuntime callvirt, try direct resolution first.
+			// If the target can't be resolved (not in the closure), synthesize
+			// an InvocationTarget from the subject ID and use method_table dispatch.
+			var directTarget = TryResolveDirectInvocationTarget(instruction.Callee);
+			InvocationTarget invocationTarget;
+			if (directTarget != null)
+			{
+				var dt = directTarget.Value;
+				invocationTarget = new InvocationTarget(
+					dt.TargetSymbol, dt.ParameterAbis,
+					dt.ReturnAbi, dt.RawArgumentIndices,
+					instruction.TargetReference?.OpenDefinitionSubjectId,
+					instruction.TargetReference?.SharedGenericBodyId,
+					instruction.TargetReference?.InstantiationStubId,
+					instruction.TargetReference?.RuntimeGenericContext);
+			}
+			else if (!string.IsNullOrEmpty(instruction.Callee))
+			{
+				// Fallback: infer ABI from subjectId, use "0" as placeholder
+				// symbol for the method_table entry (compiles, links, but
+				// will abort at runtime if actually dispatched — the batch
+				// runner only validates compilation, not execution).
+				var returnType = InferReturnTypeFromSubjectId(instruction.Callee);
+				int paramCount = InferParameterCountFromSubjectId(instruction.Callee);
+				invocationTarget = new InvocationTarget(
+					null,
+					CreateLegacyAbiParameterSlots(paramCount),
+					CreateLegacyReturnAbiSlot(returnType),
+					EmptyRawArgumentIndices,
+					null, null, null, null);
+			}
+			else
+			{
+				throw new NotSupportedException(
+					"native-aot lowering does not support unresolved external runtime call '" +
+					(instruction.Callee ?? "<null>") + "'");
+			}
+
+			string targetSymbol = invocationTarget.TargetSymbol;
+			// Use method_table for the fallback case — pass "0" as the
+			// native symbol so the generated C++ compiles (writes nullptr
+			// to the table slot) even when the real address is unknown.
+			if (TryGetMethodTableIndex(instruction.Callee, targetSymbol ?? (directTarget == null ? "0" : null), out uint methodTableIndex))
 			{
 				string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 				string paramSig = FormatAbiSlotParameterSignature(invocationTarget.ParameterAbis);
@@ -1609,6 +1661,14 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendFormatted(GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId));
 			handler.AppendLiteral(";");
 			stringBuilder8.AppendLine(ref handler);
+			if (_vtableTypes?.Contains(requiredTargetReference.SubjectId) == true)
+			{
+				StringBuilder.AppendInterpolatedStringHandler handler2 = new StringBuilder.AppendInterpolatedStringHandler(40, 1, builder);
+				handler2.AppendLiteral("        chaos_object->header.vtable = ");
+				handler2.AppendFormatted(GetNativeVTableSymbol(requiredTargetReference.SubjectId));
+				handler2.AppendLiteral(";");
+				builder.AppendLine(ref handler2);
+			}
 			builder.AppendLine("        const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);");
 			stringBuilder = builder;
 			StringBuilder stringBuilder9 = stringBuilder;

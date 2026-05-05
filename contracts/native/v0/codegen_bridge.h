@@ -58,6 +58,25 @@ typedef struct GenericTypeRegistrationEntryV0 {
 typedef GenericTypeRegistrationEntryV0 GenericMethodRegistrationEntryV0;
 
 /*
+ * ── Generic method AOT entries ──
+ *
+ * Codegen emits these for each closed generic method instantiation that was
+ * pre-compiled to native AOT code.  The open_token identifies the generic
+ * method definition; the closed_token identifies the AOT-compiled instance.
+ * type_args are stored in a flat uint32_t[] token pool referenced by
+ * args_start_index and arg_count.
+ *
+ * The array MUST be sorted by open_token (ascending) to enable per-module
+ * binary search at runtime.
+ */
+typedef struct GenericMethodAotEntryV0 {
+    uint32_t open_token;          /* open generic method token (e.g. 0x06000010 for M<>)   */
+    uint32_t closed_token;        /* AOT-compiled closed method token (e.g. 0x06000050)    */
+    uint32_t arg_count;           /* number of type arguments                              */
+    uint32_t args_start_index;    /* offset into the flat type-arg token pool              */
+} GenericMethodAotEntryV0;
+
+/*
  * Aggregate registration bundle for one module (AOT or hot-update).
  * Codegen data + runtime-filled fields (source_image, bridge).
  */
@@ -80,6 +99,12 @@ typedef struct ModuleGenericRegistrationV0 {
     const uint32_t* generic_method_args;    /* flat token pool */
     uint32_t generic_method_arg_count;
 
+    /* Method AOT entries (GenericMethodAotEntryV0[]). */
+    const GenericMethodAotEntryV0*  method_aot_entries;
+    uint32_t method_aot_entry_count;
+    const uint32_t* method_aot_entry_args;      /* flat type-arg token pool */
+    uint32_t method_aot_entry_arg_count;
+
     /* Runtime-filled: the image owning every token in this bundle. */
     ImageHandle source_image;
 } ModuleGenericRegistrationV0;
@@ -98,6 +123,12 @@ typedef struct MetadataRegistrationV0 {
     uint32_t generic_method_count;
     const uint32_t* generic_method_args;    /* flat token pool */
     uint32_t generic_method_arg_count;
+
+    /* Generic method AOT entries (GenericMethodAotEntryV0[]). */
+    const GenericMethodAotEntryV0*  method_aot_entries;
+    uint32_t method_aot_entry_count;
+    const uint32_t* method_aot_entry_args;      /* flat type-arg token pool */
+    uint32_t method_aot_entry_arg_count;
 
     const void* field_offsets;
     uint32_t field_offset_count;

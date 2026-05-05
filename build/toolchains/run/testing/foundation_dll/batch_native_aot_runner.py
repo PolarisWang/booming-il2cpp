@@ -28,13 +28,7 @@ sys.path.insert(0, str(_HERE))
 
 from family_entrypoint_generator import generate_and_build
 
-try:
-    from testing.trace import trace_init, trace
-except ImportError:
-    def trace_init(*args, **kwargs):
-        pass
-    def trace(*args, **kwargs):
-        pass
+from testing.trace import trace_init, trace
 
 # Families to process (all 23 non-report CoreLib families)
 FAMILIES = [
@@ -408,7 +402,8 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
 def main() -> None:
     parser = argparse.ArgumentParser(description="Batch native AOT CodeGen pipeline")
     parser.add_argument("--assembly-name", default="System.Private.CoreLib", help="Assembly name to process")
-    parser.add_argument("--trace", action="store_true", help="Enable JSONL trace logging")
+    parser.add_argument("--trace", action="store_true", default=True, help="Enable JSONL trace logging (default: on)")
+    parser.add_argument("--no-trace", action="store_true", help="Disable JSONL trace logging")
     parser.add_argument("--families", nargs="*", help="Space-separated subset of family slugs to process. Auto-discovers from contracts if not specified.")
     args = parser.parse_args()
 
@@ -419,9 +414,8 @@ def main() -> None:
         print(f"FATAL: verification directory not found: {_VERIFICATION}", file=sys.stderr)
         sys.exit(1)
 
-    if args.trace:
+    if args.trace and not args.no_trace:
         trace_init(_REPO_ROOT, stage="batch-native-aot")
-        print("[trace] JSONL trace enabled")
 
     families = args.families
     if not families:

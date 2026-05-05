@@ -48,6 +48,9 @@ using chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector512Carrier;
 void SetCurrentRuntimeState(RuntimeState* runtime_state);
 RuntimeState* GetCurrentRuntimeState();
 
+void SetCurrentThreadState(ThreadState* thread_state);
+ThreadState* GetCurrentThreadState();
+
 struct ManagedExceptionCarrier {
     ExceptionHandle exception;
 };

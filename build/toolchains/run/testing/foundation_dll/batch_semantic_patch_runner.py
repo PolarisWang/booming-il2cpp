@@ -27,13 +27,7 @@ sys.path.insert(0, str(_HERE))
 
 from family_entrypoint_generator import generate_and_build
 
-try:
-    from testing.trace import trace_init, trace
-except ImportError:
-    def trace_init(*args, **kwargs):
-        pass
-    def trace(*args, **kwargs):
-        pass
+from testing.trace import trace_init, trace
 
 FAMILIES = [
     "reflection-type",
@@ -222,13 +216,13 @@ def run_family(family_slug: str) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Batch semantic-patch CodeGen pipeline")
-    parser.add_argument("--trace", action="store_true", help="Enable JSONL trace logging")
+    parser.add_argument("--trace", action="store_true", default=True, help="Enable JSONL trace logging (default: on)")
+    parser.add_argument("--no-trace", action="store_true", help="Disable JSONL trace logging")
     parser.add_argument("--families", nargs="*", help="Space-separated subset of family slugs to process")
     args = parser.parse_args()
 
-    if args.trace:
+    if args.trace and not args.no_trace:
         trace_init(_REPO_ROOT, stage="batch-semantic-patch")
-        print("[trace] JSONL trace enabled")
 
     families = args.families or FAMILIES
 

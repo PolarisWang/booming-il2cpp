@@ -9,10 +9,21 @@ public static class ChaosProofRunner
     {
         var request = ChaosManagedHostArguments.Parse(args);
         var entry = ChaosManagedHostReflection.ResolveEntry(ChaosManagedHostKind.Proof, request);
+
+        var methodName = entry?.MethodName ?? "unknown";
+        RuntimeTrace.Point("proof_runner.run", "proof", new Dictionary<string, object?>
+        {
+            ["method"] = methodName,
+            ["entryIndex"] = request.EntryIndex,
+        });
+
         try
         {
             ChaosAssertState.Reset();
-            ChaosManagedHostReflection.InvokeStaticEntry(entry);
+            RuntimeTrace.TraceCall("proof_runner.invoke", "proof", () =>
+            {
+                ChaosManagedHostReflection.InvokeStaticEntry(entry);
+            });
             return ChaosAssertState.Complete();
         }
         catch (ChaosAssertionException exception)

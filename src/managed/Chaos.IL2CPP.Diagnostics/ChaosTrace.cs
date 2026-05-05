@@ -11,6 +11,7 @@ namespace Chaos.IL2CPP.Diagnostics;
 public static class ChaosTrace
 {
     private static string? _tracePath;
+    private static string _traceId = "";
     private static string _runId = "";
     private static string _subjectId = "";
     private static string _matrixId = "";
@@ -43,14 +44,18 @@ public static class ChaosTrace
     }
 
     /// <summary>
-    /// Initialize from CHAOS_TRACE_PATH environment variable.
-    /// No-op if the variable is not set.
+    /// Initialize from CHAOS_TRACE_PATH and CHAOS_TRACE_ID environment variables.
+    /// No-op if CHAOS_TRACE_PATH is not set.
     /// </summary>
     public static void InitFromEnv()
     {
         var path = Environment.GetEnvironmentVariable("CHAOS_TRACE_PATH");
         if (!string.IsNullOrEmpty(path))
             Init(path);
+
+        var traceId = Environment.GetEnvironmentVariable("CHAOS_TRACE_ID");
+        if (!string.IsNullOrEmpty(traceId))
+            _traceId = traceId;
     }
 
     /// <summary>
@@ -76,6 +81,7 @@ public static class ChaosTrace
             ["t"] = DateTime.UtcNow.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"),
             ["l"] = "cs",
             ["o"] = operation,
+            ["traceId"] = _traceId,
         };
         if (!string.IsNullOrEmpty(stage))
             record["s"] = stage;

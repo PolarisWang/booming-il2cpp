@@ -2,6 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Chaos.IL2CPP.CodeGen;
 using Chaos.IL2CPP.Contracts;
+using Chaos.IL2CPP.Diagnostics;
 using Chaos.IL2CPP.Pipeline;
 using Chaos.IL2CPP.ProjectGraph;
 
@@ -82,20 +83,29 @@ public sealed class DriverEntry
 
     public static int Main(string[] args)
     {
+        // Initialize cross-language trace from environment
+        ChaosTrace.InitFromEnv();
+
         if (args.Length == 0)
         {
             ShowHelp();
             return 1;
         }
 
-        return args[0] switch
+        var command = args[0];
+        ChaosTrace.Point("driver.main", "cli", new Dictionary<string, object?>
+        {
+            ["command"] = command,
+        });
+
+        return command switch
         {
             "convert" => RunConvert(args[1..]),
             "build" => RunBuild(args[1..]),
             "publish" => RunPublish(args[1..]),
             "emit-native-reference" => RunLegacyEmitNativeReference(args),
             "emit-native-aot" => RunLegacyEmitNativeAot(args),
-            _ when !args[0].StartsWith('-') => RunLegacyConvert(args),
+            _ when !command.StartsWith('-') => RunLegacyConvert(args),
             _ => ShowHelpAndFail(),
         };
     }
@@ -248,6 +258,7 @@ public sealed class DriverEntry
             }
 
             Console.WriteLine("[2/3] Running IL2CPP pipeline...");
+            ChaosTrace.Point("driver.convert.pipeline", "convert");
             var entry = entryPointOverride
                 ?? (source.TryGetProperty("entry", out var e) ? e.GetString() : null);
 
@@ -263,6 +274,7 @@ public sealed class DriverEntry
             if (closureResult != 0) return closureResult;
 
             Console.WriteLine("[3/3] Generating native reference...");
+            ChaosTrace.Point("driver.convert.native_reference", "convert");
             var nativeOutputDir = Path.Combine(outputDir, "generated");
             var nativeRequest = new NativeReferenceProofRequest(closureOutputDir, nativeOutputDir);
             try
@@ -451,6 +463,8 @@ public sealed class DriverEntry
             return 1;
         }
 
+        ChaosTrace.Point("driver.emit_native_reference", "codegen");
+
         try
         {
             return new DriverEntry().Run(new NativeReferenceProofRequest(args[1], args[2]));
@@ -469,6 +483,8 @@ public sealed class DriverEntry
             Console.Error.WriteLine("Usage: chaos-il2cpp emit-native-aot <managed-closure-root> <output-root>");
             return 1;
         }
+
+        ChaosTrace.Point("driver.emit_native_aot", "codegen");
 
         try
         {

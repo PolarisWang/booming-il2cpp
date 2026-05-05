@@ -1,6 +1,8 @@
 #include "layout_engine.h"
+#include "runtime_instantiation.h"
 
 #include <chaos/native_types.h>
+#include <chaos/trace.h>
 
 #include <atomic>
 #include <cstdint>
@@ -210,6 +212,8 @@ const TypeLayout* LayoutEngine::GetOrComputeLayout(
     const TypeInfoHandle*  type_args,
     CHAOS_IL2CPP_UINT32   arg_count)
 {
+    CHAOS_IL2CPP_TRACE("runtime", "GetOrComputeLayout",
+        "\"arg_count\"=%u", arg_count);
     if (closed_type == 0u) {
         return nullptr;
     }
@@ -494,9 +498,34 @@ LayoutEngine::SizeAndAlignment LayoutEngine::ResolveSizeAndAlignmentInternal(
     CHAOS_IL2CPP_UINT32 sub_arg_count = 0u;
 
     if (desc->generic_type_definition != nullptr) {
-        // This is a closed generic — we need type args but can't recover
-        // them from the handle alone.  Fall back to pointer-sized.
-        // (Full recursive generic resolution is a Phase 4+ enhancement.)
+        // ── Closed generic value type ──────────────────────────────
+        // Try to recover type args from the tag-encoded handle.
+        // RuntimeInstantiatedType is a container_of pattern: its first
+        // field is `descriptor`, so &rt_type->descriptor == rt_type
+        // when reinterpret_casted.
+        const auto* tag_desc = TryDecodeReflectionQueryTypeHandle(type);
+        if (tag_desc != nullptr) {
+            const auto* rt_type =
+                reinterpret_cast<const runtime_instantiation::RuntimeInstantiatedType*>(tag_desc);
+            sub_type_args = rt_type->type_args;
+            sub_arg_count = rt_type->arg_count;
+        }
+
+        if (sub_type_args != nullptr && sub_arg_count > 0u) {
+            auto* sub_layout = ComputeLayoutInternal(
+                type, desc, sub_type_args, sub_arg_count, guard);
+            if (sub_layout != nullptr) {
+                cache_[type] = sub_layout;
+                using namespace runtime_core;
+                const CHAOS_IL2CPP_UINT32 mod_id = GetModuleId(type);
+                if (mod_id < kMaxModules) {
+                    module_index_[mod_id].push_back(type);
+                }
+                result.size      = sub_layout->value_size;
+                result.alignment = sub_layout->alignment;
+            }
+        }
+
         return result;
     }
 
@@ -557,11 +586,144 @@ TypeInfoHandle LayoutEngine::ResolveFieldType(
         return 0u;  // index out of range
     }
 
+    // ── Compound generic type ─────────────────────────────────────
+    //
+    // Format: "Namespace.Type`N[arg1, arg2]"  (ECMA field signature).
+    // e.g. "System.Collections.Generic.List`1[!0]"
+    if (std::strchr(member_type, '`') != nullptr) {
+        return ResolveCompoundGenericType(member_type, type_args, arg_count);
+    }
+
     // ── Well-known type name ─────────────────────────────────────────
     //
     // For member_type_utf8 values like "System.Int32", look up the
     // TypeInfoHandle by scanning registered modules.
     return FindTypeByName(member_type);
+}
+
+// ── Private: ResolveCompoundGenericType ──────────────────────────────
+
+TypeInfoHandle LayoutEngine::ResolveCompoundGenericType(
+    const char* member_type,
+    const TypeInfoHandle* type_args,
+    CHAOS_IL2CPP_UINT32 arg_count)
+{
+    // Format: "Namespace.Type`N[arg1, arg2]"
+    // Find backtick and bracket.
+    const char* backtick = std::strchr(member_type, '`');
+    const char* bracket  = std::strchr(member_type, '[');
+    if (backtick == nullptr || bracket == nullptr || bracket <= backtick) {
+        return 0u;
+    }
+
+    // Extract the base type name (everything before the backtick).
+    const CHAOS_IL2CPP_SIZE base_len =
+        static_cast<CHAOS_IL2CPP_SIZE>(backtick - member_type);
+    char base_name[256];
+    if (base_len >= sizeof(base_name)) {
+        return 0u;  // base name too long
+    }
+    std::memcpy(base_name, member_type, base_len);
+    base_name[base_len] = '\0';
+
+    // Look up the open generic type definition.
+    const TypeInfoHandle base_type = FindTypeByName(base_name);
+    if (base_type == 0u) {
+        return 0u;
+    }
+
+    // Parse type arguments between '[' and ']'.
+    // V1: supports up to 8 type args.
+    TypeInfoHandle parsed_args[8];
+    CHAOS_IL2CPP_UINT32 parsed_count = 0u;
+
+    const char* arg_start = bracket + 1;
+    // Find the matching close bracket (handles one level of nesting).
+    int depth = 1;
+    const char* end_bracket = nullptr;
+    for (const char* p = arg_start; *p != '\0'; ++p) {
+        if (*p == '[' || *p == '<') ++depth;
+        if (*p == ']' || *p == '>') { --depth; if (depth == 0) { end_bracket = p; break; } }
+    }
+    if (end_bracket == nullptr) {
+        return 0u;  // unmatched bracket
+    }
+
+    // Walk comma-separated args within the brackets.
+    const char* arg_begin = arg_start;
+    for (const char* p = arg_start; p <= end_bracket && parsed_count < 8u; ++p) {
+        // Track nesting depth so commas inside nested generics are skipped.
+        int nest = 0;
+        while (p < end_bracket) {
+            if (*p == '[' || *p == '<') ++nest;
+            if (*p == ']' || *p == '>') --nest;
+            if (nest == 0 && (*p == ',' || *p == ']')) break;
+            ++p;
+        }
+
+        const CHAOS_IL2CPP_SIZE arg_len =
+            static_cast<CHAOS_IL2CPP_SIZE>(p - arg_begin);
+        if (arg_len > 0u) {
+            // Trim leading/trailing whitespace.
+            const char* trimmed = arg_begin;
+            CHAOS_IL2CPP_SIZE trim_len = arg_len;
+            while (trim_len > 0u && (*trimmed == ' ' || *trimmed == '\t')) {
+                ++trimmed;
+                --trim_len;
+            }
+            while (trim_len > 0u &&
+                   (trimmed[trim_len - 1] == ' ' || trimmed[trim_len - 1] == '\t')) {
+                --trim_len;
+            }
+
+            if (trim_len > 0u) {
+                char arg_buf[256];
+                if (trim_len < sizeof(arg_buf)) {
+                    std::memcpy(arg_buf, trimmed, trim_len);
+                    arg_buf[trim_len] = '\0';
+
+                    if (arg_buf[0] == '!') {
+                        // Generic parameter reference (!N or !!N).
+                        const char* digits = arg_buf + (arg_buf[1] == '!' ? 2u : 1u);
+                        char* endp = nullptr;
+                        const CHAOS_IL2CPP_UINT32 idx =
+                            static_cast<CHAOS_IL2CPP_UINT32>(std::strtoul(digits, &endp, 10));
+                        if (endp != digits && type_args != nullptr && idx < arg_count) {
+                            parsed_args[parsed_count++] = type_args[idx];
+                        }
+                    } else if (std::strchr(arg_buf, '`') != nullptr) {
+                        // Nested compound generic — recurse.
+                        // Build a temporary field-like descriptor.
+                        const TypeInfoHandle nested =
+                            ResolveCompoundGenericType(arg_buf, type_args, arg_count);
+                        if (nested != 0u) {
+                            parsed_args[parsed_count++] = nested;
+                        }
+                    } else {
+                        // Plain type name — look up via module scan.
+                        const TypeInfoHandle named = FindTypeByName(arg_buf);
+                        if (named != 0u) {
+                            parsed_args[parsed_count++] = named;
+                        }
+                    }
+                }
+            }
+        }
+
+        arg_begin = (p < end_bracket) ? p + 1u : p;  // skip past comma or bracket
+    }
+
+    if (parsed_count == 0u) {
+        return 0u;
+    }
+
+    // Instantiate the closed generic type via the runtime bridge.
+    auto* bridge = runtime_instantiation::GetBridgeV0();
+    if (bridge == nullptr || bridge->resolve_or_instantiate_type == nullptr) {
+        return 0u;
+    }
+
+    return bridge->resolve_or_instantiate_type(base_type, parsed_args, parsed_count);
 }
 
 // ── Private: FindTypeByName ──────────────────────────────────────────

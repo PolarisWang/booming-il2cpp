@@ -18,6 +18,7 @@
 // Message field is at offset 8 from the object base.
 
 #include "runtime_core.h"
+#include <chaos/trace.h>
 #include <chaos/type_info.h>
 
 #include <cstring>
@@ -50,6 +51,7 @@ extern "C" void ChaosReflectionSetExceptionMetadata(
     CHAOS_IL2CPP_INTPTR exception_obj,
     CHAOS_IL2CPP_INTPTR message_value)
 {
+    CHAOS_IL2CPP_TRACE("runtime", "SetExceptionMetadata", "");
     using namespace chaos::il2cpp::runtime_core;
 
     auto* message_slot = GetExceptionFieldPtr(
