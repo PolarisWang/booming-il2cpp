@@ -48,6 +48,10 @@ bool ArrayReverseReferenceRange(
     CHAOS_IL2CPP_UINTPTR start_index,
     CHAOS_IL2CPP_UINTPTR length);
 
+/// Mark the object as changed (for incremental GC write barrier).
+/// No-op when bdwgc is not compiled with MANUAL_VDB.
+void GcEndStubbornChange(const void* obj);
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_HELPERS_H_

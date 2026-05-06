@@ -1,5 +1,11 @@
 #include "interpreter_entry.h"
 #include "patch_loader.h"
+#include "runtime_core.h"
+#include "runtime_instantiation.h"
+#include "token_resolver.h"
+#include "module_registry.h"
+#include "reflection_query_model.h"
+#include "../bootstrap/bootstrap.h"
 
 #include <il_to_ir_lowerer.h>     // LowerILToIR, ParseMethodBodyHeader, ILTokenResolver
 #include <interpreter_vm.h>       // ExecutionFrame, InterpreterVM, IRMethod, InterpreterValue
@@ -97,36 +103,45 @@ static bool PatchTokenResolver(
     uint8_t table = static_cast<uint8_t>(token >> 24);
 
     switch (table) {
-    case 0x01: {  // TypeRef
-        // TypeRef in patch data = locally defined reference.
-        // The caller handles resolution via the returned value.
+    case 0x02: {  // TypeDef — type defined in patch assembly.
         instruction.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(token);
         return true;
     }
-    case 0x02: {  // TypeDef
-        // TypeDef in patch data = type defined in patch assembly.
+    case 0x06: {  // MethodDef — method defined in patch assembly.
+        instruction.call_target = nullptr;
         instruction.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(token);
         return true;
     }
-    case 0x06: {  // MethodDef
-        // MethodDef in patch data = method defined in patch assembly.
-        instruction.call_target = nullptr;  // Will be resolved by interpreter dispatch
-        instruction.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(token);
-        return true;
-    }
-    case 0x0A: {  // MemberRef
-        // MemberRef: reference to a member of another type.
-        instruction.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(token);
-        return true;
-    }
-    case 0x11: {  // StandaloneSig
-        instruction.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(token);
-        return true;
-    }
-    default:
-        // Unknown token type — return false to let the lowerer handle it.
+    case 0x70: {  // UserString — ldstr token from patch #US heap.
+        const char* str = cache->GetUserString(token);
+        if (str != nullptr) {
+            instruction.string_operand = str;
+            return true;
+        }
         return false;
     }
+    default:
+        // All other token types (0x01 TypeRef, 0x0A MemberRef, 0x11
+        // StandaloneSig, etc.) fall through to DefaultTokenResolver
+        // for AOT-side resolution via CodegenBridgeV0.
+        break;
+    }
+
+    // ── Fallback to DefaultTokenResolver ──
+    // Uses the AOT CodegenBridgeV0 + ImageHandle stored in PatchMetadataCache
+    // by InterpreterEntryDirect before IL→IR lowering. This enables resolution
+    // of string tokens (ldstr), cross-module method references (Convert.ToChar),
+    // and type references (System.String) that live in the AOT image rather than
+    // the patch data.
+    const auto* bridge = cache->GetBridge();
+    if (bridge == nullptr) return false;
+    const ImageHandle aot_image = cache->GetAotImage();
+    if (aot_image == 0) return false;
+
+    interpreter::TokenResolverContext fallback_ctx;
+    fallback_ctx.bridge       = bridge;
+    fallback_ctx.source_image = aot_image;
+    return interpreter::DefaultTokenResolver(token, instruction, &fallback_ctx);
 }
 
 // ── PatchMethod lazy IR lowering ────────────────────────────────────────
@@ -189,6 +204,36 @@ void InterpreterEntryDirect(
     if (method_key == 0) return;
 
     auto* patch_method = reinterpret_cast<PatchMethod*>(method_key);
+
+    // Step 0: Set up AOT bridge for cross-module token resolution.
+    // The PatchMetadataCache needs access to the CodegenBridgeV0 + AOT
+    // ImageHandle so that PatchTokenResolver can fall back to
+    // DefaultTokenResolver for MemberRef, TypeRef, and LdStr tokens
+    // that reference types/methods/strings outside the patch data.
+    if (patch_method->metadata_cache != nullptr) {
+        const auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
+        const auto* bootstrap_state = chaos::il2cpp::bootstrap::PeekBootstrapState();
+        ImageHandle image = 0;
+        if (bootstrap_state != nullptr && bootstrap_state->aot_image_handle != 0) {
+            image = bootstrap_state->aot_image_handle;
+        } else if (bridge != nullptr) {
+            // Fallback for standalone hotupdate test context where
+            // bootstrap_state->aot_image_handle is 0 (bootstrap not fully
+            // initialized). Scan registered modules for the first valid
+            // ImageHandle to enable DefaultTokenResolver fallback.
+            for (uint32_t mid = 0; mid < kMaxModules; ++mid) {
+                const auto* module = LookupModule(mid);
+                if (module != nullptr && !module->tombstone &&
+                    module->image != nullptr && module->type_count > 0) {
+                    image = EncodeReflectionQueryImageHandle(module->image);
+                    break;
+                }
+            }
+        }
+        if (bridge != nullptr && image != 0) {
+            patch_method->metadata_cache->SetAotBridge(bridge, image);
+        }
+    }
 
     // Step 1: Lazy IL→IR lowering.
     PatchMethodLowerIR(method_key);
@@ -255,6 +300,20 @@ void InterpreterEntryDirect(
     // requires parsing the local_var_sig_tok from the method body header.
     // For now, start with empty locals — InterpreterVM will expand as needed.)
     frame.locals.reserve(8);
+
+    // ── Set up dispatch callback for nested Call instructions ──
+    // When Execute encounters Call/CallVirt/CallBridge to cross-module
+    // methods (e.g. System.Convert.ToChar), the dispatch_fn routes them
+    // through MethodInvoke → AOT function or interpreter, instead of
+    // returning needs_external_dispatch. This is the same pattern used
+    // by InterpretMethodCall in runtime_instantiation.cpp.
+    auto* runtime_state = GetCurrentRuntimeState();
+    auto* thread_state  = GetCurrentThreadState();
+    runtime_instantiation::InterpreterDispatchContext dispatch_ctx;
+    dispatch_ctx.runtime_state = runtime_state;
+    dispatch_ctx.thread_state  = thread_state;
+    frame.dispatch_fn     = runtime_instantiation::InterpreterDispatch;
+    frame.dispatch_context = &dispatch_ctx;
 
     // Step 4: Execute via InterpreterVM.
     interpreter::ExecutionResult result;

@@ -76,10 +76,12 @@ static const ChaosAbiManifestV0* BuildTestManifest(uint8_t* buf, size_t buf_size
     params[1] = CHAOS_ABI_CARRIER_FLOAT64;                  // method 0, param 1
     params[2] = CHAOS_ABI_CARRIER_BY_REF;                   // method 1, param 0
 
-    // Compute checksum over entries + params payload
-    size_t checksum_off = offsetof(ChaosAbiManifestV0, checksum) + sizeof(uint32_t);
-    size_t payload_bytes = needed - checksum_off;
-    manifest->checksum = HashPayload(buf + checksum_off, payload_bytes);
+    // Compute checksum over entries + params payload (matches abi_manifest.cpp)
+    // Hash from sizeof(ChaosAbiManifestV0) (skipping the entire header including
+    // the link-time prefix-sum pointer) for method_count*entry_size + params_size bytes.
+    size_t payload_offset = sizeof(ChaosAbiManifestV0);
+    size_t payload_bytes = kMethodCount * sizeof(ChaosAbiMethodEntryV0) + kParamCount;
+    manifest->checksum = HashPayload(buf + payload_offset, payload_bytes);
 
     return manifest;
 }
@@ -267,6 +269,30 @@ static bool TestGetMethodParamOffset() {
     return true;
 }
 
+// ── Test: ChaosAbiManifestGetMethodParamOffset with prefix-sum (O(1)) ──────
+static bool TestGetMethodParamOffsetPrefixSum() {
+    uint8_t buf[256] = {};
+    // Build a manifest that has a literal prefix-sum array embedded after params.
+    // Method 0: 2 params, Method 1: 1 param  =>  prefix_sum = [0, 2, 3]
+    static const uint32_t kPrefixSum[] = {0u, 2u, 3u};
+
+    const auto* manifest = BuildTestManifest(buf, sizeof(buf));
+    // Patch in the prefix-sum pointer (conceptually what codegen emits).
+    auto* mutable_manifest = const_cast<ChaosAbiManifestV0*>(manifest);
+    mutable_manifest->param_offset_prefix_sum = kPrefixSum;
+
+    TEST("Prefix-sum O(1) method 0",
+         ChaosAbiManifestGetMethodParamOffset(manifest, 0) == 0u);
+    TEST("Prefix-sum O(1) method 1",
+         ChaosAbiManifestGetMethodParamOffset(manifest, 1) == 2u);
+    TEST("Prefix-sum O(1) null manifest",
+         ChaosAbiManifestGetMethodParamOffset(nullptr, 0) == 0u);
+    TEST("Prefix-sum O(1) out of range",
+         ChaosAbiManifestGetMethodParamOffset(manifest, 99) == 0u);
+
+    return true;
+}
+
 // ── Test: ResolveMethodTableWithAbiCheck ────────────────────────────────────
 static bool TestResolveWithAbiCheck() {
     using namespace chaos::il2cpp::method_table;
@@ -354,6 +380,9 @@ int main() {
 
     std::printf("\n--- TestGetMethodParamOffset ---\n");
     TestGetMethodParamOffset();
+
+    std::printf("\n--- TestGetMethodParamOffsetPrefixSum ---\n");
+    TestGetMethodParamOffsetPrefixSum();
 
     std::printf("\n--- TestResolveWithAbiCheck ---\n");
     TestResolveWithAbiCheck();

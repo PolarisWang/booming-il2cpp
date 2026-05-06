@@ -10,9 +10,6 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\vtable_registry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_vtable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\generic_context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

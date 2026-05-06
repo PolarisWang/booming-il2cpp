@@ -1,6 +1,16 @@
 #ifndef CHAOS_IL2CPP_VTABLE_REGISTRY_H_
 #define CHAOS_IL2CPP_VTABLE_REGISTRY_H_
 
+// ── Unified VTable Registry ──────────────────────────────────────────────
+//
+// Merges the legacy vtable_registry (type_token-keyed) and runtime_vtable
+// (stable_id-keyed) into a single registry with:
+//   - Primary key:  stable_id (FNV-1a 64-bit, universal across AOT/runtime)
+//   - Secondary:    type_token → stable_id (for interpreter lookups)
+//
+// Supports both rich slot descriptors (method_token + method_pointer pairs)
+// and flat function-pointer arrays (for AOT codegen direct dispatch).
+
 #include "runtime_abi.h"
 #include <chaos/native_types.h>
 
@@ -13,50 +23,71 @@ struct VTableSlot {
 };
 
 /// Describes the full vtable for one concrete or abstract type.
-/// Registered at bootstrap time; looked up at runtime for virtual dispatch.
 struct TypeVTable {
-    TypeInfoHandle type;         ///< The concrete type this vtable belongs to
-    CHAOS_IL2CPP_UINT32       type_token;   ///< Numeric token of `type` (for fast lookup without ABI decode)
-    TypeInfoHandle base_type;    ///< Base type (nullptr = no base)
-    CHAOS_IL2CPP_UINT32       base_token;   ///< Numeric token of base_type (0 = no base)
-    CHAOS_IL2CPP_UINT32       slot_count;
-    const VTableSlot* slots;
+    TypeInfoHandle type;              ///< The concrete type this vtable belongs to
+    CHAOS_IL2CPP_UINT64 stable_id;    ///< FNV-1a stable_id (primary key in unified registry)
+    CHAOS_IL2CPP_UINT32 type_token;   ///< Numeric token of `type` (for interpreter without ABI decode)
+    TypeInfoHandle base_type;          ///< Base type (nullptr = no base)
+    CHAOS_IL2CPP_UINT64 base_stable_id; ///< Stable_id of base type (chain walking)
+    CHAOS_IL2CPP_UINT32 base_token;   ///< Numeric token of base_type (0 = no base)
+    CHAOS_IL2CPP_UINT32 slot_count;
+    const VTableSlot* slots;          ///< Rich slot descriptors (method_token + pointer)
+    const void** vtable_array;         ///< Flat function-pointer array (for direct dispatch)
+    CHAOS_IL2CPP_UINT32 vtable_length; ///< Length of vtable_array
 };
 
-/// Register a type vtable. Called from generated bootstrap code.
-/// Returns true if registration succeeded (duplicate registrations are ignored).
+// ── Registration ─────────────────────────────────────────────────────────
+
+/// Register a type vtable from a pre-constructed TypeVTable (bootstrap/test).
+/// The caller must keep `vtable` alive for the process lifetime.
+/// Duplicate registrations are silently ignored.
 bool RegisterTypeVTable(const TypeVTable* vtable);
 
 /// Register a vtable for a runtime-instantiated type (TypeInfoHandle-based).
-/// The type_token is extracted from the TypeInfoHandle's descriptor metadata_token.
-/// `base_vtable` is the vtable of the open generic definition (copied as template).
-/// Returns true if registration succeeded.
+/// The type_token and stable_id are extracted from the handle.
 bool RegisterRuntimeVTable(
     TypeInfoHandle               type,
     TypeInfoHandle               base_type,
     CHAOS_IL2CPP_UINT32         slot_count,
     const VTableSlot*           slots);
 
-/// Look up the concrete method pointer for a virtual call.
-/// Walks the inheritance chain from `instance_type_token` upward until the
-/// declared method is found.
-/// Returns nullptr if no entry is found.
+/// Register a flat vtable array (emitted by AOT codegen).
+/// Duplicate registrations are silently ignored.
+void RegisterVTableArray(CHAOS_IL2CPP_UINT64 stable_id,
+                         const void** vtable,
+                         CHAOS_IL2CPP_UINT32 length) noexcept;
+
+// ── Lookup ───────────────────────────────────────────────────────────────
+
+/// Resolve a virtual method pointer by walking the inheritance chain.
+/// Uses secondary token→stable_id index, then walks by base_stable_id.
 void* ResolveVirtualMethodPointer(CHAOS_IL2CPP_UINT32 instance_type_token,
                                   CHAOS_IL2CPP_UINT32 declared_method_token);
 
-/// Look up a type's VTable by type_token (for type hierarchy walking).
-/// Returns nullptr if the type is not registered.
-/// This is a read-only lookup used by the interpreter for CastClass/IsInst.
+/// Look up TypeVTable by type_token (for interpreter CastClass/IsInst).
 const TypeVTable* TryGetTypeVTable(CHAOS_IL2CPP_UINT32 type_token);
 
+/// Look up TypeVTable by stable_id.
+const TypeVTable* TryGetTypeVTableByStableId(CHAOS_IL2CPP_UINT64 stable_id);
+
+/// Flat vtable array lookup (for AOT codegen direct dispatch).
+const void** FindVTable(CHAOS_IL2CPP_UINT64 stable_id) noexcept;
+
+/// Flat vtable array length lookup.
+CHAOS_IL2CPP_UINT32 FindVTableLength(CHAOS_IL2CPP_UINT64 stable_id) noexcept;
+
+/// Build and register a vtable for a runtime type by copying the base type's
+/// flat vtable array.  Returns the newly-allocated array, or nullptr if the
+/// base has no registered vtable.
+const void** BuildRuntimeVTable(CHAOS_IL2CPP_UINT64 type_stable_id,
+                                 CHAOS_IL2CPP_UINT64 base_stable_id) noexcept;
+
 /// Resolve a virtual method pointer using a TypeInfoHandle.
-/// Decodes the handle to extract the type_token, then delegates to
-/// ResolveVirtualMethodPointer.
 void* ResolveVirtualMethodPointerByHandle(
     TypeInfoHandle               instance_type,
     CHAOS_IL2CPP_UINT32         declared_method_token);
 
-/// Returns the number of registered vtables (useful for diagnostics).
+/// Returns the number of registered vtables (for diagnostics).
 CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount();
 
 }  // namespace chaos::il2cpp::vtable_registry

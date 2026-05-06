@@ -21,6 +21,8 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <string>
+#include <vector>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -69,8 +71,29 @@ public:
     // Returns pointer to a thread-local or static buffer — use or copy immediately.
     const char* GetFullMethodName(const PatchMethodDefEntry* method) const noexcept;
 
+    // ── AOT bridge for cross-module token resolution ──
+    // Set by InterpreterEntryDirect before IL→IR lowering to enable
+    // DefaultTokenResolver fallback for tokens outside the patch scope.
+    void SetAotBridge(const CodegenBridgeV0* bridge, ImageHandle image) noexcept {
+        bridge_ = bridge;
+        aot_image_ = image;
+    }
+
+    const CodegenBridgeV0* GetBridge() const noexcept { return bridge_; }
+    ImageHandle GetAotImage() const noexcept { return aot_image_; }
+
+    // Resolve a UserString token (0x70xxxxxx) → UTF-8 string.
+    // Reads from the patch data's #US heap and caches the converted result.
+    const char* GetUserString(uint32_t token) const noexcept;
+
 private:
     const PatchDataHeader* header_;
+    const CodegenBridgeV0* bridge_ = nullptr;
+    ImageHandle            aot_image_ = 0;
+
+    // Cached UTF-8 strings decoded from the #US heap.
+    // Populated lazily by GetUserString().
+    mutable std::vector<std::string> user_string_cache_;
 
     // Resolve a TypeDef token (0x02xxxxxx) → TypeDefEntry.
     const PatchTypeDefEntry* ResolveTypeDef(uint32_t token) const noexcept;

@@ -152,6 +152,15 @@ struct Registry {
     };
     CHAOS_IL2CPP_UNORDERED_MAP(TypeInfoHandle, TypeEntry) by_open_type;
 
+    // Reverse index: closed_type → (open_type, type_args, module_id)
+    // Enables O(1) GetClosedTypeGenericArgs lookup instead of linear scan.
+    struct ClosedTypeArgs {
+        TypeInfoHandle open_type;
+        CHAOS_IL2CPP_VECTOR(TypeInfoHandle) type_args;
+        CHAOS_IL2CPP_UINT32 module_id;
+    };
+    CHAOS_IL2CPP_UNORDERED_MAP(TypeInfoHandle, ClosedTypeArgs) by_closed_type;
+
     // Method instantiation index.
     using MethodInstantiationVector = CHAOS_IL2CPP_VECTOR(MethodInstantiationEntry);
     CHAOS_IL2CPP_UNORDERED_MAP(MethodInfoHandle, MethodInstantiationVector) by_open_method;
@@ -203,6 +212,13 @@ static void DoLazyResolveOpenType(Registry& registry, ModuleShard* shard,
         inst.module_id   = shard->module_id;
         inst.type_args   = CHAOS_IL2CPP_MOVE(arg_handles);
         type_entry.closed_types.push_back(CHAOS_IL2CPP_MOVE(inst));
+
+        // Populate reverse index for O(1) GetClosedTypeGenericArgs.
+        Registry::ClosedTypeArgs rev;
+        rev.open_type = open_type;
+        rev.module_id = shard->module_id;
+        rev.type_args = inst.type_args;
+        registry.by_closed_type[closed_handle] = CHAOS_IL2CPP_MOVE(rev);
     }
 
     shard->resolve_state[open_idx] = true;
@@ -268,6 +284,15 @@ void RegisterGenericInstantiation(
         entry.type_args.assign(type_args, type_args + arg_count);
     }
     type_entry.closed_types.push_back(CHAOS_IL2CPP_MOVE(entry));
+
+    // Populate reverse index for O(1) GetClosedTypeGenericArgs.
+    Registry::ClosedTypeArgs rev;
+    rev.open_type = open_type;
+    rev.module_id = 0u;
+    if (type_args != nullptr && arg_count > 0u) {
+        rev.type_args.assign(type_args, type_args + arg_count);
+    }
+    registry.by_closed_type[closed_type] = CHAOS_IL2CPP_MOVE(rev);
 }
 
 // ═════════════════════════════════════════════════════════════
@@ -669,24 +694,19 @@ CHAOS_IL2CPP_UINT32 GetClosedTypeGenericArgs(
 
     auto& registry = GetRegistry();
     CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
-    // Linear scan across all open-type buckets for a closed_type match.
-    for (const auto& [open_type, type_entry] : registry.by_open_type) {
-        (void)open_type;
-        for (const auto& entry : type_entry.closed_types) {
-            if (entry.closed_type == closed_type) {
-                uint32_t count = static_cast<uint32_t>(entry.type_args.size());
-                if (out_handles != nullptr && max_count > 0) {
-                    uint32_t copy_count = (count < max_count) ? count : max_count;
-                    for (uint32_t i = 0; i < copy_count; i++) {
-                        out_handles[i] = entry.type_args[i];
-                    }
-                }
-                return count;
-            }
+    auto it = registry.by_closed_type.find(closed_type);
+    if (it == registry.by_closed_type.end())
+        return 0;
+
+    const auto& args = it->second.type_args;
+    uint32_t count = static_cast<uint32_t>(args.size());
+    if (out_handles != nullptr && max_count > 0) {
+        uint32_t copy_count = (count < max_count) ? count : max_count;
+        for (uint32_t i = 0; i < copy_count; i++) {
+            out_handles[i] = args[i];
         }
     }
-
-    return 0;  // not found
+    return count;
 }
 
 }  // namespace chaos::il2cpp::generic_context

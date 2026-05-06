@@ -390,24 +390,6 @@ void CHAOS_RUNTIME_ABI_CALL UnregisterModuleGenerics(
     runtime_core::MarkModuleTombstone(module_id);
 }
 
-// ── InterpreterDispatchContext ─────────────────────────────────────────────
-// Passed as dispatch_context to InterpreterDispatch callback.
-
-// ── Dispatch callback types ───────────────────────────────────────────────
-
-/// Maximum interpreter dispatch recursion depth.  Prevents runaway recursion
-/// when interpreted methods call other interpreted methods through the
-/// dispatch callback (each call goes through MethodInvoke → InterpretMethodCall
-/// → Execute → dispatch → ...).  200 layers is generous for typical managed
-/// call stacks.
-constexpr int kMaxDispatchDepth = 200;
-
-struct InterpreterDispatchContext {
-    RuntimeState* runtime_state   = nullptr;
-    ThreadState*  thread_state    = nullptr;
-    int           recursion_depth = 0;   // Phase 7: depth guard
-};
-
 // ── InterpreterDispatch ────────────────────────────────────────────────────
 // DispatchCallback implementation for InterpreterVM::Execute.
 //
@@ -418,7 +400,7 @@ struct InterpreterDispatchContext {
 // This is the single point where interpreter Call/CallVirt/CallBridge
 // instructions bridge into runtime-core's method dispatch.
 
-static interpreter::DispatchResult InterpreterDispatch(
+interpreter::DispatchResult InterpreterDispatch(
     void*                               call_target,
     const interpreter::InterpreterValue* call_args,
     CHAOS_IL2CPP_UINT32                 arg_count,
@@ -442,7 +424,7 @@ static interpreter::DispatchResult InterpreterDispatch(
     }
 
     // ── Depth guard (Phase 7) ──
-    if (ctx->recursion_depth >= kMaxDispatchDepth) {
+    if (ctx->recursion_depth >= kInterpreterMaxDispatchDepth) {
         // Exceeded maximum dispatch recursion — signal as an unhandled exception.
         result.threw_exception = true;
         result.exception_value = interpreter::InterpreterValue::null_val();

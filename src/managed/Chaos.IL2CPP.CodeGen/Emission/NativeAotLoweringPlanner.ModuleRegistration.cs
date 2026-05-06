@@ -780,6 +780,23 @@ public sealed partial class NativeAotLoweringPlanner
         int totalParams = reachableMethods.Sum(m => m.ParameterAbis.Count);
         uint checksum = ComputeAbiManifestChecksum(reachableMethods);
 
+        // Prefix-sum array (separate constexpr so we can reference it in header initializer)
+        sb.Append("// Param offset prefix-sum: [i] = cumulative parameter count before method i").AppendLine();
+        sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[")
+            .Append(reachableMethods.Count + 1).AppendLine("] = {");
+        {
+            uint runningTotal = 0;
+            for (int i = 0; i < reachableMethods.Count; i++)
+            {
+                sb.Append("    ").Append(runningTotal).Append("u,");
+                sb.AppendLine();
+                runningTotal += reachableMethods[i].ParameterAbis.Count;
+            }
+            sb.Append("    ").Append(runningTotal).AppendLine("u");
+        }
+        sb.AppendLine("};");
+        sb.AppendLine();
+
         sb.Append("static constexpr struct {").AppendLine();
         sb.Append("    ::ChaosAbiManifestV0 header;").AppendLine();
         sb.Append("    ::ChaosAbiMethodEntryV0 entries[").Append(reachableMethods.Count).AppendLine("];");
@@ -790,6 +807,7 @@ public sealed partial class NativeAotLoweringPlanner
         sb.Append("        ").Append(reachableMethods.Count).AppendLine("u,");
         sb.Append("        ").Append(totalParams).AppendLine("u,");
         sb.Append("        ").Append(checksum).AppendLine("u,  // FNV-1a over entries+params");
+        sb.Append("        s_abi_manifest_prefix_sum,  // O(1) prefix-sum");
         sb.AppendLine("    },");
         sb.AppendLine("    {");
         for (int i = 0; i < reachableMethods.Count; i++)

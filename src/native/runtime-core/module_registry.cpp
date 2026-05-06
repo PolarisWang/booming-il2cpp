@@ -2,6 +2,7 @@
 
 #include <chaos/native_types.h>
 #include <chaos/trace.h>
+#include <chaos/log.h>
 
 #include <cstring>
 

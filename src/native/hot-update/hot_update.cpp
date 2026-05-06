@@ -192,7 +192,7 @@ bool LoadHotUpdatePackage(const char* package_root_utf8, HotUpdatePackageHandle*
     out_handle->package_id = DuplicateCString(package_id);
     out_handle->target_aot_version = DuplicateCString(target_aot_version);
     out_handle->assembly_name = DuplicateCString(assembly_name);
-    out_handle->module_id = s_next_module_id.fetch_add(1u, std::memory_order_relaxed);
+    out_handle->module_id = s_next_module_id.fetch_add(1u, std::memory_order_acq_rel);
     out_handle->loaded = true;
 
     // Register a per-package memory domain so marshal allocations during

@@ -97,28 +97,25 @@ uint32_t NameIndexRegistry::TokenToSlot(uint32_t token) const noexcept {
 // ── Dispatch entry access ─────────────────────────────────────────────
 
 DispatchEntryV0* NameIndexRegistry::GetDispatchEntry(uint32_t token) const noexcept {
+    if (token == 0) return nullptr;
+
+    // ── Token → module cache (single-entry, covers the common case) ──
+    if (token_cache_key_ != token || token_cache_value_ == ~static_cast<size_t>(0)) {
+        token_cache_key_ = token;
+        token_cache_value_ = FindModuleForToken(token);
+    }
+    size_t mi = token_cache_value_;
+    if (mi == ~static_cast<size_t>(0)) return nullptr;
+
+    const auto* mod = modules_[mi];
+    if (mod == nullptr) return nullptr;
+    if (mod->dispatch_table == nullptr) return nullptr;
+
     uint32_t slot = TokenToSlot(token);
     if (slot == ~0u) return nullptr;
+    if (slot >= mod->dispatch_table_size) return nullptr;
 
-    // Find which module owns this token.
-    for (size_t mi = 0; mi < module_count_; ++mi) {
-        const auto* mod = modules_[mi];
-        if (mod == nullptr) continue;
-        if (mod->dispatch_table == nullptr) continue;
-        if (mod->token_slot_entries == nullptr || mod->token_slot_entry_count == 0) continue;
-        if (slot >= mod->dispatch_table_size) continue;
-
-        // Verify token belongs to this module via bsearch.
-        const auto* entry = static_cast<const TokenSlotEntryV0*>(
-            std::bsearch(&token,
-                         mod->token_slot_entries,
-                         mod->token_slot_entry_count,
-                         sizeof(TokenSlotEntryV0),
-                         CompareTokenSlot));
-        if (entry != nullptr) return &mod->dispatch_table[slot];
-    }
-
-    return nullptr;
+    return &mod->dispatch_table[slot];
 }
 
 DispatchEntryV0* NameIndexRegistry::GetDispatchEntryBySlot(
