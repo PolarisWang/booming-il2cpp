@@ -7,8 +7,8 @@
   "d3PatchedCount": 19,
   "summary": {
     "totalMethods": 18,
-    "passedMethods": 18,
-    "failedMethods": 0,
+    "passedMethods": 17,
+    "failedMethods": 1,
     "unmatchedMethods": 0
   },
   "methodResults": [
@@ -18,8 +18,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663298,
@@ -27,8 +27,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663299,
@@ -36,8 +36,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663300,
@@ -45,8 +45,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663301,
@@ -54,8 +54,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663302,
@@ -63,8 +63,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663303,
@@ -72,8 +72,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663304,
@@ -81,8 +81,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663305,
@@ -90,8 +90,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663306,
@@ -99,8 +99,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663307,
@@ -108,8 +108,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663308,
@@ -117,8 +117,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663309,
@@ -126,16 +126,16 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663310,
-      "status": "passed",
+      "status": "failed",
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
+      "revertVerified": true,
       "semanticVerified": false
     },
     {
@@ -144,8 +144,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663312,
@@ -153,8 +153,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663313,
@@ -162,8 +162,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     },
     {
       "methodToken": 100663314,
@@ -171,8 +171,8 @@
       "d3Patched": true,
       "patchReturnValue": 0,
       "interpreterDispatched": true,
-      "revertVerified": false,
-      "semanticVerified": false
+      "revertVerified": true,
+      "semanticVerified": true
     }
   ]
 }

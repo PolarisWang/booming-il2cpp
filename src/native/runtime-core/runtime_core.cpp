@@ -1,6 +1,7 @@
 ﻿#include "runtime_core.h"
 
 #include <chaos/trace.h>
+#include <chaos/log.h>
 
 #include "memory_domain.h"
 #include "reflection_query_model.h"

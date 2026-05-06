@@ -913,6 +913,10 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}    }}");
 		}
 		builder.AppendLine($"{indentation}    chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
+			if (isReferenceElement)
+			{
+				builder.AppendLine($"{indentation}    GC_END_STUBBORN_CHANGE(chaos_array);");
+			}
 		builder.AppendLine($"{indentation}}}");
 	}
 

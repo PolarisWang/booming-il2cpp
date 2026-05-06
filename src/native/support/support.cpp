@@ -1,5 +1,6 @@
 #include "support.h"
 
+#include <chaos/log.h>
 #include <chaos/native_types.h>
 
 #include <string>

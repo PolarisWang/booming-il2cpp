@@ -54,6 +54,12 @@ public sealed partial class NativeAotLoweringPlanner
         int ExitOffset
     ) : StructuredIRNode;
 
+    /// <summary>Flat region that falls back to EmitInstructionRange.</summary>
+    internal sealed record IRFlatRegion(
+        IReadOnlyList<AotCoreIrInstructionArtifact> Instructions,
+        IReadOnlySet<int> Offsets
+    ) : StructuredIRNode;
+
     /// <summary>Switch dispatch.</summary>
     internal sealed record IRSwitch(
         IReadOnlyList<AotCoreIrInstructionArtifact> SwitchInstructions,
@@ -266,6 +272,7 @@ public sealed partial class NativeAotLoweringPlanner
             IRDoWhileLoop loop => ContainsResidualBranchTerminators(loop.Body),
             IRSwitch sw => sw.CaseBodies.Values.Any(ContainsResidualBranchTerminators) || (sw.DefaultBody != null && ContainsResidualBranchTerminators(sw.DefaultBody)),
             IRExceptionRegion er => ContainsResidualBranchTerminators(er.TryBody) || ContainsResidualBranchTerminators(er.HandlerBody),
+            IRFlatRegion => false,
             _ => false,
         };
     }
@@ -312,6 +319,7 @@ public sealed partial class NativeAotLoweringPlanner
                     StripExceptionPartitionExitTerminators(er.HandlerBody),
                     er.CatchTypeSubjectId,
                     er.FilterInstructions),
+            IRFlatRegion fr => fr,
             _ => node,
         };
     }
@@ -371,6 +379,10 @@ public sealed partial class NativeAotLoweringPlanner
 
             case IRExceptionRegion er:
                 EmitIRExceptionRegion(builder, er, method, indentation);
+                break;
+
+            case IRFlatRegion fr:
+                EmitStructuredFlatRegion(builder, method, fr, indentation);
                 break;
 
             default:
@@ -565,6 +577,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             builder.AppendLine(indentation + "while (true)");
             builder.AppendLine(indentation + "{");
+            builder.AppendLine(indentation + "    chaos_safepoint_poll();");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
             builder.AppendLine(indentation + "}");
             return;
@@ -967,12 +980,6 @@ public sealed partial class NativeAotLoweringPlanner
             return true;
         }
 
-        var cfg = BuildControlFlowGraph(instructions, offsets);
-        if (!cfg.IsReducible)
-        {
-            return false;
-        }
-
         if (ReferenceEquals(instructions, method.Instructions) &&
             method.ExceptionRegionCount > 0 &&
             method.ExceptionRegions is { Count: > 0 })
@@ -980,11 +987,18 @@ public sealed partial class NativeAotLoweringPlanner
             return TryBuildStructuredExceptionMethodBody(method, instructions, offsets, out body, out maxDepth);
         }
 
+        var cfg = BuildControlFlowGraph(instructions, offsets);
+        if (!cfg.IsReducible)
+        {
+            body = new IRFlatRegion(instructions, offsets);
+            maxDepth = ComputeMaxEvalStackDepth(instructions);
+            return true;
+        }
+
         body = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
         if (ContainsResidualBranchTerminators(body))
         {
-            body = null;
-            return false;
+            body = new IRFlatRegion(instructions, offsets);
         }
 
         maxDepth = ComputeMaxEvalStackDepth(instructions);
@@ -1002,11 +1016,7 @@ public sealed partial class NativeAotLoweringPlanner
             return;
 
         System.Console.Error.WriteLine("TRACE:Em " + (method.SubjectId != null && method.SubjectId.Length > 80 ? method.SubjectId.Substring(0, 80) : method.SubjectId ?? "null") + " instr=" + instructions.Count);
-        if (!TryBuildStructuredMethodBody(method, instructions, offsets, out var body, out _))
-        {
-            EmitInstructionRange(builder, method, instructions, nextOffsetsByIlOffset, offsets);
-            return;
-        }
+        TryBuildStructuredMethodBody(method, instructions, offsets, out var body, out _);
 
         StructuredSlotEmissionContext? previousSlotContext = _activeStructuredSlotContext;
         _activeStructuredSlotContext = new StructuredSlotEmissionContext();
@@ -1018,6 +1028,16 @@ public sealed partial class NativeAotLoweringPlanner
         {
             _activeStructuredSlotContext = previousSlotContext;
         }
+    }
+
+    private void EmitStructuredFlatRegion(
+        StringBuilder builder,
+        AotCoreIrMethodArtifact method,
+        IRFlatRegion fr,
+        string indentation)
+    {
+        var nextOffsets = CreateNextOffsets(fr.Instructions.ToArray());
+        EmitInstructionRange(builder, method, fr.Instructions, nextOffsets, fr.Offsets);
     }
 
     private bool TryBuildStructuredExceptionMethodBody(

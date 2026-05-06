@@ -64,6 +64,11 @@ private:
     const NameIndexModuleV0* modules_[kMaxModules] = {};
     size_t module_count_ = 0;
 
+    // Cached token → module_index mapping: populated lazily on first
+    // GetDispatchEntry miss.  Avoids re-scanning all modules on every call.
+    mutable uint32_t token_cache_key_ = 0;
+    mutable size_t   token_cache_value_ = ~static_cast<size_t>(0);
+
     // Find which registered module contains a given token (linear scan).
     size_t FindModuleForToken(uint32_t token) const noexcept;
 

@@ -4,6 +4,7 @@
 #include <runtime_abi.h>
 #include "reflection_query_model.h"
 #include <runtime_instantiation.h>
+#include <interpreter_vm.h>
 
 #include <cstdint>
 #include <cstdlib>
@@ -11,6 +12,29 @@
 #include <vector>
 
 namespace chaos::il2cpp::runtime_instantiation {
+
+// ── Interpreter dispatch context ──────────────────────────────────
+
+/// Maximum interpreter dispatch recursion depth.
+constexpr int kInterpreterMaxDispatchDepth = 200;
+
+/// Per-call dispatch context passed to InterpreterDispatch callback.
+struct InterpreterDispatchContext {
+    RuntimeState* runtime_state   = nullptr;
+    ThreadState*  thread_state    = nullptr;
+    int           recursion_depth = 0;
+};
+
+/// DispatchCallback implementation for InterpreterVM::Execute.
+/// Routes Call/CallVirt/CallBridge through MethodInvoke (AOT or interpreted).
+/// Declared here so InterpreterEntryDirect (interpreter_entry.cpp) can also
+/// wire it up as the dispatch_fn for patched-method execution frames.
+interpreter::DispatchResult InterpreterDispatch(
+    void*                               call_target,
+    const interpreter::InterpreterValue* call_args,
+    CHAOS_IL2CPP_UINT32                 arg_count,
+    bool                                is_instance_call,
+    void*                               dispatch_context);
 
 // ── Runtime-instantiated type ─────────────────────────────────────────────
 

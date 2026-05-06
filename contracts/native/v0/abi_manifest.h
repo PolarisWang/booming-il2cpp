@@ -53,6 +53,7 @@ typedef struct ChaosAbiManifestV0 {
     uint32_t method_count;              // number of methods in the manifest
     uint32_t parameters_byte_count;     // total bytes in the parameters array
     uint32_t checksum;                  // FNV-1a hash over entries+params (0 = skip)
+    const uint32_t* param_offset_prefix_sum;  // [method_count+1] prefix-sum, null = O(n) fallback
 } ChaosAbiManifestV0;
 
 // ── Accessor macros ─────────────────────────────────────────────────────

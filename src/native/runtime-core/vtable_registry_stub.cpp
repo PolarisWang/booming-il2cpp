@@ -1,11 +1,11 @@
 /// Test stub — replaces vtable_registry.cpp for standalone interpreter tests.
-/// Provides the minimal implementation of RegisterTypeVTable and
-/// ResolveVirtualMethodPointer without pulling in the full runtime-core
-/// dependency chain (codegen_bridge, reflection_query_model, etc.).
+/// Provides minimal implementations of the unified vtable registry API
+/// without pulling in the full runtime-core dependency chain.
 #include "vtable_registry.h"
 #include "layout_engine.h"   // LayoutEngine stub
 
 #include <cstdlib>
+#include <cstring>
 #include <unordered_map>
 #include <vector>
 
@@ -16,6 +16,8 @@ namespace {
 // Minimal registry: type_token → TypeVTable
 struct Registry {
     std::unordered_map<CHAOS_IL2CPP_UINT32, const TypeVTable*> by_token;
+    std::unordered_map<CHAOS_IL2CPP_UINT64, const void**> flat_vtables;
+    std::unordered_map<CHAOS_IL2CPP_UINT64, CHAOS_IL2CPP_UINT32> flat_lengths;
 };
 
 Registry& GetReg() {
@@ -44,6 +46,36 @@ bool RegisterRuntimeVTable(
     const VTableSlot* /*slots*/)
 {
     return false;  // not exercised by interpreter tests
+}
+
+void RegisterVTableArray(CHAOS_IL2CPP_UINT64 stable_id,
+                          const void** vtable,
+                          CHAOS_IL2CPP_UINT32 length) noexcept {
+    if (stable_id == 0u || vtable == nullptr || length == 0u) return;
+    auto& reg = GetReg();
+    reg.flat_vtables[stable_id] = vtable;
+    reg.flat_lengths[stable_id] = length;
+}
+
+const void** FindVTable(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
+    auto& reg = GetReg();
+    auto it = reg.flat_vtables.find(stable_id);
+    return (it != reg.flat_vtables.end()) ? it->second : nullptr;
+}
+
+CHAOS_IL2CPP_UINT32 FindVTableLength(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
+    auto& reg = GetReg();
+    auto it = reg.flat_lengths.find(stable_id);
+    return (it != reg.flat_lengths.end()) ? it->second : 0u;
+}
+
+const void** BuildRuntimeVTable(CHAOS_IL2CPP_UINT64 /*type_stable_id*/,
+                                 CHAOS_IL2CPP_UINT64 /*base_stable_id*/) noexcept {
+    return nullptr;  // not exercised by interpreter tests
+}
+
+const TypeVTable* TryGetTypeVTableByStableId(CHAOS_IL2CPP_UINT64 /*stable_id*/) {
+    return nullptr;  // not exercised by interpreter tests
 }
 
 void* ResolveVirtualMethodPointer(

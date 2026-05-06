@@ -69,7 +69,7 @@ def _build_bat(
         "if %ERRORLEVEL% neq 0 exit /b 1",
         "",
         f'echo Linking...',
-        f'link /nologo /nodefaultlib:ucrt /out:"{exe_path}" "{test_obj}" "{genuine_obj}" {all_libs} "%WindowsSdkDir%lib\\%UCRTVersion%\\ucrt\\x64\\ucrt.lib" ole32.lib user32.lib',
+        f'link /nologo /out:"{exe_path}" "{test_obj}" "{genuine_obj}" {all_libs} ole32.lib user32.lib',
         "if %ERRORLEVEL% neq 0 exit /b 1",
         "",
         f'echo Build OK',
@@ -108,6 +108,7 @@ def build_and_run(family_slug: str) -> dict:
         _REPO_ROOT / "src" / "native" / "bootstrap",
         _REPO_ROOT / "src" / "native" / "interpreter",
         _REPO_ROOT / "third_party" / "fmt" / "include",
+        _REPO_ROOT / "third_party" / "bdwgc" / "include",
         _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib",
     ]
     include_flags = " ".join(f'-I"{d}"' for d in include_dirs)
@@ -120,20 +121,25 @@ def build_and_run(family_slug: str) -> dict:
 
     # /GS- for convert-char: codegen-emitted stack buffers trigger a harmless
     # MSVC buffer security check false positive (STATUS_STACK_BUFFER_OVERRUN).
+    # /MD — the cmake-native chaos libs (RelWithDebInfo) use dynamic CRT by
+    # default on MSVC. Must match all linked libs' RuntimeLibrary.
     compile_flags = "/nologo /std:c++17 /c /EHsc /W3 /utf-8 /O2 /MD /GS-"
     defines = "-DCHAOS_IL2CPP_CHECK -DCHAOS_RUNTIME_ABI_STATIC"
 
     r = _REPO_ROOT
+    # Use RelWithDebInfo variant (the cmake-native build produces this config).
+    # The chaos_runtime_core.lib from build/src/native/runtime-core/Release/
+    # is copied to build/native-runtime/Release/ for the D3 linking step.
     all_libs = " ".join(
         f'"{p}"' for p in [
-            r / "build" / "native-runtime" / "Release" / "chaos_runtime_core.lib",
-            r / "build" / "native" / "src" / "native" / "interpreter" / "Release" / "chaos_interpreter.lib",
-            r / "build" / "native" / "src" / "native" / "bootstrap" / "Release" / "chaos_bootstrap.lib",
-            r / "build" / "native" / "src" / "native" / "support" / "Release" / "chaos_support.lib",
-            r / "build" / "native" / "src" / "native" / "hot-update" / "Release" / "chaos_hot_update.lib",
-            r / "build" / "native" / "fmt_build" / "Release" / "chaos_fmt.lib",
-            r / "build" / "native" / "src" / "native" / "common" / "Release" / "chaos_common.lib",
-            r / "build" / "native" / "bdwgc_build" / "Release" / "chaos_bdwgc.lib",
+            r / "build" / "native" / "src" / "native" / "runtime-core" / "RelWithDebInfo" / "chaos_runtime_core.lib",
+            r / "build" / "native" / "src" / "native" / "interpreter" / "RelWithDebInfo" / "chaos_interpreter.lib",
+            r / "build" / "native" / "src" / "native" / "bootstrap" / "RelWithDebInfo" / "chaos_bootstrap.lib",
+            r / "build" / "native" / "src" / "native" / "support" / "RelWithDebInfo" / "chaos_support.lib",
+            r / "build" / "native" / "src" / "native" / "hot-update" / "RelWithDebInfo" / "chaos_hot_update.lib",
+            r / "build" / "native" / "fmt_build" / "RelWithDebInfo" / "chaos_fmt.lib",
+            r / "build" / "native" / "src" / "native" / "common" / "RelWithDebInfo" / "chaos_common.lib",
+            r / "build" / "native" / "bdwgc_build" / "RelWithDebInfo" / "chaos_bdwgc.lib",
         ]
     )
 

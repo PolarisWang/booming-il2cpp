@@ -149,6 +149,108 @@ const char* PatchMetadataCache::GetFullMethodName(const PatchMethodDefEntry* met
     return buffer;
 }
 
+const char* PatchMetadataCache::GetUserString(uint32_t token) const noexcept {
+    // Token format: high byte = 0x70 (UserString), low 24 bits = offset into #US heap.
+    uint32_t offset = token & 0x00FFFFFFu;
+    if (header_ == nullptr || offset >= header_->user_string_heap_size) return nullptr;
+
+    const auto* base = reinterpret_cast<const uint8_t*>(header_);
+    const auto* us_start = base + header_->user_string_heap_offset;
+
+    // Read compressed unsigned int for blob length (includes 1 byte padding).
+    uint32_t blob_len = 0;
+    uint32_t bytes_read = 0;
+    const uint8_t* len_ptr = us_start + offset;
+    if ((*len_ptr & 0x80) == 0) {
+        blob_len = *len_ptr;
+        bytes_read = 1;
+    } else if ((*len_ptr & 0xC0) == 0x80) {
+        blob_len = static_cast<uint32_t>((*len_ptr & 0x3F) << 8) | (*(len_ptr + 1));
+        bytes_read = 2;
+    } else {
+        return nullptr; // 4-byte encoding not expected for user strings
+    }
+
+    if (blob_len < 2) return nullptr; // minimum: 1 char + padding
+
+    // String data is UTF-16LE, blob_len includes the 1-byte padding.
+    uint32_t utf16_byte_count = blob_len - 1;
+    uint32_t char_count = utf16_byte_count / 2;
+
+    if (char_count == 0) return nullptr;
+
+    const uint16_t* utf16_data = reinterpret_cast<const uint16_t*>(len_ptr + bytes_read);
+
+    // Convert UTF-16 to UTF-8 and cache.
+    // We cache lazily to avoid converting all strings upfront.
+    // Use a simple scheme: the cache index = offset into #US heap.
+    // Since offsets into the US heap are sparse and the cache is a vector,
+    // we store a parallel offset-to-index mapping.
+    // For simplicity, check if we already have this offset cached in the vector.
+    // Each cached entry is stored as "offset\0utf8_data" in a single string.
+    // Instead, use a simple approach: store in a map-like structure.
+
+    // Simple linear scan of cache (small number of ldstr per method).
+    // Cache entries are stored as: [4-byte offset][utf8_string\0]
+    // We need to find or create an entry for this offset.
+
+    // For now, allocate and convert on each call, relying on the fact that
+    // LowerILToIR calls the resolver once per token during lowering.
+    // The string is stored in IRInstruction.string_operand which points to
+    // the const char* from our cache, so we need it to live long enough.
+
+    // Check cache first.
+    for (const auto& entry : user_string_cache_) {
+        // Each entry starts with the offset (4 bytes LE) followed by the string.
+        if (entry.size() >= 4) {
+            uint32_t cached_offset =
+                static_cast<uint32_t>(static_cast<uint8_t>(entry[0])) |
+                (static_cast<uint32_t>(static_cast<uint8_t>(entry[1])) << 8) |
+                (static_cast<uint32_t>(static_cast<uint8_t>(entry[2])) << 16) |
+                (static_cast<uint32_t>(static_cast<uint8_t>(entry[3])) << 24);
+            if (cached_offset == offset) {
+                return entry.data() + 4;
+            }
+        }
+    }
+
+    // Not cached — convert UTF-16 to UTF-8.
+    // Allocate worst-case UTF-8 buffer (each UTF-16 code unit → up to 3 bytes).
+    std::string utf8;
+    utf8.reserve(char_count * 3);
+
+    for (uint32_t i = 0; i < char_count; ++i) {
+        uint16_t uc = utf16_data[i];
+
+        if (uc < 0x80) {
+            utf8 += static_cast<char>(uc);
+        } else if (uc < 0x800) {
+            utf8 += static_cast<char>(0xC0 | (uc >> 6));
+            utf8 += static_cast<char>(0x80 | (uc & 0x3F));
+        } else {
+            utf8 += static_cast<char>(0xE0 | (uc >> 12));
+            utf8 += static_cast<char>(0x80 | ((uc >> 6) & 0x3F));
+            utf8 += static_cast<char>(0x80 | (uc & 0x3F));
+        }
+    }
+
+    // Store with offset prefix: [4-byte LE offset][utf8\0]
+    // std::string can contain embedded nulls, but we'll use a vector of strings
+    // where each entry is "offset_prefix + utf8_data + null".
+    std::string cache_entry;
+    cache_entry.reserve(4 + utf8.size() + 1);
+    cache_entry.push_back(static_cast<char>(offset & 0xFF));
+    cache_entry.push_back(static_cast<char>((offset >> 8) & 0xFF));
+    cache_entry.push_back(static_cast<char>((offset >> 16) & 0xFF));
+    cache_entry.push_back(static_cast<char>((offset >> 24) & 0xFF));
+    cache_entry += utf8;
+    cache_entry.push_back('\0');
+
+    const char* result = cache_entry.data() + 4;
+    user_string_cache_.push_back(std::move(cache_entry));
+    return result;
+}
+
 uint32_t PatchMetadataCache::ResolveToken(uint32_t token) const noexcept {
     // For now, return the token itself as a passthrough.
     // Full token resolution (TypeRef → runtime TypeInfo*, MemberRef → method pointer, etc.)

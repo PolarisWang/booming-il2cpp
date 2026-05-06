@@ -11,6 +11,7 @@
 #include <chaos/type_info.h>
 #include "arithmetic_chaos_bridge.h"
 #include "codegen_bridge.h"       // DispatchEntryV0, NameIndex structs, kDispatchPatched
+#include <gc.h>                   // GC_END_STUBBORN_CHANGE for write barriers
 
 // ── Object header definition ──
 // type_info: type identity for GC, casting, reflection

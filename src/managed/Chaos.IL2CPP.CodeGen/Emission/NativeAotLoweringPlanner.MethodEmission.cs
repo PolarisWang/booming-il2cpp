@@ -1490,23 +1490,20 @@ public sealed partial class NativeAotLoweringPlanner
 		bool isInterfaceDispatch = !string.IsNullOrEmpty(declaringTypeId) && _interfaceTypeSubjectIds != null && _interfaceTypeSubjectIds.Contains(declaringTypeId);
 		if (isInterfaceDispatch)
 		{
-			var (ifaceVtableOffset, ifaceMethodCount) = ComputeInterfaceVtableInfo(declaringTypeId);
-			if (_vtableSlotMap != null && _vtableSlotMap.TryGetValue(vtableSlotSig, out int vtableSlot) && ifaceMethodCount > 0)
+			if (_vtableSlotMap != null && _vtableSlotMap.TryGetValue(vtableSlotSig, out int vtableSlot))
 			{
-				int methodIndex = vtableSlot - ifaceVtableOffset;
 				string ifaceArgs = FormatAbiInvocationArgumentList(methodAbiParameterSlots, "chaos_instance");
 				string ifaceParamSig = FormatAbiSlotParameterSignature(methodAbiParameterSlots);
 				string ifaceFnType = string.IsNullOrEmpty(ifaceParamSig)
 					? $"{text}(*)()"
 					: $"{text}(*)({ifaceParamSig})";
-				builder.AppendLine($"        CHAOS_IL2CPP_UINT32 chaos_iface_offset = chaos_find_interface_offset(chaos_header->type_info, &{GetNativeTypeInfoSymbol(declaringTypeId)});");
 				if (string.Equals(text, "void", StringComparison.Ordinal))
 				{
-					builder.AppendLine($"        reinterpret_cast<{ifaceFnType}>(chaos_header->vtable[chaos_iface_offset + {methodIndex}])({ifaceArgs});");
+					builder.AppendLine($"        reinterpret_cast<{ifaceFnType}>(chaos_header->vtable[{vtableSlot}])({ifaceArgs});");
 				}
 				else
 				{
-					builder.AppendLine($"        chaos_callvirt_result = reinterpret_cast<{ifaceFnType}>(chaos_header->vtable[chaos_iface_offset + {methodIndex}])({ifaceArgs});");
+					builder.AppendLine($"        chaos_callvirt_result = reinterpret_cast<{ifaceFnType}>(chaos_header->vtable[{vtableSlot}])({ifaceArgs});");
 				}
 			}
 			else
@@ -2602,6 +2599,10 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("        }");
 		}
 		builder.AppendLine("        chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
+		if (string.Equals(op, "stelem.ref", StringComparison.Ordinal))
+		{
+			builder.AppendLine("        GC_END_STUBBORN_CHANGE(chaos_array);");
+		}
 		builder.AppendLine("    }");
 		AppendGotoNext(builder, nextOffset, op);
 	}
@@ -3103,6 +3104,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine(ref handler);
 		builder.AppendLine("        for (;;)");
 		builder.AppendLine("        {");
+		builder.AppendLine("            chaos_safepoint_poll();");
 		builder.AppendLine("            switch (chaos_pc)");
 		builder.AppendLine("            {");
 		var previousDispatchExitTargets = _dispatchExitTargets;
@@ -3133,7 +3135,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("            {");
 		builder.AppendLine("                break;");
 		builder.AppendLine("            }");
-		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine("            continue;  // dispatch not completed, loop back;");
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
 	}

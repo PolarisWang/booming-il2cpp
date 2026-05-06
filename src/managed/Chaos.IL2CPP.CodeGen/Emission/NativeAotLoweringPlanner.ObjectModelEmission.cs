@@ -751,27 +751,8 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    return false;");
 		builder.AppendLine("}");
 		builder.AppendLine();
-		builder.Append("inline CHAOS_IL2CPP_UINT32 chaos_find_interface_offset(\n");
-		builder.Append("    const TypeInfo* chaos_actual_type_info,\n");
-		builder.Append("    const TypeInfo* chaos_target_interface_type_info) noexcept\n");
-		builder.AppendLine("{");
-		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_actual_type_info->iface_count; chaos_i++)");
-		builder.AppendLine("    {");
-		builder.AppendLine("        if (chaos_actual_type_info->iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
-		builder.AppendLine("        {");
-		builder.AppendLine("            return chaos_actual_type_info->iface_map[chaos_i].vtable_offset;");
-		builder.AppendLine("        }");
-		builder.AppendLine("    }");
-		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_actual_type_info->runtime_iface_count; chaos_i++)");
-		builder.AppendLine("    {");
-		builder.AppendLine("        if (chaos_actual_type_info->runtime_iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
-		builder.AppendLine("        {");
-		builder.AppendLine("            return chaos_actual_type_info->runtime_iface_map[chaos_i].vtable_offset;");
-		builder.AppendLine("        }");
-		builder.AppendLine("    }");
-		builder.AppendLine("    CHAOS_IL2CPP_ABORT();");
-		builder.AppendLine("}");
-		builder.AppendLine();
+		// chaos_find_interface_offset removed: interface dispatch now uses
+		// global vtable slot directly (O(1)) instead of iface_map linear scan.
 		builder.AppendLine("bool chaos_does_type_implement_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept");
 		builder.AppendLine("{");
 		builder.AppendLine("    auto* chaos_current = chaos_actual_type_info;");

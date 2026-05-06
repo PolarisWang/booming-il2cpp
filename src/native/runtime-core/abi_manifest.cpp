@@ -32,6 +32,12 @@ uint32_t ChaosAbiManifestGetMethodParamOffset(const ChaosAbiManifestV0* manifest
     if (method_index >= manifest->method_count)
         return 0;
 
+    // O(1) path: prefix-sum array precomputed at compile time.
+    if (manifest->param_offset_prefix_sum != nullptr) {
+        return manifest->param_offset_prefix_sum[method_index];
+    }
+
+    // O(n) fallback: iterate entries (legacy manifests without prefix-sum).
     const auto* entries = CHAOS_ABI_MANIFEST_ENTRIES(manifest);
     uint32_t offset = 0;
     for (uint32_t i = 0; i < method_index; i++)
@@ -105,16 +111,14 @@ ChaosAbiManifestResult ChaosAbiManifestValidate(const ChaosAbiManifestV0* manife
     // Verify checksum if non-zero
     if (manifest->checksum != 0)
     {
-        size_t total_bytes = sizeof(ChaosAbiManifestV0) +
-                             manifest->method_count * sizeof(ChaosAbiMethodEntryV0) +
-                             manifest->parameters_byte_count;
-        size_t checksum_offset = offsetof(ChaosAbiManifestV0, checksum);
-        size_t hash_start_offset = checksum_offset + sizeof(uint32_t);
-        // Hash from the start of entries payload to end
-        size_t hash_byte_count = total_bytes - hash_start_offset;
+        // Hash entries[] + params[] (excludes header, which includes the
+        // link-time param_offset_prefix_sum pointer that is not reproducible).
+        size_t payload_offset = sizeof(ChaosAbiManifestV0);
+        size_t payload_byte_count = manifest->method_count * sizeof(ChaosAbiMethodEntryV0) +
+                                     manifest->parameters_byte_count;
         uint32_t expected_checksum = AbiManifestHash(
-            reinterpret_cast<const uint8_t*>(manifest) + hash_start_offset,
-            hash_byte_count);
+            reinterpret_cast<const uint8_t*>(manifest) + payload_offset,
+            payload_byte_count);
         if (manifest->checksum != expected_checksum)
             return CHAOS_ABI_MANIFEST_ERR_CHECKSUM;
     }
@@ -135,8 +139,9 @@ int ChaosAbiManifestCompatible(const ChaosAbiManifestV0* expected,
         return 0;
 
     // Compare entries and parameters by the total payload
-    size_t checksum_offset = offsetof(ChaosAbiManifestV0, checksum);
-    size_t payload_offset = checksum_offset + sizeof(uint32_t);
+    // Compare from entries[] onwards, skipping the entire header (which includes
+    // the link-time param_offset_prefix_sum pointer that differs per DLL).
+    size_t payload_offset = sizeof(ChaosAbiManifestV0);
     const uint8_t* expected_payload = reinterpret_cast<const uint8_t*>(expected) + payload_offset;
     const uint8_t* actual_payload   = reinterpret_cast<const uint8_t*>(actual) + payload_offset;
     size_t payload_size = expected->method_count * sizeof(ChaosAbiMethodEntryV0) +

@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.15)
 project(chaos_runtime_core LANGUAGES CXX)
 
 # Note: CMAKE_MSVC_RUNTIME_LIBRARY intentionally not set.
@@ -12,9 +12,8 @@ add_library(chaos_runtime_core STATIC
     runtime_core.h
     memory_domain.cpp
     memory_domain.h
-    vtable_registry.cpp
+    vtable_registry_stub.cpp
     vtable_registry.h
-    runtime_vtable.cpp
     runtime_vtable.h
     generic_context.cpp
     generic_context.h
@@ -59,6 +58,7 @@ target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)
 target_compile_definitions(chaos_runtime_core PUBLIC CHAOS_RUNTIME_ABI_STATIC)
 target_compile_definitions(chaos_runtime_core PUBLIC GC_NOT_DLL)
+target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
 target_include_directories(
     chaos_runtime_core
     PUBLIC
@@ -69,5 +69,5 @@ target_include_directories(
 target_link_libraries(chaos_runtime_core PUBLIC chaos_bdwgc)
 target_include_directories(chaos_runtime_core PRIVATE
     "${REPO_ROOT}/third_party/bdwgc/include"
-    "${REPO_ROOT}/src/native/interpreter")
-
+    "${REPO_ROOT}/src/native/interpreter"
+    "${REPO_ROOT}/third_party/fmt/include")

@@ -150,6 +150,16 @@ def _detect_aborting_methods(family_slug: str, host_symbols: list[str]) -> set[i
     ):
         idx_to_name[int(m.group(1))] = m.group(2)
 
+    # Also capture literal-0 method table entries (unresolved generic methods
+    # like Nullable<T>.GetValueOrDefault where codegen emits
+    # WriteMethodTable(N, reinterpret_cast<void*>(0), 0u)).
+    zero_indices: set[int] = set()
+    for m in re.finditer(
+        r'WriteMethodTable\((\d+),\s*reinterpret_cast<void\*>\s*\(\s*0\s*\)\s*,\s*\d+u?\)',
+        content,
+    ):
+        zero_indices.add(int(m.group(1)))
+
     # Step 2: Classify null-returning stubs (INTPTR return, body returns 0)
     null_stub_names: set[str] = set()
     for m in re.finditer(r'extern "C" inline CHAOS_IL2CPP_INTPTR (chaos_external_runtime_\w+)\(', content):
@@ -171,10 +181,14 @@ def _detect_aborting_methods(family_slug: str, host_symbols: list[str]) -> set[i
     # Map null stub names to g_method_table indices
     null_indices = {idx for idx, name in idx_to_name.items() if name in null_stub_names}
 
-    if not null_indices:
-        return set()
+    # Merge literal-0 method table slots into the null detection set.
+    # These are unresolved generic methods (e.g., Nullable<T>.GetValueOrDefault)
+    # where codegen emits reinterpret_cast<void*>(0) instead of a valid stub.
+    null_indices |= zero_indices
 
     # Step 3: For each MethodN, check for null-stub call + abort pattern
+    # (even when null_indices is empty — methods can still abort on null arg
+    # checks during baseline capture because kHostThunks[i]() passes no args).
     aborting: set[int] = set()
     sym_indexes: dict[str, int] = {}
     for sym in host_symbols:
@@ -213,13 +227,48 @@ def _detect_aborting_methods(family_slug: str, host_symbols: list[str]) -> set[i
         # (codegen emits fully-qualified ::chaos::il2cpp::method_table::g_method_table[N])
         calls_null_stub = any(
             f"::g_method_table[{ni}]" in body or f"g_method_table[{ni}]" in body
+            or f"::chaos::il2cpp::method_table::g_method_table[{ni}]" in body
             for ni in null_indices
         )
 
-        # Check for null→abort pattern
-        has_null_abort = "if (chaos_array == nullptr)" in body
+        # Check for null→abort pattern — multiple variants:
+        #   if (chaos_array == nullptr) { CHAOS_IL2CPP_ABORT(); }
+        #   if (chaos_string == nullptr) { CHAOS_IL2CPP_ABORT(); }
+        #   if (chaos_arg_N == static_cast<CHAOS_IL2CPP_INTPTR>(0)) { CHAOS_IL2CPP_ABORT(); }
+        has_null_abort = (
+            "if (chaos_array == nullptr)" in body
+            or "if (chaos_string == nullptr)" in body
+            or "if (chaos_delegate == nullptr)" in body
+            or re.search(
+                r'if \(chaos_arg_\d+ == static_cast<CHAOS_IL2CPP_INTPTR>\(0\)\)',
+                body,
+            ) is not None
+        )
+
+        # Additional check: if the method calls a literal-0 method table slot
+        # (WriteMethodTable(N, reinterpret_cast<void*>(0), ...)), the call
+        # itself will crash with ACCESS_VIOLATION since the function pointer
+        # is null. There is no explicit null-check-abort pattern — the crash
+        # happens inside the null dereference itself.
+        calls_zero_slot = any(
+            f"::g_method_table[{zi}]" in body or f"g_method_table[{zi}]" in body
+            or f"::chaos::il2cpp::method_table::g_method_table[{zi}]" in body
+            for zi in zero_indices
+        )
 
         if calls_null_stub and has_null_abort:
+            # Calls a null-returning stub and then null-checks the result → abort.
+            aborting.add(midx)
+        elif has_null_abort:
+            # The method null-checks an arg (e.g., chaos_arg_N == 0) which will
+            # always trigger during baseline capture (all methods are called with
+            # no C++ arguments, so eval-stack args are zero-initialized).
+            # This catches reflection-* families where WriteMethodTable entries
+            # point to real functions but the method body aborts on null arg.
+            aborting.add(midx)
+        elif calls_zero_slot:
+            # Calling a null function pointer directly will crash — no
+            # explicit null-check-abort pattern needed.
             aborting.add(midx)
 
     return aborting
@@ -708,6 +757,7 @@ def _generate_hotupdate_cmake_full(family_slug: str) -> str:
         "    ${CMAKE_SOURCE_DIR}/src/native/runtime-core\n"
         "    ${CMAKE_SOURCE_DIR}/src/native/bootstrap\n"
         "    ${CMAKE_SOURCE_DIR}/src/native/interpreter\n"
+        "    ${CMAKE_SOURCE_DIR}/third_party/bdwgc/include\n"
         "    ${CMAKE_SOURCE_DIR}/verification/foundation-dll/System.Private.CoreLib\n"
         ")\n"
         "# Force-include hotupdate config so CodeGen-generated code can find\n"
@@ -876,6 +926,34 @@ def _inject_missing_structs_and_type_ids(content: str) -> str:
         'chaos_type_System_Private_CoreLib_System_Reflection_Module': [
             "    CHAOS_IL2CPP_INTPTR runtime_module_name_value = 0;\n",
             "    CHAOS_IL2CPP_INTPTR runtime_assembly_name_value = 0;\n",
+        ],
+        'chaos_type_System_Private_CoreLib_System_Exception': [
+            "    CHAOS_IL2CPP_INTPTR _className = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _message = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _data = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _innerException = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _helpURL = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _stackTrace = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _stackTraceString = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _remoteStackTraceString = 0;\n",
+            "    CHAOS_IL2CPP_INT32 _HResult = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _source = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _xptrs = 0;\n",
+            "    CHAOS_IL2CPP_INT32 _xcode = -1;\n",
+        ],
+        'chaos_type_System_Private_CoreLib_System_SystemException': [
+            "    CHAOS_IL2CPP_INTPTR _className = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _message = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _data = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _innerException = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _helpURL = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _stackTrace = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _stackTraceString = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _remoteStackTraceString = 0;\n",
+            "    CHAOS_IL2CPP_INT32 _HResult = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _source = 0;\n",
+            "    CHAOS_IL2CPP_INTPTR _xptrs = 0;\n",
+            "    CHAOS_IL2CPP_INT32 _xcode = -1;\n",
         ],
     }
 
@@ -1524,6 +1602,34 @@ def _fix_todo_struct_fields(content: str) -> str:
             '    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;\n',
             '    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;\n',
             '    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;\n',
+        ],
+        'chaos_type_System_Private_CoreLib_System_Exception': [
+            '    CHAOS_IL2CPP_INTPTR _className = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _message = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _data = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _innerException = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _helpURL = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _stackTrace = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _stackTraceString = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _remoteStackTraceString = 0;\n',
+            '    CHAOS_IL2CPP_INT32 _HResult = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _source = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _xptrs = 0;\n',
+            '    CHAOS_IL2CPP_INT32 _xcode = -1;\n',
+        ],
+        'chaos_type_System_Private_CoreLib_System_SystemException': [
+            '    CHAOS_IL2CPP_INTPTR _className = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _message = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _data = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _innerException = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _helpURL = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _stackTrace = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _stackTraceString = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _remoteStackTraceString = 0;\n',
+            '    CHAOS_IL2CPP_INT32 _HResult = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _source = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR _xptrs = 0;\n',
+            '    CHAOS_IL2CPP_INT32 _xcode = -1;\n',
         ],
     }
 
