@@ -367,6 +367,22 @@ def build_family_verification_snapshot(
             family,
             claim=native_proof_claims.get(f"{family_id}::test-code"),
         ).to_dict()
+
+        # Derive closureStatus from verification gate results.
+        # Only the 6 standard gates determine closure; completion-certification
+        # is a project-level gate, not a per-family verification gate.
+        # Preserve manually-set statuses (waived/excluded/platform-blocked).
+        current_status = snapshot_family.get("closureStatus", "in-progress")
+        if current_status == "in-progress":
+            gates = dict(snapshot_family.get("verificationGates") or {})
+            verification_codes = {
+                "audit-input-and-ledger", "managed-proof", "native-proof",
+                "hotupdate-proof", "benchmark", "codegen-review",
+            }
+            relevant = {k: v for k, v in gates.items() if k in verification_codes}
+            if relevant and all(v == "passed" for v in relevant.values()):
+                snapshot_family["closureStatus"] = "closed"
+
         snapshot_families.append(snapshot_family)
     return {
         "schemaVersion": 1,

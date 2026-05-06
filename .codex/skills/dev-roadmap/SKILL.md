@@ -137,7 +137,7 @@ roadmap 文档固定包含：
   - `auto_continue: true`
   - `auto_stop_policy: blocking-only`
 - `recommended_next_child` 在串行模式下指向下一可启动子任务
-- 自动启动前必须先做最小 `preflight self-review`（检查项、结果字段与判定规则同 `dev:executing-plans` 中的定义）
+- 自动启动前必须先做最小 `preflight self-review`（检查项、结果字段与判定规则同 `dev-executing-plans` 中的定义）
 
 ## 调度策略（DISPATCH.md）
 
@@ -250,7 +250,7 @@ batches:
    - 子任务默认先进入 `writing-plans` 做最小 `preflight self-review`
    - 如果 `preflight self-review = pass|warn`：继续自动执行
    - 如果 `preflight self-review = stop`：停止自动推进，并向用户说明问题后等待确认
-   - 子任务后续必须通过 `dev:executing-plans` 或 `dev:subagent-driven-development` 执行到终态
+   - 子任务后续必须通过 `dev-executing-plans` 或 `dev-subagent-driven-development` 执行到终态
    - 子任务进入终态后，必须同步父 roadmap 的 child mapping、`latest_stop_point`、`下一步` 与新的 `recommended_next_child`
 10. 如果 `child_execution_mode = manual`，或当前不存在唯一可启动的 `recommended_next_child`：
     - 说明原因并等待用户确认，再决定推进哪个子任务

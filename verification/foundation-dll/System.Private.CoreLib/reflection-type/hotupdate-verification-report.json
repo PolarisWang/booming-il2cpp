@@ -1,0 +1,403 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/type",
+  "verificationKind": "hotupdate-proof",
+  "d3PatchApplied": true,
+  "d3PatchedCount": 44,
+  "summary": {
+    "totalMethods": 43,
+    "passedMethods": 43,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": [
+    {
+      "methodToken": 100663297,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663298,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663299,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663300,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663301,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663302,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663303,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663304,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663305,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663306,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663307,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663308,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663309,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663310,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663311,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663312,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663313,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663314,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663315,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663316,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663317,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663318,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663319,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663320,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663321,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663322,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663323,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663324,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663325,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663326,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663327,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663328,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663329,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663330,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663331,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663332,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663333,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663334,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663335,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663336,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663337,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663338,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663339,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    }
+  ]
+}

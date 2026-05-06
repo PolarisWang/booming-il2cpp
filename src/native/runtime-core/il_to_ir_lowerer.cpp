@@ -210,7 +210,7 @@ IRMethod LowerILToIR(
     ILTokenResolver      token_resolver,
     void*                user_data)
 {
-    CHAOS_IL2CPP_TRACE("runtime", "LowerILToIR", "\"il_length\"=%zu,\"code_size\"=%zu", il_length, code_size);
+    CHAOS_IL2CPP_LOG_TRACE("runtime", "LowerILToIR", "\"il_length\"=%zu,\"code_size\"=%zu", il_length, code_size);
     if (il_bytes == nullptr || il_length == 0u) {
         return MakeEmptyMethod();
     }

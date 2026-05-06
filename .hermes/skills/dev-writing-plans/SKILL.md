@@ -51,7 +51,7 @@ description: 当你有规格说明或多步骤任务的需求时，在接触代�
 ## roadmap-child Preflight Self-Review
 
 - 当任务带有 `source_relation: roadmap-child*`，或父 roadmap 声明 `child_execution_mode = auto` 时，写 plan 前必须先做一次最小 `preflight self-review`
-- 检查项、结果字段与判定规则同 `dev:executing-plans` 中的定义，聚焦是否还能安全自动继续
+- 检查项、结果字段与判定规则同 `dev-executing-plans` 中的定义，聚焦是否还能安全自动继续
 
 ## 计划要求
 
@@ -165,5 +165,5 @@ description: 当你有规格说明或多步骤任务的需求时，在接触代�
 
 ## 执行路径
 
-- 如果执行环境有子 Agent：使用 `dev:subagent-driven-development`
-- 如果执行环境没有子 Agent：使用 `dev:executing-plans`
+- 如果执行环境有子 Agent：使用 `dev-subagent-driven-development`
+- 如果执行环境没有子 Agent：使用 `dev-executing-plans`

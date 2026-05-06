@@ -293,6 +293,13 @@ public sealed record AotCoreIrReferenceArtifact
     public string? DeclaringTypeSubjectId { get; init; }
 
     public AotCoreIrTypeShapeKind DeclaringTypeShape { get; init; }
+
+    /// <summary>
+    /// Field type subject ID (e.g. "System.Int32", "System.Boolean").
+    /// Populated only when <see cref="Kind"/> is <see cref="AotCoreIrReferenceKind.Field"/>.
+    /// Used by the planner to emit correct C++ field types instead of uniform CHAOS_IL2CPP_INTPTR.
+    /// </summary>
+    public string? FieldTypeSubjectId { get; init; }
 }
 
 /// <summary>

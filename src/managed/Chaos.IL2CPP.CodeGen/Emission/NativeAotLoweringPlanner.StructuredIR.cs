@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +8,15 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed partial class NativeAotLoweringPlanner
 {
-    // ──────────────────────────────────────────────────────────────
-    // Pure Structured IR — type definitions
+    // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+    // Pure Structured IR 鈥?type definitions
     //
     // These types represent the output of control flow recovery,
     // completely decoupled from CFG analysis (BasicBlock,
     // ControlFlowGraph, etc.).  The IR tree is a pure control-flow
     // representation that can be directly lowered to C++ without
     // any `goto chaos_ip_*` merge labels or `_suppressGotoNext`.
-    // ──────────────────────────────────────────────────────────────
+    // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
     internal abstract record StructuredIRNode;
 
@@ -29,7 +29,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// <summary>Sequential composition of IR nodes.</summary>
     internal sealed record IRSequence(IReadOnlyList<StructuredIRNode> Nodes) : StructuredIRNode;
 
-    /// <summary>If-then-else — condition expressed via eval-stack + branch opcode.</summary>
+    /// <summary>If-then-else 鈥?condition expressed via eval-stack + branch opcode.</summary>
     internal sealed record IRIfThenElse(
         IReadOnlyList<AotCoreIrInstructionArtifact> ConditionInstructions,
         AotCoreIrInstructionArtifact BranchTerminator,
@@ -62,15 +62,14 @@ public sealed partial class NativeAotLoweringPlanner
         int ExitOffset
     ) : StructuredIRNode;
 
-    // ── Leaf control-flow nodes ──
+    // 鈹€鈹€ Leaf control-flow nodes 鈹€鈹€
 
     internal sealed record IRBreak : StructuredIRNode;
     internal sealed record IRContinue : StructuredIRNode;
     internal sealed record IRReturn : StructuredIRNode;
     internal sealed record IRThrow : StructuredIRNode;
-    internal sealed record IRGoto(int TargetOffset) : StructuredIRNode;
 
-    // ── Exception regions (first-class IR nodes) ──
+    // 鈹€鈹€ Exception regions (first-class IR nodes) 鈹€鈹€
 
     internal enum IRExceptionKind { TryCatch, TryFinally, TryFilter }
 
@@ -82,218 +81,240 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrInstructionArtifact>? FilterInstructions = null
     ) : StructuredIRNode;
 
-    // ──────────────────────────────────────────────────────────────
-    // Stack Slot Context — maps IL eval stack positions to C++ local
-    // variable names (_s0, _s1, …) so that push/pop operations become
+    // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+    // Stack Slot Context 鈥?maps IL eval stack positions to C++ local
+    // variable names (_s0, _s1, 鈥? so that push/pop operations become
     // local-variable assignments instead of array operations.
     //
     // Each push to a given stack depth gets a unique slot id, so
-    // the mapping is: depth → slotId → "_s{slotId}".  Pop returns
+    // the mapping is: depth 鈫?slotId 鈫?"_s{slotId}".  Pop returns
     // the name at the current top and discards it.
-    // ──────────────────────────────────────────────────────────────
+    // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
-    private sealed class SlotContext
+    private StructuredSlotEmissionContext? _activeStructuredSlotContext;
+
+    private sealed class StructuredSlotEmissionContext
     {
-        private readonly List<int> _depths = new(); // stack of depth entries
-        private int _maxDepth = 0;
+        private int _depth;
 
-        public int Depth => _depths.Count;
-        public int MaxDepth => _maxDepth;
-
-        /// <summary>Push a new slot, returning the C++ expression to assign it.</summary>
-        public string Push()
+        public string AllocatePushTarget()
         {
-            _depths.Add(_depths.Count);
-            _maxDepth = Math.Max(_maxDepth, _depths.Count);
-            return $"__s[{_depths.Count - 1}]";
+            string slotName = FormatStructuredSlotName(_depth);
+            _depth++;
+            return slotName;
         }
 
-        /// <summary>Pop and return the expression to read the top slot.</summary>
-        public string Pop()
+        public string PopValue()
         {
-            int depth = _depths.Count - 1;
-            _depths.RemoveAt(depth);
-            return $"__s[{depth}]";
+            if (_depth <= 0)
+            {
+                throw new InvalidOperationException("structured slot stack underflow.");
+            }
+
+            _depth--;
+            return FormatStructuredSlotName(_depth);
         }
 
-        /// <summary>Peek at the top slot expression without popping.</summary>
-        public string Peek() => $"__s[{_depths.Count - 1}]";
+        public string PeekValue()
+        {
+            if (_depth <= 0)
+            {
+                throw new InvalidOperationException("structured slot stack underflow.");
+            }
+
+            return FormatStructuredSlotName(_depth - 1);
+        }
+
+        public void Discard(int count = 1)
+        {
+            if (count < 0 || count > _depth)
+            {
+                throw new InvalidOperationException("structured slot stack underflow.");
+            }
+
+            _depth -= count;
+        }
     }
 
-    // ──────────────────────────────────────────────────────────────
-    // Stack operation pattern post-processor
-    //
-    // Takes the output of EmitLinearInstruction / helpers (which
-    // contains chaos_eval_stack[chaos_stack_top++], etc.) and replaces
-    // the array operations with _sN slot names, tracking depth through
-    // a SlotContext.
-    //
-    // This avoids rewriting every opcode handler — the patterns are
-    // predictable and the substitution is purely mechanical.
-    // ──────────────────────────────────────────────────────────────
+    private static string FormatStructuredSlotName(int slotIndex) => $"_s{slotIndex}";
 
-    private static string ReplaceStackOpsWithSlots(string code, SlotContext slots)
+    private void EmitStructuredMethodReturn(StringBuilder builder, AotCoreIrAbiSlotArtifact returnAbi, string indentation)
     {
-        var lines = code.Split('\n');
-        for (int i = 0; i < lines.Length; i++)
+        switch (returnAbi.CarrierKindCode)
         {
-            string line = lines[i];
-
-            // ── Push: chaos_eval_stack[chaos_stack_top++] = VALUE;
-            int pushIdx = line.IndexOf("chaos_eval_stack[chaos_stack_top++]", StringComparison.Ordinal);
-            if (pushIdx >= 0 && line.Contains('='))
-            {
-                int eqIdx = line.IndexOf('=', pushIdx);
-                if (eqIdx < 0) continue;
-                string prefix = line[..pushIdx].TrimEnd();
-                string valueExpr = line[(eqIdx + 1)..].Trim().TrimEnd(';');
-                // ldloca/ldarga produce pointer values (&chaos_locals[N] / &chaos_args[N])
-                // Cast to CHAOS_IL2CPP_INTPTR since __s[N] is an integer type.
-                string valueForSlot = (valueExpr.StartsWith("&chaos_locals") || valueExpr.StartsWith("&chaos_args"))
-                    ? $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>({valueExpr})"
-                    : valueExpr;
-                string slotExpr = slots.Push();
-                lines[i] = $"{prefix}{slotExpr} = {valueForSlot};";
-                continue;
-            }
-
-            // ── Pop:  ... = chaos_eval_stack[--chaos_stack_top];
-            // Also handles return-value pop: return static_cast<T>(...[...]);
-            // (return lines lack '=', so we match without the Contains('=') guard)
-            int popIdx = line.IndexOf("chaos_eval_stack[--chaos_stack_top]", StringComparison.Ordinal);
-            if (popIdx >= 0 && slots.Depth > 0)
-            {
-                string afterPop = line[(popIdx + "chaos_eval_stack[--chaos_stack_top]".Length)..];
-                string slotName = slots.Pop();
-                lines[i] = $"{line[..popIdx]}{slotName}{afterPop}";
-                continue;
-            }
-
-            // ── Top modify: chaos_eval_stack[chaos_stack_top - 1] = VALUE;
-            int topModIdx = line.IndexOf("chaos_eval_stack[chaos_stack_top - 1]", StringComparison.Ordinal);
-            if (topModIdx >= 0)
-            {
-                int eqIdx = line.IndexOf('=', topModIdx);
-                string prefix = line[..topModIdx].TrimEnd();
-                string valueExpr = line[(eqIdx + 1)..].Trim().TrimEnd(';');
-                string slotName = slots.Peek();
-                lines[i] = $"{prefix}{slotName} = {valueExpr};";
-                continue;
-            }
-
-            // ── Top decrement: chaos_stack_top--;
-            if (line.Contains("chaos_stack_top--;"))
-            {
-                string prefix = line[..line.IndexOf("chaos_stack_top--;")].TrimEnd();
-                slots.Pop();
-                lines[i] = string.IsNullOrEmpty(prefix) ? $"// (pop)" : $"{prefix}// (pop)";
-                continue;
-            }
-
-            // ── Top decrement by N: chaos_stack_top -= N;
-            int minusEqIdx = line.IndexOf("chaos_stack_top -=", StringComparison.Ordinal);
-            if (minusEqIdx >= 0)
-            {
-                int semiIdx = line.IndexOf(';', minusEqIdx);
-                string nStr = line[(minusEqIdx + "chaos_stack_top -=".Length)..semiIdx].Trim();
-                if (int.TryParse(nStr, out int n))
-                {
-                    string prefix = line[..minusEqIdx].TrimEnd();
-                    for (int j = 0; j < n; j++) slots.Pop();
-                    lines[i] = string.IsNullOrEmpty(prefix) ? $"// (pop {n})" : $"{prefix}// (pop {n})";
-                    continue;
-                }
-            }
-
-            // ── Dup: chaos_eval_stack[chaos_stack_top] = chaos_eval_stack[chaos_stack_top - 1]; + stack_top++;
-            if (line.Contains("chaos_eval_stack[chaos_stack_top] = chaos_eval_stack[chaos_stack_top - 1]"))
-            {
-                string prefix = line[..line.IndexOf("chaos_eval_stack[chaos_stack_top]", StringComparison.Ordinal)].TrimEnd();
-                string oldTop = slots.Peek(); // slot before push (will be at depth-1 after push)
-                slots.Push(); // increment depth
-                string newTop = slots.Peek(); // slot at new depth
-                lines[i] = $"{prefix}{newTop} = {oldTop};";
-                continue;
-            }
+            case AotCoreIrAbiCarrierKind.Void:
+                builder.AppendLine(indentation + "return;");
+                return;
         }
 
-        return string.Join("\n", lines);
+        string valueExpression = ConsumeEvalStackValueExpression();
+        switch (returnAbi.CarrierKindCode)
+        {
+            case AotCoreIrAbiCarrierKind.Int32:
+                builder.AppendLine(indentation + $"return static_cast<CHAOS_IL2CPP_INT32>({valueExpression});");
+                return;
+            case AotCoreIrAbiCarrierKind.Int8:
+                builder.AppendLine(indentation + $"return static_cast<CHAOS_IL2CPP_INT8>({valueExpression});");
+                return;
+            case AotCoreIrAbiCarrierKind.UInt8:
+                builder.AppendLine(indentation + $"return static_cast<CHAOS_IL2CPP_UINT8>({valueExpression});");
+                return;
+            case AotCoreIrAbiCarrierKind.Int16:
+                builder.AppendLine(indentation + $"return static_cast<CHAOS_IL2CPP_INT16>({valueExpression});");
+                return;
+            case AotCoreIrAbiCarrierKind.UInt16:
+                builder.AppendLine(indentation + $"return static_cast<CHAOS_IL2CPP_UINT16>({valueExpression});");
+                return;
+            case AotCoreIrAbiCarrierKind.Float32:
+                builder.AppendLine(indentation + $"return chaos_load_float32({valueExpression});");
+                return;
+            case AotCoreIrAbiCarrierKind.Float64:
+                builder.AppendLine(indentation + $"return ChaosLoadFloat64({valueExpression});");
+                return;
+            case AotCoreIrAbiCarrierKind.Int64:
+                builder.AppendLine(indentation + $"return ChaosLoadInt64({valueExpression});");
+                return;
+            case AotCoreIrAbiCarrierKind.UInt64:
+                builder.AppendLine(indentation + $"return chaos_load_uint64({valueExpression});");
+                return;
+            case AotCoreIrAbiCarrierKind.NativeInt:
+            case AotCoreIrAbiCarrierKind.ByRef:
+            case AotCoreIrAbiCarrierKind.MultiReturn:
+            case AotCoreIrAbiCarrierKind.ByRefToValueType:
+                builder.AppendLine(indentation + $"return {valueExpression};");
+                return;
+            case AotCoreIrAbiCarrierKind.ValueTypeByValue:
+                builder.AppendLine(indentation + $"return *chaos_resolve_managed_value_pointer<{GetRequiredAbiValueTypeSymbol(returnAbi)}>({valueExpression});");
+                return;
+            default:
+                throw new NotSupportedException($"native-aot lowering does not support ABI return carrier '{returnAbi.CarrierKindCode}'.");
+        }
     }
 
-    // ──────────────────────────────────────────────────────────────
-    // Pure Structured IR → C++ Recursive Emitter
+    private static string NormalizeStoredStackValueExpression(string valueExpression)
+    {
+        string trimmed = valueExpression.Trim();
+        return trimmed.StartsWith("&chaos_locals", StringComparison.Ordinal) ||
+               trimmed.StartsWith("&chaos_args", StringComparison.Ordinal)
+            ? $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>({trimmed})"
+            : valueExpression;
+    }
+
+    private string AllocateEvalStackTargetExpression()
+        => _activeStructuredSlotContext is null
+            ? "chaos_eval_stack[chaos_stack_top++]"
+            : _activeStructuredSlotContext.AllocatePushTarget();
+
+    private string ConsumeEvalStackValueExpression()
+        => _activeStructuredSlotContext is null
+            ? "chaos_eval_stack[--chaos_stack_top]"
+            : _activeStructuredSlotContext.PopValue();
+
+    private string AccessEvalStackTopExpression()
+        => _activeStructuredSlotContext is null
+            ? "chaos_eval_stack[chaos_stack_top - 1]"
+            : _activeStructuredSlotContext.PeekValue();
+
+    private void EmitEvalStackPush(StringBuilder builder, string indentation, string valueExpression)
+        => builder.AppendLine($"{indentation}{AllocateEvalStackTargetExpression()} = {NormalizeStoredStackValueExpression(valueExpression)};");
+
+    private void EmitEvalStackDiscard(StringBuilder builder, string indentation, int count = 1)
+    {
+        if (_activeStructuredSlotContext is null)
+        {
+            if (count == 1)
+            {
+                builder.AppendLine($"{indentation}chaos_stack_top--;");
+            }
+            else
+            {
+                builder.AppendLine($"{indentation}chaos_stack_top -= {count};");
+            }
+
+            return;
+        }
+
+        _activeStructuredSlotContext.Discard(count);
+    }
+
+    private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxDepth, string indentation)
+    {
+        for (int i = 0; i < maxDepth; i++)
+        {
+            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INTPTR {FormatStructuredSlotName(i)}{{}};");
+        }
+    }
+
+    // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+    // Pure Structured IR 鈫?C++ Recursive Emitter
     //
     // The emitter is a recursive tree walk that produces C++ control
-    // flow directly — no `goto chaos_ip_*`, no `_suppressGotoNext`,
+    // flow directly 鈥?no `goto chaos_ip_*`, no `_suppressGotoNext`,
     // no merge labels.  Leaf instructions use EmitLinearInstruction
     // (no goto-next appended).
-    // ──────────────────────────────────────────────────────────────
+    // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
-    /// <summary>
-    /// Goto target offsets collected from the current IR tree, used by
-    /// EmitIRBlock to emit missing label definitions (chaos_ip_OFFSET:)
-    /// for blocks that are targets of IRGoto or residual br/leave.
-    /// </summary>
-    private HashSet<int>? _irGotoTargets;
 
-    /// <summary>
-    /// Labels already emitted in the current method body (C++ labels have
-    /// function scope, so duplicates across then/else bodies are illegal).
-    /// </summary>
-    private readonly HashSet<int> _emittedLabels = new();
-
-    /// <summary>
-    /// Recursively collect all goto/br/leave target offsets from the tree.
-    /// </summary>
-    private static void CollectGotoTargets(StructuredIRNode node, HashSet<int> targets)
+    private static bool ContainsResidualBranchTerminators(StructuredIRNode node)
     {
-        switch (node)
+        return node switch
         {
-            case IRBlock block:
-                if (block.Terminator != null &&
-                    (block.Terminator.Op == "br" || block.Terminator.Op == "leave"))
-                    targets.Add(GetRequiredIntOperand(block.Terminator));
-                break;
-
-            case IRSequence seq:
-                foreach (var child in seq.Nodes)
-                    CollectGotoTargets(child, targets);
-                break;
-
-            case IRIfThenElse ite:
-                CollectGotoTargets(ite.ThenBody, targets);
-                if (ite.ElseBody != null)
-                    CollectGotoTargets(ite.ElseBody, targets);
-                break;
-
-            case IRWhileLoop w:
-                CollectGotoTargets(w.Body, targets);
-                break;
-
-            case IRDoWhileLoop dw:
-                CollectGotoTargets(dw.Body, targets);
-                break;
-
-            case IRSwitch sw:
-                foreach (var caseBody in sw.CaseBodies.Values)
-                    CollectGotoTargets(caseBody, targets);
-                if (sw.DefaultBody != null)
-                    CollectGotoTargets(sw.DefaultBody, targets);
-                break;
-
-            case IRGoto g:
-                targets.Add(g.TargetOffset);
-                break;
-
-            case IRExceptionRegion er:
-                CollectGotoTargets(er.TryBody, targets);
-                CollectGotoTargets(er.HandlerBody, targets);
-                break;
-
-            // IRBreak, IRContinue, IRReturn, IRThrow — no target
-        }
+            IRBlock { Terminator: { Op: "br" or "leave" } } => true,
+            IRSequence seq => seq.Nodes.Any(ContainsResidualBranchTerminators),
+            IRIfThenElse ite => ContainsResidualBranchTerminators(ite.ThenBody) || (ite.ElseBody != null && ContainsResidualBranchTerminators(ite.ElseBody)),
+            IRWhileLoop loop => ContainsResidualBranchTerminators(loop.Body),
+            IRDoWhileLoop loop => ContainsResidualBranchTerminators(loop.Body),
+            IRSwitch sw => sw.CaseBodies.Values.Any(ContainsResidualBranchTerminators) || (sw.DefaultBody != null && ContainsResidualBranchTerminators(sw.DefaultBody)),
+            IRExceptionRegion er => ContainsResidualBranchTerminators(er.TryBody) || ContainsResidualBranchTerminators(er.HandlerBody),
+            _ => false,
+        };
     }
 
+    private static StructuredIRNode StripExceptionPartitionExitTerminators(StructuredIRNode node)
+    {
+        return node switch
+        {
+            IRBlock block when block.Terminator is { Op: "br" or "leave" }
+                => new IRBlock(block.BodyInstructions, null),
+            IRSequence seq
+                => new IRSequence(seq.Nodes.Select(StripExceptionPartitionExitTerminators).ToArray()),
+            IRIfThenElse ite
+                => new IRIfThenElse(
+                    ite.ConditionInstructions,
+                    ite.BranchTerminator,
+                    StripExceptionPartitionExitTerminators(ite.ThenBody),
+                    ite.ElseBody is null ? null : StripExceptionPartitionExitTerminators(ite.ElseBody)),
+            IRWhileLoop loop
+                => new IRWhileLoop(
+                    loop.ConditionInstructions,
+                    loop.ConditionTerminator,
+                    StripExceptionPartitionExitTerminators(loop.Body),
+                    loop.ExitOffset),
+            IRDoWhileLoop loop
+                => new IRDoWhileLoop(
+                    StripExceptionPartitionExitTerminators(loop.Body),
+                    loop.LatchInstructions,
+                    loop.LatchTerminator,
+                    loop.HeaderOffset,
+                    loop.ExitOffset),
+            IRSwitch sw
+                => new IRSwitch(
+                    sw.SwitchInstructions,
+                    sw.CaseBodies.ToDictionary(
+                        pair => pair.Key,
+                        pair => StripExceptionPartitionExitTerminators(pair.Value)),
+                    sw.DefaultBody is null ? null : StripExceptionPartitionExitTerminators(sw.DefaultBody),
+                    sw.ExitOffset),
+            IRExceptionRegion er
+                => new IRExceptionRegion(
+                    er.Kind,
+                    StripExceptionPartitionExitTerminators(er.TryBody),
+                    StripExceptionPartitionExitTerminators(er.HandlerBody),
+                    er.CatchTypeSubjectId,
+                    er.FilterInstructions),
+            _ => node,
+        };
+    }
     /// <summary>
     /// Top-level entry point: emit a StructuredIR tree as C++ code.
     /// Called from EmitManagedMethod (and future exception region
@@ -341,15 +362,11 @@ public sealed partial class NativeAotLoweringPlanner
                 break;
 
             case IRReturn:
-                EmitMethodReturn(builder, method.ReturnAbi);
+                EmitStructuredMethodReturn(builder, method.ReturnAbi, indentation);
                 break;
 
             case IRThrow:
                 builder.AppendLine(indentation + "throw;");
-                break;
-
-            case IRGoto g:
-                builder.AppendLine(indentation + "goto chaos_ip_" + g.TargetOffset + ";");
                 break;
 
             case IRExceptionRegion er:
@@ -362,7 +379,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
     }
 
-    // ── Block ─────────────────────────────────────────────────────
+    // 鈹€鈹€ Block 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
     /// <summary>
     /// Emit an IRBlock using slot-mapped local variables for the eval stack.
@@ -375,46 +392,14 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
-        // If this block's first instruction is a goto target, emit the label.
-        // This covers both IRGoto and residual br/leave fallback targets.
-        // C++ labels have function scope — guard against duplicates.
-        if (_irGotoTargets != null && block.BodyInstructions.Count > 0)
-        {
-            int offset = GetRequiredIlOffset(block.BodyInstructions[0]);
-            if (_irGotoTargets.Contains(offset) && _emittedLabels.Add(offset))
-            {
-                builder.AppendLine($"{indentation}chaos_ip_{offset}:");
-            }
-        }
-
-        var slots = new SlotContext();
-
         foreach (var instr in block.BodyInstructions)
         {
-            var temp = new StringBuilder();
-            EmitLinearInstruction(temp, instr, indentation);
-            string processed = ReplaceStackOpsWithSlots(temp.ToString(), slots);
-            builder.Append(processed);
-            if (!processed.EndsWith("\n", StringComparison.Ordinal))
-                builder.AppendLine();
+            EmitLinearInstruction(builder, instr, indentation);
         }
 
         if (block.Terminator != null)
         {
-            // Terminators that pop from the stack can also use slot mapping
-            var temp = new StringBuilder();
-            EmitIRBlockTerminator(temp, block.Terminator, method, indentation);
-            string processed = ReplaceStackOpsWithSlots(temp.ToString(), slots);
-            builder.Append(processed);
-            if (!processed.EndsWith("\n", StringComparison.Ordinal))
-                builder.AppendLine();
-        }
-
-        // If stack is not empty after the block (shouldn't happen in structured code),
-        // emit a comment showing residual slots (debug aid).
-        if (slots.Depth > 0)
-        {
-            builder.AppendLine($"{indentation}// (stack depth {slots.Depth} after block)");
+            EmitIRBlockTerminator(builder, block.Terminator, method, indentation);
         }
     }
 
@@ -431,22 +416,24 @@ public sealed partial class NativeAotLoweringPlanner
         switch (terminator.Op)
         {
             case "ret":
-                EmitMethodReturn(builder, method.ReturnAbi);
+                EmitStructuredMethodReturn(builder, method.ReturnAbi, indentation);
                 break;
 
             case "throw":
+                builder.AppendLine(indentation + $"throw chaos_managed_exception{{{ConsumeEvalStackValueExpression()}}};");
+                break;
+
             case "rethrow":
                 builder.AppendLine(indentation + "throw;");
                 break;
 
             case "endfinally":
-                // RAII scope guard handles the finally body — no explicit code needed.
+                // RAII scope guard handles the finally body 鈥?no explicit code needed.
                 break;
 
             case "endfilter":
-                // endfilter: pop eval stack, re-throw if 0, else pass through to handler
                 builder.AppendLine(indentation +
-                    "if (chaos_eval_stack[--chaos_stack_top] == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+                    $"if ({ConsumeEvalStackValueExpression()} == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
                 builder.AppendLine(indentation + "{");
                 builder.AppendLine(indentation + "    throw;");
                 builder.AppendLine(indentation + "}");
@@ -454,12 +441,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             case "br":
             case "leave":
-                // In a pure StructuredIR tree, unconditional branches should have been
-                // converted to IRBreak, IRContinue, or eliminated.  A residual IRBlock
-                // with br/leave means the IR builder could not structure this branch.
-                // Emit a goto as a correctness fallback.
-                EmitIRGoto(builder, terminator, indentation);
-                break;
+                throw new NotSupportedException("StructuredIR: residual br/leave requires method-level dispatch fallback.");
 
             default:
                 throw new NotSupportedException(
@@ -467,23 +449,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
     }
 
-    /// <summary>
-    /// Emit an unconditional branch as a goto (correctness fallback
-    /// for branches that could not be structured).
-    /// </summary>
-    private static void EmitIRGoto(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact terminator,
-        string indentation)
-    {
-        int target = GetRequiredIntOperand(terminator);
-        builder.Append(indentation);
-        builder.Append("goto chaos_ip_");
-        builder.Append(target);
-        builder.AppendLine(";");
-    }
-
-    // ── If-then-else ──────────────────────────────────────────────
+    // 鈹€鈹€ If-then-else 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
     private void EmitIRIfThenElse(
         StringBuilder builder,
@@ -508,7 +474,7 @@ public sealed partial class NativeAotLoweringPlanner
                 : "chaos_condition == static_cast<CHAOS_IL2CPP_INTPTR>(0)";
 
             builder.AppendLine(indentation + "{");
-            builder.AppendLine(inner + "const auto chaos_condition = chaos_eval_stack[--chaos_stack_top];");
+            builder.AppendLine(inner + $"const auto chaos_condition = {ConsumeEvalStackValueExpression()};");
             builder.AppendLine(inner + "if (" + condition + ")");
             builder.AppendLine(inner + "{");
             EmitStructuredIRNode(builder, ite.ThenBody, method, bodyIndent);
@@ -550,16 +516,16 @@ public sealed partial class NativeAotLoweringPlanner
             if (isUnsigned)
             {
                 builder.AppendLine(inner +
-                    "const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]));");
+                    $"const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()}));");
                 builder.AppendLine(inner +
-                    "const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]));");
+                    $"const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()}));");
             }
             else
             {
                 builder.AppendLine(inner +
-                    "const auto chaos_right = static_cast<" + valueType + ">(chaos_eval_stack[--chaos_stack_top]);");
+                    $"const auto chaos_right = static_cast<{valueType}>({ConsumeEvalStackValueExpression()});");
                 builder.AppendLine(inner +
-                    "const auto chaos_left = static_cast<" + valueType + ">(chaos_eval_stack[--chaos_stack_top]);");
+                    $"const auto chaos_left = static_cast<{valueType}>({ConsumeEvalStackValueExpression()});");
             }
 
             builder.AppendLine(inner + "if (chaos_left " + cmpOp + " chaos_right)");
@@ -579,7 +545,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
     }
 
-    // ── While loop ───────────────────────────────────────────────
+    // 鈹€鈹€ While loop 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
     private void EmitIRWhileLoop(
         StringBuilder builder,
@@ -592,7 +558,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         if (w.ConditionTerminator == null)
         {
-            // No condition — infinite loop (while (true) { ... })
+            // No condition 鈥?infinite loop (while (true) { ... })
             // Condition instructions might still contain setup code.
             foreach (var instr in w.ConditionInstructions)
                 EmitLinearInstruction(builder, instr, indentation);
@@ -617,7 +583,7 @@ public sealed partial class NativeAotLoweringPlanner
                 : "chaos_condition == static_cast<CHAOS_IL2CPP_INTPTR>(0)";
 
             builder.AppendLine(indentation + "{");
-            builder.AppendLine(inner + "const auto chaos_condition = chaos_eval_stack[--chaos_stack_top];");
+            builder.AppendLine(inner + $"const auto chaos_condition = {ConsumeEvalStackValueExpression()};");
             builder.AppendLine(inner + "while (" + condition + ")");
             builder.AppendLine(inner + "{");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
@@ -650,16 +616,16 @@ public sealed partial class NativeAotLoweringPlanner
             if (isUnsigned)
             {
                 builder.AppendLine(inner +
-                    "const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]));");
+                    $"const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()}));");
                 builder.AppendLine(inner +
-                    "const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]));");
+                    $"const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()}));");
             }
             else
             {
                 builder.AppendLine(inner +
-                    "const auto chaos_right = static_cast<" + valueType + ">(chaos_eval_stack[--chaos_stack_top]);");
+                    $"const auto chaos_right = static_cast<{valueType}>({ConsumeEvalStackValueExpression()});");
                 builder.AppendLine(inner +
-                    "const auto chaos_left = static_cast<" + valueType + ">(chaos_eval_stack[--chaos_stack_top]);");
+                    $"const auto chaos_left = static_cast<{valueType}>({ConsumeEvalStackValueExpression()});");
             }
 
             builder.AppendLine(inner + "while (chaos_left " + cmpOp + " chaos_right)");
@@ -670,7 +636,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
     }
 
-    // ── Do-while loop ─────────────────────────────────────────────
+    // 鈹€鈹€ Do-while loop 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
     private void EmitIRDoWhileLoop(
         StringBuilder builder,
@@ -701,12 +667,12 @@ public sealed partial class NativeAotLoweringPlanner
                     ? "chaos_condition != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
                     : "chaos_condition == static_cast<CHAOS_IL2CPP_INTPTR>(0)";
 
-                builder.AppendLine(bodyIndent + "const auto chaos_condition = chaos_eval_stack[--chaos_stack_top];");
+                builder.AppendLine(bodyIndent + $"const auto chaos_condition = {ConsumeEvalStackValueExpression()};");
                 builder.AppendLine(bodyIndent + "if (!(" + condition + ")) break;");
             }
             else if (terminator.Op == "br")
             {
-                // Infinite loop latch — no condition to check
+                // Infinite loop latch 鈥?no condition to check
             }
             else
             {
@@ -718,7 +684,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine(indentation + "} while (true);");
     }
 
-    // ── Switch ────────────────────────────────────────────────────
+    // 鈹€鈹€ Switch 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
     private void EmitIRSwitch(
         StringBuilder builder,
@@ -734,7 +700,7 @@ public sealed partial class NativeAotLoweringPlanner
             EmitLinearInstruction(builder, instr, indentation);
 
         builder.AppendLine(indentation + "{");
-        builder.AppendLine(inner + "const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);");
+        builder.AppendLine(inner + $"const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
         builder.AppendLine(inner + "switch (chaos_switch_value)");
         builder.AppendLine(inner + "{");
 
@@ -761,7 +727,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine(indentation + "}");
     }
 
-    // ── Exception regions ─────────────────────────────────────────
+    // 鈹€鈹€ Exception regions 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
     private void EmitIRExceptionRegion(
         StringBuilder builder,
@@ -796,7 +762,7 @@ public sealed partial class NativeAotLoweringPlanner
                     builder.AppendLine(inner + "{");
                     builder.AppendLine(inner + "    throw;");
                     builder.AppendLine(inner + "}");
-                    builder.AppendLine(inner + "chaos_eval_stack[chaos_stack_top++] = chaos_exception.object_value;");
+                    EmitEvalStackPush(builder, inner, "chaos_exception.object_value");
                 }
                 EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
                 builder.AppendLine(indentation + "}");
@@ -824,29 +790,31 @@ public sealed partial class NativeAotLoweringPlanner
                 builder.AppendLine(indentation + "}");
                 builder.AppendLine(indentation + "catch (const chaos_managed_exception& chaos_exception)");
                 builder.AppendLine(indentation + "{");
-                builder.AppendLine(inner + "chaos_eval_stack[chaos_stack_top++] = chaos_exception.object_value;");
+                EmitEvalStackPush(builder, inner, "chaos_exception.object_value");
 
-                // Emit filter instructions (endfilter decides rethrow vs accept)
-                if (er.FilterInstructions != null)
+                // Emit structured filter body first, then let endfilter decide rethrow vs accept.
+                if (er.FilterInstructions != null && er.FilterInstructions.Count > 0)
                 {
-                    foreach (var instr in er.FilterInstructions)
+                    var filterInstructions = er.FilterInstructions;
+                    int terminalIndex = filterInstructions.Count - 1;
+                    bool hasTerminalEndFilter = string.Equals(filterInstructions[terminalIndex].Op, "endfilter", StringComparison.Ordinal);
+                    if (terminalIndex > 0)
                     {
-                        if (instr.Op == "endfilter")
-                        {
-                            builder.AppendLine(inner +
-                                "if (chaos_eval_stack[--chaos_stack_top] == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-                            builder.AppendLine(inner + "{");
-                            builder.AppendLine(inner + "    throw;");
-                            builder.AppendLine(inner + "}");
-                        }
-                        else
-                        {
-                            EmitLinearInstruction(builder, instr, inner);
-                        }
+                        StructuredIRNode filterBody = BuildExceptionPartitionTree(filterInstructions.Take(terminalIndex).ToArray(), offsets: new HashSet<int>(filterInstructions.Take(terminalIndex).Select(GetRequiredIlOffset)));
+                        EmitStructuredIRNode(builder, filterBody, method, inner);
+                    }
+
+                    if (hasTerminalEndFilter)
+                    {
+                        builder.AppendLine(inner +
+                            $"if ({ConsumeEvalStackValueExpression()} == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+                        builder.AppendLine(inner + "{");
+                        builder.AppendLine(inner + "    throw;");
+                        builder.AppendLine(inner + "}");
                     }
                 }
 
-                builder.AppendLine(inner + "chaos_eval_stack[chaos_stack_top++] = chaos_exception.object_value;");
+                EmitEvalStackPush(builder, inner, "chaos_exception.object_value");
                 EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
                 builder.AppendLine(indentation + "}");
                 break;
@@ -861,7 +829,8 @@ public sealed partial class NativeAotLoweringPlanner
 
     /// <summary>
     /// Compute the maximum eval-stack depth across all instructions in the method.
-    /// This determines the size of the __s[] slot array.  Simulates the net
+    /// This determines the number of structured slot locals (_s0, _s1, ...).
+    /// Simulates the net
     /// push/pop effect of each IL opcode to find the peak concurrent depth.
     /// </summary>
     private static int ComputeMaxEvalStackDepth(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
@@ -918,7 +887,7 @@ public sealed partial class NativeAotLoweringPlanner
                 case "ldelem": case "ldelem.ref": case "ldelema":
                     pushes = 1; pops = 2; break;
 
-                // Pop 1, push 1 (net 0 — in-place transformation)
+                // Pop 1, push 1 (net 0 鈥?in-place transformation)
                 case "ldfld": case "ldflda":
                 case "ldind.i4": case "ldind.u1": case "ldind.i1":
                 case "ldind.u2": case "ldind.i2": case "ldind.u4":
@@ -972,10 +941,10 @@ public sealed partial class NativeAotLoweringPlanner
             if (depth > maxDepth) maxDepth = depth;
         }
 
-        return Math.Max(16, maxDepth);
+        return maxDepth;
     }
 
-    // ── Convenience: try to use this emitter for a set of instructions ──
+    // 鈹€鈹€ Convenience: try to use this emitter for a set of instructions 鈹€鈹€
 
     /// <summary>
     /// Emit a list of instructions using the new StructuredIR emitter
@@ -983,6 +952,45 @@ public sealed partial class NativeAotLoweringPlanner
     /// and emits the IR tree.  For irreducible CFGs, falls back to
     /// flat goto emission via EmitInstructionRange.
     /// </summary>
+    private bool TryBuildStructuredMethodBody(
+        AotCoreIrMethodArtifact method,
+        IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
+        IReadOnlySet<int> offsets,
+        out StructuredIRNode? body,
+        out int maxDepth)
+    {
+        body = null;
+        maxDepth = 0;
+        if (instructions.Count == 0)
+        {
+            body = new IRSequence(Array.Empty<StructuredIRNode>());
+            return true;
+        }
+
+        var cfg = BuildControlFlowGraph(instructions, offsets);
+        if (!cfg.IsReducible)
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(instructions, method.Instructions) &&
+            method.ExceptionRegionCount > 0 &&
+            method.ExceptionRegions is { Count: > 0 })
+        {
+            return TryBuildStructuredExceptionMethodBody(method, instructions, offsets, out body, out maxDepth);
+        }
+
+        body = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
+        if (ContainsResidualBranchTerminators(body))
+        {
+            body = null;
+            return false;
+        }
+
+        maxDepth = ComputeMaxEvalStackDepth(instructions);
+        return true;
+    }
+
     private void EmitViaStructuredIR(
         StringBuilder builder,
         AotCoreIrMethodArtifact method,
@@ -994,69 +1002,35 @@ public sealed partial class NativeAotLoweringPlanner
             return;
 
         System.Console.Error.WriteLine("TRACE:Em " + (method.SubjectId != null && method.SubjectId.Length > 80 ? method.SubjectId.Substring(0, 80) : method.SubjectId ?? "null") + " instr=" + instructions.Count);
-        var cfg = BuildControlFlowGraph(instructions, offsets);
-        if (!cfg.IsReducible)
+        if (!TryBuildStructuredMethodBody(method, instructions, offsets, out var body, out _))
         {
-            // Fallback: flat goto mode (emits chaos_ip_OFFSET: labels + goto-next)
-            // TODO: replace with node-splitting in Phase 2 when IR builder is rewritten
             EmitInstructionRange(builder, method, instructions, nextOffsetsByIlOffset, offsets);
             return;
         }
 
-        // Slot array for structured-IR eval-stack replacement.
-        // Each IRBlock's ReplaceStackOpsWithSlots rewrites
-        // chaos_eval_stack[...] patterns to __s[N], so declare the
-        // backing store here for the whole method body.
-        int maxDepth = ComputeMaxEvalStackDepth(instructions);
-        builder.AppendLine($"    CHAOS_IL2CPP_INTPTR __s[{maxDepth}] = {{}};");
-
-        // Check for exception regions — route through IRExceptionRegion path for
-        // simple shapes (catch-only, filter-only, finally-only) that would
-        // otherwise go through the old EmitCatchOnlyExceptionMethodBody etc.
-        if (method.ExceptionRegionCount > 0 && method.ExceptionRegions is { Count: > 0 })
-        {
-            EmitViaStructuredIRWithExceptions(builder, method, instructions, nextOffsetsByIlOffset, offsets);
-            return;
-        }
-
-        var tree = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
-        StructuredIRNode ir = tree;
-
-        // Collect ALL branch target offsets — both from the raw instruction
-        // list (EnumerateBranchTargets) and from any IRGoto nodes the structure
-        // recovery introduced.  This guarantees every goto chaos_ip_N has a
-        // matching label regardless of how the IR tree expresses branches.
-        var gotoTargets = EnumerateBranchTargets(instructions);
-        CollectGotoTargets(ir, gotoTargets);
-        _irGotoTargets = gotoTargets;
-        _emittedLabels.Clear();
+        StructuredSlotEmissionContext? previousSlotContext = _activeStructuredSlotContext;
+        _activeStructuredSlotContext = new StructuredSlotEmissionContext();
         try
         {
-            EmitStructuredIRNode(builder, ir, method, "    ");
+            EmitStructuredIRNode(builder, body!, method, "    ");
         }
         finally
         {
-            _irGotoTargets = null;
+            _activeStructuredSlotContext = previousSlotContext;
         }
     }
 
-    /// <summary>
-    /// Handle exception-region methods through the IRExceptionRegion path.
-    /// Partitions the instruction list using the existing TryCreate* shape
-    /// detection and builds a StructuredIR tree with IRExceptionRegion nodes.
-    /// Complex shapes (CatchAndFinally, FilterAndFinally) fall back to the
-    /// old exception emission path via EmitCatchOnlyExceptionMethodBody etc.
-    /// </summary>
-    private void EmitViaStructuredIRWithExceptions(
-        StringBuilder builder,
+    private bool TryBuildStructuredExceptionMethodBody(
         AotCoreIrMethodArtifact method,
         IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
-        IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset,
-        IReadOnlySet<int> offsets)
+        IReadOnlySet<int> offsets,
+        out StructuredIRNode? body,
+        out int maxDepth)
     {
-        StructuredIRNode? body = null;
+        body = null;
+        maxDepth = 0;
 
-        if (TryCreateCatchOnlyExceptionMethodShape(method, out var catchOnly))
+        if (TryCreateCatchOnlyExceptionMethodShape(method, out var catchOnly) && catchOnly is not null)
         {
             body = BuildExceptionIRBody(
                 catchOnly.PrefixInstructions,
@@ -1067,7 +1041,7 @@ public sealed partial class NativeAotLoweringPlanner
                 offsets,
                 catchTypeSubjectId: catchOnly.ExceptionRegion.CatchTypeSubjectId);
         }
-        else if (TryCreateFilterOnlyExceptionMethodShape(method, out var filterOnly))
+        else if (TryCreateFilterOnlyExceptionMethodShape(method, out var filterOnly) && filterOnly is not null)
         {
             body = BuildExceptionIRBody(
                 filterOnly.PrefixInstructions,
@@ -1079,41 +1053,26 @@ public sealed partial class NativeAotLoweringPlanner
                 filterInstructions: filterOnly.FilterInstructions,
                 catchTypeSubjectId: filterOnly.FilterRegion.CatchTypeSubjectId);
         }
-        else if (TryCreateFinallyOnlyExceptionMethodShape(method, out var finallyOnly))
+        else if (TryCreateFinallyOnlyExceptionMethodShape(method, out var finallyOnly) && finallyOnly is not null)
         {
-            // Handle the common case of a single finally handler.
-            // Multiple finally handlers fall back to flat goto.
-            if (finallyOnly.FinallyHandlers.Count == 1)
-            {
-                body = BuildExceptionIRBody(
-                    finallyOnly.PrefixInstructions,
-                    finallyOnly.TryInstructions,
-                    finallyOnly.FinallyHandlers[0].Instructions,
-                    finallyOnly.TailInstructions,
-                    IRExceptionKind.TryFinally,
-                    offsets);
-            }
+            body = BuildFinallyOnlyExceptionIRBody(finallyOnly, offsets);
+        }
+        else if (TryCreateCatchAndFinallyExceptionMethodShape(method, out var catchAndFinally) && catchAndFinally is not null)
+        {
+            body = BuildCatchAndFinallyExceptionIRBody(catchAndFinally, offsets);
+        }
+        else if (TryCreateFilterAndFinallyExceptionMethodShape(method, out var filterAndFinally) && filterAndFinally is not null)
+        {
+            body = BuildFilterAndFinallyExceptionIRBody(filterAndFinally, offsets);
         }
 
-        if (body == null)
+        if (body is null)
         {
-            // Fallback: flat goto for unrecognized exception shapes
-            EmitInstructionRange(builder, method, instructions, nextOffsetsByIlOffset, offsets);
-            return;
+            return false;
         }
 
-        var gotoTargets = EnumerateBranchTargets(instructions);
-        CollectGotoTargets(body, gotoTargets);
-        _irGotoTargets = gotoTargets;
-        _emittedLabels.Clear();
-        try
-        {
-            EmitStructuredIRNode(builder, body, method, "    ");
-        }
-        finally
-        {
-            _irGotoTargets = null;
-        }
+        maxDepth = ComputeMaxEvalStackDepth(instructions);
+        return true;
     }
 
     /// <summary>
@@ -1163,6 +1122,102 @@ public sealed partial class NativeAotLoweringPlanner
         return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
     }
 
+    private StructuredIRNode BuildFinallyOnlyExceptionIRBody(
+        FinallyOnlyExceptionMethodShape finallyOnly,
+        IReadOnlySet<int> offsets)
+    {
+        StructuredIRNode inner = BuildExceptionPartitionTree(finallyOnly.TryInstructions, offsets);
+        for (int i = finallyOnly.FinallyHandlers.Count - 1; i >= 0; i--)
+        {
+            inner = new IRExceptionRegion(
+                IRExceptionKind.TryFinally,
+                inner,
+                BuildExceptionPartitionTree(finallyOnly.FinallyHandlers[i].Instructions, offsets));
+        }
+
+        var nodes = new List<StructuredIRNode>();
+        if (finallyOnly.PrefixInstructions.Count > 0)
+            nodes.Add(BuildExceptionPartitionTree(finallyOnly.PrefixInstructions, offsets));
+        nodes.Add(inner);
+        if (finallyOnly.TailInstructions.Count > 0)
+            nodes.Add(BuildExceptionPartitionTree(finallyOnly.TailInstructions, offsets));
+        return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
+    }
+
+    private StructuredIRNode BuildCatchAndFinallyExceptionIRBody(
+        CatchAndFinallyExceptionMethodShape catchAndFinally,
+        IReadOnlySet<int> offsets)
+    {
+        var tryNodes = new List<StructuredIRNode>();
+        if (catchAndFinally.PreInnerFinallyInstructions.Count > 0)
+            tryNodes.Add(BuildExceptionPartitionTree(catchAndFinally.PreInnerFinallyInstructions, offsets));
+
+        StructuredIRNode innerTry = BuildExceptionPartitionTree(catchAndFinally.InnerTryInstructions, offsets);
+        if (catchAndFinally.InnerFinallyHandler is not null)
+        {
+            innerTry = new IRExceptionRegion(
+                IRExceptionKind.TryFinally,
+                innerTry,
+                BuildExceptionPartitionTree(catchAndFinally.InnerFinallyHandler.Instructions, offsets));
+        }
+        tryNodes.Add(innerTry);
+
+        if (catchAndFinally.PostInnerTryInstructions.Count > 0)
+            tryNodes.Add(BuildExceptionPartitionTree(catchAndFinally.PostInnerTryInstructions, offsets));
+
+        StructuredIRNode catchRegion = new IRExceptionRegion(
+            IRExceptionKind.TryCatch,
+            tryNodes.Count == 1 ? tryNodes[0] : new IRSequence(tryNodes),
+            BuildExceptionPartitionTree(catchAndFinally.HandlerInstructions, offsets),
+            CatchTypeSubjectId: catchAndFinally.CatchRegion.CatchTypeSubjectId);
+
+        StructuredIRNode wrapped = catchRegion;
+        for (int i = catchAndFinally.OuterFinallyHandlers.Count - 1; i >= 0; i--)
+        {
+            wrapped = new IRExceptionRegion(
+                IRExceptionKind.TryFinally,
+                wrapped,
+                BuildExceptionPartitionTree(catchAndFinally.OuterFinallyHandlers[i].Instructions, offsets));
+        }
+
+        var nodes = new List<StructuredIRNode>();
+        if (catchAndFinally.PrefixInstructions.Count > 0)
+            nodes.Add(BuildExceptionPartitionTree(catchAndFinally.PrefixInstructions, offsets));
+        nodes.Add(wrapped);
+        if (catchAndFinally.TailInstructions.Count > 0)
+            nodes.Add(BuildExceptionPartitionTree(catchAndFinally.TailInstructions, offsets));
+        return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
+    }
+
+    private StructuredIRNode BuildFilterAndFinallyExceptionIRBody(
+        FilterAndFinallyExceptionMethodShape filterAndFinally,
+        IReadOnlySet<int> offsets)
+    {
+        StructuredIRNode filterRegion = new IRExceptionRegion(
+            IRExceptionKind.TryFilter,
+            BuildExceptionPartitionTree(filterAndFinally.TryInstructions, offsets),
+            BuildExceptionPartitionTree(filterAndFinally.HandlerInstructions, offsets),
+            CatchTypeSubjectId: filterAndFinally.FilterRegion.CatchTypeSubjectId,
+            FilterInstructions: filterAndFinally.FilterInstructions);
+
+        StructuredIRNode wrapped = filterRegion;
+        for (int i = filterAndFinally.FinallyHandlers.Count - 1; i >= 0; i--)
+        {
+            wrapped = new IRExceptionRegion(
+                IRExceptionKind.TryFinally,
+                wrapped,
+                BuildExceptionPartitionTree(filterAndFinally.FinallyHandlers[i].Instructions, offsets));
+        }
+
+        var nodes = new List<StructuredIRNode>();
+        if (filterAndFinally.PrefixInstructions.Count > 0)
+            nodes.Add(BuildExceptionPartitionTree(filterAndFinally.PrefixInstructions, offsets));
+        nodes.Add(wrapped);
+        if (filterAndFinally.TailInstructions.Count > 0)
+            nodes.Add(BuildExceptionPartitionTree(filterAndFinally.TailInstructions, offsets));
+        return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
+    }
+
     /// <summary>
     /// Build a structured IR tree from a sub-list of instructions (for exception
     /// region partitions).  Returns an empty IRSequence if the partition has no
@@ -1180,7 +1235,10 @@ public sealed partial class NativeAotLoweringPlanner
         if (!cfg.IsReducible)
             return new IRSequence(Array.Empty<StructuredIRNode>());
 
-        return RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
+        return StripExceptionPartitionExitTerminators(RecoverStructure(cfg, 0, cfg.Blocks.Count - 1));
     }
 
 }
+
+
+

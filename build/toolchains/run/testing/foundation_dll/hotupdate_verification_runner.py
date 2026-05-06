@@ -1,16 +1,15 @@
-"""HotUpdate verification runner — maps global C++ test results to per-family
-hotupdate-verification-report.json files for dashboard injection.
+"""D3 HotUpdate verification runner — collects per-family D3 exe JSON results
+and produces hotupdate-verification-report.json files for the dashboard.
 
-The global C++ test (chaos_hotupdate_verification_test) tests 18 synthetic methods
-and produces a JSON result with per-index entries (methodToken, status, etc.).
-Each family's method-hotupdate-case-index.json lists hotupdate cases with
-methodSubjectIds. This runner maps C++ results by index to unique methodSubjectIds
-and writes per-family reports.
+Each family's standalone D3 exe runs Register → ApplyPatch → InterpreterEntryDirect
+and outputs a JSON report. This runner collects all per-family outputs and writes
+per-family hotupdate-verification-report.json files that the dashboard generator
+can consume.
 
 Usage:
-    python hotupdate_verification_runner.py ^
-        --input verification/catalog/programs/ci/hotupdate-verification-output.json ^
-        --output-dir verification/foundation-dll
+    python hotupdate_verification_runner.py
+        --results-dir verification/foundation-dll/hotupdate-results
+        --verification-root verification/foundation-dll
 """
 
 from __future__ import annotations
@@ -18,9 +17,14 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from collections import OrderedDict
 from pathlib import Path
 from typing import Any
+
+
+def _slug_to_family_id(slug: str) -> str:
+    """Reconstruct familyId from directory slug (e.g., 'convert-char' -> 'family/System.Private.CoreLib/convert/char')."""
+    parts = slug.replace("_", "-").split("-")
+    return f"family/System.Private.CoreLib/{'/'.join(parts)}"
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -38,174 +42,112 @@ def _write_json(path: Path, data: Any) -> None:
         f.write("\n")
 
 
-def _deduplicate_by_method_subject_id(cases: list[dict[str, Any]]) -> list[str]:
-    """Return ordered unique methodSubjectIds from hotupdate case index entries."""
-    seen: set[str] = set()
-    result: list[str] = []
-    for case in cases:
-        sid = str(case.get("methodSubjectId") or "")
-        if sid and sid not in seen:
-            seen.add(sid)
-            result.append(sid)
-    return result
-
-
-def _slug_from_family_id(family_id: str) -> str:
-    """Derive directory slug from family ID (matches _slug_from_family_id in native_codegen_generator.py)."""
-    value = str(family_id)
-    if not value:
-        return ""
-    parts = value.split("/")
-    if len(parts) >= 4:
-        return "-".join(part.replace("_", "-") for part in parts[2:])
-    return parts[-1].replace("_", "-")
-
-
 def generate_per_family_reports(
-    input_path: Path,
+    results_dir: Path,
     verification_root: Path,
     assembly_name: str,
-    *,
-    family_ids: list[str] | None = None,
 ) -> dict[str, Any]:
-    """Load global hotupdate output and generate per-family reports.
+    """Load per-family D3 exe outputs and write hotupdate-verification-report.json
+    for each family.
+
+    Each per-family exe JSON contains method-level results with methodToken and
+    status. We write them as methodResults (with synthetic methodSubjectIds if
+    available, or methodToken-based identifiers as fallback).
 
     Args:
-        input_path: Path to the global hotupdate-verification-output.json.
-        verification_root: Root of the verification directory
-            (e.g., repo_root / "verification").
+        results_dir: Directory containing per-family .json files from D3 exes.
+        verification_root: Root of verification directory (e.g., repo_root / "verification").
         assembly_name: Assembly name (e.g., "System.Private.CoreLib").
-        family_ids: If provided, only process these families (by familyId).
-            Otherwise scan all families under verification_root / assembly_name.
 
     Returns:
         Dict mapping familyId -> report dict.
     """
-    global_data = _load_json(input_path)
-    global_results: list[dict[str, Any]] = list(global_data.get("results") or [])
-
-    print(f"Loaded global hotupdate output: {len(global_results)} methods from {input_path}")
-
-    if family_ids is None:
-        # Scan all families under the assembly directory
-        assembly_dir = verification_root / "foundation-dll" / assembly_name
-        if not assembly_dir.is_dir():
-            print(f"ERROR: {assembly_dir} not found", file=sys.stderr)
-            sys.exit(1)
-        family_ids = []
-        for slug_dir in sorted(assembly_dir.iterdir()):
-            if slug_dir.is_dir():
-                case_idx_path = slug_dir / "method-hotupdate-case-index.json"
-                if case_idx_path.is_file():
-                    # Reconstruct familyId from the directory
-                    # We'll load it from the case index
-                    pass
-                    family_ids.append(str(slug_dir.name))
-
-    reports: dict[str, Any] = {}
-
-    # Scan families from the assembly directory
-    assembly_dir = verification_root / "foundation-dll" / assembly_name
-    if not assembly_dir.is_dir():
-        print(f"ERROR: {assembly_dir} not found", file=sys.stderr)
+    if not results_dir.is_dir():
+        print(f"ERROR: results dir not found: {results_dir}", file=sys.stderr)
         sys.exit(1)
 
-    for slug_dir in sorted(assembly_dir.iterdir()):
-        slug = slug_dir.name
-        if not slug_dir.is_dir():
+    reports: dict[str, Any] = {}
+    json_files = sorted(results_dir.glob("*.json"))
+
+    if not json_files:
+        print(f"WARNING: no JSON files found in {results_dir}")
+        return reports
+
+    print(f"Found {len(json_files)} per-family result files in {results_dir}")
+
+    for json_path in json_files:
+        slug = json_path.stem  # e.g., "convert-char"
+
+        try:
+            data = _load_json(json_path)
+        except (json.JSONDecodeError, OSError) as e:
+            print(f"  SKIP {slug}: failed to read JSON ({e})")
             continue
 
-        case_idx_path = slug_dir / "method-hotupdate-case-index.json"
-        if not case_idx_path.is_file():
-            continue
+        total = int(data.get("totalMethods") or 0)
+        passed = int(data.get("passedMethods") or 0)
+        failed = int(data.get("failedMethods") or 0)
+        family_id = str(data.get("familyId") or _slug_to_family_id(slug))
+        raw_results = list(data.get("results") or [])
 
-        if family_ids and slug not in family_ids and slug not in [s.replace("/", "-") for s in family_ids]:
-            continue
-
-        case_idx = _load_json(case_idx_path)
-        cases = list(case_idx.get("cases") or [])
-        unique_ids = _deduplicate_by_method_subject_id(cases)
-
-        if not unique_ids:
-            print(f"  SKIP {slug}: no unique methodSubjectIds in case index")
-            continue
-
-        # Read familyId from the first case's familyId field
-        family_id = str(cases[0].get("familyId") or "") if cases else slug
-        if not family_id:
-            family_id = f"family/{assembly_name}/{slug.replace('-', '/')}"
-
-        # Map C++ results by index to unique methodSubjectIds
+        # Build methodResults: preserve all fields from the D3 exe output
         method_results: list[dict[str, Any]] = []
-        for i, sid in enumerate(unique_ids):
-            if i < len(global_results):
-                result = global_results[i]
-                method_results.append({
-                    "methodSubjectId": sid,
-                    "status": str(result.get("status", "unmatched")),
-                    "methodToken": result.get("methodToken"),
-                    "originalReturnValue": result.get("originalReturnValue"),
-                    "patchedReturnValue": result.get("patchedReturnValue"),
-                    "expectedPatchedValue": result.get("expectedPatchedValue"),
-                    "revertVerified": result.get("revertVerified", False),
-                    "semanticVerified": result.get("semanticVerified", False),
-                })
-            else:
-                # More unique IDs than C++ results — mark as unmatched
-                method_results.append({
-                    "methodSubjectId": sid,
-                    "status": "unmatched",
-                    "methodToken": None,
-                    "originalReturnValue": None,
-                    "patchedReturnValue": None,
-                    "expectedPatchedValue": None,
-                    "revertVerified": False,
-                })
-
-        # Count
-        total = len(method_results)
-        passed = sum(1 for r in method_results if r["status"] == "passed")
-        failed = sum(1 for r in method_results if r["status"] == "failed")
-        unmatched = sum(1 for r in method_results if r["status"] == "unmatched")
+        for result in raw_results:
+            entry: dict[str, Any] = {
+                "methodToken": result.get("methodToken"),
+                "status": str(result.get("status", "unmatched")),
+                "d3Patched": result.get("d3Patched", False),
+                "patchReturnValue": result.get("patchReturnValue"),
+                "interpreterDispatched": result.get("interpreterDispatched", False),
+                "revertVerified": result.get("revertVerified", False),
+                "semanticVerified": result.get("semanticVerified", False),
+            }
+            method_results.append(entry)
 
         report = {
-            "schemaVersion": 1,
+            "schemaVersion": 2,
             "assemblyName": assembly_name,
             "familyId": family_id,
+            "verificationKind": "hotupdate-proof",
+            "d3PatchApplied": data.get("d3PatchApplied", False),
+            "d3PatchedCount": data.get("d3PatchedCount", 0),
             "summary": {
                 "totalMethods": total,
                 "passedMethods": passed,
                 "failedMethods": failed,
-                "unmatchedMethods": unmatched,
+                "unmatchedMethods": total - passed - failed,
             },
             "methodResults": method_results,
         }
 
-        output_path = slug_dir / "hotupdate-verification-report.json"
-        _write_json(output_path, report)
+        # Write report to family directory
+        report_path = verification_root / "foundation-dll" / assembly_name / slug / "hotupdate-verification-report.json"
+        _write_json(report_path, report)
 
-        print(f"  {slug}: {total} methods, {passed} passed, {failed} failed, {unmatched} unmatched -> {output_path}")
+        print(f"  {slug}: {total} methods, {passed} passed, {failed} failed -> {report_path}")
         reports[family_id] = report
 
     total_families = len(reports)
     total_passed = sum(r["summary"]["passedMethods"] for r in reports.values())
     total_failed = sum(r["summary"]["failedMethods"] for r in reports.values())
-    total_unmatched = sum(r["summary"]["unmatchedMethods"] for r in reports.values())
-    print(f"\nProcessed {total_families} families: {total_passed} passed, {total_failed} failed, {total_unmatched} unmatched total")
+    print(f"\nProcessed {total_families} families: {total_passed} passed, {total_failed} failed total")
 
     return reports
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate per-family hotupdate verification reports")
-    parser.add_argument("--input", required=True, type=Path, help="Path to global hotupdate-verification-output.json")
+    parser = argparse.ArgumentParser(description="Generate per-family D3 hotupdate verification reports")
+    parser.add_argument("--results-dir", type=Path,
+                        default=Path.cwd() / "verification" / "foundation-dll" / "hotupdate-results",
+                        help="Directory containing per-family .json files from D3 exes")
     parser.add_argument("--verification-root", type=Path, default=Path.cwd() / "verification",
                         help="Root of the verification directory")
-    parser.add_argument("--assembly-name", default="System.Private.CoreLib", help="Assembly name")
+    parser.add_argument("--assembly-name", default="System.Private.CoreLib",
+                        help="Assembly name")
     args = parser.parse_args()
 
     generate_per_family_reports(
-        input_path=args.input.resolve(),
+        results_dir=args.results_dir.resolve(),
         verification_root=args.verification_root.resolve(),
         assembly_name=args.assembly_name,
     )

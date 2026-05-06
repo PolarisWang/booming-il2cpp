@@ -27,6 +27,7 @@ from pathlib import Path
 from typing import Any
 
 _HERE = Path(__file__).resolve().parent
+_REPO_ROOT = _HERE.parents[4]
 sys.path.insert(0, str(_HERE))
 
 from test_code_generator import (_METHOD_OVERRIDES, _build_call_expr, _build_call_expr_with_refs, _cast_return_to_int,
@@ -183,6 +184,7 @@ def _generate_entrypoint_source(
         usings: set[str] = set()
     else:
         usings = _collect_required_usings(method_subject_ids)
+        usings.add("Chaos.TestFramework")
 
     lines = [
         "// Auto-generated native-AOT entry point",
@@ -262,7 +264,9 @@ def _generate_entrypoint_source(
                     lines.append(f"{ns_indent}        return (int){ret_expr};")
                 else:
                     cast_expr = _cast_return_to_int(ret, call_expr)
-                    lines.append(f"{ns_indent}        return {cast_expr};")
+                    lines.append(f"{ns_indent}        int __result = {cast_expr};")
+                    lines.append(f"{ns_indent}        Assert.Equal(__result, __result);")
+                    lines.append(f"{ns_indent}        return __result;")
             else:
                 lines.append(f"{ns_indent}        // TODO: {subject_id} could not be auto-generated")
                 lines.append(f"{ns_indent}        return 0;")
@@ -282,9 +286,21 @@ def _generate_csproj(
     class_name: str,
     cs_file_name: str,
     target_framework: str = "net10.0",
+    *,
+    variant: str = "benchmark",
 ) -> str:
     """Generate the .csproj for the synthetic entry point assembly."""
     namespace_part = f"<RootNamespace>{class_name}</RootNamespace>"
+
+    # Chaos.TestFramework.Sdk provides the Assert intrinsic marker types for codegen
+    chaos_tf_ref = ""
+    if variant in ("benchmark", "semantic-patch"):
+        sdk_csproj = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
+        chaos_tf_ref = (
+            "  <ItemGroup>\n"
+            f'    <ProjectReference Include="{sdk_csproj}" />\n'
+            "  </ItemGroup>\n"
+        )
 
     return (
         '<Project Sdk="Microsoft.NET.Sdk">\n'
@@ -297,6 +313,7 @@ def _generate_csproj(
         f"    {namespace_part}\n"
         "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
         "  </PropertyGroup>\n"
+        f"{chaos_tf_ref}"
         "  <ItemGroup>\n"
         f'    <Compile Include="{cs_file_name}" />\n'
         "  </ItemGroup>\n"
@@ -384,6 +401,7 @@ def generate_and_build(
         class_name=class_name,
         cs_file_name=cs_file_name,
         target_framework=target_framework,
+        variant=variant,
     )
 
     # Write files

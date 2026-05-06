@@ -44,6 +44,11 @@ bool RegisterRuntimeVTable(
 void* ResolveVirtualMethodPointer(CHAOS_IL2CPP_UINT32 instance_type_token,
                                   CHAOS_IL2CPP_UINT32 declared_method_token);
 
+/// Look up a type's VTable by type_token (for type hierarchy walking).
+/// Returns nullptr if the type is not registered.
+/// This is a read-only lookup used by the interpreter for CastClass/IsInst.
+const TypeVTable* TryGetTypeVTable(CHAOS_IL2CPP_UINT32 type_token);
+
 /// Resolve a virtual method pointer using a TypeInfoHandle.
 /// Decodes the handle to extract the type_token, then delegates to
 /// ResolveVirtualMethodPointer.

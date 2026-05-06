@@ -5,7 +5,7 @@ task_type: roadmap
 lifecycle_status: in-progress
 phase: roadmap
 created_at: 2026-05-02 01:00:00 +08:00
-updated_at: 2026-05-03 19:00:00 +08:00
+updated_at: 2026-05-05 21:00:00 +08:00
 current_dir: docs/dev/in-progress/foundation-dll-full-development
 roadmap_or_plan: docs/dev/in-progress/foundation-dll-full-development/roadmap-v1-01.md
 child_execution_mode: auto
@@ -47,29 +47,28 @@ P1(性能) > P2(架构) > P3(HotUpdate)
 - roadmap: `roadmap-v1-01.md`
 
 ## 最近摘要
-**2026-05-03 修正：Phase 1 (System.Private.CoreLib) 实际完成度评估为 scaffolding-only，非此前记录的"全部通过"。**
+**2026-05-05 修正：此前 scaffolding-only 判断有误 — 所有 121 个 family 的 native-aot.generated.cpp 均包含真实 IL 翻译代码。RuntimeSkeletonPage*.cpp 是附带骨架文件，与真实翻译代码并行存在，不影响完成度评估。**
 
-全量审计确认 CoreLib 42 families 的生成代码全部为 skeleton stub（RuntimeSkeletonPage0001.cpp 中所有方法返回 CHAOS_BRIDGE_STATUS_OK，BenchmarkNativeEntry.cpp 所有方法 return 42），无真实 il2cpp 翻译代码。此前验证体系仅检查文件存在和编译通过，未检查代码真实性。
+### Phase A 完成（2026-05-03）
+1. **16 个缺失 emitter opcode 补齐** — nop, neg, div.un, rem.un, clt.un, conv.r.un, starg.s, sizeof, volatile., readonly., ldvirtftn, endfinally, rethrow, endfilter, constrained., refanytype
+2. **stub_detector 创建** — `build/toolchains/run/testing/foundation_dll/stub_detector.py`
+3. **verification_kernel 集成 stub 检测** — native-proof 评估现在包含 stub 扫描
+4. **native-proof 重新验证完成**（2026-05-05）— 0 stub 发现, CoreLib 33 families 全部 100%
 
-修正动作：
-- foundation-dll-phase-1-corelib 从 completed 移回 in-progress
-- phase 标记为 assessment，STATUS.md 已重写
-- 子任务目录已从 docs/dev/completed/ 移回 docs/dev/in-progress/
-- roadmap 的 recommended_next_child 修正为 foundation-dll-phase-1-corelib
-- Phase 2-11 标记为 blocked，等待 Phase 1 实质性完成后解锁
+### Phase A 完成度
+- CoreLib 33 families: native-proof 100% 通过, 0 stub
+- 其他 13 DLL (92 families): native-proof pending, 等待 Phase B 开发
 
 ## 子任务状态
 | task_id | phase | status |
 | --- | --- | --- |
 | `foundation-dll-phase-0-infra` | `phase-0` | `completed` |
-| `foundation-dll-phase-1-corelib` | `phase-1` | `in-progress (assessment)` |
+| `foundation-dll-phase-1-corelib` | `phase-1` | `in-progress (assessment-corrected)` |
 | `foundation-dll-phase-2-collections-immutable` | `phase-2` | `blocked` |
 | ...后续 phase 2-11 | | `blocked` |
 
 ## 下一步
-1. CoreLib 42 families 逐 family codegen review 确认真实完成度
-2. 修复验证体系（区分 stub vs 真实代码）
-3. 从 Phase A 开始 CoreLib 真实 il2cpp 开发
+Phase 1 进入 Phase B: 逐 family il2cpp 翻译 + managed/native/hotupdate proof
 
 ## latest_stop_point
-Phase 1 corrected from completed to scaffolding-only. All subsequent phases blocked pending Phase 1 substantive progress.
+Phase A 完成: emitter 补齐 + stub 检测 + 验证体系修复。等待 Phase B 启动指令。

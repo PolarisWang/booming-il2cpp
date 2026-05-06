@@ -50,12 +50,12 @@ public sealed partial class NativeAotLoweringPlanner
 		IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers)
 	{
 		HashSet<string> referenceTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
-		Dictionary<string, string?> referenceTypeBaseSubjectIds = new Dictionary<string, string>(StringComparer.Ordinal);
+		Dictionary<string, string?> referenceTypeBaseSubjectIds = new Dictionary<string, string?>(StringComparer.Ordinal);
 		HashSet<string> interfaceTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
 		Dictionary<string, HashSet<string>> referenceTypeImplementedInterfaceSubjectIds = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
 		HashSet<string> valueTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
-		HashSet<string> hashSet = new HashSet<string>(StringComparer.Ordinal);
-		HashSet<string> hashSet2 = new HashSet<string>(StringComparer.Ordinal);
+		Dictionary<string, string?> hashSet = new Dictionary<string, string?>(StringComparer.Ordinal);
+		Dictionary<string, string?> hashSet2 = new Dictionary<string, string?>(StringComparer.Ordinal);
 		HashSet<string> hashSet3 = new HashSet<string>(StringComparer.Ordinal);
 		builder.AppendLine("#include <chaos/type_info.h>");
 		builder.AppendLine();
@@ -113,7 +113,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				if (!string.IsNullOrEmpty(referencedStaticFieldSubjectId))
 				{
-					hashSet2.Add(referencedStaticFieldSubjectId);
+					hashSet2.Add(referencedStaticFieldSubjectId, null);
 				}
 			}
 		}
@@ -175,8 +175,8 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					TrackReferenceType("System.Private.CoreLib/System.Reflection.ParameterInfo", "System.Private.CoreLib/System.Object");
 				}
-				AotCoreIrReferenceArtifact targetReference = instruction.TargetReference;
-				if ((object)targetReference == null)
+				AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;
+				if (targetReference is null)
 				{
 					continue;
 				}
@@ -202,7 +202,7 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					if (HasArrayElementReference(targetReference))
 					{
-						TrackCarrierType(targetReference.ArrayElementSubjectId, targetReference.ArrayElementTypeShape, targetReference.ArrayElementBaseTypeSubjectId, targetReference.ArrayElementImplementedInterfaceSubjectIds);
+						TrackCarrierType(targetReference.ArrayElementSubjectId!, targetReference.ArrayElementTypeShape, targetReference.ArrayElementBaseTypeSubjectId, targetReference.ArrayElementImplementedInterfaceSubjectIds);
 					}
 					else
 					{
@@ -231,11 +231,7 @@ public sealed partial class NativeAotLoweringPlanner
 				IL_07fe:
 				if (flag)
 				{
-					hashSet2.Add(targetReference.SubjectId);
-				}
-				else
-				{
-					hashSet.Add(targetReference.SubjectId);
+					hashSet2.Add(targetReference.SubjectId, targetReference.FieldTypeSubjectId);
 				}
 				continue;
 				IL_06ac:
@@ -309,7 +305,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			string declaringTypeSubjectId = GetDeclaringTypeSubjectId(additionalInstanceFieldSubjectId);
 			TrackReferenceType(declaringTypeSubjectId, "System.Private.CoreLib/System.Object");
-			hashSet.Add(additionalInstanceFieldSubjectId);
+			hashSet.Add(additionalInstanceFieldSubjectId, null);
 		}
 		foreach (StaticInitializationPlan value9 in _staticInitializationSupport.PlansByTypeSubjectId.Values)
 		{
@@ -352,12 +348,14 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		// Pre-index fields by declaring type to avoid O(n*m) Where+OrderBy per type.
 		var fieldsByDeclaringType = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+		var fieldTypeMap = new Dictionary<string, string?>(StringComparer.Ordinal);
 		foreach (var field in hashSet)
 		{
-			var declaringType = GetDeclaringTypeSubjectId(field);
+			var declaringType = GetDeclaringTypeSubjectId(field.Key);
 			if (!fieldsByDeclaringType.TryGetValue(declaringType, out var list))
 				fieldsByDeclaringType[declaringType] = list = new List<string>();
-			list.Add(field);
+			list.Add(field.Key);
+			fieldTypeMap[field.Key] = field.Value;
 		}
 		// Sort each type's field list once.
 		foreach (var list in fieldsByDeclaringType.Values)
@@ -452,7 +450,7 @@ public sealed partial class NativeAotLoweringPlanner
 			string ifaceCountExpr;
 			if (hasIfaceMap)
 			{
-				var sortedIfaceIds = ifaceSubjectIds.OrderBy(id => ComputeStableTypeId(id)).ToArray();
+				var sortedIfaceIds = ifaceSubjectIds!.OrderBy(id => ComputeStableTypeId(id)).ToArray();
 				ifaceMapExpr = GetNativeIfaceMapSymbol(item);
 				ifaceCountExpr = sortedIfaceIds.Length.ToString();
 				{
@@ -560,7 +558,7 @@ public sealed partial class NativeAotLoweringPlanner
 			string ifaceCountExpr;
 			if (hasIfaceMap)
 			{
-				var sortedIfaceIds = ifaceSubjectIds.OrderBy(id => ComputeStableTypeId(id)).ToArray();
+				var sortedIfaceIds = ifaceSubjectIds!.OrderBy(id => ComputeStableTypeId(id)).ToArray();
 				ifaceMapExpr = GetNativeIfaceMapSymbol(item3);
 				ifaceCountExpr = sortedIfaceIds.Length.ToString();
 				{
@@ -629,7 +627,7 @@ public sealed partial class NativeAotLoweringPlanner
 				if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
 				var entries = new string[vtLen];
 				// Walk hierarchy to fill entries (most derived first)
-				string current = typeId;
+				string? current = typeId;
 				while (current != null && referenceTypeSubjectIds.Contains(current))
 				{
 					if (methodsByDeclaringTypeVT.TryGetValue(current, out var typeMethods))
@@ -644,13 +642,14 @@ public sealed partial class NativeAotLoweringPlanner
 							}
 						}
 					}
-					referenceTypeBaseSubjectIds.TryGetValue(current, out current);
+					referenceTypeBaseSubjectIds.TryGetValue(current, out string? nextCurrent);
+					current = nextCurrent;
 				}
 				// Emit extern declarations for methods referenced in vtable array
 				var externDeclared = new HashSet<string>(StringComparer.Ordinal);
 				foreach (var entry in entries)
 				{
-					if (entry != null && externDeclared.Add(entry))
+					if (entry is not null && externDeclared.Add(entry))
 					{
 						builder.Append("extern void ");
 						builder.Append(entry);
@@ -874,7 +873,7 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine();
 				continue;
 			}
-			if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string value6) && !string.IsNullOrWhiteSpace(value6) && referenceTypeSubjectIds.Contains(value6))
+			if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value6) && !string.IsNullOrWhiteSpace(value6) && referenceTypeSubjectIds.Contains(value6))
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder stringBuilder13 = stringBuilder;
@@ -895,7 +894,7 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder14.AppendLine(ref handler);
 			}
 			builder.AppendLine("{");
-			if (!referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string value7) || string.IsNullOrWhiteSpace(value7) || !referenceTypeSubjectIds.Contains(value7))
+			if (!referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value7) || string.IsNullOrWhiteSpace(value7) || !referenceTypeSubjectIds.Contains(value7))
 			{
 				builder.AppendLine("    chaos_object_header header{};");
 			}
@@ -954,10 +953,13 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			foreach (string item8 in list)
 			{
+				var cppType = MapFieldTypeToCppType(fieldTypeMap.GetValueOrDefault(item8));
 				StringBuilder stringBuilder = builder;
 				StringBuilder stringBuilder15 = stringBuilder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(23, 1, stringBuilder);
-				handler.AppendLiteral("    CHAOS_IL2CPP_INTPTR ");
+				handler.AppendLiteral("    ");
+				handler.AppendFormatted(cppType);
+				handler.AppendLiteral(" ");
 				handler.AppendFormatted(GetNativeFieldMemberName(item8));
 				handler.AppendLiteral(" = 0;");
 				stringBuilder15.AppendLine(ref handler);
@@ -983,10 +985,13 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			foreach (string item9 in list2)
 			{
+				var cppType = MapFieldTypeToCppType(fieldTypeMap.GetValueOrDefault(item9));
 				stringBuilder = builder;
 				StringBuilder stringBuilder17 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(23, 1, stringBuilder);
-				handler.AppendLiteral("    CHAOS_IL2CPP_INTPTR ");
+				handler.AppendLiteral("    ");
+				handler.AppendFormatted(cppType);
+				handler.AppendLiteral(" ");
 				handler.AppendFormatted(GetNativeFieldMemberName(item9));
 				handler.AppendLiteral(" = 0;");
 				stringBuilder17.AppendLine(ref handler);
@@ -1024,13 +1029,15 @@ public sealed partial class NativeAotLoweringPlanner
 		EmitObjectEqualityHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
 		EmitReflectionObjectHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
 		EmitExceptionMetadataHelpers(builder, reachableMethods);
-		foreach (string item11 in hashSet2.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
+		foreach (KeyValuePair<string, string?> item11 in hashSet2.OrderBy<KeyValuePair<string, string?>, string>((KeyValuePair<string, string?> result) => result.Key, StringComparer.Ordinal))
 		{
+			var cppType = MapFieldTypeToCppType(item11.Value);
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder20 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder);
-			handler.AppendLiteral("CHAOS_IL2CPP_INTPTR ");
-			handler.AppendFormatted(GetNativeStaticFieldSymbol(item11));
+			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(23, 1, stringBuilder);
+			handler.AppendLiteral(cppType);
+			handler.AppendLiteral(" ");
+			handler.AppendFormatted(GetNativeStaticFieldSymbol(item11.Key));
 			handler.AppendLiteral(" = 0;");
 			stringBuilder20.AppendLine(ref handler);
 		}
@@ -1075,7 +1082,7 @@ public sealed partial class NativeAotLoweringPlanner
 		void TrackReferenceType(string subjectId, string? baseTypeSubjectId, IReadOnlyList<string>? implementedInterfaceSubjectIds = null)
 		{
 			baseTypeSubjectId = ResolveReferenceTypeBaseSubjectId(subjectId, baseTypeSubjectId);
-			if (implementedInterfaceSubjectIds == null && _referenceTypeImplementedInterfaceSubjectIds.TryGetValue(subjectId, out HashSet<string> value8) && value8.Count > 0)
+			if (implementedInterfaceSubjectIds == null && _referenceTypeImplementedInterfaceSubjectIds.TryGetValue(subjectId, out HashSet<string>? value8) && value8.Count > 0)
 			{
 				implementedInterfaceSubjectIds = value8.OrderBy<string, string>((string result) => result, StringComparer.Ordinal).ToArray();
 			}
@@ -1184,6 +1191,29 @@ public sealed partial class NativeAotLoweringPlanner
 				"R8" => 10,
 				"Struct" => 11,
 				_ => 0,
+			};
+		}
+
+		private static string MapFieldTypeToCppType(string? fieldTypeSubjectId)
+		{
+			return fieldTypeSubjectId switch
+			{
+				"System.Boolean" => "CHAOS_IL2CPP_UINT8",
+				"System.Byte" => "CHAOS_IL2CPP_UINT8",
+				"System.SByte" => "CHAOS_IL2CPP_INT8",
+				"System.Int16" => "CHAOS_IL2CPP_INT16",
+				"System.UInt16" => "CHAOS_IL2CPP_UINT16",
+				"System.Char" => "CHAOS_IL2CPP_UINT16",
+				"System.Int32" => "CHAOS_IL2CPP_INT32",
+				"System.UInt32" => "CHAOS_IL2CPP_UINT32",
+				"System.Int64" => "CHAOS_IL2CPP_INT64",
+				"System.UInt64" => "CHAOS_IL2CPP_UINT64",
+				"System.Single" => "CHAOS_IL2CPP_FLOAT32",
+				"System.Double" => "CHAOS_IL2CPP_FLOAT64",
+				"System.IntPtr" => "CHAOS_IL2CPP_INTPTR",
+				"System.UIntPtr" => "CHAOS_IL2CPP_UINTPTR",
+				null => "CHAOS_IL2CPP_INTPTR",
+				_ => "CHAOS_IL2CPP_INTPTR",
 			};
 		}
 

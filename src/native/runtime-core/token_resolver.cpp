@@ -53,7 +53,7 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
     IRInstruction&        instruction,
     void*                 user_data)
 {
-    CHAOS_IL2CPP_TRACE("runtime", "DefaultTokenResolver", "\"token\"=0x%x", token);
+    CHAOS_IL2CPP_LOG_TRACE("runtime", "DefaultTokenResolver", "\"token\"=0x%x", token);
     if (user_data == nullptr) {
         return false;
     }

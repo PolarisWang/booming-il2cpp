@@ -1,5 +1,5 @@
 // Auto-generated managed benchmark harness
-// Family: family/System.Private.CoreLib/array/indexing-copy
+// Family: family/System.Private.CoreLib/array-indexing-copy
 using System;
 using System.Diagnostics;
 using Chaos.Benchmark.array_indexing_copy;
@@ -27,7 +27,7 @@ var methodSubjects = new (string SubjectId, Action Body)[]
 Console.WriteLine("{");
 Console.WriteLine("  \"schemaVersion\": 1,");
 Console.WriteLine("  \"assemblyName\": \"System.Private.CoreLib\",");
-Console.WriteLine("  \"familyId\": \"family/System.Private.CoreLib/array/indexing-copy\",");
+Console.WriteLine("  \"familyId\": \"family/System.Private.CoreLib/array-indexing-copy\",");
 Console.WriteLine("  \"warmupIterations\": " + kWarmupIterations + ",");
 Console.WriteLine("  \"measureIterations\": " + kMeasureIterations + ",");
 Console.WriteLine("  \"results\": [");

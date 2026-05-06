@@ -1,6 +1,5 @@
 #include "{{ include_header }}"
 #include <chrono>
-#include <cstdio>
 
 namespace chaos::il2cpp::generated {
 
@@ -337,11 +336,11 @@ CHAOS_IL2CPP_INT32 RunProfileDispatch(
     }
 
     const double elapsed_milliseconds = virtual_total_nanoseconds / 1000000.0;
-    CHAOS_IL2CPP_PRINTF(
-        "{\"elapsedMilliseconds\": %.3f, \"metrics\": {\"dispatchNanoseconds\": %.3f}}\n",
+    CHAOS_IL2CPP_LOG_WRITE_RAW_M(
+        "{{\"elapsedMilliseconds\": {0:.3f}, \"metrics\": {{\"dispatchNanoseconds\": {1:.3f}}}}}\n",
         elapsed_milliseconds,
         dispatch_nanoseconds);
-    CHAOS_IL2CPP_FFLUSH(stdout);
+    CHAOS_IL2CPP_LOG_FLUSH_STDOUT();
     return 0;
 }
 #endif

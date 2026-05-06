@@ -2,9 +2,9 @@
 #include "result_reporter.h"
 
 #include <chaos/native_types.h>
+#include <fmt/format.h>
 
 #include <chrono>
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <string>
@@ -148,30 +148,20 @@ void report_success_stage(const char* stage, const std::string& detail)
 
 std::string format_heartbeat_detail(const HostRunOptions& options, int heartbeat_index, double elapsed_seconds)
 {
-    char buffer[256];
-    std::snprintf(
-        buffer,
-        sizeof(buffer),
-        "%s|heartbeat=%d|elapsedSeconds=%.3f|targetSeconds=%.3f",
-        options.subjectId,
-        heartbeat_index,
-        elapsed_seconds,
-        options.soakDurationSeconds
-    );
-    return std::string(buffer);
+    return fmt::format("{}|heartbeat={}|elapsedSeconds={:.3f}|targetSeconds={:.3f}",
+                       options.subjectId,
+                       heartbeat_index,
+                       elapsed_seconds,
+                       options.soakDurationSeconds);
 }
 
 std::string format_completion_detail(const HostRunOptions& options, int heartbeat_count, double elapsed_seconds)
 {
-    char buffer[256];
-    std::snprintf(
-        buffer,
-        sizeof(buffer),
-        "%s|elapsedSeconds=%.3f|heartbeats=%d",
-        options.subjectId,
-        elapsed_seconds,
-        heartbeat_count
-    );
+    return fmt::format("{}|elapsedSeconds={:.3f}|heartbeats={}",
+                       options.subjectId,
+                       elapsed_seconds,
+                       heartbeat_count);
+}
     return std::string(buffer);
 }
 }

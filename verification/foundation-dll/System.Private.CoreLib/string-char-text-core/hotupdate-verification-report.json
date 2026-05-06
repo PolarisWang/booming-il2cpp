@@ -1,7 +1,10 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
-  "familyId": "family/System.Private.CoreLib/string/char-text-core",
+  "familyId": "family/System.Private.CoreLib/string/char/text/core",
+  "verificationKind": "hotupdate-proof",
+  "d3PatchApplied": true,
+  "d3PatchedCount": 21,
   "summary": {
     "totalMethods": 20,
     "passedMethods": 20,
@@ -10,202 +13,182 @@
   },
   "methodResults": [
     {
-      "methodSubjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
-      "status": "passed",
       "methodToken": 100663297,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000000",
-      "expectedPatchedValue": "0xb0000000",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)",
       "status": "passed",
-      "methodToken": 100663298,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000001",
-      "expectedPatchedValue": "0xb0000001",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)",
-      "status": "passed",
-      "methodToken": 100663299,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000002",
-      "expectedPatchedValue": "0xb0000002",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
-      "status": "passed",
-      "methodToken": 100663300,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000003",
-      "expectedPatchedValue": "0xb0000003",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
-      "status": "passed",
-      "methodToken": 100663301,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000004",
-      "expectedPatchedValue": "0xb0000004",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)",
-      "status": "passed",
-      "methodToken": 100663302,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000005",
-      "expectedPatchedValue": "0xb0000005",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-      "status": "passed",
-      "methodToken": 100663303,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000006",
-      "expectedPatchedValue": "0xb0000006",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)",
-      "status": "passed",
-      "methodToken": 100663304,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000007",
-      "expectedPatchedValue": "0xb0000007",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
-      "status": "passed",
-      "methodToken": 100663305,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000008",
-      "expectedPatchedValue": "0xb0000008",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
-      "status": "passed",
-      "methodToken": 100663306,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000009",
-      "expectedPatchedValue": "0xb0000009",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
-      "status": "passed",
-      "methodToken": 100663307,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb000000a",
-      "expectedPatchedValue": "0xb000000a",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)",
-      "status": "passed",
-      "methodToken": 100663308,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb000000b",
-      "expectedPatchedValue": "0xb000000b",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Split:System.String[](System.Char)",
-      "status": "passed",
-      "methodToken": 100663309,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb000000c",
-      "expectedPatchedValue": "0xb000000c",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::ToUpper:System.String()",
-      "status": "passed",
-      "methodToken": 100663310,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb000000d",
-      "expectedPatchedValue": "0xb000000d",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::ToLower:System.String()",
-      "status": "passed",
-      "methodToken": 100663311,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb000000e",
-      "expectedPatchedValue": "0xb000000e",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Trim:System.String()",
-      "status": "passed",
-      "methodToken": 100663312,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb000000f",
-      "expectedPatchedValue": "0xb000000f",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
-      "status": "passed",
-      "methodToken": 100663313,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000010",
-      "expectedPatchedValue": "0xb0000010",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)",
-      "status": "passed",
-      "methodToken": 100663314,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000011",
-      "expectedPatchedValue": "0xb0000011",
-      "revertVerified": true,
-      "semanticVerified": false
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)",
-      "status": "passed",
-      "methodToken": null,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000012",
-      "expectedPatchedValue": "0xb0000012",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
       "revertVerified": false,
       "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)",
+      "methodToken": 100663298,
       "status": "passed",
-      "methodToken": null,
-      "originalReturnValue": "0x00000000",
-      "patchedReturnValue": "0xb0000013",
-      "expectedPatchedValue": "0xb0000013",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663299,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663300,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663301,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663302,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663303,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663304,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663305,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663306,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663307,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663308,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663309,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663310,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663311,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663312,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663313,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663314,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663315,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663316,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
       "revertVerified": false,
       "semanticVerified": false
     }

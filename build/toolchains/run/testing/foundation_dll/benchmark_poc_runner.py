@@ -31,10 +31,10 @@ sys.path.insert(0, str(_HERE))
 
 from native_codegen_generator import (
     generate_benchmark_managed_bodies,
-    generate_benchmark_native_entry,
     _slug_from_family_id,
-    _family_namespace_slug,
 )
+from native_benchmark_runner import build_native_benchmark as build_native_benchmark_real
+from native_benchmark_runner import run_benchmark as run_benchmark_real
 from benchmark_comparator import compare as compare_benchmarks
 
 
@@ -154,51 +154,67 @@ def run_benchmark_poc(
             print(f"WARNING: managed baseline JSON invalid: {e}", file=sys.stderr)
             managed_output_path = None
 
-    # Step 3: Generate native benchmark entry
-    _info("Step 3: Generating native benchmark entry")
-    generate_benchmark_native_entry(
-        repo_root,
-        assembly_name=assembly_name,
-        family=family,
-        method_subject_ids=method_subject_ids,
-    )
-
-    # Step 4: Build native benchmark executable
-    _info("Step 4: Building native benchmark executable")
-    target_name = f"chaos_benchmark_{_family_namespace_slug(family_id)}"
-    build_dir = repo_root / "artifacts" / "presets" / "windows-x64-reference"
-    if not build_dir.exists():
-        # Reconfigure cmake
-        _capture(["cmake", "--preset", "windows-x64-reference"], cwd=repo_root)
-    _capture(
-        ["cmake", "--build", str(build_dir), "--target", target_name, "--config", "Release"],
-        cwd=repo_root,
-    )
+    # Steps 3-4: Build native benchmark from real IL2CPP AOT code
+    _info("Steps 3-4: Building native benchmark from real IL2CPP AOT code")
+    build_result = build_native_benchmark_real(family_slug)
+    if not build_result["success"]:
+        error_msg = build_result.get("error", "unknown build error")
+        _info(f"Native benchmark build FAILED: {error_msg}")
+        # Write comparison report showing build failure
+        comparison_output = family_dir / "benchmark-comparison-report.json"
+        report = {
+            "schemaVersion": 1,
+            "assemblyName": assembly_name,
+            "familyId": family_id,
+            "status": "build_failed",
+            "error": error_msg,
+            "summary": {
+                "totalMethods": len(method_subject_ids),
+                "matchedCount": 0,
+                "unmatchedCount": 0,
+                "invalidCount": len(method_subject_ids),
+                "nativeFasterCount": 0,
+                "managedFasterCount": 0,
+                "equalCount": 0,
+                "averageSpeedupPercent": 0.0,
+            },
+            "methodResults": [
+                {"methodSubjectId": m, "status": "build_failed"}
+                for m in method_subject_ids
+            ],
+        }
+        with open(comparison_output, "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2, ensure_ascii=False)
+        _info(f"Comparison report (build failed) written to {comparison_output}")
+        return report
 
     # Step 5: Run native benchmark for each method
     _info("Step 5: Running native benchmark for each method")
-    native_exe = _find_native_exe(repo_root, target_name)
-    _info(f"Using native executable: {native_exe}")
+    native_raw_results = run_benchmark_real(
+        build_result["exe_path"],
+        len(method_subject_ids),
+        iterations=10000,
+    )
 
     native_results: list[dict[str, Any]] = []
-    for idx in range(len(method_subject_ids)):
-        stdout = _capture(
-            [str(native_exe), "--entry-index", str(idx), "--iterations", "10000",
-             "--subject-id", method_subject_ids[idx]],
-            cwd=repo_root,
-        )
-        try:
-            data = json.loads(stdout.strip())
-        except json.JSONDecodeError as e:
-            print(f"WARNING: invalid JSON from native entry {idx}: {stdout[:200]}", file=sys.stderr)
-            continue
-        native_results.append({
-            "methodIndex": idx,
-            "methodSubjectId": data.get("subjectId", method_subject_ids[idx]),
-            "elapsedMilliseconds": data.get("elapsedMilliseconds", 0.0),
-            "opsPerSecond": data.get("opsPerSecond", 0.0),
-            "iterations": data.get("iterations", 10000),
-        })
+    for r in native_raw_results:
+        idx = r.get("methodIndex", 0)
+        mid = method_subject_ids[idx] if idx < len(method_subject_ids) else f"unknown-{idx}"
+        if "elapsedMilliseconds" in r:
+            native_results.append({
+                "methodIndex": idx,
+                "methodSubjectId": mid,
+                "elapsedMilliseconds": r["elapsedMilliseconds"],
+                "opsPerSecond": r.get("opsPerSecond", 0.0),
+                "iterations": r.get("iterations", 10000),
+            })
+        else:
+            native_results.append({
+                "methodIndex": idx,
+                "methodSubjectId": mid,
+                "elapsedMilliseconds": -1.0,
+                "error": r.get("error", "unknown"),
+            })
 
     native_output_path = native_dir / "native-benchmark.json"
     native_output_path.parent.mkdir(parents=True, exist_ok=True)

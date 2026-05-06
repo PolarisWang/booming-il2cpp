@@ -298,9 +298,12 @@ internal static partial class {{registryClassName}}
                 return null;
             }
 
+            string resolvedId = id!;
+            string resolvedProductLineName = productLineName!;
+
             return new MethodPluginDefinition(
-                id,
-                productLineName,
+                resolvedId,
+                resolvedProductLineName,
                 order.Value,
                 methodSymbol.Name,
                 kindName ?? string.Empty);
@@ -344,11 +347,15 @@ internal static partial class {{registryClassName}}
                 return null;
             }
 
+            string resolvedId = id!;
+            string resolvedProductLineName = productLineName!;
+            string resolvedThird = third!;
+
             return new TypePluginDefinition(
-                id,
-                productLineName,
+                resolvedId,
+                resolvedProductLineName,
                 order,
-                third,
+                resolvedThird,
                 version,
                 typeSymbol.Name,
                 typeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));

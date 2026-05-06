@@ -247,8 +247,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Convert", "ToDouble", 1): "skip",
     ("Convert", "ToDecimal", 1): "skip",
     ("Convert", "ToBoolean", 1): "skip",
-    # Convert.ToXxx(string, IFormatProvider) - same issue
-    ("Convert", "ToChar", 2): "skip",      # with IFormatProvider
+    # Convert.ToXxx(string, IFormatProvider) - need null provider
     # Array index-out-of-range with empty arrays
     ("Array", "GetLength", 1): "new int[4, 4].GetLength(0)",
     ("Array", "GetValue", 1): "new int[1].GetValue(0)",
@@ -479,6 +478,7 @@ TYPE_DEFAULT_MAP: dict[str, str] = {
     "System.Globalization.CompareOptions": "System.Globalization.CompareOptions.None",
     "System.RuntimeTypeHandle": "default(System.RuntimeTypeHandle)",
     "System.RuntimeFieldHandle": "default(System.RuntimeFieldHandle)",
+    "System.IFormatProvider": "null",
 }
 
 TYPE_ALTERNATIVE_MAP: dict[str, str] = {

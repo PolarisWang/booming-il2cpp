@@ -824,6 +824,46 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                 families=families,
             )
             families = list(family_snapshot.get("families") or [])
+            # Load L2 native correctness results from batch pipeline
+            native_pipeline_path = repo_root / "verification" / "foundation-dll" / assembly_name / "reports" / "batch-native-aot-pipeline-results.json"
+            native_lookup: dict[str, dict[str, Any]] = {}
+            if native_pipeline_path.is_file():
+                try:
+                    _pipeline_data = json.loads(native_pipeline_path.read_text(encoding="utf-8"))
+                    for _result in list(_pipeline_data.get("results") or []):
+                        _slug = _string(_result.get("family"))
+                        _l2_status = _string(_result.get("steps", {}).get("l2_verify"))
+                        _l2_passed = int(_result.get("l2_passed", 0))
+                        _l2_total = int(_result.get("l2_total", 0))
+                        if _l2_status == "OK":
+                            _native_status = "passed"
+                            _reason = "全部 checksum 匹配通过"
+                        elif _l2_status == "failed":
+                            _native_status = "failed"
+                            if _l2_total > 0:
+                                _reason = "部分方法 checksum 不匹配"
+                            else:
+                                _reason = "native exe 运行失败"
+                        elif _l2_status == "compile_failed":
+                            _native_status = "skip"
+                            _reason = "C++ 编译失败"
+                        elif _l2_status == "link_failed":
+                            _native_status = "skip"
+                            _reason = "链接失败"
+                        elif _l2_status == "skip":
+                            _native_status = "skip"
+                            _reason = "L2 验证被跳过"
+                        else:
+                            _native_status = "pending"
+                            _reason = f"L2 状态未知 (raw={_l2_status})"
+                        native_lookup[_slug] = {
+                            "status": _native_status,
+                            "passed": _l2_passed,
+                            "total": _l2_total,
+                            "reason": _reason,
+                        }
+                except (json.JSONDecodeError, OSError):
+                    pass
             for family_record in families:
                 family_id = _string(family_record.get("familyId"))
                 case_indexes = case_index_loader_module.load_family_case_indexes(
@@ -859,8 +899,8 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                 ]
                 for proof_key, case_count, items, section_label in (
                     ("managedProof", test_case_count or int(family_record.get("methodCount") or 0), managed_case_items, "Tests"),
-                    ("hotupdateProof", hotupdate_case_count or 1, hotupdate_case_items, "HotUpdate"),
-                    ("benchmarkProof", benchmark_case_count or 1, benchmark_case_items, "Benchmarks"),
+                    ("hotupdateProof", hotupdate_case_count, hotupdate_case_items, "HotUpdate"),
+                    ("benchmarkProof", benchmark_case_count, benchmark_case_items, "Benchmarks"),
                 ):
                     proof = dict(family_record.get(proof_key) or {})
                     proof["denominator"] = case_count
@@ -882,25 +922,42 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                                 proof["comparisonMethodResults"] = list(cmp_data.get("methodResults") or [])
                             except (json.JSONDecodeError, OSError):
                                 pass
-                    # Inject hotupdate verification report into hotupdateProof
+                    # Inject hotupdate verification: load per-family D3 report
+                    # (schemaVersion 2: d3PatchApplied, d3PatchedCount, methodResults
+                    #  with d3Patched/patchReturnValue/interpreterDispatched).
                     if proof_key == "hotupdateProof":
                         report_path = repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id) / "hotupdate-verification-report.json"
+                        d3_passed = 0
+                        d3_total = 0
+                        d3_method_results: list[dict[str, Any]] = []
+                        d3_patch_applied = False
+                        d3_patched_count = 0
+                        schema_version = 0
                         if report_path.is_file():
                             try:
                                 report_data = json.loads(report_path.read_text(encoding="utf-8"))
-                                summary_data = dict(report_data.get("summary") or {})
-                                proof["passedMethodCount"] = summary_data.get("passedMethods", 0)
-                                proof["failedMethodCount"] = summary_data.get("failedMethods", 0)
-                                proof["unmatchedMethodCount"] = summary_data.get("unmatchedMethods", 0)
-                                proof["verificationMethodResults"] = list(report_data.get("methodResults") or [])
-                                # Update numerator/denominator based on actual results
-                                total = summary_data.get("totalMethods", 0)
-                                if total > 0:
-                                    proof["denominator"] = total
-                                    proof["numerator"] = summary_data.get("passedMethods", 0)
-                                    proof["progressPercent"] = (proof["numerator"] / total) * 100.0
+                                schema_version = int(report_data.get("schemaVersion") or 0)
+                                d3_passed = int(report_data.get("summary", {}).get("passedMethods") or 0)
+                                d3_total = int(report_data.get("summary", {}).get("totalMethods") or 0)
+                                d3_method_results = list(report_data.get("methodResults") or [])
+                                if schema_version >= 2:
+                                    d3_patch_applied = bool(report_data.get("d3PatchApplied", False))
+                                    d3_patched_count = int(report_data.get("d3PatchedCount") or 0)
                             except (json.JSONDecodeError, OSError):
                                 pass
+                        proof["d3PatchApplied"] = d3_patch_applied
+                        proof["d3PatchedCount"] = d3_patched_count
+                        proof["d3SchemaVersion"] = schema_version
+                        proof["d3MethodResults"] = d3_method_results
+                        if d3_total > 0:
+                            proof["denominator"] = d3_total
+                            proof["numerator"] = d3_passed
+                            proof["progressPercent"] = (d3_passed / d3_total) * 100.0
+                            proof["status"] = "passed" if d3_passed == d3_total else "failed"
+                        proof["passedMethodCount"] = d3_passed
+                        proof["failedMethodCount"] = d3_total - d3_passed
+                        proof["unmatchedMethodCount"] = 0
+                        proof["verificationMethodResults"] = []
                     family_record[proof_key] = proof
                 # Synthetic proof objects for audit-input and codegen-review using methodCount
                 mc = int(family_record.get("methodCount") or 0)
@@ -918,6 +975,18 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                         "evidence": [],
                         "caseItems": [],
                         "caseSectionLabel": "",
+                    }
+                # Inject native correctness (L2 verification) from batch pipeline results
+                _native_slug = _family_slug(family_id)
+                _native_result = native_lookup.get(_native_slug)
+                if _native_result is not None:
+                    family_record["nativeCorrect"] = dict(_native_result)
+                else:
+                    family_record["nativeCorrect"] = {
+                        "status": "pending",
+                        "passed": 0,
+                        "total": 0,
+                        "reason": "未接入批量验证管线",
                     }
                 family_record["reviewBundle"] = review_bundle
             dll_record["capabilityClosure"] = _compute_capability_closure(families)
@@ -1663,6 +1732,13 @@ li + li { margin-top: 6px; }
 .family-table th, .family-table td,
 .waiver-table th, .waiver-table td { white-space: nowrap; }
 .family-table tr.family-active td:first-child + td { font-weight: 700; }
+.cell-hint {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--dim);
+  line-height: 1.3;
+  white-space: nowrap;
+}
 .benchmark-link {
   display: inline-block;
   padding: 2px 10px;
@@ -2019,7 +2095,7 @@ FAMILY_GATE_LABELS: dict[str, str] = {
     "native-proof": "CodeGen\u7ffb\u8bd1\u7387",
     "native-correct": "Native\u6b63\u786e\u7387",
     "benchmark": "Benchmark\u52a0\u901f\u6bd4",
-    "hotupdate-proof": "HotUpdate\u901a\u8fc7\u7387",
+    "hotupdate-proof": "HotUpdate\u673a\u5236",
 }
 FAMILY_GATE_COLUMNS = tuple(FAMILY_GATE_LABELS.keys())
 
@@ -2060,16 +2136,12 @@ def _gate_header_tooltip(gate_code: str) -> str:
             "失败 = 翻译语义有误。"
         ),
         "hotupdate-proof": (
-            "HotUpdate: 表示该家族的热更新验证覆盖情况。"
-            "验证流程: ① Host C# → il2cpp AOT 编译为 C++ 原生代码; "
-            "② Patch C# → 编译为 patch.dll (热更包); "
-            "③ C++ 运行时通过 LoadHotUpdatePackage + method_replacement::Register 加载并注册热更替换; "
-            "④ C++ 验证入口调用原始方法 → 断言热更已生效且结果符合预期。"
-            "整个过程在 C++ 侧完成，不依赖 managed 运行时。"
-            "计算方式: 分母 = 该家族的热更新测试用例数 (hotupdateCases)，"
-            "分子 = 当状态为 passed 时等于分母，否则为 0。"
-            "进度 = 分子 / 分母 * 100%。"
-            "悬停查看详细热更新用例列表"
+            "D3 双层分派验证：ApplyPatchFromMemory → DispatchTable patching → "
+            "InterpreterEntryDirect → Unpatch。验证真实 family 方法的 Patch → Interpreter 分派全链路。"
+            "D3 exe 读取 .patchdata，对 dispatch 表执行 ApplyPatchFromMemory，然后通过 "
+            "InterpreterEntryDirect 执行 IL 解释器，验证 patch 生效且返回值正确。"
+            "分母 = 方法总数，分子 = D3 验证通过数。"
+            "点击跳转详情页查看 D3 分派验证结果。"
         ),
         "benchmark": (
             "Benchmark: 表示该家族的原生代码性能基准测试覆盖情况。"
@@ -2281,7 +2353,6 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
         dname = _string(family.get("displayName"))
         family_id = _string(family.get("familyId") or "")
         slug = _family_slug(family_id)
-        status = _string(family.get("closureStatus"))
         gates = dict(family.get("verificationGates") or {})
         native_proof = dict(family.get("nativeProof") or {})
         native_proof_cell = (
@@ -2299,16 +2370,14 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
         native_correct_cell = _render_native_correct_cell(native_correct_proof)
         gate_badges = "".join(
             f"<td class=\"primary-cell\"><a href=\"{escape(assembly_name)}/families/{escape(slug)}-fact.html\" class=\"primary-cell-link\">{native_proof_cell}</a></td>" if col == "native-proof"
-            else f"<td class=\"primary-cell\">{native_correct_cell}</td>" if col == "native-correct"
+            else f"<td class=\"primary-cell\"><a href=\"{escape(assembly_name)}/families/{escape(slug)}-fact.html\" class=\"primary-cell-link\">{native_correct_cell}</a></td>" if col == "native-correct"
             else f"<td class=\"primary-cell\"><a href=\"{escape(assembly_name)}/families/{escape(slug)}-benchmark.html\" class=\"primary-cell-link\">{_render_benchmark_speedup_cell(benchmark_proof, assembly_name=assembly_name, family_id=family_id, root_prefix=root_prefix, is_detail_page=True, link_to_family_page=True)}</a></td>" if col == "benchmark"
-            else f"<td class=\"primary-cell\"><a href=\"{escape(assembly_name)}/families/{escape(slug)}-hotupdate.html\" class=\"primary-cell-link\">{_render_generic_gate_progress_cell(family, gate_proof=hotupdate_proof, root_prefix=root_prefix, label='HotUpdate Proof')}</a></td>" if col == "hotupdate-proof"
+            else f"<td class=\"primary-cell\"><a href=\"{escape(assembly_name)}/families/{escape(slug)}-hotupdate.html\" class=\"primary-cell-link\">{_render_hotupdate_cell(family, hotupdate_proof=hotupdate_proof, root_prefix=root_prefix)}</a></td>" if col == "hotupdate-proof"
             else f"<td>{_status_badge(gates.get(col, ''))}</td>"
             for col in FAMILY_GATE_COLUMNS
         )
         bold_class = ' class="family-active"' if _family_has_active_gates(gates) else ""
-        np_method_count = int(native_proof.get("denominator") or 0)
-        np_passed = int(native_proof.get("numerator") or 0)
-        rows += f"<tr{bold_class}><td>{idx}</td><td>{escape(dname)}</td>{gate_badges}<td>{_status_badge(status)}</td><td>{np_passed}/{np_method_count}</td></tr>"
+        rows += f"<tr{bold_class}><td>{idx}</td><td>{escape(dname)}</td>{gate_badges}</tr>"
     gate_headers = "".join(
         f"<th title=\"{_gate_header_tooltip(col)}\" class=\"primary-header\">"
         + FAMILY_GATE_LABELS[col]
@@ -2321,7 +2390,7 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
   <p>Each capability family represents a logical group of methods. A family is considered closed when all its non-exempt verification gates pass.</p>
   <div class="table-wrap">
     <table class="family-table">
-      <thead><tr><th>#</th><th>Family</th>{gate_headers}<th title="Closure status: closed means all non-exempt verification gates pass">Cover</th><th>Fact</th></tr></thead>
+      <thead><tr><th>#</th><th>Family</th>{gate_headers}</tr></thead>
       <tbody>{rows}</tbody>
     </table>
   </div>
@@ -2329,21 +2398,26 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
 
 
 def _render_native_correct_cell(native_correct: dict[str, Any]) -> str:
-    """Render the Native Correct cell (L2 verification status)."""
+    """Render the Native Correct cell (L2 verification status), single-line text."""
     status = _string(native_correct.get("status", ""))
     passed = int(native_correct.get("passed", 0))
     total = int(native_correct.get("total", 0))
+    reason = _string(native_correct.get("reason", ""))
 
     if not status or status == "pending":
-        return _status_badge("pending", label="Pending")
+        text = "Pending"
+        detail = f" ({escape(reason)})" if reason else ""
+        return _status_badge("pending", label=text) + detail
     if status == "passed" and total > 0:
-        pct = round(passed / total * 100, 1)
-        return f'{_status_badge("passed", label="Pass")} {pct:.0f}%'
+        return f'{_status_badge("passed", label="Pass")} {passed}/{total}'
     if status == "failed":
-        detail = f"{passed}/{total}" if total > 0 else ""
-        return f'{_status_badge("failed", label="Fail")} {detail}'
+        text = f"Fail {passed}/{total}" if total > 0 else "Fail"
+        detail = f" ({escape(reason)})" if reason else ""
+        return _status_badge("failed", label=text) + detail
     if status == "skip":
-        return _status_badge("not-required", label="Skip")
+        text = "Skip"
+        detail = f" ({escape(reason)})" if reason else ""
+        return _status_badge("not-required", label=text) + detail
     return _status_badge(status)
 
 
@@ -2796,44 +2870,109 @@ def _render_benchmark_detail_page(family: dict[str, Any], *, assembly_name: str,
 </html>"""
 
 
+def _render_hotupdate_cell(
+    family: dict[str, Any],
+    *,
+    hotupdate_proof: dict[str, Any],
+    root_prefix: str,
+) -> str:
+    """Render the hotupdate column cell showing D3 verification status.
+
+    D3 per-family test applies ApplyPatchFromMemory on the dispatch table for
+    each real family method, then verifies InterpreterEntryDirect returns the
+    correct value.  Shows passed/total with D3 status.
+    """
+    schema_version = int(hotupdate_proof.get("d3SchemaVersion") or 0)
+    passed = int(hotupdate_proof.get("passedMethodCount") or 0)
+    total = int(hotupdate_proof.get("denominator") or int(hotupdate_proof.get("numerator") or 0))
+
+    if schema_version >= 2 and total > 0:
+        failed = int(hotupdate_proof.get("failedMethodCount") or 0)
+        patched = bool(hotupdate_proof.get("d3PatchApplied", False))
+        all_ok = failed == 0
+        badge = _status_badge("passed" if all_ok else "failed")
+        summary = f"D3 {passed}/{total}"
+        if not all_ok:
+            summary += f" ({failed} Failed)"
+        if patched:
+            summary += " ✓Patch"
+        title = (
+            f"D3 双层分派验证: {passed}/{total} 方法通过, Patch={patched}"
+            if all_ok else
+            f"D3 双层分派验证: {failed} 个方法失败"
+        )
+        return f'<span title="{escape(title)}">{badge} {escape(summary)}</span>'
+
+    # Fallback (schemaVersion 1 or no data): show gate status.
+    gate_status = _string(hotupdate_proof.get("status"))
+    return _status_badge(gate_status)
+
+
 def _render_hotupdate_detail_page(family: dict[str, Any], *, assembly_name: str, repo_root: Path, root_prefix: str) -> str:
-    """Render a standalone per-family HotUpdate detail page with inline code snippets."""
+    """Render a standalone per-family hotupdate detail page with D3 results.
+
+    Shows D3 dispatch-table patching verification results per method:
+    methodToken, status, d3Patched, patchReturnValue, interpreterDispatched.
+    """
     dname = _string(family.get("displayName") or "")
     family_id = _string(family.get("familyId") or "")
     slug = _family_slug(family_id)
     status = _string(family.get("closureStatus"))
     method_count = int(family.get("methodCount") or 0)
     hotupdate_proof = dict(family.get("hotupdateProof") or {})
-    hu_method_results = list(hotupdate_proof.get("verificationMethodResults") or [])
-    hu_passed = int(hotupdate_proof.get("passedMethodCount") or 0)
-    hu_failed = int(hotupdate_proof.get("failedMethodCount") or 0)
-    source_paths = _build_source_paths(assembly_name, slug)
 
-    if hu_method_results:
-        hu_rows = ""
-        for item in hu_method_results:
-            sid = _string(item.get("methodSubjectId", ""))
-            short_sid = _short_method_subject_id(sid)
-            status_b = _status_badge(item.get("status"))
-            detail = _string(item.get("detail") or "")
-            # Show failure reason for failed items
-            failure_info = ""
-            if item.get("status") in ("failed", "blocked") and detail:
-                failure_info = f'<div class="failure-reason">{escape(detail)}</div>'
-            elif detail:
-                failure_info = f'<span class="status-muted">{escape(detail)}</span>'
-            else:
-                failure_info = '<span class="status-muted">-</span>'
-            # Extract code
-            host_code = _extract_method_code_snippet(repo_root, source_paths["managed_host"], sid)
-            patch_code = _extract_method_code_snippet(repo_root, source_paths["managed_patch"], sid)
-            native_hu_code = _extract_method_code_snippet(repo_root, source_paths["native_hotupdate"], sid)
-            host_block = _render_code_block(host_code, source_paths["managed_host"].split("/")[-1], "C#")
-            patch_block = _render_code_block(patch_code, source_paths["managed_patch"].split("/")[-1], "C#")
-            native_block = _render_code_block(native_hu_code, source_paths["native_hotupdate"].split("/")[-1], "C++")
-            hu_rows += f"<tr><td>{escape(short_sid)}</td><td>{status_b}</td><td>{failure_info}</td><td>{host_block}</td><td>{patch_block}</td><td>{native_block}</td></tr>"
+    schema_version = int(hotupdate_proof.get("d3SchemaVersion") or 0)
+    d3_patch_applied = bool(hotupdate_proof.get("d3PatchApplied", False))
+    d3_patched_count = int(hotupdate_proof.get("d3PatchedCount") or 0)
+    d3_method_results = list(hotupdate_proof.get("d3MethodResults") or [])
+    d3_passed = int(hotupdate_proof.get("passedMethodCount") or 0)
+    d3_total = int(hotupdate_proof.get("denominator") or 0)
+    d3_failed = d3_total - d3_passed
+
+    if schema_version >= 2 and d3_method_results:
+        # D3 detail rows
+        detail_rows = ""
+        for item in d3_method_results:
+            token = item.get("methodToken", 0)
+            mstatus = str(item.get("status", "unmatched"))
+            d3_patched = bool(item.get("d3Patched", False))
+            patch_ret = str(item.get("patchReturnValue", ""))
+            interp = bool(item.get("interpreterDispatched", False))
+            revert_ok = bool(item.get("revertVerified", False))
+            patched_badge = "✔" if d3_patched else "✘"
+            interp_badge = "✔" if interp else "✘"
+            revert_badge = "✔" if revert_ok else "✘"
+            detail_rows += (
+                f"<tr>"
+                f"<td><code>0x{token:08x}</code></td>"
+                f"<td>{_status_badge(mstatus)}</td>"
+                f"<td>{patched_badge}</td>"
+                f"<td><code>{escape(patch_ret)}</code></td>"
+                f"<td>{interp_badge}</td>"
+                f"<td>{revert_badge}</td>"
+                f"</tr>"
+            )
+        if not detail_rows:
+            detail_rows = "<tr><td colspan=\"6\">No D3 method results available</td></tr>"
+
+        table_title = "D3 Patch分派验证"
+        table_headers = "<th>Token</th><th>Status</th><th>D3 Patched</th><th>返回值</th><th>Interpreter 分派</th><th>Revert</th>"
+        info_blurb = (
+            f"D3 exe 对 {d3_total} 个方法执行 ApplyPatchFromMemory → DispatchTable patching → "
+            f"InterpreterEntryDirect → Unpatch 全链路验证。Patch 状态: {'已执行' if d3_patch_applied else '未执行'} "
+            f"(patched {d3_patched_count} 个 dispatch slot)。"
+        )
+        limitations = (
+            "<p><strong>已知局限：</strong> revertVerified 和 semanticVerified 字段尚未实现实际验证逻辑，"
+            "当前始终为 false/✘。仅在验证 D3 Patch → Interpreter 分派全链路通畅。</p>"
+        )
     else:
-        hu_rows = "<tr><td colspan=\"6\">No hotupdate verification data available</td></tr>"
+        # Fallback for schemaVersion 1 or no data
+        detail_rows = "<tr><td colspan=\"4\">No D3 data available (schema v1 or missing)</td></tr>"
+        table_title = "HotUpdate 验证（旧格式）"
+        table_headers = "<th>Token</th><th>Status</th><th>Patch</th><th>说明</th>"
+        info_blurb = "当前数据为 schemaVersion 1 或缺失，无法渲染 D3 验证详情。"
+        limitations = ""
 
     evidence = list(hotupdate_proof.get("evidence") or [])
     evidence_links = "".join(
@@ -2854,23 +2993,26 @@ def _render_hotupdate_detail_page(family: dict[str, Any], *, assembly_name: str,
   <main>
     <div class="page-header">
       <a class="back-link" href="{escape(back_link, quote=True)}">Back to {escape(assembly_name)}</a>
-      <div class="eyebrow">HotUpdate Detail — Patch Verification</div>
+      <div class="eyebrow">HotUpdate Detail — D3 Dispatch-Table Patching Verification</div>
       <h1>{escape(dname)}</h1>
       <div class="summary-grid">
         <div class="summary-card"><strong>Closure Status</strong>{_status_badge(status)}</div>
         <div class="summary-card"><strong>Methods</strong>{method_count}</div>
-        <div class="summary-card"><strong>Passed</strong>{hu_passed}</div>
-        <div class="summary-card"><strong>Failed</strong>{hu_failed}</div>
+        <div class="summary-card"><strong>D3 Result</strong>{_status_badge('passed' if d3_failed == 0 else 'failed')} {d3_passed}/{d3_total}</div>
+        <div class="summary-card"><strong>D3 Patch</strong>{'✔' if d3_patch_applied else '✘'} ({d3_patched_count} slots)</div>
       </div>
     </div>
 
     <section class="detail-section">
-      <h2>HotUpdate Verification Results</h2>
-      <p>Per-method patch verification: managed host code, managed patch code, and native test code. Expand code blocks to inspect the implementations.</p>
+      <h2>{escape(table_title)}</h2>
+      <div class="info-box" style="background:#f8f9fa;border-left:4px solid #6c757d;padding:12px;margin-bottom:16px;border-radius:4px;">
+        <strong>说明：</strong> {escape(info_blurb)}
+      </div>
+      {limitations}
       <div class="table-wrap">
         <table class="family-detail-table">
-          <thead><tr><th>Method</th><th>Status</th><th>Detail / Failure Reason</th><th>Managed Host Code</th><th>Managed Patch Code</th><th>Native Test Code</th></tr></thead>
-          <tbody>{hu_rows}</tbody>
+          <thead><tr>{table_headers}</tr></thead>
+          <tbody>{detail_rows}</tbody>
         </table>
       </div>
     </section>
@@ -2917,7 +3059,7 @@ def _render_gate_detail_section(
     ) or ""
 
     case_items_html = ""
-    if case_items:
+    if case_items and not gate_proof.get("isMechanismOnly"):
         case_list = "".join(
             f"<li>{escape(_string(item.get('memberName')))} ({escape(_string(item.get('detail') or 'n/a'))})</li>"
             for item in case_items[:20]
@@ -2930,11 +3072,26 @@ def _render_gate_detail_section(
     provenance_source_map = {
         "native-proof": ("evaluate_native_proof()", "verification_kernel.py:106", "native-reference.runtime-skeleton.coverage.json", "truth-contract:method-capability-contracts"),
         "managed-proof": ("evaluate_generic_gate()", "verification_kernel.py:204", "managed-proof artifacts", "gate-presence:managed-proof"),
-        "hotupdate-proof": ("evaluate_generic_gate()", "verification_kernel.py:204", "hotupdate-verification-report.json", "gate-presence:hotupdate-proof"),
+        "hotupdate-proof": ("evaluate_generic_gate()", "verification_kernel.py:204", "hotupdate-verification-output.json (global C++ test)", "gate-presence:hotupdate-proof"),
         "benchmark": ("evaluate_generic_gate()", "verification_kernel.py:204", "benchmark-comparison-report.json", "gate-presence:benchmark"),
         "test-code": ("evaluate_test_code()", "verification_kernel.py:250", "testCode ledger entry", "ledger:testCode"),
     }
     src_func, src_file, src_evidence, src_claims = provenance_source_map.get(gate_code, ("N/A", "N/A", "N/A", "N/A"))
+
+    # Special notice for hotupdate mechanism-only verification
+    mechanism_notice = ""
+    if gate_code == "hotupdate-proof" and gate_proof.get("isMechanismOnly"):
+        mechanism_total = int(gate_proof.get("mechanismTotal") or 0)
+        mechanism_passed = int(gate_proof.get("mechanismPassed") or 0)
+        legacy_failed_count = len(list(gate_proof.get("legacyFailedMethods") or []))
+        mechanism_notice = f"""
+<div class="info-box" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px;margin-bottom:12px;border-radius:4px;">
+  <strong>机制验证模式</strong> — 当前 HotUpdate 列显示的是 C++ 层的 Patch 机制验证结果
+  ({mechanism_passed}/{mechanism_total} 合成 thunk 通过)。
+  这<strong>不代表</strong>该 family 的真实方法可被热更新。
+  {f'遗留失败: {legacy_failed_count} 个方法' if legacy_failed_count else ''}
+  <a href="families/{escape(_family_slug(family_id), quote=True)}-hotupdate.html" target="_blank">查看详情 →</a>
+</div>"""
 
     return f"""
 <section class="gate-section" id="gate-{escape(gate_code, quote=True)}">
@@ -2942,6 +3099,7 @@ def _render_gate_detail_section(
     <h3>{escape(gate_label)}</h3>
     {_status_badge(status)}
   </div>
+  {mechanism_notice}
   <div class="progress-bar-container" style="margin-bottom:12px">
     <div class="progress-label"><span>Progress</span><span>{denom_display}</span></div>
     <div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width:{min(progress_pct, 100.0):.1f}%"></div></div>

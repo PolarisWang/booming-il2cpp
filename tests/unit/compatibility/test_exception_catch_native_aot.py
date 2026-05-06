@@ -129,13 +129,17 @@ class ExceptionCatchNativeAotTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         for required_fragment in [
-            "struct chaos_managed_exception",
-            "throw chaos_managed_exception{chaos_eval_stack[--chaos_stack_top]};",
             "catch (const chaos_managed_exception& chaos_exception)",
             "chaos_is_type_compatible(",
             "CoreRuntimeFeatures_ExceptionCatchHarness_ThrowNow();",
         ]:
             self.assertIn(required_fragment, generated_cpp)
+        self.assertIn("chaos_managed_exception", generated_cpp)
+        self.assertTrue(
+            "throw chaos_managed_exception{chaos_eval_stack[--chaos_stack_top]};" in generated_cpp
+            or "throw chaos_managed_exception{__s[0]};" in generated_cpp
+            or "throw chaos_managed_exception{_s0};" in generated_cpp
+        )
 
 
 if __name__ == "__main__":

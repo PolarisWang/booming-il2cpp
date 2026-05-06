@@ -25,6 +25,7 @@
 #include "monitor.h"
 #include "thread.h"
 #include "async.h"
+#include "log.h"
 
 // Umbrella header — all symbols are in ChaosIl2cpp::Common via individual headers.
 namespace ChaosIl2cpp::Common {

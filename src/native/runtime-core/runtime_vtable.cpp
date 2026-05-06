@@ -17,7 +17,7 @@ struct VTableEntry {
 };
 
 struct Registry {
-    std::mutex mtx;
+    CHAOS_IL2CPP_SHARED_MUTEX mtx;
     std::unordered_map<CHAOS_IL2CPP_UINT64, VTableEntry> entries;
 };
 
@@ -34,27 +34,27 @@ void RegisterVTable(CHAOS_IL2CPP_UINT64 stable_id,
     if (vtable == nullptr || length == 0u) return;
 
     auto& reg = GetRegistry();
-    std::lock_guard<std::mutex> lock(reg.mtx);
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(reg.mtx);
     reg.entries[stable_id] = {vtable, length};
 }
 
 const void** FindVTable(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
     auto& reg = GetRegistry();
-    std::lock_guard<std::mutex> lock(reg.mtx);
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(reg.mtx);
     auto it = reg.entries.find(stable_id);
     return (it != reg.entries.end()) ? it->second.vtable : nullptr;
 }
 
 CHAOS_IL2CPP_UINT32 FindVTableLength(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
     auto& reg = GetRegistry();
-    std::lock_guard<std::mutex> lock(reg.mtx);
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(reg.mtx);
     auto it = reg.entries.find(stable_id);
     return (it != reg.entries.end()) ? it->second.length : 0u;
 }
 
 const void** BuildRuntimeVTable(CHAOS_IL2CPP_UINT64 type_stable_id,
                                  CHAOS_IL2CPP_UINT64 base_stable_id) noexcept {
-    CHAOS_IL2CPP_TRACE("runtime", "BuildRuntimeVTable",
+    CHAOS_IL2CPP_LOG_TRACE("runtime", "BuildRuntimeVTable",
         "\"type_sid\"=%llu,\"base_sid\"=%llu",
         (unsigned long long)type_stable_id,
         (unsigned long long)base_stable_id);

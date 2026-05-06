@@ -7,7 +7,7 @@ description: 当在当前会话中执行具有独立任务的实现计划时使�
 
 通过为每个任务派发新鲜子 Agent 来执行计划，每个任务完成后进行两阶段审查：先做规格合规性审查，再做代码质量审查。
 
-**与 `dev:executing-plans` 的关系：** 本技能是 `dev:executing-plans` 的子 Agent 派发变体。所有通用原则（文档压缩、目录一致性、父子任务原则、文档语言要求、`ACTIVE.md` 守卫、执行前输入守卫、preflight self-review、结构告警与架构审视、obligation-driven completion gate、收尾闭环、证据卡模板）均直接沿用 `dev:executing-plans` 中的定义，本技能不再重复。以下仅记录子 Agent 特有的差异。
+**与 `dev-executing-plans` 的关系：** 本技能是 `dev-executing-plans` 的子 Agent 派发变体。所有通用原则（文档压缩、目录一致性、父子任务原则、文档语言要求、`ACTIVE.md` 守卫、执行前输入守卫、preflight self-review、结构告警与架构审视、obligation-driven completion gate、收尾闭环、证据卡模板）均直接沿用 `dev-executing-plans` 中的定义，本技能不再重复。以下仅记录子 Agent 特有的差异。
 
 ## 核心差异
 
@@ -20,7 +20,7 @@ description: 当在当前会话中执行具有独立任务的实现计划时使�
 
 ### 第零步：检查活动任务
 
-与 `dev:executing-plans` 第零步一致。
+与 `dev-executing-plans` 第零步一致。
 
 ### 第一步：加载计划
 
@@ -37,13 +37,13 @@ description: 当在当前会话中执行具有独立任务的实现计划时使�
 3. 实现者完成后，先进行规格合规性审查
 4. 规格合规性通过后，再进行代码质量审查
 5. 如任一审查发现问题：由同一个实现者修复，重新审查，直到通过
-6. 任务实现收敛后，控制器完成一轮结构告警（同 `dev:executing-plans` 中的定义）
+6. 任务实现收敛后，控制器完成一轮结构告警（同 `dev-executing-plans` 中的定义）
 7. 更新 `STATUS.md`，必要时更新 `docs/dev/ACTIVE.md`、`notes/progress-*.md`、索引、wiki
 8. 如果当前任务带有 `parent_task_id`：同步父任务的 child mapping、摘要、`latest_stop_point`、下一步
 
 ### 第三步：完成
 
-所有任务完成后，按 `dev:executing-plans` 中的收尾闭环执行：`结构告警与架构审视 -> 测试通过 -> 归档 completed -> 合并&提交`。
+所有任务完成后，按 `dev-executing-plans` 中的收尾闭环执行：`结构告警与架构审视 -> 测试通过 -> 归档 completed -> 合并&提交`。
 
 ## 审查规则
 
@@ -69,8 +69,8 @@ description: 当在当前会话中执行具有独立任务的实现计划时使�
 
 ## 集成
 
-- `dev:project-wiki-maintenance`
-- `dev:verification-before-completion`
-- `dev:systematic-debugging`
-- `dev:finishing-a-development-branch`
-- 子 Agent 应使用 `dev:test-driven-development`
+- `dev-project-wiki-maintenance`
+- `dev-verification-before-completion`
+- `dev-systematic-debugging`
+- `dev-finishing-a-development-branch`
+- 子 Agent 应使用 `dev-test-driven-development`

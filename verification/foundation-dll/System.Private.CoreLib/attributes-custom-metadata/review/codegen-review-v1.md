@@ -1,22 +1,18 @@
 # AI Code Review: attributes-custom-metadata
 ## Type: codegen
-## Date: 2026-05-03T08:11:13.316049+00:00
+## Date: 2026-05-05T16:34:13.475731+00:00
 ## Verdict: PASS
 
 ## Summary
-- Total issues: 1
-- C++ LOC: 1341
-- C# methods: 0
-- C++ functions: 5
-- Stub functions: 0
-- Uncertain functions: 1
-- Bridge calls: 0
+- Total issues: 0
+- C++ LOC: 1503
+- C# methods: 20
+- C++ functions: 22
 
 ## Issues Found
-1. chaos_reflection_get_type_from_handle: no bridge calls, only 1 effective statements
+None — all checks passed.
 
 ## Check Results
-- stub_detection: PASS
 - signature_alignment: PASS
 - return_type_handling: PASS
 - null_handling: PASS

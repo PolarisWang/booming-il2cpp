@@ -51,10 +51,8 @@ uint32_t RegisterModule(const char* name, const ModuleDescriptor* descriptor) {
         ChaosAbiManifestResult manifest_result = ChaosAbiManifestValidate(descriptor->abi_manifest);
         if (manifest_result != CHAOS_ABI_MANIFEST_OK)
         {
-            CHAOS_IL2CPP_PRINTF(
-                "[runtime-core] WARN: module '%s' ABI manifest validation failed (code %d)\n",
+            CHAOS_IL2CPP_LOG_WARN_M("ABI", "module '{0}' ABI manifest validation failed (code {1})",
                 name, static_cast<int>(manifest_result));
-            CHAOS_IL2CPP_FFLUSH(stdout);
         }
     }
 
@@ -96,7 +94,7 @@ const ModuleDescriptor* LookupModuleByName(const char* name) {
 }
 
 void MarkModuleTombstone(uint32_t module_id) {
-    CHAOS_IL2CPP_TRACE("runtime", "MarkModuleTombstone", "\"module_id\"=%u", module_id);
+    CHAOS_IL2CPP_LOG_TRACE("runtime", "MarkModuleTombstone", "\"module_id\"=%u", module_id);
     if (module_id >= kMaxModules) {
         return;
     }

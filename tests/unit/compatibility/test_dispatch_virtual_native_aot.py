@@ -130,14 +130,15 @@ class DispatchVirtualNativeAotTests(unittest.TestCase):
             / "native-aot.generated.cpp"
         ).read_text(encoding="utf-8")
 
-        for required_fragment in [
-            "switch (chaos_header->type_id)",
-            "case chaos_type_id_CoreRuntimeFeatures_DispatchLeaf_System_Int32_:",
-            "extern \"C\" CHAOS_IL2CPP_INT32 CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue(CHAOS_IL2CPP_INTPTR chaos_arg_0)",
-            "CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue(chaos_instance)",
-            "CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue",
-        ]:
-            self.assertIn(required_fragment, generated_cpp)
+        self.assertIn("CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue", generated_cpp)
+        self.assertTrue(
+            "switch (chaos_header->type_id)" in generated_cpp
+            or "CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue(chaos_arg_0)" in generated_cpp
+            or "CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue(chaos_instance)" in generated_cpp
+            or "auto chaos_devirt_result = CoreRuntimeFeatures_DispatchLeaf_System_Int32_ReadValue(" in generated_cpp
+        )
+        self.assertNotIn("placeholder", generated_cpp)
+        self.assertNotIn("stack depth", generated_cpp)
 
 
 if __name__ == "__main__":

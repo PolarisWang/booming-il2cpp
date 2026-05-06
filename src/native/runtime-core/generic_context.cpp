@@ -62,7 +62,7 @@ struct LazyMethodContextEntry {
 /// All per-module data. Created during RegisterModuleGenerics, destroyed
 /// during UnregisterModuleGenerics (O(1) shard drop).
 struct ModuleShard {
-    CHAOS_IL2CPP_MUTEX     shard_mutex;
+    CHAOS_IL2CPP_SHARED_MUTEX     shard_mutex;
     CHAOS_IL2CPP_UINT32    module_id;
     ImageHandle            source_image;    // for token→handle resolution
 
@@ -142,7 +142,7 @@ static ModuleShard* RoutingTableRemove(CHAOS_IL2CPP_UINT32 module_id) {
 // ── Slimmed global registry (shared indices only) ──
 
 struct Registry {
-    CHAOS_IL2CPP_MUTEX global_mutex;
+    CHAOS_IL2CPP_SHARED_MUTEX global_mutex;
 
     // Type instantiation index (open → closed vector) with shard owner for lazy resolve.
     using InstantiationVector = CHAOS_IL2CPP_VECTOR(GenericInstantiationEntry);
@@ -247,14 +247,13 @@ void RegisterGenericInstantiation(
     const TypeInfoHandle* type_args,
     CHAOS_IL2CPP_UINT32 arg_count)
 {
-    CHAOS_IL2CPP_TRACE("runtime", "RegisterGenericInstantiation",
+    CHAOS_IL2CPP_LOG_TRACE("runtime", "RegisterGenericInstantiation",
         "\"arg_count\"=%u", arg_count);
     if (open_type == 0 || closed_type == 0)
         return;
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
-
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
     auto& type_entry = registry.by_open_type[open_type];
     for (const auto& entry : type_entry.closed_types) {
         if (entry.closed_type == closed_type)
@@ -280,8 +279,7 @@ GenericContextHandle GetGenericContextForMethod(CHAOS_IL2CPP_UINT32 method_token
         return nullptr;
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
-
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
     auto it = registry.by_method_token.find(method_token);
     if (it == registry.by_method_token.end()) {
         // Not registered → check if we have a lazy entry pending.
@@ -316,8 +314,7 @@ void RegisterMethodGenericContext(
         return;
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
-
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
     if (registry.by_method_token.count(method_token))
         return;  // already registered
 
@@ -369,14 +366,13 @@ TypeInfoHandle TryResolveClosedType(
     const TypeInfoHandle* type_args,
     CHAOS_IL2CPP_UINT32 arg_count)
 {
-    CHAOS_IL2CPP_TRACE("runtime", "TryResolveClosedType",
+    CHAOS_IL2CPP_LOG_TRACE("runtime", "TryResolveClosedType",
         "\"arg_count\"=%u", arg_count);
     if (open_type == 0)
         return 0;
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
-
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
     auto it = registry.by_open_type.find(open_type);
     if (it == registry.by_open_type.end())
         return 0;
@@ -392,7 +388,7 @@ TypeInfoHandle TryResolveClosedType(
                 // Double-checked locking: already checked resolve_state without lock,
                 // now do it under the shard mutex.
                 {
-                    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) slock(type_entry.owner_shard->shard_mutex);
+                    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) slock(type_entry.owner_shard->shard_mutex);
                     if (!type_entry.owner_shard->resolve_state[i]) {
                         DoLazyResolveOpenType(registry, type_entry.owner_shard, open_type, i);
                     }
@@ -431,8 +427,7 @@ void RegisterModuleGenerics(const struct ModuleGenericRegistrationV0* reg) {
         return;
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
-
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
     const auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
     if (bridge == nullptr || bridge->resolve_type_by_token == nullptr)
         return;
@@ -543,8 +538,7 @@ void UnregisterModuleGenerics(CHAOS_IL2CPP_UINT32 module_id) {
         return;
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
-
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
     ModuleShard* shard = RoutingTableRemove(module_id);
     if (shard == nullptr)
         return;
@@ -600,8 +594,7 @@ void RegisterGenericMethodInstantiation(
         return;
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
-
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
     auto& entries = registry.by_open_method[open_method];
     for (const auto& entry : entries) {
         if (entry.closed_method == closed_method)
@@ -626,8 +619,7 @@ MethodInfoHandle TryResolveClosedMethod(
         return 0u;
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
-
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
     auto it = registry.by_open_method.find(open_method);
     if (it == registry.by_open_method.end())
         return 0u;
@@ -655,7 +647,7 @@ MethodInfoHandle TryResolveClosedMethod(
 
 CHAOS_IL2CPP_UINT32 GetRegisteredInstantiationCount() {
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
     CHAOS_IL2CPP_UINT32 count = 0u;
     for (const auto& [_, v] : registry.by_open_type) {
         count += static_cast<CHAOS_IL2CPP_UINT32>(v.closed_types.size());
@@ -676,8 +668,7 @@ CHAOS_IL2CPP_UINT32 GetClosedTypeGenericArgs(
         return 0;
 
     auto& registry = GetRegistry();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(registry.global_mutex);
-
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(registry.global_mutex);
     // Linear scan across all open-type buckets for a closed_type match.
     for (const auto& [open_type, type_entry] : registry.by_open_type) {
         (void)open_type;

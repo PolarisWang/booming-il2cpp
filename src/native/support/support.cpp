@@ -2,7 +2,6 @@
 
 #include <chaos/native_types.h>
 
-#include <cstdio>
 #include <string>
 
 namespace chaos::il2cpp::support {
@@ -126,15 +125,12 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL WriteLineString(
         return 1;
     }
 
-    if (utf8_text != nullptr && CHAOS_IL2CPP_FWRITE(utf8_text, 1u, static_cast<CHAOS_IL2CPP_SIZE>(byte_count), stdout) != byte_count) {
-        return 1;
+    if (utf8_text != nullptr) {
+        CHAOS_IL2CPP_LOG_WRITE_RAW_M("{0}\n",
+            std::string_view(utf8_text, static_cast<CHAOS_IL2CPP_SIZE>(byte_count)));
     }
-
-    if (CHAOS_IL2CPP_FPUTC('\n', stdout) == EOF) {
-        return 1;
-    }
-
-    return CHAOS_IL2CPP_FFLUSH(stdout) == 0 ? 0 : 1;
+    CHAOS_IL2CPP_LOG_FLUSH_STDOUT();
+    return 0;
 }
 
 void CHAOS_RUNTIME_ABI_CALL TimeSpanFromMilliseconds(

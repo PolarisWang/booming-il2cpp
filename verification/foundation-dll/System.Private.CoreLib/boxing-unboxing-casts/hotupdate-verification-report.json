@@ -1,7 +1,10 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
-  "familyId": "family/System.Private.CoreLib/boxing/unboxing-casts",
+  "familyId": "family/System.Private.CoreLib/boxing/unboxing/casts",
+  "verificationKind": "hotupdate-proof",
+  "d3PatchApplied": true,
+  "d3PatchedCount": 12,
   "summary": {
     "totalMethods": 11,
     "passedMethods": 11,
@@ -10,103 +13,103 @@
   },
   "methodResults": [
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)",
-      "status": "passed",
       "methodToken": 100663297,
-      "originalReturnValue": "0xa0000000",
-      "patchedReturnValue": "0xb0000000",
-      "expectedPatchedValue": "0xb0000000",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)",
-      "status": "passed",
       "methodToken": 100663298,
-      "originalReturnValue": "0xa0000001",
-      "patchedReturnValue": "0xb0000001",
-      "expectedPatchedValue": "0xb0000001",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)",
-      "status": "passed",
       "methodToken": 100663299,
-      "originalReturnValue": "0xa0000002",
-      "patchedReturnValue": "0xb0000002",
-      "expectedPatchedValue": "0xb0000002",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)",
-      "status": "passed",
       "methodToken": 100663300,
-      "originalReturnValue": "0xa0000003",
-      "patchedReturnValue": "0xb0000003",
-      "expectedPatchedValue": "0xb0000003",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)",
-      "status": "passed",
       "methodToken": 100663301,
-      "originalReturnValue": "0xa0000004",
-      "patchedReturnValue": "0xb0000004",
-      "expectedPatchedValue": "0xb0000004",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)",
-      "status": "passed",
       "methodToken": 100663302,
-      "originalReturnValue": "0xa0000005",
-      "patchedReturnValue": "0xb0000005",
-      "expectedPatchedValue": "0xb0000005",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()",
-      "status": "passed",
       "methodToken": 100663303,
-      "originalReturnValue": "0xa0000006",
-      "patchedReturnValue": "0xb0000006",
-      "expectedPatchedValue": "0xb0000006",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)",
-      "status": "passed",
       "methodToken": 100663304,
-      "originalReturnValue": "0xa0000007",
-      "patchedReturnValue": "0xb0000007",
-      "expectedPatchedValue": "0xb0000007",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
-      "status": "passed",
       "methodToken": 100663305,
-      "originalReturnValue": "0xa0000008",
-      "patchedReturnValue": "0xb0000008",
-      "expectedPatchedValue": "0xb0000008",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)",
-      "status": "passed",
       "methodToken": 100663306,
-      "originalReturnValue": "0xa0000009",
-      "patchedReturnValue": "0xb0000009",
-      "expectedPatchedValue": "0xb0000009",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     },
     {
-      "methodSubjectId": "System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)",
-      "status": "passed",
       "methodToken": 100663307,
-      "originalReturnValue": "0xa000000a",
-      "patchedReturnValue": "0xb000000a",
-      "expectedPatchedValue": "0xb000000a",
-      "revertVerified": true
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
     }
   ]
 }

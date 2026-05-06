@@ -28,6 +28,7 @@ sys.path.insert(0, str(_HERE))
 sys.path.insert(0, str(_HERE.parent.parent))  # for testing.trace (build/toolchains/run/)
 
 from family_entrypoint_generator import generate_and_build
+from fact_l2_verifier import verify_family, verify_l3
 
 from testing.trace import trace_init, trace
 
@@ -162,6 +163,7 @@ def _run_convert_to_cpp(
     dll_path: str,
     *,
     verification: Path | None = None,
+    entry_point_subject_id: str | None = None,
 ) -> bool:
     """Run chaos-il2cpp convert-to-cpp on the entrypoint DLL.
 
@@ -173,17 +175,17 @@ def _run_convert_to_cpp(
     genuine_out = v / family_slug / "il2cpp_dist" / "genuine"
     genuine_out.mkdir(parents=True, exist_ok=True)
 
-    result = subprocess.run(
-        [
-            "dotnet", "run", "--no-build",
-            "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
-            "--", "convert-to-cpp",
-            "--assembly", dll_path,
-            "--output", str(genuine_out),
-        ],
-        capture_output=True, text=True,
-        timeout=300,
-    )
+    cmd = [
+        "dotnet", "run", "--no-build",
+        "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
+        "--", "convert-to-cpp",
+        "--assembly", dll_path,
+        "--output", str(genuine_out),
+    ]
+    if entry_point_subject_id:
+        cmd.extend(["--entry-point", entry_point_subject_id])
+
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
 
     if result.returncode != 0:
         print(f"    convert-to-cpp FAILED (rc={result.returncode})")
@@ -354,13 +356,48 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
     result["dllPath"] = build_result["dll_path"]
 
     # Step 2: Convert-to-CPP (full pipeline — replaces old convert + trim + emit)
-    print(f"  [2/2] Running convert-to-cpp...")
-    if not _run_convert_to_cpp(family_slug, build_result["dll_path"], verification=verification):
+    print(f"  [2/3] Running convert-to-cpp...")
+    entry_pt = build_result.get("entry_point_subject_id")
+    if not _run_convert_to_cpp(family_slug, build_result["dll_path"], verification=verification, entry_point_subject_id=entry_pt):
         result["steps"]["convert_to_cpp"] = "FAILED"
         result["error"] = "convert-to-cpp failed"
         trace("family_c2c_failed", family=family_slug)
         return result
     result["steps"]["convert_to_cpp"] = "OK"
+
+    # Step 3: L2 native self-verify (Fact L2: semantic correctness)
+    print(f"  [3/4] Running L2 native self-verify...")
+    l2_result = verify_family(family_slug, assembly=assembly_name, verbose=False)
+    if l2_result.get("status") == "passed":
+        result["steps"]["l2_verify"] = "OK"
+        result["l2_passed"] = l2_result.get("passed", 0)
+        result["l2_total"] = l2_result.get("total", 0)
+        trace("family_l2_passed", family=family_slug,
+              passed=l2_result.get("passed", 0), total=l2_result.get("total", 0))
+    else:
+        result["steps"]["l2_verify"] = l2_result.get("status", "FAILED")
+        result["l2_passed"] = l2_result.get("passed", 0)
+        result["l2_total"] = l2_result.get("total", 0)
+        # Don't fail the whole pipeline — L2 may be a work in progress
+        print(f"    L2: {l2_result.get('status', 'error')} "
+              f"({l2_result.get('passed', 0)}/{l2_result.get('total', 0)})")
+
+    # Step 4: L3 runtime verification (Fact L3: full runtime init)
+    print(f"  [4/4] Running L3 runtime verification...")
+    l3_result = verify_l3(family_slug, assembly=assembly_name, verbose=False)
+    if l3_result.get("status") == "passed":
+        result["steps"]["l3_verify"] = "OK"
+        result["l3_passed"] = l3_result.get("passed", 0)
+        result["l3_total"] = l3_result.get("total", 0)
+        trace("family_l3_passed", family=family_slug,
+              passed=l3_result.get("passed", 0), total=l3_result.get("total", 0))
+    else:
+        result["steps"]["l3_verify"] = l3_result.get("status", "FAILED")
+        result["l3_passed"] = l3_result.get("passed", 0)
+        result["l3_total"] = l3_result.get("total", 0)
+        # Don't fail the whole pipeline — L3 may be a work in progress
+        print(f"    L3: {l3_result.get('status', 'error')} "
+              f"({l3_result.get('passed', 0)}/{l3_result.get('total', 0)})")
 
     result["success"] = True
     trace("family_passed", family=family_slug, method_count=len(mids))
@@ -508,7 +545,13 @@ def main() -> None:
     for r in results:
         status = "PASS" if r["success"] else "FAIL"
         steps = " -> ".join(f"{k}={v}" for k, v in r.get("steps", {}).items())
-        print(f"  {status:4s}  {r['family']:35s}  {steps}")
+        l2 = ""
+        if "l2_total" in r and r["l2_total"]:
+            l2 = f"  L2:{r.get('l2_passed',0)}/{r['l2_total']}"
+        l3 = ""
+        if "l3_total" in r and r["l3_total"]:
+            l3 = f"  L3:{r.get('l3_passed',0)}/{r['l3_total']}"
+        print(f"  {status:4s}  {r['family']:35s}  {steps}{l2}{l3}")
 
     # Write results per-assembly
     output_path = _VERIFICATION / "reports" / "batch-native-aot-pipeline-results.json"

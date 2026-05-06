@@ -21,6 +21,7 @@ internal static class ConvertToCppHandler
         WriteIndented = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+        NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals,
     };
 
     public static int Run(string[] args)
@@ -180,7 +181,7 @@ internal static class ConvertToCppHandler
 #include ""codegen_bridge.h""
 #include ""runtime_abi.h""
 
-extern ""C"" int {entryFunction}(int32_t);
+extern ""C"" CHAOS_IL2CPP_INT32 {entryFunction}(CHAOS_IL2CPP_INT32);
 
 int main(int argc, char** argv) {{
     auto* bridge = chaos_codegen_get_bridge_v0();
@@ -218,17 +219,45 @@ int main(int argc, char** argv) {{
 
     private static void PatchLoweringPlanForEmission(ManagedClosureResult closureResult, string outputRoot)
     {
-        var aotCoreIr = closureResult.AotCoreIr;
-        var firstMethod = aotCoreIr?.Methods?.FirstOrDefault();
-        if (firstMethod is null)
-            return;
-
-        var syntheticEntry = firstMethod.SubjectId;
         var original = closureResult.NativeAotLoweringPlan;
         if (original is null)
             return;
 
-        var patchedManifest = closureResult.ClosureManifest with
+        // If the pipeline already produced a valid lowering plan (from --entry-point
+        // in multi-assembly mode), skip patching entirely.
+        if (!string.IsNullOrWhiteSpace(original.EntrySubjectId) &&
+            !string.IsNullOrWhiteSpace(original.EntrySymbol))
+            return;
+
+        var aotCoreIr = closureResult.AotCoreIr;
+        // Determine the entry assembly name to narrow the search scope.
+        var assemblyName = closureResult.ClosureManifest?.AssemblyName ?? "";
+        IEnumerable<AotCoreIrMethodArtifact> candidates = aotCoreIr?.Methods ?? Enumerable.Empty<AotCoreIrMethodArtifact>();
+        if (!string.IsNullOrWhiteSpace(assemblyName))
+        {
+            // Prefer methods belonging to the entry assembly (SubjectId starts with
+            // assembly name), falling back to all methods if no match is found.
+            var assemblyMethods = candidates.Where(m =>
+                m.SubjectId.StartsWith(assemblyName, StringComparison.Ordinal)).ToList();
+            if (assemblyMethods.Count > 0)
+                candidates = assemblyMethods;
+        }
+
+        // Find a method matching int(int32) ABI: 0-1 params, returns Int32 or NativeInt
+        var entryMethod = candidates.FirstOrDefault(m =>
+            m.ParameterCount <= 1 &&
+            (string.Equals(m.ReturnType, "System.Int32", StringComparison.Ordinal) ||
+             m.ReturnAbi.CarrierKindCode == Contracts.AotCoreIrAbiCarrierKind.NativeInt) &&
+            (m.ParameterCount == 0 || m.ParameterAbis[0].CarrierKindCode == Contracts.AotCoreIrAbiCarrierKind.Int32));
+        entryMethod ??= candidates.FirstOrDefault(m =>
+            m.ParameterCount <= 1 &&
+            string.Equals(m.ReturnType, "System.Int32", StringComparison.Ordinal));
+        entryMethod ??= candidates.FirstOrDefault();
+        if (entryMethod is null)
+            return;
+
+        var syntheticEntry = entryMethod.SubjectId!;
+        var patchedManifest = closureResult.ClosureManifest! with
         {
             EntrySubjectId = syntheticEntry,
             FullAssemblyClosure = true,
@@ -240,8 +269,8 @@ int main(int argc, char** argv) {{
             PlanKind = "generic-managed-entry",
             AssemblyName = original.AssemblyName,
             EntrySubjectId = syntheticEntry,
-            EntrySymbol = firstMethod.NativeSymbol,
-            EntryMethodToken = firstMethod.SubjectId,
+            EntrySymbol = entryMethod.NativeSymbol,
+            EntryMethodToken = entryMethod.SubjectId,
             NativeEntryFunctionName = "RunNativeAot",
             WorkloadAbi = "int(int32)",
             TranslationUnitPageSize = original.TranslationUnitPageSize,

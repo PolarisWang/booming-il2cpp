@@ -13,7 +13,6 @@
 
 #include <atomic>
 #include <cstdint>
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <new>

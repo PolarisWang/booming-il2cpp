@@ -40,7 +40,7 @@ public sealed partial class NativeAotLoweringPlanner
             }), CreateInt32AbiSlot(), new HashSet<int> { 0, 1 });
             return true;
         }
-        if (_customAttributeSupport.QueryAttributeTypeByCallee.TryGetValue(callee, out string value))
+        if (_customAttributeSupport.QueryAttributeTypeByCallee.TryGetValue(callee, out string? value))
         {
             helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
                 "CHAOS_IL2CPP_INTPTR",
@@ -51,9 +51,9 @@ public sealed partial class NativeAotLoweringPlanner
                 ]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(value, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
             return true;
         }
-        if (_customAttributeSupport.SyntheticGetterFieldByMethodSubjectId.TryGetValue(callee, out string value2))
+        if (_customAttributeSupport.SyntheticGetterFieldByMethodSubjectId.TryGetValue(callee, out string? value2))
         {
-            string declaringTypeSubjectId = GetDeclaringTypeSubjectId(value2);
+            string declaringTypeSubjectId = GetDeclaringTypeSubjectId(value2!);
             helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
                 "CHAOS_IL2CPP_INTPTR",
                 GetExternalRuntimeHelperSymbol(callee),

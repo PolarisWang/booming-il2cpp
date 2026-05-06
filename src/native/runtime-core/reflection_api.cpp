@@ -25,7 +25,7 @@
 #include "generic_context.h"
 
 #include <cstring>
-#include <cstdio>
+#include <fmt/format.h>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -532,7 +532,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR type_hand
             return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(name));
         }
         static char s_buf[1024];
-        std::snprintf(s_buf, sizeof(s_buf), "%s.%s", ns, name);
+        fmt::format_to_n(s_buf, sizeof(s_buf) - 1, "{}.{}", ns, name);
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf);
     }
 
@@ -543,7 +543,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR type_hand
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(desc->name_utf8));
     }
     static char s_buf2[1024];
-    std::snprintf(s_buf2, sizeof(s_buf2), "%s.%s", desc->namespace_name_utf8, desc->name_utf8);
+    fmt::format_to_n(s_buf2, sizeof(s_buf2) - 1, "{}.{}", desc->namespace_name_utf8, desc->name_utf8);
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf2);
 }
 
@@ -560,9 +560,9 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR 
 
         static char s_buf[2048];
         if (ns != nullptr && ns[0] != '\0') {
-            std::snprintf(s_buf, sizeof(s_buf), "%s.%s, %s", ns, name, assembly);
+            fmt::format_to_n(s_buf, sizeof(s_buf) - 1, "{}.{}, {}", ns, name, assembly);
         } else {
-            std::snprintf(s_buf, sizeof(s_buf), "%s, %s", name, assembly);
+            fmt::format_to_n(s_buf, sizeof(s_buf) - 1, "{}, {}", name, assembly);
         }
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf);
     }
@@ -575,10 +575,10 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR 
 
     static char s_buf2[2048];
     if (desc->namespace_name_utf8 != nullptr && desc->namespace_name_utf8[0] != '\0') {
-        std::snprintf(s_buf2, sizeof(s_buf2), "%s.%s, %s",
+        fmt::format_to_n(s_buf2, sizeof(s_buf2) - 1, "{}.{}, {}",
             desc->namespace_name_utf8, desc->name_utf8, image->image_name_utf8);
     } else {
-        std::snprintf(s_buf2, sizeof(s_buf2), "%s, %s",
+        fmt::format_to_n(s_buf2, sizeof(s_buf2) - 1, "{}, {}",
             desc->name_utf8, image->image_name_utf8);
     }
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf2);
@@ -1596,7 +1596,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(
     if (right_str == nullptr) right_str = "";
 
     static char s_buf[4096];
-    size_t len = std::snprintf(s_buf, sizeof(s_buf), "%s%s", left_str, right_str);
+    auto result = fmt::format_to_n(s_buf, sizeof(s_buf) - 1, "{}{}", left_str, right_str);
+    size_t len = result.size;
     if (len >= sizeof(s_buf)) len = sizeof(s_buf) - 1;
 
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(

@@ -23,14 +23,6 @@
 
 #include <cstring>
 
-// chaos_object_header is defined per-family in generated code.
-// This local definition (same layout) is needed for sizeof calculations
-// in exception field offset computation.
-struct chaos_object_header
-{
-    const TypeInfo* type_info = nullptr;
-};
-
 namespace chaos::il2cpp::runtime_core {
 
 // Offset of _message field in Exception struct (after header)
@@ -45,15 +37,11 @@ static inline CHAOS_IL2CPP_INTPTR* GetExceptionFieldPtr(void* exception_obj, CHA
         static_cast<CHAOS_IL2CPP_UINT8*>(exception_obj) + field_offset);
 }
 
-}  // namespace chaos::il2cpp::runtime_core
-
 extern "C" void ChaosReflectionSetExceptionMetadata(
     CHAOS_IL2CPP_INTPTR exception_obj,
     CHAOS_IL2CPP_INTPTR message_value)
 {
-    CHAOS_IL2CPP_TRACE("runtime", "SetExceptionMetadata", "");
-    using namespace chaos::il2cpp::runtime_core;
-
+    CHAOS_IL2CPP_LOG_TRACE("runtime", "SetExceptionMetadata", "");
     auto* message_slot = GetExceptionFieldPtr(
         reinterpret_cast<void*>(exception_obj),
         kExceptionMessageOffset);
@@ -62,34 +50,11 @@ extern "C" void ChaosReflectionSetExceptionMetadata(
     *message_slot = message_value;
 }
 
-extern "C" void ChaosReflectionSetExceptionMetadata(
-    CHAOS_IL2CPP_INTPTR exception_obj,
-    CHAOS_IL2CPP_INTPTR message_value,
-    CHAOS_IL2CPP_INTPTR param_name_value)
-{
-    using namespace chaos::il2cpp::runtime_core;
-
-    // Set message field
-    auto* message_slot = GetExceptionFieldPtr(
-        reinterpret_cast<void*>(exception_obj),
-        kExceptionMessageOffset);
-    if (message_slot != nullptr) {
-        *message_slot = message_value;
-    }
-
-    // For ArgumentException subclasses, param_name is stored in a subclass field
-    // at a different offset. For the generic case, we don't set it here.
-    (void)param_name_value;
-}
-
 extern "C" void ChaosReflectionSetExceptionMetadata_2params(
     CHAOS_IL2CPP_INTPTR exception_obj,
     CHAOS_IL2CPP_INTPTR message_value,
     CHAOS_IL2CPP_INTPTR param_name_value)
 {
-    using namespace chaos::il2cpp::runtime_core;
-
-    // Set message field
     auto* message_slot = GetExceptionFieldPtr(
         reinterpret_cast<void*>(exception_obj),
         kExceptionMessageOffset);
@@ -97,16 +62,12 @@ extern "C" void ChaosReflectionSetExceptionMetadata_2params(
         *message_slot = message_value;
     }
 
-    // For ArgumentException subclasses, param_name is stored in a subclass field
-    // at a different offset. For the generic case, we don't set it here.
     (void)param_name_value;
 }
 
 extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionGetExceptionMessage(
     CHAOS_IL2CPP_INTPTR exception_obj)
 {
-    using namespace chaos::il2cpp::runtime_core;
-
     auto* message_slot = GetExceptionFieldPtr(
         reinterpret_cast<void*>(exception_obj),
         kExceptionMessageOffset);
@@ -119,7 +80,7 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_exception_param_name(
     CHAOS_IL2CPP_INTPTR exception_obj)
 {
     (void)exception_obj;
-    // ParamName is specific to ArgumentException subclasses.
-    // Full implementation requires knowing the exact subclass layout.
     return 0;
 }
+
+}  // namespace chaos::il2cpp::runtime_core

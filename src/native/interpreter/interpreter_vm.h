@@ -171,6 +171,12 @@ struct IRInstruction {
     void* call_target = nullptr;   // MethodInfoHandle or bridge target for Call/CallVirt/CallBridge
     CHAOS_IL2CPP_UINT32 arg_count = 0u;  // Number of arguments for call instructions
     bool is_instance_call = false;  // true = call_args[0] is 'this' pointer (CallVirt/CallVirtConstrained, or instance Call)
+
+    // Switch instruction: branch targets for each case, populated by the IR builder.
+    // The default target is stored in branch_target (or -1 if absent).
+    // secondary_index stores the number of case targets (when used for Switch).
+    const CHAOS_IL2CPP_SIZE* switch_targets = nullptr;
+    CHAOS_IL2CPP_SIZE       switch_target_count = 0u;
 };
 
 // ── SEH (Structured Exception Handling) ──────────────────────────────────
@@ -232,6 +238,9 @@ struct ExecutionFrame {
     // instead of returning needs_external_dispatch=true.
     DispatchCallback dispatch_fn = nullptr;
     void*            dispatch_context = nullptr;
+
+    // Tracks localloc allocations for automatic cleanup on frame exit.
+    CHAOS_IL2CPP_VECTOR(void*) localloc_blocks = {};
 
     ~ExecutionFrame();
     ExecutionFrame() = default;

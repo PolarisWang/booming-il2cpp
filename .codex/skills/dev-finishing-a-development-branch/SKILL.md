@@ -48,7 +48,7 @@ git merge <feature-branch>
 - 如果测试阶段出现 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃：
   - 立即视为失败
   - 收集 stderr、binlog、崩溃堆栈或 dump 信息（如果可用）
-  - 使用 `dev:systematic-debugging` 修复根因后再继续
+  - 使用 `dev-systematic-debugging` 修复根因后再继续
 
 ### 第四步：提交收口
 
@@ -61,7 +61,7 @@ git merge <feature-branch>
 ### 第五步：清理本地分支与 Worktree
 
 - 只在合并成功、验证完成、没有未提交变更后删除 feature branch
-- 如果本次工作来自 `dev:using-git-worktrees` 创建的 worktree，同步清理对应 worktree
+- 如果本次工作来自 `dev-using-git-worktrees` 创建的 worktree，同步清理对应 worktree
 - 不自动执行 `git push`、`gh pr create` 或丢弃分支
 
 ## 常见错误

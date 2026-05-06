@@ -26,7 +26,7 @@ public sealed partial class NativeAotLoweringPlanner
 		bool flag5 = _reflectionMemberSupport.TypeEntries.Count > 0 || _reflectionMemberSupport.FieldEntries.Count > 0 || _reflectionMemberSupport.MethodEntries.Count > 0;
 		bool flag6 = UsesDefaultInterpolatedStringHandlerHelpers(reachableMethods);
 		bool flag7 = RequiresManagedStringRuntime(reachableMethods);
-		if (!flag2 && !flag3 && !flag4 && !flag5 && !flag && !flag7)
+		if (!flag2 && !flag3 && !flag4 && !flag5 && !flag && !flag7 && _stringIdMapping is not { Count: > 0 })
 		{
 			return;
 		}
@@ -445,7 +445,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    {");
 			foreach (ReflectionMemberTypeEntry item in _reflectionMemberSupport.TypeEntries.Where((ReflectionMemberTypeEntry entry) => !string.IsNullOrWhiteSpace(TryGetNestedDeclaringTypeSubjectId(entry.TypeSubjectId))).OrderBy<ReflectionMemberTypeEntry, string>((ReflectionMemberTypeEntry entry) => entry.TypeSubjectId, StringComparer.Ordinal))
 			{
-				string subjectId = TryGetNestedDeclaringTypeSubjectId(item.TypeSubjectId);
+				string? subjectId = TryGetNestedDeclaringTypeSubjectId(item.TypeSubjectId);
 				stringBuilder = builder;
 				StringBuilder stringBuilder17 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder);
@@ -457,7 +457,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder18 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(20, 1, stringBuilder);
 				handler.AppendLiteral("            return ");
-				handler.AppendFormatted(GetTypeHandleLiteral(subjectId));
+				handler.AppendFormatted(GetTypeHandleLiteral(subjectId!));
 				handler.AppendLiteral(";");
 				stringBuilder18.AppendLine(ref handler);
 			}
@@ -893,7 +893,7 @@ public sealed partial class NativeAotLoweringPlanner
 					StringBuilder stringBuilder53 = stringBuilder;
 					handler = new StringBuilder.AppendInterpolatedStringHandler(56, 1, stringBuilder);
 					handler.AppendLiteral("            return chaos_reflection_create_type_value(");
-					handler.AppendFormatted(GetTypeHandleLiteral(item4.GenericDefinitionTypeSubjectId));
+					handler.AppendFormatted(GetTypeHandleLiteral(item4.GenericDefinitionTypeSubjectId!));
 					handler.AppendLiteral(");");
 					stringBuilder53.AppendLine(ref handler);
 				}
@@ -2040,7 +2040,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return true;
 		}
-		string elementTypeDisplayName;
+		string? elementTypeDisplayName;
 		return UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.String", "Concat", "System.String", "System.String") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.String", "Concat", "System.String", "System.String", "System.String", "System.String") || TryGetStringJoinEnumerableElementType(instruction.Callee ?? string.Empty, out elementTypeDisplayName) || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.ArgumentOutOfRangeException", ".ctor", "System.String", "System.String") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.Int32", "ToString") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Runtime.InteropServices/Marshal", "PtrToStringUTF8", "System.IntPtr") || IsAssemblyReflectionHelperSubjectId(instruction.Callee ?? string.Empty) || IsTypeReflectionHelperSubjectId(instruction.Callee ?? string.Empty) || IsReflectionMemberHelperSubjectId(instruction.Callee ?? string.Empty) || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.Single", "ToString", "System.String") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.Double", "ToString", "System.String") || IsDefaultInterpolatedStringHandlerHelperSubjectId(instruction.Callee ?? string.Empty));
 	}
 
@@ -2050,7 +2050,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return true;
 		}
-		string elementTypeDisplayName;
+		string? elementTypeDisplayName;
 		return UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => TryGetStringJoinEnumerableElementType(instruction.Callee ?? string.Empty, out elementTypeDisplayName) || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.String", "StartsWith", "System.String", "System.StringComparison") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.String", "Contains", "System.String", "System.StringComparison"));
 	}
 

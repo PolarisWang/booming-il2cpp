@@ -842,6 +842,7 @@ public sealed class AotCoreIrLowering
             GenericDiagnostic = genericDiagnostic,
             DeclaringTypeSubjectId = field.DeclaringTypeSubjectId,
             DeclaringTypeShape = ResolveTypeShape(declaringType),
+            FieldTypeSubjectId = field.FieldType,
         };
     }
 
@@ -877,6 +878,7 @@ public sealed class AotCoreIrLowering
             GenericDiagnostic = genericDiagnostic,
             DeclaringTypeSubjectId = declaringTypeSubjectId,
             DeclaringTypeShape = ResolveTypeShape(declaringType),
+            FieldTypeSubjectId = null,
         };
     }
 

@@ -3,7 +3,6 @@ Stub Detector: Scans generated native C++ files and classifies methods
 as stub (skeleton) or real (genuine IL translation).
 
 Detection patterns:
-  - RuntimeSkeletonPage*.cpp → always stub
   - native-aot.generated.cpp with "NativeReferenceStub_" → stub
   - BenchmarkNativeEntry.cpp with "return 42" → stub
   - Any generated file with "CHAOS_BRIDGE_STATUS_OK" → stub
@@ -42,12 +41,6 @@ REAL_CODE_PATTERNS: list[re.Pattern] = [
     re.compile(r"callvirt|ldfld|stfld"),
 ]
 
-SKELETON_FILE_PATTERNS: list[re.Pattern] = [
-    re.compile(r"RuntimeSkeletonPage\d+\.cpp$"),
-    re.compile(r"RuntimeSkeletonSummary\.cpp$"),
-]
-
-
 @dataclass
 class StubMethodInfo:
     method_name: str
@@ -60,7 +53,7 @@ class StubMethodInfo:
 @dataclass
 class StubFileResult:
     file_path: str
-    file_kind: str  # "native-aot" | "runtime-skeleton" | "benchmark" | "hotupdate" | "other"
+    file_kind: str  # "native-aot" | "benchmark" | "hotupdate" | "other"
     total_methods: int = 0
     stub_methods: int = 0
     real_methods: int = 0
@@ -82,7 +75,6 @@ class FamilyStubResult:
     family_slug: str
     files: list[StubFileResult] = field(default_factory=list)
     has_native_aot: bool = False
-    has_runtime_skeleton: bool = False
     has_benchmark: bool = False
     has_hotupdate: bool = False
 
@@ -108,9 +100,6 @@ class FamilyStubResult:
 
 def _classify_file(path: Path) -> str:
     name = path.name
-    for pat in SKELETON_FILE_PATTERNS:
-        if pat.search(str(path)):
-            return "runtime-skeleton"
     if "BenchmarkNativeEntry" in name:
         return "benchmark"
     if "HotUpdateTest" in name:
@@ -158,30 +147,7 @@ def scan_file(path: Path) -> StubFileResult:
 
     lines = text.split("\n")
 
-    # For skeleton files, every function is a stub
-    if file_kind == "runtime-skeleton":
-        func_starts: list[int] = []
-        for i, line in enumerate(lines):
-            stripped = line.strip()
-            if "NativeReferenceStub_" in stripped or "NativeReferenceAssemblyStubFn" in stripped:
-                continue
-            if stripped.startswith("int32_t CHAOS_RUNTIME_ABI_CALL") or "NativeReferenceStub_" in stripped:
-                func_starts.append(i)
-                method_name = _extract_method_name(stripped)
-                if method_name:
-                    subject_id = _extract_subject_id(lines, i)
-                    result.methods.append(StubMethodInfo(
-                        method_name=method_name,
-                        subject_id=subject_id,
-                        is_stub=True,
-                        stub_pattern="runtime-skeleton",
-                        line_number=i + 1,
-                    ))
-                    result.total_methods += 1
-                    result.stub_methods += 1
-        return result
-
-    # For native-aot / benchmark / other files, scan function by function
+    # Scan function by function
     i = 0
     while i < len(lines):
         line = lines[i]
@@ -283,8 +249,6 @@ def scan_family(family_path: Path) -> FamilyStubResult:
 
             if file_result.file_kind == "native-aot":
                 result.has_native_aot = True
-            elif file_result.file_kind == "runtime-skeleton":
-                result.has_runtime_skeleton = True
             elif file_result.file_kind == "benchmark":
                 result.has_benchmark = True
             elif file_result.file_kind in ("hotupdate", "hotupdate-patch"):
@@ -324,7 +288,6 @@ def _family_to_dict(result: FamilyStubResult) -> dict[str, Any]:
         "familySlug": result.family_slug,
         "classification": result.classification,
         "hasNativeAot": result.has_native_aot,
-        "hasRuntimeSkeleton": result.has_runtime_skeleton,
         "hasBenchmark": result.has_benchmark,
         "hasHotupdate": result.has_hotupdate,
         "files": [asdict(f) for f in result.files],
@@ -386,7 +349,6 @@ def main():
         print(f"Family: {result.family_id}")
         print(f"  Classification: {result.classification}")
         print(f"  Native AOT: {'yes' if result.has_native_aot else 'no'}")
-        print(f"  Runtime Skeleton: {'yes' if result.has_runtime_skeleton else 'no'}")
         print(f"  Benchmark: {'yes' if result.has_benchmark else 'no'}")
         print(f"  HotUpdate: {'yes' if result.has_hotupdate else 'no'}")
         print(f"  Files with methods: {len(result.files)}")
@@ -405,7 +367,7 @@ def main():
         results = scan_assembly(asm_path)
         print(f"Assembly: {asm_path.name}")
         for slug, result in sorted(results.items()):
-            print(f"  {slug}: {result.classification} (native-aot={result.has_native_aot}, skeleton={result.has_runtime_skeleton})")
+            print(f"  {slug}: {result.classification} (native-aot={result.has_native_aot})")
         if args.report:
             report = generate_report({asm_path.name: results})
             print(json.dumps(report, indent=2, ensure_ascii=False))

@@ -20,8 +20,8 @@ description: Use when running skill health checks, reviewing evolution proposals
 
 ### 不使用的情况
 
-- 只是修改技能内容而非运行进化流程 → 用 `dev:writing-skills`
-- 只是完成前的验证检查 → 用 `dev:verification-before-completion`
+- 只是修改技能内容而非运行进化流程 → 用 `dev-writing-skills`
+- 只是完成前的验证检查 → 用 `dev-verification-before-completion`
 - 子 Agent 执行已明确的子任务（跳过本技能）
 
 ## 工作流
@@ -89,6 +89,6 @@ description: Use when running skill health checks, reviewing evolution proposals
 
 ## 关联技能
 
-- 上游：无（由 `dev:using-booming` 或用户直接触发）
-- 协作：`dev:writing-skills`（创建/修改 skill 内容）
-- 下游：`dev:verification-before-completion`（promote 后验证）
+- 上游：无（由 `dev-using-booming` 或用户直接触发）
+- 协作：`dev-writing-skills`（创建/修改 skill 内容）
+- 下游：`dev-verification-before-completion`（promote 后验证）

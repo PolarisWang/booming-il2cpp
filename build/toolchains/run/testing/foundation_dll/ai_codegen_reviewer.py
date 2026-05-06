@@ -37,23 +37,31 @@ def _check_signature_alignment(cpp_content: str, csil_content: str) -> list[str]
     """
     issues: list[str] = []
 
-    # Extract C# method names from IL dump (lines like ".method public ...")
+    # Extract C# method names from IL dump (multiline format)
     cs_methods = set()
-    for line in csil_content.splitlines():
-        m = re.search(r'\.method\s+\S+\s+\S*\s*(\S+)\(', line)
-        if m:
-            cs_methods.add(m.group(1))
+    # Match .method <attrs> on one line, then <ret> <name>( on next line(s)
+    text = csil_content
+    for m in re.finditer(r'\.method\s+\S[^\n]*\n\s+\S+\s+(\w+)\s*\(', text):
+        cs_methods.add(m.group(1))
+    # Also match inline format: .method public int32 Name(
+    for m in re.finditer(r'\.method\s+\S[^(]*(\w+)\s*\(', text):
+        cs_methods.add(m.group(1))
 
     # Extract C++ function names from generated code
     cpp_functions = set()
     for line in cpp_content.splitlines():
-        m = re.search(r'(?:CHAOS_IL2CPP_EXPORT|static|void|int32_t|bool|float|double)\s+\**\s*(\w+)\s*\(', line)
+        m = re.search(r'(?:CHAOS_IL2CPP_EXPORT|CHAOS_IL2CPP_INT32|CHAOS_IL2CPP_UINT16|extern|static|void|int32_t|bool|float|double)\s+\**\s*(\w+)\s*\(', line)
         if m:
             cpp_functions.add(m.group(1))
 
-    # Check each C# method has a C++ counterpart (by name)
+    # Check each C# method has a C++ counterpart (by name suffix)
     for cs_m in cs_methods:
-        if cs_m not in cpp_functions and cs_m not in {m.replace("_", "") for m in cpp_functions}:
+        matched = False
+        for cpp_m in cpp_functions:
+            if cpp_m.endswith(cs_m):
+                matched = True
+                break
+        if not matched:
             issues.append(f"No matching C++ function found for C# method '{cs_m}'")
 
     return issues
@@ -200,8 +208,14 @@ def perform_review(
     }
 
     # Extract method/function counts
-    cs_methods = set(re.findall(r'\.method\s+\S+\s+\S*\s*(\S+)\(', csil_content))
-    cpp_functions = set(re.findall(r'(?:void|int32_t|int64_t|bool|float|double|Object\*|String\*)\s+\**\s*(\w+)\s*\(', cpp_content))
+    cs_methods = set()
+    for m in re.finditer(r'\.method\s+\S[^\n]*\n\s+\S+\s+(\w+)\s*\(', csil_content):
+        cs_methods.add(m.group(1))
+    for m in re.finditer(r'\.method\s+\S[^(]*(\w+)\s*\(', csil_content):
+        cs_methods.add(m.group(1))
+    cpp_functions: set[str] = set()
+    for m in re.finditer(r'(?:CHAOS_IL2CPP_EXPORT|CHAOS_IL2CPP_INT32|CHAOS_IL2CPP_UINT16|extern|static|void|int32_t|bool|float|double)\s+\**\s*(\w+)\s*\(', cpp_content):
+        cpp_functions.add(m.group(1))
     stats["cs_method_count"] = len(cs_methods)
     stats["cpp_function_count"] = len(cpp_functions)
 

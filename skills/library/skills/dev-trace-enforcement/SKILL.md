@@ -20,7 +20,7 @@ trace 系统是日常开发中定位问题的**首选手段**。遇到任何失�
 git config core.hooksPath .githooks
 ```
 
-提交时自动扫描 `src/native/*.cpp` 中是否包含 `CHAOS_IL2CPP_TRACE()` 调用：
+提交时自动扫描 `src/native/*.cpp` 中是否包含 `CHAOS_IL2CPP_LOG_TRACE()` 或 `CHAOS_IL2CPP_LOG_*()` 调用：
 
 - 如果文件缺少 trace 点，输出 advisory warning，不阻断提交
 - 开发者应确认是否需要补充 trace 点
@@ -44,7 +44,7 @@ git config core.hooksPath .githooks
 
 ### C++ 检查
 
-1. Bridge 函数的新增入口/出口是否有 `CHAOS_IL2CPP_TRACE()`
+1. Bridge 函数的新增入口/出口是否有 `CHAOS_IL2CPP_LOG_TRACE()`
 2. 生成代码中每个 method dispatch 点是否有 trace
 3. Benchmark/hotupdate 运行结果是否有 trace
 

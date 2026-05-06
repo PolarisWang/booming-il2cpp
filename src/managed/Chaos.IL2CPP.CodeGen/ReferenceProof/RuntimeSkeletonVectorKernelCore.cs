@@ -342,7 +342,7 @@ internal static class RuntimeSkeletonVectorKernelCore
             carrierCppType,
             "float",
             componentCount,
-            helperPrefix);
+            helperPrefix!);
     }
 
     private static RuntimeSkeletonVectorKernelSemanticDescriptor? TryResolveIntrinsicsFromArtifact(

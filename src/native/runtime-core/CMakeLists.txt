@@ -1,4 +1,11 @@
-﻿get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
+﻿cmake_minimum_required(VERSION 3.15)
+project(chaos_runtime_core LANGUAGES CXX)
+
+# Note: CMAKE_MSVC_RUNTIME_LIBRARY intentionally not set.
+# MSVC defaults to /MD on this toolchain, which matches the main build's convention.
+# Do NOT add explicit MultiThreadedDLL here — it's the MSVC default when unset.
+
+get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 
 add_library(chaos_runtime_core STATIC
     runtime_core.cpp
@@ -44,11 +51,14 @@ add_library(chaos_runtime_core STATIC
     interpreter_entry.cpp
     native_library.h
     native_library.cpp
-    exception_api.cpp)
+    exception_api.cpp
+    exception_helpers.h
+    exception_helpers.cpp)
 
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)
 target_compile_definitions(chaos_runtime_core PUBLIC CHAOS_RUNTIME_ABI_STATIC)
+target_compile_definitions(chaos_runtime_core PUBLIC GC_NOT_DLL)
 target_include_directories(
     chaos_runtime_core
     PUBLIC
