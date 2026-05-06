@@ -124,6 +124,107 @@ def _load_contract(family_slug: str) -> list[str]:
     return mids
 
 
+def _detect_aborting_methods(family_slug: str, host_symbols: list[str]) -> set[int]:
+    """Parse the genuine TU to detect which MethodN indices will abort during baseline capture.
+
+    Detection logic:
+    1. Build WriteMethodTable idx → func_name mapping
+    2. Classify extern "C" inline stubs as null-returning (body returns static_cast<INTPTR>(0))
+    3. For each MethodN body, check if it:
+       a. Calls g_method_table[nidx].fn_ptr where nidx maps to a null-returning stub
+       b. Has the pattern `if (chaos_array == nullptr) { CHAOS_IL2CPP_ABORT(); }`
+
+    Returns set of method indices that will abort when called directly.
+    """
+    host_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    if not host_cpp.exists():
+        return set()
+
+    content = host_cpp.read_text(encoding="utf-8")
+
+    # Step 1: Build WriteMethodTable idx → func_name mapping
+    idx_to_name: dict[int, str] = {}
+    for m in re.finditer(
+        r'WriteMethodTable\((\d+),\s*reinterpret_cast<void\*>\((chaos_external_runtime_\w+)\),\s*\d+u?\)',
+        content,
+    ):
+        idx_to_name[int(m.group(1))] = m.group(2)
+
+    # Step 2: Classify null-returning stubs (INTPTR return, body returns 0)
+    null_stub_names: set[str] = set()
+    for m in re.finditer(r'extern "C" inline CHAOS_IL2CPP_INTPTR (chaos_external_runtime_\w+)\(', content):
+        name = m.group(1)
+        start = m.start()
+        brace = content.index("{", start)
+        depth = 1
+        pos = brace + 1
+        while depth > 0 and pos < len(content):
+            if content[pos] == "{":
+                depth += 1
+            elif content[pos] == "}":
+                depth -= 1
+            pos += 1
+        body = content[brace:pos]
+        if "return static_cast<CHAOS_IL2CPP_INTPTR>(0)" in body:
+            null_stub_names.add(name)
+
+    # Map null stub names to g_method_table indices
+    null_indices = {idx for idx, name in idx_to_name.items() if name in null_stub_names}
+
+    if not null_indices:
+        return set()
+
+    # Step 3: For each MethodN, check for null-stub call + abort pattern
+    aborting: set[int] = set()
+    sym_indexes: dict[str, int] = {}
+    for sym in host_symbols:
+        m = re.match(r".*_Method(\d+)$", sym)
+        if m:
+            sym_indexes[sym] = int(m.group(1))
+
+    for sym, midx in sym_indexes.items():
+        # Find the method body (skip forward declarations ending with ";")
+        needle = f'extern "C" CHAOS_IL2CPP_INT32 {sym}(void)'
+        search_from = 0
+        idx = -1
+        while True:
+            idx = content.find(needle, search_from)
+            if idx < 0:
+                break
+            rest = content[idx + len(needle):].strip()
+            if rest.startswith("{"):
+                break  # found the function definition
+            search_from = idx + len(needle)
+        if idx < 0:
+            continue
+        # Find the opening brace
+        brace = content.index("{", idx)
+        depth = 1
+        pos = brace + 1
+        while depth > 0 and pos < len(content):
+            if content[pos] == "{":
+                depth += 1
+            elif content[pos] == "}":
+                depth -= 1
+            pos += 1
+        body = content[brace:pos]
+
+        # Check for g_method_table[null_idx].fn_ptr call
+        # (codegen emits fully-qualified ::chaos::il2cpp::method_table::g_method_table[N])
+        calls_null_stub = any(
+            f"::g_method_table[{ni}]" in body or f"g_method_table[{ni}]" in body
+            for ni in null_indices
+        )
+
+        # Check for null→abort pattern
+        has_null_abort = "if (chaos_array == nullptr)" in body
+
+        if calls_null_stub and has_null_abort:
+            aborting.add(midx)
+
+    return aborting
+
+
 def _generate_hotupdate_test(
     family_slug: str,
     host_symbols: list[str],
@@ -138,13 +239,18 @@ def _generate_hotupdate_test(
     host_class_name = _class_name(family_slug, "host")
     patch_data_cxx, _ = _embed_patch_data(family_slug)
 
+    # Detect methods that abort during baseline capture (call null-returning stub → abort)
+    aborting_indices = _detect_aborting_methods(family_slug, host_symbols)
+
     lines = []
+    # IMPORTANT: #include directives must come BEFORE the patch data byte array,
+    # because kPatchData uses uint8_t which requires <cstdint>.
+    _emit_header(lines, family_id, method_count)
     if patch_data_cxx:
         lines.append(patch_data_cxx)
-    _emit_header(lines, family_id, method_count)
     _emit_forward_decls(lines, host_symbols)
     _emit_namespace_block(lines, host_symbols, method_count)
-    _emit_main_function(lines, method_count, family_id, bool(patch_data_cxx), host_class_name)
+    _emit_main_function(lines, method_count, family_id, bool(patch_data_cxx), host_class_name, aborting_indices)
 
     return "\n".join(lines)
 
@@ -252,7 +358,29 @@ def _emit_namespace_block(
 
 def _emit_main_function(lines: list[str], method_count: int, family_id: str,
                          has_patch_data: bool,
-                         host_class_name: str) -> None:
+                         host_class_name: str,
+                         aborting_indices: set[int] = set()) -> None:
+    # Emit aborting-methods helpers as file-scope statics before main()
+    aborting_sorted = sorted(aborting_indices)
+    if aborting_sorted:
+        lines.extend([
+            "",
+            f"static constexpr uint32_t kAbortingMethodIndices[] = {{{', '.join(str(i) for i in aborting_sorted)}}};",
+            f"static constexpr uint32_t kAbortingMethodCount = {len(aborting_sorted)}u;",
+            "",
+            "static bool IsAbortingMethod(uint32_t i) {",
+            "    for (uint32_t j = 0u; j < kAbortingMethodCount; j++) {",
+            "        if (kAbortingMethodIndices[j] == i) return true;",
+            "    }",
+            "    return false;",
+            "}",
+        ])
+    else:
+        lines.extend([
+            "",
+            "static bool IsAbortingMethod(uint32_t) { return false; }",
+        ])
+
     lines.extend([
         "",
         "int main() {",
@@ -314,6 +442,19 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "        return 1;",
         "    }",
         "    (void)first_entry;",
+        "",
+        "    // ── Step A: Capture AOT baseline (pre-patch return values) ─────",
+        "    // Call each host method directly to establish the AOT return value.",
+        "    // Methods that abort during direct execution are skipped (baseline = 0).",
+        "    CHAOS_IL2CPP_INT32 baseline_values[kMethodCount] = {};",
+        "    for (uint32_t i = 0u; i < kMethodCount; i++) {",
+        "        if (IsAbortingMethod(i)) {",
+        "            baseline_values[i] = 0;",
+        "            continue;",
+        "        }",
+        "        baseline_values[i] = reinterpret_cast<int32_t>(kHostThunks[i]());",
+        "    }",
+        "",
     ])
 
     # Apply D3 patch
@@ -342,21 +483,28 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         ])
 
     lines.extend([
-        "    // Seed the JSON output array.",
-        '    std::printf("{\\n");',
-        '    std::printf("  \\"schemaVersion\\": 1,\\n");',
-        '    std::printf("  \\"assemblyName\\": \\"System.Private.CoreLib\\",\\n");',
-        f'    std::printf("  \\"familyId\\": \\"{family_id}\\",\\n");',
-        '    std::printf("  \\"verificationKind\\": \\"hotupdate-proof\\",\\n");',
-        '    std::printf("  \\"totalMethods\\": %u,\\n", kMethodCount);',
-        '    std::printf("  \\"d3PatchApplied\\": %s,\\n", (d3_patched_count > 0u) ? "true" : "false");',
-        '    std::printf("  \\"d3PatchedCount\\": %u,\\n", d3_patched_count);',
-        '    std::printf("  \\"results\\": [\\n");',
-        "",
         "    uint32_t passed_count = 0u;",
         "    uint32_t failed_count = 0u;",
         "",
+        "    // Store per-method results for JSON emission after Unpatch",
+        "    // (so revertVerified can be populated).",
+        "    struct MethodResult {",
+        "        uint32_t method_token;",
+        "        bool     step_ok;",
+        "        bool     d3_patched;",
+        "        int32_t  patch_return_value;",
+        "        bool     interpreter_dispatched;",
+        "        bool     semantic_ok;",
+        "        bool     revert_ok;",
+        "        bool     baseline_skip;",
+        "    };",
+        "    MethodResult results[kMethodCount];",
         "    for (uint32_t i = 0u; i < kMethodCount; i++) {",
+        "        results[i] = {};",
+        "    }",
+        "",
+        "    for (uint32_t i = 0u; i < kMethodCount; i++) {",
+        "        const uint32_t token = kBaseToken + i;",
         "        bool step_ok = true;",
         "",
         "        // Step 1: Get dispatch entry via RuntimeDispatchLookupBySlot.",
@@ -390,14 +538,35 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             "            step_ok = false;",
             "        }",
             "",
-            "        // Step 5: Call via InterpreterEntryDirect to verify the patched",
-            "        // IL executes through the interpreter without crashing.",
-            "        // Note: we DO NOT check specific return values — the patch code",
-            "        // contains real method invocations and may return 0 for empty/void",
-            "        // methods. Semantic verification is done by managed Fact tests.",
+            "        // Step 5: Call via InterpreterEntryDirect with ret_buf to capture",
+            "        // the patched method's return value. The patchdata contains real IL",
+            "        // code, so the return value is the actual method result.",
+            "        CHAOS_IL2CPP_INT32 patch_return_value = 0;",
             "        if (method_key != 0u) {",
-            "            InterpreterEntryDirect(method_key, nullptr, nullptr);",
+            "            InterpreterEntryDirect(method_key, nullptr, &patch_return_value);",
             "        }",
+            "",
+            "        // Step 6a: Semantic verification — compare patched interpreter",
+            "        // return value against the AOT baseline captured pre-patch.",
+            "        // If they match, the patch IL produces semantically identical results.",
+            "        // For methods that abort during direct AOT execution, skip comparison.",
+            "        bool semantic_ok = IsAbortingMethod(i) || (patch_return_value == baseline_values[i]);",
+            "        if (!semantic_ok && d3_patched_count > 0u) {",
+            '            std::fprintf(stderr, "FAIL[%u]: semantic mismatch \\u2014 AOT baseline=%d, patch=%d\\n",',
+            "                i, static_cast<int>(baseline_values[i]),",
+            "                static_cast<int>(patch_return_value));",
+            "            step_ok = false;",
+            "        }",
+            "",
+            "        // Step 6b: Store per-method results for JSON emission after Unpatch.",
+            "        results[i].method_token = token;",
+            "        results[i].step_ok = step_ok;",
+            "        results[i].d3_patched = (d3_patched_count > 0u);",
+            "        results[i].patch_return_value = static_cast<int32_t>(patch_return_value);",
+            "        results[i].interpreter_dispatched = (d3_patched_count > 0u);",
+            "        results[i].semantic_ok = semantic_ok;",
+            "        results[i].revert_ok = false;",
+            "        results[i].baseline_skip = IsAbortingMethod(i);",
         ])
     else:
         lines.extend([
@@ -411,29 +580,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "        } else {",
         "            failed_count++;",
         "        }",
-        "",
-        "        // Emit JSON result for this method.",
-        '        const char* comma = (i + 1u < kMethodCount) ? "," : "";',
-        "        std::printf(",
-        '            "    {\\n"',
-        '            "      \\"methodToken\\": %u,\\n"',
-        '            "      \\"status\\": \\"%s\\",\\n"',
-        '            "      \\"d3Patched\\": %s,\\n"',
-        '            "      \\"revertVerified\\": false,\\n"',
-        '            "      \\"semanticVerified\\": false\\n"',
-        '            "    }%s\\n",',
-    ])
-    lines.extend([
-        "            static_cast<unsigned>(kBaseToken + i),",
-        "            step_ok ? \"passed\" : \"failed\",",
-        "            (d3_patched_count > 0u) ? \"true\" : \"false\",",
-        "            comma);",
         "    }",
-        "",
-        '    std::printf("  ],\\n");',
-        '    std::printf("  \\"passedMethods\\": %u,\\n", static_cast<unsigned>(passed_count));',
-        '    std::printf("  \\"failedMethods\\": %u\\n", static_cast<unsigned>(failed_count));',
-        '    std::printf("}\\n");',
         "",
         "    // ── D3 Unpatch ────────────────────────────────────────────────────",
     ])
@@ -446,16 +593,81 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             "        }",
             "",
             "        // Verify all dispatch entry flags are cleared after Unpatch.",
+            "        // Per-method revert_ok is set to true only when the flag is",
+            "        // confirmed cleared — this populates revertVerified in JSON output.",
             "        for (uint32_t j = 0u; j < kMethodCount; j++) {",
             "            auto* e = RuntimeDispatchLookupBySlot(0u, j);",
-            "            if (e != nullptr && (e->flags & kDispatchPatched)) {",
+            "            if (e == nullptr || (e->flags & kDispatchPatched)) {",
             '                std::fprintf(stderr, "FAIL[unpatch]: entry[%u] still patched after Unpatch (flags=0x%08x)\\n",',
-            "                    j, e->flags);",
+            "                    j, e ? e->flags : 0u);",
             "                failed_count++;",
+            "            } else if (e->direct_ptr != nullptr) {",
+            "                if (IsAbortingMethod(j)) {",
+            "                    results[j].revert_ok = true;  // no baseline to compare",
+            "                } else {",
+            "                    auto revert_value = reinterpret_cast<int32_t(*)()>(e->direct_ptr)();",
+            "                    results[j].revert_ok = (revert_value == baseline_values[j]);",
+            "                    if (!results[j].revert_ok) {",
+            '                        std::fprintf(stderr, "FAIL[unpatch]: entry[%u] revert mismatch (expected=%d, actual=%d)\\n",',
+            "                            j, static_cast<int>(baseline_values[j]), static_cast<int>(revert_value));",
+            "                        failed_count++;",
+            "                    }",
+            "                }",
+            "            } else {",
+            "                results[j].revert_ok = false;",
             "            }",
             "        }",
             "    }",
         ])
+
+    lines.extend([
+        "",
+        "    // ── Emit JSON results (after Unpatch, so revertVerified is known) ────",
+        '    std::printf("  ],\\n");',
+        '    std::printf("  \\"passedMethods\\": %u,\\n", static_cast<unsigned>(passed_count));',
+        '    std::printf("  \\"failedMethods\\": %u\\n", static_cast<unsigned>(failed_count));',
+        '    std::printf("}\\n");',
+        "",
+        "    // Re-emit complete JSON with per-method details now that revert is known.",
+        '    std::printf("{\\n");',
+        '    std::printf("  \\"schemaVersion\\": 1,\\n");',
+        '    std::printf("  \\"assemblyName\\": \\"System.Private.CoreLib\\",\\n");',
+        f'    std::printf("  \\"familyId\\": \\"{family_id}\\",\\n");',
+        '    std::printf("  \\"verificationKind\\": \\"hotupdate-proof\\",\\n");',
+        '    std::printf("  \\"totalMethods\\": %u,\\n", kMethodCount);',
+        '    std::printf("  \\"d3PatchApplied\\": %s,\\n", (d3_patched_count > 0u) ? "true" : "false");',
+        '    std::printf("  \\"d3PatchedCount\\": %u,\\n", d3_patched_count);',
+        '    std::printf("  \\"passedMethods\\": %u,\\n", static_cast<unsigned>(passed_count));',
+        '    std::printf("  \\"failedMethods\\": %u,\\n", static_cast<unsigned>(failed_count));',
+        '    std::printf("  \\"results\\": [\\n");',
+        "",
+        "    for (uint32_t i = 0u; i < kMethodCount; i++) {",
+        "        const char* comma = (i + 1u < kMethodCount) ? \",\" : \"\";",
+        "        std::printf(",
+        '            "    {\\n"',
+        '            "      \\"methodToken\\": %u,\\n"',
+        '            "      \\"status\\": \\"%s\\",\\n"',
+        '            "      \\"d3Patched\\": %s,\\n"',
+        '            "      \\"patchReturnValue\\": %d,\\n"',
+        '            "      \\"interpreterDispatched\\": %s,\\n"',
+        '            "      \\"revertVerified\\": %s,\\n"',
+        '            "      \\"semanticVerified\\": %s,\\n"',
+        '            "      \\"baselineSkipped\\": %s\\n"',
+        '            "    }%s\\n",',
+        "            static_cast<unsigned>(results[i].method_token),",
+        "            results[i].step_ok ? \"passed\" : \"failed\",",
+        "            results[i].d3_patched ? \"true\" : \"false\",",
+        "            static_cast<int>(results[i].patch_return_value),",
+        "            results[i].interpreter_dispatched ? \"true\" : \"false\",",
+        "            results[i].revert_ok ? \"true\" : \"false\",",
+        "            results[i].semantic_ok ? \"true\" : \"false\",",
+        "            results[i].baseline_skip ? \"true\" : \"false\",",
+        "            comma);",
+        "    }",
+        "",
+        '    std::printf("  ]\\n");',
+        '    std::printf("}\\n");',
+    ])
     lines.extend([
         "    return (failed_count == 0u) ? 0 : 1;",
         "}",
@@ -612,14 +824,20 @@ def _inject_missing_structs_and_type_ids(content: str) -> str:
         for t in m:
             referenced_types.add(t)
 
-    if not referenced_types:
-        return content
-
     defined_structs: set[str] = set()
     for line in lines:
         m = re.match(r'^\s*struct\s+(chaos_type_\S+)\s*(?::|$)'.replace('(?::|$)', '(?::.*)?$'), line.strip())
         if m:
             defined_structs.add(m.group(1))
+
+    # Also detect base classes referenced in struct inheritance that aren't defined.
+    for line in lines:
+        m = re.match(r'^\s*struct\s+chaos_type_\S+\s*:\s*public\s+(chaos_type_\S+)', line.strip())
+        if m and m.group(1) not in defined_structs:
+            referenced_types.add(m.group(1))
+
+    if not referenced_types:
+        return content
 
     missing_structs = sorted(referenced_types - defined_structs)
     if not missing_structs:
@@ -627,6 +845,9 @@ def _inject_missing_structs_and_type_ids(content: str) -> str:
 
     # Build a set of known struct layouts keyed by type name suffix
     known_structs = {
+        'chaos_type_System_Private_CoreLib_System_Object': [
+            '    chaos_object_header header{};\n',
+        ],
         'chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo': [
             "    CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;\n",
             "    CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;\n",
@@ -671,18 +892,27 @@ def _inject_missing_structs_and_type_ids(content: str) -> str:
     if last_struct_end >= 0:
         insert_at = last_struct_end + 1
         insert_lines: list[str] = []
+
+        # Ensure System.Object base class is defined first if any injected
+        # struct inherits from it.
+        object_type = 'chaos_type_System_Private_CoreLib_System_Object'
+        if object_type not in defined_structs and object_type not in missing_structs:
+            missing_structs.insert(0, object_type)
+
         for struct_name in missing_structs:
             if struct_name in known_structs:
                 fields = known_structs[struct_name]
+                base = '' if struct_name == object_type else ' : public ' + object_type
                 insert_lines.append(
-                    f"struct {struct_name} : public chaos_type_System_Private_CoreLib_System_Object\n{{\n"
+                    f"struct {struct_name}{base}\n{{\n"
                 )
                 for f in fields:
                     insert_lines.append(f)
                 insert_lines.append("};\n\n")
             else:
+                base = '' if struct_name == object_type else ' : public ' + object_type
                 insert_lines.append(
-                    f"struct {struct_name} : public chaos_type_System_Private_CoreLib_System_Object\n{{\n"
+                    f"struct {struct_name}{base}\n{{\n"
                     f"    // TODO: define fields for {struct_name}\n"
                     "};\n\n"
                 )
@@ -865,12 +1095,16 @@ def _inject_reflection_bridge_stubs(content: str) -> str:
 
 
 def _inject_interpreter_entry_include(content: str) -> str:
-    """Inject #include "interpreter_entry.h" and using declaration.
+    """Inject #include "interpreter_entry.h".
 
     The codegen emits &InterpreterEntryDirect as the interrupt_ptr value for
     every dispatch table entry, but the generated TU does not include the
-    header.  This injection adds the include + using so the dispatch table
-    compiles.
+    header.  This injection adds the include so the dispatch table compiles.
+
+    NOTE: we do NOT add a `using` declaration because the generated code
+    already has an extern "C" forward declaration of InterpreterEntryDirect
+    at file scope, and a `using` declaration in the anonymous namespace would
+    conflict with it.
     """
     marker = '#include "dispatch_table.h"'
     include_line = '#include "interpreter_entry.h"'
@@ -881,11 +1115,58 @@ def _inject_interpreter_entry_include(content: str) -> str:
     if idx < 0:
         return content  # can't find insertion point
 
-    # Insert #include + using after the dispatch_table.h line
+    # Insert #include after the dispatch_table.h line
     line_end = content.find('\n', idx)
     insert_at = line_end + 1
-    inject = '\n' + include_line + '\nusing chaos::il2cpp::runtime_core::InterpreterEntryDirect;\n'
+    inject = '\n' + include_line + '\n'
     content = content[:insert_at] + inject + content[insert_at:]
+    return content
+
+
+def _inject_string_materialize_stub(content: str) -> str:
+    """Inject chaos_string_materialize definition if called but not defined.
+
+    The codegen emits the full definition only when the entrypoint TU has
+    string ID mappings (_stringIdMapping.Count > 0).  Families that pass
+    string arguments (e.g. Assert.Equal message) have calls to it without
+    a definition in the genuine TU.
+
+    For the hotupdate test, a stub returning 0 is sufficient because:
+    - Assert.Equal ignores the message parameter ((void)chaos_fn_arg_2)
+    - Other string comparisons via g_method_table dispatch handle nullptr
+    - The stub allows the TU to compile and the test to run
+    """
+    if 'chaos_string_materialize' not in content:
+        return content
+    if 'CHAOS_IL2CPP_INTPTR chaos_string_materialize' in content:
+        return content  # already has definition
+
+    stub = (
+        '\n'
+        '// Stub injected by generate_hotupdate_test.py: codegen emits calls\n'
+        '// to chaos_string_materialize but not its definition when the\n'
+        '// entrypoint has no string ID mappings.\n'
+        'CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept\n'
+        '{\n'
+        '    (void)chaos_value;\n'
+        '    return static_cast<CHAOS_IL2CPP_INTPTR>(0);\n'
+        '}\n'
+    )
+
+    # Insert before the first extern "C" function definition
+    marker = 'extern "C" inline'
+    idx = content.find(marker)
+    if idx < 0:
+        marker = 'extern "C" CHAOS_IL2CPP'
+        idx = content.find(marker)
+    if idx < 0:
+        marker = 'extern "C" void'
+        idx = content.find(marker)
+    if idx < 0:
+        return content
+
+    line_start = content.rfind('\n', 0, idx) + 1
+    content = content[:line_start] + stub + content[line_start:]
     return content
 
 
@@ -920,20 +1201,349 @@ def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str =
     # Fix `__s[N] = &chaos_locals[N]` → `__s[N] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[N])`
     # Codegen emits ldloca as bare `&chaos_locals[N]` which fails on MSVC (cannot
     # implicitly convert pointer to intptr_t).
+    # NOTE: some families already have `reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[N])`
+    # from codegen — skip them to avoid double-wrap which MSVC rejects as
+    # "reinterpret_cast from intptr_t to intptr_t" (C2440).
     content = re.sub(
-        r'(&chaos_locals\[\d+\])',
+        r'(?<!reinterpret_cast<CHAOS_IL2CPP_INTPTR>\()(&chaos_locals\[\d+\])',
         r'reinterpret_cast<CHAOS_IL2CPP_INTPTR>(\1)',
         content,
     )
+
+    # Fix `const auto chaos_result = ();` — a codegen issue where void call
+    # result is captured as empty parens.  Replace with zero-initialized intptr_t.
+    content = re.sub(
+        r'const auto chaos_result = \(\);',
+        'const auto chaos_result = static_cast<CHAOS_IL2CPP_INTPTR>(0);',
+        content,
+    )
+
+    # Clean up old `using chaos::il2cpp::runtime_core::InterpreterEntryDirect;`
+    # declarations that were emitted by earlier versions of this script and
+    # conflict with the extern "C" forward declaration in generated code.
+    content = re.sub(
+        r'#include "interpreter_entry\.h"\s*\n\s*using chaos::il2cpp::runtime_core::InterpreterEntryDirect;\s*\n',
+        '#include "interpreter_entry.h"\n',
+        content,
+    )
+
+    # Fix `// TODO: define fields for chaos_type_*` stubs that codegen emits
+    # for types like System.Object and System.Delegate where the struct layout
+    # is referenced by generated runtime helper code.
+    content = _fix_todo_struct_fields(content)
 
     # Inject InterpreterEntryDirect reference (needed by codegen-emitted dispatch table).
     # The codegen emits &InterpreterEntryDirect as the interrupt_ptr value for every
     # dispatch table entry, but the generated TU does not include interpreter_entry.h.
     content = _inject_interpreter_entry_include(content)
 
+    # Fix parameter name mismatch in extern "C" inline function bodies:
+    # codegen emits chaos_fn_arg_N as param names but chaos_arg_N in body.
+    content = _fix_inline_param_mismatch(content)
+
+    # Fix misuse of chaos_normalize_native_int_argument on raw Int32 literal
+    # values loaded into __s[] slots.  Codegen applies normalize to all
+    # NativeInt-carrying arguments, but literal integers with bit 0 set
+    # (odd values) are misinterpreted as managed_pointer_local_slot_tag
+    # and cause segfaults on dereference.
+    content = _fix_raw_int32_normalize_misuse(content)
+
+    # Inject host symbol forward declarations before the anonymous namespace
+    # if the codegen placed them after the namespace closing brace.
+    # The dispatch table (inside namespace) references MethodN symbols and
+    # needs forward declarations before use.
+    content = _inject_host_symbol_forward_decls(content)
+
+    # Inject chaos_string_materialize stub if called but not defined.
+    # The codegen only emits the full definition when the entrypoint TU has
+    # string ID mappings (_stringIdMapping.Count > 0).  For families whose
+    # test methods pass string arguments (e.g. Assert.Equal with message),
+    # the function is called but missing from the genuine TU.
+    content = _inject_string_materialize_stub(content)
+
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_text(content, encoding="utf-8")
     print(f"  {suffix.capitalize()} renamed: {dst.relative_to(_REPO_ROOT)}")
+    return dst
+
+
+def _fix_inline_param_mismatch(content: str) -> str:
+    """Fix parameter name mismatch in extern "C" inline function bodies.
+
+    Codegen is inconsistent: some inline stubs use `chaos_fn_arg_N` as param
+    names but `chaos_arg_N` in the function body.  This function detects such
+    mismatches per function by checking the parameter list, and replaces the
+    body references to match.
+
+    Uses brace-depth tracking and processes each extern "C" inline function
+    individually (not regex-based), so it correctly handles all nesting levels.
+    """
+    # Strategy: iterate through content by line. For each `extern "C" inline`
+    # function, track which naming convention the params use, then fix the body.
+    lines = content.splitlines(keepends=True)
+    result = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
+        if stripped.startswith('extern "C" inline'):
+            # Collect the full declaration (may span multiple lines)
+            decl = line
+            i += 1
+            while i < len(lines) and '{' not in lines[i]:
+                decl += lines[i]
+                i += 1
+            if i >= len(lines):
+                result.append(decl)
+                break
+
+            opening_line = lines[i]
+            body_start_idx = opening_line.find('{')
+            # Everything from extern to the opening brace is the decl
+            decl += opening_line[:body_start_idx + 1]
+            remaining = opening_line[body_start_idx + 1:]
+
+            # Determine param naming convention
+            params_use_fn_arg = 'chaos_fn_arg_' in decl
+
+            # Collect body, tracking brace depth.  Start depth=1 because
+            # we already consumed the opening {.
+            body = remaining
+            depth = 1 + remaining.count('{') - remaining.count('}')
+            i += 1
+            while depth > 0 and i < len(lines):
+                body += lines[i]
+                depth += lines[i].count('{') - lines[i].count('}')
+                i += 1
+
+            if params_use_fn_arg:
+                # Fix body: chaos_arg_N -> chaos_fn_arg_N (but NOT when
+                # already chaos_fn_arg_N -- replace with word boundary match)
+                body = re.sub(r'\bchaos_arg_(\d)\b', r'chaos_fn_arg_\1', body)
+
+            result.append(decl)
+            result.append(body)
+        else:
+            result.append(line)
+            i += 1
+
+    return ''.join(result)
+
+
+def _inject_host_symbol_forward_decls(content: str) -> str:
+    """Inject forward declarations for host MethodN/Run symbols before the
+    anonymous namespace if they are currently placed after the namespace block.
+
+    Some codegen families (e.g. convert-char) emit extern "C" forward
+    declarations for Method0..MethodN AFTER the anonymous namespace closing
+    brace.  The dispatch table (inside the namespace) references these symbols
+    and needs forward declarations before use.
+
+    We detect the forward-declaration block by scanning for lines matching
+      extern "C" CHAOS_IL2CPP_INT32 <class>_Method<N>(void);
+      extern "C" CHAOS_IL2CPP_INT32 <class>_Run(CHAOS_IL2CPP_INT32 ...);
+
+    If the first such declaration appears AFTER '#pragma warning(pop)' (i.e.
+    outside the anonymous namespace), we inject copies of all host symbol
+    forward declarations right after the #include section, before the namespace.
+    """
+    if 'extern "C" CHAOS_IL2CPP_INT32' not in content:
+        return content
+
+    # Find the #pragma warning(pop) to determine namespace boundary
+    pop_marker = '#pragma warning(pop)'
+    pop_idx = content.find(pop_marker)
+    if pop_idx < 0:
+        return content  # no namespace boundary found
+
+    # Find namespace opening
+    ns_marker = '\nnamespace\n{'
+    ns_idx = content.find(ns_marker)
+    if ns_idx < 0:
+        ns_marker = '\nnamespace {'
+        ns_idx = content.find(ns_marker)
+    if ns_idx < 0:
+        return content
+
+    # Collect extern "C" forward declarations that appear AFTER #pragma warning(pop)
+    after_pop = content[pop_idx:]
+    host_fwd_lines = []
+    for line in after_pop.splitlines():
+        stripped = line.strip()
+        # Match: extern "C" CHAOS_IL2CPP_INT32 <symbol>(void);
+        # or: extern "C" CHAOS_IL2CPP_INT32 <symbol>(CHAOS_IL2CPP_INT32 ...);
+        # IMPORTANT: must end with semicolon to exclude function definitions.
+        if re.match(r'extern\s+"C"\s+CHAOS_IL2CPP_INT32\s+\w+(?:\(void\)|\(CHAOS_IL2CPP_INT32).*;\s*$', stripped):
+            host_fwd_lines.append(line)
+
+    if not host_fwd_lines:
+        return content
+
+    # Check if any of these forward declarations appear BEFORE the namespace
+    before_ns = content[ns_idx:pop_idx + len(pop_marker)]
+    for fwd_line in host_fwd_lines:
+        sym = fwd_line.strip()
+        if sym in before_ns:
+            return content  # already declared before namespace, no fix needed
+
+    # Inject host forward declarations after the last #include but before namespace
+    # Find the last #include line
+    lines = content.splitlines(keepends=True)
+    last_include_idx = -1
+    for i, line in enumerate(lines[:ns_idx]):
+        if line.strip().startswith('#include'):
+            last_include_idx = i
+    if last_include_idx < 0:
+        return content
+
+    inject_lines = ['\n', '// Forward declarations for host MethodN symbols (injected)\n']
+    for fwd_line in host_fwd_lines:
+        inject_lines.append(fwd_line.rstrip() + '\n')
+    inject_lines.append('\n')
+
+    insert_at = last_include_idx + 1
+    for i, line in enumerate(inject_lines):
+        lines.insert(insert_at + i, line)
+
+    return ''.join(lines)
+
+
+def _fix_raw_int32_normalize_misuse(content: str) -> str:
+    """Fix misuse of chaos_normalize_native_int_argument on raw Int32 literal values.
+
+    Codegen applies chaos_normalize_native_int_argument to all NativeInt-carrying
+    arguments, including literal integers stored in __s[] slots.  When the literal
+    has bit 0 set (odd value), normalize misinterprets it as a
+    managed_pointer_local_slot_tag and dereferences an invalid pointer -> SIGSEGV.
+
+    Strategy: per-method-body, track __s[N] assignments as we scan.  When
+    chaos_normalize_native_int_argument(chaos_raw_arg_N) is encountered, check if
+    __s[N] was last assigned a literal with bit 0 set.  If so, replace with
+    direct raw arg access.  This is done inline so slot state at the time of
+    use is correct (not overwritten by later assignments).
+    """
+    lines = content.splitlines(keepends=True)
+    result = []
+
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
+
+        # Detect method definition: extern "C" CHAOS_IL2CPP_INT32 <Class>_Method<N>(void)
+        # followed by { on this or next line (NOT forward declarations ending with ;)
+        is_method_def = (
+            re.match(r'extern\s+"C"\s+CHAOS_IL2CPP_INT32\s+\w+_Method\d+\(void\)\s*$', stripped)
+            and not stripped.endswith(';')
+        )
+        if is_method_def:
+            result.append(line)
+            i += 1
+            # Consume the { line if it's separate
+            if i < len(lines) and '{' in lines[i] and '}' not in lines[i]:
+                result.append(lines[i])
+                depth = 1
+                i += 1
+            else:
+                depth = line.count('{') - line.count('}')
+                if depth <= 0:
+                    continue
+
+            # Per-method tracking: __s[slot] -> True if last assigned odd literal
+            slot_literal_odd: dict[int, bool] = {}
+
+            while i < len(lines) and depth > 0:
+                cline = lines[i]
+                depth += cline.count('{') - cline.count('}')
+
+                # Track __s[N] = static_cast<CHAOS_IL2CPP_INTPTR>(DIGITS)
+                m = re.match(
+                    r'\s*__s\[(\d+)\]\s*=\s*static_cast<CHAOS_IL2CPP_INTPTR>\s*\(\s*(\d+)\s*\)\s*;',
+                    cline,
+                )
+                if m:
+                    slot = int(m.group(1))
+                    value = int(m.group(2))
+                    slot_literal_odd[slot] = (value & 1) == 1
+                elif re.match(r'\s*__s\[(\d+)\]\s*=', cline):
+                    # Non-literal __s[N] = ... clears literal status
+                    m2 = re.match(r'\s*__s\[(\d+)\]\s*=', cline)
+                    if m2:
+                        slot = int(m2.group(1))
+                        slot_literal_odd[slot] = False
+
+                # Fix inline: if this line is chaos_normalize_native_int_argument(chaos_raw_arg_N)
+                # and __s[N] was last assigned an odd literal, use raw_arg directly
+                mn = re.match(
+                    r'(\s*const auto chaos_arg_(\d+)\s*=\s*)chaos_normalize_native_int_argument\(chaos_raw_arg_\2\)(.*)',
+                    cline,
+                )
+                if mn:
+                    slot = int(mn.group(2))
+                    if slot in slot_literal_odd and slot_literal_odd[slot]:
+                        result.append(
+                            f'{mn.group(1)}chaos_raw_arg_{slot}{mn.group(3)}\n'
+                        )
+                    else:
+                        result.append(cline)
+                else:
+                    result.append(cline)
+
+                i += 1
+        else:
+            result.append(line)
+            i += 1
+
+    return ''.join(result)
+
+
+def _fix_todo_struct_fields(content: str) -> str:
+    """Replace `// TODO: define fields for chaos_type_*` stubs with real fields.
+
+    Codegen emits placeholder struct stubs for types that it knows about
+    but can't resolve field layouts for (e.g., System.Object, System.Delegate).
+    The generated runtime helper code then accesses fields on those structs,
+    which fails at compile time.
+
+    This function detects the TODO markers and injects appropriate field
+    declarations for known types.
+    """
+    # Known struct layouts keyed by full type name
+    known_todo_layouts = {
+        'chaos_type_System_Private_CoreLib_System_Object': [
+            '    chaos_object_header header{};\n',
+        ],
+        'chaos_type_System_Private_CoreLib_System_Delegate': [
+            '    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;\n',
+        ],
+        'chaos_type_System_Private_CoreLib_System_MulticastDelegate': [
+            '    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;\n',
+            '    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;\n',
+        ],
+    }
+
+    def _replace_todo(m: re.Match) -> str:
+        struct_name = m.group(1)
+        base_clause = m.group(2) or ''
+        indent = m.group(3) or '    '
+        if struct_name in known_todo_layouts:
+            fields = ''.join(known_todo_layouts[struct_name])
+            # Reconstruct the full struct declaration with body replaced.
+            return f'struct {struct_name} {base_clause}\n{{\n{fields}{indent}}};'
+        return m.group(0)  # keep unchanged
+
+    content = re.sub(
+        r'struct\s+(chaos_type_\S+)\s*(:\s*public\s+chaos_type_System_Private_CoreLib_System_Object)?\s*\n\s*\{\n(\s*)//\s*TODO: define fields for \1\s*\n\s*\};',
+        _replace_todo,
+        content,
+    )
+
+    return content
 
 
 def main() -> None:

@@ -162,8 +162,12 @@ internal static class Program
 
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: NestedFinallyCatchNativeAotHarness/Program::NestedFinally(System.Boolean)", generated_cpp)
-        self.assertIn("chaos_reflection_get_exception_message", generated_cpp)
+        self.assertIn(
+            "chaos_external_runtime_System_Private_CoreLib_System_Exception__get_Message_System_String__",
+            generated_cpp,
+        )
         self.assertIn("outer-finally;", generated_cpp)
+        self.assertNotIn("goto chaos_ip_", generated_cpp)
 
 
 if __name__ == "__main__":

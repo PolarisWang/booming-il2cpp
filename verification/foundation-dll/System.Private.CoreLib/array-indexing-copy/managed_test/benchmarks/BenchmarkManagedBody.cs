@@ -1,5 +1,5 @@
 // Auto-generated benchmark managed bodies
-// Family: family/System.Private.CoreLib/array/indexing-copy
+// Family: family/System.Private.CoreLib/array-indexing-copy
 using System;
 
 namespace Chaos.Benchmark.array_indexing_copy

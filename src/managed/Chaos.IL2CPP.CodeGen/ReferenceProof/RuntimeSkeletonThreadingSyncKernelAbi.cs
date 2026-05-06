@@ -155,23 +155,43 @@ internal static class RuntimeSkeletonThreadingSyncKernelAbiFactory
 
         if (subjectId.Contains("/System.Threading.Monitor::", StringComparison.Ordinal))
         {
-            return MonitorMethodToHelper.TryGetValue(methodName, out helperName);
+            if (MonitorMethodToHelper.TryGetValue(methodName, out var resolvedHelperName))
+            {
+                helperName = resolvedHelperName;
+                return true;
+            }
+            return false;
         }
 
         if (subjectId.Contains("/System.Threading.SpinLock::", StringComparison.Ordinal))
         {
-            return SpinLockMethodToHelper.TryGetValue(methodName, out helperName);
+            if (SpinLockMethodToHelper.TryGetValue(methodName, out var resolvedHelperName))
+            {
+                helperName = resolvedHelperName;
+                return true;
+            }
+            return false;
         }
 
         if (subjectId.Contains("/System.Threading.Lock::", StringComparison.Ordinal))
         {
-            return LockMethodToHelper.TryGetValue(methodName, out helperName);
+            if (LockMethodToHelper.TryGetValue(methodName, out var resolvedHelperName))
+            {
+                helperName = resolvedHelperName;
+                return true;
+            }
+            return false;
         }
 
         if (subjectId.Contains("/System.Threading.WaitHandle::", StringComparison.Ordinal) ||
             subjectId.Contains("/System.Threading.EventWaitHandle::", StringComparison.Ordinal))
         {
-            return WaitHandleMethodToHelper.TryGetValue(methodName, out helperName);
+            if (WaitHandleMethodToHelper.TryGetValue(methodName, out var resolvedHelperName))
+            {
+                helperName = resolvedHelperName;
+                return true;
+            }
+            return false;
         }
 
         return false;

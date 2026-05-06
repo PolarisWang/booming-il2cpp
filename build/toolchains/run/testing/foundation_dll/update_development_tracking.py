@@ -45,9 +45,21 @@ def _load_contract(family_slug: str) -> dict[str, Any] | None:
         return None
 
 
+def _resolve_path(*segments: str) -> Path:
+    """Resolve a path, preferring il2cpp_dist over native for codegen artifacts."""
+    p = FAMILIES_DIR / segments[0] / "native" / Path(*segments[1:])
+    if p.exists():
+        return p
+    if len(segments) >= 2 and segments[1] == "native":
+        alt = FAMILIES_DIR / segments[0] / "il2cpp_dist" / Path(*segments[2:])
+        if alt.exists():
+            return alt
+    return p
+
+
 def _load_codegen_metrics(family_slug: str) -> dict[str, Any] | None:
     """Load native-aot.codegen-metrics.json for genuine output."""
-    path = FAMILIES_DIR / family_slug / "native" / "genuine" / "native-aot.codegen-metrics.json"
+    path = _resolve_path(family_slug, "native", "genuine", "native-aot.codegen-metrics.json")
     if not path.exists():
         return None
     try:
@@ -113,7 +125,7 @@ def scan_family_phase(family_slug: str) -> dict[str, Any]:
     method_count = len(method_ids)
 
     # Check artifact existence
-    genuine_cpp = FAMILIES_DIR / family_slug / "native" / "genuine" / "generated" / "native-aot.generated.cpp"
+    genuine_cpp = _resolve_path(family_slug, "native", "genuine", "generated", "native-aot.generated.cpp")
     genuine_metrics = _load_codegen_metrics(family_slug)
     patch_dir = FAMILIES_DIR / family_slug / "native" / "patch" / "generated"
     hotupdate_dir = FAMILIES_DIR / family_slug / "native" / "hotupdate"
@@ -216,6 +228,64 @@ def scan_family_phase(family_slug: str) -> dict[str, Any]:
     }
 
 
+def _load_pipeline_errors() -> dict[str, dict[str, Any]]:
+    """Load pipeline results and extract per-family error info.
+
+    Returns dict of family_slug -> {error, failedStep, timestamp}.
+    """
+    errors: dict[str, dict[str, Any]] = {}
+    pipeline_path = FAMILIES_DIR / "reports" / "batch-native-aot-pipeline-results.json"
+    if pipeline_path.exists():
+        try:
+            data = json.loads(pipeline_path.read_text(encoding="utf-8"))
+            for r in data.get("results", []):
+                slug = r.get("family", "")
+                if not slug:
+                    continue
+                if not r.get("success", True):
+                    steps = r.get("steps", {})
+                    failed_step = next((k for k, v in steps.items() if v == "FAILED"), None)
+                    errors[slug] = {
+                        "error": r.get("error", "pipeline failed"),
+                        "failedStep": failed_step or "unknown",
+                        "timestamp": data.get("timestamp", ""),
+                    }
+                elif r.get("steps", {}).get("l2_verify") != "OK":
+                    # L2 didn't fully pass — record as warning, not fatal error
+                    l2_passed = r.get("l2_passed", 0)
+                    l2_total = r.get("l2_total", 0)
+                    if l2_total and l2_passed < l2_total:
+                        errors[slug] = {
+                            "error": f"L2: {l2_passed}/{l2_total} passed",
+                            "failedStep": "l2_verify",
+                            "timestamp": data.get("timestamp", ""),
+                        }
+        except (OSError, json.JSONDecodeError):
+            pass
+
+    # Also check hotupdate pipeline results
+    hotupdate_path = FAMILIES_DIR / "reports" / "batch-hotupdate-pipeline-results.json"
+    if hotupdate_path.exists():
+        try:
+            data = json.loads(hotupdate_path.read_text(encoding="utf-8"))
+            for r in data.get("results", []):
+                slug = r.get("family", "")
+                if not slug:
+                    continue
+                if not r.get("success", True):
+                    # Prefer native-aot errors over hotupdate errors
+                    if slug not in errors:
+                        errors[slug] = {
+                            "error": r.get("error", "hotupdate pipeline failed"),
+                            "failedStep": "hotupdate",
+                            "timestamp": data.get("timestamp", ""),
+                        }
+        except (OSError, json.JSONDecodeError):
+            pass
+
+    return errors
+
+
 def update_development_tracking() -> dict[str, Any]:
     """Scan all families and update development-tracking.json.
 
@@ -224,6 +294,8 @@ def update_development_tracking() -> dict[str, Any]:
     families: dict[str, Any] = {}
     phase_counts: dict[str, int] = {"skeleton": 0, "codegen": 0, "hotupdate": 0, "closure": 0}
 
+    pipeline_errors = _load_pipeline_errors()
+
     family_dirs = sorted([
         d.name for d in FAMILIES_DIR.iterdir()
         if d.is_dir() and (d / "capability-family-contract.json").exists()
@@ -231,7 +303,7 @@ def update_development_tracking() -> dict[str, Any]:
 
     for slug in family_dirs:
         info = scan_family_phase(slug)
-        families[slug] = {
+        entry: dict[str, Any] = {
             "phase": info["phase"],
             "gates": info["gates"],
             "methodCount": info["methodCount"],
@@ -239,6 +311,12 @@ def update_development_tracking() -> dict[str, Any]:
             "lastUpdated": datetime.now(timezone.utc).isoformat(),
             "traceSessionIds": [],
         }
+        # Inject pipeline error info if available
+        if slug in pipeline_errors:
+            entry["lastError"] = pipeline_errors[slug]["error"]
+            entry["lastFailedStep"] = pipeline_errors[slug]["failedStep"]
+            entry["lastPipelineRun"] = pipeline_errors[slug]["timestamp"]
+        families[slug] = entry
         phase_counts[info["phase"]] = phase_counts.get(info["phase"], 0) + 1
 
     total = len(families)

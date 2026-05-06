@@ -360,4 +360,10 @@ inline void chaos_decimal_ctor_int32(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2C
 // namespaces) can call chaos_decimal_ctor_int32 as a bare identifier.
 using chaos::il2cpp::runtime_core::chaos_decimal_ctor_int32;
 
+// ── Managed exception helpers for generated code ──
+// ResolveTypeByName, RaiseManagedException, and convenience wrappers
+// (RaiseInvalidCastException, RaiseFormatException, RaiseArgumentNullException).
+// These are visible to all generated code that includes runtime_core.h.
+#include "exception_helpers.h"
+
 #endif  // CHAOS_IL2CPP_RUNTIME_CORE_H_

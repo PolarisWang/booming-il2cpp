@@ -212,7 +212,7 @@ const TypeLayout* LayoutEngine::GetOrComputeLayout(
     const TypeInfoHandle*  type_args,
     CHAOS_IL2CPP_UINT32   arg_count)
 {
-    CHAOS_IL2CPP_TRACE("runtime", "GetOrComputeLayout",
+    CHAOS_IL2CPP_LOG_TRACE("runtime", "GetOrComputeLayout",
         "\"arg_count\"=%u", arg_count);
     if (closed_type == 0u) {
         return nullptr;

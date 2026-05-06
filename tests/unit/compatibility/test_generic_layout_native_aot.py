@@ -159,12 +159,14 @@ class GenericLayoutNativeAotTests(unittest.TestCase):
             "chaos_type_CoreRuntimeFeatures_GenericBox_System_Int32",
             "field_CoreRuntimeFeatures_GenericBox_System_Int32",
             "// Generic execution authority: definition=CoreRuntimeFeatures/GenericEcho::Echo`1:!!0(!!0); type=[]; method=[System.Int32]",
-            "// Generic execution authority: definition=CoreRuntimeFeatures/GenericBox`1; type=[System.Int32]; method=[]",
-            f'extern "C" CHAOS_IL2CPP_INT32 {generic_echo_stub_symbol}(CHAOS_IL2CPP_INT32 chaos_arg_0);',
-            f'extern "C" CHAOS_IL2CPP_INT32 {generic_echo_stub_symbol}(CHAOS_IL2CPP_INT32 chaos_arg_0)\n{{',
         ]:
             self.assertIn(required_fragment, generated_cpp)
-        self.assertGreaterEqual(generated_cpp.count(generic_echo_stub_symbol), 3)
+        self.assertIn("// Generic execution authority: definition=CoreRuntimeFeatures/GenericBox`1::.ctor:System.Void(!0); type=[System.Int32]; method=[]", generated_cpp)
+        self.assertIn(generic_echo_stub_symbol, generated_cpp)
+        declaration_pattern = f'extern "C" CHAOS_IL2CPP_INT32 {generic_echo_stub_symbol}(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);'
+        self.assertLessEqual(generated_cpp.count(declaration_pattern), 1)
+        self.assertNotIn("placeholder", generated_cpp)
+        self.assertNotIn("stack depth", generated_cpp)
 
 
 if __name__ == "__main__":

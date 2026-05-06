@@ -143,12 +143,14 @@ class NativeAotWorkloadEntryBundleTests(unittest.TestCase):
             / "native-aot.generated.cpp"
         ).read_text(encoding="utf-8")
 
-        self.assertIn("chaos_wrap_mul", generated_cpp)
-        self.assertIn("chaos_ip_30", generated_cpp)
+        self.assertTrue("chaos_wrap_mul" in generated_cpp or "ChaosWrapMul" in generated_cpp)
         self.assertIn("5000000", generated_cpp)
         self.assertIn("if (chaos_left < chaos_right)", generated_cpp)
         self.assertIn("return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);", generated_cpp)
         self.assertNotIn("(void)\"BenchArithmetic_Program_RunWorkload\"", generated_cpp)
+        self.assertNotIn("chaos_ip_", generated_cpp)
+        self.assertNotIn("goto ", generated_cpp)
+        self.assertNotIn("continue;\n                    CHAOS_IL2CPP_ABORT();", generated_cpp)
 
 
 if __name__ == "__main__":

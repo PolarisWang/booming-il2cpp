@@ -226,10 +226,11 @@ public sealed class DriverEntry
                             : throw new InvalidOperationException("source.assemblies is empty");
                     }
 
-                    if (!Path.IsPathRooted(entryAssembly))
-                        entryAssembly = Path.GetFullPath(entryAssembly, Directory.GetCurrentDirectory());
+                    string resolvedEntryAssembly = entryAssembly!;
+                    if (!Path.IsPathRooted(resolvedEntryAssembly))
+                        resolvedEntryAssembly = Path.GetFullPath(resolvedEntryAssembly, Directory.GetCurrentDirectory());
 
-                    inputAssemblyPath = entryAssembly;
+                    inputAssemblyPath = resolvedEntryAssembly;
                     additionalAssemblyPaths = assemblies.EnumerateArray()
                         .Select(assembly => assembly.GetString())
                         .Where(assembly => !string.IsNullOrWhiteSpace(assembly))

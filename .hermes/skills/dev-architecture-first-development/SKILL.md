@@ -111,7 +111,7 @@ description: 开发 il2cpp 功能前必须先查询架构路径，避免方案�
 
 ## 集成
 
-- `dev:executing-plans` — 在实现前应先调用本技能完成架构查询
-- `dev:subagent-driven-development` — 控制器在派发子 Agent 前应调用本技能
-- `dev:project-wiki-maintenance` — 新路径稳定后，将知识同步到 wiki
-- `dev:brainstorm` — 当需要设计新翻译路径时
+- `dev-executing-plans` — 在实现前应先调用本技能完成架构查询
+- `dev-subagent-driven-development` — 控制器在派发子 Agent 前应调用本技能
+- `dev-project-wiki-maintenance` — 新路径稳定后，将知识同步到 wiki
+- `dev-brainstorm` — 当需要设计新翻译路径时

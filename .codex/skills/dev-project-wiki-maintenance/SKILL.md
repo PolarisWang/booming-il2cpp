@@ -58,5 +58,5 @@ description: 当任务、技能或项目规则产生长期有效知识，需要�
 
 ## 集成
 
-- `dev:executing-plans`
-- `dev:subagent-driven-development`
+- `dev-executing-plans`
+- `dev-subagent-driven-development`

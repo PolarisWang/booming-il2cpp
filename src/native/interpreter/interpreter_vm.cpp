@@ -270,6 +270,10 @@ ExecutionFrame::~ExecutionFrame() {
     for (auto& v : arguments) { v.FreeStruct(); }
     for (auto& v : locals)    { v.FreeStruct(); }
     for (auto& v : stack)     { v.FreeStruct(); }
+    // Free localloc allocations.
+    for (auto* block : localloc_blocks) {
+        std::free(block);
+    }
 }
 
 CHAOS_IL2CPP_SIZE InterpreterVM::GetBranchTarget(const IRMethod& method, CHAOS_IL2CPP_SIZE target) {
@@ -654,18 +658,27 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     const CHAOS_IL2CPP_SIZE offset = static_cast<CHAOS_IL2CPP_SIZE>(instruction.field_offset);
                     if (instance.obj != nullptr && offset <= instance.struct_size) {
                         void* dst = static_cast<char*>(instance.obj) + offset;
-                        CHAOS_IL2CPP_INT64 raw = 0;
-                        if (value.tag == ValueTag::Int32 || value.tag == ValueTag::Float32) {
-                            raw = value.i32;
-                        } else if (value.tag == ValueTag::Int64 || value.tag == ValueTag::Float64) {
-                            raw = value.i64;
+                        const CHAOS_IL2CPP_SIZE remaining = instance.struct_size - offset;
+                        if (value.tag == ValueTag::Struct && value.obj != nullptr) {
+                            // Large struct field: copy full struct data (clamped to remaining space).
+                            const CHAOS_IL2CPP_SIZE copy_size = (value.struct_size < remaining)
+                                ? value.struct_size : remaining;
+                            std::memcpy(dst, value.obj, copy_size);
                         } else {
-                            raw = reinterpret_cast<CHAOS_IL2CPP_INT64>(value.obj);
+                            // Small field: read from scalar value.
+                            CHAOS_IL2CPP_INT64 raw = 0;
+                            if (value.tag == ValueTag::Int32 || value.tag == ValueTag::Float32) {
+                                raw = value.i32;
+                            } else if (value.tag == ValueTag::Int64 || value.tag == ValueTag::Float64) {
+                                raw = value.i64;
+                            } else {
+                                raw = reinterpret_cast<CHAOS_IL2CPP_INT64>(value.obj);
+                            }
+                            const CHAOS_IL2CPP_SIZE write_size = (remaining < sizeof(void*))
+                                ? remaining
+                                : sizeof(void*);
+                            std::memcpy(dst, &raw, write_size);
                         }
-                        const CHAOS_IL2CPP_SIZE write_size = (instance.struct_size - offset < sizeof(void*))
-                            ? static_cast<CHAOS_IL2CPP_SIZE>(instance.struct_size - offset)
-                            : sizeof(void*);
-                        std::memcpy(dst, &raw, write_size);
                     }
                 } else {
                     // Object field access (existing behavior).
@@ -719,9 +732,62 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::CastClass:
-            case IROpCode::IsInst:
-                frame->stack.push_back(Pop(&frame->stack));
+            case IROpCode::IsInst: {
+                const InterpreterValue cast_val = Pop(&frame->stack);
+                // Null: CastClass passes through, IsInst returns null
+                if (cast_val.tag == ValueTag::Null) {
+                    if (instruction.op_code == IROpCode::IsInst) {
+                        frame->stack.push_back(InterpreterValue::null_val());
+                    } else {
+                        frame->stack.push_back(cast_val);
+                    }
+                    break;
+                }
+                // Non-object: CastClass passes through, IsInst returns null
+                if (cast_val.tag != ValueTag::ObjectRef || cast_val.obj == nullptr) {
+                    if (instruction.op_code == IROpCode::IsInst) {
+                        frame->stack.push_back(InterpreterValue::null_val());
+                    } else {
+                        frame->stack.push_back(cast_val);
+                    }
+                    break;
+                }
+                // Target type token stored in immediate_i4 by the IR builder
+                const CHAOS_IL2CPP_UINT32 target_type_token =
+                    static_cast<CHAOS_IL2CPP_UINT32>(instruction.immediate_i4);
+                if (target_type_token == 0u) {
+                    // No target type info — pass through (safe fallback)
+                    frame->stack.push_back(cast_val);
+                    break;
+                }
+                // Walk the inheritance chain using vtable_registry
+                auto* obj = static_cast<InterpreterObject*>(cast_val.obj);
+                const CHAOS_IL2CPP_UINT32 obj_type_token = obj->type_token;
+                bool compatible = false;
+                CHAOS_IL2CPP_UINT32 current_token = obj_type_token;
+                while (current_token != 0u) {
+                    if (current_token == target_type_token) {
+                        compatible = true;
+                        break;
+                    }
+                    // Walk to base type via vtable_registry
+                    const auto* vtable = chaos::il2cpp::vtable_registry::TryGetTypeVTable(current_token);
+                    if (vtable == nullptr) {
+                        break;
+                    }
+                    current_token = vtable->base_token;
+                }
+                // Interface compatibility check: also scan implemented interfaces
+                // (Phase A+: add isinst/castclass interface check when iface_map is available)
+                if (compatible) {
+                    frame->stack.push_back(cast_val);
+                } else if (instruction.op_code == IROpCode::IsInst) {
+                    frame->stack.push_back(InterpreterValue::null_val());
+                } else {
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("InvalidCastException: type mismatch in CastClass");
+                }
                 break;
+            }
             case IROpCode::Call:
             case IROpCode::CallBridge: {
                 const CHAOS_IL2CPP_SIZE arg_count = static_cast<CHAOS_IL2CPP_SIZE>(instruction.arg_count);
@@ -1087,20 +1153,49 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::StInd: {
-                // stind.*: pop value then address; in our stack model, discard both.
-                (void)Pop(&frame->stack); // value
-                (void)Pop(&frame->stack); // address
+                // stind.*: pop value then address; write value bytes to address.
+                const InterpreterValue stind_val = Pop(&frame->stack);
+                const InterpreterValue stind_addr = Pop(&frame->stack);
+                // Determine write size from type discriminator (immediate_i4).
+                CHAOS_IL2CPP_SIZE stind_write_size = sizeof(void*);
+                switch (instruction.immediate_i4) {
+                    case 0: case 1: stind_write_size = 1; break;  // i1, u1
+                    case 2: case 3: stind_write_size = 2; break;  // i2, u2
+                    case 4: case 5: stind_write_size = 4; break;  // i4, u4
+                    case 6:          stind_write_size = 8; break;  // i8
+                    case 7:          stind_write_size = sizeof(void*); break; // i
+                    case 8:          stind_write_size = 4; break;  // r4
+                    case 9:          stind_write_size = 8; break;  // r8
+                    case 10:         stind_write_size = sizeof(void*); break; // ref
+                    default:         stind_write_size = sizeof(void*); break;
+                }
+                void* stind_dst = (stind_addr.tag == ValueTag::Struct || stind_addr.tag == ValueTag::ObjectRef)
+                    ? stind_addr.obj : nullptr;
+                if (stind_dst != nullptr) {
+                    CHAOS_IL2CPP_INT64 stind_raw = 0;
+                    if (stind_val.tag == ValueTag::Int32 || stind_val.tag == ValueTag::Float32) {
+                        stind_raw = stind_val.i32;
+                    } else if (stind_val.tag == ValueTag::Int64 || stind_val.tag == ValueTag::Float64) {
+                        stind_raw = stind_val.i64;
+                    } else {
+                        stind_raw = reinterpret_cast<CHAOS_IL2CPP_INT64>(stind_val.obj);
+                    }
+                    std::memcpy(stind_dst, &stind_raw, stind_write_size);
+                }
                 break;
             }
             case IROpCode::Switch: {
                 const CHAOS_IL2CPP_INT32 index = ReadInt32(Pop(&frame->stack));
-                // Simplified: go to the default target.
-                // Full implementation would store case targets.
-                if (index < 0 || static_cast<CHAOS_IL2CPP_UINT32>(index) >= instruction.secondary_index) {
-                    if (instruction.branch_target != static_cast<CHAOS_IL2CPP_SIZE>(-1)) {
-                        instruction_index = GetBranchTarget(method, instruction.branch_target);
-                        continue;
-                    }
+                // Check if index is within valid range of case targets.
+                if (index >= 0 && instruction.switch_targets != nullptr &&
+                    static_cast<CHAOS_IL2CPP_UINT32>(index) < instruction.switch_target_count) {
+                    instruction_index = instruction.switch_targets[index];
+                    continue;
+                }
+                // Out of range: use default target (branch_target), if set.
+                if (instruction.branch_target != static_cast<CHAOS_IL2CPP_SIZE>(-1)) {
+                    instruction_index = GetBranchTarget(method, instruction.branch_target);
+                    continue;
                 }
                 // Fall through if no default target.
                 break;
@@ -1125,9 +1220,27 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 frame->stack.push_back(InterpreterValue::from_obj(instruction.call_target));
                 break;
             case IROpCode::LdVirtFtn: {
-                // Pop the object, then push the virtual function pointer.
-                (void)Pop(&frame->stack);
-                frame->stack.push_back(InterpreterValue::null_val());
+                // Pop the object, then push the resolved virtual function pointer.
+                const InterpreterValue ldvirtftn_obj = Pop(&frame->stack);
+                if (ldvirtftn_obj.tag != ValueTag::ObjectRef || ldvirtftn_obj.obj == nullptr) {
+                    frame->stack.push_back(InterpreterValue::null_val());
+                    break;
+                }
+                const CHAOS_IL2CPP_UINT32 inst_type_token =
+                    static_cast<InterpreterObject*>(ldvirtftn_obj.obj)->type_token;
+                const CHAOS_IL2CPP_UINT32 decl_method_token =
+                    static_cast<CHAOS_IL2CPP_UINT32>(instruction.secondary_index);
+                void* resolved = nullptr;
+                if (inst_type_token != 0u && decl_method_token != 0u) {
+                    resolved = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
+                        inst_type_token, decl_method_token);
+                }
+                if (resolved != nullptr) {
+                    frame->stack.push_back(InterpreterValue::from_obj(resolved));
+                } else {
+                    // Fallback: push the declared method's call_target
+                    frame->stack.push_back(InterpreterValue::from_obj(instruction.call_target));
+                }
                 break;
             }
             case IROpCode::LdArgA: {
@@ -1149,6 +1262,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 void* buf = std::malloc(size > 0u ? size : 1u);
                 if (buf != nullptr) {
                     std::memset(buf, 0, size > 0u ? size : 1u);
+                    // Register for automatic cleanup on frame exit.
+                    frame->localloc_blocks.push_back(buf);
                 }
                 frame->stack.push_back(InterpreterValue::from_obj(buf));
                 break;
@@ -1214,44 +1329,97 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::AddOvf: {
-                // Phase A+: no overflow check — treat as regular Add.
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
                 const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
-                frame->stack.push_back(InterpreterValue::from_i32(left + right));
+                // Promote to 64-bit to detect signed overflow.
+                const CHAOS_IL2CPP_INT64 result_64 = static_cast<CHAOS_IL2CPP_INT64>(left) +
+                    static_cast<CHAOS_IL2CPP_INT64>(right);
+                if (result_64 > static_cast<CHAOS_IL2CPP_INT64>(INT32_MAX) ||
+                    result_64 < static_cast<CHAOS_IL2CPP_INT64>(INT32_MIN)) {
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: arithmetic overflow in add.ovf");
+                }
+                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(result_64)));
                 break;
             }
             case IROpCode::SubOvf: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
                 const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
-                frame->stack.push_back(InterpreterValue::from_i32(left - right));
+                const CHAOS_IL2CPP_INT64 result_64 = static_cast<CHAOS_IL2CPP_INT64>(left) -
+                    static_cast<CHAOS_IL2CPP_INT64>(right);
+                if (result_64 > static_cast<CHAOS_IL2CPP_INT64>(INT32_MAX) ||
+                    result_64 < static_cast<CHAOS_IL2CPP_INT64>(INT32_MIN)) {
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: arithmetic overflow in sub.ovf");
+                }
+                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(result_64)));
                 break;
             }
             case IROpCode::MulOvf: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
                 const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
-                frame->stack.push_back(InterpreterValue::from_i32(left * right));
+                // Use compiler builtin for overflow-checked multiplication.
+                CHAOS_IL2CPP_INT32 mul_result = 0;
+#if defined(__GNUC__) || defined(__clang__)
+                if (__builtin_mul_overflow(left, right, &mul_result)) {
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: arithmetic overflow in mul.ovf");
+                }
+#else
+                // MSVC fallback: promote to 64-bit and check range.
+                const CHAOS_IL2CPP_INT64 mul_64 = static_cast<CHAOS_IL2CPP_INT64>(left) *
+                    static_cast<CHAOS_IL2CPP_INT64>(right);
+                if (mul_64 > static_cast<CHAOS_IL2CPP_INT64>(INT32_MAX) ||
+                    mul_64 < static_cast<CHAOS_IL2CPP_INT64>(INT32_MIN)) {
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: arithmetic overflow in mul.ovf");
+                }
+                mul_result = static_cast<CHAOS_IL2CPP_INT32>(mul_64);
+#endif
+                frame->stack.push_back(InterpreterValue::from_i32(mul_result));
                 break;
             }
-            case IROpCode::ConvOvfI:
-                frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(Pop(&frame->stack))));
+            case IROpCode::ConvOvfI: {
+                const CHAOS_IL2CPP_INT64 val = ReadInt64(Pop(&frame->stack));
+                if (val > static_cast<CHAOS_IL2CPP_INT64>(INT32_MAX) ||
+                    val < static_cast<CHAOS_IL2CPP_INT64>(INT32_MIN)) {
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: conv.ovf.i");
+                }
+                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(val)));
                 break;
-            case IROpCode::ConvOvfI4:
-                frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(Pop(&frame->stack))));
+            }
+            case IROpCode::ConvOvfI4: {
+                const CHAOS_IL2CPP_INT64 val = ReadInt64(Pop(&frame->stack));
+                if (val > static_cast<CHAOS_IL2CPP_INT64>(INT32_MAX) ||
+                    val < static_cast<CHAOS_IL2CPP_INT64>(INT32_MIN)) {
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: conv.ovf.i4");
+                }
+                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(val)));
                 break;
+            }
             case IROpCode::ConvOvfI8:
                 frame->stack.push_back(InterpreterValue::from_i64(ReadInt64(Pop(&frame->stack))));
                 break;
             case IROpCode::ConvOvfU: {
-                const CHAOS_IL2CPP_UINT32 value = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
-                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(value)));
+                const CHAOS_IL2CPP_INT64 val = ReadInt64(Pop(&frame->stack));
+                if (val < 0 || val > static_cast<CHAOS_IL2CPP_INT64>(UINT32_MAX)) {
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: conv.ovf.u");
+                }
+                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(val)));
                 break;
             }
-            case IROpCode::ConvOvfU4:
-                frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(Pop(&frame->stack))));
+            case IROpCode::ConvOvfU4: {
+                const CHAOS_IL2CPP_INT64 val = ReadInt64(Pop(&frame->stack));
+                if (val < 0 || val > static_cast<CHAOS_IL2CPP_INT64>(UINT32_MAX)) {
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: conv.ovf.u4");
+                }
+                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(val)));
                 break;
-            case IROpCode::ConvOvfU8:
-                frame->stack.push_back(InterpreterValue::from_i64(ReadInt64(Pop(&frame->stack))));
+            }
+            case IROpCode::ConvOvfU8: {
+                const CHAOS_IL2CPP_INT64 val = ReadInt64(Pop(&frame->stack));
+                if (val < 0) {
+                    throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: conv.ovf.u8");
+                }
+                frame->stack.push_back(InterpreterValue::from_i64(val));
                 break;
+            }
             case IROpCode::LdObj: {
                 // Pop address, push value (similar to LdInd).
                 const InterpreterValue addr_val = Pop(&frame->stack);
@@ -1259,9 +1427,33 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             }
             case IROpCode::StObj: {
-                // Pop value then address (similar to StInd).
-                (void)Pop(&frame->stack); // value
-                (void)Pop(&frame->stack); // address
+                // StObj: pop value then address; write value bytes to address.
+                const InterpreterValue stobj_val = Pop(&frame->stack);
+                const InterpreterValue stobj_addr = Pop(&frame->stack);
+                void* stobj_dst = (stobj_addr.tag == ValueTag::Struct || stobj_addr.tag == ValueTag::ObjectRef)
+                    ? stobj_addr.obj : nullptr;
+                if (stobj_dst != nullptr) {
+                    CHAOS_IL2CPP_SIZE stobj_write_size = sizeof(void*);
+                    const void* stobj_src = nullptr;
+                    CHAOS_IL2CPP_INT64 stobj_raw = 0;
+                    if (stobj_val.tag == ValueTag::Struct && stobj_val.obj != nullptr) {
+                        stobj_src = stobj_val.obj;
+                        stobj_write_size = stobj_val.struct_size;
+                    } else if (stobj_val.tag == ValueTag::Int32 || stobj_val.tag == ValueTag::Float32) {
+                        stobj_raw = stobj_val.i32;
+                        stobj_src = &stobj_raw;
+                        stobj_write_size = 4;
+                    } else if (stobj_val.tag == ValueTag::Int64 || stobj_val.tag == ValueTag::Float64) {
+                        stobj_raw = stobj_val.i64;
+                        stobj_src = &stobj_raw;
+                        stobj_write_size = 8;
+                    } else {
+                        stobj_raw = reinterpret_cast<CHAOS_IL2CPP_INT64>(stobj_val.obj);
+                        stobj_src = &stobj_raw;
+                        stobj_write_size = sizeof(void*);
+                    }
+                    std::memcpy(stobj_dst, stobj_src, stobj_write_size);
+                }
                 break;
             }
             case IROpCode::LdElemA: {

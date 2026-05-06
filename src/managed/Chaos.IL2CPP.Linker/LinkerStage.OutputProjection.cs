@@ -231,8 +231,9 @@ public sealed partial class LinkerStage
         string subjectIdOrDefinitionSubjectId,
         out ManagedMethodModel method)
     {
-        if (methodMap.TryGetValue(subjectIdOrDefinitionSubjectId, out method))
+        if (methodMap.TryGetValue(subjectIdOrDefinitionSubjectId, out var resolvedMethod))
         {
+            method = resolvedMethod;
             return true;
         }
 

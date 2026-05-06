@@ -24,6 +24,7 @@
 
 #include "runtime_instantiation.h"
 #include "runtime_abi.h"
+#include "interpreter_entry.h"
 
 // Object header layouts (mirrors runtime_core.cpp)
 struct StubArrayHeader {
@@ -503,6 +504,9 @@ CHAOS_IL2CPP_INT32 ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept
     return *reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(ptr);
 }
 
+// -- Global assert failure counter (incremented by assertion helpers in generated code) --
+extern "C" CHAOS_IL2CPP_INT32 __chaos_assert_failures = 0;
+
 // -- Generic registration callback (defined by generated code via static init) --
 extern "C" void (*g_chaos_populate_generic_registration)(void) = nullptr;
 
@@ -514,3 +518,19 @@ extern "C" void (*g_chaos_register_name_index_modules)(void) = nullptr;
 
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
+
+// ── InterpreterEntryDirect: extern "C" forwarding wrapper ───────────────
+// The generated code emits an extern "C" forward declaration and references
+// &InterpreterEntryDirect in dispatch table entries.  This wrapper provides
+// the C-linkage symbol for verification builds.  The real implementation
+// (in interpreter_entry.cpp) requires the chaos_interpreter library; this
+// stub is sufficient for L2 checksum verification which never invokes
+// hot-patch dispatch.
+extern "C" void InterpreterEntryDirect(
+    uintptr_t /*method_key*/,
+    void*     /*args_buf*/,
+    void*     /*ret_buf*/) noexcept
+{
+    // Not reached during L2 checksum verification.
+    // Full implementation requires chaos_interpreter.lib.
+}

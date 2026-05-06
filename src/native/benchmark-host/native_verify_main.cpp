@@ -5,10 +5,30 @@
 /// fact_l2_verifier.py from the managed entrypoint DLL).
 ///
 /// On success: prints "L2: N/M passed" and exits 0.
-/// On failure: prints "FAIL [idx] expected=X got=Y" for each mismatch, exits >0.
+/// On failure: prints failure count, exits >0.
+///
+/// Verification uses two mechanisms:
+///   1. Assert intrinsic: the AOT codegen recognizes Chaos.TestFramework.Assert::*
+///      calls and emits inline comparison code that increments __chaos_assert_failures.
+///   2. Return value check: each RunNativeAot(i) result is compared against the
+///      expected checksum from the managed L2Harness reflection run.
+///
+/// Exception handling: methods that throw (e.g. Convert.ToChar(bool)) call
+/// RaiseManagedException which needs the full runtime.  In L2 verification
+/// mode the runtime is not initialized, so we register a setjmp/longjmp
+/// fallback that catches the throw gracefully.
 
-#include <cstdio>
 #include <cstdlib>
+#include <csetjmp>
+
+#include <chaos/common.h>
+
+// Assert failure counter — incremented inline by generated assert intrinsic code.
+// Defined in the generated translation unit (native-aot.generated.cpp).
+extern "C" int __chaos_assert_failures;
+
+// Fallback callback for RaiseManagedException (declared in exception_helpers.h).
+extern "C" void SetExceptionFallback(void (*fn)());
 
 extern "C" int RunNativeAot(int entryIndex);
 
@@ -18,20 +38,60 @@ extern "C" int RunNativeAot(int entryIndex);
 //   constexpr int kExpectedCount = N;
 #include "expected_checksums.h"
 
+// jmp_buf and fallback function for catching throwing methods
+static jmp_buf s_verify_buf;
+
+static void exception_fallback() {
+    longjmp(s_verify_buf, 1);
+}
+
 int main() {
-    int failures = 0;
+    // Reset assert counter before running
+    __chaos_assert_failures = 0;
+
+    // Register the longjmp fallback for RaiseManagedException
+    SetExceptionFallback(&exception_fallback);
+
+    int return_value_failures = 0;
 
     for (int i = 0; i < kExpectedCount; i++) {
-        int actual = RunNativeAot(i);
+        int actual = 0;
+        bool threw = false;
+
+        if (setjmp(s_verify_buf) == 0) {
+            // Normal path: call the native AOT entry
+            actual = RunNativeAot(i);
+        } else {
+            // longjmp path: method threw a managed exception
+            threw = true;
+        }
+
+        if (kExpectedChecksums[i] == -1) {
+            // Skip: method threw during managed reflection, no expected checksum.
+            continue;
+        }
+        if (threw) {
+            CHAOS_IL2CPP_LOG_ERROR_M("L2", "FAIL [{0}]: native threw, expected {1}",
+                                     i, kExpectedChecksums[i]);
+            return_value_failures++;
+            continue;
+        }
         if (actual != kExpectedChecksums[i]) {
-            std::printf("FAIL [%d]: expected %d, got %d\n",
-                        i, kExpectedChecksums[i], actual);
-            failures++;
+            CHAOS_IL2CPP_LOG_ERROR_M("L2", "FAIL [{0}]: expected {1}, got {2}",
+                                     i, kExpectedChecksums[i], actual);
+            return_value_failures++;
         }
     }
 
-    int passed = kExpectedCount - failures;
-    std::printf("L2: %d/%d passed\n", passed, kExpectedCount);
+    // Clear the fallback (no longer needed)
+    SetExceptionFallback(nullptr);
 
-    return failures;
+    // Combine: assert intrinsic failures + return value mismatches
+    int total_failures = __chaos_assert_failures + return_value_failures;
+    int passed = kExpectedCount - return_value_failures;
+    CHAOS_IL2CPP_LOG_INFO_M("L2", "{0}/{1} passed (assert_failures={2}, return_failures={3})",
+                            passed, kExpectedCount,
+                            __chaos_assert_failures, return_value_failures);
+
+    return total_failures;
 }

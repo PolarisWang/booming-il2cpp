@@ -68,7 +68,21 @@ parent_task_relation: child
 | hotupdate-proof | 未执行 | 尚未运行 hotupdate proof |
 | codegen-review | 未执行 | 尚未运行 codegen review |
 
+## 已完成
+
+### 2026-05-05 Assert 验证管线完成 (convert-char)
+1. **Codegen intrinsic** — Chaos.TestFramework.Assert::* 调用 → inline C++ assert code + `__chaos_assert_failures++`
+2. **Entrypoint generator** — Assert.Equal 注入到 API 调用后
+3. **native_verify_main.cpp** — assert failure count + return value 双检查
+4. **Bug fix: Convert.ToChar(string) segfault** — 外部运行时助手桩对 null string 无保护 (`chaos_arg_0 == 0` 时解引用空指针)。已添加 null guard。
+5. **Bug fix: -1 sentinel checksum** — L2 harness 记录抛出方法为 -1，但 native 比较未跳过 -1。已更新 `native_verify_main.cpp` 跳过 expected == -1。
+6. **convert-char L2 verification 通过**: 18/18 pass
+
 ## 下一步
 
-1. 重新运行 native-proof 验证（含 stub 检测门）
-2. 开始 Phase B: 逐 family 真实 il2cpp 翻译 + managed/native/hotupdate proof
+1. ✅ 重新运行 native-proof 验证（含 stub 检测门）→ 完成
+   - 验证结果: 0 stub 发现, CoreLib 33 families 100%, 其他 92 families pending (等待 Phase B 开发)
+   - 证据: verification/projections/foundation-dll-audit/family-verification.json
+2. Phase B: 逐 family 真实 il2cpp 翻译 + managed/native/hotupdate proof
+   - ✅ convert-char: L2 native-proof 18/18 通过
+   - ⏳ 下一 family: 待选择

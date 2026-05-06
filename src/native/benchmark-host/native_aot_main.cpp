@@ -1,8 +1,8 @@
 #include <chrono>
 #include <cstdint>
-#include <cstdio>
 #include <cstring>
-#include <chaos/native_types.h>
+
+#include <chaos/common.h>
 
 #ifndef CHAOS_NATIVE_AOT_ENTRY
 #define CHAOS_NATIVE_AOT_ENTRY RunNativeAot
@@ -74,20 +74,21 @@ int main(int argc, char** argv) {
     const double ops_per_second = seconds > 0.0 ? (static_cast<double>(iterations) / seconds) : 0.0;
 
     if (subject_id != nullptr) {
-        CHAOS_IL2CPP_PRINTF(
-            "{\"elapsedMilliseconds\":%.6f,\"opsPerSecond\":%.6f,\"checksum\":%lld,\"iterations\":%d,\"subjectId\":\"%s\"}\n",
+        CHAOS_IL2CPP_LOG_WRITE_RAW_M(
+            "{{\"elapsedMilliseconds\":{0:.6f},\"opsPerSecond\":{1:.6f},\"checksum\":{2},\"iterations\":{3},\"subjectId\":\"{4}\"}}\n",
             elapsed,
             ops_per_second,
             NormalizeChecksum(checksum),
             iterations,
             subject_id);
     } else {
-        CHAOS_IL2CPP_PRINTF(
-            "{\"elapsedMilliseconds\":%.6f,\"opsPerSecond\":%.6f,\"checksum\":%lld,\"iterations\":%d}\n",
+        CHAOS_IL2CPP_LOG_WRITE_RAW_M(
+            "{{\"elapsedMilliseconds\":{0:.6f},\"opsPerSecond\":{1:.6f},\"checksum\":{2},\"iterations\":{3}}}\n",
             elapsed,
             ops_per_second,
             NormalizeChecksum(checksum),
             iterations);
     }
+    CHAOS_IL2CPP_LOG_FLUSH_STDOUT();
     return 0;
 }

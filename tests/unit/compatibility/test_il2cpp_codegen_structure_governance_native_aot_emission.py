@@ -1,7 +1,15 @@
+import re
+
 from tests.unit.compatibility.il2cpp_codegen_structure_governance_test_support import *
 
 
 class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructureGovernanceTestSupport):
+    @staticmethod
+    def _strip_cppish_comments(source: str) -> str:
+        source = re.sub(r"//.*", "", source)
+        source = re.sub(r"/\*.*?\*/", "", source, flags=re.S)
+        return source
+
     def test_native_aot_collection_and_reflection_simple_helpers_prefer_scriban_templates(self) -> None:
         catalog_source = NATIVE_AOT_TEMPLATE_CATALOG_PATH.read_text(encoding="utf-8")
         collection_runtime_source = NATIVE_AOT_EXTERNAL_RUNTIME_COLLECTION_AND_REFLECTION_PATH.read_text(encoding="utf-8")
@@ -254,16 +262,25 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
 
     def test_native_aot_exception_emission_helpers_are_split_from_method_emission(self) -> None:
         method_emission_source = NATIVE_AOT_METHOD_EMISSION_PATH.read_text(encoding="utf-8")
+        exception_shape_planning_path = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Planning"
+            / "NativeAotLoweringPlanner.ExceptionShapePlanning.cs"
+        )
 
         self.assertTrue(
             NATIVE_AOT_EXCEPTION_EMISSION_PATH.is_file(),
             msg=f"missing exception emission split file: {NATIVE_AOT_EXCEPTION_EMISSION_PATH}",
         )
+        self.assertTrue(
+            exception_shape_planning_path.is_file(),
+            msg=f"missing exception shape planning split file: {exception_shape_planning_path}",
+        )
 
         for required_fragment in [
-            "private void EmitCatchOnlyExceptionMethodBody(",
-            "private void EmitFilterOnlyExceptionMethodBody(",
-            "private void EmitLinearInstructionSequence(",
             "private static IReadOnlyDictionary<int, int?> CreateNextOffsets(",
             "private static bool TryCreateCatchOnlyExceptionMethodShape(",
             "private static bool TryCreateFinallyHandlerEmissionPlan(",
@@ -274,14 +291,220 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
         self.assertIn("sealed partial class NativeAotLoweringPlanner", exception_emission_source)
 
         for required_fragment in [
-            "private void EmitCatchOnlyExceptionMethodBody(",
-            "private void EmitFilterOnlyExceptionMethodBody(",
-            "private void EmitLinearInstructionSequence(",
             "private static IReadOnlyDictionary<int, int?> CreateNextOffsets(",
+        ]:
+            self.assertIn(required_fragment, exception_emission_source)
+
+        for removed_fragment in [
             "private static bool TryCreateCatchOnlyExceptionMethodShape(",
             "private static bool TryCreateFinallyHandlerEmissionPlan(",
         ]:
-            self.assertIn(required_fragment, exception_emission_source)
+            self.assertNotIn(removed_fragment, exception_emission_source)
+
+        exception_shape_planning_source = exception_shape_planning_path.read_text(encoding="utf-8")
+        self.assertIn("sealed partial class NativeAotLoweringPlanner", exception_shape_planning_source)
+
+        for required_fragment in [
+            "private static bool TryCreateCatchOnlyExceptionMethodShape(",
+            "private static bool TryCreateFinallyHandlerEmissionPlan(",
+            "private static bool TryCreateFinallyOnlyExceptionMethodShape(",
+            "private static bool TryCreateCatchAndFinallyExceptionMethodShape(",
+            "private static bool TryCreateFilterAndFinallyExceptionMethodShape(",
+        ]:
+            self.assertIn(required_fragment, exception_shape_planning_source)
+
+    def test_native_aot_structured_ir_source_has_no_label_or_goto_model(self) -> None:
+        structured_ir_source = self._strip_cppish_comments((
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Emission"
+            / "NativeAotLoweringPlanner.StructuredIR.cs"
+        ).read_text(encoding="utf-8"))
+
+        for forbidden_fragment in [
+            "IRGoto(",
+            "CollectGotoTargets(",
+            "_irGotoTargets",
+            "_emittedLabels",
+            "goto chaos_ip_",
+            "chaos_ip_{offset}",
+            "chaos_ip_OFFSET",
+            "EmitIRGoto(",
+        ]:
+            self.assertNotIn(forbidden_fragment, structured_ir_source)
+
+    def test_native_aot_structured_ir_source_has_no_slot_rewrite_postprocessor(self) -> None:
+        structured_ir_source = self._strip_cppish_comments((
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Emission"
+            / "NativeAotLoweringPlanner.StructuredIR.cs"
+        ).read_text(encoding="utf-8"))
+
+        for forbidden_fragment in [
+            "private sealed class SlotContext",
+            "ReplaceStackOpsWithSlots(",
+            "__s[",
+        ]:
+            self.assertNotIn(forbidden_fragment, structured_ir_source)
+
+    def test_native_aot_structured_ir_declares_slots_after_exception_fast_path_split(self) -> None:
+        structured_ir_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Emission"
+            / "NativeAotLoweringPlanner.StructuredIR.cs"
+        ).read_text(encoding="utf-8")
+
+        try_build_structured_method_body_index = structured_ir_source.index("private bool TryBuildStructuredMethodBody(")
+        emit_via_structured_ir_index = structured_ir_source.index("private void EmitViaStructuredIR(")
+        try_build_structured_method_body = structured_ir_source[
+            try_build_structured_method_body_index:emit_via_structured_ir_index
+        ]
+
+        exception_split_index = try_build_structured_method_body.index(
+            "return TryBuildStructuredExceptionMethodBody("
+        )
+        slot_depth_compute_index = try_build_structured_method_body.index(
+            "maxDepth = ComputeMaxEvalStackDepth(instructions);"
+        )
+        self.assertGreater(
+            slot_depth_compute_index,
+            exception_split_index,
+            msg="structured slot sizing should happen after exception-path split in TryBuildStructuredMethodBody",
+        )
+
+    def test_native_aot_structured_ir_does_not_force_minimum_slot_floor(self) -> None:
+        structured_ir_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Emission"
+            / "NativeAotLoweringPlanner.StructuredIR.cs"
+        ).read_text(encoding="utf-8")
+
+        self.assertNotIn("Math.Max(16, maxDepth)", structured_ir_source)
+
+    def test_native_aot_method_emission_uses_path_sensitive_stack_state_declarations(self) -> None:
+        method_emission_source = NATIVE_AOT_METHOD_EMISSION_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("TryBuildStructuredMethodBody(method, instructions, offsets, out _, out int structuredSlotCount)", method_emission_source)
+        self.assertIn("if (usesStructuredSlots && structuredSlotCount > 0)", method_emission_source)
+        self.assertNotIn('EmitStructuredSlotDeclarations(builder, evalStackSize, "    ");', method_emission_source)
+        self.assertIn("else if (evalStackSize > 0)", method_emission_source)
+
+    def test_native_aot_exception_emission_source_has_no_chaos_ip_goto(self) -> None:
+        exception_emission_source = NATIVE_AOT_EXCEPTION_EMISSION_PATH.read_text(encoding="utf-8")
+
+        for forbidden_fragment in [
+            "goto chaos_ip_",
+            "chaos_ip_",
+        ]:
+            self.assertNotIn(forbidden_fragment, exception_emission_source)
+
+    def test_native_aot_exception_linear_emission_has_no_placeholder_or_passthrough_lowering(self) -> None:
+        exception_emission_source = NATIVE_AOT_EXCEPTION_EMISSION_PATH.read_text(encoding="utf-8")
+
+        for forbidden_fragment in [
+            '// box: passthrough',
+            '// unbox: passthrough',
+            '// type check: passthrough',
+            '// newarr: placeholder',
+            '// ldind: passthrough',
+            '// ldflda: placeholder',
+            '// ldsflda: placeholder',
+            '// cpobj: placeholder',
+            '// ldelem.i1: placeholder',
+            '// ldelem.u1: placeholder',
+            '// ldelem.i2: placeholder',
+            '// ldelem.u2: placeholder',
+            '// ldelem.i4: placeholder',
+            '// ldelem.u4: placeholder',
+            '// ldelem.i8: placeholder',
+            '// ldelem.r4: placeholder',
+            '// ldelem.r8: placeholder',
+            '// ldelem.ref: placeholder',
+            '// stelem.i1: placeholder',
+            '// stelem.i2: placeholder',
+            '// stelem.i4: placeholder',
+            '// stelem.i8: placeholder',
+            '// stelem.r4: placeholder',
+            '// stelem.r8: placeholder',
+            '// stelem.ref: placeholder',
+        ]:
+            self.assertNotIn(forbidden_fragment, exception_emission_source)
+
+    def test_native_aot_exception_linear_support_whitelist_covers_extended_object_model_opcodes(self) -> None:
+        exception_emission_source = NATIVE_AOT_EXCEPTION_EMISSION_PATH.read_text(encoding="utf-8")
+
+        support_method_start = exception_emission_source.index(
+            "private static bool IsStructuredEhLinearInstructionSupported(string op)"
+        )
+        support_method_end = exception_emission_source.index(
+            "private static int GetRequiredBranchTarget(",
+            support_method_start,
+        )
+        support_method_body = exception_emission_source[support_method_start:support_method_end]
+
+        for required_fragment in [
+            'case "ldind.i1":',
+            'case "ldind.u1":',
+            'case "ldind.i2":',
+            'case "ldind.u2":',
+            'case "ldind.i4":',
+            'case "ldind.u4":',
+            'case "ldind.i8":',
+            'case "ldind.r4":',
+            'case "ldind.r8":',
+            'case "ldind.ref":',
+            'case "stind.i1":',
+            'case "stind.i2":',
+            'case "stind.i4":',
+            'case "stind.i8":',
+            'case "stind.r4":',
+            'case "stind.r8":',
+            'case "stind.ref":',
+            'case "ldelem.i1":',
+            'case "ldelem.u1":',
+            'case "ldelem.i2":',
+            'case "ldelem.u2":',
+            'case "ldelem.i4":',
+            'case "ldelem.u4":',
+            'case "ldelem.i8":',
+            'case "ldelem.r4":',
+            'case "ldelem.r8":',
+            'case "ldelem.ref":',
+            'case "stelem.i1":',
+            'case "stelem.i2":',
+            'case "stelem.i4":',
+            'case "stelem.i8":',
+            'case "stelem.r4":',
+            'case "stelem.r8":',
+            'case "stelem.ref":',
+            'case "ldflda":',
+            'case "ldsflda":',
+            'case "newarr":',
+            'case "ldelema":',
+            'case "ldobj":',
+            'case "stobj":',
+            'case "cpblk":',
+            'case "localloc":',
+            'case "cpobj":',
+            'case "box":',
+            'case "unbox":',
+            'case "unbox.any":',
+            'case "castclass":',
+            'case "isinst":',
+            'case "initobj":',
+        ]:
+            self.assertIn(required_fragment, support_method_body)
 
     def test_native_aot_external_runtime_helpers_are_split_from_root_planner(self) -> None:
         planner_source = NATIVE_AOT_PLANNER_PATH.read_text(encoding="utf-8")

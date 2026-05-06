@@ -1,22 +1,18 @@
 # AI Code Review: exception-throw-diagnostics
 ## Type: codegen
-## Date: 2026-05-03T08:11:13.864866+00:00
+## Date: 2026-05-05T16:34:15.981623+00:00
 ## Verdict: PASS
 
 ## Summary
 - Total issues: 0
-- C++ LOC: 1098
-- C# methods: 0
-- C++ functions: 14
-- Stub functions: 0
-- Uncertain functions: 0
-- Bridge calls: 0
+- C++ LOC: 1422
+- C# methods: 26
+- C++ functions: 29
 
 ## Issues Found
 None — all checks passed.
 
 ## Check Results
-- stub_detection: PASS
 - signature_alignment: PASS
 - return_type_handling: PASS
 - null_handling: PASS

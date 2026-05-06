@@ -66,7 +66,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 
 - 当前验证立即视为失败
 - 必须保留并检查 `stderr`、`binlog`、堆栈或 dump
-- 必须走 `dev:systematic-debugging`
+- 必须走 `dev-systematic-debugging`
 - 根因未修复前，不得归档、提交或宣称通过
 
 ### 4. pipeline / codegen 不能漂移

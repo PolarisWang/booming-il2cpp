@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/activation",
+  "verificationKind": "hotupdate-proof",
+  "d3PatchApplied": true,
+  "d3PatchedCount": 9,
+  "summary": {
+    "totalMethods": 8,
+    "passedMethods": 8,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": [
+    {
+      "methodToken": 100663297,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663298,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663299,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663300,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663301,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663302,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663303,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    },
+    {
+      "methodToken": 100663304,
+      "status": "passed",
+      "d3Patched": true,
+      "patchReturnValue": 0,
+      "interpreterDispatched": true,
+      "revertVerified": false,
+      "semanticVerified": false
+    }
+  ]
+}

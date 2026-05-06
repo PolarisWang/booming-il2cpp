@@ -13,14 +13,14 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
 
 ### Foundation DLL 专项检查
 
-如果当前工作涉及 foundation DLL 能力族，必须在 `dev:foundation-dll-verification-pipeline` 通过后才能声称完成。该管线包含：
+如果当前工作涉及 foundation DLL 能力族，必须在 `dev-foundation-dll-verification-pipeline` 通过后才能声称完成。该管线包含：
 
 1. **Codegen Pipeline** — `batch_native_aot_runner.py` 通过
 2. **Data Integrity** — claims/coverage/ledger 一致
 3. **Three-Gate Verification** — Fact + Benchmark + HotUpdate 全部通过
 4. **Aggregate & Dashboard** — 报告已生成、dashboard 已刷新
 
-**禁止**：未跑完 `dev:foundation-dll-verification-pipeline` 就归档 foundation-dll 相关任务。
+**禁止**：未跑完 `dev-foundation-dll-verification-pipeline` 就归档 foundation-dll 相关任务。
 
 ## 闸门
 
@@ -44,7 +44,7 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
 - 项目级测试知识以 [`wiki/06-测试验证/INDEX.md`](../../../wiki/06-测试验证/INDEX.md) 为正式入口
 - selector / registry 信息优先读 `artifacts/tests/registry/current/index.json` 或执行 `run test registry list --json`
 - 如果 registry 给出 `canonicalCommand`，优先直接执行
-- 如果用户明确要求“新的验证通过记录 / 新的数据”，或任务命中 `dev:project-test-governance` / `verification-v1` 主线，则 regression 通过后还必须刷新 formal source；默认执行 `run verify verification-v1 --json`
+- 如果用户明确要求“新的验证通过记录 / 新的数据”，或任务命中 `dev-project-test-governance` / `verification-v1` 主线，则 regression 通过后还必须刷新 formal source；默认执行 `run verify verification-v1 --json`
 - `run test inventory` 不是 public verification entry
 - `benchmark --record` 不等于 formal refresh；需要新的 benchmark archive / projection / merged data 时，仍要执行 `run verify verification-v1 --json`
 - 只有 `summaryPath` / `eventsPath` / `consolePath`，但没有 `verification/archive/{latest,master,reports}` 或 `verification/evidence/owners/*/codegen-stubs/*` 更新时，不足以声称“新测试流程已打通”
@@ -69,11 +69,11 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
 
 ## 结构告警与架构审视
 
-在声称”可以 completed”之前，除了 formal verification 与受影响测试，还必须完成最新一轮结构审视（检查项同 `dev:executing-plans` 中的定义）。未解决的 `blocker` 会阻止完成声明。
+在声称”可以 completed”之前，除了 formal verification 与受影响测试，还必须完成最新一轮结构审视（检查项同 `dev-executing-plans` 中的定义）。未解决的 `blocker` 会阻止完成声明。
 
 ## Obligation-driven 任务
 
-如果任务命中以下任一字段或明显属于 AOT / IL2CPP / test governance 主线，则按 obligation-driven 模式验证（obligation 字段列表与确认优先级同 `dev:executing-plans` 中的定义）：
+如果任务命中以下任一字段或明显属于 AOT / IL2CPP / test governance 主线，则按 obligation-driven 模式验证（obligation 字段列表与确认优先级同 `dev-executing-plans` 中的定义）：
 
 ## `dotnet` 编译崩溃闸门
 

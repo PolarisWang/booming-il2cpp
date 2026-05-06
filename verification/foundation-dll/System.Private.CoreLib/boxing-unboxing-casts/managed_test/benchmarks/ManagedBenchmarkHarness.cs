@@ -1,5 +1,5 @@
 // Auto-generated managed benchmark harness
-// Family: family/System.Private.CoreLib/boxing/unboxing-casts
+// Family: family/System.Private.CoreLib/boxing-unboxing-casts
 using System;
 using System.Diagnostics;
 using Chaos.Benchmark.boxing_unboxing_casts;
@@ -25,7 +25,7 @@ var methodSubjects = new (string SubjectId, Action Body)[]
 Console.WriteLine("{");
 Console.WriteLine("  \"schemaVersion\": 1,");
 Console.WriteLine("  \"assemblyName\": \"System.Private.CoreLib\",");
-Console.WriteLine("  \"familyId\": \"family/System.Private.CoreLib/boxing/unboxing-casts\",");
+Console.WriteLine("  \"familyId\": \"family/System.Private.CoreLib/boxing-unboxing-casts\",");
 Console.WriteLine("  \"warmupIterations\": " + kWarmupIterations + ",");
 Console.WriteLine("  \"measureIterations\": " + kMeasureIterations + ",");
 Console.WriteLine("  \"results\": [");

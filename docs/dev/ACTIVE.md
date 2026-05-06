@@ -1,7 +1,7 @@
 # Active Task
 
-- task: foundation-dll-phase-1-corelib
-- status_file: docs/dev/in-progress/foundation-dll-phase-1-corelib/STATUS.md
-- started: 2026-05-02
-- current_phase: assessment-corrected
-- next: 重新运行 native-proof 验证 → 开始 Phase B 逐 family il2cpp 开发
+- task: il2cpp-full-translation
+- status_file: docs/dev/in-progress/il2cpp-full-translation/STATUS.md
+- started: 2026-05-06
+- current_phase: native-aot-no-goto-complete
+- next: 回到 `roadmap-v1-01.md` 主线，继续全量 IL2CPP 翻译后续阶段

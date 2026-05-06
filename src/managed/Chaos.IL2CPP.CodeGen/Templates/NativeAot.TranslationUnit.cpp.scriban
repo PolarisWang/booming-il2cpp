@@ -15,15 +15,15 @@ namespace
 {
 {{ object_model_section }}
 
+{{~ for declaration in method_declarations ~}}
+{{ declaration }}
+{{ end ~}}
+
 {{ module_registration_code }}
 }
 #pragma warning(pop)
 
 {{ generic_registration_code }}
-{{~ for declaration in method_declarations ~}}
-{{ declaration }}
-{{ end ~}}
-
 {{~ for method_section in method_sections ~}}
 {{ method_section }}
 

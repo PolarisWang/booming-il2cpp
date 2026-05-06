@@ -1,5 +1,5 @@
 // Auto-generated managed benchmark harness
-// Family: family/System.Private.CoreLib/delegate/core-invocation
+// Family: family/System.Private.CoreLib/delegate-core-invocation
 using System;
 using System.Diagnostics;
 using Chaos.Benchmark.delegate_core_invocation;
@@ -24,7 +24,7 @@ var methodSubjects = new (string SubjectId, Action Body)[]
 Console.WriteLine("{");
 Console.WriteLine("  \"schemaVersion\": 1,");
 Console.WriteLine("  \"assemblyName\": \"System.Private.CoreLib\",");
-Console.WriteLine("  \"familyId\": \"family/System.Private.CoreLib/delegate/core-invocation\",");
+Console.WriteLine("  \"familyId\": \"family/System.Private.CoreLib/delegate-core-invocation\",");
 Console.WriteLine("  \"warmupIterations\": " + kWarmupIterations + ",");
 Console.WriteLine("  \"measureIterations\": " + kMeasureIterations + ",");
 Console.WriteLine("  \"results\": [");

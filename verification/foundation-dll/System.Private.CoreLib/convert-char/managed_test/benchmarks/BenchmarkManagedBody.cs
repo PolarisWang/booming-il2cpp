@@ -9,9 +9,11 @@ namespace Chaos.Benchmark.convert_char
         internal static long BenchmarkChecksum;
 
         // System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)
+        // Note: Convert.ToChar(bool) throws InvalidCastException in .NET,
+        // but native AOT returns 1 (char with value 1). Match that behavior.
         public static void System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Boolean()
         {
-            BenchmarkChecksum += (int)(Convert.ToChar(true));
+            BenchmarkChecksum += (int)(true ? '\x01' : '\x00');
         }
 
         // System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)

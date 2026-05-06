@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\globalization-culture\\entrypoint\\build-output\\GlobalizationCultureNativeEntry.dll"
-    ],
-    "entry": "GlobalizationCultureNativeEntry/GlobalizationCultureNativeEntry::Run:System.Int32(System.Int32)"
-  }
-}

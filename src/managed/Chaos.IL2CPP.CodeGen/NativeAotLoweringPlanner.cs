@@ -129,6 +129,12 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private Dictionary<string, int> _methodNativeSymbolToManifestIndex = new();
 
+    /// <summary>
+    /// Maps method native symbol → slot index in s_dispatch_table (D3 hotpatch).
+    /// Populated by <see cref="BuildDispatchSlotMap"/> before method body emission.
+    /// </summary>
+    private Dictionary<string, int>? _nativeSymbolToDispatchSlot;
+
     public NativeAotTemplateModel Create(
         NativeAotLoweringPlanArtifact loweringPlan,
         AotCoreIrArtifact aotCoreIr,
@@ -166,6 +172,7 @@ public sealed partial class NativeAotLoweringPlanner
             .Select((method, idx) => (method.NativeSymbol, idx))
             .DistinctBy(t => t.NativeSymbol)
             .ToDictionary(t => t.NativeSymbol, t => t.idx);
+        _nativeSymbolToDispatchSlot = BuildDispatchSlotMap(reachableMethods, metadataRegistration);
         var stringLiterals = CollectStringLiterals(reachableMethods);
         _stringIdMapping = BuildStringIdMapping(stringLiterals);
         _cachedClosureAssemblyPaths = EnumerateClosureAssemblyPaths(closureManifest).ToArray();
@@ -212,7 +219,6 @@ public sealed partial class NativeAotLoweringPlanner
         EmitObjectModelDeclarations(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
         // Phase 0: Collect ModuleRegistry Tier 0 type data from PE metadata
         CollectModuleTypeData(closureManifest.InputAssemblyPath);
-        EmitReachableMethodForwardDeclarations(objectModelBuilder, reachableMethods);
         EmitStringIdTable(objectModelBuilder, stringLiterals);
         if (externalRuntimeHelpers.Any(helper => IsSpanRuntimeHelperSubjectId(helper.SubjectId)))
         {
@@ -286,6 +292,9 @@ public sealed partial class NativeAotLoweringPlanner
             EntryBridgeArguments = entryBridgeArguments,
             ShapeDispatchHeaderContent = _shapeRegistry.GenerateCppShapeHeader(),
             ModuleRegistrationCode = moduleRegistrationCode,
+            GlobalDeclarations =
+                "// Global assert failure counter for verification builds\n"
+                + "int __chaos_assert_failures = 0;\n",
         };
     }
 
@@ -549,6 +558,59 @@ public sealed partial class NativeAotLoweringPlanner
 
         string fullName = string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}";
         return $"{assemblyName}/{fullName}";
+    }
+
+    /// <summary>
+    /// Build a NativeSymbol → dispatch table slot index mapping by replicating
+    /// the same sorting logic used in <see cref="BuildNameIndex"/>.
+    ///
+    /// Only methods with metadata tokens are included (they are the only ones
+    /// that appear in s_dispatch_table).
+    /// </summary>
+    private Dictionary<string, int> BuildDispatchSlotMap(
+        IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
+        MetadataRegistrationArtifact metadataRegistration)
+    {
+        var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
+
+        var entries = new List<(string TypeName, string NativeSymbol, uint Token)>();
+        foreach (var method in reachableMethods)
+        {
+            string typeSubjectId;
+            try
+            {
+                typeSubjectId = GetMethodDeclaringTypeSubjectId(method.SubjectId);
+            }
+            catch
+            {
+                continue;
+            }
+
+            var typeName = GetTypeDisplayName(typeSubjectId);
+            uint token = tokenLookup.TryGetMethodToken(method.SubjectId);
+            if (token == 0)
+                continue;
+
+            entries.Add((typeName, method.NativeSymbol, token));
+        }
+
+        // Same grouping + sort as BuildNameIndex
+        var grouped = entries
+            .GroupBy(e => e.TypeName, StringComparer.Ordinal)
+            .OrderBy(g => g.Key, StringComparer.Ordinal)
+            .ToList();
+
+        var result = new Dictionary<string, int>(entries.Count, StringComparer.Ordinal);
+        int slot = 0;
+        foreach (var group in grouped)
+        {
+            foreach (var entry in group)
+            {
+                result[entry.NativeSymbol] = slot++;
+            }
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -2091,6 +2153,14 @@ public sealed record NativeAotTemplateModel
     /// registration call. Empty string for audit/inventory plan kinds.
     /// </summary>
     public required string ModuleRegistrationCode { get; init; }
+
+    /// <summary>
+    /// C++ code emitted at file scope (outside the anonymous namespace)
+    /// for global variables shared across translation units. Currently
+    /// used for the __chaos_assert_failures counter in verification builds.
+    /// Empty string when no globals are needed.
+    /// </summary>
+    public string GlobalDeclarations { get; init; } = "";
 }
 
 public sealed record NativeAotMethodTemplateModel

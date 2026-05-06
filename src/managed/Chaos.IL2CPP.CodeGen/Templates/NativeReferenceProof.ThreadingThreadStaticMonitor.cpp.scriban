@@ -3,7 +3,6 @@
 
 #include <atomic>
 #include <chaos/native_types.h>
-#include <cstdio>
 #include <thread>
 
 namespace chaos::il2cpp::generated {
@@ -21,15 +20,9 @@ void RecordFinalizer(void* object_instance) {
 }
 
 bool WriteExpectedOutputLine() {
-    if (CHAOS_IL2CPP_FWRITE(kExpectedOutput, 1u, {{ expected_output_byte_count }}u, stdout) != {{ expected_output_byte_count }}u) {
-        return false;
-    }
-
-    if (CHAOS_IL2CPP_FPUTC('\n', stdout) == EOF) {
-        return false;
-    }
-
-    return CHAOS_IL2CPP_FFLUSH(stdout) == 0;
+    CHAOS_IL2CPP_LOG_WRITE_RAW_M("{0}\n", kExpectedOutput);
+    CHAOS_IL2CPP_LOG_FLUSH_STDOUT();
+    return true;
 }
 
 }  // namespace

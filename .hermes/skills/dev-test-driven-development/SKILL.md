@@ -15,7 +15,7 @@ description: 在实现任何功能、修复任何 bug、调整任何长期规则
 
 本技能只拥有 RED-GREEN-REFACTOR 纪律。
 
-以下 authority 不由本技能定义，而是由 `dev:project-test-governance` 与 `wiki/06-测试验证/AOT新Feature接入自测规范.md` 持有：
+以下 authority 不由本技能定义，而是由 `dev-project-test-governance` 与 `wiki/06-测试验证/AOT新Feature接入自测规范.md` 持有：
 
 - `ownerSubjectId`
 - `proofRequired`
@@ -59,7 +59,7 @@ description: 在实现任何功能、修复任何 bug、调整任何长期规则
 
 - `dotnet build` / `dotnet test` / `msbuild` 在测试阶段崩溃，视为阻断性失败
 - 先保留失败的 project / target / task、退出码、`stderr`、`binlog` 与崩溃堆栈或 dump 信息（如果可用）
-- 立即进入 `dev:systematic-debugging`
+- 立即进入 `dev-systematic-debugging`
 - 根因未修复前，不得继续后续测试
 
 ## 最小循环

@@ -1,7 +1,7 @@
 #include "patch_loader.h"
 
-#include <cstdio>
 #include <cstring>
+#include <fmt/format.h>
 #include <new>
 
 namespace chaos::il2cpp::runtime_core {
@@ -130,17 +130,17 @@ const char* PatchMetadataCache::GetFullMethodName(const PatchMethodDefEntry* met
     // This matches the subject ID format used by NameIndexRegistry.
     if (ns[0] != '\0') {
         // Namespace.TypeName:MethodName
-        int len = std::snprintf(buffer, sizeof(buffer), "System.Private.CoreLib/%s.%s:%s",
-                                ns, type_name, method_name);
-        if (len < 0 || static_cast<size_t>(len) >= sizeof(buffer)) {
+        auto result = fmt::format_to_n(buffer, sizeof(buffer) - 1, "System.Private.CoreLib/{}.{}:{}",
+                                       ns, type_name, method_name);
+        if (result.size >= sizeof(buffer)) {
             std::strncpy(buffer, type_name, sizeof(buffer) - 1);
             buffer[sizeof(buffer) - 1] = '\0';
         }
     } else {
         // TypeName:MethodName (no namespace)
-        int len = std::snprintf(buffer, sizeof(buffer), "System.Private.CoreLib/%s:%s",
-                                type_name, method_name);
-        if (len < 0 || static_cast<size_t>(len) >= sizeof(buffer)) {
+        auto result = fmt::format_to_n(buffer, sizeof(buffer) - 1, "System.Private.CoreLib/{}:{}",
+                                       type_name, method_name);
+        if (result.size >= sizeof(buffer)) {
             std::strncpy(buffer, type_name, sizeof(buffer) - 1);
             buffer[sizeof(buffer) - 1] = '\0';
         }

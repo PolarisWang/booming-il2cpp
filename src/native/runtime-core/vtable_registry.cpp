@@ -15,7 +15,7 @@ namespace chaos::il2cpp::vtable_registry {
 namespace {
 
 struct VTableRegistryState {
-    CHAOS_IL2CPP_MUTEX                                            mutex;
+    CHAOS_IL2CPP_SHARED_MUTEX                                         mutex;
     // Key: type_token → registered vtable
     CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_UINT32, const TypeVTable*)       by_type_token;
 };
@@ -33,7 +33,7 @@ bool RegisterTypeVTable(const TypeVTable* vtable) {
     }
 
     auto& state = GetState();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(state.mutex);
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
 
     // Idempotent — re-registration of the same token is silently ignored.
     if (state.by_type_token.count(vtable->type_token)) {
@@ -86,7 +86,7 @@ bool RegisterRuntimeVTable(
     vtable->slots       = slots;
 
     auto& state = GetState();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(state.mutex);
+    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
 
     if (state.by_type_token.count(type_token)) {
         std::free(vtable);
@@ -97,6 +97,21 @@ bool RegisterRuntimeVTable(
     return true;
 }
 
+const TypeVTable* TryGetTypeVTable(CHAOS_IL2CPP_UINT32 type_token) {
+    if (type_token == 0u) {
+        return nullptr;
+    }
+
+    auto& state = GetState();
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
+
+    auto it = state.by_type_token.find(type_token);
+    if (it == state.by_type_token.end()) {
+        return nullptr;
+    }
+    return it->second;
+}
+
 void* ResolveVirtualMethodPointer(
     CHAOS_IL2CPP_UINT32 instance_type_token,
     CHAOS_IL2CPP_UINT32 declared_method_token) {
@@ -105,7 +120,7 @@ void* ResolveVirtualMethodPointer(
     }
 
     auto& state = GetState();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(state.mutex);
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
 
     // Walk the inheritance chain starting from instance_type_token.
     CHAOS_IL2CPP_UINT32 current_token = instance_type_token;
@@ -131,7 +146,7 @@ void* ResolveVirtualMethodPointer(
 
 CHAOS_IL2CPP_UINT32 GetRegisteredVTableCount() {
     auto& state = GetState();
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(state.mutex);
+    CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
     return static_cast<CHAOS_IL2CPP_UINT32>(state.by_type_token.size());
 }
 

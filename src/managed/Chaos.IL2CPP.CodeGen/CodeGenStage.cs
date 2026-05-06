@@ -159,12 +159,12 @@ public sealed class CodeGenStage
             System.IO.Directory.CreateDirectory(asmOutputRoot);
 
             // Filter AotCoreIr methods to this assembly
-            var assemblyMethods = fullResult.AotCoreIr?.Methods
+            var assemblyMethods = fullResult.AotCoreIr.Methods
                 .Where(m => m.SubjectId.StartsWith(asmName + "/", System.StringComparison.Ordinal)
                          || m.SubjectId.StartsWith(asmName + ".", System.StringComparison.Ordinal))
-                .ToList() ?? [];
+                .ToList();
 
-            var filteredAotCoreIr = fullResult.AotCoreIr is null ? null : fullResult.AotCoreIr with
+            var filteredAotCoreIr = fullResult.AotCoreIr with
             {
                 Methods = assemblyMethods,
             };

@@ -19,6 +19,7 @@
 #include <limits>
 #include <memory>
 #include <mutex>
+#include <shared_mutex>
 #include <string>
 #include <string_view>
 #include <thread>
@@ -87,8 +88,12 @@
 #define CHAOS_IL2CPP_REALLOC(p,s)  std::realloc(p, s)
 
 // ── I/O (reference proof / test code) ──────────────────────
-#define CHAOS_IL2CPP_PRINTF(fmt, ...) std::printf(fmt, ##__VA_ARGS__)
-#define CHAOS_IL2CPP_FFLUSH(f)        std::fflush(f)
+// NOTE: std::printf / std::fflush are forbidden project-wide.
+// Use unified logging API:
+//   CHAOS_IL2CPP_LOG_INFO("cat", "msg")          — human readable
+//   CHAOS_IL2CPP_LOG_INFO_M("cat", "fmt{0}", a)  — formatted
+//   CHAOS_IL2CPP_LOG_WRITE_RAW("json_line\n")    — machine protocol
+//   CHAOS_IL2CPP_LOG_FLUSH_STDOUT()              — raw stdout flush
 #define CHAOS_IL2CPP_FWRITE(buf, s, c, f) std::fwrite(buf, s, c, f)
 #define CHAOS_IL2CPP_FPUTC(c, f)      std::fputc(c, f)
 
@@ -99,10 +104,12 @@
 #define CHAOS_IL2CPP_ONCE_FLAG                std::once_flag
 #define CHAOS_IL2CPP_CALL_ONCE(f, init)       std::call_once(f, init)
 #define CHAOS_IL2CPP_MUTEX                    std::mutex
+#define CHAOS_IL2CPP_SHARED_MUTEX             std::shared_mutex
 #define CHAOS_IL2CPP_RECURSIVE_MUTEX          std::recursive_timed_mutex
 #define CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX     std::recursive_mutex
 #define CHAOS_IL2CPP_LOCK_GUARD(M)            std::lock_guard<M>
 #define CHAOS_IL2CPP_UNIQUE_LOCK(M)           std::unique_lock<M>
+#define CHAOS_IL2CPP_SHARED_LOCK(M)           std::shared_lock<M>
 #define CHAOS_IL2CPP_CONDITION_VARIABLE       std::condition_variable
 #define CHAOS_IL2CPP_THREAD                   std::thread
 #define CHAOS_IL2CPP_THIS_THREAD_SLEEP_FOR(t) std::this_thread::sleep_for(t)

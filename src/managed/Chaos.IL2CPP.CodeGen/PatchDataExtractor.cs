@@ -292,7 +292,7 @@ public sealed class PatchDataExtractor
             //   1 byte: (code_size << 2) | 0x02
             // Fat format:
             //   12 bytes: flags(2) + max_stack(2) + code_size(4) + local_sig_tok(4)
-            if (ilBytes.Length < 64 && body.MaxStack <= 8)
+            if (ilBytes.Length < 64 && body!.MaxStack <= 8)
             {
                 var hdr = (byte)((ilBytes.Length << 2) | 0x02);
                 ms.WriteByte(hdr);
@@ -302,7 +302,7 @@ public sealed class PatchDataExtractor
             else
             {
                 var flags = (ushort)0x0003;  // CorILMethod_FatFormat
-                var maxStack = (ushort)body.MaxStack;
+                var maxStack = (ushort)body!.MaxStack;
                 var codeSize = (uint)ilBytes.Length;
                 var localSig = (uint)MetadataTokens.GetToken(body.LocalSignature);
 
@@ -532,7 +532,7 @@ public sealed class PatchDataExtractor
     private static void WriteStruct<T>(BinaryWriter bw, T value) where T : unmanaged
     {
         Span<byte> buf = stackalloc byte[Marshal.SizeOf<T>()];
-        MemoryMarshal.Write(buf, ref value);
+        MemoryMarshal.Write(buf, in value);
         bw.Write(buf);
     }
 
@@ -542,7 +542,7 @@ public sealed class PatchDataExtractor
         var size = Marshal.SizeOf<T>();
         var buf = new byte[size * arr.Length];
         for (var i = 0; i < arr.Length; i++)
-            MemoryMarshal.Write(new Span<byte>(buf, i * size, size), ref arr[i]);
+            MemoryMarshal.Write(new Span<byte>(buf, i * size, size), in arr[i]);
         bw.Write(buf);
         var rem = (size * arr.Length) % 4;
         if (rem != 0) bw.Write(stackalloc byte[4 - rem]);

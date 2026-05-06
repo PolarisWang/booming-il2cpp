@@ -62,7 +62,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private string GetRequiredFunctionPointerTargetSymbol(AotCoreIrInstructionArtifact instruction)
 	{
-		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
+		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact? value))
 		{
 			return TryGetInstantiationStubSymbol(value) ?? value.NativeSymbol;
 		}
@@ -204,7 +204,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static AotCoreIrReferenceArtifact GetRequiredTargetReference(AotCoreIrInstructionArtifact instruction)
 	{
-		if ((object)instruction.TargetReference != null)
+		if (instruction.TargetReference is not null)
 		{
 			return instruction.TargetReference;
 		}
@@ -316,7 +316,7 @@ public sealed partial class NativeAotLoweringPlanner
 				}).TrimEnd());
 	}
 
-	private static void EmitAbiReturnPush(StringBuilder builder, AotCoreIrAbiSlotArtifact returnAbi, string resultExpression, string indentation)
+	private void EmitAbiReturnPush(StringBuilder builder, AotCoreIrAbiSlotArtifact returnAbi, string resultExpression, string indentation)
 	{
 		string[] pushLines;
 		switch (returnAbi.CarrierKindCode)
@@ -332,31 +332,31 @@ public sealed partial class NativeAotLoweringPlanner
 		case AotCoreIrAbiCarrierKind.ByRefToValueType:
 			pushLines =
 			[
-				$"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>({resultExpression});"
+				$"{indentation}{AllocateEvalStackTargetExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>({resultExpression});"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.Float32:
 			pushLines =
 			[
-				$"{indentation}chaos_eval_stack[chaos_stack_top++] = ChaosStoreFloat32({resultExpression});"
+				$"{indentation}{AllocateEvalStackTargetExpression()} = ChaosStoreFloat32({resultExpression});"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.Float64:
 			pushLines =
 			[
-				$"{indentation}chaos_eval_stack[chaos_stack_top++] = ChaosStoreFloat64({resultExpression});"
+				$"{indentation}{AllocateEvalStackTargetExpression()} = ChaosStoreFloat64({resultExpression});"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.Int64:
 			pushLines =
 			[
-				$"{indentation}chaos_eval_stack[chaos_stack_top++] = ChaosStoreInt64({resultExpression});"
+				$"{indentation}{AllocateEvalStackTargetExpression()} = ChaosStoreInt64({resultExpression});"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.UInt64:
 			pushLines =
 			[
-				$"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_store_uint64({resultExpression});"
+				$"{indentation}{AllocateEvalStackTargetExpression()} = chaos_store_uint64({resultExpression});"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.ValueTypeByValue:
@@ -364,7 +364,7 @@ public sealed partial class NativeAotLoweringPlanner
 			[
 				$"{indentation}auto* chaos_result_storage = new {GetRequiredAbiValueTypeSymbol(returnAbi)}{{}};",
 				$"{indentation}*chaos_result_storage = {resultExpression};",
-				$"{indentation}chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_result_storage);",
+				$"{indentation}{AllocateEvalStackTargetExpression()} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_result_storage);",
 			];
 			break;
 		default:
@@ -433,7 +433,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static AotCoreIrAbiSlotArtifact CreateCallSiteReturnAbi(AotCoreIrInstructionArtifact instruction)
 	{
-		if ((object)instruction.CallSiteSignature == null)
+		if (instruction.CallSiteSignature is null)
 		{
 			throw new NotSupportedException("native-aot lowering requires call-site signature metadata for '" + instruction.Op + "'.");
 		}
@@ -740,7 +740,12 @@ public sealed partial class NativeAotLoweringPlanner
 	private static string FormatInboundAbiArgumentExpression(AotCoreIrAbiSlotArtifact abiSlot, string sourceName)
 	{
 		if (abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt
-		    || abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.ByRef
+		    && abiSlot.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
+		{
+			return "chaos_normalize_native_int_argument(" + sourceName + ")";
+		}
+
+		if (abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.ByRef
 		    || abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.ByRefToValueType
 		    || abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.MultiReturn)
 		{

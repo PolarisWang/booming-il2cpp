@@ -1,5 +1,5 @@
 // Auto-generated benchmark managed bodies
-// Family: family/System.Private.CoreLib/boxing/unboxing-casts
+// Family: family/System.Private.CoreLib/boxing-unboxing-casts
 using System;
 
 namespace Chaos.Benchmark.boxing_unboxing_casts
@@ -17,7 +17,7 @@ namespace Chaos.Benchmark.boxing_unboxing_casts
         // System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)
         public static void System_Private_CoreLib_System_Convert_ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider()
         {
-            BenchmarkChecksum += ((Convert.ChangeType(42, typeof(byte), null!)).GetHashCode());
+            BenchmarkChecksum += ((Convert.ChangeType(42, typeof(byte), null)).GetHashCode());
         }
 
         // System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)

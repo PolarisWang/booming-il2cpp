@@ -35,7 +35,7 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					throw new InvalidOperationException("reference type inheritance cycle detected for '" + typeSubjectId + "'.");
 				}
-				if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string value) && !string.IsNullOrEmpty(value) && referenceTypeSubjectIds.Contains(value))
+				if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value) && !string.IsNullOrEmpty(value) && referenceTypeSubjectIds.Contains(value))
 				{
 					Visit(value);
 				}
@@ -53,8 +53,8 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			foreach (AotCoreIrInstructionArtifact instruction in method.Instructions)
 			{
-				AotCoreIrReferenceArtifact targetReference = instruction.TargetReference;
-				if ((object)targetReference != null)
+				AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;
+				if (targetReference is not null)
 				{
 					if (targetReference.Kind == AotCoreIrReferenceKind.Type && targetReference.TypeShape == AotCoreIrTypeShapeKind.ValueType)
 					{
@@ -79,8 +79,8 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			foreach (AotCoreIrInstructionArtifact instruction in method.Instructions)
 			{
-				AotCoreIrReferenceArtifact targetReference = instruction.TargetReference;
-				if ((object)targetReference != null)
+				AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;
+				if (targetReference is not null)
 				{
 					if (targetReference.Kind == AotCoreIrReferenceKind.Type && targetReference.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
 					{
@@ -103,8 +103,8 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			foreach (AotCoreIrInstructionArtifact instruction in method.Instructions)
 			{
-				AotCoreIrReferenceArtifact targetReference = instruction.TargetReference;
-				if ((object)targetReference != null)
+				AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;
+				if (targetReference is not null)
 				{
 					if (targetReference.Kind == AotCoreIrReferenceKind.Type && (targetReference.TypeShape == AotCoreIrTypeShapeKind.ReferenceType || targetReference.TypeShape == AotCoreIrTypeShapeKind.ValueType))
 					{
@@ -124,7 +124,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				return;
 			}
-			if (!implementedInterfaceSubjectIds.TryGetValue(typeSubjectId, out HashSet<string> value))
+			if (!implementedInterfaceSubjectIds.TryGetValue(typeSubjectId, out HashSet<string>? value))
 			{
 				value = (implementedInterfaceSubjectIds[typeSubjectId] = new HashSet<string>(StringComparer.Ordinal));
 			}
@@ -145,8 +145,8 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			foreach (var instruction in method.Instructions)
 			{
-				var targetReference = instruction.TargetReference;
-				if ((object)targetReference != null)
+				AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;
+				if (targetReference is not null)
 				{
 					if (targetReference.Kind == AotCoreIrReferenceKind.Type && targetReference.IsSealed)
 					{
@@ -202,16 +202,16 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private IReadOnlyList<AotCoreIrAbiSlotArtifact> ResolveDelegateInvokeParameterAbis(AotCoreIrInstructionArtifact instruction)
 	{
-		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
+		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact? value))
 		{
 			return value.ParameterAbis;
 		}
-		return GetMethodParameterTypes(instruction.Callee).Select(CreateLegacyAbiSlot).ToArray();
+		return GetMethodParameterTypes(instruction.Callee!).Select(CreateLegacyAbiSlot).ToArray();
 	}
 
 	private AotCoreIrAbiSlotArtifact ResolveDelegateInvokeReturnAbi(AotCoreIrInstructionArtifact instruction)
 	{
-		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
+		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact? value))
 		{
 			return value.ReturnAbi;
 		}
@@ -698,17 +698,17 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			CustomAttributeLiteralKind.Null => "static_cast<CHAOS_IL2CPP_INTPTR>(0)", 
 			CustomAttributeLiteralKind.Boolean => ((bool)value.Value!) ? "static_cast<CHAOS_IL2CPP_INTPTR>(1)" : "static_cast<CHAOS_IL2CPP_INTPTR>(0)", 
-			CustomAttributeLiteralKind.Byte => $"static_cast<CHAOS_IL2CPP_INTPTR>({(byte)value.Value})",
-			CustomAttributeLiteralKind.SByte => $"static_cast<CHAOS_IL2CPP_INTPTR>({(sbyte)value.Value})",
-			CustomAttributeLiteralKind.Int16 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(short)value.Value})",
-			CustomAttributeLiteralKind.Int32 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(int)value.Value})",
-			CustomAttributeLiteralKind.Int64 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(long)value.Value}ll)",
-			CustomAttributeLiteralKind.UInt16 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(ushort)value.Value}u)",
-			CustomAttributeLiteralKind.UInt32 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(uint)value.Value}u)",
-			CustomAttributeLiteralKind.UInt64 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(ulong)value.Value}ull)",
-			CustomAttributeLiteralKind.Char => $"static_cast<CHAOS_IL2CPP_INTPTR>({(char)value.Value})",
-			CustomAttributeLiteralKind.Single => $"ChaosStoreFloat32({(float)value.Value}f)",
-			CustomAttributeLiteralKind.Double => $"ChaosStoreFloat64({(double)value.Value})",
+			CustomAttributeLiteralKind.Byte => $"static_cast<CHAOS_IL2CPP_INTPTR>({(byte)value.Value!})",
+			CustomAttributeLiteralKind.SByte => $"static_cast<CHAOS_IL2CPP_INTPTR>({(sbyte)value.Value!})",
+			CustomAttributeLiteralKind.Int16 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(short)value.Value!})",
+			CustomAttributeLiteralKind.Int32 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(int)value.Value!})",
+			CustomAttributeLiteralKind.Int64 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(long)value.Value!}ll)",
+			CustomAttributeLiteralKind.UInt16 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(ushort)value.Value!}u)",
+			CustomAttributeLiteralKind.UInt32 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(uint)value.Value!}u)",
+			CustomAttributeLiteralKind.UInt64 => $"static_cast<CHAOS_IL2CPP_INTPTR>({(ulong)value.Value!}ull)",
+			CustomAttributeLiteralKind.Char => $"static_cast<CHAOS_IL2CPP_INTPTR>({(char)value.Value!})",
+			CustomAttributeLiteralKind.Single => $"ChaosStoreFloat32({(float)value.Value!}f)",
+			CustomAttributeLiteralKind.Double => $"ChaosStoreFloat64({(double)value.Value!})",
 			CustomAttributeLiteralKind.String => "chaos_reflection_create_string_literal(" + ToCppStringLiteral((string)value.Value!) + ")",
 			CustomAttributeLiteralKind.Type or CustomAttributeLiteralKind.Enum => "static_cast<CHAOS_IL2CPP_INTPTR>(0)",
 			_ => throw new NotSupportedException($"unsupported custom attribute literal kind '{value.Kind}'."), 

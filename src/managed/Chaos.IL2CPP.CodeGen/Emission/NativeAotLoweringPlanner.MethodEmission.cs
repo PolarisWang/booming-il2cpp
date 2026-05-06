@@ -43,7 +43,7 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
 		{
 			declarations.Add(FormatMethodDeclaration(reachableMethod));
-			string text = TryGetInstantiationStubSymbol(reachableMethod);
+			string? text = TryGetInstantiationStubSymbol(reachableMethod);
 			if (!string.IsNullOrEmpty(text))
 			{
 				declarations.Add(FormatMethodDeclaration(text, reachableMethod.ReturnAbi, GetMethodAbiParameterSlots(reachableMethod)));
@@ -57,7 +57,7 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
 		{
 			builder.AppendLine(FormatMethodDeclaration(reachableMethod));
-			string text = TryGetInstantiationStubSymbol(reachableMethod);
+			string? text = TryGetInstantiationStubSymbol(reachableMethod);
 			if (!string.IsNullOrEmpty(text))
 			{
 				builder.AppendLine(FormatMethodDeclaration(text, reachableMethod.ReturnAbi, GetMethodAbiParameterSlots(reachableMethod)));
@@ -72,7 +72,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private void EmitGenericInstantiationStub(StringBuilder builder, AotCoreIrMethodArtifact method)
 	{
-		string text = TryGetInstantiationStubSymbol(method);
+		string? text = TryGetInstantiationStubSymbol(method);
 		if (string.IsNullOrEmpty(text))
 		{
 			return;
@@ -106,6 +106,7 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitManagedMethod(StringBuilder builder, AotCoreIrMethodArtifact method)
 	{
 		ValidateMethod(method);
+		_linearScratchCounter = 0;
 
 		// P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.
 		if (method.IsPInvoke)
@@ -117,11 +118,12 @@ public sealed partial class NativeAotLoweringPlanner
 		IReadOnlyList<AotCoreIrInstructionArtifact> instructions = method.Instructions;
 		ValidateInstructions(method, instructions);
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
-		int value = Math.Max(instructions.Count, 1);
 		IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset = CreateNextOffsets(instructions);
 		HashSet<int> offsets = new HashSet<int>(instructions.Count);
 			for (int idx = 0; idx < instructions.Count; idx++)
 				offsets.Add(GetRequiredIlOffset(instructions[idx]));
+		bool usesStructuredSlots = TryBuildStructuredMethodBody(method, instructions, offsets, out _, out int structuredSlotCount);
+		int evalStackSize = usesStructuredSlots ? 0 : Math.Max(ComputeMaxEvalStackDepth(instructions), 1);
 		StringBuilder stringBuilder = builder;
 		StringBuilder stringBuilder2 = stringBuilder;
 		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder);
@@ -154,32 +156,24 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendFormatted(Math.Max(method.LocalCount, 1));
 		handler.AppendLiteral(") chaos_locals{};");
 		stringBuilder5.AppendLine(ref handler);
-		stringBuilder = builder;
-		StringBuilder stringBuilder6 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(51, 1, stringBuilder);
-		handler.AppendLiteral("    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
-		handler.AppendFormatted(value);
-		handler.AppendLiteral(") chaos_eval_stack{};");
-		stringBuilder6.AppendLine(ref handler);
-		builder.AppendLine("    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
+		if (usesStructuredSlots && structuredSlotCount > 0)
+		{
+			EmitStructuredSlotDeclarations(builder, structuredSlotCount, "    ");
+		}
+		else if (evalStackSize > 0)
+		{
+			stringBuilder = builder;
+			StringBuilder stringBuilder6 = stringBuilder;
+			handler = new StringBuilder.AppendInterpolatedStringHandler(51, 1, stringBuilder);
+			handler.AppendLiteral("    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
+			handler.AppendFormatted(evalStackSize);
+			handler.AppendLiteral(") chaos_eval_stack{};");
+			stringBuilder6.AppendLine(ref handler);
+			builder.AppendLine("    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
+		}
 		EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
 		EmitStaticInitializationPrologue(builder, method);
 		builder.AppendLine();
-		// Complex exception shapes with nested finally handlers use the old path.
-		// Simple shapes (catch-only, filter-only, finally-only) and non-exception
-		// methods are handled by EmitViaStructuredIR with IRExceptionRegion nodes.
-		if (TryCreateCatchAndFinallyExceptionMethodShape(method, out CatchAndFinallyExceptionMethodShape catchAndFinallyShape))
-		{
-			EmitCatchAndFinallyExceptionMethodBody(builder, method, catchAndFinallyShape!, nextOffsetsByIlOffset, offsets);
-			builder.AppendLine("}");
-			return;
-		}
-		if (TryCreateFilterAndFinallyExceptionMethodShape(method, out FilterAndFinallyExceptionMethodShape filterAndFinallyShape))
-		{
-			EmitFilterAndFinallyExceptionMethodBody(builder, method, filterAndFinallyShape!, nextOffsetsByIlOffset, offsets);
-			builder.AppendLine("}");
-			return;
-		}
 		EmitStructuredInstructionRange(builder, method, instructions, nextOffsetsByIlOffset, offsets);
 		builder.AppendLine("}");
 	}
@@ -195,7 +189,6 @@ public sealed partial class NativeAotLoweringPlanner
 		bool hasStringParams = method.StringParameterIndices is { Count: > 0 };
 		bool hasStringReturn = string.Equals(method.ReturnType, "System.String", StringComparison.Ordinal);
 		bool hasBlittableStructParams = method.BlittableStructParameterIndices is { Count: > 0 };
-		bool hasBlittableStructReturn = false; // V1: no blittable struct return support
 		bool hasSimpleNonBlittableStructParams = method.SimpleNonBlittableStructParameterIndices is { Count: > 0 };
 		bool hasComplexStructParams = method.ComplexStructParameterIndices is { Count: > 0 };
 		bool needsMarshalling = hasStringParams || hasStringReturn || hasBlittableStructParams || hasSimpleNonBlittableStructParams || hasComplexStructParams;
@@ -520,7 +513,7 @@ public sealed partial class NativeAotLoweringPlanner
 			throw new InvalidOperationException("native-aot method '" + method.SubjectId + "' is missing native symbol metadata");
 		}
 		MapAbiSlotReturnType(method.ReturnAbi);
-		if (method.ExceptionRegionCount != 0 && !TryCreateCatchOnlyExceptionMethodShape(method, out CatchOnlyExceptionMethodShape _) && !TryCreateFilterOnlyExceptionMethodShape(method, out FilterOnlyExceptionMethodShape _) && !TryCreateFinallyOnlyExceptionMethodShape(method, out FinallyOnlyExceptionMethodShape _) && !TryCreateCatchAndFinallyExceptionMethodShape(method, out CatchAndFinallyExceptionMethodShape _) && !TryCreateFilterAndFinallyExceptionMethodShape(method, out FilterAndFinallyExceptionMethodShape _))
+		if (method.ExceptionRegionCount != 0 && !TryCreateCatchOnlyExceptionMethodShape(method, out _) && !TryCreateFilterOnlyExceptionMethodShape(method, out _) && !TryCreateFinallyOnlyExceptionMethodShape(method, out _) && !TryCreateCatchAndFinallyExceptionMethodShape(method, out _) && !TryCreateFilterAndFinallyExceptionMethodShape(method, out _))
 		{
 			throw new NotSupportedException("native-aot method '" + method.SubjectId + "' does not support current exception region shape");
 		}
@@ -545,11 +538,11 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private void EmitInstruction(StringBuilder builder, AotCoreIrMethodArtifact method, AotCoreIrInstructionArtifact instruction, int? nextOffset, IReadOnlySet<int> offsets)
 	{
-		AotCoreIrReferenceArtifact targetReference = instruction.TargetReference;
+		AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;
 		if (!string.IsNullOrEmpty(targetReference?.OpenDefinitionSubjectId) ||
-			(object)targetReference?.SharedGenericBodyId != null ||
-			(object)targetReference?.InstantiationStubId != null ||
-			(object)targetReference?.RuntimeGenericContext != null)
+			targetReference?.SharedGenericBodyId is not null ||
+			targetReference?.InstantiationStubId is not null ||
+			targetReference?.RuntimeGenericContext is not null)
 		{
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder2 = stringBuilder;
@@ -902,13 +895,7 @@ public sealed partial class NativeAotLoweringPlanner
 			break;
 		case "br":
 		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder4 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder);
-			handler.AppendLiteral("    goto chaos_ip_");
-			handler.AppendFormatted(GetRequiredBranchTarget(instruction, offsets));
-			handler.AppendLiteral(";");
-			stringBuilder4.AppendLine(ref handler);
+			EmitDispatchTransfer(builder, GetRequiredBranchTarget(instruction, offsets), "    ");
 			break;
 		}
 		case "brtrue":
@@ -919,13 +906,7 @@ public sealed partial class NativeAotLoweringPlanner
 			break;
 		case "leave":
 		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder3 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder);
-			handler.AppendLiteral("    goto chaos_ip_");
-			handler.AppendFormatted(GetRequiredBranchTarget(instruction, offsets));
-			handler.AppendLiteral(";");
-			stringBuilder3.AppendLine(ref handler);
+			EmitDispatchTransfer(builder, GetRequiredBranchTarget(instruction, offsets), "    ");
 			break;
 		}
 		case "beq":
@@ -962,29 +943,42 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private void EmitDirectCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
+
 		InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
 		string? targetSymbol = invocationTarget.TargetSymbol;
 
 		// Cross-module calls use method_table dispatch instead of direct symbol calls.
 		// When targetSymbol is null (unresolved external generic instantiation),
 		// use "0" (nullptr) as the method table function pointer placeholder.
+
 		if (TryGetMethodTableIndex(instruction.Callee, targetSymbol ?? "0", out uint methodTableIndex))
 		{
 			string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 			string paramSig = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
 			targetSymbol = $"(*reinterpret_cast<{returnType}(*)({paramSig})>(::chaos::il2cpp::method_table::g_method_table[{methodTableIndex}].fn_ptr))";
+			EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: false);
 		}
 		else if (targetSymbol is null)
 		{
-			// Same-module call with no target symbol -- this should not happen
-			// for unresolved externals (they are always cross-module), but
-			// guard against generating invalid code.
 			throw new NotSupportedException(
 			    "native-aot lowering cannot resolve call target '" +
 			    (instruction.Callee ?? "<null>") + "'");
 		}
-
-		EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: false);
+		else
+		{
+			int dispatchSlot = _nativeSymbolToDispatchSlot != null &&
+				_nativeSymbolToDispatchSlot.TryGetValue(targetSymbol, out int slot) ? slot : -1;
+			if (dispatchSlot >= 0)
+			{
+				EmitD3ResolvedInvocation(builder, dispatchSlot, targetSymbol,
+					invocationTarget.ParameterAbis, invocationTarget.ReturnAbi,
+					invocationTarget.RawArgumentIndices, nextOffset, op);
+			}
+			else
+			{
+				EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: false);
+			}
+		}
 	}
 
 	private void EmitCallVirt(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
@@ -1006,8 +1000,23 @@ public sealed partial class NativeAotLoweringPlanner
 				string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 				string paramSig = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
 				targetSymbol = $"(*reinterpret_cast<{returnType}(*)({paramSig})>(::chaos::il2cpp::method_table::g_method_table[{methodTableIndex}].fn_ptr))";
+				EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: true);
 			}
-			EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: true);
+			else
+			{
+				int dispatchSlot = _nativeSymbolToDispatchSlot != null &&
+					_nativeSymbolToDispatchSlot.TryGetValue(targetSymbol, out int slot) ? slot : -1;
+				if (dispatchSlot >= 0)
+				{
+					EmitD3ResolvedInvocation(builder, dispatchSlot, targetSymbol,
+						invocationTarget.ParameterAbis, invocationTarget.ReturnAbi,
+						invocationTarget.RawArgumentIndices, nextOffset, op);
+				}
+				else
+				{
+					EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: true);
+				}
+			}
 			break;
 		}
 		case HybridDispatchKind.ExternalRuntime:
@@ -1037,7 +1046,7 @@ public sealed partial class NativeAotLoweringPlanner
 				var returnType = InferReturnTypeFromSubjectId(instruction.Callee);
 				int paramCount = InferParameterCountFromSubjectId(instruction.Callee);
 				invocationTarget = new InvocationTarget(
-					null,
+					string.Empty,
 					CreateLegacyAbiParameterSlots(paramCount),
 					CreateLegacyReturnAbiSlot(returnType),
 					EmptyRawArgumentIndices,
@@ -1054,13 +1063,14 @@ public sealed partial class NativeAotLoweringPlanner
 			// Use method_table for the fallback case — pass "0" as the
 			// native symbol so the generated C++ compiles (writes nullptr
 			// to the table slot) even when the real address is unknown.
-			if (TryGetMethodTableIndex(instruction.Callee, targetSymbol ?? (directTarget == null ? "0" : null), out uint methodTableIndex))
+			string methodTableSymbol = targetSymbol ?? (directTarget == null ? "0" : string.Empty);
+			if (TryGetMethodTableIndex(instruction.Callee, methodTableSymbol, out uint methodTableIndex))
 			{
 				string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 				string paramSig = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
 				targetSymbol = $"(*reinterpret_cast<{returnType}(*)({paramSig})>(::chaos::il2cpp::method_table::g_method_table[{methodTableIndex}].fn_ptr))";
 			}
-			EmitResolvedInvocation(builder, targetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: true);
+			EmitResolvedInvocation(builder, targetSymbol!, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, nextOffset, op, enforceInstanceNullCheck: true);
 			break;
 		}
 		case HybridDispatchKind.Virtual:
@@ -1072,6 +1082,70 @@ public sealed partial class NativeAotLoweringPlanner
 		default:
 			throw new NotSupportedException($"native-aot lowering does not support callvirt dispatch kind '{instruction.DispatchKindCode}'.");
 		}
+	}
+
+	private void EmitD3ResolvedInvocation(StringBuilder builder, int dispatchSlotIndex, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, int? nextOffset, string op)
+	{
+		string returnAbiType = MapAbiSlotReturnType(returnAbi);
+		bool isVoid = string.Equals(returnAbiType, "void", StringComparison.Ordinal);
+		bool hasArgs = parameterAbis.Count > 0;
+		int argBufferSize = hasArgs ? CalculateArgBufferSize(parameterAbis) : 0;
+		builder.AppendLine("    {");
+		// ── Load args from eval stack (same as EmitResolvedInvocation) ──
+		for (int num = parameterAbis.Count - 1; num >= 0; num--)
+		{
+			builder.AppendLine($"        auto chaos_raw_arg_{num} = chaos_eval_stack[--chaos_stack_top];");
+			if (_stringIdMapping is { Count: > 0 } && IsStringParameterSlot(parameterAbis[num]))
+			{
+				builder.AppendLine($"        if (chaos_is_string_id(chaos_raw_arg_{num}))");
+				builder.AppendLine("        {");
+				builder.AppendLine($"            chaos_raw_arg_{num} = chaos_string_materialize(chaos_raw_arg_{num});");
+				builder.AppendLine("        }");
+			}
+			builder.AppendLine(rawArgumentIndices.Contains(num) ? $"        const auto chaos_arg_{num} = chaos_raw_arg_{num};" : $"        const auto chaos_arg_{num} = {FormatInboundAbiArgumentExpression(parameterAbis[num], $"chaos_raw_arg_{num}")};");
+		}
+		// ── D3 dispatch ──
+		builder.AppendLine($"        auto& _d{dispatchSlotIndex} = s_dispatch_table[{dispatchSlotIndex}];");
+		builder.AppendLine($"        if (_d{dispatchSlotIndex}.flags & kDispatchPatched)");
+		builder.AppendLine("        {");
+		if (hasArgs)
+		{
+			builder.AppendLine($"            alignas(16) uint8_t _d_ab[{argBufferSize}];");
+			builder.AppendLine("            ArgBuffer _d_bw(_d_ab);");
+			// Serialize each arg to ArgBuffer
+			for (int i = 0; i < parameterAbis.Count; i++)
+			{
+				string writeCall = GetArgBufferWriteCall(parameterAbis[i].CarrierKindCode, $"chaos_arg_{i}");
+				builder.AppendLine($"            {writeCall};");
+			}
+		}
+		if (isVoid)
+		{
+			builder.AppendLine($"            ::chaos::il2cpp::runtime_core::InterpreterEntryDirect(_d{dispatchSlotIndex}.method_key, {(hasArgs ? "_d_ab" : "nullptr")}, nullptr);");
+		}
+		else
+		{
+			builder.AppendLine($"            {returnAbiType} _d_rv{{}};");
+			builder.AppendLine($"            ::chaos::il2cpp::runtime_core::InterpreterEntryDirect(_d{dispatchSlotIndex}.method_key, {(hasArgs ? "_d_ab" : "nullptr")}, &_d_rv);");
+			EmitAbiReturnPush(builder, returnAbi, "_d_rv", "            ");
+		}
+		builder.AppendLine("        }");
+		builder.AppendLine("        else");
+		builder.AppendLine("        {");
+		// ── Direct AOT call (same as EmitResolvedInvocation unpatched path) ──
+		string callExpr = targetSymbol + "(" + FormatAbiInvocationArgumentList(parameterAbis) + ")";
+		if (isVoid)
+		{
+			builder.AppendLine($"            {callExpr};");
+		}
+		else
+		{
+			builder.AppendLine($"            const auto chaos_result = {callExpr};");
+			EmitAbiReturnPush(builder, returnAbi, "chaos_result", "            ");
+		}
+		builder.AppendLine("        }");
+		builder.AppendLine("    }");
+		AppendGotoNext(builder, nextOffset, op);
 	}
 
 	private void EmitResolvedInvocation(StringBuilder builder, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, int? nextOffset, string op, bool enforceInstanceNullCheck)
@@ -1122,10 +1196,9 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    }");
 		AppendGotoNext(builder, nextOffset, op);
 	}
-
 	private void EmitDelegateInvoke(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
-		string methodDeclaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(instruction.Callee);
+		string methodDeclaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(instruction.Callee!);
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> readOnlyList = ResolveDelegateInvokeParameterAbis(instruction);
 		AotCoreIrAbiSlotArtifact aotCoreIrAbiSlotArtifact = ResolveDelegateInvokeReturnAbi(instruction);
 		string text = MapAbiSlotReturnType(aotCoreIrAbiSlotArtifact);
@@ -1478,7 +1551,7 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitLoadFunctionPointer(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
 		string functionPointerExpression;
-		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact targetMethod))
+		if (!string.IsNullOrEmpty(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact? targetMethod))
 		{
 			IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(targetMethod);
 			string text = MapAbiSlotReturnType(targetMethod.ReturnAbi);
@@ -1565,7 +1638,7 @@ public sealed partial class NativeAotLoweringPlanner
 		AppendGotoNext(builder, nextOffset, op);
 	}
 
-	private static void EmitIndirectCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
+	private void EmitIndirectCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> readOnlyList = CreateCallSiteParameterAbis(instruction);
 		AotCoreIrAbiSlotArtifact aotCoreIrAbiSlotArtifact = CreateCallSiteReturnAbi(instruction);
@@ -2082,7 +2155,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			throw new NotSupportedException($"native-aot newarr requires type target reference, got '{requiredTargetReference.Kind}'.");
 		}
-		string subjectId = (HasArrayElementReference(requiredTargetReference) ? requiredTargetReference.ArrayElementSubjectId : requiredTargetReference.SubjectId);
+		string subjectId = HasArrayElementReference(requiredTargetReference) ? requiredTargetReference.ArrayElementSubjectId! : requiredTargetReference.SubjectId;
 		AotCoreIrTypeShapeKind typeShape = (HasArrayElementReference(requiredTargetReference) ? requiredTargetReference.ArrayElementTypeShape : requiredTargetReference.TypeShape);
 		builder.AppendLine("    {");
 		builder.AppendLine("        const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);");
@@ -2103,7 +2176,7 @@ public sealed partial class NativeAotLoweringPlanner
 		StringBuilder stringBuilder3 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(40, 1, stringBuilder);
 		handler.AppendLiteral("        chaos_array->element_type_info = ");
-		handler.AppendFormatted(GetRuntimeTypeIdExpression(subjectId, typeShape));
+		handler.AppendFormatted(GetRuntimeTypeInfoExpression(subjectId));
 		handler.AppendLiteral(";");
 		stringBuilder3.AppendLine(ref handler);
 		builder.AppendLine("        chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);");
@@ -2174,7 +2247,7 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendLiteral("            if (!chaos_is_array_type_compatible(chaos_array->element_type_shape, chaos_array->element_type_info, ");
 			handler.AppendFormatted(GetNativeTypeShapeValue(requiredTargetReference.ArrayElementTypeShape));
 			handler.AppendLiteral(", ");
-			handler.AppendFormatted(GetRuntimeTypeIdExpression(requiredTargetReference.ArrayElementSubjectId, requiredTargetReference.ArrayElementTypeShape));
+			handler.AppendFormatted(GetRuntimeTypeInfoExpression(requiredTargetReference.ArrayElementSubjectId));
 			handler.AppendLiteral("))");
 			stringBuilder2.AppendLine(ref handler);
 		}
@@ -2242,7 +2315,7 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendLiteral("                chaos_matches = chaos_is_array_type_compatible(chaos_array->element_type_shape, chaos_array->element_type_info, ");
 			handler.AppendFormatted(GetNativeTypeShapeValue(requiredTargetReference.ArrayElementTypeShape));
 			handler.AppendLiteral(", ");
-			handler.AppendFormatted(GetRuntimeTypeIdExpression(requiredTargetReference.ArrayElementSubjectId, requiredTargetReference.ArrayElementTypeShape));
+			handler.AppendFormatted(GetRuntimeTypeInfoExpression(requiredTargetReference.ArrayElementSubjectId));
 			handler.AppendLiteral(");");
 			stringBuilder2.AppendLine(ref handler);
 			builder.AppendLine("            }");
@@ -2422,15 +2495,18 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("            chaos_value = chaos_string_materialize(chaos_value);");
 			builder.AppendLine("        }");
 		}
+		var cppFieldType = MapFieldTypeToCppType(requiredTargetReference.FieldTypeSubjectId);
 		if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.StoreStaticField)
 		{
 			EmitStaticInitializationForField(builder, requiredTargetReference.SubjectId, "        ");
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder2 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(23, 1, stringBuilder);
+			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(38, 2, stringBuilder);
 			handler.AppendLiteral("        ");
 			handler.AppendFormatted(GetNativeStaticFieldSymbol(requiredTargetReference.SubjectId));
-			handler.AppendLiteral(" = chaos_value;");
+			handler.AppendLiteral(" = static_cast<");
+			handler.AppendFormatted(cppFieldType);
+			handler.AppendLiteral(">(chaos_value);");
 			stringBuilder2.AppendLine(ref handler);
 		}
 		else
@@ -2447,10 +2523,12 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder3.AppendLine(ref handler);
 				stringBuilder = builder;
 				StringBuilder stringBuilder4 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(42, 1, stringBuilder);
+				handler = new StringBuilder.AppendInterpolatedStringHandler(60, 2, stringBuilder);
 				handler.AppendLiteral("        chaos_value_owner->");
 				handler.AppendFormatted(GetNativeFieldMemberName(requiredTargetReference.SubjectId));
-				handler.AppendLiteral(" = chaos_value;");
+				handler.AppendLiteral(" = static_cast<");
+				handler.AppendFormatted(cppFieldType);
+				handler.AppendLiteral(">(chaos_value);");
 				stringBuilder4.AppendLine(ref handler);
 			}
 			else
@@ -2464,10 +2542,12 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder5.AppendLine(ref handler);
 				stringBuilder = builder;
 				StringBuilder stringBuilder6 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(37, 1, stringBuilder);
+				handler = new StringBuilder.AppendInterpolatedStringHandler(55, 2, stringBuilder);
 				handler.AppendLiteral("        chaos_object->");
 				handler.AppendFormatted(GetNativeFieldMemberName(requiredTargetReference.SubjectId));
-				handler.AppendLiteral(" = chaos_value;");
+				handler.AppendLiteral(" = static_cast<");
+				handler.AppendFormatted(cppFieldType);
+				handler.AppendLiteral(">(chaos_value);");
 				stringBuilder6.AppendLine(ref handler);
 			}
 		}
@@ -2828,6 +2908,36 @@ public sealed partial class NativeAotLoweringPlanner
 		AppendGotoNext(builder, nextOffset, op);
 	}
 
+	private static HashSet<int>? _dispatchExitTargets;
+
+	private static void EmitDispatchTransfer(StringBuilder builder, int targetOffset, string indentation)
+	{
+		if (_dispatchExitTargets?.Contains(targetOffset) == true)
+		{
+			builder.AppendLine(indentation + "chaos_dispatch_completed = true;");
+			builder.AppendLine(indentation + "break;");
+			return;
+		}
+
+		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(23, 2, builder);
+		handler.AppendFormatted(indentation);
+		handler.AppendLiteral("chaos_pc = ");
+		handler.AppendFormatted(targetOffset);
+		handler.AppendLiteral(";");
+		builder.AppendLine(ref handler);
+		builder.AppendLine(indentation + "continue;");
+	}
+
+	private static void AppendDispatchNext(StringBuilder builder, int? nextOffset, string op, string indentation)
+	{
+		if (!nextOffset.HasValue)
+		{
+			throw new InvalidOperationException("opcode '" + op + "' cannot be the final instruction in the method");
+		}
+
+		EmitDispatchTransfer(builder, nextOffset.Value, indentation);
+	}
+
 	private static void EmitComparisonBranch(StringBuilder builder, string comparisonOperator, AotCoreIrInstructionArtifact instruction, int? nextOffset, IReadOnlySet<int> offsets)
 	{
 		if (!nextOffset.HasValue)
@@ -2860,22 +2970,10 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendLiteral(" chaos_right)");
 		stringBuilder4.AppendLine(ref handler);
 		builder.AppendLine("        {");
-		stringBuilder = builder;
-		StringBuilder stringBuilder5 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(27, 1, stringBuilder);
-		handler.AppendLiteral("            goto chaos_ip_");
-		handler.AppendFormatted(requiredBranchTarget);
-		handler.AppendLiteral(";");
-		stringBuilder5.AppendLine(ref handler);
+		EmitDispatchTransfer(builder, requiredBranchTarget, "            ");
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
-		stringBuilder = builder;
-		StringBuilder stringBuilder6 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder);
-		handler.AppendLiteral("    goto chaos_ip_");
-		handler.AppendFormatted(nextOffset.Value);
-		handler.AppendLiteral(";");
-		stringBuilder6.AppendLine(ref handler);
+		AppendDispatchNext(builder, nextOffset, instruction.Op, "    ");
 	}
 
 	private static void EmitUnsignedComparisonBranch(StringBuilder builder, string comparisonOperator, AotCoreIrInstructionArtifact instruction, int? nextOffset, IReadOnlySet<int> offsets)
@@ -2896,22 +2994,10 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendLiteral(" chaos_right)");
 		stringBuilder2.AppendLine(ref handler);
 		builder.AppendLine("        {");
-		stringBuilder = builder;
-		StringBuilder stringBuilder3 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(27, 1, stringBuilder);
-		handler.AppendLiteral("            goto chaos_ip_");
-		handler.AppendFormatted(requiredBranchTarget);
-		handler.AppendLiteral(";");
-		stringBuilder3.AppendLine(ref handler);
+		EmitDispatchTransfer(builder, requiredBranchTarget, "            ");
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
-		stringBuilder = builder;
-		StringBuilder stringBuilder4 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder);
-		handler.AppendLiteral("    goto chaos_ip_");
-		handler.AppendFormatted(nextOffset.Value);
-		handler.AppendLiteral(";");
-		stringBuilder4.AppendLine(ref handler);
+		AppendDispatchNext(builder, nextOffset, instruction.Op, "    ");
 	}
 
 	private static void EmitTruthBranch(StringBuilder builder, bool shouldBranchWhenNonZero, AotCoreIrInstructionArtifact instruction, int? nextOffset, IReadOnlySet<int> offsets)
@@ -2925,22 +3011,10 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        const auto chaos_condition = chaos_eval_stack[--chaos_stack_top];");
 		builder.AppendLine(shouldBranchWhenNonZero ? "        if (chaos_condition != static_cast<CHAOS_IL2CPP_INTPTR>(0))" : "        if (chaos_condition == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine("        {");
-		StringBuilder stringBuilder = builder;
-		StringBuilder stringBuilder2 = stringBuilder;
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(27, 1, stringBuilder);
-		handler.AppendLiteral("            goto chaos_ip_");
-		handler.AppendFormatted(requiredBranchTarget);
-		handler.AppendLiteral(";");
-		stringBuilder2.AppendLine(ref handler);
+		EmitDispatchTransfer(builder, requiredBranchTarget, "            ");
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
-		stringBuilder = builder;
-		StringBuilder stringBuilder3 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder);
-		handler.AppendLiteral("    goto chaos_ip_");
-		handler.AppendFormatted(nextOffset.Value);
-		handler.AppendLiteral(";");
-		stringBuilder3.AppendLine(ref handler);
+		AppendDispatchNext(builder, nextOffset, instruction.Op, "    ");
 	}
 
 	private static void EmitSwitch(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, IReadOnlySet<int> offsets)
@@ -2956,13 +3030,7 @@ public sealed partial class NativeAotLoweringPlanner
 		StringBuilder.AppendInterpolatedStringHandler handler;
 		if (requiredSwitchTargets.Count == 0)
 		{
-			stringBuilder = builder;
-			StringBuilder stringBuilder2 = stringBuilder;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(23, 1, stringBuilder);
-			handler.AppendLiteral("        goto chaos_ip_");
-			handler.AppendFormatted(nextOffset.Value);
-			handler.AppendLiteral(";");
-			stringBuilder2.AppendLine(ref handler);
+			EmitDispatchTransfer(builder, nextOffset.Value, "        ");
 			builder.AppendLine("    }");
 			return;
 		}
@@ -2977,22 +3045,10 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendFormatted(i);
 			handler.AppendLiteral(":");
 			stringBuilder3.AppendLine(ref handler);
-			stringBuilder = builder;
-			StringBuilder stringBuilder4 = stringBuilder;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(31, 1, stringBuilder);
-			handler.AppendLiteral("                goto chaos_ip_");
-			handler.AppendFormatted(requiredSwitchTargets[i]);
-			handler.AppendLiteral(";");
-			stringBuilder4.AppendLine(ref handler);
+			EmitDispatchTransfer(builder, requiredSwitchTargets[i], "                ");
 		}
 		builder.AppendLine("            default:");
-		stringBuilder = builder;
-		StringBuilder stringBuilder5 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(31, 1, stringBuilder);
-		handler.AppendLiteral("                goto chaos_ip_");
-		handler.AppendFormatted(nextOffset.Value);
-		handler.AppendLiteral(";");
-		stringBuilder5.AppendLine(ref handler);
+		EmitDispatchTransfer(builder, nextOffset.Value, "                ");
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
 	}
@@ -3023,35 +3079,63 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendLiteral(" chaos_right ? 1 : 0);");
 		stringBuilder4.AppendLine(ref handler);
 		builder.AppendLine("    }");
-		AppendGotoNext(builder, nextOffset, op);
+		AppendDispatchNext(builder, nextOffset, op, "    ");
 	}
 
 	private static void AppendGotoNext(StringBuilder builder, int? nextOffset, string op)
 	{
-		if (!nextOffset.HasValue)
-		{
-			throw new InvalidOperationException("opcode '" + op + "' cannot be the final instruction in the method");
-		}
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, builder);
-		handler.AppendLiteral("    goto chaos_ip_");
-		handler.AppendFormatted(nextOffset.Value);
-		handler.AppendLiteral(";");
-		builder.AppendLine(ref handler);
+		AppendDispatchNext(builder, nextOffset, op, "    ");
 	}
 
-	private void EmitInstructionRange(StringBuilder builder, AotCoreIrMethodArtifact method, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
+	private void EmitInstructionRange(StringBuilder builder, AotCoreIrMethodArtifact method, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets, IReadOnlySet<int>? exitTargets = null)
 	{
-		foreach (AotCoreIrInstructionArtifact instruction in instructions)
+		if (instructions.Count == 0)
 		{
-			int requiredIlOffset = GetRequiredIlOffset(instruction);
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(10, 1, builder);
-			handler.AppendLiteral("chaos_ip_");
-			handler.AppendFormatted(requiredIlOffset);
-			handler.AppendLiteral(":");
-			builder.AppendLine(ref handler);
-			EmitInstruction(builder, method, instruction, nextOffsetsByIlOffset[requiredIlOffset], offsets);
-			builder.AppendLine();
+			return;
 		}
+
+		builder.AppendLine("    {");
+		builder.AppendLine("        bool chaos_dispatch_completed = false;");
+		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(18, 1, builder);
+		handler.AppendLiteral("        int chaos_pc = ");
+		handler.AppendFormatted(GetRequiredIlOffset(instructions[0]));
+		handler.AppendLiteral(";");
+		builder.AppendLine(ref handler);
+		builder.AppendLine("        for (;;)");
+		builder.AppendLine("        {");
+		builder.AppendLine("            switch (chaos_pc)");
+		builder.AppendLine("            {");
+		var previousDispatchExitTargets = _dispatchExitTargets;
+		_dispatchExitTargets = exitTargets != null ? new HashSet<int>(exitTargets) : null;
+		try
+		{
+			foreach (AotCoreIrInstructionArtifact instruction in instructions)
+			{
+				int requiredIlOffset = GetRequiredIlOffset(instruction);
+				builder.AppendLine($"                case {requiredIlOffset}:");
+				builder.AppendLine("                {");
+				EmitInstruction(builder, method, instruction, nextOffsetsByIlOffset[requiredIlOffset], offsets);
+				builder.AppendLine("                    break;");
+				builder.AppendLine("                }");
+				builder.AppendLine();
+			}
+		}
+		finally
+		{
+			_dispatchExitTargets = previousDispatchExitTargets;
+		}
+		builder.AppendLine("                default:");
+		builder.AppendLine("                {");
+		builder.AppendLine("                    CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine("                }");
+		builder.AppendLine("            }");
+		builder.AppendLine("            if (chaos_dispatch_completed)");
+		builder.AppendLine("            {");
+		builder.AppendLine("                break;");
+		builder.AppendLine("            }");
+		builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine("        }");
+		builder.AppendLine("    }");
 	}
 
 	private void EmitStructuredInstructionRange(StringBuilder builder, AotCoreIrMethodArtifact method, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)

@@ -20,9 +20,9 @@ public sealed partial class NativeAotLoweringPlanner
 {
 	private AotCoreIrMethodArtifact ResolveRequiredAsyncRuntimeContinuationMethod(string callee, string stateMachineTypeName)
 	{
-		if (TryResolveAsyncRuntimeContinuationMethod(callee, out AotCoreIrMethodArtifact continuationMethod))
+		if (TryResolveAsyncRuntimeContinuationMethod(callee, out AotCoreIrMethodArtifact? continuationMethod))
 		{
-			return continuationMethod;
+			return continuationMethod!;
 		}
 		throw new NotSupportedException($"native-aot lowering could not resolve async state-machine continuation for '{stateMachineTypeName}' from '{callee}'.");
 	}
@@ -38,11 +38,11 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return true;
 		}
-		if (TryParseAsyncTaskBuilderAwaitUnsafeOnCompleted(callee, out string _, out stateMachineTypeName))
+		if (TryParseAsyncTaskBuilderAwaitUnsafeOnCompleted(callee, out _, out stateMachineTypeName))
 		{
 			return true;
 		}
-		if (TryParseAsyncValueTaskBuilderAwaitUnsafeOnCompleted(callee, out string _, out stateMachineTypeName))
+		if (TryParseAsyncValueTaskBuilderAwaitUnsafeOnCompleted(callee, out _, out stateMachineTypeName))
 		{
 			return true;
 		}
@@ -232,7 +232,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsSupportedDefaultInterpolatedStringHandlerAppendFormattedSubjectId(string subjectId)
 	{
-		return TryParseDefaultInterpolatedStringHandlerAppendFormattedType(subjectId, out string formattedTypeDisplayName) && string.Equals(formattedTypeDisplayName, "System.Int32", StringComparison.Ordinal);
+		return TryParseDefaultInterpolatedStringHandlerAppendFormattedType(subjectId, out string? formattedTypeDisplayName) && string.Equals(formattedTypeDisplayName, "System.Int32", StringComparison.Ordinal);
 	}
 
 	private static bool TryParseClosedListElementType(string declaringTypeSubjectId, out string elementTypeNameOrSubjectId)
@@ -410,7 +410,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsDelegateTypeSubjectId(string subjectId, IReadOnlyDictionary<string, string?> referenceTypeBaseSubjectIds)
 	{
-		string value = subjectId;
+		string? value = subjectId;
 		while (!string.IsNullOrEmpty(value))
 		{
 			string valueDisplayName = ManagedNaming.GetTypeDisplayNameFromSubjectId(value);
@@ -418,10 +418,11 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				return true;
 			}
-			if (!referenceTypeBaseSubjectIds.TryGetValue(value, out value))
+			if (!referenceTypeBaseSubjectIds.TryGetValue(value, out string? nextValue))
 			{
 				break;
 			}
+			value = nextValue;
 		}
 		string subjectIdDisplayName = ManagedNaming.GetTypeDisplayNameFromSubjectId(subjectId);
 		if (subjectIdDisplayName.StartsWith("System.Action", StringComparison.Ordinal) || subjectIdDisplayName.StartsWith("System.Func", StringComparison.Ordinal))
@@ -437,7 +438,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return baseTypeSubjectId;
 		}
-		if (_referenceTypeBaseSubjectIds.TryGetValue(subjectId, out string value) && !string.IsNullOrEmpty(value))
+		if (_referenceTypeBaseSubjectIds.TryGetValue(subjectId, out string? value) && !string.IsNullOrEmpty(value))
 		{
 			return value;
 		}

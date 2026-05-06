@@ -94,8 +94,8 @@ def _find_chaos_include_dirs() -> list[Path]:
     candidates = [
         _REPO_ROOT / "src" / "native" / "common",
         _REPO_ROOT / "src" / "native" / "common" / "chaos",
+        _REPO_ROOT / "contracts" / "native" / "v0",  # must precede runtime-core
         _REPO_ROOT / "src" / "native" / "runtime-core",
-        _REPO_ROOT / "contracts" / "native" / "v0",
         _REPO_ROOT / "third_party" / "fmt" / "include",
         _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib",
     ]

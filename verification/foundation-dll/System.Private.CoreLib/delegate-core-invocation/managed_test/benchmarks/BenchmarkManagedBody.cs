@@ -1,5 +1,5 @@
 // Auto-generated benchmark managed bodies
-// Family: family/System.Private.CoreLib/delegate/core-invocation
+// Family: family/System.Private.CoreLib/delegate-core-invocation
 using System;
 
 namespace Chaos.Benchmark.delegate_core_invocation

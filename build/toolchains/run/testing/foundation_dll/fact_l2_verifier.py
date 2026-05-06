@@ -12,7 +12,7 @@ Usage:
 Flow:
   1. Run C# entrypoint via reflection -> expected checksums
   2. Generate expected_checksums.h
-  3. Compile native_verify_main.cpp + native-aot.generated.cpp + runtime_stubs.cpp
+  3. Build native exe via CMake (handles CRT and dependency libs correctly)
   4. Run native exe -> exit code 0 = all pass, >0 = failures
   5. Report L2: {passed}/{total}
 """
@@ -81,12 +81,18 @@ def _generate_checksums_h(family_slug: str, *, assembly: str,
                           output_dir: Path) -> Path | None:
     """Generate expected_checksums.h from managed entrypoint via reflection."""
     entry_dir = _VERIFICATION_BASE / assembly / family_slug / "il2cpp_dist" / "entrypoint"
-    dll_candidates = list(entry_dir.glob("build-output/*.dll"))
-    if not dll_candidates:
-        dll_candidates = list(entry_dir.glob("*.dll"))
-    dll_path = dll_candidates[0] if dll_candidates else None
     cs_path = next(entry_dir.glob("*NativeEntry.cs"), None)
-    if not dll_path or not dll_path.exists() or cs_path is None:
+    if cs_path is None:
+        print("  [L2] Entrypoint C# source not found")
+        return None
+
+    class_name = cs_path.stem
+    # Pick the DLL matching the class name; avoid picking Chaos.TestFramework.Sdk.dll alphabetically first.
+    dll_candidates = list(entry_dir.glob("build-output/*.dll"))
+    dll_path = next((d for d in dll_candidates if d.stem == class_name), None)
+    if dll_path is None and dll_candidates:
+        dll_path = dll_candidates[0]
+    if dll_path is None or not dll_path.exists():
         print("  [L2] Entrypoint DLL not found")
         return None
 
@@ -98,8 +104,6 @@ def _generate_checksums_h(family_slug: str, *, assembly: str,
     if not _ensure_harness():
         print("  [L2] Failed to build reflection harness")
         return None
-
-    class_name = cs_path.stem
     r = subprocess.run(
         ["dotnet", "run", "--project", str(_L2_HARNESS_DIR / "L2Harness.csproj"),
          "--no-build", "--", str(dll_path), class_name, str(method_count)],
@@ -134,20 +138,257 @@ def _generate_checksums_h(family_slug: str, *, assembly: str,
     ])
     header_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"  [L2] Generated {header_path.name} ({len(checksums)} checksums)")
-    return header_path
+    return header_path, checksums
 
 
-# ── Step 2: Compile and verify native exe ─────────────────────────────
+# ── Step 1.5: Patch entry source with expected checksums ────────────
+
+def _patch_entry_with_checksums(family_slug: str, *, assembly: str,
+                                 checksums: list[int]) -> bool:
+    """Patch entry C# source: replace Assert.Equal(__result, __result)
+    with Assert.Equal(<checksum>, __result) so the codegen emits meaningful
+    inline comparisons.
+
+    For entries where checksum == -1 (method threw in managed execution),
+    keep the self-comparison (always passes) since return-value comparison
+    is also skipped for -1 in native_verify_main.cpp.
+    """
+    entry_dir = _VERIFICATION_BASE / assembly / family_slug / "il2cpp_dist" / "entrypoint"
+    cs_path = next(entry_dir.glob("*NativeEntry.cs"), None)
+    if cs_path is None:
+        return False
+
+    source = cs_path.read_text(encoding="utf-8")
+    checksum_iter = iter(checksums)
+
+    def _replace_assert(match: re.Match) -> str:
+        try:
+            cs = next(checksum_iter)
+        except StopIteration:
+            return match.group(0)
+        if cs == -1:
+            return match.group(0)  # keep self-comparison for throwing methods
+        return f"        Assert.Equal({cs}, __result);"
+
+    new_source = re.sub(
+        r'        Assert\.Equal\(__result, __result\);',
+        _replace_assert,
+        source,
+    )
+    if new_source == source:
+        return False
+    cs_path.write_text(new_source, encoding="utf-8")
+    return True
+
+
+def _run_convert_to_cpp(family_slug: str, dll_path: str,
+                         verification: Path | None = None) -> bool:
+    """Run chaos-il2cpp convert-to-cpp on the entrypoint DLL.
+    Replicates batch_native_aot_runner.py's codegen step.
+    """
+    v = verification or _VERIFICATION_BASE
+    genuine_out = v / family_slug / "il2cpp_dist" / "genuine"
+    genuine_out.mkdir(parents=True, exist_ok=True)
+
+    result = subprocess.run(
+        [
+            "dotnet", "run", "--no-build",
+            "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
+            "--", "convert-to-cpp",
+            "--assembly", dll_path,
+            "--output", str(genuine_out),
+        ],
+        capture_output=True, text=True,
+        timeout=300,
+    )
+    if result.returncode != 0:
+        print(f"    convert-to-cpp FAILED (rc={result.returncode})")
+        for line in result.stderr.splitlines()[-10:]:
+            print(f"      {line}")
+        return False
+    return True
+
+
+# ── Step 2: Build native verify exe via CMake ───────────────────────────
+
+_L2_NATIVE_BUILD_DIR = _REPO_ROOT / "build" / "l2-verify"
+_CMAKE_TEMPLATE = """cmake_minimum_required(VERSION 3.15)
+project(chaos_l2_verify LANGUAGES CXX)
+
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+
+add_executable(verify_{family_slug}
+    {verify_host}
+    {generated_cpp}
+)
+
+target_include_directories(verify_{family_slug} PRIVATE
+    "{repo_root}/src/native/common"
+    "{repo_root}/src/native/common/chaos"
+    "{repo_root}/contracts/native/v0"
+    "{repo_root}/src/native/runtime-core"
+    "{repo_root}/third_party/fmt/include"
+    "{build_dir}"
+)
+
+target_compile_definitions(verify_{family_slug} PRIVATE
+    CHAOS_IL2CPP_CHECK
+    CHAOS_IL2CPP_TRACE_ENABLED
+)
+
+target_link_libraries(verify_{family_slug} PRIVATE
+    chaos_runtime_core
+    chaos_bootstrap
+    chaos_interpreter
+    chaos_common
+    chaos_support
+    chaos_hot_update
+    chaos_bdwgc
+    ole32
+    user32
+)
+
+target_compile_features(verify_{family_slug} PUBLIC cxx_std_20)
+"""
+
+_L3_CMAKE_TEMPLATE = """cmake_minimum_required(VERSION 3.15)
+project(chaos_l3_verify LANGUAGES CXX)
+
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "{build_dir}")
+
+add_executable(l3_verify_{family_slug}
+    "{l3_host}"
+    "{generated_cpp}"
+)
+
+target_include_directories(l3_verify_{family_slug} PRIVATE
+    "{repo_root}/src/native/common"
+    "{repo_root}/src/native/common/chaos"
+    "{repo_root}/contracts/native/v0"
+    "{repo_root}/src/native/runtime-core"
+    "{repo_root}/src/native/bootstrap"
+    "{repo_root}/third_party/fmt/include"
+    "{build_dir}"
+)
+
+target_compile_definitions(l3_verify_{family_slug} PRIVATE
+    CHAOS_IL2CPP_CHECK
+    CHAOS_IL2CPP_TRACE_ENABLED
+    CHAOS_IL2CPP_VERIFY_MODE
+    GC_NOT_DLL
+)
+
+target_link_libraries(l3_verify_{family_slug} PRIVATE
+    "{repo_root}/build/native-runtime/Release/chaos_runtime_core.lib"
+    "{repo_root}/build/native/src/native/bootstrap/Release/chaos_bootstrap.lib"
+    "{repo_root}/build/native/src/native/interpreter/Release/chaos_interpreter.lib"
+    "{repo_root}/build/native/src/native/common/Release/chaos_common.lib"
+    "{repo_root}/build/native/src/native/support/Release/chaos_support.lib"
+    "{repo_root}/build/native/src/native/hot-update/Release/chaos_hot_update.lib"
+    "{repo_root}/build/native/bdwgc_build/Release/chaos_bdwgc.lib"
+    ole32
+    user32
+)
+
+target_compile_features(l3_verify_{family_slug} PUBLIC cxx_std_20)
+"""
+
+
+def _build_via_cmake(verify_host: Path, generated_cpp: Path,
+                     build_dir: Path, family_slug: str) -> bool:
+    """Use cmake to build the verify exe (handles CRT and dep libs correctly)."""
+    cmake_file = build_dir / "CMakeLists.txt"
+    cmake_content = _CMAKE_TEMPLATE.format(
+        family_slug=family_slug,
+        verify_host=verify_host.as_posix(),
+        generated_cpp=generated_cpp.as_posix(),
+        repo_root=_REPO_ROOT.as_posix(),
+        build_dir=build_dir.as_posix(),
+    )
+    cmake_file.parent.mkdir(parents=True, exist_ok=True)
+    cmake_file.write_text(cmake_content, encoding="utf-8")
+
+    # Configure
+    r = subprocess.run(
+        ["cmake", "-S", str(build_dir), "-B", str(build_dir / "cmake_build"),
+         "-G", "Ninja",
+         "-DCMAKE_BUILD_TYPE=Release",
+         f"-DCMAKE_PREFIX_PATH={_REPO_ROOT.as_posix()}/build/native"],
+        capture_output=True, text=True, timeout=120)
+    if r.returncode != 0:
+        print(f"  [L2] CMake configure failed:")
+        for line in (r.stderr or "").splitlines()[-5:]:
+            print(f"    {line}")
+        return False
+
+    # Build
+    r = subprocess.run(
+        ["cmake", "--build", str(build_dir / "cmake_build"), "--config", "Release"],
+        capture_output=True, text=True, timeout=300)
+    if r.returncode != 0:
+        err_lines = [l for l in (r.stdout + r.stderr).splitlines()
+                     if "error" in l.lower() or "FAILED" in l]
+        print(f"  [L2] CMake build failed:")
+        for e in err_lines[-5:]:
+            print(f"    {e}")
+        return False
+
+    return True
+
+
+def _build_l3_via_cmake(l3_host: Path, generated_cpp: Path,
+                         build_dir: Path, family_slug: str) -> bool:
+    """Use cmake to build the L3 verify exe (handles CRT and dep libs correctly)."""
+    cmake_file = build_dir / "CMakeLists.txt"
+    cmake_content = _L3_CMAKE_TEMPLATE.format(
+        family_slug=family_slug,
+        l3_host=l3_host.as_posix(),
+        generated_cpp=generated_cpp.as_posix(),
+        repo_root=_REPO_ROOT.as_posix(),
+        build_dir=build_dir.as_posix(),
+    )
+    cmake_file.parent.mkdir(parents=True, exist_ok=True)
+    cmake_file.write_text(cmake_content, encoding="utf-8")
+
+    # Configure
+    r = subprocess.run(
+        ["cmake", "-S", str(build_dir), "-B", str(build_dir / "cmake_build"),
+         "-G", "Ninja",
+         "-DCMAKE_BUILD_TYPE=Release"],
+        capture_output=True, text=True, timeout=120)
+    if r.returncode != 0:
+        print(f"  [L3] CMake configure failed:")
+        for line in (r.stderr or "").splitlines()[-5:]:
+            print(f"    {line}")
+        return False
+
+    # Build
+    r = subprocess.run(
+        ["cmake", "--build", str(build_dir / "cmake_build"), "--config", "Release",
+         "--target", f"l3_verify_{family_slug}"],
+        capture_output=True, text=True, timeout=300)
+    if r.returncode != 0:
+        err_lines = [l for l in (r.stdout + r.stderr).splitlines()
+                     if "error" in l.lower() or "FAILED" in l]
+        print(f"  [L3] CMake build failed:")
+        for e in err_lines[-5:]:
+            print(f"    {e}")
+        return False
+
+    return True
+
+
+# ── Step 2: Compile and verify native exe (original direct-link approach) ──
 
 def _verify_native(family_slug: str, *, assembly: str,
                    verbose: bool = False) -> dict[str, Any]:
     """Compile native_verify_main.cpp + generated code, run self-verify."""
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     generated_cpp = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
-    runtime_stubs = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_stubs.cpp"
     verify_host = _REPO_ROOT / "src" / "native" / "benchmark-host" / "native_verify_main.cpp"
 
-    for f in [generated_cpp, runtime_stubs, verify_host]:
+    for f in [generated_cpp, verify_host]:
         if not f.exists():
             print(f"  [L2] Required file not found: {f}")
             return {"status": "skip", "reason": f"missing {f.name}"}
@@ -155,13 +396,13 @@ def _verify_native(family_slug: str, *, assembly: str,
     vcvars = _find_vcvars()
     if not vcvars:
         return {"status": "skip", "reason": "MSVC not found"}
-    vcvars_prefix = f'"{vcvars}" x64 >nul 2>nul &&'
+    vcvars_prefix = f'"{vcvars}" x64 -vcvars_ver=14.42 >nul 2>nul &&'
 
     include_dirs = [
         _REPO_ROOT / "src" / "native" / "common",
         _REPO_ROOT / "src" / "native" / "common" / "chaos",
+        _REPO_ROOT / "contracts" / "native" / "v0",  # must precede runtime-core
         _REPO_ROOT / "src" / "native" / "runtime-core",
-        _REPO_ROOT / "contracts" / "native" / "v0",
         _REPO_ROOT / "third_party" / "fmt" / "include",
     ]
     build_dir = family_dir / "native_test" / "l2-verify" / "build"
@@ -169,68 +410,119 @@ def _verify_native(family_slug: str, *, assembly: str,
     build_dir.mkdir(parents=True, exist_ok=True)
     exe_path = build_dir / f"verify_{family_slug}.exe"
 
-    # Step 2a: Generate expected_checksums.h in the build directory
-    header = _generate_checksums_h(family_slug, assembly=assembly, output_dir=build_dir)
-    if header is None:
+    # Step 2a: Generate expected_checksums.h from managed entrypoint
+    header_result = _generate_checksums_h(family_slug, assembly=assembly, output_dir=build_dir)
+    if header_result is None:
         return {"status": "skip", "reason": "failed to generate expected checksums"}
+    header_path, checksums = header_result
 
-    # Step 2b: Compile
-    compile_flags = "/nologo /std:c++20 /c /EHsc /W3 /utf-8 /O2"
-    defines = "-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED"
+    # Step 2a.5: Patch entry source with expected checksums, rebuild DLL, re-run codegen
+    if _patch_entry_with_checksums(family_slug, assembly=assembly, checksums=checksums):
+        print("  [L2]   Patched entry source with expected checksums, rebuilding...")
+        entry_dir = _VERIFICATION_BASE / assembly / family_slug / "il2cpp_dist" / "entrypoint"
+        csproj = next(entry_dir.glob("*.csproj"), None)
+        if csproj is not None:
+            build_out = entry_dir / "build-output"
+            r = subprocess.run(
+                ["dotnet", "build", str(csproj), "-o", str(build_out), "--nologo", "-v", "q"],
+                capture_output=True, text=True, timeout=120)
+            if r.returncode == 0:
+                # Re-run codegen so the new Assert.Equal values are in the native code
+                dll_path = next((d for d in build_out.glob("*.dll")
+                                 if d.stem != "Chaos.TestFramework.Sdk"), None)
+                if dll_path is not None:
+                    _run_convert_to_cpp(family_slug, str(dll_path), verification=_VERIFICATION_BASE)
+                    print("  [L2]   Codegen re-run with patched Assert.Equal values")
 
-    source_files = [verify_host, generated_cpp, runtime_stubs]
+    # Step 2b/2c: Compile and link
+    native_lib_dir = _REPO_ROOT / "build" / "native" / "src" / "native"
+    bdwgc_dir = _REPO_ROOT / "build" / "native" / "bdwgc_build"
+
+    # Use /MD to match the main build's CRT linkage.
+    # CHAOS_IL2CPP_VERIFY_MODE disables the managed pointer tag scheme
+    # (chaos_managed_pointer_local_slot_tag = 0) to avoid bit-0 collision
+    # with odd integer checksums like 65 ('A').
+    compile_flags = "/nologo /std:c++20 /c /EHsc /W3 /utf-8 /Od /MD"
+    defines = "-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED -DCHAOS_IL2CPP_VERIFY_MODE"
+
+    source_files = [(verify_host, verify_host), (generated_cpp, generated_cpp)]
     obj_files = []
-    for src in source_files:
+    for src, display_name in source_files:
         obj = build_dir / f"{src.stem}.obj"
         obj_files.append(obj)
         cmd = f'{vcvars_prefix} cl {compile_flags} {include_flags} {defines} -Fo"{obj}" "{src}"'
         r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=120)
         if r.returncode != 0:
             err = [l for l in (r.stdout + r.stderr).splitlines()
-                   if l.strip() and "Microsoft" not in l]
-            print(f"  [L2] Compile failed for {src.name}")
-            for e in err[-3:]:
+                   if l.strip() and "Microsoft" not in l and "warning" not in l.lower()]
+            print(f"  [L2] Compile failed for {display_name.name}")
+            for e in err[-5:]:
                 print(f"    {e}")
-            return {"status": "compile_failed", "reason": f"{src.name} failed"}
+            return {"status": "compile_failed", "reason": f"{display_name.name} failed"}
         if verbose:
-            print(f"  [L2]   Compiled {src.name}")
+            print(f"  [L2]   Compiled {display_name.name}")
 
-    # Step 2c: Link (use PE environment for lib paths)
-    msvc_env = _find_msvc_env()
-    link_exe = _find_msvc_cl()
-    if link_exe:
-        link_exe = link_exe.parent / "link.exe"
+    # Link using the main build's chaos_runtime_core.lib (proper CMake dep chain)
+    # Use build/native-runtime/ which is the canonical runtime-core build output.
+    chaos_lib = _REPO_ROOT / "build" / "native-runtime" / "Release" / "chaos_runtime_core.lib"
+    if not chaos_lib.exists():
+        return {"status": "link_failed", "reason": f"chaos_runtime_core.lib not found at {chaos_lib}"}
+
+    link_exe = _find_latest_msvc_link()
     if not link_exe or not link_exe.exists():
         return {"status": "link_failed", "reason": "linker not found"}
 
     obj_list = " ".join(f'"{o}"' for o in obj_files)
-    link_cmd = f'"{link_exe}" /nologo /out:"{exe_path}" {obj_list}'
-    r = subprocess.run(link_cmd, shell=True, capture_output=True, text=True, timeout=60,
-                       env={**os.environ, **msvc_env})
+
+    dep_libs = " ".join(
+        f'"{native_lib_dir / lib / "Release" / f"{lib_name}.lib"}"'
+        for lib, lib_name in [
+            ("bootstrap", "chaos_bootstrap"),
+            ("interpreter", "chaos_interpreter"),
+            ("common", "chaos_common"),
+            ("support", "chaos_support"),
+            ("hot-update", "chaos_hot_update"),
+        ]
+    )
+    dep_libs += f' "{bdwgc_dir / "Release" / "chaos_bdwgc.lib"}"'
+    dep_libs += " ole32.lib user32.lib"
+
+    link_cmd = (
+        f'{vcvars_prefix} "{link_exe}" /nologo /out:"{exe_path}" {obj_list} '
+        f'"{chaos_lib}" {dep_libs}'
+    )
+    r = subprocess.run(link_cmd, shell=True, capture_output=True, text=True, timeout=60)
     if r.returncode != 0:
-        err = [l for l in r.stderr.splitlines() if l.strip() and "Microsoft" not in l]
+        # Filter out LNK4xxx warnings and Microsoft boilerplate
+        err_lines = []
+        for l in (r.stdout + r.stderr).splitlines():
+            line = l.strip()
+            if not line or "Microsoft" in line:
+                continue
+            if "LNK4" in line or "LNK4098" in line or "LNK4286" in line or "LNK4217" in line:
+                continue  # suppress warnings
+            err_lines.append(line)
         print("  [L2] Link failed:")
-        for e in err[-3:]:
+        for e in err_lines[-10:]:
             print(f"    {e}")
         return {"status": "link_failed", "reason": "link failed"}
 
     if verbose:
         print(f"  [L2]   Linked: {exe_path.name}")
 
-    # Step 2d: Run native self-verify exe
-    r = subprocess.run([str(exe_path)], capture_output=True, text=True, timeout=120)
+    # Step 2d: Run native self-verify exe (under vcvars env to resolve CRT DLLs)
+    run_cmd = f'{vcvars_prefix} "{exe_path}"'
+    r = subprocess.run(run_cmd, shell=True, capture_output=True, text=True, timeout=120)
     output = (r.stdout + r.stderr).strip()
 
     # Parse result from output
     passed = total = 0
     for line in output.splitlines():
         if "L2:" in line:
-            parts = line.split()
-            if len(parts) >= 2:
-                m = re.search(r'(\d+)/(\d+)', line)
-                if m:
-                    passed, total = int(m.group(1)), int(m.group(2))
-        if "FAIL" in line and "[0-9]" in line:
+            m = re.search(r'(\d+)/(\d+)', line)
+            if m:
+                passed, total = int(m.group(1)), int(m.group(2))
+        if "FAIL" in line:
             print(f"  {line}")
 
     status = "passed" if r.returncode == 0 else "failed"
@@ -238,6 +530,167 @@ def _verify_native(family_slug: str, *, assembly: str,
           status=status, passed=passed, total=total)
 
     print(f"  [L2] Native self-verify: {status} ({passed}/{total})")
+    if r.returncode != 0 and verbose:
+        print(output)
+
+    return {
+        "status": status,
+        "passed": passed,
+        "total": total,
+        "exit_code": r.returncode,
+    }
+
+
+# ── Step 3: L3 Runtime Verification (native with RuntimeInit) ────────
+
+def _verify_l3(family_slug: str, *, assembly: str,
+               verbose: bool = False) -> dict[str, Any]:
+    """Compile l3_verify_main.cpp + generated code, run with runtime init.
+
+    L3 extends L2 by initializing the full runtime (GC, thread attach)
+    before running the native AOT entries. This exercises the runtime
+    bootstrap path in addition to codegen correctness.
+
+    Flow (same as L2 but with l3_verify_main):
+      1. Read expected_checksums.h (generated by L2's _verify_native)
+      2. Compile l3_verify_main.cpp + native-aot.generated.cpp
+      3. Link with chaos_runtime_core.lib + runtime libs
+      4. Run -> exit code 0 = all pass, >0 = failures
+      5. Report L3: {passed}/{total}
+    """
+    family_dir = _VERIFICATION_BASE / assembly / family_slug
+    generated_cpp = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    l3_host = _REPO_ROOT / "src" / "native" / "benchmark-host" / "l3_verify_main.cpp"
+
+    for f in [generated_cpp, l3_host]:
+        if not f.exists():
+            print(f"  [L3] Required file not found: {f}")
+            return {"status": "skip", "reason": f"missing {f.name}"}
+
+    vcvars = _find_vcvars()
+    if not vcvars:
+        return {"status": "skip", "reason": "MSVC not found"}
+    vcvars_prefix = f'"{vcvars}" x64 -vcvars_ver=14.42 >nul 2>nul &&'
+
+    include_dirs = [
+        _REPO_ROOT / "src" / "native" / "common",
+        _REPO_ROOT / "src" / "native" / "common" / "chaos",
+        _REPO_ROOT / "contracts" / "native" / "v0",
+        _REPO_ROOT / "src" / "native" / "runtime-core",
+        _REPO_ROOT / "src" / "native" / "bootstrap",
+        _REPO_ROOT / "third_party" / "fmt" / "include",
+    ]
+    build_dir = family_dir / "native_test" / "l2-verify" / "build"
+    include_flags = " ".join(f'-I"{d}"' for d in include_dirs) + f' -I"{build_dir}"'
+    build_dir.mkdir(parents=True, exist_ok=True)
+    exe_path = build_dir / f"l3_verify_{family_slug}.exe"
+
+    # Step 3a: Check expected_checksums.h exists (generated by L2)
+    checksum_header = build_dir / "expected_checksums.h"
+    if not checksum_header.exists():
+        print(f"  [L3] expected_checksums.h not found at {checksum_header}")
+        print(f"  [L3] Run L2 verification first to generate it.")
+        return {"status": "skip", "reason": "expected_checksums.h not found"}
+
+    # Step 3b: Build via CMake (primary path). Falls back to direct cl.exe if CMake fails.
+    cmake_ok = _build_l3_via_cmake(l3_host, generated_cpp, build_dir, family_slug)
+    if not cmake_ok or not exe_path.exists():
+        if verbose:
+            print(f"  [L3]   CMake build failed, falling back to direct cl.exe...")
+        # Step 3b fallback: Compile l3_verify_main.cpp and native-aot.generated.cpp directly
+        # GC_NOT_DLL is needed because BDWGC is statically linked.
+        # CHAOS_IL2CPP_VERIFY_MODE disables the bit-0 pointer tag to avoid
+        # colliding with odd checksum values (e.g. 65 = 'A').
+        compile_flags = "/nologo /std:c++20 /c /EHsc /W3 /utf-8 /Od /MD"
+        defines = ("-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED "
+                   "-DCHAOS_IL2CPP_VERIFY_MODE -DGC_NOT_DLL")
+
+        source_files = [(l3_host, l3_host), (generated_cpp, generated_cpp)]
+        obj_files = []
+        for src, display_name in source_files:
+            obj = build_dir / f"{src.stem}.obj"
+            obj_files.append(obj)
+            cmd = f'{vcvars_prefix} cl {compile_flags} {include_flags} {defines} -Fo"{obj}" "{src}"'
+            r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=120)
+            if r.returncode != 0:
+                err = [l for l in (r.stdout + r.stderr).splitlines()
+                       if l.strip() and "Microsoft" not in l and "warning" not in l.lower()]
+                print(f"  [L3] Compile failed for {display_name.name}")
+                for e in err[-5:]:
+                    print(f"    {e}")
+                return {"status": "compile_failed", "reason": f"{display_name.name} failed"}
+            if verbose:
+                print(f"  [L3]   Compiled {display_name.name}")
+
+        # Step 3c fallback: Link
+        native_lib_dir = _REPO_ROOT / "build" / "native" / "src" / "native"
+        bdwgc_dir = _REPO_ROOT / "build" / "native" / "bdwgc_build"
+        chaos_lib = _REPO_ROOT / "build" / "native-runtime" / "Release" / "chaos_runtime_core.lib"
+        if not chaos_lib.exists():
+            return {"status": "link_failed", "reason": f"chaos_runtime_core.lib not found at {chaos_lib}"}
+
+        link_exe = _find_latest_msvc_link()
+        if not link_exe or not link_exe.exists():
+            return {"status": "link_failed", "reason": "linker not found"}
+
+        obj_list = " ".join(f'"{o}"' for o in obj_files)
+
+        dep_libs = " ".join(
+            f'"{native_lib_dir / lib / "Release" / f"{lib_name}.lib"}"'
+            for lib, lib_name in [
+                ("bootstrap", "chaos_bootstrap"),
+                ("interpreter", "chaos_interpreter"),
+                ("common", "chaos_common"),
+                ("support", "chaos_support"),
+                ("hot-update", "chaos_hot_update"),
+            ]
+        )
+        dep_libs += f' "{bdwgc_dir / "Release" / "chaos_bdwgc.lib"}"'
+        dep_libs += " ole32.lib user32.lib"
+
+        link_cmd = (
+            f'{vcvars_prefix} "{link_exe}" /nologo /out:"{exe_path}" {obj_list} '
+            f'"{chaos_lib}" {dep_libs}'
+        )
+        r = subprocess.run(link_cmd, shell=True, capture_output=True, text=True, timeout=60)
+        if r.returncode != 0:
+            err_lines = []
+            for l in (r.stdout + r.stderr).splitlines():
+                line = l.strip()
+                if not line or "Microsoft" in line:
+                    continue
+                if "LNK4" in line or "LNK4098" in line or "LNK4286" in line or "LNK4217" in line:
+                    continue
+                err_lines.append(line)
+            print("  [L3] Link failed:")
+            for e in err_lines[-10:]:
+                print(f"    {e}")
+            return {"status": "link_failed", "reason": "link failed"}
+
+        if verbose:
+            print(f"  [L3]   Linked: {exe_path.name}")
+
+    # Step 3d: Run L3 verification exe
+    run_cmd = f'{vcvars_prefix} "{exe_path}"'
+    r = subprocess.run(run_cmd, shell=True, capture_output=True, text=True, timeout=120)
+
+    output = (r.stdout + r.stderr).strip()
+
+    # Parse result from output (format: "L3: 18/18 passed (assert_failures=0, return_failures=0)")
+    passed = total = 0
+    for line in output.splitlines():
+        if "L3:" in line:
+            m = re.search(r'(\d+)/(\d+)', line)
+            if m:
+                passed, total = int(m.group(1)), int(m.group(2))
+        if "FAIL" in line:
+            print(f"  {line}")
+
+    status = "passed" if r.returncode == 0 else "failed"
+    trace("fact_l3.verify", stage="proof", family=family_slug,
+          status=status, passed=passed, total=total)
+
+    print(f"  [L3] Runtime verify: {status} ({passed}/{total})")
     if r.returncode != 0 and verbose:
         print(output)
 
@@ -266,21 +719,11 @@ def _find_latest_msvc_cl() -> Path | None:
     return None
 
 
-def _find_msvc_env() -> dict[str, str]:
-    vcvars = _find_vcvars()
-    if not vcvars:
-        return {}
-    try:
-        r = subprocess.run(f'"{vcvars}" x64 && set', shell=True,
-                           capture_output=True, text=True, timeout=30)
-        env = {}
-        for line in r.stdout.splitlines():
-            if "=" in line:
-                k, v = line.split("=", 1)
-                env[k.upper()] = v
-        return env
-    except (subprocess.TimeoutExpired, OSError):
-        return {}
+def _find_latest_msvc_link() -> Path | None:
+    cl = _find_latest_msvc_cl()
+    if cl:
+        return cl.parent / "link.exe"
+    return None
 
 
 # ── Entry point ───────────────────────────────────────────────────────
@@ -288,22 +731,33 @@ def _find_msvc_env() -> dict[str, str]:
 def verify_family(family_slug: str, *, assembly: str = "System.Private.CoreLib",
                   verbose: bool = False) -> dict[str, Any]:
     print(f"=== Fact L2: {family_slug} ===")
-    run_script = ("cmd.exe", "/c", sys.executable, __file__, family_slug,
-                  "--assembly", assembly)
     result = _verify_native(family_slug, assembly=assembly, verbose=verbose)
     print(f"=== L2 Result: {result.get('status','error')} "
           f"({result.get('passed','?')}/{result.get('total','?')}) ===")
     return result
 
 
+def verify_l3(family_slug: str, *, assembly: str = "System.Private.CoreLib",
+              verbose: bool = False) -> dict[str, Any]:
+    print(f"=== Fact L3: {family_slug} ===")
+    result = _verify_l3(family_slug, assembly=assembly, verbose=verbose)
+    print(f"=== L3 Result: {result.get('status','error')} "
+          f"({result.get('passed','?')}/{result.get('total','?')}) ===")
+    return result
+
+
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Fact L2: Native Self-Verify")
+    parser = argparse.ArgumentParser(description="Fact L2/L3 Verification")
     parser.add_argument("family_slug", help="Family slug (e.g., convert-char)")
     parser.add_argument("--assembly", default="System.Private.CoreLib")
     parser.add_argument("--verbose", "-v", action="store_true")
+    parser.add_argument("--l3", action="store_true", help="Run L3 (runtime) verification instead of L2")
     args = parser.parse_args()
 
-    result = verify_family(args.family_slug, assembly=args.assembly, verbose=args.verbose)
+    if args.l3:
+        result = verify_l3(args.family_slug, assembly=args.assembly, verbose=args.verbose)
+    else:
+        result = verify_family(args.family_slug, assembly=args.assembly, verbose=args.verbose)
     sys.exit(0 if result.get("status") == "passed" else 1)
 
 

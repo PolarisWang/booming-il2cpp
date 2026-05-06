@@ -205,7 +205,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             // For generic type cctors, skip unsupported opcodes rather than throwing
-            if (typeSubjectId.Contains("!!") || typeSubjectId.Contains("`") || typeSubjectId.Contains("<!"))
+            if (typeSubjectId!.Contains("!!") || typeSubjectId.Contains("`") || typeSubjectId.Contains("<!"))
             {
                 return null;
             }
@@ -255,7 +255,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         return actions.Count == 0
             ? null
-            : new StaticInitializationPlan(typeSubjectId, actions);
+            : new StaticInitializationPlan(typeSubjectId!, actions);
     }
 
     private static string GetManagedFieldSubjectId(ManagedInstructionModel instruction)

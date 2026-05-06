@@ -14,7 +14,6 @@
 
 #include <gc.h>
 
-#include <cstdio>
 #include <cmath>
 #include <atomic>
 #include <limits>
@@ -671,7 +670,8 @@ static bool TryPopulateVectorCapabilityFromDisplayName(
     const CHAOS_IL2CPP_STRING& display_name,
     RuntimeTypeCapabilityInfoV0* out_capability_info) {
     constexpr CHAOS_IL2CPP_STRING_VIEW kNumericsVectorPrefix = "System.Numerics.Vector<";
-    if (display_name.rfind(kNumericsVectorPrefix.data(), 0) == 0 &&
+    if (display_name.size() >= kNumericsVectorPrefix.size() &&
+        memcmp(display_name.data(), kNumericsVectorPrefix.data(), kNumericsVectorPrefix.size()) == 0 &&
         display_name.size() > kNumericsVectorPrefix.size() &&
         display_name.back() == '>') {
         const auto scalar_display_name = display_name.substr(
@@ -765,8 +765,8 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     const RuntimeInitParams* init_params,
     const RuntimeConfig* config,
     RuntimeState** out_runtime_state) {
-    CHAOS_IL2CPP_TRACE_INIT();
-    CHAOS_IL2CPP_TRACE("runtime", "RuntimeInit", "");
+    CHAOS_IL2CPP_LOG_TRACE_INIT();
+    CHAOS_IL2CPP_LOG_TRACE("runtime", "RuntimeInit", "");
     if (init_params == nullptr || out_runtime_state == nullptr) {
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
@@ -1061,11 +1061,15 @@ RuntimeStatus TypeQueryCapabilityImpl(
             // Resolve vector register width from the type name.
             // Order matters: longer prefixes first to avoid false prefix match.
             out_capability_info->vector_width_bytes = [&display_name]() -> CHAOS_IL2CPP_UINT32 {
-                if (display_name.rfind("System.Numerics.Vector512<", 0) == 0) return 64u;
-                if (display_name.rfind("System.Numerics.Vector256<", 0) == 0) return 32u;
-                if (display_name.rfind("System.Numerics.Vector128<", 0) == 0) return 16u;
-                if (display_name.rfind("System.Numerics.Vector64<", 0) == 0)  return 8u;
-                if (display_name.rfind("System.Numerics.Vector<", 0) == 0)
+                auto starts_with = [&](const char* prefix) -> bool {
+                    const auto len = strlen(prefix);
+                    return display_name.size() >= len && memcmp(display_name.data(), prefix, len) == 0;
+                };
+                if (starts_with("System.Numerics.Vector512<")) return 64u;
+                if (starts_with("System.Numerics.Vector256<")) return 32u;
+                if (starts_with("System.Numerics.Vector128<")) return 16u;
+                if (starts_with("System.Numerics.Vector64<"))  return 8u;
+                if (starts_with("System.Numerics.Vector<"))
                     return static_cast<CHAOS_IL2CPP_UINT32>(VectorPlatformByteWidth());
                 return 16u;  // default: hardware-agnostic fixed SIMD
             }();
@@ -1661,21 +1665,9 @@ CHAOS_IL2CPP_INT32 EngineLogWrite(
         return 1;
     }
 
-    const CHAOS_IL2CPP_SIZE prefix_length = CHAOS_IL2CPP_STRLEN(kEngineObservePrefix);
-    if (CHAOS_IL2CPP_FWRITE(kEngineObservePrefix, 1u, prefix_length, stdout) != prefix_length) {
-        return 1;
-    }
-
-    const CHAOS_IL2CPP_SIZE message_length = CHAOS_IL2CPP_STRLEN(message_utf8);
-    if (CHAOS_IL2CPP_FWRITE(message_utf8, 1u, message_length, stdout) != message_length) {
-        return 1;
-    }
-
-    if (CHAOS_IL2CPP_FPUTC('\n', stdout) == EOF) {
-        return 1;
-    }
-
-    return CHAOS_IL2CPP_FFLUSH(stdout) == 0 ? 0 : 1;
+    CHAOS_IL2CPP_LOG_WRITE_RAW_M("{0}{1}\n", kEngineObservePrefix, message_utf8);
+    CHAOS_IL2CPP_LOG_FLUSH_STDOUT();
+    return 0;
 }
 
 CHAOS_IL2CPP_UINTPTR CreateEngineObjectHandle(void* object_instance) {

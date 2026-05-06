@@ -4,9 +4,9 @@
 // Cross-language trace for C++ (CHECK/Debug mode only).
 //
 // Usage:
-//   CHAOS_IL2CPP_TRACE("codegen", "emit_method", "method_count=%d", 18);
-//   CHAOS_IL2CPP_TRACE_INIT();
-//   CHAOS_IL2CPP_TRACE_FLUSH("/tmp/trace.jsonl");
+//   CHAOS_IL2CPP_LOG_TRACE("codegen", "emit_method", "method_count=%d", 18);
+//   CHAOS_IL2CPP_LOG_TRACE_INIT();
+//   CHAOS_IL2CPP_LOG_TRACE_FLUSH("/tmp/trace.jsonl");
 //
 // In PROFILE/SHIP builds all macros expand to ((void)0) — zero runtime overhead.
 // Enable via CMake: target_compile_definitions(chaos_common PUBLIC CHAOS_TRACE_ENABLED)
@@ -19,6 +19,10 @@
 #include <chrono>
 #include <cstdlib>
 #include <atomic>
+
+#include <string>
+
+#include <fmt/format.h>
 
 // ============================================================================
 // Ring buffer implementation (internal)
@@ -116,28 +120,23 @@ inline const char* cached_iso8601() {
 
 #ifdef CHAOS_TRACE_ENABLED
 
-#define CHAOS_IL2CPP_TRACE(stage, op, fmt, ...) do {                         \
-    auto _ts_ = ChaosIl2cpp::Common::detail::cached_iso8601();                \
-    auto _tid_ = ChaosIl2cpp::Common::detail::g_trace_id;                     \
-    char _buf_[ChaosIl2cpp::Common::detail::kTraceLineMax];                   \
-    auto _len_ = std::snprintf(_buf_, sizeof(_buf_),                           \
-        "{\"t\":\"%sZ\",\"l\":\"cpp\",\"traceId\":\"%s\","                    \
-        "\"s\":\"%s\",\"o\":\"%s\",\"f\":\"%s:%d\"",                          \
-        _ts_, _tid_, stage, op, __FILE__, __LINE__);                           \
-    if (_len_ > 0) {                                                           \
-        char _extra_[ChaosIl2cpp::Common::detail::kTraceLineMax];              \
-        std::snprintf(_extra_, sizeof(_extra_), fmt, ##__VA_ARGS__);            \
-        if (_extra_[0]) {                                                       \
-            /* Append extra fields as JSON: prefix with comma */               \
-            _len_ += std::snprintf(_buf_ + _len_, sizeof(_buf_) - _len_,       \
-                ",%s", _extra_);                                               \
-        }                                                                      \
-        std::snprintf(_buf_ + _len_, sizeof(_buf_) - _len_, "}");             \
-    }                                                                          \
-    ChaosIl2cpp::Common::detail::g_trace_ring.write(_buf_);                    \
+#define CHAOS_IL2CPP_LOG_TRACE(stage, op, fmt_str, ...) do {                       \
+    const auto _ts_ = ChaosIl2cpp::Common::detail::cached_iso8601();              \
+    const auto _tid_ = ChaosIl2cpp::Common::detail::g_trace_id;                   \
+    auto _buf_ = ::fmt::format(                                                    \
+        "{{\"t\":\"{}Z\",\"l\":\"cpp\",\"traceId\":\"{}\","                       \
+        "\"s\":\"{}\",\"o\":\"{}\",\"f\":\"{}:{}\"",                              \
+        _ts_, _tid_, (stage), (op), __FILE__, __LINE__);                          \
+    const auto _extra_ = ::fmt::format((fmt_str), ##__VA_ARGS__);                  \
+    if (!_extra_.empty()) {                                                        \
+        _buf_ += ",";                                                              \
+        _buf_ += _extra_;                                                          \
+    }                                                                              \
+    _buf_ += "}";                                                                  \
+    ChaosIl2cpp::Common::detail::g_trace_ring.write(_buf_.c_str());                \
 } while (0)
 
-#define CHAOS_IL2CPP_TRACE_INIT() do {                                        \
+#define CHAOS_IL2CPP_LOG_TRACE_INIT() do {                                        \
     auto _trace_path_ = std::getenv("CHAOS_TRACE_PATH");                      \
     if (_trace_path_) {                                                        \
         std::strncpy(ChaosIl2cpp::Common::detail::g_trace_flush_path,          \
@@ -153,15 +152,15 @@ inline const char* cached_iso8601() {
     }                                                                          \
 } while (0)
 
-#define CHAOS_IL2CPP_TRACE_FLUSH(path) do {                                   \
+#define CHAOS_IL2CPP_LOG_TRACE_FLUSH(path) do {                                   \
     ChaosIl2cpp::Common::detail::g_trace_ring.flush(path);                     \
 } while (0)
 
 #else // !CHAOS_TRACE_ENABLED
 
-#define CHAOS_IL2CPP_TRACE(stage, op, fmt, ...) ((void)0)
-#define CHAOS_IL2CPP_TRACE_INIT()                ((void)0)
-#define CHAOS_IL2CPP_TRACE_FLUSH(path)           ((void)0)
+#define CHAOS_IL2CPP_LOG_TRACE(stage, op, fmt, ...) ((void)0)
+#define CHAOS_IL2CPP_LOG_TRACE_INIT()                ((void)0)
+#define CHAOS_IL2CPP_LOG_TRACE_FLUSH(path)           ((void)0)
 
 #endif // CHAOS_TRACE_ENABLED
 

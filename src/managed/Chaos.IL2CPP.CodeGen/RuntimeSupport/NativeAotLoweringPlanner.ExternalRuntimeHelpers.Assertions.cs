@@ -18,16 +18,16 @@ public sealed partial class NativeAotLoweringPlanner
         {
             return
             [
-                "    (void)chaos_arg_2;",
+                "    (void)chaos_fn_arg_2;",
                 "    bool chaos_equals = false;",
-                "    if (chaos_arg_0 == chaos_arg_1)",
+                "    if (chaos_fn_arg_0 == chaos_fn_arg_1)",
                 "    {",
                 "        chaos_equals = true;",
                 "    }",
-                "    else if (chaos_arg_0 != static_cast<CHAOS_IL2CPP_INTPTR>(0) && chaos_arg_1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))",
+                "    else if (chaos_fn_arg_0 != static_cast<CHAOS_IL2CPP_INTPTR>(0) && chaos_fn_arg_1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))",
                 "    {",
-                "        auto* chaos_left_string = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_arg_0);",
-                "        auto* chaos_right_string = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_arg_1);",
+                "        auto* chaos_left_string = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_fn_arg_0);",
+                "        auto* chaos_right_string = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_fn_arg_1);",
                 "        if (chaos_left_string->length == chaos_right_string->length)",
                 "        {",
                 "            if (chaos_left_string->utf8_data == nullptr || chaos_right_string->utf8_data == nullptr)",
@@ -52,8 +52,8 @@ public sealed partial class NativeAotLoweringPlanner
 
         return
         [
-            "    (void)chaos_arg_2;",
-            "    if (chaos_arg_0 == chaos_arg_1)",
+            "    (void)chaos_fn_arg_2;",
+            "    if (chaos_fn_arg_0 == chaos_fn_arg_1)",
             "    {",
             "        return;",
             "    }",

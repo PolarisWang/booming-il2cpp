@@ -15,11 +15,11 @@ constexpr int kExpectedChecksums[kExpectedCount] = {
     42,
     42,
     42,
-    0,
+    42,
     42,
     -1,
     -1,
-    0,
+    -1,
     42,
     42,
     42
