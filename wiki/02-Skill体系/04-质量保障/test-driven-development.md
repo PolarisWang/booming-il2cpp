@@ -12,6 +12,7 @@
 ## 本项目补充规则
 
 - IL2CPP compiler / loader / linker / semantic world / codegen 改动，必须先补失败测试
+  - 对于 codegen 改动，除了单元测试外，应考虑补快照测试（详见 [`../../06-测试验证/CodeGen快照测试规范.md`](../../06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/CodeGen%E5%BF%AB%E7%85%A7%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83.md)）
 - `Chaos.TestFramework.Sdk` / `Chaos.TestFramework.Runtime` 改动，必须先补失败测试
 - UnitTest / Benchmark / HotUpdate collection schema、loader、runner、dashboard 改动，必须先补失败测试
 - subject planner、generated solution pipeline、native/hotupdate test 主线改动，必须先补失败测试

@@ -16,6 +16,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 - [`docs/architecture/verification-v1/spec.md`](../../../docs/architecture/verification-v1/spec.md)
 - [`wiki/06-测试验证/INDEX.md`](../../../wiki/06-测试验证/INDEX.md)
 - [`wiki/06-测试验证/AOT新Feature接入自测规范.md`](../../../wiki/06-测试验证/AOT新Feature接入自测规范.md)
+- [`wiki/06-测试验证/CodeGen快照测试规范.md`](../../../wiki/06-测试验证/CodeGen快照测试规范.md)
 
 ## 何时必须使用
 
@@ -50,7 +51,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 - bugfix 不能只靠手工复跑、dashboard 观察或控制台输出
 - 证据顺序默认是：
   1. `tests/unit/**`
-  2. `tests/contracts/**`
+  2. `tests/contracts/**`（含快照测试）
   3. `tests/integration/**`
   4. subject 级正式验证
 
@@ -106,7 +107,25 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
   - `verification/projections/foundation-dll-audit/dlls/*.json`
   - `docs/verification/foundation-dll-audit/family-verification-claims.json`
 
-### 7. DLL-first reporting 的 primary evidence 约束
+### 8. CodeGen 快照测试
+
+以下改动必须先过快照测试：
+
+- 修改 `NativeAotLoweringPlanner` 的任何 Emission / Planning / RuntimeSupport 文件
+- 修改 `NativeAotEmitter` 核心逻辑
+- 新增或修改 Scriban 模板
+- 其他会改变生成 C++ 形状的改动
+
+快照测试的夹具（Fixtures）和基线（Baselines）必须随实现代码一同维护。
+
+- 新增 IL 模式时必须补对应夹具和基线
+- 修改生成逻辑后必须运行快照测试，审查基线变更后再更新
+- 夹具须遵循精简原则（1-3 种 IL 模式、1-3 个方法）
+- 基线更新通过 `SNAPSHOT_UPDATE=1` 环境变量触发
+
+详见 [`wiki/06-测试验证/CodeGen快照测试规范.md`](../../../wiki/06-测试验证/CodeGen快照测试规范.md)。
+
+### 9. DLL-first reporting 的 primary evidence 约束
 
 - 只有 `artifacts/**` 下的真实产物允许进入 primary evidence / artifact index
 - `docs/**`、`subjects/**`、`verification/**` 等引用只能作为 support refs
@@ -119,6 +138,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 - `docs/architecture/subject-test-framework-v1/INDEX.md`
 - `docs/architecture/verification-v1/spec.md`
 - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
+- `wiki/06-测试验证/CodeGen快照测试规范.md`
 - `wiki/06-测试验证/INDEX.md`
 - `wiki/02-Skill体系/04-质量保障/project-test-governance.md`
 - `wiki/02-Skill体系/skill-registry.md`
