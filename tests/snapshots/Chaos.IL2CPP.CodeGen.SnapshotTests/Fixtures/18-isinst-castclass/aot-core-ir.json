@@ -1,0 +1,116 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.type-check-helper.check-and-cast",
+      "subjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
+      "signature": "System.Int32 TypeCheckHelper::CheckAndCast()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/TypeCheckHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
+        "methodId": "snapshot-test-fixtures.type-check-helper.check-and-cast",
+        "signature": "System.Int32 TypeCheckHelper::CheckAndCast()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_TypeCheckHelper_CheckAndCast",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newobj",
+          "operand": "System.Void MarkedClass::.ctor(System.Int32)",
+          "callee": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void(System.Int32)",
+          "ilOffset": 1,
+          "resultType": "SnapshotTestFixtures/MarkedClass",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "method",
+            "subjectId": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/MarkedClass",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 3
+        },
+        {
+          "op": "isinst",
+          "operand": "SnapshotTestFixtures/MarkedClass",
+          "ilOffset": 4,
+          "resultType": "SnapshotTestFixtures/MarkedClass",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/MarkedClass",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 8
+        },
+        {
+          "op": "castclass",
+          "operand": "SnapshotTestFixtures/MarkedClass",
+          "ilOffset": 5,
+          "resultType": "SnapshotTestFixtures/MarkedClass",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/MarkedClass",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 7
+        },
+        {
+          "op": "pop",
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 8
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+// ── TypeInfo declarations ──
+{{~ for entry in entries ~}}
+{{ indentation }}inline TypeInfo {{ entry.symbol }} = { {{ entry.parent_expr }}, {{ entry.stable_id }}ULL, {{ entry.iface_map_expr }}, nullptr, {{ entry.iface_count }}, {{ entry.flags }}, {{ entry.shape }} };
+{{~ end ~}}

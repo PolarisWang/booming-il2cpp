@@ -9,7 +9,7 @@
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
-    uintptr_t method_key,
+    CHAOS_IL2CPP_UINTPTR method_key,
     void*     args_buf,
     void*     ret_buf) noexcept;
 
@@ -324,12 +324,12 @@ chaos_type_System_Private_CoreLib_System_String)));
 		return 0u;
 	}();
 
-static constexpr uint32_t kGenericTypeArgTokens[1] = { 0 };
+static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
 static constexpr GenericTypeRegistrationEntryV0 kGenericTypeEntries[1] = { { 0, 0, 0, 0 } };
-static constexpr uint32_t kGenericMethodArgTokens[1] = { 0 };
+static constexpr CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[1] = { 0 };
 static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { { 0, 0, 0, 0 } };
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
-static constexpr uint32_t s_method_aot_entry_args[1] = { 0 };
+static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
 extern "C" void SnapshotTestFixtures_Helper_ConsumeString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringOps_UseString(void);
@@ -368,7 +368,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[13] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[31] = {
 		0u,
 		1548u,
 		1548u,
@@ -382,9 +382,27 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		1548u,
 		1548u,
 		12u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1728u,
+		1548u,
+		1536u,
+		1536u,
+		1548u,
+		1556u,
+		1536u,
+		1548u,
+		1545u,
+		1548u,
+		1548u,
+		1548u,
 	};
 
-	static constexpr const char* s_type_names[13] = {
+	static constexpr const char* s_type_names[31] = {
 		"<Module>",
 		"ArithmeticOps",
 		"StringOps",
@@ -398,9 +416,27 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		"LoopHelper",
 		"ConversionHelper",
 		"Helper",
+		"SwitchHelper",
+		"LdftnHelper",
+		"TargetHelper",
+		"ArrayHelper",
+		"EhHelper",
+		"GenericHelper",
+		"Wrapper`1",
+		"DelegateHelper",
+		"BaseClass",
+		"DerivedClass",
+		"VirtualHelper",
+		"IMarker",
+		"MarkedClass",
+		"TypeCheckHelper",
+		"SmallStruct",
+		"SizeOfHelper",
+		"IndirectHelper",
+		"<>O",
 	};
 
-	static constexpr const char* s_type_namespaces[13] = {
+	static constexpr const char* s_type_namespaces[31] = {
 		"",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
@@ -414,9 +450,27 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[13] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[31] = {
 		0u,
 		0u,
 		0u,
@@ -430,31 +484,16 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		0u,
 		0u,
 		0u,
-	};
-
-	static const TypeInfo* const s_type_info_ptrs[13] = {
-		nullptr,
-		nullptr,
-		nullptr,
-		nullptr,
-		nullptr,
-		nullptr,
-		nullptr,
-		nullptr,
-		nullptr,
-		nullptr,
-		nullptr,
-		nullptr,
-		nullptr,
-	};
-
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[14] = {
 		0u,
 		0u,
 		0u,
 		0u,
 		0u,
 		0u,
+		0u,
+		0u,
+		0u,
+		33554454u,
 		0u,
 		0u,
 		0u,
@@ -465,7 +504,98 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		0u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[14] = {
+	static const TypeInfo* const s_type_info_ptrs[31] = {
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+	};
+
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
+		33554463u,
+	};
+
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[32] = {
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+	};
+
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[32] = {
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
 		0u,
 		0u,
 		0u,
@@ -492,11 +622,11 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		/* .type_namespaces   = */ s_type_namespaces,
 		/* .type_parent_tokens= */ s_type_parent_tokens,
 		/* .type_info_ptrs    = */ s_type_info_ptrs,
-		/* .nested_type_children= */ nullptr,
+		/* .nested_type_children= */ s_nested_type_children,
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 13u,
+		/* .type_count        = */ 31u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
@@ -559,14 +689,14 @@ static const CHAOS_IL2CPP_UINT32 s_name_index_registered = []()
 
 // Populate generic registration arrays from this TU.
 static void ChaosDoPopulateGenericRegistration(
-	uint32_t* out_type_count,
+	CHAOS_IL2CPP_UINT32* out_type_count,
 	const GenericTypeRegistrationEntryV0** out_type_entries,
-	const uint32_t** out_type_args,
-	uint32_t* out_type_arg_count,
-	uint32_t* out_method_count,
+	const CHAOS_IL2CPP_UINT32** out_type_args,
+	CHAOS_IL2CPP_UINT32* out_type_arg_count,
+	CHAOS_IL2CPP_UINT32* out_method_count,
 	const GenericMethodRegistrationEntryV0** out_method_entries,
-	const uint32_t** out_method_args,
-	uint32_t* out_method_arg_count)
+	const CHAOS_IL2CPP_UINT32** out_method_args,
+	CHAOS_IL2CPP_UINT32* out_method_arg_count)
 {
 	*out_type_count = 0;
 	*out_type_entries = kGenericTypeEntries;
@@ -580,8 +710,8 @@ static void ChaosDoPopulateGenericRegistration(
 
 // Static initializer registers the callback.
 extern "C" void (*g_chaos_populate_generic_registration)(
-	uint32_t*, const GenericTypeRegistrationEntryV0**, const uint32_t**, uint32_t*,
-	uint32_t*, const GenericMethodRegistrationEntryV0**, const uint32_t**, uint32_t*);
+	CHAOS_IL2CPP_UINT32*, const GenericTypeRegistrationEntryV0**, const CHAOS_IL2CPP_UINT32**, CHAOS_IL2CPP_UINT32*,
+	CHAOS_IL2CPP_UINT32*, const GenericMethodRegistrationEntryV0**, const CHAOS_IL2CPP_UINT32**, CHAOS_IL2CPP_UINT32*);
 namespace {
 struct ChaosGenericRegistrationInit {
 	ChaosGenericRegistrationInit() {

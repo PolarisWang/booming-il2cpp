@@ -219,7 +219,14 @@ public sealed partial class NativeAotLoweringPlanner
         EmitObjectModelDeclarations(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
         // Phase 0: Collect ModuleRegistry Tier 0 type data from PE metadata
         CollectModuleTypeData(closureManifest.InputAssemblyPath);
-        EmitStringIdTable(objectModelBuilder, stringLiterals);
+        // Phase 1 string-id table via Scriban
+        var stringIdCode = BuildStringIdTable(stringLiterals);
+        if (!string.IsNullOrEmpty(stringIdCode))
+        {
+            objectModelBuilder.AppendLine();
+            objectModelBuilder.AppendLine(stringIdCode);
+            objectModelBuilder.AppendLine();
+        }
         if (externalRuntimeHelpers.Any(helper => IsSpanRuntimeHelperSubjectId(helper.SubjectId)))
         {
             EmitSpanRuntimePrelude(objectModelBuilder, _staticFieldDataSupport);
@@ -267,6 +274,9 @@ public sealed partial class NativeAotLoweringPlanner
         {
             moduleRegistrationCode += BuildMethodTableInitialization();
         }
+
+        // Phase 1 diagnostics: log StructuredIR coverage summary
+        LogPhase1Summary();
 
         return new NativeAotTemplateModel
         {

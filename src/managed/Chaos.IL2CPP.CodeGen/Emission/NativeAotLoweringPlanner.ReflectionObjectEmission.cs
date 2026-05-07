@@ -1515,6 +1515,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine();
 			var getObjectTypeModel = new Scriban.Runtime.ScriptObject
 			{
+				["indentation"] = ScribanTemplateRenderer.Indentation(0),
 				["type_entries"] = _reflectionMemberSupport.TypeEntries
 					.OrderBy((ReflectionMemberTypeEntry entry) => entry.TypeSubjectId, StringComparer.Ordinal)
 					.Select(entry => new Scriban.Runtime.ScriptObject
@@ -1532,6 +1533,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine();
 			var createInstanceModel = new Scriban.Runtime.ScriptObject
 			{
+				["indentation"] = ScribanTemplateRenderer.Indentation(0),
 				["type_native_symbol"] = GetNativeTypeSymbol("System.Private.CoreLib/System.Type"),
 				["ctor_entries"] = _reflectionMemberSupport.MethodEntries
 					.Where((ReflectionMemberMethodEntry entry) => entry.IsConstructor && entry.ParameterNames.Count == 0)

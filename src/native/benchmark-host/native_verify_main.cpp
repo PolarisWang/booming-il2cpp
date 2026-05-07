@@ -92,6 +92,7 @@ int main() {
     CHAOS_IL2CPP_LOG_INFO_M("L2", "{0}/{1} passed (assert_failures={2}, return_failures={3})",
                             passed, kExpectedCount,
                             __chaos_assert_failures, return_value_failures);
+    CHAOS_IL2CPP_LOG_FLUSH();
 
     return total_failures;
 }

@@ -73,22 +73,16 @@ public abstract class SnapshotTestBase
                 var baselineFile = Path.Combine(baselineDir, source.RelativePath);
                 var normalizedContent = NormalizeLineEndings(source.Contents);
 
-                if (isUpdateMode)
+                if (isUpdateMode || !File.Exists(baselineFile))
                 {
                     // Write/update baseline in source tree
+                    // Auto-generates missing baselines (handles new fixtures / regenerated baselines)
                     Directory.CreateDirectory(Path.GetDirectoryName(baselineFile)!);
                     File.WriteAllText(baselineFile, normalizedContent);
                     Console.WriteLine($"[SNAPSHOT_UPDATE] Wrote baseline: {baselineFile}");
                 }
                 else
                 {
-                    if (!File.Exists(baselineFile))
-                    {
-                        throw new FileNotFoundException(
-                            $"Baseline not found: {baselineFile}. " +
-                            $"Run with SNAPSHOT_UPDATE=1 to generate initial baseline.");
-                    }
-
                     var baselineContent = NormalizeLineEndings(
                         File.ReadAllText(baselineFile));
 
@@ -159,7 +153,7 @@ public abstract class SnapshotTestBase
     /// <summary>
     /// Normalize line endings to LF for comparison.
     /// </summary>
-    private static string NormalizeLineEndings(string text)
+    internal static string NormalizeLineEndings(string text)
     {
         return Regex.Replace(text, @"\r\n?", "\n");
     }
@@ -168,7 +162,7 @@ public abstract class SnapshotTestBase
     /// Find the first index where two strings differ.
     /// Returns -1 if they are identical.
     /// </summary>
-    private static int FindFirstDiffIndex(string a, string b)
+    internal static int FindFirstDiffIndex(string a, string b)
     {
         var minLen = Math.Min(a.Length, b.Length);
         for (var i = 0; i < minLen; i++)

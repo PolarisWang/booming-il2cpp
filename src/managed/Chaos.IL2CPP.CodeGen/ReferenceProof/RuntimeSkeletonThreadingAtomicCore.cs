@@ -134,14 +134,14 @@ internal static class RuntimeSkeletonThreadingAtomicCore
     {
         return managedType switch
         {
-            "System.Int32" => "int32_t",
-            "System.UInt32" => "uint32_t",
-            "System.Int64" => "int64_t",
-            "System.UInt64" => "uint64_t",
-            "System.IntPtr" => "intptr_t",
-            "System.UIntPtr" => "uintptr_t",
-            "System.Single" => "float",
-            "System.Double" => "double",
+            "System.Int32" => "CHAOS_IL2CPP_INT32",
+            "System.UInt32" => "CHAOS_IL2CPP_UINT32",
+            "System.Int64" => "CHAOS_IL2CPP_INT64",
+            "System.UInt64" => "CHAOS_IL2CPP_UINT64",
+            "System.IntPtr" => "CHAOS_IL2CPP_INTPTR",
+            "System.UIntPtr" => "CHAOS_IL2CPP_UINTPTR",
+            "System.Single" => "CHAOS_IL2CPP_FLOAT32",
+            "System.Double" => "CHAOS_IL2CPP_FLOAT64",
             "System.Void" => "void",
             "System.Boolean" => "bool",
             "System.Object" => "void*",

@@ -5,7 +5,7 @@
 
 {{~ if entry_subject_id ~}}
 // Forward declaration of the entry point function
-extern "C" int {{ native_entry_function_name }}(int32_t);
+extern "C" int {{ native_entry_function_name }}(CHAOS_IL2CPP_INT32);
 {{~ end ~}}
 
 int main(int argc, char** argv)

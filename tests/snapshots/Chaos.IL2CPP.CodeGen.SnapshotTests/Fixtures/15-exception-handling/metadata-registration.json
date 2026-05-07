@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/EhHelper",
+      "name": "EhHelper",
+      "displayName": "EhHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
+      "name": "SafeDivide",
+      "definitionSubjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

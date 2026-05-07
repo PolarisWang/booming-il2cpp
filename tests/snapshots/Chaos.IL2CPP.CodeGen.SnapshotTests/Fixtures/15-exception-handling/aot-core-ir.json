@@ -1,0 +1,110 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.eh-helper.safe-divide",
+      "subjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
+      "signature": "System.Int32 EhHelper::SafeDivide()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/EhHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
+        "methodId": "snapshot-test-fixtures.eh-helper.safe-divide",
+        "signature": "System.Int32 EhHelper::SafeDivide()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_EhHelper_SafeDivide",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 2,
+          "tryLength": 5,
+          "handlerOffset": 7,
+          "handlerLength": 3,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 100,
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "div",
+          "ilOffset": 4,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 5,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "leave",
+          "operand": 10,
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "pop",
+          "ilOffset": 7,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": -1,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "leave",
+          "operand": 10,
+          "ilOffset": 9,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 11
+        }
+      ]
+    }
+  ]
+}

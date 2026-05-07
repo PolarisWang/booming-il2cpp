@@ -255,8 +255,8 @@ public sealed class NativeAotEmitter
             ["entry_native_symbol"] = templateModel.EntryNativeSymbol,
             ["native_entry_function_name"] = templateModel.NativeEntryFunctionName,
             ["entry_bridge_arguments"] = templateModel.EntryBridgeArguments,
-            ["generic_registration_code"] = templateModel.GenericRegistrationCode,
-            ["module_registration_code"] = templateModel.ModuleRegistrationCode,
+            ["generic_registration_code"] = ScribanTemplateRenderer.NormalizeIndentation(templateModel.GenericRegistrationCode),
+            ["module_registration_code"] = ScribanTemplateRenderer.NormalizeIndentation(templateModel.ModuleRegistrationCode),
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
     }
@@ -265,7 +265,7 @@ public sealed class NativeAotEmitter
     {
         var model = new ScriptObject
         {
-            ["object_model_code"] = templateModel.ObjectModelCode,
+            ["object_model_code"] = ScribanTemplateRenderer.NormalizeIndentation(templateModel.ObjectModelCode),
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetObjectModelTemplate(), model);
     }
@@ -275,7 +275,7 @@ public sealed class NativeAotEmitter
         var model = new ScriptObject
         {
             ["subject_id"] = methodModel.SubjectId,
-            ["method_source"] = methodModel.MethodSource,
+            ["method_source"] = ScribanTemplateRenderer.NormalizeIndentation(methodModel.MethodSource),
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetMethodTemplate(), model);
     }

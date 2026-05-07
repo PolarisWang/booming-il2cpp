@@ -792,6 +792,10 @@ public sealed partial class NativeAotLoweringPlanner
 		case "ldlen":
 			EmitArrayLength(builder, nextOffset, instruction.Op);
 			break;
+		case "sizeof":
+			builder.AppendLine("    chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(4);");
+			AppendGotoNext(builder, nextOffset, instruction.Op);
+			break;
 		case "ldelema":
 			EmitArrayElementAddress(builder, instruction, nextOffset, instruction.Op);
 			break;

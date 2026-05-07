@@ -1,16 +1,10 @@
 using System.Linq;
 using System.Text;
 using Chaos.IL2CPP.Contracts;
+using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.CodeGen;
 
-/// <summary>
-/// Partial class for generating per-DLL module registration code.
-/// Emits a ModuleDescriptor with the assembly name and a call to
-/// RegisterModule() via a static initializer in the anonymous namespace.
-/// Tier 1 (type_flags/names/namespaces) and Tier 2 (image) metadata
-/// are deferred — filled in when per-assembly metadata generation is active.
-/// </summary>
 public sealed partial class NativeAotLoweringPlanner
 {
     internal string BuildModuleRegistration()
@@ -21,175 +15,58 @@ public sealed partial class NativeAotLoweringPlanner
             return string.Empty;
         }
 
-        var sb = new StringBuilder(8192);
-        sb.AppendLine("// ── Module registration ──────────────────────────────────────");
-
         bool hasTypeData = _moduleTypeCount > 0 && _moduleTypeFlags.Count == _moduleTypeCount;
+        bool hasNestedTypes = _moduleNestedTypeChildren.Count > 0;
+        bool hasConstraints = _moduleGenericParamConstraintData.Count > 0;
+
+        // Pre-build custom attribute blob + materializer code (too complex for Scriban, stay in StringBuilder)
+        string caCode = BuildCustomAttributeBlobAndMaterializer();
+
+        // Pre-build ModuleDescriptor custom attribute fields
+        var caFieldSb = new StringBuilder(256);
+        EmitCustomAttributeModuleDescriptorFields(caFieldSb);
+        string caFieldCode = caFieldSb.ToString();
+
+        var model = new ScriptObject
+        {
+            ["indentation"] = ScribanTemplateRenderer.Indentation(1),
+            ["assembly_name"] = EscapeCppStringLiteral(assemblyName),
+            ["has_type_data"] = hasTypeData,
+            ["type_count"] = _moduleTypeCount,
+            ["custom_attribute_blob_code"] = caCode,
+            ["module_descriptor_custom_attr_fields"] = caFieldCode,
+        };
 
         if (hasTypeData)
         {
-            int count = _moduleTypeCount;
+            model["type_flags"] = _moduleTypeFlags.Select(f => (object)f).ToArray();
+            model["type_names"] = _moduleTypeNames.Select(n => (object)EscapeCppStringLiteral(n)).ToArray();
+            model["type_namespaces"] = _moduleTypeNamespaces.Select(ns => (object)EscapeCppStringLiteral(ns)).ToArray();
+            model["type_parent_tokens"] = _moduleTypeParentTokens.Select(t => (object)t).ToArray();
+            model["type_info_ptrs"] = _moduleTypeInfoSymbols
+                .Select(s => (object)(s ?? "nullptr")).ToArray();
 
-            // ── type_flags array ──────────────────────────────────────────
-            sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[").Append(count).AppendLine("] =");
-            sb.AppendLine("{");
-            for (int i = 0; i < count; i++)
-            {
-                sb.Append("    ").Append(_moduleTypeFlags[i]).Append("u,");
-                if (i < count - 1) sb.AppendLine();
-            }
-            sb.AppendLine();
-            sb.AppendLine("};");
-            sb.AppendLine();
-
-            // ── type_names array ──────────────────────────────────────────
-            sb.Append("static constexpr const char* s_type_names[").Append(count).AppendLine("] =");
-            sb.AppendLine("{");
-            for (int i = 0; i < count; i++)
-            {
-                sb.Append("    \"").Append(EscapeCppStringLiteral(_moduleTypeNames[i])).AppendLine("\",");
-            }
-            sb.AppendLine("};");
-            sb.AppendLine();
-
-            // ── type_namespaces array ─────────────────────────────────────
-            sb.Append("static constexpr const char* s_type_namespaces[").Append(count).AppendLine("] =");
-            sb.AppendLine("{");
-            for (int i = 0; i < count; i++)
-            {
-                sb.Append("    \"").Append(EscapeCppStringLiteral(_moduleTypeNamespaces[i])).AppendLine("\",");
-            }
-            sb.AppendLine("};");
-            sb.AppendLine();
-
-            // ── type_parent_tokens array ──────────────────────────────────
-            sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[").Append(count).AppendLine("] =");
-            sb.AppendLine("{");
-            for (int i = 0; i < count; i++)
-            {
-                sb.Append("    ").Append(_moduleTypeParentTokens[i]).Append("u,");
-                if (i < count - 1) sb.AppendLine();
-            }
-            sb.AppendLine();
-            sb.AppendLine("};");
-            sb.AppendLine();
-
-            // ── type_info_ptrs array (NOT constexpr — addresses of inline variables) ──
-            sb.Append("static const TypeInfo* const s_type_info_ptrs[").Append(count).AppendLine("] =");
-            sb.AppendLine("{");
-            for (int i = 0; i < count; i++)
-            {
-                string? symbol = _moduleTypeInfoSymbols[i];
-                if (symbol != null)
-                    sb.Append("    ").Append(symbol).AppendLine(",");
-                else
-                    sb.AppendLine("    nullptr,");
-            }
-            sb.AppendLine("};");
-            sb.AppendLine();
-
-            // ── nested_type_children & nested_type_offset arrays ────────
-            bool hasNestedTypes = _moduleNestedTypeChildren.Count > 0;
+            model["has_nested_types"] = hasNestedTypes;
             if (hasNestedTypes)
             {
-                sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[").Append(_moduleNestedTypeChildren.Count).AppendLine("] =");
-                sb.AppendLine("{");
-                for (int i = 0; i < _moduleNestedTypeChildren.Count; i++)
-                {
-                    sb.Append("    ").Append(_moduleNestedTypeChildren[i]).Append("u,");
-                    if (i < _moduleNestedTypeChildren.Count - 1) sb.AppendLine();
-                }
-                sb.AppendLine();
-                sb.AppendLine("};");
-                sb.AppendLine();
+                model["nested_type_children"] = _moduleNestedTypeChildren.Select(c => (object)c).ToArray();
+                model["nested_children_count"] = _moduleNestedTypeChildren.Count;
             }
+            model["nested_type_offsets"] = _moduleNestedTypeOffsets.Select(o => (object)o).ToArray();
+            model["nested_offsets_count"] = _moduleNestedTypeOffsets.Count;
 
-            // nested_type_offset always emitted (type_count + 1 entries, prefix-sum sentinel)
-            sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[").Append(_moduleNestedTypeOffsets.Count).AppendLine("] =");
-            sb.AppendLine("{");
-            for (int i = 0; i < _moduleNestedTypeOffsets.Count; i++)
-            {
-                sb.Append("    ").Append(_moduleNestedTypeOffsets[i]).Append("u,");
-                if (i < _moduleNestedTypeOffsets.Count - 1) sb.AppendLine();
-            }
-            sb.AppendLine();
-            sb.AppendLine("};");
-            sb.AppendLine();
-
-            // ── generic_param_constraint arrays ────────────────────────────
-            bool hasConstraints = _moduleGenericParamConstraintData.Count > 0;
+            model["has_constraints"] = hasConstraints;
             if (hasConstraints)
             {
-                sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_data[").Append(_moduleGenericParamConstraintData.Count).AppendLine("] =");
-                sb.AppendLine("{");
-                for (int i = 0; i < _moduleGenericParamConstraintData.Count; i++)
-                {
-                    sb.Append("    ").Append(_moduleGenericParamConstraintData[i]).Append("u,");
-                    if (i < _moduleGenericParamConstraintData.Count - 1) sb.AppendLine();
-                }
-                sb.AppendLine();
-                sb.AppendLine("};");
-                sb.AppendLine();
+                model["generic_param_constraint_data"] = _moduleGenericParamConstraintData.Select(d => (object)d).ToArray();
+                model["constraint_data_count"] = _moduleGenericParamConstraintData.Count;
             }
-
-            sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[").Append(_moduleGenericParamConstraintOffsets.Count).AppendLine("] =");
-            sb.AppendLine("{");
-            for (int i = 0; i < _moduleGenericParamConstraintOffsets.Count; i++)
-            {
-                sb.Append("    ").Append(_moduleGenericParamConstraintOffsets[i]).Append("u,");
-                if (i < _moduleGenericParamConstraintOffsets.Count - 1) sb.AppendLine();
-            }
-            sb.AppendLine();
-            sb.AppendLine("};");
-            sb.AppendLine();
+            model["generic_param_constraint_offsets"] = _moduleGenericParamConstraintOffsets.Select(o => (object)o).ToArray();
+            model["constraint_offsets_count"] = _moduleGenericParamConstraintOffsets.Count;
         }
 
-        // ── CustomAttribute blob + materializer ────────────────────
-        _hasCustomAttributeBlob = false;
-        string caCode = BuildCustomAttributeBlobAndMaterializer();
-        if (!string.IsNullOrEmpty(caCode))
-        {
-            sb.Append(caCode);
-            sb.AppendLine();
-        }
-
-        sb.Append("static const ::chaos::il2cpp::runtime_core::ModuleDescriptor s_native_aot_module = {");
-        sb.AppendLine();
-        sb.Append("    /* .name_utf8         = */ \"").Append(EscapeCppStringLiteral(assemblyName)).AppendLine("\",");
-        sb.AppendLine("    /* .image             = */ nullptr,  // Tier 2 metadata — deferred");
-        if (hasTypeData)
-        {
-            sb.AppendLine("    /* .type_flags        = */ s_type_flags,");
-            sb.AppendLine("    /* .type_names        = */ s_type_names,");
-            sb.AppendLine("    /* .type_namespaces   = */ s_type_namespaces,");
-            sb.AppendLine("    /* .type_parent_tokens= */ s_type_parent_tokens,");
-            sb.AppendLine("    /* .type_info_ptrs    = */ s_type_info_ptrs,");
-            sb.Append("    /* .nested_type_children= */ ").Append(_moduleNestedTypeChildren.Count > 0 ? "s_nested_type_children" : "nullptr").AppendLine(",");
-            sb.AppendLine("    /* .nested_type_offset = */ s_nested_type_offset,");
-            sb.Append("    /* .generic_param_constraint_data= */ ").Append(_moduleGenericParamConstraintData.Count > 0 ? "s_generic_param_constraint_data" : "nullptr").AppendLine(",");
-            sb.AppendLine("    /* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,");
-            sb.Append("    /* .type_count        = */ ").Append(_moduleTypeCount).AppendLine("u,");
-            EmitCustomAttributeModuleDescriptorFields(sb);
-        }
-        else
-        {
-            sb.AppendLine("    /* .type_flags        = */ nullptr,  // Tier 1 — deferred");
-            sb.AppendLine("    /* .type_names        = */ nullptr,");
-            sb.AppendLine("    /* .type_namespaces   = */ nullptr,");
-            sb.AppendLine("    /* .type_parent_tokens= */ nullptr,");
-            sb.AppendLine("    /* .type_info_ptrs    = */ nullptr,");
-            sb.AppendLine("    /* .nested_type_children= */ nullptr,");
-            sb.AppendLine("    /* .nested_type_offset = */ nullptr,");
-            sb.AppendLine("    /* .generic_param_constraint_data= */ nullptr,");
-            sb.AppendLine("    /* .generic_param_constraint_offset= */ nullptr,");
-            sb.AppendLine("    /* .type_count        = */ 0u,");
-            EmitCustomAttributeModuleDescriptorFields(sb);
-        }
-        sb.AppendLine("    /* .abi_manifest      = */ s_abi_manifest,");
-        sb.AppendLine("};");
-        sb.AppendLine("static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =");
-        sb.Append("    ::chaos::il2cpp::runtime_core::RegisterModule(\"").Append(EscapeCppStringLiteral(assemblyName)).AppendLine("\", &s_native_aot_module);");
-        return sb.ToString();
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetModuleRegistrationTemplate(), model);
     }
 
     /// <summary>
@@ -790,7 +667,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 sb.Append("    ").Append(runningTotal).Append("u,");
                 sb.AppendLine();
-                runningTotal += reachableMethods[i].ParameterAbis.Count;
+                runningTotal += (uint)reachableMethods[i].ParameterAbis.Count;
             }
             sb.Append("    ").Append(runningTotal).AppendLine("u");
         }

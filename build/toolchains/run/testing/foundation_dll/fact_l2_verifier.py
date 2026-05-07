@@ -58,7 +58,11 @@ def _find_vcvars() -> Path | None:
         Path("C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvarsall.bat"),
         Path("C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Auxiliary/Build/vcvarsall.bat"),
     ]
-    return next((c for c in candidates if c.exists()), None)
+    vcvarsall = next((c for c in candidates if c.exists()), None)
+    if vcvarsall is None:
+        return None
+    # vcvarsall.bat exists; return vcvars64.bat in same directory
+    return vcvarsall.parent / "vcvars64.bat"
 
 
 # ── Step 1: Generate expected_checksums.h ─────────────────────────────
@@ -217,9 +221,12 @@ project(chaos_l2_verify LANGUAGES CXX)
 
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
+add_compile_options(/utf-8)
+
 add_executable(verify_{family_slug}
     {verify_host}
     {generated_cpp}
+    {repo_root}/src/native/runtime-core/runtime_instantiation.cpp
 )
 
 target_include_directories(verify_{family_slug} PRIVATE
@@ -227,13 +234,19 @@ target_include_directories(verify_{family_slug} PRIVATE
     "{repo_root}/src/native/common/chaos"
     "{repo_root}/contracts/native/v0"
     "{repo_root}/src/native/runtime-core"
+    "{repo_root}/src/native/interpreter"
+    "{repo_root}/third_party/bdwgc/include"
     "{repo_root}/third_party/fmt/include"
+    "{repo_root}/build/native/src/native/runtime-core/Release"
     "{build_dir}"
 )
 
 target_compile_definitions(verify_{family_slug} PRIVATE
     CHAOS_IL2CPP_CHECK
     CHAOS_IL2CPP_TRACE_ENABLED
+    CHAOS_IL2CPP_VERIFY_MODE
+    GC_NOT_DLL
+    CHAOS_RUNTIME_ABI_STATIC
 )
 
 target_link_libraries(verify_{family_slug} PRIVATE
@@ -243,6 +256,7 @@ target_link_libraries(verify_{family_slug} PRIVATE
     chaos_common
     chaos_support
     chaos_hot_update
+    chaos_fmt
     chaos_bdwgc
     ole32
     user32
@@ -257,9 +271,12 @@ project(chaos_l3_verify LANGUAGES CXX)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "{build_dir}")
 
+add_compile_options(/utf-8)
+
 add_executable(l3_verify_{family_slug}
     "{l3_host}"
     "{generated_cpp}"
+    "{repo_root}/src/native/runtime-core/runtime_instantiation.cpp"
 )
 
 target_include_directories(l3_verify_{family_slug} PRIVATE
@@ -268,6 +285,8 @@ target_include_directories(l3_verify_{family_slug} PRIVATE
     "{repo_root}/contracts/native/v0"
     "{repo_root}/src/native/runtime-core"
     "{repo_root}/src/native/bootstrap"
+    "{repo_root}/src/native/interpreter"
+    "{repo_root}/third_party/bdwgc/include"
     "{repo_root}/third_party/fmt/include"
     "{build_dir}"
 )
@@ -277,16 +296,18 @@ target_compile_definitions(l3_verify_{family_slug} PRIVATE
     CHAOS_IL2CPP_TRACE_ENABLED
     CHAOS_IL2CPP_VERIFY_MODE
     GC_NOT_DLL
+    CHAOS_RUNTIME_ABI_STATIC
 )
 
 target_link_libraries(l3_verify_{family_slug} PRIVATE
-    "{repo_root}/build/native-runtime/Release/chaos_runtime_core.lib"
+    "{repo_root}/build/native/src/native/runtime-core/Release/chaos_runtime_core.lib"
     "{repo_root}/build/native/src/native/bootstrap/Release/chaos_bootstrap.lib"
     "{repo_root}/build/native/src/native/interpreter/Release/chaos_interpreter.lib"
     "{repo_root}/build/native/src/native/common/Release/chaos_common.lib"
     "{repo_root}/build/native/src/native/support/Release/chaos_support.lib"
     "{repo_root}/build/native/src/native/hot-update/Release/chaos_hot_update.lib"
     "{repo_root}/build/native/bdwgc_build/Release/chaos_bdwgc.lib"
+    "{repo_root}/build/native/fmt_build/Release/chaos_fmt.lib"
     ole32
     user32
 )
@@ -298,6 +319,12 @@ target_compile_features(l3_verify_{family_slug} PUBLIC cxx_std_20)
 def _build_via_cmake(verify_host: Path, generated_cpp: Path,
                      build_dir: Path, family_slug: str) -> bool:
     """Use cmake to build the verify exe (handles CRT and dep libs correctly)."""
+    cmake_build_dir = build_dir / "cmake_build"
+
+    # Fresh configure — remove stale CMake cache from previous generator
+    if (cmake_build_dir / "CMakeCache.txt").exists():
+        (cmake_build_dir / "CMakeCache.txt").unlink()
+
     cmake_file = build_dir / "CMakeLists.txt"
     cmake_content = _CMAKE_TEMPLATE.format(
         family_slug=family_slug,
@@ -312,7 +339,7 @@ def _build_via_cmake(verify_host: Path, generated_cpp: Path,
     # Configure
     r = subprocess.run(
         ["cmake", "-S", str(build_dir), "-B", str(build_dir / "cmake_build"),
-         "-G", "Ninja",
+         "-G", "Visual Studio 17 2022",
          "-DCMAKE_BUILD_TYPE=Release",
          f"-DCMAKE_PREFIX_PATH={_REPO_ROOT.as_posix()}/build/native"],
         capture_output=True, text=True, timeout=120)
@@ -340,6 +367,12 @@ def _build_via_cmake(verify_host: Path, generated_cpp: Path,
 def _build_l3_via_cmake(l3_host: Path, generated_cpp: Path,
                          build_dir: Path, family_slug: str) -> bool:
     """Use cmake to build the L3 verify exe (handles CRT and dep libs correctly)."""
+    cmake_build_dir = build_dir / "cmake_build"
+
+    # Fresh configure — remove stale CMake cache from previous generator
+    if (cmake_build_dir / "CMakeCache.txt").exists():
+        (cmake_build_dir / "CMakeCache.txt").unlink()
+
     cmake_file = build_dir / "CMakeLists.txt"
     cmake_content = _L3_CMAKE_TEMPLATE.format(
         family_slug=family_slug,
@@ -354,7 +387,7 @@ def _build_l3_via_cmake(l3_host: Path, generated_cpp: Path,
     # Configure
     r = subprocess.run(
         ["cmake", "-S", str(build_dir), "-B", str(build_dir / "cmake_build"),
-         "-G", "Ninja",
+         "-G", "Visual Studio 17 2022",
          "-DCMAKE_BUILD_TYPE=Release"],
         capture_output=True, text=True, timeout=120)
     if r.returncode != 0:
@@ -403,6 +436,9 @@ def _verify_native(family_slug: str, *, assembly: str,
         _REPO_ROOT / "src" / "native" / "common" / "chaos",
         _REPO_ROOT / "contracts" / "native" / "v0",  # must precede runtime-core
         _REPO_ROOT / "src" / "native" / "runtime-core",
+        _REPO_ROOT / "src" / "native" / "interpreter",
+        _REPO_ROOT / "src" / "native" / "bootstrap",
+        _REPO_ROOT / "third_party" / "bdwgc" / "include",
         _REPO_ROOT / "third_party" / "fmt" / "include",
     ]
     build_dir = family_dir / "native_test" / "l2-verify" / "build"
@@ -443,9 +479,15 @@ def _verify_native(family_slug: str, *, assembly: str,
     # (chaos_managed_pointer_local_slot_tag = 0) to avoid bit-0 collision
     # with odd integer checksums like 65 ('A').
     compile_flags = "/nologo /std:c++20 /c /EHsc /W3 /utf-8 /Od /MD"
-    defines = "-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED -DCHAOS_IL2CPP_VERIFY_MODE"
+    defines = "-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED -DCHAOS_IL2CPP_VERIFY_MODE -DCHAOS_RUNTIME_ABI_STATIC -DGC_NOT_DLL"
 
-    source_files = [(verify_host, verify_host), (generated_cpp, generated_cpp)]
+    # Compile runtime_instantiation.cpp ourselves so InterpreterDispatch is
+    # available at link time (interpreter_entry.obj inside chaos_runtime_core.lib
+    # references it, but the lib's own runtime_instantiation.obj may not participate).
+    runtime_inst_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_instantiation.cpp"
+
+    source_files = [(verify_host, verify_host), (generated_cpp, generated_cpp),
+                     (runtime_inst_src, runtime_inst_src)]
     obj_files = []
     for src, display_name in source_files:
         obj = build_dir / f"{src.stem}.obj"
@@ -462,9 +504,9 @@ def _verify_native(family_slug: str, *, assembly: str,
         if verbose:
             print(f"  [L2]   Compiled {display_name.name}")
 
-    # Link using the main build's chaos_runtime_core.lib (proper CMake dep chain)
-    # Use build/native-runtime/ which is the canonical runtime-core build output.
-    chaos_lib = _REPO_ROOT / "build" / "native-runtime" / "Release" / "chaos_runtime_core.lib"
+    # Link chaos_runtime_core.lib without /WHOLEARCHIVE — the freshly-compiled
+    # runtime_instantiation.obj provides InterpreterDispatch directly.
+    chaos_lib = _REPO_ROOT / "build" / "native" / "src" / "native" / "runtime-core" / "Release" / "chaos_runtime_core.lib"
     if not chaos_lib.exists():
         return {"status": "link_failed", "reason": f"chaos_runtime_core.lib not found at {chaos_lib}"}
 
@@ -484,6 +526,7 @@ def _verify_native(family_slug: str, *, assembly: str,
             ("hot-update", "chaos_hot_update"),
         ]
     )
+    dep_libs += f' "{_REPO_ROOT / "build" / "native" / "fmt_build" / "Release" / "chaos_fmt.lib"}"'
     dep_libs += f' "{bdwgc_dir / "Release" / "chaos_bdwgc.lib"}"'
     dep_libs += " ole32.lib user32.lib"
 
@@ -512,13 +555,13 @@ def _verify_native(family_slug: str, *, assembly: str,
 
     # Step 2d: Run native self-verify exe (under vcvars env to resolve CRT DLLs)
     run_cmd = f'{vcvars_prefix} "{exe_path}"'
-    r = subprocess.run(run_cmd, shell=True, capture_output=True, text=True, timeout=120)
-    output = (r.stdout + r.stderr).strip()
+    r = subprocess.run(run_cmd, shell=True, capture_output=True, timeout=120)
+    output = (r.stdout + r.stderr).decode("utf-8", errors="replace").strip()
 
-    # Parse result from output
+    # Parse result from output (format: "INFO][L2] N/M passed (assert_failures=..., return_failures=...)")
     passed = total = 0
     for line in output.splitlines():
-        if "L2:" in line:
+        if "L2]" in line or "L2:" in line:
             m = re.search(r'(\d+)/(\d+)', line)
             if m:
                 passed, total = int(m.group(1)), int(m.group(2))
@@ -575,9 +618,11 @@ def _verify_l3(family_slug: str, *, assembly: str,
     include_dirs = [
         _REPO_ROOT / "src" / "native" / "common",
         _REPO_ROOT / "src" / "native" / "common" / "chaos",
-        _REPO_ROOT / "contracts" / "native" / "v0",
+        _REPO_ROOT / "contracts" / "native" / "v0",  # must precede runtime-core
         _REPO_ROOT / "src" / "native" / "runtime-core",
+        _REPO_ROOT / "src" / "native" / "interpreter",
         _REPO_ROOT / "src" / "native" / "bootstrap",
+        _REPO_ROOT / "third_party" / "bdwgc" / "include",
         _REPO_ROOT / "third_party" / "fmt" / "include",
     ]
     build_dir = family_dir / "native_test" / "l2-verify" / "build"
@@ -603,9 +648,13 @@ def _verify_l3(family_slug: str, *, assembly: str,
         # colliding with odd checksum values (e.g. 65 = 'A').
         compile_flags = "/nologo /std:c++20 /c /EHsc /W3 /utf-8 /Od /MD"
         defines = ("-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED "
-                   "-DCHAOS_IL2CPP_VERIFY_MODE -DGC_NOT_DLL")
+                   "-DCHAOS_IL2CPP_VERIFY_MODE -DGC_NOT_DLL "
+                   "-DCHAOS_RUNTIME_ABI_STATIC")
 
-        source_files = [(l3_host, l3_host), (generated_cpp, generated_cpp)]
+        runtime_inst_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_instantiation.cpp"
+
+        source_files = [(l3_host, l3_host), (generated_cpp, generated_cpp),
+                         (runtime_inst_src, runtime_inst_src)]
         obj_files = []
         for src, display_name in source_files:
             obj = build_dir / f"{src.stem}.obj"
@@ -625,7 +674,7 @@ def _verify_l3(family_slug: str, *, assembly: str,
         # Step 3c fallback: Link
         native_lib_dir = _REPO_ROOT / "build" / "native" / "src" / "native"
         bdwgc_dir = _REPO_ROOT / "build" / "native" / "bdwgc_build"
-        chaos_lib = _REPO_ROOT / "build" / "native-runtime" / "Release" / "chaos_runtime_core.lib"
+        chaos_lib = _REPO_ROOT / "build" / "native" / "src" / "native" / "runtime-core" / "Release" / "chaos_runtime_core.lib"
         if not chaos_lib.exists():
             return {"status": "link_failed", "reason": f"chaos_runtime_core.lib not found at {chaos_lib}"}
 
@@ -645,9 +694,12 @@ def _verify_l3(family_slug: str, *, assembly: str,
                 ("hot-update", "chaos_hot_update"),
             ]
         )
+        dep_libs += f' "{_REPO_ROOT / "build" / "native" / "fmt_build" / "Release" / "chaos_fmt.lib"}"'
         dep_libs += f' "{bdwgc_dir / "Release" / "chaos_bdwgc.lib"}"'
         dep_libs += " ole32.lib user32.lib"
 
+        # Don't use /WHOLEARCHIVE on chaos_runtime_core.lib — it would
+        # cause duplicate symbols with our freshly-compiled runtime_instantiation.obj.
         link_cmd = (
             f'{vcvars_prefix} "{link_exe}" /nologo /out:"{exe_path}" {obj_list} '
             f'"{chaos_lib}" {dep_libs}'
@@ -672,7 +724,8 @@ def _verify_l3(family_slug: str, *, assembly: str,
 
     # Step 3d: Run L3 verification exe
     run_cmd = f'{vcvars_prefix} "{exe_path}"'
-    r = subprocess.run(run_cmd, shell=True, capture_output=True, text=True, timeout=120)
+    r = subprocess.run(run_cmd, shell=True, capture_output=True, timeout=120)
+    output = (r.stdout + r.stderr).decode("utf-8", errors="replace").strip()
 
     output = (r.stdout + r.stderr).strip()
 

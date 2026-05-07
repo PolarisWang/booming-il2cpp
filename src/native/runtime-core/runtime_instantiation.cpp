@@ -390,6 +390,8 @@ void CHAOS_RUNTIME_ABI_CALL UnregisterModuleGenerics(
     runtime_core::MarkModuleTombstone(module_id);
 }
 
+}  // anonymous namespace
+
 // ── InterpreterDispatch ────────────────────────────────────────────────────
 // DispatchCallback implementation for InterpreterVM::Execute.
 //
@@ -399,6 +401,11 @@ void CHAOS_RUNTIME_ABI_CALL UnregisterModuleGenerics(
 //
 // This is the single point where interpreter Call/CallVirt/CallBridge
 // instructions bridge into runtime-core's method dispatch.
+//
+// NOTE: This is intentionally OUTSIDE the anonymous namespace — the header
+// declares it with external linkage, and interpreter_entry.cpp references it
+// that way. Putting it in the anonymous namespace gives it internal linkage,
+// causing LNK2019 at link time.
 
 interpreter::DispatchResult InterpreterDispatch(
     void*                               call_target,
@@ -873,8 +880,6 @@ RuntimeInstantiationBridgeV0 g_bridge = {
     0u,
     0u
 };
-
-}  // anonymous namespace
 
 // ════════════════════════════════════════════════════════════════════════════
 // Public API

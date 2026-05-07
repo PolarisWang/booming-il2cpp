@@ -121,8 +121,7 @@ def build_and_run(family_slug: str) -> dict:
 
     # /GS- for convert-char: codegen-emitted stack buffers trigger a harmless
     # MSVC buffer security check false positive (STATUS_STACK_BUFFER_OVERRUN).
-    # /MD — the cmake-native chaos libs (RelWithDebInfo) use dynamic CRT by
-    # default on MSVC. Must match all linked libs' RuntimeLibrary.
+    # /MD — all cmake-native chaos libs use the MSVC default dynamic CRT (/MD).
     compile_flags = "/nologo /std:c++17 /c /EHsc /W3 /utf-8 /O2 /MD /GS-"
     defines = "-DCHAOS_IL2CPP_CHECK -DCHAOS_RUNTIME_ABI_STATIC"
 
@@ -132,7 +131,7 @@ def build_and_run(family_slug: str) -> dict:
     # is copied to build/native-runtime/Release/ for the D3 linking step.
     all_libs = " ".join(
         f'"{p}"' for p in [
-            r / "build" / "native" / "src" / "native" / "runtime-core" / "RelWithDebInfo" / "chaos_runtime_core.lib",
+            r / "build" / "native-runtime" / "Release" / "chaos_runtime_core.lib",
             r / "build" / "native" / "src" / "native" / "interpreter" / "RelWithDebInfo" / "chaos_interpreter.lib",
             r / "build" / "native" / "src" / "native" / "bootstrap" / "RelWithDebInfo" / "chaos_bootstrap.lib",
             r / "build" / "native" / "src" / "native" / "support" / "RelWithDebInfo" / "chaos_support.lib",
