@@ -61,6 +61,15 @@ const PatchTypeRefEntry* PatchMetadataCache::ResolveTypeRef(uint32_t token) cons
     return &entries[index];
 }
 
+const PatchMemberRefEntry* PatchMetadataCache::ResolveMemberRef(uint32_t token) const noexcept {
+    uint32_t index = (token & 0x00FFFFFFu) - 1;
+    if (header_ == nullptr || index >= header_->member_ref_count) return nullptr;
+    const auto* base = reinterpret_cast<const uint8_t*>(header_);
+    const auto* entries = reinterpret_cast<const PatchMemberRefEntry*>(
+        base + header_->member_ref_offset);
+    return &entries[index];
+}
+
 const char* PatchMetadataCache::GetTypeName(const PatchMethodDefEntry* method) const noexcept {
     if (method == nullptr) return "UnknownType";
 

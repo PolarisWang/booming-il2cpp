@@ -11,8 +11,8 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
-namespace
-{
+namespace chaos::il2cpp::codegen::{{ codegen_namespace }} {
+
 {{ object_model_section }}
 
 {{~ for declaration in method_declarations ~}}
@@ -20,14 +20,17 @@ namespace
 {{ end ~}}
 
 {{ module_registration_code }}
-}
-#pragma warning(pop)
-
 {{ generic_registration_code }}
 {{~ for method_section in method_sections ~}}
 {{ method_section }}
 
 {{ end ~}}
+
+}  // namespace chaos::il2cpp::codegen::{{ codegen_namespace }}
+#pragma warning(pop)
+
+{{ global_declarations }}
+
 // Native AOT entry for {{ entry_subject_id }}
 // Managed symbol: {{ entry_symbol }}
 extern "C" CHAOS_IL2CPP_INT32 {{ native_entry_function_name }}(CHAOS_IL2CPP_INT32 chaos_entry_index)

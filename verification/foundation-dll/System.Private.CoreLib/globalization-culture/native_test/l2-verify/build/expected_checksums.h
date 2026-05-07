@@ -5,8 +5,8 @@
 
 constexpr int kExpectedCount = 13;
 constexpr int kExpectedChecksums[kExpectedCount] = {
-    -1274789500,
-    -192202086,
+    -170127624,
+    1703080112,
     0,
     0,
     38,

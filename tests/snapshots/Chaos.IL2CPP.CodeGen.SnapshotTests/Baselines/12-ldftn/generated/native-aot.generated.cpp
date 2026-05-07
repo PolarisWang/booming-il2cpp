@@ -16,8 +16,8 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
-namespace
-{
+namespace chaos::il2cpp::codegen::SnapshotTestFixtures {
+
 #include <chaos/common.h>
 
 #include <chaos/type_info.h>
@@ -304,7 +304,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[58] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[63] = {
 		0u,
 		1548u,
 		1548u,
@@ -363,9 +363,14 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		1548u,
 		1548u,
 		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
 	};
 
-	static constexpr const char* s_type_names[58] = {
+	static constexpr const char* s_type_names[63] = {
 		"<Module>",
 		"ArithmeticOps",
 		"StringOps",
@@ -423,11 +428,21 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		"LdargaHelper",
 		"CpobjHelper",
 		"StindNarrowHelper",
+		"CallvirtHelper",
+		"UnboxHelper",
+		"CpblkHelper",
+		"LdindUnsignedHelper",
+		"LdindI8Helper",
 		"<>O",
 	};
 
-	static constexpr const char* s_type_namespaces[58] = {
+	static constexpr const char* s_type_namespaces[63] = {
 		"",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
@@ -487,7 +502,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[58] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[63] = {
 		0u,
 		0u,
 		0u,
@@ -546,9 +561,19 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		0u,
 		0u,
 		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
 	};
 
-	static const TypeInfo* const s_type_info_ptrs[58] = {
+	static const TypeInfo* const s_type_info_ptrs[63] = {
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
 		nullptr,
 		nullptr,
 		nullptr,
@@ -610,10 +635,10 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
-		33554490u,
+		33554495u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[59] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[64] = {
 		0u,
 		0u,
 		0u,
@@ -629,6 +654,11 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		0u,
 		0u,
 		0u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
 		1u,
 		1u,
 		1u,
@@ -675,7 +705,12 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		1u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[59] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[64] = {
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
 		0u,
 		0u,
 		0u,
@@ -751,14 +786,14 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 58u,
+		/* .type_count        = */ 63u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
 
 		/* .abi_manifest      = */ s_abi_manifest,
-	}};
+	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
 		::chaos::il2cpp::runtime_core::RegisterModule("SnapshotTestFixtures", &s_native_aot_module);
 // ── NameIndex + Dispatch Table (D3 HotPatch) ────────────────────
@@ -808,9 +843,6 @@ static const CHAOS_IL2CPP_UINT32 s_name_index_registered = []()
 }();
 
 // (no method AOT entries for this module)
-
-}
-#pragma warning(pop)
 
 // Populate generic registration arrays from this TU.
 static void ChaosDoPopulateGenericRegistration(
@@ -869,6 +901,12 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdftnHelper_GetFnPtr(void)
 	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&SnapshotTestFixtures_TargetHelper_GetValue);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
+
+
+}  // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
+#pragma warning(pop)
+
+
 
 // Native AOT entry for SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()
 // Managed symbol: SnapshotTestFixtures_LdftnHelper_GetFnPtr

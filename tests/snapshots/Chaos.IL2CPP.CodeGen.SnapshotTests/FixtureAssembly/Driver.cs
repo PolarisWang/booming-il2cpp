@@ -473,3 +473,38 @@ public static class StindNarrowHelper
     // Used by fixture 45-stind-narrow
     public static int RunStindNarrow() => 0;
 }
+
+// --- Fixture 46: callvirt (dispatchKindCode=1, direct) ---
+public static class CallvirtHelper
+{
+    // Used by fixture 46-callvirt
+    public static int RunCallvirt() => new InstanceHelper(42).GetValue();
+}
+
+// --- Fixture 47: unbox (plain, not unbox.any) ---
+public static class UnboxHelper
+{
+    // Used by fixture 47-unbox-plain
+    public static int RunUnbox() => 0;
+}
+
+// --- Fixture 48: cpblk (copy block) ---
+public static class CpblkHelper
+{
+    // Used by fixture 48-cpblk
+    public static int RunCpblk() => 0;
+}
+
+// --- Fixture 49: ldind.u1 + ldind.u2 + ldind.u4 ---
+public static class LdindUnsignedHelper
+{
+    // Used by fixture 49-ldind-unsigned
+    public static int RunLdindUnsigned() => 0;
+}
+
+// --- Fixture 50: ldind.i8 + stind.i8 ---
+public static class LdindI8Helper
+{
+    // Used by fixture 50-ldind-i8
+    public static int RunLdindI8() => 0;
+}

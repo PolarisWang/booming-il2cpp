@@ -1,0 +1,9 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    { "registrationKind": "assembly", "slot": 0, "subjectId": "SnapshotTestFixtures" },
+    { "registrationKind": "type", "slot": 1, "subjectId": "SnapshotTestFixtures/CpblkHelper", "name": "CpblkHelper", "displayName": "CpblkHelper", "definitionSubjectId": "SnapshotTestFixtures/CpblkHelper" },
+    { "registrationKind": "method", "slot": 2, "subjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()", "name": "RunCpblk", "definitionSubjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/CpblkHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false }
+  ]
+}

@@ -852,8 +852,11 @@ public sealed partial class NativeAotLoweringPlanner
     /// This determines the number of structured slot locals (_s0, _s1, ...).
     /// Simulates the net
     /// push/pop effect of each IL opcode to find the peak concurrent depth.
+    /// When returnAbi is provided, returns -1 if a non-void method has a `ret`
+    /// with nothing on the stack (would underflow during structured emission).
     /// </summary>
-    private int ComputeMaxEvalStackDepth(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+    private int ComputeMaxEvalStackDepth(IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
+        AotCoreIrAbiSlotArtifact? returnAbi = null)
     {
         int maxDepth = 0;
         int depth = 0;
@@ -971,6 +974,16 @@ public sealed partial class NativeAotLoweringPlanner
                 // ret: method return (depth resets)
                 case "ret":
                     pushes = 0; pops = 0;
+                    // Stack-balance guard: if the method is non-void and the simulated
+                    // stack is empty at a ret, structured emission would underflow
+                    // (EmitStructuredMethodReturn tries to consume a value that was
+                    // never pushed).  Return -1 to signal "will underflow", causing
+                    // TryBuildStructuredMethodBody to fallback to goto emission.
+                    if (depth == 0 &&
+                        returnAbi is { CarrierKindCode: not AotCoreIrAbiCarrierKind.Void })
+                    {
+                        return -1;
+                    }
                     depth = 0;
                     break;
 
@@ -1068,7 +1081,16 @@ public sealed partial class NativeAotLoweringPlanner
                 cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
         }
 
-        maxDepth = ComputeMaxEvalStackDepth(instructions);
+        maxDepth = ComputeMaxEvalStackDepth(instructions, method.ReturnAbi);
+        if (maxDepth < 0)
+        {
+            body = new IRFlatRegion(instructions, offsets);
+            maxDepth = ComputeMaxEvalStackDepth(instructions);
+            LogIrreducibleMethod(method, isException: false,
+                reason: "stack-underflow-on-ret",
+                instructions.Count, cfg.Blocks.Count, cfg.LoopHeaders.Count,
+                method.ExceptionRegionCount);
+        }
         return true;
     }
 

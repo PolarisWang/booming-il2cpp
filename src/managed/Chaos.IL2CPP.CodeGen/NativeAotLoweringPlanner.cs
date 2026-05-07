@@ -305,7 +305,20 @@ public sealed partial class NativeAotLoweringPlanner
             GlobalDeclarations =
                 "// Global assert failure counter for verification builds\n"
                 + "int __chaos_assert_failures = 0;\n",
+            CodegenNamespace = SanitizeCppIdentifier(loweringPlan.AssemblyName),
         };
+    }
+
+    private static string SanitizeCppIdentifier(string name)
+    {
+        // Replace non-alphanumeric characters (except underscore) with underscores
+        // to produce a valid C++ identifier from an assembly name.
+        var sb = new System.Text.StringBuilder(name.Length);
+        foreach (char c in name)
+        {
+            sb.Append(char.IsLetterOrDigit(c) ? c : '_');
+        }
+        return sb.ToString();
     }
 
     private static string BuildEntryBridgeArguments(AotCoreIrMethodArtifact entryMethod)
@@ -2149,28 +2162,35 @@ public sealed record NativeAotTemplateModel
     public required string ShapeDispatchHeaderContent { get; init; }
 
     /// <summary>
-    /// C++ code emitted outside the anonymous namespace that exposes
-    /// generic registration arrays (kGenericTypeEntries, etc.) to the
-    /// proof host via an extern "C" helper function. Empty string when
-    /// there are no generic arrays to expose.
+    /// C++ code for generic registration helper (data arrays + init function).
+    /// Emitted inside the named namespace alongside all other generated code.
+    /// Empty string when there are no generic arrays to expose.
     /// </summary>
     public required string GenericRegistrationCode { get; init; }
 
     /// <summary>
     /// C++ code for per-DLL module registration via RegisterModule().
-    /// Emitted inside the anonymous namespace so the static initializer
+    /// Emitted inside the named namespace so the static initializer
     /// runs at module load time. Includes a ModuleDescriptor and the
     /// registration call. Empty string for audit/inventory plan kinds.
     /// </summary>
     public required string ModuleRegistrationCode { get; init; }
 
     /// <summary>
-    /// C++ code emitted at file scope (outside the anonymous namespace)
+    /// C++ code emitted at file scope (outside the codegen namespace)
     /// for global variables shared across translation units. Currently
     /// used for the __chaos_assert_failures counter in verification builds.
     /// Empty string when no globals are needed.
     /// </summary>
     public string GlobalDeclarations { get; init; } = "";
+
+    /// <summary>
+    /// C++ namespace for the generated translation unit.
+    /// Derived from the entry native symbol to provide a unique, named
+    /// scope for ODR protection across multi-TU builds. Follows the
+    /// project's <c>chaos::il2cpp::codegen::*</c> convention.
+    /// </summary>
+    public string CodegenNamespace { get; init; } = "";
 }
 
 public sealed record NativeAotMethodTemplateModel

@@ -300,14 +300,14 @@ target_compile_definitions(l3_verify_{family_slug} PRIVATE
 )
 
 target_link_libraries(l3_verify_{family_slug} PRIVATE
-    "{repo_root}/build/native/src/native/runtime-core/Release/chaos_runtime_core.lib"
-    "{repo_root}/build/native/src/native/bootstrap/Release/chaos_bootstrap.lib"
-    "{repo_root}/build/native/src/native/interpreter/Release/chaos_interpreter.lib"
-    "{repo_root}/build/native/src/native/common/Release/chaos_common.lib"
-    "{repo_root}/build/native/src/native/support/Release/chaos_support.lib"
-    "{repo_root}/build/native/src/native/hot-update/Release/chaos_hot_update.lib"
-    "{repo_root}/build/native/bdwgc_build/Release/chaos_bdwgc.lib"
-    "{repo_root}/build/native/fmt_build/Release/chaos_fmt.lib"
+    "{repo_root}/build/native/src/native/runtime-core/RelWithDebInfo/chaos_runtime_core.lib"
+    "{repo_root}/build/native/src/native/bootstrap/RelWithDebInfo/chaos_bootstrap.lib"
+    "{repo_root}/build/native/src/native/interpreter/RelWithDebInfo/chaos_interpreter.lib"
+    "{repo_root}/build/native/src/native/common/RelWithDebInfo/chaos_common.lib"
+    "{repo_root}/build/native/src/native/support/RelWithDebInfo/chaos_support.lib"
+    "{repo_root}/build/native/src/native/hot-update/RelWithDebInfo/chaos_hot_update.lib"
+    "{repo_root}/build/native/bdwgc_build/RelWithDebInfo/chaos_bdwgc.lib"
+    "{repo_root}/build/native/fmt_build/RelWithDebInfo/chaos_fmt.lib"
     ole32
     user32
 )
@@ -544,7 +544,7 @@ def _verify_native(family_slug: str, *, assembly: str,
 
     # Link chaos_runtime_core.lib without /WHOLEARCHIVE — the freshly-compiled
     # runtime_instantiation.obj provides InterpreterDispatch directly.
-    chaos_lib = _REPO_ROOT / "build" / "native" / "src" / "native" / "runtime-core" / "Release" / "chaos_runtime_core.lib"
+    chaos_lib = _REPO_ROOT / "build" / "native" / "src" / "native" / "runtime-core" / "RelWithDebInfo" / "chaos_runtime_core.lib"
     if not chaos_lib.exists():
         return {"status": "link_failed", "reason": f"chaos_runtime_core.lib not found at {chaos_lib}"}
 
@@ -555,7 +555,7 @@ def _verify_native(family_slug: str, *, assembly: str,
     obj_list = " ".join(f'"{o}"' for o in obj_files)
 
     dep_libs = " ".join(
-        f'"{native_lib_dir / lib / "Release" / f"{lib_name}.lib"}"'
+        f'"{native_lib_dir / lib / "RelWithDebInfo" / f"{lib_name}.lib"}"'
         for lib, lib_name in [
             ("bootstrap", "chaos_bootstrap"),
             ("interpreter", "chaos_interpreter"),
@@ -564,8 +564,8 @@ def _verify_native(family_slug: str, *, assembly: str,
             ("hot-update", "chaos_hot_update"),
         ]
     )
-    dep_libs += f' "{_REPO_ROOT / "build" / "native" / "fmt_build" / "Release" / "chaos_fmt.lib"}"'
-    dep_libs += f' "{bdwgc_dir / "Release" / "chaos_bdwgc.lib"}"'
+    dep_libs += f' "{_REPO_ROOT / "build" / "native" / "fmt_build" / "RelWithDebInfo" / "chaos_fmt.lib"}"'
+    dep_libs += f' "{bdwgc_dir / "RelWithDebInfo" / "chaos_bdwgc.lib"}"'
     dep_libs += " ole32.lib user32.lib"
 
     link_cmd = (
@@ -712,7 +712,7 @@ def _verify_l3(family_slug: str, *, assembly: str,
         # Step 3c fallback: Link
         native_lib_dir = _REPO_ROOT / "build" / "native" / "src" / "native"
         bdwgc_dir = _REPO_ROOT / "build" / "native" / "bdwgc_build"
-        chaos_lib = _REPO_ROOT / "build" / "native" / "src" / "native" / "runtime-core" / "Release" / "chaos_runtime_core.lib"
+        chaos_lib = _REPO_ROOT / "build" / "native" / "src" / "native" / "runtime-core" / "RelWithDebInfo" / "chaos_runtime_core.lib"
         if not chaos_lib.exists():
             return {"status": "link_failed", "reason": f"chaos_runtime_core.lib not found at {chaos_lib}"}
 
