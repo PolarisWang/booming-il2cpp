@@ -252,6 +252,7 @@ public static class SizeOfHelper
 // --- Fixture 20: ldind + stind (via ref parameter) ---
 public static class IndirectHelper
 {
+    // Used by fixture 20-ldind-stind
     public static int ReadWriteRef()
     {
         int val = 42;
@@ -259,4 +260,216 @@ public static class IndirectHelper
         r = 100;
         return val;
     }
+}
+
+// --- Fixture 21: arithmetic compare (sub, rem, ceq, clt, cgt.un) ---
+public static class ArithmeticCompareHelper
+{
+    // Used by fixture 21-arithmetic-compare
+    public static int RunCompare() => 0;
+}
+
+// --- Fixture 22: branch dup (dup, brtrue) ---
+public static class BranchDupHelper
+{
+    // Used by fixture 22-branch-dup
+    public static int RunBranchDup() => 0;
+}
+
+// --- Fixture 23: instance fields (ldfld, stfld) ---
+public class HasInstanceFields
+{
+    public int Value;
+    public HasInstanceFields(int val) { Value = val; }
+}
+
+public static class InstanceFieldHelper
+{
+    // Used by fixture 23-instance-fields
+    public static int CreateAndUseFields()
+    {
+        var obj = new HasInstanceFields(42);
+        obj.Value = 100;
+        return obj.Value;
+    }
+}
+
+// --- Fixture 24: static field write (stsfld, ldsfld) ---
+public static class StaticFieldWriteHelper
+{
+    private static int _writeTarget;
+    private static int _readTarget;
+
+    // Used by fixture 24-static-field-write
+    public static int WriteAndRead()
+    {
+        _writeTarget = 42;
+        return _readTarget;
+    }
+}
+
+// --- Fixture 25: virtual dispatch (vtable slot via newobj) ---
+public static class VirtualDispatchHelper
+{
+    // Used by fixture 25-virtual-dispatch
+    public static int UseVirtualDispatch()
+    {
+        BaseClass obj = new DerivedClass();
+        obj.Compute();
+        return 0;
+    }
+}
+
+// --- Fixture 26: bitwise logical (and, or, xor, not) ---
+public static class BitwiseHelper
+{
+    // Used by fixture 26-bitwise-logical
+    public static int RunBitwise() => 0;
+}
+
+// --- Fixture 27: shift (shl, shr) ---
+public static class ShiftHelper
+{
+    // Used by fixture 27-shift
+    public static int RunShift() => 0;
+}
+
+// --- Fixture 28: array length (newarr, ldlen) ---
+public static class ArrayLengthHelper
+{
+    // Used by fixture 28-array-length
+    public static int RunLength()
+    {
+        var arr = new int[5];
+        return arr.Length;
+    }
+}
+
+// --- Fixture 29: value type initobj (ldobj, stobj, initobj) ---
+public static class ValueTypeHelper
+{
+    // Used by fixture 29-value-type-initobj
+    public static int RunValueType() => 0;
+}
+
+// --- Fixture 30: localloc ---
+public static class LocalAllocHelper
+{
+    // Used by fixture 30-localloc
+    public static unsafe int RunAlloc() => 0;
+}
+
+// --- Fixture 31: arithmetic mul/div ---
+public static class MulDivHelper
+{
+    // Used by fixture 31-arithmetic-mul-div
+    public static int RunMulDiv() => 0;
+}
+
+// --- Fixture 32: branch compare (beq, bgt, blt, bne.un) ---
+public static class BranchCompareHelper
+{
+    // Used by fixture 32-branch-compare
+    public static int RunBranchCompare() => 0;
+}
+
+// --- Fixture 33: float ops (ldc.r4, ldc.r8, conv.r4, conv.r8) ---
+public static class FloatOpsHelper
+{
+    // Used by fixture 33-float-ops
+    public static int RunFloatOps() => 0;
+}
+
+// --- Fixture 34: conv wide (conv.i8, conv.u8, conv.u) ---
+public static class ConvWideHelper
+{
+    // Used by fixture 34-conv-wide
+    public static int RunConvWide() => 0;
+}
+
+// --- Fixture 35: neg + shr.un ---
+public static class NegShiftHelper
+{
+    // Used by fixture 35-neg-shrun
+    public static int RunNegShift() => 0;
+}
+
+// --- Fixture 36: ldc.i8 (8-byte integer constant) ---
+public static class LdcI8Helper
+{
+    // Used by fixture 36-ldc-i8
+    public static int RunLdcI8() => 0;
+}
+
+// --- Fixture 37: conv small int (conv.i1, conv.i2, conv.u1, conv.u2) ---
+public static class ConvSmallIntHelper
+{
+    // Used by fixture 37-conv-small-int
+    public static int RunConvSmall() => 0;
+}
+
+// --- Fixture 38: ldind.i1 (indirect load int8) ---
+public static class LdindI1Helper
+{
+    // Used by fixture 38-ldind-i1
+    public static int RunLdindI1() => 0;
+}
+
+// --- Fixture 39: branch complement (ble, bge, bge.un) ---
+public static class BranchCompareBHelper
+{
+    // Used by fixture 39-branch-complement
+    public static int RunBranchCompareB() => 0;
+}
+
+// --- Fixture 40: ldflda + ldsflda ---
+public class HasFields
+{
+    public int instanceVal;
+    public static int staticVal;
+}
+
+public static class AddressHelper
+{
+    // Used by fixture 40-ldflda-address
+    public static int RunAddress()
+    {
+        var obj = new HasFields();
+        return obj.instanceVal;
+    }
+}
+
+// --- Fixture 41: ldtoken (load runtime type handle) ---
+public static class LdtokenHelper
+{
+    // Used by fixture 41-ldtoken
+    public static int RunLdtoken() => 0;
+}
+
+// --- Fixture 42: ldelema (load element address) ---
+public static class LdelemaHelper
+{
+    // Used by fixture 42-ldelema
+    public static int RunLdelema() => 0;
+}
+
+// --- Fixture 43: ldarga (load argument address) ---
+public static class LdargaHelper
+{
+    // Used by fixture 43-ldarga
+    public static int RunLdarga(int val) => val;
+}
+
+// --- Fixture 44: cpobj (copy value type) ---
+public static class CpobjHelper
+{
+    // Used by fixture 44-cpobj
+    public static int RunCpobj() => 0;
+}
+
+// --- Fixture 45: stind.i1 + stind.i2 (indirect store narrow) ---
+public static class StindNarrowHelper
+{
+    // Used by fixture 45-stind-narrow
+    public static int RunStindNarrow() => 0;
 }

@@ -275,6 +275,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\memory_domain.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\vtable_registry.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\vtable_registry.h" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\convert.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\convert.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_vtable.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\generic_context.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\generic_context.h" />

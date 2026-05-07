@@ -1,0 +1,42 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.float-ops-helper.run-float-ops",
+      "subjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
+      "signature": "System.Int32 FloatOpsHelper::RunFloatOps()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/FloatOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
+        "methodId": "snapshot-test-fixtures.float-ops-helper.run-float-ops",
+        "signature": "System.Int32 FloatOpsHelper::RunFloatOps()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_FloatOpsHelper_RunFloatOps",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.r4", "operand": 3.14, "ilOffset": 0, "resultType": "System.Single" },
+        { "op": "ldc.r4", "operand": 2.71, "ilOffset": 1, "resultType": "System.Single" },
+        { "op": "conv.r8", "ilOffset": 2, "resultType": "System.Double" },
+        { "op": "pop", "ilOffset": 3, "resultType": "System.Void" },
+        { "op": "ldc.r8", "operand": 42.0, "ilOffset": 4, "resultType": "System.Double" },
+        { "op": "conv.r4", "ilOffset": 5, "resultType": "System.Single" },
+        { "op": "pop", "ilOffset": 6, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 7, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 8 }
+      ]
+    }
+  ]
+}

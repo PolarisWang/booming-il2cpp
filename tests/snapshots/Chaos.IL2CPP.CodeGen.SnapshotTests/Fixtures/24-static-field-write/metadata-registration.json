@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+      "name": "StaticFieldWriteHelper",
+      "displayName": "StaticFieldWriteHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "name": "WriteAndRead",
+      "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "field",
+      "slot": 3,
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget",
+      "name": "_writeTarget",
+      "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 4,
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget",
+      "name": "_readTarget",
+      "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+      "memberType": "System.Int32"
+    }
+  ]
+}

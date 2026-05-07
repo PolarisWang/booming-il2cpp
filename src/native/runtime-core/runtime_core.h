@@ -19,6 +19,7 @@
 #include "marshal_abi.h"
 #include "com_abi.h"
 #include "runtime_capability.h"
+#include "convert.h"
 #include "numerics_carriers.h"
 #include "string_table.h"
 #include "method_table.h"

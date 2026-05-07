@@ -1,0 +1,45 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.branch-dup-helper.run-branch-dup",
+      "subjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
+      "signature": "System.Int32 BranchDupHelper::RunBranchDup()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/BranchDupHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
+        "methodId": "snapshot-test-fixtures.branch-dup-helper.run-branch-dup",
+        "signature": "System.Int32 BranchDupHelper::RunBranchDup()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_BranchDupHelper_RunBranchDup",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "dup", "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "add", "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "stloc", "operand": 0, "ilOffset": 3, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 4, "resultType": "System.Int32" },
+        { "op": "stloc", "operand": 1, "ilOffset": 5, "resultType": "System.Void" },
+        { "op": "ldloc", "operand": 1, "ilOffset": 6 },
+        { "op": "brtrue", "operand": 10, "ilOffset": 7, "resultType": "System.Void", "targetReference": { "kind": 0, "assemblyName": "", "subjectId": "", "typeShape": 0, "arrayElementTypeShape": 0, "declaringTypeShape": 0 } },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 8, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 9 },
+        { "op": "ldloc", "operand": 0, "ilOffset": 10 },
+        { "op": "ret", "ilOffset": 11 }
+      ]
+    }
+  ]
+}

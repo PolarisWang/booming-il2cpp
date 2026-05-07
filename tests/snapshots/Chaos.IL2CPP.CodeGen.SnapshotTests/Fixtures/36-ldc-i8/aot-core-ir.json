@@ -1,0 +1,37 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.ldc-i8-helper.run-ldc-i8",
+      "subjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int32()",
+      "signature": "System.Int32 LdcI8Helper::RunLdcI8()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/LdcI8Helper",
+        "definitionSubjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int32()",
+        "methodId": "snapshot-test-fixtures.ldc-i8-helper.run-ldc-i8",
+        "signature": "System.Int32 LdcI8Helper::RunLdcI8()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_LdcI8Helper_RunLdcI8",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i8", "operand": 42, "ilOffset": 0, "resultType": "System.Int64" },
+        { "op": "pop", "ilOffset": 1, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.branch-compare-b-helper.run-branch-compare-b",
+      "subjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+      "signature": "System.Int32 BranchCompareBHelper::RunBranchCompareB()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/BranchCompareBHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
+        "methodId": "snapshot-test-fixtures.branch-compare-b-helper.run-branch-compare-b",
+        "signature": "System.Int32 BranchCompareBHelper::RunBranchCompareB()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 3, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 5, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "ble", "operand": 5, "ilOffset": 2, "resultType": "System.Void", "targetReference": { "kind": 0, "assemblyName": "", "subjectId": "", "typeShape": 0, "arrayElementTypeShape": 0, "declaringTypeShape": 0 } },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 3, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 4 },
+        { "op": "ldc.i4", "operand": 5, "ilOffset": 5, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 3, "ilOffset": 6, "resultType": "System.Int32" },
+        { "op": "bge", "operand": 10, "ilOffset": 7, "resultType": "System.Void", "targetReference": { "kind": 0, "assemblyName": "", "subjectId": "", "typeShape": 0, "arrayElementTypeShape": 0, "declaringTypeShape": 0 } },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 8, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 9 },
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 10, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 11, "resultType": "System.Int32" },
+        { "op": "bge.un", "operand": 15, "ilOffset": 12, "resultType": "System.Void", "targetReference": { "kind": 0, "assemblyName": "", "subjectId": "", "typeShape": 0, "arrayElementTypeShape": 0, "declaringTypeShape": 0 } },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 13, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 14 },
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 15, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 16 }
+      ]
+    }
+  ]
+}

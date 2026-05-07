@@ -122,7 +122,7 @@ def build_and_run(family_slug: str) -> dict:
     # /GS- for convert-char: codegen-emitted stack buffers trigger a harmless
     # MSVC buffer security check false positive (STATUS_STACK_BUFFER_OVERRUN).
     # /MD — all cmake-native chaos libs use the MSVC default dynamic CRT (/MD).
-    compile_flags = "/nologo /std:c++17 /c /EHsc /W3 /utf-8 /O2 /MD /GS-"
+    compile_flags = "/nologo /std:c++17 /c /EHac /W3 /utf-8 /O2 /MD /GS-"
     defines = "-DCHAOS_IL2CPP_CHECK -DCHAOS_RUNTIME_ABI_STATIC"
 
     r = _REPO_ROOT
@@ -180,6 +180,7 @@ def build_and_run(family_slug: str) -> dict:
         r_run = subprocess.run(
             [str(exe_path)],
             capture_output=True, text=True, timeout=120,
+            errors="replace",
         )
         run_elapsed = time.time() - t1
         result["run_elapsed"] = round(run_elapsed, 1)

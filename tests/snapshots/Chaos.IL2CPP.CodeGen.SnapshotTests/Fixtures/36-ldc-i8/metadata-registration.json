@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/LdcI8Helper",
+      "name": "LdcI8Helper",
+      "displayName": "LdcI8Helper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdcI8Helper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int32()",
+      "name": "RunLdcI8",
+      "definitionSubjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdcI8Helper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}
