@@ -1,0 +1,51 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper<System.Int32>",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1",
+      "metadataToken": 4,
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1",
+          "typeArguments": ["System.Int32"],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": { "value": "00000000-0000-0000-0000-000000000001" },
+        "instantiationStubId": { "value": "00000000-0000-0000-0000-000000000001" },
+        "supportKindCode": 3,
+        "specializationKindCode": 2
+      }
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper<System.Int32>::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper<System.Int32>",
+      "metadataToken": 7,
+      "parameterCount": 1,
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1",
+          "typeArguments": ["System.Int32"],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": { "value": "00000000-0000-0000-0000-000000000001" },
+        "instantiationStubId": { "value": "00000000-0000-0000-0000-000000000001" },
+        "supportKindCode": 3,
+        "specializationKindCode": 2
+      }
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

@@ -12,7 +12,7 @@ add_library(chaos_runtime_core STATIC
     runtime_core.h
     memory_domain.cpp
     memory_domain.h
-    vtable_registry_stub.cpp
+    vtable_registry.cpp
     vtable_registry.h
     runtime_vtable.h
     generic_context.cpp

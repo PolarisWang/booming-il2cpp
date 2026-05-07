@@ -103,6 +103,8 @@ public sealed partial class NativeAotLoweringPlanner
     {
         private int _depth;
 
+        public int Depth => _depth;
+
         public string AllocatePushTarget()
         {
             string slotName = FormatStructuredSlotName(_depth);
@@ -453,7 +455,11 @@ public sealed partial class NativeAotLoweringPlanner
 
             case "br":
             case "leave":
-                throw new NotSupportedException("StructuredIR: residual br/leave requires method-level dispatch fallback.");
+                // Safety net: residual br/leave are stripped earlier by
+                // RemoveTrailingBranch for known structured patterns. Any
+                // remaining br/leave is a non-structured pattern that
+                // should not reach emission in practice.
+                break;
 
             default:
                 throw new NotSupportedException(
@@ -724,7 +730,7 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(caseIndent + "case " + caseValue + ":");
             builder.AppendLine(caseIndent + "{");
             EmitStructuredIRNode(builder, body, method, bodyIndent);
-            // Fall through implicitly, or break at end of case body
+            builder.AppendLine(caseIndent + "    break;");
             builder.AppendLine(caseIndent + "}");
         }
 
@@ -733,6 +739,7 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(caseIndent + "default:");
             builder.AppendLine(caseIndent + "{");
             EmitStructuredIRNode(builder, sw.DefaultBody, method, bodyIndent);
+            builder.AppendLine(caseIndent + "    break;");
             builder.AppendLine(caseIndent + "}");
         }
 
@@ -846,7 +853,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// Simulates the net
     /// push/pop effect of each IL opcode to find the peak concurrent depth.
     /// </summary>
-    private static int ComputeMaxEvalStackDepth(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+    private int ComputeMaxEvalStackDepth(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
     {
         int maxDepth = 0;
         int depth = 0;
@@ -863,7 +870,7 @@ public sealed partial class NativeAotLoweringPlanner
                 case "ldarg": case "ldstr": case "ldtoken": case "ldarga":
                 case "ldnull": case "ldloc": case "ldloca":
                 case "ldsfld": case "ldsflda":
-                case "ldftn": case "newarr":
+                case "ldftn": case "newarr": case "sizeof":
                     pushes = 1; pops = 0; break;
 
                 // Dup: push a copy of the top value
@@ -916,15 +923,49 @@ public sealed partial class NativeAotLoweringPlanner
                     pushes = 1; pops = 1; break;
 
                 // Call/callvirt/calli: pop N args, push 0/1 result
-                case "call": case "callvirt": case "calli":
-                    pops = instr.TargetParameterCount ?? 0;
-                    pushes = (instr.TargetReturnType != null && instr.TargetReturnType != "System.Void") ? 1 : 0;
-                    break;
-
                 // newobj: pop constructor args, push new object/value
-                case "newobj":
-                    pops = instr.TargetParameterCount ?? 0;
-                    pushes = 1;
+                case "call": case "callvirt": case "calli": case "newobj":
+                    string? callee = instr.Callee ?? instr.TargetReference?.SubjectId;
+                    if (!string.IsNullOrEmpty(callee) && TryGetLowerableMethod(callee) is { } lowerableMethod)
+                    {
+                        // Method is in _methodsBySubjectId — use ABI-level parameter count.
+                        // For non-static methods, GetMethodAbiParameterSlots prepends a `this`
+                        // pointer that is NOT on the IL eval stack for newobj (it's the new object).
+                        pops = GetMethodAbiParameterSlots(lowerableMethod).Count;
+                        if (op == "newobj") pops--;
+                        pushes = (op == "newobj")
+                            ? 1
+                            : (lowerableMethod.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void) ? 1 : 0;
+                    }
+                    else if (!string.IsNullOrEmpty(callee) &&
+                             TryResolveDirectInvocationTarget(callee) is { } resolvedTarget)
+                    {
+                        // Use the same resolution as EmitLinearCall: external runtime helper
+                        // or legacy ABI.  This matches the exact parameter count the emission
+                        // path will pop from the structured slot stack.
+                        // Same newobj caveat: `this` is in the ABI but not on the IL stack.
+                        pops = resolvedTarget.ParameterAbis.Count;
+                        if (op == "newobj") pops--;
+                        pushes = (op == "newobj")
+                            ? 1
+                            : (resolvedTarget.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void) ? 1 : 0;
+                    }
+                    else
+                    {
+                        // Fallback: infer from IL-level metadata when no resolution available.
+                        // InferParameterCountFromSubjectId already returns IL-level count
+                        // (no `this` pointer), so no newobj adjustment needed.
+                        int? paramCount = instr.TargetParameterCount;
+                        if (!paramCount.HasValue && !string.IsNullOrEmpty(callee))
+                            paramCount = InferParameterCountFromSubjectId(callee);
+                        pops = paramCount ?? 0;
+                        string? retType = instr.TargetReturnType;
+                        if (string.IsNullOrEmpty(retType) && !string.IsNullOrEmpty(callee))
+                            retType = InferReturnTypeFromSubjectId(callee);
+                        pushes = (op == "newobj")
+                            ? 1
+                            : (!string.IsNullOrEmpty(retType) && retType != "System.Void") ? 1 : 0;
+                    }
                     break;
 
                 // ret: method return (depth resets)
@@ -957,7 +998,9 @@ public sealed partial class NativeAotLoweringPlanner
         return maxDepth;
     }
 
-    // 鈹€鈹€ Convenience: try to use this emitter for a set of instructions 鈹€鈹€
+    // ════════════════════════════════════════════════════════════════════════════
+    // Convenience: try to use this emitter for a set of instructions
+    // ════════════════════════════════════════════════════════════════════════════
 
     /// <summary>
     /// Emit a list of instructions using the new StructuredIR emitter
@@ -984,7 +1027,18 @@ public sealed partial class NativeAotLoweringPlanner
             method.ExceptionRegionCount > 0 &&
             method.ExceptionRegions is { Count: > 0 })
         {
-            return TryBuildStructuredExceptionMethodBody(method, instructions, offsets, out body, out maxDepth);
+            bool result = TryBuildStructuredExceptionMethodBody(method, instructions, offsets, out body, out maxDepth);
+            if (!result || body is IRFlatRegion)
+            {
+                LogIrreducibleMethod(method, isException: true,
+                    reason: body is IRFlatRegion ? "exception-shape-unhandled" : "exception-shape-failed",
+                    instructions.Count, 0, 0, 0);
+            }
+            else
+            {
+                LogStructuredMethod(method, "exception-body", instructions.Count, 0, 0, 0);
+            }
+            return result;
         }
 
         var cfg = BuildControlFlowGraph(instructions, offsets);
@@ -992,13 +1046,26 @@ public sealed partial class NativeAotLoweringPlanner
         {
             body = new IRFlatRegion(instructions, offsets);
             maxDepth = ComputeMaxEvalStackDepth(instructions);
+            LogIrreducibleMethod(method, isException: false,
+                reason: ClassifyIrreducibleReason(cfg),
+                instructions.Count, cfg.Blocks.Count, cfg.LoopHeaders.Count,
+                method.ExceptionRegionCount);
             return true;
         }
 
         body = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
         if (ContainsResidualBranchTerminators(body))
         {
+            LogIrreducibleMethod(method, isException: false,
+                reason: "residual-br-leave",
+                instructions.Count, cfg.Blocks.Count, cfg.LoopHeaders.Count,
+                method.ExceptionRegionCount);
             body = new IRFlatRegion(instructions, offsets);
+        }
+        else
+        {
+            LogStructuredMethod(method, "structured", instructions.Count,
+                cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
         }
 
         maxDepth = ComputeMaxEvalStackDepth(instructions);
@@ -1015,7 +1082,6 @@ public sealed partial class NativeAotLoweringPlanner
         if (instructions.Count == 0)
             return;
 
-        System.Console.Error.WriteLine("TRACE:Em " + (method.SubjectId != null && method.SubjectId.Length > 80 ? method.SubjectId.Substring(0, 80) : method.SubjectId ?? "null") + " instr=" + instructions.Count);
         TryBuildStructuredMethodBody(method, instructions, offsets, out var body, out _);
 
         StructuredSlotEmissionContext? previousSlotContext = _activeStructuredSlotContext;
@@ -1258,6 +1324,163 @@ public sealed partial class NativeAotLoweringPlanner
         return StripExceptionPartitionExitTerminators(RecoverStructure(cfg, 0, cfg.Blocks.Count - 1));
     }
 
+    // ════════════════════════════════════════════════════════════════════════════
+    // Phase 1 diagnostics: irreducible CFG classification
+    // ════════════════════════════════════════════════════════════════════════════
+
+    private static long s_structuredMethodCount;
+    private static long s_exceptionBodyCount;
+    private static long s_irreducibleCount;
+    private static long s_totalMethodCount;
+    private static readonly Dictionary<string, long> s_irreducibleReasons = new();
+
+    private static void LogStructuredMethod(
+        AotCoreIrMethodArtifact method, string kind,
+        int instrCount, int blocks, int loops, int exceptionRegions)
+    {
+        s_totalMethodCount++;
+        if (kind == "exception-body")
+            s_exceptionBodyCount++;
+        else
+            s_structuredMethodCount++;
+
+        System.Console.Error.WriteLine(
+            $"TRACE:EMIT method={SafeShortName(method)} " +
+            $"kind={kind} " +
+            $"instr={instrCount} " +
+            $"blocks={blocks} " +
+            $"loops={loops} " +
+            $"exceptions={exceptionRegions}");
+    }
+
+    private static void LogIrreducibleMethod(
+        AotCoreIrMethodArtifact method, bool isException,
+        string reason, int instrCount, int blocks, int loops, int exceptionRegions)
+    {
+        s_totalMethodCount++;
+        s_irreducibleCount++;
+        if (!s_irreducibleReasons.ContainsKey(reason))
+            s_irreducibleReasons[reason] = 0;
+        s_irreducibleReasons[reason]++;
+
+        System.Console.Error.WriteLine(
+            $"TRACE:FLAT method={SafeShortName(method)} " +
+            $"reason={reason} " +
+            $"instr={instrCount} " +
+            $"blocks={blocks} " +
+            $"loops={loops} " +
+            $"exceptions={exceptionRegions}");
+    }
+
+    private static string SafeShortName(AotCoreIrMethodArtifact method)
+    {
+        var id = method.SubjectId;
+        if (string.IsNullOrEmpty(id)) return "<null>";
+        return id.Length > 80 ? id.Substring(0, 80) : id;
+    }
+
+    private static string ClassifyIrreducibleReason(ControlFlowGraph cfg)
+    {
+        int unnaturalBackedges = 0;
+        int crossNestedLoopPairs = 0;
+        int switchWithLoopBack = 0;
+
+        var blocks = cfg.Blocks;
+        var headers = cfg.LoopHeaders;
+
+        // Count unnatural backedges
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            var block = blocks[i];
+            if (block.ConditionalTarget.HasValue)
+            {
+                if (cfg.OffsetToBlockIndex.TryGetValue(block.ConditionalTarget.Value, out var tgt) && tgt < i)
+                {
+                    if (!headers.ContainsKey(tgt) || !headers[tgt].LatchIndices.Contains(i))
+                        unnaturalBackedges++;
+                }
+            }
+            if (block.BranchTarget.HasValue)
+            {
+                if (cfg.OffsetToBlockIndex.TryGetValue(block.BranchTarget.Value, out var tgt) && tgt < i)
+                {
+                    if (!headers.ContainsKey(tgt) || !headers[tgt].LatchIndices.Contains(i))
+                        unnaturalBackedges++;
+                }
+            }
+            if (block.SwitchTargets.Count > 0)
+            {
+                foreach (var t in block.SwitchTargets)
+                {
+                    if (cfg.OffsetToBlockIndex.TryGetValue(t, out var tgt) && tgt < i)
+                    {
+                        if (!headers.ContainsKey(tgt))
+                            switchWithLoopBack++;
+                    }
+                }
+            }
+        }
+
+        // Count cross-nested loop pairs
+        foreach (var kvp1 in headers)
+        {
+            foreach (var kvp2 in headers)
+            {
+                if (kvp1.Key >= kvp2.Key) continue;
+                if (kvp1.Value.BodyIndices.Contains(kvp2.Key) &&
+                    kvp2.Value.BodyIndices.Contains(kvp1.Key))
+                    crossNestedLoopPairs++;
+            }
+        }
+
+        // Determine primary reason
+        if (crossNestedLoopPairs > 0 && unnaturalBackedges > 0)
+            return $"multi-loop-cross-nested+{unnaturalBackedges}unat+{crossNestedLoopPairs}xnested";
+        if (unnaturalBackedges > 1)
+            return $"multi-entry-loop+{unnaturalBackedges}unat";
+        if (switchWithLoopBack > 0)
+            return $"switch-loop-back+{switchWithLoopBack}sw";
+        if (unnaturalBackedges == 1)
+            return $"single-unnatural-backedge";
+        return $"unknown-irreducible-b{blocks}l{headers.Count}";
+    }
+
+    // ════════════════════════════════════════════════════════════════════════════
+    // Report summary (call at end of codegen session)
+    // ════════════════════════════════════════════════════════════════════════════
+
+    internal static void LogPhase1Summary()
+    {
+        long total = s_totalMethodCount;
+        long structured = s_structuredMethodCount;
+        long exceptionBody = s_exceptionBodyCount;
+        long flat = s_irreducibleCount;
+
+        System.Console.Error.WriteLine("");
+        System.Console.Error.WriteLine("╔══════════════════════════════════════════════════╗");
+        System.Console.Error.WriteLine("║  Phase 1 — StructuredIR Coverage Summary        ║");
+        System.Console.Error.WriteLine("╠══════════════════════════════════════════════════╣");
+        System.Console.Error.WriteLine($"║  Total methods:          {total,8}                ║");
+        System.Console.Error.WriteLine($"║  StructuredIR:           {structured,8} ({Pct(structured, total),6})       ║");
+        System.Console.Error.WriteLine($"║  Exception-body:         {exceptionBody,8} ({Pct(exceptionBody, total),6})       ║");
+        System.Console.Error.WriteLine($"║  Flat goto (total):      {flat,8} ({Pct(flat, total),6})       ║");
+        System.Console.Error.WriteLine("╠══════════════════════════════════════════════════╣");
+        System.Console.Error.WriteLine("║  Irreducible reasons:                            ║");
+
+        foreach (var kvp in s_irreducibleReasons.OrderByDescending(k => k.Value))
+        {
+            System.Console.Error.WriteLine($"║    {kvp.Key,-36} {kvp.Value,4} ({Pct(kvp.Value, flat),6}) ║");
+        }
+
+        System.Console.Error.WriteLine("╚══════════════════════════════════════════════════╝");
+        System.Console.Error.WriteLine("");
+    }
+
+    private static string Pct(long part, long total)
+    {
+        if (total == 0) return " 0.0%";
+        return (part * 100.0 / total).ToString("F1") + "%";
+    }
 }
 
 

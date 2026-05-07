@@ -10,11 +10,11 @@ namespace Chaos.IL2CPP.CodeGen;
 ///
 /// Generated output pattern (in ObjectModelCode):
 /// <code>
-/// static constexpr uint32_t kGenericTypeArgTokens[] = { 0x01000008, 0x0100000E };
+/// static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[] = { 0x01000008, 0x0100000E };
 /// static constexpr GenericTypeRegistrationEntryV0 kGenericTypeEntries[] = {
 ///     { 0x02000010, 0x02000050, 1, 0 },
 /// };
-/// static constexpr uint32_t kGenericMethodArgTokens[] = { 0x01000008 };
+/// static constexpr CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[] = { 0x01000008 };
 /// static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[] = {
 ///     { 0x06000100, 0, 1, 0 },
 /// };
@@ -62,13 +62,13 @@ public partial class NativeAotLoweringPlanner
         // ── Type arg tokens ──
         if (typeArgTokens.Count > 0)
         {
-            builder.Append("static constexpr uint32_t kGenericTypeArgTokens[] = { ");
+            builder.Append("static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[] = { ");
             builder.Append(string.Join(", ", typeArgTokens));
             builder.AppendLine(" };");
         }
         else
         {
-            builder.AppendLine("static constexpr uint32_t kGenericTypeArgTokens[1] = { 0 };");
+            builder.AppendLine("static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };");
         }
 
         // ── Type entries ──
@@ -90,13 +90,13 @@ public partial class NativeAotLoweringPlanner
         // ── Method arg tokens ──
         if (methodArgTokens.Count > 0)
         {
-            builder.Append("static constexpr uint32_t kGenericMethodArgTokens[] = { ");
+            builder.Append("static constexpr CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[] = { ");
             builder.Append(string.Join(", ", methodArgTokens));
             builder.AppendLine(" };");
         }
         else
         {
-            builder.AppendLine("static constexpr uint32_t kGenericMethodArgTokens[1] = { 0 };");
+            builder.AppendLine("static constexpr CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[1] = { 0 };");
         }
 
         // ── Method entries ──
@@ -129,14 +129,14 @@ public partial class NativeAotLoweringPlanner
             }
             builder.AppendLine("};");
 
-            builder.Append("static constexpr uint32_t s_method_aot_entry_args[] = { ");
+            builder.Append("static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[] = { ");
             builder.Append(string.Join(", ", methodAotArgTokens));
             builder.AppendLine(" };");
         }
         else
         {
             builder.AppendLine("static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };");
-            builder.AppendLine("static constexpr uint32_t s_method_aot_entry_args[1] = { 0 };");
+            builder.AppendLine("static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };");
         }
 
         // ── AOT registration code (emitted into module registration section) ──
@@ -148,7 +148,7 @@ public partial class NativeAotLoweringPlanner
         if (methodAotEntryCount > 0)
         {
             aotReg.AppendLine("// ── Register method AOT entries ─────────────────────────────");
-            aotReg.AppendLine("static const uint32_t s_register_method_aot = []()");
+            aotReg.AppendLine("static const CHAOS_IL2CPP_UINT32 s_register_method_aot = []()");
             aotReg.AppendLine("{");
             aotReg.AppendLine("    ::chaos::il2cpp::runtime_instantiation::RegisterMethodAotEntries(");
             aotReg.AppendLine("        s_native_aot_module_id,");
@@ -177,14 +177,14 @@ public partial class NativeAotLoweringPlanner
         var helper = new StringBuilder(512);
         helper.AppendLine("// Populate generic registration arrays from this TU.");
         helper.AppendLine("static void ChaosDoPopulateGenericRegistration(");
-        helper.AppendLine("    uint32_t* out_type_count,");
+        helper.AppendLine("    CHAOS_IL2CPP_UINT32* out_type_count,");
         helper.AppendLine("    const GenericTypeRegistrationEntryV0** out_type_entries,");
-        helper.AppendLine("    const uint32_t** out_type_args,");
-        helper.AppendLine("    uint32_t* out_type_arg_count,");
-        helper.AppendLine("    uint32_t* out_method_count,");
+        helper.AppendLine("    const CHAOS_IL2CPP_UINT32** out_type_args,");
+        helper.AppendLine("    CHAOS_IL2CPP_UINT32* out_type_arg_count,");
+        helper.AppendLine("    CHAOS_IL2CPP_UINT32* out_method_count,");
         helper.AppendLine("    const GenericMethodRegistrationEntryV0** out_method_entries,");
-        helper.AppendLine("    const uint32_t** out_method_args,");
-        helper.AppendLine("    uint32_t* out_method_arg_count)");
+        helper.AppendLine("    const CHAOS_IL2CPP_UINT32** out_method_args,");
+        helper.AppendLine("    CHAOS_IL2CPP_UINT32* out_method_arg_count)");
         helper.AppendLine("{");
         helper.AppendLine($"    *out_type_count = {typeEntryCount};");
         helper.AppendLine("    *out_type_entries = kGenericTypeEntries;");
@@ -198,8 +198,8 @@ public partial class NativeAotLoweringPlanner
         helper.AppendLine("");
         helper.AppendLine("// Static initializer registers the callback.");
         helper.AppendLine("extern \"C\" void (*g_chaos_populate_generic_registration)(");
-        helper.AppendLine("    uint32_t*, const GenericTypeRegistrationEntryV0**, const uint32_t**, uint32_t*,");
-        helper.AppendLine("    uint32_t*, const GenericMethodRegistrationEntryV0**, const uint32_t**, uint32_t*);");
+        helper.AppendLine("    CHAOS_IL2CPP_UINT32*, const GenericTypeRegistrationEntryV0**, const CHAOS_IL2CPP_UINT32**, CHAOS_IL2CPP_UINT32*,");
+        helper.AppendLine("    CHAOS_IL2CPP_UINT32*, const GenericMethodRegistrationEntryV0**, const CHAOS_IL2CPP_UINT32**, CHAOS_IL2CPP_UINT32*);");
         helper.AppendLine("namespace {");
         helper.AppendLine("struct ChaosGenericRegistrationInit {");
         helper.AppendLine("    ChaosGenericRegistrationInit() {");

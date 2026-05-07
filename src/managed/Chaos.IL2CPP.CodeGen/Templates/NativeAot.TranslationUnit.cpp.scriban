@@ -4,7 +4,7 @@
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
-    uintptr_t method_key,
+    CHAOS_IL2CPP_UINTPTR method_key,
     void*     args_buf,
     void*     ret_buf) noexcept;
 

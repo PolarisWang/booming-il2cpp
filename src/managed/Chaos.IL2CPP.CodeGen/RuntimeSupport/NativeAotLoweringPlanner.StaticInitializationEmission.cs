@@ -15,7 +15,7 @@ public sealed partial class NativeAotLoweringPlanner
             var actionBuilder = new StringBuilder(512);
             foreach (var action in plan.Actions)
             {
-                EmitStaticInitializationAction(actionBuilder, action, "        ");
+                EmitStaticInitializationAction(actionBuilder, action, ScribanTemplateRenderer.Tab);
             }
 
             var model = new ScriptObject
@@ -45,7 +45,7 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        AppendStaticInitializationCall(builder, GetNativeTypeInitializationFunctionSymbol(plan.TypeSubjectId), "    ");
+        AppendStaticInitializationCall(builder, GetNativeTypeInitializationFunctionSymbol(plan.TypeSubjectId), ScribanTemplateRenderer.Tab);
     }
 
     private void EmitStaticInitializationForField(
@@ -104,9 +104,13 @@ public sealed partial class NativeAotLoweringPlanner
         if (!action.ElideConstructorCall)
         {
             var resolvedInvocationTarget = invocationTarget!.Value;
-            model["constructor_block"] =
-                $"{indentation}    const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);{Environment.NewLine}" +
-                $"{indentation}    {resolvedInvocationTarget.TargetSymbol}({FormatAbiInvocationArgumentList(resolvedInvocationTarget.ParameterAbis)});{Environment.NewLine}";
+            var cb = new StringBuilder();
+            cb.Append(indentation).Append(ScribanTemplateRenderer.Tab)
+              .Append("const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);").AppendLine();
+            cb.Append(indentation).Append(ScribanTemplateRenderer.Tab)
+              .Append(resolvedInvocationTarget.TargetSymbol)
+              .Append('(').Append(FormatAbiInvocationArgumentList(resolvedInvocationTarget.ParameterAbis)).Append(");").AppendLine();
+            model["constructor_block"] = cb.ToString();
         }
 
         builder.AppendLine(

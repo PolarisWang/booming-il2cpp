@@ -29,6 +29,14 @@ internal static class NativeAotTemplateCatalog
     public const string ReflectionCreateInstanceTemplateRelativePath = "Templates/NativeAot.ReflectionCreateInstance.cpp.scriban";
     public const string RuntimeHelperShapeDispatchHeaderTemplateRelativePath = "Templates/NativeAot.RuntimeHelperShapeDispatch.h.scriban";
     public const string TypeDeclarationsHeaderTemplateRelativePath = "Templates/NativeAot.TypeDeclarations.h.scriban";
+    public const string StringIdTableTemplateRelativePath = "Templates/NativeAot.StringIdTable.cpp.scriban";
+    public const string ObjectEqualityTemplateRelativePath = "Templates/NativeAot.ObjectEquality.cpp.scriban";
+    public const string GenericRegistrationTemplateRelativePath = "Templates/NativeAot.GenericRegistration.cpp.scriban";
+    public const string InterfaceTypeIdTemplateRelativePath = "Templates/NativeAot.InterfaceTypeId.cpp.scriban";
+    public const string IfaceMapArrayTemplateRelativePath = "Templates/NativeAot.IfaceMapArray.cpp.scriban";
+    public const string TypeInfoTemplateRelativePath = "Templates/NativeAot.TypeInfo.cpp.scriban";
+    public const string VTableArrayTemplateRelativePath = "Templates/NativeAot.VTableArray.cpp.scriban";
+    public const string ModuleRegistrationTemplateRelativePath = "Templates/NativeAot.ModuleRegistration.cpp.scriban";
 
     public static Template GetTypeDeclarationsTemplate()
     {
@@ -140,4 +148,43 @@ internal static class NativeAotTemplateCatalog
         return ScribanTemplateRenderer.LoadTemplate(RuntimeHelperShapeDispatchHeaderTemplateRelativePath);
     }
 
+    public static Template GetStringIdTableTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(StringIdTableTemplateRelativePath);
+    }
+
+    public static Template GetObjectEqualityTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(ObjectEqualityTemplateRelativePath);
+    }
+
+    public static Template GetGenericRegistrationTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(GenericRegistrationTemplateRelativePath);
+    }
+
+    public static Template GetModuleRegistrationTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(ModuleRegistrationTemplateRelativePath);
+    }
+
+    public static Template GetInterfaceTypeIdTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(InterfaceTypeIdTemplateRelativePath);
+    }
+
+    public static Template GetIfaceMapArrayTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(IfaceMapArrayTemplateRelativePath);
+    }
+
+    public static Template GetTypeInfoTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(TypeInfoTemplateRelativePath);
+    }
+
+    public static Template GetVTableArrayTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(VTableArrayTemplateRelativePath);
+    }
 }

@@ -5,14 +5,14 @@
 #ifndef CHAOS_IL2CPP_RUNTIME_HELPER_SHAPES_H_
 #define CHAOS_IL2CPP_RUNTIME_HELPER_SHAPES_H_
 
-#include <cstdint>
+#include <chaos/native_types.h>
 #include <cstddef>
 
 namespace chaos { namespace il2cpp { namespace shape_dispatch {
 #pragma pack(push, 1)
 
 // ---- Shape ID enum (FNV-1a hashes of canonical shape keys) ----
-enum ShapeId : uint32_t {
+enum ShapeId : CHAOS_IL2CPP_UINT32 {
 {{~ for entry in shape_entries ~}}
     {{ entry.enum_name }} = 0x{{ entry.shape_id }}u,
 {{~ end ~}}
@@ -64,16 +64,16 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
 }
 
 // ---- Runtime dispatch table (HotUpdate registration) ----
-using ShapeRuntimeDispatchFn = void* (*)(void** args, uint32_t argc);
+using ShapeRuntimeDispatchFn = void* (*)(void** args, CHAOS_IL2CPP_UINT32 argc);
 
 struct ShapeRuntimeEntry {
     ShapeId id;
     ShapeRuntimeDispatchFn fn;
 };
 
-constexpr uint32_t kMaxRuntimeShapeEntries = 32;
+constexpr CHAOS_IL2CPP_UINT32 kMaxRuntimeShapeEntries = 32;
 extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
-extern uint32_t g_runtime_shape_count;
+extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
 static_assert(SHAPE_COUNT == {{ shape_entry_count }}u,

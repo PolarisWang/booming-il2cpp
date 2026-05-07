@@ -17,7 +17,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
     }
 
-    using TAtomicArg = CHAOS_IL2CPP_ATOMIC(uint32_t);
+    using TAtomicArg = CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_UINT32);
     const auto* request = static_cast<const {{ stub_name }}*>(managed_args);
     (void)request;
 

@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "SnapshotTestFixtures",
+  "entrySubjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "SnapshotTestFixtures_LdftnHelper_GetFnPtr",
+  "entryMethodToken": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+  "workloadAbi": "int(int32)"
+}

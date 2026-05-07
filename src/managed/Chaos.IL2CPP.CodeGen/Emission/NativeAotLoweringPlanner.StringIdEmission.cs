@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Text;
 using Chaos.IL2CPP.Contracts;
+using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -83,43 +84,34 @@ public sealed partial class NativeAotLoweringPlanner
         return mapping.ToImmutableDictionary(StringComparer.Ordinal);
     }
 
-    private void EmitStringIdTable(
-        StringBuilder builder,
+    private string BuildStringIdTable(
         IReadOnlySet<string> stringLiterals)
     {
         if (stringLiterals.Count == 0)
         {
-            return;
+            return string.Empty;
         }
 
         var mapping = _stringIdMapping ??= BuildStringIdMapping(stringLiterals);
 
-        builder.AppendLine();
-        builder.AppendLine("// AOT-baked string table: sorted by StringId for binary search at runtime.");
-        builder.AppendLine("constexpr chaos::il2cpp::string_table::StringEntry chaos_aot_string_entries[] = {");
+        var entries = stringLiterals
+            .OrderBy(literal => mapping[literal])
+            .Select(literal => new ScriptObject
+            {
+                ["id"] = (object)mapping[literal],
+                ["cpp_literal"] = ToCppStringLiteral(literal),
+                ["byte_count"] = Encoding.UTF8.GetByteCount(literal),
+            })
+            .ToArray();
 
-        foreach (var literal in stringLiterals.OrderBy(l => mapping[l]))
+        var model = new ScriptObject
         {
-            var id = mapping[literal];
-            var byteCount = Encoding.UTF8.GetByteCount(literal);
-            var cppLiteral = ToCppStringLiteral(literal);
-            builder.AppendLine($"    {{ {id}U, {cppLiteral}, {byteCount}u }},");
-        }
+            ["string_entries"] = entries,
+            ["indentation"] = ScribanTemplateRenderer.Indentation(1),
+        };
 
-        builder.Append('}');
-        builder.AppendLine(";");
-        builder.AppendLine();
-        builder.AppendLine("constexpr CHAOS_IL2CPP_UINT32 chaos_aot_string_entry_count = sizeof(chaos_aot_string_entries) / sizeof(chaos_aot_string_entries[0]);");
-        builder.AppendLine();
-        builder.AppendLine("// Register the AOT-baked string table with the runtime before any code uses it.");
-        builder.AppendLine("static const CHAOS_IL2CPP_UINT32 s_aot_string_table_registered = []()");
-        builder.AppendLine("{");
-        builder.AppendLine("    ::chaos::il2cpp::string_table::InitializeFromAot(");
-        builder.AppendLine("        chaos_aot_string_entries,");
-        builder.AppendLine("        chaos_aot_string_entry_count);");
-        builder.AppendLine("    return 0u;");
-        builder.AppendLine("}();");
-        builder.AppendLine();
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetStringIdTableTemplate(), model);
     }
 
     private bool TryGetStringId(string literal, out ulong id)
