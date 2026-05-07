@@ -30,48 +30,6 @@ struct chaos_managed_string {
 
 #define CHAOS_IL2CPP_STRING_TYPE chaos_managed_string
 
-// ── Reflection struct type definitions ────────────────────────────
-// Used by generated code for reflection object marshalling.
-// The codegen emits extern runtime functions that work with these
-// struct layouts; the definitions must stay in sync.
-
-struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo {
-    chaos_object_header header{};
-    CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
-    CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
-    CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
-    CHAOS_IL2CPP_INTPTR generic_argument_type_handle = 0;
-    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
-    CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
-};
-
-struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo {
-    chaos_object_header header{};
-    CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
-    CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
-    CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
-    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
-    CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
-};
-
-struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo {
-    chaos_object_header header{};
-    CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
-    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
-    CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
-};
-
-struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly {
-    chaos_object_header header{};
-    CHAOS_IL2CPP_INTPTR runtime_assembly_handle = 0;
-    CHAOS_IL2CPP_INTPTR runtime_assembly_name_value = 0;
-};
-
-struct chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName {
-    chaos_object_header header{};
-    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
-};
-
 // ── Exception metadata functions (extern C declarations) ──
 // Implementations live in exception_api.cpp.
 namespace chaos::il2cpp::runtime_core {

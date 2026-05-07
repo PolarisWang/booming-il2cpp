@@ -24,3 +24,4 @@
 | [`16-RuntimeCentricCrossDllDispatch决策.md`](./16-RuntimeCentricCrossDllDispatch%E5%86%B3%E7%AD%96.md) | Runtime-Centric 跨 DLL 分派 + STRING_ID 完整架构：method_table、StringId-first ldstr、TypeInfo stable_id 双路径比较 |
 | [`17-GenericContextRegistry-B+SegmentedShard-决策.md`](./17-GenericContextRegistry-B%2BSegmentedShard-%E5%86%B3%E7%AD%96.md) | GenericContextRegistry B+ 重构：Per-Module Shard + 两级注册 (Eager Open + Lazy Closed) + O(1) 热更卸载，消除 arg_buffer[8] 和 owned_entries 泄漏 |
 | [`18-HotUpdateDispatchD3-决策.md`](./18-HotUpdateDispatchD3-%E5%86%B3%E7%AD%96.md) | HotUpdate Dispatch D3 双层分派架构：静态 Dispatch Table + 模式感知分支 + 构建期 .patchdata 提取 + PatchMetadataCache 本地自洽 |
+| [`19-A4-Dual+V2-ObjectHeader优化决策.md`](./19-A4-Dual%2BV2-ObjectHeader%E4%BC%98%E5%8C%96%E5%86%B3%E7%AD%96.md) | A4-Dual+V2 ObjectHeader 优化：PureType(8B)/ThinLockable(8B)/Fat(16B) 分型 header + V2 inline vtable + 2-bit Magic 判别 + CoreCLR 风格薄锁，ObjectHeader 56B→~9.6B |

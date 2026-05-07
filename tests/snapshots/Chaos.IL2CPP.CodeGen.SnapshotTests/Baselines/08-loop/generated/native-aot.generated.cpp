@@ -301,7 +301,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[31] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[58] = {
 		0u,
 		1548u,
 		1548u,
@@ -333,9 +333,36 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		1548u,
 		1548u,
 		1548u,
+		1548u,
+		1536u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1536u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
 	};
 
-	static constexpr const char* s_type_names[31] = {
+	static constexpr const char* s_type_names[58] = {
 		"<Module>",
 		"ArithmeticOps",
 		"StringOps",
@@ -366,11 +393,65 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		"SmallStruct",
 		"SizeOfHelper",
 		"IndirectHelper",
+		"ArithmeticCompareHelper",
+		"BranchDupHelper",
+		"HasInstanceFields",
+		"InstanceFieldHelper",
+		"StaticFieldWriteHelper",
+		"VirtualDispatchHelper",
+		"BitwiseHelper",
+		"ShiftHelper",
+		"ArrayLengthHelper",
+		"ValueTypeHelper",
+		"LocalAllocHelper",
+		"MulDivHelper",
+		"BranchCompareHelper",
+		"FloatOpsHelper",
+		"ConvWideHelper",
+		"NegShiftHelper",
+		"LdcI8Helper",
+		"ConvSmallIntHelper",
+		"LdindI1Helper",
+		"BranchCompareBHelper",
+		"HasFields",
+		"AddressHelper",
+		"LdtokenHelper",
+		"LdelemaHelper",
+		"LdargaHelper",
+		"CpobjHelper",
+		"StindNarrowHelper",
 		"<>O",
 	};
 
-	static constexpr const char* s_type_namespaces[31] = {
+	static constexpr const char* s_type_namespaces[58] = {
 		"",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
@@ -403,7 +484,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[31] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[58] = {
 		0u,
 		0u,
 		0u,
@@ -435,9 +516,63 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		0u,
 		0u,
 		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
 	};
 
-	static const TypeInfo* const s_type_info_ptrs[31] = {
+	static const TypeInfo* const s_type_info_ptrs[58] = {
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
 		nullptr,
 		nullptr,
 		nullptr,
@@ -472,10 +607,10 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
-		33554463u,
+		33554490u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[32] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[59] = {
 		0u,
 		0u,
 		0u,
@@ -491,6 +626,33 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		0u,
 		0u,
 		0u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
 		1u,
 		1u,
 		1u,
@@ -510,7 +672,34 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		1u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[32] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[59] = {
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
 		0u,
 		0u,
 		0u,
@@ -559,7 +748,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 31u,
+		/* .type_count        = */ 58u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
@@ -659,183 +848,38 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LoopHelper_SumToFive(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 
 
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	chaos_locals[0] = _s0;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
 	{
-		bool chaos_dispatch_completed = false;
-		int chaos_pc = 0;
-		for (;;)
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		while (chaos_left < chaos_right)
 		{
-			chaos_safepoint_poll();
-			switch (chaos_pc)
+			_s0 = chaos_locals[0];
+			_s1 = chaos_locals[1];
 			{
-				case 0:
-				{
-	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_pc = 1;
-	continue;
-					break;
-				}
-
-				case 1:
-				{
-	chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-	chaos_pc = 2;
-	continue;
-					break;
-				}
-
-				case 2:
-				{
-	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_pc = 3;
-	continue;
-					break;
-				}
-
-				case 3:
-				{
-	chaos_locals[1] = chaos_eval_stack[--chaos_stack_top];
-	chaos_pc = 4;
-	continue;
-					break;
-				}
-
-				case 4:
-				{
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[1];
-	chaos_pc = 5;
-	continue;
-					break;
-				}
-
-				case 5:
-				{
-	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(5);
-	chaos_pc = 6;
-	continue;
-					break;
-				}
-
-				case 6:
-				{
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
-		if (chaos_left < chaos_right)
-		{
-			chaos_pc = 9;
+				const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+				const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(chaos_left, chaos_right));
+			}
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[1];
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+				const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(chaos_left, chaos_right));
+			}
+			chaos_locals[1] = _s0;
 			continue;
 		}
 	}
-	chaos_pc = 7;
-	continue;
-					break;
-				}
-
-				case 7:
-				{
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-	chaos_pc = 8;
-	continue;
-					break;
-				}
-
-				case 8:
-				{
-	return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
-					break;
-				}
-
-				case 9:
-				{
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-	chaos_pc = 10;
-	continue;
-					break;
-				}
-
-				case 10:
-				{
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[1];
-	chaos_pc = 11;
-	continue;
-					break;
-				}
-
-				case 11:
-				{
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
-		chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(chaos_left, chaos_right));
-	}
-	chaos_pc = 12;
-	continue;
-					break;
-				}
-
-				case 12:
-				{
-	chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-	chaos_pc = 13;
-	continue;
-					break;
-				}
-
-				case 13:
-				{
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[1];
-	chaos_pc = 14;
-	continue;
-					break;
-				}
-
-				case 14:
-				{
-	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	chaos_pc = 15;
-	continue;
-					break;
-				}
-
-				case 15:
-				{
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
-		chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(chaos_left, chaos_right));
-	}
-	chaos_pc = 16;
-	continue;
-					break;
-				}
-
-				case 16:
-				{
-	chaos_locals[1] = chaos_eval_stack[--chaos_stack_top];
-	chaos_pc = 17;
-	continue;
-					break;
-				}
-
-				case 17:
-				{
-	chaos_pc = 4;
-	continue;
-					break;
-				}
-
-				default:
-				{
-					CHAOS_IL2CPP_ABORT();
-				}
-			}
-			if (chaos_dispatch_completed)
-			{
-				break;
-			}
-			continue;  // dispatch not completed, loop back;
-		}
-	}
+	_s0 = chaos_locals[0];
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
 // Native AOT entry for SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()

@@ -1,0 +1,35 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.ldarga-helper.run-ldarga",
+      "subjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+      "signature": "System.Int32 LdargaHelper::RunLdarga(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/LdargaHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.ldarga-helper.run-ldarga",
+        "signature": "System.Int32 LdargaHelper::RunLdarga(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_LdargaHelper_RunLdarga",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [
+        { "carrierKindCode": 1, "typeShape": 2 }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldarga", "operand": 0, "ilOffset": 0, "resultType": "System.Int32&" },
+        { "op": "ldind.i4", "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 2 }
+      ]
+    }
+  ]
+}

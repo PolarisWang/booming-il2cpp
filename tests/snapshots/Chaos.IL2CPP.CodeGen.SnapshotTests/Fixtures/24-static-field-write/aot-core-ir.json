@@ -1,0 +1,73 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.static-field-write-helper.write-and-read",
+      "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+      "signature": "System.Int32 StaticFieldWriteHelper::WriteAndRead()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
+        "methodId": "snapshot-test-fixtures.static-field-write-helper.write-and-read",
+        "signature": "System.Int32 StaticFieldWriteHelper::WriteAndRead()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_StaticFieldWriteHelper_WriteAndRead",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stsfld",
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+            "declaringTypeShape": 1
+          },
+          "runtimeServiceKind": 5
+        },
+        {
+          "op": "ldsfld",
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+            "declaringTypeShape": 1
+          },
+          "runtimeServiceKind": 4
+        },
+        {
+          "op": "ret",
+          "ilOffset": 3
+        }
+      ]
+    }
+  ]
+}

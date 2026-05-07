@@ -73,6 +73,29 @@ def _slug_from_family_id(family_id: str) -> str:
     return parts[-1].replace("_", "-")
 
 
+# Runtime core functions that raise managed exceptions (crash when called
+# during baseline capture with uninitialized runtime).  Extend this set
+# when new families exhibit FAILFAST crashes during baseline.
+# These are the runtime-core functions whose inline-stub wrappers are
+# "pass-through" (just `return runtime_core::func(args)`) and thus don't
+# directly contain Raise/ABORT in the stub body.
+_KNOWN_THROWING_RUNTIME_FUNCTIONS = frozenset({
+    # convert-char: invalid cast conversions that call RaiseInvalidCastException.
+    # Trivial numeric conversions (byte, char, int16, uint16, int32, uint32,
+    # int64, uint64, sbyte) ARE safe during baseline — they're simple cast/
+    # truncation.  The following need runtime type resolution which fails when
+    # the runtime is uninitialized:
+    "chaos_convert_tochar_double",
+    "chaos_convert_tochar_single",
+    "chaos_convert_tochar_boolean",
+    "chaos_convert_tochar_datetime",
+    "chaos_convert_tochar_decimal",
+    "chaos_convert_tochar_object_provider",
+    "chaos_convert_tochar_string",
+    "chaos_convert_tochar_string_provider",
+})
+
+
 def _ns_slug_from_family_id(family_id: str) -> str:
     return _slug_from_family_id(family_id).replace("-", "_")
 
@@ -83,12 +106,62 @@ def _class_name(family_slug: str, variant: str) -> str:
     return f"{base}NativeEntry" if variant == "host" else f"{base}PatchEntry"
 
 
+def _find_genuine_cpp(family_slug: str) -> Path | None:
+    """Find the genuine native-aot.generated.cpp for a family.
+
+    Used for symbol discovery and aborting-methods detection — needs the
+    file that actually contains MethodN function definitions/bodies.
+
+    Returns NativeEntry-subdirectory version when the flat path is a shim.
+    """
+    genuine_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine"
+    if genuine_dir.is_dir():
+        for native_entry_dir in sorted(genuine_dir.iterdir()):
+            if native_entry_dir.is_dir() and native_entry_dir.name.endswith("NativeEntry"):
+                candidate = native_entry_dir / "generated" / "native-aot.generated.cpp"
+                if candidate.exists():
+                    return candidate
+
+    direct = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    if direct.exists():
+        return direct
+
+    genuine_fixed = _VERIFICATION / family_slug / "il2cpp_dist" / "hotupdate" / "genuine-fixed" / "native-aot.generated.cpp"
+    if genuine_fixed.exists():
+        return genuine_fixed
+
+    return None
+
+
+def _find_genuine_cpp_for_fix(family_slug: str) -> Path | None:
+    """Find the genuine source for the genuine-fixed copy.
+
+    Prefers the flat path (genuine/generated/) — the fix functions in
+    _rename_and_fix_patch_file assume this format (flat namespace, no
+    NativeEntry wrapper).  Returns None if the flat path doesn't exist
+    or is a stub (only forward declarations, no actual MethodN symbols),
+    so the caller can fall back to the NativeEntry subdirectory.
+    """
+    candidate = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    if candidate.exists():
+        content = candidate.read_text(encoding="utf-8")
+        # Detect stub: genuine/generated contains only extern declarations
+        # and a dispatch table, not actual method function bodies.
+        # Real files have extern "C" ...MethodN declarations; stubs don't.
+        if not re.search(r'extern\s+"C"\s+CHAOS_IL2CPP_INT32\s+\w+_Method\d+', content):
+            return None
+        return candidate
+    return None
+
+
 def _discover_host_symbols(family_slug: str) -> list[str]:
     """Scan the genuine (host) generated C++ to discover MethodN symbols.
 
     Returns host_symbols list.
     """
-    host_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    host_cpp = _find_genuine_cpp(family_slug)
+    if host_cpp is None:
+        return []
     return _extract_method_symbols(host_cpp)
 
 
@@ -136,10 +209,9 @@ def _detect_aborting_methods(family_slug: str, host_symbols: list[str]) -> set[i
 
     Returns set of method indices that will abort when called directly.
     """
-    host_cpp = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
-    if not host_cpp.exists():
+    host_cpp = _find_genuine_cpp(family_slug)
+    if host_cpp is None:
         return set()
-
     content = host_cpp.read_text(encoding="utf-8")
 
     # Step 1: Build WriteMethodTable idx → func_name mapping
@@ -177,6 +249,57 @@ def _detect_aborting_methods(family_slug: str, host_symbols: list[str]) -> set[i
         body = content[brace:pos]
         if "return static_cast<CHAOS_IL2CPP_INTPTR>(0)" in body:
             null_stub_names.add(name)
+
+    # Step 2b: Classify throwing inline stubs — any inline stub whose body
+    # calls Raise* (managed exception), std::abort(), or CHAOS_IL2CPP_ABORT.
+    # These will terminate the process when called during baseline capture
+    # (uninitialized runtime, or type not resolvable in per-family builds).
+    throwing_stub_names: set[str] = set()
+    for m in re.finditer(r'extern "C" inline \w+ (chaos_external_runtime_\w+)\(', content):
+        name = m.group(1)
+        if name in null_stub_names:
+            continue  # already classified as null-returning
+        start = m.start()
+        brace = content.index("{", start)
+        depth = 1
+        pos = brace + 1
+        while depth > 0 and pos < len(content):
+            if content[pos] == "{":
+                depth += 1
+            elif content[pos] == "}":
+                depth -= 1
+            pos += 1
+        body = content[brace:pos]
+        # Check if the body calls anything that raises or aborts
+        if any(kw in body for kw in ['Raise', 'ABORT', 'abort', 'throw']):
+            throwing_stub_names.add(name)
+
+    # Step 2c: Detect pass-through inline stubs that call known-throwing
+    # runtime functions.  These stubs are thin wrappers like:
+    #   return chaos_convert_tochar_double(chaos_fn_arg_0);
+    # The stub body itself does NOT contain Raise/ABORT — the throwing
+    # is in the runtime-core function it delegates to.  We classify them
+    # as throwing when the called function is in _KNOWN_THROWING_RUNTIME_FUNCTIONS.
+    for m in re.finditer(r'extern "C" inline \w+ (chaos_external_runtime_\w+)\(', content):
+        name = m.group(1)
+        if name in null_stub_names or name in throwing_stub_names:
+            continue
+        start = m.start()
+        brace = content.index("{", start)
+        depth = 1
+        pos = brace + 1
+        while depth > 0 and pos < len(content):
+            if content[pos] == "{":
+                depth += 1
+            elif content[pos] == "}":
+                depth -= 1
+            pos += 1
+        body = content[brace:pos]
+        # Check if the body calls any known-throwing runtime function
+        for tf in _KNOWN_THROWING_RUNTIME_FUNCTIONS:
+            if tf in body:
+                throwing_stub_names.add(name)
+                break
 
     # Map null stub names to g_method_table indices
     null_indices = {idx for idx, name in idx_to_name.items() if name in null_stub_names}
@@ -245,6 +368,24 @@ def _detect_aborting_methods(family_slug: str, host_symbols: list[str]) -> set[i
             ) is not None
         )
 
+        # Check for calls to throwing inline stubs (stubs that call
+        # Raise*, CHAOS_IL2CPP_ABORT, std::abort, or known-throwing
+        # runtime functions in their body). These are extern "C" inline
+        # wrappers in the genuine TU that dispatch to runtime_core
+        # functions that throw when the runtime is uninitialized or the
+        # type is not resolvable.
+        #
+        # Uses substring match (tn in body) instead of regex, because
+        # different families call stubs with different syntax:
+        #   return stubname(args);           — return-value pass-through
+        #   const auto r = stubname(args);   — captured result
+        # Only false-positive risk is if the stub name is a substring of
+        # another identifier, which is negligible for these long names.
+        calls_throwing_stub = any(
+            tn in body
+            for tn in throwing_stub_names
+        )
+
         # Additional check: if the method calls a literal-0 method table slot
         # (WriteMethodTable(N, reinterpret_cast<void*>(0), ...)), the call
         # itself will crash with ACCESS_VIOLATION since the function pointer
@@ -269,6 +410,11 @@ def _detect_aborting_methods(family_slug: str, host_symbols: list[str]) -> set[i
         elif calls_zero_slot:
             # Calling a null function pointer directly will crash — no
             # explicit null-check-abort pattern needed.
+            aborting.add(midx)
+        elif calls_throwing_stub:
+            # The method calls an inline stub that raises a managed exception
+            # (e.g., RaiseInvalidCastException, RaiseManagedException).
+            # During baseline capture with uninitialized runtime, these abort.
             aborting.add(midx)
 
     return aborting
@@ -355,10 +501,12 @@ def _emit_header(
         '#include "dispatch_table.h"',
         '#include "runtime_core.h"',
         '#include "interpreter_entry.h"',
+        '#include "exception_helpers.h"',
         "",
         "#include <cstdio>",
         "#include <cstdint>",
         "#include <cstring>",
+        "#include <excpt.h>",
         "",
     ])
 
@@ -430,6 +578,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             "static bool IsAbortingMethod(uint32_t) { return false; }",
         ])
 
+    # Now the main function
     lines.extend([
         "",
         "int main() {",
@@ -494,19 +643,24 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "",
         "    // ── Step A: Capture AOT baseline (pre-patch return values) ─────",
         "    // Call each host method directly to establish the AOT return value.",
-        "    // Methods that abort during direct execution are skipped (baseline = 0).",
+        "    // Methods that crash during direct execution are skipped (baseline = 0).",
+        "    // Uses __try/__except to catch ACCESS_VIOLATION so one bad method",
+        "    // doesn't kill the whole test.  Methods that __fastfail (std::abort)",
+        "    // are handled via static IsAbortingMethod detection instead.",
         "    CHAOS_IL2CPP_INT32 baseline_values[kMethodCount] = {};",
         "    for (uint32_t i = 0u; i < kMethodCount; i++) {",
         "        if (IsAbortingMethod(i)) {",
         "            baseline_values[i] = 0;",
         "            continue;",
         "        }",
-        "        baseline_values[i] = reinterpret_cast<int32_t>(kHostThunks[i]());",
+        "        __try {",
+        "            baseline_values[i] = reinterpret_cast<int32_t>(kHostThunks[i]());",
+        "        } __except (EXCEPTION_EXECUTE_HANDLER) {",
+        "            baseline_values[i] = 0;",
+        "        }",
         "    }",
         "",
     ])
-
-    # Apply D3 patch
     if has_patch_data:
         lines.extend([
             "",
@@ -841,9 +995,16 @@ def _fix_genuine_for_hotupdate_keep_extern(family_slug: str, ns_slug: str) -> Pa
 
     The fixed copy goes to native/hotupdate/genuine-fixed/native-aot.generated.cpp
     so the original genuine file remains untouched.
+
+    Uses _find_genuine_cpp_for_fix() which prefers the flat path
+    (genuine/generated/).  When the flat path is a stub (no MethodN
+    symbols — e.g., families with NativeEntry subdirectory), we skip
+    regeneration and keep the existing genuine-fixed if any.
     """
-    src = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
-    if not src.exists():
+    src = _find_genuine_cpp_for_fix(family_slug)
+    if src is None:
+        return None
+    if src is None:
         return None
 
     dst = _VERIFICATION / family_slug / "il2cpp_dist" / "hotupdate" / "genuine-fixed" / "native-aot.generated.cpp"
@@ -1058,116 +1219,200 @@ def _inject_missing_structs_and_type_ids(content: str) -> str:
 
 
 def _inject_reflection_bridge_stubs(content: str) -> str:
-    """Inject missing chaos_reflection_get_* stub definitions.
+    """Inject missing chaos_* stub definitions for functions called but not defined.
 
-    The AOT lowering planner emits `extern "C"` wrappers that call these
-    helper functions, but the CodeGen stage does not always emit the
-    corresponding helper definitions for reflection query functions that
-    don't have concrete switch-case entries. Each TU needs its own copy
-    since these are in the anonymous namespace.
+    The AOT lowering planner emits `extern "C"` wrappers that call various
+    chaos_* helper functions, but the CodeGen stage does not always emit the
+    corresponding helper definitions. Each TU needs its own copy since these
+    are in the anonymous namespace.
 
-    This is now generalized: ANY `chaos_reflection_*` function
-    that is called but not defined in the TU will receive a stub.
+    Covers chaos_reflection_*, chaos_thread_*, chaos_safepoint_*, and any
+    other chaos_* function called but not defined in the TU. Functions that
+    have known definitions in the runtime headers or the TU's own preamble
+    are excluded.
     """
-    # Find all called-but-not-defined chaos_reflection_* functions
+    # Functions known to be defined in runtime headers (Chaos* via using decls)
+    # or in the TU preamble (chaos_* inline helpers from codegen).
+    _KNOWN_DEFINED = frozenset({
+        # Runtime-provided (Chaos* prefix, capital C — declared in generated_code_compat.h)
+        'ChaosArrayClear', 'ChaosArrayGetLength', 'ChaosBufferByteLength',
+        'ChaosCultureGetCompareInfo', 'ChaosCultureGetCurrent', 'ChaosCultureGetDateTimeFormat',
+        'ChaosCultureGetDisplayName', 'ChaosCultureGetInvariant', 'ChaosCultureGetName',
+        'ChaosCultureGetNumberFormat', 'ChaosDatetimeGetHashCode', 'ChaosDatetimeGetUtcNow',
+        'ChaosExceptionGetBaseException', 'ChaosExceptionGetHresult', 'ChaosExceptionGetInnerException',
+        'ChaosFormattablestringFactoryCreate', 'ChaosGuidNewGuid', 'ChaosInterlockedMemoryBarrier',
+        'ChaosLoadFloat64', 'ChaosLoadInt64', 'ChaosMathSqrt', 'ChaosObjectCtor',
+        'ChaosObjectEqualsStatic', 'ChaosRandomNextBytes', 'ChaosRandomNextDouble',
+        'ChaosReflectionAssemblyGetTypes', 'ChaosReflectionGetAssemblyFullName',
+        'ChaosReflectionGetAssemblyLocation', 'ChaosReflectionGetAssemblyQualifiedName',
+        'ChaosReflectionGetBaseDefinition', 'ChaosReflectionGetBaseType',
+        'ChaosReflectionGetCallingAssembly', 'ChaosReflectionGetCallingConvention',
+        'ChaosReflectionGetConstructorsDefault', 'ChaosReflectionGetContainsGenericParams',
+        'ChaosReflectionGetDefaultValue', 'ChaosReflectionGetEntryAssembly',
+        'ChaosReflectionGetExceptionMessage', 'ChaosReflectionGetExecutingAssembly',
+        'ChaosReflectionGetFieldsBindingflags', 'ChaosReflectionGetGenericParamConstraints',
+        'ChaosReflectionGetGenericParamPos', 'ChaosReflectionGetImageRuntimeVersion',
+        'ChaosReflectionGetIsAbstract', 'ChaosReflectionGetIsArray',
+        'ChaosReflectionGetIsConstructedGeneric', 'ChaosReflectionGetIsEnum',
+        'ChaosReflectionGetIsGenericType', 'ChaosReflectionGetIsGenericTypeDef',
+        'ChaosReflectionGetIsInterface', 'ChaosReflectionGetIsPublic',
+        'ChaosReflectionGetIsSealed', 'ChaosReflectionGetIsValueType',
+        'ChaosReflectionGetIsVirtual', 'ChaosReflectionGetMethodsBindingflags',
+        'ChaosReflectionGetModuleAssembly', 'ChaosReflectionGetModuleName',
+        'ChaosReflectionGetModuleNameOnly', 'ChaosReflectionGetNamespace',
+        'ChaosReflectionGetParamAttributes', 'ChaosReflectionGetParamPosition',
+        'ChaosReflectionGetParameterType', 'ChaosReflectionGetRawDefaultValue',
+        'ChaosReflectionGetReflectedType', 'ChaosReflectionGetRequiredCustomModifiers',
+        'ChaosReflectionGetTypeFromAssemblyBool', 'ChaosReflectionGetTypeFullName',
+        'ChaosReflectionHasDefaultValue', 'ChaosReflectionIsAssignableFrom',
+        'ChaosReflectionIsAssignableTo', 'ChaosReflectionIsDefined',
+        'ChaosReflectionIsInstanceOfType', 'ChaosReflectionIsSubclassOf',
+        'ChaosReflectionMakeGenericType', 'ChaosReflectionModuleGetType',
+        'ChaosReflectionModuleGetTypes', 'ChaosReflectionSetExceptionMetadata',
+        'ChaosRuntimeHelpersEquals', 'ChaosRuntimeHelpersGetHashCode',
+        'ChaosRuntimeHelpersGetObjectValue', 'ChaosRuntimefieldhandleGetHashCode',
+        'ChaosRuntimemethodhandleGetHashCode', 'ChaosRuntimetypehandleGetHashCode',
+        'ChaosRuntimewrappedGetWrappedException', 'ChaosStoreFloat32', 'ChaosStoreFloat64',
+        'ChaosStoreInt64', 'ChaosStringContains', 'ChaosStringJoinSs', 'ChaosStringStartsWith',
+        'ChaosVolatileRead', 'ChaosGetCustomAttributeFromBlob',
+        # Codegen preamble inline helpers (defined in every TU)
+        'chaos_normalize_native_int_argument', 'chaos_resolve_managed_value_pointer',
+        'chaos_is_string_id', 'chaos_is_type_compatible', 'chaos_type_implements_interface',
+        'chaos_does_type_implement_interface', 'chaos_is_array_type_compatible',
+        'chaos_is_array_store_compatible', 'chaos_vtable_resolve', 'chaos_get_parent_type_info',
+        'chaos_make_string_id_value', 'chaos_extract_string_id', 'chaos_resolve_managed_pointer',
+        # Reflection string helpers (implemented in the reflection runtime)
+        'chaos_reflection_create_string_utf8_copy', 'chaos_reflection_concat_string_pair_values',
+        'chaos_reflection_get_string_utf8', 'chaos_reflection_create_reference_array',
+        'chaos_reflection_create_type_value', 'chaos_reflection_create_array_value',
+        'chaos_reflection_create_struct_value',
+        # Thread helpers declared in runtime headers
+        'chaos_find_interface_offset',
+        # Delegate helpers (defined in codegen as struct type returns or using aliases)
+        'chaos_delegate_invocation_list', 'chaos_require_delegate',
+        'chaos_try_get_delegate_invocation_list', 'chaos_delegate_single_entry_equals',
+        # Convert-char helpers (defined in runtime-core/convert.cpp)
+        'chaos_convert_tochar_byte', 'chaos_convert_tochar_char',
+        'chaos_convert_tochar_int16', 'chaos_convert_tochar_int32',
+        'chaos_convert_tochar_int64', 'chaos_convert_tochar_sbyte',
+        'chaos_convert_tochar_uint16', 'chaos_convert_tochar_uint32',
+        'chaos_convert_tochar_uint64', 'chaos_convert_tochar_boolean',
+        'chaos_convert_tochar_datetime', 'chaos_convert_tochar_decimal',
+        'chaos_convert_tochar_double', 'chaos_convert_tochar_single',
+        'chaos_convert_tochar_object', 'chaos_convert_tochar_object_provider',
+        'chaos_convert_tochar_string', 'chaos_convert_tochar_string_provider',
+        # Generic registration helpers (defined in every TU's anonymous namespace)
+        'ChaosDoPopulateGenericRegistration', 'ChaosGenericRegistrationInit',
+    })
+
+    # Find all called-but-not-defined chaos_* functions
     called_funcs: set[str] = set()
     defined_funcs: set[str] = set()
 
     for line in content.splitlines():
         stripped = line.strip()
-        # Detect calls: `func(args` pattern (inside expressions)
-        for m in re.finditer(r'\b(chaos_reflection_\w+)\s*\(', stripped):
-            call = m.group(1)
-            if call not in ('chaos_reflection_create_string_utf8_copy',
-                            'chaos_reflection_concat_string_pair_values',
-                            'chaos_reflection_get_string_utf8',
-                            'chaos_reflection_create_reference_array',
-                            'chaos_reflection_create_type_value',
-                            'chaos_reflection_create_array_value',
-                            'chaos_reflection_create_struct_value',
-                            'chaos_make_string_id_value',
-                            'chaos_extract_string_id',
-                            'chaos_is_string_id',
-                            'chaos_resolve_managed_pointer',
-                            'chaos_resolve_managed_value_pointer'):
-                called_funcs.add(call)
-        # Detect definitions: any typed return + func name at line start
+        # Detect calls: any `chaos_*(` or `Chaos*(` pattern
+        for m in re.finditer(r'\b(chaos_\w+)\s*\(', stripped):
+            called_funcs.add(m.group(1))
+        for m in re.finditer(r'\b(Chaos\w+)\s*\(', stripped):
+            called_funcs.add(m.group(1))
+        # Detect definitions: any typed return + func name
+        # Catches CHAOS_IL2CPP_*, plain C types, template prefixes, extern "C" inline, etc.
         for m in re.finditer(
-            r'\b(CHAOS_IL2CPP_INTPTR|CHAOS_IL2CPP_INT32|CHAOS_IL2CPP_UINT8|'
-            r'CHAOS_IL2CPP_SIZE|int32_t|intptr_t|bool|void)\s+'
-            r'(chaos_reflection_\w+)\s*\(',
+            r'\b(CHAOS_IL2CPP_\w+|void|bool|int32_t|uint32_t|int64_t|uint64_t|'
+            r'int16_t|uint16_t|intptr_t|uintptr_t|size_t)\s*\*?\s+'
+            r'(chaos_\w+|Chaos\w+)\s*\(',
             stripped):
             defined_funcs.add(m.group(2))
+        # Also catch template definitions like TValue* chaos_resolve_managed_value_pointer
+        for m in re.finditer(r'\w+\s*\*?\s+(chaos_\w+)\s*\(', stripped):
+            if m.group(1) not in defined_funcs:
+                # Check if this is actually a definition (typename before it)
+                if any(kw in stripped for kw in ('inline', 'extern', 'template', 'TValue')):
+                    defined_funcs.add(m.group(1))
+
+    # System.Private.CoreLib interop helpers — never stub these
+    for line in content.splitlines():
+        stripped = line.strip()
+        if 'System.Private.CoreLib' in stripped and 'extern' in stripped:
+            for m in re.finditer(r'\b(chaos_\w+)\s*\(', stripped):
+                defined_funcs.add(m.group(1))
 
     missing = sorted(called_funcs - defined_funcs)
-    # Filter helpers that are definitely defined
-    missing = [f for f in missing
-               if not f.startswith('chaos_reflection_get_string')
-               and not f.startswith('chaos_reflection_create_string')
-               and not f.startswith('chaos_reflection_concat')
-               and not f.startswith('chaos_reflection_create_reference')
-               and not f.startswith('chaos_reflection_create_type')
-               and not f.startswith('chaos_reflection_create_array')
-               and not f.startswith('chaos_reflection_create_struct')]
+    # Remove known-defined runtime functions
+    missing = [f for f in missing if f not in _KNOWN_DEFINED]
 
     if not missing:
         return content
 
     # Generate stubs for all missing functions
     stubs = []
-    stubs.append("// Reflection bridge stubs injected for hotupdate test compilation.\n")
-    stubs.append("// These are TODO stubs: the runtime backend does not yet implement\n")
-    stubs.append("// these specific reflection queries.\n\n")
+    stubs.append("// Stub definitions injected for hotupdate test compilation.\n")
+    stubs.append("// These functions are called by codegen-emitted code but not\n")
+    stubs.append("// defined in this TU nor exported by the runtime core library.\n\n")
 
     for func in missing:
-        used_params = ["chaos_arg_0"]
-        # Scan call sites to count parameters
+        # Determine parameter count and whether the function returns a value
+        used_params: list[str] = []
+        returns_value = False
         call_pattern = f'{func}('
         for line in content.splitlines():
-            if call_pattern in line:
-                idx = line.index(call_pattern) + len(call_pattern)
-                depth = 0
-                args: list[str] = []
-                current = ""
-                for ch in line[idx:]:
-                    if ch == '(':
-                        depth += 1
-                        current += ch
-                    elif ch == ')':
-                        if depth == 0:
-                            if current.strip():
-                                args.append(current.strip())
-                            break
-                        depth -= 1
-                        current += ch
-                    elif ch == ',' and depth == 0:
-                        args.append(current.strip())
-                        current = ""
-                    else:
-                        current += ch
-                if args:
-                    real_args = [a for a in args if a not in ('void', '')]
-                    if real_args:
-                        used_params = [f"chaos_arg_{i}" for i in range(len(real_args))]
-                break
+            if call_pattern not in line:
+                continue
+            idx = line.index(call_pattern) + len(call_pattern)
+            depth = 0
+            args: list[str] = []
+            current = ""
+            for ch in line[idx:]:
+                if ch == '(':
+                    depth += 1
+                    current += ch
+                elif ch == ')':
+                    if depth == 0:
+                        if current.strip():
+                            args.append(current.strip())
+                        break
+                    depth -= 1
+                    current += ch
+                elif ch == ',' and depth == 0:
+                    args.append(current.strip())
+                    current = ""
+                else:
+                    current += ch
+            real_args = [a for a in args if a not in ('void', '')]
+            if real_args and (not used_params or len(real_args) > len(used_params)):
+                used_params = [f"chaos_arg_{i}" for i in range(len(real_args))]
+            # Check if any call site uses the return value
+            before = line[:line.index(call_pattern)].rstrip()
+            if before.endswith('=') or before.endswith('return'):
+                returns_value = True
 
-        param_list = ", ".join(f"CHAOS_IL2CPP_INTPTR {p}" for p in used_params)
-        stubs.append(f"CHAOS_IL2CPP_INTPTR {func}({param_list})\n")
-        stubs.append("{\n")
-        for p in used_params:
-            stubs.append(f"    (void){p};\n")
-        stubs.append("    return static_cast<CHAOS_IL2CPP_INTPTR>(0);\n")
-        stubs.append("}\n\n")
+        if returns_value:
+            param_list = ", ".join(f"CHAOS_IL2CPP_INTPTR {p}" for p in used_params) if used_params else "void"
+            stubs.append(f"CHAOS_IL2CPP_INTPTR {func}({param_list})\n")
+            stubs.append("{\n")
+            for p in used_params:
+                stubs.append(f"    (void){p};\n")
+            stubs.append("    return static_cast<CHAOS_IL2CPP_INTPTR>(0);\n")
+            stubs.append("}\n\n")
+        else:
+            param_list = ", ".join(f"CHAOS_IL2CPP_INTPTR {p}" for p in used_params) if used_params else "void"
+            stubs.append(f"void {func}({param_list})\n")
+            stubs.append("{\n")
+            for p in used_params:
+                stubs.append(f"    (void){p};\n")
+            stubs.append("}\n\n")
 
     stub_text = "".join(stubs)
 
     # Insert before the first extern "C" chaos_external_runtime_ wrapper
-    marker = 'extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_'
-    idx = content.find(marker)
-    if idx < 0:
+    # Account for optional `inline` keyword between extern "C" and return type.
+    marker_pattern = r'extern\s+"C"\s+(?:inline\s+)?CHAOS_IL2CPP_INTPTR\s+chaos_external_runtime_'
+    m = re.search(marker_pattern, content)
+    if not m:
         return content
 
-    line_start = content.rfind('\n', 0, idx) + 1
+    line_start = content.rfind('\n', 0, m.start()) + 1
     content = content[:line_start] + stub_text + content[line_start:]
     return content
 
@@ -1339,10 +1584,127 @@ def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str =
     # the function is called but missing from the genuine TU.
     content = _inject_string_materialize_stub(content)
 
+    # Inject missing chaos_eval_stack, chaos_stack_top, and _sN declarations
+    # for functions that use interpreter dispatch (for/switch/case) but whose
+    # codegen preamble omitted these declarations (e.g. array-indexing-copy).
+    content = _inject_missing_eval_stack_decls(content)
+
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_text(content, encoding="utf-8")
     print(f"  {suffix.capitalize()} renamed: {dst.relative_to(_REPO_ROOT)}")
     return dst
+
+
+def _inject_missing_eval_stack_decls(content: str) -> str:
+    """Inject chaos_eval_stack{} / chaos_stack_top / missing _sN declarations.
+
+    The codegen emits interpreter-dispatch functions (for/switch/case pattern)
+    that reference chaos_eval_stack[] and chaos_stack_top, but some families
+    (e.g. array-indexing-copy) omit these declarations in the Run function
+    preamble.
+
+    We detect functions that use chaos_eval_stack but lack a declaration for it
+    in the first 6 lines of the function body, then inject the missing decls.
+    """
+    # Phase 1: scan for max locals, s vars, and eval stack constants.
+    # Do this on the raw content first.
+    max_locals = 0
+    for m in re.finditer(r'chaos_locals\[(\d+)\]', content):
+        val = int(m.group(1))
+        if val > max_locals:
+            max_locals = val
+
+    max_s_array = 0
+    for m in re.finditer(r'__s\[(\d+)\]', content):
+        val = int(m.group(1))
+        if val > max_s_array:
+            max_s_array = val
+
+    max_stack_index = 0
+    for m in re.finditer(r'chaos_eval_stack\[(\d+)\]', content):
+        val = int(m.group(1))
+        if val > max_stack_index:
+            max_stack_index = val
+
+    eval_size = max(max_locals + 4, max_s_array + 4, max_stack_index + 1, 8)
+
+    s_vars: set[str] = set()
+    for m in re.finditer(r'(?<!CHAOS_IL2CPP_INTPTR )(_s\d+)\s*=', content):
+        name = m.group(1)
+        if name != '_s0':
+            s_vars.add(name)
+
+    # Phase 2: iterate through extern "C" function definitions (not forward decls)
+    # and inject missing declarations.
+    LINES = content.splitlines(keepends=True)
+    result = []
+    i = 0
+    while i < len(LINES):
+        line = LINES[i]
+        stripped = line.strip()
+
+        # Detect extern "C" function definitions only.
+        # We skip non-extern-C functions (they're in the anonymous namespace
+        # and we must not touch their internal brace tracking).
+        is_function_def = False
+        if (stripped.startswith('extern "C"') or
+            not stripped.startswith('extern') and not stripped.startswith('//') and not stripped.startswith('#')):
+            if stripped.endswith(')'):
+                # Check next non-empty line is { (not ; for forward decls)
+                for j in range(i + 1, min(i + 4, len(LINES))):
+                    next_stripped = LINES[j].strip()
+                    if next_stripped == '{':
+                        # ONLY match if it's extern "C" — skip non-extern C++
+                        # functions inside the anonymous namespace.
+                        if 'extern "C"' in line:
+                            is_function_def = True
+                        break
+                    if next_stripped and not next_stripped.startswith('//') and next_stripped != '{':
+                        break  # Not a function start (e.g. another decl)
+
+        if is_function_def:
+            func_lines = [line]
+            depth = line.count('{') - line.count('}')
+            i += 1
+            while i < len(LINES):
+                func_lines.append(LINES[i])
+                depth += LINES[i].count('{') - LINES[i].count('}')
+                i += 1
+                if depth == 0:
+                    break
+
+            func_text = ''.join(func_lines)
+
+            uses_eval = 'chaos_eval_stack' in func_text
+            has_decl = False
+            if uses_eval:
+                count = 0
+                for fl in func_lines:
+                    if 'CHAOS_IL2CPP_ARRAY' in fl and 'chaos_eval_stack' in fl:
+                        has_decl = True
+                        break
+                    count += 1
+                    if count > 6:
+                        break
+
+            if uses_eval and not has_decl:
+                brace_idx = func_text.index('{')
+                decls = []
+                decls.append(f'\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, {eval_size}) chaos_eval_stack{{}};\n')
+                decls.append(f'\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;\n')
+                for s in sorted(s_vars, key=lambda x: int(x[2:])):
+                    decls.append(f'\tCHAOS_IL2CPP_INTPTR {s}{{}};\n')
+                if max_s_array > 0:
+                    decls.append(f'\tCHAOS_IL2CPP_INTPTR __s[{max_s_array + 1}] = {{}};\n')
+                insert = ''.join(decls)
+                func_text = func_text[:brace_idx + 1] + '\n' + insert + func_text[brace_idx + 1:]
+
+            result.append(func_text)
+        else:
+            result.append(line)
+            i += 1
+
+    return ''.join(result)
 
 
 def _fix_inline_param_mismatch(content: str) -> str:

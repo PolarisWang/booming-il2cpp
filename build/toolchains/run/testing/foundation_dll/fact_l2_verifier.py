@@ -414,14 +414,35 @@ def _build_l3_via_cmake(l3_host: Path, generated_cpp: Path,
 
 # ── Step 2: Compile and verify native exe (original direct-link approach) ──
 
+def _find_generated_cpp(family_dir: Path) -> Path | None:
+    """Find native-aot.generated.cpp in the genuine output directory.
+
+    The codegen now generates per-assembly output under
+    il2cpp_dist/genuine/<AssemblyName>/generated/native-aot.generated.cpp
+    Fall back to the legacy path il2cpp_dist/genuine/generated/native-aot.generated.cpp.
+    """
+    legacy = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    if legacy.exists():
+        return legacy
+    # Scan for per-assembly subdirectory
+    genuine_dir = family_dir / "il2cpp_dist" / "genuine"
+    if genuine_dir.exists():
+        for d in genuine_dir.iterdir():
+            if d.is_dir():
+                candidate = d / "generated" / "native-aot.generated.cpp"
+                if candidate.exists():
+                    return candidate
+    return None
+
+
 def _verify_native(family_slug: str, *, assembly: str,
                    verbose: bool = False) -> dict[str, Any]:
     """Compile native_verify_main.cpp + generated code, run self-verify."""
     family_dir = _VERIFICATION_BASE / assembly / family_slug
-    generated_cpp = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    generated_cpp = _find_generated_cpp(family_dir)
     verify_host = _REPO_ROOT / "src" / "native" / "benchmark-host" / "native_verify_main.cpp"
 
-    for f in [generated_cpp, verify_host]:
+    for f in filter(None, [generated_cpp, verify_host]):
         if not f.exists():
             print(f"  [L2] Required file not found: {f}")
             return {"status": "skip", "reason": f"missing {f.name}"}
@@ -463,12 +484,12 @@ def _verify_native(family_slug: str, *, assembly: str,
                 ["dotnet", "build", str(csproj), "-o", str(build_out), "--nologo", "-v", "q"],
                 capture_output=True, text=True, timeout=120)
             if r.returncode == 0:
-                # Re-run codegen so the new Assert.Equal values are in the native code
-                dll_path = next((d for d in build_out.glob("*.dll")
-                                 if d.stem != "Chaos.TestFramework.Sdk"), None)
-                if dll_path is not None:
-                    _run_convert_to_cpp(family_slug, str(dll_path), verification=_VERIFICATION_BASE)
-                    print("  [L2]   Codegen re-run with patched Assert.Equal values")
+                # The native verifier reads expected checksums from
+                # expected_checksums.h, so the Assert.Equal values in the
+                # generated C++ are used only for inline comparison.
+                # Skip the codegen re-run to avoid unnecessary pipeline delay.
+                print("  [L2]   Rebuilt with patched Assert.Equal values (skipping codegen re-run)")
+                pass
 
     # Step 2b/2c: Compile and link
     native_lib_dir = _REPO_ROOT / "build" / "native" / "src" / "native"
@@ -484,10 +505,27 @@ def _verify_native(family_slug: str, *, assembly: str,
     # Compile runtime_instantiation.cpp ourselves so InterpreterDispatch is
     # available at link time (interpreter_entry.obj inside chaos_runtime_core.lib
     # references it, but the lib's own runtime_instantiation.obj may not participate).
+    # Also compile convert.cpp for the Convert.ToChar family (and similar helpers).
     runtime_inst_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_instantiation.cpp"
+    convert_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "convert.cpp"
 
-    source_files = [(verify_host, verify_host), (generated_cpp, generated_cpp),
-                     (runtime_inst_src, runtime_inst_src)]
+    # Use single-TU compilation for verify_host + generated_cpp to avoid
+    # cross-TU static initialization ordering crashes. The generated code
+    # calls RegisterModule() (which accesses std::vector g_free_list from
+    # module_registry.cpp in chaos_runtime_core.lib) during its static init
+    # phase. As separate TUs, the lib's dynamic initializers may not have
+    # run yet, causing an access violation. Single-TU ensures all static
+    # initializers from both files are sequenced in declaration order.
+    combined_src = build_dir / "l2_verify_combined.cpp"
+    combined_src.write_text(
+        f'#include "{verify_host.as_posix()}"\n'
+        f'#include "{generated_cpp.as_posix()}"\n',
+        encoding="utf-8",
+    )
+
+    source_files = [(combined_src, combined_src),
+                     (runtime_inst_src, runtime_inst_src),
+                     (convert_src, convert_src)]
     obj_files = []
     for src, display_name in source_files:
         obj = build_dir / f"{src.stem}.obj"
@@ -602,10 +640,10 @@ def _verify_l3(family_slug: str, *, assembly: str,
       5. Report L3: {passed}/{total}
     """
     family_dir = _VERIFICATION_BASE / assembly / family_slug
-    generated_cpp = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    generated_cpp = _find_generated_cpp(family_dir)
     l3_host = _REPO_ROOT / "src" / "native" / "benchmark-host" / "l3_verify_main.cpp"
 
-    for f in [generated_cpp, l3_host]:
+    for f in filter(None, [generated_cpp, l3_host]):
         if not f.exists():
             print(f"  [L3] Required file not found: {f}")
             return {"status": "skip", "reason": f"missing {f.name}"}

@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/ShiftHelper",
+      "name": "ShiftHelper",
+      "displayName": "ShiftHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ShiftHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()",
+      "name": "RunShift",
+      "definitionSubjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ShiftHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

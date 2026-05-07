@@ -667,7 +667,18 @@ public sealed partial class NativeAotLoweringPlanner
                 if (loopExitOffset.HasValue && target == loopExitOffset.Value)
                     return new IRBreak();
                 if (loopHeaderOffset.HasValue && target == loopHeaderOffset.Value)
+                {
+                    // Backedge (latch block): emit body instructions followed by continue.
+                    if (block.BodyInstructions.Count > 0)
+                    {
+                        return new IRSequence(new StructuredIRNode[]
+                        {
+                            new IRBlock(block.BodyInstructions, null),
+                            new IRContinue()
+                        });
+                    }
                     return new IRContinue();
+                }
             }
 
             if (block.Terminator == null || block.IsTerminal || block.Terminator.Op is "br" or "leave")
@@ -757,10 +768,18 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 var loop = BuildLoop(cfg, idx, endIndex, currentLoop, loopHeaderOffset, loopExitOffset);
                 seqNodes.Add(loop);
-                int nextIdx = idx + 1;
-                while (nextIdx <= endIndex && currentLoop.BodyIndices.Contains(nextIdx))
-                    nextIdx++;
-                idx = nextIdx;
+
+                int maxLatch = currentLoop.LatchIndices.Max();
+                int bodyEnd = maxLatch <= endIndex ? maxLatch : endIndex;
+
+                // Emit any exit blocks that sit between the loop header and
+                // the first body block (e.g. early-return before the latch).
+                var afterHeaderBody = currentLoop.BodyIndices.Where(i => i > idx).ToList();
+                int firstBodyIdx = afterHeaderBody.Count > 0 ? afterHeaderBody.Min() : idx + 1;
+                for (int e = idx + 1; e < firstBodyIdx && e <= endIndex; e++)
+                    seqNodes.Add(new IRBlock(cfg.Blocks[e].BodyInstructions, cfg.Blocks[e].Terminator));
+
+                idx = bodyEnd + 1;
             }
             else if (block.ConditionalTarget.HasValue && IsConditionalBranchOpcode(block.Terminator?.Op ?? ""))
             {
@@ -847,7 +866,8 @@ public sealed partial class NativeAotLoweringPlanner
         int? outerLoopExitOffset = null)
     {
         var header = cfg.Blocks[headerIndex];
-        int bodyStart = headerIndex + 1;
+        var bodyIndicesAfterHeader = loopInfo.BodyIndices.Where(i => i > headerIndex).ToList();
+        int bodyStart = bodyIndicesAfterHeader.Count > 0 ? bodyIndicesAfterHeader.Min() : headerIndex + 1;
 
         int maxLatchIdx = loopInfo.LatchIndices.Max();
         int bodyEnd = maxLatchIdx;

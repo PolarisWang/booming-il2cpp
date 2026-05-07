@@ -343,9 +343,7 @@ IRMethod LowerILToIR(
 
         switch (op_byte) {
             // ── No operand ──
-            case 0x00: insn.op_code = IROpCode::Ret; break;  // nop → treated as Ret in empty fallback; handled below
-            // Actually nop: just skip
-            // We'll handle nop specially
+            case 0x00: continue; // nop — skip without emitting an instruction
             case 0x01: insn.op_code = IROpCode::Break; break;  // break (debugger) → NOP in interpreter
 
             case 0x02: insn.op_code = IROpCode::LdArg; insn.operand_i4 = 0; break;

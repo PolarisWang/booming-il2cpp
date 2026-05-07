@@ -589,8 +589,10 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR 
 // The managed AssemblyName stores the name string pointer at offset 16.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyNameValue(CHAOS_IL2CPP_INTPTR assembly_name_handle) noexcept {
     if (assembly_name_handle == 0) return 0;
-    auto* name_obj = reinterpret_cast<const chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName*>(assembly_name_handle);
-    return name_obj->runtime_name_value;
+    // The managed AssemblyName stores runtime_name_value at offset 16.
+    return *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
+        static_cast<const char*>(reinterpret_cast<const void*>(
+            static_cast<CHAOS_IL2CPP_INTPTR>(assembly_name_handle))) + 16);
 }
 
 // ── GetReflectedType ─────────────────────────────────────────────
@@ -1143,10 +1145,13 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(
 
     // method_handle is a pointer to managed MethodInfo object.
     // Extract runtime_method_handle at offset 24 (after 16-byte object header).
+    // Use raw pointer arithmetic to avoid MSVC auto+const+complex-type issues.
     if (method_handle == 0) return 0;
-    auto* mi = reinterpret_cast<const chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo*>(
+    const void* methodInfoObj = reinterpret_cast<const void*>(
         static_cast<CHAOS_IL2CPP_INTPTR>(method_handle));
-    MethodInfoHandle method = static_cast<MethodInfoHandle>(mi->runtime_method_handle);
+    MethodInfoHandle method = static_cast<MethodInfoHandle>(
+        *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
+            static_cast<const char*>(methodInfoObj) + 24));
     if (method == 0) return 0;
 
     // Decode managed System.Object[] args array.

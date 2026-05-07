@@ -16,7 +16,13 @@ static uint32_t g_module_count = 1;  // [0] = CoreLib fallback, always present
 
 // Free list of recycled module_ids (from tombstone modules).
 // RegisterModule checks this list before allocating a new linear slot.
-static CHAOS_IL2CPP_VECTOR(uint32_t) g_free_list;
+// Function-local static to avoid cross-TU static init ordering fiasco:
+// std::vector requires dynamic initialization; callers may run before
+// file-scope statics in this TU are constructed.
+static auto& g_free_list() {
+    static CHAOS_IL2CPP_VECTOR(uint32_t) list;
+    return list;
+}
 
 // ── Registry API ───────────────────────────────────────────────────────
 
@@ -28,9 +34,9 @@ uint32_t RegisterModule(const char* name, const ModuleDescriptor* descriptor) {
     uint32_t id = kInvalidModuleId;
 
     // Priority 1: Reuse a freed slot from the free list.
-    if (!g_free_list.empty()) {
-        id = g_free_list.back();
-        g_free_list.pop_back();
+    if (!g_free_list().empty()) {
+        id = g_free_list().back();
+        g_free_list().pop_back();
     }
 
     // Priority 2: Allocate a new linear slot.
@@ -119,7 +125,7 @@ void MarkModuleTombstone(uint32_t module_id) {
     // Keep name_utf8, type_names, type_namespaces (string literals from codegen).
 
     // Add to the free list so RegisterModule can reuse this slot.
-    g_free_list.push_back(module_id);
+    g_free_list().push_back(module_id);
 }
 
 bool IsModuleTombstone(uint32_t module_id) {

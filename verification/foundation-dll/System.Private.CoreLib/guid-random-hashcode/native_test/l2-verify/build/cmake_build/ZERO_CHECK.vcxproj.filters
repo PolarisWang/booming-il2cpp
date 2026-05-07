@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\guid-random-hashcode\native_test\l2-verify\build\cmake_build\CMakeFiles\2a301b0a248a4766676339ca3802f8e0\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{E9B19A03-8A6A-32C5-BACC-9037F69C1336}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

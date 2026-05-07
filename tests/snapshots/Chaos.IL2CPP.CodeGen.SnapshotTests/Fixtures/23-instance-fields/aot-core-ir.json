@@ -1,0 +1,135 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.instance-field-helper.create-and-use-fields",
+      "subjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "signature": "System.Int32 InstanceFieldHelper::CreateAndUseFields()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceFieldHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+        "methodId": "snapshot-test-fixtures.instance-field-helper.create-and-use-fields",
+        "signature": "System.Int32 InstanceFieldHelper::CreateAndUseFields()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newobj",
+          "operand": "System.Void HasInstanceFields::.ctor(System.Int32)",
+          "ilOffset": 1,
+          "resultType": "System.Object",
+          "callee": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "method",
+            "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/HasInstanceFields",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "dup",
+          "ilOffset": 2,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 100,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stfld",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/HasInstanceFields::Value",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeSubjectId": "SnapshotTestFixtures/HasInstanceFields",
+            "declaringTypeShape": 1
+          },
+          "runtimeServiceKind": 3
+        },
+        {
+          "op": "ldfld",
+          "ilOffset": 5,
+          "resultType": "System.Int32",
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/HasInstanceFields::Value",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeSubjectId": "SnapshotTestFixtures/HasInstanceFields",
+            "declaringTypeShape": 1
+          },
+          "runtimeServiceKind": 2
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.has-instance-fields.ctor",
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "signature": "System.Void HasInstanceFields::.ctor(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/HasInstanceFields",
+        "definitionSubjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
+        "methodId": "snapshot-test-fixtures.has-instance-fields.ctor",
+        "signature": "System.Void HasInstanceFields::.ctor(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_HasInstanceFields__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 0
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        { "carrierKindCode": 1, "typeShape": 2 }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ret", "ilOffset": 0 }
+      ]
+    }
+  ]
+}
