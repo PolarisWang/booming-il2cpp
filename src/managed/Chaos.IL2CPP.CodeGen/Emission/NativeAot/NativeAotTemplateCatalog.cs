@@ -25,6 +25,7 @@ internal static class NativeAotTemplateCatalog
     public const string StringJoinInt32EnumerableTemplateRelativePath = "Templates/NativeAot.StringJoinInt32Enumerable.cpp.scriban";
     public const string StringJoinStringEnumerableTemplateRelativePath = "Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban";
     public const string SimpleExternalRuntimeHelperTemplateRelativePath = "Templates/NativeAot.SimpleExternalRuntimeHelper.cpp.scriban";
+    public const string TranslationUnitNamespaceProperty = "codegen_namespace";
     public const string ReflectionGetObjectTypeTemplateRelativePath = "Templates/NativeAot.ReflectionGetObjectType.cpp.scriban";
     public const string ReflectionCreateInstanceTemplateRelativePath = "Templates/NativeAot.ReflectionCreateInstance.cpp.scriban";
     public const string RuntimeHelperShapeDispatchHeaderTemplateRelativePath = "Templates/NativeAot.RuntimeHelperShapeDispatch.h.scriban";

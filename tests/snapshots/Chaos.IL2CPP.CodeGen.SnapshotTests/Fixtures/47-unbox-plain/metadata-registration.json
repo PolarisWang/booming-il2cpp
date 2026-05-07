@@ -1,0 +1,9 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    { "registrationKind": "assembly", "slot": 0, "subjectId": "SnapshotTestFixtures" },
+    { "registrationKind": "type", "slot": 1, "subjectId": "SnapshotTestFixtures/UnboxHelper", "name": "UnboxHelper", "displayName": "UnboxHelper", "definitionSubjectId": "SnapshotTestFixtures/UnboxHelper" },
+    { "registrationKind": "method", "slot": 2, "subjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()", "name": "RunUnbox", "definitionSubjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/UnboxHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false }
+  ]
+}

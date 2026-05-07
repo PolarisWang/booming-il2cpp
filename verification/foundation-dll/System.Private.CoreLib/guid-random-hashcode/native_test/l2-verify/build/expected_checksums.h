@@ -7,17 +7,17 @@ constexpr int kExpectedCount = 14;
 constexpr int kExpectedChecksums[kExpectedCount] = {
     0,
     0,
-    -1657643511,
+    -101209383,
     0,
     0,
     36,
     0,
-    7540938,
-    24,
+    251427906,
+    30,
     0,
     0,
     0,
-    -1638037344,
-    -941858620
+    -203587753,
+    1343306390
 };
 

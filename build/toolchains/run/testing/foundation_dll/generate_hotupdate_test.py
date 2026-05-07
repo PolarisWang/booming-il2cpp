@@ -136,21 +136,31 @@ def _find_genuine_cpp(family_slug: str) -> Path | None:
 def _find_genuine_cpp_for_fix(family_slug: str) -> Path | None:
     """Find the genuine source for the genuine-fixed copy.
 
-    Prefers the flat path (genuine/generated/) — the fix functions in
-    _rename_and_fix_patch_file assume this format (flat namespace, no
-    NativeEntry wrapper).  Returns None if the flat path doesn't exist
-    or is a stub (only forward declarations, no actual MethodN symbols),
-    so the caller can fall back to the NativeEntry subdirectory.
+    Prefers NativeEntry subdirectory with a generated/ child (24+ families
+    whose flat genuine/generated/ is a shim).  Falls back to the flat path
+    when no NativeEntry dir exists or the NativeEntry dir has no generated/
+    subdirectory (e.g. convert-char, interface-dispatch — these families
+    ran through convert-to-cpp which outputs the flat format only).
+
+    The fix functions in _rename_and_fix_patch_file were designed for the
+    old emit-native-aot pipeline format (anonymous namespace, `int` return
+    type for RunNativeAot).  The old-format NativeEntry files are preferred
+    because the fix functions work correctly with them.
     """
+    genuine_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine"
+    if genuine_dir.is_dir():
+        for native_entry_dir in sorted(genuine_dir.iterdir()):
+            if native_entry_dir.is_dir() and native_entry_dir.name.endswith("NativeEntry"):
+                candidate = native_entry_dir / "generated" / "native-aot.generated.cpp"
+                if candidate.exists():
+                    return candidate
+
     candidate = _VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
     if candidate.exists():
         content = candidate.read_text(encoding="utf-8")
-        # Detect stub: genuine/generated contains only extern declarations
-        # and a dispatch table, not actual method function bodies.
-        # Real files have extern "C" ...MethodN declarations; stubs don't.
-        if not re.search(r'extern\s+"C"\s+CHAOS_IL2CPP_INT32\s+\w+_Method\d+', content):
-            return None
-        return candidate
+        # Only accept flat path if it has actual MethodN function bodies
+        if re.search(r'extern\s+"C"\s+CHAOS_IL2CPP_INT32\s+\w+_Method\d+', content):
+            return candidate
     return None
 
 
@@ -996,16 +1006,20 @@ def _fix_genuine_for_hotupdate_keep_extern(family_slug: str, ns_slug: str) -> Pa
     The fixed copy goes to native/hotupdate/genuine-fixed/native-aot.generated.cpp
     so the original genuine file remains untouched.
 
-    Uses _find_genuine_cpp_for_fix() which prefers the flat path
-    (genuine/generated/).  When the flat path is a stub (no MethodN
-    symbols — e.g., families with NativeEntry subdirectory), we skip
-    regeneration and keep the existing genuine-fixed if any.
+    Prefers the NativeEntry subdirectory (old emit-native-aot format) when
+    available — the fix functions work correctly with this format.  Falls
+    back to the flat path (new convert-to-cpp format) when the NativeEntry
+    dir has no generated/ output.
+
+    For the new pipeline format (flat-only), uses a simplified fix pass since
+    the new format has full struct definitions and doesn't need most injections.
     """
     src = _find_genuine_cpp_for_fix(family_slug)
     if src is None:
-        return None
-    if src is None:
-        return None
+        # Fallback: try NativeEntry subdirectory
+        src = _find_genuine_cpp(family_slug)
+        if src is None:
+            return None
 
     dst = _VERIFICATION / family_slug / "il2cpp_dist" / "hotupdate" / "genuine-fixed" / "native-aot.generated.cpp"
     _rename_and_fix_patch_file(src, dst, ns_slug, suffix="genuine_fixed")
@@ -1500,94 +1514,83 @@ def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str =
     so each TU has its own anonymous-namespace definition.
     """
     content = src.read_text(encoding="utf-8")
-    rename_from = 'extern "C" int RunNativeAot(CHAOS_IL2CPP_INT32 chaos_entry_index)'
-    rename_to = f'extern "C" int RunNativeAot_{ns_slug}_{suffix}(CHAOS_IL2CPP_INT32 chaos_entry_index)'
-    content = content.replace(rename_from, rename_to)
 
-    # Uncomment the stripped chaos_managed_pointer_local_slot_tag constexpr
-    content = content.replace(
-        '// constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;  // stripped: provided by native_hotupdate_config.h',
-        'constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;',
-    )
-    content = content.replace(
-        '// constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;',
-        'constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;',
-    )
+    # Detect format: old (anonymous namespace, int RunNativeAot) vs new
+    # (named namespace, CHAOS_IL2CPP_INT32 RunNativeAot).
+    is_new_format = 'extern "C" CHAOS_IL2CPP_INT32 RunNativeAot' in content
+
+    # Handle both old format (int) and new pipeline format (CHAOS_IL2CPP_INT32)
+    if 'extern "C" int RunNativeAot' in content:
+        rename_from = 'extern "C" int RunNativeAot(CHAOS_IL2CPP_INT32 chaos_entry_index)'
+        rename_to = f'extern "C" int RunNativeAot_{ns_slug}_{suffix}(CHAOS_IL2CPP_INT32 chaos_entry_index)'
+        content = content.replace(rename_from, rename_to)
+    elif is_new_format:
+        rename_from = 'extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 chaos_entry_index)'
+        rename_to = f'extern "C" CHAOS_IL2CPP_INT32 RunNativeAot_{ns_slug}_{suffix}(CHAOS_IL2CPP_INT32 chaos_entry_index)'
+        content = content.replace(rename_from, rename_to)
+
+    if not is_new_format:
+        # Old format fixes (anonymous namespace, pre-convert-to-cpp pipeline)
+        # Uncomment the stripped chaos_managed_pointer_local_slot_tag constexpr
+        content = content.replace(
+            '// constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;  // stripped: provided by native_hotupdate_config.h',
+            'constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;',
+        )
+        content = content.replace(
+            '// constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;',
+            'constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = ChaosIl2cpp::Common::k_managed_pointer_local_slot_tag;',
+        )
+
+        # Inject missing struct definitions and type-id constexprs
+        content = _inject_missing_structs_and_type_ids(content)
+
+        # Fix `__s[N] = &chaos_locals[N]` → `__s[N] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[N])`
+        content = re.sub(
+            r'(?<!reinterpret_cast<CHAOS_IL2CPP_INTPTR>\()(&chaos_locals\[\d+\])',
+            r'reinterpret_cast<CHAOS_IL2CPP_INTPTR>(\1)',
+            content,
+        )
+
+        # Fix `const auto chaos_result = ();`
+        content = re.sub(
+            r'const auto chaos_result = \(\);',
+            'const auto chaos_result = static_cast<CHAOS_IL2CPP_INTPTR>(0);',
+            content,
+        )
+
+        # Fix `// TODO: define fields for chaos_type_*` stubs
+        content = _fix_todo_struct_fields(content)
+
+        # Inject InterpreterEntryDirect reference
+        content = _inject_interpreter_entry_include(content)
+
+        # Inject host symbol forward declarations before the anonymous namespace
+        content = _inject_host_symbol_forward_decls(content)
+
+        # Inject chaos_string_materialize stub
+        content = _inject_string_materialize_stub(content)
+
+        # Inject missing chaos_eval_stack, chaos_stack_top, and _sN declarations
+        content = _inject_missing_eval_stack_decls(content)
+
+        # Fix misuse of chaos_normalize_native_int_argument on raw Int32 literal
+        # values loaded into __s[] slots.
+        content = _fix_raw_int32_normalize_misuse(content)
+
+    # Format-agnostic fixes (apply to both old and new formats)
 
     # Inject missing reflection bridge stubs for functions that CodeGen hasn't
     # emitted yet (e.g., chaos_reflection_get_fields).
     content = _inject_reflection_bridge_stubs(content)
 
-    # Inject missing struct definitions and type-id constexprs
-    content = _inject_missing_structs_and_type_ids(content)
-
-    # Fix `__s[N] = &chaos_locals[N]` → `__s[N] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[N])`
-    # Codegen emits ldloca as bare `&chaos_locals[N]` which fails on MSVC (cannot
-    # implicitly convert pointer to intptr_t).
-    # NOTE: some families already have `reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[N])`
-    # from codegen — skip them to avoid double-wrap which MSVC rejects as
-    # "reinterpret_cast from intptr_t to intptr_t" (C2440).
-    content = re.sub(
-        r'(?<!reinterpret_cast<CHAOS_IL2CPP_INTPTR>\()(&chaos_locals\[\d+\])',
-        r'reinterpret_cast<CHAOS_IL2CPP_INTPTR>(\1)',
-        content,
-    )
-
-    # Fix `const auto chaos_result = ();` — a codegen issue where void call
-    # result is captured as empty parens.  Replace with zero-initialized intptr_t.
-    content = re.sub(
-        r'const auto chaos_result = \(\);',
-        'const auto chaos_result = static_cast<CHAOS_IL2CPP_INTPTR>(0);',
-        content,
-    )
-
-    # Clean up old `using chaos::il2cpp::runtime_core::InterpreterEntryDirect;`
-    # declarations that were emitted by earlier versions of this script and
-    # conflict with the extern "C" forward declaration in generated code.
-    content = re.sub(
-        r'#include "interpreter_entry\.h"\s*\n\s*using chaos::il2cpp::runtime_core::InterpreterEntryDirect;\s*\n',
-        '#include "interpreter_entry.h"\n',
-        content,
-    )
-
-    # Fix `// TODO: define fields for chaos_type_*` stubs that codegen emits
-    # for types like System.Object and System.Delegate where the struct layout
-    # is referenced by generated runtime helper code.
-    content = _fix_todo_struct_fields(content)
-
-    # Inject InterpreterEntryDirect reference (needed by codegen-emitted dispatch table).
-    # The codegen emits &InterpreterEntryDirect as the interrupt_ptr value for every
-    # dispatch table entry, but the generated TU does not include interpreter_entry.h.
-    content = _inject_interpreter_entry_include(content)
-
     # Fix parameter name mismatch in extern "C" inline function bodies:
     # codegen emits chaos_fn_arg_N as param names but chaos_arg_N in body.
     content = _fix_inline_param_mismatch(content)
 
-    # Fix misuse of chaos_normalize_native_int_argument on raw Int32 literal
-    # values loaded into __s[] slots.  Codegen applies normalize to all
-    # NativeInt-carrying arguments, but literal integers with bit 0 set
-    # (odd values) are misinterpreted as managed_pointer_local_slot_tag
-    # and cause segfaults on dereference.
-    content = _fix_raw_int32_normalize_misuse(content)
-
-    # Inject host symbol forward declarations before the anonymous namespace
-    # if the codegen placed them after the namespace closing brace.
-    # The dispatch table (inside namespace) references MethodN symbols and
-    # needs forward declarations before use.
-    content = _inject_host_symbol_forward_decls(content)
-
-    # Inject chaos_string_materialize stub if called but not defined.
-    # The codegen only emits the full definition when the entrypoint TU has
-    # string ID mappings (_stringIdMapping.Count > 0).  For families whose
-    # test methods pass string arguments (e.g. Assert.Equal with message),
-    # the function is called but missing from the genuine TU.
-    content = _inject_string_materialize_stub(content)
-
-    # Inject missing chaos_eval_stack, chaos_stack_top, and _sN declarations
-    # for functions that use interpreter dispatch (for/switch/case) but whose
-    # codegen preamble omitted these declarations (e.g. array-indexing-copy).
-    content = _inject_missing_eval_stack_decls(content)
+    if is_new_format:
+        # New pipeline format (convert-to-cpp): named namespace, all structs
+        # already present. Only need interpreter_entry.h include.
+        content = _inject_interpreter_entry_include(content)
 
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_text(content, encoding="utf-8")

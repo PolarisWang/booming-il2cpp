@@ -86,6 +86,11 @@ public:
     // Reads from the patch data's #US heap and caches the converted result.
     const char* GetUserString(uint32_t token) const noexcept;
 
+    // ── Public token lookup helpers (needed by PatchTokenResolver) ──
+    const PatchTypeDefEntry* ResolveTypeDef(uint32_t token) const noexcept;
+    const PatchTypeRefEntry* ResolveTypeRef(uint32_t token) const noexcept;
+    const PatchMemberRefEntry* ResolveMemberRef(uint32_t token) const noexcept;
+
 private:
     const PatchDataHeader* header_;
     const CodegenBridgeV0* bridge_ = nullptr;
@@ -94,12 +99,6 @@ private:
     // Cached UTF-8 strings decoded from the #US heap.
     // Populated lazily by GetUserString().
     mutable std::vector<std::string> user_string_cache_;
-
-    // Resolve a TypeDef token (0x02xxxxxx) → TypeDefEntry.
-    const PatchTypeDefEntry* ResolveTypeDef(uint32_t token) const noexcept;
-
-    // Resolve a TypeRef token (0x01xxxxxx) → TypeRefEntry.
-    const PatchTypeRefEntry* ResolveTypeRef(uint32_t token) const noexcept;
 };
 
 // ── PatchContext ─────────────────────────────────────────────────────────

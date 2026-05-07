@@ -120,6 +120,83 @@ static bool PatchTokenResolver(
         }
         return false;
     }
+    case 0x0A: {  // MemberRef — cross-module method reference.
+        // Resolve MemberRef to a concrete MethodInfoHandle from the AOT image.
+        // MemberRef tokens (0x0A) cannot be resolved by DefaultTokenResolver
+        // because the AOT bridge's resolve_method_by_token only handles MethodDef
+        // tokens (0x06).  Instead, we extract the declaring type and method name
+        // from the patch data's MemberRef/TypeRef tables, then look up the method
+        // in the AOT image's reflection query descriptor tree.
+        if (instruction.op_code != interpreter::IROpCode::Call &&
+            instruction.op_code != interpreter::IROpCode::CallBridge) {
+            break;  // non-call MemberRefs fall through to DefaultTokenResolver
+        }
+
+        const auto* member_ref = cache->ResolveMemberRef(token);
+        if (member_ref == nullptr) break;
+
+        const char* method_name = cache->GetString(member_ref->name_offset);
+        if (method_name == nullptr || method_name[0] == '\0') break;
+
+        // Resolve declaring type name from parent token (TypeRef or TypeDef).
+        const uint8_t parent_table = static_cast<uint8_t>(
+            member_ref->parent_token >> 24);
+        const char* type_name = nullptr;
+        const char* ns       = "";
+
+        if (parent_table == 0x02) {
+            auto* td = cache->ResolveTypeDef(member_ref->parent_token);
+            if (td != nullptr) {
+                type_name = cache->GetString(td->type_name_offset);
+                ns        = cache->GetString(td->namespace_offset);
+            }
+        } else if (parent_table == 0x01) {
+            auto* tr = cache->ResolveTypeRef(member_ref->parent_token);
+            if (tr != nullptr) {
+                type_name = cache->GetString(tr->type_name_offset);
+                ns        = cache->GetString(tr->namespace_offset);
+            }
+        }
+        if (type_name == nullptr) break;
+
+        // Find the declaring type in the AOT image.
+        const auto* aot_image = TryDecodeReflectionQueryImageHandle(
+            cache->GetAotImage());
+        if (aot_image == nullptr) break;
+
+        const auto* decl_type = FindReflectionQueryTypeByName(
+            aot_image, ns, type_name);
+        if (decl_type == nullptr) break;
+
+        // Parse parameter count and instance flag from the MemberRef signature.
+        CHAOS_IL2CPP_INT32 param_count = -1;
+        bool is_instance = false;
+        if (member_ref->signature_offset != 0) {
+            const auto* sb = static_cast<const uint8_t*>(
+                cache->GetBlob(member_ref->signature_offset));
+            if (sb != nullptr && sb[0] >= 2) {
+                const uint8_t* sig = sb + 1;  // skip #Blob length byte
+                is_instance = (sig[0] & 0x20) == 0x20;
+                const uint8_t pc = sig[1];     // param count (compressed uint)
+                if (pc <= 0x7F) {
+                    param_count = static_cast<CHAOS_IL2CPP_INT32>(pc);
+                }
+            }
+        }
+        if (param_count < 0) break;
+
+        const auto* method = FindReflectionQueryMethod(
+            decl_type, method_name, param_count);
+        if (method == nullptr) break;
+
+        instruction.call_target = reinterpret_cast<void*>(
+            static_cast<CHAOS_IL2CPP_UINTPTR>(
+                EncodeReflectionQueryMethodHandle(method)));
+        instruction.is_instance_call = is_instance;
+        instruction.arg_count = static_cast<CHAOS_IL2CPP_UINT32>(
+            param_count + (is_instance ? 1u : 0u));
+        return true;
+    }
     default:
         // All other token types (0x01 TypeRef, 0x0A MemberRef, 0x11
         // StandaloneSig, etc.) fall through to DefaultTokenResolver

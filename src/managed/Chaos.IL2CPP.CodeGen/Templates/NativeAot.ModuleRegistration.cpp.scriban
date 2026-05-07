@@ -90,6 +90,6 @@
 {{~ end ~}}
 {{ module_descriptor_custom_attr_fields }}
 {{ indentation }}{{ tab }}/* .abi_manifest      = */ s_abi_manifest,
-{{ indentation }}}};
+{{ indentation }}};
 {{ indentation }}static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
 {{ indentation }}{{ tab }}::chaos::il2cpp::runtime_core::RegisterModule("{{ assembly_name }}", &s_native_aot_module);

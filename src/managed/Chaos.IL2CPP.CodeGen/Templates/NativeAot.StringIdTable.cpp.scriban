@@ -1,7 +1,7 @@
 {{ indentation }}// AOT-baked string table: sorted by StringId for binary search at runtime.
 {{ indentation }}constexpr chaos::il2cpp::string_table::StringEntry chaos_aot_string_entries[] = {
 {{~ for entry in string_entries ~}}
-{{ indentation }}{{ tab }}{{ entry.id }}U, {{ entry.cpp_literal }}, {{ entry.byte_count }}u },
+{{ indentation }}{{ tab }}{ {{ entry.id }}U, {{ entry.cpp_literal }}, {{ entry.byte_count }}u },
 {{~ end ~}}
 {{ indentation }}};
 

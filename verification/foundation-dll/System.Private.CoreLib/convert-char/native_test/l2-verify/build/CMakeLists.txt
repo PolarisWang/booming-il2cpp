@@ -33,14 +33,14 @@ target_compile_definitions(l3_verify_convert-char PRIVATE
 )
 
 target_link_libraries(l3_verify_convert-char PRIVATE
-    "D:/agent/booming-il2cpp/build/native/src/native/runtime-core/Release/chaos_runtime_core.lib"
-    "D:/agent/booming-il2cpp/build/native/src/native/bootstrap/Release/chaos_bootstrap.lib"
-    "D:/agent/booming-il2cpp/build/native/src/native/interpreter/Release/chaos_interpreter.lib"
-    "D:/agent/booming-il2cpp/build/native/src/native/common/Release/chaos_common.lib"
-    "D:/agent/booming-il2cpp/build/native/src/native/support/Release/chaos_support.lib"
-    "D:/agent/booming-il2cpp/build/native/src/native/hot-update/Release/chaos_hot_update.lib"
-    "D:/agent/booming-il2cpp/build/native/bdwgc_build/Release/chaos_bdwgc.lib"
-    "D:/agent/booming-il2cpp/build/native/fmt_build/Release/chaos_fmt.lib"
+    "D:/agent/booming-il2cpp/build/native/src/native/runtime-core/RelWithDebInfo/chaos_runtime_core.lib"
+    "D:/agent/booming-il2cpp/build/native/src/native/bootstrap/RelWithDebInfo/chaos_bootstrap.lib"
+    "D:/agent/booming-il2cpp/build/native/src/native/interpreter/RelWithDebInfo/chaos_interpreter.lib"
+    "D:/agent/booming-il2cpp/build/native/src/native/common/RelWithDebInfo/chaos_common.lib"
+    "D:/agent/booming-il2cpp/build/native/src/native/support/RelWithDebInfo/chaos_support.lib"
+    "D:/agent/booming-il2cpp/build/native/src/native/hot-update/RelWithDebInfo/chaos_hot_update.lib"
+    "D:/agent/booming-il2cpp/build/native/bdwgc_build/RelWithDebInfo/chaos_bdwgc.lib"
+    "D:/agent/booming-il2cpp/build/native/fmt_build/RelWithDebInfo/chaos_fmt.lib"
     ole32
     user32
 )
