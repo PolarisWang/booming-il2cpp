@@ -42,6 +42,8 @@ description: 在实现任何功能、修复任何 bug、调整任何长期规则
 - benchmark dashboard 数据聚合或展示逻辑
 - subject planner、subject discovery、generated solution pipeline
 
+对 codegen 改动，除了补单元测试外，还应考虑补快照测试（参见 `CodeGen快照测试规范`）：对于影响 emitter 输出的修改，快照测试提供比单元测试更完整的回归覆盖。
+
 ### 2. 测试优先级
 
 1. `tests/unit/**` 下的 Python 模板化单测

@@ -19,6 +19,8 @@
   - 拥有正式验证入口、对象导航与 completion 前对象优先级
 - [`../../06-测试验证/AOT新Feature接入自测规范.md`](../../06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/AOT%E6%96%B0Feature%E6%8E%A5%E5%85%A5%E8%87%AA%E6%B5%8B%E8%A7%84%E8%8C%83.md)
   - 拥有 capability intake、owner subject、proof / benchmark / hotupdate obligation、formal verification 顺序
+- [`../../06-测试验证/CodeGen快照测试规范.md`](../../06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/CodeGen%E5%BF%AB%E7%85%A7%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83.md)
+  - 拥有 CodeGen 增量回归测试的夹具规范、基线管理、开发流程集成规则
 
 ## 核心规则
 

@@ -1,0 +1,51 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.field-helper.get-and-increment",
+      "subjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
+      "signature": "System.Int32 FieldHelper::GetAndIncrement()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/FieldHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
+        "methodId": "snapshot-test-fixtures.field-helper.get-and-increment",
+        "signature": "System.Int32 FieldHelper::GetAndIncrement()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_FieldHelper_GetAndIncrement",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldsfld",
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/FieldHelper::_counter",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 4
+        },
+        {
+          "op": "ret",
+          "ilOffset": 1
+        }
+      ]
+    }
+  ]
+}

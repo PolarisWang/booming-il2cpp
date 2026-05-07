@@ -1,0 +1,124 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.math-helper.run-square",
+      "subjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+      "signature": "System.Int32 MathHelper::RunSquare()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/MathHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+        "methodId": "snapshot-test-fixtures.math-helper.run-square",
+        "signature": "System.Int32 MathHelper::RunSquare()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_MathHelper_RunSquare",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 5,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "callee": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "method",
+            "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 3
+        },
+        {
+          "op": "ret",
+          "ilOffset": 4
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.helper.square",
+      "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
+      "signature": "System.Int32 Helper::Square(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
+        "definitionSubjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.helper.square",
+        "signature": "System.Int32 Helper::Square(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_Helper_Square",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        { "carrierKindCode": 1, "typeShape": 2 }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "mul",
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 3
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.conversion-helper.convert-to-int",
+      "subjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+      "signature": "System.Int32 ConversionHelper::ConvertToInt()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/ConversionHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+        "methodId": "snapshot-test-fixtures.conversion-helper.convert-to-int",
+        "signature": "System.Int32 ConversionHelper::ConvertToInt()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_ConversionHelper_ConvertToInt",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 100,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "conv.i4",
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 3
+        },
+        {
+          "op": "ret",
+          "ilOffset": 4
+        }
+      ]
+    }
+  ]
+}

@@ -67,6 +67,19 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
   - `verification/projections/foundation-dll-audit/dlls/*.json`
   - `docs/verification/foundation-dll-audit/family-verification-claims.json`
 
+## CodeGen 快照测试专项检查
+
+如果本轮改动涉及 codegen (emitter / planner / RuntimeSupport / Scriban 模板)，完成前必须运行快照测试并确认以下事项：
+
+- 运行 `dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/` 是否通过
+- 如果基线有变更，是否已通过 `git diff` 审查
+- 新增 IL 模式时是否补了对应夹具和基线
+- 基线更新是否使用了 `SNAPSHOT_UPDATE=1` 模式
+
+快照测试未通过不得声称 codegen 改动完成。
+
+详见 [`wiki/06-测试验证/CodeGen快照测试规范.md`](../../../wiki/06-测试验证/CodeGen快照测试规范.md)。
+
 ## 结构告警与架构审视
 
 在声称”可以 completed”之前，除了 formal verification 与受影响测试，还必须完成最新一轮结构审视（检查项同 `dev-executing-plans` 中的定义）。未解决的 `blocker` 会阻止完成声明。

@@ -59,6 +59,7 @@ description: 开发 il2cpp 功能前必须先查询架构路径，避免方案�
 4. **new_constraints** — 是否产生了新的约束或边界？如有：
    - 记录到 `docs/discuss/` 对应的设计讨论（或新建讨论文档）
    - 安排后续更新 `il2cpp-架构约束与边界.md` 和 `il2cpp-核心翻译路径参考.md`
+5. **snapshot_tests** — 如果修改了 emitter / planner / RuntimeSupport 输出逻辑，必须运行快照测试确认基线变更符合预期；新增 IL 模式时同时补对应夹具与基线
 
 验证结果写入 STATUS.md。
 
@@ -89,6 +90,7 @@ description: 开发 il2cpp 功能前必须先查询架构路径，避免方案�
 - constraints_followed: [已确认的约束列表]
 - new_constraints: [新发现的约束 / 无]
 - consistency_check: [ok / issues:...]
+- snapshot_tests: [passed / baseline_updated / n/a]
 - wiki_entry: [ok / updated:<path> / needs-update:<path>]
 - design_discussion: [链接到 docs/discuss/ 的讨论文档 / n/a]
 ```
