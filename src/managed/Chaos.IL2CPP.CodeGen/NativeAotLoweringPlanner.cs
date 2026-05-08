@@ -347,7 +347,6 @@ public sealed partial class NativeAotLoweringPlanner
         {
             Includes =
             [
-                "<chaos/common.h>",
                 "\"runtime_core.h\"",
                 "\"codegen_bridge.h\"",
                 "\"module_registry.h\"",

@@ -84,21 +84,21 @@ namespace {
 constexpr CHAOS_IL2CPP_UINT64 kDateTimeTicksMask = 0x3FFFFFFFFFFFFFFFull;
 // struct ManagedExceptionCarrier is declared in runtime_core.h and used as the cold EH payload.
 
-// ── A4-Dual+V2 Object Header Layouts ─────────────────────────────
-// Three header kinds discriminated by TypeInfo.flags[1:0]:
-//   PureType (00):  8B  {TypeInfo* type_info}
-//   ThinLockable (01): 16B {TypeInfo* type_info, uint64_t sync_state}
-//   Fat (10):          24B {TypeInfo* type_info, void** vtable, uint64_t sync_state}
+// ── A5-Trinity Object Header Layouts ────────────────────────────
+// Three header kinds discriminated by TypeInfoHot.flags[1:0]:
+//   PureType (00):  8B  {TypeInfoHot* type_info}
+//   ThinLockable (01): 16B {TypeInfoHot* type_info, uint64_t sync_state}
+//   Fat (10):          24B {TypeInfoHot* type_info, void** vtable, uint64_t sync_state}
 
 struct ObjectHeaderFat {  // 24B — full dispatch + sync
-    const TypeInfo* type_info   = nullptr;  // [0]
-    const void**    vtable      = nullptr;  // [8]
-    uint64_t        sync_state  = 0;        // [16]
+    const TypeInfoHot* type_info   = nullptr;  // [0]
+    const void**       vtable      = nullptr;  // [8]
+    uint64_t           sync_state  = 0;        // [16]
 };
 
 struct ObjectHeaderThin {  // 16B — sync only, no vtable
-    const TypeInfo* type_info   = nullptr;  // [0]
-    uint64_t        sync_state  = 0;        // [8]
+    const TypeInfoHot* type_info   = nullptr;  // [0]
+    uint64_t           sync_state  = 0;        // [8]
 };
 
 // Legacy alias for code that handles Fat objects specifically.
@@ -114,7 +114,7 @@ inline CHAOS_IL2CPP_SIZE HeaderSizeFromFlags(CHAOS_IL2CPP_UINT8 flags) noexcept 
 }
 
 inline uint64_t* GetSyncStatePtr(void* obj) noexcept {
-    const auto* ti = *static_cast<const TypeInfo* const*>(obj);
+    const auto* ti = *static_cast<const TypeInfoHot* const*>(obj);
     const auto kind = ti->flags & kTypeInfoHeaderKindMask;
     if (kind == kTypeInfoHeaderKindThin)
         return &static_cast<ObjectHeaderThin*>(obj)->sync_state;
@@ -621,7 +621,7 @@ constexpr uint32_t kSyncBlockStripes  = 64;
 constexpr uint32_t kSyncBlockSpinMax  = 1000;
 
 struct SyncBlock {
-    const TypeInfo*                     type_info = nullptr;  // saved type_info for ThinLockable inflation
+    const TypeInfoHot*                     type_info = nullptr;  // saved type_info for ThinLockable inflation
     CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX    mutex;
     std::condition_variable_any          cond;  // for Monitor.Wait/Pulse
 };
@@ -929,7 +929,7 @@ namespace {
 ///
 /// Returns true when at least the vtable was resolved.
 static bool ResolveObjectTypeInfo(TypeInfoHandle type_handle,
-                                   const TypeInfo*& out_type_info,
+                                   const TypeInfoHot*& out_type_info,
                                    const void**& out_vtable) noexcept
 {
     out_type_info = nullptr;
@@ -981,8 +981,8 @@ void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
         return nullptr;
     }
 
-    // Step 1: resolve TypeInfo* from handle.
-    const TypeInfo* type_info = nullptr;
+    // Step 1: resolve TypeInfoHot* from handle.
+    const TypeInfoHot* type_info = nullptr;
     const void** vtable = nullptr;
     ResolveObjectTypeInfo(type, type_info, vtable);
     if (type_info == nullptr) {
@@ -1008,6 +1008,42 @@ void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
     }
     // PureType: type_info already set, nothing else needed.
 
+    return object;
+}
+
+// ── ObjectNewDirect (Phase 3: skip TypeInfoHandle resolution) ─────
+// For AOT static types where TypeInfoHot* and vtable are known at
+// compile time.  Skips the ResolveObjectTypeInfo parse path entirely.
+// Callers from codegen-generated code need RuntimeState/ThreadState
+// available (passed through global or explicit parameter).
+void* CHAOS_RUNTIME_ABI_CALL ObjectNewDirect(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const TypeInfoHot* type_info,
+    const void** vtable) noexcept
+{
+    if (!IsAttached(runtime_state, thread_state)) {
+        return nullptr;
+    }
+    if (type_info == nullptr) {
+        return nullptr;
+    }
+
+    const CHAOS_IL2CPP_SIZE header_size = HeaderSizeFromFlags(type_info->flags);
+    auto* object = static_cast<ObjectHeaderFat*>(AllocateBytes(runtime_state->config, header_size));
+    if (object == nullptr) {
+        return nullptr;
+    }
+
+    object->type_info = type_info;
+    const auto kind = type_info->flags & kTypeInfoHeaderKindMask;
+    if (kind == kTypeInfoHeaderKindFat) {
+        object->vtable = vtable;
+        object->sync_state = 0;
+    } else if (kind == kTypeInfoHeaderKindThin) {
+        auto* thin = static_cast<ObjectHeaderThin*>(static_cast<void*>(object));
+        thin->sync_state = 0;
+    }
     return object;
 }
 
@@ -1205,8 +1241,8 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldGetValue(
         return CHAOS_RUNTIME_STATUS_NOT_FOUND;
     }
 
-    // A4-Dual+V2: header size varies by kind (PureType 8B, ThinLockable 16B, Fat 24B).
-    const auto* ti = *static_cast<const TypeInfo* const*>(object_instance);
+    // A5-Trinity: header size varies by kind (PureType 8B, ThinLockable 16B, Fat 24B).
+    const auto* ti = *static_cast<const TypeInfoHot* const*>(object_instance);
     const auto header_size = HeaderSizeFromFlags(ti != nullptr ? ti->flags : 0);
     CHAOS_IL2CPP_MEMCPY(out_value,
         static_cast<const unsigned char*>(object_instance) + header_size,
@@ -1232,8 +1268,8 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldSetValue(
         return CHAOS_RUNTIME_STATUS_NOT_FOUND;
     }
 
-    // A4-Dual+V2: header size varies by kind (PureType 8B, ThinLockable 16B, Fat 24B).
-    const auto* ti = *static_cast<const TypeInfo* const*>(object_instance);
+    // A5-Trinity: header size varies by kind (PureType 8B, ThinLockable 16B, Fat 24B).
+    const auto* ti = *static_cast<const TypeInfoHot* const*>(object_instance);
     const auto header_size = HeaderSizeFromFlags(ti != nullptr ? ti->flags : 0);
     CHAOS_IL2CPP_MEMCPY(
         static_cast<unsigned char*>(object_instance) + header_size,
@@ -4255,7 +4291,7 @@ static const StructMarshallingDescriptorV1* FindStaticDescriptor(
 }
 
 const StructMarshallingDescriptorV1*
-ResolveStructMarshallingDescriptor(const TypeInfo* type) noexcept
+ResolveStructMarshallingDescriptor(const TypeInfoHot* type) noexcept
 {
     if (type == nullptr || type->stable_id == 0) return nullptr;
 

@@ -17,26 +17,6 @@ public sealed partial class NativeAotLoweringPlanner
                 NativeAotTemplateCatalog.GetRuntimePreludeTemplate(),
                 new ScriptObject()).TrimEnd());
         builder.AppendLine();
-
-        if (externalRuntimeHelpers.Any(helper => IsCollectionRuntimeHelperSubjectId(helper.SubjectId)))
-        {
-            EmitCollectionRuntimePrelude(builder);
-        }
-
-        if (externalRuntimeHelpers.Any(helper => IsMonitorRuntimeHelperSubjectId(helper.SubjectId)))
-        {
-            EmitMonitorRuntimePrelude(builder);
-        }
-
-        if (externalRuntimeHelpers.Any(helper => IsThreadRuntimeHelperSubjectId(helper.SubjectId)))
-        {
-            EmitThreadRuntimePrelude(builder);
-        }
-
-        if (externalRuntimeHelpers.Any(helper => IsAsyncRuntimeHelperSubjectId(helper.SubjectId)))
-        {
-            EmitAsyncRuntimePrelude(builder);
-        }
     }
 
     private static void EmitSpanRuntimePrelude(

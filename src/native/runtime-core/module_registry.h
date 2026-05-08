@@ -14,7 +14,7 @@ namespace chaos::il2cpp::runtime_core {
 // ── Constants ──────────────────────────────────────────────────────────
 
 constexpr uint32_t kModuleIdBits = 32;
-constexpr uint32_t kMaxModules = 256;
+constexpr uint32_t kMaxModules = 1024;
 constexpr uint32_t kInvalidModuleId = 0xFFFFFFFFu;
 
 // ── Type flag bit definitions ──────────────────────────────────────────
@@ -40,7 +40,7 @@ struct ModuleDescriptor {
     const char* const* type_names;          // Tier 1: per-type names
     const char* const* type_namespaces;     // Tier 1: per-type namespaces
     const uint32_t* type_parent_tokens;     // Tier 1: per-type parent tokens
-    const TypeInfo* const* type_info_ptrs;   // Tier 1: per-type TypeInfo* pointers (Phase 3+)
+    const TypeInfoHot* const* type_info_ptrs;   // Tier 1: per-type TypeInfoHot* pointers (Phase 3+)
     const uint32_t* nested_type_children;    // Tier 1: flat array of child tokens, grouped by parent type
     const uint32_t* nested_type_offset;      // Tier 1: [type_count+1] prefix-sum into nested_type_children
     const uint32_t* generic_param_constraint_data;   // Tier 1: flat array of (param_index<<28|token) per constraint

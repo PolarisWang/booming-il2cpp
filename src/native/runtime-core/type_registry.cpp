@@ -1,6 +1,6 @@
 // type_registry.cpp — HotUpdate dynamic TypeInfo registry
 //
-// Implements the runtime-registration side of the Hybrid TypeInfo* identity
+// Implements the runtime-registration side of the Hybrid TypeInfoHot* identity
 // system: chaos_register_type() and chaos_find_type_by_stable_id().
 //
 // See type_info.h for the design rationale.
@@ -12,6 +12,7 @@
 #include "reflection_query_model.h"
 
 #include <mutex>
+#include <cstring>
 
 // ── Dynamic type registry ───────────────────────────────────────
 // Flat array bounded by kChaosMaxDynamicTypes (256).  A production
@@ -20,7 +21,7 @@
 namespace {
 
 struct Registry {
-    TypeInfo* types[kChaosMaxDynamicTypes];
+    TypeInfoHot* types[kChaosMaxDynamicTypes];
     CHAOS_IL2CPP_SIZE count;
     std::mutex mtx;
 };
@@ -39,9 +40,9 @@ Registry& GetRegistry() noexcept
 
 namespace chaos::il2cpp::runtime_core {
 
-TypeInfo* chaos_register_type(
+TypeInfoHot* chaos_register_type(
     const char* name,
-    const TypeInfo* parent,
+    const TypeInfoHot* parent,
     CHAOS_IL2CPP_UINT8 type_shape,
     const InterfaceMapEntry* iface_map,
     CHAOS_IL2CPP_UINT32 iface_count,
@@ -72,14 +73,27 @@ TypeInfo* chaos_register_type(
         return nullptr;
     }
 
-    auto* ti = CHAOS_IL2CPP_NEW(TypeInfo);
-    ti->parent     = parent;
-    ti->stable_id  = stable_id;
-    ti->type_shape = type_shape;
-    ti->iface_map  = iface_map;
-    ti->iface_count = iface_count;
+    // Allocate TypeInfoHot + TypeInfoWarm as a contiguous pair.
+    auto* hot = CHAOS_IL2CPP_NEW(TypeInfoHot);
+    auto* warm = CHAOS_IL2CPP_NEW(TypeInfoWarm);
 
-    reg.types[reg.count] = ti;
+    hot->parent        = parent;
+    hot->vtable_array  = nullptr;
+    hot->stable_id     = stable_id;
+    hot->vtable_length = 0;
+    hot->warm_delta    = static_cast<uint16_t>(
+        reinterpret_cast<uint8_t*>(warm) - reinterpret_cast<uint8_t*>(hot));
+    hot->type_shape    = type_shape;
+    hot->flags         = 0;
+
+    warm->iface_map          = iface_map;
+    warm->runtime_iface_map  = nullptr;
+    warm->iface_count        = iface_count;
+    warm->runtime_iface_count = 0;
+    warm->cold_delta         = 0;
+    warm->_reserved          = 0;
+
+    reg.types[reg.count] = hot;
     reg.count++;
 
     // Build vtable for the new HotUpdate type (copies parent vtable if registered).
@@ -88,10 +102,10 @@ TypeInfo* chaos_register_type(
     }
 
     if (out_stable_id) *out_stable_id = stable_id;
-    return ti;
+    return hot;
 }
 
-const TypeInfo* chaos_find_type_by_stable_id(
+const TypeInfoHot* chaos_find_type_by_stable_id(
     CHAOS_IL2CPP_UINT64 stable_id) noexcept
 {
     const auto& reg = GetRegistry();
@@ -109,48 +123,50 @@ const TypeInfo* chaos_find_type_by_stable_id(
 
 
 bool ChaosTypeAddInterface(
-    TypeInfo* ti,
+    TypeInfoHot* ti,
     CHAOS_IL2CPP_UINT64 iface_stable_id,
     CHAOS_IL2CPP_UINT32 vtable_offset,
     CHAOS_IL2CPP_UINT32 method_count) noexcept
 {
     if (ti == nullptr) return false;
 
+    auto* warm = GetWarmPtr(ti);
+
     // Check if already present in AOT iface_map.
-    for (CHAOS_IL2CPP_UINT32 i = 0; i < ti->iface_count; ++i)
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < warm->iface_count; ++i)
     {
-        if (ti->iface_map[i].iface_stable_id == iface_stable_id)
+        if (warm->iface_map[i].iface_stable_id == iface_stable_id)
             return true;  // already mapped by AOT
     }
 
     // Check if already present in runtime_iface_map.
-    for (CHAOS_IL2CPP_UINT32 i = 0; i < ti->runtime_iface_count; ++i)
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < warm->runtime_iface_count; ++i)
     {
-        if (ti->runtime_iface_map[i].iface_stable_id == iface_stable_id)
+        if (warm->runtime_iface_map[i].iface_stable_id == iface_stable_id)
             return true;  // already added
     }
 
     auto& reg = GetRegistry();
     std::lock_guard<std::mutex> lock(reg.mtx);
 
-    CHAOS_IL2CPP_UINT32 newCount = ti->runtime_iface_count + 1;
+    CHAOS_IL2CPP_UINT32 newCount = warm->runtime_iface_count + 1;
     auto* newMap = static_cast<InterfaceMapEntry*>(
         CHAOS_IL2CPP_REALLOC(
-            const_cast<InterfaceMapEntry*>(ti->runtime_iface_map),
+            const_cast<InterfaceMapEntry*>(warm->runtime_iface_map),
             newCount * sizeof(InterfaceMapEntry)));
 
     if (newMap == nullptr) return false;
 
-    newMap[ti->runtime_iface_count].iface_stable_id = iface_stable_id;
-    newMap[ti->runtime_iface_count].vtable_offset   = vtable_offset;
-    newMap[ti->runtime_iface_count].method_count    = method_count;
+    newMap[warm->runtime_iface_count].iface_stable_id = iface_stable_id;
+    newMap[warm->runtime_iface_count].vtable_offset   = vtable_offset;
+    newMap[warm->runtime_iface_count].method_count    = method_count;
 
-    ti->runtime_iface_map  = newMap;
-    ti->runtime_iface_count = newCount;
+    warm->runtime_iface_map  = newMap;
+    warm->runtime_iface_count = newCount;
     return true;
 }
 
-const TypeInfo* TryResolveTypeInfo(TypeInfoHandle handle) noexcept
+const TypeInfoHot* TryResolveTypeInfo(TypeInfoHandle handle) noexcept
 {
     if (handle == 0u || handle == TypeInfoHandle{}) return nullptr;
 

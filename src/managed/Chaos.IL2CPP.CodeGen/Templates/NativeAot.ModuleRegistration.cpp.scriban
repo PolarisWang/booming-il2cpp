@@ -25,7 +25,7 @@
 {{~ end ~}}
 {{ indentation }}};
 
-{{ indentation }}static const TypeInfo* const s_type_info_ptrs[{{ type_count }}] = {
+{{ indentation }}static const TypeInfoHot* const s_type_info_ptrs[{{ type_count }}] = {
 {{~ for ptr in type_info_ptrs ~}}
 {{ indentation }}{{ tab }}{{ ptr }},
 {{~ end ~}}
