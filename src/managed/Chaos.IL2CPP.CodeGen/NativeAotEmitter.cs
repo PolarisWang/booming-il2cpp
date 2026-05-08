@@ -258,6 +258,7 @@ public sealed class NativeAotEmitter
             ["generic_registration_code"] = ScribanTemplateRenderer.NormalizeIndentation(templateModel.GenericRegistrationCode),
             ["module_registration_code"] = ScribanTemplateRenderer.NormalizeIndentation(templateModel.ModuleRegistrationCode),
             [NativeAotTemplateCatalog.TranslationUnitNamespaceProperty] = templateModel.CodegenNamespace,
+            ["global_declarations"] = templateModel.GlobalDeclarations,
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
     }
