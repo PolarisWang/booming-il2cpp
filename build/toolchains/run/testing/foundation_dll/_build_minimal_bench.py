@@ -68,7 +68,7 @@ include_dirs = [
     REPO_ROOT / "contracts" / "native" / "v0",
     REPO_ROOT / "src" / "native" / "runtime-core",
     REPO_ROOT / "third_party" / "fmt" / "include",
-    family_dir / "native_test" / "l2-verify" / "build",
+    family_dir / "native_test" / "fact-verify" / "build",
 ]
 include_flags = " ".join(f'-I"{d}"' for d in include_dirs)
 chaos_lib = REPO_ROOT / "build" / "native-runtime" / "Release" / "chaos_runtime_core.lib"

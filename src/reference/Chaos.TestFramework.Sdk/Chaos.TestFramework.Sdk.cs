@@ -697,7 +697,7 @@ public static class Assert
     {
         if (!condition)
         {
-            throw new ChaosAssertionException(message ?? "Expected condition to be true.");
+            ChaosAssertState.RecordFailure();
         }
     }
 
@@ -705,7 +705,7 @@ public static class Assert
     {
         if (condition)
         {
-            throw new ChaosAssertionException(message ?? "Expected condition to be false.");
+            ChaosAssertState.RecordFailure();
         }
     }
 
@@ -721,36 +721,34 @@ public static class Assert
 
     public static void Equal<T>(T expected, T actual, string? message = null)
     {
-        object? expectedObject = expected;
-        object? actualObject = actual;
-        if (expectedObject is null)
+        if (expected is null)
         {
-            if (actualObject is null)
+            if (actual is null)
             {
                 return;
             }
         }
-        else if (expectedObject.Equals(actualObject))
+        else if (expected.Equals(actual))
         {
             return;
         }
-        throw new ChaosAssertionException(message ?? "Expected values to be equal.");
+        ChaosAssertState.RecordFailure();
     }
 
     public static void NotNull(object? value, string? message = null)
     {
         if (value is null)
         {
-            throw new ChaosAssertionException(message ?? "Expected value to be non-null.");
+            ChaosAssertState.RecordFailure();
         }
     }
 
     public static void Fail(string? message = null)
     {
-        throw new ChaosAssertionException(message ?? "Assertion failure.");
+        ChaosAssertState.RecordFailure();
     }
 
-    public static TException Throws<TException>(Action action, string? message = null)
+    public static void Throws<TException>(Action action, string? message = null)
         where TException : Exception
     {
         ArgumentNullException.ThrowIfNull(action);
@@ -758,17 +756,15 @@ public static class Assert
         {
             action();
         }
-        catch (TException exception)
+        catch (TException)
         {
-            return exception;
+            return;
         }
-        catch (Exception exception)
+        catch (Exception)
         {
-            throw new ChaosAssertionException(
-                message
-                ?? $"Expected exception '{typeof(TException).FullName}', but got '{exception.GetType().FullName}'.");
+            ChaosAssertState.RecordFailure();
+            return;
         }
-        throw new ChaosAssertionException(
-            message ?? $"Expected exception '{typeof(TException).FullName}'.");
+        ChaosAssertState.RecordFailure();
     }
 }

@@ -10,7 +10,7 @@
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
 #include "arithmetic_chaos_bridge.h"
-#include "codegen_bridge.h"       // DispatchEntryV0, NameIndex structs, kDispatchPatched
+#include "codegen_bridge.h"       // HotpatchEntryV0, Hotpatch structs, kHotpatchActive
 #include <gc.h>                   // GC_END_STUBBORN_CHANGE for write barriers
 
 // ═══════════════════════════════════════════════════════════════════

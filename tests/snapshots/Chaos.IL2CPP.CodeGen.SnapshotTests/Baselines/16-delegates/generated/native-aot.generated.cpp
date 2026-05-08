@@ -4,7 +4,7 @@
 #include "codegen_bridge.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
-#include "dispatch_table.h"
+#include "hotpatch_table.h"
 #include "runtime_vtable.h"
 #include "runtime_instantiation.h"
 
@@ -71,25 +71,25 @@ TValue* chaos_resolve_managed_value_pointer(CHAOS_IL2CPP_INTPTR chaos_managed_po
 	return reinterpret_cast<TValue*>(chaos_managed_pointer);
 }
 
-inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Object = { nullptrnullptr, 15228727185366376748ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
+inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Object = { nullptr, nullptr, 15228727185366376748ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Object = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Delegate = { &chaos_type_info_System_Private_CoreLib_System_Objectnullptr, 7451128447593600616ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 2 };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Delegate = { &chaos_type_info_System_Private_CoreLib_System_Object, nullptr, 7451128447593600616ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 2 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Delegate = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_MulticastDelegate = { &chaos_type_info_System_Private_CoreLib_System_Delegatenullptr, 6681393039041505440ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 2 };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_MulticastDelegate = { &chaos_type_info_System_Private_CoreLib_System_Delegate, nullptr, 6681393039041505440ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 2 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_MulticastDelegate = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);inline TypeInfoHot chaos_type_info_System_Func_System_Int32_ = { &chaos_type_info_System_Private_CoreLib_System_MulticastDelegatenullptr, 18237973049932333903ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);inline TypeInfoHot chaos_type_info_System_Func_System_Int32_ = { &chaos_type_info_System_Private_CoreLib_System_MulticastDelegate, nullptr, 18237973049932333903ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
 inline TypeInfoWarm chaos_type_info_warm_System_Func_System_Int32_ = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Func_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(18237973049932333903ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_Assembly = { nullptrnullptr, 5474029880995115448ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Func_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(18237973049932333903ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_Assembly = { nullptr, nullptr, 5474029880995115448ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_Assembly = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_AssemblyName = { nullptrnullptr, 17082367815459723707ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_AssemblyName = { nullptr, nullptr, 17082367815459723707ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_AssemblyName = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_ConstructorInfo = { nullptrnullptr, 4137207361503509124ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_ConstructorInfo = { nullptr, nullptr, 4137207361503509124ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_ConstructorInfo = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_FieldInfo = { nullptrnullptr, 17040031516751226236ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_FieldInfo = { nullptr, nullptr, 17040031516751226236ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_FieldInfo = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_MethodInfo = { nullptrnullptr, 10748947813473285525ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_Reflection_MethodInfo = { nullptr, nullptr, 10748947813473285525ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 1 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_Reflection_MethodInfo = { nullptr, nullptr, 0, 0, 0, 0 };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_String = { nullptrnullptr, 1782325859292956794ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 2 };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoHot chaos_type_info_System_Private_CoreLib_System_String = { nullptr, nullptr, 1782325859292956794ULL, 0u, 32 /* warm_delta */, 1 /* reference */, 2 };
 inline TypeInfoWarm chaos_type_info_warm_System_Private_CoreLib_System_String = { nullptr, nullptr, 0, 0, 0, 0 };
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 // ── Virtual method table arrays ──
@@ -859,49 +859,49 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest = reinterpret_cast<const
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
 		::chaos::il2cpp::runtime_core::RegisterModule("SnapshotTestFixtures", &s_native_aot_module);
-// ── NameIndex + Dispatch Table (D3 HotPatch) ────────────────────
+// ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr NameIndexMethodEntryV0 s_name_index_methods[2] = {
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[2] = {
 	{ "RunDelegate", 0x00000002u, 0u },  // DelegateHelper
 	{ "GetValue", 0x00000004u, 0u },  // Helper
 };
 
 // Type name index entries
-static constexpr NameIndexTypeEntryV0 s_name_index_types[2] = {
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types[2] = {
 	{ "DelegateHelper", 0u, 1u },
 	{ "Helper", 1u, 1u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr TokenSlotEntryV0 s_token_slot_entries[2] = {
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[2] = {
 	{ 0x00000002u, 1u },
 	{ 0x00000004u, 0u },
 };
 
 // Dispatch table (function pointers)
-static DispatchEntryV0 s_dispatch_table[2] = {
+static HotpatchEntryV0 s_hotpatch_entries[2] = {
 	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0u },  // Helper::GetValue
 	{ reinterpret_cast<void*>(&SnapshotTestFixtures_DelegateHelper_RunDelegate), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0u },  // DelegateHelper::RunDelegate
 };
 
-// Module NameIndex bundle
-static constexpr NameIndexModuleV0 s_name_index_module = {
+// Module hotpatch bundle
+static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	"SnapshotTestFixtures",
-	s_name_index_types,
+	s_hotpatch_types,
 	2u,
-	s_name_index_methods,
+	s_hotpatch_methods,
 	2u,
-	s_token_slot_entries,
+	s_hotpatch_slots,
 	2u,
-	s_dispatch_table,
+	s_hotpatch_entries,
 	2u,
 };
 
-// Register NameIndex with the runtime on load
-static const CHAOS_IL2CPP_UINT32 s_name_index_registered = []()
+// Register hotpatch table with the runtime on load
+static const CHAOS_IL2CPP_UINT32 s_hotpatch_registered = []()
 {
-	::chaos::il2cpp::runtime_core::RegisterModuleNameIndex(
-		&s_name_index_module);
+	::chaos::il2cpp::runtime_core::RegisterHotpatchModule(
+		&s_hotpatch_module);
 	return 1u;
 }();
 
@@ -987,6 +987,3 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 chaos_entry_index)
 
 }  // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 #pragma warning(pop)
-
-// Global assert failure counter (defined in runtime_stubs.cpp)
-extern "C" CHAOS_IL2CPP_INT32 __chaos_assert_failures;

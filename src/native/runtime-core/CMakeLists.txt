@@ -44,8 +44,8 @@ add_library(chaos_runtime_core STATIC
     token_resolver.cpp
     token_resolver.h
     abi_manifest.cpp
-    dispatch_table.h
-    dispatch_table.cpp
+    hotpatch_table.h
+    hotpatch_table.cpp
     patch_loader.h
     patch_loader.cpp
     interpreter_entry.h

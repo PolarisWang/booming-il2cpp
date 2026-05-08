@@ -6,22 +6,23 @@
 // The PatchLoader is responsible for:
 //   1. Validating a .patchdata binary (magic, version, structural integrity)
 //   2. Iterating its MethodDef entries
-//   3. Resolving each method's (type_name, method_name) via NameIndexRegistry
+//   3. Resolving each method's (type_name, method_name) via HotpatchNameRegistry
 //   4. Building PatchMethod objects containing raw IL + signature
-//   5. Marking dispatch table entries as patched (kDispatchPatched)
+//   5. Marking dispatch table entries as patched (kHotpatchActive)
 //   6. Providing PatchMetadataCache for token resolution during IL→IR lowering
 //
 // PatchMetadataCache provides a self-contained metadata resolver that only
 // looks at the .patchdata's own metadata tables. It does NOT register types
 // into the global type system (iOS-compatible — no global registration).
 
-#include "dispatch_table.h"
+#include "hotpatch_table.h"
 
 #include "patch_data.h"
 
 #include <cstddef>
 #include <cstdint>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace chaos::il2cpp::runtime_core {
@@ -97,8 +98,10 @@ private:
     ImageHandle            aot_image_ = 0;
 
     // Cached UTF-8 strings decoded from the #US heap.
-    // Populated lazily by GetUserString().
-    mutable std::vector<std::string> user_string_cache_;
+    // Populated lazily by GetUserString(). Keyed by offset into the #US heap
+    // for O(1) lookup and pointer stability (unordered_map does not invalidate
+    // references on insertion).
+    mutable std::unordered_map<uint32_t, std::string> user_string_cache_;
 };
 
 // ── PatchContext ─────────────────────────────────────────────────────────
@@ -118,14 +121,14 @@ struct PatchContext {
 // objects, and marks dispatch table entries as patched.
 // Returns a PatchContext (must be freed via Unpatch or delete).
 // If host_type_name is provided (non-null), it is used instead of the
-// patch DLL's type name when looking up methods in NameIndexRegistry.
+// patch DLL's type name when looking up methods in HotpatchNameRegistry.
 // This handles the case where the patch DLL has different type names
 // than the AOT host code (e.g. "PatchEntry" vs "NativeEntry").
 PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
                                     const char* host_type_name = nullptr) noexcept;
 
 // Revert all patched methods in the given context.
-// Clears kDispatchPatched flags on all affected dispatch table entries,
+// Clears kHotpatchActive flags on all affected dispatch table entries,
 // frees PatchMethod cached IR, and deletes the PatchContext.
 bool Unpatch(PatchContext* ctx) noexcept;
 

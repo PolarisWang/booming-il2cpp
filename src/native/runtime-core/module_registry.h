@@ -4,7 +4,7 @@
 #include "runtime_abi.h"
 #include "reflection_query_model.h"
 #include "abi_manifest.h"
-#include "dispatch_table.h"
+#include "hotpatch_table.h"
 #include <chaos/type_info.h>
 
 #include <cstdint>

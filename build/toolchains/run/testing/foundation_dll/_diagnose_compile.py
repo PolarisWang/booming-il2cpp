@@ -11,7 +11,7 @@ REPO_ROOT = Path("D:/agent/booming-il2cpp")
 FAMILY = "convert-char"
 FAMILY_DIR = REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib" / FAMILY
 GENERATED_CPP = FAMILY_DIR / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
-VERIFY_DIR = FAMILY_DIR / "native_test" / "l2-verify" / "build"
+VERIFY_DIR = FAMILY_DIR / "native_test" / "fact-verify" / "build"
 BUILD_DIR = FAMILY_DIR / "native_test" / "benchmark" / "build"
 
 # 1. Check that the source file hasn't changed

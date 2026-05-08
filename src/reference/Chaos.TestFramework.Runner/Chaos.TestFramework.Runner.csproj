@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Chaos.TestFramework.Runner</AssemblyName>
+    <RootNamespace>Chaos.TestFramework.Runner</RootNamespace>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+  </ItemGroup>
+</Project>

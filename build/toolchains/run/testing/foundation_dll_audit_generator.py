@@ -824,7 +824,7 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                 families=families,
             )
             families = list(family_snapshot.get("families") or [])
-            # Load L2 native correctness results from batch pipeline
+            # Load Fact Static native correctness results from batch pipeline
             native_pipeline_path = repo_root / "verification" / "foundation-dll" / assembly_name / "reports" / "batch-native-aot-pipeline-results.json"
             native_lookup: dict[str, dict[str, Any]] = {}
             if native_pipeline_path.is_file():
@@ -852,10 +852,10 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                             _reason = "链接失败"
                         elif _l2_status == "skip":
                             _native_status = "skip"
-                            _reason = "L2 验证被跳过"
+                            _reason = "Fact Static 验证被跳过"
                         else:
                             _native_status = "pending"
-                            _reason = f"L2 状态未知 (raw={_l2_status})"
+                            _reason = f"Fact Static 状态未知 (raw={_l2_status})"
                         native_lookup[_slug] = {
                             "status": _native_status,
                             "passed": _l2_passed,
@@ -922,7 +922,7 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                                 proof["comparisonMethodResults"] = list(cmp_data.get("methodResults") or [])
                             except (json.JSONDecodeError, OSError):
                                 pass
-                    # Inject hotupdate verification: load per-family D3 report
+                    # Inject hotupdate verification: load per-family Hotpatch report
                     # (schemaVersion 2: d3PatchApplied, d3PatchedCount, methodResults
                     #  with d3Patched/patchReturnValue/interpreterDispatched).
                     if proof_key == "hotupdateProof":
@@ -976,7 +976,7 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                         "caseItems": [],
                         "caseSectionLabel": "",
                     }
-                # Inject native correctness (L2 verification) from batch pipeline results
+                # Inject Fact Static correctness from batch pipeline results
                 _native_slug = _family_slug(family_id)
                 _native_result = native_lookup.get(_native_slug)
                 if _native_result is not None:
@@ -2132,16 +2132,16 @@ def _gate_header_tooltip(gate_code: str) -> str:
             "Native Correct: 表示生成的 C++ AOT 代码语义正确性。"
             "验证方式: 将生成的 C++ 编译为 native exe，与 managed entrypoint 对比 checksum。"
             "通过 = 翻译结果与期望一致。"
-            "待验证 = 未运行 L2 验证。"
+            "待验证 = 未运行 Fact Static 验证。"
             "失败 = 翻译语义有误。"
         ),
         "hotupdate-proof": (
-            "D3 双层分派验证：ApplyPatchFromMemory → DispatchTable patching → "
+            "Hotpatch 双层分派验证：ApplyPatchFromMemory → DispatchTable patching → "
             "InterpreterEntryDirect → Unpatch。验证真实 family 方法的 Patch → Interpreter 分派全链路。"
-            "D3 exe 读取 .patchdata，对 dispatch 表执行 ApplyPatchFromMemory，然后通过 "
+            "Hotpatch exe 读取 .patchdata，对 dispatch 表执行 ApplyPatchFromMemory，然后通过 "
             "InterpreterEntryDirect 执行 IL 解释器，验证 patch 生效且返回值正确。"
-            "分母 = 方法总数，分子 = D3 验证通过数。"
-            "点击跳转详情页查看 D3 分派验证结果。"
+            "分母 = 方法总数，分子 = Hotpatch 验证通过数。"
+            "点击跳转详情页查看 Hotpatch 分派验证结果。"
         ),
         "benchmark": (
             "Benchmark: 表示该家族的原生代码性能基准测试覆盖情况。"
@@ -2398,7 +2398,7 @@ def _render_family_table(families: list[dict[str, Any]], *, assembly_name: str =
 
 
 def _render_native_correct_cell(native_correct: dict[str, Any]) -> str:
-    """Render the Native Correct cell (L2 verification status), single-line text."""
+    """Render the Native Correct cell (Fact Static verification status), single-line text."""
     status = _string(native_correct.get("status", ""))
     passed = int(native_correct.get("passed", 0))
     total = int(native_correct.get("total", 0))
@@ -2876,30 +2876,30 @@ def _render_hotupdate_cell(
     hotupdate_proof: dict[str, Any],
     root_prefix: str,
 ) -> str:
-    """Render the hotupdate column cell showing D3 verification status.
+    """Render the hotupdate column cell showing Hotpatch verification status.
 
-    D3 per-family test applies ApplyPatchFromMemory on the dispatch table for
+    Hotpatch per-family test applies ApplyPatchFromMemory on the dispatch table for
     each real family method, then verifies InterpreterEntryDirect returns the
-    correct value.  Shows passed/total with D3 status.
+    correct value.  Shows passed/total with Hotpatch status.
     """
-    schema_version = int(hotupdate_proof.get("d3SchemaVersion") or 0)
+    schema_version = int(hotupdate_proof.get("hotpatchSchemaVersion") or 0)
     passed = int(hotupdate_proof.get("passedMethodCount") or 0)
     total = int(hotupdate_proof.get("denominator") or int(hotupdate_proof.get("numerator") or 0))
 
     if schema_version >= 2 and total > 0:
         failed = int(hotupdate_proof.get("failedMethodCount") or 0)
-        patched = bool(hotupdate_proof.get("d3PatchApplied", False))
+        patched = bool(hotupdate_proof.get("hotpatchPatchApplied", False))
         all_ok = failed == 0
         badge = _status_badge("passed" if all_ok else "failed")
-        summary = f"D3 {passed}/{total}"
+        summary = f"Hotpatch {passed}/{total}"
         if not all_ok:
             summary += f" ({failed} Failed)"
         if patched:
             summary += " ✓Patch"
         title = (
-            f"D3 双层分派验证: {passed}/{total} 方法通过, Patch={patched}"
+            f"Hotpatch 双层分派验证: {passed}/{total} 方法通过, Patch={patched}"
             if all_ok else
-            f"D3 双层分派验证: {failed} 个方法失败"
+            f"Hotpatch 双层分派验证: {failed} 个方法失败"
         )
         return f'<span title="{escape(title)}">{badge} {escape(summary)}</span>'
 
@@ -2909,10 +2909,10 @@ def _render_hotupdate_cell(
 
 
 def _render_hotupdate_detail_page(family: dict[str, Any], *, assembly_name: str, repo_root: Path, root_prefix: str) -> str:
-    """Render a standalone per-family hotupdate detail page with D3 results.
+    """Render a standalone per-family hotupdate detail page with Hotpatch results.
 
-    Shows D3 dispatch-table patching verification results per method:
-    methodToken, status, d3Patched, patchReturnValue, interpreterDispatched.
+    Shows Hotpatch dispatch-table patching verification results per method:
+    methodToken, status, hotpatchPatched, patchReturnValue, interpreterDispatched.
     """
     dname = _string(family.get("displayName") or "")
     family_id = _string(family.get("familyId") or "")
@@ -2921,25 +2921,25 @@ def _render_hotupdate_detail_page(family: dict[str, Any], *, assembly_name: str,
     method_count = int(family.get("methodCount") or 0)
     hotupdate_proof = dict(family.get("hotupdateProof") or {})
 
-    schema_version = int(hotupdate_proof.get("d3SchemaVersion") or 0)
-    d3_patch_applied = bool(hotupdate_proof.get("d3PatchApplied", False))
-    d3_patched_count = int(hotupdate_proof.get("d3PatchedCount") or 0)
-    d3_method_results = list(hotupdate_proof.get("d3MethodResults") or [])
-    d3_passed = int(hotupdate_proof.get("passedMethodCount") or 0)
-    d3_total = int(hotupdate_proof.get("denominator") or 0)
-    d3_failed = d3_total - d3_passed
+    schema_version = int(hotupdate_proof.get("hotpatchSchemaVersion") or 0)
+    hotpatch_patch_applied = bool(hotupdate_proof.get("hotpatchPatchApplied", False))
+    hotpatch_patched_count = int(hotupdate_proof.get("hotpatchPatchedCount") or 0)
+    hotpatch_method_results = list(hotupdate_proof.get("hotpatchMethodResults") or [])
+    hotpatch_passed = int(hotupdate_proof.get("passedMethodCount") or 0)
+    hotpatch_total = int(hotupdate_proof.get("denominator") or 0)
+    hotpatch_failed = hotpatch_total - hotpatch_passed
 
-    if schema_version >= 2 and d3_method_results:
-        # D3 detail rows
+    if schema_version >= 2 and hotpatch_method_results:
+        # Hotpatch detail rows
         detail_rows = ""
-        for item in d3_method_results:
+        for item in hotpatch_method_results:
             token = item.get("methodToken", 0)
             mstatus = str(item.get("status", "unmatched"))
-            d3_patched = bool(item.get("d3Patched", False))
+            hp_patched = bool(item.get("hotpatchPatched", False))
             patch_ret = str(item.get("patchReturnValue", ""))
             interp = bool(item.get("interpreterDispatched", False))
             revert_ok = bool(item.get("revertVerified", False))
-            patched_badge = "✔" if d3_patched else "✘"
+            patched_badge = "✔" if hp_patched else "✘"
             interp_badge = "✔" if interp else "✘"
             revert_badge = "✔" if revert_ok else "✘"
             detail_rows += (
@@ -2953,25 +2953,25 @@ def _render_hotupdate_detail_page(family: dict[str, Any], *, assembly_name: str,
                 f"</tr>"
             )
         if not detail_rows:
-            detail_rows = "<tr><td colspan=\"6\">No D3 method results available</td></tr>"
+            detail_rows = "<tr><td colspan=\"6\">No Hotpatch method results available</td></tr>"
 
-        table_title = "D3 Patch分派验证"
-        table_headers = "<th>Token</th><th>Status</th><th>D3 Patched</th><th>返回值</th><th>Interpreter 分派</th><th>Revert</th>"
+        table_title = "Hotpatch Patch分派验证"
+        table_headers = "<th>Token</th><th>Status</th><th>Patched</th><th>返回值</th><th>Interpreter 分派</th><th>Revert</th>"
         info_blurb = (
-            f"D3 exe 对 {d3_total} 个方法执行 ApplyPatchFromMemory → DispatchTable patching → "
-            f"InterpreterEntryDirect → Unpatch 全链路验证。Patch 状态: {'已执行' if d3_patch_applied else '未执行'} "
-            f"(patched {d3_patched_count} 个 dispatch slot)。"
+            f"Hotpatch exe 对 {hotpatch_total} 个方法执行 ApplyPatchFromMemory → DispatchTable patching → "
+            f"InterpreterEntryDirect → Unpatch 全链路验证。Patch 状态: {'已执行' if hotpatch_patch_applied else '未执行'} "
+            f"(patched {hotpatch_patched_count} 个 dispatch slot)。"
         )
         limitations = (
             "<p><strong>已知局限：</strong> revertVerified 和 semanticVerified 字段尚未实现实际验证逻辑，"
-            "当前始终为 false/✘。仅在验证 D3 Patch → Interpreter 分派全链路通畅。</p>"
+            "当前始终为 false/✘。仅在验证 Hotpatch Patch → Interpreter 分派全链路通畅。</p>"
         )
     else:
         # Fallback for schemaVersion 1 or no data
-        detail_rows = "<tr><td colspan=\"4\">No D3 data available (schema v1 or missing)</td></tr>"
+        detail_rows = "<tr><td colspan=\"4\">No Hotpatch data available (schema v1 or missing)</td></tr>"
         table_title = "HotUpdate 验证（旧格式）"
         table_headers = "<th>Token</th><th>Status</th><th>Patch</th><th>说明</th>"
-        info_blurb = "当前数据为 schemaVersion 1 或缺失，无法渲染 D3 验证详情。"
+        info_blurb = "当前数据为 schemaVersion 1 或缺失，无法渲染 Hotpatch 验证详情。"
         limitations = ""
 
     evidence = list(hotupdate_proof.get("evidence") or [])
@@ -2993,13 +2993,13 @@ def _render_hotupdate_detail_page(family: dict[str, Any], *, assembly_name: str,
   <main>
     <div class="page-header">
       <a class="back-link" href="{escape(back_link, quote=True)}">Back to {escape(assembly_name)}</a>
-      <div class="eyebrow">HotUpdate Detail — D3 Dispatch-Table Patching Verification</div>
+      <div class="eyebrow">HotUpdate Detail — Hotpatch Dispatch Patching Verification</div>
       <h1>{escape(dname)}</h1>
       <div class="summary-grid">
         <div class="summary-card"><strong>Closure Status</strong>{_status_badge(status)}</div>
         <div class="summary-card"><strong>Methods</strong>{method_count}</div>
-        <div class="summary-card"><strong>D3 Result</strong>{_status_badge('passed' if d3_failed == 0 else 'failed')} {d3_passed}/{d3_total}</div>
-        <div class="summary-card"><strong>D3 Patch</strong>{'✔' if d3_patch_applied else '✘'} ({d3_patched_count} slots)</div>
+        <div class="summary-card"><strong>Hotpatch Result</strong>{_status_badge('passed' if hotpatch_failed == 0 else 'failed')} {hotpatch_passed}/{hotpatch_total}</div>
+        <div class="summary-card"><strong>Hotpatch</strong>{'✔' if hotpatch_patch_applied else '✘'} ({hotpatch_patched_count} slots)</div>
       </div>
     </div>
 

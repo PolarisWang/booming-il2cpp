@@ -5,6 +5,12 @@
 #include <fmt/format.h>
 #include <new>
 
+#ifdef CHAOS_HOTPATCH_DEBUG
+#define HOTPATCH_DIAG(fmt, ...) std::fprintf(stderr, fmt, ##__VA_ARGS__); std::fflush(stderr)
+#else
+#define HOTPATCH_DIAG(fmt, ...) ((void)0)
+#endif
+
 namespace chaos::il2cpp::runtime_core {
 
 // ── PatchMetadataCache implementation ────────────────────────────────────
@@ -137,7 +143,7 @@ const char* PatchMetadataCache::GetFullMethodName(const PatchMethodDefEntry* met
     const char* method_name = GetString(method->name_offset);
 
     // Format: "System.Private.CoreLib/Namespace.TypeName:MethodName"
-    // This matches the subject ID format used by NameIndexRegistry.
+    // This matches the subject ID format used by HotpatchNameRegistry.
     if (ns[0] != '\0') {
         // Namespace.TypeName:MethodName
         auto result = fmt::format_to_n(buffer, sizeof(buffer) - 1, "System.Private.CoreLib/{}.{}:{}",
@@ -191,41 +197,13 @@ const char* PatchMetadataCache::GetUserString(uint32_t token) const noexcept {
 
     const uint16_t* utf16_data = reinterpret_cast<const uint16_t*>(len_ptr + bytes_read);
 
-    // Convert UTF-16 to UTF-8 and cache.
-    // We cache lazily to avoid converting all strings upfront.
-    // Use a simple scheme: the cache index = offset into #US heap.
-    // Since offsets into the US heap are sparse and the cache is a vector,
-    // we store a parallel offset-to-index mapping.
-    // For simplicity, check if we already have this offset cached in the vector.
-    // Each cached entry is stored as "offset\0utf8_data" in a single string.
-    // Instead, use a simple approach: store in a map-like structure.
-
-    // Simple linear scan of cache (small number of ldstr per method).
-    // Cache entries are stored as: [4-byte offset][utf8_string\0]
-    // We need to find or create an entry for this offset.
-
-    // For now, allocate and convert on each call, relying on the fact that
-    // LowerILToIR calls the resolver once per token during lowering.
-    // The string is stored in IRInstruction.string_operand which points to
-    // the const char* from our cache, so we need it to live long enough.
-
-    // Check cache first.
-    for (const auto& entry : user_string_cache_) {
-        // Each entry starts with the offset (4 bytes LE) followed by the string.
-        if (entry.size() >= 4) {
-            uint32_t cached_offset =
-                static_cast<uint32_t>(static_cast<uint8_t>(entry[0])) |
-                (static_cast<uint32_t>(static_cast<uint8_t>(entry[1])) << 8) |
-                (static_cast<uint32_t>(static_cast<uint8_t>(entry[2])) << 16) |
-                (static_cast<uint32_t>(static_cast<uint8_t>(entry[3])) << 24);
-            if (cached_offset == offset) {
-                return entry.data() + 4;
-            }
-        }
+    // Check cache first (O(1) via unordered_map).
+    auto it = user_string_cache_.find(offset);
+    if (it != user_string_cache_.end()) {
+        return it->second.c_str();
     }
 
-    // Not cached — convert UTF-16 to UTF-8.
-    // Allocate worst-case UTF-8 buffer (each UTF-16 code unit → up to 3 bytes).
+    // Not cached — convert UTF-16 to UTF-8 and emplace.
     std::string utf8;
     utf8.reserve(char_count * 3);
 
@@ -244,21 +222,8 @@ const char* PatchMetadataCache::GetUserString(uint32_t token) const noexcept {
         }
     }
 
-    // Store with offset prefix: [4-byte LE offset][utf8\0]
-    // std::string can contain embedded nulls, but we'll use a vector of strings
-    // where each entry is "offset_prefix + utf8_data + null".
-    std::string cache_entry;
-    cache_entry.reserve(4 + utf8.size() + 1);
-    cache_entry.push_back(static_cast<char>(offset & 0xFF));
-    cache_entry.push_back(static_cast<char>((offset >> 8) & 0xFF));
-    cache_entry.push_back(static_cast<char>((offset >> 16) & 0xFF));
-    cache_entry.push_back(static_cast<char>((offset >> 24) & 0xFF));
-    cache_entry += utf8;
-    cache_entry.push_back('\0');
-
-    const char* result = cache_entry.data() + 4;
-    user_string_cache_.push_back(std::move(cache_entry));
-    return result;
+    auto emplaced = user_string_cache_.emplace(offset, std::move(utf8));
+    return emplaced.first->second.c_str();
 }
 
 uint32_t PatchMetadataCache::ResolveToken(uint32_t token) const noexcept {
@@ -338,32 +303,32 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     if (data == nullptr || size < sizeof(PatchDataHeader)) return nullptr;
 
     auto* header = static_cast<const PatchDataHeader*>(data);
-    std::fprintf(stderr, "DIAG[APFM]: magic=%x ver=%u\n", header->magic, header->version); std::fflush(stderr);
+    HOTPATCH_DIAG("DIAG[APFM]: magic=%x ver=%u\n", header->magic, header->version);
 
     // Validate magic and version.
     if (header->magic != PATCH_DATA_MAGIC) return nullptr;
     if (header->version != PATCH_DATA_VERSION) return nullptr;
     if (header->header_size < sizeof(PatchDataHeader)) return nullptr;
-    std::fprintf(stderr, "DIAG[APFM]: validation OK\n"); std::fflush(stderr);
+    HOTPATCH_DIAG("DIAG[APFM]: validation OK\n");
 
     // Validate structural integrity: total size must match.
     uint32_t expected_size = header->body_data_offset + header->body_data_size;
     if (size < expected_size) return nullptr;
-    std::fprintf(stderr, "DIAG[APFM]: size OK\n"); std::fflush(stderr);
+    HOTPATCH_DIAG("DIAG[APFM]: size OK\n");
 
     // Create context.
     auto* ctx = CreatePatchContext(header, size);
     if (ctx == nullptr) return nullptr;
-    std::fprintf(stderr, "DIAG[APFM]: ctx created\n"); std::fflush(stderr);
+    HOTPATCH_DIAG("DIAG[APFM]: ctx created\n");
 
-    auto& registry = GetNameIndexRegistry();
+    auto& registry = GetHotpatchNameRegistry();
     auto* cache = ctx->metadata_cache;
-    std::fprintf(stderr, "DIAG[APFM]: registry ready\n"); std::fflush(stderr);
+    HOTPATCH_DIAG("DIAG[APFM]: registry ready\n");
 
     // Iterate MethodDef entries and patch each one.
     uint32_t patched_count = 0;
-    std::fprintf(stderr, "DIAG[APFM]: iterating %u methods\n",
-        static_cast<unsigned>(cache->MethodCount())); std::fflush(stderr);
+    HOTPATCH_DIAG("DIAG[APFM]: iterating %u methods\n",
+        static_cast<unsigned>(cache->MethodCount()));
     for (uint32_t i = 0; i < cache->MethodCount(); ++i) {
         auto* method_entry = cache->GetMethodDef(i);
         if (method_entry == nullptr) continue;
@@ -380,7 +345,7 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         // NativeEntry naming mismatch between patch DLL and AOT code).
         const char* lookup_type = (host_type_name != nullptr) ? host_type_name : type_name;
 
-        // Look up the method in the NameIndexRegistry.
+        // Look up the method in the HotpatchNameRegistry.
         uint32_t aot_token = registry.LookupMethod(lookup_type, method_name);
         if (aot_token == 0) {
             // Try with full name format (includes assembly prefix).
@@ -390,8 +355,8 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
 
         // Set up the PatchMethod.
         auto& patch_method = ctx->methods[patched_count];
-        std::fprintf(stderr, "DIAG[APFM]: setting up method token=%u\n",
-            static_cast<unsigned>(aot_token)); std::fflush(stderr);
+        HOTPATCH_DIAG("DIAG[APFM]: setting up method token=%u\n",
+            static_cast<unsigned>(aot_token));
         patch_method.token = aot_token;
         patch_method.il_bytes = static_cast<const uint8_t*>(
             cache->GetBody(method_entry->body_offset));
@@ -426,16 +391,16 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         }
 
         // Mark the dispatch entry as patched.
-        std::fprintf(stderr, "DIAG[APFM]: calling SetPatched token=%u\n", static_cast<unsigned>(aot_token)); std::fflush(stderr);
+        HOTPATCH_DIAG("DIAG[APFM]: calling SetPatched token=%u\n", static_cast<unsigned>(aot_token));
         registry.SetPatched(aot_token, true, &patch_method);
-        std::fprintf(stderr, "DIAG[APFM]: SetPatched OK\n"); std::fflush(stderr);
+        HOTPATCH_DIAG("DIAG[APFM]: SetPatched OK\n");
 
         ++patched_count;
     }
 
     // Update method count to reflect only successfully patched methods.
     ctx->method_count = patched_count;
-    std::fprintf(stderr, "DIAG[APFM]: returning ctx method_count=%u\n", static_cast<unsigned>(ctx->method_count)); std::fflush(stderr);
+    HOTPATCH_DIAG("DIAG[APFM]: returning ctx method_count=%u\n", static_cast<unsigned>(ctx->method_count));
 
     return ctx;
 }
@@ -443,9 +408,9 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
 bool Unpatch(PatchContext* ctx) noexcept {
     if (ctx == nullptr) return false;
 
-    auto& registry = GetNameIndexRegistry();
+    auto& registry = GetHotpatchNameRegistry();
 
-    // Clear kDispatchPatched flag on each patched method.
+    // Clear kHotpatchActive flag on each patched method.
     for (uint32_t i = 0; i < ctx->method_count; ++i) {
         auto& method = ctx->methods[i];
         if (method.token != 0) {

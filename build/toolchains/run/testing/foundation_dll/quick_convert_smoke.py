@@ -1,6 +1,6 @@
 """Quick convert-to-cpp smoke test across all families.
 Verifies that the dead code cleanup didn't break codegen.
-Skips L2/L3 (pre-existing issues unrelated to recent changes)."""
+Skips Fact Static/Fact Runtime (pre-existing issues unrelated to recent changes)."""
 from __future__ import annotations
 import json, subprocess, sys, time
 from pathlib import Path

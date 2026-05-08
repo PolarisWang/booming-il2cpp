@@ -21,13 +21,13 @@
 #include <cstdlib>
 #include <cstring>
 
-// ── L2 verification fallback: callback instead of abort ───────────────────
+// ── Fact Static verification fallback: callback instead of abort ──────────
 //
-// When the runtime is not fully initialized (L2 verification mode), the
+// When the runtime is not fully initialized (Fact Static verification mode), the
 // generated code's throwing helpers call into RaiseManagedException, which
 // would hit std::abort() -> fast-fail (0xC0000409).  That is uncatchable.
 //
-// Instead, the L2 verification harness registers a fallback callback via
+// Instead, the Fact Static verification harness registers a fallback callback via
 // SetExceptionFallback().  When RaiseManagedException detects an
 // uninitialized runtime, it calls the fallback instead of aborting.
 //
@@ -130,7 +130,7 @@ TypeInfoHandle ResolveTypeByName(const char* fully_qualified_name) {
 
     const auto type_handle = ResolveTypeByName(type_full_name);
     if (type_handle == 0) {
-        // Per-family builds (L3 verification etc.) don't register framework types
+        // Per-family builds (Fact Runtime verification etc.) don't register framework types
         // like InvalidCastException. Use the verification fallback if available.
         if (g_exception_fallback != nullptr) {
             g_exception_fallback();

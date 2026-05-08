@@ -28,7 +28,7 @@
 // ── Phase 1: Declare types needed by sub-headers below ──
 #include "reflection_api.h"
 
-// ── D3 dispatch: InterpreterEntryDirect for patched-method dispatch ──
+// ── Hotpatch dispatch: InterpreterEntryDirect for patched-method dispatch ──
 // Generated code (codegen-emitted module registration) references
 // chaos::il2cpp::runtime_core::InterpreterEntryDirect in dispatch table
 // entries.  Include the declaration here so it is visible to all generated

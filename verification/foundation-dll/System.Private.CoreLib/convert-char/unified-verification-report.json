@@ -1,0 +1,80 @@
+{
+  "family": "convert-char",
+  "assembly": "System.Private.CoreLib",
+  "mode": "standard",
+  "timestamp": "2026-05-08T22:27:28",
+  "duration_ms": 33295,
+  "overall_status": "partial",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "18 methods, 2 custom entries",
+      "details": {
+        "methodCount": 18,
+        "customMethodCount": 2,
+        "hasCustomEntryFile": true,
+        "customMethods": [
+          "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
+          "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 18,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll",
+        "factStaticPassed": 0,
+        "factStaticTotal": 0,
+        "l3Passed": null,
+        "l3Total": null
+      },
+      "errors": [],
+      "duration_ms": 19684
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "failed",
+      "summary": "Fact Static=compile_failed (0/0) Fact Runtime=compile_failed (0/0)",
+      "details": {
+        "factStatic": {
+          "status": "compile_failed",
+          "passed": 0,
+          "total": 0
+        },
+        "factRuntime": {
+          "status": "compile_failed",
+          "passed": 0,
+          "total": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 13484
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "failed",
+      "summary": "false_passing=18, principle=VIOLATION",
+      "details": {
+        "falsePassing": 18,
+        "stubsFound": 18,
+        "skipsFound": 100,
+        "principleStatus": "VIOLATION",
+        "methodsWithoutLowering": 67
+      },
+      "errors": [],
+      "duration_ms": 126
+    }
+  },
+  "coverage": {
+    "methodCoverage": 0.0,
+    "skipRate": -4.5556,
+    "overall": 0.0
+  },
+  "regression": {}
+}

@@ -499,9 +499,9 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			throw new NotSupportedException($"native-aot entry supports only zero-parameter or single-int32 entry methods, but '{entryMethod.SubjectId}' has {entryMethod.ParameterCount} parameters.");
 		}
-		if (!string.Equals(entryMethod.ReturnType, "System.Int32", StringComparison.Ordinal))
+		if (entryMethod.ReturnType is not ("System.Int32" or "System.Void"))
 		{
-			throw new NotSupportedException("native-aot entry '" + entryMethod.SubjectId + "' must return System.Int32");
+			throw new NotSupportedException("native-aot entry '" + entryMethod.SubjectId + "' must return System.Int32 or System.Void");
 		}
 	}
 

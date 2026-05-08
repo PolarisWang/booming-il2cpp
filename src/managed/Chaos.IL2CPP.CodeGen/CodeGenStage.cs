@@ -607,8 +607,51 @@ private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAss
             NativeEntryFunctionName = "RunNativeAot",
             EntrySymbol = entrySymbol,
             EntryMethodToken = entryMethodToken,
-            WorkloadAbi = "int(int32)",
+            WorkloadAbi = DeriveWorkloadAbi(linkedWorld.EntryPointSubjectId),
         };
+    }
+
+    private static string DeriveWorkloadAbi(string entrySubjectId)
+    {
+        // SubjectId format: AssemblyName/FullTypeName::MethodName:ReturnType(ParamTypes)
+        // Examples:
+        //   ...::Main:System.Int32()        → "int()"
+        //   ...::Run:System.Int32(Int32)    → "int(int32)"
+        //   ...::Run:System.Void(Int32)     → "void(int32)"
+
+        // Find the return type: after last ':' and before '('
+        var colonIndex = entrySubjectId.LastIndexOf(':');
+        if (colonIndex < 0)
+            return "int(int32)";
+
+        var parenIndex = entrySubjectId.IndexOf('(', colonIndex);
+        if (parenIndex < 0)
+            return "int(int32)";
+
+        var returnType = entrySubjectId.Substring(colonIndex + 1, parenIndex - colonIndex - 1);
+        var isVoid = string.Equals(returnType, "System.Void", StringComparison.Ordinal);
+
+        // Parse parameter types
+        var paramsPart = entrySubjectId.Substring(parenIndex + 1);
+        var closeParen = paramsPart.IndexOf(')');
+        paramsPart = closeParen >= 0 ? paramsPart.Substring(0, closeParen) : paramsPart;
+
+        var paramTypes = string.IsNullOrWhiteSpace(paramsPart)
+            ? Array.Empty<string>()
+            : paramsPart.Split(',');
+
+        var abiParams = string.Join(",", paramTypes.Select(p =>
+        {
+            p = p.Trim();
+            if (string.Equals(p, "System.Int32", StringComparison.Ordinal) || p.Contains("Int32"))
+                return "int32";
+            return "int32"; // default fallback
+        }));
+
+        if (string.IsNullOrEmpty(abiParams))
+            return isVoid ? "void()" : "int()";
+
+        return isVoid ? $"void({abiParams})" : $"int({abiParams})";
     }
 
     private static NativeAotLoweringPlanArtifact CreateAssemblyFullClosureNativeAotAuditPlan(

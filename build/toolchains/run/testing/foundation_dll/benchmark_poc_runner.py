@@ -29,13 +29,7 @@ from typing import Any
 _HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(_HERE))
 
-from native_codegen_generator import (
-    generate_benchmark_managed_bodies,
-    _slug_from_family_id,
-)
-from native_benchmark_runner import build_native_benchmark as build_native_benchmark_real
-from native_benchmark_runner import run_benchmark as run_benchmark_real
-from benchmark_comparator import compare as compare_benchmarks
+from fact_verifier import verify_benchmark
 
 
 def _info(msg: str) -> None:

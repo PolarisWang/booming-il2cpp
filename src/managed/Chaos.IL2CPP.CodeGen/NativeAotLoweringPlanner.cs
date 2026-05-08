@@ -195,7 +195,7 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<string, int> _methodNativeSymbolToManifestIndex = new();
 
     /// <summary>
-    /// Maps method native symbol → slot index in s_dispatch_table (D3 hotpatch).
+    /// Maps method native symbol → slot index in s_hotpatch_entries (Hotpatch).
     /// Populated by <see cref="BuildDispatchSlotMap"/> before method body emission.
     /// </summary>
     private Dictionary<string, int>? _nativeSymbolToDispatchSlot;
@@ -321,7 +321,7 @@ public sealed partial class NativeAotLoweringPlanner
         var entryBridgeArguments = BuildEntryBridgeArguments(entryMethod);
 
         var abiManifestCode = BuildAbiManifest(reachableMethods);
-        var nameIndexCode = BuildNameIndex(reachableMethods, metadataRegistration);
+        var nameIndexCode = BuildHotpatchTable(reachableMethods, metadataRegistration);
         var moduleRegistrationCode = BuildModuleRegistration();
         if (!string.IsNullOrEmpty(nameIndexCode))
         {
@@ -353,7 +353,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "\"codegen_bridge.h\"",
                 "\"module_registry.h\"",
                 "\"abi_manifest.h\"",
-                "\"dispatch_table.h\"",
+                "\"hotpatch_table.h\"",
                 "\"runtime_vtable.h\"",
                 "\"runtime_instantiation.h\"",
             ],
@@ -368,9 +368,8 @@ public sealed partial class NativeAotLoweringPlanner
             EntryBridgeArguments = entryBridgeArguments,
             ShapeDispatchHeaderContent = _shapeRegistry.GenerateCppShapeHeader(),
             ModuleRegistrationCode = moduleRegistrationCode,
-            GlobalDeclarations =
-                "// Global assert failure counter (defined in runtime_stubs.cpp)\n"
-                + "extern \"C\" CHAOS_IL2CPP_INT32 __chaos_assert_failures;\n",
+            WorkloadAbi = loweringPlan.WorkloadAbi,
+            GlobalDeclarations = string.Empty,
             CodegenNamespace = SanitizeCppIdentifier(loweringPlan.AssemblyName),
         };
     }
@@ -651,10 +650,10 @@ public sealed partial class NativeAotLoweringPlanner
 
     /// <summary>
     /// Build a NativeSymbol → dispatch table slot index mapping by replicating
-    /// the same sorting logic used in <see cref="BuildNameIndex"/>.
+    /// the same sorting logic used in <see cref="BuildHotpatchTable"/>.
     ///
-    /// Only methods with metadata tokens are included (they are the only ones
-    /// that appear in s_dispatch_table).
+    /// Only methods with metadata tokens are included (the only ones
+    /// that appear in s_hotpatch_entries).
     /// </summary>
     private Dictionary<string, int> BuildDispatchSlotMap(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
@@ -683,7 +682,7 @@ public sealed partial class NativeAotLoweringPlanner
             entries.Add((typeName, method.NativeSymbol, token));
         }
 
-        // Same grouping + sort as BuildNameIndex
+        // Same grouping + sort as BuildHotpatchTable
         var grouped = entries
             .GroupBy(e => e.TypeName, StringComparer.Ordinal)
             .OrderBy(g => g.Key, StringComparer.Ordinal)
@@ -2226,6 +2225,8 @@ public sealed record NativeAotTemplateModel
     public required string EntryBridgeArguments { get; init; }
 
     public required string ShapeDispatchHeaderContent { get; init; }
+
+    public required string WorkloadAbi { get; init; }
 
     /// <summary>
     /// C++ code for generic registration helper (data arrays + init function).
