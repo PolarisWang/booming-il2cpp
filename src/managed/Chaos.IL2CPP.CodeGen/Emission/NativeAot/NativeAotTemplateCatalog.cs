@@ -12,10 +12,6 @@ internal static class NativeAotTemplateCatalog
     public const string MethodTemplateRelativePath = "Templates/NativeAot.Method.cpp.scriban";
     public const string RuntimePreludeTemplateRelativePath = "Templates/NativeAot.RuntimePrelude.cpp.scriban";
     public const string SpanRuntimePreludeTemplateRelativePath = "Templates/NativeAot.SpanRuntimePrelude.cpp.scriban";
-    public const string CollectionRuntimePreludeTemplateRelativePath = "Templates/NativeAot.CollectionRuntimePrelude.cpp.scriban";
-    public const string MonitorRuntimePreludeTemplateRelativePath = "Templates/NativeAot.MonitorRuntimePrelude.cpp.scriban";
-    public const string ThreadRuntimePreludeTemplateRelativePath = "Templates/NativeAot.ThreadRuntimePrelude.cpp.scriban";
-    public const string AsyncRuntimePreludeTemplateRelativePath = "Templates/NativeAot.AsyncRuntimePrelude.cpp.scriban";
     public const string StaticInitializationDefinitionTemplateRelativePath = "Templates/NativeAot.StaticInitializationDefinition.cpp.scriban";
     public const string StaticInitializationActionTemplateRelativePath = "Templates/NativeAot.StaticInitializationAction.cpp.scriban";
     public const string StaticInitializationCallTemplateRelativePath = "Templates/NativeAot.StaticInitializationCall.cpp.scriban";
@@ -67,26 +63,6 @@ internal static class NativeAotTemplateCatalog
     public static Template GetSpanRuntimePreludeTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(SpanRuntimePreludeTemplateRelativePath);
-    }
-
-    public static Template GetCollectionRuntimePreludeTemplate()
-    {
-        return ScribanTemplateRenderer.LoadTemplate(CollectionRuntimePreludeTemplateRelativePath);
-    }
-
-    public static Template GetMonitorRuntimePreludeTemplate()
-    {
-        return ScribanTemplateRenderer.LoadTemplate(MonitorRuntimePreludeTemplateRelativePath);
-    }
-
-    public static Template GetThreadRuntimePreludeTemplate()
-    {
-        return ScribanTemplateRenderer.LoadTemplate(ThreadRuntimePreludeTemplateRelativePath);
-    }
-
-    public static Template GetAsyncRuntimePreludeTemplate()
-    {
-        return ScribanTemplateRenderer.LoadTemplate(AsyncRuntimePreludeTemplateRelativePath);
     }
 
     public static Template GetStaticInitializationDefinitionTemplate()

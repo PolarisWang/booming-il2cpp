@@ -485,19 +485,29 @@ public sealed partial class NativeAotLoweringPlanner
 				// Determine header flags from decision engine
 				HeaderKind hdrKind = GetHeaderKind(item);
 				byte flags = (byte)hdrKind; // PureType=0, ThinLockable=1, Fat=2
-				handler.AppendLiteral("inline TypeInfo ");
+				_vtableLengths.TryGetValue(item, out int vtLen);
+				// TypeInfoHot (32B)
+				handler.AppendLiteral("inline TypeInfoHot ");
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item));
 				handler.AppendLiteral(" = { ");
 				handler.AppendFormatted(parentExpr);
-				handler.AppendLiteral(", ");
+				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(", ");
+				handler.AppendFormatted(vtLen.ToString());
+				handler.AppendLiteral("u, 32 /* warm_delta */, 1 /* reference */, ");
+				handler.AppendFormatted(flags.ToString());
+				handler.AppendLiteral(" };");
+				stringBuilder.AppendLine(ref handler);
+				// TypeInfoWarm (32B)
+				handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline TypeInfoWarm ");
+				handler.AppendFormatted(GetNativeTypeInfoWarmSymbol(item));
+				handler.AppendLiteral(" = { ");
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 0, 1 /* reference */, ");
-				handler.AppendFormatted(flags.ToString());
-				handler.AppendLiteral(", nullptr, 0u };");
+				handler.AppendLiteral(", 0, 0, 0 };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -517,11 +527,16 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfo ");
+				handler.AppendLiteral("inline TypeInfoHot ");
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item2));
-				handler.AppendLiteral(" = { nullptr, ");
+				handler.AppendLiteral(" = { nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", nullptr, nullptr, 0, 0, 3 /* interface */, 0, nullptr, 0u };");
+				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 3 /* interface */, 0 };");
+				stringBuilder.AppendLine(ref handler);
+				handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline TypeInfoWarm ");
+				handler.AppendFormatted(GetNativeTypeInfoWarmSymbol(item2));
+				handler.AppendLiteral(" = { nullptr, nullptr, 0, 0, 0, 0 };");
 				stringBuilder.AppendLine(ref handler);
 			}
 
@@ -533,11 +548,16 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfo ");
+				handler.AppendLiteral("inline TypeInfoHot ");
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
-				handler.AppendLiteral(" = { nullptr, ");
+				handler.AppendLiteral(" = { nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", nullptr, nullptr, 0, 0, 2 /* value */, 0, nullptr, 0u };");
+				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 2 /* value */, 0 };");
+				stringBuilder.AppendLine(ref handler);
+				handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline TypeInfoWarm ");
+				handler.AppendFormatted(GetNativeTypeInfoWarmSymbol(item3));
+				handler.AppendLiteral(" = { nullptr, nullptr, 0, 0, 0, 0 };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -594,15 +614,20 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfo ");
+				handler.AppendLiteral("inline TypeInfoHot ");
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
-				handler.AppendLiteral(" = { nullptr, ");
+				handler.AppendLiteral(" = { nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", ");
+				handler.AppendLiteral(", 0u, 32 /* warm_delta */, 2 /* value (boxed) */, 0 };");
+				stringBuilder.AppendLine(ref handler);
+				handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline TypeInfoWarm ");
+				handler.AppendFormatted(GetNativeTypeInfoWarmSymbol(item3));
+				handler.AppendLiteral(" = { ");
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 0, 2 /* value (boxed) */, 0, nullptr, 0u };");
+				handler.AppendLiteral(", 0, 0, 0 };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -727,26 +752,34 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    return false;");
 		builder.AppendLine("}");
 		builder.AppendLine();
-		// ── Interface check (iface_map + runtime_iface_map linear scan) ──
+		// ── Interface check (iface_map + runtime_iface_map linear scan via WarmPtr) ──
 		builder.AppendLine("bool chaos_type_implements_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept");
 		builder.AppendLine("{");
-		builder.AppendLine("    if (chaos_actual_type_info->iface_count == 0 &&");
-		builder.AppendLine("        chaos_actual_type_info->runtime_iface_count == 0)");
+		builder.AppendLine("    if (chaos_actual_type_info == nullptr || chaos_target_interface_type_info == nullptr)");
 		builder.AppendLine("    {");
 		builder.AppendLine("        return false;");
 		builder.AppendLine("    }");
 		builder.AppendLine();
-		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_actual_type_info->iface_count; chaos_i++)");
+		builder.AppendLine("    const auto* chaos_warm = GetWarmPtr(chaos_actual_type_info);");
+		builder.AppendLine("    if (chaos_warm == nullptr) return false;");
+		builder.AppendLine();
+		builder.AppendLine("    if (chaos_warm->iface_count == 0 &&");
+		builder.AppendLine("        chaos_warm->runtime_iface_count == 0)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        if (chaos_actual_type_info->iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
+		builder.AppendLine("        return false;");
+		builder.AppendLine("    }");
+		builder.AppendLine();
+		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_warm->iface_count; chaos_i++)");
+		builder.AppendLine("    {");
+		builder.AppendLine("        if (chaos_warm->iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
 		builder.AppendLine("        {");
 		builder.AppendLine("            return true;");
 		builder.AppendLine("        }");
 		builder.AppendLine("    }");
 		builder.AppendLine();
-		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_actual_type_info->runtime_iface_count; chaos_i++)");
+		builder.AppendLine("    for (CHAOS_IL2CPP_UINT32 chaos_i = 0; chaos_i < chaos_warm->runtime_iface_count; chaos_i++)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        if (chaos_actual_type_info->runtime_iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
+		builder.AppendLine("        if (chaos_warm->runtime_iface_map[chaos_i].iface_stable_id == chaos_target_interface_type_info->stable_id)");
 		builder.AppendLine("        {");
 		builder.AppendLine("            return true;");
 		builder.AppendLine("        }");

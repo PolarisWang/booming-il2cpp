@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.CodeGen;
@@ -54,7 +55,7 @@ public sealed partial class NativeAotLoweringPlanner
         int ExitOffset
     ) : StructuredIRNode;
 
-    /// <summary>Flat region that falls back to EmitInstructionRange.</summary>
+    /// <summary>Flat region (kept for safety — should be unreachable at runtime).</summary>
     internal sealed record IRFlatRegion(
         IReadOnlyList<AotCoreIrInstructionArtifact> Instructions,
         IReadOnlySet<int> Offsets
@@ -258,7 +259,7 @@ public sealed partial class NativeAotLoweringPlanner
     //
     // The emitter is a recursive tree walk that produces C++ control
     // flow directly 鈥?no `goto chaos_ip_*`, no `_suppressGotoNext`,
-    // no merge labels.  Leaf instructions use EmitLinearInstruction
+    // no merge labels.  Leaf instructions use EmitInstruction
     // (no goto-next appended).
     // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
@@ -274,7 +275,6 @@ public sealed partial class NativeAotLoweringPlanner
             IRDoWhileLoop loop => ContainsResidualBranchTerminators(loop.Body),
             IRSwitch sw => sw.CaseBodies.Values.Any(ContainsResidualBranchTerminators) || (sw.DefaultBody != null && ContainsResidualBranchTerminators(sw.DefaultBody)),
             IRExceptionRegion er => ContainsResidualBranchTerminators(er.TryBody) || ContainsResidualBranchTerminators(er.HandlerBody),
-            IRFlatRegion => false,
             _ => false,
         };
     }
@@ -408,7 +408,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         foreach (var instr in block.BodyInstructions)
         {
-            EmitLinearInstruction(builder, instr, indentation);
+            EmitInstruction(builder, instr, indentation);
         }
 
         if (block.Terminator != null)
@@ -479,7 +479,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Emit condition instructions (push operands onto eval stack)
         foreach (var instr in ite.ConditionInstructions)
-            EmitLinearInstruction(builder, instr, indentation);
+            EmitInstruction(builder, instr, indentation);
 
         string inner = indentation + "    ";
         string bodyIndent = inner + "    ";
@@ -579,7 +579,7 @@ public sealed partial class NativeAotLoweringPlanner
             // No condition 鈥?infinite loop (while (true) { ... })
             // Condition instructions might still contain setup code.
             foreach (var instr in w.ConditionInstructions)
-                EmitLinearInstruction(builder, instr, indentation);
+                EmitInstruction(builder, instr, indentation);
 
             builder.AppendLine(indentation + "while (true)");
             builder.AppendLine(indentation + "{");
@@ -592,7 +592,7 @@ public sealed partial class NativeAotLoweringPlanner
         var terminator = w.ConditionTerminator;
 
         foreach (var instr in w.ConditionInstructions)
-            EmitLinearInstruction(builder, instr, indentation);
+            EmitInstruction(builder, instr, indentation);
 
         if (terminator.Op == "brtrue" || terminator.Op == "brfalse")
         {
@@ -674,7 +674,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (dw.LatchTerminator != null)
         {
             foreach (var instr in dw.LatchInstructions)
-                EmitLinearInstruction(builder, instr, bodyIndent);
+                EmitInstruction(builder, instr, bodyIndent);
 
             var terminator = dw.LatchTerminator;
             if (terminator.Op == "brtrue" || terminator.Op == "brfalse")
@@ -716,7 +716,7 @@ public sealed partial class NativeAotLoweringPlanner
         string bodyIndent = caseIndent + "    ";
 
         foreach (var instr in sw.SwitchInstructions)
-            EmitLinearInstruction(builder, instr, indentation);
+            EmitInstruction(builder, instr, indentation);
 
         builder.AppendLine(indentation + "{");
         builder.AppendLine(inner + $"const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
@@ -1043,6 +1043,8 @@ public sealed partial class NativeAotLoweringPlanner
             bool result = TryBuildStructuredExceptionMethodBody(method, instructions, offsets, out body, out maxDepth);
             if (!result || body is IRFlatRegion)
             {
+                if (body is IRFlatRegion)
+                    Interlocked.Increment(ref s_flatRegionCount);
                 LogIrreducibleMethod(method, isException: true,
                     reason: body is IRFlatRegion ? "exception-shape-unhandled" : "exception-shape-failed",
                     instructions.Count, 0, 0, 0);
@@ -1057,6 +1059,7 @@ public sealed partial class NativeAotLoweringPlanner
         var cfg = BuildControlFlowGraph(instructions, offsets);
         if (!cfg.IsReducible)
         {
+            Interlocked.Increment(ref s_flatRegionCount);
             body = new IRFlatRegion(instructions, offsets);
             maxDepth = ComputeMaxEvalStackDepth(instructions);
             LogIrreducibleMethod(method, isException: false,
@@ -1073,6 +1076,7 @@ public sealed partial class NativeAotLoweringPlanner
                 reason: "residual-br-leave",
                 instructions.Count, cfg.Blocks.Count, cfg.LoopHeaders.Count,
                 method.ExceptionRegionCount);
+            Interlocked.Increment(ref s_flatRegionCount);
             body = new IRFlatRegion(instructions, offsets);
         }
         else
@@ -1084,6 +1088,7 @@ public sealed partial class NativeAotLoweringPlanner
         maxDepth = ComputeMaxEvalStackDepth(instructions, method.ReturnAbi);
         if (maxDepth < 0)
         {
+            Interlocked.Increment(ref s_flatRegionCount);
             body = new IRFlatRegion(instructions, offsets);
             maxDepth = ComputeMaxEvalStackDepth(instructions);
             LogIrreducibleMethod(method, isException: false,
@@ -1098,13 +1103,15 @@ public sealed partial class NativeAotLoweringPlanner
         StringBuilder builder,
         AotCoreIrMethodArtifact method,
         IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
-        IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset,
-        IReadOnlySet<int> offsets)
+        IReadOnlySet<int> offsets,
+        StructuredIRNode? body = null)
     {
         if (instructions.Count == 0)
             return;
 
-        TryBuildStructuredMethodBody(method, instructions, offsets, out var body, out _);
+        body ??= (TryBuildStructuredMethodBody(method, instructions, offsets, out var b, out _) ? b : null);
+        if (body is null)
+            return;
 
         StructuredSlotEmissionContext? previousSlotContext = _activeStructuredSlotContext;
         _activeStructuredSlotContext = new StructuredSlotEmissionContext();
@@ -1124,8 +1131,8 @@ public sealed partial class NativeAotLoweringPlanner
         IRFlatRegion fr,
         string indentation)
     {
-        var nextOffsets = CreateNextOffsets(fr.Instructions.ToArray());
-        EmitInstructionRange(builder, method, fr.Instructions, nextOffsets, fr.Offsets);
+        throw new NotSupportedException(
+            $"IRFlatRegion should be unreachable — method '{SafeShortName(method)}' has flat goto.");
     }
 
     private bool TryBuildStructuredExceptionMethodBody(
@@ -1355,6 +1362,7 @@ public sealed partial class NativeAotLoweringPlanner
     private static long s_irreducibleCount;
     private static long s_totalMethodCount;
     private static readonly Dictionary<string, long> s_irreducibleReasons = new();
+    private static long s_flatRegionCount;
 
     private static void LogStructuredMethod(
         AotCoreIrMethodArtifact method, string kind,

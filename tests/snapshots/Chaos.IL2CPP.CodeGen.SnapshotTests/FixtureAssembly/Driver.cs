@@ -508,3 +508,24 @@ public static class LdindI8Helper
     // Used by fixture 50-ldind-i8
     public static int RunLdindI8() => 0;
 }
+
+// --- Fixture 51: ldind.i2 + ldind.r4 + ldind.r8 + ldind.ref ---
+public static class LdindWideHelper
+{
+    // Used by fixture 51-ldind-wide
+    public static int RunLdindWide() => 0;
+}
+
+// --- Fixture 52: stind.r4 + stind.r8 + stind.ref ---
+public static class StindWideHelper
+{
+    // Used by fixture 52-stind-wide
+    public static int RunStindWide() => 0;
+}
+
+// --- Fixture 53: ldelem.ref + stelem.ref ---
+public static class ArrayRefHelper
+{
+    // Used by fixture 53-array-ref
+    public static int RunArrayRef() => 0;
+}

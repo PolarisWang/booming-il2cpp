@@ -22,284 +22,12 @@ public sealed partial class NativeAotLoweringPlanner
 	private string AllocateLinearScratchName(string prefix)
 		=> "chaos_" + prefix + "_" + (_linearScratchCounter++).ToString(CultureInfo.InvariantCulture);
 
-	private void EmitCatchOnlyExceptionMethodBody(StringBuilder builder, AotCoreIrMethodArtifact method, CatchOnlyExceptionMethodShape catchOnlyShape, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		EmitLinearInstructionSequence(builder, catchOnlyShape.PrefixInstructions, "    ");
-		if (catchOnlyShape.PrefixInstructions.Count > 0)
-		{
-			builder.AppendLine();
-		}
-		builder.AppendLine("    try");
-		builder.AppendLine("    {");
-		EmitStructuredInstructionRange(builder, method, catchOnlyShape.TryInstructions, nextOffsetsByIlOffset, offsets);
-		builder.AppendLine("    }");
-		builder.AppendLine("    catch (const chaos_managed_exception& chaos_exception)");
-		builder.AppendLine("    {");
-		builder.AppendLine("        auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_exception.object_value);");
-		builder.AppendLine("        if (chaos_header == nullptr)");
-		builder.AppendLine("        {");
-		builder.AppendLine("            throw;");
-		builder.AppendLine("        }");
-		StringBuilder stringBuilder = builder;
-		StringBuilder stringBuilder3 = stringBuilder;
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(63, 1, stringBuilder);
-		handler.AppendLiteral("        if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &");
-		handler.AppendFormatted(GetNativeTypeInfoSymbol(catchOnlyShape.ExceptionRegion.CatchTypeSubjectId!));
-		handler.AppendLiteral("))");
-		stringBuilder3.AppendLine(ref handler);
-		builder.AppendLine("        {");
-		builder.AppendLine("            throw;");
-		builder.AppendLine("        }");
-		builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = chaos_exception.object_value;");
-		EmitStructuredInstructionRange(builder, method, catchOnlyShape.HandlerInstructions, nextOffsetsByIlOffset, offsets);
-		builder.AppendLine("    }");
-		builder.AppendLine();
-		EmitStructuredInstructionRange(builder, method, catchOnlyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
-	}
 
-	private void EmitFilterOnlyExceptionMethodBody(StringBuilder builder, AotCoreIrMethodArtifact method, FilterOnlyExceptionMethodShape filterOnlyShape, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		EmitLinearInstructionSequence(builder, filterOnlyShape.PrefixInstructions, "    ");
-		if (filterOnlyShape.PrefixInstructions.Count > 0)
-		{
-			builder.AppendLine();
-		}
-		EmitFilterTryCatchCore(builder, method, filterOnlyShape.TryInstructions, filterOnlyShape.FilterInstructions, filterOnlyShape.HandlerInstructions, nextOffsetsByIlOffset, offsets, "    ");
-		builder.AppendLine();
-		EmitStructuredInstructionRange(builder, method, filterOnlyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
-	}
-
-	private void EmitCatchAndFinallyExceptionMethodBody(StringBuilder builder, AotCoreIrMethodArtifact method, CatchAndFinallyExceptionMethodShape catchAndFinallyShape, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		EmitLinearInstructionSequence(builder, catchAndFinallyShape.PrefixInstructions, "    ");
-		if (catchAndFinallyShape.PrefixInstructions.Count > 0)
-		{
-			builder.AppendLine();
-		}
-		EmitCatchAndFinallyOuterFinallyScopes(builder, method, catchAndFinallyShape, 0, nextOffsetsByIlOffset, offsets);
-		builder.AppendLine();
-		EmitStructuredInstructionRange(builder, method, catchAndFinallyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
-	}
-
-	private void EmitFinallyOnlyExceptionMethodBody(StringBuilder builder, AotCoreIrMethodArtifact method, FinallyOnlyExceptionMethodShape finallyOnlyShape, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		EmitStructuredInstructionRange(builder, method, finallyOnlyShape.PrefixInstructions, nextOffsetsByIlOffset, offsets);
-		if (finallyOnlyShape.PrefixInstructions.Count > 0)
-		{
-			builder.AppendLine();
-		}
-		EmitFinallyOnlyScopes(builder, method, finallyOnlyShape, 0, nextOffsetsByIlOffset, offsets);
-		builder.AppendLine();
-		EmitStructuredInstructionRange(builder, method, finallyOnlyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
-	}
-
-	private void EmitFinallyOnlyScopes(StringBuilder builder, AotCoreIrMethodArtifact method, FinallyOnlyExceptionMethodShape finallyOnlyShape, int finallyIndex, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		if (finallyIndex >= finallyOnlyShape.FinallyHandlers.Count)
-		{
-			EmitStructuredInstructionRange(builder, method, finallyOnlyShape.TryInstructions, nextOffsetsByIlOffset, offsets);
-		}
-		else
-		{
-			builder.AppendLine("{");
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(73, 1, builder);
-			handler.AppendLiteral("    auto chaos_finally_only_guard_");
-			handler.AppendFormatted(finallyIndex);
-			handler.AppendLiteral(" = chaos_make_finally_scope_guard([&]()");
-			builder.AppendLine(ref handler);
-			builder.AppendLine("    {");
-			EmitStructuredFinallyHandlerSequence(builder, finallyOnlyShape.FinallyHandlers[finallyIndex], "        ");
-			builder.AppendLine("    });");
-			EmitFinallyOnlyScopes(builder, method, finallyOnlyShape, finallyIndex + 1, nextOffsetsByIlOffset, offsets);
-			builder.AppendLine("}");
-		}
-	}
-
-	private void EmitCatchAndFinallyOuterFinallyScopes(StringBuilder builder, AotCoreIrMethodArtifact method, CatchAndFinallyExceptionMethodShape catchAndFinallyShape, int finallyIndex, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		if (finallyIndex >= catchAndFinallyShape.OuterFinallyHandlers.Count)
-		{
-			EmitCatchAndFinallyTryCatchCore(builder, method, catchAndFinallyShape, nextOffsetsByIlOffset, offsets);
-			return;
-		}
-		builder.AppendLine("    {");
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(78, 1, builder);
-		handler.AppendLiteral("        auto chaos_catch_finally_guard_");
-		handler.AppendFormatted(finallyIndex);
-		handler.AppendLiteral(" = chaos_make_finally_scope_guard([&]()");
-		builder.AppendLine(ref handler);
-		builder.AppendLine("        {");
-		EmitStructuredFinallyHandlerSequence(builder, catchAndFinallyShape.OuterFinallyHandlers[finallyIndex], "            ");
-		builder.AppendLine("        });");
-		EmitCatchAndFinallyOuterFinallyScopes(builder, method, catchAndFinallyShape, finallyIndex + 1, nextOffsetsByIlOffset, offsets);
-		builder.AppendLine("    }");
-	}
-
-	private void EmitCatchAndFinallyTryCatchCore(StringBuilder builder, AotCoreIrMethodArtifact method, CatchAndFinallyExceptionMethodShape catchAndFinallyShape, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		builder.AppendLine("        try");
-		builder.AppendLine("        {");
-		if (catchAndFinallyShape.PreInnerFinallyInstructions.Count > 0)
-		{
-			EmitLinearInstructionSequence(builder, catchAndFinallyShape.PreInnerFinallyInstructions, "            ");
-			builder.AppendLine();
-		}
-		StringBuilder stringBuilder;
-		StringBuilder.AppendInterpolatedStringHandler handler;
-		if (catchAndFinallyShape.InnerFinallyHandler is null)
-		{
-			EmitStructuredInstructionRange(builder, method, catchAndFinallyShape.InnerTryInstructions, nextOffsetsByIlOffset, offsets);
-		}
-		else
-		{
-			builder.AppendLine("            {");
-			builder.AppendLine("                auto chaos_inner_finally_guard = chaos_make_finally_scope_guard([&]()");
-			builder.AppendLine("                {");
-			EmitStructuredFinallyHandlerSequence(builder, catchAndFinallyShape.InnerFinallyHandler, "                    ");
-			builder.AppendLine("                });");
-			EmitStructuredInstructionRange(builder, method, catchAndFinallyShape.InnerTryInstructions, nextOffsetsByIlOffset, offsets);
-			builder.AppendLine("            }");
-			if (catchAndFinallyShape.PostInnerTryInstructions.Count > 0)
-			{
-				builder.AppendLine();
-				EmitStructuredInstructionRange(builder, method, catchAndFinallyShape.PostInnerTryInstructions, nextOffsetsByIlOffset, offsets);
-			}
-		}
-		builder.AppendLine("        }");
-		builder.AppendLine("        catch (const chaos_managed_exception& chaos_exception)");
-		builder.AppendLine("        {");
-		builder.AppendLine("            auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_exception.object_value);");
-		builder.AppendLine("            if (chaos_header == nullptr)");
-		builder.AppendLine("            {");
-		builder.AppendLine("                throw;");
-		builder.AppendLine("            }");
-		stringBuilder = builder;
-		StringBuilder stringBuilder4 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(67, 1, stringBuilder);
-		handler.AppendLiteral("            if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &");
-		handler.AppendFormatted(GetNativeTypeInfoSymbol(catchAndFinallyShape.CatchRegion.CatchTypeSubjectId!));
-		handler.AppendLiteral("))");
-		stringBuilder4.AppendLine(ref handler);
-		builder.AppendLine("            {");
-		builder.AppendLine("                throw;");
-		builder.AppendLine("            }");
-		builder.AppendLine("            chaos_eval_stack[chaos_stack_top++] = chaos_exception.object_value;");
-		EmitStructuredInstructionRange(builder, method, catchAndFinallyShape.HandlerInstructions, nextOffsetsByIlOffset, offsets);
-		builder.AppendLine("        }");
-	}
-
-	private void EmitFilterAndFinallyExceptionMethodBody(StringBuilder builder, AotCoreIrMethodArtifact method, FilterAndFinallyExceptionMethodShape filterAndFinallyShape, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		EmitLinearInstructionSequence(builder, filterAndFinallyShape.PrefixInstructions, "    ");
-		if (filterAndFinallyShape.PrefixInstructions.Count > 0)
-		{
-			builder.AppendLine();
-		}
-		EmitNestedFinallyScopes(builder, method, filterAndFinallyShape, 0, nextOffsetsByIlOffset, offsets);
-		builder.AppendLine();
-		EmitStructuredInstructionRange(builder, method, filterAndFinallyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
-	}
-
-	private void EmitNestedFinallyScopes(StringBuilder builder, AotCoreIrMethodArtifact method, FilterAndFinallyExceptionMethodShape filterAndFinallyShape, int finallyIndex, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		if (finallyIndex >= filterAndFinallyShape.FinallyHandlers.Count)
-		{
-			EmitFilterAndFinallyTryCatchCore(builder, method, filterAndFinallyShape, nextOffsetsByIlOffset, offsets);
-			return;
-		}
-		builder.AppendLine("    {");
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(72, 1, builder);
-		handler.AppendLiteral("        auto chaos_finally_guard_");
-		handler.AppendFormatted(finallyIndex);
-		handler.AppendLiteral(" = chaos_make_finally_scope_guard([&]()");
-		builder.AppendLine(ref handler);
-		builder.AppendLine("        {");
-		EmitStructuredFinallyHandlerSequence(builder, filterAndFinallyShape.FinallyHandlers[finallyIndex], "            ");
-		builder.AppendLine("        });");
-		EmitNestedFinallyScopes(builder, method, filterAndFinallyShape, finallyIndex + 1, nextOffsetsByIlOffset, offsets);
-		builder.AppendLine("    }");
-	}
-
-	private void EmitFilterAndFinallyTryCatchCore(StringBuilder builder, AotCoreIrMethodArtifact method, FilterAndFinallyExceptionMethodShape filterAndFinallyShape, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		EmitFilterTryCatchCore(builder, method, filterAndFinallyShape.TryInstructions, filterAndFinallyShape.FilterInstructions, filterAndFinallyShape.HandlerInstructions, nextOffsetsByIlOffset, offsets, "        ");
-	}
-
-	private void EmitFilterTryCatchCore(StringBuilder builder, AotCoreIrMethodArtifact method, IReadOnlyList<AotCoreIrInstructionArtifact> tryInstructions, IReadOnlyList<AotCoreIrInstructionArtifact> filterInstructions, IReadOnlyList<AotCoreIrInstructionArtifact> handlerInstructions, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets, string indentation)
-	{
-		StringBuilder stringBuilder = builder;
-		StringBuilder stringBuilder2 = stringBuilder;
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(3, 1, stringBuilder);
-		handler.AppendFormatted(indentation);
-		handler.AppendLiteral("try");
-		stringBuilder2.AppendLine(ref handler);
-		stringBuilder = builder;
-		StringBuilder stringBuilder3 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder);
-		handler.AppendFormatted(indentation);
-		handler.AppendLiteral("{");
-		stringBuilder3.AppendLine(ref handler);
-		EmitStructuredInstructionRange(builder, method, tryInstructions, nextOffsetsByIlOffset, offsets);
-		stringBuilder = builder;
-		StringBuilder stringBuilder5 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder);
-		handler.AppendFormatted(indentation);
-		handler.AppendLiteral("}");
-		stringBuilder5.AppendLine(ref handler);
-		stringBuilder = builder;
-		StringBuilder stringBuilder6 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(54, 1, stringBuilder);
-		handler.AppendFormatted(indentation);
-		handler.AppendLiteral("catch (const chaos_managed_exception& chaos_exception)");
-		stringBuilder6.AppendLine(ref handler);
-		stringBuilder = builder;
-		StringBuilder stringBuilder7 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder);
-		handler.AppendFormatted(indentation);
-		handler.AppendLiteral("{");
-		stringBuilder7.AppendLine(ref handler);
-		stringBuilder = builder;
-		StringBuilder stringBuilder8 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(71, 1, stringBuilder);
-		handler.AppendFormatted(indentation);
-		handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top++] = chaos_exception.object_value;");
-		stringBuilder8.AppendLine(ref handler);
-		EmitFilterInstructionRange(builder, method, filterInstructions, handlerInstructions, nextOffsetsByIlOffset, offsets);
-		stringBuilder = builder;
-		StringBuilder stringBuilder10 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder);
-		handler.AppendFormatted(indentation);
-		handler.AppendLiteral("}");
-		stringBuilder10.AppendLine(ref handler);
-	}
-
-	private void EmitFilterInstructionRange(StringBuilder builder, AotCoreIrMethodArtifact method, IReadOnlyList<AotCoreIrInstructionArtifact> filterInstructions, IReadOnlyList<AotCoreIrInstructionArtifact> handlerInstructions, IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset, IReadOnlySet<int> offsets)
-	{
-		foreach (AotCoreIrInstructionArtifact filterInstruction in filterInstructions)
-		{
-			int requiredIlOffset2 = GetRequiredIlOffset(filterInstruction);
-			if (string.Equals(filterInstruction.Op, "endfilter", StringComparison.Ordinal))
-			{
-				builder.AppendLine("    if (chaos_eval_stack[--chaos_stack_top] == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
-				builder.AppendLine("    {");
-				builder.AppendLine("        throw;");
-				builder.AppendLine("    }");
-				builder.AppendLine("    chaos_eval_stack[chaos_stack_top++] = chaos_exception.object_value;");
-			}
-			else
-			{
-				EmitInstruction(builder, method, filterInstruction, nextOffsetsByIlOffset[requiredIlOffset2], offsets);
-			}
-			builder.AppendLine();
-		}
-		EmitStructuredInstructionRange(builder, method, handlerInstructions, nextOffsetsByIlOffset, offsets);
-	}
-
-	private void EmitLinearInstructionSequence(StringBuilder builder, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, string indentation)
+	private void EmitInstructionSequence(StringBuilder builder, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, string indentation)
 	{
 		foreach (AotCoreIrInstructionArtifact instruction in instructions)
 		{
-			EmitLinearInstruction(builder, instruction, indentation);
+			EmitInstruction(builder, instruction, indentation);
 		}
 	}
 
@@ -311,10 +39,10 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		if (emissionPlan.Guard is null)
 		{
-			EmitLinearInstructionSequence(builder, emissionPlan.BodyInstructions, indentation);
+			EmitInstructionSequence(builder, emissionPlan.BodyInstructions, indentation);
 			return;
 		}
-		EmitLinearInstructionSequence(builder, emissionPlan.Guard.ConditionInstructions, indentation);
+		EmitInstructionSequence(builder, emissionPlan.Guard.ConditionInstructions, indentation);
 		StringBuilder stringBuilder = builder;
 		StringBuilder stringBuilder2 = stringBuilder;
 		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder);
@@ -334,7 +62,7 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendFormatted(indentation);
 		handler.AppendLiteral("    {");
 		stringBuilder4.AppendLine(ref handler);
-		EmitLinearInstructionSequence(builder, emissionPlan.BodyInstructions, indentation + "        ");
+		EmitInstructionSequence(builder, emissionPlan.BodyInstructions, indentation + "        ");
 		stringBuilder = builder;
 		StringBuilder stringBuilder5 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(5, 1, stringBuilder);
@@ -349,7 +77,7 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder6.AppendLine(ref handler);
 	}
 
-	private void EmitLinearInstruction(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+	private void EmitInstruction(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 		switch (instruction.Op)
 		{
@@ -1727,17 +1455,6 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}    const auto chaos_left = static_cast<{operandType}>({ConsumeEvalStackValueExpression()});");
 		EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left {comparisonOperator} chaos_right ? 1 : 0)");
 		builder.AppendLine($"{indentation}}}");
-	}
-
-	private static IReadOnlyDictionary<int, int?> CreateNextOffsets(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
-	{
-		Dictionary<int, int?> dictionary = new Dictionary<int, int?>(instructions.Count);
-		for (int i = 0; i < instructions.Count; i++)
-		{
-			int requiredIlOffset = GetRequiredIlOffset(instructions[i]);
-			dictionary[requiredIlOffset] = ((i + 1 < instructions.Count) ? new int?(GetRequiredIlOffset(instructions[i + 1])) : ((int?)null));
-		}
-		return dictionary;
 	}
 
 	private static bool LegacyTryCreateCatchOnlyExceptionMethodShape(AotCoreIrMethodArtifact method, out CatchOnlyExceptionMethodShape? catchOnlyShape)

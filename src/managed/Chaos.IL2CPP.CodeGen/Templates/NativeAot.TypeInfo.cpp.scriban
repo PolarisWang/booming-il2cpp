@@ -1,4 +1,5 @@
-// ── TypeInfo declarations ──
+// ── TypeInfoHot + TypeInfoWarm declarations ──
 {{~ for entry in entries ~}}
-{{ indentation }}inline TypeInfo {{ entry.symbol }} = { {{ entry.parent_expr }}, {{ entry.stable_id }}ULL, {{ entry.iface_map_expr }}, nullptr, {{ entry.iface_count }}, {{ entry.flags }}, {{ entry.shape }} };
+{{ indentation }}inline TypeInfoHot {{ entry.symbol }} = { {{ entry.parent_expr }}, nullptr, {{ entry.stable_id }}ULL, 0u, 32 /* warm_delta */, {{ entry.shape }}, {{ entry.flags }} };
+{{ indentation }}inline TypeInfoWarm {{ entry.symbol }}_warm = { {{ entry.iface_map_expr }}, nullptr, {{ entry.iface_count }}, 0, 0, 0 };
 {{~ end ~}}

@@ -14,7 +14,7 @@
 #include <gc.h>                   // GC_END_STUBBORN_CHANGE for write barriers
 
 // ═══════════════════════════════════════════════════════════════════
-// A4-Dual+V2 Object Header Architecture
+// A5-Trinity Object Header Architecture
 // ═══════════════════════════════════════════════════════════════════
 // Three header variants discriminated by TypeInfo.flags[1:0]:
 //
@@ -26,7 +26,7 @@
 //                       — full dispatch + sync
 //
 // All three store TypeInfo* at offset [0], so chaos_object_get_type_info()
-// is a simple *(TypeInfo**)obj read — no bit magic needed.
+// is a single *(TypeInfoHot**)obj read — no bit magic needed.
 //
 // PureType: value-type boxes, sealed types with 0 virtual methods,
 //           compiler-verified no-sync.
@@ -38,20 +38,20 @@
 // Used for value-type boxes, sealed types with no virtual methods.
 // No sync_state — compiler-verified no-sync.
 struct PureTypeHeader {
-    const TypeInfo* type_info = nullptr;
+    const TypeInfoHot* type_info = nullptr;
 };
 
 // ── ThinLockable header (16B) ─────────────────────────────────────
 // Used for most reference types. sync_state at [8] for thin locking.
 struct ThinLockableHeader {
-    const TypeInfo* type_info   = nullptr;  // [0]
+    const TypeInfoHot* type_info   = nullptr;  // [0]
     uint64_t        sync_state  = 0;        // [8] — thin lock / sync block index
 };
 
 // ── Fat header (24B) ──────────────────────────────────────────────
 // Full-featured: virtual dispatch table + type identity + sync.
 struct FatHeader {
-    const TypeInfo* type_info   = nullptr;  // [0]
+    const TypeInfoHot* type_info   = nullptr;  // [0]
     const void**    vtable      = nullptr;  // [8]
     uint64_t        sync_state  = 0;        // [16] — thin lock / sync block index
 };
@@ -65,18 +65,10 @@ struct FatHeader {
 // };  // 24B (defined in runtime_core.cpp)
 
 // ── Unified type_info accessor ─────────────────────────────────────
-// All three header kinds store TypeInfo* at offset [0].
-inline const TypeInfo* chaos_object_get_type_info(const void* obj) noexcept {
-    return *static_cast<const TypeInfo* const*>(obj);
+// All three header kinds store TypeInfoHot* at offset [0].
+inline const TypeInfoHot* chaos_object_get_type_info(const void* obj) noexcept {
+    return *static_cast<const TypeInfoHot* const*>(obj);
 }
-
-// ── Inherited chaos_object_header for legacy compat ───────────────
-// New code should use FatHeader directly. This alias prevents
-// compilation errors in older generated stubs.
-struct chaos_object_header {
-    const void**    vtable      = nullptr;  // [0]
-    const TypeInfo* type_info   = nullptr;   // [8]
-};
 
 // ── Managed string type ──────────────────────────────────────────
 // Used by generated code for reinterpret_cast access to string length.
@@ -104,6 +96,7 @@ void    ChaosArrayClear(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHA
 CHAOS_IL2CPP_INT32 ChaosArrayGetLength(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 dimension) noexcept;
 // Type marshalling
 CHAOS_IL2CPP_INTPTR ChaosStoreInt64(CHAOS_IL2CPP_INT64 value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStoreFloat32(CHAOS_IL2CPP_FLOAT32 value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosStoreFloat64(CHAOS_IL2CPP_FLOAT64 value) noexcept;
 CHAOS_IL2CPP_INT64  ChaosLoadInt64(CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_FLOAT64 ChaosLoadFloat64(CHAOS_IL2CPP_INTPTR value) noexcept;

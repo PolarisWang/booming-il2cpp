@@ -232,7 +232,7 @@ static bool ResolveTypeRef(CHAOS_IL2CPP_INTPTR handle, TypeRef& out) noexcept {
 // Returns nullptr for ReflectionQuery encoded handles or when Tier 0
 // type_info_ptrs is not populated.
 
-static const TypeInfo* GetTypeInfoFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept {
+static const TypeInfoHot* GetTypeInfoFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept {
     TypeRef tr;
     if (!ResolveTypeRef(handle, tr)) return nullptr;
     if (tr.module->type_info_ptrs == nullptr) return nullptr;
@@ -729,14 +729,15 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFrom(
     // Walk source's parent chain checking each type's iface_map
     const auto* walk = source_info;
     while (walk != nullptr) {
-        if (walk->iface_map != nullptr) {
-            for (uint32_t i = 0; i < walk->iface_count; i++) {
-                if (walk->iface_map[i].iface_stable_id == target_stable) return 1;
+        const auto* warm = GetWarmPtr(walk);
+        if (warm->iface_map != nullptr) {
+            for (uint32_t i = 0; i < warm->iface_count; i++) {
+                if (warm->iface_map[i].iface_stable_id == target_stable) return 1;
             }
         }
-        if (walk->runtime_iface_map != nullptr) {
-            for (uint32_t i = 0; i < walk->runtime_iface_count; i++) {
-                if (walk->runtime_iface_map[i].iface_stable_id == target_stable) return 1;
+        if (warm->runtime_iface_map != nullptr) {
+            for (uint32_t i = 0; i < warm->runtime_iface_count; i++) {
+                if (warm->runtime_iface_map[i].iface_stable_id == target_stable) return 1;
             }
         }
         walk = walk->parent;
@@ -746,7 +747,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFrom(
 
 // ── IsInstanceOfType ───────────────────────────────────────────────
 // Returns 1 if `obj` is an instance of `type` (or a subclass/implementor).
-// Reads TypeInfo* from the object header, compares via parent / iface chain.
+// Reads TypeInfoHot* from the object header, compares via parent / iface chain.
 CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfType(
     CHAOS_IL2CPP_INTPTR obj,
     CHAOS_IL2CPP_INTPTR type_handle) noexcept
@@ -775,14 +776,15 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfType(
         uint64_t target_stable = target_info->stable_id;
         walk = obj_type;
         while (walk != nullptr) {
-            if (walk->iface_map != nullptr) {
-                for (uint32_t i = 0; i < walk->iface_count; i++) {
-                    if (walk->iface_map[i].iface_stable_id == target_stable) return 1;
+            const auto* warm = GetWarmPtr(walk);
+            if (warm->iface_map != nullptr) {
+                for (uint32_t i = 0; i < warm->iface_count; i++) {
+                    if (warm->iface_map[i].iface_stable_id == target_stable) return 1;
                 }
             }
-            if (walk->runtime_iface_map != nullptr) {
-                for (uint32_t i = 0; i < walk->runtime_iface_count; i++) {
-                    if (walk->runtime_iface_map[i].iface_stable_id == target_stable) return 1;
+            if (warm->runtime_iface_map != nullptr) {
+                for (uint32_t i = 0; i < warm->runtime_iface_count; i++) {
+                    if (warm->runtime_iface_map[i].iface_stable_id == target_stable) return 1;
                 }
             }
             walk = walk->parent;
@@ -817,14 +819,15 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetInterfaces(CHAOS_IL2CPP_INTPTR type_handle
         if (h != 0) { s_buffer[1 + count++] = static_cast<CHAOS_IL2CPP_INTPTR>(h); }
     };
 
-    if (type_info->iface_map != nullptr) {
-        for (uint32_t i = 0; i < type_info->iface_count; i++) {
-            try_add(type_info->iface_map[i].iface_stable_id);
+    const auto* type_info_warm = GetWarmPtr(type_info);
+    if (type_info_warm->iface_map != nullptr) {
+        for (uint32_t i = 0; i < type_info_warm->iface_count; i++) {
+            try_add(type_info_warm->iface_map[i].iface_stable_id);
         }
     }
-    if (type_info->runtime_iface_map != nullptr) {
-        for (uint32_t i = 0; i < type_info->runtime_iface_count; i++) {
-            try_add(type_info->runtime_iface_map[i].iface_stable_id);
+    if (type_info_warm->runtime_iface_map != nullptr) {
+        for (uint32_t i = 0; i < type_info_warm->runtime_iface_count; i++) {
+            try_add(type_info_warm->runtime_iface_map[i].iface_stable_id);
         }
     }
 
