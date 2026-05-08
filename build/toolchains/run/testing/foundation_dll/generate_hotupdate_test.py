@@ -1,4 +1,4 @@
-"""Generate per-family D3 hotupdate C++ test from CodeGen-generated host C++.
+"""Generate per-family Hotpatch C++ test from CodeGen-generated host C++.
 
 For each family, this script:
   1. Reads the host (genuine) native-aot.generated.cpp to discover MethodN symbols
@@ -6,12 +6,12 @@ For each family, this script:
   3. Embeds .patchdata as a C++ byte array in HotUpdateTest.cpp
   4. Generates HotUpdateTest.cpp that:
      - Bootstraps the runtime through the ABI bridge
-     - Calls ApplyPatchFromMemory to apply D3 dispatch hotpatch
+     - Calls ApplyPatchFromMemory to apply Hotpatch dispatch
      - For each method: verifies dispatch entry flags, calls InterpreterEntryDirect
      - Calls Unpatch, verifies dispatch entry flags are cleared
   5. Creates/updates CMakeLists.txt with proper linkage (no patch C++ TU)
 
-The test verifies the D3 dual-layer dispatch lifecycle:
+The test verifies the Hotpatch dual-layer dispatch lifecycle:
   ApplyPatchFromMemory → dispatch table patching → InterpreterEntryDirect → Unpatch
 """
 
@@ -153,7 +153,7 @@ def _find_genuine_cpp_for_fix(family_slug: str) -> Path | None:
     doesn't have the new format.
 
     The flat path is preferred because it goes through the current codegen
-    which emits D3 dispatch (s_dispatch_table slot lookup + ArgBuffer).
+    which emits hotpatch dispatch (s_hotpatch_entries slot lookup + ArgBuffer).
     NativeEntry files are from the old emit-native-aot pipeline which
     lacks D3 dispatch call sites.
     """
@@ -161,7 +161,7 @@ def _find_genuine_cpp_for_fix(family_slug: str) -> Path | None:
     # Accept both named-namespace format (canonical new pipeline) and
     # "hybrid" format (anonymous namespace + CHAOS_IL2CPP_INT32 RunNativeAot,
     # from the batch pipeline).  The flat path goes through current codegen
-    # which emits D3 dispatch for same-module calls and has more complete
+    # which emits Hotpatch dispatch for same-module calls and has more complete
     # external runtime helpers.  The old-format fix pipeline handles the
     # anonymous namespace fixes that hybrid families need.
     #
@@ -462,7 +462,7 @@ def _generate_hotupdate_test(
     host_symbols: list[str],
     method_subject_ids: list[str],
 ) -> str:
-    """Generate the per-family D3 hotupdate C++ test source."""
+    """Generate the per-family Hotpatch C++ test source."""
     family_id = f"family/System.Private.CoreLib/{family_slug.replace('-', '/')}"
     ns_slug = _ns_slug_from_family_id(family_id)
     method_count = len(host_symbols)
@@ -499,7 +499,7 @@ def _embed_patch_data(family_slug: str) -> tuple[str, int]:
 
     data = patchdata_path.read_bytes()
     lines = [
-        "// ── Embedded .patchdata for D3 dispatch hotpatch ──────────────",
+        "// ── Embedded .patchdata for Hotpatch dispatch ──────────────",
         "// Generated from: " + str(patchdata_path.relative_to(_VERIFICATION)),
         f"// Size: {len(data)} bytes",
         "",
@@ -527,7 +527,7 @@ def _emit_header(
         f"// Family: {family_id}",
         f"// {method_count} methods",
         "//",
-        "// Uses the codegen-emitted dispatch table + .patchdata for D3 verification:",
+        "// Uses the codegen-emitted dispatch table + .patchdata for Hotpatch verification:",
         "//   ApplyPatchFromMemory -> dispatch table patching -> InterpreterEntryDirect -> Unpatch",
         "//",
     ])
@@ -535,7 +535,7 @@ def _emit_header(
         '#include "bootstrap.h"',
         '#include "codegen_bridge.h"',
         '#include "patch_loader.h"',
-        '#include "dispatch_table.h"',
+        '#include "hotpatch_table.h"',
         '#include "runtime_core.h"',
         '#include "interpreter_entry.h"',
         '#include "exception_helpers.h"',
@@ -622,7 +622,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "    using chaos::il2cpp::bootstrap::PeekBootstrapState;",
         "    using chaos::il2cpp::runtime_core::ApplyPatchFromMemory;",
         "    using chaos::il2cpp::runtime_core::Unpatch;",
-        "    using chaos::il2cpp::runtime_core::RuntimeDispatchLookupBySlot;",
+        "    using chaos::il2cpp::runtime_core::HotpatchLookupBySlot;",
         "    using chaos::il2cpp::runtime_core::PatchContext;",
         "    using chaos::il2cpp::runtime_core::InterpreterEntryDirect;",
         "",
@@ -671,7 +671,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "    (void)chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
         "",
         "    // Verify dispatch table is registered (codegen static initializer).",
-        "    auto* first_entry = RuntimeDispatchLookupBySlot(0u, 0u);",
+        "    auto* first_entry = HotpatchLookupBySlot(0u, 0u);",
         "    if (first_entry == nullptr) {",
         '        std::fprintf(stderr, "FATAL: no dispatch table registered by codegen TU\\n");',
         "        return 1;",
@@ -701,7 +701,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
     if has_patch_data:
         lines.extend([
             "",
-            "    // ── D3 dispatch hotpatch via ApplyPatchFromMemory ────────────────",
+            "    // ── Hotpatch dispatch via ApplyPatchFromMemory ────────────────",
             f'    PatchContext* patch_ctx = ApplyPatchFromMemory(kPatchData, kPatchDataSize, "{host_class_name}");',
             "    if (patch_ctx == nullptr) {",
             '        std::fprintf(stderr, "FATAL: ApplyPatchFromMemory failed\\n");',
@@ -716,7 +716,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
     else:
         lines.extend([
             "",
-            "    // ── D3 dispatch hotpatch disabled (no .patchdata) ──────────────",
+            "    // ── Hotpatch dispatch disabled (no .patchdata) ──────────────",
             "    uint32_t d3_patched_count = 0u;",
             "    PatchContext* patch_ctx = nullptr;",
             "",
@@ -747,10 +747,10 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "        const uint32_t token = kBaseToken + i;",
         "        bool step_ok = true;",
         "",
-        "        // Step 1: Get dispatch entry via RuntimeDispatchLookupBySlot.",
-        "        auto* entry = RuntimeDispatchLookupBySlot(0u, i);",
+        "        // Step 1: Get dispatch entry via HotpatchLookupBySlot.",
+        "        auto* entry = HotpatchLookupBySlot(0u, i);",
         "        if (entry == nullptr) {",
-        '            std::fprintf(stderr, "FAIL[%u]: RuntimeDispatchLookupBySlot returned null\\n", i);',
+        '            std::fprintf(stderr, "FAIL[%u]: HotpatchLookupBySlot returned null\\n", i);',
         "            step_ok = false;",
         "        }",
         "",
@@ -763,8 +763,8 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
     ])
     if has_patch_data:
         lines.extend([
-            "        // Step 3: Verify dispatch entry has kDispatchPatched flag set.",
-            "        bool patched_flag = (entry != nullptr) && (entry->flags & kDispatchPatched);",
+            "        // Step 3: Verify dispatch entry has kHotpatchActive flag set.",
+            "        bool patched_flag = (entry != nullptr) && (entry->flags & kHotpatchActive);",
             "        if (!patched_flag) {",
             '            std::fprintf(stderr, "FAIL[%u]: dispatch entry not patched (flags=0x%08x)\\n",',
             "                i, entry ? entry->flags : 0u);",
@@ -822,7 +822,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "        }",
         "    }",
         "",
-        "    // ── D3 Unpatch ────────────────────────────────────────────────────",
+        "    // ── Hotpatch Unpatch ────────────────────────────────────",
     ])
     if has_patch_data:
         lines.extend([
@@ -836,8 +836,8 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             "        // Per-method revert_ok is set to true only when the flag is",
             "        // confirmed cleared — this populates revertVerified in JSON output.",
             "        for (uint32_t j = 0u; j < kMethodCount; j++) {",
-            "            auto* e = RuntimeDispatchLookupBySlot(0u, j);",
-            "            if (e == nullptr || (e->flags & kDispatchPatched)) {",
+            "            auto* e = HotpatchLookupBySlot(0u, j);",
+            "            if (e == nullptr || (e->flags & kHotpatchActive)) {",
             '                std::fprintf(stderr, "FAIL[unpatch]: entry[%u] still patched after Unpatch (flags=0x%08x)\\n",',
             "                    j, e ? e->flags : 0u);",
             "                failed_count++;",
@@ -915,7 +915,7 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
 
 
 def _generate_hotupdate_cmake_full(family_slug: str) -> str:
-    """Generate the complete CMakeLists.txt with D3 hotupdate target."""
+    """Generate the complete CMakeLists.txt with Hotpatch target."""
     ns_slug = _ns_slug_from_family_id(family_id=f"family/System.Private.CoreLib/{family_slug.replace('-', '/')}")
     target = f"chaos_hotupdate_{ns_slug}"
 
@@ -931,7 +931,7 @@ def _generate_hotupdate_cmake_full(family_slug: str) -> str:
     return (
         f"add_library({dummy_lib} INTERFACE)\n"
         "\n"
-        "# Per-family D3 hotupdate test.\n"
+        "# Per-family Hotpatch test.\n"
         "# The genuine AOT TU provides dispatch table + NameIndex via static init;\n"
         "# HotUpdateTest.cpp embeds .patchdata and calls ApplyPatchFromMemory.\n"
         "# No patch C++ TU needed — the interpreter runs the patched IL directly.\n"
@@ -976,7 +976,7 @@ def _generate_hotupdate_cmake_full(family_slug: str) -> str:
 
 
 def generate_family(family_slug: str) -> dict[str, Any]:
-    """Generate the D3 hotupdate test for a single family."""
+    """Generate the Hotpatch test for a single family."""
     print(f"\n{'='*60}")
     print(f"Family: {family_slug}")
     print(f"{'='*60}")
@@ -1006,7 +1006,7 @@ def generate_family(family_slug: str) -> dict[str, Any]:
     ns_slug = _ns_slug_from_family_id(f"family/System.Private.CoreLib/{family_slug.replace('-', '/')}")
     _fix_genuine_for_hotupdate_keep_extern(family_slug, ns_slug)
 
-    # Append D3 hotupdate target to existing CMakeLists.txt
+    # Append Hotpatch target to existing CMakeLists.txt
     # (preserves benchmark static library target already in the file).
     cmake_hotupdate_section = _generate_hotupdate_cmake_full(family_slug)
     cmake_path = _VERIFICATION / family_slug / "il2cpp_dist" / "CMakeLists.txt"
@@ -1544,7 +1544,7 @@ def _inject_interpreter_entry_include(content: str) -> str:
     at file scope, and a `using` declaration in the anonymous namespace would
     conflict with it.
     """
-    marker = '#include "dispatch_table.h"'
+    marker = '#include "hotpatch_table.h"'
     include_line = '#include "interpreter_entry.h"'
     if include_line in content:
         return content  # already injected
@@ -1553,7 +1553,7 @@ def _inject_interpreter_entry_include(content: str) -> str:
     if idx < 0:
         return content  # can't find insertion point
 
-    # Insert #include after the dispatch_table.h line
+    # Insert #include after the hotpatch_table.h line
     line_end = content.find('\n', idx)
     insert_at = line_end + 1
     inject = '\n' + include_line + '\n'
@@ -2413,12 +2413,12 @@ def main() -> None:
     args = parser.parse_args()
 
     families = args.families or FAMILIES
-    print(f"Generating per-family D3 hotupdate tests (pure dispatch-table + interpreter) - {len(families)} families")
+    print(f"Generating per-family Hotpatch tests (pure dispatch-table + interpreter) - {len(families)} families")
 
     for family_slug in families:
         generate_family(family_slug)
 
-    print(f"\nDone. D3 test and CMake artifacts in verification/foundation-dll/.../il2cpp_dist/hotupdate/")
+    print(f"\nDone. Hotpatch test and CMake artifacts in verification/foundation-dll/.../il2cpp_dist/hotupdate/")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,64 @@
+Compiling HotUpdateTest.cpp...
+HotUpdateTest.cpp
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): warning C4200: nonstandard extension used: zero-sized array in struct/union
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\array-indexing-copy\il2cpp_dist\hotupdate\HotUpdateTest.cpp(279): warning C4311: 'reinterpret_cast': pointer truncation from 'void *' to 'int32_t'
+D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\array-indexing-copy\il2cpp_dist\hotupdate\HotUpdateTest.cpp(279): warning C4302: 'reinterpret_cast': truncation from 'void *' to 'int32_t'
+Compiling genuine-fixed native-aot.generated.cpp...
+native-aot.generated.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos/trace.h(45): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\common\chaos/trace.h(53): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\common\chaos\log.h(134): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): warning C4200: nonstandard extension used: zero-sized array in struct/union
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+Linking...
+Build OK
+array-indexing-copy: EXITCODE=1
+Compiling HotUpdateTest.cpp...
+HotUpdateTest.cpp
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): warning C4200: nonstandard extension used: zero-sized array in struct/union
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\buffer-memory\il2cpp_dist\hotupdate\HotUpdateTest.cpp(253): warning C4311: 'reinterpret_cast': pointer truncation from 'void *' to 'int32_t'
+D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\buffer-memory\il2cpp_dist\hotupdate\HotUpdateTest.cpp(253): warning C4302: 'reinterpret_cast': truncation from 'void *' to 'int32_t'
+Compiling genuine-fixed native-aot.generated.cpp...
+native-aot.generated.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos/trace.h(45): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\common\chaos/trace.h(53): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\common\chaos\log.h(134): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): warning C4200: nonstandard extension used: zero-sized array in struct/union
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+Linking...
+Build OK
+buffer-memory: EXITCODE=1
+Compiling HotUpdateTest.cpp...
+HotUpdateTest.cpp
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): warning C4200: nonstandard extension used: zero-sized array in struct/union
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\collections-generic-core\il2cpp_dist\hotupdate\HotUpdateTest.cpp(290): warning C4311: 'reinterpret_cast': pointer truncation from 'void *' to 'int32_t'
+D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\collections-generic-core\il2cpp_dist\hotupdate\HotUpdateTest.cpp(290): warning C4302: 'reinterpret_cast': truncation from 'void *' to 'int32_t'
+Compiling genuine-fixed native-aot.generated.cpp...
+native-aot.generated.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos/trace.h(45): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\common\chaos/trace.h(53): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\common\chaos\log.h(134): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): warning C4200: nonstandard extension used: zero-sized array in struct/union
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+Linking...
+Build OK
+collections-generic-core: EXITCODE=1
+Compiling HotUpdateTest.cpp...
+HotUpdateTest.cpp
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): warning C4200: nonstandard extension used: zero-sized array in struct/union
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\convert-char\il2cpp_dist\hotupdate\HotUpdateTest.cpp(341): warning C4311: 'reinterpret_cast': pointer truncation from 'void *' to 'int32_t'
+D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\convert-char\il2cpp_dist\hotupdate\HotUpdateTest.cpp(341): warning C4302: 'reinterpret_cast': truncation from 'void *' to 'int32_t'
+Compiling genuine-fixed native-aot.generated.cpp...
+native-aot.generated.cpp
+D:\agent\booming-il2cpp\src\native\common\chaos/trace.h(45): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\common\chaos/trace.h(53): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\common\chaos\log.h(134): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): warning C4200: nonstandard extension used: zero-sized array in struct/union
+D:\agent\booming-il2cpp\src\native\runtime-core\marshal_abi.h(128): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+Linking...
+Build OK
+convert-char: EXITCODE=0

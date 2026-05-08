@@ -136,65 +136,65 @@ typedef struct MetadataRegistrationV0 {
     uint32_t metadata_usage_count;
 } MetadataRegistrationV0;
 
-/* ── Dispatch Table entry ──────────────────────────────────────────────
+/* ── Hotpatch Dispatch Table entry ─────────────────────────────────────
  *
  * Each AOT module emits a static dispatch table with one entry per public
  * method.  Codegen-generated call sites use pattern-aware branching:
- *   if (entry.flags & kDispatchPatched) call InterpreterEntryDirect
+ *   if (entry.flags & kHotpatchActive) call InterpreterEntryDirect
  *   else                               call direct_ptr directly.
  *
  * The dispatch table is an extern "C" symbol emitted by codegen and consumed
  * by both generated code and the runtime PatchLoader.                           */
-#define kDispatchPatched    (1u << 0)
+#define kHotpatchActive    (1u << 0)
 
-typedef struct DispatchEntryV0 {
+typedef struct HotpatchEntryV0 {
     void*       direct_ptr;        /* AOT function pointer (set by codegen)   */
     void*       interrupt_ptr;     /* = &InterpreterEntryDirect              */
     uintptr_t   method_key;        /* = PatchMethod* (0 when not patched)   */
-    uint32_t    flags;             /* bit 0: kDispatchPatched                 */
-} DispatchEntryV0;
+    uint32_t    flags;             /* bit 0: kHotpatchActive                 */
+} HotpatchEntryV0;
 
-/* ── NameIndex entries ──────────────────────────────────────────────
+/* ── Hotpatch type name index entries ────────────────────────────
  *
  * Two-level name-based method index used by PatchLoader at runtime to map
  * (type_name, method_name) → AOT token.  Codegen emits flat sorted arrays
- * in .rodata; the NameIndexRegistry performs binary search on them.       */
-typedef struct NameIndexTypeEntryV0 {
+ * in .rodata; the HotpatchNameRegistry performs binary search on them.       */
+typedef struct HotpatchTypeEntryV0 {
     const char* type_name;          /* fully-qualified type name (UTF-8)    */
     uint32_t    first_method_index; /* index into the parallel method array */
     uint16_t    method_count;       /* number of methods in this type       */
-} NameIndexTypeEntryV0;
+} HotpatchTypeEntryV0;
 
-typedef struct NameIndexMethodEntryV0 {
+typedef struct HotpatchMethodEntryV0 {
     const char* method_name;        /* method name (UTF-8)                  */
     uint32_t    method_token;       /* AOT metadata token (0x06xxxxxx)     */
     uint16_t    param_count;        /* number of parameters                 */
-} NameIndexMethodEntryV0;
+} HotpatchMethodEntryV0;
 
 /* ── Token→Slot entry ───────────────────────────────────────────────
  *
  * Reverse mapping from metadata token to dispatch table slot index.
  * Sorted by token for binary search.                                     */
-typedef struct TokenSlotEntryV0 {
+typedef struct HotpatchSlotEntryV0 {
     uint32_t    token;              /* AOT metadata token                   */
     uint32_t    slot;               /* dispatch table slot index            */
-} TokenSlotEntryV0;
+} HotpatchSlotEntryV0;
 
-/* ── Per-module name index registration bundle ──────────────────────
+/* ── Per-module hotpatch registration bundle ────────────────────-─────
  *
  * Codegen emits one of these per AOT module.  Bootstrap passes it to
- * NameIndexRegistry::RegisterModule().  All arrays point into .rodata.     */
-typedef struct NameIndexModuleV0 {
+ * HotpatchNameRegistry::RegisterModule().  All arrays point into .rodata.     */
+typedef struct HotpatchModuleV0 {
     const char*                 module_name;          /* diagnostic only   */
-    const NameIndexTypeEntryV0* type_entries;
+    const HotpatchTypeEntryV0*  type_entries;
     uint32_t                    type_entry_count;
-    const NameIndexMethodEntryV0* method_entries;
+    const HotpatchMethodEntryV0* method_entries;
     uint32_t                    method_entry_count;
-    const TokenSlotEntryV0*     token_slot_entries;
+    const HotpatchSlotEntryV0*  token_slot_entries;
     uint32_t                    token_slot_entry_count;
-    DispatchEntryV0*            dispatch_table;       /* pointer to table  */
-    uint32_t                    dispatch_table_size;
-} NameIndexModuleV0;
+    HotpatchEntryV0*            entry_table;       /* pointer to table  */
+    uint32_t                    entry_table_size;
+} HotpatchModuleV0;
 
 typedef struct CodegenRegistrationOptionsV0 {
     uint32_t struct_size;

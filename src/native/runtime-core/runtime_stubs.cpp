@@ -504,17 +504,14 @@ CHAOS_IL2CPP_INT32 ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept
     return *reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(ptr);
 }
 
-// -- Global assert failure counter (incremented by assertion helpers in generated code) --
-extern "C" CHAOS_IL2CPP_INT32 __chaos_assert_failures = 0;
-
 // -- Generic registration callback (defined by generated code via static init) --
 extern "C" void (*g_chaos_populate_generic_registration)(void) = nullptr;
 
-// -- NameIndex module registration callback (set by generated code via static init) --
-// Called at the end of BootstrapRuntime() to register per-module name index
+// -- Hotpatch module registration callback (set by generated code via static init) --
+// Called at the end of BootstrapRuntime() to register per-module hotpatch
 // data for hot-patch dispatch.  Each AOT module emits a static initializer
 // that sets this pointer before main().
-extern "C" void (*g_chaos_register_name_index_modules)(void) = nullptr;
+extern "C" void (*g_chaos_register_hotpatch_modules)(void) = nullptr;
 
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
@@ -524,13 +521,13 @@ extern "C" void (*g_chaos_register_name_index_modules)(void) = nullptr;
 // &InterpreterEntryDirect in dispatch table entries.  This wrapper provides
 // the C-linkage symbol for verification builds.  The real implementation
 // (in interpreter_entry.cpp) requires the chaos_interpreter library; this
-// stub is sufficient for L2 checksum verification which never invokes
+// stub is sufficient for Fact Static checksum verification which never invokes
 // hot-patch dispatch.
 extern "C" void InterpreterEntryDirect(
     uintptr_t /*method_key*/,
     void*     /*args_buf*/,
     void*     /*ret_buf*/) noexcept
 {
-    // Not reached during L2 checksum verification.
+    // Not reached during Fact Static checksum verification.
     // Full implementation requires chaos_interpreter.lib.
 }

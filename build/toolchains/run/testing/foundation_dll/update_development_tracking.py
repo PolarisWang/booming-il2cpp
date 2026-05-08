@@ -250,14 +250,14 @@ def _load_pipeline_errors() -> dict[str, dict[str, Any]]:
                         "failedStep": failed_step or "unknown",
                         "timestamp": data.get("timestamp", ""),
                     }
-                elif r.get("steps", {}).get("l2_verify") != "OK":
-                    # L2 didn't fully pass — record as warning, not fatal error
-                    l2_passed = r.get("l2_passed", 0)
-                    l2_total = r.get("l2_total", 0)
-                    if l2_total and l2_passed < l2_total:
+                elif r.get("steps", {}).get("fact_static_verify") != "OK":
+                    # Fact Static didn't fully pass — record as warning, not fatal error
+                    fs_passed = r.get("fact_static_passed", 0)
+                    fs_total = r.get("fact_static_total", 0)
+                    if fs_total and fs_passed < fs_total:
                         errors[slug] = {
-                            "error": f"L2: {l2_passed}/{l2_total} passed",
-                            "failedStep": "l2_verify",
+                            "error": f"Fact Static: {fs_passed}/{fs_total} passed",
+                            "failedStep": "fact_static_verify",
                             "timestamp": data.get("timestamp", ""),
                         }
         except (OSError, json.JSONDecodeError):

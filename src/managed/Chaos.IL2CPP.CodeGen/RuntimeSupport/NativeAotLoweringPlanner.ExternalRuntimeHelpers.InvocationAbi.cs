@@ -851,7 +851,7 @@ public sealed partial class NativeAotLoweringPlanner
 		return ManagedNaming.CreateInstantiationStubSymbol(instantiationStubId);
 	}
 
-	// ── ArgBuffer helpers for dispatch-table-aware call sites (D3) ──
+	// ── ArgBuffer helpers for dispatch-table-aware call sites (Hotpatch) ──
 
 	/// <summary>
 	/// Returns the byte size needed in an ArgBuffer for a single ABI slot.

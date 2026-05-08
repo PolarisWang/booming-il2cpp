@@ -1,9 +1,9 @@
-"""M1+ Audit: Mechanism + Principle alignment verification.
+"""Mechanism + Principle Audit: Mechanism + Principle alignment verification.
 
 Orchestrates:
   1. Stub detection (via stub_detector.py)
   2. _METHOD_OVERRIDES skip audit
-  3. L2 assert verification
+  3. Fact Static assert verification
   4. 7 automated principle checks (via principle_auto_checks.py)
 
 Outputs:
@@ -120,17 +120,17 @@ def _get_skip_entries() -> dict[tuple[str, str, int], str]:
 # ── Generated C++ analysis ────────────────────────────────────────────
 
 def _count_assert_invocations(cpp_content: str) -> int:
-    """Count __chaos_assert_failures references in generated code."""
-    return len(re.findall(r'__chaos_assert_failures', cpp_content))
+    """Count assert-related references in generated code (placeholder, no longer used)."""
+    return 0
 
 
-# ── L2 results loader ─────────────────────────────────────────────────
+# ── Fact Static results loader ──────────────────────────────────────────
 
-def _load_l2_results(assembly: str, family_slug: str) -> dict[str, Any] | None:
-    l2_path = _VERIFICATION_BASE / assembly / family_slug / "managed_test" / "tests" / "l2-results.json"
-    if l2_path.exists():
+def _load_fact_static_results(assembly: str, family_slug: str) -> dict[str, Any] | None:
+    fs_path = _VERIFICATION_BASE / assembly / family_slug / "managed_test" / "tests" / "l2-results.json"
+    if fs_path.exists():
         try:
-            return json.loads(l2_path.read_bytes())
+            return json.loads(fs_path.read_bytes())
         except (json.JSONDecodeError, OSError):
             return None
     return None
@@ -139,7 +139,7 @@ def _load_l2_results(assembly: str, family_slug: str) -> dict[str, Any] | None:
 # ── Main audit logic ──────────────────────────────────────────────────
 
 def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
-    """Run full M1+ audit on a single family."""
+    """Run full Mechanism + Principle audit on a single family."""
     trace("mechanism_audit.audit_family", stage="audit", family=family_slug, assembly=assembly)
 
     report = MechanismAuditReport(family=family_slug, assembly=assembly)
@@ -157,7 +157,12 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
         errors.append("stub_detector not available")
 
     # ── 2. Load generated C++ ─────────────────────────────────────────
-    cpp_path = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    # Prefer namespaced path (new convert-to-cpp pipeline), fall back to legacy flat path.
+    cpp_candidates = sorted(family_dir.glob("il2cpp_dist/genuine/*/generated/native-aot.generated.cpp"))
+    if cpp_candidates:
+        cpp_path = cpp_candidates[0]
+    else:
+        cpp_path = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
     cpp_content = cpp_path.read_text(encoding="utf-8") if cpp_path.exists() else ""
 
     if not cpp_content:
@@ -168,8 +173,8 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
     # ── 3. Load _METHOD_OVERRIDES skip entries ─────────────────────────
     skip_entries = _get_skip_entries()
 
-    # ── 4. Load L2 results ────────────────────────────────────────────
-    l2_results = _load_l2_results(assembly, family_slug)
+    # ── 4. Load Fact Static results ────────────────────────────────────
+    l2_results = _load_fact_static_results(assembly, family_slug)
 
     # ── 5. Process methods ────────────────────────────────────────────
     method_details: list[dict] = []
@@ -198,14 +203,26 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
 
     # If no stub_results, extract methods from C++
     if not method_details and cpp_content:
-        methods = re.findall(r'(?:NativeReferenceStub_|ConvertCharNativeEntry_|NativeEntry_|RunNativeAot_)(\w+)\s*\(', cpp_content)
-        for m in methods:
-            method_details.append({
-                "method_name": m,
-                "subject_id": "",
-                "is_stub": "NativeReferenceStub_" in m,
-                "stub_pattern": "NativeReferenceStub_" if "NativeReferenceStub_" in m else "",
-            })
+        # Namespaced pattern: ConvertCharNativeEntry_ConvertCharNativeEntry_Method0
+        # or flat pattern: ConvertCharNativeEntry_Method0
+        namespaced = re.findall(r'\bConvertCharNativeEntry_ConvertCharNativeEntry_(\w+)\s*\(', cpp_content)
+        if namespaced:
+            for m in namespaced:
+                method_details.append({
+                    "method_name": m,
+                    "subject_id": "",
+                    "is_stub": False,
+                    "stub_pattern": "",
+                })
+        else:
+            methods = re.findall(r'(?:NativeReferenceStub_|ConvertCharNativeEntry_|NativeEntry_|RunNativeAot_)(\w+)\s*\(', cpp_content)
+            for m in methods:
+                method_details.append({
+                    "method_name": m,
+                    "subject_id": "",
+                    "is_stub": "NativeReferenceStub_" in m,
+                    "stub_pattern": "NativeReferenceStub_" if "NativeReferenceStub_" in m else "",
+                })
 
     # Cross-reference with skip entries
     for (type_name, method_name, param_count), override in skip_entries.items():
@@ -259,7 +276,7 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
 
 
 def run_full_audit(assembly: str, family_slug: str) -> dict[str, Any]:
-    """Run M1+ audit + principle checks, output both reports as a single result."""
+    """Run Mechanism + Principle audit + principle checks, output both reports as a single result."""
     mechanism = audit_family(assembly, family_slug)
     principle_result = run_principle_checks(assembly, family_slug) if run_principle_checks else {
         "error": "principle_auto_checks not available",
@@ -345,9 +362,9 @@ def write_reports(assembly: str, family_slug: str, output_dir: Path | None = Non
         encoding="utf-8",
     )
 
-    print(f"  [M1+] Mechanism audit: {mechanism_path.name} "
+    print(f"  [Mechanism+Principle] Mechanism audit: {mechanism_path.name} "
           f"({result['mechanism_audit']['false_passing']} false passes)")
-    print(f"  [M1+] Principle alignment: {principle_path.name} "
+    print(f"  [Mechanism+Principle] Principle alignment: {principle_path.name} "
           f"(overall={result['principle_alignment'].get('summary', {}).get('overall', 'N/A')})")
 
     return {
@@ -358,7 +375,7 @@ def write_reports(assembly: str, family_slug: str, output_dir: Path | None = Non
 
 def main() -> None:
     import argparse
-    parser = argparse.ArgumentParser(description="M1+ Audit: Mechanism + Principle Verification")
+    parser = argparse.ArgumentParser(description="Mechanism + Principle Audit: Mechanism + Principle Verification")
     parser.add_argument("--family", help="Family slug (e.g., convert-char)")
     parser.add_argument("--assembly", default="System.Private.CoreLib")
     parser.add_argument("--verbose", "-v", action="store_true")

@@ -335,7 +335,7 @@ def check_p3_patch_entry(assembly: str, family_slug: str) -> PrincipleCheckResul
     cpp = cpp_path.read_text(encoding="utf-8")
 
     # Parse dispatch table entries from the generated C++
-    dispatch_match = re.search(r'static DispatchEntryV0\s+\w+\[(\d+)\]\s*=\s*\{(.*?)\};', cpp, re.DOTALL)
+    dispatch_match = re.search(r'static HotpatchEntryV0\s+\w+\[(\d+)\]\s*=\s*\{(.*?)\};', cpp, re.DOTALL)
     if not dispatch_match:
         return PrincipleCheckResult(
             check_id="p3_patch_entry", principle="P3",
@@ -369,18 +369,18 @@ def check_p3_patch_entry(assembly: str, family_slug: str) -> PrincipleCheckResul
             },
         )
 
-    # Also check for NameIndexModuleV0 registration
-    has_name_index = "NameIndexModuleV0" in cpp and "s_name_index_module" in cpp
+    # Also check for HotpatchModuleV0 registration
+    has_hotpatch_module = "HotpatchModuleV0" in cpp and "s_hotpatch_module" in cpp
 
     return PrincipleCheckResult(
         check_id="p3_patch_entry", principle="P3",
-        status="ALIGNED" if has_name_index else "CONCERN",
+        status="ALIGNED" if has_hotpatch_module else "CONCERN",
         summary=f"Dispatch table: {table_size} entries, all with interrupt_ptr [OK]" +
-                ("" if has_name_index else " (NameIndexModule not found — runtime registration may be incomplete)"),
+                ("" if has_hotpatch_module else " (HotpatchModule not found — runtime registration may be incomplete)"),
         evidence={
             "table_size": table_size,
             "entries_with_interrupt_ptr": present,
-            "has_name_index_module": has_name_index,
+            "has_hotpatch_module": has_hotpatch_module,
         },
     )
 

@@ -70,24 +70,24 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     /// <summary>
-    /// Emit NameIndex + Dispatch Table data for hot-patch (D3) support.
+    /// Emit hotpatch name index + dispatch table data.
     /// Generates flat .rodata arrays: type index, method index, token→slot map,
-    /// dispatch table, and a NameIndexModuleV0 bundle with a static init caller.
+    /// dispatch table, and a HotpatchModuleV0 bundle with a static init caller.
     ///
     /// Generated C++ pattern:
     /// <code>
-    /// static constexpr NameIndexMethodEntryV0 s_name_index_methods[] = { ... };
-    /// static constexpr NameIndexTypeEntryV0   s_name_index_types[] = { ... };
-    /// static constexpr TokenSlotEntryV0       s_token_slot_entries[] = { ... };
-    /// static DispatchEntryV0                  s_dispatch_table[] = { ... };
-    /// static constexpr NameIndexModuleV0      s_name_index_module = { ... };
-    /// static const CHAOS_IL2CPP_UINT32 s_name_index_registered = [](){
-    ///     RegisterModuleNameIndex(&amp;s_name_index_module);
+    /// static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[] = { ... };
+    /// static constexpr HotpatchTypeEntryV0   s_hotpatch_types[] = { ... };
+    /// static constexpr HotpatchSlotEntryV0   s_hotpatch_slots[] = { ... };
+    /// static HotpatchEntryV0                 s_hotpatch_entries[] = { ... };
+    /// static constexpr HotpatchModuleV0      s_hotpatch_module = { ... };
+    /// static const CHAOS_IL2CPP_UINT32 s_hotpatch_registered = [](){
+    ///     RegisterHotpatchModule(&amp;s_hotpatch_module);
     ///     return 1u;
     /// }();
     /// </code>
     /// </summary>
-    internal string BuildNameIndex(
+    internal string BuildHotpatchTable(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
         MetadataRegistrationArtifact metadataRegistration)
     {
@@ -95,7 +95,7 @@ public sealed partial class NativeAotLoweringPlanner
             return string.Empty;
 
         var sb = new StringBuilder(4096);
-        sb.AppendLine("// ── NameIndex + Dispatch Table (D3 HotPatch) ────────────────────");
+        sb.AppendLine("// ── Hotpatch name index + dispatch table ────────────────────");
 
         // Build token lookup from metadata registration.
         var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
@@ -134,7 +134,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         // ── Method entries (grouped by type, in type-sorted order) ──
         sb.AppendLine("// Method name index entries");
-        sb.Append("static constexpr NameIndexMethodEntryV0 s_name_index_methods[")
+        sb.Append("static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[")
           .Append(entries.Count).AppendLine("] = {");
         foreach (var group in grouped)
         {
@@ -151,7 +151,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         // ── Type entries with first_method_index ──
         sb.AppendLine("// Type name index entries");
-        sb.Append("static constexpr NameIndexTypeEntryV0 s_name_index_types[")
+        sb.Append("static constexpr HotpatchTypeEntryV0 s_hotpatch_types[")
           .Append(grouped.Count).AppendLine("] = {");
         uint methodIndex = 0;
         foreach (var group in grouped)
@@ -172,7 +172,7 @@ public sealed partial class NativeAotLoweringPlanner
             .ToList();
 
         sb.AppendLine("// Token→Slot mapping (sorted by token for binary search)");
-        sb.Append("static constexpr TokenSlotEntryV0 s_token_slot_entries[")
+        sb.Append("static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[")
           .Append(tokenSlotList.Count).AppendLine("] = {");
         foreach (var ts in tokenSlotList)
         {
@@ -185,9 +185,9 @@ public sealed partial class NativeAotLoweringPlanner
 
         // ── Dispatch table with function pointers ──
         // direct_ptr = &MethodNativeSymbol (extern "C" function emitted elsewhere)
-        // interrupt_ptr = &InterpreterEntryDirect (D3 patched-method dispatch)
+        // interrupt_ptr = &InterpreterEntryDirect (hotpatch dispatch)
         sb.AppendLine("// Dispatch table (function pointers)");
-        sb.Append("static DispatchEntryV0 s_dispatch_table[")
+        sb.Append("static HotpatchEntryV0 s_hotpatch_entries[")
           .Append(entries.Count).AppendLine("] = {");
         foreach (var entry in entries)
         {
@@ -198,27 +198,27 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("};");
         sb.AppendLine();
 
-        // ── NameIndexModuleV0 bundle ──
-        sb.AppendLine("// Module NameIndex bundle");
-        sb.AppendLine("static constexpr NameIndexModuleV0 s_name_index_module = {");
+        // ── HotpatchModuleV0 bundle ──
+        sb.AppendLine("// Module hotpatch bundle");
+        sb.AppendLine("static constexpr HotpatchModuleV0 s_hotpatch_module = {");
         sb.Append("    ").Append(ToCppStringLiteral(_assemblyName)).AppendLine(",");
-        sb.AppendLine("    s_name_index_types,");
+        sb.AppendLine("    s_hotpatch_types,");
         sb.Append("    ").Append(grouped.Count).AppendLine("u,");
-        sb.AppendLine("    s_name_index_methods,");
+        sb.AppendLine("    s_hotpatch_methods,");
         sb.Append("    ").Append(entries.Count).AppendLine("u,");
-        sb.AppendLine("    s_token_slot_entries,");
+        sb.AppendLine("    s_hotpatch_slots,");
         sb.Append("    ").Append(tokenSlotList.Count).AppendLine("u,");
-        sb.AppendLine("    s_dispatch_table,");
+        sb.AppendLine("    s_hotpatch_entries,");
         sb.Append("    ").Append(entries.Count).AppendLine("u,");
         sb.AppendLine("};");
         sb.AppendLine();
 
         // ── Static initializer: register with runtime ──
-        sb.AppendLine("// Register NameIndex with the runtime on load");
-        sb.AppendLine("static const CHAOS_IL2CPP_UINT32 s_name_index_registered = []()");
+        sb.AppendLine("// Register hotpatch table with the runtime on load");
+        sb.AppendLine("static const CHAOS_IL2CPP_UINT32 s_hotpatch_registered = []()");
         sb.AppendLine("{");
-        sb.AppendLine("    ::chaos::il2cpp::runtime_core::RegisterModuleNameIndex(");
-        sb.AppendLine("        &s_name_index_module);");
+        sb.AppendLine("    ::chaos::il2cpp::runtime_core::RegisterHotpatchModule(");
+        sb.AppendLine("        &s_hotpatch_module);");
         sb.AppendLine("    return 1u;");
         sb.AppendLine("}();");
 

@@ -502,6 +502,7 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item));
 				handler.AppendLiteral(" = { ");
 				handler.AppendFormatted(parentExpr);
+				handler.AppendLiteral(", ");
 				string vtableArrayExpr = (vtLen > 0) ? GetNativeVTableSymbol(item) : "nullptr";
 				handler.AppendFormatted(vtableArrayExpr);
 				handler.AppendLiteral(", ");

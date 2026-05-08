@@ -1,9 +1,9 @@
 #ifndef CHAOS_IL2CPP_INTERPRETER_ENTRY_H_
 #define CHAOS_IL2CPP_INTERPRETER_ENTRY_H_
 
-// ── InterpreterEntryDirect: D3 patched-method dispatch entry point ──────
+// ── InterpreterEntryDirect: hotpatch patched-method dispatch entry point ──
 //
-// When a dispatch table entry has kDispatchPatched set, the pattern-aware
+// When a dispatch table entry has kHotpatchActive set, the pattern-aware
 // call site routes through interrupt_ptr → InterpreterEntryDirect.
 //
 // Flow:

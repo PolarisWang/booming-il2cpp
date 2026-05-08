@@ -18,7 +18,7 @@ TypeInfoHandle ResolveTypeByName(const char* fully_qualified_name);
 /// if the type cannot be resolved or the runtime is not yet initialized.
 [[noreturn]] void RaiseManagedException(const char* type_full_name, const char* message_utf8);
 
-/// Register a fallback callback for L2 verification mode.
+/// Register a fallback callback for Fact Static verification mode.
 /// When RaiseManagedException detects an uninitialized runtime, it calls this
 /// callback instead of aborting. The callback must NOT return (typically uses
 /// longjmp back to the verification harness).

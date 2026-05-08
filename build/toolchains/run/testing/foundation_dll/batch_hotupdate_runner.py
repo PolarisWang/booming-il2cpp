@@ -328,7 +328,7 @@ def _run_variant_pipeline(
     if variant == "patch":
         # Patch variant: extract .patchdata from DLL using emit-patch-data.
         # The .patchdata binary is consumed at runtime by PatchLoader for
-        # IL interpretation via InterpreterEntryDirect (D3 dispatch).
+        # IL interpretation via InterpreterEntryDirect (Hotpatch dispatch).
         print(f"    [patch] Extracting patch data via emit-patch-data...")
         patchdata_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "patchdata"
         patchdata_dir.mkdir(parents=True, exist_ok=True)
@@ -402,7 +402,7 @@ def run_family(family_slug: str, skip_semantic_patch: bool = False) -> dict:
         trace("family_patch_failed", family=family_slug, error=patch_result.get("error"))
         return result
 
-    # Semantic-patch variant (optional — D3 dispatch replaces the need for SP C++)
+    # Semantic-patch variant (optional — Hotpatch dispatch replaces the need for SP C++)
     if skip_semantic_patch:
         print(f"\n  --- Semantic-patch variant (skipped) ---")
         result["variants"]["semantic-patch"] = {"success": True, "skipped": True}
@@ -428,7 +428,7 @@ def main() -> None:
     parser.add_argument("--trace", action="store_true", default=True, help="Enable JSONL trace logging (default: on)")
     parser.add_argument("--no-trace", action="store_true", help="Disable JSONL trace logging")
     parser.add_argument("--families", nargs="*", help="Space-separated subset of family slugs to process")
-    parser.add_argument("--skip-semantic-patch", action="store_true", default=True, help="Skip semantic-patch variant (D3 dispatch replaces it)")
+    parser.add_argument("--skip-semantic-patch", action="store_true", default=True, help="Skip semantic-patch variant (Hotpatch dispatch replaces it)")
     parser.add_argument("--no-skip-semantic-patch", action="store_false", dest="skip_semantic_patch", help="Include semantic-patch variant")
     args = parser.parse_args()
 

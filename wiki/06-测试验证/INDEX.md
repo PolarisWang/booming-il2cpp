@@ -38,7 +38,7 @@
 | 文档 | 主题 | 说明 |
 | --- | --- | --- |
 | [`CodeGen快照测试规范.md`](./CodeGen快照测试规范.md) | CodeGen 增量回归测试 | 定义 NativeAotEmitter 输出的快照测试体系：夹具结构、基线管理、开发工作流集成 |
-| [`L2-Native验证Gate流程.md`](./L2-Native验证Gate流程.md) | L2 native 验证门 | 说明 foundation-dll Fact L2 验证的架构、异常处理、tag 问题与运行方式 |
+| [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md) | Fact Static native 验证门 | 说明 foundation-dll Fact Static 验证的架构、异常处理、tag 问题与运行方式 |
 | [`测试方法清单.md`](./测试方法清单.md) | 全链路测试方法索引 | **推荐入口** — 系统梳理 Python、C# Foundation-DLL、Native 编译三条测试链的所有测试方法和管线阶段，按文件/类/方法粒度索引 |
 | [`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md) | Verification V1 测试流程 | 说明新的 canonical 测试流程、formal source、覆盖模型、投影视图与旧流程清理规则 |
 | [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md) | AOT 新 feature 自测 | 说明 owner subject、hotupdate 触发条件、collector/registry/workspace 接线闸门与标准验收顺序 |

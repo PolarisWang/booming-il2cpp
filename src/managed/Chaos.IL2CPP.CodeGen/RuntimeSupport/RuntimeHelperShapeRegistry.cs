@@ -1724,37 +1724,6 @@ public sealed partial class NativeAotLoweringPlanner
                         }), CreateInt32AbiSlot(), new HashSet<int> { 0, 1 });
                 }));
 
-            // === Assertion shapes (inlined from TryCreateAssertionRuntimeHelperDefinition) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                MethodName: "Equal",
-                Resolver: (planner, callee, typeArgs) =>
-                {
-                    if (!TryParseKnownEqualityAssertionContract(callee, out var assertionSpec))
-                        return null;
-                    if (!planner.TryCreateResolvedTypeAbiSlot(assertionSpec.ComparedTypeNameOrSubjectId, out var comparedAbi) ||
-                        !IsSupportedEqualityAssertionAbi(comparedAbi))
-                        return null;
-
-                    var symbol = GetExternalRuntimeHelperSymbol(callee);
-                    var parameterAbis = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
-                        new AotCoreIrAbiSlotArtifact[3]
-                        {
-                            comparedAbi,
-                            comparedAbi,
-                            CreateNativeIntAbiSlot(StringTypeSubjectId, AotCoreIrTypeShapeKind.ReferenceType),
-                        });
-                    var failureBodyLines = CreateFailureStateWriteBodyLines(
-                        GetNativeStaticFieldSymbol(assertionSpec.FailureStateFieldSubjectId));
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
-                        FormatAbiSlotParameterSignature(parameterAbis),
-                        NativeAotLoweringPlanner.CreateEqualityAssertionRuntimeHelperBodyLines(comparedAbi, failureBodyLines));
-
-                    return new GenericShapeResolution(src, symbol,
-                        parameterAbis, CreateVoidAbiSlot(), EmptyRawArgumentIndices,
-                        new HashSet<string>(StringComparer.Ordinal) { assertionSpec.FailureStateFieldSubjectId });
-                }));
-
             // === InterpolatedStringHandler ===
             registry.Register("System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", ".ctor",
                 ["System.Int32", "System.Int32"],
@@ -2286,7 +2255,7 @@ public sealed partial class NativeAotLoweringPlanner
                         else
                         {
                             // Invalid conversion type (bool, DateTime, Decimal, Double, Single, String):
-                            // managed Convert.ToChar throws — stub returns 0 (L2 expected checksum is -1).
+                            // managed Convert.ToChar throws — stub returns 0 (Fact Static expected checksum is -1).
                             var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
                             body.Add($"    {voidExprs};");
                             body.Add("    return static_cast<CHAOS_IL2CPP_UINT16>(0);");

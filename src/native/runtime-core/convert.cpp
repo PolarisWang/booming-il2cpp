@@ -108,7 +108,7 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_datetime(CHAOS_IL2CPP_INTPTR
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_decimal(CHAOS_IL2CPP_INTPTR value)
 {
-    // Decimal needs full runtime support — in L2 verification mode the
+    // Decimal needs full runtime support — in Fact Static verification mode the
     // uninitialized runtime will longjmp (setjmp fallback). In production
     // with runtime init, this correctly raises InvalidCastException since
     // a raw pointer cannot be interpreted as a decimal.
@@ -134,7 +134,7 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_single(CHAOS_IL2CPP_INTPTR v
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object(CHAOS_IL2CPP_INTPTR value)
 {
-    // In L2 verification mode without GC, boxed objects don't exist.
+    // In Fact Static verification mode without GC, boxed objects don't exist.
     // The value is the raw intptr payload. Delegate to int32 and range-check.
     return chaos_convert_tochar_int32(value);
 }
@@ -150,7 +150,7 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object_provider(
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_string(CHAOS_IL2CPP_INTPTR value)
 {
-    // In L2 verification mode, ldstr pushes a tagged StringId.
+    // In Fact Static verification mode, ldstr pushes a tagged StringId.
     // Read the first UTF-8 byte and return it as char.
     if (chaos_is_string_id(value))
     {
@@ -165,7 +165,7 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_string(CHAOS_IL2CPP_INTPTR v
         return static_cast<CHAOS_IL2CPP_UINT16>(
             static_cast<unsigned char>(chaos_view.utf8_data[0]));
     }
-    // No heap string pointer — in L2 mode strings are always StringIds
+    // No heap string pointer — in Fact Static mode strings are always StringIds
     chaos::il2cpp::runtime_core::RaiseManagedException(
         "System.FormatException",
         "String must be exactly one character long.");

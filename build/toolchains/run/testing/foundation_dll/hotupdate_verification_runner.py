@@ -1,7 +1,7 @@
-"""D3 HotUpdate verification runner — collects per-family D3 exe JSON results
+"""Hotpatch verification runner — collects per-family exe JSON results
 and produces hotupdate-verification-report.json files for the dashboard.
 
-Each family's standalone D3 exe runs Register → ApplyPatch → InterpreterEntryDirect
+Each family's standalone Hotpatch exe runs Register → ApplyPatch → InterpreterEntryDirect
 and outputs a JSON report. This runner collects all per-family outputs and writes
 per-family hotupdate-verification-report.json files that the dashboard generator
 can consume.
@@ -96,7 +96,7 @@ def generate_per_family_reports(
             entry: dict[str, Any] = {
                 "methodToken": result.get("methodToken"),
                 "status": str(result.get("status", "unmatched")),
-                "d3Patched": result.get("d3Patched", False),
+                "hotpatchPatched": result.get("d3Patched", False),
                 "patchReturnValue": result.get("patchReturnValue"),
                 "interpreterDispatched": result.get("interpreterDispatched", False),
                 "revertVerified": result.get("revertVerified", False),
@@ -109,8 +109,8 @@ def generate_per_family_reports(
             "assemblyName": assembly_name,
             "familyId": family_id,
             "verificationKind": "hotupdate-proof",
-            "d3PatchApplied": data.get("d3PatchApplied", False),
-            "d3PatchedCount": data.get("d3PatchedCount", 0),
+            "hotpatchPatchApplied": data.get("d3PatchApplied", False),
+            "hotpatchPatchedCount": data.get("d3PatchedCount", 0),
             "summary": {
                 "totalMethods": total,
                 "passedMethods": passed,

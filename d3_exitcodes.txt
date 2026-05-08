@@ -1,0 +1,4 @@
+array-indexing-copy: EXITCODE=1
+buffer-memory: EXITCODE=1
+collections-generic-core: EXITCODE=1
+convert-char: EXITCODE=0

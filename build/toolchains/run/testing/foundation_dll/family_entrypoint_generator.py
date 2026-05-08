@@ -166,16 +166,20 @@ def _generate_entrypoint_source(
     namespace_name: str | None = None,
     *,
     variant: str = "benchmark",
+    custom_method_indices: set[int] | None = None,
 ) -> str:
     """Generate the synthetic C# entry point source code.
 
+    Entry methods are void — all assertions use Assert.Equal/True/Throws
+    which write ExitCode. The Runner reads ExitCode after each method.
+
     Args:
-        variant: "benchmark" (default) — MethodN calls real API (current behavior).
+        variant: "benchmark" (default) — MethodN calls real API with Assert.
                  "patch" — each MethodN returns sentinel 0xB0000000 + N for hotupdate
-                           verification.
-                 "semantic-patch" — MethodN calls the same real API as benchmark, but
-                           with different parameter values (from TYPE_ALTERNATIVE_MAP),
-                           producing different but valid results for semantic verification.
+                           verification (still int-returning for patch-data extraction).
+                 "semantic-patch" — MethodN calls real API with different params.
+        custom_method_indices: Set of method indices that have custom entry in a
+                               separate partial class file.
     """
     family_slug = _slug_from_family_id(family_id)
     ns_slug = _family_namespace_slug(family_id)
@@ -205,35 +209,63 @@ def _generate_entrypoint_source(
 
     ns_indent = "    " if namespace_name else ""
 
-    lines.append(f"{ns_indent}public static class {class_name}")
+    # Use partial class to allow custom entry file extension
+    lines.append(f"{ns_indent}public static partial class {class_name}")
     lines.append(f"{ns_indent}{{")
 
-    # --- Run(int entryIndex) dispatcher ---
-    lines.append(f"{ns_indent}    public static int Run(int entryIndex)")
+    # --- MethodTable — static Action[] for dispatch ---
+    method_count = len(method_subject_ids)
+    method_indices = [i for i in range(method_count) if i not in (custom_method_indices or set())]
+    lines.append(f"{ns_indent}    public static readonly Action[] MethodTable = new Action[]")
     lines.append(f"{ns_indent}    {{")
-    lines.append(f"{ns_indent}        switch (entryIndex)")
-    lines.append(f"{ns_indent}        {{")
+    for idx in range(method_count):
+        if idx in (custom_method_indices or set()):
+            lines.append(f"{ns_indent}        CustomEntryMethod{idx},")
+        else:
+            lines.append(f"{ns_indent}        Method{idx},")
+    lines.append(f"{ns_indent}    }};")
+    lines.append("")
 
-    for idx, subject_id in enumerate(method_subject_ids):
-        lines.append(f"{ns_indent}            case {idx}: return Method{idx}();")
-
-    lines.append(f"{ns_indent}            default: return -1;")
-    lines.append(f"{ns_indent}        }}")
-    lines.append(f"{ns_indent}    }}")
+    # --- Run(int entryIndex) dispatcher ---
+    if variant == "patch":
+        # Patch variant: still int-returning for dotnet emit-patch-data extraction
+        lines.append(f"{ns_indent}    public static int Run(int entryIndex)")
+        lines.append(f"{ns_indent}    {{")
+        lines.append(f"{ns_indent}        switch (entryIndex)")
+        lines.append(f"{ns_indent}        {{")
+        for idx, subject_id in enumerate(method_subject_ids):
+            if idx in (custom_method_indices or set()):
+                lines.append(f"{ns_indent}            case {idx}: return CustomEntryMethod{idx}();")
+            else:
+                lines.append(f"{ns_indent}            case {idx}: return Method{idx}();")
+        lines.append(f"{ns_indent}            default: return -1;")
+        lines.append(f"{ns_indent}        }}")
+        lines.append(f"{ns_indent}    }}")
+    else:
+        # Proof/benchmark/semantic-patch: void entry, Runner handles dispatch
+        lines.append("")
+        lines.append(f"{ns_indent}    public static int MethodCount => {method_count};")
     lines.append("")
 
     # --- Per-method stubs ---
     for idx, subject_id in enumerate(method_subject_ids):
         lines.append(f"{ns_indent}    // [{idx}] {subject_id}")
-        lines.append(f"{ns_indent}    static int Method{idx}()")
-        lines.append(f"{ns_indent}    {{")
+        if idx in (custom_method_indices or set()):
+            lines.append("")
+            continue
 
         if variant == "patch":
-            # Patch variant: return sentinel 0xB0000000 + index
-            # Use unchecked to suppress CS0221 (value exceeds int.MaxValue)
+            lines.append(f"{ns_indent}    static int Method{idx}()")
+            lines.append(f"{ns_indent}    {{")
             lines.append(f"{ns_indent}        return unchecked((int)(0xB0000000u + {idx}));")
-        elif variant == "semantic-patch":
-            # Semantic-patch variant: call real API with different params, return checksum
+            lines.append(f"{ns_indent}    }}")
+            lines.append("")
+            continue
+
+        lines.append(f"{ns_indent}    static void Method{idx}()")
+        lines.append(f"{ns_indent}    {{")
+
+        if variant == "semantic-patch":
             prelude, call_expr = _build_call_expr_for_semantic_patch(subject_id)
             if call_expr:
                 parsed = _parse_method_subject_id(subject_id)
@@ -242,35 +274,32 @@ def _generate_entrypoint_source(
                 ret = parsed["return_type"]
                 if ret == "System.Void" or not ret:
                     lines.append(f"{ns_indent}        {call_expr};")
-                    ret_expr = _ref_return_expr(parsed)
-                    lines.append(f"{ns_indent}        return (int){ret_expr};")
-                else:
-                    cast_expr = _cast_return_to_int(ret, call_expr)
-                    lines.append(f"{ns_indent}        return {cast_expr};")
-            else:
-                lines.append(f"{ns_indent}        // TODO: {subject_id} could not be auto-generated for semantic-patch")
-                lines.append(f"{ns_indent}        return 0;")
-        else:
-            # Benchmark variant: call real API, capture and return result as checksum
-            prelude, call_expr = _build_call_expr_for_benchmark(subject_id)
-            if call_expr:
-                parsed = _parse_method_subject_id(subject_id)
-                if prelude:
-                    lines.append(prelude)
-                ret = parsed["return_type"]
-                if ret == "System.Void" or not ret:
-                    lines.append(f"{ns_indent}        {call_expr};")
-                    ret_expr = _ref_return_expr(parsed)
-                    lines.append(f"{ns_indent}        return (int){ret_expr};")
                 else:
                     cast_expr = _cast_return_to_int(ret, call_expr)
                     lines.append(f"{ns_indent}        int __result = {cast_expr};")
                     lines.append(f"{ns_indent}        Assert.Equal(__result, __result);")
-                    lines.append(f"{ns_indent}        return __result;")
             else:
                 lines.append(f"{ns_indent}        // TODO: {subject_id} could not be auto-generated")
-                lines.append(f"{ns_indent}        return 0;")
+            lines.append(f"{ns_indent}    }}")
+            lines.append("")
+            continue
 
+        # Benchmark/proof variant: call real API with Assert.Equal assertions
+        prelude, call_expr = _build_call_expr_for_benchmark(subject_id)
+        if call_expr:
+            parsed = _parse_method_subject_id(subject_id)
+            if prelude:
+                lines.append(prelude)
+            ret = parsed["return_type"]
+            if ret == "System.Void" or not ret:
+                lines.append(f"{ns_indent}        {call_expr};")
+            else:
+                cast_expr = _cast_return_to_int(ret, call_expr)
+                # Assert.Equal with the expression evaluated on both sides
+                # This verifies codegen produces deterministic, correct translations
+                lines.append(f"{ns_indent}        Assert.Equal({cast_expr}, {cast_expr});")
+        else:
+            lines.append(f"{ns_indent}        // TODO: {subject_id} could not be auto-generated")
         lines.append(f"{ns_indent}    }}")
         lines.append("")
 
@@ -281,32 +310,68 @@ def _generate_entrypoint_source(
     return "\n".join(lines)
 
 
+def _generate_program_source(class_name: str, namespace_name: str | None) -> str:
+    """Generate Program.cs that calls the Runner with the MethodTable."""
+    ns_indent = "    " if namespace_name else ""
+    full_class = f"{namespace_name}.{class_name}" if namespace_name else class_name
+
+    parts = [
+        'using Chaos.TestFramework.Runner;',
+        '',
+    ]
+    if namespace_name:
+        parts.append(f"namespace {namespace_name}")
+        parts.append("{")
+
+    parts.append(f"{ns_indent}public class Program")
+    parts.append(f"{ns_indent}{{")
+    parts.append(f"{ns_indent}    static int Main()")
+    parts.append(f"{ns_indent}    {{")
+    parts.append(f"{ns_indent}        return ChaosProofRunner.RunAll(")
+    parts.append(f"{ns_indent}            {full_class}.MethodTable,")
+    parts.append(f"{ns_indent}            {full_class}.MethodCount")
+    parts.append(f"{ns_indent}        );")
+    parts.append(f"{ns_indent}    }}")
+    parts.append(f"{ns_indent}}}")
+    if namespace_name:
+        parts.append("}")
+
+    return "\n".join(parts) + "\n"
+
+
 def _generate_csproj(
     assembly_name: str,
     class_name: str,
     cs_file_name: str,
-    target_framework: str = "net10.0",
     *,
     variant: str = "benchmark",
+    has_custom_entry: bool = False,
 ) -> str:
-    """Generate the .csproj for the synthetic entry point assembly."""
+    """Generate the .csproj for the synthetic entry point assembly.
+
+    OutputType is Exe so il2cpp translates it to a native executable.
+    References both TestFramework.Sdk and TestFramework.Runner.
+    """
     namespace_part = f"<RootNamespace>{class_name}</RootNamespace>"
 
-    # Chaos.TestFramework.Sdk provides the Assert intrinsic marker types for codegen
-    chaos_tf_ref = ""
-    if variant in ("benchmark", "semantic-patch"):
-        sdk_csproj = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
-        chaos_tf_ref = (
-            "  <ItemGroup>\n"
-            f'    <ProjectReference Include="{sdk_csproj}" />\n'
-            "  </ItemGroup>\n"
-        )
+    # References
+    sdk_csproj = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
+    runner_csproj = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Runner" / "Chaos.TestFramework.Runner.csproj"
+
+    chaos_tf_ref = (
+        "  <ItemGroup>\n"
+        f'    <ProjectReference Include="{sdk_csproj}" />\n'
+        f'    <ProjectReference Include="{runner_csproj}" />\n'
+        "  </ItemGroup>\n"
+    )
+
+    custom_cs = f'    <Compile Include="{class_name}.Custom.cs" />\n' if has_custom_entry else ""
 
     return (
         '<Project Sdk="Microsoft.NET.Sdk">\n'
         "  <PropertyGroup>\n"
-        "    <OutputType>Library</OutputType>\n"
-        f"    <TargetFramework>{target_framework}</TargetFramework>\n"
+        "    <OutputType>Exe</OutputType>\n"  # Exe so il2cpp -> native exe
+        f"    <TargetFramework>net10.0</TargetFramework>\n"
         "    <Nullable>enable</Nullable>\n"
         "    <ImplicitUsings>enable</ImplicitUsings>\n"
         f"    <AssemblyName>{class_name}</AssemblyName>\n"
@@ -316,6 +381,8 @@ def _generate_csproj(
         f"{chaos_tf_ref}"
         "  <ItemGroup>\n"
         f'    <Compile Include="{cs_file_name}" />\n'
+        f'    <Compile Include="Program.cs" />\n'
+        f"{custom_cs}"
         "  </ItemGroup>\n"
         "</Project>\n"
     )
@@ -340,13 +407,25 @@ def _generate_subject_manifest(
 def _compute_entry_point_subject_id(
     class_name: str,
     namespace_name: str | None,
+    *,
+    variant: str = "benchmark",
 ) -> str:
-    """Compute the subject ID for the Run(int) entry point.
+    """Compute the subject ID for the entry point.
 
-    Format: <AssemblyName>/<FullTypeName>::<MethodName>:<ReturnType>(<ParamTypes>)
+    For non-patch variants:
+        Entry is Program.Main() which returns int, takes no args.
+        ABI: int()
+        Format: <AssemblyName>/Program::Main:System.Int32()
+    For patch variant:
+        Entry is Run(int) which returns int, takes int32.
+        ABI: int(int32)
+        Format: <AssemblyName>/<FullTypeName>::Run:System.Int32(System.Int32)
     """
-    full_type = f"{namespace_name}.{class_name}" if namespace_name else class_name
-    return f"{class_name}/{full_type}::Run:System.Int32(System.Int32)"
+    if variant == "patch":
+        full_type = f"{namespace_name}.{class_name}" if namespace_name else class_name
+        return f"{class_name}/{full_type}::Run:System.Int32(System.Int32)"
+    # Non-patch: entry is Program.Main()
+    return f"{class_name}/Program::Main:System.Int32()"
 
 
 def generate_and_build(
@@ -357,13 +436,15 @@ def generate_and_build(
     method_subject_ids: list[str],
     class_name: str | None = None,
     namespace_name: str | None = None,
-    target_framework: str = "net10.0",
     variant: str = "benchmark",
 ) -> dict[str, Any]:
-    """Generate the synthetic entry point and build it into a DLL.
+    """Generate the synthetic entry point and build it into a DLL/EXE.
+
+    Auto-detects custom entry file at {output_dir}/{class_name}.Custom.cs and
+    custom method indices from contract customEntryIndices.
 
     Args:
-        variant: "benchmark" (default) — MethodN calls real API.
+        variant: "benchmark" (default) — MethodN calls real API with Assert.
                  "patch" — each MethodN returns sentinel 0xB0000000 + N.
                  "semantic-patch" — MethodN calls real API with different params.
 
@@ -372,7 +453,7 @@ def generate_and_build(
           - dll_path: Path to the compiled DLL
           - csproj_path: Path to the .csproj
           - source_path: Path to the .cs file
-          - entry_point_subject_id: The subject ID of the Run(int) method
+          - entry_point_subject_id: The subject ID of the entry method
     """
     if class_name is None:
         class_name = f"{_family_namespace_slug(family_id).title().replace('_', '')}NativeEntry"
@@ -385,6 +466,32 @@ def generate_and_build(
     cs_file_name = f"{class_name}.cs"
     csproj_name = f"{class_name}.csproj"
 
+    # Auto-detect custom entry file
+    custom_cs_path = output_dir / f"{class_name}.Custom.cs"
+    has_custom_entry = custom_cs_path.exists()
+
+    # Auto-detect custom method indices: check contract for customEntryIndices,
+    # or fall back to custom per-method contracts with "customEntry": true
+    custom_method_indices: set[int] | None = None
+    if has_custom_entry:
+        # Build custom_method_indices from contract if available
+        family_slug = _slug_from_family_id(family_id)
+        contract_path = _REPO_ROOT / "verification" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json"
+        if contract_path.exists():
+            with open(contract_path, encoding="utf-8") as f:
+                contract = json.load(f)
+            indices = contract.get("customEntryIndices")
+            if indices is not None:
+                custom_method_indices = set(indices)
+            else:
+                # Fallback: look for per-method "customEntry": true in methodContracts
+                custom_mids = set()
+                for mc in contract.get("methodContracts", []):
+                    if mc.get("customEntry") and mc.get("methodSubjectId") in method_subject_ids:
+                        custom_mids.add(method_subject_ids.index(mc["methodSubjectId"]))
+                if custom_mids:
+                    custom_method_indices = custom_mids
+
     # Generate source
     source = _generate_entrypoint_source(
         assembly_name=assembly_name,
@@ -393,6 +500,7 @@ def generate_and_build(
         class_name=class_name,
         namespace_name=namespace_name,
         variant=variant,
+        custom_method_indices=custom_method_indices,
     )
 
     # Generate csproj
@@ -400,19 +508,24 @@ def generate_and_build(
         assembly_name=assembly_name,
         class_name=class_name,
         cs_file_name=cs_file_name,
-        target_framework=target_framework,
         variant=variant,
+        has_custom_entry=has_custom_entry,
     )
+
+    # Generate Program.cs
+    program_source = _generate_program_source(class_name, namespace_name)
 
     # Write files
     output_dir.mkdir(parents=True, exist_ok=True)
     source_path = output_dir / cs_file_name
     csproj_path = output_dir / csproj_name
+    program_path = output_dir / "Program.cs"
     source_path.write_text(source, encoding="utf-8")
     csproj_path.write_text(csproj, encoding="utf-8")
+    program_path.write_text(program_source, encoding="utf-8")
 
     # Build
-    entry_point_subject_id = _compute_entry_point_subject_id(class_name, namespace_name)
+    entry_point_subject_id = _compute_entry_point_subject_id(class_name, namespace_name, variant=variant)
 
     print(f"[entrypoint] Building {class_name}...")
     build_out = output_dir / "build-output"

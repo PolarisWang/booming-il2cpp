@@ -15,7 +15,7 @@ REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
 families = sorted(
     d.name for d in FAMILIES_DIR.iterdir()
-    if d.is_dir() and (d / "native_test" / "l2-verify" / "build" / "native-aot.generated.obj").exists()
+    if d.is_dir() and (d / "native_test" / "fact-verify" / "build" / "native-aot.generated.obj").exists()
 )
 
 print(f"Running benchmarks for {len(families)} families...\n")

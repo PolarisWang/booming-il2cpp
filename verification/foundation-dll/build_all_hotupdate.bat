@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 set REPO_ROOT=D:\agent\booming-il2cpp
 
 echo ============================================================
-echo Building all foundation-dll D3 hotupdate tests
+echo Building all foundation-dll Hotpatch tests
 echo ============================================================
 
 set BUILD_FAILED=0
@@ -13,7 +13,7 @@ echo.
 echo NOTE: This batch file uses "call" chaining which may have issues
 echo when run from bash via "cmd //c". If you encounter issues, run
 echo the Python runner instead:
-echo   python build/toolchains/run/testing/foundation_dll/d3_hotupdate_runner.py --all
+echo   python build/toolchains/run/testing/foundation_dll/hotpatch_runner.py --all
 echo.
 
 for %%F in (
@@ -53,7 +53,7 @@ for %%F in (
     echo.
     echo [BUILD] %%F ...
     pushd "%REPO_ROOT%\verification\foundation-dll\System.Private.CoreLib\%%F\il2cpp_dist\hotupdate\build"
-    call "_build_d3_%%F.bat"
+    call "_build_hotpatch_%%F.bat"
     popd
     if !ERRORLEVEL! equ 0 (
         echo [OK] %%F built successfully

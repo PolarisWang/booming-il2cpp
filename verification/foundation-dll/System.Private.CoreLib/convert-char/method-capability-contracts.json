@@ -16,7 +16,8 @@
       ],
       "benchmarkProfiles": [],
       "hotupdateProfiles": [],
-      "reviewRequired": true
+      "reviewRequired": true,
+      "customEntry": true
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
@@ -58,7 +59,8 @@
       ],
       "benchmarkProfiles": [],
       "hotupdateProfiles": [],
-      "reviewRequired": true
+      "reviewRequired": true,
+      "customEntry": true
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",

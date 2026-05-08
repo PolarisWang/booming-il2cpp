@@ -68,7 +68,7 @@ N 个 --assembly DLLs
 gen/
   GameLogic.cpp              # 方法实现 + TypeInfo + vtable + string table
   GameLogic.module-desc.h    # ModuleDescriptor 常量数据
-  GameLogic.name-index.h     # D3 名称索引 + dispatch table
+  GameLogic.name-index.h     # Hotpatch 名称索引 + dispatch table
   GameLogic.abi-manifest.h   # ChaosAbiManifestV0
   ScriptRuntime.cpp
   ScriptRuntime.module-desc.h
@@ -84,7 +84,7 @@ gen/
 |------|------|------|
 | 同程序集调用 | 直接 `callee(args)` | 最快 |
 | 跨程序集调用 | 方法表 `ResolveMethodTable(index)` | 一次间接 |
-| HotPatch | D3 dispatch entry 切换 interrupt_ptr | 已优化 |
+| HotPatch | Hotpatch dispatch entry 切换 interrupt_ptr | 已优化 |
 | 泛型运行时实例化 | RuntimeInstantiationBridgeV0 | 解释执行 |
 
 ## 跨程序集调用决议
@@ -184,7 +184,7 @@ public IReadOnlyList<NativeAotResult> GeneratePerAssembly(
 | **Phase 1** | 每程序集 NativeAot Emission：CreateForAssembly()、GeneratePerAssembly()、每程序集 ModuleDescriptor | ✅ 完成 |
 | **Phase 2** | 跨程序集调用决议：MethodTableAllocator、同程序集 direct call / 跨程序集 method table | ✅ 完成 |
 | **Phase 3** | 构建系统 + 运行时集成：CMakeLists.txt 生成、runtime-entry.cpp、TypeInfo extern 声明 | ✅ 完成 |
-| **Phase 4** | HotUpdate 完整性：每方法 D3 dispatch entry、interpreter 回退、PatchLoader 多模块 | ⬜ 未开始 |
+| **Phase 4** | HotUpdate 完整性：每方法 Hotpatch dispatch entry、interpreter 回退、PatchLoader 多模块 | ⬜ 未开始 |
 | **Phase 5** | 性能优化：内联、去虚拟化、LTO、大程序集分页 | ⬜ 未开始 |
 
 ---
@@ -193,6 +193,6 @@ public IReadOnlyList<NativeAotResult> GeneratePerAssembly(
 
 - [`01-总体流程与五层职责.md`](./01-%E6%80%BB%E4%BD%93%E6%B5%81%E7%A8%8B%E4%B8%8E%E4%BA%94%E5%B1%82%E8%81%8C%E8%B4%A3.md) — PipelinePlan 五层架构
 - [`04-NativeAotLoweringPlanner文件布局.md`](./04-NativeAotLoweringPlanner%E6%96%87%E4%BB%B6%E5%B8%83%E5%B1%80.md) — LoweringPlanner 20+ partial 文件分布
-- [`18-热更新架构.md`](./18-%E7%83%AD%E6%9B%B4%E6%96%B0%E6%9E%B6%E6%9E%84.md) — D3 dispatch + PatchLoader
+- [`18-热更新架构.md`](./18-%E7%83%AD%E6%9B%B4%E6%96%B0%E6%9E%B6%E6%9E%84.md) — Hotpatch dispatch + PatchLoader
 - [`15-泛型上下文运行时.md`](./15-%E6%B3%9B%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E8%BF%90%E8%A1%8C%E6%97%B6.md) — RuntimeInstantiationBridgeV0
 - `wiki/04-历史决策/` — 方案 C、HybridCLR 对齐等历史决策
