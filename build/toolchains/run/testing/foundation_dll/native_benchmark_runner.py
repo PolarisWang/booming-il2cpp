@@ -33,6 +33,20 @@ if str(_RUN_DIR) not in sys.path:
 from testing.trace import trace_init, trace
 
 
+def _find_generated_cpp(family_dir: Path) -> Path | None:
+    """Find native-aot.generated.cpp under il2cpp_dist/genuine/ recursively.
+
+    The generated C++ may be at:
+      il2cpp_dist/genuine/generated/native-aot.generated.cpp  (flat layout)
+      il2cpp_dist/genuine/<Namespace>/generated/native-aot.generated.cpp  (namespaced layout)
+    """
+    genuine = family_dir / "il2cpp_dist" / "genuine"
+    if not genuine.exists():
+        return None
+    matches = sorted(genuine.rglob("native-aot.generated.cpp"))
+    return matches[0] if matches else None
+
+
 def _find_vcvars() -> Path | None:
     """Locate vcvarsall.bat — prefers BuildTools (MSVC 14.44+) which has
     CRT symbols (_Thrd_sleep_for, _Cnd_timedwait_for_unchecked, __std_find_end_1)
@@ -109,11 +123,11 @@ def build_native_benchmark(
     MSVC approach) and links against all native runtime libraries.
     """
     family_dir = _VERIFICATION / family_slug
-    generated_cpp = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+    generated_cpp = _find_generated_cpp(family_dir)
     benchmark_host = _REPO_ROOT / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
 
-    if not generated_cpp.exists():
-        return {"success": False, "error": f"Generated C++ not found: {generated_cpp}"}
+    if generated_cpp is None:
+        return {"success": False, "error": f"Generated C++ not found under {family_dir / 'il2cpp_dist' / 'genuine'}"}
 
     include_dirs = [
         _REPO_ROOT / "src" / "native" / "common",
@@ -121,6 +135,7 @@ def build_native_benchmark(
         _REPO_ROOT / "contracts" / "native" / "v0",
         _REPO_ROOT / "src" / "native" / "runtime-core",
         _REPO_ROOT / "third_party" / "fmt" / "include",
+        _REPO_ROOT / "third_party" / "bdwgc" / "include",
     ]
     include_flags = " ".join(f'-I"{d}"' for d in include_dirs)
 
@@ -136,12 +151,9 @@ def build_native_benchmark(
     # Compile from source via .bat (which runs vcvarsall.bat first, avoiding
     # both the SIGSEGV from the env-based MSVC approach and the linker symbol
     # resolution issues when mixing verify's .obj with our compile flags).
-    generated_cpp_path = family_dir / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
-    if not generated_cpp_path.exists():
-        return {"success": False, "error": f"Generated C++ not found: {generated_cpp_path}"}
     gen_obj = output_dir / "native-aot.generated.obj"
 
-    compile_flags = "/nologo /std:c++20 /c /EHsc /W3 /utf-8 /O2 /MD"
+    compile_flags = "/nologo /std:c++17 /c /EHsc /W3 /utf-8 /O2 /MD"
     defines = "-DCHAOS_IL2CPP_CHECK"
 
     # All native runtime libs that executable code in the generated .obj
@@ -150,13 +162,13 @@ def build_native_benchmark(
     all_libs = " ".join(
         f'"{p}"' for p in [
             r / "build" / "native-runtime" / "Release" / "chaos_runtime_core.lib",
-            r / "build" / "native" / "src" / "native" / "interpreter" / "Release" / "chaos_interpreter.lib",
-            r / "build" / "native" / "src" / "native" / "bootstrap" / "Release" / "chaos_bootstrap.lib",
-            r / "build" / "native" / "src" / "native" / "support" / "Release" / "chaos_support.lib",
-            r / "build" / "native" / "src" / "native" / "hot-update" / "Release" / "chaos_hot_update.lib",
-            r / "build" / "native" / "fmt_build" / "Release" / "chaos_fmt.lib",
-            r / "build" / "native" / "src" / "native" / "common" / "Release" / "chaos_common.lib",
-            r / "build" / "native" / "bdwgc_build" / "Release" / "chaos_bdwgc.lib",
+            r / "build" / "src" / "native" / "interpreter" / "Release" / "chaos_interpreter.lib",
+            r / "build" / "src" / "native" / "bootstrap" / "Release" / "chaos_bootstrap.lib",
+            r / "build" / "src" / "native" / "support" / "Release" / "chaos_support.lib",
+            r / "build" / "src" / "native" / "hot-update" / "Release" / "chaos_hot_update.lib",
+            r / "build" / "fmt_build" / "Release" / "chaos_fmt.lib",
+            r / "build" / "src" / "native" / "common" / "Release" / "chaos_common.lib",
+            r / "build" / "bdwgc_build" / "Release" / "chaos_bdwgc.lib",
         ]
     )
 
@@ -166,7 +178,7 @@ def build_native_benchmark(
     bat_path = _build_bat(
         family_slug,
         vcvars=vcvars, family_dir=family_dir,
-        benchmark_host=benchmark_host, generated_cpp=generated_cpp_path,
+        benchmark_host=benchmark_host, generated_cpp=generated_cpp,
         main_obj=main_obj, gen_obj=gen_obj, exe_path=exe_path,
         include_flags=include_flags,
         compile_flags=compile_flags, defines=defines,

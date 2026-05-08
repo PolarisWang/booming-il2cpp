@@ -347,6 +347,8 @@ public sealed partial class NativeAotLoweringPlanner
         {
             Includes =
             [
+                "<chaos/common.h>",
+                "<chaos/type_info.h>",
                 "\"runtime_core.h\"",
                 "\"codegen_bridge.h\"",
                 "\"module_registry.h\"",
@@ -367,8 +369,8 @@ public sealed partial class NativeAotLoweringPlanner
             ShapeDispatchHeaderContent = _shapeRegistry.GenerateCppShapeHeader(),
             ModuleRegistrationCode = moduleRegistrationCode,
             GlobalDeclarations =
-                "// Global assert failure counter for verification builds\n"
-                + "int __chaos_assert_failures = 0;\n",
+                "// Global assert failure counter (defined in runtime_stubs.cpp)\n"
+                + "extern \"C\" CHAOS_IL2CPP_INT32 __chaos_assert_failures;\n",
             CodegenNamespace = SanitizeCppIdentifier(loweringPlan.AssemblyName),
         };
     }

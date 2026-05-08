@@ -2263,9 +2263,39 @@ public sealed partial class NativeAotLoweringPlanner
                             body.Add($"    }}");
                         }
                     }
-                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
-                    body.Add($"    {voidExprs};");
-                    body.Add("    return static_cast<CHAOS_IL2CPP_UINT16>(0);");
+
+                    // Determine conversion strategy based on first parameter type.
+                    // Convert.ToChar overloads all convert from a single source value.
+                    if (paramTypes.Count > 0)
+                    {
+                        var firstParam = paramTypes[0];
+                        if (firstParam is "System.Byte" or "System.SByte" or "System.Int16" or "System.UInt16"
+                            or "System.Int32" or "System.UInt32" or "System.Int64" or "System.UInt64"
+                            or "System.Char")
+                        {
+                            // Integral types and char: direct truncation cast.
+                            body.Add($"    return static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0);");
+                        }
+                        else if (firstParam == "System.Object")
+                        {
+                            // Boxed object: in verify mode without GC, the value may be a
+                            // raw intptr (not a heap pointer).  Delegate to int32 conversion
+                            // which matches chaos_convert_tochar_object() in convert.cpp.
+                            body.Add($"    return static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_0);");
+                        }
+                        else
+                        {
+                            // Invalid conversion type (bool, DateTime, Decimal, Double, Single, String):
+                            // managed Convert.ToChar throws — stub returns 0 (L2 expected checksum is -1).
+                            var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
+                            body.Add($"    {voidExprs};");
+                            body.Add("    return static_cast<CHAOS_IL2CPP_UINT16>(0);");
+                        }
+                    }
+                    else
+                    {
+                        body.Add("    return static_cast<CHAOS_IL2CPP_UINT16>(0);");
+                    }
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_UINT16", symbol, paramSig, body.ToArray());
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
