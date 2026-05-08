@@ -10,15 +10,16 @@ set BUILD_DIR=%REPO%\verification\foundation-dll\System.Private.CoreLib\%FAMILY%
 set INC=-I"%REPO%\src\native\common" -I"%REPO%\src\native\common\chaos" -I"%REPO%\contracts\native\v0" -I"%REPO%\src\native\runtime-core" -I"%REPO%\third_party\fmt\include" -I"%REPO%\third_party\bdwgc\include"
 set DEFS=-DCHAOS_IL2CPP_CHECK -DCHAOS_IL2CPP_VERIFY_MODE -DGC_NOT_DLL
 
-set LIBDIR=%REPO%\build\native
-set LIBS=%LIBDIR%\src\native\runtime-core\RelWithDebInfo\chaos_runtime_core.lib ^
-    %LIBDIR%\src\native\interpreter\RelWithDebInfo\chaos_interpreter.lib ^
-    %LIBDIR%\src\native\bootstrap\RelWithDebInfo\chaos_bootstrap.lib ^
-    %LIBDIR%\src\native\common\RelWithDebInfo\chaos_common.lib ^
-    %LIBDIR%\src\native\support\RelWithDebInfo\chaos_support.lib ^
-    %LIBDIR%\src\native\hot-update\RelWithDebInfo\chaos_hot_update.lib ^
-    %LIBDIR%\..\..\fmt_build\RelWithDebInfo\chaos_fmt.lib ^
-    %LIBDIR%\..\..\bdwgc_build\RelWithDebInfo\chaos_bdwgc.lib
+set L=%REPO%\build\native
+
+set LIBS=%L%\src\native\runtime-core\RelWithDebInfo\chaos_runtime_core.lib ^
+    %L%\src\native\interpreter\RelWithDebInfo\chaos_interpreter.lib ^
+    %L%\src\native\bootstrap\RelWithDebInfo\chaos_bootstrap.lib ^
+    %L%\src\native\common\RelWithDebInfo\chaos_common.lib ^
+    %L%\src\native\support\RelWithDebInfo\chaos_support.lib ^
+    %L%\src\native\hot-update\RelWithDebInfo\chaos_hot_update.lib ^
+    %L%\fmt_build\RelWithDebInfo\chaos_fmt.lib ^
+    %L%\bdwgc_build\RelWithDebInfo\chaos_bdwgc.lib
 
 set GEN_CPP=%REPO%\verification\foundation-dll\System.Private.CoreLib\%FAMILY%\il2cpp_dist\genuine\ConvertCharNativeEntry\generated\native-aot.generated.cpp
 
