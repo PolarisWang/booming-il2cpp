@@ -86,6 +86,71 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlySet<string>? _interfaceTypeSubjectIds;
     private IReadOnlySet<string>? _sealedTypeSubjectIds;
 
+    // ── A4-Dual+V2 Header kind / vtable variant decision engine ──
+    /// <summary>
+    /// Determines the ObjectHeader kind for a given type. PureType = no sync (value types,
+    /// boxed primitives, sealed types with no finalizer). ThinLockable = default for reference
+    /// types. Fat = types with finalizers, types needing explicit vtable*, string, array, delegate.
+    /// </summary>
+    private enum HeaderKind { PureType, ThinLockable, Fat }
+
+    /// <summary>
+    /// VTable variant: V0 (no vtable — interfaces, pure value types in V0 emission),
+    /// V1 (indirect — vtable_array points to external VTable_symbol[]),
+    /// V2 (inline — TypeInfoV2 with inline_slots[6] for ≤6 virtual methods).
+    /// </summary>
+    private enum VTableVariant { V0, V1, V2 }
+
+    private HeaderKind GetHeaderKind(string typeSubjectId)
+    {
+        // Strings, arrays, delegates always use Fat (need explicit vtable* and sync)
+        if (typeSubjectId.Contains("/System.String") ||
+            typeSubjectId.Contains("/System.Array") ||
+            typeSubjectId.Contains("/System.Delegate") ||
+            typeSubjectId.Contains("/System.MulticastDelegate") ||
+            typeSubjectId.Contains("/System.Collections.IEnumerator"))
+            return HeaderKind.Fat;
+
+        // Value types → PureType (no sync needed)
+        if (_valueTypeSubjectIds.Contains(typeSubjectId))
+            return HeaderKind.PureType;
+
+        // Interface types → PureType
+        if (_interfaceTypeSubjectIds?.Contains(typeSubjectId) == true)
+            return HeaderKind.PureType;
+
+        // Sealed types with no virtual methods → PureType
+        if (_sealedTypeSubjectIds?.Contains(typeSubjectId) == true)
+        {
+            // Check if type has any virtual methods
+            bool hasVirtual = _methodsBySubjectId.Values.Any(m =>
+                !m.IsStatic &&
+                string.Equals(m.Identity.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal));
+            if (!hasVirtual)
+                return HeaderKind.PureType;
+        }
+
+        // Types with finalizer → Fat
+        // (finalizer detection: check for virtual Finalize method)
+        if (_methodsBySubjectId.Values.Any(m =>
+            !m.IsStatic &&
+            string.Equals(m.Identity.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal) &&
+            m.SubjectId.Contains("Finalize")))
+            return HeaderKind.Fat;
+
+        // Everything else → ThinLockable (default)
+        return HeaderKind.ThinLockable;
+    }
+
+    private VTableVariant GetVTableVariant(string typeSubjectId, int vtableLength)
+    {
+        if (vtableLength == 0)
+            return VTableVariant.V0;
+        if (vtableLength <= 6)
+            return VTableVariant.V2;
+        return VTableVariant.V1;
+    }
+
     // Phase 0: ModuleRegistry Tier 0 type data (populated after EmitObjectModelDeclarations)
     private HashSet<string>? _allEmittedTypeSubjectIds;
     private int _moduleTypeCount;

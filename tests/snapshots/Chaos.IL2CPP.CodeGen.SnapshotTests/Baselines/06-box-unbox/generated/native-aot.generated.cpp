@@ -23,11 +23,11 @@ namespace chaos::il2cpp::codegen::SnapshotTestFixtures {
 #include <chaos/type_info.h>
 
 constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;
-inline TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, nullptr, 0, 0, 2 };
+inline TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, nullptr, 0, 0, 2, 0, nullptr, 0u };
 
 struct chaos_managed_array
 {
-	chaos_object_header header{};
+	FatHeader header{};
 	CHAOS_IL2CPP_UINT8 element_type_shape = 0;
 	const TypeInfo* element_type_info = nullptr;
 	CHAOS_IL2CPP_INTPTR length = 0;
@@ -67,21 +67,15 @@ TValue* chaos_resolve_managed_value_pointer(CHAOS_IL2CPP_INTPTR chaos_managed_po
 	return reinterpret_cast<TValue*>(chaos_managed_pointer);
 }
 
-inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Reflection_Assembly = { nullptr, 5474029880995115448ULL, nullptr, nullptr, 0, 0, 1 /* reference */ };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
-inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Reflection_AssemblyName = { nullptr, 17082367815459723707ULL, nullptr, nullptr, 0, 0, 1 /* reference */ };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
-inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Reflection_ConstructorInfo = { nullptr, 4137207361503509124ULL, nullptr, nullptr, 0, 0, 1 /* reference */ };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
-inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Reflection_FieldInfo = { nullptr, 17040031516751226236ULL, nullptr, nullptr, 0, 0, 1 /* reference */ };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
-inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Reflection_MethodInfo = { nullptr, 10748947813473285525ULL, nullptr, nullptr, 0, 0, 1 /* reference */ };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
-inline TypeInfo chaos_type_info_System_Private_CoreLib_System_String = { nullptr, 1782325859292956794ULL, nullptr, nullptr, 0, 0, 1 /* reference */ };
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
-inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Int32 = { nullptr, 11009693519287992193ULL, nullptr, nullptr, 0, 0, 2 /* value */ };
+inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Reflection_Assembly = { nullptr, 5474029880995115448ULL, nullptr, nullptr, 0, 0, 1 /* reference */, 1, nullptr, 0u };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Reflection_AssemblyName = { nullptr, 17082367815459723707ULL, nullptr, nullptr, 0, 0, 1 /* reference */, 1, nullptr, 0u };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Reflection_ConstructorInfo = { nullptr, 4137207361503509124ULL, nullptr, nullptr, 0, 0, 1 /* reference */, 1, nullptr, 0u };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Reflection_FieldInfo = { nullptr, 17040031516751226236ULL, nullptr, nullptr, 0, 0, 1 /* reference */, 1, nullptr, 0u };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Reflection_MethodInfo = { nullptr, 10748947813473285525ULL, nullptr, nullptr, 0, 0, 1 /* reference */, 1, nullptr, 0u };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfo chaos_type_info_System_Private_CoreLib_System_String = { nullptr, 1782325859292956794ULL, nullptr, nullptr, 0, 0, 1 /* reference */, 2, nullptr, 0u };
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Int32 = { nullptr, 11009693519287992193ULL, nullptr, nullptr, 0, 0, 2 /* value */, 0, nullptr, 0u };
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
-inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Int32 = { nullptr, 11009693519287992193ULL, nullptr, nullptr, 0, 0, 2 /* value (boxed) */ };
+inline TypeInfo chaos_type_info_System_Private_CoreLib_System_Int32 = { nullptr, 11009693519287992193ULL, nullptr, nullptr, 0, 0, 2 /* value (boxed) */, 0, nullptr, 0u };
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
 // ── Virtual method table arrays ──
@@ -201,15 +195,15 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_type_info_System_Private_CoreLib_System_String, chaos_array->element_type_info);
 	}
 
-	auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_value);
+	auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);
 	if (chaos_array->element_type_shape == chaos_type_shape_interface)
 	{
-		return chaos_does_type_implement_interface(chaos_header->type_info, chaos_array->element_type_info);
+		return chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);
 	}
 
 	if (chaos_array->element_type_shape == chaos_type_shape_reference)
 	{
-		return chaos_is_type_compatible(chaos_header->type_info, chaos_array->element_type_info);
+		return chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);
 	}
 
 	return false;
@@ -217,19 +211,19 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
 {
-	chaos_object_header header{};
+	FatHeader header{};
 	CHAOS_IL2CPP_INTPTR runtime_assembly_name_value = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName
 {
-	chaos_object_header header{};
+	FatHeader header{};
 	CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo
 {
-	chaos_object_header header{};
+	FatHeader header{};
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
 	CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
@@ -240,7 +234,7 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo
 {
-	chaos_object_header header{};
+	FatHeader header{};
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 	CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
@@ -248,7 +242,7 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo
 {
-	chaos_object_header header{};
+	FatHeader header{};
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
 	CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
@@ -259,7 +253,7 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo
 
 struct chaos_type_System_Private_CoreLib_System_String
 {
-	chaos_object_header header{};
+	FatHeader header{};
 	CHAOS_IL2CPP_INTPTR length = 0;
 	const char* utf8_data = nullptr;
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
@@ -271,7 +265,7 @@ struct chaos_valuetype_System_Private_CoreLib_System_Int32
 
 struct chaos_boxed_type_System_Private_CoreLib_System_Int32
 {
-	chaos_object_header header{};
+	FatHeader header{};
 	CHAOS_IL2CPP_INTPTR value = 0;
 };
 

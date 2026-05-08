@@ -4,8 +4,8 @@
 // ── Runtime API declarations exposed to generated code ──
 //
 // This header provides declarations used by generated .cpp files via
-// runtime_core.h. After the Hybrid TypeInfo* migration, all 28 passing
-// families generate self-contained C++ code.
+// runtime_core.h. After the A4-Dual+V2 migration, generated code uses
+// FatHeader (16B: type_info + vtable) for all object headers.
 
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
@@ -13,18 +13,75 @@
 #include "codegen_bridge.h"       // DispatchEntryV0, NameIndex structs, kDispatchPatched
 #include <gc.h>                   // GC_END_STUBBORN_CHANGE for write barriers
 
-// ── Object header definition ──
-// type_info: type identity for GC, casting, reflection
-// vtable: virtual method dispatch table
+// ═══════════════════════════════════════════════════════════════════
+// A4-Dual+V2 Object Header Architecture
+// ═══════════════════════════════════════════════════════════════════
+// Three header variants discriminated by TypeInfo.flags[1:0]:
+//
+//   PureType (00):  8B  {TypeInfo* type_info}
+//                       — no sync, no vtable
+//   ThinLockable (01): 16B {TypeInfo* type_info, uint64_t sync_state}
+//                       — thin-lock capable, no vtable
+//   Fat (10):          24B {TypeInfo* type_info, void** vtable, uint64_t sync_state}
+//                       — full dispatch + sync
+//
+// All three store TypeInfo* at offset [0], so chaos_object_get_type_info()
+// is a simple *(TypeInfo**)obj read — no bit magic needed.
+//
+// PureType: value-type boxes, sealed types with 0 virtual methods,
+//           compiler-verified no-sync.
+// ThinLockable: most reference types (no virtual dispatch, can sync).
+// Fat: types with virtual methods (vtable dispatch + sync).
+// ═══════════════════════════════════════════════════════════════════
+
+// ── PureType header (8B) ──────────────────────────────────────────
+// Used for value-type boxes, sealed types with no virtual methods.
+// No sync_state — compiler-verified no-sync.
+struct PureTypeHeader {
+    const TypeInfo* type_info = nullptr;
+};
+
+// ── ThinLockable header (16B) ─────────────────────────────────────
+// Used for most reference types. sync_state at [8] for thin locking.
+struct ThinLockableHeader {
+    const TypeInfo* type_info   = nullptr;  // [0]
+    uint64_t        sync_state  = 0;        // [8] — thin lock / sync block index
+};
+
+// ── Fat header (24B) ──────────────────────────────────────────────
+// Full-featured: virtual dispatch table + type identity + sync.
+struct FatHeader {
+    const TypeInfo* type_info   = nullptr;  // [0]
+    const void**    vtable      = nullptr;  // [8]
+    uint64_t        sync_state  = 0;        // [16] — thin lock / sync block index
+};
+
+// ── Runtime ObjectHeader (24B) ────────────────────────────────────
+// Runtime-internal full layout. Matches FatHeader fields at [0..15]
+// so reinterpret_cast between them is safe.
+// struct RuntimeObjectHeader {
+//     FatHeader   header;         // 16B {type_info, vtable}
+//     uint64_t    sync_state = 0; // 8B  — thin lock / sync block index
+// };  // 24B (defined in runtime_core.cpp)
+
+// ── Unified type_info accessor ─────────────────────────────────────
+// All three header kinds store TypeInfo* at offset [0].
+inline const TypeInfo* chaos_object_get_type_info(const void* obj) noexcept {
+    return *static_cast<const TypeInfo* const*>(obj);
+}
+
+// ── Inherited chaos_object_header for legacy compat ───────────────
+// New code should use FatHeader directly. This alias prevents
+// compilation errors in older generated stubs.
 struct chaos_object_header {
-    const void**    vtable      = nullptr;  // [0] virtual method table
-    const TypeInfo* type_info   = nullptr;   // [8] type identity
+    const void**    vtable      = nullptr;  // [0]
+    const TypeInfo* type_info   = nullptr;   // [8]
 };
 
 // ── Managed string type ──────────────────────────────────────────
 // Used by generated code for reinterpret_cast access to string length.
 struct chaos_managed_string {
-    chaos_object_header header{};
+    FatHeader header{};
     CHAOS_IL2CPP_INT32 length = 0;
 };
 
@@ -82,186 +139,42 @@ CHAOS_IL2CPP_INTPTR ChaosCultureGetNumberFormat(CHAOS_IL2CPP_INTPTR culture) noe
 CHAOS_IL2CPP_INTPTR ChaosStringContains(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosStringStartsWith(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept;
-// Reflection
-CHAOS_IL2CPP_INTPTR ChaosReflectionIsDefined(CHAOS_IL2CPP_INTPTR assembly, CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOf(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR base) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsGenericType(CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsValueType(CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetNamespace(CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR member) noexcept;
-CHAOS_IL2CPP_INT32  ChaosReflectionGetCallingConvention(CHAOS_IL2CPP_INTPTR method) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsPublic(CHAOS_IL2CPP_INTPTR member) noexcept;
-// Module reflection
-CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetType(CHAOS_IL2CPP_INTPTR module, CHAOS_IL2CPP_INTPTR name) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetTypes(CHAOS_IL2CPP_INTPTR module) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleAssembly(CHAOS_IL2CPP_INTPTR module) noexcept;
-// Parameter reflection
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR param) noexcept;
-CHAOS_IL2CPP_INT32  ChaosReflectionGetParamAttributes(CHAOS_IL2CPP_INTPTR param) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept;
-// Reflection image/constructed-generic
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetImageRuntimeVersion(CHAOS_IL2CPP_INTPTR assembly) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsConstructedGeneric(CHAOS_IL2CPP_INTPTR type) noexcept;
-// Runtime helpers
-CHAOS_IL2CPP_INTPTR ChaosFormattablestringFactoryCreate(CHAOS_IL2CPP_INTPTR format, CHAOS_IL2CPP_INTPTR args) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersEquals(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right) noexcept;
-CHAOS_IL2CPP_INT32  ChaosRuntimeHelpersGetHashCode(CHAOS_IL2CPP_INTPTR value) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetObjectValue(CHAOS_IL2CPP_INTPTR value) noexcept;
-// Runtime method handle
-CHAOS_IL2CPP_INT32  ChaosRuntimemethodhandleGetHashCode(CHAOS_IL2CPP_INT64 handle) noexcept;
-// Runtime-wrapped exception
-CHAOS_IL2CPP_INTPTR ChaosRuntimewrappedGetWrappedException(CHAOS_IL2CPP_INTPTR exc) noexcept;
-// Volatile
-CHAOS_IL2CPP_INT32  ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept;
-	// Reflection supplementary
-	CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsSealed(CHAOS_IL2CPP_INTPTR type) noexcept;
-	CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsGenericTypeDef(CHAOS_IL2CPP_INTPTR type) noexcept;
-	CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromAssemblyBool(CHAOS_IL2CPP_INTPTR assembly, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 throw_on_error);
-	CHAOS_IL2CPP_INTPTR ChaosReflectionGetExecutingAssembly(void) noexcept;
-	CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyLocation(CHAOS_IL2CPP_INTPTR assembly) noexcept;
-	CHAOS_IL2CPP_INTPTR ChaosGetCustomAttributeFromBlob(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attr_type_handle) noexcept;
-// Float32 marshalling
-CHAOS_IL2CPP_INTPTR ChaosStoreFloat32(CHAOS_IL2CPP_FLOAT32 value) noexcept;
-// Reflection assignable
-CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFrom(CHAOS_IL2CPP_INTPTR target, CHAOS_IL2CPP_INTPTR source) noexcept;
-// Reflection generic
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamConstraints(CHAOS_IL2CPP_INTPTR type) noexcept;
-// Reflection member info
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsVirtual(CHAOS_IL2CPP_INTPTR member) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsInterface(CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsArray(CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyFullName(CHAOS_IL2CPP_INTPTR assembly) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamPos(CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsEnum(CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetIsAbstract(CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetTypes(CHAOS_IL2CPP_INTPTR assembly) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseDefinition(CHAOS_IL2CPP_INTPTR member) noexcept;
-// Reflection field handle
-CHAOS_IL2CPP_INT32  ChaosRuntimefieldhandleGetHashCode(CHAOS_IL2CPP_INTPTR handle) noexcept;
-// Reflection module
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleName(CHAOS_IL2CPP_INTPTR module) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleNameOnly(CHAOS_IL2CPP_INTPTR module) noexcept;
-// Parameter reflection (supplementary)
-CHAOS_IL2CPP_INTPTR ChaosReflectionHasDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameterType(CHAOS_IL2CPP_INTPTR param) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetParamPosition(CHAOS_IL2CPP_INTPTR param) noexcept;
-// Reflection type handle
-CHAOS_IL2CPP_INT32  ChaosRuntimetypehandleGetHashCode(CHAOS_IL2CPP_INTPTR handle) noexcept;
-// Reflection constructors
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type) noexcept;
-// Reflection assignable (supplementary)
-CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableTo(CHAOS_IL2CPP_INTPTR target, CHAOS_IL2CPP_INTPTR source) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfType(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR type) noexcept;
-// Assembly reflection
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetCallingAssembly(void) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetEntryAssembly(void) noexcept;
-// Generic type reflection
-CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericType(CHAOS_IL2CPP_INTPTR def, CHAOS_IL2CPP_INTPTR args) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetContainsGenericParams(CHAOS_IL2CPP_INTPTR type) noexcept;
-// Parameter default value
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetRawDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept;
-// Type reflection
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 flags) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodsBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 flags) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR type) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR type) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringEndsWith(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringToLower(CHAOS_IL2CPP_INTPTR str) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringToUpper(CHAOS_IL2CPP_INTPTR str) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringTrim(CHAOS_IL2CPP_INTPTR str) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringReplace(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR old_value, CHAOS_IL2CPP_INTPTR new_value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringSubstring(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR start_index, CHAOS_IL2CPP_INTPTR length) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringRemove(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR start_index, CHAOS_IL2CPP_INTPTR length) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringFormat(CHAOS_IL2CPP_INTPTR format_str, CHAOS_IL2CPP_INTPTR arg0, CHAOS_IL2CPP_INTPTR arg1) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringFastAllocate(CHAOS_IL2CPP_INTPTR length) noexcept;
+void    ChaosStringAppend(CHAOS_IL2CPP_INTPTR builder, CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR arg) noexcept;
+// GC
+void    ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept;
+CHAOS_IL2CPP_INT32  ChaosGcGetGeneration(CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INT32  ChaosGcGetMaxGeneration(void) noexcept;
+// RuntimeType
+CHAOS_IL2CPP_INTPTR ChaosRuntimeTypeFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept;
+// Type
+CHAOS_IL2CPP_INTPTR ChaosTypeGetTypeFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeEquals(CHAOS_IL2CPP_INTPTR type_a, CHAOS_IL2CPP_INTPTR type_b) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetTypeInfo(CHAOS_IL2CPP_INTPTR type) noexcept;
+// Interlocked
+CHAOS_IL2CPP_INT64  ChaosInterlockedReadInt64(CHAOS_IL2CPP_INT64* location) noexcept;
+CHAOS_IL2CPP_INT64  ChaosInterlockedIncrementInt64(CHAOS_IL2CPP_INT64* location) noexcept;
+CHAOS_IL2CPP_INT64  ChaosInterlockedDecrementInt64(CHAOS_IL2CPP_INT64* location) noexcept;
+CHAOS_IL2CPP_INT64  ChaosInterlockedExchangeInt64(CHAOS_IL2CPP_INT64* location, CHAOS_IL2CPP_INT64 value) noexcept;
+CHAOS_IL2CPP_INT32  ChaosInterlockedCompareExchangeInt32(CHAOS_IL2CPP_INT32* location, CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INT32 comparand) noexcept;
+CHAOS_IL2CPP_INT64  ChaosInterlockedCompareExchangeInt64(CHAOS_IL2CPP_INT64* location, CHAOS_IL2CPP_INT64 value, CHAOS_IL2CPP_INT64 comparand) noexcept;
+void    ChaosInterlockedStoreNoBarrier(CHAOS_IL2CPP_INT64* location, CHAOS_IL2CPP_INT64 value) noexcept;
+// Environment
+CHAOS_IL2CPP_INTPTR ChaosEnvironmentGetStackTrace(void) noexcept;
+// Console
+void    ChaosConsoleWriteLine(CHAOS_IL2CPP_INTPTR value) noexcept;
+// Delegate
+void    ChaosDelegateInitialize(CHAOS_IL2CPP_INTPTR delegate_obj, CHAOS_IL2CPP_INTPTR target, CHAOS_IL2CPP_INTPTR method_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosDelegateGetTarget(CHAOS_IL2CPP_INTPTR delegate_obj) noexcept;
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
 
-// Expose at global scope so generated code (inside anonymous namespaces)
-// can call these as bare identifiers.
-using chaos::il2cpp::runtime_core::ChaosArrayClear;
-using chaos::il2cpp::runtime_core::ChaosArrayGetLength;
-using chaos::il2cpp::runtime_core::ChaosBufferByteLength;
-using chaos::il2cpp::runtime_core::ChaosCultureGetCompareInfo;
-using chaos::il2cpp::runtime_core::ChaosCultureGetCurrent;
-using chaos::il2cpp::runtime_core::ChaosCultureGetDateTimeFormat;
-using chaos::il2cpp::runtime_core::ChaosCultureGetDisplayName;
-using chaos::il2cpp::runtime_core::ChaosCultureGetInvariant;
-using chaos::il2cpp::runtime_core::ChaosCultureGetName;
-using chaos::il2cpp::runtime_core::ChaosCultureGetNumberFormat;
-using chaos::il2cpp::runtime_core::ChaosDatetimeGetHashCode;
-using chaos::il2cpp::runtime_core::ChaosDatetimeGetUtcNow;
-using chaos::il2cpp::runtime_core::ChaosExceptionGetBaseException;
-using chaos::il2cpp::runtime_core::ChaosExceptionGetHresult;
-using chaos::il2cpp::runtime_core::ChaosExceptionGetInnerException;
-using chaos::il2cpp::runtime_core::ChaosFormattablestringFactoryCreate;
-using chaos::il2cpp::runtime_core::ChaosGuidNewGuid;
-using chaos::il2cpp::runtime_core::ChaosInterlockedMemoryBarrier;
-using chaos::il2cpp::runtime_core::ChaosLoadFloat64;
-using chaos::il2cpp::runtime_core::ChaosLoadInt64;
-using chaos::il2cpp::runtime_core::ChaosMathSqrt;
-using chaos::il2cpp::runtime_core::ChaosObjectCtor;
-using chaos::il2cpp::runtime_core::ChaosObjectEqualsStatic;
-using chaos::il2cpp::runtime_core::ChaosRandomNextBytes;
-using chaos::il2cpp::runtime_core::ChaosRandomNextDouble;
-using chaos::il2cpp::runtime_core::ChaosReflectionAssemblyGetTypes;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetAssemblyFullName;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetAssemblyLocation;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetAssemblyQualifiedName;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetBaseDefinition;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetBaseType;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetCallingAssembly;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetCallingConvention;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetConstructorsDefault;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetContainsGenericParams;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetDefaultValue;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetEntryAssembly;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetExceptionMessage;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetExecutingAssembly;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetFieldsBindingflags;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetGenericParamConstraints;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetGenericParamPos;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetImageRuntimeVersion;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsAbstract;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsArray;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsConstructedGeneric;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsEnum;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsGenericType;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsGenericTypeDef;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsInterface;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsPublic;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsSealed;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsValueType;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetIsVirtual;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetMethodsBindingflags;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetModuleAssembly;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetModuleName;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetModuleNameOnly;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetNamespace;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetParamAttributes;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetParamPosition;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetParameterType;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetRawDefaultValue;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetReflectedType;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetRequiredCustomModifiers;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetTypeFromAssemblyBool;
-using chaos::il2cpp::runtime_core::ChaosReflectionGetTypeFullName;
-using chaos::il2cpp::runtime_core::ChaosReflectionHasDefaultValue;
-using chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableFrom;
-using chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableTo;
-using chaos::il2cpp::runtime_core::ChaosReflectionIsDefined;
-using chaos::il2cpp::runtime_core::ChaosReflectionIsInstanceOfType;
-using chaos::il2cpp::runtime_core::ChaosReflectionIsSubclassOf;
-using chaos::il2cpp::runtime_core::ChaosReflectionMakeGenericType;
-using chaos::il2cpp::runtime_core::ChaosReflectionModuleGetType;
-using chaos::il2cpp::runtime_core::ChaosReflectionModuleGetTypes;
-using chaos::il2cpp::runtime_core::ChaosReflectionSetExceptionMetadata;
-using chaos::il2cpp::runtime_core::ChaosRuntimeHelpersEquals;
-using chaos::il2cpp::runtime_core::ChaosRuntimeHelpersGetHashCode;
-using chaos::il2cpp::runtime_core::ChaosRuntimeHelpersGetObjectValue;
-using chaos::il2cpp::runtime_core::ChaosRuntimefieldhandleGetHashCode;
-using chaos::il2cpp::runtime_core::ChaosRuntimemethodhandleGetHashCode;
-using chaos::il2cpp::runtime_core::ChaosRuntimetypehandleGetHashCode;
-using chaos::il2cpp::runtime_core::ChaosRuntimewrappedGetWrappedException;
-using chaos::il2cpp::runtime_core::ChaosStoreFloat32;
-using chaos::il2cpp::runtime_core::ChaosStoreFloat64;
-using chaos::il2cpp::runtime_core::ChaosStoreInt64;
-using chaos::il2cpp::runtime_core::ChaosStringContains;
-using chaos::il2cpp::runtime_core::ChaosStringJoinSs;
-using chaos::il2cpp::runtime_core::ChaosStringStartsWith;
-using chaos::il2cpp::runtime_core::ChaosVolatileRead;
-using chaos::il2cpp::runtime_core::ChaosGetCustomAttributeFromBlob;
-
-#endif  // CHAOS_IL2CPP_GENERATED_CODE_COMPAT_H_
+#endif // CHAOS_IL2CPP_GENERATED_CODE_COMPAT_H_

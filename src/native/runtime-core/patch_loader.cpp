@@ -1,5 +1,6 @@
 #include "patch_loader.h"
 
+#include <cstdio>
 #include <cstring>
 #include <fmt/format.h>
 #include <new>
@@ -337,25 +338,32 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     if (data == nullptr || size < sizeof(PatchDataHeader)) return nullptr;
 
     auto* header = static_cast<const PatchDataHeader*>(data);
+    std::fprintf(stderr, "DIAG[APFM]: magic=%x ver=%u\n", header->magic, header->version); std::fflush(stderr);
 
     // Validate magic and version.
     if (header->magic != PATCH_DATA_MAGIC) return nullptr;
     if (header->version != PATCH_DATA_VERSION) return nullptr;
     if (header->header_size < sizeof(PatchDataHeader)) return nullptr;
+    std::fprintf(stderr, "DIAG[APFM]: validation OK\n"); std::fflush(stderr);
 
     // Validate structural integrity: total size must match.
     uint32_t expected_size = header->body_data_offset + header->body_data_size;
     if (size < expected_size) return nullptr;
+    std::fprintf(stderr, "DIAG[APFM]: size OK\n"); std::fflush(stderr);
 
     // Create context.
     auto* ctx = CreatePatchContext(header, size);
     if (ctx == nullptr) return nullptr;
+    std::fprintf(stderr, "DIAG[APFM]: ctx created\n"); std::fflush(stderr);
 
     auto& registry = GetNameIndexRegistry();
     auto* cache = ctx->metadata_cache;
+    std::fprintf(stderr, "DIAG[APFM]: registry ready\n"); std::fflush(stderr);
 
     // Iterate MethodDef entries and patch each one.
     uint32_t patched_count = 0;
+    std::fprintf(stderr, "DIAG[APFM]: iterating %u methods\n",
+        static_cast<unsigned>(cache->MethodCount())); std::fflush(stderr);
     for (uint32_t i = 0; i < cache->MethodCount(); ++i) {
         auto* method_entry = cache->GetMethodDef(i);
         if (method_entry == nullptr) continue;
@@ -382,6 +390,8 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
 
         // Set up the PatchMethod.
         auto& patch_method = ctx->methods[patched_count];
+        std::fprintf(stderr, "DIAG[APFM]: setting up method token=%u\n",
+            static_cast<unsigned>(aot_token)); std::fflush(stderr);
         patch_method.token = aot_token;
         patch_method.il_bytes = static_cast<const uint8_t*>(
             cache->GetBody(method_entry->body_offset));
@@ -416,13 +426,16 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         }
 
         // Mark the dispatch entry as patched.
+        std::fprintf(stderr, "DIAG[APFM]: calling SetPatched token=%u\n", static_cast<unsigned>(aot_token)); std::fflush(stderr);
         registry.SetPatched(aot_token, true, &patch_method);
+        std::fprintf(stderr, "DIAG[APFM]: SetPatched OK\n"); std::fflush(stderr);
 
         ++patched_count;
     }
 
     // Update method count to reflect only successfully patched methods.
     ctx->method_count = patched_count;
+    std::fprintf(stderr, "DIAG[APFM]: returning ctx method_count=%u\n", static_cast<unsigned>(ctx->method_count)); std::fflush(stderr);
 
     return ctx;
 }

@@ -7,15 +7,14 @@
 // (defined in each family's native-aot.generated.cpp). The common prefix is:
 //
 //   struct chaos_type_System_Private_CoreLib_System_Exception {
-//       chaos_object_header header;          // 8 bytes (type_info*)
-//       CHAOS_IL2CPP_INTPTR _message;        // offset +8
-//       CHAOS_IL2CPP_INTPTR _innerException; // offset +16
-//       CHAOS_IL2CPP_INTPTR _stackTrace;     // offset +24
-//       CHAOS_IL2CPP_INT32 _HResult;         // offset +32
+//       FatHeader header;                // 24 bytes (type_info + vtable + sync_state)
+//       CHAOS_IL2CPP_INTPTR _message;        // offset +24
+//       CHAOS_IL2CPP_INTPTR _innerException; // offset +32
+//       CHAOS_IL2CPP_INTPTR _stackTrace;     // offset +40
+//       CHAOS_IL2CPP_INT32 _HResult;         // offset +48
 //   };
 //
-// The header size is sizeof(chaos_object_header) = sizeof(CHAOS_IL2CPP_INTPTR) = 8 bytes (64-bit)
-// Message field is at offset 8 from the object base.
+// The header size is sizeof(FatHeader) = 24 bytes (64-bit)
 
 #include "runtime_core.h"
 #include <chaos/trace.h>
@@ -26,10 +25,11 @@
 namespace chaos::il2cpp::runtime_core {
 
 // Offset of _message field in Exception struct (after header)
-static constexpr CHAOS_IL2CPP_SIZE kExceptionMessageOffset = sizeof(chaos_object_header);
-static constexpr CHAOS_IL2CPP_SIZE kExceptionInnerExceptionOffset = sizeof(chaos_object_header) + sizeof(CHAOS_IL2CPP_INTPTR);
-static constexpr CHAOS_IL2CPP_SIZE kExceptionStackTraceOffset = sizeof(chaos_object_header) + 2 * sizeof(CHAOS_IL2CPP_INTPTR);
-static constexpr CHAOS_IL2CPP_SIZE kExceptionHResultOffset = sizeof(chaos_object_header) + 3 * sizeof(CHAOS_IL2CPP_INTPTR);
+// Generated types use FatHeader (24B: type_info + vtable + sync_state).
+static constexpr CHAOS_IL2CPP_SIZE kExceptionMessageOffset = sizeof(FatHeader);
+static constexpr CHAOS_IL2CPP_SIZE kExceptionInnerExceptionOffset = sizeof(FatHeader) + sizeof(CHAOS_IL2CPP_INTPTR);
+static constexpr CHAOS_IL2CPP_SIZE kExceptionStackTraceOffset = sizeof(FatHeader) + 2 * sizeof(CHAOS_IL2CPP_INTPTR);
+static constexpr CHAOS_IL2CPP_SIZE kExceptionHResultOffset = sizeof(FatHeader) + 3 * sizeof(CHAOS_IL2CPP_INTPTR);
 
 static inline CHAOS_IL2CPP_INTPTR* GetExceptionFieldPtr(void* exception_obj, CHAOS_IL2CPP_SIZE field_offset) {
     if (exception_obj == nullptr) return nullptr;

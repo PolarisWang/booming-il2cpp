@@ -771,13 +771,13 @@ public sealed partial class NativeAotLoweringPlanner
                 if (er.CatchTypeSubjectId != null)
                 {
                     builder.AppendLine(inner +
-                        "auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_exception.object_value);");
+                        "auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_exception.object_value);");
                     builder.AppendLine(inner + "if (chaos_header == nullptr)");
                     builder.AppendLine(inner + "{");
                     builder.AppendLine(inner + "    throw;");
                     builder.AppendLine(inner + "}");
                     builder.AppendLine(inner +
-                        "if (!chaos_is_type_compatible(chaos_header->type_info, &" +
+                        "if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &" +
                         GetNativeTypeInfoSymbol(er.CatchTypeSubjectId) + "))");
                     builder.AppendLine(inner + "{");
                     builder.AppendLine(inner + "    throw;");
