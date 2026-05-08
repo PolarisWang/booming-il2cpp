@@ -257,42 +257,30 @@ bool chaos_is_type_compatible(const TypeInfoHot* actual, const TypeInfoHot* targ
 
 ---
 
-## 实现计划
+## 实现状态
 
-### Phase 1: TypeInfo 三层拆分
-- C++: `type_info.h` 定义 TypeInfoHot + TypeInfoWarm，更新 TypeInfoV2
-- C++: 所有 `TypeInfo*` → `TypeInfoHot*`（通过 `using` 过渡）
-- C++: `runtime_core.cpp` 适配 GetSyncStatePtr / HeaderSizeFromFlags
-- C#: `ObjectModelEmission.cs` 发射双结构体
-- 验证: `dotnet test` 快照
-
-### Phase 2: ObjectNewDirect
-- C++: `runtime_core.cpp` 实现 `ObjectNewDirect`
-- C#: `ObjectModelEmission.cs` 加 `isStaticAotType` 分支
-- C#: `MethodEmission.cs` 对应 newobj 指令发射
-- 验证: 快照 + 原生编译
-
-### Phase 3: Triple Dispatch
-- C#: `MethodEmission.cs` EmitCallVirt 按 HeaderKind 三分支
-- C++: 无变更（运行时统一读 vtable_array）
-- 验证: 快照
-
-### Phase 4: ModuleRegistry 扩展 + 跨模块
-- C++: `module_registry.h` kMaxModules 256→1024
-- C++: `module_registry.cpp` 适配
-
-### Phase 5: 验证
-- 快照测试 58/58
-- 原生编译 chaos_runtime_core.lib
-- 结构告警
+| Phase | 内容 | 状态 | Commit |
+|-------|------|------|--------|
+| **Phase 1** | TypeInfo 三层拆分：type_info.h Hot+Warm+V2；所有 TypeInfo*→TypeInfoHot* 迁移；runtime_core.cpp 头类型适配 | 完成 | `ff0c88f7` |
+| **Phase 2** | C# Codegen TypeInfo+VTable 双结构发射；ObjectModelEmission.cs Scriban 模板适配 | 完成 | `6761ebf9` |
+| **Phase 3** | ObjectNewDirect AOT 零解析路径；RuntimeAbiV0 注册 | 完成 | `ff0c88f7` |
+| **Phase 4** | Fat 1-deref dispatch：vtable_array 去除 static；ExceptionEmission.cs EmitLinearVirtualDispatchCall 按 HeaderKind 三分支 | 完成 | `34db609b` |
+| **Phase 5** | ModuleRegistry kMaxModules 256→1024 | 完成 | `ff0c88f7` |
+| **Phase 6** | 验证收尾：全部 61/61 快照通过；chaos_runtime_core 编译通过；结构告警 | 完成 | — |
+| **总计** | 7 个 commit（含 A4-Dual+V2 基底） | 全部完成 | `cadacbc1`→`34db609b` |
 
 ---
 
 ## 位置
 
-- TypeInfoHot/Warm: `src/native/common/chaos/type_info.h`
-- ObjectNewDirect: `src/native/runtime-core/runtime_core.cpp`
-- codegen TypeInfo 发射: `ObjectModelEmission.cs`
-- codegen Triple Dispatch: `MethodEmission.cs` (EmitCallVirt ~1444行)
-- codegen ObjectNew: `ObjectModelEmission.cs` (newobj ~839行)
+- TypeInfoHot/Warm/V2: `src/native/common/chaos/type_info.h`
+- Header 类型 + GetSyncStatePtr: `src/native/runtime-core/generated_code_compat.h`
+- ObjectNewDirect + HeaderSizeFromFlags: `src/native/runtime-core/runtime_core.cpp`
+- codegen TypeInfo+VTable 发射: `ObjectModelEmission.cs`
+- codegen Triple Dispatch (Fat 1-deref): `ExceptionEmission.cs` (~1330行 `EmitLinearVirtualDispatchCall`)
+- codegen ObjectNew 双路径: `ObjectModelEmission.cs` (newobj ~850行)
+- vtable registry 适配 GetWarmPtr: `src/native/runtime-core/vtable_registry.cpp`
+- type_registry (HotUpdate) 适配: `src/native/runtime-core/type_registry.cpp`
+- reflection_api 适配: `src/native/runtime-core/reflection_api.cpp`
 - ModuleRegistry: `module_registry.h` / `module_registry.cpp`
+- NativeCodegenValidator: `Validation/NativeCodegenValidator.cs`
