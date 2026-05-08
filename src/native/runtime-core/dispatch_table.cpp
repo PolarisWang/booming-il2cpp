@@ -163,16 +163,13 @@ void NameIndexRegistry::SetPatched(uint32_t token, bool patched,
 
 // ── Global singleton ──────────────────────────────────────────────────
 
-namespace {
-NameIndexRegistry g_name_index_registry;
-}  // anonymous namespace
-
 NameIndexRegistry& GetNameIndexRegistry() noexcept {
+    static NameIndexRegistry g_name_index_registry;
     return g_name_index_registry;
 }
 
 void RegisterModuleNameIndex(const NameIndexModuleV0* module) noexcept {
-    g_name_index_registry.RegisterModule(module);
+    GetNameIndexRegistry().RegisterModule(module);
 }
 
 void RegisterReversePInvokeWrappers(void* const* wrappers, uint32_t count) noexcept {
@@ -187,7 +184,7 @@ void* CallViaSlot(uint32_t module_index, uint32_t slot,
     (void)args_buf;
     (void)ret;
 
-    auto* entry = g_name_index_registry.GetDispatchEntryBySlot(module_index, slot);
+    auto* entry = GetNameIndexRegistry().GetDispatchEntryBySlot(module_index, slot);
     if (entry == nullptr) return nullptr;
 
     if (entry->flags & kDispatchPatched) {

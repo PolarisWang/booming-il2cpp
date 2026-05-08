@@ -684,7 +684,7 @@ public sealed partial class NativeAotLoweringPlanner
         sb.Append("        ").Append(reachableMethods.Count).AppendLine("u,");
         sb.Append("        ").Append(totalParams).AppendLine("u,");
         sb.Append("        ").Append(checksum).AppendLine("u,  // FNV-1a over entries+params");
-        sb.Append("        s_abi_manifest_prefix_sum,  // O(1) prefix-sum");
+        sb.AppendLine("        s_abi_manifest_prefix_sum  // O(1) prefix-sum");
         sb.AppendLine("    },");
         sb.AppendLine("    {");
         for (int i = 0; i < reachableMethods.Count; i++)

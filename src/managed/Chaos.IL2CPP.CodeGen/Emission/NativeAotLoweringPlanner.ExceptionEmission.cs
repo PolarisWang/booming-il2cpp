@@ -1028,6 +1028,11 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitLinearResolvedInvocation(builder, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck: true);
 			return;
 		}
+		case HybridDispatchKind.Virtual:
+		{
+			EmitLinearVirtualDispatchCall(builder, instruction, indentation);
+			return;
+		}
 		default:
 			throw new NotSupportedException($"native-aot structured EH linear lowering does not support callvirt dispatch kind '{instruction.DispatchKindCode}'.");
 		}
@@ -1301,6 +1306,118 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendFormatted(indentation);
 		handler.AppendLiteral("}");
 		stringBuilder6.AppendLine(ref handler);
+	}
+
+	private void EmitLinearVirtualDispatchCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+	{
+		AotCoreIrMethodArtifact dispatchSlotMethod = ResolveRequiredDispatchSlotMethod(instruction);
+		IReadOnlyList<AotCoreIrAbiSlotArtifact> paramAbis = GetMethodAbiParameterSlots(dispatchSlotMethod);
+		string returnType = MapAbiSlotReturnType(dispatchSlotMethod.ReturnAbi);
+		string vtableSlotSig = GetMethodSignatureSuffix(dispatchSlotMethod.SubjectId);
+		bool isInterface = !string.IsNullOrEmpty(dispatchSlotMethod.Identity.DeclaringTypeSubjectId) &&
+			_interfaceTypeSubjectIds != null &&
+			_interfaceTypeSubjectIds.Contains(dispatchSlotMethod.Identity.DeclaringTypeSubjectId);
+
+		builder.AppendLine($"{indentation}{{");
+		for (int i = paramAbis.Count - 1; i >= 0; i--)
+		{
+			builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {ConsumeEvalStackValueExpression()};");
+			builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(paramAbis[i], $"chaos_raw_arg_{i}")};");
+		}
+		// Null check
+		builder.AppendLine($"{indentation}    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
+		builder.AppendLine($"{indentation}    {{");
+		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine($"{indentation}    }}");
+		// Determine header kind for dispatch path
+		string declaringTypeId = GetMethodDeclaringTypeSubjectId(instruction.Callee!);
+		bool isFat = GetHeaderKind(declaringTypeId) == HeaderKind.Fat;
+		// VTable resolve — Fat: 1-deref (header->vtable), others: 2-deref (ti->vtable_array)
+		string vtableSource = isFat
+			? $"reinterpret_cast<FatHeader*>(chaos_arg_0)->vtable"
+			: $"chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array";
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}    {returnType} chaos_callvirt_result{{}};");
+		}
+		// VTable dispatch
+		if (_vtableSlotMap != null && _vtableSlotMap.TryGetValue(vtableSlotSig, out int vtableSlot))
+		{
+			string vtableArgs = FormatAbiInvocationArgumentList(paramAbis, "chaos_arg_0");
+			string vtableParamSig = FormatAbiSlotParameterSignature(paramAbis);
+			string vtableFnType = string.IsNullOrEmpty(vtableParamSig)
+				? $"{returnType}(*)()"
+				: $"{returnType}(*)({vtableParamSig})";
+			if (string.Equals(returnType, "void", StringComparison.Ordinal))
+			{
+				string fnCall = $"reinterpret_cast<{vtableFnType}>(chaos_vtable_resolve({vtableSource}, {vtableSlot}u))";
+				builder.AppendLine($"{indentation}    (*{fnCall})({vtableArgs});");
+			}
+			else
+			{
+				string fnCall = $"reinterpret_cast<{vtableFnType}>(chaos_vtable_resolve({vtableSource}, {vtableSlot}u))";
+				builder.AppendLine($"{indentation}    chaos_callvirt_result = (*{fnCall})({vtableArgs});");
+			}
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}    CHAOS_IL2CPP_ABORT();");
+		}
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			EmitAbiReturnPush(builder, dispatchSlotMethod.ReturnAbi, "chaos_callvirt_result", indentation + "    ");
+		}
+		builder.AppendLine($"{indentation}}}");
+	}
+
+	private void EmitD3ResolvedInvocation(StringBuilder builder, int dispatchSlotIndex, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation)
+	{
+		string returnType = MapAbiSlotReturnType(returnAbi);
+		int argBufferSize = CalculateArgBufferSize(parameterAbis);
+		builder.AppendLine($"{indentation}{{");
+		for (int i = parameterAbis.Count - 1; i >= 0; i--)
+		{
+			builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {ConsumeEvalStackValueExpression()};");
+			builder.AppendLine(rawArgumentIndices.Contains(i)
+				? $"{indentation}    const auto chaos_arg_{i} = chaos_raw_arg_{i};"
+				: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(parameterAbis[i], $"chaos_raw_arg_{i}")};");
+		}
+		builder.AppendLine($"{indentation}    auto& _d{dispatchSlotIndex} = s_dispatch_table[{dispatchSlotIndex}];");
+		builder.AppendLine($"{indentation}    if (_d{dispatchSlotIndex}.flags & kDispatchPatched)");
+		builder.AppendLine($"{indentation}    {{");
+		builder.AppendLine($"{indentation}        alignas(16) uint8_t _d_ab[{argBufferSize}];");
+		builder.AppendLine($"{indentation}        ArgBuffer _d_bw(_d_ab);");
+		for (int i = 0; i < parameterAbis.Count; i++)
+		{
+			builder.AppendLine($"{indentation}        _d_bw.{GetArgBufferWriteCall(parameterAbis[i].CarrierKindCode, $"chaos_arg_{i}")};");
+		}
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}        {returnType} _d_rv{{}};");
+			builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
+			builder.AppendLine($"{indentation}            _d{dispatchSlotIndex}.method_key, _d_ab, &_d_rv);");
+			EmitAbiReturnPush(builder, returnAbi, "_d_rv", $"{indentation}        ");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::InterpreterEntryDirect(");
+			builder.AppendLine($"{indentation}            _d{dispatchSlotIndex}.method_key, _d_ab, nullptr);");
+		}
+		builder.AppendLine($"{indentation}    }}");
+		builder.AppendLine($"{indentation}    else");
+		builder.AppendLine($"{indentation}    {{");
+		string callExpr = $"{targetSymbol}({FormatAbiInvocationArgumentList(parameterAbis)})";
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}        const auto chaos_result = {callExpr};");
+			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}        ");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}        {callExpr};");
+		}
+		builder.AppendLine($"{indentation}    }}");
+		builder.AppendLine($"{indentation}}}");
 	}
 
 	private void EmitLinearBinaryArithmetic(StringBuilder builder, string indentation, string helperName)

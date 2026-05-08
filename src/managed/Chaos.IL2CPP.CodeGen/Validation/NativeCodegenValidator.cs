@@ -39,7 +39,7 @@ public sealed class NativeCodegenValidator
         RegexOptions.Compiled);
 
     private static readonly Regex UsingDirectiveRegex = new(
-        @"^using\s+namespace\s+(std|chaos)",
+        @"^using\s+namespace\s+(std|chaos)\s*;",
         RegexOptions.Compiled | RegexOptions.Multiline);
 
     private static readonly Regex RawStdTypeRegex = new(

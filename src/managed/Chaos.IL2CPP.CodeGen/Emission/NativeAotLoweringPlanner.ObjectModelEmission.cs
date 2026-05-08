@@ -57,10 +57,10 @@ public sealed partial class NativeAotLoweringPlanner
 		Dictionary<string, string?> hashSet = new Dictionary<string, string?>(StringComparer.Ordinal);
 		Dictionary<string, string?> hashSet2 = new Dictionary<string, string?>(StringComparer.Ordinal);
 		HashSet<string> hashSet3 = new HashSet<string>(StringComparer.Ordinal);
-		builder.AppendLine("#include <chaos/type_info.h>");
+		builder.AppendLine();
 		builder.AppendLine();
 		builder.AppendLine("constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;");
-		builder.AppendLine("inline TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, nullptr, 0, 0, 2, 0, nullptr, 0u };");
+		builder.AppendLine("inline TypeInfo chaos_type_info_managed_array = { nullptr, nullptr, 1ULL, 0, 32, 2, 0 };");
 		builder.AppendLine();
 		builder.AppendLine("struct chaos_managed_array");
 		builder.AppendLine("{");
@@ -435,7 +435,18 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.Append(ifaceStableId.ToString());
 			builder.AppendLine("ULL);");
 		}
-		// ── TypeInfo instances (replace integer type_id system) ──
+		// ── Forward-declare vtable arrays so TypeInfoHot.vtable_array can reference them ──
+			if (referenceTypeSubjectIds.Count > 0)
+			{
+				foreach (string typeId in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+				{
+					if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
+					builder.Append("const void* ");
+					builder.Append(GetNativeVTableSymbol(typeId));
+					builder.AppendLine("[];");
+				}
+			}
+			// ── TypeInfo instances (replace integer type_id system) ──
 		foreach (string item in TopologicalSortReferenceTypes(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 		{
 			ulong stableId = ComputeStableTypeId(item);
@@ -491,7 +502,9 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item));
 				handler.AppendLiteral(" = { ");
 				handler.AppendFormatted(parentExpr);
-				handler.AppendLiteral(", nullptr, ");
+				string vtableArrayExpr = (vtLen > 0) ? GetNativeVTableSymbol(item) : "nullptr";
+				handler.AppendFormatted(vtableArrayExpr);
+				handler.AppendLiteral(", ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(", ");
 				handler.AppendFormatted(vtLen.ToString());
@@ -688,7 +701,7 @@ public sealed partial class NativeAotLoweringPlanner
 				// Emit vtable array
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(24, 1, stringBuilder);
-				handler.AppendLiteral("static const void* ");
+				handler.AppendLiteral("const void* ");
 				handler.AppendFormatted(GetNativeVTableSymbol(typeId));
 				handler.AppendLiteral("[] =");
 				stringBuilder.AppendLine(ref handler);

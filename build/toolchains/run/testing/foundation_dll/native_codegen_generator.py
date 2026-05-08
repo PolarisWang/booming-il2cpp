@@ -760,6 +760,7 @@ def generate_benchmark_native_entry(
                 f"target_include_directories(chaos_benchmark_{ns_slug} PRIVATE\n"
                 "    ${CMAKE_SOURCE_DIR}/src/native/common\n"
                 "    ${CMAKE_SOURCE_DIR}/contracts/native/v0\n"
+                "    ${CMAKE_SOURCE_DIR}/third_party/bdwgc/include\n"
                 ")\n"
                 f"target_link_libraries(chaos_benchmark_{ns_slug} PRIVATE chaos_common)\n"
                 "endif()\n"
