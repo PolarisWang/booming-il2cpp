@@ -60,11 +60,11 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("#include <chaos/type_info.h>");
 		builder.AppendLine();
 		builder.AppendLine("constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;");
-		builder.AppendLine("inline TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, nullptr, 0, 0, 2 };");
+		builder.AppendLine("inline TypeInfo chaos_type_info_managed_array = { nullptr, 1ULL, nullptr, nullptr, 0, 0, 2, 0, nullptr, 0u };");
 		builder.AppendLine();
 		builder.AppendLine("struct chaos_managed_array");
 		builder.AppendLine("{");
-		builder.AppendLine("    chaos_object_header header{};");
+		builder.AppendLine("    FatHeader header{};");
 		builder.AppendLine("    CHAOS_IL2CPP_UINT8 element_type_shape = 0;");
 		builder.AppendLine("    const TypeInfo* element_type_info = nullptr;");
 		builder.AppendLine("    CHAOS_IL2CPP_INTPTR length = 0;");
@@ -482,6 +482,9 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				// Determine header flags from decision engine
+				HeaderKind hdrKind = GetHeaderKind(item);
+				byte flags = (byte)hdrKind; // PureType=0, ThinLockable=1, Fat=2
 				handler.AppendLiteral("inline TypeInfo ");
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item));
 				handler.AppendLiteral(" = { ");
@@ -492,7 +495,9 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 0, 1 /* reference */ };");
+				handler.AppendLiteral(", 0, 1 /* reference */, ");
+				handler.AppendFormatted(flags.ToString());
+				handler.AppendLiteral(", nullptr, 0u };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -503,7 +508,6 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(");");
-				stringBuilder.AppendLine(ref handler);
 			}
 			num++;
 		}
@@ -517,7 +521,7 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item2));
 				handler.AppendLiteral(" = { nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", nullptr, nullptr, 0, 0, 3 /* interface */ };");
+				handler.AppendLiteral(", nullptr, nullptr, 0, 0, 3 /* interface */, 0, nullptr, 0u };");
 				stringBuilder.AppendLine(ref handler);
 			}
 
@@ -533,7 +537,7 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(GetNativeTypeInfoSymbol(item3));
 				handler.AppendLiteral(" = { nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", nullptr, nullptr, 0, 0, 2 /* value */ };");
+				handler.AppendLiteral(", nullptr, nullptr, 0, 0, 2 /* value */, 0, nullptr, 0u };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -598,7 +602,7 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 0, 2 /* value (boxed) */ };");
+				handler.AppendLiteral(", 0, 2 /* value (boxed) */, 0, nullptr, 0u };");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -817,15 +821,15 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine(", chaos_array->element_type_info);");
 		builder.AppendLine("    }");
 		builder.AppendLine();
-		builder.AppendLine("    auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_value);");
+		builder.AppendLine("    auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);");
 		builder.AppendLine("    if (chaos_array->element_type_shape == chaos_type_shape_interface)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        return chaos_does_type_implement_interface(chaos_header->type_info, chaos_array->element_type_info);");
+		builder.AppendLine("        return chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    if (chaos_array->element_type_shape == chaos_type_shape_reference)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        return chaos_is_type_compatible(chaos_header->type_info, chaos_array->element_type_info);");
+		builder.AppendLine("        return chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    return false;");
@@ -849,7 +853,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				builder.AppendLine("struct " + GetNativeTypeSymbol(typeSubjectId));
 				builder.AppendLine("{");
-				builder.AppendLine("    chaos_object_header header{};");
+				builder.AppendLine("    FatHeader header{};");
 				builder.AppendLine("};");
 				builder.AppendLine();
 				continue;
@@ -877,7 +881,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("{");
 			if (!referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out string? value7) || string.IsNullOrWhiteSpace(value7) || !referenceTypeSubjectIds.Contains(value7))
 			{
-				builder.AppendLine("    chaos_object_header header{};");
+				builder.AppendLine("    FatHeader header{};");
 			}
 			List<string> list = fieldsByDeclaringType.TryGetValue(typeSubjectId, out var fields) ? fields : s_emptyFieldList;
 			if (num2)
@@ -989,7 +993,7 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendFormatted(GetNativeBoxTypeSymbol(item10));
 			stringBuilder18.AppendLine(ref handler);
 			builder.AppendLine("{");
-			builder.AppendLine("    chaos_object_header header{};");
+			builder.AppendLine("    FatHeader header{};");
 			if (IsStructuredValueTypeSubjectId(item10))
 			{
 				stringBuilder = builder;

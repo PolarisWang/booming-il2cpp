@@ -35,7 +35,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    }");
 		builder.AppendLine("    catch (const chaos_managed_exception& chaos_exception)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_exception.object_value);");
+		builder.AppendLine("        auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_exception.object_value);");
 		builder.AppendLine("        if (chaos_header == nullptr)");
 		builder.AppendLine("        {");
 		builder.AppendLine("            throw;");
@@ -43,7 +43,7 @@ public sealed partial class NativeAotLoweringPlanner
 		StringBuilder stringBuilder = builder;
 		StringBuilder stringBuilder3 = stringBuilder;
 		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(63, 1, stringBuilder);
-		handler.AppendLiteral("        if (!chaos_is_type_compatible(chaos_header->type_info, &");
+		handler.AppendLiteral("        if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &");
 		handler.AppendFormatted(GetNativeTypeInfoSymbol(catchOnlyShape.ExceptionRegion.CatchTypeSubjectId!));
 		handler.AppendLiteral("))");
 		stringBuilder3.AppendLine(ref handler);
@@ -168,7 +168,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        }");
 		builder.AppendLine("        catch (const chaos_managed_exception& chaos_exception)");
 		builder.AppendLine("        {");
-		builder.AppendLine("            auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_exception.object_value);");
+		builder.AppendLine("            auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_exception.object_value);");
 		builder.AppendLine("            if (chaos_header == nullptr)");
 		builder.AppendLine("            {");
 		builder.AppendLine("                throw;");
@@ -176,7 +176,7 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder = builder;
 		StringBuilder stringBuilder4 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(67, 1, stringBuilder);
-		handler.AppendLiteral("            if (!chaos_is_type_compatible(chaos_header->type_info, &");
+		handler.AppendLiteral("            if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &");
 		handler.AppendFormatted(GetNativeTypeInfoSymbol(catchAndFinallyShape.CatchRegion.CatchTypeSubjectId!));
 		handler.AppendLiteral("))");
 		stringBuilder4.AppendLine(ref handler);
@@ -1009,10 +1009,10 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}    const auto chaos_value = {chaosValue};");
 		builder.AppendLine($"{indentation}    if (chaos_value != static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine($"{indentation}    {{");
-		builder.AppendLine($"{indentation}        auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_value);");
+		builder.AppendLine($"{indentation}        auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);");
 		if (HasArrayElementReference(requiredTargetReference))
 		{
-			builder.AppendLine($"{indentation}        if (chaos_header->type_info != &chaos_type_info_managed_array)");
+			builder.AppendLine($"{indentation}        if (chaos_object_get_type_info(chaos_header) != &chaos_type_info_managed_array)");
 			builder.AppendLine($"{indentation}        {{");
 			builder.AppendLine($"{indentation}            CHAOS_IL2CPP_ABORT();");
 			builder.AppendLine($"{indentation}        }}");
@@ -1021,15 +1021,15 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		else if (requiredTargetReference.TypeShape == AotCoreIrTypeShapeKind.InterfaceType)
 		{
-			builder.AppendLine($"{indentation}        if (!chaos_does_type_implement_interface(chaos_header->type_info, &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)}))");
+			builder.AppendLine($"{indentation}        if (!chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)}))");
 		}
 		else if (requiredTargetReference.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
 		{
-			builder.AppendLine($"{indentation}        if (!chaos_is_type_compatible(chaos_header->type_info, &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)}))");
+			builder.AppendLine($"{indentation}        if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)}))");
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}        if (chaos_header->type_info != &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)} && chaos_header->type_info->stable_id != (&{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)})->stable_id)");
+			builder.AppendLine($"{indentation}        if (chaos_object_get_type_info(chaos_header) != &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)} && chaos_object_get_type_info(chaos_header)->stable_id != (&{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)})->stable_id)");
 		}
 		builder.AppendLine($"{indentation}        {{");
 		builder.AppendLine($"{indentation}            CHAOS_IL2CPP_ABORT();");
@@ -1051,10 +1051,10 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}    auto chaos_matches = false;");
 		builder.AppendLine($"{indentation}    if (chaos_value != static_cast<CHAOS_IL2CPP_INTPTR>(0))");
 		builder.AppendLine($"{indentation}    {{");
-		builder.AppendLine($"{indentation}        auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_value);");
+		builder.AppendLine($"{indentation}        auto* chaos_header = reinterpret_cast<FatHeader*>(chaos_value);");
 		if (HasArrayElementReference(requiredTargetReference))
 		{
-			builder.AppendLine($"{indentation}        if (chaos_header->type_info == &chaos_type_info_managed_array)");
+			builder.AppendLine($"{indentation}        if (chaos_object_get_type_info(chaos_header) == &chaos_type_info_managed_array)");
 			builder.AppendLine($"{indentation}        {{");
 			builder.AppendLine($"{indentation}            auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_value);");
 			builder.AppendLine($"{indentation}            chaos_matches = chaos_is_array_type_compatible(chaos_array->element_type_shape, chaos_array->element_type_info, {GetNativeTypeShapeValue(requiredTargetReference.ArrayElementTypeShape)}, {GetRuntimeTypeInfoExpression(requiredTargetReference.ArrayElementSubjectId)});");
@@ -1062,15 +1062,15 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		else if (requiredTargetReference.TypeShape == AotCoreIrTypeShapeKind.InterfaceType)
 		{
-			builder.AppendLine($"{indentation}        chaos_matches = chaos_does_type_implement_interface(chaos_header->type_info, &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)});");
+			builder.AppendLine($"{indentation}        chaos_matches = chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)});");
 		}
 		else if (requiredTargetReference.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
 		{
-			builder.AppendLine($"{indentation}        chaos_matches = chaos_is_type_compatible(chaos_header->type_info, &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)});");
+			builder.AppendLine($"{indentation}        chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)});");
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}        chaos_matches = chaos_header->type_info == &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)} || chaos_header->type_info->stable_id == (&{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)})->stable_id;");
+			builder.AppendLine($"{indentation}        chaos_matches = chaos_object_get_type_info(chaos_header) == &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)} || chaos_object_get_type_info(chaos_header)->stable_id == (&{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)})->stable_id;");
 		}
 		builder.AppendLine($"{indentation}    }}");
 		EmitEvalStackPush(builder, indentation + "    ", "chaos_matches ? chaos_value : static_cast<CHAOS_IL2CPP_INTPTR>(0)");

@@ -18,16 +18,18 @@
 {{ indentation }}{{ tab }}{
 {{ indentation }}{{ tab }}{{ tab }}return false;
 {{ indentation }}{{ tab }}
-{{ indentation }}{{ tab }}auto* chaos_left_header = reinterpret_cast<chaos_object_header*>(chaos_left_value);
-{{ indentation }}{{ tab }}auto* chaos_right_header = reinterpret_cast<chaos_object_header*>(chaos_right_value);
-{{ indentation }}{{ tab }}if (chaos_left_header->type_info != chaos_right_header->type_info
-{{ indentation }}{{ tab }}{{ tab }}&& chaos_left_header->type_info->stable_id != chaos_right_header->type_info->stable_id)
+{{ indentation }}{{ tab }}auto* chaos_left_header = reinterpret_cast<FatHeader*>(chaos_left_value);
+{{ indentation }}{{ tab }}auto* chaos_right_header = reinterpret_cast<FatHeader*>(chaos_right_value);
+{{ indentation }}{{ tab }}const auto* chaos_left_ti = chaos_object_get_type_info(chaos_left_value);
+{{ indentation }}{{ tab }}const auto* chaos_right_ti = chaos_object_get_type_info(chaos_right_value);
+{{ indentation }}{{ tab }}if (chaos_left_ti != chaos_right_ti
+{{ indentation }}{{ tab }}{{ tab }}&& chaos_left_ti->stable_id != chaos_right_ti->stable_id)
 {{ indentation }}{{ tab }}{
 {{ indentation }}{{ tab }}{{ tab }}return false;
 {{ indentation }}{{ tab }}
 {{~ if has_string_type ~}}
-{{ indentation }}{{ tab }}if (chaos_left_header->type_info == &{{ string_type_info_symbol }}
-{{ indentation }}{{ tab }}{{ tab }}|| chaos_left_header->type_info->stable_id == (&{{ string_type_info_symbol }})->stable_id)
+{{ indentation }}{{ tab }}if (chaos_left_ti == &{{ string_type_info_symbol }}
+{{ indentation }}{{ tab }}{{ tab }}|| chaos_left_ti->stable_id == (&{{ string_type_info_symbol }})->stable_id)
 {{ indentation }}{{ tab }}{
 {{ indentation }}{{ tab }}{{ tab }}auto* chaos_left_string = reinterpret_cast<{{ string_type_symbol }}*>(chaos_left_value);
 {{ indentation }}{{ tab }}{{ tab }}auto* chaos_right_string = reinterpret_cast<{{ string_type_symbol }}*>(chaos_right_value);
@@ -44,7 +46,7 @@
 {{ indentation }}{{ tab }}{{ tab }}return CHAOS_IL2CPP_STRCMP(chaos_left_string->utf8_data, chaos_right_string->utf8_data) == 0;
 {{ indentation }}{{ tab }}
 {{~ end ~}}
-{{ indentation }}{{ tab }}switch (chaos_left_header->type_info->stable_id)
+{{ indentation }}{{ tab }}switch (chaos_left_ti->stable_id)
 {{ indentation }}{{ tab }}{
 {{~ for entry in boxed_type_entries ~}}
 {{ indentation }}{{ tab }}{{ tab }}case {{ entry.type_id_symbol }}:

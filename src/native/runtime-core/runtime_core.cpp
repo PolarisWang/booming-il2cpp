@@ -81,16 +81,45 @@ using namespace chaos::il2cpp::runtime_capability;
 
 namespace {
 
-constexpr CHAOS_IL2CPP_SIZE kInlineFieldStorageSize = sizeof(void*) * 4u;
 constexpr CHAOS_IL2CPP_UINT64 kDateTimeTicksMask = 0x3FFFFFFFFFFFFFFFull;
 // struct ManagedExceptionCarrier is declared in runtime_core.h and used as the cold EH payload.
 
-struct ObjectHeader {
-    const void**    vtable      = nullptr;  // B2+ vtable dispatch
-    const TypeInfo* type_info   = nullptr;  // Hybrid TypeInfo* identity
-    uint64_t        sync_state  = 0;        // Thin lock / sync block index
-    unsigned char   field_storage[kInlineFieldStorageSize];
+// ── A4-Dual+V2 Object Header Layouts ─────────────────────────────
+// Three header kinds discriminated by TypeInfo.flags[1:0]:
+//   PureType (00):  8B  {TypeInfo* type_info}
+//   ThinLockable (01): 16B {TypeInfo* type_info, uint64_t sync_state}
+//   Fat (10):          24B {TypeInfo* type_info, void** vtable, uint64_t sync_state}
+
+struct ObjectHeaderFat {  // 24B — full dispatch + sync
+    const TypeInfo* type_info   = nullptr;  // [0]
+    const void**    vtable      = nullptr;  // [8]
+    uint64_t        sync_state  = 0;        // [16]
 };
+
+struct ObjectHeaderThin {  // 16B — sync only, no vtable
+    const TypeInfo* type_info   = nullptr;  // [0]
+    uint64_t        sync_state  = 0;        // [8]
+};
+
+// Legacy alias for code that handles Fat objects specifically.
+using ObjectHeader = ObjectHeaderFat;
+
+// ── Header size helpers ──────────────────────────────────────────
+inline CHAOS_IL2CPP_SIZE HeaderSizeFromFlags(CHAOS_IL2CPP_UINT8 flags) noexcept {
+    switch (flags & kTypeInfoHeaderKindMask) {
+        case kTypeInfoHeaderKindPure: return 8;  // PureTypeHeader
+        case kTypeInfoHeaderKindThin: return 16; // ObjectHeaderThin
+        default:                     return 24;  // ObjectHeaderFat
+    }
+}
+
+inline uint64_t* GetSyncStatePtr(void* obj) noexcept {
+    const auto* ti = *static_cast<const TypeInfo* const*>(obj);
+    const auto kind = ti->flags & kTypeInfoHeaderKindMask;
+    if (kind == kTypeInfoHeaderKindThin)
+        return &static_cast<ObjectHeaderThin*>(obj)->sync_state;
+    return &static_cast<ObjectHeaderFat*>(obj)->sync_state;
+}
 
 struct StringObjectHeader {
     TypeInfoHandle type;
@@ -592,6 +621,7 @@ constexpr uint32_t kSyncBlockStripes  = 64;
 constexpr uint32_t kSyncBlockSpinMax  = 1000;
 
 struct SyncBlock {
+    const TypeInfo*                     type_info = nullptr;  // saved type_info for ThinLockable inflation
     CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX    mutex;
     std::condition_variable_any          cond;  // for Monitor.Wait/Pulse
 };
@@ -617,8 +647,8 @@ static bool InflateAndEnter(void* obj, uint64_t current_sync) noexcept {
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.table_lock);
 
     // Double-check: another thread may have inflated already.
-    auto* header = static_cast<ObjectHeader*>(obj);
-    uint64_t sync = header->sync_state;
+    auto* sync_ptr = GetSyncStatePtr(obj);
+    uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
         const auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
         if (sb != nullptr) {
@@ -637,10 +667,9 @@ static bool InflateAndEnter(void* obj, uint64_t current_sync) noexcept {
     auto* sb = new SyncBlock();
     stripe.entries[obj] = sb;
 
-    // Mark inflated in header. The index encodes stripe + entry position.
-    // Simple: use the pointer to SyncBlock* itself (unique, no lookup needed).
+    // Mark inflated in header. Use SyncBlock* itself (unique, no lookup needed).
     const uint64_t inflated_val = kSyncInflatedBit | reinterpret_cast<uint64_t>(sb);
-    AtomicStoreRelease(&header->sync_state, inflated_val);
+    AtomicStoreRelease(sync_ptr, inflated_val);
 
     sb->mutex.lock();
     return true;
@@ -952,16 +981,33 @@ void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
         return nullptr;
     }
 
-    ObjectHeader* object = static_cast<ObjectHeader*>(AllocateBytes(runtime_state->config, sizeof(ObjectHeader)));
+    // Step 1: resolve TypeInfo* from handle.
+    const TypeInfo* type_info = nullptr;
+    const void** vtable = nullptr;
+    ResolveObjectTypeInfo(type, type_info, vtable);
+    if (type_info == nullptr) {
+        return nullptr;
+    }
+
+    // Step 2: determine header kind and allocate.
+    const CHAOS_IL2CPP_SIZE header_size = HeaderSizeFromFlags(type_info->flags);
+    auto* object = static_cast<ObjectHeaderFat*>(AllocateBytes(runtime_state->config, header_size));
     if (object == nullptr) {
         return nullptr;
     }
 
-    // Resolve TypeInfo* and vtable from the handle.
-    ResolveObjectTypeInfo(type, object->type_info, object->vtable);
-    object->sync_state = 0;
+    // Step 3: populate fields per kind.
+    object->type_info = type_info;
+    const auto kind = type_info->flags & kTypeInfoHeaderKindMask;
+    if (kind == kTypeInfoHeaderKindFat) {
+        object->vtable = vtable;
+        object->sync_state = 0;
+    } else if (kind == kTypeInfoHeaderKindThin) {
+        auto* thin = static_cast<ObjectHeaderThin*>(static_cast<void*>(object));
+        thin->sync_state = 0;
+    }
+    // PureType: type_info already set, nothing else needed.
 
-    CHAOS_IL2CPP_MEMSET(object->field_storage, 0, sizeof(object->field_storage));
     return object;
 }
 
@@ -1151,8 +1197,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldGetValue(
     if (!IsAttached(runtime_state, thread_state)
         || object_instance == nullptr
         || out_value == nullptr
-        || out_value_size == 0u
-        || out_value_size > kInlineFieldStorageSize) {
+        || out_value_size == 0u) {
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
 
@@ -1160,8 +1205,12 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldGetValue(
         return CHAOS_RUNTIME_STATUS_NOT_FOUND;
     }
 
-    auto* object = static_cast<ObjectHeader*>(object_instance);
-    CHAOS_IL2CPP_MEMCPY(out_value, object->field_storage, out_value_size);
+    // A4-Dual+V2: header size varies by kind (PureType 8B, ThinLockable 16B, Fat 24B).
+    const auto* ti = *static_cast<const TypeInfo* const*>(object_instance);
+    const auto header_size = HeaderSizeFromFlags(ti != nullptr ? ti->flags : 0);
+    CHAOS_IL2CPP_MEMCPY(out_value,
+        static_cast<const unsigned char*>(object_instance) + header_size,
+        out_value_size);
     return CHAOS_RUNTIME_STATUS_OK;
 }
 
@@ -1175,8 +1224,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldSetValue(
     if (!IsAttached(runtime_state, thread_state)
         || object_instance == nullptr
         || value == nullptr
-        || value_size == 0u
-        || value_size > kInlineFieldStorageSize) {
+        || value_size == 0u) {
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
 
@@ -1184,8 +1232,12 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldSetValue(
         return CHAOS_RUNTIME_STATUS_NOT_FOUND;
     }
 
-    auto* object = static_cast<ObjectHeader*>(object_instance);
-    CHAOS_IL2CPP_MEMCPY(object->field_storage, value, value_size);
+    // A4-Dual+V2: header size varies by kind (PureType 8B, ThinLockable 16B, Fat 24B).
+    const auto* ti = *static_cast<const TypeInfo* const*>(object_instance);
+    const auto header_size = HeaderSizeFromFlags(ti != nullptr ? ti->flags : 0);
+    CHAOS_IL2CPP_MEMCPY(
+        static_cast<unsigned char*>(object_instance) + header_size,
+        value, value_size);
     return CHAOS_RUNTIME_STATUS_OK;
 }
 
@@ -1761,14 +1813,14 @@ bool ThreadStaticInt32Add(
 bool MonitorEnter(void* monitor_target) {
     if (monitor_target == nullptr) return false;
 
-    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    auto* sync_ptr = GetSyncStatePtr(monitor_target);
     const int32_t tid = threading::GetCurrentThreadId();
     if (tid == 0) return false;  // not a managed thread
 
     const uint64_t tid_bits = static_cast<uint64_t>(tid) << kSyncThreadShift;
 
     // Fast path: thin lock, uncontended CAS.
-    uint64_t sync = header->sync_state;
+    uint64_t sync = *sync_ptr;
     for (;;) {
         if ((sync & kSyncInflatedBit) != 0) {
             // Inflated — forward to SyncBlock.
@@ -1783,7 +1835,7 @@ bool MonitorEnter(void* monitor_target) {
         if ((sync & kSyncLockedBit) == 0) {
             // Free — try to acquire as thin lock.
             const uint64_t desired = kSyncLockedBit | tid_bits;  // recursion = 0
-            if (AtomicCAS(&header->sync_state, sync, desired,
+            if (AtomicCAS(sync_ptr, sync, desired,
                     __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
                 return true;
             }
@@ -1798,7 +1850,7 @@ bool MonitorEnter(void* monitor_target) {
             const uint64_t recursion = (sync >> kSyncRecursionShift) + 1;
             const uint64_t desired = kSyncLockedBit | tid_bits |
                                      (recursion << kSyncRecursionShift);
-            if (AtomicCAS(&header->sync_state, sync, desired,
+            if (AtomicCAS(sync_ptr, sync, desired,
                     __ATOMIC_RELAXED, __ATOMIC_RELAXED)) {
                 return true;
             }
@@ -1808,11 +1860,11 @@ bool MonitorEnter(void* monitor_target) {
         // Contention: spin, then inflate.
         for (uint32_t spin = 0; spin < kSyncBlockSpinMax; ++spin) {
             CHAOS_SPIN_HINT();
-            sync = header->sync_state;
+            sync = *sync_ptr;
             if ((sync & kSyncLockedBit) == 0) {
                 // Lock was released — retry acquisition.
                 const uint64_t desired = kSyncLockedBit | tid_bits;
-                if (AtomicCAS(&header->sync_state, sync, desired,
+                if (AtomicCAS(sync_ptr, sync, desired,
                         __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
                     return true;
                 }
@@ -1837,10 +1889,10 @@ bool MonitorEnter(void* monitor_target) {
 bool MonitorExit(void* monitor_target) {
     if (monitor_target == nullptr) return false;
 
-    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    auto* sync_ptr = GetSyncStatePtr(monitor_target);
     const int32_t tid = threading::GetCurrentThreadId();
 
-    uint64_t sync = header->sync_state;
+    uint64_t sync = *sync_ptr;
 
     if ((sync & kSyncInflatedBit) != 0) {
         // Inflated — unlock via SyncBlock.
@@ -1868,10 +1920,10 @@ bool MonitorExit(void* monitor_target) {
         const uint64_t desired = kSyncLockedBit |
             (static_cast<uint64_t>(tid) << kSyncThreadShift) |
             ((recursion - 1) << kSyncRecursionShift);
-        AtomicStoreRelaxed(&header->sync_state, desired);
+        AtomicStoreRelaxed(sync_ptr, desired);
     } else {
         // Final release.
-        AtomicStoreRelease(&header->sync_state, 0);
+        AtomicStoreRelease(sync_ptr, 0);
     }
     return true;
 }
@@ -1880,10 +1932,10 @@ bool MonitorExit(void* monitor_target) {
 
 bool MonitorTryEnter(void* monitor_target) {
     if (monitor_target == nullptr) return false;
-    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    auto* sync_ptr = GetSyncStatePtr(monitor_target);
     const int32_t tid = threading::GetCurrentThreadId();
     if (tid == 0) return false;
-    uint64_t sync = header->sync_state;
+    uint64_t sync = *sync_ptr;
     for (;;) {
         if ((sync & kSyncInflatedBit) != 0) {
             auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
@@ -1892,7 +1944,7 @@ bool MonitorTryEnter(void* monitor_target) {
         if ((sync & kSyncLockedBit) == 0) {
             const uint64_t desired = kSyncLockedBit |
                 (static_cast<uint64_t>(tid) << kSyncThreadShift);
-            if (AtomicCAS(&header->sync_state, sync, desired,
+            if (AtomicCAS(sync_ptr, sync, desired,
                     __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
                 return true;
             }
@@ -1904,10 +1956,10 @@ bool MonitorTryEnter(void* monitor_target) {
 
 bool MonitorIsEntered(void* monitor_target) {
     if (monitor_target == nullptr) return false;
-    auto* header = static_cast<ObjectHeader*>(monitor_target);
+    auto* sync_ptr = GetSyncStatePtr(monitor_target);
     const int32_t tid = threading::GetCurrentThreadId();
     if (tid == 0) return false;
-    uint64_t sync = header->sync_state;
+    uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
         return sync != 0;
     }
@@ -1920,8 +1972,8 @@ bool MonitorIsEntered(void* monitor_target) {
 
 bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
     if (monitor_target == nullptr) return false;
-    auto* header = static_cast<ObjectHeader*>(monitor_target);
-    uint64_t sync = header->sync_state;
+    auto* sync_ptr = GetSyncStatePtr(monitor_target);
+    uint64_t sync = *sync_ptr;
     SyncBlock* sb = nullptr;
     if ((sync & kSyncInflatedBit) != 0) {
         sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
@@ -1934,7 +1986,7 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
             CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.table_lock);
             stripe.entries[monitor_target] = sb;
             const uint64_t inflated_val = kSyncInflatedBit | reinterpret_cast<uint64_t>(sb);
-            AtomicStoreRelease(&header->sync_state, inflated_val);
+            AtomicStoreRelease(sync_ptr, inflated_val);
         }
     }
     if (sb == nullptr) return false;
@@ -1948,8 +2000,8 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
 
 bool MonitorPulse(void* monitor_target) {
     if (monitor_target == nullptr) return false;
-    auto* header = static_cast<ObjectHeader*>(monitor_target);
-    uint64_t sync = header->sync_state;
+    auto* sync_ptr = GetSyncStatePtr(monitor_target);
+    uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
         auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
         if (sb != nullptr) {
@@ -1962,8 +2014,8 @@ bool MonitorPulse(void* monitor_target) {
 
 bool MonitorPulseAll(void* monitor_target) {
     if (monitor_target == nullptr) return false;
-    auto* header = static_cast<ObjectHeader*>(monitor_target);
-    uint64_t sync = header->sync_state;
+    auto* sync_ptr = GetSyncStatePtr(monitor_target);
+    uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
         auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
         if (sb != nullptr) {
@@ -1994,20 +2046,19 @@ bool ThreadSleep(int32_t timeout_ms) {
 
 bool SpinLockExit(void* spinlock_target) {
     if (spinlock_target == nullptr) return false;
-    auto* header = static_cast<ObjectHeader*>(spinlock_target);
+    auto* sync_ptr = GetSyncStatePtr(spinlock_target);
     const int32_t tid = threading::GetCurrentThreadId();
-    uint64_t sync = header->sync_state;
+    uint64_t sync = *sync_ptr;
     if ((sync & kSyncLockedBit) == 0) return false;
     const uint64_t stored_tid = (sync >> kSyncThreadShift) & 0x3FFFFFFF;
     if (stored_tid != static_cast<uint64_t>(tid)) return false;
-    AtomicStoreRelease(&header->sync_state, 0);
+    AtomicStoreRelease(sync_ptr, 0);
     return true;
 }
 
 bool SpinLockIsHeld(void* spinlock_target) {
     if (spinlock_target == nullptr) return false;
-    auto* header = static_cast<ObjectHeader*>(spinlock_target);
-    return (header->sync_state & kSyncLockedBit) != 0;
+    return (*GetSyncStatePtr(spinlock_target) & kSyncLockedBit) != 0;
 }
 
 bool LockEnter(void* lock_target) {

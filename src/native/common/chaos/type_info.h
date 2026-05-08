@@ -54,6 +54,10 @@ static_assert(sizeof(InterfaceMapEntry) == 16,
               "InterfaceMapEntry: stable_id(8) + vtable_offset(4) + method_count(4) = 16 bytes");
 
 // ── TypeInfo ────────────────────────────────────────────────────
+// Base TypeInfo (64B) shared by all type variants:
+//   V0: vtable_array=nullptr, vtable_length=0 (interfaces, primitives)
+//   V1: vtable_array points to external VTable_symbol[] (regular types)
+//   V2: TypeInfoV2 extends with inline_slots[6], vtable_array=&inline_slots[0]
 
 struct TypeInfo {
     const TypeInfo* parent;                  // base type, nullptr = System.Object (8 bytes)
@@ -63,11 +67,37 @@ struct TypeInfo {
     CHAOS_IL2CPP_UINT32 iface_count;         // number of entries in iface_map (4 bytes)
     CHAOS_IL2CPP_UINT32 runtime_iface_count; // number of entries in runtime_iface_map (4 bytes)
     CHAOS_IL2CPP_UINT8  type_shape;          // 1=reference, 2=value, 3=interface (1 byte)
-    // 7 bytes padding
+    CHAOS_IL2CPP_UINT8  flags;               // bit[0:1]=header_kind, bit[2]=has_finalizer (1 byte)
+    // 2 bytes padding
+    const void**        vtable_array;        // unified vtable access ptr (8 bytes)
+    CHAOS_IL2CPP_UINT32 vtable_length;       // number of vtable slots (4 bytes)
+    // 4 bytes padding
 };
 
-static_assert(sizeof(TypeInfo) == 48,
-              "TypeInfo layout: parent(8) + stable_id(8) + iface_map(8) + runtime_iface_map(8) + iface_count(4) + runtime_iface_count(4) + type_shape(1) + padding(7) = 48 bytes");
+static_assert(sizeof(TypeInfo) == 64,
+              "TypeInfo layout: parent(8) + stable_id(8) + iface_map(8) + runtime_iface_map(8) + "
+              "iface_count(4) + runtime_iface_count(4) + type_shape(1) + flags(1) + padding(2) + "
+              "vtable_array(8) + vtable_length(4) + padding(4) = 64 bytes");
+
+// ── TypeInfo flags ──────────────────────────────────────────────
+inline constexpr CHAOS_IL2CPP_UINT8 kTypeInfoHeaderKindMask   = 0x03;
+inline constexpr CHAOS_IL2CPP_UINT8 kTypeInfoHeaderKindPure   = 0x00;  // PureType (no sync)
+inline constexpr CHAOS_IL2CPP_UINT8 kTypeInfoHeaderKindThin   = 0x01;  // ThinLockable
+inline constexpr CHAOS_IL2CPP_UINT8 kTypeInfoHeaderKindFat    = 0x02;  // Fat (vtable* + sync_state)
+inline constexpr CHAOS_IL2CPP_UINT8 kTypeInfoHasFinalizer     = 0x04;  // bit[2]: has finalizer
+
+// ── TypeInfoV2 — inline vtable slots ───────────────────────────
+// Extends TypeInfo with inline_slots[6] for types with ≤6 virtual methods.
+// vtable_array is set to &inline_slots[0] at emission time so the unified
+// vtable_array[slot] access path works identically for V1 and V2.
+
+struct TypeInfoV2 {
+    TypeInfo                base;               // 64B (vtable_array = &inline_slots[0])
+    const void*             inline_slots[6];    // 48B: inline vtable slots
+};
+
+static_assert(sizeof(TypeInfoV2) == 112,
+              "TypeInfoV2: TypeInfo(64) + inline_slots[6](48) = 112 bytes");
 
 // ── Common type-shape constants ─────────────────────────────────
 

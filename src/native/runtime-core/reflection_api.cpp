@@ -753,9 +753,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfType(
 {
     if (obj == 0 || type_handle == 0) return 0;
 
-    const auto* obj_header = reinterpret_cast<const chaos_object_header*>(
-        static_cast<CHAOS_IL2CPP_INTPTR>(obj));
-    const auto* obj_type = obj_header->type_info;
+    const auto* obj_type = chaos_object_get_type_info(
+        reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_INTPTR>(obj)));
     if (obj_type == nullptr) return 0;
 
     const auto* target_info = GetTypeInfoFromHandle(type_handle);
@@ -1011,12 +1010,11 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(
     if (method_name == nullptr) return 0;
 
     if (param_types != 0) {
-        // Extract parameter count from managed System.Type[] array
-        // Layout: object_header (16 bytes) + length (4 bytes)
+        // Layout: object_header (24 bytes FatHeader) + length (4 bytes)
         const auto* arr_bytes = reinterpret_cast<const uint8_t*>(
             static_cast<CHAOS_IL2CPP_INTPTR>(param_types));
         int32_t param_count = *reinterpret_cast<const CHAOS_IL2CPP_INT32*>(
-            arr_bytes + sizeof(chaos_object_header));
+            arr_bytes + sizeof(FatHeader));
         if (param_count < 0) param_count = 0;
 
         auto* method = FindReflectionQueryMethod(desc, method_name, param_count);
