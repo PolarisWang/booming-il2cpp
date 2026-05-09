@@ -29,12 +29,14 @@ using namespace chaos::il2cpp::runtime_core;
 
 {{ end ~}}
 
+{{~ if native_entry_function_name != "" ~}}
 // Native AOT entry for {{ entry_subject_id }}
 // Managed symbol: {{ entry_symbol }}
 extern "C" {{ if workload_abi == "void(int32)" || workload_abi == "void()" }}void{{ else }}CHAOS_IL2CPP_INT32{{ end }} {{ native_entry_function_name }}(CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
     {{ if workload_abi == "void(int32)" || workload_abi == "void()" }}{{ entry_native_symbol }}({{ entry_bridge_arguments }});{{ else }}return {{ entry_native_symbol }}({{ entry_bridge_arguments }});{{ end }}
 }
+{{~ end ~}}
 
 }  // namespace chaos::il2cpp::codegen::{{ codegen_namespace }}
 #pragma warning(pop)

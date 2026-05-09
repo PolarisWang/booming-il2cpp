@@ -134,11 +134,25 @@ public sealed class ManagedInterpreterExecutor
                         case IROpCode.LdcI4:
                             WriteResult(values, instruction.Result, ReadInt32Literal(RequireOperand(instruction, 0)));
                             break;
+                        case IROpCode.LdcI8:
+                            WriteResult(values, instruction.Result, RequireOperand(instruction, 0).Int64Value ?? 0L);
+                            break;
+                        case IROpCode.LdcR4:
+                            WriteResult(values, instruction.Result, (double?)(RequireOperand(instruction, 0).Float32Value) ?? 0.0);
+                            break;
+                        case IROpCode.LdcR8:
+                            WriteResult(values, instruction.Result, RequireOperand(instruction, 0).Float64Value ?? 0.0);
+                            break;
                         case IROpCode.LdStr:
                             WriteResult(values, instruction.Result, RequireOperand(instruction, 0).StringValue);
                             break;
                         case IROpCode.LdNull:
                             WriteResult(values, instruction.Result, null);
+                            break;
+                        case IROpCode.Dup:
+                        case IROpCode.Neg:
+                        case IROpCode.Not:
+                            WriteResult(values, instruction.Result, ReadOperandValue(RequireOperand(instruction, 0), arguments, values));
                             break;
                         case IROpCode.Pop:
                             break;
@@ -164,8 +178,41 @@ public sealed class ManagedInterpreterExecutor
                         case IROpCode.Div:
                             WriteBinary(values, instruction, arguments, values, static (left, right) => left / right);
                             break;
+                        case IROpCode.DivUn:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => (int)((uint)left / (uint)right));
+                            break;
                         case IROpCode.Rem:
                             WriteBinary(values, instruction, arguments, values, static (left, right) => left % right);
+                            break;
+                        case IROpCode.RemUn:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => (int)((uint)left % (uint)right));
+                            break;
+                        case IROpCode.And:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => left & right);
+                            break;
+                        case IROpCode.Or:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => left | right);
+                            break;
+                        case IROpCode.Xor:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => left ^ right);
+                            break;
+                        case IROpCode.Shl:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => left << right);
+                            break;
+                        case IROpCode.Shr:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => left >> right);
+                            break;
+                        case IROpCode.ShrUn:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => (int)((uint)left >> right));
+                            break;
+                        case IROpCode.AddOvf:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => checked(left + right));
+                            break;
+                        case IROpCode.SubOvf:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => checked(left - right));
+                            break;
+                        case IROpCode.MulOvf:
+                            WriteBinary(values, instruction, arguments, values, static (left, right) => checked(left * right));
                             break;
                         case IROpCode.Ceq:
                             WriteBinary(values, instruction, arguments, values, static (left, right) => left == right ? 1 : 0);
@@ -175,6 +222,14 @@ public sealed class ManagedInterpreterExecutor
                             break;
                         case IROpCode.Cgt:
                             WriteBinary(values, instruction, arguments, values, static (left, right) => left > right ? 1 : 0);
+                            break;
+                        case IROpCode.Conv_I4:
+                        case IROpCode.ConvI:
+                        case IROpCode.ConvU:
+                            WriteResult(values, instruction.Result, ReadInt32Operand(RequireOperand(instruction, 0), arguments, values));
+                            break;
+                        case IROpCode.Conv_I8:
+                            WriteResult(values, instruction.Result, (long)ReadInt32Operand(RequireOperand(instruction, 0), arguments, values));
                             break;
                         case IROpCode.Br:
                             blockOffset = ResolveBlockOffset(RequireOperand(instruction, 0), blockOffsets);
@@ -202,9 +257,25 @@ public sealed class ManagedInterpreterExecutor
                                 jumped = true;
                             }
                             break;
+                        case IROpCode.BltUn:
+                            if ((uint)ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) <
+                                (uint)ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
+                            {
+                                blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
+                                jumped = true;
+                            }
+                            break;
                         case IROpCode.Bgt:
                             if (ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) >
                                 ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
+                            {
+                                blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
+                                jumped = true;
+                            }
+                            break;
+                        case IROpCode.BgtUn:
+                            if ((uint)ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) >
+                                (uint)ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
                             {
                                 blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
                                 jumped = true;
@@ -218,8 +289,40 @@ public sealed class ManagedInterpreterExecutor
                                 jumped = true;
                             }
                             break;
+                        case IROpCode.BleUn:
+                            if ((uint)ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) <=
+                                (uint)ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
+                            {
+                                blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
+                                jumped = true;
+                            }
+                            break;
                         case IROpCode.Bge:
                             if (ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) >=
+                                ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
+                            {
+                                blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
+                                jumped = true;
+                            }
+                            break;
+                        case IROpCode.BgeUn:
+                            if ((uint)ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) >=
+                                (uint)ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
+                            {
+                                blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
+                                jumped = true;
+                            }
+                            break;
+                        case IROpCode.Beq:
+                            if (ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) ==
+                                ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
+                            {
+                                blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
+                                jumped = true;
+                            }
+                            break;
+                        case IROpCode.BneUn:
+                            if (ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) !=
                                 ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
                             {
                                 blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);

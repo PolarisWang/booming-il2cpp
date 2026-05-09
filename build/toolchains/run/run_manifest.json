@@ -1175,6 +1175,22 @@
       ]
     },
     {
+      "id": "foundation-dll-verify-family",
+      "title": "Run full 7-stage verification pipeline for a foundation DLL family",
+      "group": "Test And Verify",
+      "handler": "foundation_dll.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["foundation-dll", "verify-family"],
+      "target": "foundation-dll",
+      "syntax": "foundation-dll verify-family --family <family-slug> [--assembly <assembly>] [--mode <standard|strict>] [--skip <stages>]",
+      "show_in_menu": true,
+      "examples": [
+        "run foundation-dll verify-family convert-char",
+        "run foundation-dll verify-family convert-char --mode strict",
+        "run foundation-dll verify-family buffer-memory --skip benchmark hotupdate"
+      ]
+    },
+    {
       "id": "test-family-suite",
       "title": "Run a test suite from a public family",
       "group": "Test And Verify",

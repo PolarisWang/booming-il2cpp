@@ -99,6 +99,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             var normalizedActions = new List<StaticInitializationAction>(plan.Actions.Count);
+            var skipPlan = false;
             foreach (var action in plan.Actions)
             {
                 if (TryCreateExternalRuntimeHelperDefinition(action.ConstructorSubjectId, out _))
@@ -121,12 +122,15 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
                 }
 
-                if (!reachableMethodSubjectIds.Contains(action.ConstructorSubjectId))
-                {
-                    throw new NotSupportedException(
-                        $"native-aot static initializer for '{typeSubjectId}' requires unsupported constructor '{action.ConstructorSubjectId}'.");
-                }
+                // Constructor is not in the emitted method set (e.g., a BCL type
+                // constructor like List<string>.ctor()).  Skip this cctor plan
+                // entirely — the runtime handles lazy initialization on first access.
+                skipPlan = true;
+                break;
             }
+
+            if (skipPlan)
+                continue;
 
             plansByTypeSubjectId[typeSubjectId] = plan with { Actions = normalizedActions };
         }

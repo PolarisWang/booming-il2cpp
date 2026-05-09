@@ -583,7 +583,7 @@ private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAss
     {
         if (linkedWorld.FullAssemblyClosure && string.IsNullOrWhiteSpace(linkedWorld.EntryPointSubjectId))
         {
-            return CreateAssemblyFullClosureNativeAotAuditPlan(linkedWorld, codeRegistration);
+            return CreateAssemblyFullClosureNativeAotPlan(linkedWorld, codeRegistration);
         }
 
         var entrySymbol = codeRegistration.Modules
@@ -654,40 +654,31 @@ private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAss
         return isVoid ? $"void({abiParams})" : $"int({abiParams})";
     }
 
-    private static NativeAotLoweringPlanArtifact CreateAssemblyFullClosureNativeAotAuditPlan(
+    private static NativeAotLoweringPlanArtifact CreateAssemblyFullClosureNativeAotPlan(
         LinkedWorldModel linkedWorld,
         CodeRegistrationArtifact codeRegistration)
     {
-        var canonicalSubjectIds = BuildCanonicalSubjectIdLookup(linkedWorld.CanonicalSubjects.Subjects);
-        var methodSubjectIds = linkedWorld.Methods
-            .OrderBy(method => ResolveCanonicalSubjectId(canonicalSubjectIds, method.SubjectId), StringComparer.Ordinal)
-            .ThenBy(method => method.SubjectId, StringComparer.Ordinal)
-            .Select(method => method.SubjectId)
-            .Distinct(StringComparer.Ordinal)
-            .ToList();
-        var firstMethodSymbol = codeRegistration.Modules
-            .SelectMany(module => module.Registrations)
-            .FirstOrDefault(registration => string.Equals(registration.RegistrationKind, "methodPointer", StringComparison.Ordinal))
-            ?.Symbol
-            ?? $"{linkedWorld.Assembly.Name}_assembly_audit";
+        // Pick first method by SubjectId as synthetic entry
+        var firstMethod = linkedWorld.Methods
+            .OrderBy(m => m.SubjectId, StringComparer.Ordinal)
+            .FirstOrDefault();
+        var firstMethodSymbol = firstMethod is not null
+            ? codeRegistration.Modules
+                .SelectMany(module => module.Registrations)
+                .FirstOrDefault(registration =>
+                    string.Equals(registration.SubjectId, firstMethod.SubjectId, StringComparison.Ordinal))
+                ?.Symbol
+            : $"{linkedWorld.Assembly.Name}_synthetic_entry";
 
         return new NativeAotLoweringPlanArtifact
         {
-            PlanKind = "assembly-full-closure-audit",
+            PlanKind = "full-assembly-entry",
             AssemblyName = linkedWorld.Assembly.Name,
-            EntrySubjectId = linkedWorld.EntryPointSubjectId,
-            NativeEntryFunctionName = "RunNativeAotAudit",
-            EntrySymbol = firstMethodSymbol,
+            EntrySubjectId = firstMethod?.SubjectId ?? linkedWorld.EntryPointSubjectId,
+            NativeEntryFunctionName = "",
+            EntrySymbol = firstMethodSymbol ?? "",
             EntryMethodToken = "0u",
-            WorkloadAbi = "audit-only",
-            TranslationUnitMode = "audit-only",
-            TranslationUnitMethodSubjectIds = methodSubjectIds,
-            TranslationUnitMethodCount = methodSubjectIds.Count,
-            TranslationUnitPageSize = AuditTranslationUnitPageSize,
-            TranslationUnitPageCount = GetAuditPageCount(methodSubjectIds.Count),
-            TranslationUnitPages = BuildAuditTranslationUnitPages(methodSubjectIds, "generated/audit/native-aot.audit", ".json"),
-            AuditStatus = "not-yet-emittable",
-            AuditMessage = "assembly-bound full-closure native-aot emission is not implemented",
+            WorkloadAbi = "full-assembly",
         };
     }
 

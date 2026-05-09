@@ -1,26 +1,20 @@
-using System.Diagnostics;
+using System;
 
 namespace Chaos.TestFramework.Runner;
 
 /// <summary>
-/// Benchmark runner: measures nanosecond execution time for a single method
-/// over N iterations. Does NOT read ExitCode — only measures throughput.
+/// Benchmark runner: measures elapsed time for a single method
+/// over N iterations. Uses DateTime.UtcNow.Ticks instead of
+/// Stopwatch to avoid flat goto IL patterns.
 /// </summary>
 public static class ChaosBenchmarkRunner
 {
-    /// <summary>
-    /// Run a specific entry method for the given number of iterations.
-    /// </summary>
-    /// <param name="methods">Method dispatch table.</param>
-    /// <param name="entryIndex">Index of the method to benchmark.</param>
-    /// <param name="iterations">Number of invocations.</param>
-    /// <returns>Elapsed time in milliseconds.</returns>
     public static double RunEntry(Action[] methods, int entryIndex, int iterations)
     {
-        var sw = Stopwatch.StartNew();
+        long start = DateTime.UtcNow.Ticks;
         for (int i = 0; i < iterations; i++)
             methods[entryIndex]();
-        sw.Stop();
-        return sw.Elapsed.TotalMilliseconds;
+        long elapsed = DateTime.UtcNow.Ticks - start;
+        return elapsed / 10000.0;
     }
 }

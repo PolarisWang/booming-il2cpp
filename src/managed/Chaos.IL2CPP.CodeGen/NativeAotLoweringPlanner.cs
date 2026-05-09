@@ -206,19 +206,23 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact entryMethod,
         ManagedClosureManifestArtifact closureManifest,
         MetadataRegistrationArtifact metadataRegistration,
-        SupplementalMetadataTemplateArtifact supplementalMetadataTemplate)
+        SupplementalMetadataTemplateArtifact supplementalMetadataTemplate,
+        bool fullAssemblyMode = false)
     {
         ArgumentNullException.ThrowIfNull(loweringPlan);
         ArgumentNullException.ThrowIfNull(aotCoreIr);
-        ArgumentNullException.ThrowIfNull(entryMethod);
         ArgumentNullException.ThrowIfNull(closureManifest);
         ArgumentNullException.ThrowIfNull(metadataRegistration);
         ArgumentNullException.ThrowIfNull(supplementalMetadataTemplate);
 
+        if (!fullAssemblyMode)
+            ArgumentNullException.ThrowIfNull(entryMethod);
+
         // Skip entry ABI validation for full-closure assembly translation
         if (!closureManifest.FullAssemblyClosure)
             ValidateEntryMethod(entryMethod);
-        if (!string.Equals(entryMethod.NativeSymbol, loweringPlan.EntrySymbol, StringComparison.Ordinal))
+        if (!fullAssemblyMode &&
+            !string.Equals(entryMethod.NativeSymbol, loweringPlan.EntrySymbol, StringComparison.Ordinal))
         {
             throw new InvalidOperationException(
                 $"native-aot entry symbol '{loweringPlan.EntrySymbol}' does not match aot-core-ir symbol '{entryMethod.NativeSymbol}'");
@@ -232,13 +236,15 @@ public sealed partial class NativeAotLoweringPlanner
         _valueTypeSubjectIds = CollectValueTypeSubjectIds(aotCoreIr);
         _sealedTypeSubjectIds = CollectSealedTypeSubjectIds(aotCoreIr);
 
-        var reachableMethods = CollectReachableMethods(aotCoreIr, entryMethod);
-        _methodNativeSymbolToManifestIndex = reachableMethods
+        var methodsForLowering = fullAssemblyMode
+            ? CollectAllMethods(aotCoreIr)
+            : CollectReachableMethods(aotCoreIr, entryMethod);
+        _methodNativeSymbolToManifestIndex = methodsForLowering
             .Select((method, idx) => (method.NativeSymbol, idx))
             .DistinctBy(t => t.NativeSymbol)
             .ToDictionary(t => t.NativeSymbol, t => t.idx);
-        _nativeSymbolToDispatchSlot = BuildDispatchSlotMap(reachableMethods, metadataRegistration);
-        var stringLiterals = CollectStringLiterals(reachableMethods);
+        _nativeSymbolToDispatchSlot = BuildDispatchSlotMap(methodsForLowering, metadataRegistration);
+        var stringLiterals = CollectStringLiterals(methodsForLowering);
         _stringIdMapping = BuildStringIdMapping(stringLiterals);
         _cachedClosureAssemblyPaths = EnumerateClosureAssemblyPaths(closureManifest).ToArray();
         _closureAssemblyPathByName = BuildClosureAssemblyPathByNameCore(_cachedClosureAssemblyPaths);
@@ -259,16 +265,16 @@ public sealed partial class NativeAotLoweringPlanner
 
         Parallel.Invoke(
             () => customAttributeSupport = BuildCustomAttributeSupportModel(
-                reachableMethods,
+                methodsForLowering,
                 supplementalMetadataTemplate),
             () => assemblyReflectionSupport = BuildAssemblyReflectionSupportModel(
-                reachableMethods,
+                methodsForLowering,
                 supplementalMetadataTemplate),
             () => reflectionMemberSupport = BuildReflectionMemberSupportModel(
-                reachableMethods,
+                methodsForLowering,
                 supplementalMetadataTemplate),
             () => staticFieldDataSupport = BuildStaticFieldDataSupportModel(
-                reachableMethods,
+                methodsForLowering,
                 metadataRegistration));
 
         _customAttributeSupport = customAttributeSupport!;
@@ -276,12 +282,12 @@ public sealed partial class NativeAotLoweringPlanner
         _reflectionMemberSupport = reflectionMemberSupport!;
         _staticFieldDataSupport = staticFieldDataSupport!;
         _staticInitializationSupport = BuildStaticInitializationSupportModel(
-            reachableMethods,
+            methodsForLowering,
             closureManifest);
-        var externalRuntimeHelpers = CollectExternalRuntimeHelpers(reachableMethods, _staticInitializationSupport);
+        var externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport);
         var objectModelBuilder = new StringBuilder(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
-        EmitObjectModelDeclarations(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
+        EmitObjectModelDeclarations(objectModelBuilder, methodsForLowering, externalRuntimeHelpers);
         // Phase 0: Collect ModuleRegistry Tier 0 type data from PE metadata
         CollectModuleTypeData(closureManifest.InputAssemblyPath);
         // Phase 1 string-id table via Scriban
@@ -296,13 +302,13 @@ public sealed partial class NativeAotLoweringPlanner
         {
             EmitSpanRuntimePrelude(objectModelBuilder, _staticFieldDataSupport);
         }
-        EmitDelegateRuntimeSupportDefinitions(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
+        EmitDelegateRuntimeSupportDefinitions(objectModelBuilder, methodsForLowering, externalRuntimeHelpers);
         EmitExternalRuntimeHelperDefinitions(objectModelBuilder, externalRuntimeHelpers);
         EmitStaticInitializationDefinitions(objectModelBuilder);
         EmitGenericRegistration(objectModelBuilder, supplementalMetadataTemplate, metadataRegistration, out var genericRegistrationHelperCode, out var aotRegistrationCode);
 
-        var methodDeclarations = BuildMethodDeclarations(reachableMethods);
-        var methods = reachableMethods
+        var methodDeclarations = BuildMethodDeclarations(methodsForLowering);
+        var methods = methodsForLowering
             .Select(method =>
             {
                 // Collect UnmanagedCallersOnly methods for reverse P/Invoke registration.
@@ -318,10 +324,10 @@ public sealed partial class NativeAotLoweringPlanner
                 };
             })
             .ToList();
-        var entryBridgeArguments = BuildEntryBridgeArguments(entryMethod);
+        var entryBridgeArguments = fullAssemblyMode ? "" : BuildEntryBridgeArguments(entryMethod);
 
-        var abiManifestCode = BuildAbiManifest(reachableMethods);
-        var nameIndexCode = BuildHotpatchTable(reachableMethods, metadataRegistration);
+        var abiManifestCode = BuildAbiManifest(methodsForLowering);
+        var nameIndexCode = BuildHotpatchTable(methodsForLowering, metadataRegistration);
         var moduleRegistrationCode = BuildModuleRegistration();
         if (!string.IsNullOrEmpty(nameIndexCode))
         {
@@ -356,6 +362,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "\"hotpatch_table.h\"",
                 "\"runtime_vtable.h\"",
                 "\"runtime_instantiation.h\"",
+                "\"load_store_chaos_bridge.h\"",
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
             GenericRegistrationCode = genericRegistrationHelperCode,

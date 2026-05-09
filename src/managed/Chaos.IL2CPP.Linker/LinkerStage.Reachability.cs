@@ -19,8 +19,7 @@ public sealed partial class LinkerStage
 
     private static ReachableClosure ComputeReachableClosure(SemanticWorldModel semanticWorld)
     {
-        if (semanticWorld.FullAssemblyClosure &&
-            semanticWorld.Assemblies.Count == 1)
+        if (semanticWorld.FullAssemblyClosure)
         {
             return new ReachableClosure(
                 semanticWorld.Types,

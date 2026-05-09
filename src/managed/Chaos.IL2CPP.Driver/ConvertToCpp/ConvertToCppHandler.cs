@@ -41,6 +41,7 @@ internal static class ConvertToCppHandler
 
         // ── Step 1: Collect managed dependency DLLs ────────────────────────
         var additionalPaths = new List<string>();
+        var entryAssemblyNames = new HashSet<string>(config.AssemblyPaths.Select(Path.GetFileNameWithoutExtension), StringComparer.OrdinalIgnoreCase);
         foreach (var dir in config.AssemblyDirs)
         {
             if (Directory.Exists(dir))
@@ -51,7 +52,12 @@ internal static class ConvertToCppHandler
                     {
                         using var peReader = new PEReader(File.OpenRead(dll));
                         if (peReader.HasMetadata)
-                            additionalPaths.Add(dll);
+                        {
+                            // Skip assemblies already specified via --assembly
+                            var name = Path.GetFileNameWithoutExtension(dll);
+                            if (!entryAssemblyNames.Contains(name))
+                                additionalPaths.Add(dll);
+                        }
                     }
                     catch { }
                 }
@@ -68,14 +74,13 @@ internal static class ConvertToCppHandler
 
         var pipeline = new PipelinePlan();
 
-        if (config.AssemblyPaths.Count == 1 && string.IsNullOrWhiteSpace(config.EntryPoint))
+        if (config.AssemblyPaths.Count == 1)
         {
-            // Single assembly with full-closure — use EmitNativeAot which now
-            // handles full-closure mode via CreateForAssembly() fallback.
+            // Single assembly full-closure — entry is specified or auto-detected
             var request = new ManagedClosureRequest(
                 config.AssemblyPaths[0],
                 outputRoot,
-                EntryPointSubjectIdOverride: null,
+                EntryPointSubjectIdOverride: config.EntryPoint,
                 AdditionalAssemblyPaths: additionalPaths,
                 FullAssemblyClosure: true);
 
@@ -86,12 +91,39 @@ internal static class ConvertToCppHandler
             WriteArtifacts(outputRoot, closureResult);
             Console.WriteLine(" done");
 
-            // Patch plan for emitter to see correct assembly info
-            PatchLoweringPlanForEmission(closureResult, outputRoot);
-
             Console.Write("  [3/3] Emitting C++ (NativeAot)...");
             var emitResult = EmitNativeAot(outputRoot);
+            // EmitNativeAot writes .cpp to outputRoot/generated/ but CmakeGenerator
+            // expects outputRoot/{AssemblyName}/generated/. Move files to match.
+            var asmName = emitResult.Manifest.AssemblyName;
+            if (!string.IsNullOrEmpty(asmName))
+            {
+                var asmOutputDir = Path.Combine(outputRoot, asmName);
+                foreach (var source in emitResult.GeneratedSources)
+                {
+                    var relativePath = source.RelativePath.Replace('/', Path.DirectorySeparatorChar);
+                    var srcPath = Path.Combine(outputRoot, relativePath);
+                    var dstPath = Path.Combine(asmOutputDir, relativePath);
+                    Directory.CreateDirectory(Path.GetDirectoryName(dstPath)!);
+                    if (File.Exists(srcPath))
+                        File.Move(srcPath, dstPath, overwrite: true);
+                }
+            }
             Console.WriteLine($" {emitResult.GeneratedSources.Count} files");
+
+            // Generate CMakeLists.txt
+            var repoRoot = ResolveRepoRoot();
+            var nativeLibDir = Path.Combine(repoRoot, "build", "native");
+            var cmakeGen = new Chaos.IL2CPP.CodeGen.BuildSystem.CmakeGenerator(repoRoot);
+            var singleCmakeContent = cmakeGen.Generate(
+                new[] { emitResult }.ToList(),
+                nativeLibDir: nativeLibDir,
+                extraSources: new List<string> { "runtime-entry.cpp" },
+                targetName: "entry");
+            File.WriteAllText(Path.Combine(outputRoot, "CMakeLists.txt"), singleCmakeContent);
+
+            var runtimeEntryCpp = GenerateRuntimeEntryCpp(config.EntryPoint is not null ? "RunNativeAot" : null);
+            File.WriteAllText(Path.Combine(outputRoot, "runtime-entry.cpp"), runtimeEntryCpp);
 
             Console.WriteLine($"Convert completed: {outputRoot}");
         }
@@ -114,7 +146,6 @@ internal static class ConvertToCppHandler
                 var assemblyOutput = result.OutputRootPath;
                 Directory.CreateDirectory(assemblyOutput);
                 WriteArtifacts(assemblyOutput, result);
-                PatchLoweringPlanForEmission(result, assemblyOutput);
             }
             Console.WriteLine(" done");
 
@@ -131,7 +162,9 @@ internal static class ConvertToCppHandler
             WriteCombinedReport(outputRoot, config, results);
 
             // Generate CMakeLists.txt
-            var cmakeGen = new Chaos.IL2CPP.CodeGen.BuildSystem.CmakeGenerator();
+            var repoRoot = ResolveRepoRoot();
+            var nativeLibDir = Path.Combine(repoRoot, "build", "native");
+            var cmakeGen = new Chaos.IL2CPP.CodeGen.BuildSystem.CmakeGenerator(repoRoot);
             var assemblyNames = results.Select(r => r.ClosureManifest?.AssemblyName ?? "unknown").ToList();
             var assemblyInfo = assemblyNames.Select(name => new
             {
@@ -171,26 +204,14 @@ internal static class ConvertToCppHandler
                         RelativePath = m.SubjectId,
                         Contents = "",
                     }).ToList() ?? [],
-                }).ToList());
+                }).ToList(),
+                nativeLibDir: nativeLibDir,
+                extraSources: new List<string> { "runtime-entry.cpp" },
+                targetName: "entry");
             File.WriteAllText(Path.Combine(outputRoot, "CMakeLists.txt"), cmakeContent);
 
             // Generate runtime entry point (simple text, no Scriban dependency)
-            var entryPoint = config.EntryPoint ?? "";
-            var entryFunction = "RunNativeAot";
-            var runtimeEntryContent = $@"// Auto-generated runtime entry point for chaos-il2cpp AOT output.
-#include ""codegen_bridge.h""
-#include ""runtime_abi.h""
-
-extern ""C"" CHAOS_IL2CPP_INT32 {entryFunction}(CHAOS_IL2CPP_INT32);
-
-int main(int argc, char** argv) {{
-    auto* bridge = chaos_codegen_get_bridge_v0();
-    if (!bridge) return -1;
-    bridge->bootstrap_runtime();
-    int result = {entryFunction}(argc > 1 ? atoi(argv[1]) : 0);
-    return result;
-}}
-";
+            var runtimeEntryContent = GenerateRuntimeEntryCpp(config.EntryPoint is not null ? "RunNativeAot" : null);
             File.WriteAllText(Path.Combine(outputRoot, "runtime-entry.cpp"), runtimeEntryContent);
 
             Console.WriteLine($" {totalFiles} files across {results.Count} assemblies");
@@ -215,71 +236,6 @@ int main(int argc, char** argv) {{
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.NativeReferenceLoweringPlan), result.NativeReferenceLoweringPlan);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.NativeAotLoweringPlan), result.NativeAotLoweringPlan);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.ClosureManifest), result.ClosureManifest);
-    }
-
-    private static void PatchLoweringPlanForEmission(ManagedClosureResult closureResult, string outputRoot)
-    {
-        var original = closureResult.NativeAotLoweringPlan;
-        if (original is null)
-            return;
-
-        // If the pipeline already produced a valid lowering plan (from --entry-point
-        // in multi-assembly mode), skip patching entirely.
-        if (!string.IsNullOrWhiteSpace(original.EntrySubjectId) &&
-            !string.IsNullOrWhiteSpace(original.EntrySymbol))
-            return;
-
-        var aotCoreIr = closureResult.AotCoreIr;
-        // Determine the entry assembly name to narrow the search scope.
-        var assemblyName = closureResult.ClosureManifest?.AssemblyName ?? "";
-        IEnumerable<AotCoreIrMethodArtifact> candidates = aotCoreIr?.Methods ?? Enumerable.Empty<AotCoreIrMethodArtifact>();
-        if (!string.IsNullOrWhiteSpace(assemblyName))
-        {
-            // Prefer methods belonging to the entry assembly (SubjectId starts with
-            // assembly name), falling back to all methods if no match is found.
-            var assemblyMethods = candidates.Where(m =>
-                m.SubjectId.StartsWith(assemblyName, StringComparison.Ordinal)).ToList();
-            if (assemblyMethods.Count > 0)
-                candidates = assemblyMethods;
-        }
-
-        // Find a method matching int(int32) ABI: 0-1 params, returns Int32 or NativeInt
-        var entryMethod = candidates.FirstOrDefault(m =>
-            m.ParameterCount <= 1 &&
-            (string.Equals(m.ReturnType, "System.Int32", StringComparison.Ordinal) ||
-             m.ReturnAbi.CarrierKindCode == Contracts.AotCoreIrAbiCarrierKind.NativeInt) &&
-            (m.ParameterCount == 0 || m.ParameterAbis[0].CarrierKindCode == Contracts.AotCoreIrAbiCarrierKind.Int32));
-        entryMethod ??= candidates.FirstOrDefault(m =>
-            m.ParameterCount <= 1 &&
-            string.Equals(m.ReturnType, "System.Int32", StringComparison.Ordinal));
-        entryMethod ??= candidates.FirstOrDefault();
-        if (entryMethod is null)
-            return;
-
-        var syntheticEntry = entryMethod.SubjectId!;
-        var patchedManifest = closureResult.ClosureManifest! with
-        {
-            EntrySubjectId = syntheticEntry,
-            FullAssemblyClosure = true,
-        };
-        WriteJson(Path.Combine(outputRoot, ManagedClosureArtifactNames.ClosureManifest), patchedManifest);
-
-        var patchedPlan = new NativeAotLoweringPlanArtifact
-        {
-            PlanKind = "generic-managed-entry",
-            AssemblyName = original.AssemblyName,
-            EntrySubjectId = syntheticEntry,
-            EntrySymbol = entryMethod.NativeSymbol,
-            EntryMethodToken = entryMethod.SubjectId,
-            NativeEntryFunctionName = "RunNativeAot",
-            WorkloadAbi = "int(int32)",
-            TranslationUnitPageSize = original.TranslationUnitPageSize,
-            TranslationUnitPageCount = original.TranslationUnitPageCount,
-            TranslationUnitPages = original.TranslationUnitPages,
-            TranslationUnitMode = original.TranslationUnitMode,
-            TranslationUnitMethodSubjectIds = original.TranslationUnitMethodSubjectIds,
-        };
-        WriteJson(Path.Combine(outputRoot, ManagedClosureArtifactNames.NativeAotLoweringPlan), patchedPlan);
     }
 
     private static NativeAotResult EmitNativeAot(string outputRoot)
@@ -326,5 +282,57 @@ int main(int argc, char** argv) {{
         if (!string.IsNullOrEmpty(dir))
             Directory.CreateDirectory(dir);
         File.WriteAllText(path, JsonSerializer.Serialize(value, JsonOptions) + Environment.NewLine);
+    }
+
+    private static string ResolveRepoRoot()
+    {
+        // Starting from the assembly output directory (e.g. Chaos.IL2CPP.Driver/bin/Debug/net8.0),
+        // walk up to find the repo root (contains src/, build/, etc.)
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        while (dir != null)
+        {
+            if (Directory.Exists(Path.Combine(dir.FullName, "src")) &&
+                Directory.Exists(Path.Combine(dir.FullName, "build")))
+                return dir.FullName;
+            dir = dir.Parent;
+        }
+        // Fallback: use current directory
+        return Directory.GetCurrentDirectory();
+    }
+
+    private static string GenerateRuntimeEntryCpp(string? entryFunction)
+    {
+        if (string.IsNullOrEmpty(entryFunction))
+        {
+            return @"// Auto-generated runtime entry point for chaos-il2cpp full-assembly AOT output.
+// No single entry point — all methods are available via dispatch/hotpatch tables.
+#include ""codegen_bridge.h""
+#include ""runtime_abi.h""
+
+int main(int argc, char** argv) {
+    auto* bridge = chaos_codegen_get_bridge_v0();
+    if (!bridge) return -1;
+    bridge->bootstrap_runtime();
+    return 0;
+}
+";
+        }
+
+        return $@"// Auto-generated runtime entry point for chaos-il2cpp AOT output.
+#include <cstdint>
+#include <cstdlib>
+#include ""codegen_bridge.h""
+#include ""runtime_abi.h""
+
+extern ""C"" std::int32_t {entryFunction}(std::int32_t);
+
+int main(int argc, char** argv) {{
+    auto* bridge = chaos_codegen_get_bridge_v0();
+    if (!bridge) return -1;
+    bridge->bootstrap_runtime();
+    int result = {entryFunction}(argc > 1 ? std::atoi(argv[1]) : 0);
+    return result;
+}}
+";
     }
 }

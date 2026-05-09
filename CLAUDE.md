@@ -24,6 +24,14 @@
 
 在开发任何 il2cpp 新功能或修改现有翻译行为前，必须先执行 `dev-architecture-first-development` 技能完成架构查询，确认翻译路径与既有架构一致。禁止在未查表的情况下直接进入实现。
 
+## 完成前自测
+
+任何开发任务完成后，必须按以下顺序完成自测：
+
+1. **查 wiki 要求** — 查阅 `wiki/` 中对应功能模块的自测要求，按说明执行
+2. **无要求则走 TDD** — 如果 wiki 中没有自测要求，则按 TDD 规范补充测试：先写失败测试，再改实现，直到测试通过
+3. **验证管线** — 如果项目有对应验证管线（如 foundation-dll verification pipeline），必须跑通后再声称完成
+
 ## 知识记录
 
 - 新翻译路径必须记录到 `wiki/03-功能模块/il2cpp-核心架构/il2cpp-核心翻译路径参考.md`
@@ -36,77 +44,6 @@
 - 仅当任务确实产生长期有效知识时才更新 wiki
 - 历史决策只保留最终方案，不保留讨论过程
 
-## 可用技能注册表
+## 技能系统
 
-以下技能通过 `.claude/skills/` 注册到 Claude Code，全程可通过 Skill 工具按名称（`dev-<skill-name>`）调用，或在对话中输入 `/dev-<skill-name>` 触发。
-
-### 核心开发流程
-| 技能 | 说明 |
-|------|------|
-| `dev-brainstorm` | 新功能设计前澄清边界、拍板方案 |
-| `dev-roadmap` | 复杂任务分多阶段/多子任务推进 |
-| `dev-writing-plans` | 编写实现计划 |
-| `dev-executing-plans` | 按计划执行任务 |
-| `dev-subagent-driven-development` | 子 Agent 并行执行 |
-
-### 开发前/中检查
-| 技能 | 说明 |
-|------|------|
-| `dev-architecture-first-development` | il2cpp 翻译逻辑开发前必须先调用 |
-| `dev-test-driven-development` | 测试优先开发 |
-| `dev-systematic-debugging` | 复杂 bug 根因分析 |
-
-### 验证与完成
-| 技能 | 说明 |
-|------|------|
-| `dev-verification-before-completion` | 完成前运行验证 |
-| `dev-finishing-a-development-branch` | 分支完成、提交和 PR |
-
-### 领域特定
-| 技能 | 说明 |
-|------|------|
-| `dev-foundation-dll-verification-pipeline` | **入口** foundation DLL 验证管线编排：数据校验 → 三闸门 → 聚合 → dashboard |
-| `dev-foundation-dll-verify-data-integrity` | 验证前数据一致性检查：claims/ledger/coverage |
-| `dev-foundation-dll-family-verification` | 单 family 三维验证：Fact → Benchmark → HotUpdate |
-| `dev-foundation-dll-verify-aggregate` | 跨 family 结果聚合、回归检测、dashboard 刷新 |
-| `dev-foundation-dll-ai-test-generation` | foundation DLL 测试代码生成 |
-| `dev-foundation-dll-onboard-family` | 新 capability family 接入：ledger → Phase 1/2 → codegen → verification |
-| `dev-project-test-governance` | 测试治理 |
-
-### 基础设施
-| 技能 | 说明 |
-|------|------|
-| `dev-using-git-worktrees` | git worktree 隔离开发 |
-| `dev-project-wiki-maintenance` | wiki 维护 |
-| `dev-writing-skills` | 编写/修改技能 |
-| `dev-dispatching-parallel-agents` | 并行 Agent 派发 |
-| `dev-using-booming` | Booming 工具 |
-| `dev-skill-evolution` | 技能自进化管线操作入口（健康检查、提案审查与晋升） |
-
-### 技能自进化系统
-
-技能自进化系统通过 telemetry → health → evolution → promote 管线自动优化技能质量。
-
-**Telemetry 采集（HOOK 自动运行）：**
-- `skills/hooks/hook_track_usage.py` — 记录 SKILL.md 读取
-- `skills/hooks/hook_track_tool_outcomes.py` — 记录工具调用成败
-- `skills/hooks/hook_evaluate_session.py` — 评估会话质量
-- `skills/hooks/hook_track_session_outcomes.py` — 记录会话完成状态
-
-**健康度量与进化触发（手动/定时运行）：**
-- `python skills/tooling/learning/health_engine.py check --window 30` — **一键自检：** 计算健康指标 + 生成报告 + 预览进化提案（推荐日常使用）
-- `python skills/tooling/learning/health_engine.py compute --all --window 30` — 计算 per-skill 健康指标（applied_rate、completion_rate、tool_success_rate 等）
-- `python skills/tooling/learning/health_engine.py report --window 30` — 生成健康仪表盘
-- `python skills/tooling/learning/evolve.py propose --dry-run` — 预览进化提案
-- `python skills/tooling/learning/evolve.py auto-evolve` — 执行进化（FIX/DERIVED/CAPTURED）
-
-**PIPELINE（提案审批）：**
-- `python skills/tooling/learning/skill_learn.py evolve-benchmark <proposal-id>` — 准入检查
-- `python skills/tooling/learning/skill_learn.py evolve-review <proposal-id>` — 审查
-- `python skills/tooling/learning/skill_learn.py evolve-promote <proposal-id>` — 晋升到 library/skills/
-- `python skills/tooling/learning/skill_learn.py evolve-history --skill <name>` — 查看版本谱系
-
-**验证：**
-- `python skills/tooling/verification/verify-skill-pipeline.ps1` — 完整管线一致性检查
-
-技能定义见 `.codex/skills/<skill-name>/SKILL.md`。
+技能通过 `.claude/skills/` 注册，支持 `/dev-<skill-name>` 或 Skill 工具调用。完整技能目录见 `skills/discovery/skill-index.md`（自动加载）。自进化系统详情见 `skills/` 目录。

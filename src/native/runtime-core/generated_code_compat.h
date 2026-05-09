@@ -12,6 +12,7 @@
 #include "arithmetic_chaos_bridge.h"
 #include "codegen_bridge.h"       // HotpatchEntryV0, Hotpatch structs, kHotpatchActive
 #include <gc.h>                   // GC_END_STUBBORN_CHANGE for write barriers
+#include "debug_sink.h"           // DebugEventSink ring buffer
 
 // ═══════════════════════════════════════════════════════════════════
 // A5-Trinity Object Header Architecture
@@ -75,6 +76,16 @@ inline const TypeInfoHot* chaos_object_get_type_info(const void* obj) noexcept {
 struct chaos_managed_string {
     FatHeader header{};
     CHAOS_IL2CPP_INT32 length = 0;
+    const char* utf8_data = nullptr;
+    CHAOS_IL2CPP_UINT64 string_id = 0u;
+};
+
+// ── Managed exception type ───────────────────────────────────────
+// Used by generated code for catch(chaos_managed_exception&) blocks
+// and throw chaos_managed_exception{obj} statements.
+struct chaos_managed_exception
+{
+    CHAOS_IL2CPP_INTPTR object_value = 0;
 };
 
 #define CHAOS_IL2CPP_STRING_TYPE chaos_managed_string

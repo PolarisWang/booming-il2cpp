@@ -5,20 +5,32 @@ namespace Chaos.IL2CPP.CodeGen.BuildSystem;
 
 /// <summary>
 /// Generates CMake build files for per-assembly IL2CPP translation outputs.
-/// Each assembly becomes an OBJECT library, and a final executable links them all.
+/// Each assembly becomes a STATIC library, and a combined entry.exe links them
+/// with the pre-built native runtime libs.
 /// </summary>
 public sealed class CmakeGenerator
 {
+    private readonly string _repoRoot;
+
+    public CmakeGenerator(string repoRoot)
+    {
+        _repoRoot = repoRoot;
+    }
+
     /// <summary>
     /// Generate a CMakeLists.txt for the given assembly codegen results.
     /// </summary>
     /// <param name="assemblyResults">Per-assembly NativeAot results from GeneratePerAssembly</param>
-    /// <param name="extraSources">Additional sources like global-registration.cpp, runtime-entry.cpp</param>
-    /// <param name="targetName">The final executable/library target name</param>
+    /// <param name="nativeLibDir">Directory containing pre-built native libs (e.g. build/native)</param>
+    /// <param name="buildConfig">MSVC build config subdirectory (RelWithDebInfo, Debug, Release)</param>
+    /// <param name="extraSources">Additional sources like runtime-entry.cpp</param>
+    /// <param name="targetName">The final executable target name</param>
     public string Generate(
         IReadOnlyList<NativeAotResult> assemblyResults,
+        string nativeLibDir,
+        string buildConfig = "RelWithDebInfo",
         IReadOnlyList<string>? extraSources = null,
-        string targetName = "chaos_app")
+        string targetName = "entry_exe")
     {
         var sb = new StringBuilder();
 
@@ -26,82 +38,99 @@ public sealed class CmakeGenerator
         sb.AppendLine("# DO NOT EDIT — regenerated on each build");
         sb.AppendLine();
         sb.AppendLine("cmake_minimum_required(VERSION 3.20)");
-        sb.AppendLine($"project({targetName} LANGUAGES CXX)");
+        // CMake project() for MSVC appends "/DWIN32 /D_WINDOWS /EHsc" to CMAKE_CXX_FLAGS.
+        // /EHsc = /EHs + /EHc. /EHc blocks C++ exceptions through extern "C" frames,
+        // so try/catch in extern "C" codegen entry methods cannot catch stub throws.
+        // Two-prong fix:
+        //   1. Set CMAKE_MSVC_EXCEPTION_HANDLING before project() so the toolchain
+        //      generates <ExceptionHandling>Sync</ExceptionHandling> in .vcxproj.
+        //   2. Strip /EHsc from INIT flags so toolchain doesn't prefer flag-based mode.
+        sb.AppendLine("set(CMAKE_CXX_FLAGS_INIT \"/DWIN32 /D_WINDOWS\")");
+        sb.AppendLine("set(CMAKE_MSVC_EXCEPTION_HANDLING \"Sync\")");
+        sb.AppendLine($"project(chaos_gen LANGUAGES CXX)");
         sb.AppendLine();
 
-        // Root dir for include paths
+        // Root paths — normalize to forward slashes for CMake compat
+        var repoRoot = _repoRoot.Replace('\\', '/');
+        var nativeLibDirNormalized = nativeLibDir.Replace('\\', '/');
+        sb.AppendLine($"set(REPO_ROOT \"{repoRoot}\")");
         sb.AppendLine("set(CHAOS_GEN_DIR \"${CMAKE_CURRENT_LIST_DIR}\")");
+        sb.AppendLine($"set(NATIVE_LIB_DIR \"{nativeLibDirNormalized}\")");
+        sb.AppendLine($"set(CFG \"{buildConfig}\")");
         sb.AppendLine();
 
-        // Collect OBJECT libraries for each assembly
-        var objectTargets = new List<string>();
+        // Helper macro: link pre-built native lib
+        sb.AppendLine("set(NATIVE_LIBS");
+        sb.AppendLine("    \"${NATIVE_LIB_DIR}/src/native/runtime-core/${CFG}/chaos_runtime_core.lib\"");
+        sb.AppendLine("    \"${NATIVE_LIB_DIR}/src/native/bootstrap/${CFG}/chaos_bootstrap.lib\"");
+        sb.AppendLine("    \"${NATIVE_LIB_DIR}/src/native/common/${CFG}/chaos_common.lib\"");
+        sb.AppendLine("    \"${NATIVE_LIB_DIR}/src/native/support/${CFG}/chaos_support.lib\"");
+        sb.AppendLine("    \"${NATIVE_LIB_DIR}/src/native/interpreter/${CFG}/chaos_interpreter.lib\"");
+        sb.AppendLine("    \"${NATIVE_LIB_DIR}/src/native/hot-update/${CFG}/chaos_hot_update.lib\"");
+        sb.AppendLine("    \"${NATIVE_LIB_DIR}/bdwgc_build/${CFG}/chaos_bdwgc.lib\"");
+        sb.AppendLine("    \"${NATIVE_LIB_DIR}/fmt_build/${CFG}/chaos_fmt.lib\"");
+        sb.AppendLine(")");
+        sb.AppendLine();
+
+        // Common include dirs
+        sb.AppendLine("set(COMMON_INCLUDE_DIRS");
+        sb.AppendLine("    \"${REPO_ROOT}/contracts/native/v0\"");
+        sb.AppendLine("    \"${REPO_ROOT}/src/native/common\"");
+        sb.AppendLine("    \"${REPO_ROOT}/src/native/runtime-core\"");
+        sb.AppendLine("    \"${REPO_ROOT}/third_party/fmt/include\"");
+        sb.AppendLine("    \"${REPO_ROOT}/third_party/bdwgc/include\"");
+        sb.AppendLine(")");
+        sb.AppendLine();
+
+        // Compile options for all targets
+        sb.AppendLine("set(COMMON_COMPILE_OPTIONS \"$<$<CXX_COMPILER_ID:MSVC>:/utf-8>\")");
+
+        // Collect STATIC library targets for each assembly
+        var staticTargets = new List<string>();
         foreach (var result in assemblyResults)
         {
             var assemblyName = SanitizeTargetName(result.Manifest.AssemblyName);
             var sourceFiles = result.GeneratedSources
-                .Select(s => Path.Combine("${CHAOS_GEN_DIR}", result.Manifest.AssemblyName, s.RelativePath))
+                .Select(s => $"${{CHAOS_GEN_DIR}}/{result.Manifest.AssemblyName}/{s.RelativePath.Replace('\\', '/')}")
+                .Where(p => p.EndsWith(".cpp", StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
             if (sourceFiles.Count == 0)
                 continue;
 
             var target = $"chaos_gen_{assemblyName}";
-            objectTargets.Add(target);
+            staticTargets.Add(target);
 
             sb.AppendLine($"# Assembly: {result.Manifest.AssemblyName}");
-            sb.AppendLine($"add_library({target} OBJECT");
+            sb.AppendLine($"add_library({target} STATIC");
             foreach (var src in sourceFiles)
-                sb.AppendLine($"    {src.Replace('/', Path.DirectorySeparatorChar)}");
+                sb.AppendLine($"    {src.Replace('\\', '/')}");
             sb.AppendLine(")");
             sb.AppendLine();
 
-            sb.AppendLine($"target_include_directories({target} PUBLIC");
-            sb.AppendLine("    \"${CHAOS_GEN_DIR}\"");
-            sb.AppendLine("    \"${CHAOS_GEN_DIR}/../src/native/common\"");
-            sb.AppendLine("    \"${CHAOS_GEN_DIR}/../src/native/runtime-core\"");
-            sb.AppendLine("    \"${CHAOS_GEN_DIR}/../contracts/native/v0\"");
-            sb.AppendLine("    \"${CHAOS_GEN_DIR}/../third_party/fmt/include\"");
-            sb.AppendLine(")");
-            sb.AppendLine();
-
+            sb.AppendLine($"target_include_directories({target} PUBLIC ${{COMMON_INCLUDE_DIRS}})");
             sb.AppendLine($"target_compile_features({target} PUBLIC cxx_std_20)");
-            sb.AppendLine();
-
-            // Link runtime core
-            sb.AppendLine($"target_link_libraries({target} PUBLIC");
-            sb.AppendLine("    chaos_runtime_core");
-            sb.AppendLine(")");
+            sb.AppendLine($"target_compile_options({target} PUBLIC ${{COMMON_COMPILE_OPTIONS}})");
             sb.AppendLine();
         }
 
-        // Final executable
-        sb.AppendLine($"# Final target linking all assembly objects");
-        var allObjects = objectTargets.Select(t => $"$<TARGET_OBJECTS:{t}>").ToList();
+        // Entry executable — links generated static libs + native libs
+        sb.AppendLine($"# Entry executable — links generated code + native runtime");
         sb.AppendLine($"add_executable({targetName}");
-        foreach (var obj in allObjects)
-            sb.AppendLine($"    {obj}");
-
-        // Extra sources (global-registration, runtime-entry)
-        if (extraSources != null)
-        {
-            foreach (var src in extraSources)
-                sb.AppendLine($"    ${{CHAOS_GEN_DIR}}/{src.Replace('/', Path.DirectorySeparatorChar)}");
-        }
+        foreach (var src in (extraSources ?? new List<string>()))
+            sb.AppendLine($"    ${{CHAOS_GEN_DIR}}/{src.Replace('\\', '/')}");
         sb.AppendLine(")");
         sb.AppendLine();
 
-        sb.AppendLine($"target_link_libraries({targetName}");
-        sb.AppendLine("    chaos_runtime_core");
+        sb.AppendLine($"target_link_libraries({targetName} PRIVATE");
+        foreach (var t in staticTargets)
+            sb.AppendLine($"    {t}");
+        // Add native libs only once
+        sb.AppendLine("    ${NATIVE_LIBS}");
         sb.AppendLine(")");
-        sb.AppendLine();
 
-        sb.AppendLine($"target_include_directories({targetName} PUBLIC");
-        sb.AppendLine("    \"${CHAOS_GEN_DIR}\"");
-        sb.AppendLine("    \"${CHAOS_GEN_DIR}/../src/native/common\"");
-        sb.AppendLine("    \"${CHAOS_GEN_DIR}/../src/native/runtime-core\"");
-        sb.AppendLine("    \"${CHAOS_GEN_DIR}/../contracts/native/v0\"");
-        sb.AppendLine("    \"${CHAOS_GEN_DIR}/../third_party/fmt/include\"");
-        sb.AppendLine(")");
+        sb.AppendLine($"target_include_directories({targetName} PRIVATE ${{COMMON_INCLUDE_DIRS}})");
+        sb.AppendLine($"target_compile_options({targetName} PRIVATE ${{COMMON_COMPILE_OPTIONS}})");
         sb.AppendLine();
 
         return sb.ToString();
@@ -109,7 +138,6 @@ public sealed class CmakeGenerator
 
     private static string SanitizeTargetName(string name)
     {
-        // Replace non-alphanumeric chars with underscores for CMake target names
         var sb = new StringBuilder(name.Length);
         foreach (var c in name)
         {

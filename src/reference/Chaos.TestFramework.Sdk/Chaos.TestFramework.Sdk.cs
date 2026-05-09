@@ -672,9 +672,17 @@ public static class ChaosAssertState
 {
     public static int ExitCode;
 
+    /// <summary>Debug: tracks which method index most recently called RecordFailure.</summary>
+    public static int LastFailedMethodIndex = -1;
+
+    /// <summary>Debug: set by caller before each method invocation.</summary>
+    public static int CurrentMethodIndex = -1;
+
     public static void Reset()
     {
         ExitCode = 0;
+        LastFailedMethodIndex = -1;
+        CurrentMethodIndex = -1;
     }
 
     public static int Complete()
@@ -745,6 +753,7 @@ public static class Assert
 
     public static void Fail(string? message = null)
     {
+        Console.Error.WriteLine($"[DEBUG_SINK] Assert.Fail methodIndex={ChaosAssertState.CurrentMethodIndex} message={message}");
         ChaosAssertState.RecordFailure();
     }
 

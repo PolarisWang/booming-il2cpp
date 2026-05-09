@@ -54,7 +54,9 @@ add_library(chaos_runtime_core STATIC
     native_library.cpp
     exception_api.cpp
     exception_helpers.h
-    exception_helpers.cpp)
+    exception_helpers.cpp
+    debug_sink.h
+    debug_sink.cpp)
 
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)

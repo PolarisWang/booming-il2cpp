@@ -7,11 +7,6 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed class NativeAotEmitter
 {
-    private sealed record AssemblyFullClosureAuditEmission(
-        IReadOnlyList<NativeAotGeneratedSource> GeneratedSources,
-        IReadOnlyList<NativeAotGeneratedArtifactRef> GeneratedArtifacts);
-
-    private const int AuditTranslationUnitPageSize = 1024;
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNameCaseInsensitive = true,
@@ -25,11 +20,61 @@ public sealed class NativeAotEmitter
         IReadOnlyList<NativeAotGeneratedSource> generatedSources;
         IReadOnlyList<NativeAotGeneratedArtifactRef> generatedArtifacts;
 
-        if (string.Equals(loweringPlan.PlanKind, "assembly-full-closure-audit", StringComparison.Ordinal))
+        if (string.Equals(loweringPlan.PlanKind, "full-assembly-entry", StringComparison.Ordinal))
         {
-            var auditEmission = BuildAssemblyFullClosureAuditGeneratedSources(loweringPlan);
-            generatedSources = auditEmission.GeneratedSources;
-            generatedArtifacts = auditEmission.GeneratedArtifacts;
+            var aotCoreIrPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.AotCoreIr);
+            var closureManifestPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.ClosureManifest);
+            var metadataRegistrationPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.MetadataRegistration);
+            var supplementalMetadataTemplatePath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.SupplementalMetadataTemplate);
+
+            AotCoreIrArtifact? aotCoreIr = null;
+            ManagedClosureManifestArtifact? closureManifest = null;
+            MetadataRegistrationArtifact? metadataRegistration = null;
+            SupplementalMetadataTemplateArtifact? supplementalMetadataTemplate = null;
+            Exception? loadException = null;
+            var loadLock = new object();
+
+            System.Threading.Tasks.Parallel.Invoke(
+                () => { try { aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+                () => { try { closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+                () => { try { metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+                () => { try { supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } });
+
+            if (loadException is not null)
+            {
+                throw new InvalidOperationException("failed to load one or more required closure artifacts", loadException);
+            }
+
+            ValidateLoweringPlan(loweringPlan, closureManifest!);
+            var entryMethod = LoadEntryMethod(aotCoreIr!, loweringPlan.EntrySubjectId);
+            var templateModel = new NativeAotLoweringPlanner().Create(
+                loweringPlan,
+                aotCoreIr!,
+                entryMethod,
+                closureManifest!,
+                metadataRegistration!,
+                supplementalMetadataTemplate!,
+                fullAssemblyMode: true);
+            generatedSources =
+            [
+                new NativeAotGeneratedSource
+                {
+                    RelativePath = NativeAotArtifactNames.GeneratedTranslationUnit,
+                    Contents = BuildGeneratedTranslationUnit(templateModel),
+                },
+                new NativeAotGeneratedSource
+                {
+                    RelativePath = NativeAotArtifactNames.ShapeDispatchHeader,
+                    Contents = templateModel.ShapeDispatchHeaderContent,
+                },
+            ];
+            generatedArtifacts = generatedSources
+                .Select(generatedSource => new NativeAotGeneratedArtifactRef
+                {
+                    Kind = generatedSource.RelativePath.EndsWith(".h", StringComparison.Ordinal) ? "shapeDispatchHeader" : "generatedTranslationUnit",
+                    Path = generatedSource.RelativePath,
+                })
+                .ToList();
         }
         else
         {
@@ -143,42 +188,6 @@ public sealed class NativeAotEmitter
         };
     }
 
-    private static AssemblyFullClosureAuditEmission BuildAssemblyFullClosureAuditGeneratedSources(
-        NativeAotLoweringPlanArtifact loweringPlan)
-    {
-        ValidateAssemblyFullClosureAuditPlan(loweringPlan);
-        var generatedFiles = AssemblyFullClosureAuditEmitter.BuildGeneratedFiles(
-            loweringPlan.AssemblyName,
-            loweringPlan.PlanKind,
-            loweringPlan.TranslationUnitMethodCount ?? 0,
-            loweringPlan.TranslationUnitPageSize ?? AuditTranslationUnitPageSize,
-            loweringPlan.TranslationUnitPages ?? [],
-            loweringPlan.TranslationUnitMethodSubjectIds ?? [],
-            NativeAotArtifactNames.AuditSummaryTranslationUnit);
-        var generatedSources = generatedFiles
-            .Select(generatedFile => new NativeAotGeneratedSource
-            {
-                RelativePath = generatedFile.RelativePath,
-                Contents = generatedFile.Contents,
-            })
-            .ToList();
-        var generatedArtifacts = new List<NativeAotGeneratedArtifactRef>
-        {
-            new()
-            {
-                Kind = "generatedTranslationUnit",
-                Path = NativeAotArtifactNames.AuditSummaryTranslationUnit,
-            },
-        };
-        generatedArtifacts.AddRange((loweringPlan.TranslationUnitPages ?? []).Select(page => new NativeAotGeneratedArtifactRef
-        {
-            Kind = "auditInventoryPage",
-            Path = page.Path,
-        }));
-
-        return new AssemblyFullClosureAuditEmission(generatedSources, generatedArtifacts);
-    }
-
     private static void ValidateLoweringPlan(
         NativeAotLoweringPlanArtifact loweringPlan,
         ManagedClosureManifestArtifact closureManifest)
@@ -186,10 +195,18 @@ public sealed class NativeAotEmitter
         RequireStringField(loweringPlan.PlanKind, nameof(loweringPlan.PlanKind));
         RequireStringField(loweringPlan.AssemblyName, nameof(loweringPlan.AssemblyName));
         RequireStringField(loweringPlan.EntrySubjectId, nameof(loweringPlan.EntrySubjectId));
-        RequireStringField(loweringPlan.NativeEntryFunctionName, nameof(loweringPlan.NativeEntryFunctionName));
         RequireStringField(loweringPlan.EntrySymbol, nameof(loweringPlan.EntrySymbol));
         RequireStringField(loweringPlan.EntryMethodToken, nameof(loweringPlan.EntryMethodToken));
         RequireStringField(loweringPlan.WorkloadAbi, nameof(loweringPlan.WorkloadAbi));
+
+        if (string.Equals(loweringPlan.PlanKind, "full-assembly-entry", StringComparison.Ordinal))
+        {
+            // Full assembly mode: NativeEntryFunctionName is intentionally empty,
+            // WorkloadAbi is "full-assembly", and entry is synthetic (not in closureManifest).
+            return;
+        }
+
+        RequireStringField(loweringPlan.NativeEntryFunctionName, nameof(loweringPlan.NativeEntryFunctionName));
 
         if (!string.Equals(loweringPlan.PlanKind, "generic-managed-entry", StringComparison.Ordinal))
         {
@@ -208,19 +225,6 @@ public sealed class NativeAotEmitter
             throw new InvalidOperationException(
                 $"native-aot plan entry '{loweringPlan.EntrySubjectId}' does not match closure entry '{closureManifest.EntrySubjectId}'");
         }
-    }
-
-    private static void ValidateAssemblyFullClosureAuditPlan(NativeAotLoweringPlanArtifact loweringPlan)
-    {
-        AssemblyFullClosureAuditEmitter.ValidatePlan(
-            loweringPlan.PlanKind,
-            loweringPlan.AssemblyName,
-            loweringPlan.TranslationUnitMode,
-            loweringPlan.TranslationUnitMethodSubjectIds,
-            loweringPlan.TranslationUnitPageSize,
-            loweringPlan.TranslationUnitPageCount,
-            loweringPlan.TranslationUnitPages,
-            AuditTranslationUnitPageSize);
     }
 
     private static AotCoreIrMethodArtifact LoadEntryMethod(

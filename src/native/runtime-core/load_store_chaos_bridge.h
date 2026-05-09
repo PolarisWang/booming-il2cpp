@@ -60,6 +60,16 @@ inline CHAOS_IL2CPP_UINT64 chaos_load_uint64(CHAOS_IL2CPP_INTPTR value) noexcept
     return ChaosIl2cpp::Common::load_uint64(value);
 }
 
+inline CHAOS_IL2CPP_INT32 chaos_shift_left_int32(CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INT32 shift) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(value) << (shift & 31));
+}
+
+inline CHAOS_IL2CPP_INT32 chaos_shift_right_int32(CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INT32 shift) noexcept
+{
+    return value >> (shift & 31);
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 
 // Expose at global scope so generated code (inside anonymous namespaces)
@@ -72,5 +82,7 @@ using chaos::il2cpp::runtime_core::chaos_store_int64;
 using chaos::il2cpp::runtime_core::chaos_load_int64;
 using chaos::il2cpp::runtime_core::chaos_store_uint64;
 using chaos::il2cpp::runtime_core::chaos_load_uint64;
+using chaos::il2cpp::runtime_core::chaos_shift_left_int32;
+using chaos::il2cpp::runtime_core::chaos_shift_right_int32;
 
 #endif  // CHAOS_IL2CPP_LOAD_STORE_CHAOS_BRIDGE_H_

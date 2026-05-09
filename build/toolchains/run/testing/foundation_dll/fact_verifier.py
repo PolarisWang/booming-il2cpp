@@ -44,6 +44,7 @@ def _locate_entry_exe(family_slug: str, *, assembly: str) -> Path | None:
 
 
 def verify_fact(family_slug: str, *, assembly: str = "System.Private.CoreLib",
+                method_count: int | None = None,
                 verbose: bool = False) -> dict[str, Any]:
     """Run il2cpp-translated native entry EXE, verify all Assert pass."""
     print(f"=== Fact Verify: {family_slug} ===")
@@ -63,6 +64,13 @@ def verify_fact(family_slug: str, *, assembly: str = "System.Private.CoreLib",
             passed, total = int(m.group(1)), int(m.group(2))
         if "FAIL" in line:
             print(f"  {line}")
+
+    # Fallback: if no "Passed: N/M" found and we know total, derive from bitmask exit code
+    if passed == 0 and total == 0 and method_count is not None:
+        total = method_count
+        mask = (1 << total) - 1
+        failures = (r.returncode & mask).bit_count()
+        passed = total - failures
 
     status = "passed" if r.returncode == 0 else "failed"
     trace("fact.verify", stage="proof", family=family_slug,
