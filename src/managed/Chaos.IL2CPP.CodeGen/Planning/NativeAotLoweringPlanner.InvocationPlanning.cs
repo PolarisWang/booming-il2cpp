@@ -608,6 +608,33 @@ public sealed partial class NativeAotLoweringPlanner
             return directInvocationTarget;
         }
 
+        // Fallback: callee is not in our method dictionary and has no registered
+        // runtime helper shape (e.g. BCL method like String.Join from a different
+        // assembly not included in the closure).  Use instruction-level metadata
+        // (TargetSymbol, TargetParameterCount, TargetReturnType) if present,
+        // otherwise derive a callable symbol from the callee SubjectId.
+        string? symbol;
+        if (TryGetInstantiationStubSymbol(instruction.TargetReference?.InstantiationStubId) is { } stubSymbol)
+        {
+            symbol = stubSymbol;
+        }
+        else if (!string.IsNullOrEmpty(instruction.TargetSymbol))
+        {
+            symbol = instruction.TargetSymbol;
+        }
+        else if (!string.IsNullOrEmpty(instruction.Callee))
+        {
+            // Generate a derived symbol from the callee SubjectId so the
+            // generated C++ references a runtime-provided implementation.
+            symbol = GetExternalRuntimeHelperSymbol(instruction.Callee);
+        }
+        else
+        {
+            throw new NotSupportedException(
+                "native-aot lowering does not support unresolved call target '" +
+                (instruction.Callee ?? "<null>") + "'");
+        }
+
         string? returnType = instruction.TargetReturnType;
         if (string.IsNullOrEmpty(returnType) && !string.IsNullOrEmpty(instruction.Callee))
         {
@@ -615,7 +642,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         return new InvocationTarget(
-            GetRequiredTargetSymbol(instruction),
+            symbol,
             CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction)),
             CreateLegacyReturnAbiSlot(returnType ?? instruction.TargetReturnType),
             EmptyRawArgumentIndices,

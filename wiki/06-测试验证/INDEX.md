@@ -82,6 +82,8 @@
 
 ## 最近更新
 
+- `2026-05-09`：更新 [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md)，补充 handwrite partial class 集成模式、`handwritten/` 覆盖保护规则、`_exitCode` 模式说明
+- `2026-05-09`：更新 [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)，补充 `handwritten/` 目录 contract 和覆盖保护规则
 - `2026-05-09`：重写 [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md)，覆盖新验证管线全貌：两阶段托管探测（Probe → Emit）、void entry + Assert ExitCode 模式、7 阶段管线、自定义条目流程。旧 C++ host / checksum / L2 流程已全部删除。
 - `2026-04-26`：新增 Capability Closure 双轴报告治理框架；capability-family ledger 成为 foundation DLL 进度报告的正式分母 authority；completion-certification 改为 DLL 级 gate，不再混入 family workflow denominator；waiver / exclusion / platform-blocked 三类豁免必须带正式 authorityRef，不再允许引用 task STATUS.md。
 - `2026-04-26`：新增 foundation-dll-audit 投影系列的 authority 分层；`verification/projections/foundation-dll-audit/*` 成为正式 projection contract，HTML 报告从 projection JSON 派生；source links 五类（Subject / Verification / Generated / Evidence / Authority）的渲染规则固定。
