@@ -38,7 +38,7 @@
 | 文档 | 主题 | 说明 |
 | --- | --- | --- |
 | [`CodeGen快照测试规范.md`](./CodeGen快照测试规范.md) | CodeGen 增量回归测试 | 定义 NativeAotEmitter 输出的快照测试体系：夹具结构、基线管理、开发工作流集成 |
-| [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md) | Fact Static native 验证门 | 说明 foundation-dll Fact Static 验证的架构、异常处理、tag 问题与运行方式 |
+| [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md) | Foundation DLL 验证管线 | 覆盖完整流程：两阶段探测、Assert ExitCode 模式、7 阶段管线、自定义条目 |
 | [`测试方法清单.md`](./测试方法清单.md) | 全链路测试方法索引 | **推荐入口** — 系统梳理 Python、C# Foundation-DLL、Native 编译三条测试链的所有测试方法和管线阶段，按文件/类/方法粒度索引 |
 | [`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md) | Verification V1 测试流程 | 说明新的 canonical 测试流程、formal source、覆盖模型、投影视图与旧流程清理规则 |
 | [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md) | AOT 新 feature 自测 | 说明 owner subject、hotupdate 触发条件、collector/registry/workspace 接线闸门与标准验收顺序 |
@@ -82,6 +82,7 @@
 
 ## 最近更新
 
+- `2026-05-09`：重写 [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md)，覆盖新验证管线全貌：两阶段托管探测（Probe → Emit）、void entry + Assert ExitCode 模式、7 阶段管线、自定义条目流程。旧 C++ host / checksum / L2 流程已全部删除。
 - `2026-04-26`：新增 Capability Closure 双轴报告治理框架；capability-family ledger 成为 foundation DLL 进度报告的正式分母 authority；completion-certification 改为 DLL 级 gate，不再混入 family workflow denominator；waiver / exclusion / platform-blocked 三类豁免必须带正式 authorityRef，不再允许引用 task STATUS.md。
 - `2026-04-26`：新增 foundation-dll-audit 投影系列的 authority 分层；`verification/projections/foundation-dll-audit/*` 成为正式 projection contract，HTML 报告从 projection JSON 派生；source links 五类（Subject / Verification / Generated / Evidence / Authority）的渲染规则固定。
 - `2026-04-26`：新增 DLL 详情页的信息架构规范；DLL 页头显示双轴进度条 + source links，正文显示 capability families 表格 + waiver records 表格 + verification projects 精简摘要。Dashboard 页头显示三轴进度条（DLL Completion / Capability Closure / Workflow Progress），DLL Matrix 新增 Closure/Progress 列和筛选器。Artifact Index 拆分到独立 artifact-index.html 次级入口。

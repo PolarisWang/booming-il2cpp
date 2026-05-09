@@ -58,7 +58,7 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\abi_manifest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\dispatch_table.cpp">
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\hotpatch_table.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\patch_loader.cpp">
@@ -129,7 +129,7 @@
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\token_resolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\dispatch_table.h">
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\hotpatch_table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\patch_loader.h">

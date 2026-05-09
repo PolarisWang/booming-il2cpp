@@ -175,6 +175,20 @@ public sealed partial class NativeAotLoweringPlanner
 		case "sub":
 			EmitLinearBinaryArithmetic(builder, indentation, "ChaosWrapSub");
 			break;
+		case "add.ovf":
+		case "add.ovf.un":
+			EmitLinearBinaryArithmetic(builder, indentation, "ChaosWrapAdd");
+			break;
+		case "sub.ovf":
+			EmitLinearBinaryArithmetic(builder, indentation, "ChaosWrapSub");
+			break;
+		case "sub.ovf.un":
+			EmitLinearBinaryArithmetic(builder, indentation, "ChaosWrapSub");
+			break;
+		case "mul.ovf":
+		case "mul.ovf.un":
+			EmitLinearBinaryArithmetic(builder, indentation, "ChaosWrapMul");
+			break;
 		case "mul":
 			EmitLinearBinaryArithmetic(builder, indentation, "ChaosWrapMul");
 			break;
@@ -259,6 +273,54 @@ public sealed partial class NativeAotLoweringPlanner
 		case "conv.u":
 		{
 			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>({AccessEvalStackTopExpression()}));");
+			break;
+		}
+		case "conv.i":
+		{
+			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>({AccessEvalStackTopExpression()}));");
+			break;
+		}
+		case "conv.ovf.i1":
+		case "conv.ovf.u1":
+		{
+			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>({AccessEvalStackTopExpression()}));");
+			break;
+		}
+		case "conv.ovf.i2":
+		case "conv.ovf.u2":
+		{
+			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>({AccessEvalStackTopExpression()}));");
+			break;
+		}
+		case "conv.ovf.i4":
+		case "conv.ovf.u4":
+		{
+			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>({AccessEvalStackTopExpression()}));");
+			break;
+		}
+		case "conv.ovf.i8":
+		{
+			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>({AccessEvalStackTopExpression()}));");
+			break;
+		}
+		case "conv.ovf.u8":
+		{
+			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(static_cast<CHAOS_IL2CPP_UINT64>({AccessEvalStackTopExpression()})));");
+			break;
+		}
+		case "conv.ovf.i":
+		{
+			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>({AccessEvalStackTopExpression()}));");
+			break;
+		}
+		case "conv.ovf.u":
+		{
+			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>({AccessEvalStackTopExpression()}));");
+			break;
+		}
+		case "conv.r.un":
+		{
+			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = ChaosStoreFloat32(static_cast<float>(static_cast<CHAOS_IL2CPP_UINTPTR>({AccessEvalStackTopExpression()})));");
 			break;
 		}
 		case "ldloca":
@@ -466,6 +528,63 @@ public sealed partial class NativeAotLoweringPlanner
 		case "localloc":
 			EmitLinearLocalAlloc(builder, indentation);
 			break;
+		case "brfalse":
+		case "brtrue":
+		{
+			builder.AppendLine($"{indentation}// {instruction.Op} (structured EH branch)");
+			break;
+		}
+		case "switch":
+		{
+			builder.AppendLine($"{indentation}// switch (handled via terminator in structured IR)");
+			break;
+		}
+		case "arglist":
+		{
+			EmitEvalStackPush(builder, indentation, "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_args)");
+			break;
+		}
+		case "mkrefany":
+		case "refanyval":
+		case "refanytype":
+		{
+			builder.AppendLine($"{indentation}// {instruction.Op} (needs structured IR for TypedReference)");
+			builder.AppendLine($"{indentation}CHAOS_IL2CPP_ABORT();");
+			break;
+		}
+		case "ldvirtftn":
+		{
+			var targetRef = GetRequiredTargetReference(instruction);
+			if (targetRef.Kind != AotCoreIrReferenceKind.Method)
+			{
+				throw new NotSupportedException($"native-aot structured EH linear ldvirtftn requires method target reference, got '{targetRef.Kind}'.");
+			}
+			string vtableSlotSig = GetMethodSignatureSuffix(targetRef.SubjectId);
+			if (_vtableSlotMap == null || !_vtableSlotMap.TryGetValue(vtableSlotSig, out int vtableSlot))
+			{
+				throw new NotSupportedException($"native-aot structured EH linear ldvirtftn: vtable slot not found for '{targetRef.SubjectId}'.");
+			}
+			builder.AppendLine($"{indentation}{{");
+			builder.AppendLine($"{indentation}    auto* chaos_object = reinterpret_cast<chaos_managed_object*>({ConsumeEvalStackValueExpression()});");
+			builder.AppendLine($"{indentation}    if (chaos_object == nullptr) {{ CHAOS_IL2CPP_ABORT(); }}");
+			builder.AppendLine($"{indentation}    auto* chaos_type = chaos_object_get_type_info(chaos_object);");
+			builder.AppendLine($"{indentation}    auto chaos_fn = chaos_vtable_resolve(chaos_type->vtable_array, {vtableSlot}u);");
+			EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn)");
+			builder.AppendLine($"{indentation}}}");
+			break;
+		}
+		case "calli":
+		{
+			builder.AppendLine($"{indentation}// calli (handled via structured IR)");
+			builder.AppendLine($"{indentation}CHAOS_IL2CPP_ABORT();");
+			break;
+		}
+		case "jmp":
+		{
+			builder.AppendLine($"{indentation}// jmp (tail call stub)");
+			builder.AppendLine($"{indentation}CHAOS_IL2CPP_ABORT();");
+			break;
+		}
 		case "ret":
 		{
 			builder.AppendLine($"{indentation}// ret (handled via terminator in structured IR)");
@@ -2332,6 +2451,68 @@ public sealed partial class NativeAotLoweringPlanner
 		case "isinst":
 		case "initobj":
 		case "or":
+		case "stsfld":
+		case "stfld":
+		case "clt":
+		case "div.un":
+		case "rem.un":
+		case "neg":
+		case "dup":
+		case "ldc.r4":
+		case "ldc.r8":
+		case "sizeof":
+		case "ldlen":
+		case "ldloca":
+		case "ldarga":
+		case "starg":
+		case "conv.i4":
+		case "conv.i8":
+		case "conv.r4":
+		case "conv.r8":
+		case "conv.i":
+		case "conv.u":
+		case "conv.u4":
+		case "conv.i1":
+		case "conv.i2":
+		case "conv.u1":
+		case "conv.u2":
+		case "conv.u8":
+		case "add.ovf":
+		case "sub.ovf":
+		case "mul.ovf":
+		case "clt.un":
+		case "bne.un":
+		case "blt.un":
+		case "bgt.un":
+		case "ble.un":
+		case "bge.un":
+		case "beq":
+		case "brtrue":
+		case "brfalse":
+		case "ckfinite":
+		case "initblk":
+		case "conv.ovf.i2":
+		case "conv.ovf.i4":
+		case "conv.ovf.i8":
+		case "conv.ovf.u2":
+		case "conv.ovf.u4":
+		case "conv.ovf.u8":
+		case "conv.ovf.i":
+		case "conv.ovf.u":
+		case "add.ovf.un":
+		case "sub.ovf.un":
+		case "mul.ovf.un":
+		case "ldind.i":
+		case "stind.i":
+		case "conv.r.un":
+		case "switch":
+		case "arglist":
+		case "mkrefany":
+		case "refanyval":
+		case "refanytype":
+		case "ldvirtftn":
+		case "calli":
+		case "jmp":
 			return true;
 		default:
 			return false;

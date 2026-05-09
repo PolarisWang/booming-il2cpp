@@ -305,8 +305,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\token_resolver.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\token_resolver.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\abi_manifest.cpp" />
-    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\dispatch_table.h" />
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\dispatch_table.cpp" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\hotpatch_table.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\hotpatch_table.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\patch_loader.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\patch_loader.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\interpreter_entry.h" />

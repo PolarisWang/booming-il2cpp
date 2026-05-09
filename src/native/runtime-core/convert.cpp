@@ -134,16 +134,21 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_single(CHAOS_IL2CPP_INTPTR v
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object(CHAOS_IL2CPP_INTPTR value)
 {
-    // In Fact Static verification mode without GC, boxed objects don't exist.
-    // The value is the raw intptr payload. Delegate to int32 and range-check.
-    return chaos_convert_tochar_int32(value);
+    // The value is a pointer to a heap-allocated boxed struct:
+    //   FatHeader (24B: type_info + vtable + sync_state) + payload (8B).
+    // Extract the payload at offset 24 (= slot [3] when viewed as intptr[]).
+    auto* chaos_slots = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(value);
+    CHAOS_IL2CPP_INTPTR payload = chaos_slots[3];
+    return chaos_convert_tochar_int32(payload);
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object_provider(
     CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR provider)
 {
     (void)provider;
-    return chaos_convert_tochar_object(value);
+    auto* chaos_slots = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(value);
+    CHAOS_IL2CPP_INTPTR payload = chaos_slots[3];
+    return chaos_convert_tochar_int32(payload);
 }
 
 // ── String overloads (first UTF-8 byte → char) ─────────────────────────

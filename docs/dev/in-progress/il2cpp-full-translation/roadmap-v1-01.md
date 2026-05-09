@@ -258,7 +258,7 @@ dotnet run --project src/managed/Chaos.IL2CPP.Driver -- convert-to-cpp \
 |------|------|------|
 | `batch_native_aot_runner.py` | 修改 | 调用 `convert-to-cpp` 替代三步流程 |
 | `native_compile_runner.py` | 修改 | 编译多文件 C++ |
-| `fact_l2_verifier.py` | 修改 | 适配多文件编译 |
+| `fact_verifier.py` | 替换 | 新管线直接运行 entry.exe，旧 fact_l2_verifier.py 已删除 |
 | `native_verify_main.cpp` | 修改 | include 新路径 |
 
 ---

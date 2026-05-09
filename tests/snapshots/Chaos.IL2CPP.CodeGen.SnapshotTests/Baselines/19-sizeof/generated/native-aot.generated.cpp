@@ -7,6 +7,7 @@
 #include "hotpatch_table.h"
 #include "runtime_vtable.h"
 #include "runtime_instantiation.h"
+#include "load_store_chaos_bridge.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(

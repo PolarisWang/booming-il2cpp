@@ -3,9 +3,9 @@
 For each family:
   1. Generate synthetic entry point C# source + project (via family_entrypoint_generator)
   2. Build the DLL
-  3. Run chaos-il2cpp convert to produce aot-core-ir.json
-  4. Trim aot-core-ir.json to entry-only methods
-  5. Run chaos-il2cpp emit-native-aot to produce real C++
+  3. Run chaos-il2cpp convert-to-cpp (IL lowering + C++ emission)
+  4. Build entry.exe from generated C++ via CMake (static lib + runtime stubs)
+  5. Run the native entry EXE directly for Fact verification
 
 Results are written to a summary JSON file.
 """
@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -28,7 +29,7 @@ sys.path.insert(0, str(_HERE))
 sys.path.insert(0, str(_HERE.parent.parent))  # for testing.trace (build/toolchains/run/)
 
 from family_entrypoint_generator import generate_and_build
-from fact_verifier import verify_fact
+from fact_verifier import verify_fact, verify_benchmark, verify_hotupdate
 
 from testing.trace import trace_init, trace
 
@@ -167,9 +168,8 @@ def _run_convert_to_cpp(
 ) -> bool:
     """Run chaos-il2cpp convert-to-cpp on the entrypoint DLL.
 
-    Replaces the old 3-step flow (convert + trim + emit-native-aot) with a
-    single PipelinePlan execution that produces real C++ lowering via
-    NativeAotEmitter.
+    Uses single-assembly mode with assembly-dir to resolve dependencies.
+    FullAssemblyClosure=true includes all methods from all loaded assemblies.
     """
     v = verification or _VERIFICATION
     genuine_out = v / family_slug / "il2cpp_dist" / "genuine"
@@ -180,30 +180,208 @@ def _run_convert_to_cpp(
         "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
         "--", "convert-to-cpp",
         "--assembly", dll_path,
+        "--assembly-dir", str(Path(dll_path).parent),
         "--output", str(genuine_out),
     ]
     if entry_point_subject_id:
         cmd.extend(["--entry-point", entry_point_subject_id])
 
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=300)
 
     if result.returncode != 0:
         print(f"    convert-to-cpp FAILED (rc={result.returncode})")
-        for line in result.stderr.splitlines()[-15:]:
+        stderr = result.stderr or "(no stderr)"
+        for line in stderr.splitlines()[-15:]:
             print(f"      {line}")
         return False
 
-    # Check output
-    cpp_path = genuine_out / "generated" / "native-aot.generated.cpp"
-    if cpp_path.exists():
-        size = cpp_path.stat().st_size
-        print(f"    convert-to-cpp OK: {size} bytes")
-    else:
+    # Check output — multi-assembly mode generates per-assembly subdirectories
+    cpp_found = False
+    for d in genuine_out.iterdir():
+        if d.is_dir() and d.name not in ("build",):
+            per_asm_cpp = d / "generated" / "native-aot.generated.cpp"
+            if per_asm_cpp.exists():
+                if not cpp_found:
+                    cpp_found = True
+                    size = per_asm_cpp.stat().st_size
+                    print(f"    convert-to-cpp OK: {size} bytes (in {d.name}/)")
+                else:
+                    print(f"      + {d.name}/generated/native-aot.generated.cpp")
+    if not cpp_found:
         print(f"    convert-to-cpp OK (no .cpp output found)")
     return True
 
 
-def _trim_ir(family_slug: str, *, verification: Path | None = None, class_name: str | None = None) -> bool:
+def _build_entry_exe(family_slug: str, *, verification: Path | None = None) -> bool:
+    """Build entry.exe from the CMakeLists.txt produced by convert-to-cpp.
+
+    Uses CMake to configure and build the 'entry' target, producing entry.exe
+    that fact_verifier.py can run directly.
+    """
+    v = verification or _VERIFICATION
+    genuine_out = v / family_slug / "il2cpp_dist" / "genuine"
+    cmakelists = genuine_out / "CMakeLists.txt"
+    if not cmakelists.exists():
+        print(f"    [build_entry] no CMakeLists.txt at {cmakelists}")
+        return False
+
+    build_dir = genuine_out / "build"
+    build_dir.mkdir(parents=True, exist_ok=True)
+
+    # Step 1: CMake configure
+    print(f"    [build_entry] cmake configure...")
+    cfg_result = subprocess.run(
+        ["cmake", "-S", str(genuine_out), "-B", str(build_dir),
+         "-G", "Visual Studio 17 2022", "-A", "x64"],
+        capture_output=True, text=True, timeout=120,
+    )
+    if cfg_result.returncode != 0:
+        print(f"    [build_entry] cmake configure FAILED")
+        for line in cfg_result.stderr.splitlines()[-10:]:
+            print(f"      {line}")
+        return False
+
+    # Step 1b: Patch vcxproj files to use /EHs /EHc- (extern "C" exception propagation)
+    # Without this, CMake VS generator hardcodes /EHsc which blocks exceptions through extern "C".
+    patch_script = _HERE.parents[0] / "_patch_vcxproj.py"
+    if patch_script.exists():
+        subprocess.run([sys.executable, str(patch_script), str(build_dir)],
+                      capture_output=True, text=True, timeout=30)
+        print(f"    [build_entry] vcxproj patched for /EHs /EHc-")
+
+    # Step 2: CMake build (entry target, RelWithDebInfo)
+    print(f"    [build_entry] cmake build...")
+    build_result = subprocess.run(
+        ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo",
+         "--target", "entry"],
+        capture_output=True, text=True, timeout=300,
+    )
+    if build_result.returncode != 0:
+        # The generated CMakeLists.txt may have incorrect paths for single-assembly
+        # mode. Retry with a corrected CMakeLists.txt that references the right paths.
+        print(f"    [build_entry] cmake build FAILED, retrying with corrected CMakeLists.txt")
+
+        # Locate ALL generated .cpp files across all assembly subdirectories
+        gen_cpp_files: list[Path] = []
+        for d in genuine_out.iterdir():
+            if d.is_dir() and d.name not in ("build",):
+                extra_cpps = sorted((d / "generated").glob("*.cpp"))
+                gen_cpp_files.extend(extra_cpps)
+
+        if not gen_cpp_files:
+            print(f"    [build_entry] no generated .cpp files found")
+            for line in build_result.stderr.splitlines()[-15:]:
+                print(f"      {line}")
+            for line in build_result.stdout.splitlines()[-15:]:
+                print(f"      {line}")
+            return False
+
+        # Write our own CMakeLists.txt with correct file references
+        gen_cpp_entries = "\n    ".join(f"${{CHAOS_GEN_DIR}}/{f.relative_to(genuine_out).as_posix()}" for f in gen_cpp_files)
+        corrected_cmake = f"""# Generated by chaos-il2cpp convert-to-cpp (corrected by pipeline)
+cmake_minimum_required(VERSION 3.20)
+# /EHsc default blocks exceptions through extern "C" frames.
+# Strip EH from INIT flags; use CMAKE_MSVC_EXCEPTION_HANDLING instead.
+set(CMAKE_CXX_FLAGS_INIT "/DWIN32 /D_WINDOWS")
+set(CMAKE_MSVC_EXCEPTION_HANDLING "Sync")
+project(chaos_gen LANGUAGES CXX)
+
+set(REPO_ROOT "{_REPO_ROOT.as_posix()}")
+set(CHAOS_GEN_DIR "${{CMAKE_CURRENT_LIST_DIR}}")
+set(NATIVE_LIB_DIR "{(_REPO_ROOT / 'build' / 'native').as_posix()}")
+set(CFG "RelWithDebInfo")
+
+set(NATIVE_LIBS
+    "${{NATIVE_LIB_DIR}}/src/native/runtime-core/${{CFG}}/chaos_runtime_core.lib"
+    "${{NATIVE_LIB_DIR}}/src/native/bootstrap/${{CFG}}/chaos_bootstrap.lib"
+    "${{NATIVE_LIB_DIR}}/src/native/common/${{CFG}}/chaos_common.lib"
+    "${{NATIVE_LIB_DIR}}/src/native/support/${{CFG}}/chaos_support.lib"
+    "${{NATIVE_LIB_DIR}}/src/native/interpreter/${{CFG}}/chaos_interpreter.lib"
+    "${{NATIVE_LIB_DIR}}/src/native/hot-update/${{CFG}}/chaos_hot_update.lib"
+    "${{NATIVE_LIB_DIR}}/bdwgc_build/${{CFG}}/chaos_bdwgc.lib"
+    "${{NATIVE_LIB_DIR}}/fmt_build/${{CFG}}/chaos_fmt.lib"
+)
+
+set(COMMON_INCLUDE_DIRS
+    "${{REPO_ROOT}}/contracts/native/v0"
+    "${{REPO_ROOT}}/src/native/common"
+    "${{REPO_ROOT}}/src/native/runtime-core"
+    "${{REPO_ROOT}}/third_party/fmt/include"
+    "${{REPO_ROOT}}/third_party/bdwgc/include"
+)
+
+add_compile_options(/utf-8)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_executable(entry
+    ${{CHAOS_GEN_DIR}}/runtime-entry.cpp
+    {gen_cpp_entries}
+)
+
+target_link_libraries(entry PRIVATE
+    ${{NATIVE_LIBS}}
+)
+target_include_directories(entry PRIVATE ${{COMMON_INCLUDE_DIRS}})
+"""
+        cmakelists.write_text(corrected_cmake, encoding="utf-8")
+
+        # Re-run cmake configure + build with corrected CMakeLists.txt
+        cfg_result = subprocess.run(
+            ["cmake", "-S", str(genuine_out), "-B", str(build_dir),
+             "-G", "Visual Studio 17 2022", "-A", "x64"],
+            capture_output=True, text=True, timeout=120,
+        )
+        if cfg_result.returncode != 0:
+            print(f"    [build_entry] cmake configure (retry) FAILED")
+            for line in cfg_result.stderr.splitlines()[-10:]:
+                print(f"      {line}")
+            return False
+
+        build_result = subprocess.run(
+            ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo",
+             "--target", "entry"],
+            capture_output=True, text=True, timeout=300,
+        )
+        if build_result.returncode != 0:
+            print(f"    [build_entry] cmake build (retry) FAILED")
+            for line in build_result.stderr.splitlines()[-15:]:
+                print(f"      {line}")
+            for line in build_result.stdout.splitlines()[-15:]:
+                print(f"      {line}")
+            return False
+
+    # Step 3: Locate entry.exe and copy to generated/
+    # cmake --build drops exe at build_dir/<config>/entry.exe
+    exe_candidates = [
+        build_dir / "RelWithDebInfo" / "entry.exe",
+        build_dir / "Release" / "entry.exe",
+        build_dir / "Debug" / "entry.exe",
+        build_dir / "entry.exe",
+    ]
+    exe_path = None
+    for c in exe_candidates:
+        if c.exists():
+            exe_path = c
+            break
+
+    if exe_path is None:
+        print(f"    [build_entry] entry.exe not found in build output")
+        return False
+
+    # Find assembly subdirectory to place entry.exe inside generated/
+    assembly_dirs = [d for d in genuine_out.iterdir() if d.is_dir() and d.name != "build"
+                     and (d / "generated").exists()]
+    if not assembly_dirs:
+        print(f"    [build_entry] no assembly/generated dir found")
+        return False
+
+    assembly_dir = assembly_dirs[0]
+    target_dir = assembly_dir / "generated"
+    shutil.copy2(str(exe_path), str(target_dir / "entry.exe"))
+    size = (target_dir / "entry.exe").stat().st_size
+    print(f"    [build_entry] entry.exe OK: {size} bytes -> {target_dir / 'entry.exe'}")
+    return True
     """Trim aot-core-ir.json to entry-only methods."""
     v = verification or _VERIFICATION
     entry_prefix = class_name or f"{family_slug.title().replace('-', '').replace('_', '')}NativeEntry"
@@ -356,7 +534,7 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
     result["dllPath"] = build_result["dll_path"]
 
     # Step 2: Convert-to-CPP (full pipeline)
-    print(f"  [2/3] Running convert-to-cpp...")
+    print(f"  [2/4] Running convert-to-cpp...")
     entry_pt = build_result.get("entry_point_subject_id")
     if not _run_convert_to_cpp(family_slug, build_result["dll_path"], verification=verification, entry_point_subject_id=entry_pt):
         result["steps"]["convert_to_cpp"] = "FAILED"
@@ -365,9 +543,18 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
         return result
     result["steps"]["convert_to_cpp"] = "OK"
 
-    # Step 3: Fact verification (run il2cpp-translated native entry EXE directly)
-    print(f"  [3/3] Running native entry EXE verification...")
-    fact_result = verify_fact(family_slug, assembly=assembly_name, verbose=False)
+    # Step 3: Build entry.exe from generated C++ via CMake
+    print(f"  [3/4] Building entry.exe from generated C++...")
+    if not _build_entry_exe(family_slug, verification=verification):
+        result["steps"]["build_entry_exe"] = "FAILED"
+        result["error"] = "entry.exe build failed"
+        trace("family_entry_build_failed", family=family_slug)
+        return result
+    result["steps"]["build_entry_exe"] = "OK"
+
+    # Step 4: Fact verification (run il2cpp-translated native entry EXE directly)
+    print(f"  [4/6] Running native entry EXE verification...")
+    fact_result = verify_fact(family_slug, assembly=assembly_name, method_count=len(mids), verbose=False)
     if fact_result.get("status") == "passed":
         result["steps"]["fact_verify"] = "OK"
         result["fact_passed"] = fact_result.get("passed", 0)
@@ -381,8 +568,31 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
         print(f"    Fact verify: {fact_result.get('status', 'error')} "
               f"({fact_result.get('passed', 0)}/{fact_result.get('total', 0)})")
 
-    result["success"] = True
-    trace("family_passed", family=family_slug, method_count=len(mids))
+    # Step 5: Benchmark verification (run native benchmark via entry.exe --benchmark)
+    print(f"  [5/6] Running native benchmark...")
+    bench_result = verify_benchmark(family_slug, assembly=assembly_name,
+                                    entry_index=0, iterations=10000, verbose=False)
+    result["steps"]["benchmark"] = bench_result.get("status", "FAILED")
+    result["benchmark_ms"] = bench_result.get("elapsed_ms", 0)
+    result["benchmark_iterations"] = bench_result.get("iterations", 0)
+
+    # Step 6: HotUpdate verification (run via entry.exe --hotupdate)
+    print(f"  [6/6] Running hotupdate verification...")
+    hot_result = verify_hotupdate(family_slug, assembly=assembly_name, verbose=False)
+    result["steps"]["hotupdate"] = hot_result.get("status", "FAILED")
+    result["hotupdate_passed"] = hot_result.get("passed", 0)
+    result["hotupdate_total"] = hot_result.get("total", 0)
+
+    # Family succeeds only if all 6 steps pass
+    if result["steps"].get("build_entrypoint") == "OK" \
+            and result["steps"].get("convert_to_cpp") == "OK" \
+            and result["steps"].get("build_entry_exe") == "OK" \
+            and result["steps"].get("fact_verify") == "OK":
+        result["success"] = True
+        trace("family_passed", family=family_slug, method_count=len(mids))
+    else:
+        result["success"] = False
+        print(f"    >>> FAMILY FAILED: fact_verify={result['steps'].get('fact_verify', 'N/A')}")
     return result
 
 

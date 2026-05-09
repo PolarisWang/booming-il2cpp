@@ -190,7 +190,10 @@ public sealed class ILToIRLowering
     {
         return op switch
         {
-            "br" or "brtrue" or "brfalse" or "blt" or "bgt" or "ble" or "bge" or "leave" => true,
+            "br" or "brtrue" or "brfalse" or "beq" or "bne.un"
+                or "blt" or "bgt" or "ble" or "bge"
+                or "blt.un" or "bgt.un" or "ble.un" or "bge.un"
+                or "leave" or "switch" => true,
             _ => false,
         };
     }
@@ -199,7 +202,9 @@ public sealed class ILToIRLowering
     {
         return op switch
         {
-            "brtrue" or "brfalse" or "blt" or "bgt" or "ble" or "bge" => true,
+            "brtrue" or "brfalse" or "beq" or "bne.un"
+                or "blt" or "bgt" or "ble" or "bge"
+                or "blt.un" or "bgt.un" or "ble.un" or "bge.un" => true,
             _ => false,
         };
     }
@@ -319,30 +324,90 @@ public sealed class ILToIRLowering
             "ldloc" => LowerLdloc(instruction, locals, stack, ref temporaryIndex),
             "stloc" => LowerStloc(instruction, locals, stack),
             "ldc.i4" => LowerLdcI4(instruction, stack, ref temporaryIndex),
+            "ldc.i8" => LowerLdcI8(instruction, stack, ref temporaryIndex),
+            "ldc.r4" => LowerLdcR4(instruction, stack, ref temporaryIndex),
+            "ldc.r8" => LowerLdcR8(instruction, stack, ref temporaryIndex),
             "ldstr" => LowerLdstr(instruction, stack, ref temporaryIndex),
             "ldnull" => LowerLdnull(stack, ref temporaryIndex),
+            "dup" => LowerUnaryNumeric(IROpCode.Dup, instruction, stack, ref temporaryIndex),
             "pop" => new IRInstruction { OpCode = IROpCode.Pop },
+            "neg" => new IRInstruction { OpCode = IROpCode.Neg },
             "add" => LowerBinaryNumeric(IROpCode.Add, instruction, stack, ref temporaryIndex),
             "sub" => LowerBinaryNumeric(IROpCode.Sub, instruction, stack, ref temporaryIndex),
             "mul" => LowerBinaryNumeric(IROpCode.Mul, instruction, stack, ref temporaryIndex),
             "div" => LowerBinaryNumeric(IROpCode.Div, instruction, stack, ref temporaryIndex),
+            "div.un" => LowerBinaryNumeric(IROpCode.DivUn, instruction, stack, ref temporaryIndex),
             "rem" => LowerBinaryNumeric(IROpCode.Rem, instruction, stack, ref temporaryIndex),
-            "call" => LowerMethodCall(method, instruction, internalAssemblyNames, methodsBySubjectId, stack, ref temporaryIndex),
-            "callvirt" => LowerMethodCall(method, instruction, internalAssemblyNames, methodsBySubjectId, stack, ref temporaryIndex),
+            "rem.un" => LowerBinaryNumeric(IROpCode.RemUn, instruction, stack, ref temporaryIndex),
+            "and" => LowerBinaryNumeric(IROpCode.And, instruction, stack, ref temporaryIndex),
+            "or" => LowerBinaryNumeric(IROpCode.Or, instruction, stack, ref temporaryIndex),
+            "xor" => LowerBinaryNumeric(IROpCode.Xor, instruction, stack, ref temporaryIndex),
+            "not" => new IRInstruction { OpCode = IROpCode.Not },
+            "shl" => LowerBinaryNumeric(IROpCode.Shl, instruction, stack, ref temporaryIndex),
+            "shr" => LowerBinaryNumeric(IROpCode.Shr, instruction, stack, ref temporaryIndex),
+            "shr.un" => LowerBinaryNumeric(IROpCode.ShrUn, instruction, stack, ref temporaryIndex),
+            "add.ovf" => LowerBinaryNumeric(IROpCode.AddOvf, instruction, stack, ref temporaryIndex),
+            "sub.ovf" => LowerBinaryNumeric(IROpCode.SubOvf, instruction, stack, ref temporaryIndex),
+            "mul.ovf" => LowerBinaryNumeric(IROpCode.MulOvf, instruction, stack, ref temporaryIndex),
             "ceq" => LowerBinaryNumeric(IROpCode.Ceq, instruction, stack, ref temporaryIndex),
             "clt" => LowerBinaryNumeric(IROpCode.Clt, instruction, stack, ref temporaryIndex),
+            "clt.un" => LowerBinaryNumeric(IROpCode.Clt, instruction, stack, ref temporaryIndex),
             "cgt" => LowerBinaryNumeric(IROpCode.Cgt, instruction, stack, ref temporaryIndex),
+            "cgt.un" => LowerBinaryNumeric(IROpCode.Cgt, instruction, stack, ref temporaryIndex),
+            "conv.i1" => new IRInstruction { OpCode = IROpCode.Conv_I4 },
+            "conv.i2" => new IRInstruction { OpCode = IROpCode.Conv_I4 },
+            "conv.u1" => new IRInstruction { OpCode = IROpCode.Conv_I4 },
+            "conv.u2" => new IRInstruction { OpCode = IROpCode.Conv_I4 },
+            "conv.u4" => new IRInstruction { OpCode = IROpCode.Conv_I4 },
+            "conv.u8" => new IRInstruction { OpCode = IROpCode.Conv_I8 },
+            "conv.i4" => new IRInstruction { OpCode = IROpCode.Conv_I4 },
+            "conv.i8" => new IRInstruction { OpCode = IROpCode.Conv_I8 },
+            "conv.r4" => new IRInstruction { OpCode = IROpCode.Conv_R4 },
+            "conv.r8" => new IRInstruction { OpCode = IROpCode.Conv_R8 },
+            "conv.i" => new IRInstruction { OpCode = IROpCode.ConvI },
+            "conv.u" => new IRInstruction { OpCode = IROpCode.ConvU },
+            "conv.r.un" => new IRInstruction { OpCode = IROpCode.ConvRUn },
+            "conv.ovf.i1" => new IRInstruction { OpCode = IROpCode.ConvOvfI4 },
+            "conv.ovf.i2" => new IRInstruction { OpCode = IROpCode.ConvOvfI4 },
+            "conv.ovf.i4" => new IRInstruction { OpCode = IROpCode.ConvOvfI4 },
+            "conv.ovf.i8" => new IRInstruction { OpCode = IROpCode.ConvOvfI8 },
+            "conv.ovf.u1" => new IRInstruction { OpCode = IROpCode.ConvOvfU4 },
+            "conv.ovf.u2" => new IRInstruction { OpCode = IROpCode.ConvOvfU4 },
+            "conv.ovf.u4" => new IRInstruction { OpCode = IROpCode.ConvOvfU4 },
+            "conv.ovf.u8" => new IRInstruction { OpCode = IROpCode.ConvOvfU8 },
+            "conv.ovf.i" => new IRInstruction { OpCode = IROpCode.ConvOvfI },
+            "conv.ovf.u" => new IRInstruction { OpCode = IROpCode.ConvOvfU },
+            "add.ovf.un" => LowerBinaryNumeric(IROpCode.AddOvf, instruction, stack, ref temporaryIndex),
+            "sub.ovf.un" => LowerBinaryNumeric(IROpCode.SubOvf, instruction, stack, ref temporaryIndex),
+            "mul.ovf.un" => LowerBinaryNumeric(IROpCode.MulOvf, instruction, stack, ref temporaryIndex),
+            "call" => LowerMethodCall(method, instruction, internalAssemblyNames, methodsBySubjectId, stack, ref temporaryIndex),
+            "callvirt" => LowerMethodCall(method, instruction, internalAssemblyNames, methodsBySubjectId, stack, ref temporaryIndex),
             "br" => LowerBranch(IROpCode.Br, instruction, blockIds, offsetToBlockIndex),
             "brtrue" => LowerConditionalBranch(IROpCode.BrTrue, instruction, blockIds, offsetToBlockIndex, stack),
             "brfalse" => LowerConditionalBranch(IROpCode.BrFalse, instruction, blockIds, offsetToBlockIndex, stack),
+            "beq" => LowerRelationalBranch(IROpCode.Beq, instruction, blockIds, offsetToBlockIndex, stack),
+            "bne.un" => LowerRelationalBranch(IROpCode.BneUn, instruction, blockIds, offsetToBlockIndex, stack),
             "blt" => LowerRelationalBranch(IROpCode.Blt, instruction, blockIds, offsetToBlockIndex, stack),
+            "blt.un" => LowerRelationalBranch(IROpCode.BltUn, instruction, blockIds, offsetToBlockIndex, stack),
             "bgt" => LowerRelationalBranch(IROpCode.Bgt, instruction, blockIds, offsetToBlockIndex, stack),
+            "bgt.un" => LowerRelationalBranch(IROpCode.BgtUn, instruction, blockIds, offsetToBlockIndex, stack),
             "ble" => LowerRelationalBranch(IROpCode.Ble, instruction, blockIds, offsetToBlockIndex, stack),
+            "ble.un" => LowerRelationalBranch(IROpCode.BleUn, instruction, blockIds, offsetToBlockIndex, stack),
             "bge" => LowerRelationalBranch(IROpCode.Bge, instruction, blockIds, offsetToBlockIndex, stack),
+            "bge.un" => LowerRelationalBranch(IROpCode.BgeUn, instruction, blockIds, offsetToBlockIndex, stack),
             "leave" => LowerLeave(instruction, blockIds, offsetToBlockIndex, exceptionRegions),
             "endfinally" => new IRInstruction { OpCode = IROpCode.EndFinally },
+            "endfilter" => new IRInstruction { OpCode = IROpCode.EndFilter },
+            "throw" => new IRInstruction { OpCode = IROpCode.Throw },
             "rethrow" => new IRInstruction { OpCode = IROpCode.Rethrow },
             "ret" => LowerRet(method, stack),
+            "arglist" => LowerSimplePush(IROpCode.ArgList, IRTypeTag.NativeInt, stack, ref temporaryIndex),
+            "mkrefany" => LowerSimplePopPush(IROpCode.MkRefAny, IRTypeTag.Object, stack, ref temporaryIndex),
+            "refanyval" => LowerSimplePopPush(IROpCode.RefAnyVal, IRTypeTag.NativeInt, stack, ref temporaryIndex),
+            "refanytype" => LowerSimplePopPush(IROpCode.RefAnyType, IRTypeTag.NativeInt, stack, ref temporaryIndex),
+            "ldvirtftn" => LowerSimplePopPush(IROpCode.LdVirtFtn, IRTypeTag.NativeInt, stack, ref temporaryIndex),
+            "calli" => LowerMethodCall(method, instruction, internalAssemblyNames, methodsBySubjectId, stack, ref temporaryIndex),
+            "jmp" => new IRInstruction { OpCode = IROpCode.Jmp },
             _ => throw new NotSupportedException($"unsupported lowering opcode: {instruction.Op}"),
         };
     }
@@ -428,6 +493,91 @@ public sealed class ILToIRLowering
         };
     }
 
+    private static IRInstruction LowerLdcI8(
+        ManagedInstructionModel instruction,
+        Stack<IROperand> stack,
+        ref int temporaryIndex)
+    {
+        var constant = new IROperand
+        {
+            Kind = IROperandKind.Int32Literal,
+            TypeTag = IRTypeTag.Int64,
+            Int64Value = instruction.Operand is long l ? l : GetRequiredInt32Operand(instruction),
+        };
+        var result = CreateTemporaryOperand(ref temporaryIndex, IRTypeTag.Int64);
+        stack.Push(result);
+
+        return new IRInstruction
+        {
+            OpCode = IROpCode.LdcI8,
+            Operands = [constant],
+            Result = result,
+        };
+    }
+
+    private static IRInstruction LowerLdcR4(
+        ManagedInstructionModel instruction,
+        Stack<IROperand> stack,
+        ref int temporaryIndex)
+    {
+        var constant = new IROperand
+        {
+            Kind = IROperandKind.Int32Literal,
+            TypeTag = IRTypeTag.Float32,
+            Float32Value = instruction.Operand is float f ? f : 0.0f,
+        };
+        var result = CreateTemporaryOperand(ref temporaryIndex, IRTypeTag.Float32);
+        stack.Push(result);
+
+        return new IRInstruction
+        {
+            OpCode = IROpCode.LdcR4,
+            Operands = [constant],
+            Result = result,
+        };
+    }
+
+    private static IRInstruction LowerLdcR8(
+        ManagedInstructionModel instruction,
+        Stack<IROperand> stack,
+        ref int temporaryIndex)
+    {
+        var constant = new IROperand
+        {
+            Kind = IROperandKind.Int32Literal,
+            TypeTag = IRTypeTag.Float64,
+            Float64Value = instruction.Operand is double d ? d : 0.0,
+        };
+        var result = CreateTemporaryOperand(ref temporaryIndex, IRTypeTag.Float64);
+        stack.Push(result);
+
+        return new IRInstruction
+        {
+            OpCode = IROpCode.LdcR8,
+            Operands = [constant],
+            Result = result,
+        };
+    }
+
+    private static IRInstruction LowerUnaryNumeric(
+        IROpCode opCode,
+        ManagedInstructionModel instruction,
+        Stack<IROperand> stack,
+        ref int temporaryIndex)
+    {
+        var operand = Pop(stack, instruction.Op);
+        var resultType = MapTypeTag(instruction.ResultType);
+        var result = CreateTemporaryOperand(ref temporaryIndex, resultType);
+        stack.Push(result);
+
+        return new IRInstruction
+        {
+            OpCode = opCode,
+            Operands = [operand],
+            Result = result,
+        };
+    }
+
     private static IRInstruction LowerLdstr(
         ManagedInstructionModel instruction,
         Stack<IROperand> stack,
@@ -466,6 +616,40 @@ public sealed class ILToIRLowering
         {
             OpCode = IROpCode.LdNull,
             Operands = [constant],
+            Result = result,
+        };
+    }
+
+    private static IRInstruction LowerSimplePush(
+        IROpCode opCode,
+        IRTypeTag typeTag,
+        Stack<IROperand> stack,
+        ref int temporaryIndex)
+    {
+        var result = CreateTemporaryOperand(ref temporaryIndex, typeTag);
+        stack.Push(result);
+
+        return new IRInstruction
+        {
+            OpCode = opCode,
+            Result = result,
+        };
+    }
+
+    private static IRInstruction LowerSimplePopPush(
+        IROpCode opCode,
+        IRTypeTag typeTag,
+        Stack<IROperand> stack,
+        ref int temporaryIndex)
+    {
+        var operand = Pop(stack, opCode.ToString());
+        var result = CreateTemporaryOperand(ref temporaryIndex, typeTag);
+        stack.Push(result);
+
+        return new IRInstruction
+        {
+            OpCode = opCode,
+            Operands = [operand],
             Result = result,
         };
     }

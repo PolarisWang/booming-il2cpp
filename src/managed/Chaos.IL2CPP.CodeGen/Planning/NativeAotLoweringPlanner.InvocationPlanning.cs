@@ -654,6 +654,23 @@ public sealed partial class NativeAotLoweringPlanner
                 lowerableMethod.RuntimeGenericContext);
         }
 
+        // Fallback: callee exists in the closure method dictionary but was not
+        // matched by external runtime helper or lowerable checks.  Use its
+        // NativeSymbol and ABI so the generated C++ calls the runtime-provided
+        // implementation directly (e.g., InternalCall methods, BCL intrinsics).
+        if (_methodsBySubjectId.TryGetValue(callee, out var anyMethod))
+        {
+            return new InvocationTarget(
+                TryGetInstantiationStubSymbol(anyMethod) ?? anyMethod.NativeSymbol,
+                GetMethodAbiParameterSlots(anyMethod),
+                anyMethod.ReturnAbi,
+                EmptyRawArgumentIndices,
+                anyMethod.OpenDefinitionSubjectId,
+                anyMethod.SharedGenericBodyId,
+                anyMethod.InstantiationStubId,
+                anyMethod.RuntimeGenericContext);
+        }
+
         return null;
     }
 

@@ -1,27 +1,38 @@
 {
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
-  "total": 1,
-  "passed": 1,
-  "failed": 0,
+  "total": 2,
+  "passed": 0,
+  "failed": 2,
   "results": [
     {
-      "family": "convert-char",
+      "family": "object-equality-identity",
       "steps": {
         "build_entrypoint": "OK",
         "convert_to_cpp": "OK",
-        "fact_static_verify": "failed",
-        "fact_runtime_verify": "skip"
+        "build_entry_exe": "OK",
+        "fact_verify": "failed"
       },
-      "success": true,
-      "methodCount": 18,
-      "entryPointSubjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Run:System.Int32(System.Int32)",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll",
-      "fact_static_passed": 0,
-      "fact_static_total": 0,
-      "fact_runtime_passed": 0,
-      "fact_runtime_total": 0
+      "success": false,
+      "methodCount": 7,
+      "entryPointSubjectId": "ObjectEqualityIdentityNativeEntry/Program::Main:System.Int32()",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\object-equality-identity\\il2cpp_dist\\entrypoint\\build-output\\ObjectEqualityIdentityNativeEntry.dll",
+      "fact_passed": 5,
+      "fact_total": 7
+    },
+    {
+      "family": "generic-nullable-value",
+      "steps": {
+        "build_entrypoint": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "FAILED"
+      },
+      "success": false,
+      "methodCount": 10,
+      "entryPointSubjectId": "GenericNullableValueNativeEntry/Program::Main:System.Int32()",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\il2cpp_dist\\entrypoint\\build-output\\GenericNullableValueNativeEntry.dll",
+      "error": "entry.exe build failed"
     }
   ],
-  "timestamp": "2026-05-08T23:08:28"
+  "timestamp": "2026-05-09T13:42:44"
 }

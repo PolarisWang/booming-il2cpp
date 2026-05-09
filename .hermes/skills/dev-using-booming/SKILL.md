@@ -92,10 +92,10 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 
 | 场景 | 入口技能 | 说明 |
 |------|---------|------|
-| 验证一个或多个 family 的全部三闸门 | `dev-foundation-dll-verification-pipeline` | 主管线：codegen → integrity → three-gate → aggregate |
-| 验证前检查 dashboard 数据一致性 | `dev-foundation-dll-verify-data-integrity` | claims/ledger/coverage 一致性校验 |
-| 已有 batch pipeline 产出，跑单 family 三闸门 | `dev-foundation-dll-family-verification` | Fact → Benchmark → HotUpdate |
-| 验证后聚合结果 + 刷新 dashboard | `dev-foundation-dll-verify-aggregate` | 汇总 + 回归检测 + dashboard 刷新 |
+| 执行单 family 完整 7 阶段验证 | `dev-foundation-dll-verification-pipeline` | 统一入口：verify_family() 全流程 |
+| 定义原则/约束（AI codegen 参考） | `dev-foundation-dll-family-verification` | P1/P2/P3、skip 规则、handwrite 规范 |
+| 聚合跨 family 结果 + 刷新 dashboard | `dev-foundation-dll-verify-aggregate` | 汇总 + 回归检测 + dashboard 刷新 |
+| 验证前/后检查 dashboard 数据一致性 | `dev-foundation-dll-verify-data-integrity` | claims/ledger/coverage 一致性校验 |
 | 接入一个全新的 capability family | `dev-foundation-dll-onboard-family` | ledger → Phase 1/2 → codegen → verification |
 
 **触发条件**：只要任务涉及以下任一内容，必须先使用上述技能之一：
@@ -110,7 +110,7 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 **工作流映射**：
 - "验证这个 family 能否通过"：`verification-pipeline`
 - "dashboard 显示 0/13，查一下为什么"：`verify-data-integrity`
-- "跑一下这个 family 的 benchmark"：`family-verification`（仅 Step 2）
+- "跑一下这个 family 的 benchmark"：`verification-pipeline`（用 `--skip fact,audit`）
 - "刷新 dashboard"：`verify-aggregate`（含 dashboard 刷新）
 - "接一个新 family 到验证体系"：`onboard-family`
 

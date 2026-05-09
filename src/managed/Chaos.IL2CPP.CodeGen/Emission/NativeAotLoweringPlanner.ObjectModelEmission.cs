@@ -113,7 +113,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				if (!string.IsNullOrEmpty(referencedStaticFieldSubjectId))
 				{
-					hashSet2.Add(referencedStaticFieldSubjectId, null);
+					hashSet2[referencedStaticFieldSubjectId] = null;
 				}
 			}
 		}
@@ -139,8 +139,19 @@ public sealed partial class NativeAotLoweringPlanner
 				case "add.ovf":
 				case "sub.ovf":
 				case "mul.ovf":
+				case "add.ovf.un":
+				case "sub.ovf.un":
+				case "mul.ovf.un":
 				case "conv.ovf.i1":
 				case "conv.ovf.u1":
+				case "conv.ovf.i2":
+				case "conv.ovf.u2":
+				case "conv.ovf.i4":
+				case "conv.ovf.u4":
+				case "conv.ovf.i8":
+				case "conv.ovf.u8":
+				case "conv.ovf.i":
+				case "conv.ovf.u":
 					flag = true;
 					break;
 				default:
@@ -231,7 +242,7 @@ public sealed partial class NativeAotLoweringPlanner
 				IL_07fe:
 				if (flag)
 				{
-					hashSet2.Add(targetReference.SubjectId, targetReference.FieldTypeSubjectId);
+					hashSet2[targetReference.SubjectId] = targetReference.FieldTypeSubjectId;
 				}
 				continue;
 				IL_06ac:
@@ -305,7 +316,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			string declaringTypeSubjectId = GetDeclaringTypeSubjectId(additionalInstanceFieldSubjectId);
 			TrackReferenceType(declaringTypeSubjectId, "System.Private.CoreLib/System.Object");
-			hashSet.Add(additionalInstanceFieldSubjectId, null);
+			hashSet[additionalInstanceFieldSubjectId] = null;
 		}
 		foreach (StaticInitializationPlan value9 in _staticInitializationSupport.PlansByTypeSubjectId.Values)
 		{

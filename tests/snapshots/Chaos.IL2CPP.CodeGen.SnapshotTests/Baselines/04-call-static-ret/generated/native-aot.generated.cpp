@@ -7,6 +7,7 @@
 #include "hotpatch_table.h"
 #include "runtime_vtable.h"
 #include "runtime_instantiation.h"
+#include "load_store_chaos_bridge.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -920,6 +921,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_Helper_Square(CHAOS_IL2CPP_IN
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
 	_s0 = chaos_args[0];
@@ -938,6 +940,8 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_MathHelper_RunSquare(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);

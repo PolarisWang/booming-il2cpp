@@ -832,7 +832,7 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                     _pipeline_data = json.loads(native_pipeline_path.read_text(encoding="utf-8"))
                     for _result in list(_pipeline_data.get("results") or []):
                         _slug = _string(_result.get("family"))
-                        _l2_status = _string(_result.get("steps", {}).get("l2_verify"))
+                        _l2_status = _string(_result.get("steps", {}).get("fact_verify"))
                         _l2_passed = int(_result.get("l2_passed", 0))
                         _l2_total = int(_result.get("l2_total", 0))
                         if _l2_status == "OK":

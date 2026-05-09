@@ -299,6 +299,12 @@ public sealed partial class LoaderStage
             ILOpCode.Endfilter => new ManagedInstructionModel { Op = "endfilter", ResultType = "System.Void" },
             ILOpCode.Endfinally => new ManagedInstructionModel { Op = "endfinally", ResultType = "System.Void" },
             ILOpCode.Ret => new ManagedInstructionModel { Op = "ret" },
+            ILOpCode.Break => null,
+            ILOpCode.Tail => null,
+            ILOpCode.Jmp => DecodeJmpInstruction(metadataReader, typeResolver, typeModels, methodOwners, ref ilReader),
+            ILOpCode.Cpobj => DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Cpobj, ref ilReader),
+            ILOpCode.Ckfinite => new ManagedInstructionModel { Op = "ckfinite", ResultType = "System.Void" },
+            ILOpCode.Initblk => new ManagedInstructionModel { Op = "initblk", ResultType = "System.Void" },
             _ => throw new NotSupportedException($"unsupported IL opcode in loader: {opCode}"),
         };
     }
@@ -329,6 +335,7 @@ public sealed partial class LoaderStage
                 ILOpCode.Ldelema => "ldelema",
                 ILOpCode.Ldelem => "ldelem",
                 ILOpCode.Stobj => "stobj",
+                ILOpCode.Cpobj => "cpobj",
                 ILOpCode.Stelem => "stelem",
                 ILOpCode.Unbox => "unbox",
                 ILOpCode.Unbox_any => "unbox.any",
@@ -349,6 +356,7 @@ public sealed partial class LoaderStage
                 ILOpCode.Ldelema => "System.IntPtr",
                 ILOpCode.Ldelem => typeIdentity.SubjectId,
                 ILOpCode.Stobj => "System.Void",
+                ILOpCode.Cpobj => "System.Void",
                 ILOpCode.Stelem => "System.Void",
                 ILOpCode.Unbox => "System.IntPtr",
                 ILOpCode.Unbox_any => typeIdentity.SubjectId,
@@ -678,6 +686,23 @@ public sealed partial class LoaderStage
             "ldvirtftn",
             ref ilReader);
         return instruction with { Op = "ldvirtftn" };
+    }
+
+    private static ManagedInstructionModel DecodeJmpInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        IReadOnlyDictionary<TypeDefinitionHandle, ManagedTypeModel> typeModels,
+        IReadOnlyDictionary<MethodDefinitionHandle, ManagedTypeModel> methodOwners,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeFunctionPointerInstruction(
+            metadataReader,
+            typeResolver,
+            typeModels,
+            methodOwners,
+            "jmp",
+            ref ilReader);
+        return instruction with { Op = "jmp" };
     }
 
     private static ManagedInstructionModel DecodeFieldReferenceInstruction(
