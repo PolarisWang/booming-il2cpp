@@ -374,7 +374,8 @@ Annotations should prefer enum-backed attributes. String should be kept only for
 
 Per family, fixed directories are:
 
-- `verification/foundation-dll/<assembly>/<family>/src/` — handwrite managed source
+- `verification/foundation-dll/<assembly>/<family>/handwritten/` — **READ ONLY** handwrite partial class `.cs` 源（管线只读不写）
+- `verification/foundation-dll/<assembly>/<family>/src/` — handwrite managed source（legacy，已弃用，新 family 用 handwritten/）
 - `verification/foundation-dll/<assembly>/<family>/src/patch/` — handwrite patch source
 - `verification/foundation-dll/<assembly>/<family>/managed_test/tests/` — managed xunit tests
 - `verification/foundation-dll/<assembly>/<family>/managed_test/benchmarks/` — managed benchmarks
@@ -382,6 +383,12 @@ Per family, fixed directories are:
 - `verification/foundation-dll/<assembly>/<family>/native_test/benchmark/` — native benchmark entry (committed)
 - `verification/foundation-dll/<assembly>/<family>/native_test/hotupdate/` — native hotupdate skeleton (committed)
 - `verification/foundation-dll/<assembly>/<family>/reports/` — test reports (not committed)
+
+**`handwritten/` 保护规则**：
+- 管线只从该目录读 `.cs` 文件，从不写入
+- `il2cpp_dist/entrypoint/` 可能被 auto-generate 覆盖，但 `handwritten/` 保持不变
+- Partial class 模式（仅 `.cs` 文件，无 `.csproj`）→ fall through 到 `generate_and_build()` 正常执行两阶段探测
+- Legacy 全项目模式（包含 `.csproj`）→ 直接 `dotnet build`，不经过 auto-generate
 
 Generated project/solution artifacts are centralized outside the family tree:
 

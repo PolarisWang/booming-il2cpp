@@ -96,18 +96,56 @@ public static void Throws<TException>(Action action)
 ## 生成文件结构
 
 ```
+handwritten/                          # 手写源（只读，管线不修改，不提交到仓库）
+  ConvertCharNativeEntry.Custom.cs   # partial class，包含 CustomEntryMethodN()
+
 il2cpp_dist/entrypoint/
-  ConvertCharNativeEntry.cs        # 自动生成的主 entry（包含 MethodTable + per-method stubs）
-  ConvertCharNativeEntry.Custom.cs # 手工编写的自定义条目（Assert.Throws 模式）
-  Program.cs                       # Main() → ChaosProofRunner.RunAll
-  ConvertCharNativeEntry.csproj    # Exe OutputType, 引用 TestFramework.Sdk + Runner
+  ConvertCharNativeEntry.cs         # 自动生成的主 entry（包含 Run() dispatcher + per-method stubs）
+  ConvertCharNativeEntry.Custom.cs  # 从 handwritten/ 复制（auto-generate 自动包含）
+  Program.cs                        # Main() → 位掩码 exit code 模式
+  ConvertCharNativeEntry.csproj     # Exe OutputType, 自动包含 Custom.cs
   build-output/
-    ConvertCharNativeEntry.exe     # 托管 EXE（pipeline 用它构建）
+    ConvertCharNativeEntry.dll      # 托管 DLL（pipeline 用它做 convert-to-cpp）
 
 il2cpp_dist/genuine/<AssemblyName>/generated/
-  native-aot.generated.cpp         # il2cpp 翻译后的原生 C++
-  entry.exe                        # 原生可执行文件（由 fact_verifier 运行）
+  native-aot.generated.cpp          # il2cpp 翻译后的原生 C++
+  entry.exe                         # 原生可执行文件（由 fact_verifier 运行）
 ```
+
+## Handwrite 源覆盖保护
+
+`handwritten/` 目录是管线的**只读源**，管线只从该目录读取 `.cs` 文件，从不写入：
+
+| 路径 | 访问模式 | 说明 |
+|------|---------|------|
+| `handwritten/` | **READ ONLY** | 管线仅读 `.cs` 文件，绝不修改此目录 |
+| `il2cpp_dist/entrypoint/` | WRITABLE | `generate_and_build()` 可以覆盖此目录全部文件 |
+
+### 集成模式
+
+**Partial Class 模式（推荐）** — 在 `handwritten/` 中放 `.cs` 文件（不含 `.csproj`）：
+
+1. 管线检测到 `handwritten/` 目录，列出所有 `.cs` 文件
+2. 复制到 `il2cpp_dist/entrypoint/`
+3. **回退到 `generate_and_build()`** 正常执行两阶段探测（Probe → Emit）
+4. `generate_and_build()` 自动检测 `Custom.cs`，在 `.csproj` 中加入 `<Compile Include>`
+5. 根据 `capability-family-contract.json` 的 `customEntryIndices`，为 custom method 生成空桩
+6. Custom.cs 提供 `CustomEntryMethodN()` 实现
+
+**Legacy 全项目模式** — 在 `handwritten/` 中包含 `.csproj`：
+- 管线复制全部文件到 `il2cpp_dist/entrypoint/`，直接 `dotnet build`
+- 不经过 `generate_and_build()`，不执行两阶段探测
+
+### Handwrite 方法约束
+
+```csharp
+// CustomEntryMethodN 必须与 auto-generated 桩签名一致：
+public static void CustomEntryMethod0()
+{
+    _exitCode = 0;
+    try { Convert.ToChar(true); _exitCode = 1; }
+    catch (InvalidCastException) { }
+}
 
 ## 与旧流程（已删除）的区别
 
@@ -122,16 +160,35 @@ il2cpp_dist/genuine/<AssemblyName>/generated/
 
 ## 自定义条目
 
-对于会抛出预期异常的方法（如 `Convert.ToChar(true)` → `InvalidCastException`），使用 `Custom.cs` 手工编写：
+对于会抛出预期异常的方法（如 `Convert.ToChar(true)` → `InvalidCastException`），使用 `handwritten/<Class>.Custom.cs` 手工编写：
 
 ```csharp
 public static partial class ConvertCharNativeEntry
 {
-    static void CustomEntryMethod0()
+    // [0] Convert.ToChar(bool) always throws InvalidCastException
+    public static void CustomEntryMethod0()
     {
-        Assert.Throws<InvalidCastException>(() => Convert.ToChar(true));
+        _exitCode = 0;
+        try { Convert.ToChar(true); _exitCode = 1; }
+        catch (InvalidCastException) { }
     }
 }
 ```
 
-通过 `capability-family-contract.json` 中的 `customEntryIndices` 字段声明哪些索引走自定义条目。
+**重要**：Custom 方法使用 `_exitCode` 字段而非 `Assert.Throws`，因为 codegen 无法解析外部 assembly 的方法符号。通过 `capability-family-contract.json` 中的 `customEntryIndices` 字段声明哪些索引走自定义条目。
+
+### Handwrite 覆盖保护
+
+`handwritten/` 目录是管线**只读源**，`pipeline_native_aot_runner.py:_build_entrypoint()` 确保：
+
+```python
+handwritten_dir = v / family_slug / "handwritten"
+if handwritten_dir.exists():
+    cs_files = [f for f in handwritten_dir.iterdir() if f.is_file() and f.suffix == ".cs"]
+    # 复制 .cs 到 il2cpp_dist/entrypoint/，然后回退到 generate_and_build()
+```
+
+| 路径 | 访问模式 | 说明 |
+|------|---------|------|
+| `handwritten/` | **READ ONLY** | 管线仅读 `.cs` 文件，绝不修改 |
+| `il2cpp_dist/` | WRITABLE | auto-generate 可覆盖 |

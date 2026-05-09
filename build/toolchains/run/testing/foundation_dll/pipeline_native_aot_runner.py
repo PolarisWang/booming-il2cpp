@@ -117,36 +117,48 @@ def _build_entrypoint(
     entrypoint_dir = v / family_slug / "il2cpp_dist" / "entrypoint"
     class_name = f"{family_slug.title().replace('-', '').replace('_', '')}NativeEntry"
 
-    # Check for hand-written entrypoint
+    # Check for hand-written entrypoint (partial class files or full project)
     handwritten_dir = v / family_slug / "handwritten"
     if handwritten_dir.exists():
-        print(f"    using hand-written entrypoint from {handwritten_dir}")
+        cs_files = [f for f in handwritten_dir.iterdir() if f.is_file() and f.suffix == ".cs"]
+        csproj_files = [f for f in handwritten_dir.iterdir() if f.is_file() and f.suffix == ".csproj"]
+
+        if csproj_files:
+            # Legacy full-project handwritten entrypoint — copy everything and build directly.
+            # Source handwritten/ is NEVER modified by the pipeline.
+            print(f"    using full-project handwritten entrypoint from {handwritten_dir}")
+            entrypoint_dir.mkdir(parents=True, exist_ok=True)
+            for f in handwritten_dir.iterdir():
+                if f.is_file():
+                    dest = entrypoint_dir / f.name
+                    dest.write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
+            csproj = csproj_files[0]
+            build_out = entrypoint_dir / "build-output"
+            result = subprocess.run(
+                ["dotnet", "build", str(csproj), "-o", str(build_out), "--nologo", "-v", "quiet"],
+                capture_output=True, text=True,
+            )
+            if result.returncode != 0:
+                return {"success": False, "error": result.stderr or result.stdout}
+            dll = next(build_out.glob("*.dll"), None)
+            if not dll:
+                return {"success": False, "error": "no DLL produced"}
+            return {
+                "success": True,
+                "dll_path": str(dll),
+                "csproj_path": str(csproj),
+                "source_path": str(next(entrypoint_dir.glob("*.cs"), None)),
+                "entry_point_subject_id": f"{class_name}/{class_name}::Run:System.Int32(System.Int32)",
+            }
+
+        # Partial class handwritten files (e.g. Custom.cs) — copy .cs files to entrypoint,
+        # then fall through to generate_and_build() which auto-detects Custom.cs.
+        # Source handwritten/ is NEVER modified by the pipeline.
+        print(f"    using handwritten partial class files from {handwritten_dir}")
         entrypoint_dir.mkdir(parents=True, exist_ok=True)
-        for f in handwritten_dir.iterdir():
-            if f.is_file():
-                dest = entrypoint_dir / f.name
-                dest.write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
-        # Build
-        csproj = next(entrypoint_dir.glob("*.csproj"), None)
-        if not csproj:
-            return {"success": False, "error": "no .csproj in handwritten entrypoint"}
-        build_out = entrypoint_dir / "build-output"
-        result = subprocess.run(
-            ["dotnet", "build", str(csproj), "-o", str(build_out), "--nologo", "-v", "quiet"],
-            capture_output=True, text=True,
-        )
-        if result.returncode != 0:
-            return {"success": False, "error": result.stderr or result.stdout}
-        dll = next(build_out.glob("*.dll"), None)
-        if not dll:
-            return {"success": False, "error": "no DLL produced"}
-        return {
-            "success": True,
-            "dll_path": str(dll),
-            "csproj_path": str(csproj),
-            "source_path": str(next(entrypoint_dir.glob("*.cs"), None)),
-            "entry_point_subject_id": f"{class_name}/{class_name}::Run:System.Int32(System.Int32)",
-        }
+        for f in cs_files:
+            dest = entrypoint_dir / f.name
+            dest.write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
 
     result = generate_and_build(
         entrypoint_dir,

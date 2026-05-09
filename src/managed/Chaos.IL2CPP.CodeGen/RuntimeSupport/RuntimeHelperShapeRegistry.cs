@@ -2255,6 +2255,54 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
+            // === Nullable<T>.get_HasValue (GenericShapeDescriptor — returns false/zero stub) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Nullable`1",
+                MethodName: "get_HasValue",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
+                    foreach (var pt in paramTypes)
+                        abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType));
+                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
+                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
+                    [
+                        $"    {voidExprs};",
+                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
+                }));
+
+            // === Nullable<T>.GetValueOrDefault() — returns zero token ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Nullable`1",
+                MethodName: "GetValueOrDefault",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
+                    foreach (var pt in paramTypes)
+                        abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType));
+                    var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
+                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
+                    [
+                        $"    {voidExprs};",
+                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
+                }));
+
             // === Convert.ToChar (GenericShapeDescriptor — handles all overloads) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Convert",

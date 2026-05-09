@@ -160,6 +160,45 @@ run trace --exception
 - **多次失败后不升级到 dev-systematic-debugging**
 - **违反自动化原则检查** — 7 项原则检查全是阻塞门禁
 
+## Handwrite C# 集成
+
+### Partial Class 模式（推荐）
+
+handwrite C# 作为 **partial class** 注入 entrypoint，不干预 auto-generate 流程：
+
+```
+verification/foundation-dll/<Assembly>/<family>/
+├── handwritten/                          ← 手写源（只读，管线不修改）
+│   └── <ClassName>NativeEntry.Custom.cs  ← partial class，包含 CustomEntryMethodN()
+├── il2cpp_dist/entrypoint/              ← 管线输出（由 auto-generate + copy 生成）
+│   ├── <ClassName>NativeEntry.cs        ← auto-generate 的 partial class
+│   ├── <ClassName>NativeEntry.Custom.cs ← 从 handwritten/ 复制的 partial class
+│   ├── Program.cs                       ← auto-generate
+│   └── <ClassName>NativeEntry.csproj    ← auto-generate，自动包含 Custom.cs
+```
+
+**集成流程**（`pipeline_native_aot_runner.py:_build_entrypoint()`）：
+
+1. 检测 `handwritten/` 目录是否存在
+2. 如果存在 `.csproj` → 按 **legacy 全项目模式** 处理（复制全部文件到 entrypoint/，直接 build）
+3. **如果只有 `.cs` 文件**（如 `Custom.cs`）→ 复制到 `il2cpp_dist/entrypoint/`，然后**回退到 `generate_and_build()`**
+4. `generate_and_build()` 自动检测 `Custom.cs` 文件，在 `.csproj` 中加入 `<Compile Include="<Class>.Custom.cs" />`
+5. 根据 contract 中的 `customEntryIndices` 为 custom method 生成空桩，由 `Custom.cs` 提供实现
+
+**关键约束**：
+- Custom 方法的签名必须与 auto-generated 桩一致：`public static void CustomEntryMethodN()`
+- `_exitCode = 1` on failure，`try/catch` for expected exceptions
+- `handwritten/` 目录是**只读源**——管线只做 copy，从不写入
+
+### 覆盖保护
+
+管线不会覆盖 `handwritten/` 目录。每次运行 `_build_entrypoint()` 时：
+
+```
+handwritten/  → READ ONLY — 管线从目录读取 .cs 文件，从不写入
+il2cpp_dist/  → 可覆盖 — 所有 entrypoint/ 下的文件可由 generate_and_build() 重新生成
+```
+
 ## 参数
 
 | 参数 | 说明 | 默认值 |

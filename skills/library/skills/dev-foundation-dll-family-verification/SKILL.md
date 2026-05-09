@@ -268,4 +268,4 @@ handwritten entrypoint 与 auto-generated entrypoint 使用同一管道：
 - 审计代码: `mechanism_audit.py` — audit 逻辑实现
 - 原则检查: `principle_auto_checks.py` — 7 项自动化原则检查
 - Skip Registry: `wiki/06-测试验证/foundation-dll-skip-registry.md`
-- Handwrite 规范: `wiki/06-测试验证/handwrite-test-guidelines.md`
+- Handwrite 规范: `wiki/06-测试验证/FactStatic-Native验证Gate流程.md#handwrite-源覆盖保护`
