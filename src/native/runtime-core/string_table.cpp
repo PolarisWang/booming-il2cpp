@@ -96,7 +96,7 @@ StringId Register(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count, CHAOS_I
         return id;
     }
 
-    auto* owned_data = new char[byte_count];
+    auto* owned_data = static_cast<char*>(CHAOS_IL2CPP_MALLOC(byte_count));
     CHAOS_IL2CPP_MEMCPY(owned_data, utf8_data, byte_count);
 
     g_dynamic_entries[id] = StringView{owned_data, byte_count};
@@ -131,7 +131,7 @@ void UnregisterDomain(CHAOS_IL2CPP_UINT32 domain_id)
         const auto entry_it = g_dynamic_entries.find(id);
         if (entry_it != g_dynamic_entries.end())
         {
-            delete[] entry_it->second.utf8_data;
+            CHAOS_IL2CPP_FREE(entry_it->second.utf8_data);
             g_dynamic_entries.erase(entry_it);
         }
     }
