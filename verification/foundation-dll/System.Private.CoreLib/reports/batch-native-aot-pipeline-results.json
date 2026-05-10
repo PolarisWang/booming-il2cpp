@@ -10,6 +10,7 @@
       "steps": {
         "build_entrypoint": "OK",
         "convert_to_cpp": "OK",
+<<<<<<< Updated upstream
         "build_entry_exe": "OK"
       },
       "success": true,
@@ -19,4 +20,20 @@
     }
   ],
   "timestamp": "2026-05-11T01:27:39"
+=======
+        "l2_verify": "failed",
+        "l3_verify": "link_failed"
+      },
+      "success": true,
+      "methodCount": 18,
+      "entryPointSubjectId": "ConvertCharNativeEntry/ConvertCharNativeEntry::Run:System.Int32(System.Int32)",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll",
+      "l2_passed": 17,
+      "l2_total": 18,
+      "l3_passed": 0,
+      "l3_total": 0
+    }
+  ],
+  "timestamp": "2026-05-08T19:04:11"
+>>>>>>> Stashed changes
 }

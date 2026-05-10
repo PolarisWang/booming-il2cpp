@@ -16,6 +16,8 @@
 
 #include <interpreter_vm.h>
 
+#include <chaos/log.h>
+
 #include <cstddef>
 #include <cstdint>
 #include <cstring>

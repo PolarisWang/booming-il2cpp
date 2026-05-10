@@ -18,7 +18,13 @@ using ObjectStorage = InterpreterObject;
 /// The vast majority of managed methods have < 8 parameters.
 static constexpr CHAOS_IL2CPP_UINT32 kMaxCallArgs = 8u;
 
+}  // anonymous namespace
+
+/// Definition of the process-global static fields vector.
+/// Extern declaration in fast_dispatch.cpp.
 CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
+
+namespace {
 
 CHAOS_IL2CPP_INT32 ReadInt32(const InterpreterValue& value) {
     switch (value.tag) {

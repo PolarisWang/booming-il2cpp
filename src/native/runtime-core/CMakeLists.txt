@@ -24,7 +24,20 @@ add_library(chaos_runtime_core STATIC
     string_table.h
     string_table.cpp
     type_registry.cpp
-    runtime_stubs.cpp
+    runtime_stubs/math_stubs.cpp
+    runtime_stubs/datetime_stubs.cpp
+    runtime_stubs/guid_stubs.cpp
+    runtime_stubs/random_stubs.cpp
+    runtime_stubs/hashcode_stubs.cpp
+    runtime_stubs/interlocked_stubs.cpp
+    runtime_stubs/string_stubs.cpp
+    runtime_stubs/exception_stubs.cpp
+    runtime_stubs/object_stubs.cpp
+    runtime_stubs/threading_stubs.cpp
+    runtime_stubs/reflection_stubs.cpp
+    runtime_stubs/misc_stubs.cpp
+    runtime_stubs/interpreter_entry_direct.cpp
+    runtime_stubs/registration_globals.cpp
     module_registry.cpp
     module_registry.h
     layout_engine.cpp
@@ -68,7 +81,7 @@ target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)
 target_compile_definitions(chaos_runtime_core PUBLIC CHAOS_RUNTIME_ABI_STATIC)
 target_compile_definitions(chaos_runtime_core PUBLIC GC_NOT_DLL)
 target_compile_definitions(chaos_runtime_core PUBLIC NOMINMAX)
-target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /FS>)
 target_include_directories(
     chaos_runtime_core
     PUBLIC

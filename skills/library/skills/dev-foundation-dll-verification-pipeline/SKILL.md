@@ -67,14 +67,18 @@ run foundation-dll verify-family <family-slug> --assembly System.Private.CoreLib
 
 [4] Benchmark   — 托管 vs 原生性能对比
                   1. stub_detect 解析 entrypoint 源码识别 stub 方法
-                  2. 运行 managed benchmark harness（如存在）
-                  3. 对每个非 stub 方法运行 entry.exe --benchmark N
+                  2. 自动生成 managed benchmark harness（从 entrypoint Program.cs 提取
+                     方法调用序列，包裹 in Stopwatch 循环）。managed 端也在 native AOT 内
+                     执行，通过运行 entry.exe --managed-benchmark N 获取基线
+                  3. 如 managed harness 已存在（managed_test/benchmark/*.cs），使用已有的；
+                     不存在则自动生成临时 harness
+                  4. 对每个非 stub 方法运行 entry.exe --benchmark N
                      - native 端调用 BenchmarkMethod(index, iterations) — 生成代码内直接
                        调用 kAotMethods[index]()，绕过 hotpatch dispatch 开销
                      - 测量纯 AOT 生成代码的真实性能
-                  4. benchmark_comparator.compare() 生成对比报告
+                  5. benchmark_comparator.compare() 生成对比报告
                   输出 benchmark-comparison-report.json
-                  [标准模式 advisory]
+                  [标准模式 advisory；无 managed harness 时退化为 native-only 记录]
 
 [5] HotUpdate   — 热补丁验证
                   1. stub_detect 解析 entrypoint 源码
@@ -84,17 +88,20 @@ run foundation-dll verify-family <family-slug> --assembly System.Private.CoreLib
                   [严格模式 required]
 
 [6] PostHotBench — 热补丁后性能对比（interpreter 路径）
-                   1. 读取 native-benchmark.json 获取 pre-patch ns/op
+                   1. 读取 unified-verification-report.json 中的 native benchmark
+                      数据获取 pre-patch ns/op
                    2. 对每个非 stub 方法运行 entry.exe --hotupdate-and-benchmark N
                    3. 计算 slowdown%（interpreter vs native）
                    输出 post-hotupdate-benchmark-report.json
-                   [严格模式 required]
+                   **注意：interpreter 路径 slowdown 预期极高（1000x+），这是 interpreter
+                   设计的已知特性，不作为失败判定。**
+                   [严格模式 required；不阻塞 pipeline]
 
 [7] Aggregate   — 汇总全部 stage 结果
-                  计算 coverage（methodCoverage, skipRate）
+                  计算 coverage（methodCoverage, testedRate）
                   - methodCoverage: fact.details.fact.passed / total（之前 Bug: 读取不存在的 l2）
-                  - skipRate: max(0, 1 - skipsFound/total_methods)（之前 Bug: 可负）
-                  - overall: 可用 coverage 的均值
+                  - testedRate: 1 - (skipsFound / total_methods)，下限 max(0, ...)（之前 Bug: 可负）
+                  - overall: methodCoverage 和 testedRate 的均值
                   回归检测（baseline_manager.compare_checksum/benchmark）
                   输出 unified-verification-report.json
 ```
@@ -131,7 +138,7 @@ run foundation-dll verify-family <family-slug> --assembly System.Private.CoreLib
   },
   "coverage": {
     "methodCoverage": 1.0,
-    "skipRate": 1.0,
+    "testedRate": 1.0,
     "overall": 1.0
   },
   "regression": {}

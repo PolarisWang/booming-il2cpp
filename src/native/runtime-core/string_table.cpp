@@ -131,7 +131,7 @@ void UnregisterDomain(CHAOS_IL2CPP_UINT32 domain_id)
         const auto entry_it = g_dynamic_entries.find(id);
         if (entry_it != g_dynamic_entries.end())
         {
-            CHAOS_IL2CPP_FREE(entry_it->second.utf8_data);
+            CHAOS_IL2CPP_FREE(const_cast<char*>(entry_it->second.utf8_data));
             g_dynamic_entries.erase(entry_it);
         }
     }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/convert/char",
   "passedMethods": 18,
@@ -8,5 +8,15 @@
   "stubMethods": 0,
   "realMethods": 18,
   "allMethodsRevertVerified": false,
-  "allMethodsSemanticVerified": false
+  "allMethodsSemanticVerified": false,
+  "d3PatchApplied": false,
+  "d3PatchedCount": 0,
+  "verificationKind": "hotupdate-proof",
+  "summary": {
+    "totalMethods": 18,
+    "passedMethods": 18,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": []
 }

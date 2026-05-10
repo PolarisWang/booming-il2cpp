@@ -853,7 +853,7 @@ def _stage_hotupdate(family_slug: str, assembly: str) -> StageResult:
     real = max(0, method_count - stub_total)
 
     report = {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "assemblyName": assembly,
         "familyId": f"family/{assembly}/{family_slug.replace('-', '/')}",
         "passedMethods": passed,
@@ -863,6 +863,16 @@ def _stage_hotupdate(family_slug: str, assembly: str) -> StageResult:
         "realMethods": real,
         "allMethodsRevertVerified": result.get("all_revert", False),
         "allMethodsSemanticVerified": result.get("all_semantic", False),
+        "d3PatchApplied": False,
+        "d3PatchedCount": 0,
+        "verificationKind": "hotupdate-proof",
+        "summary": {
+            "totalMethods": total,
+            "passedMethods": passed,
+            "failedMethods": failed,
+            "unmatchedMethods": 0,
+        },
+        "methodResults": [],
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
     with open(report_path, "w", encoding="utf-8") as f:

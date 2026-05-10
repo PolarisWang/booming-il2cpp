@@ -4,6 +4,7 @@
 #include "runtime_abi.h"
 
 #include <chaos/native_types.h>
+#include <chaos/log.h>
 
 #include <cstddef>
 #include <cstdint>
@@ -56,45 +57,20 @@ public:
     MemoryDomain* GetOwner() const { return owner_; }
 
     /// Get the domain id of the owning MemoryDomain.
-    DomainId GetDomainId() const {
-        return owner_ ? owner_->domain_id : kDomainIdInvalid;
-    }
+    DomainId GetDomainId() const;
 
 protected:
     MemoryDomain* owner_ = nullptr;
 
     /// Track an allocation of @a size bytes.  Returns false if the
     /// domain's usage_limit would be exceeded (caller should fail).
-    bool TrackAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
-        if (owner_ == nullptr) return true;
-        CHAOS_IL2CPP_INT64 new_usage = owner_->current_usage + static_cast<CHAOS_IL2CPP_INT64>(size);
-        if (owner_->usage_limit > 0 && new_usage > owner_->usage_limit) {
-            CHAOS_IL2CPP_LOG_WARN("MemoryDomain", "allocation of %llu bytes would exceed limit %lld",
-                                  (unsigned long long)size, (long long)owner_->usage_limit);
-            return false;
-        }
-        owner_->current_usage = new_usage;
-        if (new_usage > owner_->peak_usage) {
-            owner_->peak_usage = new_usage;
-        }
-        return true;
-    }
+    bool TrackAlloc(CHAOS_IL2CPP_SIZE size) noexcept;
 
     /// Track a free of @a size bytes.
-    void TrackFree(CHAOS_IL2CPP_SIZE size) noexcept {
-        if (owner_ == nullptr) return;
-        owner_->current_usage -= static_cast<CHAOS_IL2CPP_INT64>(size);
-    }
+    void TrackFree(CHAOS_IL2CPP_SIZE size) noexcept;
 };
 
-// -----------------------------------------------------------------------
-// MemoryDomain — per-module allocation domain.
-//
-// Each loaded module (AOT assembly, hot-update DLL) gets its own domain
-// with an independent heap.  Marshal allocations are tagged with the
-// domain id so that cross-module free() can correctly attribute the
-// deallocation back to the originating domain.
-// -----------------------------------------------------------------------
+// ── MemoryDomain (full definition) ───────────────────────────────────
 struct MemoryDomain {
     DomainId      domain_id;
     const char*   module_name;       ///< e.g. "System.Private.CoreLib"
@@ -109,6 +85,32 @@ struct MemoryDomain {
 
     bool          is_unloaded;       ///< Set to true when UnregisterMemoryDomain is called.
 };
+
+// ── IDomainHeap inline implementations (after MemoryDomain is complete) ──
+
+inline DomainId IDomainHeap::GetDomainId() const {
+    return owner_ ? owner_->domain_id : kDomainIdInvalid;
+}
+
+inline bool IDomainHeap::TrackAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
+    if (owner_ == nullptr) return true;
+    CHAOS_IL2CPP_INT64 new_usage = owner_->current_usage + static_cast<CHAOS_IL2CPP_INT64>(size);
+    if (owner_->usage_limit > 0 && new_usage > owner_->usage_limit) {
+        CHAOS_IL2CPP_LOG_WARN_M("MemoryDomain", "allocation of {0} bytes would exceed limit {1}",
+                              size, owner_->usage_limit);
+        return false;
+    }
+    owner_->current_usage = new_usage;
+    if (new_usage > owner_->peak_usage) {
+        owner_->peak_usage = new_usage;
+    }
+    return true;
+}
+
+inline void IDomainHeap::TrackFree(CHAOS_IL2CPP_SIZE size) noexcept {
+    if (owner_ == nullptr) return;
+    owner_->current_usage -= static_cast<CHAOS_IL2CPP_INT64>(size);
+}
 
 // -----------------------------------------------------------------------
 // Domain-tagged allocation — cross-domain safe free routing.
@@ -135,6 +137,7 @@ void* DomainCurrentAllocateTagged(CHAOS_IL2CPP_SIZE size);
 /// DomainCurrentAllocateTagged().  Reads the header to route to the
 /// originating heap.  Safe to call even after the domain has been
 /// unloaded (no-ops when heap is gone).
+void DomainFreeTagged(void* ptr);
 // -----------------------------------------------------------------------
 using HeapFactoryFn = IDomainHeap* (*)(const MemoryDomain* domain, void* user_data);
 using HeapFactoryUserData = void*;
