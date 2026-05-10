@@ -592,8 +592,9 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 var thenBody = RemoveTrailingBranch(ite.ThenBody, targetOffset);
                 var elseBody = ite.ElseBody is null ? null : RemoveTrailingBranch(ite.ElseBody, targetOffset);
-                if (!ReferenceEquals(thenBody, ite.ThenBody) || !ReferenceEquals(elseBody, ite.ElseBody))
-                    return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator, thenBody, elseBody);
+                var postMergeBody = ite.PostMergeBody is null ? null : RemoveTrailingBranch(ite.PostMergeBody, targetOffset);
+                if (!ReferenceEquals(thenBody, ite.ThenBody) || !ReferenceEquals(elseBody, ite.ElseBody) || !ReferenceEquals(postMergeBody, ite.PostMergeBody))
+                    return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator, thenBody, elseBody, postMergeBody);
                 return ite;
             }
 
@@ -714,16 +715,21 @@ public sealed partial class NativeAotLoweringPlanner
                 int falseBlockIdx = startIndex + 1;
                 int? mergeOffset = FindMergePoint(cfg, startIndex, trueBlockIdx, falseBlockIdx);
 
-                int afterMergeIdx;
-                if (mergeOffset.HasValue &&
-                    cfg.OffsetToBlockIndex.TryGetValue(mergeOffset.Value, out var mergeIdx))
-                {
-                    afterMergeIdx = mergeIdx + 1;
-                }
-                else
-                {
-                    afterMergeIdx = endIndex + 1;
-                }
+                    int afterMergeIdx;
+                    if (ite is IRIfThenElse iteResult && iteResult.PostMergeBody != null)
+                    {
+                        // PostMergeBody absorbed all code from merge point to endIndex.
+                        afterMergeIdx = endIndex + 1;
+                    }
+                    else if (mergeOffset.HasValue &&
+                             cfg.OffsetToBlockIndex.TryGetValue(mergeOffset.Value, out var mergeIdx))
+                    {
+                        afterMergeIdx = mergeIdx + 1;
+                    }
+                    else
+                    {
+                        afterMergeIdx = endIndex + 1;
+                    }
 
                 var nodes = new List<StructuredIRNode> { ite };
                 if (afterMergeIdx <= endIndex)
@@ -785,7 +791,12 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 var ite = BuildIfThenElse(cfg, idx, endIndex, loopHeaderOffset, loopExitOffset);
                 seqNodes.Add(ite);
-                if (ite is IRIfThenElse)
+                if (ite is IRIfThenElse iteNode && iteNode.PostMergeBody != null)
+                {
+                    // PostMergeBody absorbed all code from merge to endIndex.
+                    idx = endIndex + 1;
+                }
+                else if (ite is IRIfThenElse)
                 {
                     int trueBlockIdx2 = cfg.OffsetToBlockIndex[block.ConditionalTarget.Value];
                     int falseBlockIdx2 = idx + 1;
@@ -966,12 +977,13 @@ public sealed partial class NativeAotLoweringPlanner
         int endIdx = endIndex;
 
         int? mergeOffset = FindMergePoint(cfg, conditionBlockIndex, trueBlockIdx, falseBlockIdx);
+        int mergeIdx = -1;
 
         StructuredIRNode thenBranch;
         StructuredIRNode? elseBranch;
         int? effectiveMerge = null;
 
-        if (mergeOffset.HasValue && cfg.OffsetToBlockIndex.TryGetValue(mergeOffset.Value, out var mergeIdx))
+        if (mergeOffset.HasValue && cfg.OffsetToBlockIndex.TryGetValue(mergeOffset.Value, out mergeIdx))
         {
             thenBranch = RecoverStructure(cfg, trueBlockIdx, mergeIdx - 1, loopHeaderOffset, loopExitOffset);
             // Else range must not overlap with the true-target block.
@@ -1005,11 +1017,20 @@ public sealed partial class NativeAotLoweringPlanner
                 elseBranch = RemoveTrailingBranch(elseBranch, effectiveMerge.Value);
         }
 
+        // Recover the merge block and all subsequent code as PostMergeBody.
+        // This naturally handles nested ITEs (merge block with conditional branch),
+        // sequential continuation code, and terminal blocks — without the caller
+        // skipping the merge block via mergeIdx + 1.
+        StructuredIRNode? postMergeBody = null;
+        if (effectiveMerge.HasValue && mergeIdx <= endIdx)
+            postMergeBody = RecoverStructure(cfg, mergeIdx, endIdx, loopHeaderOffset, loopExitOffset);
+
         return new IRIfThenElse(
             condBlock.BodyInstructions,
             condBlock.Terminator ?? throw new InvalidOperationException("Condition block must have a terminator"),
             thenBranch,
-            elseBranch);
+            elseBranch,
+            postMergeBody);
     }
 
     /// <summary>
@@ -1101,5 +1122,194 @@ public sealed partial class NativeAotLoweringPlanner
 
         int exitOffset = mergeIdx <= endIdx ? cfg.Blocks[mergeIdx].StartOffset : -1;
         return new IRSwitch(swBlock.BodyInstructions, caseBodies, defaultBody, exitOffset);
+    }
+
+    // ────────────────────────────────────────────────────────────────────────────
+    // Node Splitting — make irreducible CFGs reducible
+    // ────────────────────────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Attempt to make an irreducible CFG reducible by node splitting.
+    /// For each block that receives backward edges without being a proper loop
+    /// header, create a copy and redirect all forward (external) predecessors
+    /// to the copy, so the original block becomes a single-entry loop header.
+    /// </summary>
+    private static ControlFlowGraph ApplyNodeSplitting(ControlFlowGraph cfg)
+    {
+        var blocks = cfg.Blocks;
+        var offsetToBlockIndex = cfg.OffsetToBlockIndex;
+        var loopHeaders = cfg.LoopHeaders;
+        var preds = ComputePredecessors(blocks);
+
+        // Pass 1: find split candidates — blocks targeted by unnatural backward branches
+        var splitTargets = FindUnnaturalBackedgeTargets(blocks, offsetToBlockIndex, loopHeaders);
+
+        if (splitTargets.Count == 0)
+            return cfg; // nothing to split
+
+        int nextSynthOffset = -1;
+        var newBlocks = new List<BasicBlock>();
+        var newOffsetMap = new Dictionary<int, int>();
+
+        // Maps original index → new index of the split copy (for redirection)
+        var splitCopyIndex = new Dictionary<int, int>();
+
+        // Helper: check if an edge from sourceIdx to targetOffset in the original CFG is forward
+        bool IsForwardEdge(int sourceIdx, int? targetOffset)
+        {
+            if (!targetOffset.HasValue) return false;
+            if (!offsetToBlockIndex.TryGetValue(targetOffset.Value, out var targetIdx)) return false;
+            return sourceIdx < targetIdx;
+        }
+
+        // Pass 1: build newBlocks with clones for split targets.
+        // Clones get a synthetic negative offset and are inserted BEFORE the original block.
+        // The clone inherits the original's outgoing targets; forward edges from non-latch
+        // predecessors will be redirected to the clone in pass 2.
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            if (!splitTargets.Contains(i))
+            {
+                newOffsetMap[blocks[i].StartOffset] = newBlocks.Count;
+                newBlocks.Add(blocks[i]);
+                continue;
+            }
+
+            var original = blocks[i];
+            int synthOffset = nextSynthOffset--;
+
+            // Create a clone of the block with the same body + terminator + targets.
+            // It bridges external (forward) predecessors into the loop header.
+            var clone = new BasicBlock(
+                synthOffset,
+                original.BodyInstructions,
+                original.Terminator,
+                BasicBlockKind.Normal,
+                original.BranchTarget,
+                original.ConditionalTarget,
+                original.SwitchTargets,
+                original.IsTerminal);
+
+            int cloneIdx = newBlocks.Count;
+            splitCopyIndex[i] = cloneIdx;
+            newOffsetMap[synthOffset] = cloneIdx;
+            newBlocks.Add(clone);
+
+            // Original block follows — now only reached from backward edges
+            newOffsetMap[original.StartOffset] = newBlocks.Count;
+            newBlocks.Add(original);
+        }
+
+        // Pass 2: redirect forward edges from non-latch predecessors to the split copies.
+        // Iterate original indices; for each block, check if its outgoing targets
+        // point to a split target via a forward edge. If so, redirect to the clone.
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            int newIdx = newOffsetMap[blocks[i].StartOffset];
+            var b = newBlocks[newIdx];
+
+            int? newBranchTarget = b.BranchTarget;
+            if (IsForwardEdge(i, b.BranchTarget) && splitTargets.Contains(offsetToBlockIndex[b.BranchTarget!.Value]))
+                newBranchTarget = FindCloneOffset(offsetToBlockIndex[b.BranchTarget.Value], splitCopyIndex, newOffsetMap);
+
+            int? newConditionalTarget = b.ConditionalTarget;
+            if (IsForwardEdge(i, b.ConditionalTarget) && splitTargets.Contains(offsetToBlockIndex[b.ConditionalTarget!.Value]))
+                newConditionalTarget = FindCloneOffset(offsetToBlockIndex[b.ConditionalTarget.Value], splitCopyIndex, newOffsetMap);
+
+            IReadOnlyList<int> newSwitchTargets = b.SwitchTargets;
+            if (b.SwitchTargets.Count > 0)
+            {
+                var switched = false;
+                var list = new List<int>(b.SwitchTargets.Count);
+                foreach (var st in b.SwitchTargets)
+                {
+                    if (offsetToBlockIndex.TryGetValue(st, out var stIdx) &&
+                        IsForwardEdge(i, st) && splitTargets.Contains(stIdx))
+                    {
+                        var cloneOff = FindCloneOffset(stIdx, splitCopyIndex, newOffsetMap);
+                        list.Add(cloneOff ?? st);
+                        if (cloneOff != st) switched = true;
+                    }
+                    else
+                    {
+                        list.Add(st);
+                    }
+                }
+                if (switched) newSwitchTargets = list;
+            }
+
+            if (newBranchTarget != b.BranchTarget ||
+                newConditionalTarget != b.ConditionalTarget ||
+                newSwitchTargets != b.SwitchTargets)
+            {
+                newBlocks[newIdx] = new BasicBlock(
+                    b.StartOffset, b.BodyInstructions, b.Terminator, b.Kind,
+                    newBranchTarget, newConditionalTarget, newSwitchTargets, b.IsTerminal);
+            }
+        }
+
+        // Pass 3: Recompute dominators + loop headers + reducibility
+        var newDominators = ComputeDominators(newBlocks);
+        var newLoopHeaders = FindLoopHeaders(newBlocks, newOffsetMap, newDominators);
+        bool reducible = IsCfgReducible(newBlocks, newOffsetMap, newLoopHeaders);
+
+        return new ControlFlowGraph(newBlocks, newOffsetMap, newLoopHeaders, reducible);
+    }
+
+    /// <summary>
+    /// Find blocks that are the target of at least one unnatural backward branch
+    /// (backward edge where the target is not a loop header, or the source is not a latch).
+    /// </summary>
+    private static HashSet<int> FindUnnaturalBackedgeTargets(
+        IReadOnlyList<BasicBlock> blocks,
+        IReadOnlyDictionary<int, int> offsetToBlockIndex,
+        IReadOnlyDictionary<int, NaturalLoopInfo> loopHeaders)
+    {
+        var targets = new HashSet<int>();
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            var block = blocks[i];
+            CheckBackwardEdge(block.ConditionalTarget, i, offsetToBlockIndex, loopHeaders, targets);
+            CheckBackwardEdge(block.BranchTarget, i, offsetToBlockIndex, loopHeaders, targets);
+            if (block.SwitchTargets.Count > 0)
+            {
+                foreach (var t in block.SwitchTargets)
+                    CheckBackwardEdge(t, i, offsetToBlockIndex, loopHeaders, targets);
+            }
+        }
+        return targets;
+    }
+
+    private static void CheckBackwardEdge(
+        int? targetOffset, int sourceIdx,
+        IReadOnlyDictionary<int, int> offsetToBlockIndex,
+        IReadOnlyDictionary<int, NaturalLoopInfo> loopHeaders,
+        HashSet<int> targets)
+    {
+        if (!targetOffset.HasValue) return;
+        if (!offsetToBlockIndex.TryGetValue(targetOffset.Value, out var targetIdx)) return;
+        if (targetIdx >= sourceIdx) return; // not a backward edge
+
+        // Unnatural if target is not a loop header, or source is not a latch
+        if (!loopHeaders.ContainsKey(targetIdx) ||
+            !loopHeaders[targetIdx].LatchIndices.Contains(sourceIdx))
+        {
+            targets.Add(targetIdx);
+        }
+    }
+
+    /// <summary>
+    /// Find the synthetic offset assigned to a split copy of the given original block index.
+    /// </summary>
+    private static int? FindCloneOffset(int originalIdx, Dictionary<int, int> splitCopyIndex, IReadOnlyDictionary<int, int> newOffsetMap)
+    {
+        if (!splitCopyIndex.TryGetValue(originalIdx, out var cloneIdx))
+            return null;
+        foreach (var kvp in newOffsetMap)
+        {
+            if (kvp.Value == cloneIdx)
+                return kvp.Key;
+        }
+        return null;
     }
 }

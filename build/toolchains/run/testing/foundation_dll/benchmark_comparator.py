@@ -25,17 +25,6 @@ def _load_json(path: Path) -> dict[str, Any]:
         return json.load(f)
 
 
-def _compute_speedup_pct(managed_ms: float, native_ms: float) -> tuple[float, str]:
-    """Positive = native is faster; negative = managed is faster.
-
-    Returns (speedup_pct, status) where status is one of:
-    "matched", "invalid".
-    """
-    if managed_ms <= 0.0 or native_ms <= 0.0:
-        return 0.0, "invalid"
-    return ((managed_ms - native_ms) / managed_ms) * 100.0, "matched"
-
-
 def compare(
     managed_path: Path,
     native_path: Path,
@@ -68,6 +57,7 @@ def compare(
     equal_count = 0
     unmatched_count = 0
     invalid_count = 0
+    jit_elided_count = 0
     total_speedup = 0.0
     matched_count = 0
 
@@ -86,28 +76,73 @@ def compare(
             continue
 
         managed_ms = managed_entry.get("elapsedMilliseconds", 0.0)
-        native_ms = native_entry.get("elapsedMilliseconds", 0.0)
-        speedup_pct, status = _compute_speedup_pct(managed_ms, native_ms)
+        # Use calibrated native time (dispatch overhead subtracted) when available
+        native_calibrated = native_entry.get("calibratedMs")
+        native_ms = native_calibrated if native_calibrated is not None and native_calibrated >= 0 else native_entry.get("elapsedMilliseconds", 0.0)
 
-        if status == "invalid":
+        # invalid if: managed body is empty, native is stub, or elapsed is invalid
+        managed_body_real = managed_entry.get("isBodyReal", True)
+        managed_has_exception = managed_entry.get("isException", False)
+        native_status = native_entry.get("status", "completed")
+        is_invalid = (
+            not managed_body_real
+            or managed_has_exception
+            or native_status == "stub"
+            or native_status == "throws"
+            or managed_ms <= 0.0
+            or native_ms <= 0.0
+        )
+
+        # JIT elision detection: if managed took fewer than 1 ns per iteration,
+        # the JIT almost certainly optimized the call away. Mark as jit_elided
+        # and exclude from average speedup computation.
+        managed_ns_per_op = (managed_ms * 1_000_000) / max(managed_entry.get("iterations", 1), 1)
+        is_jit_elided = (
+            not is_invalid
+            and not managed_has_exception
+            and managed_ns_per_op < 1.0
+        )
+
+        if is_invalid:
             invalid_count += 1
-        elif speedup_pct > 1.0:
+            method_results.append({
+                "methodSubjectId": sid,
+                "status": "invalid",
+                "managedElapsedMs": managed_ms,
+                "nativeElapsedMs": native_ms,
+                "speedupPercent": None,
+            })
+            continue
+
+        if is_jit_elided:
+            jit_elided_count += 1
+            method_results.append({
+                "methodSubjectId": sid,
+                "status": "jit_elided",
+                "managedElapsedMs": managed_ms,
+                "nativeElapsedMs": native_ms,
+                "speedupPercent": None,
+                "jitNote": f"Managed ns/op ({managed_ns_per_op:.2f}) below physical minimum — JIT elided the call",
+            })
+            continue
+
+        speedup_pct = ((managed_ms - native_ms) / managed_ms) * 100.0
+        matched_count += 1
+        total_speedup += speedup_pct
+
+        if speedup_pct > 1.0:
             native_faster_count += 1
         elif speedup_pct < -1.0:
             managed_faster_count += 1
         else:
             equal_count += 1
 
-        if status == "matched":
-            matched_count += 1
-            total_speedup += speedup_pct
-
         method_results.append({
             "methodSubjectId": sid,
-            "status": status,
+            "status": "matched",
             "managedElapsedMs": managed_ms,
             "nativeElapsedMs": native_ms,
-            "speedupPercent": round(speedup_pct, 2) if status == "matched" else None,
+            "speedupPercent": round(speedup_pct, 2),
         })
 
     average_speedup = round(total_speedup / matched_count, 2) if matched_count > 0 else 0.0
@@ -121,6 +156,7 @@ def compare(
             "matchedCount": matched_count,
             "unmatchedCount": unmatched_count,
             "invalidCount": invalid_count,
+            "jitElidedCount": jit_elided_count,
             "nativeFasterCount": native_faster_count,
             "managedFasterCount": managed_faster_count,
             "equalCount": equal_count,

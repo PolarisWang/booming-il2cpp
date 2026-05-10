@@ -35,7 +35,8 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrInstructionArtifact> ConditionInstructions,
         AotCoreIrInstructionArtifact BranchTerminator,
         StructuredIRNode ThenBody,
-        StructuredIRNode? ElseBody
+        StructuredIRNode? ElseBody,
+        StructuredIRNode? PostMergeBody = null
     ) : StructuredIRNode;
 
     /// <summary>Header-controlled while loop.</summary>
@@ -146,6 +147,11 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             _depth -= count;
+        }
+
+        public void RestoreDepth(int savedDepth)
+        {
+            _depth = savedDepth;
         }
     }
 
@@ -274,7 +280,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             IRBlock { Terminator: { Op: "br" or "leave" } } => true,
             IRSequence seq => seq.Nodes.Any(ContainsResidualBranchTerminators),
-            IRIfThenElse ite => ContainsResidualBranchTerminators(ite.ThenBody) || (ite.ElseBody != null && ContainsResidualBranchTerminators(ite.ElseBody)),
+            IRIfThenElse ite => ContainsResidualBranchTerminators(ite.ThenBody) || (ite.ElseBody != null && ContainsResidualBranchTerminators(ite.ElseBody)) || (ite.PostMergeBody != null && ContainsResidualBranchTerminators(ite.PostMergeBody)),
             IRWhileLoop loop => ContainsResidualBranchTerminators(loop.Body),
             IRDoWhileLoop loop => ContainsResidualBranchTerminators(loop.Body),
             IRSwitch sw => sw.CaseBodies.Values.Any(ContainsResidualBranchTerminators) || (sw.DefaultBody != null && ContainsResidualBranchTerminators(sw.DefaultBody)),
@@ -296,7 +302,8 @@ public sealed partial class NativeAotLoweringPlanner
                     ite.ConditionInstructions,
                     ite.BranchTerminator,
                     StripExceptionPartitionExitTerminators(ite.ThenBody),
-                    ite.ElseBody is null ? null : StripExceptionPartitionExitTerminators(ite.ElseBody)),
+                    ite.ElseBody is null ? null : StripExceptionPartitionExitTerminators(ite.ElseBody),
+                    ite.PostMergeBody is null ? null : StripExceptionPartitionExitTerminators(ite.PostMergeBody)),
             IRWhileLoop loop
                 => new IRWhileLoop(
                     loop.ConditionInstructions,
@@ -481,6 +488,10 @@ public sealed partial class NativeAotLoweringPlanner
     {
         var terminator = ite.BranchTerminator;
 
+        // Capture depth before condition instructions — both branches must start
+        // from this depth so they converge on the same slot names.
+        int preConditionDepth = _activeStructuredSlotContext?.Depth ?? 0;
+
         // Emit condition instructions (push operands onto eval stack)
         foreach (var instr in ite.ConditionInstructions)
             EmitInstruction(builder, instr, indentation);
@@ -491,13 +502,24 @@ public sealed partial class NativeAotLoweringPlanner
         if (terminator.Op == "brtrue" || terminator.Op == "brfalse")
         {
             bool branchOnNonZero = terminator.Op == "brtrue";
-            string condition = branchOnNonZero
-                ? "chaos_condition != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
-                : "chaos_condition == static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+            string _cType = PeekSlotType();
+            string _cSlot = ConsumeEvalStackValueExpression();
+            // Condition operand consumed — depth is back to preConditionDepth
+            string _condition = _cType switch
+            {
+                "Float32" => branchOnNonZero
+                    ? $"chaos_load_float32({_cSlot}) != 0.0f"
+                    : $"chaos_load_float32({_cSlot}) == 0.0f",
+                "Float64" => branchOnNonZero
+                    ? $"ChaosLoadFloat64({_cSlot}) != 0.0"
+                    : $"ChaosLoadFloat64({_cSlot}) == 0.0",
+                _ => branchOnNonZero
+                    ? $"{_cSlot} != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
+                    : $"{_cSlot} == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+            };
 
             builder.AppendLine(indentation + "{");
-            builder.AppendLine(inner + $"const auto chaos_condition = {ConsumeEvalStackValueExpression()};");
-            builder.AppendLine(inner + "if (" + condition + ")");
+            builder.AppendLine(inner + "if (" + _condition + ")");
             builder.AppendLine(inner + "{");
             EmitStructuredIRNode(builder, ite.ThenBody, method, bodyIndent);
             builder.AppendLine(inner + "}");
@@ -506,8 +528,14 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 builder.AppendLine(inner + "else");
                 builder.AppendLine(inner + "{");
+                _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
                 EmitStructuredIRNode(builder, ite.ElseBody, method, bodyIndent);
                 builder.AppendLine(inner + "}");
+            }
+
+            if (ite.PostMergeBody != null)
+            {
+                EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
             }
 
             builder.AppendLine(indentation + "}");
@@ -535,20 +563,28 @@ public sealed partial class NativeAotLoweringPlanner
 
             builder.AppendLine(indentation + "{");
 
-            if (isUnsigned)
+            string _cmpRType = PeekSlotType();
+            string _cmpRExpr = ConsumeEvalStackValueExpression();
+            string _cmpLType = PeekSlotType();
+            string _cmpLExpr = ConsumeEvalStackValueExpression();
+            string _cmpRight = _cmpRType switch
             {
-                builder.AppendLine(inner +
-                    $"const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()}));");
-                builder.AppendLine(inner +
-                    $"const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()}));");
-            }
-            else
+                "Float32" => $"chaos_load_float32({_cmpRExpr})",
+                "Float64" => $"ChaosLoadFloat64({_cmpRExpr})",
+                _ => isUnsigned
+                    ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({_cmpRExpr}))"
+                    : $"static_cast<{valueType}>({_cmpRExpr})",
+            };
+            string _cmpLeft = _cmpLType switch
             {
-                builder.AppendLine(inner +
-                    $"const auto chaos_right = static_cast<{valueType}>({ConsumeEvalStackValueExpression()});");
-                builder.AppendLine(inner +
-                    $"const auto chaos_left = static_cast<{valueType}>({ConsumeEvalStackValueExpression()});");
-            }
+                "Float32" => $"chaos_load_float32({_cmpLExpr})",
+                "Float64" => $"ChaosLoadFloat64({_cmpLExpr})",
+                _ => isUnsigned
+                    ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({_cmpLExpr}))"
+                    : $"static_cast<{valueType}>({_cmpLExpr})",
+            };
+            builder.AppendLine(inner + $"const auto chaos_right = {_cmpRight};");
+            builder.AppendLine(inner + $"const auto chaos_left = {_cmpLeft};");
 
             builder.AppendLine(inner + "if (chaos_left " + cmpOp + " chaos_right)");
             builder.AppendLine(inner + "{");
@@ -559,9 +595,13 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 builder.AppendLine(inner + "else");
                 builder.AppendLine(inner + "{");
+                _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
                 EmitStructuredIRNode(builder, ite.ElseBody, method, bodyIndent);
                 builder.AppendLine(inner + "}");
             }
+
+            if (ite.PostMergeBody != null)
+                EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
 
             builder.AppendLine(indentation + "}");
         }
@@ -601,13 +641,23 @@ public sealed partial class NativeAotLoweringPlanner
         if (terminator.Op == "brtrue" || terminator.Op == "brfalse")
         {
             bool branchOnNonZero = terminator.Op == "brtrue";
-            string condition = branchOnNonZero
-                ? "chaos_condition != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
-                : "chaos_condition == static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+            string _cType = PeekSlotType();
+            string _cSlot = ConsumeEvalStackValueExpression();
+            string _condition = _cType switch
+            {
+                "Float32" => branchOnNonZero
+                    ? $"chaos_load_float32({_cSlot}) != 0.0f"
+                    : $"chaos_load_float32({_cSlot}) == 0.0f",
+                "Float64" => branchOnNonZero
+                    ? $"ChaosLoadFloat64({_cSlot}) != 0.0"
+                    : $"ChaosLoadFloat64({_cSlot}) == 0.0",
+                _ => branchOnNonZero
+                    ? $"{_cSlot} != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
+                    : $"{_cSlot} == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+            };
 
             builder.AppendLine(indentation + "{");
-            builder.AppendLine(inner + $"const auto chaos_condition = {ConsumeEvalStackValueExpression()};");
-            builder.AppendLine(inner + "while (" + condition + ")");
+            builder.AppendLine(inner + "while (" + _condition + ")");
             builder.AppendLine(inner + "{");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
             builder.AppendLine(inner + "}");
@@ -636,20 +686,28 @@ public sealed partial class NativeAotLoweringPlanner
 
             builder.AppendLine(indentation + "{");
 
-            if (isUnsigned)
+            string _cmpRType = PeekSlotType();
+            string _cmpRExpr = ConsumeEvalStackValueExpression();
+            string _cmpLType = PeekSlotType();
+            string _cmpLExpr = ConsumeEvalStackValueExpression();
+            string _cmpRight = _cmpRType switch
             {
-                builder.AppendLine(inner +
-                    $"const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()}));");
-                builder.AppendLine(inner +
-                    $"const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()}));");
-            }
-            else
+                "Float32" => $"chaos_load_float32({_cmpRExpr})",
+                "Float64" => $"ChaosLoadFloat64({_cmpRExpr})",
+                _ => isUnsigned
+                    ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({_cmpRExpr}))"
+                    : $"static_cast<{valueType}>({_cmpRExpr})",
+            };
+            string _cmpLeft = _cmpLType switch
             {
-                builder.AppendLine(inner +
-                    $"const auto chaos_right = static_cast<{valueType}>({ConsumeEvalStackValueExpression()});");
-                builder.AppendLine(inner +
-                    $"const auto chaos_left = static_cast<{valueType}>({ConsumeEvalStackValueExpression()});");
-            }
+                "Float32" => $"chaos_load_float32({_cmpLExpr})",
+                "Float64" => $"ChaosLoadFloat64({_cmpLExpr})",
+                _ => isUnsigned
+                    ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({_cmpLExpr}))"
+                    : $"static_cast<{valueType}>({_cmpLExpr})",
+            };
+            builder.AppendLine(inner + $"const auto chaos_right = {_cmpRight};");
+            builder.AppendLine(inner + $"const auto chaos_left = {_cmpLeft};");
 
             builder.AppendLine(inner + "while (chaos_left " + cmpOp + " chaos_right)");
             builder.AppendLine(inner + "{");
@@ -686,12 +744,22 @@ public sealed partial class NativeAotLoweringPlanner
                 bool branchOnNonZero = terminator.Op == "brtrue";
                 // For do-while, the latch branch is the loop-back branch.
                 // When it's false, we break out (invert the condition).
-                string condition = branchOnNonZero
-                    ? "chaos_condition != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
-                    : "chaos_condition == static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                string _cType = PeekSlotType();
+                string _cSlot = ConsumeEvalStackValueExpression();
+                string _condition = _cType switch
+                {
+                    "Float32" => branchOnNonZero
+                        ? $"chaos_load_float32({_cSlot}) != 0.0f"
+                        : $"chaos_load_float32({_cSlot}) == 0.0f",
+                    "Float64" => branchOnNonZero
+                        ? $"ChaosLoadFloat64({_cSlot}) != 0.0"
+                        : $"ChaosLoadFloat64({_cSlot}) == 0.0",
+                    _ => branchOnNonZero
+                        ? $"{_cSlot} != static_cast<CHAOS_IL2CPP_INTPTR>(0)"
+                        : $"{_cSlot} == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+                };
 
-                builder.AppendLine(bodyIndent + $"const auto chaos_condition = {ConsumeEvalStackValueExpression()};");
-                builder.AppendLine(bodyIndent + "if (!(" + condition + ")) break;");
+                builder.AppendLine(bodyIndent + "if (!(" + _condition + ")) break;");
             }
             else if (terminator.Op == "br")
             {
@@ -888,13 +956,13 @@ public sealed partial class NativeAotLoweringPlanner
                     case "arglist":
                         totalPushes++; break;
 
-                    case "pop": case "stloc": case "initobj":
+                    case "pop": case "stloc": case "starg": case "initobj":
                     case "stsfld":
                     case "throw":
                     case "brfalse": case "brtrue":
                         break;
 
-                    case "stfld": case "stobj":
+                    case "initblk": case "stfld": case "stobj":
                     case "stind.i4": case "stind.i1": case "stind.i2":
                     case "stind.i8": case "stind.r4": case "stind.r8": case "stind.ref":
                     case "stind.i":
@@ -902,16 +970,16 @@ public sealed partial class NativeAotLoweringPlanner
                     case "bne.un": case "bge.un":
                         break;
 
-                    case "stelem": case "stelem.ref":
+                    case "stelem": case "stelem.i": case "stelem.ref":
                     case "cpblk":
                         break;
 
                     case "cgt.un": case "ceq": case "cgt": case "clt":
-                    case "add": case "sub": case "mul": case "div": case "rem":
+                    case "add": case "sub": case "mul": case "div": case "div.un": case "rem": case "rem.un":
                     case "shl": case "shr": case "shr.un":
                     case "and": case "or": case "xor":
                     case "add.ovf": case "sub.ovf": case "mul.ovf":
-                    case "ldelem": case "ldelem.ref": case "ldelema":
+                    case "ldelem": case "ldelem.i": case "ldelem.ref": case "ldelema":
                         totalPushes++; break;  // net: pop 2 push 1 = one new slot
 
                     case "ldfld": case "ldflda":
@@ -925,14 +993,21 @@ public sealed partial class NativeAotLoweringPlanner
                     case "conv.i4": case "conv.i1": case "conv.i2": case "conv.i8":
                     case "conv.u8": case "conv.r4": case "conv.r8": case "conv.u":
                     case "conv.u1": case "conv.u2": case "conv.u4":
-                    case "conv.r.un":
+                    case "conv.r.un": case "ckfinite":
                     case "conv.ovf.i1": case "conv.ovf.u1": case "conv.ovf.i2": case "conv.ovf.u2":
                     case "conv.ovf.i4": case "conv.ovf.u4": case "conv.ovf.i8": case "conv.ovf.u8":
-                    case "conv.ovf.i": case "conv.ovf.u":
+                    case "conv.ovf.i": case "conv.ovf.u": case "conv.ovf.i8.un": case "conv.ovf.u8.un": case "conv.ovf.i.un": case "conv.ovf.u.un":
+                    case "conv.ovf.i1.un": case "conv.ovf.i2.un": case "conv.ovf.i4.un":
+                    case "conv.ovf.u1.un": case "conv.ovf.u2.un": case "conv.ovf.u4.un":
                     case "not":
-                    case "mkrefany": case "refanyval": case "refanytype":
+                    case "mkrefany":
+                        totalPushes += 2; break;  // pop 1 ptr, push 2 (typeHandle + ptr)
+                    case "refanyval": case "refanytype":
                     case "ldvirtftn":
-                        totalPushes++; break;  // pop 1 push 1 = one new slot
+                        totalPushes++; break;  // pop 2 push 1 (refanyval/refanytype) or pop 1 push 1 (ldvirtftn)
+
+                    case "jmp":
+                        break;  // forwards chaos_args directly, no stack effect
 
                     case "call": case "callvirt": case "calli": case "newobj":
                         string? callee = instr.Callee ?? instr.TargetReference?.SubjectId;
@@ -994,7 +1069,7 @@ public sealed partial class NativeAotLoweringPlanner
                     pushes = 1; pops = 0; break;
 
                 // Pure pops (-1)
-                case "pop": case "stloc": case "initobj":
+                case "pop": case "stloc": case "starg": case "initobj":
                 case "stsfld":
                 case "throw":
                 case "brfalse": case "brtrue":
@@ -1011,17 +1086,17 @@ public sealed partial class NativeAotLoweringPlanner
                     pushes = 0; pops = 2; break;
 
                 // Pops 3
-                case "stelem": case "stelem.ref":
+                case "stelem": case "stelem.i": case "stelem.ref":
                 case "cpblk":
                     pushes = 0; pops = 3; break;
 
                 // Pop 2, push 1 (net -1)
                 case "cgt.un": case "ceq": case "cgt": case "clt":
-                case "add": case "sub": case "mul": case "div": case "rem":
+                case "add": case "sub": case "mul": case "div": case "div.un": case "rem": case "rem.un":
                 case "shl": case "shr": case "shr.un":
                 case "and": case "or": case "xor":
                 case "add.ovf": case "sub.ovf": case "mul.ovf": case "add.ovf.un": case "sub.ovf.un": case "mul.ovf.un":
-                case "ldelem": case "ldelem.ref": case "ldelema":
+                case "ldelem": case "ldelem.i": case "ldelem.ref": case "ldelema":
                     pushes = 1; pops = 2; break;
 
                 // Pop 1, push 1 (net 0 鈥?in-place transformation)
@@ -1036,12 +1111,17 @@ public sealed partial class NativeAotLoweringPlanner
                 case "conv.i4": case "conv.i1": case "conv.i2": case "conv.i8":
                 case "conv.u8": case "conv.r4": case "conv.r8": case "conv.u":
                 case "conv.u1": case "conv.u2": case "conv.u4":
-                case "conv.r.un":
+                case "conv.r.un": case "ckfinite":
                 case "conv.ovf.i1": case "conv.ovf.u1": case "conv.ovf.i2": case "conv.ovf.u2":
                 case "conv.ovf.i4": case "conv.ovf.u4": case "conv.ovf.i8": case "conv.ovf.u8":
-                case "conv.ovf.i": case "conv.ovf.u":
+                case "conv.ovf.i": case "conv.ovf.u": case "conv.ovf.i8.un": case "conv.ovf.u8.un": case "conv.ovf.i.un": case "conv.ovf.u.un":
+                    case "conv.ovf.i1.un": case "conv.ovf.i2.un": case "conv.ovf.i4.un":
+                    case "conv.ovf.u1.un": case "conv.ovf.u2.un": case "conv.ovf.u4.un":
                 case "not":
-                case "mkrefany": case "refanyval": case "refanytype":
+                case "mkrefany":
+                    pushes = 2; pops = 1; break;  // pop 1 ptr, push 2 (typeHandle + ptr)
+                case "refanyval": case "refanytype":
+                    pushes = 1; pops = 2; break;  // pop 2 (typeHandle+ptr), push 1 result
                 case "ldvirtftn":
                     pushes = 1; pops = 1; break;
 
@@ -1108,6 +1188,10 @@ public sealed partial class NativeAotLoweringPlanner
                         depth = 0;
                     break;
 
+                // jmp: forwards chaos_args directly, no stack effect
+                case "jmp":
+                    pushes = 0; pops = 0; break;
+
                 // switch: pop index value
                 case "switch":
                     pushes = 0; pops = 1; break;
@@ -1170,6 +1254,7 @@ public sealed partial class NativeAotLoweringPlanner
                 LogIrreducibleMethod(method, isException: true,
                     reason: body is IRFlatRegion ? "exception-shape-unhandled" : "exception-shape-failed",
                     instructions.Count, 0, 0, 0);
+                return false; // IRFlatRegion → caller must allocate eval stack
             }
             else
             {
@@ -1181,14 +1266,24 @@ public sealed partial class NativeAotLoweringPlanner
         var cfg = BuildControlFlowGraph(instructions, offsets);
         if (!cfg.IsReducible)
         {
-            Interlocked.Increment(ref s_flatRegionCount);
-            body = new IRFlatRegion(instructions, offsets);
-            maxDepth = ComputeMaxEvalStackDepth(instructions);
-            LogIrreducibleMethod(method, isException: false,
-                reason: ClassifyIrreducibleReason(cfg),
-                instructions.Count, cfg.Blocks.Count, cfg.LoopHeaders.Count,
-                method.ExceptionRegionCount);
-            return true;
+            var splitCfg = ApplyNodeSplitting(cfg);
+            if (splitCfg.IsReducible)
+            {
+                cfg = splitCfg;
+                LogStructuredMethod(method, "node-split", instructions.Count,
+                    cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
+            }
+            else
+            {
+                Interlocked.Increment(ref s_flatRegionCount);
+                body = new IRFlatRegion(instructions, offsets);
+                maxDepth = ComputeMaxEvalStackDepth(instructions);
+                LogIrreducibleMethod(method, isException: false,
+                    reason: ClassifyIrreducibleReason(cfg) + "+split-failed",
+                    instructions.Count, cfg.Blocks.Count, cfg.LoopHeaders.Count,
+                    method.ExceptionRegionCount);
+                return true;
+            }
         }
 
         body = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
@@ -1241,8 +1336,15 @@ public sealed partial class NativeAotLoweringPlanner
         if (body is null)
             return;
 
+        if (body is IRFlatRegion flatRegion)
+        {
+            EmitFlatGotoBody(builder, method, flatRegion.Instructions, flatRegion.Offsets);
+            return;
+        }
+
         StructuredSlotEmissionContext? previousSlotContext = _activeStructuredSlotContext;
         _activeStructuredSlotContext = new StructuredSlotEmissionContext();
+        _structuredSlotTypes.Clear();
         try
         {
             EmitStructuredIRNode(builder, body!, method, "    ");
@@ -1250,6 +1352,7 @@ public sealed partial class NativeAotLoweringPlanner
         finally
         {
             _activeStructuredSlotContext = previousSlotContext;
+            _structuredSlotTypes.Clear();
         }
     }
 

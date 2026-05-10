@@ -210,6 +210,17 @@ def _extract_method_symbols(cpp_path: Path) -> list[str]:
     symbols: list[str] = []
     content = cpp_path.read_text(encoding="utf-8")
     for line in content.splitlines():
+        # New format: extern "C" void Namespace_Namespace_MethodN(void)
+        m = re.match(
+            r'extern\s+"C"\s+void\s+(\w+_Method\d+)\(void\)',
+            line.strip(),
+        )
+        if m:
+            sym = m.group(1)
+            if sym not in symbols:
+                symbols.append(sym)
+            continue
+        # Old format: extern "C" CHAOS_IL2CPP_INT32 Name_MethodN(void)
         m = re.match(
             r'extern\s+"C"\s+CHAOS_IL2CPP_INT32\s+(\w+_Method\d+)\(void\)',
             line.strip(),
@@ -232,6 +243,26 @@ def _load_contract(family_slug: str) -> list[str]:
     if not mids:
         mids = [m["methodSubjectId"] for m in contract.get("methodContracts", []) if m.get("methodSubjectId")]
     return mids
+
+
+def _detect_method_return_type(family_slug: str) -> str:
+    """Detect whether codegen uses 'void' or 'CHAOS_IL2CPP_INT32' return type.
+
+    Scans the genuine TU for MethodN forward declaration/definition format.
+    Returns 'void' or 'CHAOS_IL2CPP_INT32'.
+    """
+    host_cpp = _find_genuine_cpp(family_slug)
+    if host_cpp is None or not host_cpp.exists():
+        return "CHAOS_IL2CPP_INT32"  # default
+    content = host_cpp.read_text(encoding="utf-8")
+    for line in content.splitlines():
+        m = re.match(
+            r'extern\s+"C"\s+(void|CHAOS_IL2CPP_INT32)\s+\w+_Method\d+\(void\)',
+            line.strip(),
+        )
+        if m:
+            return m.group(1)
+    return "CHAOS_IL2CPP_INT32"  # default
 
 
 def _detect_aborting_methods(family_slug: str, host_symbols: list[str]) -> set[int]:
@@ -358,7 +389,10 @@ def _detect_aborting_methods(family_slug: str, host_symbols: list[str]) -> set[i
 
     for sym, midx in sym_indexes.items():
         # Find the method body (skip forward declarations ending with ";")
-        needle = f'extern "C" CHAOS_IL2CPP_INT32 {sym}(void)'
+        # Try void return format first, then CHAOS_IL2CPP_INT32 fallback
+        needle_void = f'extern "C" void {sym}(void)'
+        needle_int32 = f'extern "C" CHAOS_IL2CPP_INT32 {sym}(void)'
+        needle = needle_void if needle_void in content else needle_int32
         search_from = 0
         idx = -1
         while True:
@@ -471,6 +505,9 @@ def _generate_hotupdate_test(
     host_class_name = _class_name(family_slug, "host")
     patch_data_cxx, _ = _embed_patch_data(family_slug)
 
+    # Detect whether codegen uses 'void' or 'CHAOS_IL2CPP_INT32' return type
+    return_type = _detect_method_return_type(family_slug)
+
     # Detect methods that abort during baseline capture (call null-returning stub → abort)
     aborting_indices = _detect_aborting_methods(family_slug, host_symbols)
 
@@ -480,9 +517,9 @@ def _generate_hotupdate_test(
     _emit_header(lines, family_id, method_count)
     if patch_data_cxx:
         lines.append(patch_data_cxx)
-    _emit_forward_decls(lines, host_symbols)
-    _emit_namespace_block(lines, host_symbols, method_count)
-    _emit_main_function(lines, method_count, family_id, bool(patch_data_cxx), host_class_name, aborting_indices)
+    _emit_forward_decls(lines, host_symbols, return_type)
+    _emit_namespace_block(lines, host_symbols, method_count, return_type)
+    _emit_main_function(lines, method_count, family_id, bool(patch_data_cxx), host_class_name, aborting_indices, return_type)
 
     return "\n".join(lines)
 
@@ -551,19 +588,25 @@ def _emit_header(
 def _emit_forward_decls(
     lines: list[str],
     host_symbols: list[str],
+    return_type: str = "CHAOS_IL2CPP_INT32",
 ) -> None:
     lines.append("// ---------------------------------------------------------------")
     lines.append("// Forward declarations: host methods (real API calls via CodeGen)")
     lines.append("// ---------------------------------------------------------------")
     for sym in host_symbols:
-        lines.append(f'extern "C" CHAOS_IL2CPP_INT32 {sym}(void);')
+        lines.append(f'extern "C" {return_type} {sym}(void);')
 
 
 def _emit_namespace_block(
     lines: list[str],
     host_symbols: list[str],
     method_count: int,
+    return_type: str = "CHAOS_IL2CPP_INT32",
 ) -> None:
+    is_void_return = (return_type == "void")
+    # For void-returning methods: void (*kHostThunks[])()
+    # For CHAOS_IL2CPP_INT32-returning: void* (*kHostThunks[])()
+    fn_ptr_cast = "void (*)()" if is_void_return else "void* (*)()"
     lines.extend([
         "",
         "namespace {",
@@ -579,10 +622,13 @@ def _emit_namespace_block(
         "constexpr uint32_t kBaseToken = 0x06000001u;",
         "",
         "// Host method pointer array (auto-indexed by MethodN ordering)",
-        "void* (*kHostThunks[])() = {",
     ])
+    if is_void_return:
+        lines.append("    void (*kHostThunks[])() = {")
+    else:
+        lines.append("    void* (*kHostThunks[])() = {")
     for sym in host_symbols:
-        lines.append(f"    reinterpret_cast<void* (*)()>(&{sym}),")
+        lines.append(f"    reinterpret_cast<{fn_ptr_cast}>(&{sym}),")
     lines.extend([
         "};",
         "",
@@ -593,7 +639,9 @@ def _emit_namespace_block(
 def _emit_main_function(lines: list[str], method_count: int, family_id: str,
                          has_patch_data: bool,
                          host_class_name: str,
-                         aborting_indices: set[int] = set()) -> None:
+                         aborting_indices: set[int] = set(),
+                         return_type: str = "CHAOS_IL2CPP_INT32") -> None:
+    is_void_return = (return_type == "void")
     # Emit aborting-methods helpers as file-scope statics before main()
     aborting_sorted = sorted(aborting_indices)
     if aborting_sorted:
@@ -678,26 +726,54 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
         "    }",
         "    (void)first_entry;",
         "",
-        "    // ── Step A: Capture AOT baseline (pre-patch return values) ─────",
-        "    // Call each host method directly to establish the AOT return value.",
-        "    // Methods that crash during direct execution are skipped (baseline = 0).",
-        "    // Uses __try/__except to catch ACCESS_VIOLATION so one bad method",
-        "    // doesn't kill the whole test.  Methods that __fastfail (std::abort)",
-        "    // are handled via static IsAbortingMethod detection instead.",
-        "    CHAOS_IL2CPP_INT32 baseline_values[kMethodCount] = {};",
-        "    for (uint32_t i = 0u; i < kMethodCount; i++) {",
-        "        if (IsAbortingMethod(i)) {",
-        "            baseline_values[i] = 0;",
-        "            continue;",
-        "        }",
-        "        __try {",
-        "            baseline_values[i] = reinterpret_cast<int32_t>(kHostThunks[i]());",
-        "        } __except (EXCEPTION_EXECUTE_HANDLER) {",
-        "            baseline_values[i] = 0;",
-        "        }",
-        "    }",
-        "",
     ])
+
+    if is_void_return:
+        baseline_lines = [
+            "    // ── Step A: Capture AOT baseline (pre-patch call verification) ─────",
+            "    // Call each host method directly. Since codegen emits void return,",
+            "    // there is no return value to capture; we just verify the call doesn't crash.",
+            "    // Methods that crash during direct execution are skipped.",
+            "    // Uses __try/__except to catch ACCESS_VIOLATION so one bad method",
+            "    // doesn't kill the whole test.  Methods that __fastfail (std::abort)",
+            "    // are handled via static IsAbortingMethod detection instead.",
+            "    CHAOS_IL2CPP_INT32 baseline_values[kMethodCount] = {};",
+            "    for (uint32_t i = 0u; i < kMethodCount; i++) {",
+            "        if (IsAbortingMethod(i)) {",
+            "            baseline_values[i] = 0;",
+            "            continue;",
+            "        }",
+            "        __try {",
+            "            kHostThunks[i]();",
+            "            baseline_values[i] = 0;",
+            "        } __except (EXCEPTION_EXECUTE_HANDLER) {",
+            "            baseline_values[i] = 0;",
+            "        }",
+            "    }",
+        ]
+    else:
+        baseline_lines = [
+            "    // ── Step A: Capture AOT baseline (pre-patch return values) ─────",
+            "    // Call each host method directly to establish the AOT return value.",
+            "    // Methods that crash during direct execution are skipped (baseline = 0).",
+            "    // Uses __try/__except to catch ACCESS_VIOLATION so one bad method",
+            "    // doesn't kill the whole test.  Methods that __fastfail (std::abort)",
+            "    // are handled via static IsAbortingMethod detection instead.",
+            "    CHAOS_IL2CPP_INT32 baseline_values[kMethodCount] = {};",
+            "    for (uint32_t i = 0u; i < kMethodCount; i++) {",
+            "        if (IsAbortingMethod(i)) {",
+            "            baseline_values[i] = 0;",
+            "            continue;",
+            "        }",
+            "        __try {",
+            "            baseline_values[i] = reinterpret_cast<int32_t>(kHostThunks[i]());",
+            "        } __except (EXCEPTION_EXECUTE_HANDLER) {",
+            "            baseline_values[i] = 0;",
+            "        }",
+            "    }",
+        ]
+    lines.extend(baseline_lines)
+
     if has_patch_data:
         lines.extend([
             "",
@@ -786,11 +862,9 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             "            InterpreterEntryDirect(method_key, nullptr, &patch_return_value);",
             "        }",
             "",
-            "        // Step 6a: Semantic verification — compare patched interpreter",
-            "        // return value against the AOT baseline captured pre-patch.",
-            "        // If they match, the patch IL produces semantically identical results.",
-            "        // For methods that abort during direct AOT execution, skip comparison.",
-            "        bool semantic_ok = IsAbortingMethod(i) || (patch_return_value == baseline_values[i]);",
+            "        // Step 6a: Semantic verification.",
+            "        // For void-returning methods, skip comparison (no return value to compare).",
+            f"        bool semantic_ok = {'true' if is_void_return else 'IsAbortingMethod(i) || (patch_return_value == baseline_values[i])'};",
             "        if (!semantic_ok && d3_patched_count > 0u) {",
             '            std::fprintf(stderr, "FAIL[%u]: semantic mismatch \\u2014 AOT baseline=%d, patch=%d\\n",',
             "                i, static_cast<int>(baseline_values[i]),",
@@ -845,13 +919,24 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
             "                if (IsAbortingMethod(j)) {",
             "                    results[j].revert_ok = true;  // no baseline to compare",
             "                } else {",
-            "                    auto revert_value = reinterpret_cast<int32_t(*)()>(e->direct_ptr)();",
-            "                    results[j].revert_ok = (revert_value == baseline_values[j]);",
-            "                    if (!results[j].revert_ok) {",
-            '                        std::fprintf(stderr, "FAIL[unpatch]: entry[%u] revert mismatch (expected=%d, actual=%d)\\n",',
-            "                            j, static_cast<int>(baseline_values[j]), static_cast<int>(revert_value));",
-            "                        failed_count++;",
-            "                    }",
+        ])
+        if is_void_return:
+            lines.extend([
+                "                    auto revert_fn = reinterpret_cast<void(*)()>(e->direct_ptr);",
+                "                    revert_fn();",
+                "                    results[j].revert_ok = true;",
+            ])
+        else:
+            lines.extend([
+                "                    auto revert_value = reinterpret_cast<int32_t(*)()>(e->direct_ptr)();",
+                "                    results[j].revert_ok = (revert_value == baseline_values[j]);",
+                "                    if (!results[j].revert_ok) {",
+                '                        std::fprintf(stderr, "FAIL[unpatch]: entry[%u] revert mismatch (expected=%d, actual=%d)\\n",',
+                "                            j, static_cast<int>(baseline_values[j]), static_cast<int>(revert_value));",
+                "                        failed_count++;",
+                "                    }",
+            ])
+        lines.extend([
             "                }",
             "            } else {",
             "                results[j].revert_ok = false;",
@@ -915,7 +1000,13 @@ def _emit_main_function(lines: list[str], method_count: int, family_id: str,
 
 
 def _generate_hotupdate_cmake_full(family_slug: str) -> str:
-    """Generate the complete CMakeLists.txt with Hotpatch target."""
+    """Generate the complete CMakeLists.txt with Hotpatch target.
+
+    Uses REPO_ROOT computed relative to CMAKE_CURRENT_LIST_DIR so the file
+    works when configured standalone (not as part of the solution_native build).
+    Links against prebuilt .lib files with full paths to avoid RuntimeLibrary
+    mismatches.
+    """
     ns_slug = _ns_slug_from_family_id(family_id=f"family/System.Private.CoreLib/{family_slug.replace('-', '/')}")
     target = f"chaos_hotupdate_{ns_slug}"
 
@@ -929,6 +1020,12 @@ def _generate_hotupdate_cmake_full(family_slug: str) -> str:
 
     dummy_lib = f"family_{ns_slug}_dummy"
     return (
+        'cmake_minimum_required(VERSION 3.15)\n'
+        f'project(chaos_hotupdate_{ns_slug} LANGUAGES CXX)\n'
+        '\n'
+        '# Relative to repo root (il2cpp_dist = rooted at ../../../../.. from repo root)\n'
+        'get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../../../.." ABSOLUTE)\n'
+        '\n'
         f"add_library({dummy_lib} INTERFACE)\n"
         "\n"
         "# Per-family Hotpatch test.\n"
@@ -942,34 +1039,37 @@ def _generate_hotupdate_cmake_full(family_slug: str) -> str:
         ")\n"
         f"target_compile_features({target} PRIVATE cxx_std_17)\n"
         f"target_compile_definitions({target} PRIVATE CHAOS_RUNTIME_ABI_STATIC)\n"
+        f"target_compile_definitions({target} PRIVATE NOMINMAX)\n"
         f"target_include_directories({target} PRIVATE\n"
-        "    ${CMAKE_SOURCE_DIR}/src/native/common\n"
-        "    ${CMAKE_SOURCE_DIR}/contracts/native/v0\n"
-        "    ${CMAKE_SOURCE_DIR}/src/native/runtime-core\n"
-        "    ${CMAKE_SOURCE_DIR}/src/native/bootstrap\n"
-        "    ${CMAKE_SOURCE_DIR}/src/native/interpreter\n"
-        "    ${CMAKE_SOURCE_DIR}/third_party/bdwgc/include\n"
-        "    ${CMAKE_SOURCE_DIR}/verification/foundation-dll/System.Private.CoreLib\n"
+        "    ${REPO_ROOT}/src/native/common\n"
+        "    ${REPO_ROOT}/contracts/native/v0\n"
+        "    ${REPO_ROOT}/src/native/runtime-core\n"
+        "    ${REPO_ROOT}/src/native/bootstrap\n"
+        "    ${REPO_ROOT}/src/native/interpreter\n"
+        "    ${REPO_ROOT}/third_party/bdwgc/include\n"
+        "    ${REPO_ROOT}/third_party/fmt/include\n"
+        "    ${REPO_ROOT}/verification/foundation-dll/System.Private.CoreLib\n"
         ")\n"
         "# Force-include hotupdate config so CodeGen-generated code can find\n"
         "# chaos_managed_pointer_local_slot_tag, chaos_is_string_id, etc.\n"
         f"target_compile_options({target} PRIVATE\n"
-        '    $<$<CXX_COMPILER_ID:MSVC>:/FI"${CMAKE_SOURCE_DIR}/verification/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h">\n'
-        '    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-include${CMAKE_SOURCE_DIR}/verification/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h>\n'
+        '    $<$<CXX_COMPILER_ID:MSVC>:/FI"${REPO_ROOT}/verification/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h">\n'
+        '    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-include${REPO_ROOT}/verification/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h>\n'
         ")\n"
         "# fmt requires /utf-8 on MSVC\n"
         f"target_compile_options({target} PRIVATE\n"
         "    $<$<CXX_COMPILER_ID:MSVC>:/utf-8>\n"
         ")\n"
+        'set(NATIVE_LIB_DIR "${REPO_ROOT}/build/native")\n'
         f"target_link_libraries({target} PRIVATE\n"
-        "    chaos_hot_update\n"
-        "    chaos_bootstrap\n"
-        "    chaos_runtime_core\n"
-        "    chaos_interpreter\n"
-        "    chaos_bdwgc\n"
-        "    chaos_common\n"
-        # Note: force-reference in HotUpdateTest.cpp (GetCurrentRuntimeState())
-        # resolves MSVC intra-lib circular deps — no WHOLEARCHIVE needed.
+        '    "${NATIVE_LIB_DIR}/src/native/hot-update/RelWithDebInfo/chaos_hot_update.lib"\n'
+        '    "${NATIVE_LIB_DIR}/src/native/bootstrap/RelWithDebInfo/chaos_bootstrap.lib"\n'
+        '    "${NATIVE_LIB_DIR}/src/native/runtime-core/RelWithDebInfo/chaos_runtime_core.lib"\n'
+        '    "${NATIVE_LIB_DIR}/src/native/interpreter/RelWithDebInfo/chaos_interpreter.lib"\n'
+        '    "${NATIVE_LIB_DIR}/src/native/common/RelWithDebInfo/chaos_common.lib"\n'
+        '    "${NATIVE_LIB_DIR}/src/native/support/RelWithDebInfo/chaos_support.lib"\n'
+        '    "${NATIVE_LIB_DIR}/bdwgc_build/RelWithDebInfo/chaos_bdwgc.lib"\n'
+        '    "${NATIVE_LIB_DIR}/fmt_build/RelWithDebInfo/chaos_fmt.lib"\n'
         ")\n"
         "endif()\n"
     )
@@ -1012,7 +1112,7 @@ def generate_family(family_slug: str) -> dict[str, Any]:
     cmake_path = _VERIFICATION / family_slug / "il2cpp_dist" / "CMakeLists.txt"
     existing_cmake = cmake_path.read_text(encoding="utf-8") if cmake_path.exists() else ""
     # Check if hotupdate section is already present (idempotent).
-    hotupdate_marker = f"Per-family D3 hotupdate test"
+    hotupdate_marker = f"Per-family Hotpatch test"
     if hotupdate_marker not in existing_cmake:
         combined = existing_cmake.rstrip() + "\n\n" + cmake_hotupdate_section
         cmake_path.write_text(combined, encoding="utf-8")
@@ -1689,6 +1789,15 @@ def _rename_and_fix_patch_file(src: Path, dst: Path, ns_slug: str, suffix: str =
 
     # Format-agnostic fixes (apply to both old and new formats)
 
+    # Fix `ThinLockableHeader header{}``/`FatHeader header{}` missing trailing semicolon.
+    # The codegen emits them with semicolons, but some injection steps or source
+    # copies may strip them. MSVC rejects `header{}` without `;` in struct body.
+    content = re.sub(
+        r'(FatHeader|ThinLockableHeader)\s+header\{\}(?!\s*;)',
+        r'\1 header{};',
+        content,
+    )
+
     # Inject missing reflection bridge stubs for functions that CodeGen hasn't
     # emitted yet (e.g., chaos_reflection_get_fields).
     content = _inject_reflection_bridge_stubs(content)
@@ -1975,14 +2084,16 @@ def _inject_host_symbol_forward_decls(content: str) -> str:
     and needs forward declarations before use.
 
     We detect the forward-declaration block by scanning for lines matching
-      extern "C" CHAOS_IL2CPP_INT32 <class>_Method<N>(void);
-      extern "C" CHAOS_IL2CPP_INT32 <class>_Run(CHAOS_IL2CPP_INT32 ...);
+      extern "C" <type> <class>_Method<N>(void);
+      extern "C" <type> <class>_Run(<type> ...);
+
+    where <type> is CHAOS_IL2CPP_INT32 or void.
 
     If the first such declaration appears AFTER '#pragma warning(pop)' (i.e.
     outside the anonymous namespace), we inject copies of all host symbol
     forward declarations right after the #include section, before the namespace.
     """
-    if 'extern "C" CHAOS_IL2CPP_INT32' not in content:
+    if 'extern "C"' not in content:
         return content
 
     # Find the #pragma warning(pop) to determine namespace boundary
@@ -2005,10 +2116,9 @@ def _inject_host_symbol_forward_decls(content: str) -> str:
     host_fwd_lines = []
     for line in after_pop.splitlines():
         stripped = line.strip()
-        # Match: extern "C" CHAOS_IL2CPP_INT32 <symbol>(void);
-        # or: extern "C" CHAOS_IL2CPP_INT32 <symbol>(CHAOS_IL2CPP_INT32 ...);
+        # Match: extern "C" <type> <symbol>(void);  or  extern "C" <type> <symbol>(<type> ...);
         # IMPORTANT: must end with semicolon to exclude function definitions.
-        if re.match(r'extern\s+"C"\s+CHAOS_IL2CPP_INT32\s+\w+(?:\(void\)|\(CHAOS_IL2CPP_INT32).*;\s*$', stripped):
+        if re.match(r'extern\s+"C"\s+(CHAOS_IL2CPP_INT32|void)\s+\w+(?:\(void\)|\((?:CHAOS_IL2CPP_INT32|void)).*;\s*$', stripped):
             host_fwd_lines.append(line)
 
     if not host_fwd_lines:
@@ -2262,10 +2372,11 @@ def _fix_raw_int32_normalize_misuse(content: str) -> str:
         line = lines[i]
         stripped = line.strip()
 
-        # Detect method definition: extern "C" CHAOS_IL2CPP_INT32 <Class>_Method<N>(void)
+        # Detect method definition: extern "C" <type> <Class>_Method<N>(void)
+        # where <type> is CHAOS_IL2CPP_INT32 or void
         # followed by { on this or next line (NOT forward declarations ending with ;)
         is_method_def = (
-            re.match(r'extern\s+"C"\s+CHAOS_IL2CPP_INT32\s+\w+_Method\d+\(void\)\s*$', stripped)
+            re.match(r'extern\s+"C"\s+(?:CHAOS_IL2CPP_INT32|void)\s+\w+_Method\d+\(void\)\s*$', stripped)
             and not stripped.endswith(';')
         )
         if is_method_def:

@@ -1,7 +1,7 @@
 #ifndef CHAOS_IL2CPP_TOKEN_RESOLVER_H_
 #define CHAOS_IL2CPP_TOKEN_RESOLVER_H_
 
-#include "il_to_ir_lowerer.h"   // ILTokenResolver, IRInstruction
+#include <interpreter_vm.h>     // IRInstruction, IROpCode
 #include "codegen_bridge.h"     // CodegenBridgeV0, ImageHandle
 
 #include <chaos/native_types.h>
@@ -15,7 +15,7 @@ namespace chaos::il2cpp::interpreter {
 /// Context passed through user_data to the default token resolver.
 ///
 /// Populated by the caller (e.g. the interpreter dispatch or method
-/// instantiation path) before calling LowerILToIR / LowerMethodBody.
+/// instantiation path) before calling LowerMethodBody.
 struct TokenResolverContext {
     /// Process-wide codegen bridge (used for standard token→handle resolution).
     const CodegenBridgeV0* bridge = nullptr;

@@ -1,72 +1,425 @@
 // Auto-generated managed benchmark harness
-// Family: family/System.Private.CoreLib/convert/char
+// Family: convert-char, Assembly: System.Private.CoreLib
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using Chaos.Benchmark.convert_char;
+using System.Text.Json;
 
-const int kWarmupIterations = 100;
-const int kMeasureIterations = 10000;
-
-var methodSubjects = new (string SubjectId, Action Body)[]
+class ManagedBenchmarkHarness
 {
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Boolean),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Byte),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Char),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_DateTime),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Decimal),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Double),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Int16),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Int32),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Int64),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Object),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Object_System_IFormatProvider),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_SByte),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Single),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_String),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_String_System_IFormatProvider),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_UInt16),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_UInt32),
-    ("System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)", BenchmarkManagedBody.System_Private_CoreLib_System_Convert_ToChar_System_Char_System_UInt64)
-};
+    static long accum;  // static accumulator prevents dead-code elimination
 
-Console.WriteLine("{");
-Console.WriteLine("  \"schemaVersion\": 1,");
-Console.WriteLine("  \"assemblyName\": \"System.Private.CoreLib\",");
-Console.WriteLine("  \"familyId\": \"family/System.Private.CoreLib/convert/char\",");
-Console.WriteLine("  \"warmupIterations\": " + kWarmupIterations + ",");
-Console.WriteLine("  \"measureIterations\": " + kMeasureIterations + ",");
-Console.WriteLine("  \"results\": [");
-
-for (int i = 0; i < methodSubjects.Length; i++)
-{
-    var (subjectId, body) = methodSubjects[i];
-
-    // Warmup
-    for (int w = 0; w < kWarmupIterations; w++)
+    struct MethodResult
     {
-        body();
+        public int MethodIndex { get; set; }
+        public string MethodSubjectId { get; set; }
+        public double ElapsedMilliseconds { get; set; }
+        public int Iterations { get; set; }
+        public bool IsBodyReal { get; set; }
+        public bool IsException { get; set; }
     }
 
-    // Measurement
-    var sw = Stopwatch.StartNew();
-    for (int m = 0; m < kMeasureIterations; m++)
-    {
-        body();
-    }
-    sw.Stop();
-
-    double elapsedMs = sw.Elapsed.TotalMilliseconds;
-    double opsPerSecond = kMeasureIterations / (elapsedMs / 1000.0);
-
-    string comma = (i < methodSubjects.Length - 1) ? "," : "";
-    Console.WriteLine("    {");
-    Console.WriteLine("      \"methodIndex\": " + i + ",");
-    Console.WriteLine("      \"methodSubjectId\": \"" + subjectId.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\",");
-    Console.WriteLine("      \"elapsedMilliseconds\": " + elapsedMs.ToString("F6") + ",");
-    Console.WriteLine("      \"opsPerSecond\": " + opsPerSecond.ToString("F6") + ",");
-    Console.WriteLine("      \"iterations\": " + kMeasureIterations);
-    Console.WriteLine("    }" + comma);
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static void H_0(int i)
+{
+    try { Convert.ToChar(((i) & 1) == 0); } catch { }
 }
 
-Console.WriteLine("  ]");
-Console.WriteLine("}");
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_1(int i)
+{
+    return Convert.ToChar((byte)(((i + 1)) & 0xFF));
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_2(int i)
+{
+    return Convert.ToChar((char)(((i + 2)) & 0xFFFF));
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static void H_3(int i)
+{
+    try { Convert.ToChar(DateTime.UtcNow); } catch { }
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static void H_4(int i)
+{
+    try { Convert.ToChar((decimal)(((i + 4)) & 0xFF)); } catch { }
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static void H_5(int i)
+{
+    try { Convert.ToChar((double)(((i + 5)) & 0xFF)); } catch { }
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_6(int i)
+{
+    return Convert.ToChar((short)(((i + 6)) & 0x7FFF));
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_7(int i)
+{
+    return Convert.ToChar(((i + 7)) & 0x7FFF);
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_8(int i)
+{
+    return Convert.ToChar((long)(((i + 8)) & 0x7FFF));
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_9(int i)
+{
+    return Convert.ToChar((object)(((i + 9)) & 0xFF));
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_10(int i)
+{
+    return Convert.ToChar((object)(((i + 10)) & 0xFF), null);
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_11(int i)
+{
+    return Convert.ToChar((sbyte)(((i + 11)) & 0x7F));
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static void H_12(int i)
+{
+    try { Convert.ToChar((float)(((i + 12)) & 0xFF)); } catch { }
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static void H_13(int i)
+{
+    try { Convert.ToChar("hello"); } catch { }
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static void H_14(int i)
+{
+    try { Convert.ToChar("hello", null); } catch { }
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_15(int i)
+{
+    return Convert.ToChar((ushort)(((i + 15)) & 0xFFFF));
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_16(int i)
+{
+    return Convert.ToChar((uint)(((i + 16)) & 0x7FFF));
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static char H_17(int i)
+{
+    return Convert.ToChar((ulong)(((i + 17)) & 0x7FFF));
+}
+
+    static void Main()
+    {
+        var results = new List<MethodResult>();
+            { // [0] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    H_0(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 0,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = true,
+                });
+            }
+            { // [1] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_1(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 1,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+            { // [2] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_2(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 2,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+            { // [3] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    H_3(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 3,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = true,
+                });
+            }
+            { // [4] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    H_4(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 4,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = true,
+                });
+            }
+            { // [5] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    H_5(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 5,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = true,
+                });
+            }
+            { // [6] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_6(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 6,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+            { // [7] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_7(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 7,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+            { // [8] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_8(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 8,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+            { // [9] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_9(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 9,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+            { // [10] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_10(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 10,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+            { // [11] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_11(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 11,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+            { // [12] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    H_12(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 12,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = true,
+                });
+            }
+            { // [13] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    H_13(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 13,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = true,
+                });
+            }
+            { // [14] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    H_14(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 14,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = true,
+                });
+            }
+            { // [15] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_15(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 15,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+            { // [16] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_16(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 16,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+            { // [17] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                for (int i = 0; i < 10000; i++) {
+                    accum ^= (long)H_17(i);
+                }
+                sw.Stop();
+                double ms = sw.Elapsed.TotalMilliseconds;
+                results.Add(new MethodResult {
+                    MethodIndex = 17,
+                    MethodSubjectId = "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
+                    ElapsedMilliseconds = ms,
+                    Iterations = 10000,
+                    IsBodyReal = true,
+                    IsException = false,
+                });
+            }
+        // Consume accum so JIT cannot elide the computation
+        string json = JsonSerializer.Serialize(new { accumulation = accum, results }, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        Console.WriteLine(json);
+    }
+}

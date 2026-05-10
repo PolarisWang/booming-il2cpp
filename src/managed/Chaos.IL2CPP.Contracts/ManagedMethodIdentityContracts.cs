@@ -249,6 +249,15 @@ public static class HybridDispatchResolver
             return null;
         }
 
+        // ── Constrained callvirt on value types ──
+        // The `constrained.` IL prefix tells the runtime to call the value type's
+        // own override of the virtual method directly, rather than dispatching
+        // through the base type's vtable. We resolve this as a direct call.
+        if (!string.IsNullOrWhiteSpace(instruction.ConstrainedTypeSubjectId))
+        {
+            return HybridDispatchKind.Direct;
+        }
+
         var calleeAssemblyName = instruction.Reference?.AssemblyName ?? TryGetAssemblyNameFromSubjectId(instruction.Callee);
         if (string.IsNullOrWhiteSpace(calleeAssemblyName))
         {

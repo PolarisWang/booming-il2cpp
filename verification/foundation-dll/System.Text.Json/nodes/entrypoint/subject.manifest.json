@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Text.Json\\nodes\\entrypoint\\build-output\\NodesNativeEntry.dll"
-    ],
-    "entry": "NodesNativeEntry/NodesNativeEntry::Run:System.Int32(System.Int32)"
-  }
-}

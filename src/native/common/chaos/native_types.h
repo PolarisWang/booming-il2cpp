@@ -37,6 +37,7 @@
 #define CHAOS_IL2CPP_UINT16   std::uint16_t
 #define CHAOS_IL2CPP_UINT32   std::uint32_t
 #define CHAOS_IL2CPP_UINT64   std::uint64_t
+#define CHAOS_IL2CPP_UINT64_C(x)  UINT64_C(x)
 #define CHAOS_IL2CPP_INTPTR   std::intptr_t
 #define CHAOS_IL2CPP_UINTPTR  std::uintptr_t
 #define CHAOS_IL2CPP_SIZE     std::size_t
@@ -77,6 +78,10 @@
 
 // ── C standard library ─────────────────────────────────────
 #define CHAOS_IL2CPP_ABORT()       std::abort()
+// CHAOS_IL2CPP_FAIL: non-fatal failure indicator, distinct from ABORT.
+// Codegen emits FAIL for null-checks / expected failures so verification
+// mode can override FAIL without disabling ABORT for real crashes.
+#define CHAOS_IL2CPP_FAIL()        CHAOS_IL2CPP_ABORT()
 #define CHAOS_IL2CPP_MEMCPY(d,s,n) std::memcpy(d, s, n)
 #define CHAOS_IL2CPP_MEMCMP(a,b,n) std::memcmp(a, b, n)
 #define CHAOS_IL2CPP_MEMSET(d,c,n) std::memset(d, c, n)
@@ -182,6 +187,18 @@
 #define CHAOS_IL2CPP_NUMERIC_LIMITS_MAX(T) std::numeric_limits<T>::max()
 #define CHAOS_IL2CPP_NUMERIC_LIMITS_INFINITY(T) std::numeric_limits<T>::infinity()
 #define CHAOS_IL2CPP_NUMERIC_LIMITS_QUIET_NAN(T) std::numeric_limits<T>::quiet_NaN()
+
+// ── Explicit *_[MIN|MAX] constants (for generated C++ overflow checks) ──
+#define CHAOS_IL2CPP_INT8_MAX     std::numeric_limits<CHAOS_IL2CPP_INT8>::max()
+#define CHAOS_IL2CPP_INT16_MAX    std::numeric_limits<CHAOS_IL2CPP_INT16>::max()
+#define CHAOS_IL2CPP_INT32_MAX    std::numeric_limits<CHAOS_IL2CPP_INT32>::max()
+#define CHAOS_IL2CPP_INT64_MAX    std::numeric_limits<CHAOS_IL2CPP_INT64>::max()
+#define CHAOS_IL2CPP_UINT8_MAX    std::numeric_limits<CHAOS_IL2CPP_UINT8>::max()
+#define CHAOS_IL2CPP_UINT16_MAX   std::numeric_limits<CHAOS_IL2CPP_UINT16>::max()
+#define CHAOS_IL2CPP_UINT32_MAX   std::numeric_limits<CHAOS_IL2CPP_UINT32>::max()
+#define CHAOS_IL2CPP_UINT64_MAX   std::numeric_limits<CHAOS_IL2CPP_UINT64>::max()
+#define CHAOS_IL2CPP_INTPTR_MAX   std::numeric_limits<CHAOS_IL2CPP_INTPTR>::max()
+#define CHAOS_IL2CPP_UINTPTR_MAX  std::numeric_limits<CHAOS_IL2CPP_UINTPTR>::max()
 
 // ── Indirect load/store templates ────────────────────────────
 #define CHAOS_IL2CPP_RAW_POINTER_TAG  CHAOS_IL2CPP_UINTPTR(1) << 63

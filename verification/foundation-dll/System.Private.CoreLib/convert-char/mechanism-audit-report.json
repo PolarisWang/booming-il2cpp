@@ -1,17 +1,17 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 57,
-  "audited": 57,
+  "total_methods": 43,
+  "audited": 43,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 128,
+  "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 57,
+  "methods_without_assert": 43,
   "passed": true,
   "method_details": [
     {
-      "method_name": "ConvertCharNativeEntry_Method0",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -20,7 +20,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method1",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -29,7 +29,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method2",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -38,7 +38,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method3",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -47,7 +47,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method4",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -56,7 +56,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method5",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method5",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -65,7 +65,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method6",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method6",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -74,7 +74,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method7",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method7",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -83,7 +83,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method8",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -92,7 +92,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method9",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method9",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -101,7 +101,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method10",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method10",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -110,7 +110,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method11",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method11",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -119,7 +119,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method12",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method12",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -128,7 +128,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method13",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method13",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -137,7 +137,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method14",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method14",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -146,7 +146,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method15",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method15",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -155,7 +155,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method16",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method16",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -164,7 +164,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method17",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method17",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -173,7 +173,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Run",
+      "method_name": "ConvertCharNativeEntry_Program_Main",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -182,7 +182,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method0",
+      "method_name": "RunNativeAot",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -191,7 +191,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method1",
+      "method_name": "RunNativeAotAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -200,7 +200,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method2",
+      "method_name": "BenchmarkMethod",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -209,7 +209,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method3",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -218,7 +218,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method4",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -227,7 +227,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method5",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -236,7 +236,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method6",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -245,7 +245,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method7",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -254,7 +254,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method8",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method5",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -263,7 +263,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method9",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method6",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -272,7 +272,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method10",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method7",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -281,7 +281,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method11",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -290,7 +290,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method12",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method9",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -299,7 +299,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method13",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method10",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -308,7 +308,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method14",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method11",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -317,7 +317,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method15",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method12",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -326,7 +326,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method16",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method13",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -335,7 +335,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method17",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method14",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -344,7 +344,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Run",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method15",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -353,7 +353,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method0",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method16",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -362,7 +362,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method1",
+      "method_name": "ConvertCharNativeEntry_ConvertCharNativeEntry_Method17",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -371,7 +371,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method2",
+      "method_name": "ConvertCharNativeEntry_Program_Main",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -380,7 +380,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method3",
+      "method_name": "RunNativeAot_convert_char_genuine_fixed",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -389,133 +389,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "ConvertCharNativeEntry_Method4",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method5",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method6",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method7",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method8",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method9",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method10",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method11",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method12",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method13",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method14",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method15",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method16",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Method17",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ConvertCharNativeEntry_Run",
+      "method_name": "RunNativeAotAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -524,777 +398,6 @@
       "audit_status": "PASS"
     }
   ],
-  "skip_details": [
-    {
-      "type_name": "Span",
-      "method_name": "ToArray",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Attribute",
-      "method_name": "GetCustomAttributes",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Attribute",
-      "method_name": "GetCustomAttributes",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "DateTime",
-      "method_name": "TryParse",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "DateTime",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "TimeSpan",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Guid",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Guid",
-      "method_name": ".ctor",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Guid",
-      "method_name": "TryParse",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Boolean",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Byte",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "SByte",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Int16",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Int32",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Int64",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Single",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Double",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Decimal",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "UInt16",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "UInt32",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "UInt64",
-      "method_name": "Parse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToByte",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToSByte",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToInt16",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToUInt16",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToInt32",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToUInt32",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToInt64",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToUInt64",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToSingle",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToDouble",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToDecimal",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Convert",
-      "method_name": "ToBoolean",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Array",
-      "method_name": "Resize",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Buffer",
-      "method_name": "BlockCopy",
-      "param_count": 5,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Buffer",
-      "method_name": "BulkMoveWithWriteBarrier",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Buffer",
-      "method_name": "Memmove",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Buffer",
-      "method_name": "GetByte",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Buffer",
-      "method_name": "SetByte",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Span",
-      "method_name": "get_Item",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Span",
-      "method_name": "Slice",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Span",
-      "method_name": "Slice",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "ReadOnlySpan",
-      "method_name": "get_Item",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "ReadOnlySpan",
-      "method_name": "Slice",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "ReadOnlySpan",
-      "method_name": "Slice",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Memory",
-      "method_name": "Slice",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "List",
-      "method_name": "RemoveAt",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Thread",
-      "method_name": "Start",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Monitor",
-      "method_name": "Enter",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Monitor",
-      "method_name": "Exit",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Monitor",
-      "method_name": "Pulse",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Monitor",
-      "method_name": "PulseAll",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Monitor",
-      "method_name": "Wait",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Delegate",
-      "method_name": "DynamicInvoke",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Delegate",
-      "method_name": "get_Method",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Delegate",
-      "method_name": "get_Target",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Delegate",
-      "method_name": "CreateDelegate",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Delegate",
-      "method_name": "CreateDelegate",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "MulticastDelegate",
-      "method_name": "GetInvocationList",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Delegate",
-      "method_name": "op_Equality",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Delegate",
-      "method_name": "op_Inequality",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Enum",
-      "method_name": "Parse",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Enum",
-      "method_name": "Parse",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Enum",
-      "method_name": "IsDefined",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Enum",
-      "method_name": "GetValues",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Enum",
-      "method_name": "GetNames",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Enum",
-      "method_name": "GetName",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Enum",
-      "method_name": "Format",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Enum",
-      "method_name": "ToString",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Enum",
-      "method_name": "TryParse",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Enum",
-      "method_name": "TryParse",
-      "param_count": 4,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Type",
-      "method_name": "GetType",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Type",
-      "method_name": "GetType",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Type",
-      "method_name": "GetType",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Nullable",
-      "method_name": "get_Value",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "RuntimeHelpers",
-      "method_name": "RunClassConstructor",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "RuntimeHelpers",
-      "method_name": "InitializeArray",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "RuntimeHelpers",
-      "method_name": "GetSubArray",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "BinaryReader",
-      "method_name": "ReadString",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "BinaryReader",
-      "method_name": "ReadInt32",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "BinaryReader",
-      "method_name": "ReadDouble",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "BinaryWriter",
-      "method_name": "Write",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Stream",
-      "method_name": "Read",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Stream",
-      "method_name": "Write",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Stream",
-      "method_name": "CopyTo",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "CultureInfo",
-      "method_name": "GetCultureInfo",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "Run",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "ContinueWith",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "WhenAny",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "WhenAll",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "FromResult",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "Delay",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "Wait",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "Wait",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "get_IsCompleted",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "get_Status",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Thread",
-      "method_name": "Sleep",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Thread",
-      "method_name": "get_ManagedThreadId",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Activator",
-      "method_name": "CreateInstance",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Module",
-      "method_name": "GetCustomAttributes",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "MethodBase",
-      "method_name": "Invoke",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "MemberInfo",
-      "method_name": "get_MemberType",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "MethodInfo",
-      "method_name": "GetParameters",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "MethodInfo",
-      "method_name": "get_ReturnType",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "ConstructorInfo",
-      "method_name": "Invoke",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "FieldInfo",
-      "method_name": "GetValue",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "FieldInfo",
-      "method_name": "SetValue",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "FieldInfo",
-      "method_name": "get_FieldType",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "PropertyInfo",
-      "method_name": "GetValue",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "PropertyInfo",
-      "method_name": "GetValue",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "PropertyInfo",
-      "method_name": "SetValue",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "PropertyInfo",
-      "method_name": "get_PropertyType",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Exception",
-      "method_name": "get_StackTrace",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "BitConverter",
-      "method_name": "ToDouble",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "BitConverter",
-      "method_name": "ToInt32",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Guid",
-      "method_name": "ctor",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Interlocked",
-      "method_name": "CompareExchange",
-      "param_count": 3,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Interlocked",
-      "method_name": "Exchange",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Interlocked",
-      "method_name": "Increment",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Interlocked",
-      "method_name": "Decrement",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Interlocked",
-      "method_name": "Add",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Attribute",
-      "method_name": "get_TypeId",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "List",
-      "method_name": "Remove",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Dictionary",
-      "method_name": "ContainsKey",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Dictionary",
-      "method_name": "Remove",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "HashSet",
-      "method_name": "Add",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "HashSet",
-      "method_name": "Contains",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "HashSet",
-      "method_name": "Remove",
-      "param_count": 1,
-      "override_value": "skip"
-    }
-  ],
-  "errors": [
-    "stub_detector not available"
-  ]
+  "skip_details": [],
+  "errors": []
 }

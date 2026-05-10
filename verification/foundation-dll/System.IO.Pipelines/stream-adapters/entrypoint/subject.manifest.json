@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\stream-adapters\\entrypoint\\build-output\\StreamAdaptersNativeEntry.dll"
-    ],
-    "entry": "StreamAdaptersNativeEntry/StreamAdaptersNativeEntry::Run:System.Int32(System.Int32)"
-  }
-}

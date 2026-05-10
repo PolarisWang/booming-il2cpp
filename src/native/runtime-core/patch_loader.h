@@ -28,16 +28,27 @@
 namespace chaos::il2cpp::runtime_core {
 
 // ── PatchMethod ─────────────────────────────────────────────────────────
-// Represents a single patched method with its raw IL and cached lowered IR.
+// Represents a single patched method with its AotCoreIr JSON and cached lowered IR.
 struct PatchMethod {
-    const uint8_t* il_bytes        = nullptr;   // raw IL bytecode (body data)
-    uint32_t       il_length       = 0;          // IL code length
-    const uint8_t* signature_blob  = nullptr;   // method signature blob
-    uint32_t       signature_len   = 0;          // signature blob length
-    uint32_t       max_stack       = 8;          // max stack depth (tiny default)
-    void*          cached_ir       = nullptr;   // cached IRMethod (lazy, null = not lowered)
-    uint32_t       token;                        // AOT metadata token for this method
+    const char*     aot_core_ir_json        = nullptr;   // serialized AotCoreIr method JSON
+    uint32_t        aot_core_ir_json_length = 0;          // JSON string length
+    const uint8_t*  signature_blob  = nullptr;   // method signature blob
+    uint32_t        signature_len   = 0;          // signature blob length
+    void*           cached_ir       = nullptr;   // cached IRMethod (lazy, null = not lowered)
+    uint32_t        token;                        // AOT metadata token for this method
+    uint32_t        module_id;                    // module index for module-scoped dispatch
     class PatchMetadataCache* metadata_cache = nullptr;  // token resolution cache
+
+    // ── Cached signature parse results (populated lazily on first invocation) ──
+    uint32_t        cached_arg_count    = 0;       // total arg count (including 'this')
+    uint8_t         cached_ret_tag      = 0;       // ValueTag for return type
+    uint8_t         cached_arg_types[8] = {};       // ValueTag per arg (small-buffer for ≤8 args)
+    bool            cached_sig_valid    = false;   // true when cache is populated
+
+    // ── Per-instruction call-site metadata cache ──────────────────────────
+    // Populated in PatchMethodLowerIR after IR deserialization.
+    // Points to heap-allocated CachedCallInfo[instr_count], or nullptr.
+    void*           call_cache          = nullptr;   // CachedCallInfo[]
 };
 
 // ── PatchMetadataCache ───────────────────────────────────────────────────
@@ -59,6 +70,10 @@ public:
     const char* GetString(uint32_t offset) const noexcept;
     const void* GetBlob(uint32_t offset) const noexcept;
     const void* GetBody(uint32_t offset) const noexcept;
+
+    // Get the AotCoreIr JSON for a method by its index in the MethodDef table.
+    // Returns nullptr if the index is out of range or the section is empty.
+    const char* GetAotCoreIr(uint32_t method_index) const noexcept;
 
     // Iterate methods: return the i-th MethodDef entry.
     const PatchMethodDefEntry* GetMethodDef(uint32_t index) const noexcept;

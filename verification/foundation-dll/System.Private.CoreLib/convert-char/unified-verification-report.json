@@ -2,9 +2,9 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-08T22:27:28",
-  "duration_ms": 33295,
-  "overall_status": "partial",
+  "timestamp": "2026-05-10T20:31:37",
+  "duration_ms": 19309,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -13,7 +13,7 @@
       "details": {
         "methodCount": 18,
         "customMethodCount": 2,
-        "hasCustomEntryFile": true,
+        "hasCustomEntryFile": false,
         "customMethods": [
           "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
           "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)"
@@ -28,53 +28,85 @@
       "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
         "methodCount": 18,
-        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll",
-        "factStaticPassed": 0,
-        "factStaticTotal": 0,
-        "l3Passed": null,
-        "l3Total": null
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\convert-char\\il2cpp_dist\\entrypoint\\build-output\\ConvertCharNativeEntry.dll"
       },
       "errors": [],
-      "duration_ms": 19684
+      "duration_ms": 16262
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact Static=compile_failed (0/0) Fact Runtime=compile_failed (0/0)",
+      "status": "passed",
+      "summary": "Fact verify=passed (18/18)",
       "details": {
-        "factStatic": {
-          "status": "compile_failed",
-          "passed": 0,
-          "total": 0
-        },
-        "factRuntime": {
-          "status": "compile_failed",
-          "passed": 0,
-          "total": 0
+        "fact": {
+          "status": "passed",
+          "passed": 18,
+          "total": 18
         }
       },
       "errors": [],
-      "duration_ms": 13484
+      "duration_ms": 190
     },
     "audit": {
       "stage": "audit",
-      "status": "failed",
-      "summary": "false_passing=18, principle=VIOLATION",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
-        "falsePassing": 18,
-        "stubsFound": 18,
-        "skipsFound": 100,
-        "principleStatus": "VIOLATION",
-        "methodsWithoutLowering": 67
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "CONCERN",
+        "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 126
+      "duration_ms": 120
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "passed",
+      "summary": "avg_speedup=75.34%, native_faster=11/11, managed_faster=0/11",
+      "details": {
+        "averageSpeedupPercent": 75.34,
+        "nativeFasterCount": 11,
+        "managedFasterCount": 0,
+        "matchedCount": 11,
+        "totalMethods": 18
+      },
+      "errors": [],
+      "duration_ms": 1949
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "18/18 passed, 0 failed (stub=0)",
+      "details": {
+        "passedMethods": 18,
+        "failedMethods": 0,
+        "totalMethods": 18,
+        "realMethods": 18,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 22
+    },
+    "post_hotupdate_benchmark": {
+      "stage": "post_hotupdate_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=143834.85% (1439.3x) over 11 methods (interpreter path — expected)",
+      "details": {
+        "averageSlowdownPercent": 143834.85,
+        "slowdownFactor": 1439.3485,
+        "threshold": 50.0,
+        "nonStubMethods": 11
+      },
+      "errors": [],
+      "duration_ms": 760
     }
   },
   "coverage": {
-    "methodCoverage": 0.0,
-    "skipRate": -4.5556,
-    "overall": 0.0
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "regression": {}
 }

@@ -340,12 +340,14 @@ public sealed partial class NativeAotLoweringPlanner
 			[
 				$"{indentation}{AllocateEvalStackTargetExpression()} = ChaosStoreFloat32({resultExpression});"
 			];
+			PushSlotType("Float32");
 			break;
 		case AotCoreIrAbiCarrierKind.Float64:
 			pushLines =
 			[
 				$"{indentation}{AllocateEvalStackTargetExpression()} = ChaosStoreFloat64({resultExpression});"
 			];
+			PushSlotType("Float64");
 			break;
 		case AotCoreIrAbiCarrierKind.Int64:
 			pushLines =

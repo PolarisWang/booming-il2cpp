@@ -20,6 +20,7 @@
 //   StandaloneSigEntry[]
 //   BodyDataSection  (raw IL bytecode concatenated; MethodDefEntry.body_offset
 //                     points here)
+//   AotCoreIrSection  (see below: uint32_t index[count] + null-terminated JSON strings)
 
 #ifndef CHAOS_IL2CPP_PATCH_DATA_H_
 #define CHAOS_IL2CPP_PATCH_DATA_H_
@@ -34,7 +35,7 @@ extern "C" {
 #define PATCH_DATA_MAGIC     0x50415854u   // "PADT" little-endian
 #define PATCH_DATA_VERSION   1u
 
-// ── Main header (fixed-size, 100 bytes) ──────────────────────────────
+// ── Main header (fixed-size, 112 bytes) ──────────────────────────────
 typedef struct PatchDataHeader {
     uint32_t magic;
     uint32_t version;
@@ -67,6 +68,14 @@ typedef struct PatchDataHeader {
     // Method body IL data — raw bytes, indexed by MethodDefEntry.body_offset
     uint32_t body_data_offset;
     uint32_t body_data_size;
+
+    // AotCoreIr JSON section — per-method lowered IR strings.
+    // Format: [index: uint32_t[count]] [null-terminated JSON strings]
+    // index[i] = byte offset of i-th method's JSON from the start of strings.
+    // GetAotCoreIr(i) = section + sizeof(uint32_t)*count + index[i]  (O(1)).
+    uint32_t aot_core_ir_offset;
+    uint32_t aot_core_ir_size;
+    uint32_t aot_core_ir_count;
 } PatchDataHeader;
 
 // ── Table entry structs ──────────────────────────────────────────────
@@ -135,7 +144,9 @@ typedef struct PatchStandaloneSigEntry {
 // These are safe to call on a mapped file after header validation.
 
 static inline uint32_t PatchData_TotalSize(const PatchDataHeader* hdr) {
-    return hdr->body_data_offset + hdr->body_data_size;
+    uint32_t section_end = hdr->body_data_offset + hdr->body_data_size;
+    uint32_t ir_end = hdr->aot_core_ir_offset + hdr->aot_core_ir_size;
+    return (ir_end > section_end) ? ir_end : section_end;
 }
 
 static inline const char* PatchData_String(const PatchDataHeader* hdr, uint32_t offset) {

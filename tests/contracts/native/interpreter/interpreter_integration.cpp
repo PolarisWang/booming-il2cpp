@@ -1,17 +1,16 @@
-/// Integration tests for the full IL->IR->execution pipeline.
+/// Integration tests for the IR->execution pipeline.
 ///
-/// Each test constructs a raw ECMA 335 method body (tiny or fat header + IL
-/// bytecodes), parses the header with ParseMethodBodyHeader, lowers the IL
-/// with LowerILToIR, executes the resulting IRMethod via InterpreterVM, and
-/// verifies the execution result.
+/// Each test constructs an IRMethod with explicit IRInstruction entries and
+/// executes it via InterpreterVM::Execute, then verifies the result.
 ///
-/// These tests exercise the entire lowering + interpretation path end-to-end,
-/// unlike interpreter_smoke.cpp which builds IRMethod manually.
+/// The old IL->IR lowering path (LowerILToIR, ParseMethodBodyHeader) has been
+/// removed; all tests now build IRMethod directly.
 
-#include "il_to_ir_lowerer.h"
 #include "interpreter_vm.h"
 #include "vtable_registry.h"
 #include "token_resolver.h"
+
+#include <chaos/type_info.h>
 
 #include <iostream>
 #include <cstring>
@@ -26,120 +25,13 @@ using chaos::il2cpp::interpreter::IROpCode;
 using chaos::il2cpp::interpreter::InterpreterObject;
 using chaos::il2cpp::interpreter::InterpreterValue;
 using chaos::il2cpp::interpreter::InterpreterVM;
-using chaos::il2cpp::interpreter::ILTokenResolver;
-using chaos::il2cpp::interpreter::LowerILToIR;
-using chaos::il2cpp::interpreter::MethodBodyHeader;
-using chaos::il2cpp::interpreter::ParseMethodBodyHeader;
 using chaos::il2cpp::interpreter::SEHClause;
 using chaos::il2cpp::interpreter::SEHFlags;
-using chaos::il2cpp::interpreter::DefaultTokenResolver;
-using chaos::il2cpp::interpreter::TokenResolverContext;
 using chaos::il2cpp::interpreter::ValueTag;
 using chaos::il2cpp::interpreter::DispatchResult;
 using chaos::il2cpp::interpreter::DispatchCallback;
-
-// ════════════════════════════════════════════════════════════════════════════
-// Helpers (file-scope linkage)
-// ════════════════════════════════════════════════════════════════════════════
-
-/// No-op token resolver for tests that don't use metadata tokens.
-static bool NoopTokenResolver(CHAOS_IL2CPP_UINT32 /*token*/,
-                              IRInstruction& /*instruction*/,
-                              void* /*user_data*/)
-{
-    return true;
-}
-
-/// Encode a tiny method header (1 byte) into the buffer.
-static uint8_t EncodeTinyHeader(uint8_t* buf, uint8_t code_size)
-{
-    buf[0] = static_cast<uint8_t>((code_size << 2) | 0x02u);
-    return 1u;
-}
-
-/// Token resolver that stores the raw token as immediate_i4 for SizeOf/LdFtn/LdToken.
-static bool PassthroughTokenResolver(CHAOS_IL2CPP_UINT32 token,
-                                     IRInstruction& instruction,
-                                     void* /*user_data*/)
-{
-    instruction.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(token);
-    return true;
-}
-
-/// Encode a fat method header (12 bytes) into the buffer.
-static uint8_t EncodeFatHeader(uint8_t* buf, uint16_t max_stack,
-                                uint32_t code_size, uint32_t local_sig_tok)
-{
-    buf[0] = 0x03u; buf[1] = 0x00u;
-    buf[2] = static_cast<uint8_t>(max_stack & 0xFFu);
-    buf[3] = static_cast<uint8_t>((max_stack >> 8) & 0xFFu);
-    buf[4] = static_cast<uint8_t>(code_size & 0xFFu);
-    buf[5] = static_cast<uint8_t>((code_size >> 8) & 0xFFu);
-    buf[6] = static_cast<uint8_t>((code_size >> 16) & 0xFFu);
-    buf[7] = static_cast<uint8_t>((code_size >> 24) & 0xFFu);
-    buf[8]  = static_cast<uint8_t>(local_sig_tok & 0xFFu);
-    buf[9]  = static_cast<uint8_t>((local_sig_tok >> 8) & 0xFFu);
-    buf[10] = static_cast<uint8_t>((local_sig_tok >> 16) & 0xFFu);
-    buf[11] = static_cast<uint8_t>((local_sig_tok >> 24) & 0xFFu);
-    return 12u;
-}
-
-/// Parse a tiny-header method body, lower it, and execute.
-static ExecutionResult LowerAndExecuteTiny(
-    const uint8_t* il_code, CHAOS_IL2CPP_SIZE code_size,
-    ExecutionFrame* frame)
-{
-    uint8_t method_body[1 + 64];
-    uint8_t hdr_size = EncodeTinyHeader(method_body, static_cast<uint8_t>(code_size));
-    std::memcpy(method_body + hdr_size, il_code, code_size);
-
-    MethodBodyHeader header;
-    if (!ParseMethodBodyHeader(method_body, hdr_size + code_size, header)) {
-        ExecutionResult err;
-        err.has_return_value = false;
-        return err;
-    }
-
-    IRMethod method = LowerILToIR(
-        header.code_start, header.code_size,
-        header.code_size, header.max_stack,
-        NoopTokenResolver, nullptr);
-
-    const InterpreterVM vm = {};
-    return vm.Execute(method, frame);
-}
-
-/// Lower and execute with a fat header and a custom token resolver.
-static ExecutionResult LowerAndExecuteFat(
-    const uint8_t* il_code, CHAOS_IL2CPP_SIZE code_size,
-    uint16_t max_stack,
-    ILTokenResolver token_resolver,
-    ExecutionFrame* frame)
-{
-    uint8_t method_body[12 + 128];
-    if (12u + code_size > sizeof(method_body)) {
-        ExecutionResult err;
-        err.has_return_value = false;
-        return err;
-    }
-    EncodeFatHeader(method_body, max_stack, static_cast<uint32_t>(code_size), 0u);
-    std::memcpy(method_body + 12u, il_code, code_size);
-
-    MethodBodyHeader header;
-    if (!ParseMethodBodyHeader(method_body, 12u + code_size, header)) {
-        ExecutionResult err;
-        err.has_return_value = false;
-        return err;
-    }
-
-    IRMethod method = LowerILToIR(
-        header.code_start, header.code_size,
-        header.code_size, header.max_stack,
-        token_resolver, nullptr);
-
-    const InterpreterVM vm = {};
-    return vm.Execute(method, frame);
-}
+using chaos::il2cpp::interpreter::DefaultTokenResolver;
+using chaos::il2cpp::interpreter::TokenResolverContext;
 
 // ════════════════════════════════════════════════════════════════════════════
 // Test declarations
@@ -157,10 +49,6 @@ static bool TestBeq_NotEqual();
 static bool TestSub();
 static bool TestMul();
 static bool TestLdNull();
-static bool TestFatHeaderMaxStack();
-static bool TestEmptyInput();
-static bool TestInvalidOpcode();
-static bool TestTinyHeaderRejectedForEmptyCode();
 
 // ── Phase A new opcode tests ───────────────────────────────────────────────
 static bool TestDup();
@@ -207,6 +95,17 @@ static bool TestDispatchBasic();
 static bool TestDispatchException();
 static bool TestDispatchArgs();
 
+// New interpreter VM feature tests
+static bool TestFloatBlt();
+static bool TestFloatBgt();
+static bool TestFloatBle();
+static bool TestFloatBge();
+static bool TestLdArgA_RefSemantics();
+static bool TestLdLocA_RefSemantics();
+static bool TestInterfaceCastClass();
+static bool TestInterfaceIsInst();
+static bool TestInterfaceVtableDispatch();
+
 // ════════════════════════════════════════════════════════════════════════════
 // Test runner
 // ════════════════════════════════════════════════════════════════════════════
@@ -235,10 +134,6 @@ int main()
     TEST(TestSub);
     TEST(TestMul);
     TEST(TestLdNull);
-    TEST(TestFatHeaderMaxStack);
-    TEST(TestEmptyInput);
-    TEST(TestInvalidOpcode);
-    TEST(TestTinyHeaderRejectedForEmptyCode);
 
     // Phase A new opcode tests
     TEST(TestDup);
@@ -284,6 +179,17 @@ int main()
     TEST(TestDispatchException);
     TEST(TestDispatchArgs);
 
+    // New interpreter VM feature tests
+    TEST(TestFloatBlt);
+    TEST(TestFloatBgt);
+    TEST(TestFloatBle);
+    TEST(TestFloatBge);
+    TEST(TestLdArgA_RefSemantics);
+    TEST(TestLdLocA_RefSemantics);
+    TEST(TestInterfaceCastClass);
+    TEST(TestInterfaceIsInst);
+    TEST(TestInterfaceVtableDispatch);
+
     std::cout << "interpreter-integration=failures=" << failures << std::endl;
 
     if (failures > 0) {
@@ -298,215 +204,203 @@ int main()
 // Test implementations
 // ═══════════════════════════════════════════════════════════════════════════
 
+static IRMethod MakeSimpleMethod(IROpCode op, CHAOS_IL2CPP_INT32 imm = 0)
+{
+    IRMethod method;
+    IRInstruction i;
+    i.op_code = op;
+    i.immediate_i4 = imm;
+    method.instructions.push_back(i);
+    IRInstruction ret;
+    ret.op_code = IROpCode::Ret;
+    method.instructions.push_back(ret);
+    return method;
+}
+
 bool TestLdcI4_0()
 {
-    // IL: ldc.i4.0 (0x16) + ret (0x2A) = 2 bytes
-    const uint8_t il_code[] = { 0x14, 0x2A };
+    // ldc.i4.0 → ret
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    IRMethod method = MakeSimpleMethod(IROpCode::LdcI4, 0);
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 0;
 }
 
 bool TestLdcI4_S()
 {
-    // IL: ldc.i4.s 42 (0x1F, 42) + ret (0x2A) = 3 bytes
-    const uint8_t il_code[] = { 0x1F, 42, 0x2A };
+    // ldc.i4.s 42 → ret
+    IRMethod method = MakeSimpleMethod(IROpCode::LdcI4, 42);
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 42;
 }
 
 bool TestLdcI4_2_3_Add()
 {
-    // IL: ldc.i4.2 (0x18) + ldc.i4.3 (0x19) + add (0x58) + ret (0x2A)
-    const uint8_t il_code[] = { 0x16, 0x17, 0x58, 0x2A };
+    // ldc.i4.2 → ldc.i4.3 → add → ret
+    IRMethod method;
+    IRInstruction i1; i1.op_code = IROpCode::LdcI4; i1.immediate_i4 = 2; method.instructions.push_back(i1);
+    IRInstruction i2; i2.op_code = IROpCode::LdcI4; i2.immediate_i4 = 3; method.instructions.push_back(i2);
+    IRInstruction add; add.op_code = IROpCode::Add; method.instructions.push_back(add);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 5;
 }
 
 bool TestLdArgAdd()
 {
-    // IL: ldarg.0 (0x02) + ldarg.1 (0x03) + add (0x58) + ret (0x2A)
-    const uint8_t il_code[] = { 0x02, 0x03, 0x58, 0x2A };
+    // ldarg.0 → ldarg.1 → add → ret
+    IRMethod method;
+    IRInstruction a0; a0.op_code = IROpCode::LdArg; a0.operand_index = 0; method.instructions.push_back(a0);
+    IRInstruction a1; a1.op_code = IROpCode::LdArg; a1.operand_index = 1; method.instructions.push_back(a1);
+    IRInstruction add; add.op_code = IROpCode::Add; method.instructions.push_back(add);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
     frame.arguments.push_back(InterpreterValue::from_i32(10));
     frame.arguments.push_back(InterpreterValue::from_i32(32));
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 42;
 }
 
 bool TestStLocLdLoc()
 {
-    // IL: ldc.i4.s 42 (0x1F, 42) + stloc.0 (0x0A) + ldloc.0 (0x06) + ret (0x2A)
-    // = 5 bytes
-    const uint8_t il_code[] = { 0x1F, 42, 0x0A, 0x06, 0x2A };
+    // ldc.i4.s 42 → stloc.0 → ldloc.0 → ret
+    IRMethod method;
+    IRInstruction push; push.op_code = IROpCode::LdcI4; push.immediate_i4 = 42; method.instructions.push_back(push);
+    IRInstruction st;   st.op_code = IROpCode::StLoc; st.operand_index = 0; method.instructions.push_back(st);
+    IRInstruction ld;   ld.op_code = IROpCode::LdLoc; ld.operand_index = 0; method.instructions.push_back(ld);
+    IRInstruction ret;  ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 42;
 }
 
 bool TestSub()
 {
-    // IL: ldc.i4.s 10 (0x1F, 10) + ldc.i4.3 (0x19) + sub (0x59) + ret (0x2A)
-    const uint8_t il_code[] = { 0x1F, 10, 0x17, 0x59, 0x2A };
+    // ldc.i4.s 10 → ldc.i4.3 → sub → ret
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 10; method.instructions.push_back(a);
+    IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 3; method.instructions.push_back(b);
+    IRInstruction sub; sub.op_code = IROpCode::Sub; method.instructions.push_back(sub);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 7;
 }
 
 bool TestMul()
 {
-    // IL: ldc.i4.6 (0x1C) + ldc.i4.7 (0x1D) + mul (0x5A) + ret (0x2A)
-    const uint8_t il_code[] = { 0x1A, 0x1B, 0x5A, 0x2A };
+    // ldc.i4.6 → ldc.i4.7 → mul → ret
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 6; method.instructions.push_back(a);
+    IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 7; method.instructions.push_back(b);
+    IRInstruction mul; mul.op_code = IROpCode::Mul; method.instructions.push_back(mul);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 42;
 }
 
 bool TestLdNull()
 {
-    // IL: ldnull (0x14) + pop (0x26) + ldc.i4.0 (0x16) + ret (0x2A)
-    const uint8_t il_code[] = { 0x13, 0x26, 0x14, 0x2A };
+    // ldnull → pop → ldc.i4.0 → ret
+    IRMethod method;
+    IRInstruction null; null.op_code = IROpCode::LdNull; method.instructions.push_back(null);
+    IRInstruction pop; pop.op_code = IROpCode::Pop; method.instructions.push_back(pop);
+    IRInstruction push; push.op_code = IROpCode::LdcI4; push.immediate_i4 = 0; method.instructions.push_back(push);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 0;
 }
 
 bool TestBrTrue_Taken()
 {
-    // IL (8 bytes):
-    //   0: ldc.i4.1 (0x17)         push 1 (truthy)
-    //   1: brtrue.s +2 (0x2D, 2)   branch to offset 5 if top != 0
-    //   3: ldc.i4.0 (0x16)         fallthrough: push 0
-    //   4: ret (0x2A)
-    //   5: ldc.i4.s 42 (0x1F, 42)  target: push 42
-    //   7: ret (0x2A)
-    const uint8_t il_code[] = { 0x15, 0x2D, 0x02, 0x14, 0x2A, 0x1F, 42, 0x2A };
+    // ldc.i4.1 → brtrue(4) → ldc.i4.0 → ret → [4] ldc.i4.s 42 → ret
+    // brtrue offset 4 skips the push-0/ret, lands on ldc.i4.s 42
+    IRMethod method;
+    IRInstruction push1; push1.op_code = IROpCode::LdcI4; push1.immediate_i4 = 1; method.instructions.push_back(push1);
+    IRInstruction br;    br.op_code = IROpCode::BrTrue; br.branch_target = 4; method.instructions.push_back(br);
+    IRInstruction push0; push0.op_code = IROpCode::LdcI4; push0.immediate_i4 = 0; method.instructions.push_back(push0);
+    IRInstruction ret1;  ret1.op_code = IROpCode::Ret; method.instructions.push_back(ret1);
+    IRInstruction push42; push42.op_code = IROpCode::LdcI4; push42.immediate_i4 = 42; method.instructions.push_back(push42);
+    IRInstruction ret2;   ret2.op_code = IROpCode::Ret; method.instructions.push_back(ret2);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 42;
 }
 
 bool TestBrTrue_NotTaken()
 {
-    // IL (8 bytes):
-    //   0: ldc.i4.0 (0x16)         push 0 (falsy)
-    //   1: brtrue.s +2 (0x2D, 2)   NOT taken (top is 0)
-    //   3: ldc.i4.1 (0x17)         falls through: push 1
-    //   4: ret (0x2A)
-    //   5: ldc.i4.s 42 (0x1F, 42)
-    //   7: ret (0x2A)
-    const uint8_t il_code[] = { 0x14, 0x2D, 0x02, 0x15, 0x2A, 0x1F, 42, 0x2A };
+    // ldc.i4.0 → brtrue(4) → NOT taken → ldc.i4.1 → ret
+    IRMethod method;
+    IRInstruction push0; push0.op_code = IROpCode::LdcI4; push0.immediate_i4 = 0; method.instructions.push_back(push0);
+    IRInstruction br;    br.op_code = IROpCode::BrTrue; br.branch_target = 4; method.instructions.push_back(br);
+    IRInstruction push1; push1.op_code = IROpCode::LdcI4; push1.immediate_i4 = 1; method.instructions.push_back(push1);
+    IRInstruction ret;   ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+    IRInstruction push42; push42.op_code = IROpCode::LdcI4; push42.immediate_i4 = 42; method.instructions.push_back(push42);
+    IRInstruction ret2;   ret2.op_code = IROpCode::Ret; method.instructions.push_back(ret2);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 1;
 }
 
 bool TestBeq_Equal()
 {
-    // IL (8 bytes):
-    //   0: ldarg.0 (0x02)
-    //   1: ldarg.1 (0x03)
-    //   2: beq.s +2 (0x2E, 2)      branch to offset 6 if arg0 == arg1
-    //   4: ldc.i4.0 (0x16)         not equal: push 0
-    //   5: ret (0x2A)
-    //   6: ldc.i4.1 (0x17)         equal: push 1
-    //   7: ret (0x2A)
-    const uint8_t il_code[] = { 0x02, 0x03, 0x2E, 0x02, 0x14, 0x2A, 0x15, 0x2A };
+    // ldarg.0 → ldarg.1 → beq(5) → ldc.i4.0 → ret → [5] ldc.i4.1 → ret
+    IRMethod method;
+    IRInstruction a0; a0.op_code = IROpCode::LdArg; a0.operand_index = 0; method.instructions.push_back(a0);
+    IRInstruction a1; a1.op_code = IROpCode::LdArg; a1.operand_index = 1; method.instructions.push_back(a1);
+    IRInstruction beq; beq.op_code = IROpCode::Beq; beq.branch_target = 5; method.instructions.push_back(beq);
+    IRInstruction push0; push0.op_code = IROpCode::LdcI4; push0.immediate_i4 = 0; method.instructions.push_back(push0);
+    IRInstruction ret1;  ret1.op_code = IROpCode::Ret; method.instructions.push_back(ret1);
+    IRInstruction push1; push1.op_code = IROpCode::LdcI4; push1.immediate_i4 = 1; method.instructions.push_back(push1);
+    IRInstruction ret2;  ret2.op_code = IROpCode::Ret; method.instructions.push_back(ret2);
+
     ExecutionFrame frame = {};
     frame.arguments.push_back(InterpreterValue::from_i32(42));
     frame.arguments.push_back(InterpreterValue::from_i32(42));
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 1;
 }
 
 bool TestBeq_NotEqual()
 {
-    const uint8_t il_code[] = { 0x02, 0x03, 0x2E, 0x02, 0x14, 0x2A, 0x15, 0x2A };
+    IRMethod method;
+    IRInstruction a0; a0.op_code = IROpCode::LdArg; a0.operand_index = 0; method.instructions.push_back(a0);
+    IRInstruction a1; a1.op_code = IROpCode::LdArg; a1.operand_index = 1; method.instructions.push_back(a1);
+    IRInstruction beq; beq.op_code = IROpCode::Beq; beq.branch_target = 5; method.instructions.push_back(beq);
+    IRInstruction push0; push0.op_code = IROpCode::LdcI4; push0.immediate_i4 = 0; method.instructions.push_back(push0);
+    IRInstruction ret1;  ret1.op_code = IROpCode::Ret; method.instructions.push_back(ret1);
+    IRInstruction push1; push1.op_code = IROpCode::LdcI4; push1.immediate_i4 = 1; method.instructions.push_back(push1);
+    IRInstruction ret2;  ret2.op_code = IROpCode::Ret; method.instructions.push_back(ret2);
+
     ExecutionFrame frame = {};
     frame.arguments.push_back(InterpreterValue::from_i32(10));
     frame.arguments.push_back(InterpreterValue::from_i32(99));
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 0;
-}
-
-bool TestFatHeaderMaxStack()
-{
-    // Same IL as TestLdcI4_S but with a fat header and explicit max_stack.
-    const uint8_t il_code[] = { 0x1F, 42, 0x2A };
-    constexpr uint32_t code_size = 3;
-    constexpr uint16_t max_stack = 16;
-
-    uint8_t method_body[12 + code_size];
-    EncodeFatHeader(method_body, max_stack, code_size, 0u);
-    std::memcpy(method_body + 12, il_code, code_size);
-
-    MethodBodyHeader header;
-    if (!ParseMethodBodyHeader(method_body, sizeof(method_body), header)) {
-        return false;
-    }
-    if (header.max_stack != max_stack) return false;
-    if (header.code_size != code_size) return false;
-    if (header.local_var_sig_tok != 0u) return false;
-
-    IRMethod method = LowerILToIR(
-        header.code_start, header.code_size,
-        header.code_size, header.max_stack,
-        NoopTokenResolver, nullptr);
-
-    const InterpreterVM vm = {};
-    ExecutionFrame frame = {};
-    const ExecutionResult result = vm.Execute(method, &frame);
-    return result.has_return_value && result.int32_value == 42;
-}
-
-bool TestEmptyInput()
-{
-    // LowerILToIR with null bytes returns an empty method (single Ret).
-    IRMethod method = LowerILToIR(
-        nullptr, 0u, 0u, 8u, NoopTokenResolver, nullptr);
-    if (method.instructions.size() != 1u) return false;
-    if (method.instructions[0].op_code != IROpCode::Ret) return false;
-
-    const InterpreterVM vm = {};
-    ExecutionFrame frame = {};
-    const ExecutionResult result = vm.Execute(method, &frame);
-    return !result.has_return_value;
-}
-
-bool TestInvalidOpcode()
-{
-    // An unrecognised opcode (0xFF) should cause LowerILToIR to return an
-    // empty method (single Ret, no return value).
-    const uint8_t il_code[] = { 0xFF, 0x2A };
-    ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(
-        il_code, sizeof(il_code), &frame);
-    return !result.has_return_value;
-}
-
-bool TestTinyHeaderRejectedForEmptyCode()
-{
-    // A tiny header encoding a code_size of 0 should be rejected.
-    uint8_t body[] = { 0x02u };
-    MethodBodyHeader header;
-    if (ParseMethodBodyHeader(body, sizeof(body), header)) {
-        return false;
-    }
-    return true;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -515,174 +409,260 @@ bool TestTinyHeaderRejectedForEmptyCode()
 
 bool TestDup()
 {
-    // IL: ldc.i4.5 (0x1B) + ldc.i4.3 (0x19) + dup (0x25) + add (0x58) + add (0x58) + ret (0x2A)
-    // Stack: [5], [5,3], [5,3,3], [5,6], [11] -> ret 11
-    const uint8_t il_code[] = { 0x19, 0x17, 0x25, 0x58, 0x58, 0x2A };
+    // ldc.i4.5 → ldc.i4.3 → dup → add → add → ret
+    // Stack: [5], [5,3], [5,3,3], [5,6], [11]
+    IRMethod method;
+    IRInstruction p5; p5.op_code = IROpCode::LdcI4; p5.immediate_i4 = 5; method.instructions.push_back(p5);
+    IRInstruction p3; p3.op_code = IROpCode::LdcI4; p3.immediate_i4 = 3; method.instructions.push_back(p3);
+    IRInstruction dup; dup.op_code = IROpCode::Dup; method.instructions.push_back(dup);
+    IRInstruction a1; a1.op_code = IROpCode::Add; method.instructions.push_back(a1);
+    IRInstruction a2; a2.op_code = IROpCode::Add; method.instructions.push_back(a2);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 11;
 }
 
 bool TestDivUn()
 {
-    // IL: ldc.i4.s -1 (0x1F, 0xFF) + ldc.i4.2 (0x18) + div.un (0x60) + ret (0x2A)
+    // ldc.i4.s -1 (0xFFFFFFFF) → ldc.i4.2 → div.un → ret
     // Unsigned -1 / 2 = 0xFFFFFFFF / 2 = 2147483647
-    const uint8_t il_code[] = { 0x1F, 0xFF, 0x16, 0x60, 0x2A };
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = -1; method.instructions.push_back(a);
+    IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 2; method.instructions.push_back(b);
+    IRInstruction du; du.op_code = IROpCode::DivUn; method.instructions.push_back(du);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 2147483647;
 }
 
 bool TestRemUn()
 {
-    // IL: ldc.i4.s -1 (0x1F, 0xFF) + ldc.i4.3 (0x19) + rem.un (0x61) + ret (0x2A)
-    // Unsigned -1 % 3: 4294967295 % 3 = 0
-    const uint8_t il_code[] = { 0x1F, 0xFF, 0x17, 0x61, 0x2A };
+    // ldc.i4.s -1 → ldc.i4.3 → rem.un → ret
+    // 4294967295 % 3 = 0
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = -1; method.instructions.push_back(a);
+    IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 3; method.instructions.push_back(b);
+    IRInstruction ru; ru.op_code = IROpCode::RemUn; method.instructions.push_back(ru);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 0;
 }
 
 bool TestBitwiseAnd()
 {
-    // IL: ldc.i4.3 (0x19) + ldc.i4.6 (0x1A) + and (0x62) + ret (0x2A)
-    // 3 & 6 = 2
-    const uint8_t il_code[] = { 0x17, 0x1A, 0x62, 0x2A };
+    // ldc.i4.3 → ldc.i4.6 → and → ret  →  3 & 6 = 2
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 3; method.instructions.push_back(a);
+    IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 6; method.instructions.push_back(b);
+    IRInstruction and; and.op_code = IROpCode::And; method.instructions.push_back(and);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 2;
 }
 
 bool TestBitwiseOr()
 {
-    // IL: ldc.i4.3 (0x19) + ldc.i4.6 (0x1A) + or (0x63) + ret (0x2A)
-    // 3 | 6 = 7
-    const uint8_t il_code[] = { 0x17, 0x1A, 0x63, 0x2A };
+    // ldc.i4.3 → ldc.i4.6 → or → ret  →  3 | 6 = 7
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 3; method.instructions.push_back(a);
+    IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 6; method.instructions.push_back(b);
+    IRInstruction or; or.op_code = IROpCode::Or; method.instructions.push_back(or);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 7;
 }
 
 bool TestBitwiseXor()
 {
-    // IL: ldc.i4.3 (0x19) + ldc.i4.6 (0x1A) + xor (0x64) + ret (0x2A)
-    // 3 ^ 6 = 5
-    const uint8_t il_code[] = { 0x17, 0x1A, 0x64, 0x2A };
+    // ldc.i4.3 → ldc.i4.6 → xor → ret  →  3 ^ 6 = 5
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 3; method.instructions.push_back(a);
+    IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 6; method.instructions.push_back(b);
+    IRInstruction xor; xor.op_code = IROpCode::Xor; method.instructions.push_back(xor);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 5;
 }
 
 bool TestBitwiseNot()
 {
-    // IL: ldc.i4.0 (0x16) + not (0x66) + ret (0x2A)
-    // ~0 = -1
-    const uint8_t il_code[] = { 0x14, 0x66, 0x2A };
+    // ldc.i4.0 → not → ret  →  ~0 = -1
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 0; method.instructions.push_back(a);
+    IRInstruction not; not.op_code = IROpCode::Not; method.instructions.push_back(not);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == -1;
 }
 
 bool TestShiftLeft()
 {
-    // IL: ldc.i4.3 (0x19) + ldc.i4.2 (0x18) + shl (0x67) + ret (0x2A)
-    // 3 << 2 = 12
-    const uint8_t il_code[] = { 0x17, 0x16, 0x67, 0x2A };
+    // ldc.i4.3 → ldc.i4.2 → shl → ret  →  3 << 2 = 12
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 3; method.instructions.push_back(a);
+    IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 2; method.instructions.push_back(b);
+    IRInstruction shl; shl.op_code = IROpCode::Shl; method.instructions.push_back(shl);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 12;
 }
 
 bool TestShiftRightArith()
 {
-    // IL: ldc.i4.s -8 (0x1F, 0xF8) + ldc.i4.2 (0x18) + shr (0x68) + ret (0x2A)
-    // -8 >> 2 = -2 (arithmetic shift, sign-extending)
-    const uint8_t il_code[] = { 0x1F, 0xF8, 0x16, 0x68, 0x2A };
+    // ldc.i4.s -8 → ldc.i4.2 → shr → ret  →  -8 >> 2 = -2
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = -8; method.instructions.push_back(a);
+    IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 2; method.instructions.push_back(b);
+    IRInstruction shr; shr.op_code = IROpCode::Shr; method.instructions.push_back(shr);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == -2;
 }
 
 bool TestShiftRightLogical()
 {
-    // IL: ldc.i4.s -8 (0x1F, 0xF8) + ldc.i4.2 (0x18) + shr.un (0x69) + ret (0x2A)
-    // -8 >>> 2 = 0x3FFFFFFE = 1073741822 (logical shift, zero-filling)
-    const uint8_t il_code[] = { 0x1F, 0xF8, 0x16, 0x69, 0x2A };
+    // ldc.i4.s -8 → ldc.i4.2 → shr.un → ret
+    // -8 >>> 2 = 0x3FFFFFFE = 1073741822
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = -8; method.instructions.push_back(a);
+    IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 2; method.instructions.push_back(b);
+    IRInstruction shru; shru.op_code = IROpCode::ShrUn; method.instructions.push_back(shru);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 1073741822;
 }
 
 bool TestConvRUn()
 {
-    // IL: ldc.i4.3 (0x19) + conv.r.un (0x6F) + conv.i4 (0x6C) + ret (0x2A)
+    // ldc.i4.3 → conv.r.un → conv.i4 → ret
     // unsigned 3 → 3.0 → 3
-    const uint8_t il_code[] = { 0x17, 0x6F, 0x6C, 0x2A };
+    IRMethod method;
+    IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 3; method.instructions.push_back(a);
+    IRInstruction cru; cru.op_code = IROpCode::ConvRUn; method.instructions.push_back(cru);
+    IRInstruction ci; ci.op_code = IROpCode::Conv_I4; method.instructions.push_back(ci);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 3;
 }
 
 bool TestConvI()
 {
-    // IL: ldc.i4.5 (0x1B) + conv.i (0xB3) + ret (0x2A)
-    const uint8_t il_code[] = { 0x19, 0xB3, 0x2A };
+    // ldc.i4.5 → conv.i → ret
+    IRMethod method;
+    IRInstruction push; push.op_code = IROpCode::LdcI4; push.immediate_i4 = 5; method.instructions.push_back(push);
+    IRInstruction ci; ci.op_code = IROpCode::ConvI; method.instructions.push_back(ci);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 5;
 }
 
 bool TestConvU()
 {
-    // IL: ldc.i4.5 (0x1B) + conv.u (0xB6) + ret (0x2A)
-    const uint8_t il_code[] = { 0x19, 0xB6, 0x2A };
+    // ldc.i4.5 → conv.u → ret
+    IRMethod method;
+    IRInstruction push; push.op_code = IROpCode::LdcI4; push.immediate_i4 = 5; method.instructions.push_back(push);
+    IRInstruction cu; cu.op_code = IROpCode::ConvU; method.instructions.push_back(cu);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 5;
 }
 
 bool TestSizeOf()
 {
-    // sizeof requires a token; use fat header + PassthroughTokenResolver.
-    // IL: sizeof(4-byte-token) (FE 0x1C, tok[3..0]) + ret (0x2A)
-    // Token 0x12345 → stored as immediate_i4 = 0x12345
-    const uint8_t il_code[] = { 0xFE, 0x1C, 0x45, 0x23, 0x01, 0x00, 0x2A };
+    // sizeof(0x12345) → ret
+    // The immediate_i4 stores the type token, which the interpreter
+    // may use to look up type size at runtime.
+    IRMethod method;
+    IRInstruction so; so.op_code = IROpCode::SizeOf; so.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(0x12345u); method.instructions.push_back(so);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteFat(
-        il_code, sizeof(il_code), 8u, PassthroughTokenResolver, &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == static_cast<CHAOS_IL2CPP_INT32>(0x12345u);
 }
 
 bool TestExtendedLdFtn()
 {
-    // ldftn(4-byte-token) (FE 0x06, tok) + pop (0x26) + ldc.i4.1 (0x17) + ret (0x2A)
-    const uint8_t il_code[] = { 0xFE, 0x06, 0xAA, 0xBB, 0xCC, 0xDD, 0x26, 0x15, 0x2A };
+    // ldftn(0xCCDDAABB) → pop → ldc.i4.1 → ret
+    // Verifies that LdFtn does not crash and pops cleanly.
+    IRMethod method;
+    IRInstruction ldftn; ldftn.op_code = IROpCode::LdFtn; ldftn.call_target = reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xCCDDAABBu)); method.instructions.push_back(ldftn);
+    IRInstruction pop; pop.op_code = IROpCode::Pop; method.instructions.push_back(pop);
+    IRInstruction push; push.op_code = IROpCode::LdcI4; push.immediate_i4 = 1; method.instructions.push_back(push);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    // ldftn + pop leaves nothing; then ldc.i4.1 + ret = returns 1
-    // No crash from ldftn is the basic check.
-    ExecutionResult result = LowerAndExecuteFat(
-        il_code, sizeof(il_code), 8u, PassthroughTokenResolver, &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 1;
 }
 
 bool TestExtendedLdArg()
 {
-    // FE 0x09: ldarg (uint16) + ret
-    // IL: FE 0x09, 0x00, 0x00 (= ldarg 0), ret (0x2A)
-    const uint8_t il_code[] = { 0xFE, 0x09, 0x00, 0x00, 0x2A };
+    // ldarg 0 → ret  (uint16 index form)
+    IRMethod method;
+    IRInstruction ldarg; ldarg.op_code = IROpCode::LdArg; ldarg.operand_index = 0; method.instructions.push_back(ldarg);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
     frame.arguments.push_back(InterpreterValue::from_i32(99));
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 99;
 }
 
 bool TestExtendedLdLoc()
 {
-    // FE 0x0C: ldloc (uint16) + ret
-    // IL: ldc.i4.s 42 (0x1F, 42) + stloc.0 (0x0A) + FE 0x0C, 0x00, 0x00 (= ldloc 0) + ret (0x2A)
-    const uint8_t il_code[] = { 0x1F, 42, 0x0A, 0xFE, 0x0C, 0x00, 0x00, 0x2A };
+    // ldc.i4.s 42 → stloc.0 → ldloc 0 → ret (uint16 index form of ldloc)
+    IRMethod method;
+    IRInstruction push; push.op_code = IROpCode::LdcI4; push.immediate_i4 = 42; method.instructions.push_back(push);
+    IRInstruction st; st.op_code = IROpCode::StLoc; st.operand_index = 0; method.instructions.push_back(st);
+    IRInstruction ld; ld.op_code = IROpCode::LdLoc; ld.operand_index = 0; method.instructions.push_back(ld);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
     ExecutionFrame frame = {};
-    ExecutionResult result = LowerAndExecuteTiny(il_code, sizeof(il_code), &frame);
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
     return result.has_return_value && result.int32_value == 42;
 }
 
@@ -999,39 +979,18 @@ bool TestLeaveFinally()
 
 // ── Runtime-generic-method simulation tests ──────────────────────────────
 // These tests simulate what the RuntimeInstantiationBridgeV0::interpret_method_call
-// does: lower IL → build frame → execute → extract result.
+// does: build IR → execute → extract result.
 
-// Test: Lower IL for a generic-like method and execute with args.
-// Simulates what the bridge does: LowerILToIR → ExecutionFrame → Execute.
+// Test: Execute a simple add method via IR + ExecutionFrame.
+// Simulates the bridge's core: IRMethod → ExecutionFrame → Execute.
 static bool TestRuntimeMethodExecute()
 {
-    // IL: add(ldarg.0, ldarg.1) → ret
-    // Using tiny header: 0x02 | (code_size << 2)
-    // code_size = 3 bytes: ldarg.0 (02), ldarg.1 (03), add (58), ret (2a) → actually 4 bytes
-    // Wait, let me count: ldarg.0=0x02, ldarg.1=0x03, add=0x58, ret=0x2A → 4 bytes
-    // tiny header = 0x02 | (4 << 2) = 0x12
-    uint8_t il[] = {
-        0x12,       // tiny header: code_size=4
-        0x02,       // ldarg.0
-        0x03,       // ldarg.1
-        0x58,       // add
-        0x2A        // ret
-    };
-
-    MethodBodyHeader header;
-    if (!ParseMethodBodyHeader(il, sizeof(il), header)) {
-        return false;
-    }
-
-    // Token resolver: none needed for this IL (no metadata tokens).
-    IRMethod method = LowerILToIR(
-        header.code_start, sizeof(il) - (header.code_start - il),
-        header.code_size, header.max_stack,
-        nullptr, nullptr);
-
-    if (method.instructions.empty()) {
-        return false;
-    }
+    // IR: ldarg.0 → ldarg.1 → add → ret
+    IRMethod method;
+    IRInstruction a0; a0.op_code = IROpCode::LdArg; a0.operand_index = 0; method.instructions.push_back(a0);
+    IRInstruction a1; a1.op_code = IROpCode::LdArg; a1.operand_index = 1; method.instructions.push_back(a1);
+    IRInstruction add; add.op_code = IROpCode::Add; method.instructions.push_back(add);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
 
     // Build frame with two int32 arguments.
     ExecutionFrame frame;
@@ -1050,27 +1009,8 @@ static bool TestRuntimeMethodExecute()
 // The bridge uses tag dispatch to write return_value into raw out_return_value.
 static bool TestRuntimeMethodReturnValueDispatch()
 {
-    // IL: ldc.i4.s 42 → ret
-    uint8_t il[] = {
-        0x0E,       // tiny header: code_size=3  (0x02 | (3<<2))
-        0x1F,       // ldc.i4.s               (short form, 1 opcode + 1 operand)
-        0x2A,       // operand = 42
-        0x2A        // ret
-    };
-
-    MethodBodyHeader header;
-    if (!ParseMethodBodyHeader(il, sizeof(il), header)) {
-        return false;
-    }
-
-    IRMethod method = LowerILToIR(
-        header.code_start, sizeof(il) - (header.code_start - il),
-        header.code_size, header.max_stack,
-        nullptr, nullptr);
-
-    if (method.instructions.empty()) {
-        return false;
-    }
+    // IR: ldc.i4.s 42 → ret
+    IRMethod method = MakeSimpleMethod(IROpCode::LdcI4, 42);
 
     ExecutionFrame frame;
     const InterpreterVM vm = {};
@@ -1099,51 +1039,28 @@ static bool TestRuntimeMethodReturnValueDispatch()
 // from the TokenResolverContext.
 static bool TestRuntimeMethodTypeParamResolution()
 {
-    // IL for a method that takes a type parameter and boxes it:
-    // ldarg.0, box 0x11000000, ret
-    // The token 0x11000000 represents ELEMENT_TYPE_VAR with index 0 (!0).
-    uint8_t il[] = {
-        0x0A,       // tiny header: code_size=2
-        0x02,       // ldarg.0
-        0x8C,       // box <token>
-        0x00, 0x00, 0x00, 0x11,  // token = 0x11000000 (ELEMENT_TYPE_VAR, index 0)
-        0x2A        // ret
-    };
-
-    MethodBodyHeader header;
-    if (!ParseMethodBodyHeader(il, sizeof(il), header)) {
-        return false;
-    }
-
     // Set up TokenResolverContext with type_args.
-    // Use a sentinel pointer as the "resolved type handle" for the type param.
     TypeInfoHandle dummy_type = static_cast<TypeInfoHandle>(0xDEADBEEFu);
 
-    auto ctx = chaos::il2cpp::interpreter::TokenResolverContext();
+    auto ctx = TokenResolverContext();
     ctx.type_args = &dummy_type;
     ctx.arg_count = 1u;
-    // No bridge needed — generic param resolution happens before bridge check.
 
-    IRMethod method = LowerILToIR(
-        header.code_start, sizeof(il) - (header.code_start - il),
-        header.code_size, header.max_stack,
-        chaos::il2cpp::interpreter::DefaultTokenResolver, &ctx);
+    // Construct a Box instruction (no call_target yet).
+    IRInstruction box_insn;
+    box_insn.op_code = IROpCode::Box;
 
-    if (method.instructions.empty()) {
+    // Call DefaultTokenResolver with the ELEMENT_TYPE_VAR token (0x11xxxxxx).
+    // Token 0x11000000 = ELEMENT_TYPE_VAR, index 0 (= !0, the first class-level type parameter).
+    bool resolved = DefaultTokenResolver(0x11000000u, box_insn, &ctx);
+    if (!resolved) {
         return false;
     }
 
-    // After lowering, the box instruction should have its call_target set
-    // to dummy_type (resolved from ELEMENT_TYPE_VAR).
-    for (const auto& insn : method.instructions) {
-        if (insn.op_code == IROpCode::Box) {
-            void* expected = reinterpret_cast<void*>(
-                static_cast<CHAOS_IL2CPP_UINTPTR>(0xDEADBEEFu));
-            return insn.call_target == expected;
-        }
-    }
-
-    return false;  // Box instruction not found
+    // The call_target should point to dummy_type (resolved from ELEMENT_TYPE_VAR).
+    void* expected = reinterpret_cast<void*>(
+        static_cast<CHAOS_IL2CPP_UINTPTR>(0xDEADBEEFu));
+    return box_insn.call_target == expected;
 }
 
 // Test: Exception propagation matching bridge path.
@@ -1474,4 +1391,304 @@ bool TestDispatchArgs()
     if (result.return_value.i32 != 99) return false;
 
     return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// New interpreter VM feature tests
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Test: Blt with float operands — 2.5 < 3.5 → branch taken.
+bool TestFloatBlt()
+{
+    IRMethod method;
+    // ldc.r8 2.5, ldc.r8 3.5, blt (taken) → ldc.i4 1 → ret
+    // 0: ldc.r8 2.5
+    IRInstruction r1; r1.op_code = IROpCode::LdcR8; r1.immediate_r8 = 2.5; method.instructions.push_back(r1);
+    // 1: ldc.r8 3.5
+    IRInstruction r2; r2.op_code = IROpCode::LdcR8; r2.immediate_r8 = 3.5; method.instructions.push_back(r2);
+    // 2: blt → 4
+    IRInstruction blt; blt.op_code = IROpCode::Blt; blt.branch_target = 4; method.instructions.push_back(blt);
+    // 3: (skipped) ldc.i4 0
+    IRInstruction f; f.op_code = IROpCode::LdcI4; f.immediate_i4 = 0; method.instructions.push_back(f);
+    // 4: ldc.i4 1
+    IRInstruction t; t.op_code = IROpCode::LdcI4; t.immediate_i4 = 1; method.instructions.push_back(t);
+    // 5: ret
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
+    ExecutionFrame frame;
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+    return result.has_return_value && result.int32_value == 1;
+}
+
+// Test: Bgt with float operands — 5.0 > 2.0 → branch taken.
+bool TestFloatBgt()
+{
+    IRMethod method;
+    IRInstruction r1; r1.op_code = IROpCode::LdcR8; r1.immediate_r8 = 5.0; method.instructions.push_back(r1);
+    IRInstruction r2; r2.op_code = IROpCode::LdcR8; r2.immediate_r8 = 2.0; method.instructions.push_back(r2);
+    IRInstruction bgt; bgt.op_code = IROpCode::Bgt; bgt.branch_target = 4; method.instructions.push_back(bgt);
+    IRInstruction f; f.op_code = IROpCode::LdcI4; f.immediate_i4 = 0; method.instructions.push_back(f);
+    IRInstruction t; t.op_code = IROpCode::LdcI4; t.immediate_i4 = 1; method.instructions.push_back(t);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
+    ExecutionFrame frame;
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+    return result.has_return_value && result.int32_value == 1;
+}
+
+// Test: Ble with float operands — 3.0 <= 3.0 → branch taken.
+bool TestFloatBle()
+{
+    IRMethod method;
+    IRInstruction r1; r1.op_code = IROpCode::LdcR8; r1.immediate_r8 = 3.0; method.instructions.push_back(r1);
+    IRInstruction r2; r2.op_code = IROpCode::LdcR8; r2.immediate_r8 = 3.0; method.instructions.push_back(r2);
+    IRInstruction ble; ble.op_code = IROpCode::Ble; ble.branch_target = 4; method.instructions.push_back(ble);
+    IRInstruction f; f.op_code = IROpCode::LdcI4; f.immediate_i4 = 0; method.instructions.push_back(f);
+    IRInstruction t; t.op_code = IROpCode::LdcI4; t.immediate_i4 = 1; method.instructions.push_back(t);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
+    ExecutionFrame frame;
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+    return result.has_return_value && result.int32_value == 1;
+}
+
+// Test: Bge with float operands — 1.0 >= 0.5 → branch taken.
+bool TestFloatBge()
+{
+    IRMethod method;
+    IRInstruction r1; r1.op_code = IROpCode::LdcR8; r1.immediate_r8 = 1.0; method.instructions.push_back(r1);
+    IRInstruction r2; r2.op_code = IROpCode::LdcR8; r2.immediate_r8 = 0.5; method.instructions.push_back(r2);
+    IRInstruction bge; bge.op_code = IROpCode::Bge; bge.branch_target = 4; method.instructions.push_back(bge);
+    IRInstruction f; f.op_code = IROpCode::LdcI4; f.immediate_i4 = 0; method.instructions.push_back(f);
+    IRInstruction t; t.op_code = IROpCode::LdcI4; t.immediate_i4 = 1; method.instructions.push_back(t);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
+    ExecutionFrame frame;
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+    return result.has_return_value && result.int32_value == 1;
+}
+
+// Test: LdArgA pushes a managed pointer (address of InterpreterValue slot),
+// and LdObj dereferences it to get the value.
+bool TestLdArgA_RefSemantics()
+{
+    IRMethod method;
+    // ldarga 0 → ldobj → ret  (should load value at arg[0]'s address)
+    IRInstruction ldarga; ldarga.op_code = IROpCode::LdArgA; ldarga.operand_index = 0; method.instructions.push_back(ldarga);
+    IRInstruction ldobj; ldobj.op_code = IROpCode::LdObj; method.instructions.push_back(ldobj);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
+    ExecutionFrame frame;
+    frame.arguments.push_back(InterpreterValue::from_i32(42));
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+    return result.has_return_value && result.int32_value == 42;
+}
+
+// Test: LdLocA + StObj to modify a local through its address.
+bool TestLdLocA_RefSemantics()
+{
+    IRMethod method;
+    // ldc.i4 10 → stloc 0  (local[0] = 10)
+    IRInstruction push; push.op_code = IROpCode::LdcI4; push.immediate_i4 = 10; method.instructions.push_back(push);
+    IRInstruction stloc; stloc.op_code = IROpCode::StLoc; stloc.operand_index = 0; method.instructions.push_back(stloc);
+    // ldc.i4 20 → ldloca 0 → stobj  (write 20 through managed ptr to local[0])
+    IRInstruction push2; push2.op_code = IROpCode::LdcI4; push2.immediate_i4 = 20; method.instructions.push_back(push2);
+    IRInstruction ldloca; ldloca.op_code = IROpCode::LdLocA; ldloca.operand_index = 0; method.instructions.push_back(ldloca);
+    IRInstruction stobj; stobj.op_code = IROpCode::StObj; method.instructions.push_back(stobj);
+    // ldloc 0 → ret  (should read 20, written via StObj through the managed ptr)
+    IRInstruction ldloc; ldloc.op_code = IROpCode::LdLoc; ldloc.operand_index = 0; method.instructions.push_back(ldloc);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
+    ExecutionFrame frame;
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+    return result.has_return_value && result.int32_value == 20;
+}
+
+// Test: CastClass to an interface — object implements interface → pass through.
+bool TestInterfaceCastClass()
+{
+    using namespace chaos::il2cpp::vtable_registry;
+
+    // Register an interface type vtable: type_token=0x200, type_shape=interface
+    // Object type: type_token=0x100, base_token=0, iface_map includes stable_id matching interface
+    const CHAOS_IL2CPP_UINT64 kIfaceStableId = 0xABCD1234ULL;
+    CHAOS_IL2CPP_UINT64 obj_stable_id = 0xDEADBEEFULL;
+
+    // Object type's interface map entry
+    ChaosIl2cpp::Common::InterfaceMapEntry obj_iface_entries[] = {
+        { kIfaceStableId, 0u, 0u }
+    };
+    // Dummy slot (MSVC requires non-zero array)
+    VTableSlot dummy_slot = { 1u, nullptr };
+    VTableSlot obj_slots[1] = { dummy_slot };
+    TypeVTable obj_vtable = {};
+    obj_vtable.type_token = 0x100u;
+    obj_vtable.base_token = 0u;
+    obj_vtable.slot_count = 1u;
+    obj_vtable.slots = obj_slots;
+    obj_vtable.stable_id = obj_stable_id;
+    obj_vtable.type_shape = ChaosIl2cpp::Common::chaos_type_shape_reference;
+    obj_vtable.iface_map = obj_iface_entries;
+    obj_vtable.iface_count = 1u;
+    RegisterTypeVTable(&obj_vtable);
+
+    // Register interface type vtable (with matching stable_id)
+    VTableSlot iface_slots[1] = { dummy_slot };
+    TypeVTable iface_vtable = {};
+    iface_vtable.type_token = 0x200u;
+    iface_vtable.base_token = 0u;
+    iface_vtable.slot_count = 1u;
+    iface_vtable.slots = iface_slots;
+    iface_vtable.stable_id = kIfaceStableId;
+    iface_vtable.type_shape = ChaosIl2cpp::Common::chaos_type_shape_interface;
+    iface_vtable.iface_map = nullptr;
+    iface_vtable.iface_count = 0u;
+    RegisterTypeVTable(&iface_vtable);
+
+    // Build IR: ldarg.0 → castclass(0x200) → ret
+    IRMethod method;
+    IRInstruction ldarg; ldarg.op_code = IROpCode::LdArg; ldarg.operand_index = 0; method.instructions.push_back(ldarg);
+    IRInstruction cast; cast.op_code = IROpCode::CastClass; cast.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(0x200u); method.instructions.push_back(cast);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
+    // Create object with type_token = 0x100
+    auto* storage = new InterpreterObject();
+    storage->type_token = 0x100u;
+
+    ExecutionFrame frame;
+    frame.arguments.push_back(InterpreterValue::from_obj(storage));
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    // Should pass through — object implements interface
+    return result.has_return_value && result.return_value.tag == ValueTag::ObjectRef;
+}
+
+// Test: IsInst to an interface that is NOT implemented → returns null.
+bool TestInterfaceIsInst()
+{
+    using namespace chaos::il2cpp::vtable_registry;
+
+    VTableSlot dummy_slot2 = { 1u, nullptr };
+    VTableSlot obj_slots2[1] = { dummy_slot2 };
+
+    // Object type: type_token=0x100, no iface_map
+    TypeVTable obj_vtable2 = {};
+    obj_vtable2.type_token = 0x100u;
+    obj_vtable2.base_token = 0u;
+    obj_vtable2.slot_count = 1u;
+    obj_vtable2.slots = obj_slots2;
+    obj_vtable2.stable_id = 0xBEEFBEEFULL;
+    obj_vtable2.type_shape = ChaosIl2cpp::Common::chaos_type_shape_reference;
+    obj_vtable2.iface_map = nullptr;
+    obj_vtable2.iface_count = 0u;
+    RegisterTypeVTable(&obj_vtable2);
+
+    // Interface type: type_token=0x300, type_shape=interface
+    VTableSlot iface_slots2[1] = { dummy_slot2 };
+    TypeVTable iface_vtable2 = {};
+    iface_vtable2.type_token = 0x300u;
+    iface_vtable2.base_token = 0u;
+    iface_vtable2.slot_count = 1u;
+    iface_vtable2.slots = iface_slots2;
+    iface_vtable2.stable_id = 0xCAFE1234ULL;
+    iface_vtable2.type_shape = ChaosIl2cpp::Common::chaos_type_shape_interface;
+    RegisterTypeVTable(&iface_vtable2);
+
+    // Build IR: ldarg.0 → isinst(0x300) → ret
+    IRMethod method;
+    IRInstruction ldarg; ldarg.op_code = IROpCode::LdArg; ldarg.operand_index = 0; method.instructions.push_back(ldarg);
+    IRInstruction isinst; isinst.op_code = IROpCode::IsInst; isinst.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(0x300u); method.instructions.push_back(isinst);
+    IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
+
+    auto* storage = new InterpreterObject();
+    storage->type_token = 0x100u;
+
+    ExecutionFrame frame;
+    frame.arguments.push_back(InterpreterValue::from_obj(storage));
+
+    const InterpreterVM vm = {};
+    ExecutionResult result = vm.Execute(method, &frame);
+
+    // Should return null — object does NOT implement interface 0x300
+    return result.has_return_value && result.return_value.tag == ValueTag::Null;
+}
+
+// Test: Interface vtable dispatch via CallVirt + interface method resolution.
+bool TestInterfaceVtableDispatch()
+{
+    using namespace chaos::il2cpp::vtable_registry;
+
+    // Interface type_token = 0x400, stable_id method is slot 0 in iface
+    const CHAOS_IL2CPP_UINT64 kIfaceStable = 0xABCD0001ULL;
+
+    // Derived: iface map + flat vtable
+    // The iface entry maps the interface's first method (slot index 0) to vtable offset 2
+    ChaosIl2cpp::Common::InterfaceMapEntry impl_ifaces[] = {
+        { kIfaceStable, 2u, 1u }  // interface's method 0 → vtable slot 2
+    };
+    void* impl_vtable_array[] = {
+        nullptr, nullptr, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBABEu))
+    };
+
+    VTableSlot slot0 = { 0x600u, nullptr };
+    VTableSlot slot1 = { 0x601u, nullptr };
+    VTableSlot slot2 = { 0x602u, reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBABEu)) };
+    VTableSlot base_slots_iface[3] = { slot0, slot1, slot2 };
+
+    TypeVTable derived_vtable_iface = {};
+    derived_vtable_iface.type_token = 0x500u;
+    derived_vtable_iface.base_token = 0u;
+    derived_vtable_iface.slot_count = 3u;
+    derived_vtable_iface.slots = base_slots_iface;
+    derived_vtable_iface.stable_id = 0x50000001ULL;
+    derived_vtable_iface.vtable_array = const_cast<const void**>(impl_vtable_array);
+    derived_vtable_iface.vtable_length = 3u;
+    derived_vtable_iface.type_shape = ChaosIl2cpp::Common::chaos_type_shape_reference;
+    derived_vtable_iface.iface_map = impl_ifaces;
+    derived_vtable_iface.iface_count = 1u;
+    RegisterTypeVTable(&derived_vtable_iface);
+
+    // Register interface: type_token=0x400, type_shape=interface
+    VTableSlot iface_slot = { 0x700u, nullptr };
+    VTableSlot iface_slots3[1] = { iface_slot };
+    TypeVTable iface_vtable3 = {};
+    iface_vtable3.type_token = 0x400u;
+    iface_vtable3.base_token = 0u;
+    iface_vtable3.slot_count = 1u;
+    iface_vtable3.slots = iface_slots3;
+    iface_vtable3.stable_id = kIfaceStable;
+    iface_vtable3.type_shape = ChaosIl2cpp::Common::chaos_type_shape_interface;
+    RegisterTypeVTable(&iface_vtable3);
+
+    // Build IR: ldarg.0 → callvirt method_token=0x700 (= slot 0 in interface)
+    IRMethod method;
+    IRInstruction ldarg3; ldarg3.op_code = IROpCode::LdArg; ldarg3.operand_index = 0; method.instructions.push_back(ldarg3);
+    IRInstruction callvirt3;
+    callvirt3.op_code = IROpCode::CallVirt;
+    callvirt3.secondary_index = static_cast<CHAOS_IL2CPP_SIZE>(0x700u);
+    callvirt3.arg_count = 1u;
+    method.instructions.push_back(callvirt3);
+
+    // Object with type_token = 0x500 (implements the interface)
+    auto* storage_iface = new InterpreterObject();
+    storage_iface->type_token = 0x500u;
+
+    ExecutionFrame frame3;
+    frame3.arguments.push_back(InterpreterValue::from_obj(storage_iface));
+
+    const InterpreterVM vm3 = {};
+    ExecutionResult result3 = vm3.Execute(method, &frame3);
+
+    // Must resolve through interface vtable → slot[2] → 0xBABE
+    return result3.needs_external_dispatch &&
+           result3.call_target == reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(0xBABEu));
 }

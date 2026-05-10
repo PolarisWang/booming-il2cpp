@@ -37,6 +37,21 @@ const void* PatchMetadataCache::GetBody(uint32_t offset) const noexcept {
     return base + header_->body_data_offset + offset;
 }
 
+const char* PatchMetadataCache::GetAotCoreIr(uint32_t method_index) const noexcept {
+    if (header_ == nullptr || method_index >= header_->aot_core_ir_count) return nullptr;
+    const auto* base = reinterpret_cast<const uint8_t*>(header_);
+    const auto* section = base + header_->aot_core_ir_offset;
+
+    // Format: [index: uint32_t[count]] [json strings (null-terminated)]
+    // index[i] = byte offset of i-th method's JSON from the start of strings.
+    // GetAotCoreIr(i) = section_start + sizeof(uint32_t)*count + index[i]  (O(1))
+    const auto* index = reinterpret_cast<const uint32_t*>(section);
+    uint32_t offset = index[method_index];
+    const char* str_start = reinterpret_cast<const char*>(
+        section + sizeof(uint32_t) * header_->aot_core_ir_count);
+    return str_start + offset;
+}
+
 const PatchMethodDefEntry* PatchMetadataCache::GetMethodDef(uint32_t index) const noexcept {
     if (header_ == nullptr || index >= header_->method_def_count) return nullptr;
     const auto* base = reinterpret_cast<const uint8_t*>(header_);
@@ -227,17 +242,10 @@ const char* PatchMetadataCache::GetUserString(uint32_t token) const noexcept {
 }
 
 uint32_t PatchMetadataCache::ResolveToken(uint32_t token) const noexcept {
-    // For now, return the token itself as a passthrough.
-    // Full token resolution (TypeRef → runtime TypeInfo*, MemberRef → method pointer, etc.)
-    // requires integration with the runtime's DefaultTokenResolver and will be
-    // implemented in Step 5 (InterpreterEntry → IL→IR lowerer integration).
-    //
-    // For IL→IR lowering, the lowerer needs:
-    //   - call target resolution: token → IRInstruction.call_target
-    //   - field access: token → IRInstruction.field_offset
-    //   - type tests: token → IRInstruction.type_handle
-    //
-    // Stub: return token as-is so the lowerer can at least see it.
+    // Not needed for the JSON-driven interpreter path.
+    // AotCoreIr JSON already carries resolved references via targetReference.subjectId,
+    // so DeserializeAotCoreIrMethod uses ResolveSubjectId rather than raw token resolution.
+    // This stub exists for API completeness; it is never called during normal execution.
     (void)token;
     return 0;
 }
@@ -311,8 +319,11 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     if (header->header_size < sizeof(PatchDataHeader)) return nullptr;
     HOTPATCH_DIAG("DIAG[APFM]: validation OK\n");
 
-    // Validate structural integrity: total size must match.
+    // Validate structural integrity: total size must include AotCoreIr section.
     uint32_t expected_size = header->body_data_offset + header->body_data_size;
+    uint32_t ir_section_end = header->aot_core_ir_offset + header->aot_core_ir_size;
+    if (ir_section_end > expected_size)
+        expected_size = ir_section_end;
     if (size < expected_size) return nullptr;
     HOTPATCH_DIAG("DIAG[APFM]: size OK\n");
 
@@ -346,38 +357,35 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         const char* lookup_type = (host_type_name != nullptr) ? host_type_name : type_name;
 
         // Look up the method in the HotpatchNameRegistry.
-        uint32_t aot_token = registry.LookupMethod(lookup_type, method_name);
-        if (aot_token == 0) {
+        uint64_t lookup = registry.LookupMethod(lookup_type, method_name);
+        if (lookup == 0) {
             // Try with full name format (includes assembly prefix).
             // For now, just skip unresolved methods.
             continue;
         }
 
-        // Set up the PatchMethod.
-        auto& patch_method = ctx->methods[patched_count];
-        HOTPATCH_DIAG("DIAG[APFM]: setting up method token=%u\n",
-            static_cast<unsigned>(aot_token));
-        patch_method.token = aot_token;
-        patch_method.il_bytes = static_cast<const uint8_t*>(
-            cache->GetBody(method_entry->body_offset));
-        patch_method.il_length = method_entry->body_size;
+        // Extract module_id and token from composite key.
+        uint32_t module_id = static_cast<uint32_t>(lookup >> 32);
+        uint32_t aot_token = static_cast<uint32_t>(lookup & 0xFFFFFFFFu);
 
-        // Parse method body header to determine max_stack.
-        // (Full parsing requires ParseMethodBodyHeader from il_to_ir_lowerer.h;
-        // for now default to safe max_stack=8 which works for tiny format.)
-        if (patch_method.il_length > 0 && patch_method.il_bytes != nullptr) {
-            uint8_t header_byte = patch_method.il_bytes[0];
-            if ((header_byte & 0x03) == 0x03) {
-                // Fat format: max_stack is at offset 2 (uint16).
-                if (patch_method.il_length >= 4) {
-                    patch_method.max_stack = static_cast<uint32_t>(
-                        patch_method.il_bytes[2] | (patch_method.il_bytes[3] << 8));
-                }
-            }
-            // Tiny format: max_stack = 8 (ECMA 335 II.15.4.2.1).
+        // Get the dispatch slot for this method within its module.
+        uint32_t slot = registry.TokenToSlot(module_id, aot_token);
+        if (slot == ~0u) {
+            continue;
         }
 
-        // Store reference to the metadata cache for token resolution during IR lowering.
+        // Set up the PatchMethod.
+        auto& patch_method = ctx->methods[patched_count];
+        HOTPATCH_DIAG("DIAG[APFM]: setting up method module=%u token=%u slot=%u\n",
+            static_cast<unsigned>(module_id),
+            static_cast<unsigned>(aot_token),
+            static_cast<unsigned>(slot));
+        patch_method.token = aot_token;
+        patch_method.module_id = module_id;
+        patch_method.aot_core_ir_json = cache->GetAotCoreIr(i);
+        patch_method.aot_core_ir_json_length = 0;  // null-terminated, length determined by strlen
+
+        // Store reference to the metadata cache for call_target resolution during IR lowering.
         patch_method.metadata_cache = cache;
 
         // Get signature blob for runtime signature parsing.
@@ -390,10 +398,11 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
             }
         }
 
-        // Mark the dispatch entry as patched.
-        HOTPATCH_DIAG("DIAG[APFM]: calling SetPatched token=%u\n", static_cast<unsigned>(aot_token));
-        registry.SetPatched(aot_token, true, &patch_method);
-        HOTPATCH_DIAG("DIAG[APFM]: SetPatched OK\n");
+        // Mark the dispatch entry as patched — module-scoped, no token collision.
+        HOTPATCH_DIAG("DIAG[APFM]: calling SetPatchedBySlot module=%u slot=%u\n",
+            static_cast<unsigned>(module_id), static_cast<unsigned>(slot));
+        registry.SetPatchedBySlot(module_id, slot, true, &patch_method);
+        HOTPATCH_DIAG("DIAG[APFM]: SetPatchedBySlot OK\n");
 
         ++patched_count;
     }
@@ -414,7 +423,10 @@ bool Unpatch(PatchContext* ctx) noexcept {
     for (uint32_t i = 0; i < ctx->method_count; ++i) {
         auto& method = ctx->methods[i];
         if (method.token != 0) {
-            registry.SetPatched(method.token, false, nullptr);
+            uint32_t slot = registry.TokenToSlot(method.module_id, method.token);
+            if (slot != ~0u) {
+                registry.SetPatchedBySlot(method.module_id, slot, false, nullptr);
+            }
         }
     }
 

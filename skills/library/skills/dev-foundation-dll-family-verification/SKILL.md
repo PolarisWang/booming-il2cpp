@@ -188,6 +188,7 @@ AUDIT_RULES = {
 1. **Stub detection** — `stub_detector.scan_family()` 扫描 C++ 代码
 2. **加载生成 C++** — 优先命名空间路径，回退扁平路径
 3. **解析 _METHOD_OVERRIDES** — 从 `test_code_generator.py` AST 提取 skip 条目
+   - **重要**：必须按 family 过滤（`relevant_type_names` 参数），否则全局 ~100 条 skip 条目会被计入导致 skipRate 为负。
 4. **Per-method 审计** — 标记 false-passing、missing lowering、missing assert
 
 ### 审计输出

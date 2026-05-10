@@ -11,6 +11,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json as _json
 import re
 import subprocess
 import sys
@@ -101,18 +102,27 @@ def verify_benchmark(family_slug: str, *, assembly: str = "System.Private.CoreLi
         [str(exe_path), "--benchmark", str(entry_index), str(iterations)],
         capture_output=True, text=True, timeout=300)
 
-    output = r.stdout + r.stderr
     elapsed_ms = 0.0
+    calibrated_ms = 0.0
+    ops_per_sec = 0.0
+    output = r.stdout.strip()
+    # Parse JSON from last output line
     for line in output.splitlines():
-        if "Benchmark" in line:
-            m = re.search(r'([\d.]+)\s*ms', line)
-            if m:
-                elapsed_ms = float(m.group(1))
+        try:
+            obj = _json.loads(line.strip())
+            if "elapsedMilliseconds" in obj:
+                elapsed_ms = obj["elapsedMilliseconds"]
+                calibrated_ms = obj.get("calibratedMs", elapsed_ms)
+                ops_per_sec = obj.get("opsPerSecond", 0.0)
+                iterations = obj.get("iterations", iterations)
+        except (_json.JSONDecodeError, ValueError):
+            pass
 
     status = "completed" if r.returncode == 0 else "failed"
-    print(f"  [Benchmark] {status}: {elapsed_ms:.1f}ms ({iterations} iterations)")
-    return {"status": status, "elapsed_ms": elapsed_ms, "iterations": iterations,
-            "exit_code": r.returncode}
+    cal_note = f" (cal={calibrated_ms:.3f}ms)" if calibrated_ms != elapsed_ms else ""
+    print(f"  [Benchmark] {status}: {elapsed_ms:.3f}ms{cal_note}, {ops_per_sec:.0f} ops/s ({iterations} iterations)")
+    return {"status": status, "elapsed_ms": elapsed_ms, "calibrated_ms": calibrated_ms,
+            "iterations": iterations, "ops_per_sec": ops_per_sec, "exit_code": r.returncode}
 
 
 def verify_hotupdate(family_slug: str, *, assembly: str = "System.Private.CoreLib",
@@ -127,14 +137,21 @@ def verify_hotupdate(family_slug: str, *, assembly: str = "System.Private.CoreLi
         [str(exe_path), "--hotupdate"],
         capture_output=True, text=True, timeout=120)
 
-    output = r.stdout + r.stderr
     passed = total = 0
+    output = r.stdout.strip()
     for line in output.splitlines():
-        m = re.search(r'Passed:\s*(\d+)/(\d+)', line)
-        if m:
-            passed, total = int(m.group(1)), int(m.group(2))
-        if "FAIL" in line:
-            print(f"  {line}")
+        try:
+            obj = _json.loads(line.strip())
+            passed = obj.get("passedMethods", 0)
+            total = obj.get("totalMethods", 0)
+        except (_json.JSONDecodeError, ValueError):
+            pass
+    if total == 0:
+        # Fallback: try parsing "Passed: N/M"
+        for line in output.splitlines():
+            m = re.search(r'Passed:\s*(\d+)/(\d+)', line)
+            if m:
+                passed, total = int(m.group(1)), int(m.group(2))
 
     status = "passed" if r.returncode == 0 else "failed"
     print(f"  [HotUpdate] Native verify: {status} ({passed}/{total})")

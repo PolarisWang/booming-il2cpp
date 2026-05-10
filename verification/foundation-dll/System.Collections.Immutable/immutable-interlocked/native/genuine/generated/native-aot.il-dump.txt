@@ -1,5 +1,0 @@
-.method public static System.Int32 ImmutableInterlockedNativeEntry::Run(System.Int32)
-// SubjectId: ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Run:System.Int32(System.Int32)
-
-.method public static System.Int32 ImmutableInterlockedNativeEntry::Method0()
-// SubjectId: ImmutableInterlockedNativeEntry/ImmutableInterlockedNativeEntry::Method0:System.Int32()

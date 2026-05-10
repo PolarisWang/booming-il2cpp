@@ -502,15 +502,22 @@ public sealed class DriverEntry
 
     private static int RunEmitPatchData(string[] args)
     {
-        // Usage: chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path>
+        // Usage: chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-core-ir <path>]
         if (args.Length < 2)
         {
-            Console.Error.WriteLine("Usage: chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path>");
+            Console.Error.WriteLine("Usage: chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-core-ir <path>]");
             return 1;
         }
 
         var dllPath = args[0];
         var outputPath = args[1];
+        string? aotCoreIrPath = null;
+
+        for (var i = 2; i < args.Length; i++)
+        {
+            if (args[i] == "--aot-core-ir" && i + 1 < args.Length)
+                aotCoreIrPath = args[++i];
+        }
 
         if (!File.Exists(dllPath))
         {
@@ -523,7 +530,7 @@ public sealed class DriverEntry
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
-            new PatchDataExtractor().Extract(dllPath, outputPath);
+            new PatchDataExtractor().Extract(dllPath, outputPath, aotCoreIrPath);
             var fileSize = new FileInfo(outputPath).Length;
             Console.WriteLine($"Patch data written: {outputPath} ({fileSize} bytes)");
             return 0;
@@ -645,7 +652,7 @@ public sealed class DriverEntry
         Console.WriteLine("      [--full-assembly-closure]");
         Console.WriteLine("  emit-native-reference <closure-root> <out>   Native reference emission");
         Console.WriteLine("  emit-native-aot <closure-root> <out>         Generic native AOT emission");
-        Console.WriteLine("  emit-patch-data <patch-dll> <out>           Extract patch metadata (.patchdata)");
+        Console.WriteLine("  emit-patch-data <patch-dll> <out> [--aot-core-ir <path>]   Extract patch metadata (.patchdata)");
         Console.WriteLine();
         Console.WriteLine("Run 'chaos-il2cpp <command> --help' for details.");
     }

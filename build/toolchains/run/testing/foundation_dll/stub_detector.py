@@ -113,7 +113,9 @@ def _classify_file(path: Path) -> str:
 
 def _extract_method_name(line: str) -> str:
     """Extract C++ function name from a definition line."""
-    m = re.match(r"^(?:static\s+)?(?:inline\s+)?(?:\w+(?:::\w+)*\s+)?(\w+)\s*\(", line)
+    # Strip extern "C" prefix which breaks word-based regex matching
+    cleaned = re.sub(r'^extern\s+"C"\s+', '', line)
+    m = re.match(r"^(?:static\s+)?(?:inline\s+)?(?:\w+(?:::\w+)*\s+)?(\w+)\s*\(", cleaned)
     if m:
         return m.group(1)
     # Match CHAOS_RUNTIME_ABI_CALL style
@@ -171,6 +173,31 @@ def scan_file(path: Path) -> StubFileResult:
             i += 1
             continue
 
+        # Determine if this line starts a forward declaration or a definition
+        # Scan ahead (tracking paren depth) to find the first { or ;
+        paren_depth = 0
+        is_forward_decl = False
+        is_definition = False
+        for scan_j in range(i, min(i + 20, len(lines))):
+            scan_line = lines[scan_j]
+            for ch in scan_line:
+                if ch == '(':
+                    paren_depth += 1
+                elif ch == ')':
+                    paren_depth -= 1
+                elif ch == ';' and paren_depth == 0:
+                    is_forward_decl = True
+                    break
+                elif ch == '{' and paren_depth == 0:
+                    is_definition = True
+                    break
+            if is_forward_decl or is_definition:
+                break
+
+        if is_forward_decl:
+            i += 1
+            continue
+
         subject_id = _extract_subject_id(lines, i)
         func_start = i
 
@@ -191,6 +218,11 @@ def scan_file(path: Path) -> StubFileResult:
                     break
         else:
             body_end = len(lines) - 1
+
+        # Skip forward declarations (no function body found)
+        if not in_body:
+            i = body_end + 1
+            continue
 
         body_text = "\n".join(lines[body_start:body_end + 1]) if in_body else ""
 

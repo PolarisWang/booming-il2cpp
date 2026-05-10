@@ -1,1 +1,1 @@
-# placeholder — native build for string-char-text-core
+# Placeholder — native skeletons for this family not generated yet.

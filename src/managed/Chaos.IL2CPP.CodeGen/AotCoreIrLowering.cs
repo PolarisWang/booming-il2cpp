@@ -111,6 +111,21 @@ public sealed class AotCoreIrLowering
 
                 var directCallTarget = ResolveDirectCallTarget(typedInstruction, managedMethods, targetSymbols);
 
+                // ── Constrained callvirt on value types ──
+                // Rewrite the callee to the value type's own override method
+                // so the emission path resolves it directly instead of dispatching
+                // through the base type's vtable (Object::GetHashCode → Guid::GetHashCode).
+                if (ResolveConstrainedValueTypeOverride(typedInstruction) is { } overrideSubjectId)
+                {
+                    Console.Error.WriteLine($"[constrained] {typedInstruction.ConstrainedTypeSubjectId} :: {typedInstruction.Callee} -> {overrideSubjectId}");
+                    typedInstruction = typedInstruction with { Callee = overrideSubjectId };
+                    directCallTarget = ResolveDirectCallTarget(typedInstruction, managedMethods, targetSymbols);
+                }
+                else if (typedInstruction.ConstrainedTypeSubjectId is not null)
+                {
+                    Console.Error.WriteLine($"[constrained] MISS: {typedInstruction.ConstrainedTypeSubjectId} :: {typedInstruction.Callee} — typeInDict={managedTypes.ContainsKey(typedInstruction.ConstrainedTypeSubjectId)}");
+                }
+
                 var targetReference = ResolveTargetReference(
                     managedInstruction,
                     typedInstruction,
@@ -134,6 +149,7 @@ public sealed class AotCoreIrLowering
                 instructions.Add(new AotCoreIrInstructionArtifact
                 {
                     Op = typedInstruction.Op,
+                    OpCode = MapOpStringToEnum(typedInstruction.Op),
                     Operand = typedInstruction.Operand,
                     IlOffset = ilOffset,
                     ResultType = typedInstruction.ResultType,
@@ -147,6 +163,7 @@ public sealed class AotCoreIrLowering
                     TargetReturnType = directCallTarget.TargetReturnType,
                     DispatchKindCode = dispatchKind,
                     ComVtableSlot = comVtableSlot,
+                    ConstrainedTypeSubjectId = typedInstruction.ConstrainedTypeSubjectId,
                 });
             }
         }
@@ -502,6 +519,130 @@ public sealed class AotCoreIrLowering
             default:
                 return null;
         }
+    }
+
+    private static InstructionOpCode? MapOpStringToEnum(string op)
+    {
+        return op switch
+        {
+            "add" => InstructionOpCode.Add,
+            "add.ovf" => InstructionOpCode.AddOvf,
+            "add.ovf.un" => InstructionOpCode.AddOvf,
+            "and" => InstructionOpCode.And,
+            "beq" => InstructionOpCode.Beq,
+            "bge" => InstructionOpCode.Bge,
+            "bge.un" => InstructionOpCode.BgeUn,
+            "bgt" => InstructionOpCode.Bgt,
+            "bgt.un" => InstructionOpCode.BgtUn,
+            "ble" => InstructionOpCode.Ble,
+            "ble.un" => InstructionOpCode.BleUn,
+            "blt" => InstructionOpCode.Blt,
+            "blt.un" => InstructionOpCode.BltUn,
+            "bne.un" => InstructionOpCode.BneUn,
+            "box" => InstructionOpCode.Box,
+            "br" => InstructionOpCode.Br,
+            "break" => InstructionOpCode.Break,
+            "brfalse" => InstructionOpCode.BrFalse,
+            "brtrue" => InstructionOpCode.BrTrue,
+            "call" => InstructionOpCode.Call,
+            "callvirt" => InstructionOpCode.CallVirt,
+            "castclass" => InstructionOpCode.CastClass,
+            "ceq" => InstructionOpCode.Ceq,
+            "cgt" => InstructionOpCode.Cgt,
+            "cgt.un" => InstructionOpCode.Cgt,
+            "clt" => InstructionOpCode.Clt,
+            "clt.un" => InstructionOpCode.Clt,
+            "conv.i" => InstructionOpCode.ConvI,
+            "conv.i1" => InstructionOpCode.Conv_I4,
+            "conv.i2" => InstructionOpCode.Conv_I4,
+            "conv.i4" => InstructionOpCode.Conv_I4,
+            "conv.i8" => InstructionOpCode.Conv_I8,
+            "conv.ovf.i" => InstructionOpCode.ConvOvfI,
+            "conv.ovf.i.un" => InstructionOpCode.ConvOvfI,
+            "conv.ovf.i1" => InstructionOpCode.ConvOvfI4,
+            "conv.ovf.i2" => InstructionOpCode.ConvOvfI4,
+            "conv.ovf.i4" => InstructionOpCode.ConvOvfI4,
+            "conv.ovf.i8" => InstructionOpCode.ConvOvfI8,
+            "conv.ovf.u" => InstructionOpCode.ConvOvfU,
+            "conv.ovf.u.un" => InstructionOpCode.ConvOvfU,
+            "conv.ovf.u1" => InstructionOpCode.ConvOvfU4,
+            "conv.ovf.u2" => InstructionOpCode.ConvOvfU4,
+            "conv.ovf.u4" => InstructionOpCode.ConvOvfU4,
+            "conv.ovf.u8" => InstructionOpCode.ConvOvfU8,
+            "conv.r.un" => InstructionOpCode.ConvRUn,
+            "conv.r4" => InstructionOpCode.Conv_R4,
+            "conv.r8" => InstructionOpCode.Conv_R8,
+            "conv.u" => InstructionOpCode.ConvU,
+            "conv.u1" => InstructionOpCode.Conv_I4,
+            "conv.u2" => InstructionOpCode.Conv_I4,
+            "conv.u4" => InstructionOpCode.Conv_I4,
+            "conv.u8" => InstructionOpCode.Conv_I8,
+            "cpblk" => InstructionOpCode.Cpblk,
+            "div" => InstructionOpCode.Div,
+            "div.un" => InstructionOpCode.DivUn,
+            "dup" => InstructionOpCode.Dup,
+            "endfilter" => InstructionOpCode.EndFilter,
+            "endfinally" => InstructionOpCode.EndFinally,
+            "initblk" => InstructionOpCode.InitBlk,
+            "initobj" => InstructionOpCode.InitObj,
+            "isinst" => InstructionOpCode.IsInst,
+            "ldarg" => InstructionOpCode.LdArg,
+            "ldarga" => InstructionOpCode.LdArgA,
+            "ldc.i4" => InstructionOpCode.LdcI4,
+            "ldc.i8" => InstructionOpCode.LdcI8,
+            "ldc.r4" => InstructionOpCode.LdcR4,
+            "ldc.r8" => InstructionOpCode.LdcR8,
+            "ldelem" => InstructionOpCode.LdElem,
+            "ldelem.ref" => InstructionOpCode.LdElem,
+            "ldelema" => InstructionOpCode.LdElemA,
+            "ldfld" => InstructionOpCode.LdFld,
+            "ldftn" => InstructionOpCode.LdFtn,
+            "ldind" => InstructionOpCode.LdInd,
+            "ldlen" => InstructionOpCode.LdLen,
+            "ldloc" => InstructionOpCode.LdLoc,
+            "ldloca" => InstructionOpCode.LdLocA,
+            "ldnull" => InstructionOpCode.LdNull,
+            "ldobj" => InstructionOpCode.LdObj,
+            "ldsfld" => InstructionOpCode.LdSFld,
+            "ldstr" => InstructionOpCode.LdStr,
+            "ldtoken" => InstructionOpCode.LdToken,
+            "ldvirtftn" => InstructionOpCode.LdVirtFtn,
+            "leave" => InstructionOpCode.Leave,
+            "localloc" => InstructionOpCode.LocAlloc,
+            "mul" => InstructionOpCode.Mul,
+            "mul.ovf" => InstructionOpCode.MulOvf,
+            "neg" => InstructionOpCode.Neg,
+            "newarr" => InstructionOpCode.NewArr,
+            "newobj" => InstructionOpCode.NewObj,
+            "nop" => null,
+            "not" => InstructionOpCode.Not,
+            "or" => InstructionOpCode.Or,
+            "pop" => InstructionOpCode.Pop,
+            "rem" => InstructionOpCode.Rem,
+            "rem.un" => InstructionOpCode.RemUn,
+            "ret" => InstructionOpCode.Ret,
+            "rethrow" => InstructionOpCode.Rethrow,
+            "shl" => InstructionOpCode.Shl,
+            "shr" => InstructionOpCode.Shr,
+            "shr.un" => InstructionOpCode.ShrUn,
+            "sizeof" => InstructionOpCode.SizeOf,
+            "starg" => InstructionOpCode.StArg,
+            "stelem" => InstructionOpCode.StElem,
+            "stelem.ref" => InstructionOpCode.StElem,
+            "stfld" => InstructionOpCode.StFld,
+            "stind" => InstructionOpCode.StInd,
+            "stloc" => InstructionOpCode.StLoc,
+            "stobj" => InstructionOpCode.StObj,
+            "stsfld" => InstructionOpCode.StSFld,
+            "sub" => InstructionOpCode.Sub,
+            "sub.ovf" => InstructionOpCode.SubOvf,
+            "switch" => InstructionOpCode.Switch,
+            "throw" => InstructionOpCode.Throw,
+            "unbox" => InstructionOpCode.Unbox,
+            "unbox.any" => InstructionOpCode.Unbox,
+            "xor" => InstructionOpCode.Xor,
+            _ => null,
+        };
     }
 
     private static (string? TargetSymbol, int? TargetParameterCount, string? TargetReturnType) ResolveDirectCallTarget(
@@ -1486,6 +1627,36 @@ public sealed class AotCoreIrLowering
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// When a callvirt is preceded by the constrained. IL prefix on a value type,
+    /// returns the value type's own override SubjectId for the virtual method slot.
+    /// Returns null when no override exists (the original Callee should be kept).
+    /// </summary>
+    private static string? ResolveConstrainedValueTypeOverride(
+        TypedIlInstructionArtifact typedInstruction)
+    {
+        var constrainedTypeId = typedInstruction.ConstrainedTypeSubjectId;
+        if (string.IsNullOrWhiteSpace(constrainedTypeId))
+            return null;
+
+        // Extract the signature suffix (everything after "::") from the slot method.
+        var callee = typedInstruction.Callee;
+        if (string.IsNullOrWhiteSpace(callee))
+            return null;
+
+        var sepIdx = callee.IndexOf("::", StringComparison.Ordinal);
+        if (sepIdx < 0)
+            return null;
+        var slotSig = callee.Substring(sepIdx + 2);
+
+        // Constrained. callvirt on a value type should dispatch to the value type's
+        // own override of the virtual method (e.g. Guid::GetHashCode instead of
+        // Object::GetHashCode). We construct the expected SubjectId directly —
+        // no need to verify IsValueType since the C# compiler only emits constrained.
+        // for value types; for reference types it emits plain callvirt.
+        return constrainedTypeId + "::" + slotSig;
     }
 
 }

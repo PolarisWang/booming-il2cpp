@@ -1,6 +1,6 @@
 #include "generic_method_instantiation.h"
-#include "il_to_ir_lowerer.h"       // LowerILToIR
-#include "runtime_instantiation.h"  // AllocateRuntimeToken
+#include "aot_core_ir_reader.h"   // DeserializeAotCoreIrMethod
+#include "runtime_instantiation.h" // AllocateRuntimeToken
 
 #include <chaos/native_types.h>
 #include <chaos/trace.h>
@@ -100,7 +100,6 @@ RuntimeInstantiatedMethod* CreateClosedMethodDescriptor(
     rt_method->descriptor.member_type_utf8 = StrDup(open_desc->member_type_utf8);
 
     // Reference the open method's parameter descriptors directly.
-    // (Phase 5b may substitute type arguments in parameter descriptors.)
     rt_method->descriptor.parameter_count = open_desc->parameter_count;
     rt_method->descriptor.parameters = open_desc->parameters;
     rt_method->descriptor.parameter_descriptor_count =
@@ -127,17 +126,17 @@ RuntimeInstantiatedMethod* CreateClosedMethodDescriptor(
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-// Deferred IL→IR lowering
+// Deferred AotCoreIr JSON → IR deserialization
 // ════════════════════════════════════════════════════════════════════════════
 
 bool LowerMethodBody(
     RuntimeInstantiatedMethod*                      rt_method,
-    const void*                                     il_bytes,
-    CHAOS_IL2CPP_SIZE                               il_length,
-    chaos::il2cpp::interpreter::ILTokenResolver      token_resolver,
-    void*                                           user_data)
+    const char*                                     aot_core_ir_json,
+    CHAOS_IL2CPP_SIZE                               aot_core_ir_json_length,
+    chaos::il2cpp::runtime_core::ResolveSubjectIdFn  resolve_fn,
+    void*                                           resolve_ctx)
 {
-    CHAOS_IL2CPP_LOG_TRACE("runtime", "LowerMethodBody", "\"il_length\"=%zu", il_length);
+    CHAOS_IL2CPP_LOG_TRACE("runtime", "LowerMethodBody", "\"json_length\"=%zu", aot_core_ir_json_length);
     if (rt_method == nullptr) {
         return false;
     }
@@ -147,35 +146,16 @@ bool LowerMethodBody(
         return true;
     }
 
-    if (il_bytes == nullptr || il_length == 0u) {
+    if (aot_core_ir_json == nullptr || aot_core_ir_json_length == 0u) {
         return false;
     }
 
-    // ── Attempt to parse as ECMA-335 method body header ──
-    // Auto-detect tiny/fat format.  If il_bytes starts with a valid header,
-    // extract the code body, max_stack, and code_size for correct SEH
-    // section location.  If parsing fails, treat il_bytes as raw code body
-    // (backward compat with callers that pre-strip the header).
-    const uint8_t* raw = static_cast<const uint8_t*>(il_bytes);
-    const uint8_t* code_body    = raw;
-    CHAOS_IL2CPP_SIZE code_size = 0u;  // 0 = backward compat in LowerILToIR
-    CHAOS_IL2CPP_SIZE buf_remaining = il_length;
-    CHAOS_IL2CPP_UINT16 max_stack = 8u;
-
-    interpreter::MethodBodyHeader header;
-    if (interpreter::ParseMethodBodyHeader(il_bytes, il_length, header)) {
-        code_body     = header.code_start;
-        code_size     = header.code_size;
-        max_stack     = header.max_stack;
-        // Remaining buffer from code_start onward (code + padding + SEH)
-        buf_remaining = il_length - static_cast<CHAOS_IL2CPP_SIZE>(
-            code_body - raw);
-    }
-
-    // Lower IL → IR using the (possibly parsed) max_stack and code_size.
-    interpreter::IRMethod method = interpreter::LowerILToIR(
-        code_body, buf_remaining, code_size, max_stack,
-        token_resolver, user_data);
+    // Deserialize AotCoreIr JSON → IRMethod.
+    interpreter::IRMethod method = chaos::il2cpp::runtime_core::DeserializeAotCoreIrMethod(
+        aot_core_ir_json,
+        aot_core_ir_json_length,
+        resolve_fn,
+        resolve_ctx);
 
     // Allocate heap-cached IRMethod via placement new
     // (IRMethod contains a std::vector and needs its constructor called).
@@ -186,8 +166,8 @@ bool LowerMethodBody(
     auto* cached = ::new (mem) interpreter::IRMethod(
         CHAOS_IL2CPP_MOVE(method));
 
-    rt_method->il_bytes  = il_bytes;
-    rt_method->il_length = il_length;
+    rt_method->aot_core_ir_json = aot_core_ir_json;
+    rt_method->aot_core_ir_json_length = aot_core_ir_json_length;
     rt_method->ir_method_body = cached;
     return true;
 }

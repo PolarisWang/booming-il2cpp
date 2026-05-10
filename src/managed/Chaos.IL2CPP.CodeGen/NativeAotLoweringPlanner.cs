@@ -103,13 +103,16 @@ public sealed partial class NativeAotLoweringPlanner
 
     private HeaderKind GetHeaderKind(string typeSubjectId)
     {
-        // Strings, arrays, delegates always use Fat (need explicit vtable* and sync)
-        if (typeSubjectId.Contains("/System.String") ||
-            typeSubjectId.Contains("/System.Array") ||
+        // Arrays, delegates always use Fat (need explicit vtable* and sync)
+        if (typeSubjectId.Contains("/System.Array") ||
             typeSubjectId.Contains("/System.Delegate") ||
             typeSubjectId.Contains("/System.MulticastDelegate") ||
             typeSubjectId.Contains("/System.Collections.IEnumerator"))
             return HeaderKind.Fat;
+
+        // String: ThinLockable (sealed, no virtual dispatch, but supports sync via lock())
+        if (typeSubjectId.Contains("/System.String"))
+            return HeaderKind.ThinLockable;
 
         // Value types → PureType (no sync needed)
         if (_valueTypeSubjectIds.Contains(typeSubjectId))
@@ -136,6 +139,13 @@ public sealed partial class NativeAotLoweringPlanner
             !m.IsStatic &&
             string.Equals(m.Identity.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal) &&
             m.SubjectId.Contains("Finalize")))
+            return HeaderKind.Fat;
+
+        // If the type has a non-empty vtable (virtual methods), it needs FatHeader
+        // to store the vtable pointer. ThinLockableHeader has no vtable field.
+        if (_vtableLengths != null &&
+            _vtableLengths.TryGetValue(typeSubjectId, out int vtLen) &&
+            vtLen > 0)
             return HeaderKind.Fat;
 
         // Everything else → ThinLockable (default)
@@ -825,11 +835,22 @@ public sealed partial class NativeAotLoweringPlanner
 
         builder.AppendLine("using chaos_delegate_invocation_list = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR);");
         builder.AppendLine();
+
+        // Emit struct definition for System.Delegate so the helper functions below can use it
+        builder.AppendLine("struct chaos_type_System_Private_CoreLib_System_Delegate");
+        builder.AppendLine("{");
+        builder.AppendLine("    FatHeader header{};");
+        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
+        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
+        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
+        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
+        builder.AppendLine("};");
+        builder.AppendLine();
         builder.AppendLine("chaos_type_System_Private_CoreLib_System_Delegate* chaos_require_delegate(CHAOS_IL2CPP_INTPTR chaos_delegate_value)");
         builder.AppendLine("{");
         builder.AppendLine("    if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("    {");
-        builder.AppendLine("        CHAOS_IL2CPP_ABORT();");
+        builder.AppendLine("        CHAOS_IL2CPP_FAIL();");
         builder.AppendLine("    }");
         builder.AppendLine();
         builder.AppendLine("    return reinterpret_cast<chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_delegate_value);");
@@ -884,7 +905,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("    {");
         builder.AppendLine("        if (chaos_delegate->chaos_delegate_method_ptr == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("        {");
-        builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
+        builder.AppendLine("            CHAOS_IL2CPP_FAIL();");
         builder.AppendLine("        }");
         builder.AppendLine();
         builder.AppendLine("        chaos_entries.push_back(chaos_delegate_value);");
@@ -894,7 +915,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine(
             "    if (static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)");
         builder.AppendLine("    {");
-        builder.AppendLine("        CHAOS_IL2CPP_ABORT();");
+        builder.AppendLine("        CHAOS_IL2CPP_FAIL();");
         builder.AppendLine("    }");
         builder.AppendLine();
         builder.AppendLine("    for (const auto chaos_entry_value : *chaos_invocation_list)");
@@ -916,7 +937,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("        const auto* chaos_entry = chaos_require_delegate(chaos_entry_value);");
         builder.AppendLine("        if (chaos_entry->header.type_info != chaos_first->header.type_info)");
         builder.AppendLine("        {");
-        builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
+        builder.AppendLine("            CHAOS_IL2CPP_FAIL();");
         builder.AppendLine("        }");
         builder.AppendLine("    }");
         builder.AppendLine("}");
@@ -940,7 +961,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         builder.AppendLine("        default:");
-        builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
+        builder.AppendLine("            CHAOS_IL2CPP_FAIL();");
         builder.AppendLine("    }");
         builder.AppendLine("}");
         builder.AppendLine();

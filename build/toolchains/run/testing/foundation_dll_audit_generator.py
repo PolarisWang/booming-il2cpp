@@ -937,8 +937,8 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                             try:
                                 report_data = json.loads(report_path.read_text(encoding="utf-8"))
                                 schema_version = int(report_data.get("schemaVersion") or 0)
-                                d3_passed = int(report_data.get("summary", {}).get("passedMethods") or 0)
-                                d3_total = int(report_data.get("summary", {}).get("totalMethods") or 0)
+                                d3_passed = int(report_data.get("passedMethods") or 0)
+                                d3_total = int(report_data.get("totalMethods") or 0)
                                 d3_method_results = list(report_data.get("methodResults") or [])
                                 if schema_version >= 2:
                                     d3_patch_applied = bool(report_data.get("d3PatchApplied", False))
@@ -2719,7 +2719,7 @@ def _render_fact_detail_page(family: dict[str, Any], *, assembly_name: str, repo
                     failure_reason = f'<span class="failure-reason">{escape(detail)}</span>'
             fact_rows += f"<tr class=\"{'row-uncovered' if not covered else ''}\"><td>{escape(short_name)}</td><td>{status_icon}</td><td>{managed_block}</td><td>{native_block}</td><td>{failure_reason or '<span class=\"status-muted\">-</span>'}</td></tr>"
     else:
-        short_methods = "<tr><td colspan=\"5\">No method detail data available ({np_numerator}/{np_denominator})</td></tr>"
+        short_methods = f"<tr><td colspan=\"5\">No method detail data available ({np_numerator}/{np_denominator})</td></tr>"
         fact_rows = short_methods
 
     # Source paths for evidence
@@ -2882,13 +2882,13 @@ def _render_hotupdate_cell(
     each real family method, then verifies InterpreterEntryDirect returns the
     correct value.  Shows passed/total with Hotpatch status.
     """
-    schema_version = int(hotupdate_proof.get("hotpatchSchemaVersion") or 0)
+    schema_version = int(hotupdate_proof.get("d3SchemaVersion") or 0)
     passed = int(hotupdate_proof.get("passedMethodCount") or 0)
     total = int(hotupdate_proof.get("denominator") or int(hotupdate_proof.get("numerator") or 0))
 
     if schema_version >= 2 and total > 0:
         failed = int(hotupdate_proof.get("failedMethodCount") or 0)
-        patched = bool(hotupdate_proof.get("hotpatchPatchApplied", False))
+        patched = bool(hotupdate_proof.get("d3PatchApplied", False))
         all_ok = failed == 0
         badge = _status_badge("passed" if all_ok else "failed")
         summary = f"Hotpatch {passed}/{total}"
@@ -2903,7 +2903,14 @@ def _render_hotupdate_cell(
         )
         return f'<span title="{escape(title)}">{badge} {escape(summary)}</span>'
 
-    # Fallback (schemaVersion 1 or no data): show gate status.
+    # Fallback (schemaVersion 1 or no data): show basic pass/fail stats if available
+    if total > 0:
+        failed = total - passed
+        all_ok = failed == 0
+        badge = _status_badge("passed" if all_ok else "failed")
+        return f'{badge} {escape(str(passed))}/{escape(str(total))}'
+
+    # No data at all — show gate status badge
     gate_status = _string(hotupdate_proof.get("status"))
     return _status_badge(gate_status)
 
@@ -2921,10 +2928,10 @@ def _render_hotupdate_detail_page(family: dict[str, Any], *, assembly_name: str,
     method_count = int(family.get("methodCount") or 0)
     hotupdate_proof = dict(family.get("hotupdateProof") or {})
 
-    schema_version = int(hotupdate_proof.get("hotpatchSchemaVersion") or 0)
-    hotpatch_patch_applied = bool(hotupdate_proof.get("hotpatchPatchApplied", False))
-    hotpatch_patched_count = int(hotupdate_proof.get("hotpatchPatchedCount") or 0)
-    hotpatch_method_results = list(hotupdate_proof.get("hotpatchMethodResults") or [])
+    schema_version = int(hotupdate_proof.get("d3SchemaVersion") or 0)
+    hotpatch_patch_applied = bool(hotupdate_proof.get("d3PatchApplied", False))
+    hotpatch_patched_count = int(hotupdate_proof.get("d3PatchedCount") or 0)
+    hotpatch_method_results = list(hotupdate_proof.get("d3MethodResults") or [])
     hotpatch_passed = int(hotupdate_proof.get("passedMethodCount") or 0)
     hotpatch_total = int(hotupdate_proof.get("denominator") or 0)
     hotpatch_failed = hotpatch_total - hotpatch_passed

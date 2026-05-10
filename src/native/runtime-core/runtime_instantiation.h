@@ -36,6 +36,51 @@ interpreter::DispatchResult InterpreterDispatch(
     bool                                is_instance_call,
     void*                               dispatch_context);
 
+/// Result of a raw dispatch (no InterpreterValue round-trip).
+struct RawDispatchResult {
+    bool    has_value       = false;
+    uint64_t value           = 0;
+    uint8_t tag             = 0;        // ValueTag
+    bool    threw_exception = false;
+    void*   exception_obj   = nullptr;
+    void*   struct_data     = nullptr;  // heap-allocated struct return (caller frees)
+    uint32_t struct_size    = 0;
+};
+
+/// Pre-computed metadata for a single Call instruction's target.
+/// Populated during IR lowering to avoid runtime reflection queries.
+struct CachedCallInfo {
+    uint8_t  ret_tag          = 0xFF;   // ValueTag for return type (0xFF = uninit)
+    bool     is_struct_ret    = false;  // true = struct (value type) return
+    uint32_t struct_size      = 0;      // pre-computed struct buffer size (0 = scalar)
+
+    // A2: direct native function pointer for same-module calls.
+    // When non-null and !is_patched, Handle_Call can call direct_ptr directly
+    // instead of going through method_invoke (save ~1500ns).
+    // direct_ptr is nullptr for cross-module calls (must use method_invoke).
+    void*    direct_ptr       = nullptr;  // AOT native function (void(*)())
+    bool     is_patched       = false;    // true = method has active patch
+    uint32_t module_id        = 0;        // module owning the target method
+    uint32_t slot             = 0;        // dispatch table slot index
+};
+
+/// Pre-compute call metadata for a single call_target (MethodInfoHandle).
+/// Resolves ret_tag, struct-ness, and struct size so InterpreterDispatchRaw
+/// can skip all reflection queries at runtime.
+CachedCallInfo PrecacheCallTarget(void* call_target) noexcept;
+
+/// Dispatch directly from raw uint64_t values + ValueTag tags, skipping the
+/// InterpreterValue round-trip.  Args are in call order (arg[0] = first arg).
+/// Used by FastFrame::Handle_Call (fast_dispatch.cpp) to inline the call dispatch.
+RawDispatchResult InterpreterDispatchRaw(
+    void*                               call_target,
+    const uint64_t*                     raw_args,
+    const uint8_t*                      arg_tags,
+    CHAOS_IL2CPP_UINT32                 arg_count,
+    bool                                is_instance_call,
+    void*                               dispatch_context,
+    const CachedCallInfo*               cache_info = nullptr);
+
 // ── Runtime-instantiated type ─────────────────────────────────────────────
 
 /// Heap-allocated descriptor for a MakeGenericType-created type.

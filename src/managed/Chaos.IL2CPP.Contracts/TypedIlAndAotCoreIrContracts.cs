@@ -492,6 +492,8 @@ public sealed record AotCoreIrInstructionArtifact
 {
     public required string Op { get; init; }
 
+    public InstructionOpCode? OpCode { get; init; }
+
     public object? Operand { get; init; }
 
     public required int IlOffset { get; init; }
@@ -515,6 +517,12 @@ public sealed record AotCoreIrInstructionArtifact
     public string? TargetReturnType { get; init; }
 
     public HybridDispatchKind? DispatchKindCode { get; init; }
+
+    /// <summary>
+    /// When non-null, this callvirt was preceded by a <c>constrained.</c> IL prefix.
+    /// The value is the type SubjectId that should be used to resolve the call target.
+    /// </summary>
+    public string? ConstrainedTypeSubjectId { get; init; }
 
     /// <summary>
     /// For <see cref="HybridDispatchKind.ComVtable"/> dispatch: the vtable slot
@@ -576,4 +584,10 @@ public sealed record TypedIlInstructionArtifact
     public ManagedInstructionReference? Reference { get; init; }
 
     public HybridDispatchKind? DispatchKindCode { get; init; }
+
+    /// <summary>
+    /// When non-null, this callvirt was preceded by a <c>constrained.</c> IL prefix.
+    /// The value is the type SubjectId that should be used to resolve the call target.
+    /// </summary>
+    public string? ConstrainedTypeSubjectId { get; init; }
 }

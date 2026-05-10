@@ -1,9 +1,0 @@
-{
-  "source": {
-    "type": "managed-dlls",
-    "assemblies": [
-      "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.IO.Pipelines\\reader-writer\\entrypoint\\build-output\\ReaderWriterNativeEntry.dll"
-    ],
-    "entry": "ReaderWriterNativeEntry/ReaderWriterNativeEntry::Run:System.Int32(System.Int32)"
-  }
-}

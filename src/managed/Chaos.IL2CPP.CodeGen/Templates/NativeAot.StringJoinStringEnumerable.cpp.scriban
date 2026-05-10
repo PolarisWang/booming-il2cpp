@@ -2,7 +2,7 @@ extern "C" CHAOS_IL2CPP_INTPTR {{ helper_symbol }}(CHAOS_IL2CPP_INTPTR chaos_arg
 {
     if (chaos_arg_1 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
-        CHAOS_IL2CPP_ABORT();
+        CHAOS_IL2CPP_FAIL();
     }
 
     const char* chaos_separator_utf8 = chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0)
@@ -31,7 +31,7 @@ extern "C" CHAOS_IL2CPP_INTPTR {{ helper_symbol }}(CHAOS_IL2CPP_INTPTR chaos_arg
         if (chaos_array->element_type_shape != {{ reference_type_shape_value }} ||
             chaos_array->element_type_info != {{ string_type_info_symbol }})
         {
-            CHAOS_IL2CPP_ABORT();
+            CHAOS_IL2CPP_FAIL();
         }
 
         for (CHAOS_IL2CPP_INTPTR chaos_index = 0; chaos_index < chaos_array->length; chaos_index++)
@@ -83,5 +83,5 @@ extern "C" CHAOS_IL2CPP_INTPTR {{ helper_symbol }}(CHAOS_IL2CPP_INTPTR chaos_arg
     }
 
 {{~ end }}
-    CHAOS_IL2CPP_ABORT();
+    CHAOS_IL2CPP_FAIL();
 }

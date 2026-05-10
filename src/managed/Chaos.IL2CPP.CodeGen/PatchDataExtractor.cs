@@ -3,6 +3,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -15,10 +16,9 @@ public sealed class PatchDataExtractor
     private const uint Magic = 0x50415854; // "PADT"
 
     // Track string insertion order for correct offset computation.
-    // Dictionary<>.Last() is unreliable (Dictionary does not guarantee ordering).
     private readonly List<(string Key, uint Offset)> _insertOrder = new();
 
-    public void Extract(string dllPath, string outputPath)
+    public void Extract(string dllPath, string outputPath, string? aotCoreIrPath = null)
     {
         using var stream = File.OpenRead(dllPath);
         using var peReader = new PEReader(stream);
@@ -113,6 +113,14 @@ public sealed class PatchDataExtractor
         var memberRefs = BuildMemberRefs(mr, StrOff, AllocBlob);
         var userStringBytes = BuildUserStringHeap(mr);
 
+        // ── Optional AotCoreIr JSON section ──
+        byte[]? aotCoreIrSection = null;
+        uint aotCoreIrCount = 0;
+        if (aotCoreIrPath != null && File.Exists(aotCoreIrPath))
+        {
+            (aotCoreIrSection, aotCoreIrCount) = BuildAotCoreIrSection(aotCoreIrPath, methodDefs, mr);
+        }
+
         // Build binary heaps
         var stringHeap = BuildStringHeap(stringOffsets);
         var blobHeap = BuildBlobHeap(blobHandles, mr);
@@ -123,7 +131,8 @@ public sealed class PatchDataExtractor
         // Serialize
         Serialize(outputPath, stringHeap, blobHeap, userStringBytes,
             [.. asmRefs], [.. typeRefs], [.. typeDefs],
-            [.. fieldDefs], [.. methodDefs], [.. memberRefs], bodyData);
+            [.. fieldDefs], [.. methodDefs], [.. memberRefs], bodyData,
+            aotCoreIrSection, aotCoreIrCount);
     }
 
     private static List<PatchAssemblyRefEntry> BuildAssemblyRefs(
@@ -414,7 +423,9 @@ public sealed class PatchDataExtractor
         PatchFieldDefEntry[] fieldDefs,
         PatchMethodDefEntry[] methodDefs,
         PatchMemberRefEntry[] memberRefs,
-        byte[] bodyData)
+        byte[] bodyData,
+        byte[]? aotCoreIrSection = null,
+        uint aotCoreIrCount = 0)
     {
         using var fs = File.Create(outputPath);
         using var bw = new BinaryWriter(fs);
@@ -431,7 +442,8 @@ public sealed class PatchDataExtractor
         var fdOff = Align4(off);  off = fdOff + Pad4(SizeOf<PatchFieldDefEntry>() * (uint)fieldDefs.Length);
         var mdOff = Align4(off);  off = mdOff + Pad4(SizeOf<PatchMethodDefEntry>() * (uint)methodDefs.Length);
         var mrOff = Align4(off);  off = mrOff + Pad4(SizeOf<PatchMemberRefEntry>() * (uint)memberRefs.Length);
-        var bodyOff = Align4(off);
+        var bodyOff = Align4(off); off = bodyOff + Pad4((uint)bodyData.Length);
+        var irOff = off;           off = irOff + Pad4((uint)(aotCoreIrSection?.Length ?? 0));
 
         var blobOffsets = ComputeBlobOffsets(blobHeap);
         RemapBlobOffsets(fieldDefs, blobOffsets);
@@ -452,6 +464,8 @@ public sealed class PatchDataExtractor
             member_ref_offset = mrOff, member_ref_count = (uint)memberRefs.Length,
             standalone_sig_offset = 0, standalone_sig_count = 0,
             body_data_offset = bodyOff, body_data_size = (uint)bodyData.Length,
+            aot_core_ir_offset = irOff, aot_core_ir_size = (uint)(aotCoreIrSection?.Length ?? 0),
+            aot_core_ir_count = aotCoreIrCount,
         };
         WriteStruct(bw, hdr);
 
@@ -465,6 +479,9 @@ public sealed class PatchDataExtractor
         WriteStructArray(bw, methodDefs);
         WriteStructArray(bw, memberRefs);
         bw.Write(bodyData);
+        AlignStream(bw, (uint)bodyData.Length);
+        if (aotCoreIrSection != null)
+            bw.Write(aotCoreIrSection);
     }
 
     private static uint[] ComputeBlobOffsets(byte[] blobHeap)
@@ -555,6 +572,7 @@ public sealed class PatchDataExtractor
     }
 
 #pragma warning disable CS0649
+    [StructLayout(LayoutKind.Sequential)]
     private struct FileHeader
     {
         public uint magic, version, header_size;
@@ -569,13 +587,121 @@ public sealed class PatchDataExtractor
         public uint member_ref_offset, member_ref_count;
         public uint standalone_sig_offset, standalone_sig_count;
         public uint body_data_offset, body_data_size;
+        public uint aot_core_ir_offset, aot_core_ir_size, aot_core_ir_count;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
     private struct PatchAssemblyRefEntry { public uint name_offset, token; }
+    [StructLayout(LayoutKind.Sequential)]
     private struct PatchTypeRefEntry { public uint type_name_offset, namespace_offset, resolution_scope_token, token; }
+    [StructLayout(LayoutKind.Sequential)]
     private struct PatchTypeDefEntry { public uint type_name_offset, namespace_offset, enclosing_type_token, extends_token, token; public ushort flags; }
+    [StructLayout(LayoutKind.Sequential)]
     private struct PatchFieldDefEntry { public uint name_offset, signature_offset, declaring_type_token, token; public ushort flags; }
+    [StructLayout(LayoutKind.Sequential)]
     private struct PatchMethodDefEntry { public uint name_offset, signature_offset, body_offset, body_size, declaring_type_token, token; public ushort impl_flags, flags; }
+    [StructLayout(LayoutKind.Sequential)]
     private struct PatchMemberRefEntry { public uint name_offset, signature_offset, parent_token, token; }
 #pragma warning restore CS0649
+
+    /// <summary>
+    /// Build the AotCoreIr JSON section from a serialized AotCoreIrArtifact JSON file.
+    /// For each method in methodDefs, locates the corresponding method JSON by matching
+    /// PE metadata (TypeName::MethodName) against AotCoreIr subjectId entries.
+    ///
+    /// The section is a concatenation of null-terminated JSON strings,
+    /// ordered by method index in the MethodDef table.
+    /// Methods without a matching AotCoreIr entry get an empty entry (null terminator only).
+    /// </summary>
+    private static (byte[] Section, uint Count) BuildAotCoreIrSection(
+        string aotCoreIrPath,
+        List<PatchMethodDefEntry> methodDefs,
+        MetadataReader mr)
+    {
+        // ── Build AotCoreIr lookup: "MethodName" → JSON ──
+        // The genuine aot-core-ir.json uses TypeName=NativeEntry but the
+        // patch DLL uses TypeName=PatchEntry, so we match by method name alone.
+        // Within a family, method names (Method0..MethodN) are unique.
+        var jsonText = File.ReadAllText(aotCoreIrPath);
+        using var doc = JsonDocument.Parse(jsonText);
+        var root = doc.RootElement;
+
+        if (!root.TryGetProperty("methods", out var methodsArray))
+            return ([], 0);
+
+        var aotIrLookup = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var methodElem in methodsArray.EnumerateArray())
+        {
+            var subjectId = methodElem.TryGetProperty("subjectId", out var sid)
+                ? sid.GetString() ?? ""
+                : "";
+
+            // subjectId format: "Assembly/TypeName::MethodName:ReturnType(Params)"
+            // Extract method name after "::" and before ':ReturnType'.
+            var doubleColon = subjectId.IndexOf("::", StringComparison.Ordinal);
+            if (doubleColon < 0) continue;
+            var afterDoubleColon = subjectId[(doubleColon + 2)..];
+            var returnTypeColon = afterDoubleColon.IndexOf(':');
+            var methodName = returnTypeColon >= 0 ? afterDoubleColon[..returnTypeColon] : afterDoubleColon;
+
+            if (!string.IsNullOrEmpty(methodName))
+            {
+                aotIrLookup.TryAdd(methodName, methodElem.GetRawText());
+            }
+        }
+
+        // ── Build PE metadata key for each methodDef (method name only) ──
+        static string BuildMethodKey(MetadataReader reader, PatchMethodDefEntry entry)
+        {
+            var mh = MetadataTokens.MethodDefinitionHandle((int)entry.token);
+            if (mh.IsNil) return "";
+            var md = reader.GetMethodDefinition(mh);
+            return reader.GetString(md.Name);
+        }
+
+        // ── Match and serialize ──
+        // Format: [index: uint32_t[count]] [json strings (null-terminated)]
+        // index[i] = byte offset of i-th method's JSON from the start of json strings.
+        // GetAotCoreIr(i) = section_start + sizeof(uint32_t)*count + index[i]  (O(1))
+
+        // First pass: collect all JSON byte arrays.
+        var jsonList = new List<byte[]>();
+        foreach (var methodDef in methodDefs)
+        {
+            var key = BuildMethodKey(mr, methodDef);
+            string? json = null;
+
+            if (!string.IsNullOrEmpty(key) && aotIrLookup.TryGetValue(key, out var found))
+            {
+                json = found;
+            }
+
+            jsonList.Add(json != null ? Encoding.UTF8.GetBytes(json) : []);
+        }
+
+        // Second pass: write index, then JSON strings with null terminators.
+        using var ms = new MemoryStream();
+        // Reserve space for uint32_t index[count].
+        ms.Seek(jsonList.Count * 4, SeekOrigin.Begin);
+
+        var indexOffsets = new uint[jsonList.Count];
+        for (int i = 0; i < jsonList.Count; i++)
+        {
+            // Offset relative to end of index array.
+            indexOffsets[i] = (uint)ms.Position - (uint)(jsonList.Count * 4);
+            if (jsonList[i].Length > 0)
+                ms.Write(jsonList[i], 0, jsonList[i].Length);
+            ms.WriteByte(0); // null terminator
+        }
+
+        // Write index array at the beginning.
+        ms.Position = 0;
+        for (int i = 0; i < jsonList.Count; i++)
+        {
+            var bytes = BitConverter.GetBytes(indexOffsets[i]);
+            ms.Write(bytes, 0, 4);
+        }
+
+        return (ms.ToArray(), (uint)jsonList.Count);
+    }
 }

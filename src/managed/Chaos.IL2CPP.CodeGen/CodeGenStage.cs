@@ -830,6 +830,7 @@ private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAss
             Callee = instruction.Callee,
             CallSiteSignature = instruction.CallSiteSignature,
             Reference = instruction.Reference,
+            ConstrainedTypeSubjectId = instruction.ConstrainedTypeSubjectId,
             DispatchKindCode = HybridDispatchResolver.ResolveInstruction(
                 method.AssemblyName,
                 internalAssemblyNames,

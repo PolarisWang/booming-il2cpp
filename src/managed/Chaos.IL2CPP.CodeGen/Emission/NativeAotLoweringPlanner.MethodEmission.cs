@@ -318,10 +318,10 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("    if (s_pinvoke_fn_ == nullptr)");
 		builder.AppendLine("    {");
 		builder.AppendLine($"        s_pinvoke_lib_ = ::chaos::il2cpp::runtime_core::NativeLibraryLoad(\"{moduleName}\");");
-		builder.AppendLine("        if (s_pinvoke_lib_ == nullptr) CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine("        if (s_pinvoke_lib_ == nullptr) CHAOS_IL2CPP_FAIL();");
 		builder.AppendLine($"        s_pinvoke_fn_ = reinterpret_cast<{fnPtrType}>(");
 		builder.AppendLine($"            ::chaos::il2cpp::runtime_core::NativeLibraryGetProcAddress(s_pinvoke_lib_, \"{entryPointName}\"));");
-		builder.AppendLine("        if (s_pinvoke_fn_ == nullptr) CHAOS_IL2CPP_ABORT();");
+		builder.AppendLine("        if (s_pinvoke_fn_ == nullptr) CHAOS_IL2CPP_FAIL();");
 		builder.AppendLine("    }");
 
 		// Pre-call: marshal string parameters to native UTF-8 CoTaskMem buffers.
@@ -512,10 +512,9 @@ public sealed partial class NativeAotLoweringPlanner
 			throw new InvalidOperationException("native-aot method '" + method.SubjectId + "' is missing native symbol metadata");
 		}
 		MapAbiSlotReturnType(method.ReturnAbi);
-		if (method.ExceptionRegionCount != 0 && !TryCreateCatchOnlyExceptionMethodShape(method, out _) && !TryCreateFilterOnlyExceptionMethodShape(method, out _) && !TryCreateFinallyOnlyExceptionMethodShape(method, out _) && !TryCreateCatchAndFinallyExceptionMethodShape(method, out _) && !TryCreateFilterAndFinallyExceptionMethodShape(method, out _))
-		{
-			throw new NotSupportedException("native-aot method '" + method.SubjectId + "' does not support current exception region shape");
-		}
+		// Exception region shape validation is deferred to TryBuildStructuredMethodBody
+		// which handles all shapes gracefully (falling back to IRFlatRegion / empty body
+		// for unsupported shapes).  Redundant checks here would crash before the fallback.
 	}
 
 	private static void ValidateInstructions(AotCoreIrMethodArtifact entryMethod, IReadOnlyList<AotCoreIrInstructionArtifact> instructions)

@@ -73,16 +73,26 @@ FAMILIES = [
 ]
 
 
-def _run_emit_patch_data(dll_path: str, output_path: str) -> bool:
-    """Run emit-patch-data to produce .patchdata from a patch DLL."""
+def _run_emit_patch_data(dll_path: str, output_path: str,
+                         aot_core_ir_path: str | None = None) -> bool:
+    """Run emit-patch-data to produce .patchdata from a patch DLL.
+
+    If aot_core_ir_path is provided, passes --aot-core-ir so the extractor
+    embeds pre-lowered IR (AotCoreIr JSON) into the .patchdata for interpreter
+    execution of patched methods.
+    """
+    cmd = [
+        "dotnet", "run", "--no-build",
+        "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
+        "--", "emit-patch-data",
+        dll_path,
+        output_path,
+    ]
+    if aot_core_ir_path:
+        cmd += ["--aot-core-ir", aot_core_ir_path]
+
     result = subprocess.run(
-        [
-            "dotnet", "run", "--no-build",
-            "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
-            "--", "emit-patch-data",
-            dll_path,
-            output_path,
-        ],
+        cmd,
         capture_output=True, text=True,
         timeout=120,
     )
@@ -333,7 +343,14 @@ def _run_variant_pipeline(
         patchdata_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "patch" / "patchdata"
         patchdata_dir.mkdir(parents=True, exist_ok=True)
         patchdata_path = patchdata_dir / f"{family_slug}.patchdata"
-        if not _run_emit_patch_data(build_result["dll_path"], str(patchdata_path)):
+        # AotCoreIr JSON from genuine codegen — pre-lowered IR for interpreter.
+        # Falls back to genuine/aot-core-ir.json; also try the trimmed variant
+        # which contains only entry-point methods from the genuine pipeline.
+        aot_core_ir_path = str(_VERIFICATION / family_slug / "il2cpp_dist" / "genuine" / "aot-core-ir.json")
+        if not os.path.exists(aot_core_ir_path):
+            aot_core_ir_path = None
+        if not _run_emit_patch_data(build_result["dll_path"], str(patchdata_path),
+                                    aot_core_ir_path=aot_core_ir_path):
             result["steps"]["emit_patch_data"] = "FAILED"
             result["error"] = "emit-patch-data failed"
             return result

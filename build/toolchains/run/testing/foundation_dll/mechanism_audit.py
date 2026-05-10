@@ -32,6 +32,8 @@ _REPO_ROOT = _HERE.parents[4]
 _VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
 _TEST_CODE_GENERATOR = _HERE / "test_code_generator.py"
 
+sys.path.insert(0, str(_HERE.parent.parent))  # for testing package
+
 try:
     from testing.foundation_dll.stub_detector import scan_family, FamilyStubResult
 except ImportError:
@@ -111,10 +113,17 @@ def _parse_method_overrides() -> dict[tuple[str, str, int], str]:
     return {}
 
 
-def _get_skip_entries() -> dict[tuple[str, str, int], str]:
-    """Get only the 'skip' entries from _METHOD_OVERRIDES."""
+def _get_skip_entries(relevant_type_names: set[str] | None = None) -> dict[tuple[str, str, int], str]:
+    """Get only the 'skip' entries from _METHOD_OVERRIDES.
+
+    When relevant_type_names is provided, filters to entries whose type_name
+    appears in the relevant set (per-family filtering).
+    """
     overrides = _parse_method_overrides()
-    return {k: v for k, v in overrides.items() if v == "skip"}
+    skips = {k: v for k, v in overrides.items() if v == "skip"}
+    if relevant_type_names is not None:
+        skips = {k: v for k, v in skips.items() if k[0] in relevant_type_names}
+    return skips
 
 
 # ── Generated C++ analysis ────────────────────────────────────────────
@@ -168,10 +177,48 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
     if not cpp_content:
         errors.append("Generated C++ not found")
 
-    has_file_level_lowering = "chaos_eval_stack" in cpp_content if cpp_content else False
+    has_file_level_lowering = ("chaos_eval_stack" in cpp_content or "CHAOS_IL2CPP_ARRAY" in cpp_content) if cpp_content else False
 
     # ── 3. Load _METHOD_OVERRIDES skip entries ─────────────────────────
-    skip_entries = _get_skip_entries()
+    # Extract relevant C# type names from the capability-family-contract
+    relevant_types: set[str] = set()
+    if stub_results:
+        # Derive type names from stub_results' method subject IDs
+        for sf in stub_results.files:
+            for m in sf.methods:
+                if m.subject_id:
+                    type_path = m.subject_id.split("::")[0] if "::" in m.subject_id else ""
+                    if "/" in type_path:
+                        raw_type = type_path.split("/", 1)[1]
+                    else:
+                        raw_type = type_path
+                    tn = raw_type.rsplit(".", 1)[-1] if "." in raw_type else raw_type
+                    # Strip generic arity suffix (e.g., "Span`1" -> "Span")
+                    bt_match = re.match(r"^(\w+)`\d+$", tn)
+                    if bt_match:
+                        tn = bt_match.group(1)
+                    if tn:
+                        relevant_types.add(tn)
+    # Fallback: load from contract file directly
+    if not relevant_types:
+        contract_path = family_dir / "capability-family-contract.json"
+        if contract_path.exists():
+            try:
+                contract = json.loads(contract_path.read_bytes())
+                mids = contract.get("methodSubjectIds", []) or [m["methodSubjectId"] for m in contract.get("methodContracts", []) if m.get("methodSubjectId")]
+                for mid in mids:
+                    if "::" in mid:
+                        type_path = mid.split("::", 1)[0]
+                        raw_type = type_path.split("/", 1)[1] if "/" in type_path else type_path
+                        tn = raw_type.rsplit(".", 1)[-1]
+                        bt_match = re.match(r"^(\w+)`\d+$", tn)
+                        if bt_match:
+                            tn = bt_match.group(1)
+                        if tn:
+                            relevant_types.add(tn)
+            except (OSError, json.JSONDecodeError):
+                pass
+    skip_entries = _get_skip_entries(relevant_type_names=relevant_types if relevant_types else None)
 
     # ── 4. Load Fact Static results ────────────────────────────────────
     l2_results = _load_fact_static_results(assembly, family_slug)
@@ -185,10 +232,13 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
     no_lowering = 0
     no_assert = 0
 
-    # Extract method names from stub results
+    # Extract method names from stub results — only from native-aot generated files
+    # (benchmark stubs and hotupdate stubs are expected harness code, not audit targets)
     stub_methods_set: set[str] = set()
     if stub_results:
         for sf in stub_results.files:
+            if sf.file_kind != "native-aot":
+                continue
             for m in sf.methods:
                 entry = {
                     "method_name": m.method_name,
@@ -201,11 +251,11 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
                     stubs_found += 1
                     stub_methods_set.add(m.method_name)
 
-    # If no stub_results, extract methods from C++
+    # If no stub_results, extract methods from C++ using dynamic class name
     if not method_details and cpp_content:
-        # Namespaced pattern: ConvertCharNativeEntry_ConvertCharNativeEntry_Method0
-        # or flat pattern: ConvertCharNativeEntry_Method0
-        namespaced = re.findall(r'\bConvertCharNativeEntry_ConvertCharNativeEntry_(\w+)\s*\(', cpp_content)
+        class_name = f"{family_slug.title().replace('-', '').replace('_', '')}NativeEntry"
+        # Namespaced pattern: ClassName_ClassName_Method0
+        namespaced = re.findall(rf'\b{class_name}_{class_name}_(\w+)\s*\(', cpp_content)
         if namespaced:
             for m in namespaced:
                 method_details.append({
@@ -215,8 +265,9 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
                     "stub_pattern": "",
                 })
         else:
-            methods = re.findall(r'(?:NativeReferenceStub_|ConvertCharNativeEntry_|NativeEntry_|RunNativeAot_)(\w+)\s*\(', cpp_content)
-            for m in methods:
+            # Flat pattern: ClassName_Method0 or NativeReferenceStub_Method0 or RunNativeAot
+            flat = re.findall(rf'(?:NativeReferenceStub_|{class_name}_|NativeEntry_|RunNativeAot_)(\w+)\s*\(', cpp_content)
+            for m in flat:
                 method_details.append({
                     "method_name": m,
                     "subject_id": "",
@@ -318,7 +369,11 @@ def run_assembly_audit(assembly: str) -> dict[str, Any]:
     for item in sorted(asm_dir.iterdir()):
         if not item.is_dir() or item.name.startswith("_") or item.name == "reports":
             continue
-        cpp_path = item / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
+        cpp_candidates = sorted(item.glob("il2cpp_dist/genuine/*/generated/native-aot.generated.cpp"))
+        if cpp_candidates:
+            cpp_path = cpp_candidates[0]
+        else:
+            cpp_path = item / "il2cpp_dist" / "genuine" / "generated" / "native-aot.generated.cpp"
         if not cpp_path.exists():
             continue
         families[item.name] = run_full_audit(assembly, item.name)
